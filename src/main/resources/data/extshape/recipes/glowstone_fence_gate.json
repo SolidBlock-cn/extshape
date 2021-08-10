@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "W": {
+        "item": "minecraft:glowstone"
+      }
+    },
+    "result": {
+      "item": "extshape:glowstone_fence_gate"
+    }
+  }

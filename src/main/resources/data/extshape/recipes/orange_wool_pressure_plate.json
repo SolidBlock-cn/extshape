@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wool_pressure_plate",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:orange_wool"
+    }
+  },
+  "result": {
+    "item": "extshape:orange_wool_pressure_plate"
+  }
+}

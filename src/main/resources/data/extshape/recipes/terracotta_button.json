@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "",
+  "ingredients": [
+    {
+      "item": "minecraft:terracotta"
+    }
+  ],
+  "result": {
+    "item": "extshape:terracotta_button"
+  }
+}

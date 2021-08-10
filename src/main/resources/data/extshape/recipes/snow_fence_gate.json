@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:snowball"
+      },
+      "W": {
+        "item": "minecraft:snow_block"
+      }
+    },
+    "result": {
+      "item": "extshape:snow_fence_gate"
+    }
+  }

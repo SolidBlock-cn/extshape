@@ -1,0 +1,35 @@
+{
+  "block.extshape.smooth_stone_slab_double": "双层平滑石台阶",
+
+  "block.extshape.?_stairs": "%s楼梯",
+  "block.extshape.?_slab": "%s台阶",
+  "block.extshape.?_fence": "%s栅栏",
+  "block.extshape.?_fence_gate": "%s栅栏门",
+  "block.extshape.?_wall": "%s墙",
+  "block.extshape.?_vertical_slab": "%s纵台阶",
+  "block.extshape.?_button": "%s按钮",
+  "block.extshape.?_pressure_plate": "%s压力板",
+
+  "block.extshape.prefix.iron": "铁",
+  "block.extshape.prefix.gold": "金",
+  "block.extshape.prefix.diamond": "钻石",
+  "block.extshape.prefix.netherite": "下界合金",
+  "block.extshape.prefix.lapis": "青金石",
+  "block.extshape.prefix.emerald": "绿宝石",
+  "block.extshape.prefix.brick": "砖",
+  "block.extshape.prefix.stone_brick": "石砖",
+  "block.extshape.prefix.prismarine_brick": "海晶石砖",
+  "block.extshape.prefix.snow": "雪",
+  "block.extshape.prefix.amethyst": "紫水晶",
+  "block.extshape.prefix.nether_brick": "下界砖",
+  "block.extshape.prefix.red_nether_brick": "红色下界砖",
+  "block.extshape.prefix.quartz": "石英",
+  "block.extshape.prefix.quartz_brick": "石英砖",
+  "block.extshape.prefix.chiseled_quartz": "錾制石英",
+  "block.extshape.prefix.nether_wart": "下界疣",
+  "block.extshape.prefix.warped_wart": "诡异疣",
+
+  "itemGroup.extshape.building_blocks": "扩展方块形状：建筑方块",
+  "itemGroup.extshape.decoration_blocks": "扩展方块形状：装饰性方块",
+  "itemGroup.extshape.redstone": "扩展方块形状：红石"
+}

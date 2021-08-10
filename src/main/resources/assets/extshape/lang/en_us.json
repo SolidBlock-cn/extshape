@@ -1,0 +1,35 @@
+{
+  "block.extshape.smooth_stone_slab_double": "Double smooth stone slab",
+
+  "block.extshape.?_stairs": "%s stairs",
+  "block.extshape.?_slab": "%s slab",
+  "block.extshape.?_fence": "%s fence",
+  "block.extshape.?_fence_gate": "%s fence gate",
+  "block.extshape.?_wall": "%s wall",
+  "block.extshape.?_vertical_slab": "%s vertical slab",
+  "block.extshape.?_button": "%s button",
+  "block.extshape.?_pressure_plate": "%s pressure plate",
+
+  "block.extshape.prefix.iron": "Iron",
+  "block.extshape.prefix.gold": "Gold",
+  "block.extshape.prefix.diamond": "Diamond",
+  "block.extshape.prefix.netherite": "Netherite",
+  "block.extshape.prefix.lapis": "Lapis",
+  "block.extshape.prefix.emerald": "Emerald",
+  "block.extshape.prefix.brick": "Brick",
+  "block.extshape.prefix.stone_brick": "Stone brick",
+  "block.extshape.prefix.prismarine_brick": "Prismarine",
+  "block.extshape.prefix.snow": "Snow",
+  "block.extshape.prefix.amethyst": "Amethyst",
+  "block.extshape.prefix.nether_brick": "Nether brick",
+  "block.extshape.prefix.red_nether_brick": "Red nether brick",
+  "block.extshape.prefix.quartz": "Quartz",
+  "block.extshape.prefix.quartz_brick": "Quartz brick",
+  "block.extshape.prefix.chiseled_quartz": "Chiseled quartz",
+  "block.extshape.prefix.nether_wart": "Nether wart",
+  "block.extshape.prefix.warped_wart": "Warped wart",
+
+  "itemGroup.extshape.building_blocks": "Extended block shapes: Building blocks",
+  "itemGroup.extshape.decoration_blocks": "Extended block shape: Decoration blocks",
+  "itemGroup.extshape.redstone": "Extended block shape: Redstone"
+}

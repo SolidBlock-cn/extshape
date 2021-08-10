@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "concrete_fence",
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:brown_concrete"
+    },
+    "#": {
+      "item": "minecraft:gravel"
+    }
+  },
+  "result": {
+    "item": "extshape:brown_concrete_fence",
+    "count": 3
+  }
+}

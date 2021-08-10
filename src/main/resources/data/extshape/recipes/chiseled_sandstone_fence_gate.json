@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:sand"
+      },
+      "W": {
+        "item": "minecraft:chiseled_sandstone"
+      }
+    },
+    "result": {
+      "item": "extshape:chiseled_sandstone_fence_gate"
+    }
+  }
