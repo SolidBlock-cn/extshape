@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "extshape",
   "version": "1.0.0",
-
+  "icon": "assets/extshape/icon.png",
   "name": "Extended Shapes",
   "description": "Extends shape of blocks and more shapes!",
   "authors": [

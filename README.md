@@ -67,7 +67,7 @@ Used as fuels, slab burns half the time of its base blocks, and button burns 1/3
 
 ## 更新日志 Update log
 
-### 1.0
+### 1.0.0
 更新于2021年8月5日 Updated on Apr. 5th 2021
 
 - 为多种方块添加了楼梯、台阶、栅栏、栅栏门、按钮、压力板。
