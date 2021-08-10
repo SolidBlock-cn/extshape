@@ -2,7 +2,7 @@
 
 本模组为许多的原版方块添加了其楼梯、台阶、栅栏、栅栏门、按钮和压力板。具体内容列表请参考[此文件](BlockList.md)。
 
-This mod adds stairs, slab, fence, fence gate, button an pressure plate ofr many vanilla blocks. List of the 
+This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks. List of the 
 contents can be found in [this file](BlockList.md).
 
 模组目前仅支持 Minecraft Java 版 1.17.x，并需要 Fabric API。
