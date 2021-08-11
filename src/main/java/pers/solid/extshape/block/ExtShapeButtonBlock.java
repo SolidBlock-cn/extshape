@@ -1,11 +1,8 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
@@ -14,17 +11,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.ExtShapeBlockItem;
+import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtShapeButtonBlock extends AbstractButtonBlock implements RegistrableSubBlock {
+public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShapeSubBlockInterface {
 
-    public final Identifier identifier;
-    public final BlockItem blockItem;
-    public final BlockState baseBlockState;
     public final ButtonType type;
 
     @Override
@@ -41,46 +35,22 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements Registra
         soft
     }
 
-    protected ExtShapeButtonBlock(@NotNull ButtonType type, @NotNull BlockState baseBlockState,
-                                  @Nullable Identifier identifier,
-                                  @Nullable Settings settings, @Nullable FabricItemSettings itemSettings) {
+    protected ExtShapeButtonBlock(@NotNull ButtonType type, @NotNull Block baseBlock,
+                                  @Nullable Settings settings) {
         super(type == ButtonType.wooden, settings == null ?
-                FabricBlockSettings.copyOf(baseBlockState.getBlock()).noCollision().strength(baseBlockState.getBlock().getHardness() / 4f) :
+                FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f) :
                 settings);
         this.type = type;
-        this.baseBlockState = baseBlockState;
-        this.identifier = identifier == null ?
-                SubBlock.convertIdentifier(this.getBaseBlockIdentifier(), "_button") : identifier;
-        this.blockItem = new ExtShapeBlockItem(this, itemSettings == null ? new FabricItemSettings() : itemSettings);
-    }
-
-    protected ExtShapeButtonBlock(ButtonType type, Block block, Identifier identifier, Settings settings,
-                                  FabricItemSettings itemSettings) {
-        this(type, block.getDefaultState(), identifier, settings, itemSettings);
+        BlockMappings.mappingOfButtons.put(baseBlock,this);
     }
 
     public ExtShapeButtonBlock(ButtonType type, Block baseBlock) {
-        this(type, baseBlock, null, null, null);
+        this(type, baseBlock, null);
     }
 
     @Override
-    public Identifier getIdentifier() {
-        return this.identifier;
-    }
-
-    @Override
-    public BlockItem getBlockItem() {
-        return this.blockItem;
-    }
-
-    @Override
-    public RegistrableBlock addToTag() {
+    public ExtShapeBlockInterface addToTag() {
         return this.addToTag(ExtShapeBlockTag.BUTTONS);
-    }
-
-    @Override
-    public BlockState getBaseBlockState() {
-        return this.baseBlockState;
     }
 
     @Override
@@ -116,6 +86,11 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements Registra
                     "texture": "%s"
                   }
                 }""", this.getBaseTexture());
+    }
+
+    @Override
+    public Identifier getDefaultIdentifier() {
+        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(), "_button");
     }
 
     public List<Pair<Identifier, String>> getBlockModelCollection() {

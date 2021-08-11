@@ -1,44 +1,26 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.item.BlockItem;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import net.minecraft.util.registry.Registry;
-import pers.solid.extshape.ExtShapeBlockItem;
+import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.List;
 
-public class ExtShapePressurePlateBlock extends PressurePlateBlock implements RegistrableSubBlock {
-    private Identifier identifier;
-    private BlockItem blockItem;
-    private BlockState baseBlockState;
+public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeSubBlockInterface {
 
     protected ExtShapePressurePlateBlock(ActivationRule type, Settings settings) {
         super(type, settings);
     }
 
-    public ExtShapePressurePlateBlock(ActivationRule type, BlockState baseBlockState, Identifier identifier, Settings settings) {
-        this(type, settings);
-        this.baseBlockState = baseBlockState;
-        this.identifier = identifier;
-        this.blockItem = new ExtShapeBlockItem(this, new FabricItemSettings());
-    }
-
-    public ExtShapePressurePlateBlock(ActivationRule type, Block baseBlock, Identifier identifier, Settings settings) {
-        this(type, baseBlock.getDefaultState(), identifier, settings);
-    }
-
     public ExtShapePressurePlateBlock(ActivationRule type, Block baseBlock, Settings settings) {
-        this(type, baseBlock, SubBlock.convertIdentifier(Registry.BLOCK.getId(baseBlock), "_pressure_plate"),
-                settings);
+        this(type, settings);
+        BlockMappings.mappingOfPressurePlates.put(baseBlock,this);
     }
 
     public ExtShapePressurePlateBlock(ActivationRule type, Block baseBlock) {
@@ -46,23 +28,13 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Re
     }
 
     @Override
-    public Identifier getIdentifier() {
-        return this.identifier;
+    public Identifier getDefaultIdentifier() {
+        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),"_pressure_plate");
     }
 
     @Override
-    public BlockItem getBlockItem() {
-        return this.blockItem;
-    }
-
-    @Override
-    public RegistrableBlock addToTag() {
+    public ExtShapeBlockInterface addToTag() {
         return this.addToTag(ExtShapeBlockTag.PRESSURE_PLATES);
-    }
-
-    @Override
-    public BlockState getBaseBlockState() {
-        return this.baseBlockState;
     }
 
     @Override

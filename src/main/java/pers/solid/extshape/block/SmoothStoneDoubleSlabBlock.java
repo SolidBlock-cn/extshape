@@ -4,8 +4,8 @@ import net.minecraft.util.Identifier;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class SmoothStoneDoubleSlabBlock extends ExtShapeBlock {
-    public SmoothStoneDoubleSlabBlock(Identifier identifier, Settings settings) {
-        super(identifier, settings);
+    public SmoothStoneDoubleSlabBlock(Settings settings) {
+        super(settings);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class SmoothStoneDoubleSlabBlock extends ExtShapeBlock {
     }
 
     @Override
-    public RegistrableBlock addToTag() {
+    public ExtShapeBlockInterface addToTag() {
         this.addToTag(ExtShapeBlockTag.FULL_BLOCKS);
         return this;
     }

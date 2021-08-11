@@ -1,38 +1,72 @@
 package pers.solid.extshape.block;
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
+import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface RegistrableBlock {
-    // 用于方块自行进行注册。
-
-    String basePath = "../src/main/resources";
-
-    Identifier getIdentifier();
-
-    BlockItem getBlockItem();
-
-    default void registerBlock() {
-        Registry.register(Registry.BLOCK, this.getIdentifier(), (Block) this);
+public interface ExtShapeBlockInterface {
+    default Identifier getIdentifier() {
+        if (!(this instanceof Block)) return null;
+        return Registry.BLOCK.getId((Block) this);
     }
 
-    default void registerItem() {
-        Registry.register(Registry.ITEM, this.getIdentifier(), this.getBlockItem());
+    default Item getBlockItem() {
+        if (!(this instanceof Block)) return null;
+        return Item.BLOCK_ITEMS.get(this);
     }
 
-    default void register() {
+    default ExtShapeBlockInterface registerBlock(Identifier identifier) {
+        Registry.register(Registry.BLOCK, identifier, (Block) this);
+        return this;
+    }
+
+    default ExtShapeBlockInterface registerBlock() {
+        this.registerBlock(this.getDefaultIdentifier());
+        return this;
+    }
+
+    default ExtShapeBlockInterface registerItem(Item.Settings settings, Identifier identifier) {
+        // 创建并注册物品。
+        BlockItem blockItem = new ExtShapeBlockItem((Block) this,settings==null ? new FabricItemSettings() : settings);
+        Registry.register(Registry.ITEM, identifier, blockItem);
+        return this;
+    }
+
+    default ExtShapeBlockInterface registerItem(Item.Settings settings) {
+        return this.registerItem(settings,this.getDefaultIdentifier());
+    }
+
+    default ExtShapeBlockInterface registerItem() {
+        return this.registerItem(new FabricItemSettings());
+    }
+
+    default ExtShapeBlockInterface register(Identifier identifier, Item.Settings itemSettings) {
         // 同时注册方块和物品
-        this.registerBlock();
-        this.registerItem();
+        return this.registerBlock(identifier).registerItem(itemSettings,identifier);
     }
 
+    default ExtShapeBlockInterface register(Identifier identifier) {
+        return this.register(identifier, new FabricItemSettings());
+    }
+
+    default ExtShapeBlockInterface register(Item.Settings settings) {
+        return this.register(this.getDefaultIdentifier(),settings);
+    }
+
+    default ExtShapeBlockInterface register() {
+        return this.register(this.getDefaultIdentifier());
+    }
+
+    Identifier getDefaultIdentifier();
 
     default Identifier getBlockModelIdentifier() {
         Identifier identifier = this.getIdentifier();
@@ -121,9 +155,9 @@ public interface RegistrableBlock {
         return "";
     }
 
-    RegistrableBlock addToTag();
+    ExtShapeBlockInterface addToTag();
 
-    default RegistrableBlock addToTag(ExtShapeBlockTag tag) {
+    default ExtShapeBlockInterface addToTag(ExtShapeBlockTag tag) {
         assert this instanceof Block;
         tag.add((Block) this);
         return this;

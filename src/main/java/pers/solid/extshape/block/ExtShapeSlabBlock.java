@@ -1,12 +1,9 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.Waterloggable;
-import net.minecraft.item.BlockItem;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
@@ -14,40 +11,23 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.ExtShapeBlockItem;
+import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtShapeSlabBlock extends SlabBlock implements Waterloggable, RegistrableSubBlock {
-    public final Identifier identifier;
-    public final ExtShapeBlockItem blockItem;
-    public BlockState baseBlockState;
+public class ExtShapeSlabBlock extends SlabBlock implements Waterloggable, ExtShapeSubBlockInterface {
 
-    public ExtShapeSlabBlock(@NotNull BlockState baseBlockState, @Nullable Identifier identifier,
-                             @Nullable Settings settings, @Nullable FabricItemSettings itemSettings) {
-        super(settings == null ? FabricBlockSettings.copyOf(baseBlockState.getBlock()) : settings);
-        this.baseBlockState = baseBlockState;
-        this.identifier = identifier == null ? SubBlock.convertIdentifier(this.getBaseBlockIdentifier(), "_slab") :
-                identifier;
-        this.blockItem = new ExtShapeBlockItem(this, itemSettings == null ? new FabricItemSettings() : itemSettings);
-    }
-
-    public ExtShapeSlabBlock(@NotNull Block baseBlock, @Nullable Identifier identifier,
-                             @Nullable Settings settings, @Nullable FabricItemSettings itemSettings) {
-        this(baseBlock.getDefaultState(), identifier, settings, itemSettings);
+    public ExtShapeSlabBlock(@NotNull Block baseBlock,
+                             @Nullable Settings settings) {
+        super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
+        BlockMappings.mappingOfSlabs.put(baseBlock,this);
     }
 
     public ExtShapeSlabBlock(@NotNull Block baseBlock) {
-        this(baseBlock, null, null, null);
+        this(baseBlock, null);
     }
-
-    @Override
-    public BlockState getBaseBlockState() {
-        return this.baseBlockState;
-    }
-
 
     @Override
     public ExtShapeSlabBlock addToTag() {
@@ -56,13 +36,8 @@ public class ExtShapeSlabBlock extends SlabBlock implements Waterloggable, Regis
     }
 
     @Override
-    public Identifier getIdentifier() {
-        return this.identifier;
-    }
-
-    @Override
-    public BlockItem getBlockItem() {
-        return this.blockItem;
+    public Identifier getDefaultIdentifier() {
+        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),"_slab");
     }
 
     @Override

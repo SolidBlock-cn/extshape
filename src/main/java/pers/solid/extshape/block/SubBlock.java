@@ -1,21 +1,19 @@
 package pers.solid.extshape.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import pers.solid.extshape.mappings.BlockMappings;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static pers.solid.extshape.Mappings.*;
+import static pers.solid.extshape.mappings.TextureMappings.*;
 
 public interface SubBlock {
     // 所有从其他方块生成的方块都称为SubBlock。]
-    BlockState getBaseBlockState();
-
     default Identifier getBaseBlockIdentifier() {
         return Registry.BLOCK.getId(this.getBaseBlock());
     }
@@ -23,7 +21,7 @@ public interface SubBlock {
     Map<String, String> pathPrefixMappings = new HashMap<>();
 
     default Block getBaseBlock() {
-        return this.getBaseBlockState().getBlock();
+        return BlockMappings.getBaseBlockOf((Block) this);
     }
 
     default String getPathPrefix() {
@@ -53,6 +51,8 @@ public interface SubBlock {
     }
 
     static Identifier convertIdentifier(Identifier identifier, String suffix) {
+        if (identifier==Registry.BLOCK.getDefaultId()) throw new RuntimeException(String.format("Attempt to convert a default block" +
+                " ID %s with suffix %s!", identifier,suffix));
         String path = identifier.getPath();
         String basePath = getPathPrefixOf(path);
         return new Identifier("extshape", basePath + suffix);

@@ -67,6 +67,23 @@ Used as fuels, slab burns half the time of its base blocks, and button burns 1/3
 
 ## 更新日志 Update log
 
+## 1.1.0 [未发布 Unpublished]
+- 添加了纵向台阶。
+- Added vertical slabs.
+- 为浮冰添加了楼梯、台阶、栅栏、栅栏门。
+- Added stairs, slab, fence and fence gate for packed ice.
+- 现在带釉陶瓦台阶可以旋转了。
+- Glazed terracotta slabs can be rotated now.
+- 移除了弃用的代码。
+- Removed deprecated code.
+- 不再在各对象内存储其 id、基础方块等信息，而是使用 Minecraft 原版注册表储存并调取 id，并使用专门的映射表储存方块与其基础方块的对应关系。
+- Identifiers and base blocks are not stored inside objects any longer; Minecraft vanilla registry for identifiers 
+  and specific maps for relations between blocks and their base blocks are used instead.
+- 当前版本仍存在的问题：浮冰台阶下半砖和正立的浮冰楼梯第一阶顶部表面不滑。
+- Issue existing in this version: Packed ice slab bottom half and the first stage of bottom-haft stair are not slippery.
+- 未完成。
+- Undone.
+
 ### 1.0.0
 更新于2021年8月5日 Updated on Apr. 5th 2021
 

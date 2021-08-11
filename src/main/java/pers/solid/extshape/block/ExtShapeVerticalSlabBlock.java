@@ -1,60 +1,35 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.ExtShapeBlockItem;
+import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
-public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements RegistrableSubBlock{
-    public final Identifier identifier;
-    public final ExtShapeBlockItem blockItem;
-    public BlockState baseBlockState;
+public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeSubBlockInterface {
 
-    public ExtShapeVerticalSlabBlock(@NotNull BlockState baseBlockState, @Nullable Identifier identifier,
-                                     @Nullable Settings settings, @Nullable FabricItemSettings itemSettings) {
-        super(settings == null ? FabricBlockSettings.copyOf(baseBlockState.getBlock()) : settings);
-        this.baseBlockState = baseBlockState;
-        this.identifier = identifier == null ? SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),
-                "_vertical_slab") :
-                identifier;
-        this.blockItem = new ExtShapeBlockItem(this, itemSettings == null ? new FabricItemSettings() : itemSettings);
-    }
-
-    public ExtShapeVerticalSlabBlock(@NotNull Block block, @Nullable Identifier identifier,
-                                     @Nullable Settings settings, @Nullable FabricItemSettings itemSettings) {
-        this(block.getDefaultState(),identifier,settings,itemSettings);
+    public ExtShapeVerticalSlabBlock(@NotNull Block baseBlock,
+                                     @Nullable Settings settings) {
+        super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
+        BlockMappings.mappingOfVerticalSlabs.put(baseBlock,this);
     }
 
     public ExtShapeVerticalSlabBlock(@NotNull Block block) {
-        this(block,null,null,null);
+        this(block,null);
     }
 
     @Override
-    public Identifier getIdentifier() {
-        return this.identifier;
+    public Identifier getDefaultIdentifier() {
+        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),"_vertical_slab");
     }
 
     @Override
-    public BlockItem getBlockItem() {
-        return this.blockItem;
-    }
-
-    @Override
-    public RegistrableBlock addToTag() {
+    public ExtShapeBlockInterface addToTag() {
         return this.addToTag(ExtShapeBlockTag.VERTICAL_SLABS);
-    }
-
-    @Override
-    public BlockState getBaseBlockState() {
-        return this.baseBlockState;
     }
 
     @Override

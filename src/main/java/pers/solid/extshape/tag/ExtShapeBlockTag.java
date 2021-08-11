@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import pers.solid.extshape.block.RegistrableBlock;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -182,6 +182,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "terracotta_slabs"));
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "stained_terracotta_slabs"));
+    public static final ExtShapeBlockTag GLAZED_TERRACOTTA_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
+            "glazed_terracotta_slabs"));
 
     // 栅栏
     public static final ExtShapeBlockTag FENCES = new ExtShapeBlockTag(new Identifier("minecraft",
@@ -282,7 +284,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
 
     @Override
     public Identifier getIdentifierOf(Block element) {
-        if (element instanceof RegistrableBlock) return ((RegistrableBlock) element).getIdentifier();
+        if (element instanceof ExtShapeBlockInterface) return ((ExtShapeBlockInterface) element).getIdentifier();
         else return Registry.BLOCK.getId(element);
     }
 

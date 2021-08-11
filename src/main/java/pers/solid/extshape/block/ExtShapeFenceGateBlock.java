@@ -1,11 +1,8 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.FenceGateBlock;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
@@ -14,35 +11,30 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.ExtShapeBlockItem;
+import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtShapeFenceGateBlock extends FenceGateBlock implements RegistrableSubBlock {
-    public final Identifier identifier;
-    public final BlockItem blockItem;
-    public final BlockState baseBlockState;
+public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeSubBlockInterface {
     public final Item craftingIngredient;
 
-    public ExtShapeFenceGateBlock(@NotNull BlockState baseBlockState, @NotNull Item craftingIngredient, @Nullable Identifier identifier,
-                                  @Nullable Settings settings, @Nullable FabricItemSettings itemSettings) {
-        super(settings == null ? FabricBlockSettings.copyOf(baseBlockState.getBlock()) : settings);
+    public ExtShapeFenceGateBlock(@NotNull Block baseBlock, @NotNull Item craftingIngredient,
+                                  @Nullable Settings settings) {
+        super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
         this.craftingIngredient = craftingIngredient;
-        this.baseBlockState = baseBlockState;
-        this.identifier = identifier == null ? SubBlock.convertIdentifier(Registry.BLOCK.getId(baseBlockState.getBlock()),
-                "_fence_gate") : identifier;
-        this.blockItem = new ExtShapeFenceGateBlockItem(this, itemSettings == null ? new FabricItemSettings() : itemSettings);
+        BlockMappings.mappingOfFenceGates.put(baseBlock,this);
     }
 
-    public ExtShapeFenceGateBlock(Block block, Item craftingIngredient, Identifier identifier, Settings settings,
-                                  FabricItemSettings itemSettings) {
-        this(block.getDefaultState(), craftingIngredient, identifier, settings, itemSettings);
+    @Override
+    public Identifier getDefaultIdentifier() {
+        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),
+                "_fence_gate");
     }
 
     public ExtShapeFenceGateBlock(Block baseBlock, Item craftingIngredient) {
-        this(baseBlock, craftingIngredient, null, null, null);
+        this(baseBlock, craftingIngredient, null);
     }
 
     public ExtShapeFenceGateBlock addToTag() {
@@ -56,21 +48,6 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements Registrabl
 
     public Identifier getCraftingIngredientIdentifier() {
         return Registry.ITEM.getId(this.craftingIngredient);
-    }
-
-    @Override
-    public Identifier getIdentifier() {
-        return this.identifier;
-    }
-
-    @Override
-    public BlockItem getBlockItem() {
-        return this.blockItem;
-    }
-
-    @Override
-    public BlockState getBaseBlockState() {
-        return this.baseBlockState;
     }
 
     @Override
@@ -254,13 +231,5 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements Registrabl
         if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return
                 "glazed_terracotta_fence_gate";
         return "";
-    }
-
-    // 内部类
-    public static class ExtShapeFenceGateBlockItem extends ExtShapeBlockItem {
-
-        public ExtShapeFenceGateBlockItem(Block block, Settings settings) {
-            super(block, settings);
-        }
     }
 }

@@ -4,8 +4,7 @@ import net.minecraft.Bootstrap;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.block.RegistrableBlock;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.SubBlock;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
@@ -33,26 +32,82 @@ public class Generator {
     public static void generateAllData(Path basePath) {
         // 生成关于方块的数据
         Generator generator = new Generator(basePath);
-        generator.writeModelFile("extshape","block/vertical_slab", """
-                {   "parent": "block/block",
+//        generator.writeModelFile("extshape","block/vertical_slab", """
+//                {   "parent": "block/block",
+//                    "textures": {
+//                        "particle": "#side"
+//                    },
+//                    "elements": [
+//                        {   "from": [ 0, 0, 0 ],
+//                            "to": [  16, 16, 8 ],
+//                            "faces": {
+//                                "down":  {"texture": "#bottom", "cullface": "down" },
+//                                "up":    {"texture": "#top",    "cullface": "up" },
+//                                "north": {"texture": "#side",   "cullface": "north" },
+//                                "south": {"texture": "#side",   "cullface": "south" },
+//                                "west":  { "texture": "#side",   "cullface": "west" },
+//                                "east":  { "texture": "#side",   "cullface": "east" }
+//                            }
+//                        }
+//                    ]
+//                }""");
+        generator.writeModelFile("extshape","block/glazed_terracotta_slab", """
+                {
+                    "parent": "block/cube",
                     "textures": {
                         "particle": "#side"
                     },
+                    "display": {
+                        "firstperson_righthand": {
+                            "rotation": [ 0, 135, 0 ],
+                            "translation": [ 0, 0, 0 ],
+                            "scale": [ 0.40, 0.40, 0.40 ]
+                        }
+                    },
                     "elements": [
                         {   "from": [ 0, 0, 0 ],
-                            "to": [  16, 16, 8 ],
+                            "to": [ 16, 8, 16 ],
                             "faces": {
-                                "down":  {"texture": "#bottom", "cullface": "down" },
-                                "up":    {"texture": "#top",    "cullface": "up" },
-                                "north": {"texture": "#side",   "cullface": "north" },
-                                "south": {"texture": "#side",   "cullface": "south" },
-                                "west":  { "texture": "#side",   "cullface": "west" },
-                                "east":  { "texture": "#side",   "cullface": "east" }
+                                "down":  { "texture": "#bottom", "cullface": "down" },
+                                "up":    { "texture": "#top", "cullface": "up" },
+                                "north": { "texture": "#side", "uv":[8,0,16,16], "cullface": "north", "rotation": 90 },
+                                "south": { "texture": "#side", "uv":[0,0,8,16], "cullface": "south", "rotation": 270 },
+                                "west":  { "texture": "#side", "uv":[0,8,16,16], "cullface": "west", "rotation": 0 },
+                                "east":  { "texture": "#side", "uv":[0,0,16,8], "cullface": "east", "rotation": 180 }
                             }
                         }
                     ]
-                }""");
-        for (final Block BLOCK : VERTICAL_SLABS) generator.writeAllFiles(BLOCK);
+                }
+                """);
+        generator.writeModelFile("extshape","block/glazed_terracotta_slab_top", """
+                {
+                    "parent": "block/cube",
+                    "textures": {
+                        "particle": "#side"
+                    },
+                    "display": {
+                        "firstperson_righthand": {
+                            "rotation": [ 0, 135, 0 ],
+                            "translation": [ 0, 0, 0 ],
+                            "scale": [ 0.40, 0.40, 0.40 ]
+                        }
+                    },
+                    "elements": [
+                        {   "from": [ 0, 8, 0 ],
+                            "to": [ 16, 16, 16 ],
+                            "faces": {
+                                "down":  { "texture": "#bottom", "cullface": "down" },
+                                "up":    { "texture": "#top", "cullface": "up" },
+                                "north": { "texture": "#side", "uv":[0,0,8,16], "cullface": "north", "rotation": 90 },
+                                "south": { "texture": "#side", "uv":[8,0,16,16], "cullface": "south", "rotation": 270 },
+                                "west":  { "texture": "#side", "uv":[0,0,16,8], "cullface": "west", "rotation": 0 },
+                                "east":  { "texture": "#side", "uv":[0,8,16,16], "cullface": "east", "rotation": 180 }
+                            }
+                        }
+                    ]
+                }
+                """);
+        for (final Block BLOCK : EXTSHAPE_BLOCKS) generator.writeAllFiles(BLOCK);
 
         try {
             for (final Block block : EXTSHAPE_BLOCKS) {
@@ -132,8 +187,8 @@ public class Generator {
 //    }
 
     public void writeBlockModelFiles(Block block) {
-        assert block instanceof RegistrableBlock;
-        List<Pair<Identifier, String>> collection = ((RegistrableBlock) block).getBlockModelCollection();
+        assert block instanceof ExtShapeBlockInterface;
+        List<Pair<Identifier, String>> collection = ((ExtShapeBlockInterface) block).getBlockModelCollection();
         for (Pair<Identifier, String> pair : collection) {
             Identifier identifier = pair.getLeft();
             String content = pair.getRight();
@@ -142,14 +197,14 @@ public class Generator {
     }
 
     public void writeItemModelFile(Block block) {
-        assert block instanceof RegistrableBlock;
-        Identifier identifier = ((RegistrableBlock) block).getItemModelIdentifier();
+        assert block instanceof ExtShapeBlockInterface;
+        Identifier identifier = ((ExtShapeBlockInterface) block).getItemModelIdentifier();
         this.writeModelFile(identifier.getNamespace(), identifier.getPath(),
-                ((RegistrableBlock) block).getItemModelString());
+                ((ExtShapeBlockInterface) block).getItemModelString());
     }
 
     public void writeBlockStatesFile(Block block, String namespace, String path, String content) {
-        assert block instanceof RegistrableBlock;
+        assert block instanceof ExtShapeBlockInterface;
         this.write(String.format("assets/%s/blockstates/%s.json", namespace, path), content);
     }
 
@@ -158,24 +213,24 @@ public class Generator {
     }
 
     public void writeBlockStatesFile(Block block) {
-        assert block instanceof RegistrableBlock;
-        Identifier identifier = ((RegistrableBlock) block).getIdentifier();
+        assert block instanceof ExtShapeBlockInterface;
+        Identifier identifier = ((ExtShapeBlockInterface) block).getIdentifier();
         this.writeBlockStatesFile(block, identifier.getNamespace(), identifier.getPath(),
-                ((RegistrableBlock) block).getBlockStatesString());
+                ((ExtShapeBlockInterface) block).getBlockStatesString());
     }
 
     public void writeCraftingRecipeFile(Block block) {
-        assert block instanceof RegistrableBlock;
-        Identifier identifier = ((RegistrableBlock) block).getIdentifier();
+        assert block instanceof ExtShapeBlockInterface;
+        Identifier identifier = ((ExtShapeBlockInterface) block).getIdentifier();
         this.writeRecipeFile(block, identifier.getNamespace(),
-                identifier.getPath(), ((RegistrableBlock) block).getCraftingRecipeString());
+                identifier.getPath(), ((ExtShapeBlockInterface) block).getCraftingRecipeString());
     }
 
     public void writeStoneCuttingRecipeFile(Block block) {
-        assert block instanceof RegistrableBlock;
-        Identifier identifier = ((RegistrableBlock) block).getIdentifier();
+        assert block instanceof ExtShapeBlockInterface;
+        Identifier identifier = ((ExtShapeBlockInterface) block).getIdentifier();
         this.writeRecipeFile(block, identifier.getNamespace(), identifier.getPath() + "_from_stonecutting",
-                ((RegistrableBlock) block).getStoneCuttingRecipeString());
+                ((ExtShapeBlockInterface) block).getStoneCuttingRecipeString());
     }
 
     public void writeRecipeFiles(Block block) {
@@ -194,9 +249,9 @@ public class Generator {
 
 
     public void writeLootTableFile(Block block) {
-        assert block instanceof RegistrableBlock;
-        this.writeLootTableFile(((RegistrableBlock) block).getIdentifier().getNamespace(), ((RegistrableBlock) block).getIdentifier().getPath(),
-                ((RegistrableBlock) block).getLootTableString());
+        assert block instanceof ExtShapeBlockInterface;
+        this.writeLootTableFile(((ExtShapeBlockInterface) block).getIdentifier().getNamespace(), ((ExtShapeBlockInterface) block).getIdentifier().getPath(),
+                ((ExtShapeBlockInterface) block).getLootTableString());
     }
 
     public void writeBlockTagFile(ExtShapeBlockTag blockTag) {
@@ -249,7 +304,6 @@ public class Generator {
 
         // 此函数不应该在游戏运行时执行。
         Bootstrap.initialize();
-        ExtShape.registerAll();
 
         System.out.println("%%% 开始生成数据 %%%");
 
