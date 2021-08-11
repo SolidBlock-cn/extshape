@@ -214,9 +214,4 @@ public class ExtShapeSlabBlock extends SlabBlock implements Waterloggable, Regis
         return "";
     }
 
-    public static class ExtShapeSlabBlockItem extends ExtShapeBlockItem {
-        public ExtShapeSlabBlockItem(Block block, Settings settings) {
-            super(block, settings);
-        }
-    }
 }

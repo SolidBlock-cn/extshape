@@ -16,6 +16,7 @@ public class ItemGroups {
                 ExtShapeBlockTag.FULL_BLOCKS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
                 ExtShapeBlockTag.STAIRS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
                 ExtShapeBlockTag.SLABS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
+                ExtShapeBlockTag.VERTICAL_SLABS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
             })
             .build();
     public static final ItemGroup EXT_DECORATION_BLOCKS_GROUP = FabricItemGroupBuilder.create(

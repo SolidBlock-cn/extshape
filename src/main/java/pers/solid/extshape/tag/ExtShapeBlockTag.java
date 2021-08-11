@@ -244,6 +244,18 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "extshape",
             "stained_terracotta_pressure_plates"));
 
+    // 纵向台阶
+    public static final ExtShapeBlockTag VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
+            "vertical_slabs")).addToTag(EXTSHAPE_BLOCKS);
+    public static final ExtShapeBlockTag WOOLEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_vertical_slabs")).addToTag(WOOLEN_BLOCKS);
+    public static final ExtShapeBlockTag CONCRETE_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
+            "concrete_vertical_slabs"));
+    public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
+            "terracotta_vertical_slabs"));
+    public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier(
+            "extshape","stained_terracotta_vertical_slabs"));
+
     public ExtShapeBlockTag() {
         this(new ArrayList<>());
     }

@@ -6,9 +6,9 @@
   "block.extshape.?_fence": "%s栅栏",
   "block.extshape.?_fence_gate": "%s栅栏门",
   "block.extshape.?_wall": "%s墙",
-  "block.extshape.?_vertical_slab": "%s纵台阶",
   "block.extshape.?_button": "%s按钮",
   "block.extshape.?_pressure_plate": "%s压力板",
+  "block.extshape.?_vertical_slab": "%s纵台阶",
 
   "block.extshape.prefix.iron": "铁",
   "block.extshape.prefix.gold": "金",

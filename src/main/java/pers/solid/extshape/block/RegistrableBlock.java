@@ -46,7 +46,7 @@ public interface RegistrableBlock {
 
     default List<Pair<Identifier, String>> getBlockModelCollection() {
         List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
-        modelCollection.add(new Pair<>(this.getIdentifier(), this.getBlockModelString()));
+        modelCollection.add(new Pair<>(this.getBlockModelIdentifier(), this.getBlockModelString()));
         return modelCollection;
     }
 

@@ -33,7 +33,26 @@ public class Generator {
     public static void generateAllData(Path basePath) {
         // 生成关于方块的数据
         Generator generator = new Generator(basePath);
-        for (final Block BLOCK : EXTSHAPE_BLOCKS) generator.writeAllFiles(BLOCK);
+        generator.writeModelFile("extshape","block/vertical_slab", """
+                {   "parent": "block/block",
+                    "textures": {
+                        "particle": "#side"
+                    },
+                    "elements": [
+                        {   "from": [ 0, 0, 0 ],
+                            "to": [  16, 16, 8 ],
+                            "faces": {
+                                "down":  {"texture": "#bottom", "cullface": "down" },
+                                "up":    {"texture": "#top",    "cullface": "up" },
+                                "north": {"texture": "#side",   "cullface": "north" },
+                                "south": {"texture": "#side",   "cullface": "south" },
+                                "west":  { "texture": "#side",   "cullface": "west" },
+                                "east":  { "texture": "#side",   "cullface": "east" }
+                            }
+                        }
+                    ]
+                }""");
+        for (final Block BLOCK : VERTICAL_SLABS) generator.writeAllFiles(BLOCK);
 
         try {
             for (final Block block : EXTSHAPE_BLOCKS) {
@@ -57,8 +76,7 @@ public class Generator {
 
     }
 
-    public void writeModelFile(Block block, String namespace, String path, String content) {
-        assert block instanceof RegistrableBlock;
+    public void writeModelFile(String namespace, String path, String content) {
         this.write(String.format("assets/%s/models/%s.json", namespace, path), content);
     }
 
@@ -119,14 +137,14 @@ public class Generator {
         for (Pair<Identifier, String> pair : collection) {
             Identifier identifier = pair.getLeft();
             String content = pair.getRight();
-            this.writeModelFile(block, identifier.getNamespace(), identifier.getPath(), content);
+            this.writeModelFile(identifier.getNamespace(), identifier.getPath(), content);
         }
     }
 
     public void writeItemModelFile(Block block) {
         assert block instanceof RegistrableBlock;
         Identifier identifier = ((RegistrableBlock) block).getItemModelIdentifier();
-        this.writeModelFile(block, identifier.getNamespace(), identifier.getPath(),
+        this.writeModelFile(identifier.getNamespace(), identifier.getPath(),
                 ((RegistrableBlock) block).getItemModelString());
     }
 
