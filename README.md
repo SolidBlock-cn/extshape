@@ -67,7 +67,7 @@ Used as fuels, slab burns half the time of its base blocks, and button burns 1/3
 
 ## 更新日志 Update log
 
-## 1.1.0 [未发布 Unpublished]
+### 1.1.0 [未发布 Unpublished]
 - 添加了纵向台阶。
 - Added vertical slabs.
 - 为浮冰添加了楼梯、台阶、栅栏、栅栏门。
