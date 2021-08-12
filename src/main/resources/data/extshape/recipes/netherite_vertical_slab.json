@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:netherite_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:netherite_vertical_slab",
+    "count": 3
+  }
+}

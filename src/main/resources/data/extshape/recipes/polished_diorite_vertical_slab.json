@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:air"
+    }
+  },
+  "result": {
+    "item": "extshape:polished_diorite_vertical_slab",
+    "count": 3
+  }
+}
