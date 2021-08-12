@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.mappings.BlockMappings;
@@ -15,16 +16,16 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
     public ExtShapeVerticalSlabBlock(@NotNull Block baseBlock,
                                      @Nullable Settings settings) {
         super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
-        BlockMappings.mappingOfVerticalSlabs.put(baseBlock,this);
+        BlockMappings.mappingOfVerticalSlabs.put(baseBlock, this);
     }
 
     public ExtShapeVerticalSlabBlock(@NotNull Block block) {
-        this(block,null);
+        this(block, null);
     }
 
     @Override
     public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),"_vertical_slab");
+        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(), "_vertical_slab");
     }
 
     @Override
@@ -55,7 +56,30 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
                         "top": "%s",
                         "side": "%s"
                     }
-                }""", this.getBottomTexture(),this.getTopTexture(),this.getSideTexture());
+                }""", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
+    }
+
+    @Override
+    public String getCraftingRecipeString() {
+        return String.format("""
+                        {
+                          "type": "minecraft:crafting_shaped",
+                          "group": "%s",
+                          "pattern": [
+                            "#","#","#"
+                          ],
+                          "key": {
+                            "#": {
+                              "item": "%s"
+                            }
+                          },
+                          "result": {
+                            "item": "%s",
+                            "count": 3
+                          }
+                        }
+                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getSlabBlockOf(this.getBaseBlock())),
+                this.getIdentifier());
     }
 
     @Override
@@ -67,7 +91,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
                     "item": "%s"
                   },
                   "result": "%s",
-                  "count": 1
+                  "count": 2
                 }""", this.getBaseBlockIdentifier(), this.getIdentifier());
     }
 

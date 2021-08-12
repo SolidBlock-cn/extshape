@@ -6,8 +6,8 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
 import pers.solid.extshape.block.Blocks;
+import pers.solid.extshape.block.VerticalSlabBlock;
 import pers.solid.extshape.datagen.Generator;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
@@ -16,7 +16,7 @@ import java.nio.file.Path;
 public class ExtShape implements ModInitializer {
 
     // 是否生成数据。构建模组时设为true，编译模组时设为false。
-    final boolean DATA_GENERATION_SWITCH = false;
+    final boolean DATA_GENERATION_SWITCH = true;
 
     @Override
     public void onInitialize() {
@@ -28,12 +28,17 @@ public class ExtShape implements ModInitializer {
             Generator.generateAllData(Path.of("../src/main/resources"));
 
         // 羊毛方块加入可燃方块
-        for (Block BLOCK : ExtShapeBlockTag.WOOLEN_BLOCKS) {
-            FlammableBlockRegistry.getDefaultInstance().add(BLOCK, 30, 60);
-            if (BLOCK instanceof StairsBlock) FuelRegistry.INSTANCE.add(BLOCK, 75);
-            else if (BLOCK instanceof SlabBlock) FuelRegistry.INSTANCE.add(BLOCK, 50);
-            else if (BLOCK instanceof AbstractButtonBlock) FuelRegistry.INSTANCE.add(BLOCK, 33);
-            else FuelRegistry.INSTANCE.add(BLOCK, 100);
+        for (final Block block : ExtShapeBlockTag.WOOLEN_BLOCKS) {
+            FlammableBlockRegistry.getDefaultInstance().add(block, 30, 60);
+            if (block instanceof SlabBlock || block instanceof VerticalSlabBlock) FuelRegistry.INSTANCE.add(block, 50);
+            else if (block instanceof AbstractButtonBlock) FuelRegistry.INSTANCE.add(block, 33);
+            else FuelRegistry.INSTANCE.add(block, 100);
+        }
+
+        // 木头加入可燃方块
+        for (final Block block : ExtShapeBlockTag.OVERWORLD_WOODEN_BLOCKS) {
+            FlammableBlockRegistry.getDefaultInstance().add(block,5,20);
+            if (block instanceof VerticalSlabBlock) FuelRegistry.INSTANCE.add(block,150);
         }
     }
 }

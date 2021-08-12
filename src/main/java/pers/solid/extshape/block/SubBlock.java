@@ -44,6 +44,7 @@ public interface SubBlock {
         String convertedPath = path.replaceAll("_planks$", "")
                 .replaceAll("_block$", "")
                 .replaceAll("^block_of_", "")
+                .replaceAll("tiles$","tile")
                 .replaceAll("bricks$", "brick");
         if (!path.equals(convertedPath))
             pathPrefixMappings.put(path, convertedPath);

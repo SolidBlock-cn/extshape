@@ -38,6 +38,11 @@ public class Blocks {
         new ExtShapeWallBlock(SMOOTH_STONE).register().addToTag();
         new ExtShapeButtonBlock(stone, SMOOTH_STONE).register().addToTag();
 
+        // 深板岩圆石、磨制深板岩
+        for (final Block BLOCK:new Block[]{COBBLED_DEEPSLATE,POLISHED_DEEPSLATE}) {
+            new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
+        }
+
         // 凝灰岩，方解石。
         for (final Block BLOCK : new Block[]{TUFF, CALCITE}) {
             new ExtShapeStairsBlock(BLOCK).register().addToTag();
@@ -49,10 +54,18 @@ public class Blocks {
             new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
-        // 圆石栅栏和栅栏门。
+        // 圆石。
         new ExtShapeFenceBlock(COBBLESTONE, Items.FLINT).register().addToTag();
         new ExtShapeFenceGateBlock(COBBLESTONE, Items.FLINT).register().addToTag();
         new ExtShapeVerticalSlabBlock(COBBLESTONE).register().addToTag();
+
+        // 木板。
+        for (final Block BLOCK : PLANKS) {
+            final boolean isOverworld = OVERWORLD_PLANKS.contains(BLOCK);
+            new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag(WOODEN_VERTICAL_SLABS).addToTag(isOverworld ?
+                    OVERWORLD_WOODEN_BLOCKS:null);
+        }
+        WOODEN_VERTICAL_SLABS.addToTag(VERTICAL_SLABS);
 
         // 基岩
         for (final Block BLOCK : new Block[]{BEDROCK}) {
@@ -100,7 +113,7 @@ public class Blocks {
             new ExtShapeVerticalSlabBlock(BLOCK).register(settings).addToTag();
         }
 
-        // 砂岩、红砂岩，注册栅栏、按钮和压力板。
+        // 砂岩、红砂岩。
         new ExtShapeFenceBlock(SANDSTONE, Items.SAND).register().addToTag();
         new ExtShapeFenceGateBlock(SANDSTONE, Items.SAND).register().addToTag();
         new ExtShapeFenceBlock(RED_SANDSTONE, Items.RED_SAND).register().addToTag();
@@ -174,7 +187,6 @@ public class Blocks {
         new ExtShapeFenceGateBlock(MOSSY_COBBLESTONE, Items.FLINT).register().addToTag();
         new ExtShapeVerticalSlabBlock(MOSSY_COBBLESTONE).register().addToTag();
 
-
         // 黑曜石。
         new ExtShapeStairsBlock(OBSIDIAN).register().addToTag();
         new ExtShapeSlabBlock(OBSIDIAN).register().addToTag();
@@ -184,6 +196,11 @@ public class Blocks {
         new ExtShapeButtonBlock(hard, OBSIDIAN).register().addToTag();
         new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, OBSIDIAN).register().addToTag();
         new ExtShapeVerticalSlabBlock(OBSIDIAN).register().addToTag();
+
+        // 紫珀块。
+        new ExtShapeVerticalSlabBlock(PURPUR_BLOCK).register().addToTag();
+
+        // 冰，由于技术原因，暂不产生。
 
         // 雪块
         new ExtShapeStairsBlock(SNOW_BLOCK).register().addToTag();
@@ -215,6 +232,11 @@ public class Blocks {
         new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, GLOWSTONE).register().addToTag();
         new ExtShapeVerticalSlabBlock(GLOWSTONE).register().addToTag();
 
+        // 石砖、苔石砖、深板岩砖、深板岩瓦
+        for (final Block BLOCK : new Block[]{STONE_BRICKS, MOSSY_STONE_BRICKS, DEEPSLATE_BRICKS,DEEPSLATE_TILES}) {
+            new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
+        }
+
         // 下界砖块的栅栏门、按钮和压力板。
         for (final Block BLOCK : new Block[]{NETHER_BRICKS}) {
             new ExtShapeFenceGateBlock(BLOCK, Items.NETHER_BRICK).register().addToTag();
@@ -224,7 +246,10 @@ public class Blocks {
             new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
-        // 绿宝石。
+        // 末地石砖。
+        new ExtShapeVerticalSlabBlock(END_STONE_BRICKS).register().addToTag();
+
+        // 绿宝石块。
         new ExtShapeStairsBlock(EMERALD_BLOCK).register().addToTag();
         new ExtShapeSlabBlock(EMERALD_BLOCK).register().addToTag();
         new ExtShapeFenceBlock(EMERALD_BLOCK, Items.EMERALD).register().addToTag();
@@ -241,12 +266,12 @@ public class Blocks {
             new ExtShapeWallBlock(BLOCK).register().addToTag();
             new ExtShapeButtonBlock(stone, BLOCK).register().addToTag();
             new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK);
+            new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
         for (final Block BLOCK : new Block[]{QUARTZ_BRICKS, CHISELED_QUARTZ_BLOCK}) {
             new ExtShapeStairsBlock(BLOCK).register().addToTag();
             new ExtShapeSlabBlock(BLOCK).register().addToTag();
-            new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
         // 陶瓦和彩色陶瓦。

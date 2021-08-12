@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
@@ -157,9 +158,9 @@ public interface ExtShapeBlockInterface {
 
     ExtShapeBlockInterface addToTag();
 
-    default ExtShapeBlockInterface addToTag(ExtShapeBlockTag tag) {
+    default ExtShapeBlockInterface addToTag(@Nullable ExtShapeBlockTag tag) {
         assert this instanceof Block;
-        tag.add((Block) this);
+        if(tag!=null) tag.add((Block) this);
         return this;
     }
 

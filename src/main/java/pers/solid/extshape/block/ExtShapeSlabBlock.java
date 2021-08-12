@@ -135,7 +135,7 @@ public class ExtShapeSlabBlock extends SlabBlock implements Waterloggable, ExtSh
                     "item": "%s"
                   },
                   "result": "%s",
-                  "count": 1
+                  "count": 2
                 }""", this.getBaseBlockIdentifier(), this.getIdentifier());
     }
 

@@ -15,14 +15,24 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
 
     public static final List<ExtShapeBlockTag> ALL_EXTSHAPE_BLOCK_TAGS = new ArrayList<>();
 
-    public static final ExtShapeBlockTag PLANKS = new ExtShapeBlockTag(List.of(new Block[]{
+    public static final ExtShapeBlockTag PLANKS = new ExtShapeBlockTag(List.of(
             OAK_PLANKS,
             SPRUCE_PLANKS,
             BIRCH_PLANKS,
             JUNGLE_PLANKS,
             ACACIA_PLANKS,
             DARK_OAK_PLANKS,
-    }));
+            CRIMSON_PLANKS,
+            WARPED_PLANKS
+    ));
+    public static final ExtShapeBlockTag OVERWORLD_PLANKS = new ExtShapeBlockTag(List.of(
+            OAK_PLANKS,
+            SPRUCE_PLANKS,
+            BIRCH_PLANKS,
+            JUNGLE_PLANKS,
+            ACACIA_PLANKS,
+            DARK_OAK_PLANKS
+    ));
     public static final ExtShapeBlockTag STONES = new ExtShapeBlockTag(List.of(new Block[]{
             STONE,
     }));
@@ -139,6 +149,9 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             , "occludes_vibration_signals"));
     public static final ExtShapeBlockTag WOOLEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
             "woolen_blocks")).addToTag(OCCLUDES_VIBRATION_SIGNALS);
+    public static final ExtShapeBlockTag WOODEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
+            "wooden_blocks"));
+    public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
     public static final ExtShapeBlockTag DRAGON_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
             "dragon_immune"));
     public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = new ExtShapeBlockTag(new Identifier("minecraft",
@@ -249,6 +262,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     // 纵向台阶
     public static final ExtShapeBlockTag VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_slabs")).addToTag(EXTSHAPE_BLOCKS);
+    public static final ExtShapeBlockTag WOODEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
+            "wooden_vertical_slabs")).addToTag(WOODEN_BLOCKS);
     public static final ExtShapeBlockTag WOOLEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "woolen_vertical_slabs")).addToTag(WOOLEN_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",

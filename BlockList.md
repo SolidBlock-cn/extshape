@@ -6,6 +6,7 @@
 - **模组**：该方块在模组中加入 The block is added by this mod
 - 无：该方块在原版和模组中均不存在 The block exists in neither vanilla Minecraft nor this mod.
 
+## 原版形状 Vanilla shapes
 | 基础方块<br>Base block | 完整方块<br>Full block | 楼梯<br>Stairs | 台阶<br>Slab |栅栏和门<br>Fence and gate| 墙<br>Wall | 按钮<br>Button | 压力板<br>Pressure plate |
 |----------------------|-----|-----|------|-----|-----|-----|--------|
 | 石头 Stone | 原版 | 原版 | 原版 | **模组** | 原版 | 原版 | 原版
@@ -76,3 +77,59 @@
 | 磨制黑石砖 Pol. blackstone bricks | 原版 | 原版 | 原版 | 无 | 原版 | 无 | 无 |
 | 裂纹磨制黑石砖 Cra. pol. blackstone | 原版 | 无 | 无 | 无 | 无 | 无 | 无 |
 | 带釉陶瓦 Glazed terracotta | 原版 | 无 | **模组** | 无 | 无 | 无 | 无 |
+
+## 增添的形状 Added shapes
+
+| 基础方块<br>Base block | 直立台阶<br>Vertical slab | 直立楼梯<br>Vertical stairs | 横条<br>Quarter piece | 直立横条<br>Vertical quarter piece | 板<br>Pane
+|----------------------|---------|--------|-----|---------|---
+| 石头 Stone | **模组**
+| 石头变种 Stone variants | **模组**
+| 深板岩圆石 Cobbled deepslate | **模组**
+| 磨制深板岩 Polished deepslate | **模组**
+| 凝灰岩、方解石 Tuff and calcite | **模组**
+| 圆石 Cobblestone | **模组**
+| 木板（含下界木板）<br>Planks including nether | **模组**
+| 基岩 Bedrock | **模组**
+| 紫水晶块 Amethyst block | **模组**
+| 铁块 Block of iron |  **模组**
+| 金/钻石/下界合金/青金石块<br>Block of gold/diamond/netherite/lapis | **模组**
+| 砂岩/红砂岩 Sandstone and red | **模组**
+| 切制砂岩/切制红砂岩<br>Cut sandstone and red | **模组** 
+| 錾制砂岩/錾制红砂岩<br>Chiseled sandstone and red | **模组** 
+| 平滑砂岩/平滑红砂岩<br>Smooth sandstone and red | **模组**
+| 羊毛 Wool | **模组** 
+| 砖块 Brick block | **模组** 
+| 苔石 Mossy cobblestone | **模组** 
+| 黑曜石 Obsidian | **模组** 
+| 紫珀块 Purpur block | **模组**
+| 雪块 Snow block | **模组**
+| 下界岩 Netherrack | **模组**
+| 荧石 Glowstone | **模组**
+| 石砖 Stone bricks | **模组**
+| 裂纹石砖 Cracked stone bricks | 无 |
+| 苔石砖 Mossy stone bricks | **模组**
+| 錾制石砖 Chiseled stone bricks | 无 |
+| 深板岩砖/深板岩瓦 Deepslate bricks/tiles | **模组**
+| 裂纹深板岩砖/裂纹深板岩瓦<br>Cracked deepslate bricks/tiles | 无 |
+| 錾制深板岩 Chiseled deepslate | 无 |
+| 下界砖块 Nether brick block | **模组**
+| 裂纹下界砖块/錾制下界砖块<br>Cracked/Chiseled nether bricks | 无 |
+| 末地石 End stone | 无 |
+| 末地石砖 End stone bricks | **模组**
+| 绿宝石块 Block of emerald | **模组**
+| 石英 Quartz block | **模组**
+| 石英砖 Quartz bricks | **模组**
+| 石英柱 Quartz pillar | 无
+| 平滑石英块 Smooth quartz | **模组**
+| 錾制石英块 Chiseled quartz | **模组**
+| 陶瓦和染色陶瓦 Terracotta and dyed | **模组**
+| 浮冰 Packed ice | **模组**
+| 海晶石 Prismarine | **模组**
+| 海晶石砖 Prismarine bricks | **模组**
+| 暗海晶石 Dark prismarine | **模组**
+| 下界疣块 Nether wart block | **模组**
+| 诡异疣块 Warped wart block | **模组**
+| 红色下界砖块 Red nether bricks | **模组**
+| 混凝土 Concrete | **模组**
+| 蓝冰 Blue ice | 无 |
+| 哭泣的黑曜石 Crying obsidian | **模组**

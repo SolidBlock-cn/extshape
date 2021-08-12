@@ -40,32 +40,32 @@ public class BlockMappings {
         }
         return null;
     }
-//
-//    public static StairsBlock getStairsBlockOf(Block block) {
-//        return mappingOfStairs.get(block);
-//    }
-//
-//    public static SlabBlock getSlabBlockOf(Block block) {
-//        return mappingOfSlabs.get(block);
-//    }
-//
-//    public static VerticalSlabBlock getVerticalSlabBlockOf(Block block) {
-//        return mappingOfVerticalSlabs.get(block);
-//    }
-//
-//    public static FenceBlock getFenceBlockOf(Block block) {
-//        return mappingOfFences.get(block);
-//    }
-//
-//    public static FenceGateBlock getFenceGateBlockOf(Block block) {
-//        return mappingOfFenceGates.get(block);
-//    }
-//
-//    public static AbstractButtonBlock getButtonBlockOf(Block block) {
-//        return mappingOfButtons.get(block);
-//    }
-//
-//    public static PressurePlateBlock getPressurePlateBlockOf(Block block) {
-//        return mappingOfPressurePlates.get(block);
-//    }
+
+    public static StairsBlock getStairsBlockOf(Block block) {
+        return mappingOfStairs.get(block);
+    }
+
+    public static SlabBlock getSlabBlockOf(Block block) {
+        return mappingOfSlabs.get(block);
+    }
+
+    public static VerticalSlabBlock getVerticalSlabBlockOf(Block block) {
+        return mappingOfVerticalSlabs.get(block);
+    }
+
+    public static FenceBlock getFenceBlockOf(Block block) {
+        return mappingOfFences.get(block);
+    }
+
+    public static FenceGateBlock getFenceGateBlockOf(Block block) {
+        return mappingOfFenceGates.get(block);
+    }
+
+    public static AbstractButtonBlock getButtonBlockOf(Block block) {
+        return mappingOfButtons.get(block);
+    }
+
+    public static PressurePlateBlock getPressurePlateBlockOf(Block block) {
+        return mappingOfPressurePlates.get(block);
+    }
 }
