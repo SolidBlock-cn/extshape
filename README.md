@@ -84,6 +84,8 @@ Used as fuels, slab burns half the time of its base blocks, and button burns 1/3
   be directly merged into BlockMappings.
 - 当前版本仍存在的问题：浮冰台阶下半砖和正立的浮冰楼梯第一阶顶部表面不滑。
 - Issue existing in this version: Packed ice slab bottom half and the first stage of bottom-haft stair are not slippery.
+- 添加了按基础方块排序的物品组。
+- Added item groups where items are sorted by on base blocks.
 - 未完成。
 - Undone.
 
