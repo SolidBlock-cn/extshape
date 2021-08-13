@@ -6,26 +6,23 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
-import pers.solid.extshape.block.Blocks;
+import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.block.VerticalSlabBlock;
-import pers.solid.extshape.datagen.Generator;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
-
-import java.nio.file.Path;
 
 public class ExtShape implements ModInitializer {
 
     // 是否生成数据。构建模组时设为true，编译模组时设为false。
-    final boolean DATA_GENERATION_SWITCH = true;
+//    final boolean DATA_GENERATION_SWITCH = true;
 
     @Override
     public void onInitialize() {
-        Blocks.init();
+        ExtShapeBlocks.init();
         ItemGroups.init();
 
 //         生成数据
-        if (DATA_GENERATION_SWITCH)
-            Generator.generateAllData(Path.of("../src/main/resources"));
+//        if (DATA_GENERATION_SWITCH)
+//            Generator.generateAllData(Path.of("../src/main/resources"));
 
         // 羊毛方块加入可燃方块
         for (final Block block : ExtShapeBlockTag.WOOLEN_BLOCKS) {

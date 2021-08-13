@@ -13,7 +13,7 @@ import static net.minecraft.block.Blocks.*;
 import static pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType.*;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
 
-public class Blocks {
+public class ExtShapeBlocks {
     public static final SmoothStoneDoubleSlabBlock SMOOTH_STONE_DOUBLE_SLAB;
 
     static {
@@ -132,7 +132,7 @@ public class Blocks {
             new ExtShapeFenceGateBlock(BLOCK, BLOCK == CUT_SANDSTONE ? Items.SAND : Items.RED_SAND).register().addToTag();
             new ExtShapeWallBlock(BLOCK).register().addToTag();
             new ExtShapeButtonBlock(stone, BLOCK).register().addToTag();
-            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK);
+            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK).register().addToTag();
             new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
@@ -144,7 +144,7 @@ public class Blocks {
             new ExtShapeFenceGateBlock(BLOCK, BLOCK == CHISELED_SANDSTONE ? Items.SAND : Items.RED_SAND).register().addToTag();
             new ExtShapeWallBlock(BLOCK).register().addToTag();
             new ExtShapeButtonBlock(stone, BLOCK).register().addToTag();
-            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK);
+            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK).register().addToTag();
             new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
@@ -154,7 +154,7 @@ public class Blocks {
             new ExtShapeFenceGateBlock(BLOCK, BLOCK == SMOOTH_SANDSTONE ? Items.SAND : Items.RED_SAND).register().addToTag();
             new ExtShapeWallBlock(BLOCK).register().addToTag();
             new ExtShapeButtonBlock(stone, BLOCK).register().addToTag();
-            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK);
+            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK).register().addToTag();
             new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
@@ -265,7 +265,7 @@ public class Blocks {
             new ExtShapeFenceGateBlock(BLOCK, Items.QUARTZ).register().addToTag();
             new ExtShapeWallBlock(BLOCK).register().addToTag();
             new ExtShapeButtonBlock(stone, BLOCK).register().addToTag();
-            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK);
+            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, BLOCK).register().addToTag();
             new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
@@ -350,7 +350,7 @@ public class Blocks {
             new ExtShapeFenceGateBlock(BLOCK, BLOCK == NETHER_WART_BLOCK ? Items.NETHER_WART : Items.WARPED_FUNGUS).register().addToTag();
             new ExtShapeWallBlock(BLOCK).register().addToTag();
             new ExtShapeButtonBlock(soft, BLOCK).register().addToTag();
-            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, BLOCK);
+            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, BLOCK).register().addToTag();
             new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 
@@ -360,7 +360,7 @@ public class Blocks {
             new ExtShapeFenceGateBlock(BLOCK, Items.NETHER_BRICK).register().addToTag();
             new ExtShapeWallBlock(BLOCK).register().addToTag();
             new ExtShapeButtonBlock(soft, BLOCK).register().addToTag();
-            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, BLOCK);
+            new ExtShapePressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, BLOCK).register().addToTag();
             new ExtShapeVerticalSlabBlock(BLOCK).register().addToTag();
         }
 

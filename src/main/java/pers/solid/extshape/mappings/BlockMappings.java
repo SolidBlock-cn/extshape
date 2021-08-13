@@ -1,26 +1,44 @@
 package pers.solid.extshape.mappings;
 
 import net.minecraft.block.*;
+import net.minecraft.data.family.BlockFamilies;
+import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.VerticalSlabBlock;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class BlockMappings {
+    public static final BlockMapping<StairsBlock> mappingOfStairs = new BlockMapping<>();
+    public static final BlockMapping<SlabBlock> mappingOfSlabs = new BlockMapping<>();
+    public static final BlockMapping<VerticalSlabBlock> mappingOfVerticalSlabs = new BlockMapping<>();
 
-    public static final Map<Block, StairsBlock> mappingOfStairs = new HashMap<>();
-    public static final Map<Block, SlabBlock> mappingOfSlabs = new HashMap<>();
-    public static final Map<Block, VerticalSlabBlock> mappingOfVerticalSlabs = new HashMap<>();
+    public static final BlockMapping<FenceBlock> mappingOfFences = new BlockMapping<>();
+    public static final BlockMapping<FenceGateBlock> mappingOfFenceGates = new BlockMapping<>();
+    public static final BlockMapping<WallBlock> mappingOfWalls = new BlockMapping<>();
+    public static final BlockMapping<AbstractButtonBlock> mappingOfButtons = new BlockMapping<>();
+    public static final BlockMapping<PressurePlateBlock> mappingOfPressurePlates = new BlockMapping<>();
 
-    public static final Map<Block, FenceBlock> mappingOfFences = new HashMap<>();
-    public static final Map<Block, FenceGateBlock> mappingOfFenceGates = new HashMap<>();
-    public static final Map<Block, WallBlock> mappingOfWalls = new HashMap<>();
-    public static final Map<Block,AbstractButtonBlock> mappingOfButtons = new HashMap<>();
-    public static final Map<Block,PressurePlateBlock> mappingOfPressurePlates = new HashMap<>();
+    static {
+        // 从原版的BlockFamilies导入数据至BlockMappings。
+        Stream<BlockFamily> vanillaBlockFamilies = BlockFamilies.getFamilies();
+        vanillaBlockFamilies.forEach((blockFamily -> {
+            Block baseBlock = blockFamily.getBaseBlock();
+            Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
+            mappingOfStairs.put(baseBlock, (StairsBlock) variants.get(BlockFamily.Variant.STAIRS));
+            mappingOfSlabs.put(baseBlock, (SlabBlock) variants.get(BlockFamily.Variant.SLAB));
+            mappingOfFences.put(baseBlock, (FenceBlock) variants.get(BlockFamily.Variant.FENCE));
+            mappingOfFenceGates.put(baseBlock, (FenceGateBlock) variants.get(BlockFamily.Variant.FENCE_GATE));
+            mappingOfWalls.put(baseBlock, (WallBlock) variants.get(BlockFamily.Variant.WALL));
+            mappingOfButtons.put(baseBlock, (AbstractButtonBlock) variants.get(BlockFamily.Variant.BUTTON));
+            mappingOfPressurePlates.put(baseBlock,
+                    (PressurePlateBlock) variants.get(BlockFamily.Variant.PRESSURE_PLATE));
+        }));
+    }
 
     @Nullable
-    public static Map<Block,? extends Block> getBlockMappingOf(Block block) {
+    public static Map<Block, ? extends Block> getBlockMappingOf(Block block) {
         if (block instanceof StairsBlock) return mappingOfStairs;
         else if (block instanceof SlabBlock) return mappingOfSlabs;
         else if (block instanceof VerticalSlabBlock) return mappingOfVerticalSlabs;
@@ -34,9 +52,9 @@ public class BlockMappings {
 
     public static Block getBaseBlockOf(Block block) {
         Map<Block, ? extends Block> mapping = getBlockMappingOf(block);
-        if (mapping==null) return null;
+        if (mapping == null) return null;
         for (Map.Entry<Block, ? extends Block> entry : mapping.entrySet()) {
-            if (entry.getValue()==block) return entry.getKey();
+            if (entry.getValue() == block) return entry.getKey();
         }
         return null;
     }
@@ -59,6 +77,10 @@ public class BlockMappings {
 
     public static FenceGateBlock getFenceGateBlockOf(Block block) {
         return mappingOfFenceGates.get(block);
+    }
+
+    public static WallBlock getWallBlockOf(Block block) {
+        return mappingOfWalls.get(block);
     }
 
     public static AbstractButtonBlock getButtonBlockOf(Block block) {

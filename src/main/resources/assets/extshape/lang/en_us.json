@@ -44,5 +44,9 @@
 
   "itemGroup.extshape.building_blocks": "Extended block shapes: Building blocks",
   "itemGroup.extshape.decoration_blocks": "Extended block shape: Decoration blocks",
-  "itemGroup.extshape.redstone": "Extended block shape: Redstone"
+  "itemGroup.extshape.redstone": "Extended block shape: Redstone",
+  "itemGroup.extshape.wooden_blocks": "Extended block shape: Wooden blocks (sorted by base blocks, including vanilla blocks)",
+  "itemGroup.extshape.colorful_blocks": "Extended block shape: Colorful blocks (sorted by base blocks, including vanilla blocks)",
+  "itemGroup.extshape.stone_blocks": "Extended block shape: Stone blocks (sorted by base blocks, including vanilla blocks)",
+  "itemGroup.extshape.other_blocks": "Extended block shape: Other blocks (sorted by base blocks, including vanilla blocks)"
 }

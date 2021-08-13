@@ -42,7 +42,11 @@
   "block.extshape.prefix.warped": "诡异木",
   "block.extshape.prefix.warped_wart": "诡异疣",
 
-  "itemGroup.extshape.building_blocks": "扩展方块形状：建筑方块",
-  "itemGroup.extshape.decoration_blocks": "扩展方块形状：装饰性方块",
-  "itemGroup.extshape.redstone": "扩展方块形状：红石"
+  "itemGroup.extshape.building_blocks": "扩展方块形状：建筑方块（按形状排序）",
+  "itemGroup.extshape.decoration_blocks": "扩展方块形状：装饰性方块（按形状排序）",
+  "itemGroup.extshape.redstone": "扩展方块形状：红石（按形状排序）",
+  "itemGroup.extshape.wooden_blocks": "扩展方块形状：木制方块（按基础方块排序，含原版方块）",
+  "itemGroup.extshape.colorful_blocks": "扩展方块形状：彩色方块（按基础方块排序，含原版方块）",
+  "itemGroup.extshape.stone_blocks": "扩展方块形状：石质方块（按基础方块排序，含原版方块）",
+  "itemGroup.extshape.other_blocks": "扩展方块形状：其他（按基础方块排序，含原版方块）"
 }
