@@ -45,8 +45,25 @@ public class ItemGroups {
             .build();
 
     private static final ExtShapeBlockTag WOODEN_BLOCKS = new ExtShapeBlockTag();
+    public static final ItemGroup WOODEN_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
+            "wooden_blocks")).appendItems(itemStacks -> WOODEN_BLOCKS.forEach((block -> importTo(block, itemStacks)))).icon(() -> new ItemStack(Blocks.OAK_STAIRS)).build();
     private static final ExtShapeBlockTag COLORFUL_BLOCKS = new ExtShapeBlockTag();
+    public static final ItemGroup COLORFUL_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
+            "colorful_blocks")).icon(() -> new ItemStack(ExtShapeBlockTag.WOOLEN_PRESSURE_PLATES.getEntry(3))).appendItems(itemStacks -> COLORFUL_BLOCKS.forEach((block -> importTo(block,
+            itemStacks)))).build();
     private static final ExtShapeBlockTag STONE_BLOCKS = new ExtShapeBlockTag();
+    public static final ItemGroup STONE_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
+            "stone_blocks")).icon(() -> new ItemStack(BlockMappings.getVerticalSlabBlockOf(Blocks.STONE))).appendItems(itemStacks -> STONE_BLOCKS.forEach((block -> importTo(block,
+            itemStacks)))).build();
+    public static final ItemGroup OTHER_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
+            "other_blocks")).icon(() -> new ItemStack(BlockMappings.getSlabBlockOf(Blocks.SNOW_BLOCK))).appendItems(itemStacks -> {
+        Set<Block> baseBlockList = new LinkedHashSet<>(BlockMapping.baseBlocks);
+        WOODEN_BLOCKS.forEach(baseBlockList::remove);
+        COLORFUL_BLOCKS.forEach(baseBlockList::remove);
+        STONE_BLOCKS.forEach(baseBlockList::remove);
+        baseBlockList.forEach(block -> importTo(block, itemStacks));
+    }).build();
+
     static {
         WOODEN_BLOCKS.addTag(ExtShapeBlockTag.PLANKS);
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.WOOLS);
@@ -55,34 +72,17 @@ public class ItemGroups {
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.STAINED_TERRACOTTAS);
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.GLAZED_TERRACOTTAS);
         STONE_BLOCKS.addTag(ExtShapeBlockTag.STONES);
-        STONE_BLOCKS.addAll(List.of(Blocks.SMOOTH_STONE,Blocks.STONE_BRICKS,Blocks.MOSSY_STONE_BRICK_SLAB, Blocks.COBBLED_DEEPSLATE,
-                Blocks.POLISHED_DEEPSLATE,Blocks.DEEPSLATE_BRICKS,Blocks.DEEPSLATE_TILES,
-                Blocks.TUFF,Blocks.CALCITE,Blocks.COBBLESTONE,Blocks.MOSSY_COBBLESTONE,Blocks.SANDSTONE,Blocks.RED_SANDSTONE,
-                Blocks.CUT_SANDSTONE,Blocks.CUT_RED_SANDSTONE,Blocks.CHISELED_SANDSTONE,Blocks.CHISELED_RED_SANDSTONE
-                ,Blocks.SMOOTH_SANDSTONE,Blocks.SMOOTH_RED_SANDSTONE));
+        STONE_BLOCKS.addAll(List.of(Blocks.SMOOTH_STONE, Blocks.STONE_BRICKS, Blocks.MOSSY_STONE_BRICK_SLAB, Blocks.COBBLED_DEEPSLATE,
+                Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS, Blocks.DEEPSLATE_TILES,
+                Blocks.TUFF, Blocks.CALCITE, Blocks.COBBLESTONE, Blocks.MOSSY_COBBLESTONE, Blocks.SANDSTONE, Blocks.RED_SANDSTONE,
+                Blocks.CUT_SANDSTONE, Blocks.CUT_RED_SANDSTONE, Blocks.CHISELED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE
+                , Blocks.SMOOTH_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE));
     }
-
-    public static final ItemGroup WOODEN_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "wooden_blocks")).appendItems(itemStacks -> WOODEN_BLOCKS.forEach((block -> importTo(block,itemStacks)))).icon(() -> new ItemStack(Blocks.OAK_STAIRS)).build();
-    public static final ItemGroup COLORFUL_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "colorful_blocks")).icon(()->new ItemStack(ExtShapeBlockTag.WOOLEN_PRESSURE_PLATES.getEntry(3))).appendItems(itemStacks -> COLORFUL_BLOCKS.forEach((block -> importTo(block,
-                                                                                                      itemStacks)))).build();
-    public static final ItemGroup STONE_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "stone_blocks")).icon(()->new ItemStack(BlockMappings.getVerticalSlabBlockOf(Blocks.STONE))).appendItems(itemStacks -> STONE_BLOCKS.forEach((block -> importTo(block,
-            itemStacks)))).build();
-    public static final ItemGroup OTHER_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "other_blocks")).icon(() -> new ItemStack(BlockMappings.getSlabBlockOf(Blocks.SNOW_BLOCK))).appendItems(itemStacks -> {
-                Set<Block> baseBlockList = new LinkedHashSet<>(BlockMapping.baseBlocks);
-                WOODEN_BLOCKS.forEach(baseBlockList::remove);
-                COLORFUL_BLOCKS.forEach(baseBlockList::remove);
-                STONE_BLOCKS.forEach(baseBlockList::remove);
-                baseBlockList.forEach(block -> importTo(block,itemStacks));
-    }).build();
 
     // 以下为按方块排序的列表。
     protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
         Block t;
-        if (baseBlock!=null) itemStacks.add(new ItemStack(baseBlock));
+        if (baseBlock != null) itemStacks.add(new ItemStack(baseBlock));
         if ((t = BlockMappings.getStairsBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
         if ((t = BlockMappings.getSlabBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
         if ((t = BlockMappings.getVerticalSlabBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));

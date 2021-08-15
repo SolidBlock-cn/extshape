@@ -12,10 +12,10 @@ public class ButtonMixin {
     @Inject(method = "getPressTicks", at = @At("RETURN"), cancellable = true)
     public void getPressTicks(CallbackInfoReturnable<Integer> cir) {
         final AbstractButtonBlock block = (AbstractButtonBlock) (Object) this;
-        if (block instanceof ExtShapeButtonBlock && ((ExtShapeButtonBlock) block).type == ExtShapeButtonBlock.ButtonType.hard) {
+        if (block instanceof ExtShapeButtonBlock && ((ExtShapeButtonBlock) block).type == ExtShapeButtonBlock.ButtonType.HARD) {
             cir.setReturnValue(5);
             cir.cancel();
-        } else if (block instanceof ExtShapeButtonBlock && ((ExtShapeButtonBlock) block).type == ExtShapeButtonBlock.ButtonType.soft) {
+        } else if (block instanceof ExtShapeButtonBlock && ((ExtShapeButtonBlock) block).type == ExtShapeButtonBlock.ButtonType.SOFT) {
             cir.setReturnValue(60);
             cir.cancel();
         }

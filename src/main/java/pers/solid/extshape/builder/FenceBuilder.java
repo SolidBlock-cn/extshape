@@ -5,10 +5,11 @@ import net.minecraft.block.FenceBlock;
 import net.minecraft.item.Item;
 import pers.solid.extshape.block.ExtShapeFenceBlock;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.mappings.IngredientMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class FenceBuilder extends AbstractBlockBuilder<FenceBlock> {
-    protected final Item craftingIngredient;
+    protected Item craftingIngredient;
 
     protected FenceBuilder(Block baseBlock, Item craftingIngredient) {
         super(baseBlock);
@@ -24,6 +25,18 @@ public class FenceBuilder extends AbstractBlockBuilder<FenceBlock> {
 
     @Override
     public void createInstance() {
-        this.block = new ExtShapeFenceBlock(this.baseBlock,craftingIngredient,this.blockSettings);
+        this.block = new ExtShapeFenceBlock(this.blockSettings);
+    }
+
+    public FenceBuilder setCraftingIngredient(Item craftingIngredient) {
+        this.craftingIngredient = craftingIngredient;
+        return this;
+    }
+
+    @Override
+    public FenceBlock build() {
+        super.build();
+        IngredientMappings.mappingOfFenceIngredients.put(this.block, this.craftingIngredient);
+        return this.block;
     }
 }

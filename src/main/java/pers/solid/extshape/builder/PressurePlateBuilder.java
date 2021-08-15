@@ -24,6 +24,6 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
 
     @Override
     public void createInstance() {
-        this.block = new ExtShapePressurePlateBlock(type,baseBlock,blockSettings);
+        this.block = new ExtShapePressurePlateBlock(type, blockSettings);
     }
 }

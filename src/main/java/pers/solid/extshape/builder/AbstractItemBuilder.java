@@ -21,7 +21,7 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
 
     @Override
     public AbstractItemBuilder<T> register() {
-        Registry.register(Registry.ITEM,this.identifier,this.item);
+        Registry.register(Registry.ITEM, this.identifier, this.item);
         return this;
     }
 

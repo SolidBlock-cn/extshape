@@ -1,24 +1,22 @@
 package pers.solid.extshape.datagen;
 
-import net.minecraft.Bootstrap;
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
-import pers.solid.extshape.block.ExtShapeBlockInterface;
-import pers.solid.extshape.block.SubBlock;
+import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.block.ExtShapeBlocks;
+import pers.solid.extshape.block.GlazedTerracottaSlabBlock;
+import pers.solid.extshape.block.VerticalSlabBlock;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
-
-import static net.minecraft.block.Blocks.*;
-import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
 
 public class Generator {
 
+    public static final boolean DATA_GENERATION_SWITCH = true;
+    private static int stat = 0;
     public Path basePath;
 
     public Generator(Path path) {
@@ -29,244 +27,21 @@ public class Generator {
         this(Path.of("generated"));
     }
 
-    public static void generateAllData(Path basePath) {
-        // 生成关于方块的数据
-        Generator generator = new Generator(basePath);
-        generator.writeModelFile("extshape","block/vertical_slab", """
-                {   "parent": "block/block",
-                    "textures": {
-                        "particle": "#side"
-                    },
-                    "elements": [
-                        {   "from": [ 0, 0, 0 ],
-                            "to": [  16, 16, 8 ],
-                            "faces": {
-                                "down":  {"texture": "#bottom", "cullface": "down" },
-                                "up":    {"texture": "#top",    "cullface": "up" },
-                                "north": {"texture": "#side",   "cullface": "north" },
-                                "south": {"texture": "#side",   "cullface": "south" },
-                                "west":  { "texture": "#side",   "cullface": "west" },
-                                "east":  { "texture": "#side",   "cullface": "east" }
-                            }
-                        }
-                    ]
-                }""");
-        generator.writeModelFile("extshape","block/glazed_terracotta_slab", """
-                {
-                    "parent": "block/cube",
-                    "textures": {
-                        "particle": "#side"
-                    },
-                    "display": {
-                        "firstperson_righthand": {
-                            "rotation": [ 0, 135, 0 ],
-                            "translation": [ 0, 0, 0 ],
-                            "scale": [ 0.40, 0.40, 0.40 ]
-                        }
-                    },
-                    "elements": [
-                        {   "from": [ 0, 0, 0 ],
-                            "to": [ 16, 8, 16 ],
-                            "faces": {
-                                "down":  { "texture": "#bottom", "cullface": "down" },
-                                "up":    { "texture": "#top", "cullface": "up" },
-                                "north": { "texture": "#side", "uv":[8,0,16,16], "cullface": "north", "rotation": 90 },
-                                "south": { "texture": "#side", "uv":[0,0,8,16], "cullface": "south", "rotation": 270 },
-                                "west":  { "texture": "#side", "uv":[0,8,16,16], "cullface": "west", "rotation": 0 },
-                                "east":  { "texture": "#side", "uv":[0,0,16,8], "cullface": "east", "rotation": 180 }
-                            }
-                        }
-                    ]
-                }
-                """);
-        generator.writeModelFile("extshape","block/glazed_terracotta_slab_top", """
-                {
-                    "parent": "block/cube",
-                    "textures": {
-                        "particle": "#side"
-                    },
-                    "display": {
-                        "firstperson_righthand": {
-                            "rotation": [ 0, 135, 0 ],
-                            "translation": [ 0, 0, 0 ],
-                            "scale": [ 0.40, 0.40, 0.40 ]
-                        }
-                    },
-                    "elements": [
-                        {   "from": [ 0, 8, 0 ],
-                            "to": [ 16, 16, 16 ],
-                            "faces": {
-                                "down":  { "texture": "#bottom", "cullface": "down" },
-                                "up":    { "texture": "#top", "cullface": "up" },
-                                "north": { "texture": "#side", "uv":[0,0,8,16], "cullface": "north", "rotation": 90 },
-                                "south": { "texture": "#side", "uv":[8,0,16,16], "cullface": "south", "rotation": 270 },
-                                "west":  { "texture": "#side", "uv":[0,0,16,8], "cullface": "west", "rotation": 0 },
-                                "east":  { "texture": "#side", "uv":[0,8,16,16], "cullface": "east", "rotation": 180 }
-                            }
-                        }
-                    ]
-                }
-                """);
-        for (final Block BLOCK : EXTSHAPE_BLOCKS) generator.writeAllFiles(BLOCK);
-
-        try {
-            for (final Block block : EXTSHAPE_BLOCKS) {
-                if (!(block instanceof SubBlock)) continue;
-                Block baseBlock = ((SubBlock) block).getBaseBlock();
-                if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.AXE_MINEABLE.add(block);
-                if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.HOE_MINEABLE.add(block);
-                if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.PICKAXE_MINEABLE.add(block);
-                if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.SHOVEL_MINEABLE.add(block);
-            }
-            System.out.println("mineable部分的方块数据已生成。");
-        } catch (IllegalStateException e) {
-            System.out.printf("由于发生错误，mineable部分的方块数据未生成，错误详情如下：\n%s\n", e);
+    public static void main() {
+        if (!DATA_GENERATION_SWITCH) return;
+        ExtShapeBlocks.init();
+        System.out.println("[EXTSHAPE] 开始生成数据！（只有在开发环境中才应该出现这行字，否则是模组出bug了。）");
+        Generator generator = new Generator(Path.of("../src/main/resources"));
+        generator.generateForAllBlocks(ExtShapeBlockTag.EXTSHAPE_BLOCKS);
+        VerticalSlabGenerator.init(generator);
+        GlazedTerracottaSlabGenerator.init(generator);
+        for (ExtShapeBlockTag tag : ExtShapeBlockTag.ALL_EXTSHAPE_BLOCK_TAGS) {
+            generator.writeBlockTagFile(tag);
         }
-
-        // 生成方块标签
-        for (final ExtShapeBlockTag tag : ExtShapeBlockTag.ALL_EXTSHAPE_BLOCK_TAGS) {
-            if (tag.getIdentifier() != null)
-                generator.writeBlockTagFile(tag);
-        }
-
+        System.out.printf("[EXTSHAPE] 数据生成完成，总共生成了%s个文件，好耶！！（你可能需要重新构建项目（无需重启游戏）才能看到更改。）%n", stat);
     }
 
-    public void writeModelFile(String namespace, String path, String content) {
-        this.write(String.format("assets/%s/models/%s.json", namespace, path), content);
-    }
-
-
-//    public void writeBlockModelFile(ExtendedStairsBlock block) {
-//        Identifier identifier = (block).getBlockModelIdentifier();
-//        this.writeModelFile(block,identifier.getNamespace(), identifier.getPath(),
-//                (block).getBlockModelString());
-//        this.writeModelFile(block,identifier.getNamespace(), identifier.getPath() + "_inner",
-//                (block).getInnerBlockModelString());
-//        this.writeModelFile(block,identifier.getNamespace(), identifier.getPath() + "_outer",
-//                (block).getOuterBlockModelString());
-//    }
-//
-//    public void writeBlockModelFile(ExtendedSlabBlock block) {
-//        Identifier identifier = block.getIdentifier();
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath(),block.getBlockModelString());
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_top",block.getTopBlockModelString());
-//    }
-//
-//    public void writeBlockModelFile(ExtendedFenceBlock block) {
-//        Identifier identifier = block.getBlockModelIdentifier();
-//        this.writeModelFile(block,identifier.getNamespace(), identifier.getPath()+"_inventory",
-//                block.getBlockModelString());
-//        this.writeModelFile(block,identifier.getNamespace(), identifier.getPath()+"_side",
-//                block.getSideBlockModelString());
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_post",
-//                block.getPostBlockModelString());
-//    }
-//
-//    public void writeBlockModelFile(ExtendedFenceGateBlock block) {
-//        Identifier identifier = block.getBlockModelIdentifier();
-//        this.writeModelFile(block,identifier.getNamespace(), identifier.getPath(),
-//                block.getBlockModelString());
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_open",
-//                block.getOpenBlockModelString());
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_wall",
-//                block.getWallBlockModelString());
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_wall_open",
-//                block.getWallOpenBlockModelString());
-//    }
-//
-//    public void writeBlockModelFile(ExtendedWallBlock block) {
-//        Identifier identifier = block.getBlockModelIdentifier();
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_inventory",
-//                block.getInventoryModelString());
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_post",
-//                block.getPostModelString());
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_side",
-//                block.getSideModelString());
-//        this.writeModelFile(block,identifier.getNamespace(),identifier.getPath()+"_side_tall",
-//                block.getSideTallModelString());
-//    }
-
-    public void writeBlockModelFiles(Block block) {
-        assert block instanceof ExtShapeBlockInterface;
-        List<Pair<Identifier, String>> collection = ((ExtShapeBlockInterface) block).getBlockModelCollection();
-        for (Pair<Identifier, String> pair : collection) {
-            Identifier identifier = pair.getLeft();
-            String content = pair.getRight();
-            this.writeModelFile(identifier.getNamespace(), identifier.getPath(), content);
-        }
-    }
-
-    public void writeItemModelFile(Block block) {
-        assert block instanceof ExtShapeBlockInterface;
-        Identifier identifier = ((ExtShapeBlockInterface) block).getItemModelIdentifier();
-        this.writeModelFile(identifier.getNamespace(), identifier.getPath(),
-                ((ExtShapeBlockInterface) block).getItemModelString());
-    }
-
-    public void writeBlockStatesFile(Block block, String namespace, String path, String content) {
-        assert block instanceof ExtShapeBlockInterface;
-        this.write(String.format("assets/%s/blockstates/%s.json", namespace, path), content);
-    }
-
-    public void writeAllFiles(Block block) {
-        this.writeAllFiles(block, true, true);
-    }
-
-    public void writeBlockStatesFile(Block block) {
-        assert block instanceof ExtShapeBlockInterface;
-        Identifier identifier = ((ExtShapeBlockInterface) block).getIdentifier();
-        this.writeBlockStatesFile(block, identifier.getNamespace(), identifier.getPath(),
-                ((ExtShapeBlockInterface) block).getBlockStatesString());
-    }
-
-    public void writeCraftingRecipeFile(Block block) {
-        assert block instanceof ExtShapeBlockInterface;
-        Identifier identifier = ((ExtShapeBlockInterface) block).getIdentifier();
-        this.writeRecipeFile(block, identifier.getNamespace(),
-                identifier.getPath(), ((ExtShapeBlockInterface) block).getCraftingRecipeString());
-    }
-
-    public void writeStoneCuttingRecipeFile(Block block) {
-        assert block instanceof ExtShapeBlockInterface;
-        Identifier identifier = ((ExtShapeBlockInterface) block).getIdentifier();
-        this.writeRecipeFile(block, identifier.getNamespace(), identifier.getPath() + "_from_stonecutting",
-                ((ExtShapeBlockInterface) block).getStoneCuttingRecipeString());
-    }
-
-    public void writeRecipeFiles(Block block) {
-        this.writeCraftingRecipeFile(block);
-        if (block instanceof SubBlock) {
-            Block baseBlock = ((SubBlock) block).getBaseBlock();
-            // 特定方块允许使用切石机合成。
-            if (baseBlock == OBSIDIAN || baseBlock == CRYING_OBSIDIAN || STONES.contains(baseBlock) || CONCRETES.contains(baseBlock) || baseBlock == TERRACOTTA || STAINED_TERRACOTTAS.contains(baseBlock) || GLAZED_TERRACOTTAS.contains(baseBlock) || ORE_BLOCKS.contains(baseBlock) || SANDSTONES.contains(baseBlock) || baseBlock == PRISMARINE || baseBlock == DARK_PRISMARINE || baseBlock == PRISMARINE_BRICKS)
-                this.writeStoneCuttingRecipeFile(block);
-        }
-    }
-
-    public void writeRecipeFile(Block block, String namespace, String path, String content) {
-        this.write(String.format("data/%s/recipes/%s.json", namespace, path), content);
-    }
-
-
-    public void writeLootTableFile(Block block) {
-        assert block instanceof ExtShapeBlockInterface;
-        this.writeLootTableFile(((ExtShapeBlockInterface) block).getIdentifier().getNamespace(), ((ExtShapeBlockInterface) block).getIdentifier().getPath(),
-                ((ExtShapeBlockInterface) block).getLootTableString());
-    }
-
-    public void writeBlockTagFile(ExtShapeBlockTag blockTag) {
-        Identifier identifier = blockTag.identifier;
-        write(String.format("data/%s/tags/blocks/%s.json", identifier.getNamespace(), identifier.getPath()),
-                blockTag.generateString());
-    }
-
-
-    public void writeLootTableFile(String namespace, String path, String content) {
-        write(String.format("data/%s/loot_tables/blocks/%s.json", namespace, path), content);
-    }
-
-
-    public void write(String path, String content) {
+    public void write(String path, @Nullable String content) {
         if (content == null) return;
         File file = new File(String.valueOf(basePath), path);
 //        System.out.printf("正在写入文件：%s\n",file.getAbsolutePath());
@@ -278,37 +53,63 @@ public class Generator {
             file.createNewFile();//有路径才能创建文件
             FileWriter out = new FileWriter(file);
             out.write(content);
+            stat += 1;
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void writeAllFiles(Block block, boolean assets, boolean data) {
-        // 同时写好方块状态、方块模型和物品模型，以及合成配方、战利品表
-        if (assets) {
-            this.writeBlockStatesFile(block);
-            this.writeBlockModelFiles(block);
-            this.writeItemModelFile(block);
-        }
-        if (data) {
-            this.writeLootTableFile(block);
-            this.writeRecipeFiles(block);
-        }
+    public void writeModelFile(String namespace, String path, @Nullable String content) {
+        this.write(String.format("assets/%s/models/%s.json", namespace, path), content);
     }
 
-    @Deprecated
-    public static void main(String[] args) {
-        // 该函数不太可能成功运行，建议在游戏启动后运行。
-        Generator generator = new Generator(Path.of("generated"));
+    public void writeBlockStatesFile(String namespace, String path, @Nullable String content) {
+        this.write(String.format("assets/%s/blockstates/%s.json", namespace, path), content);
+    }
 
-        // 此函数不应该在游戏运行时执行。
-        Bootstrap.initialize();
+    public void writeRecipeFile(String namespace, String path, @Nullable String content) {
+        this.write(String.format("data/%s/recipes/%s.json", namespace, path), content);
+    }
 
-        System.out.println("%%% 开始生成数据 %%%");
+    public void writeBlockTagFile(ExtShapeBlockTag blockTag) {
+        @Nullable Identifier identifier = blockTag.identifier;
+        if (blockTag.identifier == null) return;
+        write(String.format("data/%s/tags/blocks/%s.json", identifier.getNamespace(), identifier.getPath()),
+                blockTag.generateString());
+    }
 
-        for (final Block BLOCK : EXTSHAPE_BLOCKS) generator.writeAllFiles(BLOCK);
+    public void writeLootTableFile(String namespace, String path, @Nullable String content) {
+        write(String.format("data/%s/loot_tables/blocks/%s.json", namespace, path), content);
+    }
 
-        System.out.println("%%% 数据生成完成 %%%");
+    @Nullable
+    public AbstractBlockGenerator<? extends Block> createGeneratorForBlock(Block block) {
+        AbstractBlockGenerator<? extends Block> generator;
+        Path path = basePath;
+        if (block == ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB)
+            generator = new SmoothStoneDoubleSlabGenerator(path, block);
+        else if (block instanceof StairsBlock) generator = new StairsGenerator(path, (StairsBlock) block);
+        else if (block instanceof GlazedTerracottaSlabBlock) generator = new GlazedTerracottaSlabGenerator(path,
+                (GlazedTerracottaSlabBlock) block);
+        else if (block instanceof SlabBlock) generator = new SlabGenerator(path, (SlabBlock) block);
+        else if (block instanceof VerticalSlabBlock) generator = new VerticalSlabGenerator(path,
+                (VerticalSlabBlock) block);
+        else if (block instanceof FenceBlock) generator = new FenceGenerator(path, (FenceBlock) block);
+        else if (block instanceof FenceGateBlock) generator = new FenceGateGenerator(path, (FenceGateBlock) block);
+        else if (block instanceof WallBlock) generator = new WallGenerator(path, (WallBlock) block);
+        else if (block instanceof AbstractButtonBlock)
+            generator = new ButtonGenerator(path, (AbstractButtonBlock) block);
+        else if (block instanceof PressurePlateBlock) generator = new PressurePlateGenerator(path,
+                (PressurePlateBlock) block);
+        else generator = null;
+        return generator;
+    }
+
+    public void generateForAllBlocks(ExtShapeBlockTag tag) {
+        for (Block block : tag) {
+            var generator = this.createGeneratorForBlock(block);
+            if (generator != null) generator.writeAllFiles();
+        }
     }
 }

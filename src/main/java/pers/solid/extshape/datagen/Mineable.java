@@ -12,6 +12,10 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public final class Mineable {
 
+    public static final ExtShapeBlockTag VANILLA_AXE_MINEABLE = new ExtShapeBlockTag();
+    public static final ExtShapeBlockTag VANILLA_HOE_MINEABLE = new ExtShapeBlockTag();
+    public static final ExtShapeBlockTag VANILLA_PICKAXE_MINEABLE = new ExtShapeBlockTag();
+    public static final ExtShapeBlockTag VANILLA_SHOVEL_MINEABLE = new ExtShapeBlockTag();
     // 从原版数据包获取Mineable方块标签。
     public static String axe = """
             {
@@ -99,7 +103,6 @@ public final class Mineable {
                 "#minecraft:wooden_trapdoors"
               ]
             }""";
-
     public static String hoe = """
             {
               "replace": false,
@@ -125,7 +128,6 @@ public final class Mineable {
                 "minecraft:moss_carpet"
               ]
             }""";
-
     public static String pickaxe = """
             {
               "replace": false,
@@ -456,7 +458,6 @@ public final class Mineable {
                 "#minecraft:rails"
               ]
             }""";
-
     public static String shovel = """
             {
               "replace": false,
@@ -496,6 +497,13 @@ public final class Mineable {
               ]
             }""";
 
+    static {
+        parse(VANILLA_AXE_MINEABLE, axe);
+        parse(VANILLA_HOE_MINEABLE, hoe);
+        parse(VANILLA_PICKAXE_MINEABLE, pickaxe);
+        parse(VANILLA_SHOVEL_MINEABLE, shovel);
+    }
+
     public static void parse(ExtShapeBlockTag tag, String jsonString) {
         JsonObject object = new JsonParser().parse(jsonString).getAsJsonObject();
         JsonArray list = object.get("values").getAsJsonArray();
@@ -511,17 +519,5 @@ public final class Mineable {
                 tag.add(block);
             } catch (InvalidIdentifierException ignored) {
             }
-    }
-
-    public static final ExtShapeBlockTag VANILLA_AXE_MINEABLE = new ExtShapeBlockTag();
-    public static final ExtShapeBlockTag VANILLA_HOE_MINEABLE = new ExtShapeBlockTag();
-    public static final ExtShapeBlockTag VANILLA_PICKAXE_MINEABLE = new ExtShapeBlockTag();
-    public static final ExtShapeBlockTag VANILLA_SHOVEL_MINEABLE = new ExtShapeBlockTag();
-
-    static {
-        parse(VANILLA_AXE_MINEABLE, axe);
-        parse(VANILLA_HOE_MINEABLE, hoe);
-        parse(VANILLA_PICKAXE_MINEABLE, pickaxe);
-        parse(VANILLA_SHOVEL_MINEABLE, shovel);
     }
 }

@@ -24,7 +24,6 @@ public class ButtonBuilder extends AbstractBlockBuilder<AbstractButtonBlock> {
 
     @Override
     public void createInstance() {
-        this.block = new ExtShapeButtonBlock(this.type, baseBlock,this.blockSettings);
-
+        this.block = new ExtShapeButtonBlock(this.type, this.blockSettings);
     }
 }

@@ -18,79 +18,6 @@ public class ExtShapeTag<T> implements Iterable<T> {
     public final List<TagEntry<T>> entryList;
     public boolean replace;
 
-    protected static class TagEntry<T> implements Iterable<T> {
-        final T element;
-        final ExtShapeTag<T> elementTag;
-        final boolean isTag;
-
-        TagEntry(T element) {
-            this.element = element;
-            this.elementTag = null;
-            this.isTag = false;
-        }
-
-        TagEntry(ExtShapeTag<T> elementTag) {
-            this.elementTag = elementTag;
-            this.element = null;
-            this.isTag = true;
-        }
-
-        boolean contains(T element) {
-            if (this.isTag) {
-                assert this.elementTag != null;
-                return this.elementTag.contains(element);
-            } else {
-                return this.element == element;
-            }
-        }
-
-        public int size() {
-            if (this.isTag) {
-                assert this.elementTag != null;
-                return this.elementTag.size();
-            } else return 1;
-        }
-
-        public T get(int index) {
-            if (this.isTag) {
-                assert this.elementTag != null;
-                return this.elementTag.entryList.get(index).get(0);
-            } else if (index == 0) return this.element;
-            else throw new IndexOutOfBoundsException("The single element entry has only index 0.");
-        }
-
-        @NotNull
-        @Override
-        public Iterator<T> iterator() {
-            return new Iterator<T>() {
-
-                int cursor = -1;
-                @Nullable
-                final Iterator<T> elementTagIterator = elementTag == null ? null : elementTag.iterator();
-
-                @Override
-                public boolean hasNext() {
-                    if (!isTag) return cursor == -1;
-                    else {
-                        assert elementTagIterator != null;
-                        return elementTagIterator.hasNext();
-                    }
-                }
-
-                @Override
-                public T next() {
-                    cursor++;
-                    if (!isTag) {
-                        return element;
-                    } else {
-                        assert elementTagIterator != null;
-                        return elementTagIterator.next();
-                    }
-                }
-            };
-        }
-    }
-
     public ExtShapeTag(List<T> list) {
         this(null, list);
     }
@@ -188,6 +115,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
     public String generateString() {
         return this.generateJson().toString();
     }
+
     public List<T> asList() {
         List<T> list = new ArrayList<>();
         for (final T element : this) list.add(element);
@@ -220,9 +148,9 @@ public class ExtShapeTag<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private int cursor = -1;
-            private @Nullable Iterator<T> iteratingEntryIterator=null;
             private final int entryListSize = entryList.size();
+            private int cursor = -1;
+            private @Nullable Iterator<T> iteratingEntryIterator = null;
 
             @Override
             public boolean hasNext() {
@@ -255,6 +183,80 @@ public class ExtShapeTag<T> implements Iterable<T> {
     public T getEntry(int index) {
         // 获取EntryList里面的项目。如果这个Entry为Tag，则返回这个Tag的第一个元素。
         return this.entryList.get(index).get(0);
+    }
+
+    protected static class TagEntry<T> implements Iterable<T> {
+        final T element;
+        final ExtShapeTag<T> elementTag;
+        final boolean isTag;
+
+        TagEntry(T element) {
+            this.element = element;
+            this.elementTag = null;
+            this.isTag = false;
+        }
+
+        TagEntry(ExtShapeTag<T> elementTag) {
+            this.elementTag = elementTag;
+            this.element = null;
+            this.isTag = true;
+        }
+
+        boolean contains(T element) {
+            if (this.isTag) {
+                assert this.elementTag != null;
+                return this.elementTag.contains(element);
+            } else {
+                return this.element == element;
+            }
+        }
+
+        public int size() {
+            if (this.isTag) {
+                assert this.elementTag != null;
+                return this.elementTag.size();
+            } else return 1;
+        }
+
+        public T get(int index) {
+            if (this.isTag) {
+                assert this.elementTag != null;
+                return this.elementTag.entryList.get(index).get(0);
+            } else if (index == 0) return this.element;
+            else throw new IndexOutOfBoundsException("The single element entry has only index 0.");
+        }
+
+        @NotNull
+        @Override
+        public Iterator<T> iterator() {
+            return new Iterator<T>() {
+
+                int cursor = -1;
+
+                @Override
+                public boolean hasNext() {
+                    if (!isTag) return cursor == -1;
+                    else {
+                        assert elementTagIterator != null;
+                        return elementTagIterator.hasNext();
+                    }
+                }                @Nullable
+                final Iterator<T> elementTagIterator = elementTag == null ? null : elementTag.iterator();
+
+                @Override
+                public T next() {
+                    cursor++;
+                    if (!isTag) {
+                        return element;
+                    } else {
+                        assert elementTagIterator != null;
+                        return elementTagIterator.next();
+                    }
+                }
+
+
+            };
+        }
     }
 
 }

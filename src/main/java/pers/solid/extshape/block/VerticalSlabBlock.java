@@ -15,16 +15,16 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
 public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterloggable {
-    public static final DirectionProperty HORIZONTAL_FACING=Properties.HORIZONTAL_FACING;
-    public static final BooleanProperty WATERLOGGED=Properties.WATERLOGGED;
-    protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0,0,0,16,16,8);
-    protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0,0,8,16,16,16);
-    protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8,0,0,16,16,16);
-    protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0,0,0,8,16,16);
+    public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0, 0, 0, 16, 16, 8);
+    protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0, 0, 8, 16, 16, 16);
+    protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8, 0, 0, 16, 16, 16);
+    protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0, 0, 0, 8, 16, 16);
 
     public VerticalSlabBlock(Settings settings) {
         super(settings);
-        setDefaultState(this.stateManager.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED,false));
+        setDefaultState(this.stateManager.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
     }
 
     @Override
@@ -47,12 +47,12 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockPos blockPos = ctx.getBlockPos();
         FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-        return (BlockState)this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        return (Boolean)state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
 }

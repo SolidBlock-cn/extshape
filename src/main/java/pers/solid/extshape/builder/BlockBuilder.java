@@ -4,25 +4,30 @@ import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.block.ExtShapeBlock;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
-public class BlockBuilder<T extends Block> extends AbstractBlockBuilder<T> {
+public class BlockBuilder extends AbstractBlockBuilder<Block> {
     @Nullable String suffix;
 
-    protected BlockBuilder(Block baseBlock) {
-        super(baseBlock);
+    protected BlockBuilder() {
+        super(null, null);
         suffix = null;
     }
 
     public static BlocksBuilder create(Block baseBlock) {
-        return create(baseBlock,null,null,null).noFences().noButton().noPressurePlate();
+        return create(baseBlock, null, null, null).noFences().noButton().noPressurePlate();
     }
 
     public static BlocksBuilder create(Block baseBlock, Item fenceCraftingIngredient,
-                                ExtShapeButtonBlock.ButtonType buttonType,
-                         PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
-        return new BlocksBuilder(baseBlock,fenceCraftingIngredient,buttonType,pressurePlateActivationRule);
+                                       ExtShapeButtonBlock.ButtonType buttonType,
+                                       PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+        return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
+    }
+
+    public static BlockBuilder createBlock() {
+        return new BlockBuilder();
     }
 
     public static StairsBuilder createStairs(Block baseBlock) {
@@ -70,5 +75,6 @@ public class BlockBuilder<T extends Block> extends AbstractBlockBuilder<T> {
 
     @Override
     public void createInstance() {
+        this.block = new ExtShapeBlock(this.blockSettings);
     }
 }
