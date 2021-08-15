@@ -7,7 +7,6 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.List;
@@ -20,18 +19,11 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
     public ExtShapePressurePlateBlock(ActivationRule type, Block baseBlock, Settings settings) {
         this(type, settings);
-        BlockMappings.mappingOfPressurePlates.put(baseBlock,this);
     }
 
     public ExtShapePressurePlateBlock(ActivationRule type, Block baseBlock) {
         this(type, baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f));
     }
-
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),"_pressure_plate");
-    }
-
     @Override
     public ExtShapeBlockInterface addToTag() {
         return this.addToTag(ExtShapeBlockTag.PRESSURE_PLATES);

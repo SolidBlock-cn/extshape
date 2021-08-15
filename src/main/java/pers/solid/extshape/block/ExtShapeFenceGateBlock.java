@@ -11,7 +11,6 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
@@ -24,13 +23,6 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeSu
                                   @Nullable Settings settings) {
         super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
         this.craftingIngredient = craftingIngredient;
-        BlockMappings.mappingOfFenceGates.put(baseBlock,this);
-    }
-
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),
-                "_fence_gate");
     }
 
     public ExtShapeFenceGateBlock(Block baseBlock, Item craftingIngredient) {

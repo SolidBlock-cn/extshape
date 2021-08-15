@@ -1,7 +1,7 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.text.MutableText;
@@ -9,9 +9,6 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
@@ -19,19 +16,9 @@ import java.util.List;
 
 public class ExtShapeStairsBlock extends StairsBlock implements Waterloggable, ExtShapeSubBlockInterface {
 
-    public ExtShapeStairsBlock(@NotNull Block baseBlock,
-                               @Nullable Settings settings) {
-        super(baseBlock.getDefaultState(), settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
-        BlockMappings.mappingOfStairs.put(baseBlock,this);
-    }
 
-    public ExtShapeStairsBlock(Block baseBlock) {
-        this(baseBlock, null);
-    }
-
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),"_stairs");
+    public ExtShapeStairsBlock(BlockState baseBlockState, Settings settings) {
+        super(baseBlockState, settings);
     }
 
     public ExtShapeStairsBlock addToTag() {
@@ -346,10 +333,6 @@ public class ExtShapeStairsBlock extends StairsBlock implements Waterloggable, E
     @Override
     public MutableText getName() {
         return new TranslatableText("block.extshape.?_stairs", this.getNamePrefix());
-    }
-
-    public String getTranslationKey() {
-        return "_getTranslationKeyCalled_";
     }
 
     @Override

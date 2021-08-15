@@ -10,13 +10,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ExtShapeTag<T> implements Iterable<T> {
     // 数据包内的标签
-
     public final Identifier identifier;
-    //    public final List<T> list;
-//    public final List<ExtShapeTag<T>> listOfTags;
     public final List<TagEntry<T>> entryList;
     public boolean replace;
 
@@ -103,9 +101,6 @@ public class ExtShapeTag<T> implements Iterable<T> {
 
     public ExtShapeTag(Identifier identifier, List<T> list) {
         this.identifier = identifier;
-//        this.list = new ArrayList<>();
-//        this.list.addAll(list);
-//        this.listOfTags = new ArrayList<>();
         this.entryList = new ArrayList<>();
         list.forEach(e -> this.entryList.add(new TagEntry<T>(e)));
     }
@@ -180,14 +175,6 @@ public class ExtShapeTag<T> implements Iterable<T> {
         main.addProperty("replace", replace);
 
         JsonArray values = new JsonArray();
-//        for (T element : list) values.add(getIdentifierOf(element).toString());
-//        for (ExtShapeTag<T> element : listOfTags) {
-//            if (element.getIdentifier() == null) {
-//                System.out.println(element.identifier);
-//                System.out.println(element.getIdentifier());
-//            }
-//            values.add("#" + element.getIdentifier().toString());
-//        }
 
         for (TagEntry<T> entry : this.entryList) {
             if (entry.isTag) values.add("#" + entry.elementTag.getIdentifier());
@@ -201,29 +188,27 @@ public class ExtShapeTag<T> implements Iterable<T> {
     public String generateString() {
         return this.generateJson().toString();
     }
-//
-//    @Override
-//    public void forEach(Consumer<? super T> action) {
-//        Objects.requireNonNull(action);
-//        for (T t : this.list) {
-//            action.accept(t);
-//        }
-//        for (ExtShapeTag<T> t : this.listOfTags) {
-//            t.forEach(action);
-//        }
-//    }
-
     public List<T> asList() {
         List<T> list = new ArrayList<>();
         for (final T element : this) list.add(element);
         return list;
     }
 
-//    public List<T> asListRaw(List<T> list) {
-//        list.addAll(this.list);
-//        for (final ExtShapeTag<T> element : this.listOfTags) element.asListRaw(list);
-//        return list;
-//    }
+    public void rawForEach(Consumer<? super T> action) {
+        for (TagEntry<T> entry : entryList) {
+            if (entry.isTag) {
+                entry.elementTag.rawForEach(action);
+            } else {
+                action.accept(entry.element);
+            }
+        }
+    }
+
+    public List<T> rawToList() {
+        List<T> list = new ArrayList<>();
+        this.rawForEach(list::add);
+        return list;
+    }
 
     public int size() {
         int size = 0;
@@ -235,25 +220,28 @@ public class ExtShapeTag<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private int cursor = 0;
-            //            private final Iterator<T> listIterator = list.iterator();
-//            private final Iterator<ExtShapeTag<T>> listOfTagsIterator = listOfTags.iterator();
-            private Iterator<T> iteratingTagIterator = null;
-            private final int rawSize = entryList.size();
+            private int cursor = -1;
+            private @Nullable Iterator<T> iteratingEntryIterator=null;
+            private final int entryListSize = entryList.size();
 
             @Override
             public boolean hasNext() {
-                return cursor != rawSize || iteratingTagIterator == null || iteratingTagIterator.hasNext();
+                if (cursor == entryListSize) return false;
+                while (iteratingEntryIterator == null || !iteratingEntryIterator.hasNext()) {
+                    cursor++;
+                    if (cursor == entryListSize) return false;
+                    iteratingEntryIterator = entryList.get(cursor).iterator();
+                }
+                return true;
             }
 
             @Override
             public T next() {
-                int i = cursor;
-                if (iteratingTagIterator == null || !iteratingTagIterator.hasNext()) {
-                    iteratingTagIterator = entryList.get(i).iterator();
+                while (iteratingEntryIterator == null || !iteratingEntryIterator.hasNext()) {
                     cursor++;
+                    iteratingEntryIterator = entryList.get(cursor).iterator();
                 }
-                return iteratingTagIterator.next();
+                return iteratingEntryIterator.next();
             }
         };
     }

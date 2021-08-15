@@ -1,42 +1,27 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.WallBlock;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExtShapeWallBlock extends WallBlock implements ExtShapeSubBlockInterface {
+    public ExtShapeWallBlock(Settings settings) {
+        super(settings);
+    }
     // 特别注意：目前只要是有#walls标签的方块都会在#mineable/pickaxe标签内。
     // 为修复此问题，我们不注册羊毛墙！！！
 
-    public ExtShapeWallBlock(@NotNull Block baseBlock,
-                             @Nullable Settings settings) {
-        super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
-        BlockMappings.mappingOfWalls.put(baseBlock,this);
-    }
-
-    public ExtShapeWallBlock(Block baseBlock) {
-        this(baseBlock, null);
-    }
 
     public ExtShapeWallBlock addToTag() {
         this.addToTag(ExtShapeBlockTag.WALLS);
         return this;
-    }
-
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),"_wall");
     }
 
     @Override

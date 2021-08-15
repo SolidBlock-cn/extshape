@@ -11,7 +11,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
@@ -35,13 +34,12 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
         soft
     }
 
-    protected ExtShapeButtonBlock(@NotNull ButtonType type, @NotNull Block baseBlock,
+    public ExtShapeButtonBlock(@NotNull ButtonType type, @NotNull Block baseBlock,
                                   @Nullable Settings settings) {
         super(type == ButtonType.wooden, settings == null ?
                 FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f) :
                 settings);
         this.type = type;
-        BlockMappings.mappingOfButtons.put(baseBlock,this);
     }
 
     public ExtShapeButtonBlock(ButtonType type, Block baseBlock) {
@@ -88,10 +86,6 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
                 }""", this.getBaseTexture());
     }
 
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(), "_button");
-    }
 
     public List<Pair<Identifier, String>> getBlockModelCollection() {
         List<Pair<Identifier, String>> modelCollection = new ArrayList<>();

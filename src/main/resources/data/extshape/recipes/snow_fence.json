@@ -10,7 +10,7 @@
       "item": "minecraft:snow_block"
     },
     "#": {
-      "item": "minecraft:snowball"
+      "item": "minecraft:snow_block"
     }
   },
   "result": {

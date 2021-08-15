@@ -1,18 +1,12 @@
 package pers.solid.extshape.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.util.Identifier;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class ExtShapeBlock extends Block implements ExtShapeBlockInterface {
 
     public ExtShapeBlock(Settings settings) {
         super(settings);
-    }
-
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return null;
     }
 
     @Override

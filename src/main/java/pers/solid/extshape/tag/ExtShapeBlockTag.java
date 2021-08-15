@@ -1,5 +1,6 @@
 package pers.solid.extshape.tag;
 
+import com.google.gson.JsonArray;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
@@ -307,5 +308,14 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     public String toString() {
         return "ExtShapeBlockTag{" + identifier +
                 '}';
+    }
+
+    public JsonArray jsonTree() {
+        JsonArray array = new JsonArray();
+        for (var entry : this.entryList) {
+            if (entry.isTag) array.add(((ExtShapeBlockTag)entry.elementTag).jsonTree());
+            else array.add(Registry.BLOCK.getId(entry.element).toString());
+        }
+        return array;
     }
 }

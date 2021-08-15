@@ -12,7 +12,6 @@ import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeSubBlockIn
                               @Nullable Settings settings) {
         super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
         this.craftingIngredient = craftingIngredient;
-        BlockMappings.mappingOfFences.put(baseBlock,this);
     }
 
 
@@ -38,12 +36,6 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeSubBlockIn
     public ExtShapeFenceBlock addToTag() {
         this.addToTag(ExtShapeBlockTag.FENCES);
         return this;
-    }
-
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(Registry.BLOCK.getId(this.getBaseBlock()),
-                "_fence");
     }
 
     public Item getCraftingIngredient() {

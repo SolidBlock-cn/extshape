@@ -20,18 +20,8 @@ public interface ExtShapeBlockInterface {
         return Registry.BLOCK.getId((Block) this);
     }
 
-    default Item getBlockItem() {
-        if (!(this instanceof Block)) return null;
-        return Item.BLOCK_ITEMS.get(this);
-    }
-
     default ExtShapeBlockInterface registerBlock(Identifier identifier) {
         Registry.register(Registry.BLOCK, identifier, (Block) this);
-        return this;
-    }
-
-    default ExtShapeBlockInterface registerBlock() {
-        this.registerBlock(this.getDefaultIdentifier());
         return this;
     }
 
@@ -42,14 +32,6 @@ public interface ExtShapeBlockInterface {
         return this;
     }
 
-    default ExtShapeBlockInterface registerItem(Item.Settings settings) {
-        return this.registerItem(settings,this.getDefaultIdentifier());
-    }
-
-    default ExtShapeBlockInterface registerItem() {
-        return this.registerItem(new FabricItemSettings());
-    }
-
     default ExtShapeBlockInterface register(Identifier identifier, Item.Settings itemSettings) {
         // 同时注册方块和物品
         return this.registerBlock(identifier).registerItem(itemSettings,identifier);
@@ -58,16 +40,6 @@ public interface ExtShapeBlockInterface {
     default ExtShapeBlockInterface register(Identifier identifier) {
         return this.register(identifier, new FabricItemSettings());
     }
-
-    default ExtShapeBlockInterface register(Item.Settings settings) {
-        return this.register(this.getDefaultIdentifier(),settings);
-    }
-
-    default ExtShapeBlockInterface register() {
-        return this.register(this.getDefaultIdentifier());
-    }
-
-    Identifier getDefaultIdentifier();
 
     default Identifier getBlockModelIdentifier() {
         Identifier identifier = this.getIdentifier();

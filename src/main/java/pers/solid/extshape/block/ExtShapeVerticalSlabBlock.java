@@ -1,31 +1,17 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeSubBlockInterface {
 
-    public ExtShapeVerticalSlabBlock(@NotNull Block baseBlock,
-                                     @Nullable Settings settings) {
-        super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
-        BlockMappings.mappingOfVerticalSlabs.put(baseBlock, this);
-    }
 
-    public ExtShapeVerticalSlabBlock(@NotNull Block block) {
-        this(block, null);
-    }
-
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(), "_vertical_slab");
+    public ExtShapeVerticalSlabBlock(Settings settings) {
+        super(settings);
     }
 
     @Override

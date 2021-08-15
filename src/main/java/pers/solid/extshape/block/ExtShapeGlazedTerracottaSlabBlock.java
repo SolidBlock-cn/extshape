@@ -10,19 +10,14 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ExtShapeGlazedTerracottaSlabBlock extends ExtShapeSlabBlock{
     public static final DirectionProperty FACING =Properties.HORIZONTAL_FACING;
 
-    public ExtShapeGlazedTerracottaSlabBlock(@NotNull Block baseBlock, @Nullable Settings settings) {
-        super(baseBlock, settings);
+    public ExtShapeGlazedTerracottaSlabBlock(Settings settings) {
+        super(settings);
         this.getDefaultState().with(FACING, Direction.NORTH);
-    }
-
-    public ExtShapeGlazedTerracottaSlabBlock(@NotNull Block baseBlock) {
-        this(baseBlock,null);
     }
 
     @Nullable

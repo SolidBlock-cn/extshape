@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.Waterloggable;
@@ -9,9 +8,6 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
@@ -19,25 +15,15 @@ import java.util.List;
 
 public class ExtShapeSlabBlock extends SlabBlock implements Waterloggable, ExtShapeSubBlockInterface {
 
-    public ExtShapeSlabBlock(@NotNull Block baseBlock,
-                             @Nullable Settings settings) {
-        super(settings == null ? FabricBlockSettings.copyOf(baseBlock) : settings);
-        BlockMappings.mappingOfSlabs.put(baseBlock,this);
-    }
 
-    public ExtShapeSlabBlock(@NotNull Block baseBlock) {
-        this(baseBlock, null);
+    public ExtShapeSlabBlock(Settings settings) {
+        super(settings);
     }
 
     @Override
     public ExtShapeSlabBlock addToTag() {
         this.addToTag(ExtShapeBlockTag.SLABS);
         return this;
-    }
-
-    @Override
-    public Identifier getDefaultIdentifier() {
-        return SubBlock.convertIdentifier(this.getBaseBlockIdentifier(),"_slab");
     }
 
     @Override

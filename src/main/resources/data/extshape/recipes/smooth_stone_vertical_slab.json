@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:smooth_stone_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:smooth_stone_vertical_slab",
+    "count": 3
+  }
+}
