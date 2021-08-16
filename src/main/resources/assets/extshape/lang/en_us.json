@@ -6,9 +6,12 @@
   "block.extshape.?_fence": "%s fence",
   "block.extshape.?_fence_gate": "%s fence gate",
   "block.extshape.?_wall": "%s wall",
-  "block.extshape.?_vertical_slab": "%s vertical slab",
   "block.extshape.?_button": "%s button",
   "block.extshape.?_pressure_plate": "%s pressure plate",
+  "block.extshape.?_vertical_slab": "%s vertical slab",
+  "block.extshape.?_quarter_piece": "% quarter piece",
+  "block.extshape.?_vertical_stairs": "% vertical stairs",
+  "block.extshape.?_vertical_quarter_piece": "% quarter piece",
 
   "block.extshape.prefix.acacia": "Acacia",
   "block.extshape.prefix.amethyst": "Amethyst",

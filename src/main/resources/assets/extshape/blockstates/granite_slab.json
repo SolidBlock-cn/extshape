@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/granite_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/granite"
+    },
+    "type=top": {
+      "model": "extshape:block/granite_slab_top"
+    }
+  }
+}

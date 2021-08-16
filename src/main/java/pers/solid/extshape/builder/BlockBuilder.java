@@ -16,16 +16,34 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
         suffix = null;
     }
 
-    public static BlocksBuilder create(Block baseBlock) {
-        return create(baseBlock, null, null, null).noFences().noButton().noPressurePlate();
+    public static BlocksBuilder createAllShapes(Block baseBlock) {
+        return createAllShapes(baseBlock, null, null, null).withoutFences().withoutButton().withoutPressurePlate();
     }
 
-    public static BlocksBuilder create(Block baseBlock, Item fenceCraftingIngredient,
-                                       ExtShapeButtonBlock.ButtonType buttonType,
-                                       PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+    public static BlocksBuilder createAllShapes(Block baseBlock, Item fenceCraftingIngredient,
+                                                ExtShapeButtonBlock.ButtonType buttonType,
+                                                PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
     }
 
+    public static AbstractBlockBuilder<? extends Block> create(Shape shape,Block baseBlock,
+                                                           @Nullable Item fenceCraftingIngredient,
+                                      @Nullable ExtShapeButtonBlock.ButtonType buttonType,
+                                      @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+        return switch (shape) {
+            case stairs -> createStairs(baseBlock);
+            case slab -> createSlab(baseBlock);
+            case verticalSlab -> createVerticalSlab(baseBlock);
+            case verticalStairs -> new VerticalStairsBuilder(baseBlock);
+            case quarterPiece -> createQuarterPiece(baseBlock);
+            case verticalQuarterPiece -> new VerticalQuarterPieceBuilder(baseBlock);
+            case fence -> createFence(baseBlock, fenceCraftingIngredient);
+            case fenceGate -> createFenceGate(baseBlock, fenceCraftingIngredient);
+            case button -> createButton(buttonType, baseBlock);
+            case pressurePlate -> createPressurePlate(pressurePlateActivationRule, baseBlock);
+            case wall -> createWall(baseBlock);
+        };
+    }
     public static BlockBuilder createBlock() {
         return new BlockBuilder();
     }
@@ -40,6 +58,10 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
 
     public static VerticalSlabBuilder createVerticalSlab(Block baseBlock) {
         return new VerticalSlabBuilder(baseBlock);
+    }
+
+    public static QuarterPieceBuilder createQuarterPiece(Block baseBlock) {
+        return new QuarterPieceBuilder(baseBlock);
     }
 
     public static FenceBuilder createFence(Block baseBlock, Item craftingIngredient) {

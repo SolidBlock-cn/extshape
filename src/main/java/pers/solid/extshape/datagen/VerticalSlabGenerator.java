@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.VerticalSlabBlock;
+import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
@@ -81,7 +82,8 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                             "count": 3
                           }
                         }
-                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getSlabBlockOf(this.getBaseBlock())),
+                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+                        this.getBaseBlock())),
                 this.getIdentifier());
     }
 
@@ -101,10 +103,11 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
     @Override
     public String getRecipeGroup() {
         Block baseBlock = this.getBaseBlock();
+        if ((ExtShapeBlockTag.PLANKS).contains(baseBlock)) return "wooden_vertical_slab";
         if ((ExtShapeBlockTag.WOOLS).contains(baseBlock)) return "wool_vertical_slab";
         if ((ExtShapeBlockTag.CONCRETES).contains(baseBlock)) return "concrete_vertical_slab";
-        if ((ExtShapeBlockTag.STAINED_TERRACOTTAS).contains(baseBlock)) return "stained_vertical_terracotta_slab";
-        if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return "glazed_vertical_terracotta_slab";
+        if ((ExtShapeBlockTag.STAINED_TERRACOTTAS).contains(baseBlock)) return "stained_terracotta_vertical_slab";
+        if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return "glazed_terracotta_vertical_slab";
         return "";
     }
 }

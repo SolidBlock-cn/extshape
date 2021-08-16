@@ -9,6 +9,9 @@
   "block.extshape.?_button": "%s按钮",
   "block.extshape.?_pressure_plate": "%s压力板",
   "block.extshape.?_vertical_slab": "%s纵台阶",
+  "block.extshape.?_quarter_piece": "%s横条",
+  "block.extshape.?_vertical_stairs": "%s纵向楼梯",
+  "block.extshape.?_vertical_quarter_piece": "%s纵条",
 
   "block.extshape.prefix.acacia": "金合欢木",
   "block.extshape.prefix.amethyst": "紫水晶",

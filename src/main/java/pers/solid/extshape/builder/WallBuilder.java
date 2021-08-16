@@ -9,7 +9,7 @@ public class WallBuilder extends AbstractBlockBuilder<ExtShapeWallBlock> {
     protected WallBuilder(Block baseBlock) {
         super(baseBlock);
         this.defaultTag = ExtShapeBlockTag.WALLS;
-        this.mapping = BlockMappings.mappingOfWalls;
+        this.mapping = BlockMappings.shapeToMapping.get(Shape.wall);
     }
 
     @Override

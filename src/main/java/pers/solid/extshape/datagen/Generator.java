@@ -3,9 +3,7 @@ package pers.solid.extshape.datagen;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.block.GlazedTerracottaSlabBlock;
-import pers.solid.extshape.block.VerticalSlabBlock;
+import pers.solid.extshape.block.*;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.io.File;
@@ -34,7 +32,10 @@ public class Generator {
         Generator generator = new Generator(Path.of("../src/main/resources"));
         generator.generateForAllBlocks(ExtShapeBlockTag.EXTSHAPE_BLOCKS);
         VerticalSlabGenerator.init(generator);
+        QuarterPieceGenerator.init(generator);
         GlazedTerracottaSlabGenerator.init(generator);
+        VerticalStairsGenerator.init(generator);
+        VerticalQuarterPieceGenerator.init(generator);
         for (ExtShapeBlockTag tag : ExtShapeBlockTag.ALL_EXTSHAPE_BLOCK_TAGS) {
             generator.writeBlockTagFile(tag);
         }
@@ -95,6 +96,11 @@ public class Generator {
         else if (block instanceof SlabBlock) generator = new SlabGenerator(path, (SlabBlock) block);
         else if (block instanceof VerticalSlabBlock) generator = new VerticalSlabGenerator(path,
                 (VerticalSlabBlock) block);
+        else if (block instanceof QuarterPieceBlock) generator = new QuarterPieceGenerator(path,
+                (QuarterPieceBlock) block);
+        else if (block instanceof VerticalQuarterPieceBlock) generator = new VerticalQuarterPieceGenerator(path,
+                (VerticalQuarterPieceBlock) block);
+        else if (block instanceof VerticalStairsBlock) generator = new VerticalStairsGenerator(path, (VerticalStairsBlock) block);
         else if (block instanceof FenceBlock) generator = new FenceGenerator(path, (FenceBlock) block);
         else if (block instanceof FenceGateBlock) generator = new FenceGateGenerator(path, (FenceGateBlock) block);
         else if (block instanceof WallBlock) generator = new WallGenerator(path, (WallBlock) block);

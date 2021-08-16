@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:brick_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:brick_vertical_stairs",
+    "count": 3
+  }
+}

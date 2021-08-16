@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stained_terracotta_vertical_stairs",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:red_terracotta_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:red_terracotta_vertical_stairs",
+    "count": 3
+  }
+}

@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.mappings.BlockMapping;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
@@ -24,6 +25,7 @@ public class ItemGroups {
                 ExtShapeBlockTag.STAIRS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
                 ExtShapeBlockTag.SLABS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
                 ExtShapeBlockTag.VERTICAL_SLABS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
+                ExtShapeBlockTag.QUARTER_PIECES.forEach(block -> itemStacks.add(new ItemStack(block)));
             })
             .build();
     public static final ItemGroup EXT_DECORATION_BLOCKS_GROUP = FabricItemGroupBuilder.create(
@@ -53,10 +55,10 @@ public class ItemGroups {
             itemStacks)))).build();
     private static final ExtShapeBlockTag STONE_BLOCKS = new ExtShapeBlockTag();
     public static final ItemGroup STONE_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "stone_blocks")).icon(() -> new ItemStack(BlockMappings.getVerticalSlabBlockOf(Blocks.STONE))).appendItems(itemStacks -> STONE_BLOCKS.forEach((block -> importTo(block,
+            "stone_blocks")).icon(() -> new ItemStack(BlockMappings.getBlockOf(Shape.verticalSlab,Blocks.STONE))).appendItems(itemStacks -> STONE_BLOCKS.forEach((block -> importTo(block,
             itemStacks)))).build();
     public static final ItemGroup OTHER_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "other_blocks")).icon(() -> new ItemStack(BlockMappings.getSlabBlockOf(Blocks.SNOW_BLOCK))).appendItems(itemStacks -> {
+            "other_blocks")).icon(() -> new ItemStack(BlockMappings.getBlockOf(Shape.stairs,Blocks.SNOW_BLOCK))).appendItems(itemStacks -> {
         Set<Block> baseBlockList = new LinkedHashSet<>(BlockMapping.baseBlocks);
         WOODEN_BLOCKS.forEach(baseBlockList::remove);
         COLORFUL_BLOCKS.forEach(baseBlockList::remove);
@@ -83,14 +85,9 @@ public class ItemGroups {
     protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
         Block t;
         if (baseBlock != null) itemStacks.add(new ItemStack(baseBlock));
-        if ((t = BlockMappings.getStairsBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
-        if ((t = BlockMappings.getSlabBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
-        if ((t = BlockMappings.getVerticalSlabBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
-        if ((t = BlockMappings.getFenceBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
-        if ((t = BlockMappings.getFenceGateBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
-        if ((t = BlockMappings.getWallBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
-        if ((t = BlockMappings.getButtonBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
-        if ((t = BlockMappings.getPressurePlateBlockOf(baseBlock)) != null) itemStacks.add(new ItemStack(t));
+        for (Shape shape : Shape.values()) {
+            if ((t = BlockMappings.getBlockOf(shape,baseBlock))!=null) itemStacks.add(new ItemStack(t));
+        }
     }
 
     public static void init() {

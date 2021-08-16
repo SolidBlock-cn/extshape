@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:smooth_sandstone_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:smooth_sandstone_vertical_stairs",
+    "count": 3
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:calcite_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:calcite_vertical_stairs",
+    "count": 3
+  }
+}

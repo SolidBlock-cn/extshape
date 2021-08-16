@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/prismarine_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/prismarine"
+    },
+    "type=top": {
+      "model": "extshape:block/prismarine_slab_top"
+    }
+  }
+}

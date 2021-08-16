@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:deepslate_tile_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:deepslate_tile_vertical_stairs",
+    "count": 3
+  }
+}

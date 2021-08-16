@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:warped_wart_quarter_piece"
+    }
+  },
+  "result": {
+    "item": "extshape:warped_wart_vertical_quarter_piece",
+    "count": 3
+  }
+}

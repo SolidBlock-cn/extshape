@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "concrete_vertical_quarter_piece",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:light_blue_concrete_quarter_piece"
+    }
+  },
+  "result": {
+    "item": "extshape:light_blue_concrete_vertical_quarter_piece",
+    "count": 3
+  }
+}

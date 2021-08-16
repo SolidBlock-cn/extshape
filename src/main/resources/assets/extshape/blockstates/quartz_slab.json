@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/quartz_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/quartz_block"
+    },
+    "type=top": {
+      "model": "extshape:block/quartz_slab_top"
+    }
+  }
+}

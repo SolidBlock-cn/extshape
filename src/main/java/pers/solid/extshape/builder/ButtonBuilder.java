@@ -14,7 +14,7 @@ public class ButtonBuilder extends AbstractBlockBuilder<AbstractButtonBlock> {
         super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f));
         this.type = type;
         this.defaultTag = ExtShapeBlockTag.BUTTONS;
-        this.mapping = BlockMappings.mappingOfButtons;
+        this.mapping = BlockMappings.shapeToMapping.get(Shape.button);
     }
 
     @Override

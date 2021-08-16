@@ -1,53 +1,38 @@
 package pers.solid.extshape.mappings;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.block.VerticalSlabBlock;
+import pers.solid.extshape.builder.Shape;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
 public class BlockMappings {
-    public static final BlockMapping<StairsBlock> mappingOfStairs = new BlockMapping<>();
-    public static final BlockMapping<SlabBlock> mappingOfSlabs = new BlockMapping<>();
-    public static final BlockMapping<VerticalSlabBlock> mappingOfVerticalSlabs = new BlockMapping<>();
-
-    public static final BlockMapping<FenceBlock> mappingOfFences = new BlockMapping<>();
-    public static final BlockMapping<FenceGateBlock> mappingOfFenceGates = new BlockMapping<>();
-    public static final BlockMapping<WallBlock> mappingOfWalls = new BlockMapping<>();
-    public static final BlockMapping<AbstractButtonBlock> mappingOfButtons = new BlockMapping<>();
-    public static final BlockMapping<PressurePlateBlock> mappingOfPressurePlates = new BlockMapping<>();
+    public static final Map<Shape,BlockMapping<Block>> shapeToMapping;
 
     static {
+        shapeToMapping = new HashMap<>();
+        for (Shape shape : Shape.values()) {
+            shapeToMapping.put(shape, new BlockMapping<>());
+        }
         // 从原版的BlockFamilies导入数据至BlockMappings。
         Stream<BlockFamily> vanillaBlockFamilies = BlockFamilies.getFamilies();
         vanillaBlockFamilies.forEach((blockFamily -> {
             Block baseBlock = blockFamily.getBaseBlock();
             Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
-            mappingOfStairs.put(baseBlock, (StairsBlock) variants.get(BlockFamily.Variant.STAIRS));
-            mappingOfSlabs.put(baseBlock, (SlabBlock) variants.get(BlockFamily.Variant.SLAB));
-            mappingOfFences.put(baseBlock, (FenceBlock) variants.get(BlockFamily.Variant.FENCE));
-            mappingOfFenceGates.put(baseBlock, (FenceGateBlock) variants.get(BlockFamily.Variant.FENCE_GATE));
-            mappingOfWalls.put(baseBlock, (WallBlock) variants.get(BlockFamily.Variant.WALL));
-            mappingOfButtons.put(baseBlock, (AbstractButtonBlock) variants.get(BlockFamily.Variant.BUTTON));
-            mappingOfPressurePlates.put(baseBlock,
-                    (PressurePlateBlock) variants.get(BlockFamily.Variant.PRESSURE_PLATE));
+            for (Shape shape : Shape.values()) {
+                if (shape.vanillaVariant==null) continue;
+                shapeToMapping.get(shape).put(baseBlock,variants.get(shape.vanillaVariant));
+            }
         }));
     }
 
     @Nullable
     public static Map<Block, ? extends Block> getBlockMappingOf(Block block) {
-        if (block instanceof StairsBlock) return mappingOfStairs;
-        else if (block instanceof SlabBlock) return mappingOfSlabs;
-        else if (block instanceof VerticalSlabBlock) return mappingOfVerticalSlabs;
-        else if (block instanceof FenceBlock) return mappingOfFences;
-        else if (block instanceof FenceGateBlock) return mappingOfFenceGates;
-        else if (block instanceof WallBlock) return mappingOfWalls;
-        else if (block instanceof AbstractButtonBlock) return mappingOfButtons;
-        else if (block instanceof PressurePlateBlock) return mappingOfPressurePlates;
-        else return null;
+        return shapeToMapping.get(Shape.getShapeOf(block));
     }
 
     public static Block getBaseBlockOf(Block block) {
@@ -59,35 +44,10 @@ public class BlockMappings {
         return null;
     }
 
-    public static StairsBlock getStairsBlockOf(Block block) {
-        return mappingOfStairs.get(block);
-    }
-
-    public static SlabBlock getSlabBlockOf(Block block) {
-        return mappingOfSlabs.get(block);
-    }
-
-    public static VerticalSlabBlock getVerticalSlabBlockOf(Block block) {
-        return mappingOfVerticalSlabs.get(block);
-    }
-
-    public static FenceBlock getFenceBlockOf(Block block) {
-        return mappingOfFences.get(block);
-    }
-
-    public static FenceGateBlock getFenceGateBlockOf(Block block) {
-        return mappingOfFenceGates.get(block);
-    }
-
-    public static WallBlock getWallBlockOf(Block block) {
-        return mappingOfWalls.get(block);
-    }
-
-    public static AbstractButtonBlock getButtonBlockOf(Block block) {
-        return mappingOfButtons.get(block);
-    }
-
-    public static PressurePlateBlock getPressurePlateBlockOf(Block block) {
-        return mappingOfPressurePlates.get(block);
+    @Nullable
+    public static Block getBlockOf(Shape shape, Block block) {
+        var mapping = shapeToMapping.get(shape);
+        if (mapping==null) return null;
+        return mapping.get(block);
     }
 }

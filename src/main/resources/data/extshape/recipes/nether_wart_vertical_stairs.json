@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:nether_wart_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:nether_wart_vertical_stairs",
+    "count": 3
+  }
+}

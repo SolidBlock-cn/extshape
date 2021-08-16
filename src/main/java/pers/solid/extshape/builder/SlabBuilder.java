@@ -10,7 +10,7 @@ public class SlabBuilder extends AbstractBlockBuilder<SlabBlock> {
     protected SlabBuilder(Block baseBlock) {
         super(baseBlock);
         this.defaultTag = ExtShapeBlockTag.SLABS;
-        this.mapping = BlockMappings.mappingOfSlabs;
+        this.mapping = BlockMappings.shapeToMapping.get(Shape.slab);
     }
 
     @Override

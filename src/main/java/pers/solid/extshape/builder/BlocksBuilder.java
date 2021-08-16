@@ -14,10 +14,8 @@ import java.util.*;
 public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends Block>> {
     final Map<@NotNull Shape, @Nullable ExtShapeBlockTag> defaultTags = new HashMap<>();
     Block baseBlock;
-    boolean buildStairs, buildSlab, buildVerticalSlab;
-    boolean buildFence, buildFenceGate, buildWall;
-    boolean buildButton, buildPressurePlate;
     boolean fireproof;
+    final Map<Shape, Boolean> build;
     List<ExtShapeBlockTag> tagList = new ArrayList<>();
     private @Nullable Item fenceCraftingIngredient;
     private @Nullable ExtShapeButtonBlock.ButtonType buttonType;
@@ -30,64 +28,75 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         this.buttonType = buttonType;
         this.pressurePlateActivationRule = pressurePlateActivationRule;
         this.baseBlock = baseBlock;
-        buildStairs = BlockMappings.getStairsBlockOf(baseBlock) == null;
-        buildSlab = BlockMappings.getSlabBlockOf(baseBlock) == null;
-        buildVerticalSlab = BlockMappings.getVerticalSlabBlockOf(baseBlock) == null;
-        buildFence = BlockMappings.getFenceBlockOf(baseBlock) == null;
-        buildFenceGate = BlockMappings.getFenceGateBlockOf(baseBlock) == null;
-        buildWall = BlockMappings.getWallBlockOf(baseBlock) == null;
-        buildButton = BlockMappings.getButtonBlockOf(baseBlock) == null;
-        buildPressurePlate = BlockMappings.getPressurePlateBlockOf(baseBlock) == null;
+        this.build = new HashMap<>();
+        for (Shape shape : Shape.values()) {
+            build.put(shape, BlockMappings.getBlockOf(shape,baseBlock)==null);
+        }
     }
 
-    public BlocksBuilder noFences() {
-        this.buildFence = false;
-        this.buildFenceGate = false;
+    public BlocksBuilder with(Shape... shapes) {
+        for (Shape shape : shapes) build.put(shape, true);
+        return this;
+    }
+
+    public BlocksBuilder without(Shape... shapes) {
+        for (Shape shape:shapes) build.put(shape, false);
+        return this;
+    }
+
+    public BlocksBuilder withoutFences() {
+        build.put(Shape.fence,false);
+        build.put(Shape.fenceGate,false);
         return this;
     }
 
     public BlocksBuilder withFences(@NotNull Item fenceCraftingIngredient) {
-        this.buildFence = true;
-        this.buildFenceGate = true;
+        build.put(Shape.fence,true);
+        build.put(Shape.fenceGate,true);
         this.fenceCraftingIngredient = fenceCraftingIngredient;
         return this;
     }
 
-    public BlocksBuilder noWall() {
-        this.buildWall = false;
+    public BlocksBuilder withoutWall() {
+        build.put(Shape.wall,false);
         return this;
     }
 
     public BlocksBuilder withWall() {
-        this.buildWall = true;
+        build.put(Shape.wall,true);
         return this;
     }
 
-    public BlocksBuilder noRedstone() {
-        this.buildButton = false;
-        this.buildPressurePlate = false;
+    public BlocksBuilder withoutRedstone() {
+        build.put(Shape.button,false);
+        build.put(Shape.pressurePlate,false);
         return this;
     }
 
-    public BlocksBuilder noButton() {
-        this.buildButton = false;
+    public BlocksBuilder withoutButton() {
+        build.put(Shape.button,false);
         return this;
     }
 
     public BlocksBuilder withButton(@NotNull ExtShapeButtonBlock.ButtonType type) {
-        this.buildButton = true;
+        build.put(Shape.button,true);
         this.buttonType = type;
         return this;
     }
 
-    public BlocksBuilder noPressurePlate() {
-        this.buildPressurePlate = false;
+    public BlocksBuilder withoutPressurePlate() {
+        build.put(Shape.pressurePlate,false);
         return this;
     }
 
     public BlocksBuilder withPressurePlate(@NotNull PressurePlateBlock.ActivationRule type) {
-        this.buildPressurePlate = true;
+        build.put(Shape.pressurePlate,true);
         this.pressurePlateActivationRule = type;
+        return this;
+    }
+
+    public BlocksBuilder withIf(Shape shape,boolean condition) {
+        build.put(shape,condition);
         return this;
     }
 
@@ -122,15 +131,11 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
     }
 
     public void build() {
-        if (buildStairs) this.put(Shape.stairs, BlockBuilder.createStairs(baseBlock));
-        if (buildSlab) this.put(Shape.slab, BlockBuilder.createSlab(baseBlock));
-        if (buildVerticalSlab) this.put(Shape.verticalSlab, BlockBuilder.createVerticalSlab(baseBlock));
-        if (buildFence) this.put(Shape.fence, BlockBuilder.createFence(baseBlock, fenceCraftingIngredient));
-        if (buildFenceGate) this.put(Shape.fenceGate, BlockBuilder.createFenceGate(baseBlock, fenceCraftingIngredient));
-        if (buildWall) this.put(Shape.wall, BlockBuilder.createWall(baseBlock));
-        if (buildButton) this.put(Shape.button, BlockBuilder.createButton(buttonType, baseBlock));
-        if (buildPressurePlate)
-            this.put(Shape.pressurePlate, BlockBuilder.createPressurePlate(pressurePlateActivationRule, baseBlock));
+        for (Entry<Shape, Boolean> entry : build.entrySet()) {
+            Shape shape = entry.getKey();
+            Boolean build = entry.getValue();
+            if (build) this.put(shape,BlockBuilder.create(shape,baseBlock,fenceCraftingIngredient,buttonType,pressurePlateActivationRule));
+        }
 
         if (this.baseBlock.asItem().isFireproof() || this.fireproof) this.fireproof();
         final Collection<AbstractBlockBuilder<? extends Block>> values = this.values();

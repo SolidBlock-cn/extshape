@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "stained_vertical_terracotta_slab",
+  "group": "stained_terracotta_vertical_slab",
   "pattern": [
     "#","#","#"
   ],
