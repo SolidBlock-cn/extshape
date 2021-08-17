@@ -72,9 +72,21 @@ fences and fence gates, flint is used along with base blocks, and string for woo
 Used as fuels, slab and vertical slab burn half the time of its base blocks, button burns 1/3 the time of base blocks,
 and quarter piece and vertical quarter piece burns 1/4 the time of basic blocks.
 
+### 创造模式物品栏 Creative Inventory
+
+在创造模式下，我们设置了多个物品组来以不同方式区分物品。
+
+In creative mode, multiple item groups are set in order to sort items in different ways.
+
+参照原版的物品分组，将本模组添加的方块分为建筑方块、装饰性方块和红石。此外，还设置了几个物品组，以按照不同的基础方块排列各方块（含原版方块），以便玩家快速获取同一方块的多个形状。
+
+Referring to vanilla item grouping, blocks added in this mod are sorted as building blocks, decoration blocks and
+redstone. Besides, several extra item groups are set to sort blocks (including vanilla blocks) by their basic blocks, so
+that players can easily fetch blocks of a same block in different shapes.
+
 ## 更新日志 Update log
 
-### 1.1.1 [未发布 Unpublished]
+### 1.1.1
 
 - 添加了纵楼梯、横条、纵条。其中横条、纵条占用1/4方块位置，可使用3个台阶/垂直台阶1:2合成，部分方块可在切石机内用1个完整方块1:4合成或用台阶/垂直台阶1:2合成。
 - Added vertical stairs, quarter pieces and vertical quarter pieces. Quarter pieces and vertical quarter pieces can be
@@ -100,7 +112,6 @@ and quarter piece and vertical quarter piece burns 1/4 the time of basic blocks.
     - The bottom half of slab and quarter piece of packed ice and bottom-half packed ice stairs are not slippery.
     - 配方书中，本模组添加的配方归类不正确。
     - In recipe books, recipes added by this mod are not correctly classified.
-    -
 
 ### 1.1.0-snapshot [快照版 Snapshot version]
 
