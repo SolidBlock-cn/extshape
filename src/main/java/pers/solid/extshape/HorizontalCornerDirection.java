@@ -2,6 +2,8 @@ package pers.solid.extshape;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.*;
@@ -66,11 +68,11 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     }
 
     public HorizontalCornerDirection rotateYClockwise() {
-        return byId((this.id+1));
+        return byId(Math.floorMod(this.id+1,VALUES.length));
     }
 
     public HorizontalCornerDirection rotateYCounterclockwise() {
-        return byId((this.id-1));
+        return byId(Math.floorMod(this.id-1, VALUES.length));
     }
 
     public int getOffsetX() {
@@ -135,5 +137,32 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
 
     public Vec3i getVector() {
         return this.vector;
+    }
+
+    public HorizontalCornerDirection rotate(BlockRotation rotation) {
+        return switch (rotation) {
+            case CLOCKWISE_90 -> this.rotateYClockwise();
+            case CLOCKWISE_180 -> this.getOpposite();
+            case COUNTERCLOCKWISE_90 -> this.rotateYCounterclockwise();
+            default -> this;
+        };
+    }
+
+    public HorizontalCornerDirection mirror(BlockMirror mirror) {
+        return switch (mirror) {
+            case FRONT_BACK -> switch (this) {
+                case NORTH_EAST -> NORTH_WEST;
+                case NORTH_WEST -> NORTH_EAST;
+                case SOUTH_EAST -> SOUTH_WEST;
+                case SOUTH_WEST -> SOUTH_EAST;
+            };
+            case LEFT_RIGHT -> switch (this) {
+                case NORTH_EAST -> SOUTH_EAST;
+                case NORTH_WEST -> SOUTH_WEST;
+                case SOUTH_EAST -> NORTH_EAST;
+                case SOUTH_WEST -> NORTH_WEST;
+            };
+            default -> this;
+        };
     }
 }

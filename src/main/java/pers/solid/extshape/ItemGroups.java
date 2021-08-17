@@ -80,7 +80,7 @@ public class ItemGroups {
         STONE_BLOCKS.addAll(
                 Blocks.SMOOTH_STONE,
                 Blocks.STONE_BRICKS,
-                Blocks.MOSSY_STONE_BRICK_SLAB,
+                Blocks.MOSSY_STONE_BRICKS,
                 Blocks.COBBLED_DEEPSLATE,
                 Blocks.POLISHED_DEEPSLATE,
                 Blocks.DEEPSLATE_BRICKS,
@@ -106,6 +106,7 @@ public class ItemGroups {
                 Blocks.BRICKS,
                 Blocks.BLACKSTONE,
                 Blocks.POLISHED_BLACKSTONE,
+                Blocks.POLISHED_BLACKSTONE_BRICKS,
                 Blocks.OBSIDIAN,
                 Blocks.CRYING_OBSIDIAN,
                 Blocks.BEDROCK,
