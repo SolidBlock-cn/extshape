@@ -116,7 +116,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
         super.writeCraftingRecipeFile();
         Identifier identifier = this.getIdentifier();
         this.writeRecipeFile(identifier.getNamespace(),
-                identifier.getPath()+"_from_vertical_slab", this.getCraftingFromVerticalSlabRecipeString());
+                identifier.getPath() + "_from_vertical_slab", this.getCraftingFromVerticalSlabRecipeString());
     }
 
     @Override
@@ -134,14 +134,14 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
 
     public String getStoneCuttingFromVerticalSlabRecipeString() {
         return String.format("""
-                {
-                  "type": "minecraft:stonecutting",
-                  "ingredient": {
-                    "item": "%s"
-                  },
-                  "result": "%s",
-                  "count": 2
-                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab,this.getBaseBlock())),
+                        {
+                          "type": "minecraft:stonecutting",
+                          "ingredient": {
+                            "item": "%s"
+                          },
+                          "result": "%s",
+                          "count": 2
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab, this.getBaseBlock())),
                 this.getIdentifier());
     }
 

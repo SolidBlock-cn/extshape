@@ -202,7 +202,7 @@ public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock>
                   "result": {
                     "item": "%s"
                   }
-                }""", this.getRecipeGroup(), this.getBaseBlockIdentifier().toString(), this.getIdentifier().toString());
+                }""", this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier().toString());
     }
 
     @Override

@@ -30,10 +30,11 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
     protected static final VoxelShape SOUTH_TOP_SHAPE = Block.createCuboidShape(0, 8, 8, 16, 16, 16);
     protected static final VoxelShape EAST_TOP_SHAPE = Block.createCuboidShape(8, 8, 0, 16, 16, 16);
     protected static final VoxelShape WEST_TOP_SHAPE = Block.createCuboidShape(0, 8, 0, 8, 16, 16);
+
     public QuarterPieceBlock(Settings settings) {
         super(settings);
         setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED
-                , false).with(HALF,BlockHalf.TOP));
+                , false).with(HALF, BlockHalf.TOP));
     }
 
     @Override
@@ -68,7 +69,7 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
         Direction direction = ctx.getSide();
         BlockPos blockPos = ctx.getBlockPos();
         FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER).with(HALF, direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > 0.5D)) ? BlockHalf.BOTTOM : BlockHalf.TOP);
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER).with(HALF, direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double) blockPos.getY() > 0.5D)) ? BlockHalf.BOTTOM : BlockHalf.TOP);
     }
 
     @Override

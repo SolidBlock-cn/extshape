@@ -3,7 +3,7 @@ package pers.solid.extshape.block;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 
-public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtShapeVariantBlockInterface{
+public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtShapeVariantBlockInterface {
     public ExtShapeQuarterPieceBlock(Settings settings) {
         super(settings);
     }

@@ -3,7 +3,7 @@ package pers.solid.extshape.block;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 
-public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface{
+public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
     public ExtShapeVerticalStairsBlock(Settings settings) {
         super(settings);
     }

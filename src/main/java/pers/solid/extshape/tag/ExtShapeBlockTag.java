@@ -272,19 +272,19 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     public static final ExtShapeBlockTag QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape",
             "quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier(
-            "extshape","wooden_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(QUARTER_PIECES);
+            "extshape", "wooden_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(QUARTER_PIECES);
 
     // 纵楼梯
     public static final ExtShapeBlockTag VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_stairs")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier(
-            "extshape","wooden_vertical_stairs")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_STAIRS);
+            "extshape", "wooden_vertical_stairs")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_STAIRS);
 
     // 纵条
     public static final ExtShapeBlockTag VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier(
-            "extshape","wooden_vertical_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
+            "extshape", "wooden_vertical_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
 
     public ExtShapeBlockTag() {
         this(new ArrayList<>());

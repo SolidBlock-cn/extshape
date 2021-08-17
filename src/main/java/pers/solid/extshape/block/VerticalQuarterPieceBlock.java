@@ -24,21 +24,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
-    public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new HashMap<HorizontalCornerDirection,
-            VoxelShape>();
+    public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new HashMap<>();
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static final EnumProperty<HorizontalCornerDirection> FACING = EnumProperty.of("facing",
+            HorizontalCornerDirection.class);
 
     static {
         for (var dir : HorizontalCornerDirection.values()) {
             var vec = dir.getVector();
-            VOXELS.put(dir, VoxelShapes.cuboid(Math.min(vec.getX()+1,1)*0.5, 0,
-                    Math.min(vec.getZ()+1,1)*0.5, Math.max(vec.getX()+1,1)*0.5, 1,
-                    Math.max(vec.getZ()+1,1)*0.5));
+            VOXELS.put(dir, VoxelShapes.cuboid(Math.min(vec.getX() + 1, 1) * 0.5, 0,
+                    Math.min(vec.getZ() + 1, 1) * 0.5, Math.max(vec.getX() + 1, 1) * 0.5, 1,
+                    Math.max(vec.getZ() + 1, 1) * 0.5));
         }
     }
-
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-    public static final EnumProperty<HorizontalCornerDirection> FACING = EnumProperty.of("facing",
-            HorizontalCornerDirection.class);
 
     public VerticalQuarterPieceBlock(Settings settings) {
         super(settings);
@@ -67,11 +65,11 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
 
     @Override
     public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return super.rotate(state,rotation).with(FACING,state.get(FACING).rotate(rotation));
+        return super.rotate(state, rotation).with(FACING, state.get(FACING).rotate(rotation));
     }
 
     @Override
     public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return super.mirror(state, mirror).with(FACING,state.get(FACING).mirror(mirror));
+        return super.mirror(state, mirror).with(FACING, state.get(FACING).mirror(mirror));
     }
 }

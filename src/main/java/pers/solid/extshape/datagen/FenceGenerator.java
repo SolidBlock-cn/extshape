@@ -107,8 +107,6 @@ public class FenceGenerator extends AbstractBlockGenerator<FenceBlock> {
 
     @Override
     public List<Pair<Identifier, String>> getBlockModelCollection() {
-        final Block baseBlock = this.getBaseBlock();
-        final Identifier baseIdentifier = Registry.BLOCK.getId(baseBlock);
         List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
         modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_inventory"), this.getInventoryBlockModelString()));
         modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_side"), this.getSideBlockModelString()));

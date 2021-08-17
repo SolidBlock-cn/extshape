@@ -14,21 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T> {
-    static String suffix;
+    final Block baseBlock;
+    final boolean addToDefaultTag;
+    final boolean buildItem;
     private final List<ExtShapeBlockTag> tagList = new ArrayList<>();
     @Nullable
     protected ExtShapeBlockTag defaultTag = ExtShapeBlockTag.EXTSHAPE_BLOCKS;
     protected BlockMapping<? super T> mapping;
     protected boolean addToMapping;
-    Block baseBlock;
     Identifier identifier;
     T block;
     boolean registerBlock, registerItem;
     FabricBlockSettings blockSettings;
     ExtShapeBlockItemBuilder itemBuilder;
     @Nullable FabricItemSettings itemSettings;
-    boolean addToDefaultTag;
-    boolean buildItem;
     boolean fireproof;
 
     protected AbstractBlockBuilder(Block baseBlock, FabricBlockSettings settings) {
@@ -118,7 +117,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     }
 
     protected void addToDefaultTag() {
-        this.addToTag(this.defaultTag);
+        this.addToTag(this.getDefaultTag());
     }
 
     protected void addToMapping() {
@@ -149,12 +148,14 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
         this.tagList.forEach(this::addToTag);
         if (this.addToMapping) this.addToMapping();
 
-        this.itemBuilder = new ExtShapeBlockItemBuilder(this.block, itemSettings != null ? itemSettings :
-                new FabricItemSettings());
-        itemBuilder.setIdentifier(identifier);
-        if (!registerItem) itemBuilder.noRegister();
-        if (fireproof) itemBuilder.fireproof();
-        this.itemBuilder.setIdentifier(this.getIdentifier()).build();
+        if (buildItem) {
+            this.itemBuilder = new ExtShapeBlockItemBuilder(this.block, itemSettings != null ? itemSettings :
+                    new FabricItemSettings());
+            itemBuilder.setIdentifier(identifier);
+            if (!registerItem) itemBuilder.noRegister();
+            if (fireproof) itemBuilder.fireproof();
+            this.itemBuilder.setIdentifier(this.getIdentifier()).build();
+        }
         return this.block;
     }
 }

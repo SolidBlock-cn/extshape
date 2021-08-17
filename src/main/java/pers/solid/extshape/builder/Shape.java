@@ -11,10 +11,10 @@ import pers.solid.extshape.block.VerticalStairsBlock;
 public enum Shape {
     stairs(StairsBlock.class, BlockFamily.Variant.STAIRS),
     slab(SlabBlock.class, BlockFamily.Variant.SLAB),
-    verticalSlab(VerticalSlabBlock.class,null),
+    verticalSlab(VerticalSlabBlock.class, null),
     verticalStairs(VerticalStairsBlock.class, null),
-    quarterPiece(QuarterPieceBlock.class,null),
-    verticalQuarterPiece(VerticalQuarterPieceBlock.class,null),
+    quarterPiece(QuarterPieceBlock.class, null),
+    verticalQuarterPiece(VerticalQuarterPieceBlock.class, null),
     fence(FenceBlock.class, BlockFamily.Variant.FENCE),
     fenceGate(FenceGateBlock.class, BlockFamily.Variant.FENCE_GATE),
     wall(WallBlock.class, BlockFamily.Variant.WALL),

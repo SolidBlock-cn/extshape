@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class BlockMappings {
-    public static final Map<Shape,BlockMapping<Block>> shapeToMapping;
+    public static final Map<Shape, BlockMapping<Block>> shapeToMapping;
 
     static {
         shapeToMapping = new HashMap<>();
@@ -24,8 +24,8 @@ public class BlockMappings {
             Block baseBlock = blockFamily.getBaseBlock();
             Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
             for (Shape shape : Shape.values()) {
-                if (shape.vanillaVariant==null) continue;
-                shapeToMapping.get(shape).put(baseBlock,variants.get(shape.vanillaVariant));
+                if (shape.vanillaVariant == null) continue;
+                shapeToMapping.get(shape).put(baseBlock, variants.get(shape.vanillaVariant));
             }
         }));
     }
@@ -47,7 +47,7 @@ public class BlockMappings {
     @Nullable
     public static Block getBlockOf(Shape shape, Block block) {
         var mapping = shapeToMapping.get(shape);
-        if (mapping==null) return null;
+        if (mapping == null) return null;
         return mapping.get(block);
     }
 }

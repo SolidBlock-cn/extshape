@@ -32,7 +32,8 @@ public class ExtShapeTag<T> implements Iterable<T> {
     public ExtShapeTag(Identifier identifier, List<T> list) {
         this.identifier = identifier;
         this.entryList = new ArrayList<>();
-        list.forEach(e -> this.entryList.add(new TagEntry<T>(e)));
+        list.forEach(e -> this.entryList.add(new TagEntry<>(e)));
+        replace = false;
     }
 
     public Identifier getIdentifier() {
@@ -42,7 +43,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
     public void add(T element) {
         if (this.directlyContains(element)) throw new RuntimeException(String.format("Cannot add a duplicate element " +
                 "to a tag! %s already contains %s.", this, element));
-        this.entryList.add(new TagEntry<T>(element));
+        this.entryList.add(new TagEntry<>(element));
     }
 
     public void addTag(ExtShapeTag<T> element) {
@@ -58,7 +59,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
         if (this.directlyContainsTag(element))
             throw new RuntimeException(String.format("Cannot add a duplicate tag to a tag! %s " +
                     "already contains %s.", this, element));
-        this.entryList.add(new TagEntry<T>(element));
+        this.entryList.add(new TagEntry<>(element));
     }
 
     @SafeVarargs
@@ -164,7 +165,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
     @NotNull
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             private final int entryListSize = entryList.size();
             private int cursor = -1;
             private @Nullable Iterator<T> iteratingEntryIterator = null;
@@ -246,7 +247,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
         @NotNull
         @Override
         public Iterator<T> iterator() {
-            return new Iterator<T>() {
+            return new Iterator<>() {
 
                 int cursor = -1;
 
@@ -257,8 +258,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
                         assert elementTagIterator != null;
                         return elementTagIterator.hasNext();
                     }
-                }                @Nullable
-                final Iterator<T> elementTagIterator = elementTag == null ? null : elementTag.iterator();
+                }
 
                 @Override
                 public T next() {
@@ -270,6 +270,9 @@ public class ExtShapeTag<T> implements Iterable<T> {
                         return elementTagIterator.next();
                     }
                 }
+
+                @Nullable
+                final Iterator<T> elementTagIterator = elementTag == null ? null : elementTag.iterator();
 
 
             };

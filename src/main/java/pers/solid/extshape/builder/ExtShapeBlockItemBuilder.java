@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import pers.solid.extshape.ExtShapeBlockItem;
 
 public class ExtShapeBlockItemBuilder extends AbstractItemBuilder<ExtShapeBlockItem> {
-    Block block;
+    final Block block;
 
     protected ExtShapeBlockItemBuilder(Block block, FabricItemSettings settings) {
         super(settings);

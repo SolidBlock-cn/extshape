@@ -105,29 +105,29 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
     @Override
     public List<Pair<Identifier, String>> getBlockModelCollection() {
         var modelCollection = super.getBlockModelCollection();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_top"),this.getTopBlockModelString()));
+        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_top"), this.getTopBlockModelString()));
         return modelCollection;
     }
 
     @Override
     public @Nullable String getCraftingRecipeString() {
         return String.format("""
-                {
-                  "type": "minecraft:crafting_shaped",
-                  "group": "%3$s",
-                  "pattern": [
-                    "###"
-                  ],
-                  "key": {
-                    "#": {
-                      "item": "%s"
-                    }
-                  },
-                  "result": {
-                    "item": "%s",
-                    "count": 6
-                  }
-                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,this.getBaseBlock())),
+                        {
+                          "type": "minecraft:crafting_shaped",
+                          "group": "%3$s",
+                          "pattern": [
+                            "###"
+                          ],
+                          "key": {
+                            "#": {
+                              "item": "%s"
+                            }
+                          },
+                          "result": {
+                            "item": "%s",
+                            "count": 6
+                          }
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab, this.getBaseBlock())),
                 getIdentifier().toString(), this.getRecipeGroup());
     }
 
@@ -153,7 +153,7 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                   },
                   "result": "%s",
                   "count": 2
-                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,this.getBaseBlock())), this.getIdentifier());
+                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab, this.getBaseBlock())), this.getIdentifier());
     }
 
     @Override

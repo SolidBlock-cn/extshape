@@ -57,7 +57,7 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(BEDROCK, Items.STICK, ButtonType.HARD, MOBS).putTag(BEDROCK_BLOCKS).build();
 
         // 紫水晶块。
-        BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD,null,null).withoutRedstone().build();
+        BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD, null, null).withoutRedstone().build();
 
         // 铁块。
         BlockBuilder.createAllShapes(IRON_BLOCK, Items.IRON_INGOT, ButtonType.STONE, null).withoutRedstone().build();
@@ -73,7 +73,7 @@ public class ExtShapeBlocks {
         for (final Block block : SANDSTONES) {
             BlockBuilder.createEmpty(block).withShapes().withWall().build();
         }
-        for (final Block block : new Block[]{SMOOTH_SANDSTONE,SMOOTH_RED_SANDSTONE}) {
+        for (final Block block : new Block[]{SMOOTH_SANDSTONE, SMOOTH_RED_SANDSTONE}) {
             BlockBuilder.createEmpty(block).withFences(Items.STICK).withPressurePlate(MOBS).withButton(ButtonType.STONE).build();
         }
 
@@ -139,11 +139,11 @@ public class ExtShapeBlocks {
         }
 
         for (final Block block : STAINED_TERRACOTTAS) {
-            BlockBuilder.createAllShapes(block, Items.CLAY, ButtonType.STONE, MOBS).setDefaultTagOf(Map.of(Shape.stairs,STAINED_TERRACOTTA_STAIRS,Shape.slab,
-                    STAINED_TERRACOTTA_SLABS,Shape.verticalSlab, STAINED_TERRACOTTA_VERTICAL_SLABS,Shape.fence,
-                    STAINED_TERRACOTTA_FENCES,Shape.fenceGate,
-                    STAINED_TERRACOTTA_FENCE_GATES,Shape.wall, STAINED_TERRACOTTA_WALLS,Shape.button,
-                    STAINED_TERRACOTTA_BUTTONS,Shape.pressurePlate,
+            BlockBuilder.createAllShapes(block, Items.CLAY, ButtonType.STONE, MOBS).setDefaultTagOf(Map.of(Shape.stairs, STAINED_TERRACOTTA_STAIRS, Shape.slab,
+                    STAINED_TERRACOTTA_SLABS, Shape.verticalSlab, STAINED_TERRACOTTA_VERTICAL_SLABS, Shape.fence,
+                    STAINED_TERRACOTTA_FENCES, Shape.fenceGate,
+                    STAINED_TERRACOTTA_FENCE_GATES, Shape.wall, STAINED_TERRACOTTA_WALLS, Shape.button,
+                    STAINED_TERRACOTTA_BUTTONS, Shape.pressurePlate,
                     STAINED_TERRACOTTA_PRESSURE_PLATES)).build();
         }
 
@@ -156,8 +156,8 @@ public class ExtShapeBlocks {
         }
 
         // 下界疣块、诡异疣块。
-        BlockBuilder.createAllShapes(NETHER_WART_BLOCK, Items.NETHER_WART,null,null).withoutRedstone().build();
-        BlockBuilder.createAllShapes(WARPED_WART_BLOCK, Items.WARPED_WART_BLOCK, null,null).withoutRedstone().build();
+        BlockBuilder.createAllShapes(NETHER_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().build();
+        BlockBuilder.createAllShapes(WARPED_WART_BLOCK, Items.WARPED_WART_BLOCK, null, null).withoutRedstone().build();
 
         // 红色下界砖。
         BlockBuilder.createAllShapes(RED_NETHER_BRICKS, Items.NETHER_BRICK, ButtonType.SOFT,
@@ -165,9 +165,9 @@ public class ExtShapeBlocks {
 
         // 彩色混凝土。
         for (final Block block : CONCRETES) {
-            BlockBuilder.createAllShapes(block, Items.GRAVEL, ButtonType.STONE, MOBS).setDefaultTagOf(Map.of(Shape.stairs,CONCRETE_STAIRS,Shape.slab, CONCRETE_SLABS,Shape.verticalSlab, CONCRETE_VERTICAL_SLABS,Shape.fence,
-                    CONCRETE_FENCES,Shape.fenceGate, CONCRETE_FENCE_GATES,Shape.wall, CONCRETE_WALLS,
-                    Shape.button, CONCRETE_BUTTONS,Shape.pressurePlate,
+            BlockBuilder.createAllShapes(block, Items.GRAVEL, ButtonType.STONE, MOBS).setDefaultTagOf(Map.of(Shape.stairs, CONCRETE_STAIRS, Shape.slab, CONCRETE_SLABS, Shape.verticalSlab, CONCRETE_VERTICAL_SLABS, Shape.fence,
+                    CONCRETE_FENCES, Shape.fenceGate, CONCRETE_FENCE_GATES, Shape.wall, CONCRETE_WALLS,
+                    Shape.button, CONCRETE_BUTTONS, Shape.pressurePlate,
                     CONCRETE_PRESSURE_PLATES)).build();
         }
 

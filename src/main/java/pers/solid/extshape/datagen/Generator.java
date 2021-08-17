@@ -15,7 +15,7 @@ public class Generator {
 
     public static final boolean DATA_GENERATION_SWITCH = true;
     private static int stat = 0;
-    public Path basePath;
+    public final Path basePath;
 
     public Generator(Path path) {
         this.basePath = path;
@@ -100,7 +100,8 @@ public class Generator {
                 (QuarterPieceBlock) block);
         else if (block instanceof VerticalQuarterPieceBlock) generator = new VerticalQuarterPieceGenerator(path,
                 (VerticalQuarterPieceBlock) block);
-        else if (block instanceof VerticalStairsBlock) generator = new VerticalStairsGenerator(path, (VerticalStairsBlock) block);
+        else if (block instanceof VerticalStairsBlock)
+            generator = new VerticalStairsGenerator(path, (VerticalStairsBlock) block);
         else if (block instanceof FenceBlock) generator = new FenceGenerator(path, (FenceBlock) block);
         else if (block instanceof FenceGateBlock) generator = new FenceGateGenerator(path, (FenceGateBlock) block);
         else if (block instanceof WallBlock) generator = new WallGenerator(path, (WallBlock) block);

@@ -58,10 +58,10 @@ public class ItemGroups {
             itemStacks)))).build();
     private static final ExtShapeBlockTag STONE_BLOCKS = new ExtShapeBlockTag();
     public static final ItemGroup STONE_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "stone_blocks")).icon(() -> new ItemStack(BlockMappings.getBlockOf(Shape.verticalSlab,Blocks.STONE))).appendItems(itemStacks -> STONE_BLOCKS.forEach((block -> importTo(block,
+            "stone_blocks")).icon(() -> new ItemStack(BlockMappings.getBlockOf(Shape.verticalSlab, Blocks.STONE))).appendItems(itemStacks -> STONE_BLOCKS.forEach((block -> importTo(block,
             itemStacks)))).build();
     public static final ItemGroup OTHER_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "other_blocks")).icon(() -> new ItemStack(BlockMappings.getBlockOf(Shape.stairs,Blocks.SNOW_BLOCK))).appendItems(itemStacks -> {
+            "other_blocks")).icon(() -> new ItemStack(BlockMappings.getBlockOf(Shape.stairs, Blocks.SNOW_BLOCK))).appendItems(itemStacks -> {
         Set<Block> baseBlockList = new LinkedHashSet<>(BlockMapping.baseBlocks);
         WOODEN_BLOCKS.forEach(baseBlockList::remove);
         COLORFUL_BLOCKS.forEach(baseBlockList::remove);
@@ -118,11 +118,11 @@ public class ItemGroups {
     protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
         Block t;
         List<ItemStack> is = new ArrayList<>();
-        if (baseBlock==null) return;
+        if (baseBlock == null) return;
         for (Shape shape : Shape.values()) {
-            if ((t = BlockMappings.getBlockOf(shape,baseBlock))!=null) is.add(new ItemStack(t));
+            if ((t = BlockMappings.getBlockOf(shape, baseBlock)) != null) is.add(new ItemStack(t));
         }
-        if (is.size()>0) {
+        if (is.size() > 0) {
             itemStacks.add(new ItemStack(baseBlock));
             itemStacks.addAll(is);
         }

@@ -17,7 +17,7 @@ public final class Mineable {
     public static final ExtShapeBlockTag VANILLA_PICKAXE_MINEABLE = new ExtShapeBlockTag();
     public static final ExtShapeBlockTag VANILLA_SHOVEL_MINEABLE = new ExtShapeBlockTag();
     // 从原版数据包获取Mineable方块标签。
-    public static String axe = """
+    public static final String axe = """
             {
               "replace": false,
               "values": [
@@ -103,7 +103,7 @@ public final class Mineable {
                 "#minecraft:wooden_trapdoors"
               ]
             }""";
-    public static String hoe = """
+    public static final String hoe = """
             {
               "replace": false,
               "values": [
@@ -128,7 +128,7 @@ public final class Mineable {
                 "minecraft:moss_carpet"
               ]
             }""";
-    public static String pickaxe = """
+    public static final String pickaxe = """
             {
               "replace": false,
               "values": [
@@ -458,7 +458,7 @@ public final class Mineable {
                 "#minecraft:rails"
               ]
             }""";
-    public static String shovel = """
+    public static final String shovel = """
             {
               "replace": false,
               "values": [
