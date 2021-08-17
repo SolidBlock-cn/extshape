@@ -172,12 +172,20 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
                 this.getStoneCuttingRecipeString());
     }
 
+    public void writeStoneCuttingRecipeFiles() {
+        this.writeStoneCuttingRecipeFile();
+    }
+
     public void writeRecipeFiles() {
-        this.writeCraftingRecipeFile();
+        this.writeCraftingRecipeFiles();
         Block baseBlock = this.getBaseBlock();
         // 特定方块允许使用切石机合成。
         if (baseBlock == OBSIDIAN || baseBlock == CRYING_OBSIDIAN || STONES.contains(baseBlock) || CONCRETES.contains(baseBlock) || baseBlock == TERRACOTTA || STAINED_TERRACOTTAS.contains(baseBlock) || GLAZED_TERRACOTTAS.contains(baseBlock) || ORE_BLOCKS.contains(baseBlock) || SANDSTONES.contains(baseBlock) || baseBlock == PRISMARINE || baseBlock == DARK_PRISMARINE || baseBlock == PRISMARINE_BRICKS)
-            this.writeStoneCuttingRecipeFile();
+            this.writeStoneCuttingRecipeFiles();
+    }
+
+    public void writeCraftingRecipeFiles() {
+        this.writeCraftingRecipeFile();
     }
 
     public void writeLootTableFile() {

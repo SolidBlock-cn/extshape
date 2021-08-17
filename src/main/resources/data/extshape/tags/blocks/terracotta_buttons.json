@@ -1,1 +1,7 @@
-{"replace":false,"values":["extshape:terracotta_button","#extshape:stained_terracotta_buttons"]}
+{
+  "replace": false,
+  "values": [
+    "#extshape:stained_terracotta_buttons",
+    "extshape:terracotta_button"
+  ]
+}

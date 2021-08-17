@@ -2,12 +2,15 @@ package pers.solid.extshape.tag;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.internal.Streams;
+import com.google.gson.stream.JsonWriter;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -58,12 +61,18 @@ public class ExtShapeTag<T> implements Iterable<T> {
         this.entryList.add(new TagEntry<T>(element));
     }
 
-    public void addAll(Collection<T> elements) {
-        elements.forEach(this::add);
+    @SafeVarargs
+    public final void addAll(T... elements) {
+        for (T element : elements) {
+            add(element);
+        }
     }
 
-    public void addAllTags(Collection<ExtShapeTag<T>> elements) {
-        elements.forEach(this::addTag);
+    @SafeVarargs
+    public final void addAllTags(ExtShapeTag<T>... elements) {
+        for (ExtShapeTag<T> element : elements) {
+            addTag(element);
+        }
     }
 
     public ExtShapeTag<T> addToTag(ExtShapeTag<T> tag) {
@@ -113,7 +122,15 @@ public class ExtShapeTag<T> implements Iterable<T> {
     }
 
     public String generateString() {
-        return this.generateJson().toString();
+        StringWriter stringWriter = new StringWriter();
+        JsonWriter jsonWriter = new JsonWriter(stringWriter);
+        jsonWriter.setIndent("  ");
+        try {
+            Streams.write(this.generateJson(), jsonWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringWriter.toString();
     }
 
     public List<T> asList() {

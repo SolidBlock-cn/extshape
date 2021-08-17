@@ -11,6 +11,7 @@ import pers.solid.extshape.mappings.BlockMapping;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +26,9 @@ public class ItemGroups {
                 ExtShapeBlockTag.STAIRS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
                 ExtShapeBlockTag.SLABS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
                 ExtShapeBlockTag.VERTICAL_SLABS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
+                ExtShapeBlockTag.VERTICAL_STAIRS.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
                 ExtShapeBlockTag.QUARTER_PIECES.forEach(block -> itemStacks.add(new ItemStack(block)));
+                ExtShapeBlockTag.VERTICAL_QUARTER_PIECES.forEach((Block BLOCK) -> itemStacks.add(new ItemStack(BLOCK)));
             })
             .build();
     public static final ItemGroup EXT_DECORATION_BLOCKS_GROUP = FabricItemGroupBuilder.create(
@@ -74,19 +77,53 @@ public class ItemGroups {
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.STAINED_TERRACOTTAS);
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.GLAZED_TERRACOTTAS);
         STONE_BLOCKS.addTag(ExtShapeBlockTag.STONES);
-        STONE_BLOCKS.addAll(List.of(Blocks.SMOOTH_STONE, Blocks.STONE_BRICKS, Blocks.MOSSY_STONE_BRICK_SLAB, Blocks.COBBLED_DEEPSLATE,
-                Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS, Blocks.DEEPSLATE_TILES,
-                Blocks.TUFF, Blocks.CALCITE, Blocks.COBBLESTONE, Blocks.MOSSY_COBBLESTONE, Blocks.SANDSTONE, Blocks.RED_SANDSTONE,
-                Blocks.CUT_SANDSTONE, Blocks.CUT_RED_SANDSTONE, Blocks.CHISELED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE
-                , Blocks.SMOOTH_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE));
+        STONE_BLOCKS.addAll(
+                Blocks.SMOOTH_STONE,
+                Blocks.STONE_BRICKS,
+                Blocks.MOSSY_STONE_BRICK_SLAB,
+                Blocks.COBBLED_DEEPSLATE,
+                Blocks.POLISHED_DEEPSLATE,
+                Blocks.DEEPSLATE_BRICKS,
+                Blocks.DEEPSLATE_TILES,
+                Blocks.TUFF,
+                Blocks.CALCITE,
+                Blocks.COBBLESTONE,
+                Blocks.MOSSY_COBBLESTONE,
+                Blocks.SANDSTONE,
+                Blocks.RED_SANDSTONE,
+                Blocks.CUT_SANDSTONE,
+                Blocks.CUT_RED_SANDSTONE,
+                Blocks.CHISELED_SANDSTONE,
+                Blocks.CHISELED_RED_SANDSTONE,
+                Blocks.SMOOTH_SANDSTONE,
+                Blocks.SMOOTH_RED_SANDSTONE,
+                Blocks.NETHERRACK,
+                Blocks.NETHER_BRICKS,
+                Blocks.RED_NETHER_BRICKS,
+                Blocks.PRISMARINE,
+                Blocks.PRISMARINE_BRICKS,
+                Blocks.DARK_PRISMARINE,
+                Blocks.BRICKS,
+                Blocks.BLACKSTONE,
+                Blocks.POLISHED_BLACKSTONE,
+                Blocks.OBSIDIAN,
+                Blocks.CRYING_OBSIDIAN,
+                Blocks.BEDROCK,
+                Blocks.END_STONE,
+                Blocks.END_STONE_BRICKS);
     }
 
     // 以下为按方块排序的列表。
     protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
         Block t;
-        if (baseBlock != null) itemStacks.add(new ItemStack(baseBlock));
+        List<ItemStack> is = new ArrayList<>();
+        if (baseBlock==null) return;
         for (Shape shape : Shape.values()) {
-            if ((t = BlockMappings.getBlockOf(shape,baseBlock))!=null) itemStacks.add(new ItemStack(t));
+            if ((t = BlockMappings.getBlockOf(shape,baseBlock))!=null) is.add(new ItemStack(t));
+        }
+        if (is.size()>0) {
+            itemStacks.add(new ItemStack(baseBlock));
+            itemStacks.addAll(is);
         }
     }
 

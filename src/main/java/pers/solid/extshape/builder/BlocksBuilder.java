@@ -13,7 +13,7 @@ import java.util.*;
 
 public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends Block>> {
     final Map<@NotNull Shape, @Nullable ExtShapeBlockTag> defaultTags = new HashMap<>();
-    Block baseBlock;
+    @NotNull Block baseBlock;
     boolean fireproof;
     final Map<Shape, Boolean> build;
     List<ExtShapeBlockTag> tagList = new ArrayList<>();
@@ -21,7 +21,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
     private @Nullable ExtShapeButtonBlock.ButtonType buttonType;
     private @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
 
-    public BlocksBuilder(Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType,
+    public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType,
                          PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
         super();
         this.fenceCraftingIngredient = fenceCraftingIngredient;
@@ -30,24 +30,46 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         this.baseBlock = baseBlock;
         this.build = new HashMap<>();
         for (Shape shape : Shape.values()) {
-            build.put(shape, BlockMappings.getBlockOf(shape,baseBlock)==null);
+            build.put(shape, true);
         }
     }
 
-    public BlocksBuilder with(Shape... shapes) {
-        for (Shape shape : shapes) build.put(shape, true);
+    public BlocksBuilder(@NotNull Block baseBlock) {
+        super();
+        this.baseBlock = baseBlock;
+        this.build = new HashMap<>();
+        for (Shape shape : Shape.values()) {
+            build.put(shape, false);
+        }
+    }
+
+    public BlocksBuilder withIf(boolean condition,Shape... shapes) {
+        for (Shape shape : shapes) build.put(shape,condition);
         return this;
     }
 
+    public BlocksBuilder with(Shape... shapes) {
+        return this.withIf(true,shapes);
+    }
+
     public BlocksBuilder without(Shape... shapes) {
-        for (Shape shape:shapes) build.put(shape, false);
-        return this;
+        return this.withIf(false,shapes);
     }
 
     public BlocksBuilder withoutFences() {
         build.put(Shape.fence,false);
         build.put(Shape.fenceGate,false);
         return this;
+    }
+
+    public BlocksBuilder withShapes() {
+        return this.with(Shape.stairs,Shape.slab,Shape.verticalQuarterPiece,Shape.verticalStairs,Shape.verticalStairs
+                ,Shape.quarterPiece);
+    }
+
+    public BlocksBuilder withoutShapes() {
+        return this.without(Shape.stairs,Shape.slab,Shape.verticalQuarterPiece,Shape.verticalSlab,
+                Shape.verticalStairs,Shape.quarterPiece);
     }
 
     public BlocksBuilder withFences(@NotNull Item fenceCraftingIngredient) {
@@ -105,18 +127,17 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         return this;
     }
 
-    public BlocksBuilder setDefaultTags(@Nullable ExtShapeBlockTag stairs, @Nullable ExtShapeBlockTag slab,
-                                        @Nullable ExtShapeBlockTag verticalSlab, @Nullable ExtShapeBlockTag fence,
-                                        @Nullable ExtShapeBlockTag fenceGate, @Nullable ExtShapeBlockTag wall,
-                                        @Nullable ExtShapeBlockTag button, @Nullable ExtShapeBlockTag pressurePlate) {
-        defaultTags.put(Shape.stairs, stairs);
-        defaultTags.put(Shape.slab, slab);
-        defaultTags.put(Shape.verticalSlab, verticalSlab);
-        defaultTags.put(Shape.fence, fence);
-        defaultTags.put(Shape.fenceGate, fenceGate);
-        defaultTags.put(Shape.wall, wall);
-        defaultTags.put(Shape.button, button);
-        defaultTags.put(Shape.pressurePlate, pressurePlate);
+    public BlocksBuilder setDefaultTagOf(@Nullable Shape shape, @Nullable ExtShapeBlockTag tag) {
+        if (shape==null || tag==null) return this;
+        defaultTags.put(shape,tag);
+        return this;
+    }
+
+    public BlocksBuilder setDefaultTagOf(Map<@Nullable Shape,@Nullable ExtShapeBlockTag> map) {
+        for (var entry : map.entrySet()) {
+            if (entry.getKey()==null || entry.getValue()==null) continue;
+            defaultTags.put(entry.getKey(),entry.getValue());
+        }
         return this;
     }
 
@@ -134,7 +155,9 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         for (Entry<Shape, Boolean> entry : build.entrySet()) {
             Shape shape = entry.getKey();
             Boolean build = entry.getValue();
-            if (build) this.put(shape,BlockBuilder.create(shape,baseBlock,fenceCraftingIngredient,buttonType,pressurePlateActivationRule));
+            // 自动排除现成的。
+            if (build && BlockMappings.getBlockOf(shape,baseBlock)==null) this.put(shape,BlockBuilder.create(shape,baseBlock,fenceCraftingIngredient,buttonType,
+                    pressurePlateActivationRule));
         }
 
         if (this.baseBlock.asItem().isFireproof() || this.fireproof) this.fireproof();

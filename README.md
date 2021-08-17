@@ -67,6 +67,33 @@ Used as fuels, slab burns half the time of its base blocks, and button burns 1/3
 
 ## 更新日志 Update log
 
+### 1.1.1 [未发布 Unpublished]
+- 添加了纵楼梯、横条、纵条。其中横条、纵条占用1/4方块位置，可使用3个台阶/垂直台阶1:2合成，部分方块可在切石机内用1个完整方块1:4合成或用台阶/垂直台阶1:2合成。
+- Added vertical stairs, quarter pieces and vertical quarter pieces. Quarter pieces and vertical quarter pieces can 
+  be crafted 1:2 from slabs/vertical slabs in crafting tables, and some of those can be crafted 1:4 from full blocks or 
+  1:2 from 
+  slabs/vertical slabs in stone cutters.
+- 移除了部分方块。
+- Removed some blocks.
+- 加入了黏土块、末地石等方块的衍生方块。
+- Added variant blocks for clay and end stone etc.
+- 移除了部分方块的压力板、按钮，因而同时修复了部分合成表的冲突问题。
+- Removed pressure plates and buttons for some blocks. Therefore, some conflicts between recipes have been fixed 
+  meanwhile.
+- 调整了纵台阶在物品栏中的显示形式。
+- Adjusted display form of vertical slabs in inventories.
+- 当前版本仍然存在的问题：
+- Issues currently existing in this version:
+  - 结构方块不能正确地旋转、翻转纵条和纵向楼梯方块。
+  - Vertical quarter pieces and vertical stairs are not correctly rotated by structure blocks.
+  - 在原版中，部分方块，如浮冰、荧石、雪块，其生存模式下若无精准采集，破坏后无法获得原方块，但其衍生的所有方块均未受影响。
+  - In vanilla, some blocks, such as packed ice, glowstone, snow block, cannot drop themselves when mined in survival 
+    mode without Silk Touch. However, their variant blocks are not affected.
+  - 浮冰台阶下半台阶、横条和正立的浮冰楼梯第一阶顶部表面不滑。
+  - The bottom half of slab and quarter piece of packed ice and bottom-half packed ice stairs are not slippery.
+  - 配方书中，本模组添加的配方归类不正确。
+  - In recipe books, recipes added by this mod are not correctly classified.
+  - 
 ### 1.1.0-snapshot [快照版 Snapshot version]
 - 添加了纵向台阶。
 - Added vertical slabs.
@@ -82,8 +109,8 @@ Used as fuels, slab burns half the time of its base blocks, and button burns 1/3
 - 会从原版的BlockFamilies中导入数据至本模组的BlockMappings。未来或许会直接将BlockMappings合并至BlockFamilies。
 - Imports data from vanilla BlockFamilies to BlockMappings in this mod. In the future, this mod's BlockMappings may 
   be directly merged into BlockMappings.
-- 当前版本仍存在的问题：浮冰台阶下半砖和正立的浮冰楼梯第一阶顶部表面不滑。
-- Issue existing in this version: Packed ice slab bottom half and the first stage of bottom-haft stair are not slippery.
+- 当前版本仍存在的问题：浮冰台阶下半台阶和正立的浮冰楼梯第一阶顶部表面不滑。
+- Issue existing in this version: Packed ice slab bottom half and the first stage of bottom-half stair are not slippery.
 - 添加了按基础方块排序的物品组。
 - Added item groups where items are sorted by on base blocks.
 - 未完成。

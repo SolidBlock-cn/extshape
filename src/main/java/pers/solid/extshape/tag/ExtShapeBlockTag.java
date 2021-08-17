@@ -149,20 +149,6 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             , "occludes_vibration_signals"));
     public static final ExtShapeBlockTag WOOLEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
             "woolen_blocks")).addToTag(OCCLUDES_VIBRATION_SIGNALS);
-    public static final ExtShapeBlockTag WOOLEN_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_stairs")).addToTag(WOOLEN_BLOCKS);
-    public static final ExtShapeBlockTag WOOLEN_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_slabs")).addToTag(WOOLEN_BLOCKS);
-    public static final ExtShapeBlockTag WOOLEN_FENCES = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_fences")).addToTag(WOOLEN_BLOCKS);
-    public static final ExtShapeBlockTag WOOLEN_FENCE_GATES = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_fence_gates")).addToTag(WOOLEN_BLOCKS);
-    public static final ExtShapeBlockTag WOOLEN_BUTTONS = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_buttons")).addToTag(WOOLEN_BLOCKS);
-    public static final ExtShapeBlockTag WOOLEN_PRESSURE_PLATES = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_pressure_plates")).addToTag(WOOLEN_BLOCKS);
-    public static final ExtShapeBlockTag WOOLEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_vertical_slabs")).addToTag(WOOLEN_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
             "wooden_blocks"));
     public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
@@ -182,100 +168,123 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "needs_diamond_tool"));
     public static final ExtShapeBlockTag OBSIDIAN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
             "obsidian_blocks")).addToTag(DRAGON_IMMUNE).addToTag(NEEDS_DIAMOND_TOOL);
+
     // 完整方块（主要用于双石台阶方块）
     public static final ExtShapeBlockTag FULL_BLOCKS = new ExtShapeBlockTag().addToTag(EXTSHAPE_BLOCKS);
+
     // 楼梯
     public static final ExtShapeBlockTag STAIRS = new ExtShapeBlockTag(new Identifier("minecraft"
             , "stairs")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
-            "concrete_stairs"));
+            "concrete_stairs")).addToTag(STAIRS);
     public static final ExtShapeBlockTag TERRACOTTA_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
-            "terracotta_stairs"));
+            "terracotta_stairs")).addToTag(STAIRS);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_STAIRS = new ExtShapeBlockTag(new Identifier(
-            "extshape", "stained_terracotta_stairs"));
+            "extshape", "stained_terracotta_stairs")).addToTag(TERRACOTTA_STAIRS);
+    public static final ExtShapeBlockTag WOOLEN_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_stairs")).addToTag(WOOLEN_BLOCKS).addToTag(STAIRS);
+
     // 台阶
     public static final ExtShapeBlockTag SLABS = new ExtShapeBlockTag(new Identifier("minecraft",
             "slabs")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "concrete_slabs"));
+            "concrete_slabs")).addToTag(SLABS);
     public static final ExtShapeBlockTag TERRACOTTA_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "terracotta_slabs"));
+            "terracotta_slabs")).addToTag(SLABS);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "stained_terracotta_slabs"));
+            "stained_terracotta_slabs")).addToTag(TERRACOTTA_SLABS);
     public static final ExtShapeBlockTag GLAZED_TERRACOTTA_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "glazed_terracotta_slabs"));
+            "glazed_terracotta_slabs")).addToTag(SLABS);
+    public static final ExtShapeBlockTag WOOLEN_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_slabs")).addToTag(WOOLEN_BLOCKS).addToTag(SLABS);
     // 栅栏
     public static final ExtShapeBlockTag FENCES = new ExtShapeBlockTag(new Identifier("minecraft",
             "fences")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_FENCES = new ExtShapeBlockTag(new Identifier("extshape",
-            "concrete_fences"));
+            "concrete_fences")).addToTag(FENCES);
     public static final ExtShapeBlockTag TERRACOTTA_FENCES = new ExtShapeBlockTag(new Identifier("extshape",
-            "terracotta_fences"));
+            "terracotta_fences")).addToTag(FENCES);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_FENCES = new ExtShapeBlockTag(new Identifier("extshape",
-            "stained_terracotta_fences"));
+            "stained_terracotta_fences")).addToTag(TERRACOTTA_FENCES);
+    public static final ExtShapeBlockTag WOOLEN_FENCES = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_fences")).addToTag(WOOLEN_BLOCKS).addToTag(FENCES);
     // 栅栏门
     public static final ExtShapeBlockTag FENCE_GATES = new ExtShapeBlockTag(new Identifier(
             "minecraft", "fence_gates")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_FENCE_GATES = new ExtShapeBlockTag(new Identifier("extshape",
-            "concrete_fence_gates"));
+            "concrete_fence_gates")).addToTag(FENCE_GATES);
     public static final ExtShapeBlockTag TERRACOTTA_FENCE_GATES = new ExtShapeBlockTag(new Identifier("extshape",
-            "terracotta_fence_gates"));
+            "terracotta_fence_gates")).addToTag(FENCE_GATES);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_FENCE_GATES = new ExtShapeBlockTag(new Identifier(
             "extshape",
-            "stained_terracotta_fence_gates"));
+            "stained_terracotta_fence_gates")).addToTag(TERRACOTTA_FENCE_GATES);
+    public static final ExtShapeBlockTag WOOLEN_FENCE_GATES = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_fence_gates")).addToTag(WOOLEN_BLOCKS).addToTag(FENCE_GATES);
     // 墙
     public static final ExtShapeBlockTag WALLS = new ExtShapeBlockTag(new Identifier("minecraft",
             "walls")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_WALLS = new ExtShapeBlockTag(new Identifier("extshape",
-            "concrete_fence_walls"));
+            "concrete_fence_walls")).addToTag(WALLS);
     public static final ExtShapeBlockTag TERRACOTTA_WALLS = new ExtShapeBlockTag(new Identifier("extshape",
-            "terracotta_fence_walls"));
+            "terracotta_fence_walls")).addToTag(WALLS);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_WALLS = new ExtShapeBlockTag(new Identifier(
             "extshape",
-            "stained_terracotta_fence_walls"));
+            "stained_terracotta_fence_walls")).addToTag(TERRACOTTA_WALLS);
     // 按钮
     public static final ExtShapeBlockTag BUTTONS = new ExtShapeBlockTag(new Identifier("minecraft",
             "buttons")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_BUTTONS = new ExtShapeBlockTag(new Identifier("extshape",
-            "concrete_buttons"));
+            "concrete_buttons")).addToTag(BUTTONS);
     public static final ExtShapeBlockTag TERRACOTTA_BUTTONS = new ExtShapeBlockTag(new Identifier("extshape",
-            "terracotta_buttons"));
+            "terracotta_buttons")).addToTag(BUTTONS);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_BUTTONS = new ExtShapeBlockTag(new Identifier("extshape",
-            "stained_terracotta_buttons"));
+            "stained_terracotta_buttons")).addToTag(TERRACOTTA_BUTTONS);
+    public static final ExtShapeBlockTag WOOLEN_BUTTONS = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_buttons")).addToTag(WOOLEN_BLOCKS).addToTag(BUTTONS);
     // 压力板
     public static final ExtShapeBlockTag PRESSURE_PLATES = new ExtShapeBlockTag(new Identifier("minecraft",
             "pressure_plates")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_PRESSURE_PLATES = new ExtShapeBlockTag(new Identifier("extshape",
-            "concrete_pressure_plates"));
+            "concrete_pressure_plates")).addToTag(PRESSURE_PLATES);
     public static final ExtShapeBlockTag TERRACOTTA_PRESSURE_PLATES = new ExtShapeBlockTag(new Identifier("extshape",
-            "terracotta_pressure_plates"));
+            "terracotta_pressure_plates")).addToTag(PRESSURE_PLATES);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_PRESSURE_PLATES = new ExtShapeBlockTag(new Identifier(
             "extshape",
-            "stained_terracotta_pressure_plates"));
+            "stained_terracotta_pressure_plates")).addToTag(TERRACOTTA_PRESSURE_PLATES);
+    public static final ExtShapeBlockTag WOOLEN_PRESSURE_PLATES = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_pressure_plates")).addToTag(PRESSURE_PLATES);
 
     // 纵向台阶
     public static final ExtShapeBlockTag VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_slabs")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "wooden_vertical_slabs")).addToTag(WOODEN_BLOCKS);
+            "wooden_vertical_slabs")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_SLABS);
     public static final ExtShapeBlockTag CONCRETE_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "concrete_vertical_slabs"));
+            "concrete_vertical_slabs")).addToTag(VERTICAL_SLABS);
     public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
-            "terracotta_vertical_slabs"));
+            "terracotta_vertical_slabs")).addToTag(VERTICAL_SLABS);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier(
-            "extshape", "stained_terracotta_vertical_slabs"));
+            "extshape", "stained_terracotta_vertical_slabs")).addToTag(TERRACOTTA_VERTICAL_SLABS);
+    public static final ExtShapeBlockTag WOOLEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_vertical_slabs")).addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_SLABS);
 
     // 横条
     public static final ExtShapeBlockTag QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape",
             "quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
+    public static final ExtShapeBlockTag WOODEN_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier(
+            "extshape","wooden_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(QUARTER_PIECES);
 
     // 纵楼梯
     public static final ExtShapeBlockTag VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_stairs")).addToTag(EXTSHAPE_BLOCKS);
+    public static final ExtShapeBlockTag WOODEN_VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier(
+            "extshape","wooden_vertical_stairs")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_STAIRS);
 
     // 纵条
     public static final ExtShapeBlockTag VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
+    public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier(
+            "extshape","wooden_vertical_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
 
     public ExtShapeBlockTag() {
         this(new ArrayList<>());

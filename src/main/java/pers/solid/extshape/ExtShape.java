@@ -7,6 +7,8 @@ import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import pers.solid.extshape.block.ExtShapeBlocks;
+import pers.solid.extshape.block.QuarterPieceBlock;
+import pers.solid.extshape.block.VerticalQuarterPieceBlock;
 import pers.solid.extshape.block.VerticalSlabBlock;
 import pers.solid.extshape.datagen.Generator;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
@@ -30,6 +32,8 @@ public class ExtShape implements ModInitializer {
         for (final Block block : ExtShapeBlockTag.OVERWORLD_WOODEN_BLOCKS) {
             FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
             if (block instanceof VerticalSlabBlock) FuelRegistry.INSTANCE.add(block, 150);
+            else if (block instanceof VerticalQuarterPieceBlock || block instanceof QuarterPieceBlock) FuelRegistry.INSTANCE.add(block,75);
+            else FuelRegistry.INSTANCE.add(block,300);
         }
 
         Generator.main();

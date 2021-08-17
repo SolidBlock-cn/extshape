@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:clay"
+    }
+  },
+  "result": {
+    "item": "extshape:clay_wall",
+    "count": 6
+  }
+}

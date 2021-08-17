@@ -78,8 +78,6 @@ public class SlabGenerator extends AbstractBlockGenerator<SlabBlock> {
 
     @Override
     public String getCraftingRecipeString() {
-        Identifier identifier = this.getIdentifier();
-        Identifier baseIdentifier = Registry.BLOCK.getId(this.getBaseBlock());
         return String.format("""
                 {
                   "type": "minecraft:crafting_shaped",
@@ -96,7 +94,7 @@ public class SlabGenerator extends AbstractBlockGenerator<SlabBlock> {
                     "item": "%s",
                     "count": 6
                   }
-                }""", baseIdentifier, identifier.toString(), this.getRecipeGroup());
+                }""", getBaseBlockIdentifier(), getIdentifier().toString(), this.getRecipeGroup());
     }
 
     @Override

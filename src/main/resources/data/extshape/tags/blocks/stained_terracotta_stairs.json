@@ -1,1 +1,21 @@
-{"replace":false,"values":["extshape:white_terracotta_stairs","extshape:orange_terracotta_stairs","extshape:magenta_terracotta_stairs","extshape:light_blue_terracotta_stairs","extshape:yellow_terracotta_stairs","extshape:lime_terracotta_stairs","extshape:pink_terracotta_stairs","extshape:gray_terracotta_stairs","extshape:light_gray_terracotta_stairs","extshape:cyan_terracotta_stairs","extshape:purple_terracotta_stairs","extshape:blue_terracotta_stairs","extshape:brown_terracotta_stairs","extshape:green_terracotta_stairs","extshape:red_terracotta_stairs","extshape:black_terracotta_stairs"]}
+{
+  "replace": false,
+  "values": [
+    "extshape:white_terracotta_stairs",
+    "extshape:orange_terracotta_stairs",
+    "extshape:magenta_terracotta_stairs",
+    "extshape:light_blue_terracotta_stairs",
+    "extshape:yellow_terracotta_stairs",
+    "extshape:lime_terracotta_stairs",
+    "extshape:pink_terracotta_stairs",
+    "extshape:gray_terracotta_stairs",
+    "extshape:light_gray_terracotta_stairs",
+    "extshape:cyan_terracotta_stairs",
+    "extshape:purple_terracotta_stairs",
+    "extshape:blue_terracotta_stairs",
+    "extshape:brown_terracotta_stairs",
+    "extshape:green_terracotta_stairs",
+    "extshape:red_terracotta_stairs",
+    "extshape:black_terracotta_stairs"
+  ]
+}

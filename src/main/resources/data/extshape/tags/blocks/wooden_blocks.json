@@ -1,1 +1,9 @@
-{"replace":false,"values":["#extshape:wooden_vertical_slabs"]}
+{
+  "replace": false,
+  "values": [
+    "#extshape:wooden_vertical_slabs",
+    "#extshape:wooden_quarter_pieces",
+    "#extshape:wooden_vertical_stairs",
+    "#extshape:wooden_vertical_quarter_pieces"
+  ]
+}

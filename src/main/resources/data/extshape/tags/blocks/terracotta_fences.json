@@ -1,1 +1,7 @@
-{"replace":false,"values":["#extshape:stained_terracotta_fences"]}
+{
+  "replace": false,
+  "values": [
+    "#extshape:stained_terracotta_fences",
+    "extshape:terracotta_fence"
+  ]
+}

@@ -22,8 +22,8 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                         "particle": "#side"
                     },
                     "elements": [
-                        {   "from": [ 0, 0, 0 ],
-                            "to": [  16, 16, 8 ],
+                        {   "from": [ 0, 0, 8 ],
+                            "to": [  16, 16, 16 ],
                             "faces": {
                                 "down":  {"texture": "#bottom", "cullface": "down" },
                                 "up":    {"texture": "#top",    "cullface": "up" },
@@ -42,10 +42,10 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
         return String.format("""
                 {
                   "variants": {
-                    "facing=north": { "model": "%1$s" , "uvlock":true },
-                    "facing=east":  { "model": "%1$s", "y":  90 , "uvlock":true},
-                    "facing=south": { "model": "%1$s", "y": 180 , "uvlock":true },
-                    "facing=west":  { "model": "%1$s", "y": 270 , "uvlock":true }
+                    "facing=south": { "model": "%1$s" , "uvlock":true },
+                    "facing=west":  { "model": "%1$s", "y":  90 , "uvlock":true},
+                    "facing=north": { "model": "%1$s", "y": 180 , "uvlock":true },
+                    "facing=east":  { "model": "%1$s", "y": 270 , "uvlock":true }
                   }
                 }""", this.getBlockModelIdentifier());
     }

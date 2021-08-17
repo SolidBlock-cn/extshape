@@ -1,1 +1,7 @@
-{"replace":false,"values":["extshape:terracotta_slab","#extshape:stained_terracotta_slabs"]}
+{
+  "replace": false,
+  "values": [
+    "#extshape:stained_terracotta_slabs",
+    "extshape:terracotta_slab"
+  ]
+}

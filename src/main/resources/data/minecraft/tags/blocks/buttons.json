@@ -1,1 +1,30 @@
-{"replace":false,"values":["extshape:granite_button","extshape:polished_granite_button","extshape:diorite_button","extshape:polished_diorite_button","extshape:andesite_button","extshape:polished_andesite_button","extshape:smooth_stone_button","extshape:tuff_button","extshape:calcite_button","extshape:bedrock_button","extshape:amethyst_button","extshape:iron_button","extshape:gold_button","extshape:diamond_button","extshape:netherite_button","extshape:lapis_button","extshape:sandstone_button","extshape:cut_sandstone_button","extshape:chiseled_sandstone_button","extshape:smooth_sandstone_button","extshape:red_sandstone_button","extshape:cut_red_sandstone_button","extshape:chiseled_red_sandstone_button","extshape:smooth_red_sandstone_button","#extshape:woolen_buttons","extshape:obsidian_button","extshape:snow_button","extshape:netherrack_button","extshape:glowstone_button","extshape:nether_brick_button","extshape:emerald_button","extshape:quartz_button","extshape:quartz_brick_button","extshape:smooth_quartz_button","extshape:chiseled_quartz_button","#extshape:terracotta_buttons","extshape:packed_ice_button","extshape:prismarine_button","extshape:prismarine_brick_button","extshape:dark_prismarine_button","extshape:nether_wart_button","extshape:red_nether_brick_button","#extshape:concrete_buttons","extshape:crying_obsidian_button"]}
+{
+  "replace": false,
+  "values": [
+    "#extshape:concrete_buttons",
+    "#extshape:terracotta_buttons",
+    "#extshape:woolen_buttons",
+    "extshape:granite_button",
+    "extshape:polished_granite_button",
+    "extshape:diorite_button",
+    "extshape:polished_diorite_button",
+    "extshape:andesite_button",
+    "extshape:polished_andesite_button",
+    "extshape:smooth_stone_button",
+    "extshape:tuff_button",
+    "extshape:calcite_button",
+    "extshape:bedrock_button",
+    "extshape:smooth_sandstone_button",
+    "extshape:smooth_red_sandstone_button",
+    "extshape:obsidian_button",
+    "extshape:snow_button",
+    "extshape:netherrack_button",
+    "extshape:glowstone_button",
+    "extshape:smooth_quartz_button",
+    "extshape:packed_ice_button",
+    "extshape:prismarine_button",
+    "extshape:prismarine_brick_button",
+    "extshape:dark_prismarine_button",
+    "extshape:crying_obsidian_button"
+  ]
+}

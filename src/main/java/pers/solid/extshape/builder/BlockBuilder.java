@@ -11,12 +11,12 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 public class BlockBuilder extends AbstractBlockBuilder<Block> {
     @Nullable String suffix;
 
-    protected BlockBuilder() {
+    public BlockBuilder() {
         super(null, null);
         suffix = null;
     }
 
-    public static BlocksBuilder createAllShapes(Block baseBlock) {
+    public static BlocksBuilder createBasicShapes(Block baseBlock) {
         return createAllShapes(baseBlock, null, null, null).withoutFences().withoutButton().withoutPressurePlate();
     }
 
@@ -26,63 +26,67 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
         return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
     }
 
+    public static BlocksBuilder createEmpty(Block baseBlock) {
+        return new BlocksBuilder(baseBlock);
+    }
+
     public static AbstractBlockBuilder<? extends Block> create(Shape shape,Block baseBlock,
                                                            @Nullable Item fenceCraftingIngredient,
                                       @Nullable ExtShapeButtonBlock.ButtonType buttonType,
                                       @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         return switch (shape) {
-            case stairs -> createStairs(baseBlock);
-            case slab -> createSlab(baseBlock);
-            case verticalSlab -> createVerticalSlab(baseBlock);
+            case stairs -> new StairsBuilder(baseBlock);
+            case slab -> new SlabBuilder(baseBlock);
+            case verticalSlab -> new VerticalSlabBuilder(baseBlock);
             case verticalStairs -> new VerticalStairsBuilder(baseBlock);
-            case quarterPiece -> createQuarterPiece(baseBlock);
+            case quarterPiece -> new QuarterPieceBuilder(baseBlock);
             case verticalQuarterPiece -> new VerticalQuarterPieceBuilder(baseBlock);
-            case fence -> createFence(baseBlock, fenceCraftingIngredient);
-            case fenceGate -> createFenceGate(baseBlock, fenceCraftingIngredient);
-            case button -> createButton(buttonType, baseBlock);
-            case pressurePlate -> createPressurePlate(pressurePlateActivationRule, baseBlock);
-            case wall -> createWall(baseBlock);
+            case fence -> new FenceBuilder(baseBlock, fenceCraftingIngredient);
+            case fenceGate -> new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
+            case button -> new ButtonBuilder(buttonType, baseBlock);
+            case pressurePlate -> new PressurePlateBuilder(pressurePlateActivationRule, baseBlock);
+            case wall -> new WallBuilder(baseBlock);
         };
     }
     public static BlockBuilder createBlock() {
         return new BlockBuilder();
     }
-
-    public static StairsBuilder createStairs(Block baseBlock) {
-        return new StairsBuilder(baseBlock);
-    }
-
-    public static SlabBuilder createSlab(Block baseBlock) {
-        return new SlabBuilder(baseBlock);
-    }
-
-    public static VerticalSlabBuilder createVerticalSlab(Block baseBlock) {
-        return new VerticalSlabBuilder(baseBlock);
-    }
-
-    public static QuarterPieceBuilder createQuarterPiece(Block baseBlock) {
-        return new QuarterPieceBuilder(baseBlock);
-    }
-
-    public static FenceBuilder createFence(Block baseBlock, Item craftingIngredient) {
-        return new FenceBuilder(baseBlock, craftingIngredient);
-    }
-
-    public static FenceGateBuilder createFenceGate(Block baseBlock, Item craftingIngredient) {
-        return new FenceGateBuilder(baseBlock, craftingIngredient);
-    }
-
-    public static ButtonBuilder createButton(ExtShapeButtonBlock.ButtonType type, Block baseBlock) {
-        return new ButtonBuilder(type, baseBlock);
-    }
-
-    public static PressurePlateBuilder createPressurePlate(PressurePlateBlock.ActivationRule type, Block baseBlock) {
-        return new PressurePlateBuilder(type, baseBlock);
-    }
-
-    public static WallBuilder createWall(Block baseBlock) {
-        return new WallBuilder(baseBlock);
-    }
+//
+//    public static StairsBuilder createStairs(Block baseBlock) {
+//        return new StairsBuilder(baseBlock);
+//    }
+//
+//    public static SlabBuilder createSlab(Block baseBlock) {
+//        return new SlabBuilder(baseBlock);
+//    }
+//
+//    public static VerticalSlabBuilder createVerticalSlab(Block baseBlock) {
+//        return new VerticalSlabBuilder(baseBlock);
+//    }
+//
+//    public static QuarterPieceBuilder createQuarterPiece(Block baseBlock) {
+//        return new QuarterPieceBuilder(baseBlock);
+//    }
+//
+//    public static FenceBuilder createFence(Block baseBlock, Item craftingIngredient) {
+//        return new FenceBuilder(baseBlock, craftingIngredient);
+//    }
+//
+//    public static FenceGateBuilder createFenceGate(Block baseBlock, Item craftingIngredient) {
+//        return new FenceGateBuilder(baseBlock, craftingIngredient);
+//    }
+//
+//    public static ButtonBuilder createButton(ExtShapeButtonBlock.ButtonType type, Block baseBlock) {
+//        return new ButtonBuilder(type, baseBlock);
+//    }
+//
+//    public static PressurePlateBuilder createPressurePlate(PressurePlateBlock.ActivationRule type, Block baseBlock) {
+//        return new PressurePlateBuilder(type, baseBlock);
+//    }
+//
+//    public static WallBuilder createWall(Block baseBlock) {
+//        return new WallBuilder(baseBlock);
+//    }
 
 
     @Override

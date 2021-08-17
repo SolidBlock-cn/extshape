@@ -1,6 +1,7 @@
 package pers.solid.extshape.datagen;
 
 import net.minecraft.block.Block;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.VerticalQuarterPieceBlock;
@@ -87,6 +88,37 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                 this.getIdentifier());
     }
 
+    public String getCraftingFromVerticalSlabRecipeString() {
+        return String.format("""
+                        {
+                          "type": "minecraft:crafting_shaped",
+                          "group": "%s",
+                          "pattern": [
+                            "#","#","#"
+                          ],
+                          "key": {
+                            "#": {
+                              "item": "%s"
+                            }
+                          },
+                          "result": {
+                            "item": "%s",
+                            "count": 6
+                          }
+                        }
+                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab,
+                        this.getBaseBlock())),
+                this.getIdentifier());
+    }
+
+    @Override
+    public void writeCraftingRecipeFiles() {
+        super.writeCraftingRecipeFile();
+        Identifier identifier = this.getIdentifier();
+        this.writeRecipeFile(identifier.getNamespace(),
+                identifier.getPath()+"_from_vertical_slab", this.getCraftingFromVerticalSlabRecipeString());
+    }
+
     @Override
     public String getStoneCuttingRecipeString() {
         return String.format("""
@@ -98,6 +130,27 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                   "result": "%s",
                   "count": 4
                 }""", this.getBaseBlockIdentifier(), this.getIdentifier());
+    }
+
+    public String getStoneCuttingFromVerticalSlabRecipeString() {
+        return String.format("""
+                {
+                  "type": "minecraft:stonecutting",
+                  "ingredient": {
+                    "item": "%s"
+                  },
+                  "result": "%s",
+                  "count": 2
+                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab,this.getBaseBlock())),
+                this.getIdentifier());
+    }
+
+    @Override
+    public void writeStoneCuttingRecipeFiles() {
+        super.writeStoneCuttingRecipeFiles();
+        Identifier identifier = this.getIdentifier();
+        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() + "_from_vertical_slab_stonecutting",
+                this.getStoneCuttingFromVerticalSlabRecipeString());
     }
 
     @Override

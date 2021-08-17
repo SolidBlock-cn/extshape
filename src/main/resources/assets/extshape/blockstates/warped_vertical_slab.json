@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=north": { "model": "extshape:block/warped_vertical_slab" , "uvlock":true },
-    "facing=east":  { "model": "extshape:block/warped_vertical_slab", "y":  90 , "uvlock":true},
-    "facing=south": { "model": "extshape:block/warped_vertical_slab", "y": 180 , "uvlock":true },
-    "facing=west":  { "model": "extshape:block/warped_vertical_slab", "y": 270 , "uvlock":true }
+    "facing=south": { "model": "extshape:block/warped_vertical_slab" , "uvlock":true },
+    "facing=west":  { "model": "extshape:block/warped_vertical_slab", "y":  90 , "uvlock":true},
+    "facing=north": { "model": "extshape:block/warped_vertical_slab", "y": 180 , "uvlock":true },
+    "facing=east":  { "model": "extshape:block/warped_vertical_slab", "y": 270 , "uvlock":true }
   }
 }
