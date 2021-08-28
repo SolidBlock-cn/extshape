@@ -14,7 +14,7 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
         super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f));
         this.type = type;
         this.defaultTag = ExtShapeBlockTag.PRESSURE_PLATES;
-        this.mapping = BlockMappings.shapeToMapping.get(Shape.pressurePlate);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.pressurePlate);
     }
 
     @Override

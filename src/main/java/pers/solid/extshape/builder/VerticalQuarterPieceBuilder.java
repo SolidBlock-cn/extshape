@@ -10,7 +10,7 @@ public class VerticalQuarterPieceBuilder extends AbstractBlockBuilder<VerticalQu
     protected VerticalQuarterPieceBuilder(Block baseBlock) {
         super(baseBlock);
         this.defaultTag = ExtShapeBlockTag.VERTICAL_QUARTER_PIECES;
-        this.mapping = BlockMappings.shapeToMapping.get(Shape.verticalQuarterPiece);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.verticalQuarterPiece);
     }
 
     @Override

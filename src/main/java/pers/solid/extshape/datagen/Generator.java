@@ -11,12 +11,29 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 
+/**
+ * 数据生成器。
+ */
 public class Generator {
 
+    /**
+     * 数据生成总开关。如果设为 <code>false</code>，则不生成任何数据。
+     */
     public static final boolean DATA_GENERATION_SWITCH = true;
+
+    /**
+     * 已生成的文件数据的统计。每成功写入一个文件，则该统计 +1。
+     */
     private static int stat = 0;
+
+    /**
+     * 数据存放的基础路径。
+     */
     public final Path basePath;
 
+    /**
+     * @param path 生成的数据所在的基础路径。
+     */
     public Generator(Path path) {
         this.basePath = path;
     }
@@ -42,6 +59,11 @@ public class Generator {
         System.out.printf("[EXTSHAPE] 数据生成完成，总共生成了%s个文件，好耶！！（你可能需要重新构建项目（无需重启游戏）才能看到更改。）%n", stat);
     }
 
+    /**
+     * 在指定的位置，写入指定字符串的文件。如果目录不存在，则创建此目录。写入成功后，计入统计。
+     *
+     * @param path 文件路径（将会自动基于 {@link #basePath} 生成完整路径。
+     */
     public void write(String path, @Nullable String content) {
         if (content == null) return;
         File file = new File(String.valueOf(basePath), path);
@@ -61,18 +83,42 @@ public class Generator {
         }
     }
 
+    /**
+     * 写入模型文件。
+     *
+     * @param namespace id的命名空间。
+     * @param path      id的路径。
+     * @param content   文件内容。
+     */
     public void writeModelFile(String namespace, String path, @Nullable String content) {
         this.write(String.format("assets/%s/models/%s.json", namespace, path), content);
     }
 
+    /**
+     * 写入方块状态定义文件。
+     *
+     * @param namespace id的命名空间。
+     * @param path      id的路径。
+     * @param content   文件内容。
+     */
     public void writeBlockStatesFile(String namespace, String path, @Nullable String content) {
         this.write(String.format("assets/%s/blockstates/%s.json", namespace, path), content);
     }
 
+    /**
+     * 写入（主要的）配方文件。
+     * @param namespace id的命名空间。
+     * @param path      id的路径。
+     * @param content   文件内容。
+     */
     public void writeRecipeFile(String namespace, String path, @Nullable String content) {
         this.write(String.format("data/%s/recipes/%s.json", namespace, path), content);
     }
 
+    /**
+     * 写入一个方块标签的json文件，文件路径和内容将由方块标签自动决定。
+     * @param blockTag 方块标签。
+     */
     public void writeBlockTagFile(ExtShapeBlockTag blockTag) {
         @Nullable Identifier identifier = blockTag.identifier;
         if (blockTag.identifier == null) return;
@@ -80,17 +126,26 @@ public class Generator {
                 blockTag.generateString());
     }
 
+    /**
+     * 写入一个战利品表文件。
+     * @param namespace id的命名空间
+     * @param path      id的路径。
+     * @param content   文件内容。
+     */
     public void writeLootTableFile(String namespace, String path, @Nullable String content) {
         write(String.format("data/%s/loot_tables/blocks/%s.json", namespace, path), content);
     }
 
+    /**
+     * 为指定的方块创建合适的生成器。
+     * @param block 需要创建对应生成器的方块。
+     * @return 由方块创建的生成器。
+     */
     @Nullable
     public AbstractBlockGenerator<? extends Block> createGeneratorForBlock(Block block) {
         AbstractBlockGenerator<? extends Block> generator;
         Path path = basePath;
-        if (block == ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB)
-            generator = new SmoothStoneDoubleSlabGenerator(path, block);
-        else if (block instanceof StairsBlock) generator = new StairsGenerator(path, (StairsBlock) block);
+        if (block instanceof StairsBlock) generator = new StairsGenerator(path, (StairsBlock) block);
         else if (block instanceof GlazedTerracottaSlabBlock) generator = new GlazedTerracottaSlabGenerator(path,
                 (GlazedTerracottaSlabBlock) block);
         else if (block instanceof SlabBlock) generator = new SlabGenerator(path, (SlabBlock) block);
@@ -113,10 +168,54 @@ public class Generator {
         return generator;
     }
 
+    /**
+     * 生成某方块标签内 <b>所有</b> 方块的数据。
+     * @param tag 方块标签。一般为 {@link ExtShapeBlockTag#ALL_EXTSHAPE_BLOCK_TAGS}。
+     */
     public void generateForAllBlocks(ExtShapeBlockTag tag) {
+        // 生成方块数据。
         for (Block block : tag) {
             var generator = this.createGeneratorForBlock(block);
             if (generator != null) generator.writeAllFiles();
         }
+
+        // 生成双层平滑石头的数据。
+        new AbstractBlockGenerator<Block>(basePath, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
+            @Override
+            public Identifier getBlockModelIdentifier() {
+                return new Identifier("minecraft", "block/smooth_stone_slab_double");
+            }
+
+            @Override
+            public String getBlockModelString() {
+                return null;
+            }
+        }.writeAllFiles();
+        // 生成石化橡木木板的数据。
+        new AbstractBlockGenerator<Block>(basePath, ExtShapeBlocks.PETRIFIED_OAK_PLANKS) {
+            @Override
+            public Identifier getBlockModelIdentifier() {
+                return new Identifier("minecraft", "block/oak_planks");
+            }
+
+            @Override
+            public @Nullable String getBlockModelString() {
+                return null;
+            }
+        }.writeAllFiles();
+        // 石化橡木台阶的合成表。
+        new SlabGenerator(basePath, (SlabBlock) Blocks.PETRIFIED_OAK_SLAB) {
+            @Override
+            public Identifier getCraftingRecipeIdentifier() {
+                return new Identifier("extshape", "petrified_oak_slab");
+            }
+        }.writeRecipeFiles();
+        // 双层石台阶的合成表。
+        new SlabGenerator(basePath, (SlabBlock) Blocks.SMOOTH_STONE_SLAB) {
+            @Override
+            public Identifier getCraftingRecipeIdentifier() {
+                return new Identifier("extshape", "smooth_stone_slab");
+            }
+        }.writeRecipeFiles();
     }
 }

@@ -12,6 +12,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * 水平角落方向。类似于 {@link Direction}，但是指向水平方向的四个角落。
+ */
 public enum HorizontalCornerDirection implements StringIdentifiable {
     SOUTH_WEST(0, 2, "south_west", new Vec3i(-1, 0, 1)),
     NORTH_WEST(1, 3, "north_west", new Vec3i(-1, 0, -1)),
@@ -31,6 +34,12 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     private final int id;
     private final Vec3i vector;
 
+    /**
+     * @param id         方向的内部数字id。
+     * @param idOpposite 方向对应相反方向的内部数字id。
+     * @param name       方向名称。
+     * @param vector     方向对应的向量。非单位向量。
+     */
     HorizontalCornerDirection(int id, int idOpposite, String name, Vec3i vector) {
         this.id = id;
         this.idOpposite = idOpposite;
@@ -61,6 +70,11 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
         return VECTOR_TO_DIRECTION.get(BlockPos.asLong(x, y, z));
     }
 
+    /**
+     * 从旋转角度算出距离该旋转角度最近的方向。用于方块放置。
+     * @param rotation 旋转角度。
+     * @return 离该旋转角度最近的方向。
+     */
     public static HorizontalCornerDirection fromRotation(double rotation) {
         return fromHorizontal(MathHelper.floor(rotation / 90.0D) & 3);
     }

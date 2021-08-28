@@ -8,6 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IngredientMappings {
-    public static final Map<FenceBlock, Item> mappingOfFenceIngredients = new HashMap<>();
-    public static final Map<FenceGateBlock, Item> mappingOfFenceGateIngredients = new HashMap<>();
+    public static final Map<FenceBlock, Item> MAPPING_OF_FENCE_INGREDIENTS = new HashMap<>();
+    public static final Map<FenceGateBlock, Item> MAPPING_OF_FENCE_GATE_INGREDIENTS = new HashMap<>();
 }

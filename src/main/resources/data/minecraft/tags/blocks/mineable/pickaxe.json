@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "extshape:petrified_oak_planks",
     "extshape:smooth_stone_slab_double",
     "extshape:white_concrete_stairs",
     "extshape:orange_concrete_stairs",

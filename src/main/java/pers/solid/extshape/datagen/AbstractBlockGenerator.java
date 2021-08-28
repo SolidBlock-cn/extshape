@@ -161,7 +161,7 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
     }
 
     public void writeCraftingRecipeFile() {
-        Identifier identifier = this.getIdentifier();
+        Identifier identifier = this.getCraftingRecipeIdentifier();
         this.writeRecipeFile(identifier.getNamespace(),
                 identifier.getPath(), this.getCraftingRecipeString());
     }
@@ -221,5 +221,9 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
 
     public Identifier getSideTexture() {
         return TextureMappings.getSideTextureOf(this.getBaseBlock());
+    }
+
+    public Identifier getCraftingRecipeIdentifier() {
+        return this.getIdentifier();
     }
 }

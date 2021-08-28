@@ -16,6 +16,11 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
         super(path, block);
     }
 
+    /**
+     * 生成用于所有纵条方块的模板模型。
+     *
+     * @param generator 生成器。
+     */
     public static void init(Generator generator) {
         generator.writeModelFile("extshape", "block/vertical_quarter_piece", """
                 {   "parent": "block/block",
@@ -71,7 +76,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                           "type": "minecraft:crafting_shaped",
                           "group": "%s",
                           "pattern": [
-                            "#","#","#"
+                            "#"
                           ],
                           "key": {
                             "#": {
@@ -80,7 +85,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                           },
                           "result": {
                             "item": "%s",
-                            "count": 3
+                            "count": 1
                           }
                         }
                         """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.quarterPiece,
@@ -88,6 +93,9 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                 this.getIdentifier());
     }
 
+    /**
+     * @return 由3个纵台阶合成6个纵条的合成表。
+     */
     public String getCraftingFromVerticalSlabRecipeString() {
         return String.format("""
                         {
@@ -132,6 +140,27 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                 }""", this.getBaseBlockIdentifier(), this.getIdentifier());
     }
 
+    /**
+     * 一个纵楼梯可以切石形成3个纵条。
+     *
+     * @return 由1个纵楼梯制作3个纵条的切石配方。
+     */
+    public String getStoneCuttingFromVerticalStairsRecipeString() {
+        return String.format("""
+                        {
+                          "type": "minecraft:stonecutting",
+                          "ingredient": {
+                            "item": "%s"
+                          },
+                          "result": "%s",
+                          "count": 3
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalStairs, this.getBaseBlock())),
+                this.getIdentifier());
+    }
+
+    /**
+     * @return 由1个纵台阶切石形成2个纵条的合成表。
+     */
     public String getStoneCuttingFromVerticalSlabRecipeString() {
         return String.format("""
                         {
@@ -149,7 +178,11 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
     public void writeStoneCuttingRecipeFiles() {
         super.writeStoneCuttingRecipeFiles();
         Identifier identifier = this.getIdentifier();
-        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() + "_from_vertical_slab_stonecutting",
+        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() +
+                        "_from_vertical_stairs_stonecutting",
+                this.getStoneCuttingFromVerticalStairsRecipeString());
+        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() +
+                        "_from_vertical_slab_stonecutting",
                 this.getStoneCuttingFromVerticalSlabRecipeString());
     }
 

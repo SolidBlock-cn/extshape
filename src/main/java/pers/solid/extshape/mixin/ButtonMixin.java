@@ -9,6 +9,9 @@ import pers.solid.extshape.block.ExtShapeButtonBlock;
 
 @Mixin(net.minecraft.block.AbstractButtonBlock.class)
 public class ButtonMixin {
+    /**
+     * 修改按钮的触发时间。
+     */
     @Inject(method = "getPressTicks", at = @At("RETURN"), cancellable = true)
     public void getPressTicks(CallbackInfoReturnable<Integer> cir) {
         final AbstractButtonBlock block = (AbstractButtonBlock) (Object) this;

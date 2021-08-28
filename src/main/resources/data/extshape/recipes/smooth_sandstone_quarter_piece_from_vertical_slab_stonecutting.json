@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:air"
+  },
+  "result": "extshape:smooth_sandstone_quarter_piece",
+  "count": 2
+}

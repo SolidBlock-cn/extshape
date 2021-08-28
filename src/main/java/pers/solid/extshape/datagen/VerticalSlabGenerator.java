@@ -70,7 +70,7 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                           "type": "minecraft:crafting_shaped",
                           "group": "%s",
                           "pattern": [
-                            "#","#","#"
+                            "#"
                           ],
                           "key": {
                             "#": {
@@ -79,12 +79,46 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                           },
                           "result": {
                             "item": "%s",
-                            "count": 3
+                            "count": 1
                           }
                         }
                         """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
                         this.getBaseBlock())),
                 this.getIdentifier());
+    }
+
+    /**
+     * 由纵台阶生成台阶的合成表。考虑到要应用于原版，所以生成台阶的合成表由纵台阶生成器生成。
+     * @return 由纵台阶制作台阶的合成配方。
+     */
+    public String getInverseCraftingString() {
+        return String.format("""
+                        {
+                          "type": "minecraft:crafting_shaped",
+                          "group": "%s",
+                          "pattern": [
+                            "#"
+                          ],
+                          "key": {
+                            "#": {
+                              "item": "%s"
+                            }
+                          },
+                          "result": {
+                            "item": "%s",
+                            "count": 1
+                          }
+                        }
+                        """, this.getRecipeGroup().replace("vertical_",""), this.getIdentifier(),
+                Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+                        this.getBaseBlock())));
+    }
+
+    @Override
+    public void writeCraftingRecipeFiles() {
+        super.writeCraftingRecipeFiles();
+        this.writeRecipeFile("extshape",Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+                this.getBaseBlock())).getPath()+"_from_vertical_slab",this.getInverseCraftingString());
     }
 
     @Override

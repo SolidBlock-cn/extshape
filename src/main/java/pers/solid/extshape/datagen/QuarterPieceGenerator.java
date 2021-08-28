@@ -109,8 +109,10 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
         return modelCollection;
     }
 
-    @Override
-    public @Nullable String getCraftingRecipeString() {
+    /**
+     * @return 由3个台阶生成6个横条的合成配方。
+     */
+    public @Nullable String getCraftingFromSlabRecipeString() {
         return String.format("""
                         {
                           "type": "minecraft:crafting_shaped",
@@ -131,6 +133,33 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                 getIdentifier().toString(), this.getRecipeGroup());
     }
 
+    /**
+     * @return 由1个纵条生成1个横条的合成配方。
+     */
+    public @Nullable String getCraftingFromVerticalQuarterPieceRecipeString() {
+        return String.format("""
+                        {
+                          "type": "minecraft:crafting_shaped",
+                          "group": "%3$s",
+                          "pattern": [
+                            "#"
+                          ],
+                          "key": {
+                            "#": {
+                              "item": "%s"
+                            }
+                          },
+                          "result": {
+                            "item": "%s",
+                            "count": 1
+                          }
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalQuarterPiece, this.getBaseBlock())),
+                getIdentifier().toString(), this.getRecipeGroup());
+    }
+
+    /**
+     * @return 由完整方块制作4个横条的切石配方。
+     */
     @Override
     public @Nullable String getStoneCuttingRecipeString() {
         return String.format("""
@@ -144,6 +173,26 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                 }""", this.getBaseBlockIdentifier(), this.getIdentifier());
     }
 
+    /**
+     * @return 由楼梯切石制作3个横条的切石配方。
+     */
+    public @Nullable String getStoneCuttingFromStairsRecipeString() {
+        return String.format("""
+                {
+                  "type": "minecraft:stonecutting",
+                  "ingredient": {
+                    "item": "%s"
+                  },
+                  "result": "%s",
+                  "count": 3
+                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.stairs, this.getBaseBlock())),
+                this.getIdentifier());
+    }
+
+    /**
+     *
+     * @return 由台阶切石制作2个横条的切石配方。
+     */
     public @Nullable String getStoneCuttingFromSlabRecipeString() {
         return String.format("""
                 {
@@ -156,12 +205,41 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                 }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab, this.getBaseBlock())), this.getIdentifier());
     }
 
+    /**
+     *
+     * @return 由纵台阶切石制作2个横条的切石配方。
+     */
+    public @Nullable String getStoneCuttingFromVerticalSlabRecipeString() {
+        return String.format("""
+                {
+                  "type": "minecraft:stonecutting",
+                  "ingredient": {
+                    "item": "%s"
+                  },
+                  "result": "%s",
+                  "count": 2
+                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab, this.getBaseBlock())),
+                this.getIdentifier());
+    }
+
+    @Override
+    public void writeCraftingRecipeFiles() {
+        Identifier identifier = this.getIdentifier();
+        this.writeRecipeFile(identifier.getNamespace(),identifier.getPath()+"_from_slab",this.getCraftingFromSlabRecipeString());
+        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath()+"_from_vertical_quarter_piece",
+                this.getCraftingFromVerticalQuarterPieceRecipeString());
+    }
+
     @Override
     public void writeStoneCuttingRecipeFiles() {
         super.writeStoneCuttingRecipeFiles();
         Identifier identifier = this.getIdentifier();
+        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() + "_from_stairs_stonecutting",
+                this.getStoneCuttingFromStairsRecipeString());
         this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() + "_from_slab_stonecutting",
                 this.getStoneCuttingFromSlabRecipeString());
+        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() + "_from_vertical_slab_stonecutting",
+                this.getStoneCuttingFromVerticalSlabRecipeString());
     }
 
     @Override

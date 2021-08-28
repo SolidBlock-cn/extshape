@@ -4,12 +4,14 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
 import pers.solid.extshape.builder.BlockBuilder;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.builder.SlabBuilder;
+import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.Map;
@@ -19,21 +21,31 @@ import static net.minecraft.block.PressurePlateBlock.ActivationRule.MOBS;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
 
 public class ExtShapeBlocks {
-    public static final Block SMOOTH_STONE_DOUBLE_SLAB;
+    public static final Block PETRIFIED_OAK_PLANKS,SMOOTH_STONE_DOUBLE_SLAB;
 
+    /*
+      使用BlockBuilder并利用迭代器来批量注册多个方块及其对应方块物品，提高效率。
+      只有极少数方块会以静态常量成员变量的形式存储。
+     */
     static {
         // 石头及其变种（含磨制变种），已存在其楼梯、台阶、墙，但是还没有栅栏和栅栏门。
         for (final Block block : STONES) {
             BlockBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, MOBS).build();
         }
 
+        // 石化橡木。
+        PETRIFIED_OAK_PLANKS =
+                BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape","petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
+        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(PETRIFIED_OAK_PLANKS,PETRIFIED_OAK_SLAB);
+
         // 平滑石头比较特殊，完整方块和台阶不同。
         SMOOTH_STONE_DOUBLE_SLAB =
                 BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE)).setIdentifier(new Identifier(
-                        "extshape", "smooth_stone_slab_double")).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
+                        "extshape", "smooth_stone_slab_double")).group(ItemGroup.BUILDING_BLOCKS).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
         BlockBuilder.createAllShapes(SMOOTH_STONE, Items.FLINT, ButtonType.STONE, MOBS).withoutShapes().build();
+        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(SMOOTH_STONE,SMOOTH_STONE_DOUBLE_SLAB);
 
-        // 深板岩圆石、磨制深板岩
+        // 深板岩圆石、磨制深板岩。
         for (final Block BLOCK : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE}) {
             BlockBuilder.createEmpty(BLOCK).withShapes().build();
         }
@@ -182,6 +194,9 @@ public class ExtShapeBlocks {
         ExtShapeBlockTag.completeMineableTags();
     }
 
+    /**
+     * 虽然此函数不执行操作，但是执行此函数会确保此类中的静态部分都遍历一遍。
+     */
     public static void init() {
     }
 }

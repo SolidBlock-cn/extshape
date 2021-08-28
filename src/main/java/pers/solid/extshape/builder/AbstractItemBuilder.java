@@ -19,18 +19,26 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
         this(new FabricItemSettings());
     }
 
+    /**
+     * 将物品注册到注册表。
+     */
     @Override
-    public AbstractItemBuilder<T> register() {
+    public void register() {
         Registry.register(Registry.ITEM, this.identifier, this.item);
-        return this;
     }
 
+    /**
+     * 不注册物品。
+     */
     @Override
     public AbstractItemBuilder<T> noRegister() {
         this.registerItem = false;
         return this;
     }
 
+    /**
+     * 将物品设置为防火。
+     */
     public AbstractItemBuilder<T> fireproof() {
         this.settings.fireproof();
         return this;

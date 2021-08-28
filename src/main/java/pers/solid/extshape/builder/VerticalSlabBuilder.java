@@ -10,7 +10,7 @@ public class VerticalSlabBuilder extends AbstractBlockBuilder<VerticalSlabBlock>
     protected VerticalSlabBuilder(Block baseBlock) {
         super(baseBlock);
         this.defaultTag = ExtShapeBlockTag.VERTICAL_SLABS;
-        this.mapping = BlockMappings.shapeToMapping.get(Shape.verticalSlab);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.verticalSlab);
     }
 
     @Override

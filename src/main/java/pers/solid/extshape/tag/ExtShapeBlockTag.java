@@ -1,7 +1,6 @@
 package pers.solid.extshape.tag;
 
 import com.google.gson.JsonArray;
-import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -13,8 +12,13 @@ import java.util.List;
 
 import static net.minecraft.block.Blocks.*;
 
+/**
+ * 本模组使用的方块标签。需要注意的是，这些标签是内置的会直接存储内容，不会从数据包中加载。不应与 {@link net.minecraft.tag.BlockTags} 混淆。
+ */
 public class ExtShapeBlockTag extends ExtShapeTag<Block> {
-
+    /**
+     * 包含所有已创建的标签。
+     **/
     public static final List<ExtShapeBlockTag> ALL_EXTSHAPE_BLOCK_TAGS = new ArrayList<>();
 
     public static final ExtShapeBlockTag PLANKS = new ExtShapeBlockTag(List.of(
@@ -301,7 +305,6 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     public ExtShapeBlockTag(Identifier identifier, List<Block> list) {
         super(identifier, list);
         ALL_EXTSHAPE_BLOCK_TAGS.add(this);
-        TagRegistry.block(identifier);
     }
 
     public static void completeMineableTags() {
@@ -325,6 +328,12 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
         return this;
     }
 
+    /**
+     * 获取某个方块的命名空间id。
+     *
+     * @param element 方块。
+     * @return 方块的命名空间id。
+     */
     @Override
     public Identifier getIdentifierOf(Block element) {
         return Registry.BLOCK.getId(element);
@@ -332,15 +341,16 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
 
     @Override
     public String toString() {
-        return "ExtShapeBlockTag{" + identifier +
-                '}';
+        return "ExtShapeBlockTag{" + identifier + '}';
     }
 
     public JsonArray jsonTree() {
         JsonArray array = new JsonArray();
         for (var entry : this.entryList) {
-            if (entry.isTag) array.add(((ExtShapeBlockTag) entry.elementTag).jsonTree());
-            else array.add(Registry.BLOCK.getId(entry.element).toString());
+            if (entry instanceof TagEntryTag)
+                array.add(((ExtShapeBlockTag) ((TagEntryTag<Block>) entry).elementTag).jsonTree());
+            else if (entry instanceof TagEntrySingleElement)
+                array.add(Registry.BLOCK.getId(((TagEntrySingleElement<Block>) entry).element).toString());
         }
         return array;
     }

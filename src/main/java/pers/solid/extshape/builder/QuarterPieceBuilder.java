@@ -10,7 +10,7 @@ public class QuarterPieceBuilder extends AbstractBlockBuilder<QuarterPieceBlock>
     protected QuarterPieceBuilder(Block baseBlock) {
         super(baseBlock);
         this.defaultTag = ExtShapeBlockTag.QUARTER_PIECES;
-        this.mapping = BlockMappings.shapeToMapping.get(Shape.quarterPiece);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.quarterPiece);
     }
 
     @Override

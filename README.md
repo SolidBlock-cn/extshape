@@ -38,8 +38,7 @@ The hardness, mining tools and mining time of all stairs, slabs, fences and wall
 vanilla features). For example, the time spent breaking a wool slab equals to a full wool block, instead of half of the
 latter.
 
-在原版中，大多数压力板和按钮的硬度为其基础方块的1/4到1/3。
-本模组添加的压力板和按钮的硬度均为基础方块的1/4。（基岩制品在生存模式不可破坏，但是基岩按钮、基岩压力板在失去其依靠的方块时仍会正常掉落）。本模组对按钮进行了扩展，质地较软的按钮（如羊毛按钮、雪按钮）的触发时长为60刻（3秒），质地很硬的按钮（如黑曜石按钮、基岩按钮）的触发时长为5
+在原版中，大多数压力板和按钮的硬度为其基础方块的1/4到1/3。本模组添加的压力板和按钮的硬度均为基础方块的1/4。（基岩制品在生存模式不可破坏，但是基岩按钮、基岩压力板在失去其依靠的方块时仍会正常掉落）。本模组对按钮进行了扩展，质地较软的按钮（如羊毛按钮、雪按钮）的触发时长为60刻（3秒），质地很硬的按钮（如黑曜石按钮、基岩按钮）的触发时长为5
 刻（1/4秒）。参照原版代码，所有的按钮、压力板均无碰撞箱。
 
 In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of their basic blocks. All pressure plates
@@ -49,6 +48,12 @@ simply extends buttons: soft buttons (wool buttons, snow buttons) trigger 60 tic
 (obsidian buttons, bedrock buttons) trigger 5 ticks (1/4 second). All buttons and pressure plates have no collision box
 like vanilla MC.
 
+另外此模组还添加了“双层平滑石台阶”方块和“石化橡木木板”方块，分别可以合成平滑石台阶和石化橡木台阶（原版的平滑石块也可以合成平滑石台阶）。
+
+Besides, this mod also adds "double smooth stone slab" and "petrified oak planks" block, respectively crafting
+ingredient of smooth stone slab and petrified oak slab. (Still, vanilla smooth stone block can also be crafted into
+smooth stone slab).
+
 ### 合成与烧炼 Crafting and smelting
 
 所有的方块均可使用其基础方块参照类似原版合成表合成，部分可以通过切石机合成。具体为：楼梯在工作台可3:2合成（原料:产物，下同），在切石机可1:1合成。台阶和纵台阶在工作台、切石机可1:2合成。
@@ -57,10 +62,54 @@ The crafting recipes of all blocks in this mod are similar to those in vanilla. 
 cutter. Stairs can be crafted 3:2 in crafting table (ingredient:result) and 1:1 in the stone cutter. Slabs and vertical
 slabs are craftable 1:2 in either crafting table or stone cutter.
 
-横条和纵条可在工作台或切石机由台阶或纵台阶1:2合成，或在切石机内由完整方块1:4合成。
+台阶、楼梯、横条可以直接在合成表中旋转形成对应的纵向方块，也可以“转回来”。例如 1 个台阶可以合成 1 个对应的纵台阶，1 个纵台阶也可以直接合成 1 个对应的台阶。
 
-Quarter pieces and vertical quarter pieces can be crafted 1:2 from slabs or vertical slabs in crafting tables or stone
-cutters, or crafted 1:4 from full blocks in stone cutters.
+Slabs, stairs and quarter pieces can be rotated in crafting recipes to be corresponding vertical blocks; you can also "
+rotate them back". For instance, one slab can be crafted into one corresponding vertical slab, and one vertical slab can
+also be crafted into a corresponding slab directly.
+
+各个形状方块在工作台中的合成关系如下：
+
+- 6×基础方块 → 4×楼梯
+- 3×基础方块 → 6×台阶
+- 3×台阶 → 6×横条 （台阶水平排列）
+- 1×台阶 ↔ 1×纵台阶
+- 1×楼梯 ↔ 1×纵楼梯
+- 1×横条 ↔ 1×纵条
+- 3×纵台阶 → 6×纵条 （纵台阶竖直排列）
+
+Crafting recipes of blocks in different shapes are as follows:
+
+- 6×base blocks → 4×stairs
+- 3×base blocks → 6×slabs
+- 3×slabs → 6×quarter pieces (slabs arranged horizontally)
+- 1×slab ↔ 1×vertical slab
+- 1×stairs ↔ 1×vertical stairs
+- 1×quarter piece ↔ 1×vertical quarter piece
+- 3×vertical slabs → 6×vertical quarter pieces (vertical slabs arranged vertically)
+
+部分方块的各个形状的方块在切石机中的合成关系如下：
+
+- 1×基础方块 → 1×楼梯 / 1×纵楼梯 / 2×台阶 / 2×纵台阶 / 4×横条 / 4×纵条
+- 1×楼梯 → 3×横条
+- 1×台阶 → 2×横条
+- 1×纵楼梯 → 3×纵条
+- 1×纵台阶 → 2×横条 / 2×纵条
+
+Stone-cutting recipe of some blocks are as follows:
+
+- 1×base block → 1×stairs / 1×vertical stairs / 2×slabs / 2×vertical slabs / 4×quarter pieces / 4×vertical quarter
+  pieces
+- 1×stairs → 3×quarter pieces
+- 1×slab → 2×quarter pieces
+- 1×vertical stairs → 3×vertical quarter pieces
+- 1×vertical slab → 2×quarter pieces / 2×vertical quarter pieces
+
+注意：本模组中的物品暂不能通过切石机像原版 Minecraft 那样进行“递归切石”。例如，原版游戏中，一个未磨制的安山岩可以直接切石成磨制的安山岩楼梯或者台阶。模组中的方块暂时不能这样切石。
+
+NOTE: Items in this mod are not recursively stone-cuttable like some items in vanilla Minecraft. For example, in vanilla
+Minecraft, an unpolished andesite can be cut into a polished andesite stairs or slab. Blocks in this mod can not be cut
+like this.
 
 栅栏和栅栏门合成时的原材料（除了基础方块之外），参照既有合成表。石质栅栏和栅栏门的原材料使用燧石，羊毛的为线，砂岩及其变种的为木棍。
 
@@ -85,6 +134,27 @@ redstone. Besides, several extra item groups are set to sort blocks (including v
 that players can easily fetch blocks of a same block in different shapes.
 
 ## 更新日志 Update log
+
+### 1.2.0
+
+- 删除了额外的物品组，将物品添加到原版物品组中。另外仍有4个用于分类存放方块及其变种的额外物品组仍保留。
+- Deleted extra item groups. Vanilla item groups are used instead. Besides, there are 4 other item groups in order to
+  contain blocks (including vanilla) in sort of base blocks.
+    - 因为物品添加到了原版物品组中，所以同时修复了在配方书中归类错误的问题。
+    - The issue that items are not sorted correctly in recipe groups is also fixed because of this change.
+- 方块映射由普通的 Map 改为更加高效的 BiMap（双向映射）。BiMap 的值也是不能重复的，从而更高效地得到反向映射。
+- BlockMappings use more effective BiMap instead of ordinary Map any longer. Values of BiMap is unique, so it's more
+  effective to get an inverse map.
+- 添加了 JavaDoc。
+- Added JavaDoc.
+- 参照原版习惯，本模组中的方块的英文名改为每个单词首字母大写形式。
+- Referring to vanilla convention, English names of blocks in this mod are capitalised now.
+- 修复了横条、纵条、纵楼梯方块在英文模式下的命名错误。
+- Fixed naming error of quarter piece, vertical quarter piece and vertical stairs blocks in English.
+- 修改了纵台阶、纵条、纵楼梯的配方。这些方块可以直接由1个对应的台阶、横条、楼梯合成而成（相当于进行旋转），不再需要由3个合成；同时也可以转回去。
+- Changed recipes of vertical slabs, vertical quarter pieces and vertical stairs. These blocks can now be crafted from
+  one corresponding slab, quarter piece of vertical stairs, which can be seen as rotating, instead of crafting from 3;
+  you can also "rotate" them "back".
 
 ### 1.1.1
 
@@ -123,7 +193,7 @@ that players can easily fetch blocks of a same block in different shapes.
 - Glazed terracotta slabs can be rotated now.
 - 移除了弃用的代码。
 - Removed deprecated code.
-- 不再在各对象内存储其 id、基础方块等信息，而是使用 Minecraft 原版注册表储存并调取 id，并使用专门的映射表储存方块与其基础方块的对应关系。
+- 不再在各对象内存储其 id、基础方块等信息，而是使用 Minecraft 原版注册表储存并调取 id，并使用映射储存方块与其基础方块的对应关系。
 - Identifiers and base blocks are not stored inside objects any longer; Minecraft vanilla registry for identifiers and
   specific maps for relations between blocks and their base blocks are used instead.
 - 会从原版的BlockFamilies中导入数据至本模组的BlockMappings。未来或许会直接将BlockMappings合并至BlockFamilies。

@@ -161,7 +161,7 @@ public class FenceGenerator extends AbstractBlockGenerator<FenceBlock> {
 
 
     public Item getCraftingIngredient() {
-        return IngredientMappings.mappingOfFenceIngredients.get(this.getBlock());
+        return IngredientMappings.MAPPING_OF_FENCE_INGREDIENTS.get(this.getBlock());
     }
 
     public Identifier getCraftingIngredientIdentifier() {

@@ -10,7 +10,7 @@ public class VerticalStairsBuilder extends AbstractBlockBuilder<VerticalStairsBl
     protected VerticalStairsBuilder(Block baseBlock) {
         super(baseBlock);
         this.defaultTag = ExtShapeBlockTag.VERTICAL_STAIRS;
-        this.mapping = BlockMappings.shapeToMapping.get(Shape.verticalStairs);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.verticalStairs);
     }
 
     @Override

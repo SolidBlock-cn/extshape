@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "extshape:iron_stairs"
+  },
+  "result": "extshape:iron_quarter_piece",
+  "count": 3
+}

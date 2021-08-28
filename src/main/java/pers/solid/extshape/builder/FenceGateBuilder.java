@@ -15,7 +15,7 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
         super(baseBlock);
         this.craftingIngredient = craftingIngredient;
         this.defaultTag = ExtShapeBlockTag.FENCE_GATES;
-        this.mapping = BlockMappings.shapeToMapping.get(Shape.fenceGate);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.fenceGate);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
     @Override
     public FenceGateBlock build() {
         super.build();
-        IngredientMappings.mappingOfFenceGateIngredients.put(this.block, this.craftingIngredient);
+        IngredientMappings.MAPPING_OF_FENCE_GATE_INGREDIENTS.put(this.block, this.craftingIngredient);
         return this.block;
     }
 }

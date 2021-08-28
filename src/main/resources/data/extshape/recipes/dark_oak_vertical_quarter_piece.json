@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "group": "wooden_vertical_quarter_piece",
   "pattern": [
-    "#","#","#"
+    "#"
   ],
   "key": {
     "#": {
@@ -11,6 +11,6 @@
   },
   "result": {
     "item": "extshape:dark_oak_vertical_quarter_piece",
-    "count": 3
+    "count": 1
   }
 }

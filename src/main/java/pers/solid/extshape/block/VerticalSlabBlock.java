@@ -14,6 +14,9 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
+/**
+ * 垂直台阶方块类。
+ */
 public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterloggable {
     public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;

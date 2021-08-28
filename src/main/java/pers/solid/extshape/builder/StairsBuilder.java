@@ -10,7 +10,7 @@ public class StairsBuilder extends AbstractBlockBuilder<StairsBlock> {
     protected StairsBuilder(Block baseBlock) {
         super(baseBlock);
         this.defaultTag = ExtShapeBlockTag.STAIRS;
-        this.mapping = BlockMappings.shapeToMapping.get(Shape.stairs);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.stairs);
     }
 
 

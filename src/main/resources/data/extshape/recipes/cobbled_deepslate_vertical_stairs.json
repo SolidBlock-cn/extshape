@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "group": "",
   "pattern": [
-    "#","#","#"
+    "#"
   ],
   "key": {
     "#": {
@@ -11,6 +11,6 @@
   },
   "result": {
     "item": "extshape:cobbled_deepslate_vertical_stairs",
-    "count": 3
+    "count": 1
   }
 }

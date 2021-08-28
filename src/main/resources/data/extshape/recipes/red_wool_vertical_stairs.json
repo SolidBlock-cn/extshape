@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "group": "wool_vertical_stairs",
   "pattern": [
-    "#","#","#"
+    "#"
   ],
   "key": {
     "#": {
@@ -11,6 +11,6 @@
   },
   "result": {
     "item": "extshape:red_wool_vertical_stairs",
-    "count": 3
+    "count": 1
   }
 }

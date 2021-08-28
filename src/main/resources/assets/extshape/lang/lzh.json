@@ -1,4 +1,5 @@
 {
+  "block.extshape.petrified_oak_planks": "巖化柞材",
   "block.extshape.smooth_stone_slab_double": "雙潤巖版",
 
   "block.extshape.?_stairs": "%s階",
@@ -46,11 +47,9 @@
   "block.extshape.prefix.warped": "譎蕈木",
   "block.extshape.prefix.warped_wart": "譎疣",
 
-  "itemGroup.extshape.building_blocks": "塊形之擴：營造之方（序以形）",
-  "itemGroup.extshape.decoration_blocks": "塊形之擴：飾（序以形）",
-  "itemGroup.extshape.redstone": "塊形之擴：赭石（序以形）",
   "itemGroup.extshape.wooden_blocks": "塊形之擴：木（序以原，含藝赍之塊）",
   "itemGroup.extshape.colorful_blocks": "塊形之擴：彩（序以原，含藝赍之塊）",
   "itemGroup.extshape.stone_blocks": "塊形之擴：石（序以原，含藝赍之塊）",
-  "itemGroup.extshape.other_blocks": "塊形之擴：餘（序以原，含藝赍之塊）"
+  "itemGroup.extshape.other_blocks": "塊形之擴：餘（序以原，含藝赍之塊）",
+  "modmenu.descriptionTranslation.extshape": "益形之益塊！"
 }

@@ -1,4 +1,5 @@
 {
+  "block.extshape.petrified_oak_planks": "石化橡木木板",
   "block.extshape.smooth_stone_slab_double": "双层平滑石台阶",
 
   "block.extshape.?_stairs": "%s楼梯",
@@ -46,11 +47,10 @@
   "block.extshape.prefix.warped": "诡异木",
   "block.extshape.prefix.warped_wart": "诡异疣",
 
-  "itemGroup.extshape.building_blocks": "扩展方块形状：建筑方块（按形状排序）",
-  "itemGroup.extshape.decoration_blocks": "扩展方块形状：装饰性方块（按形状排序）",
-  "itemGroup.extshape.redstone": "扩展方块形状：红石（按形状排序）",
   "itemGroup.extshape.wooden_blocks": "扩展方块形状：木制方块（按基础方块排序，含原版方块）",
   "itemGroup.extshape.colorful_blocks": "扩展方块形状：彩色方块（按基础方块排序，含原版方块）",
   "itemGroup.extshape.stone_blocks": "扩展方块形状：石质方块（按基础方块排序，含原版方块）",
-  "itemGroup.extshape.other_blocks": "扩展方块形状：其他（按基础方块排序，含原版方块）"
+  "itemGroup.extshape.other_blocks": "扩展方块形状：其他（按基础方块排序，含原版方块）",
+
+  "modmenu.descriptionTranslation.extshape": "更多形状的更多方块！"
 }
