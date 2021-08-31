@@ -5,13 +5,16 @@ import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.mixin.HardnessAccessor;
+import pers.solid.extshape.mixin.SettingsAccessor;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class ButtonBuilder extends AbstractBlockBuilder<AbstractButtonBlock> {
     public final ExtShapeButtonBlock.ButtonType type;
 
     public ButtonBuilder(ExtShapeButtonBlock.ButtonType type, Block baseBlock) {
-        super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f));
+        super(baseBlock,
+                FabricBlockSettings.copyOf(baseBlock).noCollision().strength(((HardnessAccessor) ((SettingsAccessor) baseBlock).getSettings()).getHardness() / 4f));
         this.type = type;
         this.defaultTag = ExtShapeBlockTag.BUTTONS;
         this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.button);

@@ -49,8 +49,8 @@ public class VerticalStairsBlock extends Block implements Waterloggable {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        var dir = state.get(FACING).getOpposite();
-        var voxel = VOXELS.get(dir);
+        HorizontalCornerDirection dir = state.get(FACING).getOpposite();
+        VoxelShape voxel = VOXELS.get(dir);
         return VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), voxel, BooleanBiFunction.ONLY_FIRST);
     }
 

@@ -72,6 +72,7 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
 
     /**
      * 从旋转角度算出距离该旋转角度最近的方向。用于方块放置。
+     *
      * @param rotation 旋转角度。
      * @return 离该旋转角度最近的方向。
      */
@@ -152,29 +153,46 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     }
 
     public HorizontalCornerDirection rotate(BlockRotation rotation) {
-        return switch (rotation) {
-            case CLOCKWISE_90 -> this.rotateYClockwise();
-            case CLOCKWISE_180 -> this.getOpposite();
-            case COUNTERCLOCKWISE_90 -> this.rotateYCounterclockwise();
-            default -> this;
-        };
+        switch (rotation) {
+            case CLOCKWISE_90:
+                return this.rotateYClockwise();
+            case CLOCKWISE_180:
+                return this.getOpposite();
+            case COUNTERCLOCKWISE_90:
+                return this.rotateYCounterclockwise();
+            default:
+                return this;
+        }
     }
 
     public HorizontalCornerDirection mirror(BlockMirror mirror) {
-        return switch (mirror) {
-            case FRONT_BACK -> switch (this) {
-                case NORTH_EAST -> NORTH_WEST;
-                case NORTH_WEST -> NORTH_EAST;
-                case SOUTH_EAST -> SOUTH_WEST;
-                case SOUTH_WEST -> SOUTH_EAST;
-            };
-            case LEFT_RIGHT -> switch (this) {
-                case NORTH_EAST -> SOUTH_EAST;
-                case NORTH_WEST -> SOUTH_WEST;
-                case SOUTH_EAST -> NORTH_EAST;
-                case SOUTH_WEST -> NORTH_WEST;
-            };
-            default -> this;
-        };
+        switch (mirror) {
+            case FRONT_BACK:
+                switch (this) {
+                    case NORTH_EAST:
+                        return NORTH_WEST;
+                    case NORTH_WEST:
+                        return NORTH_EAST;
+                    case SOUTH_EAST:
+                        return SOUTH_WEST;
+                    case SOUTH_WEST:
+                        return SOUTH_EAST;
+                }
+                ;
+            case LEFT_RIGHT:
+                switch (this) {
+                    case NORTH_EAST:
+                        return SOUTH_EAST;
+                    case NORTH_WEST:
+                        return SOUTH_WEST;
+                    case SOUTH_EAST:
+                        return NORTH_EAST;
+                    case SOUTH_WEST:
+                        return NORTH_WEST;
+                }
+                ;
+            default:
+                return this;
+        }
     }
 }

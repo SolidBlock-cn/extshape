@@ -5,13 +5,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.mixin.HardnessAccessor;
+import pers.solid.extshape.mixin.SettingsAccessor;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBlock> {
     public final PressurePlateBlock.ActivationRule type;
 
     protected PressurePlateBuilder(PressurePlateBlock.ActivationRule type, Block baseBlock) {
-        super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f));
+        super(baseBlock,
+                FabricBlockSettings.copyOf(baseBlock).noCollision().strength(((HardnessAccessor) ((SettingsAccessor) baseBlock).getSettings()).getHardness() / 4f));
         this.type = type;
         this.defaultTag = ExtShapeBlockTag.PRESSURE_PLATES;
         this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.pressurePlate);

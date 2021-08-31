@@ -213,7 +213,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param map 由形状到方块标签的映射。
      */
     public BlocksBuilder setDefaultTagOf(Map<@Nullable Shape, @Nullable ExtShapeBlockTag> map) {
-        for (var entry : map.entrySet()) {
+        for (Entry<@Nullable Shape, @Nullable ExtShapeBlockTag> entry : map.entrySet()) {
             if (entry.getKey() == null || entry.getValue() == null) continue;
             defaultTags.put(entry.getKey(), entry.getValue());
         }

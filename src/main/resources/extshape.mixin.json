@@ -2,11 +2,11 @@
   "required": true,
   "minVersion": "0.8",
   "package": "pers.solid.extshape.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_8",
   "mixins": [
-  ],
-  "client": [
-    "ButtonMixin"
+    "ButtonMixin",
+    "HardnessAccessor",
+    "SettingsAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

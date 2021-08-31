@@ -46,22 +46,23 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction dir = state.get(FACING);
         BlockHalf half = state.get(HALF);
-        return switch (half) {
-            case TOP -> switch (dir) {
-                case NORTH -> NORTH_TOP_SHAPE;
-                case SOUTH -> SOUTH_TOP_SHAPE;
-                case EAST -> EAST_TOP_SHAPE;
-                case WEST -> WEST_TOP_SHAPE;
-                default -> VoxelShapes.empty();
-            };
-            case BOTTOM -> switch (dir) {
-                case NORTH -> NORTH_BOTTOM_SHAPE;
-                case SOUTH -> SOUTH_BOTTOM_SHAPE;
-                case EAST -> EAST_BOTTOM_SHAPE;
-                case WEST -> WEST_BOTTOM_SHAPE;
-                default -> VoxelShapes.empty();
-            };
-        };
+        switch (half) {
+            case TOP: switch (dir) {
+                case NORTH: return NORTH_TOP_SHAPE;
+                case SOUTH: return SOUTH_TOP_SHAPE;
+                case EAST: return EAST_TOP_SHAPE;
+                case WEST: return WEST_TOP_SHAPE;
+                default: return VoxelShapes.empty();
+            }
+            case BOTTOM: switch (dir) {
+                case NORTH: return NORTH_BOTTOM_SHAPE;
+                case SOUTH: return SOUTH_BOTTOM_SHAPE;
+                case EAST: return EAST_BOTTOM_SHAPE;
+                case WEST: return WEST_BOTTOM_SHAPE;
+                default: return VoxelShapes.empty();
+            }
+            default: return VoxelShapes.empty();
+        }
     }
 
     @Override

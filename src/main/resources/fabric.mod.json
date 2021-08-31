@@ -27,10 +27,10 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.11.6",
     "fabric": "*",
     "minecraft": "1.16.x",
-    "java": ">=18"
+    "java": ">=8"
   },
   "suggests": {
     "another-mod": "*"

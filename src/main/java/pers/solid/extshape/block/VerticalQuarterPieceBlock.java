@@ -14,6 +14,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -30,8 +31,8 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
             HorizontalCornerDirection.class);
 
     static {
-        for (var dir : HorizontalCornerDirection.values()) {
-            var vec = dir.getVector();
+        for (HorizontalCornerDirection dir : HorizontalCornerDirection.values()) {
+            Vec3i vec = dir.getVector();
             VOXELS.put(dir, VoxelShapes.cuboid(Math.min(vec.getX() + 1, 1) * 0.5, 0,
                     Math.min(vec.getZ() + 1, 1) * 0.5, Math.max(vec.getX() + 1, 1) * 0.5, 1,
                     Math.max(vec.getZ() + 1, 1) * 0.5));
@@ -59,7 +60,7 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        var dir = state.get(FACING);
+        HorizontalCornerDirection dir = state.get(FACING);
         return VOXELS.get(dir);
     }
 

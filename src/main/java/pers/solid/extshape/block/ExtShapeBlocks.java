@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
@@ -14,14 +15,12 @@ import pers.solid.extshape.builder.SlabBuilder;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
-import java.util.Map;
-
 import static net.minecraft.block.Blocks.*;
 import static net.minecraft.block.PressurePlateBlock.ActivationRule.MOBS;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
 
 public class ExtShapeBlocks {
-    public static final Block PETRIFIED_OAK_PLANKS,SMOOTH_STONE_DOUBLE_SLAB;
+    public static final Block PETRIFIED_OAK_PLANKS, SMOOTH_STONE_DOUBLE_SLAB;
 
     /*
       使用BlockBuilder并利用迭代器来批量注册多个方块及其对应方块物品，提高效率。
@@ -35,25 +34,25 @@ public class ExtShapeBlocks {
 
         // 石化橡木。
         PETRIFIED_OAK_PLANKS =
-                BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape","petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
-        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(PETRIFIED_OAK_PLANKS,PETRIFIED_OAK_SLAB);
+                BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape", "petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
+        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
 
         // 平滑石头比较特殊，完整方块和台阶不同。
         SMOOTH_STONE_DOUBLE_SLAB =
                 BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE)).setIdentifier(new Identifier(
                         "extshape", "smooth_stone_slab_double")).group(ItemGroup.BUILDING_BLOCKS).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
         BlockBuilder.createAllShapes(SMOOTH_STONE, Items.FLINT, ButtonType.STONE, MOBS).withoutShapes().build();
-        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(SMOOTH_STONE,SMOOTH_STONE_DOUBLE_SLAB);
+        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(SMOOTH_STONE, SMOOTH_STONE_DOUBLE_SLAB);
 
-        // 深板岩圆石、磨制深板岩。
-        for (final Block BLOCK : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE}) {
-            BlockBuilder.createEmpty(BLOCK).withShapes().build();
-        }
-
-        // 凝灰岩，方解石。
-        for (final Block BLOCK : new Block[]{TUFF, CALCITE}) {
-            BlockBuilder.createAllShapes(BLOCK, Items.FLINT, ButtonType.STONE, MOBS).build();
-        }
+//        // 深板岩圆石、磨制深板岩。
+//        for (final Block BLOCK : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE}) {
+//            BlockBuilder.createEmpty(BLOCK).withShapes().build();
+//        }
+//
+//        // 凝灰岩，方解石。
+//        for (final Block BLOCK : new Block[]{TUFF, CALCITE}) {
+//            BlockBuilder.createAllShapes(BLOCK, Items.FLINT, ButtonType.STONE, MOBS).build();
+//        }
 
         // 圆石。
         BlockBuilder.createAllShapes(COBBLESTONE, Items.FLINT, null, null).withoutRedstone().build();
@@ -69,7 +68,7 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(BEDROCK, Items.STICK, ButtonType.HARD, MOBS).putTag(BEDROCK_BLOCKS).build();
 
         // 紫水晶块。
-        BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD, null, null).withoutRedstone().build();
+//        BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD, null, null).withoutRedstone().build();
 
         // 铁块。
         BlockBuilder.createAllShapes(IRON_BLOCK, Items.IRON_INGOT, ButtonType.STONE, null).withoutRedstone().build();
@@ -91,7 +90,15 @@ public class ExtShapeBlocks {
 
         // 羊毛不注册墙。
         for (final Block block : WOOLS) {
-            BlockBuilder.createAllShapes(block, Items.STRING, ButtonType.SOFT, ActivationRule.EVERYTHING).putTag(WOOLEN_BLOCKS).withoutWall().setDefaultTagOf(Map.of(Shape.stairs, WOOLEN_STAIRS, Shape.slab, WOOLEN_SLABS, Shape.verticalSlab, WOOLEN_VERTICAL_SLABS, Shape.fence, WOOLEN_FENCES, Shape.fenceGate, WOOLEN_FENCE_GATES, Shape.button, WOOLEN_BUTTONS, Shape.pressurePlate, WOOLEN_PRESSURE_PLATES)).build();
+            BlockBuilder.createAllShapes(block, Items.STRING, ButtonType.SOFT, ActivationRule.EVERYTHING).putTag(WOOLEN_BLOCKS).withoutWall().setDefaultTagOf(new ImmutableMap.Builder<Shape, ExtShapeBlockTag>() {{
+                put(Shape.stairs, WOOLEN_STAIRS);
+                put(Shape.slab, WOOLEN_SLABS);
+                put(Shape.verticalSlab, WOOLEN_VERTICAL_SLABS);
+                put(Shape.fence, WOOLEN_FENCES);
+                put(Shape.fenceGate, WOOLEN_FENCE_GATES);
+                put(Shape.button, WOOLEN_BUTTONS);
+                put(Shape.pressurePlate, WOOLEN_PRESSURE_PLATES);
+            }}.build()).build();
         }
 
         // 砖栅栏和栅栏门。
@@ -121,7 +128,7 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(GLOWSTONE, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
         // 石砖、苔石砖、深板岩砖、深板岩瓦
-        for (final Block block : new Block[]{STONE_BRICKS, MOSSY_STONE_BRICKS, DEEPSLATE_BRICKS, DEEPSLATE_TILES}) {
+        for (final Block block : new Block[]{STONE_BRICKS, MOSSY_STONE_BRICKS}) {
             BlockBuilder.createBasicShapes(block).withoutRedstone().build();
         }
 
@@ -143,20 +150,29 @@ public class ExtShapeBlocks {
 
         // 陶瓦和彩色陶瓦。
         for (final Block block : new Block[]{TERRACOTTA}) {
-            BlockBuilder.createAllShapes(block, Items.CLAY, ButtonType.STONE, MOBS).setDefaultTagOf(Map.of(Shape.stairs, TERRACOTTA_STAIRS, Shape.slab, TERRACOTTA_SLABS, Shape.verticalSlab,
-                    TERRACOTTA_VERTICAL_SLABS, Shape.fence, TERRACOTTA_FENCES, Shape.fenceGate, TERRACOTTA_FENCE_GATES,
-                    Shape.wall,
-                    TERRACOTTA_WALLS, Shape.button,
-                    TERRACOTTA_BUTTONS, Shape.pressurePlate, TERRACOTTA_PRESSURE_PLATES)).build();
+            BlockBuilder.createAllShapes(block, Items.CLAY, ButtonType.STONE, MOBS).setDefaultTagOf(new ImmutableMap.Builder<Shape, ExtShapeBlockTag>() {{
+                put(Shape.stairs, TERRACOTTA_STAIRS);
+                put(Shape.slab, TERRACOTTA_SLABS);
+                put(Shape.verticalSlab, TERRACOTTA_VERTICAL_SLABS);
+                put(Shape.fence, TERRACOTTA_FENCES);
+                put(Shape.fenceGate, TERRACOTTA_FENCE_GATES);
+                put(Shape.wall, TERRACOTTA_WALLS);
+                put(Shape.button, TERRACOTTA_BUTTONS);
+                put(Shape.pressurePlate, TERRACOTTA_PRESSURE_PLATES);
+            }}.build()).build();
         }
 
         for (final Block block : STAINED_TERRACOTTAS) {
-            BlockBuilder.createAllShapes(block, Items.CLAY, ButtonType.STONE, MOBS).setDefaultTagOf(Map.of(Shape.stairs, STAINED_TERRACOTTA_STAIRS, Shape.slab,
-                    STAINED_TERRACOTTA_SLABS, Shape.verticalSlab, STAINED_TERRACOTTA_VERTICAL_SLABS, Shape.fence,
-                    STAINED_TERRACOTTA_FENCES, Shape.fenceGate,
-                    STAINED_TERRACOTTA_FENCE_GATES, Shape.wall, STAINED_TERRACOTTA_WALLS, Shape.button,
-                    STAINED_TERRACOTTA_BUTTONS, Shape.pressurePlate,
-                    STAINED_TERRACOTTA_PRESSURE_PLATES)).build();
+            BlockBuilder.createAllShapes(block, Items.CLAY, ButtonType.STONE, MOBS).setDefaultTagOf(new ImmutableMap.Builder<Shape, ExtShapeBlockTag>() {{
+                put(Shape.stairs, STAINED_TERRACOTTA_STAIRS);
+                put(Shape.slab, STAINED_TERRACOTTA_SLABS);
+                put(Shape.verticalSlab, STAINED_TERRACOTTA_VERTICAL_SLABS);
+                put(Shape.fence, STAINED_TERRACOTTA_FENCES);
+                put(Shape.fenceGate, STAINED_TERRACOTTA_FENCE_GATES);
+                put(Shape.wall, STAINED_TERRACOTTA_WALLS);
+                put(Shape.button, STAINED_TERRACOTTA_BUTTONS);
+                put(Shape.pressurePlate, STAINED_TERRACOTTA_PRESSURE_PLATES);
+            }}.build()).build();
         }
 
         // 浮冰。
@@ -177,10 +193,12 @@ public class ExtShapeBlocks {
 
         // 彩色混凝土。
         for (final Block block : CONCRETES) {
-            BlockBuilder.createAllShapes(block, Items.GRAVEL, ButtonType.STONE, MOBS).setDefaultTagOf(Map.of(Shape.stairs, CONCRETE_STAIRS, Shape.slab, CONCRETE_SLABS, Shape.verticalSlab, CONCRETE_VERTICAL_SLABS, Shape.fence,
-                    CONCRETE_FENCES, Shape.fenceGate, CONCRETE_FENCE_GATES, Shape.wall, CONCRETE_WALLS,
-                    Shape.button, CONCRETE_BUTTONS, Shape.pressurePlate,
-                    CONCRETE_PRESSURE_PLATES)).build();
+            BlockBuilder.createAllShapes(block, Items.GRAVEL, ButtonType.STONE, MOBS).setDefaultTagOf(new ImmutableMap.Builder<Shape, ExtShapeBlockTag>().put(Shape.stairs,
+                    CONCRETE_STAIRS).put(Shape.slab, CONCRETE_SLABS).put(Shape.verticalSlab, CONCRETE_VERTICAL_SLABS).put(
+                    Shape.fence,
+                    CONCRETE_FENCES).put(Shape.fenceGate, CONCRETE_FENCE_GATES).put(Shape.wall, CONCRETE_WALLS).put(
+                    Shape.button, CONCRETE_BUTTONS).put(Shape.pressurePlate,
+                    CONCRETE_PRESSURE_PLATES).build()).build();
         }
 
         // 哭泣的黑曜石。
