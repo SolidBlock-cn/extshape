@@ -33,7 +33,7 @@ public class ItemGroups {
             "stone_blocks")).icon(() -> new ItemStack(Blocks.STONE)).appendItems(itemStacks -> STONE_BLOCKS.forEach((block -> importTo(block,
             itemStacks)))).build();
     public static final ItemGroup OTHER_BLOCK_GROUP = FabricItemGroupBuilder.create(new Identifier("extshape",
-            "other_blocks")).icon(() -> new ItemStack(Blocks.PRISMARINE)).appendItems(itemStacks -> {
+            "other_blocks")).icon(() -> new ItemStack(Blocks.CHISELED_QUARTZ_BLOCK)).appendItems(itemStacks -> {
         Set<Block> baseBlockList = new LinkedHashSet<>(BlockMappings.BASE_BLOCKS);
         WOODEN_BLOCKS.forEach(baseBlockList::remove);
         COLORFUL_BLOCKS.forEach(baseBlockList::remove);
@@ -49,7 +49,7 @@ public class ItemGroups {
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.STAINED_TERRACOTTAS);
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.GLAZED_TERRACOTTAS);
         STONE_BLOCKS.addTag(ExtShapeBlockTag.STONES);
-        STONE_BLOCKS.addAll(
+        STONE_BLOCKS.addAll(List.of(
                 Blocks.SMOOTH_STONE,
                 Blocks.STONE_BRICKS,
                 Blocks.MOSSY_STONE_BRICKS,
@@ -83,7 +83,7 @@ public class ItemGroups {
                 Blocks.CRYING_OBSIDIAN,
                 Blocks.BEDROCK,
                 Blocks.END_STONE,
-                Blocks.END_STONE_BRICKS);
+                Blocks.END_STONE_BRICKS));
     }
 
     // 以下为按方块排序的列表。

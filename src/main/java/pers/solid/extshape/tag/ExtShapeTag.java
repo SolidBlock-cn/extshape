@@ -1,5 +1,6 @@
 package pers.solid.extshape.tag;
 
+import com.google.common.collect.UnmodifiableIterator;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.internal.Streams;
@@ -10,9 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -21,32 +20,40 @@ import java.util.function.Consumer;
  * 标签的内容都是内置的，并且可以修改，不受数据包影响。
  * 数据生成器会利用这些标签内容生成数据。
  *
- * @param <T> 标签中的元素的参数。
+ * @param <T> 标签内的元素的类型。
  */
-public class ExtShapeTag<T> implements Iterable<T> {
+public class ExtShapeTag<T> extends AbstractCollection<T> {
     public final Identifier identifier; // 标签的命名空间id。
     public final List<TagEntry<T>> entryList;
     public boolean replace;
 
-    public ExtShapeTag(List<T> list) {
-        this(null, list);
+    @SafeVarargs
+    public ExtShapeTag(T... elements) {
+        this(null, elements);
     }
 
-    public ExtShapeTag(Identifier identifier) {
-        this(identifier, new ArrayList<>());
+    public ExtShapeTag(Collection<T> elements) {
+        this(null, elements);
     }
 
     /**
      * 创建一个用于本模组的标签。
      *
      * @param identifier 标签的命名空间id。
-     * @param list       标签的初始内容。
+     * @param elements   标签的初始内容。
      */
-    public ExtShapeTag(Identifier identifier, List<T> list) {
+    public ExtShapeTag(Identifier identifier, Collection<T> elements) {
         this.identifier = identifier;
         this.entryList = new ArrayList<>();
-        list.forEach(e -> this.entryList.add(new TagEntrySingleElement<>(e)));
+        for (T element : elements) {
+            this.entryList.add(new TagEntrySingleElement<>(element));
+        }
         replace = false;
+    }
+
+    @SafeVarargs
+    public ExtShapeTag(Identifier identifier, T... elements) {
+        this(identifier, Arrays.asList(elements));
     }
 
     /**
@@ -63,10 +70,10 @@ public class ExtShapeTag<T> implements Iterable<T> {
      *
      * @param element 需要添加进此标签的元素。
      */
-    public void add(T element) {
+    public boolean add(T element) {
         if (this.directlyContains(element)) throw new RuntimeException(String.format("Cannot add a duplicate element " +
                 "to a tag! %s already contains %s.", this, element));
-        this.entryList.add(new TagEntrySingleElement<>(element));
+        return this.entryList.add(new TagEntrySingleElement<>(element));
     }
 
     /**
@@ -77,33 +84,26 @@ public class ExtShapeTag<T> implements Iterable<T> {
      *
      * @param element 需要添加进此标签的标签，其元素类型必须一致。
      */
-    public void addTag(ExtShapeTag<T> element) {
+    public boolean addTag(ExtShapeTag<T> element) {
         if (this.identifier != null && element.identifier == null)
-            throw new IllegalStateException("Cannot add a tag without " +
-                    "identifier" +
-                    " to a tag with " +
-                    "an identifier");
-        if (element == this) throw new RuntimeException("Cannot add to a tag itself!");
+            throw new UnsupportedOperationException("Cannot add a tag without identifier to a tag with an identifier");
+        if (element == this) throw new UnsupportedOperationException("Cannot add to a tag itself!");
         if (element.containsTag(this))
-            throw new RuntimeException(String.format("Cannot add into this tag another tag that contains" +
-                    " it! %s already contains %s.", element, this));
+            throw new UnsupportedOperationException(String.format("Cannot add into this tag another tag that contains it! %s already contains %s.", element, this));
         if (this.directlyContainsTag(element))
-            throw new RuntimeException(String.format("Cannot add a duplicate tag to a tag! %s " +
-                    "already contains %s.", this, element));
-        this.entryList.add(new TagEntryTag<>(element));
+            throw new UnsupportedOperationException(String.format("Cannot add a duplicate tag to a tag! %s already contains %s.", this,
+                    element));
+        return this.entryList.add(new TagEntryTag<>(element));
     }
 
     /**
      * 向标签内添加多个元素。
      *
-     * @param elements 需要添加到该标签内的元素。
      * @see #add
      */
-    @SafeVarargs
-    public final void addAll(T... elements) {
-        for (T element : elements) {
-            add(element);
-        }
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        return super.addAll(c);
     }
 
     /**
@@ -134,7 +134,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
     /**
      * @return 标签是否包含元素。会递归检查，即检查标签内的标签是否含有此元素。
      */
-    public boolean contains(T element) {
+    public boolean contains(Object element) {
         for (TagEntry<T> entry : entryList) if (entry.contains(element)) return true;
         return false;
     }
@@ -225,9 +225,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
      * @return 转换后的列表。
      */
     public List<T> asList() {
-        List<T> list = new ArrayList<>();
-        for (final T element : this) list.add(element);
-        return list;
+        return new ArrayList<>(this);
     }
 
     /**
@@ -270,6 +268,11 @@ public class ExtShapeTag<T> implements Iterable<T> {
         return size;
     }
 
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
     @NotNull
     @Override
     public Iterator<T> iterator() {
@@ -306,18 +309,20 @@ public class ExtShapeTag<T> implements Iterable<T> {
     }
 
     /**
-     * 标签内的一个项。这个项可以是**元素**，也可以是**由此类元素组成的标签**。
+     * 标签内的一个项。这个项可以是<b>元素</b>，也可以是<b>由此类元素组成的标签</b>。
+     *
      * @param <T> 与标签的元素类相同。
      */
     protected abstract static class TagEntry<T> implements Iterable<T> {
 
-        abstract boolean contains(T element);
+        public abstract boolean contains(Object element);
 
         public abstract int size();
     }
 
     /**
      * 标签内的一个项，且这个项为单元素。
+     *
      * @param <T> 与标签的元素相同。
      */
     protected static class TagEntrySingleElement<T> extends TagEntry<T> {
@@ -329,6 +334,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
 
         /**
          * 单元素项仍然可以视为列表，其尺寸为1。
+         *
          * @return 对于单元素项，其大小一律为1。
          */
         @Override
@@ -338,17 +344,18 @@ public class ExtShapeTag<T> implements Iterable<T> {
 
         /**
          * 单元素项内的元素是否为此元素。
+         *
          * @param element 需要检测是否包含的元素。
          * @return 对于单元素项，“包含”某元素的充要条件是其内的单元素“等于”此元素。
          */
         @Override
-        boolean contains(T element) {
-            return this.element == element;
+        public boolean contains(Object element) {
+            return Objects.equals(element, this.element);
         }
 
         @Override
-        public @NotNull Iterator<T> iterator() {
-            return new Iterator<>() {
+        public UnmodifiableIterator<T> iterator() {
+            return new UnmodifiableIterator<>() {
                 int cursor = -1;
 
                 @Override
@@ -367,6 +374,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
 
     /**
      * 标签内的一个项，其中这个项为一个标签。
+     *
      * @param <T> 与标签的元素相同。
      */
     protected static class TagEntryTag<T> extends TagEntry<T> {
@@ -377,8 +385,8 @@ public class ExtShapeTag<T> implements Iterable<T> {
         }
 
         @Override
-        public @NotNull Iterator<T> iterator() {
-            return new Iterator<>() {
+        public UnmodifiableIterator<T> iterator() {
+            return new UnmodifiableIterator<>() {
                 final Iterator<T> elementTagIterator = elementTag.iterator();
                 int cursor = -1;
 
@@ -397,6 +405,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
 
         /**
          * 该项的尺寸，即为该项内的标签的尺寸。
+         *
          * @return 该项内的标签的尺寸。
          */
         @Override
@@ -409,7 +418,7 @@ public class ExtShapeTag<T> implements Iterable<T> {
          * @return 该项内的标签是否包含此元素。
          */
         @Override
-        boolean contains(T element) {
+        public boolean contains(Object element) {
             return elementTag.contains(element);
         }
     }

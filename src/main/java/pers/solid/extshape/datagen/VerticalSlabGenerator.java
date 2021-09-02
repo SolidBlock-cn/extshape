@@ -89,6 +89,7 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
 
     /**
      * 由纵台阶生成台阶的合成表。考虑到要应用于原版，所以生成台阶的合成表由纵台阶生成器生成。
+     *
      * @return 由纵台阶制作台阶的合成配方。
      */
     public String getInverseCraftingString() {
@@ -109,7 +110,7 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                             "count": 1
                           }
                         }
-                        """, this.getRecipeGroup().replace("vertical_",""), this.getIdentifier(),
+                        """, this.getRecipeGroup().replace("vertical_", ""), this.getIdentifier(),
                 Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
                         this.getBaseBlock())));
     }
@@ -117,8 +118,8 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
     @Override
     public void writeCraftingRecipeFiles() {
         super.writeCraftingRecipeFiles();
-        this.writeRecipeFile("extshape",Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
-                this.getBaseBlock())).getPath()+"_from_vertical_slab",this.getInverseCraftingString());
+        this.writeRecipeFile("extshape", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+                this.getBaseBlock())).getPath() + "_from_vertical_slab", this.getInverseCraftingString());
     }
 
     @Override

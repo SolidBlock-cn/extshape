@@ -135,6 +135,21 @@ that players can easily fetch blocks of a same block in different shapes.
 
 ## 更新日志 Update log
 
+### 1.2.1
+- 修复了 ButtonMixin 仅在客户端执行的问题。
+- Fixed the issue that ButtonMixin is only run on client side.
+- 现在 ExtShapeTag 类继承了 AbstractCollection，而不再是仅仅实现 Iterable 接口。
+- Now ExtShapeTag class extends AbstractCollection, instead of merely implements Iterable interface.
+- 移除了部分不再使用的代码。
+- Removed some code not used anymore.
+- 修复了纵条和纵楼梯在水中放置时默认不含水的问题。（注：栅栏门、按钮和压力板不能含水这是由 Minecraft 原版决定的，模组暂时无法修改。）
+- Fixed the issue that vertical quarter pieces and vertical stairs are not waterlogged when placed in water. (Note: 
+  Fence gates, buttons and pressure plates are not water-loggable because of vanilla Minecraft code, which is not 
+  modifiable by the mod.)
+- 修复“其他”物品组以海晶石作为图标但海晶石不在该物品组的问题。
+- Fixed the issue that "Others" item group uses prismarine block as icon, while prismarine block is not in this item 
+  group.
+
 ### 1.2.0
 
 - 删除了额外的物品组，将物品添加到原版物品组中。另外仍有4个用于分类存放方块及其变种的额外物品组仍保留。

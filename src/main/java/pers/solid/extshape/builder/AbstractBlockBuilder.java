@@ -22,7 +22,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     private final List<ExtShapeBlockTag> tagList = new ArrayList<>();
     @Nullable
     protected ExtShapeBlockTag defaultTag = ExtShapeBlockTag.EXTSHAPE_BLOCKS;
-    protected BiMap<Block,? super T> mapping;
+    protected BiMap<Block, ? super T> mapping;
     protected boolean addToMapping;
     Identifier identifier;
 
@@ -62,6 +62,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 设置将要构造方块时的方块设置。
+     *
      * @param settings 方块设置。
      */
     public AbstractBlockBuilder<T> setBlockSettings(FabricBlockSettings settings) {
@@ -71,6 +72,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 设置方块对应物品的物品设置。
+     *
      * @param settings 物品设置。
      */
     public AbstractBlockBuilder<T> setItemSettings(FabricItemSettings settings) {
@@ -104,6 +106,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 设置方块将要注册的命名空间id。
+     *
      * @param identifier 方块将要注册的命名空间id。
      */
     public AbstractBlockBuilder<T> setIdentifier(Identifier identifier) {
@@ -125,6 +128,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 手动设置方块所处的默认方块标签。
+     *
      * @param tag 方块标签。
      */
     public AbstractBlockBuilder<T> setDefaultTag(ExtShapeBlockTag tag) {
@@ -151,6 +155,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 设置方块亮度。
+     *
      * @param luminance 亮度。
      */
     public AbstractBlockBuilder<T> luminance(int luminance) {
@@ -160,6 +165,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 添加到某个方块标签中。不影响默认标签。
+     *
      * @param tag 需要添加到的方块标签。
      */
     protected void addToTag(@Nullable ExtShapeBlockTag tag) {
@@ -193,6 +199,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 方块构建后，添加到指定的标签中。
+     *
      * @param tag 方块构建后，需要添加到的标签。
      */
     public AbstractBlockBuilder<T> putTag(ExtShapeBlockTag tag) {
@@ -202,6 +209,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 设置实例，手动构建方块。
+     *
      * @param instance 方块实例。一般是一个新的方块对象。
      */
     public AbstractBlockBuilder<T> setInstance(T instance) {
@@ -211,6 +219,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 方块构建后，将其方块物品添加到指定的物品组中。
+     *
      * @param group 物品组。
      */
     public AbstractBlockBuilder<T> group(ItemGroup group) {
@@ -228,6 +237,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 构建方块，并按照构建时的设置进行一系列操作。
+     *
      * @return 构建后的方块。
      */
     @Override
@@ -242,7 +252,8 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
             this.itemBuilder = new ExtShapeBlockItemBuilder(this.block, itemSettings != null ? itemSettings :
                     new FabricItemSettings());
             itemBuilder.setIdentifier(identifier);
-            if (group==null) itemBuilder.group(); else itemBuilder.group(group);
+            if (group == null) itemBuilder.group();
+            else itemBuilder.group(group);
             if (!registerItem) itemBuilder.noRegister();
             if (fireproof) itemBuilder.fireproof();
             this.itemBuilder.setIdentifier(this.getIdentifier()).build();

@@ -4,9 +4,9 @@
   "package": "pers.solid.extshape.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "ButtonMixin"
   ],
   "client": [
-    "ButtonMixin"
   ],
   "injectors": {
     "defaultRequire": 1

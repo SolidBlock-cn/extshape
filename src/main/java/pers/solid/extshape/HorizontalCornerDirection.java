@@ -72,6 +72,7 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
 
     /**
      * 从旋转角度算出距离该旋转角度最近的方向。用于方块放置。
+     *
      * @param rotation 旋转角度。
      * @return 离该旋转角度最近的方向。
      */

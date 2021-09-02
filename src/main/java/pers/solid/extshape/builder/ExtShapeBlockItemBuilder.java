@@ -26,9 +26,11 @@ public class ExtShapeBlockItemBuilder extends AbstractItemBuilder<ExtShapeBlockI
 
     public ExtShapeBlockItemBuilder group() {
         Block block = this.block;
-        if (block instanceof StairsBlock || block instanceof SlabBlock || block instanceof VerticalSlabBlock || block instanceof QuarterPieceBlock || block instanceof VerticalStairsBlock || block instanceof VerticalQuarterPieceBlock) settings.group(ItemGroup.BUILDING_BLOCKS);
+        if (block instanceof StairsBlock || block instanceof SlabBlock || block instanceof VerticalSlabBlock || block instanceof QuarterPieceBlock || block instanceof VerticalStairsBlock || block instanceof VerticalQuarterPieceBlock)
+            settings.group(ItemGroup.BUILDING_BLOCKS);
         else if (block instanceof FenceBlock || block instanceof WallBlock) settings.group(ItemGroup.DECORATIONS);
-        else if (block instanceof AbstractButtonBlock || block instanceof PressurePlateBlock || block instanceof FenceGateBlock) settings.group(ItemGroup.REDSTONE);
+        else if (block instanceof AbstractButtonBlock || block instanceof PressurePlateBlock || block instanceof FenceGateBlock)
+            settings.group(ItemGroup.REDSTONE);
         return this;
     }
 
