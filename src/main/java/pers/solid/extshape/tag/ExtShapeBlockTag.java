@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.datagen.Mineable;
 import pers.solid.extshape.mappings.BlockMappings;
 
@@ -303,18 +304,14 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     }
 
     public static void completeMineableTags() {
-        try {
-            for (final Block block : EXTSHAPE_BLOCKS) {
-                Block baseBlock = BlockMappings.getBaseBlockOf(block);
-                if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.AXE_MINEABLE.add(block);
-                if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.HOE_MINEABLE.add(block);
-                if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.PICKAXE_MINEABLE.add(block);
-                if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.SHOVEL_MINEABLE.add(block);
-            }
-            System.out.println("mineable部分的方块数据已生成。");
-        } catch (IllegalStateException e) {
-            System.out.printf("由于发生错误，mineable部分的方块数据未生成，错误详情如下：\n%s\n", e);
+        for (final Block block : EXTSHAPE_BLOCKS) {
+            Block baseBlock = BlockMappings.getBaseBlockOf(block);
+            if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.AXE_MINEABLE.add(block);
+            if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.HOE_MINEABLE.add(block);
+            if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.PICKAXE_MINEABLE.add(block);
+            if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.SHOVEL_MINEABLE.add(block);
         }
+        ExtShape.EXTSHAPE_LOGGER.info("mineable部分的方块数据已生成。");
     }
 
     @Override

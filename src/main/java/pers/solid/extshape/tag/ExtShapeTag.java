@@ -8,6 +8,7 @@ import com.google.gson.stream.JsonWriter;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -71,8 +72,13 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
      * @param element 需要添加进此标签的元素。
      */
     public boolean add(T element) {
-        if (this.directlyContains(element)) throw new RuntimeException(String.format("Cannot add a duplicate element " +
-                "to a tag! %s already contains %s.", this, element));
+        if (element==null) {
+            ExtShape.EXTSHAPE_LOGGER.error(String.format("Trying to add a null value to tag %s.", this));
+            return false;
+        }
+        if (this.directlyContains(element)) {
+            throw new RuntimeException(String.format("Cannot add a duplicate element to a tag! %s already contains %s.", this, element));
+        }
         return this.entryList.add(new TagEntrySingleElement<>(element));
     }
 
@@ -85,6 +91,10 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
      * @param element 需要添加进此标签的标签，其元素类型必须一致。
      */
     public boolean addTag(ExtShapeTag<T> element) {
+        if (element==null) {
+            ExtShape.EXTSHAPE_LOGGER.error(String.format("Trying to add a null tag to tag %s.", this));
+            return false;
+        }
         if (this.identifier != null && element.identifier == null)
             throw new UnsupportedOperationException("Cannot add a tag without identifier to a tag with an identifier");
         if (element == this) throw new UnsupportedOperationException("Cannot add to a tag itself!");
@@ -220,7 +230,7 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
     }
 
     /**
-     * 将标签转换为普通的列表。标签内的标签会被完全展开。
+     * 将标签转换为普通列表。标签内的标签会被完全展开。
      *
      * @return 转换后的列表。
      */

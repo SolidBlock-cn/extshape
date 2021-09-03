@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.block.QuarterPieceBlock;
 import pers.solid.extshape.block.VerticalQuarterPieceBlock;
@@ -13,6 +15,8 @@ import pers.solid.extshape.block.VerticalSlabBlock;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class ExtShape implements ModInitializer {
+
+    public static final Logger EXTSHAPE_LOGGER = LogManager.getLogger("EXTSHAPE");
 
     @Override
     public void onInitialize() {

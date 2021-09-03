@@ -135,6 +135,16 @@ that players can easily fetch blocks of a same block in different shapes.
 
 ## 更新日志 Update log
 
+### 1.2.2
+- 改善了日志系统。
+- Improved logging system.
+- 修复了与 OptiFine 不兼容的问题。
+- Fixed the issue of incompatibility with OptiFine.
+  - 问题详情：在启用了 OptiFine 的情况下，类似于 `new Identifier("#minecraft:banners")` 这样的操作不会抛出 
+    `InvalidIdentifierException`，导致代码无法正确运行。
+  - Issue details: When OptiFine is on, operations like `new Identifier("#minecraft:banners")` do not throw 
+    `InvalidIdentiferException`, causing code abnormal behavior.
+
 ### 1.2.1
 - 修复了 ButtonMixin 仅在客户端执行的问题。
 - Fixed the issue that ButtonMixin is only run on client side.

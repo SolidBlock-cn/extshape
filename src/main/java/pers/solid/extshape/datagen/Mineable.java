@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.InvalidIdentifierException;
 import net.minecraft.util.registry.Registry;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public final class Mineable {
@@ -507,17 +508,26 @@ public final class Mineable {
     public static void parse(ExtShapeBlockTag tag, String jsonString) {
         JsonObject object = new JsonParser().parse(jsonString).getAsJsonObject();
         JsonArray list = object.get("values").getAsJsonArray();
-        for (JsonElement idString : list)
+        for (JsonElement idElement : list) {
+            String idString = idElement.getAsString();
             try {
                 // *暂时* 忽略掉井号开头的标签
-                if ("#minecraft:planks".equals(idString.getAsString())) {
+                if ("#minecraft:planks".equals(idString)) {
                     tag.addTag(ExtShapeBlockTag.PLANKS);
                 }
+                if (idString.startsWith("#")) continue;
 
-                Identifier identifier = new Identifier(idString.getAsString());
+                Identifier identifier = new Identifier(idString);
+                if (!Registry.BLOCK.containsId(identifier)) {
+                    ExtShape.EXTSHAPE_LOGGER.warn(String.format("When parsing mineable tags %s, the block " +
+                                    "registry does not contain this tag: %s",tag.toString(),
+                            identifier));
+                }
                 Block block = Registry.BLOCK.get(identifier);
                 tag.add(block);
-            } catch (InvalidIdentifierException ignored) {
+            } catch (InvalidIdentifierException e) {
+                ExtShape.EXTSHAPE_LOGGER.error(String.format("Internal error: failed to resolve id %s.", idString));
             }
+        }
     }
 }

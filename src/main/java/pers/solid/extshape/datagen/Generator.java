@@ -185,7 +185,7 @@ public class Generator {
         }
 
         // 生成双层平滑石头的数据。
-        new AbstractBlockGenerator<Block>(basePath, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
+        new AbstractBlockGenerator<>(basePath, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
             @Override
             public Identifier getBlockModelIdentifier() {
                 return new Identifier("minecraft", "block/smooth_stone_slab_double");
@@ -197,7 +197,7 @@ public class Generator {
             }
         }.writeAllFiles();
         // 生成石化橡木木板的数据。
-        new AbstractBlockGenerator<Block>(basePath, ExtShapeBlocks.PETRIFIED_OAK_PLANKS) {
+        new AbstractBlockGenerator<>(basePath, ExtShapeBlocks.PETRIFIED_OAK_PLANKS) {
             @Override
             public Identifier getBlockModelIdentifier() {
                 return new Identifier("minecraft", "block/oak_planks");
