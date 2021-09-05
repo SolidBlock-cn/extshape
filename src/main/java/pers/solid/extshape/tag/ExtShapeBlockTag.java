@@ -47,7 +47,10 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             POLISHED_DIORITE,
             ANDESITE,
             POLISHED_ANDESITE
-    ).addToTag(STONES);
+    );
+    static {
+        STONES.addTag(STONE_VARIANTS);
+    }
     public static final ExtShapeBlockTag SANDSTONES = new ExtShapeBlockTag(
             SANDSTONE,
             CUT_SANDSTONE,
