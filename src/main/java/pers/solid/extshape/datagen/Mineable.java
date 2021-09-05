@@ -13,10 +13,6 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public final class Mineable {
 
-    public static final ExtShapeBlockTag VANILLA_AXE_MINEABLE = new ExtShapeBlockTag();
-    public static final ExtShapeBlockTag VANILLA_HOE_MINEABLE = new ExtShapeBlockTag();
-    public static final ExtShapeBlockTag VANILLA_PICKAXE_MINEABLE = new ExtShapeBlockTag();
-    public static final ExtShapeBlockTag VANILLA_SHOVEL_MINEABLE = new ExtShapeBlockTag();
     // 从原版数据包获取Mineable方块标签。
     public static final String axe = """
             {
@@ -497,6 +493,10 @@ public final class Mineable {
                 "minecraft:rooted_dirt"
               ]
             }""";
+    public static final ExtShapeBlockTag VANILLA_AXE_MINEABLE = new ExtShapeBlockTag();
+    public static final ExtShapeBlockTag VANILLA_HOE_MINEABLE = new ExtShapeBlockTag();
+    public static final ExtShapeBlockTag VANILLA_PICKAXE_MINEABLE = new ExtShapeBlockTag();
+    public static final ExtShapeBlockTag VANILLA_SHOVEL_MINEABLE = new ExtShapeBlockTag();
 
     static {
         parse(VANILLA_AXE_MINEABLE, axe);
@@ -520,7 +520,7 @@ public final class Mineable {
                 Identifier identifier = new Identifier(idString);
                 if (!Registry.BLOCK.containsId(identifier)) {
                     ExtShape.EXTSHAPE_LOGGER.warn(String.format("When parsing mineable tags %s, the block " +
-                                    "registry does not contain this tag: %s",tag.toString(),
+                                    "registry does not contain this tag: %s", tag.toString(),
                             identifier));
                 }
                 Block block = Registry.BLOCK.get(identifier);

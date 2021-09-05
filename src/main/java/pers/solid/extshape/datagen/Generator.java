@@ -53,9 +53,7 @@ public class Generator {
         GlazedTerracottaSlabGenerator.init(generator);
         VerticalStairsGenerator.init(generator);
         VerticalQuarterPieceGenerator.init(generator);
-        for (ExtShapeBlockTag tag : ExtShapeBlockTag.ALL_EXTSHAPE_BLOCK_TAGS) {
-            generator.writeBlockTagFile(tag);
-        }
+        TagGenerator.writeAllBlockTagFiles(generator);
         System.out.printf("[EXTSHAPE] 数据生成完成，总共生成了%s个文件，好耶！！（你可能需要重新构建项目（无需重启游戏）才能看到更改。）%n", stat);
     }
 
@@ -125,6 +123,17 @@ public class Generator {
         @Nullable Identifier identifier = blockTag.identifier;
         if (blockTag.identifier == null) return;
         write(String.format("data/%s/tags/blocks/%s.json", identifier.getNamespace(), identifier.getPath()),
+                blockTag.generateString());
+    }
+
+    /**
+     * 写入一个方块标签对应的物品标签的json文件。
+     * @param blockTag 方块标签。
+     */
+    public void writeItemTagFile(ExtShapeBlockTag blockTag) {
+        @Nullable Identifier identifier = blockTag.identifier;
+        if (blockTag.identifier == null) return;
+        write(String.format("data/%s/tags/items/%s.json", identifier.getNamespace(), identifier.getPath()),
                 blockTag.generateString());
     }
 

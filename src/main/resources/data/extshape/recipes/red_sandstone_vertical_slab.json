@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:red_sandstone_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:red_sandstone_vertical_slab",
+    "count": 1
+  }
+}

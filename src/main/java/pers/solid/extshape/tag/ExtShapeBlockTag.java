@@ -4,9 +4,6 @@ import com.google.gson.JsonArray;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.datagen.Mineable;
-import pers.solid.extshape.mappings.BlockMappings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,34 +138,6 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     // 所有方块。
     public static final ExtShapeBlockTag EXTSHAPE_BLOCKS = new ExtShapeBlockTag();
 
-    public static final ExtShapeBlockTag AXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/axe"));
-    public static final ExtShapeBlockTag HOE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/hoe"));
-    public static final ExtShapeBlockTag PICKAXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/pickaxe"));
-    public static final ExtShapeBlockTag SHOVEL_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/shovel"));
-    public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = new ExtShapeBlockTag(new Identifier("minecraft"
-            , "occludes_vibration_signals"));
-    public static final ExtShapeBlockTag WOOLEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_blocks")).addToTag(OCCLUDES_VIBRATION_SIGNALS);
-    public static final ExtShapeBlockTag WOODEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
-            "wooden_blocks"));
-    public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
-    public static final ExtShapeBlockTag DRAGON_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
-            "dragon_immune"));
-    public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = new ExtShapeBlockTag(new Identifier("minecraft",
-            "infiniburn_overworld"));
-    public static final ExtShapeBlockTag INFINIBURN_END = new ExtShapeBlockTag(new Identifier("minecraft",
-            "infiniburn_end"));
-    public static final ExtShapeBlockTag GEODE_INVALID_BLOCKS = new ExtShapeBlockTag(new Identifier("minecraft",
-            "geode_invalid_blocks"));
-    public static final ExtShapeBlockTag WITHER_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
-            "wither_immune"));
-    public static final ExtShapeBlockTag BEDROCK_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
-            "bedrock_blocks")).addToTag(DRAGON_IMMUNE).addToTag(INFINIBURN_END).addToTag(GEODE_INVALID_BLOCKS).addToTag(WITHER_IMMUNE);
-    public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = new ExtShapeBlockTag(new Identifier("minecraft",
-            "needs_diamond_tool"));
-    public static final ExtShapeBlockTag OBSIDIAN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
-            "obsidian_blocks")).addToTag(DRAGON_IMMUNE).addToTag(NEEDS_DIAMOND_TOOL);
-
     // 完整方块（主要用于双石台阶方块）
     public static final ExtShapeBlockTag FULL_BLOCKS = new ExtShapeBlockTag().addToTag(EXTSHAPE_BLOCKS);
 
@@ -181,6 +150,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "terracotta_stairs")).addToTag(STAIRS);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_STAIRS = new ExtShapeBlockTag(new Identifier(
             "extshape", "stained_terracotta_stairs")).addToTag(TERRACOTTA_STAIRS);
+    public static final ExtShapeBlockTag WOOLEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_blocks"));
     public static final ExtShapeBlockTag WOOLEN_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
             "woolen_stairs")).addToTag(WOOLEN_BLOCKS).addToTag(STAIRS);
 
@@ -257,6 +228,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     // 纵向台阶
     public static final ExtShapeBlockTag VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_slabs")).addToTag(EXTSHAPE_BLOCKS);
+    public static final ExtShapeBlockTag WOODEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
+            "wooden_blocks"));
     public static final ExtShapeBlockTag WOODEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "wooden_vertical_slabs")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_SLABS);
     public static final ExtShapeBlockTag CONCRETE_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
@@ -285,33 +258,23 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "vertical_quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier(
             "extshape", "wooden_vertical_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
+    public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
 
     public ExtShapeBlockTag() {
         this(null, new ArrayList<>());
     }
 
     public ExtShapeBlockTag(Block... elements) {
-        super(elements);
+        this(null,elements);
     }
 
     public ExtShapeBlockTag(Identifier identifier, Block... elements) {
-        super(identifier, elements);
+        this(identifier, List.of(elements));
     }
 
     public ExtShapeBlockTag(Identifier identifier, List<Block> list) {
         super(identifier, list);
         ALL_EXTSHAPE_BLOCK_TAGS.add(this);
-    }
-
-    public static void completeMineableTags() {
-        for (final Block block : EXTSHAPE_BLOCKS) {
-            Block baseBlock = BlockMappings.getBaseBlockOf(block);
-            if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.AXE_MINEABLE.add(block);
-            if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.HOE_MINEABLE.add(block);
-            if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.PICKAXE_MINEABLE.add(block);
-            if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.SHOVEL_MINEABLE.add(block);
-        }
-        ExtShape.EXTSHAPE_LOGGER.info("mineable部分的方块数据已生成。");
     }
 
     @Override

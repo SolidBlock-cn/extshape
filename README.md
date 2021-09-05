@@ -135,6 +135,14 @@ that players can easily fetch blocks of a same block in different shapes.
 
 ## 更新日志 Update log
 
+### 1.2.3
+- 开始向旧版本兼容。
+- 修复纵台阶等方块的面遮蔽问题。
+- 修复无法用模组的双层平滑石台阶方块合成平滑石台阶的问题。
+- 修复部分方块没有垂直台阶的问题。
+- 修复 Mineable 类中的代码会被执行的问题。其他部分方块标签生成的代码也只会在数据生成过程中执行，不再在一般的游戏环境中执行。
+- 参照原版 Minecraft，添加了方块标签，同时还添加了物品标签。
+
 ### 1.2.2
 - 改善了日志系统。
 - Improved logging system.

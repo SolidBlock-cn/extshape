@@ -105,16 +105,14 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 基础形状包括楼梯、台阶、垂直楼梯等。
      */
     public BlocksBuilder withShapes() {
-        return this.with(Shape.stairs, Shape.slab, Shape.verticalQuarterPiece, Shape.verticalStairs, Shape.verticalStairs
-                , Shape.quarterPiece);
+        return this.with(Shape.stairs, Shape.slab, Shape.verticalQuarterPiece, Shape.verticalStairs, Shape.verticalSlab, Shape.quarterPiece);
     }
 
     /**
      * 不构造基础形状。
      */
     public BlocksBuilder withoutShapes() {
-        return this.without(Shape.stairs, Shape.slab, Shape.verticalQuarterPiece, Shape.verticalSlab,
-                Shape.verticalStairs, Shape.quarterPiece);
+        return this.without(Shape.stairs, Shape.slab, Shape.verticalQuarterPiece, Shape.verticalSlab, Shape.verticalStairs, Shape.quarterPiece);
     }
 
     /**

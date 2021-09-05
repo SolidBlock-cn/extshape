@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "extshape:netherrack_fence_gate",
-    "extshape:netherrack_vertical_stairs",
     "extshape:netherrack_stairs",
-    "extshape:netherrack_button",
-    "extshape:netherrack_wall",
     "extshape:netherrack_slab",
-    "extshape:netherrack_quarter_piece",
     "extshape:netherrack_fence",
+    "extshape:netherrack_fence_gate",
+    "extshape:netherrack_wall",
+    "extshape:netherrack_button",
+    "extshape:netherrack_pressure_plate",
     "extshape:netherrack_vertical_slab",
-    "extshape:netherrack_vertical_quarter_piece",
-    "extshape:netherrack_pressure_plate"
+    "extshape:netherrack_quarter_piece",
+    "extshape:netherrack_vertical_stairs",
+    "extshape:netherrack_vertical_quarter_piece"
   ]
 }
