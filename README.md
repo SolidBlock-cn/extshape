@@ -6,9 +6,9 @@ This mod adds stairs, slabs, fences, fence gates, button and pressure plates for
 vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that does not exist in vanilla Minecraft.
 List of the contents can be found in [this file](BlockList.md).
 
-模组目前仅支持 Minecraft Java 版 1.17.x，并需要 Fabric API。
+模组目前支持 Minecraft Java 版 1.17.x 和 1.16.x，并需要 Fabric API。
 
-At present this mod supports only Minecraft Java Edition 1.17.x and requires Fabric API.
+At present this mod supports Minecraft Java Edition 1.17.x and 1.16.x and requires Fabric API.
 
 ## 特性 Features
 
