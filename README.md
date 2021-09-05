@@ -136,12 +136,17 @@ that players can easily fetch blocks of a same block in different shapes.
 ## 更新日志 Update log
 
 ### 1.2.3
-- 开始向旧版本兼容。
-- 修复纵台阶等方块的面遮蔽问题。
+- 开始向旧版本兼容（稍后发布）。
+- Starting backwards compatibility (will release later qwq).
 - 修复无法用模组的双层平滑石台阶方块合成平滑石台阶的问题。
-- 修复部分方块没有垂直台阶的问题。
+- Fixed the issue that you cannot craft a smooth stone slab with double stone slabs block in this mod.
+- 修复部分方块没有垂直台阶，并导致加载数据包时报错的问题的问题。
+- Fixed the issue that some blocks have no vertical slabs, and that errors are thrown when loading data-packs.
 - 修复 Mineable 类中的代码会被执行的问题。其他部分方块标签生成的代码也只会在数据生成过程中执行，不再在一般的游戏环境中执行。
+- Fixed the issue that codes in Mineable class are run. Codes in some other block tags will also be run only in data 
+  generation process, instead of in an ordinary game environment.
 - 参照原版 Minecraft，添加了方块标签，同时还添加了物品标签。
+- Referring to vanilla Minecraft, added some block tags, and added item tags.
 
 ### 1.2.2
 - 改善了日志系统。
