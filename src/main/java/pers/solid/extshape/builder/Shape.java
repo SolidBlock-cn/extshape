@@ -1,12 +1,12 @@
 package pers.solid.extshape.builder;
 
 import net.minecraft.block.*;
-import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.QuarterPieceBlock;
 import pers.solid.extshape.block.VerticalQuarterPieceBlock;
 import pers.solid.extshape.block.VerticalSlabBlock;
 import pers.solid.extshape.block.VerticalStairsBlock;
+import pers.solid.extshape.family.BlockFamily;
 
 public enum Shape {
     stairs(StairsBlock.class, BlockFamily.Variant.STAIRS),

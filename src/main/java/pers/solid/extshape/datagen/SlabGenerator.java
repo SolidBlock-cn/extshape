@@ -21,49 +21,43 @@ public class SlabGenerator extends AbstractBlockGenerator<SlabBlock> {
     @Override
     public String getBlockStatesString() {
         Identifier baseIdentifier = Registry.BLOCK.getId(this.getBaseBlock());
-        return String.format("""
-                        {
-                          "variants": {
-                            "type=bottom": {
-                              "model": "%1$s:block/%2$s"
-                            },
-                            "type=double": {
-                              "model": "%3$s:block/%4$s"
-                            },
-                            "type=top": {
-                              "model": "%1$s:block/%2$s_top"
-                            }
-                          }
-                        }
-                        """, this.getIdentifier().getNamespace(), this.getIdentifier().getPath(), baseIdentifier.getNamespace(),
+        return String.format("{\n" +
+                        "  \"variants\": {\n" +
+                        "    \"type=bottom\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\"\n" +
+                        "    },\n" +
+                        "    \"type=double\": {\n" +
+                        "      \"model\": \"%3$s:block/%4$s\"\n" +
+                        "    },\n" +
+                        "    \"type=top\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_top\"\n" +
+                        "    }\n" +
+                        "  }\n" +
+                        "}\n", this.getIdentifier().getNamespace(), this.getIdentifier().getPath(), baseIdentifier.getNamespace(),
                 baseIdentifier.getPath());
     }
 
     @Override
     public String getBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/slab",
-                  "textures": {
-                    "bottom": "%s",
-                    "top": "%s",
-                    "side": "%s"
-                  }
-                }
-                """, this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/slab\",\n" +
+                "  \"textures\": {\n" +
+                "    \"bottom\": \"%s\",\n" +
+                "    \"top\": \"%s\",\n" +
+                "    \"side\": \"%s\"\n" +
+                "  }\n" +
+                "}\n", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
     }
 
     public String getTopBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/slab_top",
-                  "textures": {
-                    "bottom": "%s",
-                    "top": "%s",
-                    "side": "%s"
-                  }
-                }
-                """, this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/slab_top\",\n" +
+                "  \"textures\": {\n" +
+                "    \"bottom\": \"%s\",\n" +
+                "    \"top\": \"%s\",\n" +
+                "    \"side\": \"%s\"\n" +
+                "  }\n" +
+                "}\n", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
     }
 
     @Override
@@ -76,76 +70,73 @@ public class SlabGenerator extends AbstractBlockGenerator<SlabBlock> {
 
     @Override
     public String getCraftingRecipeString() {
-        return String.format("""
-                {
-                  "type": "minecraft:crafting_shaped",
-                  "group": "%3$s",
-                  "pattern": [
-                    "###"
-                  ],
-                  "key": {
-                    "#": {
-                      "item": "%s"
-                    }
-                  },
-                  "result": {
-                    "item": "%s",
-                    "count": 6
-                  }
-                }""", getBaseBlockIdentifier(), getIdentifier().toString(), this.getRecipeGroup());
+        return String.format("{\n" +
+                "  \"type\": \"minecraft:crafting_shaped\",\n" +
+                "  \"group\": \"%3$s\",\n" +
+                "  \"pattern\": [\n" +
+                "    \"###\"\n" +
+                "  ],\n" +
+                "  \"key\": {\n" +
+                "    \"#\": {\n" +
+                "      \"item\": \"%s\"\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"result\": {\n" +
+                "    \"item\": \"%s\",\n" +
+                "    \"count\": 6\n" +
+                "  }\n" +
+                "}", getBaseBlockIdentifier(), getIdentifier().toString(), this.getRecipeGroup());
     }
 
     @Override
     public String getStoneCuttingRecipeString() {
-        return String.format("""
-                {
-                  "type": "minecraft:stonecutting",
-                  "ingredient": {
-                    "item": "%s"
-                  },
-                  "result": "%s",
-                  "count": 2
-                }""", this.getBaseBlockIdentifier(), this.getIdentifier());
+        return String.format("{\n" +
+                "  \"type\": \"minecraft:stonecutting\",\n" +
+                "  \"ingredient\": {\n" +
+                "    \"item\": \"%s\"\n" +
+                "  },\n" +
+                "  \"result\": \"%s\",\n" +
+                "  \"count\": 2\n" +
+                "}", this.getBaseBlockIdentifier(), this.getIdentifier());
     }
 
     @Override
     public String getLootTableString() {
         Identifier identifier = this.getIdentifier();
-        return String.format("""
-                {
-                  "type": "minecraft:block",
-                  "pools": [
-                    {
-                      "rolls": 1.0,
-                      "bonus_rolls": 0.0,
-                      "entries": [
-                        {
-                          "type": "minecraft:item",
-                          "functions": [
-                            {
-                              "function": "minecraft:set_count",
-                              "conditions": [
-                                {
-                                  "condition": "minecraft:block_state_property",
-                                  "block": "%1$s",
-                                  "properties": {
-                                    "type": "double"
-                                  }
-                                }
-                              ],
-                              "count": 2.0,
-                              "add": false
-                            },
-                            {
-                              "function": "minecraft:explosion_decay"
-                            }
-                          ],
-                          "name": "%1$s"
-                        }
-                      ]
-                    }
-                  ]
-                }""", identifier.toString());
+        return String.format("{\n" +
+                "  \"type\": \"minecraft:block\",\n" +
+                "  \"pools\": [\n" +
+                "    {\n" +
+                "      \"rolls\": 1.0,\n" +
+                "      \"bonus_rolls\": 0.0,\n" +
+                "      \"entries\": [\n" +
+                "        {\n" +
+                "          \"type\": \"minecraft:item\",\n" +
+                "          \"functions\": [\n" +
+                "            {\n" +
+                "              \"function\": \"minecraft:set_count\",\n" +
+                "              \"conditions\": [\n" +
+                "                {\n" +
+                "                  \"condition\": \"minecraft:block_state_property\",\n" +
+                "                  \"block\": \"%1$s\",\n" +
+                "                  \"properties\": {\n" +
+                "                    \"type\": \"double\"\n" +
+                "                  }\n" +
+                "                }\n" +
+                "              ],\n" +
+                "              \"count\": 2.0,\n" +
+                "              \"add\": false\n" +
+                "            },\n" +
+                "            {\n" +
+                "              \"function\": \"minecraft:explosion_decay\"\n" +
+                "            }\n" +
+                "          ],\n" +
+                "          \"name\": \"%1$s\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}", identifier.toString());
     }
 
 

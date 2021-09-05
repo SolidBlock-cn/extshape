@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "group": "",
-  "ingredients": [
-    {
-      "item": "minecraft:smooth_sandstone"
-    }
-  ],
-  "result": {
-    "item": "extshape:smooth_sandstone_button"
-  }
-}
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:smooth_sandstone"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:smooth_sandstone_button"
+                  }
+                }

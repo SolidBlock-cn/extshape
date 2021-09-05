@@ -1,5 +1,6 @@
 package pers.solid.extshape.datagen;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.util.Identifier;
@@ -17,43 +18,40 @@ public class PressurePlateGenerator extends AbstractBlockGenerator<PressurePlate
 
     @Override
     public String getBlockStatesString() {
-        return String.format("""
-                {
-                  "variants": {
-                    "powered=false": {
-                      "model": "%1$s"
-                    },
-                    "powered=true": {
-                      "model": "%1$s_down"
-                    }
-                  }
-                }""", this.getBlockModelIdentifier());
+        return String.format("{\n" +
+                "  \"variants\": {\n" +
+                "    \"powered=false\": {\n" +
+                "      \"model\": \"%1$s\"\n" +
+                "    },\n" +
+                "    \"powered=true\": {\n" +
+                "      \"model\": \"%1$s_down\"\n" +
+                "    }\n" +
+                "  }\n" +
+                "}", this.getBlockModelIdentifier());
     }
 
     @Override
     public String getBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/pressure_plate_up",
-                  "textures": {
-                    "texture": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/pressure_plate_up\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public String getDownModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/pressure_plate_up",
-                  "textures": {
-                    "texture": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/pressure_plate_up\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     @Override
     public List<Pair<Identifier, String>> getBlockModelCollection() {
-        return List.of(
+        return ImmutableList.of(
                 new Pair<>(this.getBlockModelIdentifier(), this.getBlockModelString()),
                 new Pair<>(this.getBlockModelIdentifier("_down"), this.getDownModelString())
         );
@@ -61,22 +59,21 @@ public class PressurePlateGenerator extends AbstractBlockGenerator<PressurePlate
 
     @Override
     public String getCraftingRecipeString() {
-        return String.format("""
-                {
-                  "type": "minecraft:crafting_shaped",
-                  "group": "%s",
-                  "pattern": [
-                    "##"
-                  ],
-                  "key": {
-                    "#": {
-                      "item": "%s"
-                    }
-                  },
-                  "result": {
-                    "item": "%s"
-                  }
-                }""", this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier());
+        return String.format("{\n" +
+                "  \"type\": \"minecraft:crafting_shaped\",\n" +
+                "  \"group\": \"%s\",\n" +
+                "  \"pattern\": [\n" +
+                "    \"##\"\n" +
+                "  ],\n" +
+                "  \"key\": {\n" +
+                "    \"#\": {\n" +
+                "      \"item\": \"%s\"\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"result\": {\n" +
+                "    \"item\": \"%s\"\n" +
+                "  }\n" +
+                "}", this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier());
     }
 
     @Override

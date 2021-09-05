@@ -17,43 +17,39 @@ public class WallGenerator extends AbstractBlockGenerator<WallBlock> {
     }
 
     public String getInventoryModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/wall_inventory",
-                  "textures": {
-                    "wall": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/wall_inventory\",\n" +
+                "  \"textures\": {\n" +
+                "    \"wall\": \"%s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public String getPostModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/template_wall_post",
-                  "textures": {
-                    "wall": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/template_wall_post\",\n" +
+                "  \"textures\": {\n" +
+                "    \"wall\": \"%s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public String getSideModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/template_wall_side",
-                  "textures": {
-                    "wall": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/template_wall_side\",\n" +
+                "  \"textures\": {\n" +
+                "    \"wall\": \"%s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public String getSideTallModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/template_wall_side_tall",
-                  "textures": {
-                    "wall": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/template_wall_side_tall\",\n" +
+                "  \"textures\": {\n" +
+                "    \"wall\": \"%s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public List<Pair<Identifier, String>> getBlockModelCollection() {
@@ -68,140 +64,136 @@ public class WallGenerator extends AbstractBlockGenerator<WallBlock> {
     @Override
     public String getBlockStatesString() {
         Identifier identifier = this.getIdentifier();
-        return String.format("""
-                {
-                  "multipart": [
-                    {
-                      "when": {
-                        "up": "true"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_post"
-                      }
-                    },
-                    {
-                      "when": {
-                        "north": "low"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side",
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "east": "low"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side",
-                        "y": 90,
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "south": "low"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side",
-                        "y": 180,
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "west": "low"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side",
-                        "y": 270,
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "north": "tall"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side_tall",
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "east": "tall"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side_tall",
-                        "y": 90,
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "south": "tall"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side_tall",
-                        "y": 180,
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "west": "tall"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side_tall",
-                        "y": 270,
-                        "uvlock": true
-                      }
-                    }
-                  ]
-                }""", identifier.getNamespace(), identifier.getPath());
+        return String.format("{\n" +
+                "  \"multipart\": [\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"up\": \"true\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_post\"\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"north\": \"low\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side\",\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"east\": \"low\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side\",\n" +
+                "        \"y\": 90,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"south\": \"low\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side\",\n" +
+                "        \"y\": 180,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"west\": \"low\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side\",\n" +
+                "        \"y\": 270,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"north\": \"tall\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side_tall\",\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"east\": \"tall\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side_tall\",\n" +
+                "        \"y\": 90,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"south\": \"tall\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side_tall\",\n" +
+                "        \"y\": 180,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"west\": \"tall\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side_tall\",\n" +
+                "        \"y\": 270,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}", identifier.getNamespace(), identifier.getPath());
     }
 
     @Override
     public String getItemModelString() {
-        return String.format("""
-                {
-                  "parent": "%s_inventory"
-                }""", this.getBlockModelIdentifier().toString());
+        return String.format("{\n" +
+                "  \"parent\": \"%s_inventory\"\n" +
+                "}", this.getBlockModelIdentifier().toString());
     }
 
     @Override
     public String getCraftingRecipeString() {
-        return String.format("""
-                {
-                  "type": "minecraft:crafting_shaped",
-                  "group": "%3$s",
-                  "pattern": [
-                    "###",
-                    "###"
-                  ],
-                  "key": {
-                    "#": {
-                      "item": "%1$s"
-                    }
-                  },
-                  "result": {
-                    "item": "%2$s",
-                    "count": 6
-                  }
-                }""", this.getBaseBlockIdentifier(), this.getIdentifier().toString(), this.getRecipeGroup());
+        return String.format("{\n" +
+                "  \"type\": \"minecraft:crafting_shaped\",\n" +
+                "  \"group\": \"%3$s\",\n" +
+                "  \"pattern\": [\n" +
+                "    \"###\",\n" +
+                "    \"###\"\n" +
+                "  ],\n" +
+                "  \"key\": {\n" +
+                "    \"#\": {\n" +
+                "      \"item\": \"%1$s\"\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"result\": {\n" +
+                "    \"item\": \"%2$s\",\n" +
+                "    \"count\": 6\n" +
+                "  }\n" +
+                "}", this.getBaseBlockIdentifier(), this.getIdentifier().toString(), this.getRecipeGroup());
     }
 
     @Override
     public String getStoneCuttingRecipeString() {
-        return String.format("""
-                {
-                  "type": "minecraft:stonecutting",
-                  "ingredient": {
-                    "item": "%s"
-                  },
-                  "result": "%s",
-                  "count": 1
-                }""", this.getBaseBlockIdentifier(), this.getIdentifier());
+        return String.format("{\n" +
+                "  \"type\": \"minecraft:stonecutting\",\n" +
+                "  \"ingredient\": {\n" +
+                "    \"item\": \"%s\"\n" +
+                "  },\n" +
+                "  \"result\": \"%s\",\n" +
+                "  \"count\": 1\n" +
+                "}", this.getBaseBlockIdentifier(), this.getIdentifier());
     }
 
     @Override

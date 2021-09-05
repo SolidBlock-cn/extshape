@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "group": "",
-  "ingredients": [
-    {
-      "item": "minecraft:prismarine"
-    }
-  ],
-  "result": {
-    "item": "extshape:prismarine_button"
-  }
-}
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:prismarine"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:prismarine_button"
+                  }
+                }

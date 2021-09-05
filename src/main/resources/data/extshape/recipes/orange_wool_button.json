@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "group": "wool_button",
-  "ingredients": [
-    {
-      "item": "minecraft:orange_wool"
-    }
-  ],
-  "result": {
-    "item": "extshape:orange_wool_button"
-  }
-}
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "wool_button",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:orange_wool"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:orange_wool_button"
+                  }
+                }

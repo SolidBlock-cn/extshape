@@ -18,33 +18,15 @@ public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock>
 
 
     public String getModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/button",
-                  "textures": {
-                    "texture": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n  \"parent\": \"minecraft:block/button\",\n  \"textures\": {\n    \"texture\": \"%s\"\n  }\n}", this.getBaseTexture());
     }
 
     public String getInventoryModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/button_inventory",
-                  "textures": {
-                    "texture": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("  {\n  \"parent\": \"minecraft:block/button_inventory\",\n  \"textures\": {\n    \"texture\": \"%s\"\n  }\n}", this.getBaseTexture());
     }
 
     public String getPressedModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/button_pressed",
-                  "textures": {
-                    "texture": "%s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n  \"parent\": \"minecraft:block/button_pressed\",\n  \"textures\": {\n    \"texture\": \"%s\"\n  }\n}", this.getBaseTexture());
     }
 
 
@@ -59,150 +41,145 @@ public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock>
     @Override
     public String getBlockStatesString() {
         Identifier identifier = this.getIdentifier();
-        return String.format("""
-                {
-                  "variants": {
-                    "face=ceiling,facing=east,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 270,
-                      "x": 180
-                    },
-                    "face=ceiling,facing=east,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 270,
-                      "x": 180
-                    },
-                    "face=ceiling,facing=north,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 180,
-                      "x": 180
-                    },
-                    "face=ceiling,facing=north,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 180,
-                      "x": 180
-                    },
-                    "face=ceiling,facing=south,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "x": 180
-                    },
-                    "face=ceiling,facing=south,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "x": 180
-                    },
-                    "face=ceiling,facing=west,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 90,
-                      "x": 180
-                    },
-                    "face=ceiling,facing=west,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 90,
-                      "x": 180
-                    },
-                    "face=floor,facing=east,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 90
-                    },
-                    "face=floor,facing=east,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 90
-                    },
-                    "face=floor,facing=north,powered=false": {
-                      "model": "%1$s:block/%2$s"
-                    },
-                    "face=floor,facing=north,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed"
-                    },
-                    "face=floor,facing=south,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 180
-                    },
-                    "face=floor,facing=south,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 180
-                    },
-                    "face=floor,facing=west,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 270
-                    },
-                    "face=floor,facing=west,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 270
-                    },
-                    "face=wall,facing=east,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 90,
-                      "x": 90,
-                      "uvlock": true
-                    },
-                    "face=wall,facing=east,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 90,
-                      "x": 90,
-                      "uvlock": true
-                    },
-                    "face=wall,facing=north,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "x": 90,
-                      "uvlock": true
-                    },
-                    "face=wall,facing=north,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "x": 90,
-                      "uvlock": true
-                    },
-                    "face=wall,facing=south,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 180,
-                      "x": 90,
-                      "uvlock": true
-                    },
-                    "face=wall,facing=south,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 180,
-                      "x": 90,
-                      "uvlock": true
-                    },
-                    "face=wall,facing=west,powered=false": {
-                      "model": "%1$s:block/%2$s",
-                      "y": 270,
-                      "x": 90,
-                      "uvlock": true
-                    },
-                    "face=wall,facing=west,powered=true": {
-                      "model": "%1$s:block/%2$s_pressed",
-                      "y": 270,
-                      "x": 90,
-                      "uvlock": true
-                    }
-                  }
-                }""", identifier.getNamespace(), identifier.getPath());
+        return String.format("{\n" +
+                "                  \"variants\": {\n" +
+                "                    \"face=ceiling,facing=east,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 270,\n" +
+                "                      \"x\": 180\n" +
+                "                    },\n" +
+                "                    \"face=ceiling,facing=east,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 270,\n" +
+                "                      \"x\": 180\n" +
+                "                    },\n" +
+                "                    \"face=ceiling,facing=north,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 180,\n" +
+                "                      \"x\": 180\n" +
+                "                    },\n" +
+                "                    \"face=ceiling,facing=north,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 180,\n" +
+                "                      \"x\": 180\n" +
+                "                    },\n" +
+                "                    \"face=ceiling,facing=south,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"x\": 180\n" +
+                "                    },\n" +
+                "                    \"face=ceiling,facing=south,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"x\": 180\n" +
+                "                    },\n" +
+                "                    \"face=ceiling,facing=west,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 90,\n" +
+                "                      \"x\": 180\n" +
+                "                    },\n" +
+                "                    \"face=ceiling,facing=west,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 90,\n" +
+                "                      \"x\": 180\n" +
+                "                    },\n" +
+                "                    \"face=floor,facing=east,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 90\n" +
+                "                    },\n" +
+                "                    \"face=floor,facing=east,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 90\n" +
+                "                    },\n" +
+                "                    \"face=floor,facing=north,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\"\n" +
+                "                    },\n" +
+                "                    \"face=floor,facing=north,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\"\n" +
+                "                    },\n" +
+                "                    \"face=floor,facing=south,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 180\n" +
+                "                    },\n" +
+                "                    \"face=floor,facing=south,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 180\n" +
+                "                    },\n" +
+                "                    \"face=floor,facing=west,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 270\n" +
+                "                    },\n" +
+                "                    \"face=floor,facing=west,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 270\n" +
+                "                    },\n" +
+                "                    \"face=wall,facing=east,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 90,\n" +
+                "                      \"x\": 90,\n" +
+                "                      \"uvlock\": true\n" +
+                "                    },\n" +
+                "                    \"face=wall,facing=east,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 90,\n" +
+                "                      \"x\": 90,\n" +
+                "                      \"uvlock\": true\n" +
+                "                    },\n" +
+                "                    \"face=wall,facing=north,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"x\": 90,\n" +
+                "                      \"uvlock\": true\n" +
+                "                    },\n" +
+                "                    \"face=wall,facing=north,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"x\": 90,\n" +
+                "                      \"uvlock\": true\n" +
+                "                    },\n" +
+                "                    \"face=wall,facing=south,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 180,\n" +
+                "                      \"x\": 90,\n" +
+                "                      \"uvlock\": true\n" +
+                "                    },\n" +
+                "                    \"face=wall,facing=south,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 180,\n" +
+                "                      \"x\": 90,\n" +
+                "                      \"uvlock\": true\n" +
+                "                    },\n" +
+                "                    \"face=wall,facing=west,powered=false\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s\",\n" +
+                "                      \"y\": 270,\n" +
+                "                      \"x\": 90,\n" +
+                "                      \"uvlock\": true\n" +
+                "                    },\n" +
+                "                    \"face=wall,facing=west,powered=true\": {\n" +
+                "                      \"model\": \"%1$s:block/%2$s_pressed\",\n" +
+                "                      \"y\": 270,\n" +
+                "                      \"x\": 90,\n" +
+                "                      \"uvlock\": true\n" +
+                "                    }\n" +
+                "                  }\n" +
+                "                }", identifier.getNamespace(), identifier.getPath());
     }
 
     @Override
     public String getItemModelString() {
-        return String.format("""
-                {
-                  "parent": "%s_inventory"
-                }""", this.getBlockModelIdentifier().toString());
+        return String.format("{\n  \"parent\": \"%s_inventory\"\n}", this.getBlockModelIdentifier().toString());
     }
 
     @Override
     public String getCraftingRecipeString() {
-        return String.format("""
-                {
-                  "type": "minecraft:crafting_shapeless",
-                  "group": "%s",
-                  "ingredients": [
-                    {
-                      "item": "%s"
-                    }
-                  ],
-                  "result": {
-                    "item": "%s"
-                  }
-                }""", this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier().toString());
+        return String.format("{\n" +
+                "                  \"type\": \"minecraft:crafting_shapeless\",\n" +
+                "                  \"group\": \"%s\",\n" +
+                "                  \"ingredients\": [\n" +
+                "                    {\n" +
+                "                      \"item\": \"%s\"\n" +
+                "                    }\n" +
+                "                  ],\n" +
+                "                  \"result\": {\n" +
+                "                    \"item\": \"%s\"\n" +
+                "                  }\n" +
+                "                }", this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier().toString());
     }
 
     @Override

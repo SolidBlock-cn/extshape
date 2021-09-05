@@ -3,10 +3,10 @@ package pers.solid.extshape.mappings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import net.minecraft.block.Block;
-import net.minecraft.data.family.BlockFamilies;
-import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.family.BlockFamilies;
+import pers.solid.extshape.family.BlockFamily;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -73,7 +73,7 @@ public class BlockMappings {
      */
     @Nullable
     public static Block getBlockOf(Shape shape, Block baseBlock) {
-        var mapping = SHAPE_TO_MAPPING.get(shape);
+        BiMap<Block, Block> mapping = SHAPE_TO_MAPPING.get(shape);
         if (mapping == null) return null;
         return mapping.get(baseBlock);
     }

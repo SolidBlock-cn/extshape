@@ -23,86 +23,81 @@ public class FenceGenerator extends AbstractBlockGenerator<FenceBlock> {
     @Override
     public String getBlockStatesString() {
         Identifier identifier = this.getIdentifier();
-        return String.format("""
-                {
-                  "multipart": [
-                    {
-                      "apply": {
-                        "model": "%1$s:block/%2$s_post"
-                      }
-                    },
-                    {
-                      "when": {
-                        "north": "true"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side",
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "east": "true"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side",
-                        "y": 90,
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "south": "true"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side",
-                        "y": 180,
-                        "uvlock": true
-                      }
-                    },
-                    {
-                      "when": {
-                        "west": "true"
-                      },
-                      "apply": {
-                        "model": "%1$s:block/%2$s_side",
-                        "y": 270,
-                        "uvlock": true
-                      }
-                    }
-                  ]
-                }""", identifier.getNamespace(), identifier.getPath());
+        return String.format("{\n" +
+                "  \"multipart\": [\n" +
+                "    {\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_post\"\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"north\": \"true\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side\",\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"east\": \"true\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side\",\n" +
+                "        \"y\": 90,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"south\": \"true\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side\",\n" +
+                "        \"y\": 180,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"when\": {\n" +
+                "        \"west\": \"true\"\n" +
+                "      },\n" +
+                "      \"apply\": {\n" +
+                "        \"model\": \"%1$s:block/%2$s_side\",\n" +
+                "        \"y\": 270,\n" +
+                "        \"uvlock\": true\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}", identifier.getNamespace(), identifier.getPath());
     }
 
     public String getInventoryBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/fence_inventory",
-                  "textures": {
-                    "texture": "%1$s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/fence_inventory\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%1$s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public String getSideBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/fence_side",
-                  "textures": {
-                    "texture": "%1$s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/fence_side\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%1$s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public String getPostBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/fence_post",
-                  "textures": {
-                    "texture": "%1$s"
-                  }
-                }
-                """, this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/fence_post\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%1$s\"\n" +
+                "  }\n" +
+                "}\n", this.getBaseTexture());
     }
 
     @Override
@@ -117,36 +112,34 @@ public class FenceGenerator extends AbstractBlockGenerator<FenceBlock> {
     @Override
     public String getItemModelString() {
         Identifier identifier = this.getIdentifier();
-        return String.format("""
-                {
-                  "parent": "%1$s:block/%2$s_inventory"
-                }""", identifier.getNamespace(), identifier.getPath());
+        return String.format("{\n  \"parent\": \"%1$s:block/%2$s_inventory\"\n}", identifier.getNamespace(), identifier.getPath());
     }
 
 
     @Override
     public String getCraftingRecipeString() {
-        return String.format("""
-                {
-                  "type": "minecraft:crafting_shaped",
-                  "group": "%s",
-                  "pattern": [
-                    "W#W",
-                    "W#W"
-                  ],
-                  "key": {
-                    "W": {
-                      "item": "%s"
-                    },
-                    "#": {
-                      "item": "%s"
-                    }
-                  },
-                  "result": {
-                    "item": "%s",
-                    "count": 3
-                  }
-                }""", this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getCraftingIngredientIdentifier(), this.getIdentifier());
+        return String.format("{\n" +
+                        "  \"type\": \"minecraft:crafting_shaped\",\n" +
+                        "  \"group\": \"%s\",\n" +
+                        "  \"pattern\": [\n" +
+                        "    \"W#W\",\n" +
+                        "    \"W#W\"\n" +
+                        "  ],\n" +
+                        "  \"key\": {\n" +
+                        "    \"W\": {\n" +
+                        "      \"item\": \"%s\"\n" +
+                        "    },\n" +
+                        "    \"#\": {\n" +
+                        "      \"item\": \"%s\"\n" +
+                        "    }\n" +
+                        "  },\n" +
+                        "  \"result\": {\n" +
+                        "    \"item\": \"%s\",\n" +
+                        "    \"count\": 3\n" +
+                        "  }\n" +
+                        "}", this.getRecipeGroup(), this.getBaseBlockIdentifier(),
+                this.getCraftingIngredientIdentifier(),
+                this.getIdentifier());
     }
 
     @Override

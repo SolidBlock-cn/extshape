@@ -67,31 +67,17 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
 
     @Nullable
     public String getBlockModelString() {
-        return """
-                {
-                    "parent": "block/block"
-                }
-                """;
+        return "{\n    \"parent\": \"block/block\"\n}\n";
     }
 
     @Nullable
     public String getItemModelString() {
-        return String.format("""
-                {
-                    "parent": "%s"
-                }
-                """, this.getBlockModelIdentifier().toString());
+        return String.format("{\n    \"parent\": \"%s\"\n}\n", this.getBlockModelIdentifier().toString());
     }
 
     @Nullable
     public String getBlockStatesString() {
-        return String.format("""
-                {
-                    "variants": {
-                        "": {"model": "%s"}
-                    }
-                }
-                """, this.getBlockModelIdentifier().toString());
+        return String.format("{\n    \"variants\": {\n        \"\": {\"model\": \"%s\"}\n    }\n}\n", this.getBlockModelIdentifier().toString());
     }
 
     @Nullable
@@ -107,27 +93,26 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
     @Nullable
     public String getLootTableString() {
         Identifier identifier = this.getIdentifier();
-        return String.format("""
-                {
-                  "type": "minecraft:block",
-                  "pools": [
-                    {
-                      "rolls": 1.0,
-                      "bonus_rolls": 0.0,
-                      "entries": [
-                        {
-                          "type": "minecraft:item",
-                          "name": "%s"
-                        }
-                      ],
-                      "conditions": [
-                        {
-                          "condition": "minecraft:survives_explosion"
-                        }
-                      ]
-                    }
-                  ]
-                }""", identifier.toString());
+        return String.format("{\n" +
+                "  \"type\": \"minecraft:block\",\n" +
+                "  \"pools\": [\n" +
+                "    {\n" +
+                "      \"rolls\": 1.0,\n" +
+                "      \"bonus_rolls\": 0.0,\n" +
+                "      \"entries\": [\n" +
+                "        {\n" +
+                "          \"type\": \"minecraft:item\",\n" +
+                "          \"name\": \"%s\"\n" +
+                "        }\n" +
+                "      ],\n" +
+                "      \"conditions\": [\n" +
+                "        {\n" +
+                "          \"condition\": \"minecraft:survives_explosion\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}", identifier.toString());
     }
 
     public String getRecipeGroup() {

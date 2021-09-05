@@ -4,11 +4,9 @@ import com.google.gson.JsonArray;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.datagen.Mineable;
-import pers.solid.extshape.mappings.BlockMappings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static net.minecraft.block.Blocks.*;
@@ -291,27 +289,16 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     }
 
     public ExtShapeBlockTag(Block... elements) {
-        super(elements);
+        this(null,elements);
     }
 
     public ExtShapeBlockTag(Identifier identifier, Block... elements) {
-        super(identifier, elements);
+        this(identifier, Arrays.asList(elements));
     }
 
     public ExtShapeBlockTag(Identifier identifier, List<Block> list) {
         super(identifier, list);
         ALL_EXTSHAPE_BLOCK_TAGS.add(this);
-    }
-
-    public static void completeMineableTags() {
-        for (final Block block : EXTSHAPE_BLOCKS) {
-            Block baseBlock = BlockMappings.getBaseBlockOf(block);
-            if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.AXE_MINEABLE.add(block);
-            if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.HOE_MINEABLE.add(block);
-            if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.PICKAXE_MINEABLE.add(block);
-            if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.SHOVEL_MINEABLE.add(block);
-        }
-        ExtShape.EXTSHAPE_LOGGER.info("mineable部分的方块数据已生成。");
     }
 
     @Override
@@ -338,7 +325,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
 
     public JsonArray jsonTree() {
         JsonArray array = new JsonArray();
-        for (var entry : this.entryList) {
+        for (TagEntry<Block> entry : this.entryList) {
             if (entry instanceof TagEntryTag)
                 array.add(((ExtShapeBlockTag) ((TagEntryTag<Block>) entry).elementTag).jsonTree());
             else if (entry instanceof TagEntrySingleElement)

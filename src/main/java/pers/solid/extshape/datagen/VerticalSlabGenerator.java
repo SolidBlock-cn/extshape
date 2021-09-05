@@ -16,73 +16,68 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
     }
 
     public static void init(Generator generator) {
-        generator.writeModelFile("extshape", "block/vertical_slab", """
-                {   "parent": "block/block",
-                    "textures": {
-                        "particle": "#side"
-                    },
-                    "elements": [
-                        {   "from": [ 0, 0, 8 ],
-                            "to": [  16, 16, 16 ],
-                            "faces": {
-                                "down":  {"texture": "#bottom", "cullface": "down" },
-                                "up":    {"texture": "#top",    "cullface": "up" },
-                                "north": {"texture": "#side",   "cullface": "north" },
-                                "south": {"texture": "#side",   "cullface": "south" },
-                                "west":  { "texture": "#side",   "cullface": "west" },
-                                "east":  { "texture": "#side",   "cullface": "east" }
-                            }
-                        }
-                    ]
-                }""");
+        generator.writeModelFile("extshape", "block/vertical_slab", "{   \"parent\": \"block/block\",\n" +
+                "    \"textures\": {\n" +
+                "        \"particle\": \"#side\"\n" +
+                "    },\n" +
+                "    \"elements\": [\n" +
+                "        {   \"from\": [ 0, 0, 8 ],\n" +
+                "            \"to\": [  16, 16, 16 ],\n" +
+                "            \"faces\": {\n" +
+                "                \"down\":  {\"texture\": \"#bottom\", \"cullface\": \"down\" },\n" +
+                "                \"up\":    {\"texture\": \"#top\",    \"cullface\": \"up\" },\n" +
+                "                \"north\": {\"texture\": \"#side\",   \"cullface\": \"north\" },\n" +
+                "                \"south\": {\"texture\": \"#side\",   \"cullface\": \"south\" },\n" +
+                "                \"west\":  { \"texture\": \"#side\",   \"cullface\": \"west\" },\n" +
+                "                \"east\":  { \"texture\": \"#side\",   \"cullface\": \"east\" }\n" +
+                "            }\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}");
     }
 
     @Override
     public String getBlockStatesString() {
-        return String.format("""
-                {
-                  "variants": {
-                    "facing=south": { "model": "%1$s" , "uvlock":true },
-                    "facing=west":  { "model": "%1$s", "y":  90 , "uvlock":true},
-                    "facing=north": { "model": "%1$s", "y": 180 , "uvlock":true },
-                    "facing=east":  { "model": "%1$s", "y": 270 , "uvlock":true }
-                  }
-                }""", this.getBlockModelIdentifier());
+        return String.format("{\n" +
+                "  \"variants\": {\n" +
+                "    \"facing=south\": { \"model\": \"%1$s\" , \"uvlock\":true },\n" +
+                "    \"facing=west\":  { \"model\": \"%1$s\", \"y\":  90 , \"uvlock\":true},\n" +
+                "    \"facing=north\": { \"model\": \"%1$s\", \"y\": 180 , \"uvlock\":true },\n" +
+                "    \"facing=east\":  { \"model\": \"%1$s\", \"y\": 270 , \"uvlock\":true }\n" +
+                "  }\n" +
+                "}", this.getBlockModelIdentifier());
     }
 
     @Override
     public String getBlockModelString() {
-        return String.format("""
-                {
-                    "parent": "extshape:block/vertical_slab",
-                    "textures": {
-                        "bottom": "%s",
-                        "top": "%s",
-                        "side": "%s"
-                    }
-                }""", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
+        return String.format("{\n" +
+                "    \"parent\": \"extshape:block/vertical_slab\",\n" +
+                "    \"textures\": {\n" +
+                "        \"bottom\": \"%s\",\n" +
+                "        \"top\": \"%s\",\n" +
+                "        \"side\": \"%s\"\n" +
+                "    }\n" +
+                "}", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
     }
 
     @Override
     public String getCraftingRecipeString() {
-        return String.format("""
-                        {
-                          "type": "minecraft:crafting_shaped",
-                          "group": "%s",
-                          "pattern": [
-                            "#"
-                          ],
-                          "key": {
-                            "#": {
-                              "item": "%s"
-                            }
-                          },
-                          "result": {
-                            "item": "%s",
-                            "count": 1
-                          }
-                        }
-                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+        return String.format("{\n" +
+                        "  \"type\": \"minecraft:crafting_shaped\",\n" +
+                        "  \"group\": \"%s\",\n" +
+                        "  \"pattern\": [\n" +
+                        "    \"#\"\n" +
+                        "  ],\n" +
+                        "  \"key\": {\n" +
+                        "    \"#\": {\n" +
+                        "      \"item\": \"%s\"\n" +
+                        "    }\n" +
+                        "  },\n" +
+                        "  \"result\": {\n" +
+                        "    \"item\": \"%s\",\n" +
+                        "    \"count\": 1\n" +
+                        "  }\n" +
+                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -93,24 +88,22 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
      * @return 由纵台阶制作台阶的合成配方。
      */
     public String getInverseCraftingString() {
-        return String.format("""
-                        {
-                          "type": "minecraft:crafting_shaped",
-                          "group": "%s",
-                          "pattern": [
-                            "#"
-                          ],
-                          "key": {
-                            "#": {
-                              "item": "%s"
-                            }
-                          },
-                          "result": {
-                            "item": "%s",
-                            "count": 1
-                          }
-                        }
-                        """, this.getRecipeGroup().replace("vertical_", ""), this.getIdentifier(),
+        return String.format("{\n" +
+                        "  \"type\": \"minecraft:crafting_shaped\",\n" +
+                        "  \"group\": \"%s\",\n" +
+                        "  \"pattern\": [\n" +
+                        "    \"#\"\n" +
+                        "  ],\n" +
+                        "  \"key\": {\n" +
+                        "    \"#\": {\n" +
+                        "      \"item\": \"%s\"\n" +
+                        "    }\n" +
+                        "  },\n" +
+                        "  \"result\": {\n" +
+                        "    \"item\": \"%s\",\n" +
+                        "    \"count\": 1\n" +
+                        "  }\n" +
+                        "}\n", this.getRecipeGroup().replace("vertical_", ""), this.getIdentifier(),
                 Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
                         this.getBaseBlock())));
     }
@@ -124,15 +117,14 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
 
     @Override
     public String getStoneCuttingRecipeString() {
-        return String.format("""
-                {
-                  "type": "minecraft:stonecutting",
-                  "ingredient": {
-                    "item": "%s"
-                  },
-                  "result": "%s",
-                  "count": 2
-                }""", this.getBaseBlockIdentifier(), this.getIdentifier());
+        return String.format("{\n" +
+                "  \"type\": \"minecraft:stonecutting\",\n" +
+                "  \"ingredient\": {\n" +
+                "    \"item\": \"%s\"\n" +
+                "  },\n" +
+                "  \"result\": \"%s\",\n" +
+                "  \"count\": 2\n" +
+                "}", this.getBaseBlockIdentifier(), this.getIdentifier());
     }
 
     @Override

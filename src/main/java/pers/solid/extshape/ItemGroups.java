@@ -1,5 +1,6 @@
 package pers.solid.extshape;
 
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -49,7 +50,7 @@ public class ItemGroups {
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.STAINED_TERRACOTTAS);
         COLORFUL_BLOCKS.addTag(ExtShapeBlockTag.GLAZED_TERRACOTTAS);
         STONE_BLOCKS.addTag(ExtShapeBlockTag.STONES);
-        STONE_BLOCKS.addAll(List.of(
+        STONE_BLOCKS.addAll(ImmutableList.of(
                 Blocks.SMOOTH_STONE,
                 Blocks.STONE_BRICKS,
                 Blocks.MOSSY_STONE_BRICKS,

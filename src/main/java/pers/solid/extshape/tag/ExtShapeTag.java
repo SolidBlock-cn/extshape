@@ -155,7 +155,7 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
     public boolean containsTag(ExtShapeTag<T> tag) {
         for (TagEntry<T> entry :
                 entryList)
-            if (entry instanceof TagEntryTag<T>) {
+            if (entry instanceof TagEntryTag) {
                 ExtShapeTag<T> elementTag = ((TagEntryTag<T>) entry).elementTag;
                 if (elementTag == tag || elementTag.containsTag(tag)) return true;
             }
@@ -286,7 +286,7 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
     @NotNull
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<>() {
+        return new Iterator<T>() {
             private final int entryListSize = entryList.size();
             private int cursor = -1; // 迭代器在<code>entryList</code>中的指针。
             private @Nullable Iterator<T> iteratingEntryIterator = null;
@@ -365,7 +365,7 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
 
         @Override
         public UnmodifiableIterator<T> iterator() {
-            return new UnmodifiableIterator<>() {
+            return new UnmodifiableIterator<T>() {
                 int cursor = -1;
 
                 @Override
@@ -396,7 +396,7 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
 
         @Override
         public UnmodifiableIterator<T> iterator() {
-            return new UnmodifiableIterator<>() {
+            return new UnmodifiableIterator<T>() {
                 final Iterator<T> elementTagIterator = elementTag.iterator();
                 int cursor = -1;
 

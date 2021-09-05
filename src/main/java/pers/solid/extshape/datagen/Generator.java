@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * 数据生成器。
@@ -39,14 +40,14 @@ public class Generator {
     }
 
     public Generator() {
-        this(Path.of("generated"));
+        this(Paths.get(("generated")));
     }
 
     public static void main() {
         if (!DATA_GENERATION_SWITCH) return;
         ExtShapeBlocks.init();
         System.out.println("[EXTSHAPE] 开始生成数据！（只有在开发环境中才应该出现这行字，否则是模组出bug了。）");
-        Generator generator = new Generator(Path.of("../src/main/resources"));
+        Generator generator = new Generator(Paths.get(("../src/main/resources")));
         generator.generateForAllBlocks(ExtShapeBlockTag.EXTSHAPE_BLOCKS);
         VerticalSlabGenerator.init(generator);
         QuarterPieceGenerator.init(generator);
@@ -180,12 +181,12 @@ public class Generator {
     public void generateForAllBlocks(ExtShapeBlockTag tag) {
         // 生成方块数据。
         for (Block block : tag) {
-            var generator = this.createGeneratorForBlock(block);
+            AbstractBlockGenerator<? extends Block> generator = this.createGeneratorForBlock(block);
             if (generator != null) generator.writeAllFiles();
         }
 
         // 生成双层平滑石头的数据。
-        new AbstractBlockGenerator<>(basePath, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
+        new AbstractBlockGenerator<Block>(basePath, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
             @Override
             public Identifier getBlockModelIdentifier() {
                 return new Identifier("minecraft", "block/smooth_stone_slab_double");
@@ -197,7 +198,7 @@ public class Generator {
             }
         }.writeAllFiles();
         // 生成石化橡木木板的数据。
-        new AbstractBlockGenerator<>(basePath, ExtShapeBlocks.PETRIFIED_OAK_PLANKS) {
+        new AbstractBlockGenerator<Block>(basePath, ExtShapeBlocks.PETRIFIED_OAK_PLANKS) {
             @Override
             public Identifier getBlockModelIdentifier() {
                 return new Identifier("minecraft", "block/oak_planks");

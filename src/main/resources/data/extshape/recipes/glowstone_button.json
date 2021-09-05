@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "group": "",
-  "ingredients": [
-    {
-      "item": "minecraft:glowstone"
-    }
-  ],
-  "result": {
-    "item": "extshape:glowstone_button"
-  }
-}
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:glowstone"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:glowstone_button"
+                  }
+                }

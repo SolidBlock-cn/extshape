@@ -1,23 +1,4 @@
 {
   "replace": false,
-  "values": [
-    "extshape:snow_stairs",
-    "extshape:clay_stairs",
-    "extshape:snow_slab",
-    "extshape:clay_slab",
-    "extshape:snow_fence",
-    "extshape:snow_fence_gate",
-    "extshape:snow_wall",
-    "extshape:clay_wall",
-    "extshape:snow_button",
-    "extshape:snow_pressure_plate",
-    "extshape:snow_vertical_slab",
-    "extshape:clay_vertical_slab",
-    "extshape:snow_quarter_piece",
-    "extshape:clay_quarter_piece",
-    "extshape:snow_vertical_stairs",
-    "extshape:clay_vertical_stairs",
-    "extshape:snow_vertical_quarter_piece",
-    "extshape:clay_vertical_quarter_piece"
-  ]
+  "values": []
 }

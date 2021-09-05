@@ -15,8 +15,6 @@ import pers.solid.extshape.builder.SlabBuilder;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
-import java.util.Map;
-
 import static net.minecraft.block.Blocks.*;
 import static net.minecraft.block.PressurePlateBlock.ActivationRule.MOBS;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
@@ -44,7 +42,7 @@ public class ExtShapeBlocks {
                 BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE)).setIdentifier(new Identifier(
                         "extshape", "smooth_stone_slab_double")).group(ItemGroup.BUILDING_BLOCKS).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
         BlockBuilder.createAllShapes(SMOOTH_STONE, Items.FLINT, ButtonType.STONE, MOBS).withoutShapes().build();
-        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(SMOOTH_STONE,SMOOTH_STONE_DOUBLE_SLAB);
+        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(SMOOTH_STONE_DOUBLE_SLAB,SMOOTH_STONE_SLAB);
 
 //        // 深板岩圆石、磨制深板岩。
 //        for (final Block BLOCK : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE}) {
@@ -211,7 +209,7 @@ public class ExtShapeBlocks {
             new SlabBuilder(BLOCK).setInstance(new GlazedTerracottaSlabBlock(FabricBlockSettings.copyOf(BLOCK))).setDefaultTag(GLAZED_TERRACOTTA_SLABS).build();
         }
 
-        ExtShapeBlockTag.completeMineableTags();
+//        ExtShapeBlockTag.completeMineableTags();
     }
 
     /**

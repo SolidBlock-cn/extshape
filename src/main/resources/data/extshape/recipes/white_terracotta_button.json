@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "group": "stained_terracotta_button",
-  "ingredients": [
-    {
-      "item": "minecraft:white_terracotta"
-    }
-  ],
-  "result": {
-    "item": "extshape:white_terracotta_button"
-  }
-}
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "stained_terracotta_button",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:white_terracotta"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:white_terracotta_button"
+                  }
+                }

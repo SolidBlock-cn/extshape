@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "group": "wool_button",
-  "ingredients": [
-    {
-      "item": "minecraft:gray_wool"
-    }
-  ],
-  "result": {
-    "item": "extshape:gray_wool_button"
-  }
-}
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "wool_button",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:gray_wool"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:gray_wool_button"
+                  }
+                }

@@ -1,12 +1,12 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "group": "concrete_button",
-  "ingredients": [
-    {
-      "item": "minecraft:brown_concrete"
-    }
-  ],
-  "result": {
-    "item": "extshape:brown_concrete_button"
-  }
-}
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "concrete_button",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:brown_concrete"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:brown_concrete_button"
+                  }
+                }

@@ -32,130 +32,123 @@ public class FenceGateGenerator extends AbstractBlockGenerator<FenceGateBlock> {
     @Override
     public String getBlockStatesString() {
         Identifier identifier = this.getIdentifier();
-        return String.format("""
-                {
-                   "variants": {
-                     "facing=east,in_wall=false,open=false": {
-                       "uvlock": true,
-                       "y": 270,
-                       "model": "%1$s:block/%2$s"
-                     },
-                     "facing=east,in_wall=false,open=true": {
-                       "uvlock": true,
-                       "y": 270,
-                       "model": "%1$s:block/%2$s_open"
-                     },
-                     "facing=east,in_wall=true,open=false": {
-                       "uvlock": true,
-                       "y": 270,
-                       "model": "%1$s:block/%2$s_wall"
-                     },
-                     "facing=east,in_wall=true,open=true": {
-                       "uvlock": true,
-                       "y": 270,
-                       "model": "%1$s:block/%2$s_wall_open"
-                     },
-                     "facing=north,in_wall=false,open=false": {
-                       "uvlock": true,
-                       "y": 180,
-                       "model": "%1$s:block/%2$s"
-                     },
-                     "facing=north,in_wall=false,open=true": {
-                       "uvlock": true,
-                       "y": 180,
-                       "model": "%1$s:block/%2$s_open"
-                     },
-                     "facing=north,in_wall=true,open=false": {
-                       "uvlock": true,
-                       "y": 180,
-                       "model": "%1$s:block/%2$s_wall"
-                     },
-                     "facing=north,in_wall=true,open=true": {
-                       "uvlock": true,
-                       "y": 180,
-                       "model": "%1$s:block/%2$s_wall_open"
-                     },
-                     "facing=south,in_wall=false,open=false": {
-                       "uvlock": true,
-                       "model": "%1$s:block/%2$s"
-                     },
-                     "facing=south,in_wall=false,open=true": {
-                       "uvlock": true,
-                       "model": "%1$s:block/%2$s_open"
-                     },
-                     "facing=south,in_wall=true,open=false": {
-                       "uvlock": true,
-                       "model": "%1$s:block/%2$s_wall"
-                     },
-                     "facing=south,in_wall=true,open=true": {
-                       "uvlock": true,
-                       "model": "%1$s:block/%2$s_wall_open"
-                     },
-                     "facing=west,in_wall=false,open=false": {
-                       "uvlock": true,
-                       "y": 90,
-                       "model": "%1$s:block/%2$s"
-                     },
-                     "facing=west,in_wall=false,open=true": {
-                       "uvlock": true,
-                       "y": 90,
-                       "model": "%1$s:block/%2$s_open"
-                     },
-                     "facing=west,in_wall=true,open=false": {
-                       "uvlock": true,
-                       "y": 90,
-                       "model": "%1$s:block/%2$s_wall"
-                     },
-                     "facing=west,in_wall=true,open=true": {
-                       "uvlock": true,
-                       "y": 90,
-                       "model": "%1$s:block/%2$s_wall_open"
-                     }
-                   }
-                 }""", identifier.getNamespace(), identifier.getPath());
+        return String.format(
+                "{\n" +
+                        "  \"variants\": {\n" +
+                        "    \"facing=east,in_wall=false,open=false\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"model\": \"%1$s:block/%2$s\"\n" +
+                        "    },\n" +
+                        "    \"facing=east,in_wall=false,open=true\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_open\"\n" +
+                        "    },\n" +
+                        "    \"facing=east,in_wall=true,open=false\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_wall\"\n" +
+                        "    },\n" +
+                        "    \"facing=east,in_wall=true,open=true\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_wall_open\"\n" +
+                        "    },\n" +
+                        "    \"facing=north,in_wall=false,open=false\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"model\": \"%1$s:block/%2$s\"\n" +
+                        "    },\n" +
+                        "    \"facing=north,in_wall=false,open=true\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_open\"\n" +
+                        "    },\n" +
+                        "    \"facing=north,in_wall=true,open=false\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_wall\"\n" +
+                        "    },\n" +
+                        "    \"facing=north,in_wall=true,open=true\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_wall_open\"\n" +
+                        "    },\n" +
+                        "    \"facing=south,in_wall=false,open=false\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"model\": \"%1$s:block/%2$s\"\n" +
+                        "    },\n" +
+                        "    \"facing=south,in_wall=false,open=true\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_open\"\n" +
+                        "    },\n" +
+                        "    \"facing=south,in_wall=true,open=false\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_wall\"\n" +
+                        "    },\n" +
+                        "    \"facing=south,in_wall=true,open=true\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_wall_open\"\n" +
+                        "    },\n" +
+                        "    \"facing=west,in_wall=false,open=false\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"model\": \"%1$s:block/%2$s\"\n" +
+                        "    },\n" +
+                        "    \"facing=west,in_wall=false,open=true\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_open\"\n" +
+                        "    },\n" +
+                        "    \"facing=west,in_wall=true,open=false\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_wall\"\n" +
+                        "    },\n" +
+                        "    \"facing=west,in_wall=true,open=true\": {\n" +
+                        "      \"uvlock\": true,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"model\": \"%1$s:block/%2$s_wall_open\"\n" +
+                        "    }\n" +
+                        "  }\n" +
+                        "}", identifier.getNamespace(), identifier.getPath());
     }
 
     public String getBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/template_fence_gate",
-                  "textures": {
-                    "texture": "%1$s"
-                  }
-                }""", this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/template_fence_gate\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%1$s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public String getOpenBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/template_fence_gate_open",
-                  "textures": {
-                    "texture": "%1$s"
-                  }
-                }
-                """, this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/template_fence_gate_open\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%1$s\"\n" +
+                "  }\n" +
+                "}", this.getBaseTexture());
     }
 
     public String getWallBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/template_fence_gate_wall",
-                  "textures": {
-                    "texture": "%1$s"
-                  }
-                }
-                """, this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/template_fence_gate_wall\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%1$s\"\n" +
+                "  }\n" +
+                "}\n", this.getBaseTexture());
     }
 
     public String getWallOpenBlockModelString() {
-        return String.format("""
-                {
-                  "parent": "minecraft:block/template_fence_gate_wall_open",
-                  "textures": {
-                    "texture": "%1$s"
-                  }
-                }
-                """, this.getBaseTexture());
+        return String.format("{\n" +
+                "  \"parent\": \"minecraft:block/template_fence_gate_wall_open\",\n" +
+                "  \"textures\": {\n" +
+                "    \"texture\": \"%1$s\"\n" +
+                "  }\n" +
+                "}\n", this.getBaseTexture());
     }
 
     @Override
@@ -170,26 +163,26 @@ public class FenceGateGenerator extends AbstractBlockGenerator<FenceGateBlock> {
 
     @Override
     public String getCraftingRecipeString() {
-        return String.format("""
-                        {
-                            "type": "minecraft:crafting_shaped",
-                            "group": "%s",
-                            "pattern": [
-                              "#W#",
-                              "#W#"
-                            ],
-                            "key": {
-                              "#": {
-                                "item": "%s"
-                              },
-                              "W": {
-                                "item": "%s"
-                              }
-                            },
-                            "result": {
-                              "item": "%s"
-                            }
-                          }""", this.getRecipeGroup(), this.getCraftingIngredientIdentifier(), this.getBaseBlockIdentifier(),
+        return String.format("{\n" +
+                        "    \"type\": \"minecraft:crafting_shaped\",\n" +
+                        "    \"group\": \"%s\",\n" +
+                        "    \"pattern\": [\n" +
+                        "      \"#W#\",\n" +
+                        "      \"#W#\"\n" +
+                        "    ],\n" +
+                        "    \"key\": {\n" +
+                        "      \"#\": {\n" +
+                        "        \"item\": \"%s\"\n" +
+                        "      },\n" +
+                        "      \"W\": {\n" +
+                        "        \"item\": \"%s\"\n" +
+                        "      }\n" +
+                        "    },\n" +
+                        "    \"result\": {\n" +
+                        "      \"item\": \"%s\"\n" +
+                        "    }\n" +
+                        "  }", this.getRecipeGroup(), this.getCraftingIngredientIdentifier(),
+                this.getBaseBlockIdentifier(),
                 this.getIdentifier());
     }
 

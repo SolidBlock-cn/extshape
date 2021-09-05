@@ -135,6 +135,11 @@ that players can easily fetch blocks of a same block in different shapes.
 
 ## 更新日志 Update log
 
+### 1.2.3
+- 开始向旧版本兼容。
+- 修复纵台阶等方块的面遮蔽问题。
+- 修复无法用模组的双层平滑石台阶方块合成平滑石台阶的问题。
+
 ### 1.2.2
 - 改善了日志系统。
 - Improved logging system.
