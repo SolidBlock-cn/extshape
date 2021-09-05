@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.datagen.Mineable;
 import pers.solid.extshape.mappings.BlockMappings;
 
@@ -21,7 +22,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
      **/
     public static final List<ExtShapeBlockTag> ALL_EXTSHAPE_BLOCK_TAGS = new ArrayList<>();
 
-    public static final ExtShapeBlockTag PLANKS = new ExtShapeBlockTag(List.of(
+    public static final ExtShapeBlockTag PLANKS = new ExtShapeBlockTag(
             OAK_PLANKS,
             SPRUCE_PLANKS,
             BIRCH_PLANKS,
@@ -30,27 +31,27 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             DARK_OAK_PLANKS,
             CRIMSON_PLANKS,
             WARPED_PLANKS
-    ));
-    public static final ExtShapeBlockTag OVERWORLD_PLANKS = new ExtShapeBlockTag(List.of(
+    );
+    public static final ExtShapeBlockTag OVERWORLD_PLANKS = new ExtShapeBlockTag(
             OAK_PLANKS,
             SPRUCE_PLANKS,
             BIRCH_PLANKS,
             JUNGLE_PLANKS,
             ACACIA_PLANKS,
             DARK_OAK_PLANKS
-    ));
-    public static final ExtShapeBlockTag STONES = new ExtShapeBlockTag(List.of(new Block[]{
-            STONE,
-    }));
-    public static final ExtShapeBlockTag STONE_VARIANTS = new ExtShapeBlockTag(List.of(
+    );
+    public static final ExtShapeBlockTag STONES = new ExtShapeBlockTag(
+            STONE
+    );
+    public static final ExtShapeBlockTag STONE_VARIANTS = new ExtShapeBlockTag(
             GRANITE,
             POLISHED_GRANITE,
             DIORITE,
             POLISHED_DIORITE,
             ANDESITE,
             POLISHED_ANDESITE
-    )).addToTag(STONES);
-    public static final ExtShapeBlockTag SANDSTONES = new ExtShapeBlockTag(List.of(
+    ).addToTag(STONES);
+    public static final ExtShapeBlockTag SANDSTONES = new ExtShapeBlockTag(
             SANDSTONE,
             CUT_SANDSTONE,
             CHISELED_SANDSTONE,
@@ -59,8 +60,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             CUT_RED_SANDSTONE,
             CHISELED_RED_SANDSTONE,
             SMOOTH_RED_SANDSTONE
-    ));
-    public static final ExtShapeBlockTag WOOLS = new ExtShapeBlockTag(List.of(WHITE_WOOL,
+    );
+    public static final ExtShapeBlockTag WOOLS = new ExtShapeBlockTag(WHITE_WOOL,
             ORANGE_WOOL,
             MAGENTA_WOOL,
             LIGHT_BLUE_WOOL,
@@ -75,8 +76,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             BROWN_WOOL,
             GREEN_WOOL,
             RED_WOOL,
-            BLACK_WOOL));
-    public static final ExtShapeBlockTag GLAZED_TERRACOTTAS = new ExtShapeBlockTag(List.of(
+            BLACK_WOOL);
+    public static final ExtShapeBlockTag GLAZED_TERRACOTTAS = new ExtShapeBlockTag(
             WHITE_GLAZED_TERRACOTTA,
             ORANGE_GLAZED_TERRACOTTA,
             MAGENTA_GLAZED_TERRACOTTA,
@@ -93,8 +94,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             GREEN_GLAZED_TERRACOTTA,
             RED_GLAZED_TERRACOTTA,
             BLACK_GLAZED_TERRACOTTA
-    ));
-    public static final ExtShapeBlockTag CONCRETES = new ExtShapeBlockTag(List.of(WHITE_CONCRETE,
+    );
+    public static final ExtShapeBlockTag CONCRETES = new ExtShapeBlockTag(WHITE_CONCRETE,
             ORANGE_CONCRETE,
             MAGENTA_CONCRETE,
             LIGHT_BLUE_CONCRETE,
@@ -109,8 +110,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             BROWN_CONCRETE,
             GREEN_CONCRETE,
             RED_CONCRETE,
-            BLACK_CONCRETE));
-    public static final ExtShapeBlockTag STAINED_TERRACOTTAS = new ExtShapeBlockTag(List.of(
+            BLACK_CONCRETE);
+    public static final ExtShapeBlockTag STAINED_TERRACOTTAS = new ExtShapeBlockTag(
             WHITE_TERRACOTTA,
             ORANGE_TERRACOTTA,
             MAGENTA_TERRACOTTA,
@@ -127,23 +128,18 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             GREEN_TERRACOTTA,
             RED_TERRACOTTA,
             BLACK_TERRACOTTA
-    ));
-    public static final ExtShapeBlockTag ORE_BLOCKS = new ExtShapeBlockTag(List.of(new Block[]{
-            COAL_BLOCK,
+    );
+    public static final ExtShapeBlockTag ORE_BLOCKS = new ExtShapeBlockTag(COAL_BLOCK,
             GOLD_BLOCK,
             IRON_BLOCK,
             DIAMOND_BLOCK,
             LAPIS_BLOCK,
             EMERALD_BLOCK,
-            NETHERITE_BLOCK
-    }));
+            NETHERITE_BLOCK);
 
 
     // 所有方块。
     public static final ExtShapeBlockTag EXTSHAPE_BLOCKS = new ExtShapeBlockTag();
-
-    @Deprecated // 用于所有已注册的方块。
-    public static final ExtShapeBlockTag EXTSHAPE_REGISTERED_BLOCKS = new ExtShapeBlockTag();
 
     public static final ExtShapeBlockTag AXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/axe"));
     public static final ExtShapeBlockTag HOE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/hoe"));
@@ -291,15 +287,15 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "extshape", "wooden_vertical_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
 
     public ExtShapeBlockTag() {
-        this(new ArrayList<>());
+        this(null, new ArrayList<>());
     }
 
-    public ExtShapeBlockTag(List<Block> list) {
-        this(null, list);
+    public ExtShapeBlockTag(Block... elements) {
+        super(elements);
     }
 
-    public ExtShapeBlockTag(Identifier identifier) {
-        this(identifier, new ArrayList<>());
+    public ExtShapeBlockTag(Identifier identifier, Block... elements) {
+        super(identifier, elements);
     }
 
     public ExtShapeBlockTag(Identifier identifier, List<Block> list) {
@@ -308,18 +304,14 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     }
 
     public static void completeMineableTags() {
-        try {
-            for (final Block block : EXTSHAPE_BLOCKS) {
-                Block baseBlock = BlockMappings.getBaseBlockOf(block);
-                if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.AXE_MINEABLE.add(block);
-                if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.HOE_MINEABLE.add(block);
-                if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.PICKAXE_MINEABLE.add(block);
-                if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.SHOVEL_MINEABLE.add(block);
-            }
-            System.out.println("mineable部分的方块数据已生成。");
-        } catch (IllegalStateException e) {
-            System.out.printf("由于发生错误，mineable部分的方块数据未生成，错误详情如下：\n%s\n", e);
+        for (final Block block : EXTSHAPE_BLOCKS) {
+            Block baseBlock = BlockMappings.getBaseBlockOf(block);
+            if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.AXE_MINEABLE.add(block);
+            if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.HOE_MINEABLE.add(block);
+            if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.PICKAXE_MINEABLE.add(block);
+            if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) ExtShapeBlockTag.SHOVEL_MINEABLE.add(block);
         }
+        ExtShape.EXTSHAPE_LOGGER.info("mineable部分的方块数据已生成。");
     }
 
     @Override

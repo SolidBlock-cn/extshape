@@ -178,19 +178,18 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
      */
     public @Nullable String getStoneCuttingFromStairsRecipeString() {
         return String.format("""
-                {
-                  "type": "minecraft:stonecutting",
-                  "ingredient": {
-                    "item": "%s"
-                  },
-                  "result": "%s",
-                  "count": 3
-                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.stairs, this.getBaseBlock())),
+                        {
+                          "type": "minecraft:stonecutting",
+                          "ingredient": {
+                            "item": "%s"
+                          },
+                          "result": "%s",
+                          "count": 3
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.stairs, this.getBaseBlock())),
                 this.getIdentifier());
     }
 
     /**
-     *
      * @return 由台阶切石制作2个横条的切石配方。
      */
     public @Nullable String getStoneCuttingFromSlabRecipeString() {
@@ -206,27 +205,26 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
     }
 
     /**
-     *
      * @return 由纵台阶切石制作2个横条的切石配方。
      */
     public @Nullable String getStoneCuttingFromVerticalSlabRecipeString() {
         return String.format("""
-                {
-                  "type": "minecraft:stonecutting",
-                  "ingredient": {
-                    "item": "%s"
-                  },
-                  "result": "%s",
-                  "count": 2
-                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab, this.getBaseBlock())),
+                        {
+                          "type": "minecraft:stonecutting",
+                          "ingredient": {
+                            "item": "%s"
+                          },
+                          "result": "%s",
+                          "count": 2
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab, this.getBaseBlock())),
                 this.getIdentifier());
     }
 
     @Override
     public void writeCraftingRecipeFiles() {
         Identifier identifier = this.getIdentifier();
-        this.writeRecipeFile(identifier.getNamespace(),identifier.getPath()+"_from_slab",this.getCraftingFromSlabRecipeString());
-        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath()+"_from_vertical_quarter_piece",
+        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() + "_from_slab", this.getCraftingFromSlabRecipeString());
+        this.writeRecipeFile(identifier.getNamespace(), identifier.getPath() + "_from_vertical_quarter_piece",
                 this.getCraftingFromVerticalQuarterPieceRecipeString());
     }
 

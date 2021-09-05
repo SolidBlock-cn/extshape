@@ -36,8 +36,9 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
 
     /**
      * 根据基础方块的命名空间id以及指定的后缀，利用{@link #pathPrefixMappings}，组合一个extshape命名空间下的新的id。
+     *
      * @param identifier 基础方块的id，如<code>minecraft:quartz_bricks</code>。
-     * @param suffix 后缀，例如<code>"_stairs"</code>或<code>"_fence"</code>。
+     * @param suffix     后缀，例如<code>"_stairs"</code>或<code>"_fence"</code>。
      * @return 组合后的id，例如 <code>minecraft:quartz_bricks</code> 和 <code>"_stairs"</code> 组合形成
      * <code>extshape:quartz_stairs</code>。
      */
@@ -52,6 +53,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
 
     /**
      * 获取基础方块的id。
+     *
      * @return 基础方块的id。
      */
     default Identifier getBaseBlockIdentifier() {

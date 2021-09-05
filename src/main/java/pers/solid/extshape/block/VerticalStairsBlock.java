@@ -63,4 +63,9 @@ public class VerticalStairsBlock extends Block implements Waterloggable {
     public BlockState mirror(BlockState state, BlockMirror mirror) {
         return super.mirror(state, mirror).with(FACING, state.get(FACING).mirror(mirror));
     }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    }
 }

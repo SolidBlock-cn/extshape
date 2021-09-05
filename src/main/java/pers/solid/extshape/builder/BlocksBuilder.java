@@ -119,6 +119,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
 
     /**
      * 构造栅栏和栅栏门，并指定合成材料。
+     *
      * @param fenceCraftingIngredient 合成栅栏或栅栏门需要使用的第二合成材料。
      */
     public BlocksBuilder withFences(@NotNull Item fenceCraftingIngredient) {
@@ -163,6 +164,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
 
     /**
      * 构造按钮，并指定按钮类型。
+     *
      * @param type 按钮类型。
      */
     public BlocksBuilder withButton(@NotNull ExtShapeButtonBlock.ButtonType type) {
@@ -181,6 +183,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
 
     /**
      * 构造压力板，并指定压力板类型。
+     *
      * @param type 压力板类型。
      */
     public BlocksBuilder withPressurePlate(@NotNull PressurePlateBlock.ActivationRule type) {
@@ -199,8 +202,9 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
 
     /**
      * 设置指定形状的方块的默认方块标签。
+     *
      * @param shape 形状。
-     * @param tag 默认方块标签。
+     * @param tag   默认方块标签。
      */
     public BlocksBuilder setDefaultTagOf(@Nullable Shape shape, @Nullable ExtShapeBlockTag tag) {
         if (shape == null || tag == null) return this;
@@ -210,6 +214,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
 
     /**
      * 分别设置多个指定形状的方块的方块标签。
+     *
      * @param map 由形状到方块标签的映射。
      */
     public BlocksBuilder setDefaultTagOf(Map<@Nullable Shape, @Nullable ExtShapeBlockTag> map) {
@@ -222,6 +227,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
 
     /**
      * 将构造后的所有方块都放入同一个标签中。
+     *
      * @param tag 构造后所有的方块都需要放入的标签。
      */
     public BlocksBuilder putTag(ExtShapeBlockTag tag) {

@@ -107,6 +107,7 @@ public class Generator {
 
     /**
      * 写入（主要的）配方文件。
+     *
      * @param namespace id的命名空间。
      * @param path      id的路径。
      * @param content   文件内容。
@@ -117,6 +118,7 @@ public class Generator {
 
     /**
      * 写入一个方块标签的json文件，文件路径和内容将由方块标签自动决定。
+     *
      * @param blockTag 方块标签。
      */
     public void writeBlockTagFile(ExtShapeBlockTag blockTag) {
@@ -128,6 +130,7 @@ public class Generator {
 
     /**
      * 写入一个战利品表文件。
+     *
      * @param namespace id的命名空间
      * @param path      id的路径。
      * @param content   文件内容。
@@ -138,6 +141,7 @@ public class Generator {
 
     /**
      * 为指定的方块创建合适的生成器。
+     *
      * @param block 需要创建对应生成器的方块。
      * @return 由方块创建的生成器。
      */
@@ -170,6 +174,7 @@ public class Generator {
 
     /**
      * 生成某方块标签内 <b>所有</b> 方块的数据。
+     *
      * @param tag 方块标签。一般为 {@link ExtShapeBlockTag#ALL_EXTSHAPE_BLOCK_TAGS}。
      */
     public void generateForAllBlocks(ExtShapeBlockTag tag) {
@@ -180,7 +185,7 @@ public class Generator {
         }
 
         // 生成双层平滑石头的数据。
-        new AbstractBlockGenerator<Block>(basePath, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
+        new AbstractBlockGenerator<>(basePath, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
             @Override
             public Identifier getBlockModelIdentifier() {
                 return new Identifier("minecraft", "block/smooth_stone_slab_double");
@@ -192,7 +197,7 @@ public class Generator {
             }
         }.writeAllFiles();
         // 生成石化橡木木板的数据。
-        new AbstractBlockGenerator<Block>(basePath, ExtShapeBlocks.PETRIFIED_OAK_PLANKS) {
+        new AbstractBlockGenerator<>(basePath, ExtShapeBlocks.PETRIFIED_OAK_PLANKS) {
             @Override
             public Identifier getBlockModelIdentifier() {
                 return new Identifier("minecraft", "block/oak_planks");
