@@ -26,7 +26,7 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                 "            \"faces\": {\n" +
                 "                \"down\":  {\"texture\": \"#bottom\", \"cullface\": \"down\" },\n" +
                 "                \"up\":    {\"texture\": \"#top\",    \"cullface\": \"up\" },\n" +
-                "                \"north\": {\"texture\": \"#side\",   \"cullface\": \"north\" },\n" +
+                "                \"north\": {\"texture\": \"#side\" },\n" +
                 "                \"south\": {\"texture\": \"#side\",   \"cullface\": \"south\" },\n" +
                 "                \"west\":  { \"texture\": \"#side\",   \"cullface\": \"west\" },\n" +
                 "                \"east\":  { \"texture\": \"#side\",   \"cullface\": \"east\" }\n" +

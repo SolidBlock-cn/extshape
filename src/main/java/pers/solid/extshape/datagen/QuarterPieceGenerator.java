@@ -29,8 +29,8 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                 "            \"to\": [  16, 8, 16 ],\n" +
                 "            \"faces\": {\n" +
                 "                \"down\":  {\"texture\": \"#bottom\", \"cullface\": \"down\" },\n" +
-                "                \"up\":    {\"texture\": \"#top\",    \"cullface\": \"up\" },\n" +
-                "                \"north\": {\"texture\": \"#side\",   \"cullface\": \"north\" },\n" +
+                "                \"up\":    {\"texture\": \"#top\" },\n" +
+                "                \"north\": {\"texture\": \"#side\" },\n" +
                 "                \"south\": {\"texture\": \"#side\",   \"cullface\": \"south\" },\n" +
                 "                \"west\":  { \"texture\": \"#side\",   \"cullface\": \"west\" },\n" +
                 "                \"east\":  { \"texture\": \"#side\",   \"cullface\": \"east\" }\n" +
@@ -46,9 +46,9 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                 "        {   \"from\": [ 0, 8, 8 ],\n" +
                 "            \"to\": [  16, 16, 16 ],\n" +
                 "            \"faces\": {\n" +
-                "                \"down\":  {\"texture\": \"#bottom\", \"cullface\": \"down\" },\n" +
+                "                \"down\":  {\"texture\": \"#bottom\" },\n" +
                 "                \"up\":    {\"texture\": \"#top\",    \"cullface\": \"up\" },\n" +
-                "                \"north\": {\"texture\": \"#side\",   \"cullface\": \"north\" },\n" +
+                "                \"north\": {\"texture\": \"#side\" },\n" +
                 "                \"south\": {\"texture\": \"#side\",   \"cullface\": \"south\" },\n" +
                 "                \"west\":  { \"texture\": \"#side\",   \"cullface\": \"west\" },\n" +
                 "                \"east\":  { \"texture\": \"#side\",   \"cullface\": \"east\" }\n" +

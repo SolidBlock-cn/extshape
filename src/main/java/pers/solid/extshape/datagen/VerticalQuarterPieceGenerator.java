@@ -32,9 +32,9 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                 "            \"faces\": {\n" +
                 "                \"down\":  {\"texture\": \"#bottom\", \"cullface\": \"down\" },\n" +
                 "                \"up\":    {\"texture\": \"#top\",    \"cullface\": \"up\" },\n" +
-                "                \"north\": {\"texture\": \"#side\",   \"cullface\": \"north\" },\n" +
+                "                \"north\": {\"texture\": \"#side\" },\n" +
                 "                \"south\": {\"texture\": \"#side\",   \"cullface\": \"south\" },\n" +
-                "                \"west\":  { \"texture\": \"#side\",   \"cullface\": \"west\" },\n" +
+                "                \"west\":  { \"texture\": \"#side\" },\n" +
                 "                \"east\":  { \"texture\": \"#side\",   \"cullface\": \"east\" }\n" +
                 "            }\n" +
                 "        }\n" +

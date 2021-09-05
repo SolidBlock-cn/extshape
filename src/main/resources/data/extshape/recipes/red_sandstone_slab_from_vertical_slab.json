@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "extshape:polished_deepslate_vertical_slab"
+      "item": "extshape:red_sandstone_vertical_slab"
     }
   },
   "result": {
-    "item": "minecraft:polished_deepslate_slab",
+    "item": "minecraft:red_sandstone_slab",
     "count": 1
   }
 }

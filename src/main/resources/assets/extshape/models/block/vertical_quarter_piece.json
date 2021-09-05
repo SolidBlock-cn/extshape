@@ -8,9 +8,9 @@
             "faces": {
                 "down":  {"texture": "#bottom", "cullface": "down" },
                 "up":    {"texture": "#top",    "cullface": "up" },
-                "north": {"texture": "#side",   "cullface": "north" },
+                "north": {"texture": "#side" },
                 "south": {"texture": "#side",   "cullface": "south" },
-                "west":  { "texture": "#side",   "cullface": "west" },
+                "west":  { "texture": "#side" },
                 "east":  { "texture": "#side",   "cullface": "east" }
             }
         }

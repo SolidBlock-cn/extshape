@@ -30,7 +30,7 @@ public class GlazedTerracottaSlabGenerator extends SlabGenerator {
                 "            \"to\": [ 16, 8, 16 ],\n" +
                 "            \"faces\": {\n" +
                 "                \"down\":  { \"texture\": \"#bottom\", \"cullface\": \"down\" },\n" +
-                "                \"up\":    { \"texture\": \"#top\", \"cullface\": \"up\" },\n" +
+                "                \"up\":    { \"texture\": \"#top\" },\n" +
                 "                \"north\": { \"texture\": \"#side\", \"uv\":[8,0,16,16], \"cullface\": \"north\", \"rotation\": 90 },\n" +
                 "                \"south\": { \"texture\": \"#side\", \"uv\":[0,0,8,16], \"cullface\": \"south\", \"rotation\": 270 },\n" +
                 "                \"west\":  { \"texture\": \"#side\", \"uv\":[0,8,16,16], \"cullface\": \"west\", \"rotation\": 0 },\n" +
@@ -55,7 +55,7 @@ public class GlazedTerracottaSlabGenerator extends SlabGenerator {
                 "        {   \"from\": [ 0, 8, 0 ],\n" +
                 "            \"to\": [ 16, 16, 16 ],\n" +
                 "            \"faces\": {\n" +
-                "                \"down\":  { \"texture\": \"#bottom\", \"cullface\": \"down\" },\n" +
+                "                \"down\":  { \"texture\": \"#bottom\" },\n" +
                 "                \"up\":    { \"texture\": \"#top\", \"cullface\": \"up\" },\n" +
                 "                \"north\": { \"texture\": \"#side\", \"uv\":[0,0,8,16], \"cullface\": \"north\", \"rotation\": 90 },\n" +
                 "                \"south\": { \"texture\": \"#side\", \"uv\":[8,0,16,16], \"cullface\": \"south\", \"rotation\": 270 },\n" +
