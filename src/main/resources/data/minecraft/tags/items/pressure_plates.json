@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:concrete_pressure_plates",
+    "#extshape:terracotta_pressure_plates",
+    "#extshape:woolen_pressure_plates",
+    "extshape:granite_pressure_plate",
+    "extshape:polished_granite_pressure_plate",
+    "extshape:diorite_pressure_plate",
+    "extshape:polished_diorite_pressure_plate",
+    "extshape:andesite_pressure_plate",
+    "extshape:polished_andesite_pressure_plate",
+    "extshape:smooth_stone_pressure_plate",
+    "extshape:tuff_pressure_plate",
+    "extshape:calcite_pressure_plate",
+    "extshape:bedrock_pressure_plate",
+    "extshape:smooth_sandstone_pressure_plate",
+    "extshape:smooth_red_sandstone_pressure_plate",
+    "extshape:obsidian_pressure_plate",
+    "extshape:snow_pressure_plate",
+    "extshape:netherrack_pressure_plate",
+    "extshape:glowstone_pressure_plate",
+    "extshape:smooth_quartz_pressure_plate",
+    "extshape:packed_ice_pressure_plate",
+    "extshape:prismarine_pressure_plate",
+    "extshape:prismarine_brick_pressure_plate",
+    "extshape:dark_prismarine_pressure_plate",
+    "extshape:crying_obsidian_pressure_plate"
+  ]
+}

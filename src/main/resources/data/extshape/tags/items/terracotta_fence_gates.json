@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:stained_terracotta_fence_gates",
+    "extshape:terracotta_fence_gate"
+  ]
+}

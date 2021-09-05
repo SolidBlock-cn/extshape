@@ -72,7 +72,7 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
      * @param element 需要添加进此标签的元素。
      */
     public boolean add(T element) {
-        if (element==null) {
+        if (element == null) {
             ExtShape.EXTSHAPE_LOGGER.error(String.format("Trying to add a null value to tag %s.", this));
             return false;
         }
@@ -91,7 +91,7 @@ public class ExtShapeTag<T> extends AbstractCollection<T> {
      * @param element 需要添加进此标签的标签，其元素类型必须一致。
      */
     public boolean addTag(ExtShapeTag<T> element) {
-        if (element==null) {
+        if (element == null) {
             ExtShape.EXTSHAPE_LOGGER.error(String.format("Trying to add a null tag to tag %s.", this));
             return false;
         }

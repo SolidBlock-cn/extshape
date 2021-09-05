@@ -1,6 +1,27 @@
 {
   "replace": false,
   "values": [
-    "#extshape:bedrock_blocks"
+    "extshape:bedrock_stairs",
+    "extshape:packed_ice_stairs",
+    "extshape:bedrock_slab",
+    "extshape:packed_ice_slab",
+    "extshape:bedrock_fence",
+    "extshape:packed_ice_fence",
+    "extshape:bedrock_fence_gate",
+    "extshape:packed_ice_fence_gate",
+    "extshape:bedrock_wall",
+    "extshape:packed_ice_wall",
+    "extshape:bedrock_button",
+    "extshape:packed_ice_button",
+    "extshape:bedrock_pressure_plate",
+    "extshape:packed_ice_pressure_plate",
+    "extshape:bedrock_vertical_slab",
+    "extshape:packed_ice_vertical_slab",
+    "extshape:bedrock_quarter_piece",
+    "extshape:packed_ice_quarter_piece",
+    "extshape:bedrock_vertical_stairs",
+    "extshape:packed_ice_vertical_stairs",
+    "extshape:bedrock_vertical_quarter_piece",
+    "extshape:packed_ice_vertical_quarter_piece"
   ]
 }

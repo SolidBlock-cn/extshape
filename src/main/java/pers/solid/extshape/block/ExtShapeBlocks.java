@@ -15,12 +15,14 @@ import pers.solid.extshape.builder.SlabBuilder;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
+import java.util.Map;
+
 import static net.minecraft.block.Blocks.*;
 import static net.minecraft.block.PressurePlateBlock.ActivationRule.MOBS;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
 
 public class ExtShapeBlocks {
-    public static final Block PETRIFIED_OAK_PLANKS,SMOOTH_STONE_DOUBLE_SLAB;
+    public static final Block PETRIFIED_OAK_PLANKS, SMOOTH_STONE_DOUBLE_SLAB;
 
     /*
       使用BlockBuilder并利用迭代器来批量注册多个方块及其对应方块物品，提高效率。
@@ -34,8 +36,8 @@ public class ExtShapeBlocks {
 
         // 石化橡木。
         PETRIFIED_OAK_PLANKS =
-                BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape","petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
-        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(PETRIFIED_OAK_PLANKS,PETRIFIED_OAK_SLAB);
+                BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape", "petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).putTag(PICKAXE_MINEABLE).setDefaultTag(FULL_BLOCKS).build();
+        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
 
         // 平滑石头比较特殊，完整方块和台阶不同。
         SMOOTH_STONE_DOUBLE_SLAB =
@@ -65,7 +67,7 @@ public class ExtShapeBlocks {
         }
 
         // 基岩
-        BlockBuilder.createAllShapes(BEDROCK, Items.STICK, ButtonType.HARD, MOBS).putTag(BEDROCK_BLOCKS).build();
+        BlockBuilder.createAllShapes(BEDROCK, Items.STICK, ButtonType.HARD, MOBS).build();
 
         // 紫水晶块。
 //        BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD, null, null).withoutRedstone().build();
@@ -122,7 +124,7 @@ public class ExtShapeBlocks {
         BlockBuilder.createBasicShapes(CLAY).build();
 
         // 下界岩。
-        BlockBuilder.createAllShapes(NETHERRACK, Items.NETHER_BRICK, ButtonType.STONE, MOBS).putTag(INFINIBURN_OVERWORLD).build();
+        BlockBuilder.createAllShapes(NETHERRACK, Items.NETHER_BRICK, ButtonType.STONE, MOBS).build();
 
         // 荧石可以发光。
         BlockBuilder.createAllShapes(GLOWSTONE, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
@@ -136,7 +138,7 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(NETHER_BRICKS, Items.NETHER_BRICK, null, null).withoutRedstone().build();
 
         // 末地石、末地石砖。
-        BlockBuilder.createBasicShapes(END_STONE).withoutRedstone().putTag(DRAGON_IMMUNE).build();
+        BlockBuilder.createBasicShapes(END_STONE).withoutRedstone().build();
         BlockBuilder.createBasicShapes(END_STONE_BRICKS).withoutRedstone().build();
 
         // 绿宝石块。

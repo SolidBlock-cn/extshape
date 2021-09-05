@@ -4,9 +4,11 @@ import com.google.gson.JsonArray;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.datagen.Mineable;
+import pers.solid.extshape.mappings.BlockMappings;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static net.minecraft.block.Blocks.*;
@@ -48,7 +50,10 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             POLISHED_DIORITE,
             ANDESITE,
             POLISHED_ANDESITE
-    ).addToTag(STONES);
+    );
+    static {
+        STONES.addTag(STONE_VARIANTS);
+    }
     public static final ExtShapeBlockTag SANDSTONES = new ExtShapeBlockTag(
             SANDSTONE,
             CUT_SANDSTONE,
@@ -283,6 +288,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "vertical_quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier(
             "extshape", "wooden_vertical_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
+    public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
 
     public ExtShapeBlockTag() {
         this(null, new ArrayList<>());
