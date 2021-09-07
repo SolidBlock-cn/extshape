@@ -4,6 +4,10 @@
 ### 1.2.5
 - 修复了垂直台阶底部部分材质不渲染的问题。
 - Fixed the issue of missing rendering at the bottom of vertical stairs blocks.
+- 对于 1.16 版本：移除不必要的标签，并修复挖掘等级问题。
+- For 1.16 versions: Removed unnecessary tags and fixed mining level issue.
+  - 请注意：1.16 版本的语言文件仍会存有未来版本的语言文件。
+  - Note: For 1.16 versions, language files for future versions are still stored.
 
 ### 1.2.4
 - 移除了木板墙和粘土墙。
