@@ -14,9 +14,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class BlockFamilies {
-    private static final Map<Block, BlockFamily> BASE_BLOCKS_TO_FAMILIES = Maps.newHashMap();
-    private static final String WOODEN_GROUP = "wooden";
-    private static final String WOODEN_UNLOCK_CRITERION_NAME = "has_planks";
     public static final BlockFamily ACACIA;
     public static final BlockFamily BIRCH;
     public static final BlockFamily CRIMSON;
@@ -71,28 +68,14 @@ public class BlockFamilies {
     public static final BlockFamily SMOOTH_RED_SANDSTONE;
     public static final BlockFamily STONE;
     public static final BlockFamily STONE_BRICK;
+    private static final Map<Block, BlockFamily> BASE_BLOCKS_TO_FAMILIES = Maps.newHashMap();
+    private static final String WOODEN_GROUP = "wooden";
+    private static final String WOODEN_UNLOCK_CRITERION_NAME = "has_planks";
 //    public static final BlockFamily DEEPSLATE;
 //    public static final BlockFamily COBBLED_DEEPSLATE;
 //    public static final BlockFamily POLISHED_DEEPSLATE;
 //    public static final BlockFamily DEEPSLATE_BRICK;
 //    public static final BlockFamily DEEPSLATE_TILE;
-
-    public BlockFamilies() {
-    }
-
-    private static BlockFamily.Builder register(Block baseBlock) {
-        BlockFamily.Builder builder = new BlockFamily.Builder(baseBlock);
-        BlockFamily blockFamily = (BlockFamily)BASE_BLOCKS_TO_FAMILIES.put(baseBlock, builder.build());
-        if (blockFamily != null) {
-            throw new IllegalStateException("Duplicate family definition for " + Registry.BLOCK.getId(baseBlock));
-        } else {
-            return builder;
-        }
-    }
-
-    public static Stream<BlockFamily> getFamilies() {
-        return BASE_BLOCKS_TO_FAMILIES.values().stream();
-    }
 
     static {
         ACACIA = register(Blocks.ACACIA_PLANKS).button(Blocks.ACACIA_BUTTON).fence(Blocks.ACACIA_FENCE).fenceGate(Blocks.ACACIA_FENCE_GATE).pressurePlate(Blocks.ACACIA_PRESSURE_PLATE).sign(Blocks.ACACIA_SIGN, Blocks.ACACIA_WALL_SIGN).slab(Blocks.ACACIA_SLAB).stairs(Blocks.ACACIA_STAIRS).door(Blocks.ACACIA_DOOR).trapdoor(Blocks.ACACIA_TRAPDOOR).group("wooden").unlockCriterionName("has_planks").build();
@@ -154,5 +137,22 @@ public class BlockFamilies {
 //        POLISHED_DEEPSLATE = register(Blocks.POLISHED_DEEPSLATE).slab(Blocks.POLISHED_DEEPSLATE_SLAB).stairs(Blocks.POLISHED_DEEPSLATE_STAIRS).wall(Blocks.POLISHED_DEEPSLATE_WALL).build();
 //        DEEPSLATE_BRICK = register(Blocks.DEEPSLATE_BRICKS).slab(Blocks.DEEPSLATE_BRICK_SLAB).stairs(Blocks.DEEPSLATE_BRICK_STAIRS).wall(Blocks.DEEPSLATE_BRICK_WALL).cracked(Blocks.CRACKED_DEEPSLATE_BRICKS).build();
 //        DEEPSLATE_TILE = register(Blocks.DEEPSLATE_TILES).slab(Blocks.DEEPSLATE_TILE_SLAB).stairs(Blocks.DEEPSLATE_TILE_STAIRS).wall(Blocks.DEEPSLATE_TILE_WALL).cracked(Blocks.CRACKED_DEEPSLATE_TILES).build();
+    }
+
+    public BlockFamilies() {
+    }
+
+    private static BlockFamily.Builder register(Block baseBlock) {
+        BlockFamily.Builder builder = new BlockFamily.Builder(baseBlock);
+        BlockFamily blockFamily = BASE_BLOCKS_TO_FAMILIES.put(baseBlock, builder.build());
+        if (blockFamily != null) {
+            throw new IllegalStateException("Duplicate family definition for " + Registry.BLOCK.getId(baseBlock));
+        } else {
+            return builder;
+        }
+    }
+
+    public static Stream<BlockFamily> getFamilies() {
+        return BASE_BLOCKS_TO_FAMILIES.values().stream();
     }
 }

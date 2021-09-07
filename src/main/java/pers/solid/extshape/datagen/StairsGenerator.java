@@ -63,215 +63,215 @@ public class StairsGenerator extends AbstractBlockGenerator<StairsBlock> {
     public String getBlockStatesString() {
         Identifier identifier = this.getIdentifier();
         return String.format(
-"{\n" +
-        "  \"variants\": {\n" +
-        "    \"facing=east,half=bottom,shape=inner_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=east,half=bottom,shape=inner_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\"\n" +
-        "    },\n" +
-        "    \"facing=east,half=bottom,shape=outer_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=east,half=bottom,shape=outer_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\"\n" +
-        "    },\n" +
-        "    \"facing=east,half=bottom,shape=straight\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s\"\n" +
-        "    },\n" +
-        "    \"facing=east,half=top,shape=inner_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=east,half=top,shape=inner_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=east,half=top,shape=outer_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=east,half=top,shape=outer_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=east,half=top,shape=straight\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=bottom,shape=inner_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=bottom,shape=inner_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=bottom,shape=outer_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=bottom,shape=outer_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=bottom,shape=straight\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s\",\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=top,shape=inner_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=top,shape=inner_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=top,shape=outer_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=top,shape=outer_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=north,half=top,shape=straight\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=south,half=bottom,shape=inner_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\"\n" +
-        "    },\n" +
-        "    \"facing=south,half=bottom,shape=inner_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=south,half=bottom,shape=outer_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\"\n" +
-        "    },\n" +
-        "    \"facing=south,half=bottom,shape=outer_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=south,half=bottom,shape=straight\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s\",\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=south,half=top,shape=inner_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=south,half=top,shape=inner_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=south,half=top,shape=outer_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=south,half=top,shape=outer_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=south,half=top,shape=straight\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=bottom,shape=inner_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=bottom,shape=inner_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=bottom,shape=outer_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"y\": 90,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=bottom,shape=outer_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=bottom,shape=straight\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s\",\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=top,shape=inner_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=top,shape=inner_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=top,shape=outer_left\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=top,shape=outer_right\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 270,\n" +
-        "      \"uvlock\": true\n" +
-        "    },\n" +
-        "    \"facing=west,half=top,shape=straight\": {\n" +
-        "      \"model\": \"%1$s:block/%2$s\",\n" +
-        "      \"x\": 180,\n" +
-        "      \"y\": 180,\n" +
-        "      \"uvlock\": true\n" +
-        "    }\n" +
-        "  }\n" +
-        "}\n", identifier.getNamespace(), identifier.getPath());
+                "{\n" +
+                        "  \"variants\": {\n" +
+                        "    \"facing=east,half=bottom,shape=inner_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=bottom,shape=inner_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\"\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=bottom,shape=outer_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=bottom,shape=outer_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\"\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=bottom,shape=straight\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\"\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=top,shape=inner_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=top,shape=inner_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=top,shape=outer_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=top,shape=outer_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=east,half=top,shape=straight\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=bottom,shape=inner_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=bottom,shape=inner_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=bottom,shape=outer_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=bottom,shape=outer_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=bottom,shape=straight\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\",\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=top,shape=inner_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=top,shape=inner_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=top,shape=outer_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=top,shape=outer_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=north,half=top,shape=straight\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=bottom,shape=inner_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\"\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=bottom,shape=inner_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=bottom,shape=outer_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\"\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=bottom,shape=outer_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=bottom,shape=straight\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\",\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=top,shape=inner_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=top,shape=inner_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=top,shape=outer_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=top,shape=outer_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=south,half=top,shape=straight\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=bottom,shape=inner_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=bottom,shape=inner_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=bottom,shape=outer_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"y\": 90,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=bottom,shape=outer_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=bottom,shape=straight\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\",\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=top,shape=inner_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=top,shape=inner_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_inner\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=top,shape=outer_left\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=top,shape=outer_right\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s_outer\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 270,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    },\n" +
+                        "    \"facing=west,half=top,shape=straight\": {\n" +
+                        "      \"model\": \"%1$s:block/%2$s\",\n" +
+                        "      \"x\": 180,\n" +
+                        "      \"y\": 180,\n" +
+                        "      \"uvlock\": true\n" +
+                        "    }\n" +
+                        "  }\n" +
+                        "}\n", identifier.getNamespace(), identifier.getPath());
     }
 
     @Override

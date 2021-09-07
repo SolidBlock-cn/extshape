@@ -12,7 +12,6 @@ import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.block.QuarterPieceBlock;
 import pers.solid.extshape.block.VerticalQuarterPieceBlock;
 import pers.solid.extshape.block.VerticalSlabBlock;
-import pers.solid.extshape.datagen.Generator;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class ExtShape implements ModInitializer {
@@ -41,6 +40,6 @@ public class ExtShape implements ModInitializer {
             else FuelRegistry.INSTANCE.add(block, 300);
         }
 
-        Generator.main();
+//        Generator.main();
     }
 }

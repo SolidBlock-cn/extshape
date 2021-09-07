@@ -39,11 +39,16 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction dir = state.get(HORIZONTAL_FACING);
         switch (dir) {
-            case NORTH: return NORTH_SHAPE;
-            case SOUTH: return SOUTH_SHAPE;
-            case EAST: return EAST_SHAPE;
-            case WEST: return WEST_SHAPE;
-            default:return VoxelShapes.fullCube();
+            case NORTH:
+                return NORTH_SHAPE;
+            case SOUTH:
+                return SOUTH_SHAPE;
+            case EAST:
+                return EAST_SHAPE;
+            case WEST:
+                return WEST_SHAPE;
+            default:
+                return VoxelShapes.fullCube();
         }
     }
 

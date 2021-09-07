@@ -2,9 +2,9 @@ package pers.solid.extshape.block;
 
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -27,11 +27,6 @@ public class ExtShapeBlocks {
       只有极少数方块会以静态常量成员变量的形式存储。
      */
     static {
-        // 石头及其变种（含磨制变种），已存在其楼梯、台阶、墙，但是还没有栅栏和栅栏门。
-        for (final Block block : STONES) {
-            BlockBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, MOBS).build();
-        }
-
         // 石化橡木。
         PETRIFIED_OAK_PLANKS =
                 BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape", "petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(FULL_BLOCKS).build();
@@ -42,7 +37,12 @@ public class ExtShapeBlocks {
                 BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE)).setIdentifier(new Identifier(
                         "extshape", "smooth_stone_slab_double")).group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(FULL_BLOCKS).build();
         BlockBuilder.createAllShapes(SMOOTH_STONE, Items.FLINT, ButtonType.STONE, MOBS).withoutShapes().build();
-        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(SMOOTH_STONE_DOUBLE_SLAB,SMOOTH_STONE_SLAB);
+        BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab).put(SMOOTH_STONE_DOUBLE_SLAB, SMOOTH_STONE_SLAB);
+
+        // 石头及其变种（含磨制变种），已存在其楼梯、台阶、墙，但是还没有栅栏和栅栏门。
+        for (final Block block : STONES) {
+            BlockBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, MOBS).build();
+        }
 
 //        // 深板岩圆石、磨制深板岩。
 //        for (final Block BLOCK : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE}) {
@@ -71,14 +71,14 @@ public class ExtShapeBlocks {
 //        BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD, null, null).withoutRedstone().build();
 
         // 铁块。
-        BlockBuilder.createAllShapes(IRON_BLOCK, Items.IRON_INGOT, ButtonType.STONE, null).withoutRedstone().build();
+        BlockBuilder.createAllShapes(IRON_BLOCK, Items.IRON_INGOT, ButtonType.STONE, null).breakByTool(FabricToolTags.PICKAXES,1).withoutRedstone().build();
 
         // 金块，钻石块，下界合金块，青金石块
-        for (final Block BLOCK : new Block[]{GOLD_BLOCK, DIAMOND_BLOCK, NETHERITE_BLOCK, LAPIS_BLOCK}) {
-            Item item = BLOCK == GOLD_BLOCK ? Items.GOLD_INGOT : BLOCK == DIAMOND_BLOCK ? Items.DIAMOND :
-                    BLOCK == NETHERITE_BLOCK ? Items.NETHERITE_INGOT : BLOCK == LAPIS_BLOCK ? Items.LAPIS_LAZULI : null;
-            BlockBuilder.createAllShapes(BLOCK, item, null, null).withoutRedstone().build();
-        }
+        BlockBuilder.createAllShapes(GOLD_BLOCK, Items.GOLD_INGOT, null, null).withoutRedstone().breakByTool(FabricToolTags.PICKAXES, 2).build();
+        BlockBuilder.createAllShapes(DIAMOND_BLOCK, Items.DIAMOND, null, null).withoutRedstone().breakByTool(FabricToolTags.PICKAXES, 2).build();
+        BlockBuilder.createAllShapes(NETHERITE_BLOCK, Items.NETHERITE_INGOT, null, null).withoutRedstone().breakByTool(FabricToolTags.PICKAXES, 3).build();
+        BlockBuilder.createAllShapes(LAPIS_BLOCK, Items.LAPIS_LAZULI, null, null).withoutRedstone().breakByTool(FabricToolTags.PICKAXES
+                , 1).build();
 
         // 砂岩、红砂岩及其切制、錾制、平滑变种。其中，只有平滑砂岩有栅栏、压力板和按钮。
         for (final Block block : SANDSTONES) {
@@ -108,7 +108,7 @@ public class ExtShapeBlocks {
         BlockBuilder.createBasicShapes(MOSSY_COBBLESTONE).withFences(Items.STICK).withWall().build();
 
         // 黑曜石。
-        BlockBuilder.createAllShapes(OBSIDIAN, Items.STONE, ButtonType.HARD, MOBS).build();
+        BlockBuilder.createAllShapes(OBSIDIAN, Items.STONE, ButtonType.HARD, MOBS).breakByTool(FabricToolTags.PICKAXES, 5).build();
 
         // 紫珀块。
         BlockBuilder.createBasicShapes(PURPUR_BLOCK).withWall().build();
@@ -140,7 +140,7 @@ public class ExtShapeBlocks {
         BlockBuilder.createBasicShapes(END_STONE_BRICKS).withoutRedstone().build();
 
         // 绿宝石块。
-        BlockBuilder.createAllShapes(EMERALD_BLOCK, Items.EMERALD, ButtonType.HARD, MOBS).withoutRedstone().build();
+        BlockBuilder.createAllShapes(EMERALD_BLOCK, Items.EMERALD, ButtonType.HARD, MOBS).withoutRedstone().breakByTool(FabricToolTags.PICKAXES, 2).build();
 
         // 石英、石英砖、平滑石英块、錾制石英块，只有平滑石英块有按钮和压力板。
         for (final Block block : new Block[]{QUARTZ_BLOCK, QUARTZ_BRICKS, SMOOTH_QUARTZ, CHISELED_QUARTZ_BLOCK}) {
@@ -202,7 +202,7 @@ public class ExtShapeBlocks {
         }
 
         // 哭泣的黑曜石。
-        BlockBuilder.createAllShapes(CRYING_OBSIDIAN, Items.STONE, ButtonType.HARD, MOBS).build();
+        BlockBuilder.createAllShapes(CRYING_OBSIDIAN, Items.STONE, ButtonType.HARD, MOBS).breakByTool(FabricToolTags.PICKAXES, 3).build();
 
         // 带釉陶瓦只注册台阶。
         for (final Block BLOCK : GLAZED_TERRACOTTAS) {

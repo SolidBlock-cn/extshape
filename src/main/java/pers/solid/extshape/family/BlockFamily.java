@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class BlockFamily {
-    private final Block baseBlock;
     final Map<BlockFamily.Variant, Block> variants = Maps.newHashMap();
+    private final Block baseBlock;
     boolean generateModels = true;
     boolean generateRecipes = true;
     @Nullable
@@ -37,7 +37,7 @@ public class BlockFamily {
     }
 
     public Block getVariant(BlockFamily.Variant variant) {
-        return (Block)this.variants.get(variant);
+        return this.variants.get(variant);
     }
 
     public boolean shouldGenerateModels() {
@@ -54,6 +54,34 @@ public class BlockFamily {
 
     public Optional<String> getUnlockCriterionName() {
         return StringUtils.isBlank(this.unlockCriterionName) ? Optional.empty() : Optional.of(this.unlockCriterionName);
+    }
+
+    public enum Variant {
+        BUTTON("button"),
+        CHISELED("chiseled"),
+        CRACKED("cracked"),
+        CUT("cut"),
+        DOOR("door"),
+        FENCE("fence"),
+        FENCE_GATE("fence_gate"),
+        SIGN("sign"),
+        SLAB("slab"),
+        STAIRS("stairs"),
+        PRESSURE_PLATE("pressure_plate"),
+        POLISHED("polished"),
+        TRAPDOOR("trapdoor"),
+        WALL("wall"),
+        WALL_SIGN("wall_sign");
+
+        private final String name;
+
+        Variant(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return this.name;
+        }
     }
 
     public static class Builder {
@@ -156,34 +184,6 @@ public class BlockFamily {
         public BlockFamily.Builder unlockCriterionName(String unlockCriterionName) {
             this.family.unlockCriterionName = unlockCriterionName;
             return this;
-        }
-    }
-
-    public static enum Variant {
-        BUTTON("button"),
-        CHISELED("chiseled"),
-        CRACKED("cracked"),
-        CUT("cut"),
-        DOOR("door"),
-        FENCE("fence"),
-        FENCE_GATE("fence_gate"),
-        SIGN("sign"),
-        SLAB("slab"),
-        STAIRS("stairs"),
-        PRESSURE_PLATE("pressure_plate"),
-        POLISHED("polished"),
-        TRAPDOOR("trapdoor"),
-        WALL("wall"),
-        WALL_SIGN("wall_sign");
-
-        private final String name;
-
-        private Variant(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return this.name;
         }
     }
 }

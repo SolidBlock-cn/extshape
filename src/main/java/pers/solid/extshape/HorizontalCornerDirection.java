@@ -178,7 +178,6 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
                     case SOUTH_WEST:
                         return SOUTH_EAST;
                 }
-                ;
             case LEFT_RIGHT:
                 switch (this) {
                     case NORTH_EAST:
@@ -190,7 +189,6 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
                     case SOUTH_WEST:
                         return NORTH_WEST;
                 }
-                ;
             default:
                 return this;
         }

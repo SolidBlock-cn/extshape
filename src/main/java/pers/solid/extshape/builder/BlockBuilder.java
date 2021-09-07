@@ -33,18 +33,30 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
                                                                @Nullable ExtShapeButtonBlock.ButtonType buttonType,
                                                                @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         switch (shape) {
-            case stairs: return new StairsBuilder(baseBlock);
-            case slab: return new SlabBuilder(baseBlock);
-            case verticalSlab: return new VerticalSlabBuilder(baseBlock);
-            case verticalStairs: return new VerticalStairsBuilder(baseBlock);
-            case quarterPiece: return new QuarterPieceBuilder(baseBlock);
-            case verticalQuarterPiece: return new VerticalQuarterPieceBuilder(baseBlock);
-            case fence: return new FenceBuilder(baseBlock, fenceCraftingIngredient);
-            case fenceGate: return new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
-            case button: return new ButtonBuilder(buttonType, baseBlock);
-            case pressurePlate: return new PressurePlateBuilder(pressurePlateActivationRule, baseBlock);
-            case wall: return new WallBuilder(baseBlock);
-            default: return null;
+            case stairs:
+                return new StairsBuilder(baseBlock);
+            case slab:
+                return new SlabBuilder(baseBlock);
+            case verticalSlab:
+                return new VerticalSlabBuilder(baseBlock);
+            case verticalStairs:
+                return new VerticalStairsBuilder(baseBlock);
+            case quarterPiece:
+                return new QuarterPieceBuilder(baseBlock);
+            case verticalQuarterPiece:
+                return new VerticalQuarterPieceBuilder(baseBlock);
+            case fence:
+                return new FenceBuilder(baseBlock, fenceCraftingIngredient);
+            case fenceGate:
+                return new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
+            case button:
+                return new ButtonBuilder(buttonType, baseBlock);
+            case pressurePlate:
+                return new PressurePlateBuilder(pressurePlateActivationRule, baseBlock);
+            case wall:
+                return new WallBuilder(baseBlock);
+            default:
+                return null;
         }
     }
 

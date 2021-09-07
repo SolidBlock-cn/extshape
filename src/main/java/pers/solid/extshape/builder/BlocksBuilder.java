@@ -3,6 +3,7 @@ package pers.solid.extshape.builder;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.Item;
+import net.minecraft.tag.Tag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
@@ -26,6 +27,8 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
     private @Nullable Item fenceCraftingIngredient;
     private @Nullable ExtShapeButtonBlock.ButtonType buttonType;
     private @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
+    private Tag<Item> breakByToolTag;
+    private int miningLevel;
 
     /**
      * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
@@ -233,6 +236,12 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         return this;
     }
 
+    public BlocksBuilder breakByTool(Tag<Item> tag,int miningLevel) {
+        this.breakByToolTag = tag;
+        this.miningLevel = miningLevel;
+        return this;
+    }
+
     /**
      * 进行构造。构造后不会返回。
      */
@@ -255,6 +264,13 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         for (AbstractBlockBuilder<? extends Block> builder : values) {
             if (this.fireproof) builder.fireproof();
             tagList.forEach(builder::putTag);
+            if (this.breakByToolTag !=null) {
+                if (builder instanceof ButtonBuilder || builder instanceof PressurePlateBuilder) { // 对于按钮、压力板，不应用挖掘等级。
+                    builder = builder.breakByTool(breakByToolTag);
+                } else {
+                    builder = builder.breakByTool(breakByToolTag,miningLevel);
+                }
+            }
         }
         values.forEach(AbstractBlockBuilder::build);
     }

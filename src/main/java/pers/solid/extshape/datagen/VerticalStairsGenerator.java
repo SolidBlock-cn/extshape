@@ -35,6 +35,7 @@ public class VerticalStairsGenerator extends AbstractBlockGenerator<VerticalStai
                 "        {   \"from\": [ 0, 0, 8 ],\n" +
                 "            \"to\": [ 16, 16, 16 ],\n" +
                 "            \"faces\": {\n" +
+                "                \"down\":    { \"texture\": \"#top\", \"cullface\": \"down\" },\n" +
                 "                \"up\":    { \"texture\": \"#top\", \"cullface\": \"up\" },\n" +
                 "                \"north\": { \"texture\": \"#side\" },\n" +
                 "                \"south\": { \"texture\": \"#side\", \"cullface\": \"south\" },\n" +

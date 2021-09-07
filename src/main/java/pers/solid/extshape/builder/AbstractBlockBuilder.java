@@ -4,7 +4,9 @@ import com.google.common.collect.BiMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
@@ -111,6 +113,25 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      */
     public AbstractBlockBuilder<T> setIdentifier(Identifier identifier) {
         this.identifier = identifier;
+        return this;
+    }
+
+    /**
+     * 设置破坏方块需要的工具。请参见 {@link FabricBlockSettings#breakByTool(Tag)}。
+     * @param tag 物品标签，如 <code>FabricToolTags.PICKAXES</code>。
+     */
+    public AbstractBlockBuilder<T> breakByTool(Tag<Item> tag) {
+        this.blockSettings.breakByTool(tag);
+        return this;
+    }
+
+    /**
+     * 设置破坏方块需要的工具。请参见 {@link FabricBlockSettings#breakByTool(Tag, int)}。
+     * @param tag 物品标签，如 <code>FabricToolTags.PICKAXES</code>。
+     * @param miningLevel 挖掘等级，如 2。
+     */
+    public AbstractBlockBuilder<T> breakByTool(Tag<Item> tag, int miningLevel) {
+        this.blockSettings.breakByTool(tag,miningLevel);
         return this;
     }
 

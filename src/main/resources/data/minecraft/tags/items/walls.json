@@ -3,11 +3,11 @@
   "values": [
     "#extshape:concrete_fence_walls",
     "#extshape:terracotta_fence_walls",
+    "extshape:smooth_stone_wall",
     "extshape:stone_wall",
     "extshape:polished_granite_wall",
     "extshape:polished_diorite_wall",
     "extshape:polished_andesite_wall",
-    "extshape:smooth_stone_wall",
     "extshape:bedrock_wall",
     "extshape:iron_wall",
     "extshape:gold_wall",
