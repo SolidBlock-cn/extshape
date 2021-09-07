@@ -1,8 +1,0 @@
-{
-    "parent": "extshape:block/vertical_quarter_piece",
-    "textures": {
-        "bottom": "minecraft:block/cut_sandstone",
-        "top": "minecraft:block/cut_sandstone",
-        "side": "minecraft:block/cut_sandstone"
-    }
-}

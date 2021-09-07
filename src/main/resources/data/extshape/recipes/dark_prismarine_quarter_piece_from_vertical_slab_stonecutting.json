@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "extshape:dark_prismarine_vertical_slab"
-  },
-  "result": "extshape:dark_prismarine_quarter_piece",
-  "count": 2
-}
