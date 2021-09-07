@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:stick"
+      },
+      "W": {
+        "item": "minecraft:mossy_cobblestone"
+      }
+    },
+    "result": {
+      "item": "extshape:mossy_cobblestone_fence_gate"
+    }
+  }

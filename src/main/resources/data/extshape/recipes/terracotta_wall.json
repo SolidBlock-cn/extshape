@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:terracotta"
+    }
+  },
+  "result": {
+    "item": "extshape:terracotta_wall",
+    "count": 6
+  }
+}

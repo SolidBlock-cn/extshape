@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:ice"
+      },
+      "W": {
+        "item": "minecraft:packed_ice"
+      }
+    },
+    "result": {
+      "item": "extshape:packed_ice_fence_gate"
+    }
+  }

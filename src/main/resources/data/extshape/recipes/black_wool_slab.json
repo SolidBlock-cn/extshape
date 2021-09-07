@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wool_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "result": {
+    "item": "extshape:black_wool_slab",
+    "count": 6
+  }
+}

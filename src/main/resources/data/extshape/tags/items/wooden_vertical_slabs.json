@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:oak_vertical_slab",
+    "extshape:spruce_vertical_slab",
+    "extshape:birch_vertical_slab",
+    "extshape:jungle_vertical_slab",
+    "extshape:acacia_vertical_slab",
+    "extshape:dark_oak_vertical_slab",
+    "extshape:crimson_vertical_slab",
+    "extshape:warped_vertical_slab"
+  ]
+}

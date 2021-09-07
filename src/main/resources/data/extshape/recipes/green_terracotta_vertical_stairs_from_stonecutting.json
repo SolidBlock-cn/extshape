@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:green_terracotta"
+  },
+  "result": "extshape:green_terracotta_vertical_stairs",
+  "count": 1
+}

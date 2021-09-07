@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:iron_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:iron_quarter_piece",
+    "count": 6
+  }
+}

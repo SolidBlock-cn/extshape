@@ -1,0 +1,12 @@
+{
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:prismarine_bricks"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:prismarine_brick_button"
+                  }
+                }

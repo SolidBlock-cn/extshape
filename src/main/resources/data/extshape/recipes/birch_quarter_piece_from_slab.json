@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_quarter_piece",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:birch_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:birch_quarter_piece",
+    "count": 6
+  }
+}

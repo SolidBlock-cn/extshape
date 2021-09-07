@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:nether_wart"
+      },
+      "W": {
+        "item": "minecraft:nether_wart_block"
+      }
+    },
+    "result": {
+      "item": "extshape:nether_wart_fence_gate"
+    }
+  }

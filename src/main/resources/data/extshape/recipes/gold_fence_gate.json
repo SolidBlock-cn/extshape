@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:gold_ingot"
+      },
+      "W": {
+        "item": "minecraft:gold_block"
+      }
+    },
+    "result": {
+      "item": "extshape:gold_fence_gate"
+    }
+  }

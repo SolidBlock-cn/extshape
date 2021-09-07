@@ -1,0 +1,12 @@
+{
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:diorite"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:diorite_button"
+                  }
+                }

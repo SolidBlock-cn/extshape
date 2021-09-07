@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:oak_vertical_quarter_piece",
+    "extshape:spruce_vertical_quarter_piece",
+    "extshape:birch_vertical_quarter_piece",
+    "extshape:jungle_vertical_quarter_piece",
+    "extshape:acacia_vertical_quarter_piece",
+    "extshape:dark_oak_vertical_quarter_piece",
+    "extshape:crimson_vertical_quarter_piece",
+    "extshape:warped_vertical_quarter_piece"
+  ]
+}

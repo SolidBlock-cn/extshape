@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "concrete_vertical_slab",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:lime_concrete_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:lime_concrete_vertical_slab",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:snow_block"
+    }
+  },
+  "result": {
+    "item": "extshape:snow_stairs",
+    "count": 4
+  }
+}

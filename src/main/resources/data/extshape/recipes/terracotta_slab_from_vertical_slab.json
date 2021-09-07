@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:terracotta_vertical_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:terracotta_slab",
+    "count": 1
+  }
+}

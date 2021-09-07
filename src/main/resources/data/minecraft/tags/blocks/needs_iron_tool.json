@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:gold_stairs",
+    "extshape:diamond_stairs",
+    "extshape:emerald_stairs",
+    "extshape:gold_slab",
+    "extshape:diamond_slab",
+    "extshape:emerald_slab",
+    "extshape:gold_fence",
+    "extshape:diamond_fence",
+    "extshape:emerald_fence",
+    "extshape:gold_fence_gate",
+    "extshape:diamond_fence_gate",
+    "extshape:emerald_fence_gate",
+    "extshape:gold_wall",
+    "extshape:diamond_wall",
+    "extshape:emerald_wall",
+    "extshape:gold_vertical_slab",
+    "extshape:diamond_vertical_slab",
+    "extshape:emerald_vertical_slab",
+    "extshape:gold_quarter_piece",
+    "extshape:diamond_quarter_piece",
+    "extshape:emerald_quarter_piece",
+    "extshape:gold_vertical_stairs",
+    "extshape:diamond_vertical_stairs",
+    "extshape:emerald_vertical_stairs",
+    "extshape:gold_vertical_quarter_piece",
+    "extshape:diamond_vertical_quarter_piece",
+    "extshape:emerald_vertical_quarter_piece"
+  ]
+}

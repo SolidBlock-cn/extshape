@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:oak_vertical_stairs",
+    "extshape:spruce_vertical_stairs",
+    "extshape:birch_vertical_stairs",
+    "extshape:jungle_vertical_stairs",
+    "extshape:acacia_vertical_stairs",
+    "extshape:dark_oak_vertical_stairs",
+    "extshape:crimson_vertical_stairs",
+    "extshape:warped_vertical_stairs"
+  ]
+}
