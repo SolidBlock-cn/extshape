@@ -94,16 +94,16 @@ public class ExtShapeBlocks {
         }
 
         // 砖栅栏和栅栏门。
-        BlockBuilder.createBasicShapes(BRICKS).withFences(Items.BRICK).build();
+        BlockBuilder.createBasicShapes(BRICKS).withFences(Items.BRICK).withWall().build();
 
         // 苔石栅栏和栅栏门。
-        BlockBuilder.createBasicShapes(MOSSY_COBBLESTONE).withFences(Items.STICK).build();
+        BlockBuilder.createBasicShapes(MOSSY_COBBLESTONE).withFences(Items.STICK).withWall().build();
 
         // 黑曜石。
         BlockBuilder.createAllShapes(OBSIDIAN, Items.STONE, ButtonType.HARD, MOBS).build();
 
         // 紫珀块。
-        BlockBuilder.createBasicShapes(PURPUR_BLOCK).build();
+        BlockBuilder.createBasicShapes(PURPUR_BLOCK).withWall().build();
 
         // 冰，由于技术原因，暂不产生。
 
@@ -128,7 +128,7 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(NETHER_BRICKS, Items.NETHER_BRICK, null, null).withoutRedstone().build();
 
         // 末地石、末地石砖。
-        BlockBuilder.createBasicShapes(END_STONE).withoutRedstone().build();
+        BlockBuilder.createBasicShapes(END_STONE).withWall().withoutRedstone().build();
         BlockBuilder.createBasicShapes(END_STONE_BRICKS).withoutRedstone().build();
 
         // 绿宝石块。

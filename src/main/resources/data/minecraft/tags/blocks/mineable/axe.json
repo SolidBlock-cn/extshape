@@ -1,14 +1,6 @@
 {
   "replace": false,
   "values": [
-    "extshape:oak_wall",
-    "extshape:spruce_wall",
-    "extshape:birch_wall",
-    "extshape:jungle_wall",
-    "extshape:acacia_wall",
-    "extshape:dark_oak_wall",
-    "extshape:crimson_wall",
-    "extshape:warped_wall",
     "extshape:oak_vertical_slab",
     "extshape:spruce_vertical_slab",
     "extshape:birch_vertical_slab",

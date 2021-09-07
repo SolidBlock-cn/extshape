@@ -15,7 +15,7 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
     }
 
     public static BlocksBuilder createBasicShapes(Block baseBlock) {
-        return createAllShapes(baseBlock, null, null, null).withoutFences().withoutButton().withoutPressurePlate();
+        return createEmpty(baseBlock).withShapes();
     }
 
     public static BlocksBuilder createAllShapes(Block baseBlock, Item fenceCraftingIngredient,
