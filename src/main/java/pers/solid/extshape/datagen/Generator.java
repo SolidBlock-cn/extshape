@@ -128,6 +128,7 @@ public class Generator {
 
     /**
      * 写入一个方块标签对应的物品标签的json文件。
+     *
      * @param blockTag 方块标签。
      */
     public void writeItemTagFile(ExtShapeBlockTag blockTag) {

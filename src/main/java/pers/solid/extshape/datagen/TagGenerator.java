@@ -15,21 +15,11 @@ import java.util.Set;
  * 此类中定义的所有标签均<b>只在数据生成过程中使用</b>，平时运行游戏时，不会运行此处的代码。
  */
 public class TagGenerator extends Generator {
-    private static final Set<ExtShapeBlockTag> NO_ITEM_TAGS = new HashSet<>();
-
     public static final ExtShapeBlockTag AXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/axe"));
     public static final ExtShapeBlockTag HOE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/hoe"));
     public static final ExtShapeBlockTag PICKAXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft",
             "mineable/pickaxe"), ExtShapeBlocks.PETRIFIED_OAK_PLANKS, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
     public static final ExtShapeBlockTag SHOVEL_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/shovel"));
-
-    static {
-        NO_ITEM_TAGS.add(AXE_MINEABLE);
-        NO_ITEM_TAGS.add(HOE_MINEABLE);
-        NO_ITEM_TAGS.add(PICKAXE_MINEABLE);
-        NO_ITEM_TAGS.add(SHOVEL_MINEABLE);
-    }
-
     public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = new ExtShapeBlockTag(new Identifier("minecraft"
             , "occludes_vibration_signals"));
     public static final ExtShapeBlockTag DRAGON_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
@@ -50,6 +40,14 @@ public class TagGenerator extends Generator {
             "needs_stone_tool"));
     public static final ExtShapeBlockTag NON_FLAMMABLE_WOOL = new ExtShapeBlockTag(new Identifier("minecraft",
             "non_flammable_wood"));
+    private static final Set<ExtShapeBlockTag> NO_ITEM_TAGS = new HashSet<>();
+
+    static {
+        NO_ITEM_TAGS.add(AXE_MINEABLE);
+        NO_ITEM_TAGS.add(HOE_MINEABLE);
+        NO_ITEM_TAGS.add(PICKAXE_MINEABLE);
+        NO_ITEM_TAGS.add(SHOVEL_MINEABLE);
+    }
 
     static {
         NO_ITEM_TAGS.add(DRAGON_IMMUNE);
@@ -66,17 +64,22 @@ public class TagGenerator extends Generator {
         ExtShape.EXTSHAPE_LOGGER.info("Preparing for block tags. Make sure you are in the development environment!");
         for (Block block : ExtShapeBlockTag.EXTSHAPE_BLOCKS) {
             Block baseBlock = BlockMappings.getBaseBlockOf(block);
-            if (baseBlock==null) continue;
-            if (baseBlock== Blocks.END_STONE || baseBlock== Blocks.OBSIDIAN || baseBlock==Blocks.CRYING_OBSIDIAN ) DRAGON_IMMUNE.add(block);
-            if (baseBlock==Blocks.NETHERRACK) INFINIBURN_OVERWORLD.add(block);
-            if (baseBlock==Blocks.BEDROCK) INFINIBURN_END.add(block);
+            if (baseBlock == null) continue;
+            if (baseBlock == Blocks.END_STONE || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN)
+                DRAGON_IMMUNE.add(block);
+            if (baseBlock == Blocks.NETHERRACK) INFINIBURN_OVERWORLD.add(block);
+            if (baseBlock == Blocks.BEDROCK) INFINIBURN_END.add(block);
             if (ExtShapeBlockTag.WOOLEN_BLOCKS.contains(baseBlock)) OCCLUDES_VIBRATION_SIGNALS.add(block);
-            if (baseBlock==Blocks.BEDROCK || baseBlock==Blocks.PACKED_ICE || baseBlock==Blocks.BLUE_ICE || baseBlock==Blocks.ICE) GEODE_INVALID_BLOCKS.add(block);
-            if (baseBlock==Blocks.BEDROCK) WITHER_IMMUNE.add(block);
-            if (baseBlock==Blocks.OBSIDIAN || baseBlock==Blocks.CRYING_OBSIDIAN || baseBlock==Blocks.NETHERITE_BLOCK || baseBlock==Blocks.ANCIENT_DEBRIS) NEEDS_DIAMOND_TOOL.add(block);
-            if (baseBlock==Blocks.DIAMOND_BLOCK || baseBlock==Blocks.EMERALD_BLOCK || baseBlock==Blocks.GOLD_BLOCK || baseBlock==Blocks.RAW_GOLD_BLOCK) NEEDS_IRON_TOOL.add(block);
-            if (baseBlock==Blocks.IRON_BLOCK || baseBlock==Blocks.LAPIS_BLOCK || baseBlock==Blocks.COPPER_BLOCK || baseBlock==Blocks.CUT_COPPER) NEEDS_STONE_TOOL.add(block);
-            if (baseBlock==Blocks.CRIMSON_PLANKS || baseBlock==Blocks.WARPED_PLANKS) NON_FLAMMABLE_WOOL.add(block);
+            if (baseBlock == Blocks.BEDROCK || baseBlock == Blocks.PACKED_ICE || baseBlock == Blocks.BLUE_ICE || baseBlock == Blocks.ICE)
+                GEODE_INVALID_BLOCKS.add(block);
+            if (baseBlock == Blocks.BEDROCK) WITHER_IMMUNE.add(block);
+            if (baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN || baseBlock == Blocks.NETHERITE_BLOCK || baseBlock == Blocks.ANCIENT_DEBRIS)
+                NEEDS_DIAMOND_TOOL.add(block);
+            if (baseBlock == Blocks.DIAMOND_BLOCK || baseBlock == Blocks.EMERALD_BLOCK || baseBlock == Blocks.GOLD_BLOCK || baseBlock == Blocks.RAW_GOLD_BLOCK)
+                NEEDS_IRON_TOOL.add(block);
+            if (baseBlock == Blocks.IRON_BLOCK || baseBlock == Blocks.LAPIS_BLOCK || baseBlock == Blocks.COPPER_BLOCK || baseBlock == Blocks.CUT_COPPER)
+                NEEDS_STONE_TOOL.add(block);
+            if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) NON_FLAMMABLE_WOOL.add(block);
             if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) AXE_MINEABLE.add(block);
             if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) HOE_MINEABLE.add(block);
             if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) PICKAXE_MINEABLE.add(block);
@@ -87,6 +90,7 @@ public class TagGenerator extends Generator {
 
     /**
      * 写入所有的方块标签文件。
+     *
      * @param generator 生成器。
      */
     public static void writeAllBlockTagFiles(Generator generator) {
