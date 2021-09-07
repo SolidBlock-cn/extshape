@@ -140,9 +140,9 @@ that players can easily fetch blocks of a same block in different shapes.
 
 ## 本次更新 This update
 
-### 1.2.4
-- 移除了木板墙和粘土墙。
-- Removed plank wall and clay wall.
+### 1.2.5
+- 修复了垂直台阶底部部分材质不渲染的问题。
+- Fixed the issue of missing rendering at the bottom of vertical stairs blocks.
 
 此前的更新请参考[更新日志](UpdateLog.md)。
 
