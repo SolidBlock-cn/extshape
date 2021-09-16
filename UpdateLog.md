@@ -1,6 +1,18 @@
 
 # 更新日志 Update Log
 
+### 1.2.6
+此更新仅限 1.17 以上版本。
+
+This update is for version only 1.17 and above.
+
+- 添加了平滑玄武岩的多种形状。
+- Added multiple shapes for smooth basalt.
+- 开始支持 1.18 的快照版本。
+- Started supporting 1.18 snapshot versions.
+- 调整了模组介绍。
+- Tweaked mod description.
+
 ### 1.2.5
 - 修复了垂直台阶底部部分材质不渲染的问题。
 - Fixed the issue of missing rendering at the bottom of vertical stairs blocks.
