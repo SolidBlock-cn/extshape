@@ -38,7 +38,7 @@ public class TagGenerator extends Generator {
             "needs_iron_tool"));
     public static final ExtShapeBlockTag NEEDS_STONE_TOOL = new ExtShapeBlockTag(new Identifier("minecraft",
             "needs_stone_tool"));
-    public static final ExtShapeBlockTag NON_FLAMMABLE_WOOL = new ExtShapeBlockTag(new Identifier("minecraft",
+    public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = new ExtShapeBlockTag(new Identifier("minecraft",
             "non_flammable_wood"));
     private static final Set<ExtShapeBlockTag> NO_ITEM_TAGS = new HashSet<>();
 
@@ -79,7 +79,7 @@ public class TagGenerator extends Generator {
                 NEEDS_IRON_TOOL.add(block);
             if (baseBlock == Blocks.IRON_BLOCK || baseBlock == Blocks.LAPIS_BLOCK || baseBlock == Blocks.COPPER_BLOCK || baseBlock == Blocks.CUT_COPPER)
                 NEEDS_STONE_TOOL.add(block);
-            if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) NON_FLAMMABLE_WOOL.add(block);
+            if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) NON_FLAMMABLE_WOOD.add(block);
             if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) AXE_MINEABLE.add(block);
             if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) HOE_MINEABLE.add(block);
             if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) PICKAXE_MINEABLE.add(block);

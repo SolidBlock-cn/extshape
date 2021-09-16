@@ -140,13 +140,17 @@ that players can easily fetch blocks of a same block in different shapes.
 
 ## 本次更新 This update
 
-### 1.2.5
-- 修复了垂直台阶底部部分材质不渲染的问题。
-- Fixed the issue of missing rendering at the bottom of vertical stairs blocks.
-- 对于 1.16 版本：移除不必要的标签，并修复挖掘等级问题。
-- For 1.16 versions: Removed unnecessary tags and fixed mining level issue.
-  - 请注意：1.16 版本的语言文件仍会存有未来版本的语言文件。
-  - Note: For 1.16 versions, language files for future versions are still stored.
+### 1.2.6
+此更新仅限 1.17 以上版本。
+
+This update is for version only 1.17 and above.
+
+- 添加了平滑玄武岩的多种形状。
+- Added multiple shapes for smooth basalt.
+- 开始支持 1.18 的快照版本。
+- Started supporting 1.18 snapshot versions.
+- 调整了模组介绍。
+- Tweaked mod description.
 
 此前的更新请参考[更新日志](UpdateLog.md)。
 

@@ -71,6 +71,7 @@ public class ItemGroups {
                 Blocks.SMOOTH_RED_SANDSTONE,
                 Blocks.NETHERRACK,
                 Blocks.NETHER_BRICKS,
+                Blocks.SMOOTH_BASALT,
                 Blocks.RED_NETHER_BRICKS,
                 Blocks.PRISMARINE,
                 Blocks.PRISMARINE_BRICKS,
