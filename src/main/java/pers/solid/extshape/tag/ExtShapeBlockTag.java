@@ -1,7 +1,6 @@
 package pers.solid.extshape.tag;
 
 import com.google.gson.JsonArray;
-import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -266,15 +265,15 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
 
     public ExtShapeBlockTag() {
-        this(null, new ArrayList<>());
+        super();
     }
 
     public ExtShapeBlockTag(Block... elements) {
-        this(null,elements);
+        super(elements);
     }
 
     public ExtShapeBlockTag(Identifier identifier, Block... elements) {
-        this(identifier, List.of(elements));
+        super(identifier, List.of(elements));
     }
 
     public ExtShapeBlockTag(Identifier identifier, List<Block> list) {
@@ -309,8 +308,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
         for (var entry : this.entries) {
             if (entry instanceof ExtShapeBlockTag)
                 array.add(((ExtShapeBlockTag) entry).jsonTree());
-            else if (entry instanceof ObjectLists.Singleton)
-                array.add(Registry.BLOCK.getId(((ObjectLists.Singleton<Block>) entry).get(0)).toString());
+            else if (entry instanceof TagEntrySingleton)
+                array.add(Registry.BLOCK.getId(((TagEntrySingleton<Block>) entry).get()).toString());
         }
         return array;
     }

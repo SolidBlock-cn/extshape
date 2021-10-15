@@ -8,35 +8,20 @@ import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
 
-public abstract class AbstractContainableCollection<E> extends AbstractCollection<E> implements ContainableCollection<E> {
+public abstract class AbstractContainableCollection<E,CE extends Collection<E>,CCE extends Collection<CE>> extends AbstractCollection<E> implements ContainableCollection<E, CE,CCE> {
 
-    protected final Collection<Collection<E>> entries;
+    protected final CCE entries;
 
-    protected AbstractContainableCollection(Collection<Collection<E>> entries) {
+    protected AbstractContainableCollection(CCE entries) {
         this.entries = entries;
     }
 
     @Override
     public Iterator<E> iterator() {
         return new AbstractIterator<E>() {
-//            @Override
-//            public boolean hasNext() {
-//                if (!entriesIterator.hasNext()) {
-//                    return false;
-//                }
-//                while (iteratingEntryIterator==null || !iteratingEntryIterator.hasNext()) {
-//                    iteratingEntryIterator = entriesIterator.next().iterator();
-//                }
-//                return true;
-//            }
-//
-//            @Override
-//            public E next() {
-//                return iteratingEntryIterator.next();
-//            }
 
-            final Collection<Collection<E>> entries = AbstractContainableCollection.this.entries;
-            private final Iterator<Collection<E>> entriesIterator = entries.iterator();
+            final CCE entries = AbstractContainableCollection.this.entries;
+            private final Iterator<CE> entriesIterator = entries.iterator();
             private @Nullable Iterator<E> iteratingEntryIterator = null;
 
             @Override
@@ -77,24 +62,27 @@ public abstract class AbstractContainableCollection<E> extends AbstractCollectio
         return entries.contains(o);
     }
 
+    public abstract CE singletonOf(E e);
+
     @Override
     public boolean add(E e) {
-        return entries.add(ObjectLists.singleton(e));
+        return entries.add(singletonOf(e));
     }
 
-    protected boolean addCollection(Collection<E> c) {
-        return entries.add(c);
+    @Override
+    public boolean addCollection(CE es) {
+        return entries.add(es);
     }
 
-    protected boolean addAllCollections(Collection<Collection<E>> c) {
+    public boolean addAllCollections(Collection<CE> c) {
         return entries.addAll(c);
     }
 
-    protected boolean removeCollection(Collection<E> c) {
+    public boolean removeCollection(CE c) {
         return entries.remove(c);
     }
 
-    protected boolean removeAllCollections(Collection<Collection<E>> c) {
+    public boolean removeAllCollections(Collection<CE> c) {
         return entries.removeAll(c);
     }
 
@@ -102,7 +90,7 @@ public abstract class AbstractContainableCollection<E> extends AbstractCollectio
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj instanceof AbstractContainableCollection) {
-            if (this.entries.equals(((AbstractContainableCollection<?>) obj).entries)) return true;
+            if (this.entries.equals(((AbstractContainableCollection<?,?,?>) obj).entries)) return true;
         }
         return this == obj;
     }

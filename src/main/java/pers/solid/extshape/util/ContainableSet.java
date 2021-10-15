@@ -1,60 +1,48 @@
 package pers.solid.extshape.util;
 
 import com.google.common.collect.ImmutableSet;
-import it.unimi.dsi.fastutil.objects.ObjectLists;
+import it.unimi.dsi.fastutil.objects.ObjectSets;
 
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class ContainableSet<E> extends AbstractContainableCollection<E> implements Set<E> {
+public class ContainableSet<E> extends AbstractContainableSet<E, Set<E>,Set<Set<E>>> {
     /**
      * Please use {@link #create()} to create a new instance.
+     *
      */
-    protected ContainableSet(Set<Collection<E>> entryCollection) {
+    protected ContainableSet(Set<Set<E>> entryCollection) {
         super(entryCollection);
+    }
+
+    @Override
+    public Set<E> singletonOf(E o) {
+        return ObjectSets.singleton(o);
     }
 
     public static <E> ContainableSet<E> create() {
         return new ContainableSet<>(new LinkedHashSet<>());
     }
 
+
     @SafeVarargs
     public static <E> ContainableSet<E> of(E... elements) {
-        ImmutableSet.Builder<Collection<E>> builder = new ImmutableSet.Builder<>();
+        ImmutableSet.Builder<Set<E>> builder = new ImmutableSet.Builder<>();
         for (E element : elements) {
-            builder.add(ObjectLists.singleton(element));
+            final Set<E> singleton = ObjectSets.singleton(element);
+            builder.add(singleton);
         }
-        final ImmutableSet<Collection<E>> set = builder.build();
+        final ImmutableSet<Set<E>> set = builder.build();
         return new ContainableSet<>(set);
     }
 
+
     @SafeVarargs
-    public static <E> ContainableSet<E> ofSets(ContainableSet<E>... elements) {
-        ImmutableSet.Builder<Collection<E>> builder = new ImmutableSet.Builder<>();
+    public static <E,CE extends Set<E>,CCE extends Set<CE>> ContainableSet<E> ofSets(ContainableSet<E>... elements) {
+        ImmutableSet.Builder<Set<E>> builder = new ImmutableSet.Builder<>();
         for (ContainableSet<E> element : elements) {
             builder.add(element);
         }
-        return new ContainableSet<>(builder.build());
-    }
-
-    public boolean addSet(ContainableSet<E> set) {
-        return entries.add(set);
-    }
-
-    public boolean removeSet(ContainableSet<E> set) {
-        return entries.remove(set);
-    }
-
-    public boolean addAllSet(Collection<? extends ContainableSet<E>> c) {
-        return entries.addAll(c);
-    }
-
-    public boolean removeAllSet(Collection<? extends ContainableSet<E>> c) {
-        return entries.removeAll(c);
-    }
-
-    public boolean contains(ContainableSet<E> c) {
-        return containsEntry(c);
+        return new ContainableSet<E>(builder.build());
     }
 }

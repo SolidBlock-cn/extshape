@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "concrete_button",
+  "group": "",
   "ingredients": [
     {
       "item": "minecraft:magenta_concrete"

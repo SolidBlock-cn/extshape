@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "stained_terracotta_button",
+  "group": "",
   "ingredients": [
     {
       "item": "minecraft:black_terracotta"

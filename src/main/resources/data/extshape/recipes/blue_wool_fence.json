@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "wool_fence",
+  "group": "",
   "pattern": [
     "W#W",
     "W#W"
