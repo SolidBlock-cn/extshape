@@ -1,9 +1,11 @@
 package pers.solid.extshape.tag;
 
 import com.google.gson.JsonArray;
+import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -298,17 +300,17 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return "ExtShapeBlockTag{" + identifier + '}';
     }
 
     public JsonArray jsonTree() {
         JsonArray array = new JsonArray();
-        for (var entry : this.entryList) {
-            if (entry instanceof TagEntryTag)
-                array.add(((ExtShapeBlockTag) ((TagEntryTag<Block>) entry).elementTag).jsonTree());
-            else if (entry instanceof TagEntrySingleElement)
-                array.add(Registry.BLOCK.getId(((TagEntrySingleElement<Block>) entry).element).toString());
+        for (var entry : this.entries) {
+            if (entry instanceof ExtShapeBlockTag)
+                array.add(((ExtShapeBlockTag) entry).jsonTree());
+            else if (entry instanceof ObjectLists.Singleton)
+                array.add(Registry.BLOCK.getId(((ObjectLists.Singleton<Block>) entry).get(0)).toString());
         }
         return array;
     }
