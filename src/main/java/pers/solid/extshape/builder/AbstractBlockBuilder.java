@@ -23,29 +23,31 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     public final boolean addToDefaultTag;
     public final boolean buildItem;
     private final List<ExtShapeBlockTag> tagList = new ArrayList<>();
+    public FabricBlockSettings blockSettings;
+    public ExtShapeBlockItemBuilder itemBuilder;
     @Nullable
     protected ExtShapeBlockTag defaultTag = ExtShapeBlockTag.EXTSHAPE_BLOCKS;
     protected BiMap<Block, ? super T> mapping;
     protected boolean addToMapping;
+    /**
+     * 用于构造实例的匿名函数。该值必须非 {@code null}，否则实例化无法进行。
+     *
+     * @see #createInstance()
+     * @see #setInstanceSupplier(Function)
+     */
+    protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier = builder -> {
+        throw new IllegalStateException("Instance supplier is not provided. Failed to create instance. Please specify an instance supplier for " + this + ".");
+    };
+    protected @Nullable Consumer<? super AbstractBlockBuilder<T>> preparationConsumer;
     Identifier identifier;
-
     /**
      * 构造器的方块实例。需要注意，只有在调用{@link #build()}之后，这个实例才会存在，从而对实例进行实际操作。
      */
     T instance;
     boolean registerBlock, registerItem;
-    public FabricBlockSettings blockSettings;
-    public ExtShapeBlockItemBuilder itemBuilder;
     @Nullable FabricItemSettings itemSettings;
     boolean fireproof;
     @Nullable ItemGroup group;
-    /**
-     * 用于构造实例的匿名函数。该值必须非 {@code null}，否则实例化无法进行。
-     * @see #createInstance()
-     * @see #setInstanceSupplier(Function)
-     */
-    protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier = builder -> {throw new IllegalStateException("Instance supplier is not provided. Failed to create instance. Please specify an instance supplier for "+this+".");};
-    protected @Nullable Consumer<? super AbstractBlockBuilder<T>> preparationConsumer;
 
     protected AbstractBlockBuilder(Block baseBlock, FabricBlockSettings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
         this.baseBlock = baseBlock;
@@ -223,7 +225,8 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      *
      * @param instance 方块实例。一般是一个新的方块对象。
      */
-    public @Deprecated AbstractBlockBuilder<T> setInstance(T instance) {
+    public @Deprecated
+    AbstractBlockBuilder<T> setInstance(T instance) {
         this.instance = instance;
         return this;
     }
@@ -268,7 +271,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      */
     @Override
     public T build() {
-        if (this.preparationConsumer!=null) this.preparationConsumer.accept(this);
+        if (this.preparationConsumer != null) this.preparationConsumer.accept(this);
         if (this.instance == null) this.createInstance();
         if (this.registerBlock) this.register();
         if (this.addToDefaultTag) this.addToDefaultTag();

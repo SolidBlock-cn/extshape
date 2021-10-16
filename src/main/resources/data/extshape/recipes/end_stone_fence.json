@@ -10,7 +10,7 @@
       "item": "minecraft:end_stone"
     },
     "#": {
-      "item": "minecraft:air"
+      "item": "minecraft:end_stone_bricks"
     }
   },
   "result": {

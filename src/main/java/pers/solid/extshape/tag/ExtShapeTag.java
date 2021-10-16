@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.internal.Streams;
 import com.google.gson.stream.JsonWriter;
-import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +24,7 @@ import java.util.Set;
  *
  * @param <E> 标签内的元素的类型。
  */
-public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<TagEntry<E>>> implements TagEntry<E> {
+public class ExtShapeTag<E> extends AbstractContainableSet<E, TagEntry<E>, Set<TagEntry<E>>> implements TagEntry<E> {
     /**
      * 标签的命名空间id，有可能不存在。
      */
@@ -85,10 +84,10 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
 
     /**
      * 向该标签内添加一个由同类元素组成的标签。有以下限制：<ul>
-     *     <li>标签不能重复。</li>
-     *     <li>不能将没有命名空间的id的标签添加到有命名空间id的标签中。</li>
-     *     <li>不能将任何标签添加到它自己中（否则会造成无限递归）。</li>
-     *     <li>若标签内已包含此标签，则会报错。</li></ul>
+     * <li>标签不能重复。</li>
+     * <li>不能将没有命名空间的id的标签添加到有命名空间id的标签中。</li>
+     * <li>不能将任何标签添加到它自己中（否则会造成无限递归）。</li>
+     * <li>若标签内已包含此标签，则会报错。</li></ul>
      * 此外，元素如果为 <code>null</code>，可以正常添加进去，但是日志记录中会输出错误，不会抛出错误。
      * <b>注意：</b>有些限制在未来版本会直接移植到 {@link pers.solid.extshape.util.AbstractContainableCollection} 中去。
      *
@@ -111,8 +110,8 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
     }
 
     /**
-     * @deprecated
      * @see #addTag(ExtShapeTag)
+     * @deprecated
      */
     @Deprecated
     @Override
@@ -121,8 +120,8 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
     }
 
     /**
-     * @deprecated
      * @see #addAllTags(ExtShapeTag[])
+     * @deprecated
      */
     @Deprecated
     @Override
@@ -191,8 +190,8 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
         JsonArray values = new JsonArray();
 
         for (Collection<E> entry : this.entries) {
-            if (entry instanceof ExtShapeTag) values.add("#" + ((ExtShapeTag<Object>) entry).getIdentifier());
-            else if (entry instanceof ObjectLists.Singleton)
+            if (entry instanceof ExtShapeTag) values.add("#" + ((ExtShapeTag<E>) entry).getIdentifier());
+            else if (entry instanceof TagEntrySingleton)
                 values.add(getIdentifierOf((entry.iterator().next())).toString());
         }
 

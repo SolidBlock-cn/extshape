@@ -16,6 +16,8 @@
     "extshape:gold_wall",
     "extshape:diamond_wall",
     "extshape:emerald_wall",
+    "extshape:diamond_button",
+    "extshape:diamond_pressure_plate",
     "extshape:gold_vertical_slab",
     "extshape:diamond_vertical_slab",
     "extshape:emerald_vertical_slab",

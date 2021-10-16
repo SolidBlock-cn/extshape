@@ -51,7 +51,7 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
 
     public Identifier getBlockModelIdentifier(String suffix) {
         Identifier identifier = this.getIdentifier();
-        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath().replaceFirst("^waxed_","") + suffix);
+        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath().replaceFirst("^waxed_", "") + suffix);
     }
 
     public Map<Identifier, String> getBlockModelCollection() {
@@ -81,7 +81,7 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
                 {
                     "parent": "%s"
                 }
-                """, this.getBlockModelIdentifier().toString().replaceFirst("/waxed_","/"));
+                """, this.getBlockModelIdentifier().toString().replaceFirst("/waxed_", "/"));
     }
 
     @Nullable
@@ -141,7 +141,7 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
         for (var entry : collection.entrySet()) {
             Identifier identifier = entry.getKey();
             String content = entry.getValue();
-            this.writeModelFile(identifier.getNamespace(), identifier.getPath().replaceFirst("/waxed_", "/"), content!=null ? content.replaceAll("/waxed_","/") : content);
+            this.writeModelFile(identifier.getNamespace(), identifier.getPath().replaceFirst("/waxed_", "/"), content != null ? content.replaceAll("/waxed_", "/") : content);
         }
     }
 
@@ -157,7 +157,7 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
     public void writeBlockStatesFile() {
         Identifier identifier = this.getIdentifier();
         String blockStatesString = this.getBlockStatesString();
-        if (blockStatesString!=null) blockStatesString = blockStatesString.replaceAll(":block/waxed_",":block/");
+        if (blockStatesString != null) blockStatesString = blockStatesString.replaceAll(":block/waxed_", ":block/");
         this.writeBlockStatesFile(identifier.getNamespace(), identifier.getPath(), blockStatesString);
     }
 

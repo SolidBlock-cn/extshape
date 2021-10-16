@@ -3,6 +3,7 @@ package pers.solid.extshape.datagen;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.*;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
@@ -45,7 +46,7 @@ public class Generator {
     public static void main() {
         if (!DATA_GENERATION_SWITCH) return;
         ExtShapeBlocks.init();
-        System.out.println("[EXTSHAPE] 开始生成数据！（只有在开发环境中才应该出现这行字，否则是模组出bug了。）");
+        ExtShape.EXTSHAPE_LOGGER.info("开始生成数据！（只有在开发环境中才应该出现这行字，否则是模组出bug了。）");
         Generator generator = new Generator(Path.of("../src/main/resources"));
         generator.generateForAllBlocks(ExtShapeBlockTag.EXTSHAPE_BLOCKS);
         VerticalSlabGenerator.init(generator);
@@ -54,7 +55,7 @@ public class Generator {
         VerticalStairsGenerator.init(generator);
         VerticalQuarterPieceGenerator.init(generator);
         TagGenerator.writeAllBlockTagFiles(generator);
-        System.out.printf("[EXTSHAPE] 数据生成完成，总共生成了%s个文件，好耶！！（你可能需要重新构建项目（无需重启游戏）才能看到更改。）%n", stat);
+        ExtShape.EXTSHAPE_LOGGER.info("数据生成完成，总共生成了%s个文件，好耶！！（你可能需要重新构建项目（无需重启游戏）才能看到更改。）".formatted(stat));
     }
 
     /**
@@ -121,8 +122,7 @@ public class Generator {
     public void writeBlockTagFile(ExtShapeBlockTag blockTag) {
         @Nullable Identifier identifier = blockTag.identifier;
         if (blockTag.identifier == null) return;
-        write(String.format("data/%s/tags/blocks/%s.json", identifier.getNamespace(), identifier.getPath()),
-                blockTag.generateString());
+        write(String.format("data/%s/tags/blocks/%s.json", identifier.getNamespace(), identifier.getPath()), blockTag.generateString());
     }
 
     /**
@@ -133,8 +133,7 @@ public class Generator {
     public void writeItemTagFile(ExtShapeBlockTag blockTag) {
         @Nullable Identifier identifier = blockTag.identifier;
         if (blockTag.identifier == null) return;
-        write(String.format("data/%s/tags/items/%s.json", identifier.getNamespace(), identifier.getPath()),
-                blockTag.generateString());
+        write(String.format("data/%s/tags/items/%s.json", identifier.getNamespace(), identifier.getPath()), blockTag.generateString());
     }
 
     /**

@@ -17,29 +17,22 @@ import java.util.Set;
 public class TagGenerator extends Generator {
     public static final ExtShapeBlockTag AXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/axe"));
     public static final ExtShapeBlockTag HOE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/hoe"));
-    public static final ExtShapeBlockTag PICKAXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft",
-            "mineable/pickaxe"), ExtShapeBlocks.PETRIFIED_OAK_PLANKS, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
+    public static final ExtShapeBlockTag PICKAXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/pickaxe"), ExtShapeBlocks.PETRIFIED_OAK_PLANKS, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
     public static final ExtShapeBlockTag SHOVEL_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/shovel"));
-    public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = new ExtShapeBlockTag(new Identifier("minecraft"
-            , "occludes_vibration_signals"));
-    public static final ExtShapeBlockTag DRAGON_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
-            "dragon_immune"));
-    public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = new ExtShapeBlockTag(new Identifier("minecraft",
-            "infiniburn_overworld"));
-    public static final ExtShapeBlockTag INFINIBURN_END = new ExtShapeBlockTag(new Identifier("minecraft",
-            "infiniburn_end"));
-    public static final ExtShapeBlockTag GEODE_INVALID_BLOCKS = new ExtShapeBlockTag(new Identifier("minecraft",
-            "geode_invalid_blocks"));
-    public static final ExtShapeBlockTag WITHER_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
-            "wither_immune"));
-    public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = new ExtShapeBlockTag(new Identifier("minecraft",
-            "needs_diamond_tool"));
-    public static final ExtShapeBlockTag NEEDS_IRON_TOOL = new ExtShapeBlockTag(new Identifier("minecraft",
-            "needs_iron_tool"));
-    public static final ExtShapeBlockTag NEEDS_STONE_TOOL = new ExtShapeBlockTag(new Identifier("minecraft",
-            "needs_stone_tool"));
-    public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = new ExtShapeBlockTag(new Identifier("minecraft",
-            "non_flammable_wood"));
+
+    public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = new ExtShapeBlockTag(new Identifier("minecraft", "occludes_vibration_signals"));
+
+    public static final ExtShapeBlockTag DRAGON_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft", "dragon_immune"));
+    public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = new ExtShapeBlockTag(new Identifier("minecraft", "infiniburn_overworld"));
+    public static final ExtShapeBlockTag INFINIBURN_END = new ExtShapeBlockTag(new Identifier("minecraft", "infiniburn_end"));
+    public static final ExtShapeBlockTag GEODE_INVALID_BLOCKS = new ExtShapeBlockTag(new Identifier("minecraft", "geode_invalid_blocks"));
+    public static final ExtShapeBlockTag WITHER_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft", "wither_immune"));
+
+    public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = new ExtShapeBlockTag(new Identifier("minecraft", "needs_diamond_tool"));
+    public static final ExtShapeBlockTag NEEDS_IRON_TOOL = new ExtShapeBlockTag(new Identifier("minecraft", "needs_iron_tool"));
+    public static final ExtShapeBlockTag NEEDS_STONE_TOOL = new ExtShapeBlockTag(new Identifier("minecraft", "needs_stone_tool"));
+    public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = new ExtShapeBlockTag(new Identifier("minecraft", "non_flammable_wood"));
+
     private static final Set<ExtShapeBlockTag> NO_ITEM_TAGS = new HashSet<>();
 
     static {
@@ -61,7 +54,7 @@ public class TagGenerator extends Generator {
     }
 
     static {
-        ExtShape.EXTSHAPE_LOGGER.info("Preparing for block tags. Make sure you are in the development environment!");
+        ExtShape.EXTSHAPE_LOGGER.info("正在准备方块标签。确保当前是在开发环境！");
         for (Block block : ExtShapeBlockTag.EXTSHAPE_BLOCKS) {
             Block baseBlock = BlockMappings.getBaseBlockOf(block);
             if (baseBlock == null) continue;
@@ -77,7 +70,7 @@ public class TagGenerator extends Generator {
                 NEEDS_DIAMOND_TOOL.add(block);
             if (baseBlock == Blocks.DIAMOND_BLOCK || baseBlock == Blocks.EMERALD_BLOCK || baseBlock == Blocks.GOLD_BLOCK || baseBlock == Blocks.RAW_GOLD_BLOCK)
                 NEEDS_IRON_TOOL.add(block);
-            if (baseBlock == Blocks.IRON_BLOCK || baseBlock == Blocks.LAPIS_BLOCK || baseBlock == Blocks.COPPER_BLOCK || baseBlock == Blocks.CUT_COPPER)
+            if (baseBlock == Blocks.IRON_BLOCK || baseBlock == Blocks.RAW_IRON_BLOCK || baseBlock == Blocks.LAPIS_BLOCK || baseBlock == Blocks.COPPER_BLOCK || baseBlock == Blocks.RAW_COPPER_BLOCK || baseBlock == Blocks.CUT_COPPER || baseBlock == Blocks.WEATHERED_COPPER || baseBlock == Blocks.OXIDIZED_COPPER || baseBlock == Blocks.OXIDIZED_CUT_COPPER || baseBlock == Blocks.EXPOSED_COPPER || baseBlock == Blocks.EXPOSED_CUT_COPPER || baseBlock == Blocks.WAXED_COPPER_BLOCK || baseBlock == Blocks.WAXED_CUT_COPPER || baseBlock == Blocks.WAXED_EXPOSED_COPPER || baseBlock == Blocks.WAXED_EXPOSED_CUT_COPPER || baseBlock == Blocks.WAXED_WEATHERED_COPPER || baseBlock == Blocks.WAXED_WEATHERED_CUT_COPPER || baseBlock == Blocks.WAXED_OXIDIZED_COPPER || baseBlock == Blocks.WAXED_OXIDIZED_CUT_COPPER)
                 NEEDS_STONE_TOOL.add(block);
             if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) NON_FLAMMABLE_WOOD.add(block);
             if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) AXE_MINEABLE.add(block);
@@ -85,7 +78,7 @@ public class TagGenerator extends Generator {
             if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) PICKAXE_MINEABLE.add(block);
             if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) SHOVEL_MINEABLE.add(block);
         }
-        ExtShape.EXTSHAPE_LOGGER.info("Tags of mineable blocks have been completed.");
+        ExtShape.EXTSHAPE_LOGGER.info("用于数据生成的标签已完成填充。");
     }
 
     /**

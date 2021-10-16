@@ -172,7 +172,7 @@ public class ExtShapeBlocks {
         }
 
         // 菌光体。
-        BlockBuilder.createAllShapes(SHROOMLIGHT, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutButton().build();
+        BlockBuilder.createAllShapes(SHROOMLIGHT, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutButton().withoutWall().build();
 
         // 蜜脾块。
         BlockBuilder.createAllShapes(HONEYCOMB_BLOCK, Items.HONEYCOMB, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutButton().build();
@@ -212,8 +212,9 @@ public class ExtShapeBlocks {
             BlockBuilder.createBasicShapes(block).build();
         }
 
-        // 滴水石。
-        BlockBuilder.createBasicShapes(DRIPSTONE_BLOCK).build();
+        // 滴水石、苔藓。
+        BlockBuilder.createAllShapes(DRIPSTONE_BLOCK, Items.POINTED_DRIPSTONE, ButtonType.STONE, ActivationRule.MOBS).build();
+        BlockBuilder.createAllShapes(MOSS_BLOCK, Items.MOSS_CARPET, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutWall().build();
 
         // 深板岩及其变种。
         for (final Block block : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE, DEEPSLATE_TILES, DEEPSLATE_BRICKS, CHISELED_DEEPSLATE}) {

@@ -14,7 +14,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 public final class Mineable {
 
     // 从原版数据包获取Mineable方块标签。
-    public static final String axe = """
+    public static final String AXE_MINEABLE_JSON_STRING = """
             {
               "replace": false,
               "values": [
@@ -100,7 +100,7 @@ public final class Mineable {
                 "#minecraft:wooden_trapdoors"
               ]
             }""";
-    public static final String hoe = """
+    public static final String HOE_MINEABLE_JSON_STRING = """
             {
               "replace": false,
               "values": [
@@ -125,7 +125,7 @@ public final class Mineable {
                 "minecraft:moss_carpet"
               ]
             }""";
-    public static final String pickaxe = """
+    public static final String PICKAXE_MINEABLE_JSON_STRING = """
             {
               "replace": false,
               "values": [
@@ -455,7 +455,7 @@ public final class Mineable {
                 "#minecraft:rails"
               ]
             }""";
-    public static final String shovel = """
+    public static final String SHOVEL_MINEABLE_JSON_STRING = """
             {
               "replace": false,
               "values": [
@@ -499,10 +499,10 @@ public final class Mineable {
     public static final ExtShapeBlockTag VANILLA_SHOVEL_MINEABLE = new ExtShapeBlockTag();
 
     static {
-        parse(VANILLA_AXE_MINEABLE, axe);
-        parse(VANILLA_HOE_MINEABLE, hoe);
-        parse(VANILLA_PICKAXE_MINEABLE, pickaxe);
-        parse(VANILLA_SHOVEL_MINEABLE, shovel);
+        parse(VANILLA_AXE_MINEABLE, AXE_MINEABLE_JSON_STRING);
+        parse(VANILLA_HOE_MINEABLE, HOE_MINEABLE_JSON_STRING);
+        parse(VANILLA_PICKAXE_MINEABLE, PICKAXE_MINEABLE_JSON_STRING);
+        parse(VANILLA_SHOVEL_MINEABLE, SHOVEL_MINEABLE_JSON_STRING);
     }
 
     public static void parse(ExtShapeBlockTag tag, String jsonString) {
@@ -519,9 +519,7 @@ public final class Mineable {
 
                 Identifier identifier = new Identifier(idString);
                 if (!Registry.BLOCK.containsId(identifier)) {
-                    ExtShape.EXTSHAPE_LOGGER.warn(String.format("When parsing mineable tags %s, the block " +
-                                    "registry does not contain this tag: %s", tag.toString(),
-                            identifier));
+                    ExtShape.EXTSHAPE_LOGGER.warn(String.format("When parsing mineable tags %s, the block registry does not contain this tag: %s", tag.toString(), identifier));
                 }
                 Block block = Registry.BLOCK.get(identifier);
                 tag.add(block);

@@ -12,7 +12,7 @@ public class FenceBuilder extends AbstractBlockBuilder<FenceBlock> {
     protected Item craftingIngredient;
 
     protected FenceBuilder(Block baseBlock, Item craftingIngredient) {
-        super(baseBlock,builder -> new ExtShapeFenceBlock(builder.blockSettings));
+        super(baseBlock, builder -> new ExtShapeFenceBlock(builder.blockSettings));
         this.craftingIngredient = craftingIngredient;
         this.defaultTag = ExtShapeBlockTag.FENCES;
         this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.FENCE);

@@ -8,7 +8,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class QuarterPieceBuilder extends AbstractBlockBuilder<QuarterPieceBlock> {
     protected QuarterPieceBuilder(Block baseBlock) {
-        super(baseBlock,builder -> new ExtShapeQuarterPieceBlock(builder.blockSettings));
+        super(baseBlock, builder -> new ExtShapeQuarterPieceBlock(builder.blockSettings));
         this.defaultTag = ExtShapeBlockTag.QUARTER_PIECES;
         this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.QUARTER_PIECE);
     }

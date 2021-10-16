@@ -159,7 +159,7 @@ public class FenceGateGenerator extends AbstractBlockGenerator<FenceGateBlock> {
 
     @Override
     public Map<Identifier, String> getBlockModelCollection() {
-         Map<Identifier,String> modelCollection = new LinkedHashMap<>();
+        Map<Identifier, String> modelCollection = new LinkedHashMap<>();
         modelCollection.put(this.getBlockModelIdentifier(), this.getBlockModelString());
         modelCollection.put(this.getBlockModelIdentifier("_open"), this.getOpenBlockModelString());
         modelCollection.put(this.getBlockModelIdentifier("_wall"), this.getWallBlockModelString());

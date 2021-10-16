@@ -56,7 +56,7 @@ public class WallGenerator extends AbstractBlockGenerator<WallBlock> {
     }
 
     public Map<Identifier, String> getBlockModelCollection() {
-         Map<Identifier,String> modelCollection = new LinkedHashMap<>();
+        Map<Identifier, String> modelCollection = new LinkedHashMap<>();
         modelCollection.put(this.getBlockModelIdentifier("_inventory"), this.getInventoryModelString());
         modelCollection.put(this.getBlockModelIdentifier("_post"), this.getPostModelString());
         modelCollection.put(this.getBlockModelIdentifier("_side"), this.getSideModelString());

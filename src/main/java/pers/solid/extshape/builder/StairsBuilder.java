@@ -8,7 +8,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class StairsBuilder extends AbstractBlockBuilder<StairsBlock> {
     protected StairsBuilder(Block baseBlock) {
-        super(baseBlock,builder -> new ExtShapeStairsBlock(builder.baseBlock.getDefaultState(), builder.blockSettings));
+        super(baseBlock, builder -> new ExtShapeStairsBlock(builder.baseBlock.getDefaultState(), builder.blockSettings));
         this.defaultTag = ExtShapeBlockTag.STAIRS;
         this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.STAIRS);
     }

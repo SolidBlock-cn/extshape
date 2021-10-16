@@ -12,7 +12,7 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
     protected Item craftingIngredient;
 
     protected FenceGateBuilder(Block baseBlock, Item craftingIngredient) {
-        super(baseBlock,builder -> new ExtShapeFenceGateBlock(builder.blockSettings));
+        super(baseBlock, builder -> new ExtShapeFenceGateBlock(builder.blockSettings));
         this.craftingIngredient = craftingIngredient;
         this.defaultTag = ExtShapeBlockTag.FENCE_GATES;
         this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.FENCE_GATE);

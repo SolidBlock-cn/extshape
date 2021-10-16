@@ -1,4 +1,4 @@
-package pers.solid.extshape;
+package pers.solid.extshape.util;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 /**
  * 水平角落方向。类似于 {@link Direction}，但是指向水平方向的四个角落。
+ *
+ * @see Direction
  */
 public enum HorizontalCornerDirection implements StringIdentifiable {
     SOUTH_WEST(0, 2, "south_west", new Vec3i(-1, 0, 1)),
@@ -22,13 +24,11 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     SOUTH_EAST(3, 1, "south_east", new Vec3i(1, 0, 1));
 
     private static final HorizontalCornerDirection[] ALL = values();
-    private static final Map<String, HorizontalCornerDirection> NAME_MAP =
-            Arrays.stream(ALL).collect(Collectors.toMap(HorizontalCornerDirection::getName, (direction) -> direction));
+    private static final Map<String, HorizontalCornerDirection> NAME_MAP = Arrays.stream(ALL).collect(Collectors.toMap(HorizontalCornerDirection::getName, (direction) -> direction));
     private static final HorizontalCornerDirection[] VALUES = Arrays.stream(ALL).sorted(Comparator.comparingInt((direction) -> direction.id)).toArray(HorizontalCornerDirection[]::new);
-    private static final Long2ObjectMap<HorizontalCornerDirection> VECTOR_TO_DIRECTION =
-            Arrays.stream(ALL).collect(Collectors.toMap((direction) -> (new BlockPos(direction.getVector())).asLong(), (direction) -> direction, (direction1, direction2) -> {
-                throw new IllegalArgumentException("Duplicate keys");
-            }, Long2ObjectOpenHashMap::new));
+    private static final Long2ObjectMap<HorizontalCornerDirection> VECTOR_TO_DIRECTION = Arrays.stream(ALL).collect(Collectors.toMap((direction) -> (new BlockPos(direction.getVector())).asLong(), (direction) -> direction, (direction1, direction2) -> {
+        throw new IllegalArgumentException("Duplicate keys");
+    }, Long2ObjectOpenHashMap::new));
     private final String name;
     private final int idOpposite;
     private final int id;

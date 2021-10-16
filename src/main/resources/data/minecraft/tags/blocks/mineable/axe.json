@@ -1,4 +1,37 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "extshape:oak_vertical_slab",
+    "extshape:spruce_vertical_slab",
+    "extshape:birch_vertical_slab",
+    "extshape:jungle_vertical_slab",
+    "extshape:acacia_vertical_slab",
+    "extshape:dark_oak_vertical_slab",
+    "extshape:crimson_vertical_slab",
+    "extshape:warped_vertical_slab",
+    "extshape:oak_quarter_piece",
+    "extshape:spruce_quarter_piece",
+    "extshape:birch_quarter_piece",
+    "extshape:jungle_quarter_piece",
+    "extshape:acacia_quarter_piece",
+    "extshape:dark_oak_quarter_piece",
+    "extshape:crimson_quarter_piece",
+    "extshape:warped_quarter_piece",
+    "extshape:oak_vertical_stairs",
+    "extshape:spruce_vertical_stairs",
+    "extshape:birch_vertical_stairs",
+    "extshape:jungle_vertical_stairs",
+    "extshape:acacia_vertical_stairs",
+    "extshape:dark_oak_vertical_stairs",
+    "extshape:crimson_vertical_stairs",
+    "extshape:warped_vertical_stairs",
+    "extshape:oak_vertical_quarter_piece",
+    "extshape:spruce_vertical_quarter_piece",
+    "extshape:birch_vertical_quarter_piece",
+    "extshape:jungle_vertical_quarter_piece",
+    "extshape:acacia_vertical_quarter_piece",
+    "extshape:dark_oak_vertical_quarter_piece",
+    "extshape:crimson_vertical_quarter_piece",
+    "extshape:warped_vertical_quarter_piece"
+  ]
 }

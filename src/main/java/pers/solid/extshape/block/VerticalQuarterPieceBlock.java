@@ -18,7 +18,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.HorizontalCornerDirection;
+import pers.solid.extshape.util.HorizontalCornerDirection;
 
 import java.util.HashMap;
 import java.util.Map;

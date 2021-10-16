@@ -8,7 +8,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class SlabBuilder extends AbstractBlockBuilder<SlabBlock> {
     public SlabBuilder(Block baseBlock) {
-        super(baseBlock,builder -> new ExtShapeSlabBlock(builder.blockSettings));
+        super(baseBlock, builder -> new ExtShapeSlabBlock(builder.blockSettings));
         this.defaultTag = ExtShapeBlockTag.SLABS;
         this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB);
     }

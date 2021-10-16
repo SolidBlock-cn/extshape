@@ -10,7 +10,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 public class BlockBuilder extends AbstractBlockBuilder<Block> {
 
     public BlockBuilder() {
-        super(null, null,builder -> new Block(builder.blockSettings));
+        super(null, null, builder -> new Block(builder.blockSettings));
     }
 
     public static BlocksBuilder createBasicShapes(Block baseBlock) {

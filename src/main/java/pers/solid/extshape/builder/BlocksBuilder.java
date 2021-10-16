@@ -25,17 +25,11 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
     @NotNull
     final Block baseBlock;
     final List<ExtShapeBlockTag> tagList = new ArrayList<>();
+    public @Nullable BiConsumer<Shape, AbstractBlockBuilder<? extends Block>> preparationConsumer;
     boolean fireproof;
     private @Nullable Item fenceCraftingIngredient;
     private @Nullable ExtShapeButtonBlock.ButtonType buttonType;
     private @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
-
-    public BlocksBuilder setPreparationConsumer(@Nullable BiConsumer<Shape, AbstractBlockBuilder<? extends Block>> preparationConsumer) {
-        this.preparationConsumer = preparationConsumer;
-        return this;
-    }
-
-    public @Nullable BiConsumer<Shape,AbstractBlockBuilder<? extends Block>> preparationConsumer;
 
     /**
      * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
@@ -70,6 +64,11 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         for (Shape shape : Shape.values()) {
             shapeToWhetherBuild.put(shape, false);
         }
+    }
+
+    public BlocksBuilder setPreparationConsumer(@Nullable BiConsumer<Shape, AbstractBlockBuilder<? extends Block>> preparationConsumer) {
+        this.preparationConsumer = preparationConsumer;
+        return this;
     }
 
     /**
@@ -254,8 +253,8 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
             if (whetherBuild && BlockMappings.getBlockOf(shape, baseBlock) == null) {
                 final AbstractBlockBuilder<? extends Block> blockBuilder = BlockBuilder.create(shape, baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
                 this.put(shape, blockBuilder);
-                if (this.preparationConsumer!=null) {
-                    this.preparationConsumer.accept(shape,blockBuilder);
+                if (this.preparationConsumer != null) {
+                    this.preparationConsumer.accept(shape, blockBuilder);
                 }
             }
         }

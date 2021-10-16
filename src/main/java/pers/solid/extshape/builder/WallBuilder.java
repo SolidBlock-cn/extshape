@@ -7,7 +7,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class WallBuilder extends AbstractBlockBuilder<ExtShapeWallBlock> {
     protected WallBuilder(Block baseBlock) {
-        super(baseBlock,builder -> new ExtShapeWallBlock(builder.blockSettings));
+        super(baseBlock, builder -> new ExtShapeWallBlock(builder.blockSettings));
         this.defaultTag = ExtShapeBlockTag.WALLS;
         this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.WALL);
     }
