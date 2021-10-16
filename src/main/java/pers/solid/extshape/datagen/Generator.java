@@ -60,12 +60,11 @@ public class Generator {
     /**
      * 在指定的位置，写入指定字符串的文件。如果目录不存在，则创建此目录。写入成功后，计入统计。
      *
-     * @param path 文件路径（将会自动基于 {@link #basePath} 生成完整路径。
+     * @param path 文件路径（将会自动基于 {@link #basePath} 生成完整路径）。
      */
     public void write(String path, @Nullable String content) {
         if (content == null) return;
         File file = new File(String.valueOf(basePath), path);
-//        System.out.printf("正在写入文件：%s\n",file.getAbsolutePath());
         try {
             File fileParent = file.getParentFile();
             if (!fileParent.exists()) {

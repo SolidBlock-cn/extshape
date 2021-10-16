@@ -6,24 +6,23 @@ import it.unimi.dsi.fastutil.objects.ObjectSets;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class ContainableSet<E> extends AbstractContainableSet<E, Set<E>,Set<Set<E>>> {
+/**
+ * The concrete class of {@link AbstractContainableSet}, while {@code CE} and {@code CCE} are both {@link Set}, instead of type parameters that extend {@code Set}.
+ * It's temperately not used. The {@link pers.solid.extshape.tag.ExtShapeTag} extends {@link AbstractContainableSet} instead of this.
+ *
+ * @param <E> The type of the elements.
+ */
+public class ContainableSet<E> extends AbstractContainableSet<E, Set<E>, Set<Set<E>>> {
     /**
      * Please use {@link #create()} to create a new instance.
-     *
      */
     protected ContainableSet(Set<Set<E>> entryCollection) {
         super(entryCollection);
     }
 
-    @Override
-    public Set<E> singletonOf(E o) {
-        return ObjectSets.singleton(o);
-    }
-
     public static <E> ContainableSet<E> create() {
         return new ContainableSet<>(new LinkedHashSet<>());
     }
-
 
     @SafeVarargs
     public static <E> ContainableSet<E> of(E... elements) {
@@ -36,13 +35,17 @@ public class ContainableSet<E> extends AbstractContainableSet<E, Set<E>,Set<Set<
         return new ContainableSet<>(set);
     }
 
-
     @SafeVarargs
-    public static <E,CE extends Set<E>,CCE extends Set<CE>> ContainableSet<E> ofSets(ContainableSet<E>... elements) {
+    public static <E> ContainableSet<E> ofSets(ContainableSet<E>... elements) {
         ImmutableSet.Builder<Set<E>> builder = new ImmutableSet.Builder<>();
         for (ContainableSet<E> element : elements) {
             builder.add(element);
         }
         return new ContainableSet<E>(builder.build());
+    }
+
+    @Override
+    public Set<E> singletonOf(E o) {
+        return ObjectSets.singleton(o);
     }
 }

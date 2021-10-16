@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "",
+  "group": "wool_button",
   "ingredients": [
     {
       "item": "minecraft:cyan_wool"

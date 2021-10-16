@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "",
+  "group": "concrete_button",
   "ingredients": [
     {
       "item": "minecraft:pink_concrete"

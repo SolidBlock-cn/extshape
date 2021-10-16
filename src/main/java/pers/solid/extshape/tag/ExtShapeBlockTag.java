@@ -3,6 +3,7 @@ package pers.solid.extshape.tag;
 import com.google.gson.JsonArray;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,9 +39,6 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             ACACIA_PLANKS,
             DARK_OAK_PLANKS
     );
-    public static final ExtShapeBlockTag STONES = new ExtShapeBlockTag(
-            STONE
-    );
     public static final ExtShapeBlockTag STONE_VARIANTS = new ExtShapeBlockTag(
             GRANITE,
             POLISHED_GRANITE,
@@ -49,9 +47,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             ANDESITE,
             POLISHED_ANDESITE
     );
-    static {
-        STONES.addTag(STONE_VARIANTS);
-    }
+    public static final ExtShapeBlockTag STONES = Util.make(new ExtShapeBlockTag(
+            STONE), blockTag -> blockTag.addTag(STONE_VARIANTS));
     public static final ExtShapeBlockTag SANDSTONES = new ExtShapeBlockTag(
             SANDSTONE,
             CUT_SANDSTONE,
@@ -137,14 +134,15 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             LAPIS_BLOCK,
             EMERALD_BLOCK,
             NETHERITE_BLOCK);
-
-
     // 所有方块。
     public static final ExtShapeBlockTag EXTSHAPE_BLOCKS = new ExtShapeBlockTag();
-
+    public static final ExtShapeBlockTag WOOLEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
+            "woolen_blocks"));
+    public static final ExtShapeBlockTag WOODEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
+            "wooden_blocks"));
+    public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
     // 完整方块（主要用于双石台阶方块）
     public static final ExtShapeBlockTag FULL_BLOCKS = new ExtShapeBlockTag().addToTag(EXTSHAPE_BLOCKS);
-
     // 楼梯
     public static final ExtShapeBlockTag STAIRS = new ExtShapeBlockTag(new Identifier("minecraft"
             , "stairs")).addToTag(EXTSHAPE_BLOCKS);
@@ -154,11 +152,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "terracotta_stairs")).addToTag(STAIRS);
     public static final ExtShapeBlockTag STAINED_TERRACOTTA_STAIRS = new ExtShapeBlockTag(new Identifier(
             "extshape", "stained_terracotta_stairs")).addToTag(TERRACOTTA_STAIRS);
-    public static final ExtShapeBlockTag WOOLEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
-            "woolen_blocks"));
     public static final ExtShapeBlockTag WOOLEN_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
             "woolen_stairs")).addToTag(WOOLEN_BLOCKS).addToTag(STAIRS);
-
     // 台阶
     public static final ExtShapeBlockTag SLABS = new ExtShapeBlockTag(new Identifier("minecraft",
             "slabs")).addToTag(EXTSHAPE_BLOCKS);
@@ -228,12 +223,9 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "stained_terracotta_pressure_plates")).addToTag(TERRACOTTA_PRESSURE_PLATES);
     public static final ExtShapeBlockTag WOOLEN_PRESSURE_PLATES = new ExtShapeBlockTag(new Identifier("extshape",
             "woolen_pressure_plates")).addToTag(PRESSURE_PLATES);
-
     // 纵向台阶
     public static final ExtShapeBlockTag VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_slabs")).addToTag(EXTSHAPE_BLOCKS);
-    public static final ExtShapeBlockTag WOODEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape",
-            "wooden_blocks"));
     public static final ExtShapeBlockTag WOODEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "wooden_vertical_slabs")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_SLABS);
     public static final ExtShapeBlockTag CONCRETE_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
@@ -244,25 +236,21 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             "extshape", "stained_terracotta_vertical_slabs")).addToTag(TERRACOTTA_VERTICAL_SLABS);
     public static final ExtShapeBlockTag WOOLEN_VERTICAL_SLABS = new ExtShapeBlockTag(new Identifier("extshape",
             "woolen_vertical_slabs")).addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_SLABS);
-
     // 横条
     public static final ExtShapeBlockTag QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape",
             "quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier(
             "extshape", "wooden_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(QUARTER_PIECES);
-
     // 纵楼梯
     public static final ExtShapeBlockTag VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_stairs")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier(
             "extshape", "wooden_vertical_stairs")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_STAIRS);
-
     // 纵条
     public static final ExtShapeBlockTag VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier(
             "extshape", "wooden_vertical_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
-    public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
 
     public ExtShapeBlockTag() {
         super();
@@ -281,6 +269,11 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
         ALL_EXTSHAPE_BLOCK_TAGS.add(this);
     }
 
+    /**
+     * 将自身<b>添加到</b>另一个方块标签中。返回标签自身，可以递归调用。
+     *
+     * @param tag 需要将此标签添加到的标签。
+     */
     @Override
     public ExtShapeBlockTag addToTag(ExtShapeTag<Block> tag) {
         tag.addTag(this);

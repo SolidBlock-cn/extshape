@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "",
+  "group": "wooden_quarter_piece",
   "pattern": [
     "#"
   ],

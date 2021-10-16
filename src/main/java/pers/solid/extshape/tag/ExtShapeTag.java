@@ -8,6 +8,7 @@ import com.google.gson.stream.JsonWriter;
 import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.util.AbstractContainableSet;
 
@@ -19,15 +20,20 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 一类标签，实质上是可以递归的列表。但是不能与 Minecraft 的原版标签混淆。
- * 它即可以包含一些某类元素，又可以包含另一个由此类元素组成的标签。
- * 标签的内容都是内置的，并且可以修改，不受数据包影响。
- * 数据生成器会利用这些标签内容生成数据。
+ * 一类标签，实质上是可以递归的列表。但是不能与 Minecraft 的原版标签混淆。它既可以包含一些某类元素，又可以包含另一个由此类元素组成的标签。标签的内容都是在运行时就设置的，并且可以在代码内部修改，不是从数据包中读取的，不受数据包影响。数据生成器会利用这些标签内容生成数据。<br>
+ * “标签”实际上是一个“可递归包含的集合”，因此继承了 {@link AbstractContainableSet}。其中，{@link #entries} 是一个{@link Set 集合}（在构造器函数中，这个集合实际上是一个 {@link java.util.LinkedHashSet}，集合的元素是{@link TagEntry 标签项}。它可能是任意一个元素的单元素集，也有可能是另一个这种标签，因为这种标签自身也实现了 {@link TagEntry}。
  *
  * @param <E> 标签内的元素的类型。
  */
 public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<TagEntry<E>>> implements TagEntry<E> {
-    public final Identifier identifier; // 标签的命名空间id。
+    /**
+     * 标签的命名空间id，有可能不存在。
+     */
+    public final @Nullable Identifier identifier;
+
+    /**
+     * 类似于数据包中的标签的“replace”参数。该参数目前仅用于生成JSON格式的数据，除此之外其值并无意义。
+     */
     public boolean replace;
 
     @SafeVarargs
@@ -39,9 +45,9 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
      * 创建一个用于本模组的标签。
      *
      * @param identifier 标签的命名空间id。
-     * @param elements   标签的初始内容。
+     * @param elements   标签的初始内容的集合。
      */
-    public ExtShapeTag(Identifier identifier, Collection<E> elements) {
+    public ExtShapeTag(@Nullable Identifier identifier, Collection<E> elements) {
         super(Util.make(Sets.newLinkedHashSet(), set -> {
             for (E element : elements) {
                 set.add(TagEntry.of(element));
@@ -51,8 +57,14 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
         this.replace = false;
     }
 
+    /**
+     * 创建一个用于本模组的标签。
+     *
+     * @param identifier 标签的命名空间id。
+     * @param elements   标签的初始内容的数组。
+     */
     @SafeVarargs
-    public ExtShapeTag(Identifier identifier, E... elements) {
+    public ExtShapeTag(@Nullable Identifier identifier, E... elements) {
         super(Util.make(Sets.newLinkedHashSet(), set -> {
             for (E element : elements) {
                 set.add(TagEntry.of(element));
@@ -67,15 +79,18 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
      *
      * @return 该标签的命名空间id。
      */
-    public Identifier getIdentifier() {
+    public @Nullable Identifier getIdentifier() {
         return this.identifier;
     }
 
     /**
-     * 向该标签内添加一个由同类元素组成的标签。标签不能重复。
-     * 不能将没有命名空间的id的标签添加到有命名空间id的标签中。
-     * 不能将任何标签添加到它自己中。
-     * 若标签内已包含此标签，则会报错。
+     * 向该标签内添加一个由同类元素组成的标签。有以下限制：<ul>
+     *     <li>标签不能重复。</li>
+     *     <li>不能将没有命名空间的id的标签添加到有命名空间id的标签中。</li>
+     *     <li>不能将任何标签添加到它自己中（否则会造成无限递归）。</li>
+     *     <li>若标签内已包含此标签，则会报错。</li></ul>
+     * 此外，元素如果为 <code>null</code>，可以正常添加进去，但是日志记录中会输出错误，不会抛出错误。
+     * <b>注意：</b>有些限制在未来版本会直接移植到 {@link pers.solid.extshape.util.AbstractContainableCollection} 中去。
      *
      * @param element 需要添加进此标签的标签，其元素类型必须一致。
      */
@@ -95,12 +110,20 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
         return super.addCollection(element);
     }
 
+    /**
+     * @deprecated
+     * @see #addTag(ExtShapeTag)
+     */
     @Deprecated
     @Override
     public boolean addCollection(TagEntry<E> es) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * @deprecated
+     * @see #addAllTags(ExtShapeTag[])
+     */
     @Deprecated
     @Override
     public boolean addAllCollections(Collection<TagEntry<E>> c) {
@@ -195,9 +218,9 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E,TagEntry<E>,Set<Tag
     }
 
     /**
-     * 将标签转换为普通列表。标签内的标签会被完全展开。
+     * 将标签转换为普通列表。标签内的标签会被完全展开。列表元素有可能会重复。
      *
-     * @return 转换后的列表。
+     * @return 转换后的列表。其大小应当于标签 {@link #size()} 返回的结果一致。
      */
     public List<E> asList() {
         return new ArrayList<>(this);
