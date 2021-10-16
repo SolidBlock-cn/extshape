@@ -159,15 +159,15 @@ public class Generator {
         AbstractBlockGenerator<? extends Block> generator;
         Path path = basePath;
         if (block instanceof StairsBlock) generator = new StairsGenerator(path, (StairsBlock) block);
-        else if (block instanceof GlazedTerracottaSlabBlock) generator = new GlazedTerracottaSlabGenerator(path,
-                (GlazedTerracottaSlabBlock) block);
+        else if (block instanceof GlazedTerracottaSlabBlock)
+            generator = new GlazedTerracottaSlabGenerator(path, (GlazedTerracottaSlabBlock) block);
         else if (block instanceof SlabBlock) generator = new SlabGenerator(path, (SlabBlock) block);
-        else if (block instanceof VerticalSlabBlock) generator = new VerticalSlabGenerator(path,
-                (VerticalSlabBlock) block);
-        else if (block instanceof QuarterPieceBlock) generator = new QuarterPieceGenerator(path,
-                (QuarterPieceBlock) block);
-        else if (block instanceof VerticalQuarterPieceBlock) generator = new VerticalQuarterPieceGenerator(path,
-                (VerticalQuarterPieceBlock) block);
+        else if (block instanceof VerticalSlabBlock)
+            generator = new VerticalSlabGenerator(path, (VerticalSlabBlock) block);
+        else if (block instanceof QuarterPieceBlock)
+            generator = new QuarterPieceGenerator(path, (QuarterPieceBlock) block);
+        else if (block instanceof VerticalQuarterPieceBlock)
+            generator = new VerticalQuarterPieceGenerator(path, (VerticalQuarterPieceBlock) block);
         else if (block instanceof VerticalStairsBlock)
             generator = new VerticalStairsGenerator(path, (VerticalStairsBlock) block);
         else if (block instanceof FenceBlock) generator = new FenceGenerator(path, (FenceBlock) block);
@@ -175,8 +175,8 @@ public class Generator {
         else if (block instanceof WallBlock) generator = new WallGenerator(path, (WallBlock) block);
         else if (block instanceof AbstractButtonBlock)
             generator = new ButtonGenerator(path, (AbstractButtonBlock) block);
-        else if (block instanceof PressurePlateBlock) generator = new PressurePlateGenerator(path,
-                (PressurePlateBlock) block);
+        else if (block instanceof PressurePlateBlock)
+            generator = new PressurePlateGenerator(path, (PressurePlateBlock) block);
         else generator = null;
         return generator;
     }

@@ -8,18 +8,13 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class SlabBuilder extends AbstractBlockBuilder<SlabBlock> {
     public SlabBuilder(Block baseBlock) {
-        super(baseBlock);
+        super(baseBlock,builder -> new ExtShapeSlabBlock(builder.blockSettings));
         this.defaultTag = ExtShapeBlockTag.SLABS;
-        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.slab);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB);
     }
 
     @Override
     protected String getSuffix() {
         return "_slab";
-    }
-
-    @Override
-    public void createInstance() {
-        this.block = new ExtShapeSlabBlock(this.blockSettings);
     }
 }

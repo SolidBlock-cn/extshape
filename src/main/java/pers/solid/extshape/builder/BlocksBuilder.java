@@ -1,5 +1,7 @@
 package pers.solid.extshape.builder;
 
+import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
+import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.Item;
@@ -10,6 +12,7 @@ import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 
 /**
  * 由多个方块构造器组成的一个从形状到构造器的映射。
@@ -18,7 +21,7 @@ import java.util.*;
  */
 public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends Block>> {
     final Map<@NotNull Shape, @Nullable ExtShapeBlockTag> defaultTags = new HashMap<>();
-    final Map<Shape, Boolean> build;
+    final Object2BooleanMap<Shape> shapeToWhetherBuild;
     @NotNull
     final Block baseBlock;
     final List<ExtShapeBlockTag> tagList = new ArrayList<>();
@@ -26,6 +29,13 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
     private @Nullable Item fenceCraftingIngredient;
     private @Nullable ExtShapeButtonBlock.ButtonType buttonType;
     private @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
+
+    public BlocksBuilder setPreparationConsumer(@Nullable BiConsumer<Shape, AbstractBlockBuilder<? extends Block>> preparationConsumer) {
+        this.preparationConsumer = preparationConsumer;
+        return this;
+    }
+
+    public @Nullable BiConsumer<Shape,AbstractBlockBuilder<? extends Block>> preparationConsumer;
 
     /**
      * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
@@ -42,9 +52,9 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         this.buttonType = buttonType;
         this.pressurePlateActivationRule = pressurePlateActivationRule;
         this.baseBlock = baseBlock;
-        this.build = new HashMap<>();
+        this.shapeToWhetherBuild = new Object2BooleanOpenHashMap<>();
         for (Shape shape : Shape.values()) {
-            build.put(shape, true);
+            shapeToWhetherBuild.put(shape, true);
         }
     }
 
@@ -56,9 +66,9 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
     public BlocksBuilder(@NotNull Block baseBlock) {
         super();
         this.baseBlock = baseBlock;
-        this.build = new HashMap<>();
+        this.shapeToWhetherBuild = new Object2BooleanOpenHashMap<>();
         for (Shape shape : Shape.values()) {
-            build.put(shape, false);
+            shapeToWhetherBuild.put(shape, false);
         }
     }
 
@@ -69,7 +79,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param shapes    条件成立时，构造这些形状，否则不构造这些形状。
      */
     public BlocksBuilder withIf(boolean condition, Shape... shapes) {
-        for (Shape shape : shapes) build.put(shape, condition);
+        for (Shape shape : shapes) shapeToWhetherBuild.put(shape, condition);
         return this;
     }
 
@@ -95,8 +105,8 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 不构造栅栏。
      */
     public BlocksBuilder withoutFences() {
-        build.put(Shape.fence, false);
-        build.put(Shape.fenceGate, false);
+        shapeToWhetherBuild.put(Shape.FENCE, false);
+        shapeToWhetherBuild.put(Shape.FENCE_GATE, false);
         return this;
     }
 
@@ -105,14 +115,14 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 基础形状包括楼梯、台阶、垂直楼梯等。
      */
     public BlocksBuilder withShapes() {
-        return this.with(Shape.stairs, Shape.slab, Shape.verticalQuarterPiece, Shape.verticalStairs, Shape.verticalSlab, Shape.quarterPiece);
+        return this.with(Shape.STAIRS, Shape.SLAB, Shape.VERTICAL_QUARTER_PIECE, Shape.VERTICAL_STAIRS, Shape.VERTICAL_SLAB, Shape.QUARTER_PIECE);
     }
 
     /**
      * 不构造基础形状。
      */
     public BlocksBuilder withoutShapes() {
-        return this.without(Shape.stairs, Shape.slab, Shape.verticalQuarterPiece, Shape.verticalSlab, Shape.verticalStairs, Shape.quarterPiece);
+        return this.without(Shape.STAIRS, Shape.SLAB, Shape.VERTICAL_QUARTER_PIECE, Shape.VERTICAL_SLAB, Shape.VERTICAL_STAIRS, Shape.QUARTER_PIECE);
     }
 
     /**
@@ -121,8 +131,8 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param fenceCraftingIngredient 合成栅栏或栅栏门需要使用的第二合成材料。
      */
     public BlocksBuilder withFences(@NotNull Item fenceCraftingIngredient) {
-        build.put(Shape.fence, true);
-        build.put(Shape.fenceGate, true);
+        shapeToWhetherBuild.put(Shape.FENCE, true);
+        shapeToWhetherBuild.put(Shape.FENCE_GATE, true);
         this.fenceCraftingIngredient = fenceCraftingIngredient;
         return this;
     }
@@ -131,7 +141,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 不构造墙。
      */
     public BlocksBuilder withoutWall() {
-        build.put(Shape.wall, false);
+        shapeToWhetherBuild.put(Shape.WALL, false);
         return this;
     }
 
@@ -139,7 +149,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 构造墙。
      */
     public BlocksBuilder withWall() {
-        build.put(Shape.wall, true);
+        shapeToWhetherBuild.put(Shape.WALL, true);
         return this;
     }
 
@@ -147,8 +157,8 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 不构造红石机关。按钮、压力板都将不会构造，栅栏门虽也属于红石机关但不受影响。
      */
     public BlocksBuilder withoutRedstone() {
-        build.put(Shape.button, false);
-        build.put(Shape.pressurePlate, false);
+        shapeToWhetherBuild.put(Shape.BUTTON, false);
+        shapeToWhetherBuild.put(Shape.PRESSURE_PLATE, false);
         return this;
     }
 
@@ -156,7 +166,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 不构造按钮。
      */
     public BlocksBuilder withoutButton() {
-        build.put(Shape.button, false);
+        shapeToWhetherBuild.put(Shape.BUTTON, false);
         return this;
     }
 
@@ -166,7 +176,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param type 按钮类型。
      */
     public BlocksBuilder withButton(@NotNull ExtShapeButtonBlock.ButtonType type) {
-        build.put(Shape.button, true);
+        shapeToWhetherBuild.put(Shape.BUTTON, true);
         this.buttonType = type;
         return this;
     }
@@ -175,7 +185,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 不构造压力板。
      */
     public BlocksBuilder withoutPressurePlate() {
-        build.put(Shape.pressurePlate, false);
+        shapeToWhetherBuild.put(Shape.PRESSURE_PLATE, false);
         return this;
     }
 
@@ -185,7 +195,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param type 压力板类型。
      */
     public BlocksBuilder withPressurePlate(@NotNull PressurePlateBlock.ActivationRule type) {
-        build.put(Shape.pressurePlate, true);
+        shapeToWhetherBuild.put(Shape.PRESSURE_PLATE, true);
         this.pressurePlateActivationRule = type;
         return this;
     }
@@ -237,13 +247,17 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * 进行构造。构造后不会返回。
      */
     public void build() {
-        for (Entry<Shape, Boolean> entry : build.entrySet()) {
+        for (Object2BooleanMap.Entry<Shape> entry : shapeToWhetherBuild.object2BooleanEntrySet()) {
             Shape shape = entry.getKey();
-            Boolean build = entry.getValue();
+            boolean whetherBuild = entry.getBooleanValue();
             // 自动排除现成的。
-            if (build && BlockMappings.getBlockOf(shape, baseBlock) == null)
-                this.put(shape, BlockBuilder.create(shape, baseBlock, fenceCraftingIngredient, buttonType,
-                        pressurePlateActivationRule));
+            if (whetherBuild && BlockMappings.getBlockOf(shape, baseBlock) == null) {
+                final AbstractBlockBuilder<? extends Block> blockBuilder = BlockBuilder.create(shape, baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
+                this.put(shape, blockBuilder);
+                if (this.preparationConsumer!=null) {
+                    this.preparationConsumer.accept(shape,blockBuilder);
+                }
+            }
         }
 
         if (this.baseBlock.asItem().isFireproof() || this.fireproof) this.fireproof();

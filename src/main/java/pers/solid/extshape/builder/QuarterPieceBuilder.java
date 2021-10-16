@@ -8,18 +8,13 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class QuarterPieceBuilder extends AbstractBlockBuilder<QuarterPieceBlock> {
     protected QuarterPieceBuilder(Block baseBlock) {
-        super(baseBlock);
+        super(baseBlock,builder -> new ExtShapeQuarterPieceBlock(builder.blockSettings));
         this.defaultTag = ExtShapeBlockTag.QUARTER_PIECES;
-        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.quarterPiece);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.QUARTER_PIECE);
     }
 
     @Override
     protected String getSuffix() {
         return "_quarter_piece";
-    }
-
-    @Override
-    public void createInstance() {
-        this.block = new ExtShapeQuarterPieceBlock(this.blockSettings);
     }
 }

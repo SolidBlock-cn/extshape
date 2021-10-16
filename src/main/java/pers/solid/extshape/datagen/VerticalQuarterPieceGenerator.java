@@ -88,7 +88,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                             "count": 1
                           }
                         }
-                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.quarterPiece,
+                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.QUARTER_PIECE,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -114,7 +114,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                             "count": 6
                           }
                         }
-                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab,
+                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -154,7 +154,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                           },
                           "result": "%s",
                           "count": 3
-                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalStairs, this.getBaseBlock())),
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS, this.getBaseBlock())),
                 this.getIdentifier());
     }
 
@@ -170,7 +170,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                           },
                           "result": "%s",
                           "count": 2
-                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab, this.getBaseBlock())),
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, this.getBaseBlock())),
                 this.getIdentifier());
     }
 

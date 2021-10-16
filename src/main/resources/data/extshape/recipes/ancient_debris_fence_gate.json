@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:netherite_scrap"
+      },
+      "W": {
+        "item": "minecraft:ancient_debris"
+      }
+    },
+    "result": {
+      "item": "extshape:ancient_debris_fence_gate"
+    }
+  }

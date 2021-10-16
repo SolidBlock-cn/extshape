@@ -82,7 +82,7 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                             "count": 1
                           }
                         }
-                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+                        """, this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.SLAB,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -111,14 +111,14 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                           }
                         }
                         """, this.getRecipeGroup().replace("vertical_", ""), this.getIdentifier(),
-                Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+                Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.SLAB,
                         this.getBaseBlock())));
     }
 
     @Override
     public void writeCraftingRecipeFiles() {
         super.writeCraftingRecipeFiles();
-        this.writeRecipeFile("extshape", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+        this.writeRecipeFile("extshape", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.SLAB,
                 this.getBaseBlock())).getPath() + "_from_vertical_slab", this.getInverseCraftingString());
     }
 

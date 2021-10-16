@@ -3,13 +3,12 @@ package pers.solid.extshape.datagen;
 import net.minecraft.block.Block;
 import net.minecraft.block.WallBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class WallGenerator extends AbstractBlockGenerator<WallBlock> {
     protected WallGenerator(Path path, @NotNull WallBlock block) {
@@ -56,12 +55,12 @@ public class WallGenerator extends AbstractBlockGenerator<WallBlock> {
                 }""", this.getBaseTexture());
     }
 
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_inventory"), this.getInventoryModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_post"), this.getPostModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_side"), this.getSideModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_side_tall"), this.getSideTallModelString()));
+    public Map<Identifier, String> getBlockModelCollection() {
+         Map<Identifier,String> modelCollection = new LinkedHashMap<>();
+        modelCollection.put(this.getBlockModelIdentifier("_inventory"), this.getInventoryModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_post"), this.getPostModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_side"), this.getSideModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_side_tall"), this.getSideTallModelString());
         return modelCollection;
     }
 

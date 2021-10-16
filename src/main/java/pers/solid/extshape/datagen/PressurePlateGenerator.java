@@ -1,14 +1,14 @@
 package pers.solid.extshape.datagen;
 
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Map;
 
 public class PressurePlateGenerator extends AbstractBlockGenerator<PressurePlateBlock> {
     protected PressurePlateGenerator(Path path, @NotNull PressurePlateBlock block) {
@@ -52,10 +52,10 @@ public class PressurePlateGenerator extends AbstractBlockGenerator<PressurePlate
     }
 
     @Override
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        return List.of(
-                new Pair<>(this.getBlockModelIdentifier(), this.getBlockModelString()),
-                new Pair<>(this.getBlockModelIdentifier("_down"), this.getDownModelString())
+    public Map<Identifier, String> getBlockModelCollection() {
+        return ImmutableMap.of(
+                this.getBlockModelIdentifier(), this.getBlockModelString(),
+                this.getBlockModelIdentifier("_down"), this.getDownModelString()
         );
     }
 

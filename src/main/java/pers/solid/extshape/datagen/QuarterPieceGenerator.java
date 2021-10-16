@@ -2,7 +2,6 @@ package pers.solid.extshape.datagen;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +11,7 @@ import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Map;
 
 public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBlock> {
     protected QuarterPieceGenerator(Path path, @NotNull QuarterPieceBlock block) {
@@ -103,9 +102,9 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
     }
 
     @Override
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
+    public Map<Identifier, String> getBlockModelCollection() {
         var modelCollection = super.getBlockModelCollection();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_top"), this.getTopBlockModelString()));
+        modelCollection.put(this.getBlockModelIdentifier("_top"), this.getTopBlockModelString());
         return modelCollection;
     }
 
@@ -129,7 +128,7 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                             "item": "%s",
                             "count": 6
                           }
-                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab, this.getBaseBlock())),
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.SLAB, this.getBaseBlock())),
                 getIdentifier().toString(), this.getRecipeGroup());
     }
 
@@ -153,7 +152,7 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                             "item": "%s",
                             "count": 1
                           }
-                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalQuarterPiece, this.getBaseBlock())),
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.VERTICAL_QUARTER_PIECE, this.getBaseBlock())),
                 getIdentifier().toString(), this.getRecipeGroup());
     }
 
@@ -185,7 +184,7 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                           },
                           "result": "%s",
                           "count": 3
-                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.stairs, this.getBaseBlock())),
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.STAIRS, this.getBaseBlock())),
                 this.getIdentifier());
     }
 
@@ -201,7 +200,7 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                   },
                   "result": "%s",
                   "count": 2
-                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab, this.getBaseBlock())), this.getIdentifier());
+                }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.SLAB, this.getBaseBlock())), this.getIdentifier());
     }
 
     /**
@@ -216,7 +215,7 @@ public class QuarterPieceGenerator extends AbstractBlockGenerator<QuarterPieceBl
                           },
                           "result": "%s",
                           "count": 2
-                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab, this.getBaseBlock())),
+                        }""", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, this.getBaseBlock())),
                 this.getIdentifier());
     }
 

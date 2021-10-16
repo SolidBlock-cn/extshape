@@ -8,19 +8,14 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class StairsBuilder extends AbstractBlockBuilder<StairsBlock> {
     protected StairsBuilder(Block baseBlock) {
-        super(baseBlock);
+        super(baseBlock,builder -> new ExtShapeStairsBlock(builder.baseBlock.getDefaultState(), builder.blockSettings));
         this.defaultTag = ExtShapeBlockTag.STAIRS;
-        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.stairs);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.STAIRS);
     }
 
 
     @Override
     protected String getSuffix() {
         return "_stairs";
-    }
-
-    @Override
-    public void createInstance() {
-        this.block = new ExtShapeStairsBlock(this.baseBlock.getDefaultState(), this.blockSettings);
     }
 }

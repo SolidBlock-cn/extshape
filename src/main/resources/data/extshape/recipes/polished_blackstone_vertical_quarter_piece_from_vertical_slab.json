@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#","#","#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:polished_blackstone_vertical_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:polished_blackstone_vertical_quarter_piece",
+    "count": 6
+  }
+}

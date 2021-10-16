@@ -12,20 +12,15 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
     protected Item craftingIngredient;
 
     protected FenceGateBuilder(Block baseBlock, Item craftingIngredient) {
-        super(baseBlock);
+        super(baseBlock,builder -> new ExtShapeFenceGateBlock(builder.blockSettings));
         this.craftingIngredient = craftingIngredient;
         this.defaultTag = ExtShapeBlockTag.FENCE_GATES;
-        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.fenceGate);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.FENCE_GATE);
     }
 
     @Override
     protected String getSuffix() {
         return "_fence_gate";
-    }
-
-    @Override
-    public void createInstance() {
-        this.block = new ExtShapeFenceGateBlock(this.blockSettings);
     }
 
     public FenceGateBuilder setCraftingIngredient(Item craftingIngredient) {
@@ -36,7 +31,7 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
     @Override
     public FenceGateBlock build() {
         super.build();
-        IngredientMappings.MAPPING_OF_FENCE_GATE_INGREDIENTS.put(this.block, this.craftingIngredient);
-        return this.block;
+        IngredientMappings.MAPPING_OF_FENCE_GATE_INGREDIENTS.put(this.instance, this.craftingIngredient);
+        return this.instance;
     }
 }

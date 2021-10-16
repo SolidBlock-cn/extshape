@@ -7,18 +7,13 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class WallBuilder extends AbstractBlockBuilder<ExtShapeWallBlock> {
     protected WallBuilder(Block baseBlock) {
-        super(baseBlock);
+        super(baseBlock,builder -> new ExtShapeWallBlock(builder.blockSettings));
         this.defaultTag = ExtShapeBlockTag.WALLS;
-        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.wall);
+        this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.WALL);
     }
 
     @Override
     protected String getSuffix() {
         return "_wall";
-    }
-
-    @Override
-    public void createInstance() {
-        this.block = new ExtShapeWallBlock(blockSettings);
     }
 }

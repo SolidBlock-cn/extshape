@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeVariantBlockInterface;
 import pers.solid.extshape.mappings.BlockMappings;
@@ -14,11 +15,13 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T> {
-    final Block baseBlock;
-    final boolean addToDefaultTag;
-    final boolean buildItem;
+    public final Block baseBlock;
+    public final boolean addToDefaultTag;
+    public final boolean buildItem;
     private final List<ExtShapeBlockTag> tagList = new ArrayList<>();
     @Nullable
     protected ExtShapeBlockTag defaultTag = ExtShapeBlockTag.EXTSHAPE_BLOCKS;
@@ -27,17 +30,24 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     Identifier identifier;
 
     /**
-     * 构造器的方块实例。需要注意，只有在调用{@link #setInstance(Block)}或{@link #build()}之后，这个实例才会存在，从而对实例进行实际操作。
+     * 构造器的方块实例。需要注意，只有在调用{@link #build()}之后，这个实例才会存在，从而对实例进行实际操作。
      */
-    T block;
+    T instance;
     boolean registerBlock, registerItem;
-    FabricBlockSettings blockSettings;
-    ExtShapeBlockItemBuilder itemBuilder;
+    public FabricBlockSettings blockSettings;
+    public ExtShapeBlockItemBuilder itemBuilder;
     @Nullable FabricItemSettings itemSettings;
     boolean fireproof;
     @Nullable ItemGroup group;
+    /**
+     * 用于构造实例的匿名函数。该值必须非 {@code null}，否则实例化无法进行。
+     * @see #createInstance()
+     * @see #setInstanceSupplier(Function)
+     */
+    protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier = builder -> {throw new IllegalStateException("Instance supplier is not provided. Failed to create instance. Please specify an instance supplier for "+this+".");};
+    protected @Nullable Consumer<? super AbstractBlockBuilder<T>> preparationConsumer;
 
-    protected AbstractBlockBuilder(Block baseBlock, FabricBlockSettings settings) {
+    protected AbstractBlockBuilder(Block baseBlock, FabricBlockSettings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
         this.baseBlock = baseBlock;
         this.registerBlock = true;
         this.registerItem = true;
@@ -46,18 +56,19 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
         this.buildItem = true;
         this.addToMapping = true;
         this.itemSettings = null;
+        this.instanceSupplier = instanceSupplier;
     }
 
-    protected AbstractBlockBuilder(Block baseBlock) {
-        this(baseBlock, FabricBlockSettings.copyOf(baseBlock));
+    protected AbstractBlockBuilder(Block baseBlock, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
+        this(baseBlock, FabricBlockSettings.copyOf(baseBlock), instanceSupplier);
     }
 
     /**
      * 将方块注册到注册表，不影响其对应方块物品。需确保方块已构造。
-     * 如需要在构建时，设置需要注册的命名空间id，应使用{@link #setInstance}。
+     * 如需要在构建时，设置需要注册的命名空间id，应使用{@link #setInstanceSupplier}。
      */
     public void register() {
-        Registry.register(Registry.BLOCK, this.getIdentifier(), block);
+        Registry.register(Registry.BLOCK, this.getIdentifier(), instance);
     }
 
     /**
@@ -169,7 +180,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      * @param tag 需要添加到的方块标签。
      */
     protected void addToTag(@Nullable ExtShapeBlockTag tag) {
-        if (tag != null) tag.add(this.block);
+        if (tag != null) tag.add(this.instance);
     }
 
     /**
@@ -184,7 +195,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      */
     protected void addToMapping() {
         if (mapping != null) {
-            mapping.put(baseBlock, block);
+            mapping.put(baseBlock, instance);
             BlockMappings.BASE_BLOCKS.add(baseBlock);
         }
     }
@@ -212,8 +223,13 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      *
      * @param instance 方块实例。一般是一个新的方块对象。
      */
-    public AbstractBlockBuilder<T> setInstance(T instance) {
-        this.block = instance;
+    public @Deprecated AbstractBlockBuilder<T> setInstance(T instance) {
+        this.instance = instance;
+        return this;
+    }
+
+    public AbstractBlockBuilder<T> setInstanceSupplier(Function<AbstractBlockBuilder<T>, T> supplier) {
+        this.instanceSupplier = supplier;
         return this;
     }
 
@@ -235,6 +251,16 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
         return this;
     }
 
+    @Override
+    public final void createInstance() {
+        this.instance = this.instanceSupplier.apply(this);
+    }
+
+    public final AbstractBlockBuilder<T> setPreparationConsumer(@Nullable Consumer<? super AbstractBlockBuilder<T>> consumer) {
+        this.preparationConsumer = consumer;
+        return this;
+    }
+
     /**
      * 构建方块，并按照构建时的设置进行一系列操作。
      *
@@ -242,14 +268,15 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      */
     @Override
     public T build() {
-        if (this.block == null) this.createInstance();
+        if (this.preparationConsumer!=null) this.preparationConsumer.accept(this);
+        if (this.instance == null) this.createInstance();
         if (this.registerBlock) this.register();
         if (this.addToDefaultTag) this.addToDefaultTag();
         this.tagList.forEach(this::addToTag);
         if (this.addToMapping) this.addToMapping();
 
         if (buildItem) {
-            this.itemBuilder = new ExtShapeBlockItemBuilder(this.block, itemSettings != null ? itemSettings :
+            this.itemBuilder = new ExtShapeBlockItemBuilder(this.instance, itemSettings != null ? itemSettings :
                     new FabricItemSettings());
             itemBuilder.setIdentifier(identifier);
             if (group == null) itemBuilder.group();
@@ -258,6 +285,6 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
             if (fireproof) itemBuilder.fireproof();
             this.itemBuilder.setIdentifier(this.getIdentifier()).build();
         }
-        return this.block;
+        return this.instance;
     }
 }

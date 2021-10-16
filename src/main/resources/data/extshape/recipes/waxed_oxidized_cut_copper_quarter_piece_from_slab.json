@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:waxed_oxidized_cut_copper_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:waxed_oxidized_cut_copper_quarter_piece",
+    "count": 6
+  }
+}

@@ -2,7 +2,6 @@ package pers.solid.extshape.datagen;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,8 +9,8 @@ import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mappings.TextureMappings;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static net.minecraft.block.Blocks.*;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
@@ -36,6 +35,7 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
     }
 
     public @Nullable Identifier getBaseBlockIdentifier() {
+        // 由于涂蜡的铜块的材质与未涂蜡的一致，在原版 blockstates 里面直接使用对应的未涂蜡的铜的模型，故使用。
         if (this.baseBlock == null) return null;
         return Registry.BLOCK.getId(this.baseBlock);
     }
@@ -51,12 +51,13 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
 
     public Identifier getBlockModelIdentifier(String suffix) {
         Identifier identifier = this.getIdentifier();
-        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath() + suffix);
+        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath().replaceFirst("^waxed_","") + suffix);
     }
 
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier(), this.getBlockModelString()));
+    public Map<Identifier, String> getBlockModelCollection() {
+        Map<Identifier, String> modelCollection = new LinkedHashMap<>();
+        final String blockModelString = this.getBlockModelString();
+        modelCollection.put(this.getBlockModelIdentifier(), blockModelString);
         return modelCollection;
     }
 
@@ -80,7 +81,7 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
                 {
                     "parent": "%s"
                 }
-                """, this.getBlockModelIdentifier().toString());
+                """, this.getBlockModelIdentifier().toString().replaceFirst("/waxed_","/"));
     }
 
     @Nullable
@@ -136,18 +137,17 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
     }
 
     public void writeBlockModelFiles() {
-        List<Pair<Identifier, String>> collection = this.getBlockModelCollection();
-        for (Pair<Identifier, String> pair : collection) {
-            Identifier identifier = pair.getLeft();
-            String content = pair.getRight();
-            this.writeModelFile(identifier.getNamespace(), identifier.getPath(), content);
+        Map<Identifier, String> collection = this.getBlockModelCollection();
+        for (var entry : collection.entrySet()) {
+            Identifier identifier = entry.getKey();
+            String content = entry.getValue();
+            this.writeModelFile(identifier.getNamespace(), identifier.getPath().replaceFirst("/waxed_", "/"), content!=null ? content.replaceAll("/waxed_","/") : content);
         }
     }
 
     public void writeItemModelFile() {
         Identifier identifier = this.getItemModelIdentifier();
-        this.writeModelFile(identifier.getNamespace(), identifier.getPath(),
-                this.getItemModelString());
+        this.writeModelFile(identifier.getNamespace(), identifier.getPath(), this.getItemModelString());
     }
 
     public void writeAllFiles() {
@@ -156,8 +156,9 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
 
     public void writeBlockStatesFile() {
         Identifier identifier = this.getIdentifier();
-        this.writeBlockStatesFile(identifier.getNamespace(), identifier.getPath(),
-                this.getBlockStatesString());
+        String blockStatesString = this.getBlockStatesString();
+        if (blockStatesString!=null) blockStatesString = blockStatesString.replaceAll(":block/waxed_",":block/");
+        this.writeBlockStatesFile(identifier.getNamespace(), identifier.getPath(), blockStatesString);
     }
 
     public void writeCraftingRecipeFile() {

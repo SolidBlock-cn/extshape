@@ -3,14 +3,13 @@ package pers.solid.extshape.datagen;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SlabGenerator extends AbstractBlockGenerator<SlabBlock> {
     protected SlabGenerator(Path path, @NotNull SlabBlock block) {
@@ -67,10 +66,10 @@ public class SlabGenerator extends AbstractBlockGenerator<SlabBlock> {
     }
 
     @Override
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier(), this.getBlockModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_top"), this.getTopBlockModelString()));
+    public Map<Identifier, String> getBlockModelCollection() {
+        Map<Identifier, String> modelCollection = new LinkedHashMap<>();
+        modelCollection.put(this.getBlockModelIdentifier(), this.getBlockModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_top"), this.getTopBlockModelString());
         return modelCollection;
     }
 
