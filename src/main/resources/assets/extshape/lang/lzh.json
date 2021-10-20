@@ -52,5 +52,6 @@
   "itemGroup.extshape.stone_blocks": "塊形之擴：石（序以原，含藝赍之塊）",
   "itemGroup.extshape.other_blocks": "塊形之擴：餘（序以原，含藝赍之塊）",
 
-  "modmenu.descriptionTranslation.extshape": "增益形于塊，含形之藝赍未含者，如立版。咸可以類藝赍之製。作精良建築也。"
+  "modmenu.descriptionTranslation.extshape": "增益形于塊，含形之藝赍未含者，如立版。咸可以類藝赍之製。作精良建築也。",
+  "option.reasonable-sorting.error.invalid_shape_name": "非形之名也：%s。"
 }

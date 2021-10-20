@@ -52,5 +52,6 @@
   "itemGroup.extshape.stone_blocks": "擴展方塊形狀：石質方塊（按基礎方塊排序，含原版方塊）",
   "itemGroup.extshape.other_blocks": "擴展方塊形狀：其他（按基礎方塊排序，含原版方塊）",
 
-  "modmenu.descriptionTranslation.extshape": "本模組為許多方塊添加了更多形狀，包括原版不存在的形狀，如縱半磚。大多數方塊都像原版一樣可以合成。藉助此模組，你可以製作出更加精美的建築。"
+  "modmenu.descriptionTranslation.extshape": "本模組為許多方塊添加了更多形狀，包括原版不存在的形狀，如縱半磚。大多數方塊都像原版一樣可以合成。藉助此模組，你可以製作出更加精美的建築。",
+  "option.reasonable-sorting.error.invalid_shape_name": "無效的形狀名稱：%s。"
 }

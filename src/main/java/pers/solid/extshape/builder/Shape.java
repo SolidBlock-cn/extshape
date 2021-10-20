@@ -1,5 +1,7 @@
 package pers.solid.extshape.builder;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import net.minecraft.block.*;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.util.StringIdentifiable;
@@ -10,9 +12,11 @@ import pers.solid.extshape.block.VerticalQuarterPieceBlock;
 import pers.solid.extshape.block.VerticalSlabBlock;
 import pers.solid.extshape.block.VerticalStairsBlock;
 
+import java.util.Arrays;
+
 public enum Shape implements StringIdentifiable {
     STAIRS(StairsBlock.class, BlockFamily.Variant.STAIRS, "stairs"),
-    SLAB(SlabBlock.class, BlockFamily.Variant.SLAB, "slabs"),
+    SLAB(SlabBlock.class, BlockFamily.Variant.SLAB, "slab"),
     VERTICAL_SLAB(VerticalSlabBlock.class, null, "vertical_slab"),
     VERTICAL_STAIRS(VerticalStairsBlock.class, null, "vertical_stairs"),
     QUARTER_PIECE(QuarterPieceBlock.class, null, "quarter_piece"),
@@ -32,6 +36,8 @@ public enum Shape implements StringIdentifiable {
      */
     public final @Nullable BlockFamily.Variant vanillaVariant;
     private final @NotNull String name;
+
+    public static final BiMap<Shape,String> SHAPE_TO_STRING = Arrays.stream(values()).collect(ImmutableBiMap.toImmutableBiMap(value -> value, Shape::asString));
 
     Shape(Class<? extends Block> withClass, @Nullable BlockFamily.Variant vanillaVariant, @NotNull String name) {
         this.withClass = withClass;
