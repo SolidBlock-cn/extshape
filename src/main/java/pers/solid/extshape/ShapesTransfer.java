@@ -10,6 +10,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Util;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -17,18 +18,24 @@ import java.util.function.Supplier;
 public class ShapesTransfer implements Supplier<Collection<Map<Item, ItemGroup>>> {
     public static final Map<Item, ItemGroup> COMPILED_SHAPE_TRANSFER_RULES = new HashMap<>();
     public static final Map<Shape, ItemGroup> SHAPE_TRANSFER_RULES = new HashMap<>();
-    public static final Map<Item,ItemGroup> BASE_BLOCKS_IN_BUILDING_BLOCKS = new ImmutableMap.Builder<Item,ItemGroup>()
-            .put(Items.SHROOMLIGHT,ItemGroup.BUILDING_BLOCKS)
-            .put(Items.MOSS_BLOCK,ItemGroup.BUILDING_BLOCKS)
-            .put(Items.HONEYCOMB,ItemGroup.BUILDING_BLOCKS)
-            .build();
+    public static final Map<Item, ItemGroup> BASE_BLOCKS_IN_BUILDING_BLOCKS = Util.make(() -> {
+        final ImmutableMap.Builder<Item, ItemGroup> builder = new ImmutableMap.Builder<>();
+        builder
+                .put(Items.SHROOMLIGHT, ItemGroup.BUILDING_BLOCKS)
+                .put(Items.MOSS_BLOCK, ItemGroup.BUILDING_BLOCKS)
+                .put(Items.HONEYCOMB_BLOCK, ItemGroup.BUILDING_BLOCKS);
+        for (Block block : ExtShapeBlockTag.GLAZED_TERRACOTTAS) {
+            builder.put(block.asItem(), ItemGroup.BUILDING_BLOCKS);
+        }
+        return builder.build();
+    });
     public static boolean baseBlocksInBuildingBlocks = false;
 
     public static void updateShapeTransferRules(List<String> list) {
         SHAPE_TRANSFER_RULES.clear();
         for (String s : list) {
             final String[] split = s.split("\\s+");
-            if (split.length<2) continue;
+            if (split.length < 2) continue;
             final Shape shape = Shape.SHAPE_TO_STRING.inverse().get(split[0]);
             final ItemGroup group = Util.make(() -> {
                 final String groupName = split[1];
@@ -37,11 +44,15 @@ public class ShapesTransfer implements Supplier<Collection<Map<Item, ItemGroup>>
                 }
                 return null;
             });
-            if (shape==null || group==null) return;
-            SHAPE_TRANSFER_RULES.put(shape,group);
+            if (shape == null || group == null) return;
+            SHAPE_TRANSFER_RULES.put(shape, group);
         }
         COMPILED_SHAPE_TRANSFER_RULES.clear();
-        SHAPE_TRANSFER_RULES.forEach((shape, group) -> BlockMappings.SHAPE_TO_MAPPING.get(shape).values().stream().map(Block::asItem).filter(Objects::nonNull).forEach(item ->COMPILED_SHAPE_TRANSFER_RULES.put(item,group)));
+        SHAPE_TRANSFER_RULES.forEach((shape, group) -> BlockMappings.SHAPE_TO_MAPPING.get(shape).values().stream().map(Block::asItem).filter(Objects::nonNull).forEach(item -> COMPILED_SHAPE_TRANSFER_RULES.put(item, group)));
+    }
+
+    public static void setBaseBlocksInBuildingBlocks(boolean b) {
+        baseBlocksInBuildingBlocks = b;
     }
 
     @Override
@@ -52,9 +63,5 @@ public class ShapesTransfer implements Supplier<Collection<Map<Item, ItemGroup>>
                 return baseBlocksInBuildingBlocks ? BASE_BLOCKS_IN_BUILDING_BLOCKS : ImmutableMap.of();
             }
         });
-    }
-
-    public static void setBaseBlocksInBuildingBlocks(boolean b) {
-        baseBlocksInBuildingBlocks = b;
     }
 }

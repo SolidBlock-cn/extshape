@@ -23,7 +23,7 @@
     ],
     "extshape:_modLoaded": [
       "pers.solid.extshape.ShapesSorting::modLoaded"
-    ]
+    ],
     "extshape:_updateShapeList": [
       "pers.solid.extshape.ShapesSorting::updateShapeList"
     ],
