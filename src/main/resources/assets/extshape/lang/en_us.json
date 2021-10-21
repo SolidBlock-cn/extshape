@@ -66,6 +66,7 @@
   "block.extshape.prefix.waxed_oxidized_cut_copper": "Waxed Oxidized Cut Copper",
   "block.extshape.prefix.waxed_weathered_copper":"Waxed Weathered Copper",
   "block.extshape.prefix.waxed_weathered_cut_copper":"Waxed Weathered Cut Copper",
+  "block.extshape.prefix.weathered_copper": "Weathered Copper",
   "block.extshape.prefix.weathered_cut_copper": "Weathered Cut Copper",
 
   "itemGroup.extshape.wooden_blocks": "Extended Block Shape: Wooden Blocks (sorted by base blocks, including vanilla blocks)",

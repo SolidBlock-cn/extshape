@@ -69,7 +69,7 @@ public class ShapesSorting implements Supplier<Collection<Map<Item, Collection<I
 
     @Override
     public Collection<Map<Item, Collection<Item>>> get() {
-        return Collections.singleton(ABSTRACT_ITEM_SHAPE_SORTING_RULES);
+        return Collections.singleton(COMPILED_ITEM_SHAPE_SORTING_RULES);
     }
 
     public static String getValidShapeNames() {
