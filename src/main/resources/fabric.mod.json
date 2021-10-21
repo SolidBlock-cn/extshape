@@ -23,18 +23,27 @@
     ],
     "extshape:_modLoaded": [
       "pers.solid.extshape.ShapesSorting::modLoaded"
-    ],
-    "extshape:_checkIfValid": [
-      "pers.solid.extshape.ShapesSorting::checkIfValid"
-    ],
+    ]
     "extshape:_updateShapeList": [
       "pers.solid.extshape.ShapesSorting::updateShapeList"
     ],
     "extshape:_getValidShapeNames": [
       "pers.solid.extshape.ShapesSorting::getValidShapeNames"
     ],
+    "extshape:_isValidShapeName": [
+      "pers.solid.extshape.ShapesSorting::isValidShapeName"
+    ],
+    "extshape:_updateShapeTransferRules": [
+      "pers.solid.extshape.ShapesTransfer::updateShapeTransferRules"
+    ],
+    "extshape:_setBaseBlocksInBuildingBlocks": [
+      "pers.solid.extshape.ShapesTransfer::setBaseBlocksInBuildingBlocks"
+    ],
     "reasonable-sorting:item_sorting_rules": [
       "pers.solid.extshape.ShapesSorting"
+    ],
+    "reasonable-sorting:item_group_transfer_rules": [
+      "pers.solid.extshape.ShapesTransfer"
     ]
   },
   "mixins": [
@@ -46,8 +55,5 @@
     "fabric": "*",
     "minecraft": ">1.17",
     "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

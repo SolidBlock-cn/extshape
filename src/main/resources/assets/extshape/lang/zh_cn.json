@@ -74,6 +74,5 @@
   "itemGroup.extshape.stone_blocks": "扩展方块形状：石质方块（按基础方块排序，含原版方块）",
   "itemGroup.extshape.wooden_blocks": "扩展方块形状：木制方块（按基础方块排序，含原版方块）",
 
-  "modmenu.descriptionTranslation.extshape": "本模组为许多方块添加了更多形状，包括原版不存在的形状，如垂直台阶。大多数方块都像原版一样可以合成。借助此模组，你可以制作出更加精美的建筑。",
-  "option.reasonable-sorting.error.invalid_shape_name": "无效的形状名称：%s。"
+  "modmenu.descriptionTranslation.extshape": "本模组为许多方块添加了更多形状，包括原版不存在的形状，如垂直台阶。大多数方块都像原版一样可以合成。借助此模组，你可以制作出更加精美的建筑。"
 }

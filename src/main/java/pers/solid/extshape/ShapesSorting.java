@@ -3,8 +3,6 @@ package pers.solid.extshape;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.Shape;
@@ -15,9 +13,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ShapesSorting implements Supplier<Collection<Map<Item, Collection<Item>>>> {
-    public static boolean modLoaded() {
-        return true;
-    }
     public static final Collection<Shape> SHAPES = new LinkedHashSet<>();
     public static final Map<Block, Collection<Block>> ABSTRACT_BLOCK_SHAPE_SORTING_RULES = new AbstractMap<>() {
         @NotNull
@@ -34,12 +29,11 @@ public class ShapesSorting implements Supplier<Collection<Map<Item, Collection<I
             return blocks.isEmpty() ? null : blocks;
         }
     };
-
     public static final Map<Item, Collection<Item>> ABSTRACT_ITEM_SHAPE_SORTING_RULES = new AbstractMap<>() {
         @NotNull
         @Override
         public Set<Entry<Item, Collection<Item>>> entrySet() {
-            return ABSTRACT_BLOCK_SHAPE_SORTING_RULES.entrySet().stream().map(entry -> new SimpleImmutableEntry<Item,Collection<Item>>(entry.getKey().asItem(),entry.getValue().stream().map(Block::asItem).toList())).filter(entry -> entry.getKey()!=null && entry.getValue() != null).collect(Collectors.toUnmodifiableSet());
+            return ABSTRACT_BLOCK_SHAPE_SORTING_RULES.entrySet().stream().map(entry -> new SimpleImmutableEntry<Item, Collection<Item>>(entry.getKey().asItem(), entry.getValue().stream().map(Block::asItem).toList())).filter(entry -> entry.getKey() != null && entry.getValue() != null).collect(Collectors.toUnmodifiableSet());
         }
 
         @Override
@@ -49,8 +43,11 @@ public class ShapesSorting implements Supplier<Collection<Map<Item, Collection<I
             return blocks == null ? null : blocks.stream().map(Block::asItem).filter(Objects::nonNull).toList();
         }
     };
-
     public static final Map<Item, Collection<Item>> COMPILED_ITEM_SHAPE_SORTING_RULES = new HashMap<>();
+
+    public static boolean modLoaded() {
+        return true;
+    }
 
     public static void updateShapeList(String s) {
         SHAPES.clear();
@@ -61,18 +58,16 @@ public class ShapesSorting implements Supplier<Collection<Map<Item, Collection<I
         COMPILED_ITEM_SHAPE_SORTING_RULES.putAll(ABSTRACT_ITEM_SHAPE_SORTING_RULES);
     }
 
-    public static Optional<Text> checkIfValid(String s) {
-        if (s.equals("*")) return Optional.empty();
-        final List<String> invalids = Arrays.stream(s.split("\\s+")).filter(s1 -> !s1.isEmpty()).filter(value -> !Shape.SHAPE_TO_STRING.containsValue(value)).toList();
-        return invalids.isEmpty() ? Optional.empty() : Optional.of(new TranslatableText("option.reasonable-sorting.error.invalid_shape_name", String.join(" ", invalids)));
+    public static String getValidShapeNames() {
+        return String.join(" ", Shape.SHAPE_TO_STRING.values());
+    }
+
+    public static boolean isValidShapeName(String s) {
+        return Shape.SHAPE_TO_STRING.containsValue(s);
     }
 
     @Override
     public Collection<Map<Item, Collection<Item>>> get() {
         return Collections.singleton(COMPILED_ITEM_SHAPE_SORTING_RULES);
-    }
-
-    public static String getValidShapeNames() {
-        return String.join(" ", Shape.SHAPE_TO_STRING.values());
     }
 }
