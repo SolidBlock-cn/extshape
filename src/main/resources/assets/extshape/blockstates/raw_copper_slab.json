@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/raw_copper_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/raw_copper_block"
+    },
+    "type=top": {
+      "model": "extshape:block/raw_copper_slab_top"
+    }
+  }
+}

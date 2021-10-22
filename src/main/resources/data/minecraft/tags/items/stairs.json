@@ -17,9 +17,11 @@
     "extshape:amethyst_stairs",
     "extshape:snow_stairs",
     "extshape:clay_stairs",
+    "extshape:pumpkin_stairs",
     "extshape:netherrack_stairs",
     "extshape:glowstone_stairs",
     "extshape:chiseled_stone_brick_stairs",
+    "extshape:melon_stairs",
     "extshape:end_stone_stairs",
     "extshape:emerald_stairs",
     "extshape:chiseled_quartz_stairs",
@@ -45,6 +47,9 @@
     "extshape:dripstone_stairs",
     "extshape:moss_stairs",
     "extshape:chiseled_deepslate_stairs",
-    "extshape:smooth_basalt_stairs"
+    "extshape:smooth_basalt_stairs",
+    "extshape:raw_iron_stairs",
+    "extshape:raw_copper_stairs",
+    "extshape:raw_gold_stairs"
   ]
 }

@@ -45,14 +45,16 @@
     "extshape:amethyst_vertical_quarter_piece",
     "extshape:snow_vertical_quarter_piece",
     "extshape:clay_vertical_quarter_piece",
+    "extshape:pumpkin_vertical_quarter_piece",
     "extshape:netherrack_vertical_quarter_piece",
+    "extshape:polished_blackstone_vertical_quarter_piece",
     "extshape:glowstone_vertical_quarter_piece",
     "extshape:stone_brick_vertical_quarter_piece",
     "extshape:mossy_stone_brick_vertical_quarter_piece",
     "extshape:chiseled_stone_brick_vertical_quarter_piece",
+    "extshape:melon_vertical_quarter_piece",
     "extshape:nether_brick_vertical_quarter_piece",
     "extshape:end_stone_vertical_quarter_piece",
-    "extshape:end_stone_brick_vertical_quarter_piece",
     "extshape:emerald_vertical_quarter_piece",
     "extshape:quartz_vertical_quarter_piece",
     "extshape:chiseled_quartz_vertical_quarter_piece",
@@ -106,7 +108,7 @@
     "extshape:ancient_debris_vertical_quarter_piece",
     "extshape:crying_obsidian_vertical_quarter_piece",
     "extshape:blackstone_vertical_quarter_piece",
-    "extshape:polished_blackstone_vertical_quarter_piece",
+    "extshape:polished_blackstone_brick_vertical_quarter_piece",
     "extshape:chiseled_polished_blackstone_vertical_quarter_piece",
     "extshape:gilded_blackstone_vertical_quarter_piece",
     "extshape:chiseled_nether_brick_vertical_quarter_piece",
@@ -127,6 +129,9 @@
     "extshape:deepslate_tile_vertical_quarter_piece",
     "extshape:deepslate_brick_vertical_quarter_piece",
     "extshape:chiseled_deepslate_vertical_quarter_piece",
-    "extshape:smooth_basalt_vertical_quarter_piece"
+    "extshape:smooth_basalt_vertical_quarter_piece",
+    "extshape:raw_iron_vertical_quarter_piece",
+    "extshape:raw_copper_vertical_quarter_piece",
+    "extshape:raw_gold_vertical_quarter_piece"
   ]
 }

@@ -35,6 +35,8 @@ public class TextureMappings {
         BLOCK_TO_TEXTURE.put(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB, new Identifier("minecraft", "smooth_stone"));
         BLOCK_TO_TEXTURE.put(Blocks.QUARTZ_BLOCK, new Identifier("minecraft", "block/quartz_block_side"));
         BLOCK_TO_TEXTURE.put(Blocks.ANCIENT_DEBRIS, new Identifier("minecraft", "block/ancient_debris_side"));
+        BLOCK_TO_TEXTURE.put(Blocks.MELON, new Identifier("minecraft", "block/melon_side"));
+        BLOCK_TO_TEXTURE.put(Blocks.PUMPKIN, new Identifier("minecraft", "block/pumpkin_side"));
 
         BLOCK_TO_TOP_TEXTURE.put(Blocks.SANDSTONE, new Identifier("minecraft", "block/sandstone_top"));
         BLOCK_TO_BOTTOM_TEXTURE.put(Blocks.SANDSTONE, new Identifier("minecraft", "block/sandstone_bottom"));
@@ -45,6 +47,10 @@ public class TextureMappings {
         BLOCK_TO_BOTTOM_TEXTURE.put(Blocks.QUARTZ_BLOCK, new Identifier("minecraft", "block/quartz_block_top"));
         BLOCK_TO_TOP_TEXTURE.put(Blocks.ANCIENT_DEBRIS, new Identifier("minecraft", "block/ancient_debris_top"));
         BLOCK_TO_BOTTOM_TEXTURE.put(Blocks.ANCIENT_DEBRIS, new Identifier("minecraft", "block/ancient_debris_top"));
+        BLOCK_TO_TOP_TEXTURE.put(Blocks.MELON, new Identifier("minecraft", "block/melon_top"));
+        BLOCK_TO_BOTTOM_TEXTURE.put(Blocks.MELON, new Identifier("minecraft", "block/melon_top"));
+        BLOCK_TO_TOP_TEXTURE.put(Blocks.PUMPKIN, new Identifier("minecraft", "block/pumpkin_top"));
+        BLOCK_TO_BOTTOM_TEXTURE.put(Blocks.PUMPKIN, new Identifier("minecraft", "block/pumpkin_top"));
     }
 
     /**

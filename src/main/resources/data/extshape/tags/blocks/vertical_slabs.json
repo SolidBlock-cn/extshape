@@ -32,14 +32,16 @@
     "extshape:amethyst_vertical_slab",
     "extshape:snow_vertical_slab",
     "extshape:clay_vertical_slab",
+    "extshape:pumpkin_vertical_slab",
     "extshape:netherrack_vertical_slab",
+    "extshape:polished_blackstone_vertical_slab",
     "extshape:glowstone_vertical_slab",
     "extshape:stone_brick_vertical_slab",
     "extshape:mossy_stone_brick_vertical_slab",
     "extshape:chiseled_stone_brick_vertical_slab",
+    "extshape:melon_vertical_slab",
     "extshape:nether_brick_vertical_slab",
     "extshape:end_stone_vertical_slab",
-    "extshape:end_stone_brick_vertical_slab",
     "extshape:emerald_vertical_slab",
     "extshape:quartz_vertical_slab",
     "extshape:chiseled_quartz_vertical_slab",
@@ -60,7 +62,7 @@
     "extshape:ancient_debris_vertical_slab",
     "extshape:crying_obsidian_vertical_slab",
     "extshape:blackstone_vertical_slab",
-    "extshape:polished_blackstone_vertical_slab",
+    "extshape:polished_blackstone_brick_vertical_slab",
     "extshape:chiseled_polished_blackstone_vertical_slab",
     "extshape:gilded_blackstone_vertical_slab",
     "extshape:chiseled_nether_brick_vertical_slab",
@@ -81,6 +83,9 @@
     "extshape:deepslate_tile_vertical_slab",
     "extshape:deepslate_brick_vertical_slab",
     "extshape:chiseled_deepslate_vertical_slab",
-    "extshape:smooth_basalt_vertical_slab"
+    "extshape:smooth_basalt_vertical_slab",
+    "extshape:raw_iron_vertical_slab",
+    "extshape:raw_copper_vertical_slab",
+    "extshape:raw_gold_vertical_slab"
   ]
 }

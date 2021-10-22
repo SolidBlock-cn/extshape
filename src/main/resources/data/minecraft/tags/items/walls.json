@@ -21,8 +21,11 @@
     "extshape:diamond_wall",
     "extshape:amethyst_wall",
     "extshape:snow_wall",
+    "extshape:pumpkin_wall",
     "extshape:netherrack_wall",
     "extshape:glowstone_wall",
+    "extshape:chiseled_stone_brick_wall",
+    "extshape:melon_wall",
     "extshape:end_stone_wall",
     "extshape:emerald_wall",
     "extshape:quartz_wall",
@@ -36,6 +39,7 @@
     "extshape:purpur_wall",
     "extshape:nether_wart_wall",
     "extshape:warped_wart_wall",
+    "extshape:shroomlight_wall",
     "extshape:honeycomb_wall",
     "extshape:netherite_wall",
     "extshape:ancient_debris_wall",
@@ -43,6 +47,7 @@
     "extshape:tuff_wall",
     "extshape:calcite_wall",
     "extshape:dripstone_wall",
+    "extshape:chiseled_deepslate_wall",
     "extshape:smooth_basalt_wall"
   ]
 }

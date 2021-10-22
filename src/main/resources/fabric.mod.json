@@ -3,7 +3,7 @@
   "id": "extshape",
   "version": "1.3.0",
   "icon": "assets/extshape/icon.png",
-  "name": "Extended Shapes",
+  "name": "Extended Block Shapes",
   "description": "More blocks in more shapes!",
   "authors": [
     "SolidBlock"
