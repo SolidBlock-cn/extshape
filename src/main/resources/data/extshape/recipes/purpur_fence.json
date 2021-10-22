@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:purpur_block"
+    },
+    "#": {
+      "item": "minecraft:shulker_shell"
+    }
+  },
+  "result": {
+    "item": "extshape:purpur_fence",
+    "count": 3
+  }
+}

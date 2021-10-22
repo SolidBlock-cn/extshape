@@ -16,9 +16,11 @@
     "extshape:amethyst_slab",
     "extshape:snow_slab",
     "extshape:clay_slab",
+    "extshape:pumpkin_slab",
     "extshape:netherrack_slab",
     "extshape:glowstone_slab",
     "extshape:chiseled_stone_brick_slab",
+    "extshape:melon_slab",
     "extshape:end_stone_slab",
     "extshape:emerald_slab",
     "extshape:chiseled_quartz_slab",
@@ -44,6 +46,9 @@
     "extshape:dripstone_slab",
     "extshape:moss_slab",
     "extshape:chiseled_deepslate_slab",
-    "extshape:smooth_basalt_slab"
+    "extshape:smooth_basalt_slab",
+    "extshape:raw_iron_slab",
+    "extshape:raw_copper_slab",
+    "extshape:raw_gold_slab"
   ]
 }

@@ -33,11 +33,6 @@ public class ExtShapeBlocks {
             BlockBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
         }
 
-        // 石化橡木。
-        PETRIFIED_OAK_PLANKS =
-                BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape", "petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(FULL_BLOCKS).build();
-        BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
-
         // 圆石。
         BlockBuilder.createAllShapes(COBBLESTONE, Items.FLINT, null, null).withoutRedstone().build();
 
@@ -52,11 +47,16 @@ public class ExtShapeBlocks {
                     .putTag(isOverworld ? OVERWORLD_WOODEN_BLOCKS : null).build();
         }
 
+        // 石化橡木。
+        PETRIFIED_OAK_PLANKS =
+                BlockBuilder.createBlock().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape", "petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(FULL_BLOCKS).build();
+        BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
+
         // 基岩。
-        BlockBuilder.createAllShapes(BEDROCK, Items.STICK, ButtonType.HARD, ActivationRule.MOBS).setPreparationConsumer(((shape, abstractBlockBuilder) -> abstractBlockBuilder.setPreparationConsumer(builder -> builder.blockSettings.strength(-1.0F, 3600000.0F).dropsNothing().allowsSpawning((state, world, pos, type) -> false)))).build();
+        BlockBuilder.createAllShapes(BEDROCK, Items.STICK, ButtonType.HARD, ActivationRule.MOBS).setPreparationConsumer(((shape, abstractBlockBuilder) -> abstractBlockBuilder.setPreparationConsumer(builder -> builder.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state, world, pos, type) -> false)))).build();
 
         // 青金石块。
-        BlockBuilder.createAllShapes(LAPIS_BLOCK, Items.LAPIS_LAZULI, null, null).build();
+        BlockBuilder.createAllShapes(LAPIS_BLOCK, Items.LAPIS_LAZULI, null, ActivationRule.MOBS).build();
 
         // 砂岩、红砂岩及其切制、錾制、平滑变种。其中，只有平滑砂岩有栅栏、压力板和按钮。
         for (final Block block : SANDSTONES) {
@@ -86,51 +86,56 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(OBSIDIAN, Items.STONE, ButtonType.HARD, ActivationRule.MOBS).build();
 
         // 钻石块。
-        BlockBuilder.createAllShapes(DIAMOND_BLOCK, Items.DIAMOND, ButtonType.HARD, ActivationRule.MOBS).build();
+        BlockBuilder.createAllShapes(DIAMOND_BLOCK, Items.DIAMOND, null, ActivationRule.MOBS).build();
 
         // 紫水晶块。
         BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD, null, null).withoutRedstone().build();
 
         // 冰，由于技术原因，暂不产生。
 
-        // 雪块
+        // 雪块。
         BlockBuilder.createAllShapes(SNOW_BLOCK, Items.SNOW_BLOCK, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
-        // 黏土块
+        // 黏土块。
         BlockBuilder.createBasicShapes(CLAY).build();
+
+        // 南瓜。
+        BlockBuilder.createAllShapes(PUMPKIN, Items.PUMPKIN_SEEDS, ButtonType.WOODEN, ActivationRule.EVERYTHING).build();
 
         // 下界岩。
         BlockBuilder.createAllShapes(NETHERRACK, Items.NETHER_BRICK, ButtonType.STONE, ActivationRule.MOBS).build();
+
+        // 磨制玄武岩。
+        BlockBuilder.createAllShapes(POLISHED_BLACKSTONE, Items.NETHERRACK, null, null).build();
 
         // 荧石可以发光。
         BlockBuilder.createAllShapes(GLOWSTONE, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
         // 石砖、苔石砖。
         for (final Block block : new Block[]{STONE_BRICKS, MOSSY_STONE_BRICKS, CHISELED_STONE_BRICKS}) {
-            BlockBuilder.createBasicShapes(block).build();
+            BlockBuilder.createBasicShapes(block).withFences(Items.FLINT).withWall().build();
         }
 
         // 西瓜。
-        BlockBuilder.createAllShapes(MELON, Items.MELON_SLICE, ButtonType.WOODEN, ActivationRule.EVERYTHING);
+        BlockBuilder.createAllShapes(MELON, Items.MELON_SLICE, ButtonType.WOODEN, ActivationRule.EVERYTHING).build();
 
         // 下界砖块的栅栏门、按钮和压力板。
-        BlockBuilder.createAllShapes(NETHER_BRICKS, Items.NETHER_BRICK, null, null).withoutRedstone().build();
+        BlockBuilder.createAllShapes(NETHER_BRICKS, Items.NETHER_BRICK, ButtonType.STONE, ActivationRule.MOBS).withoutRedstone().build();
 
         // 末地石、末地石砖。
         BlockBuilder.createAllShapes(END_STONE, Items.END_STONE_BRICKS, null, null).build();
-        BlockBuilder.createBasicShapes(END_STONE_BRICKS).withoutRedstone().build();
 
         // 绿宝石块。
-        BlockBuilder.createAllShapes(EMERALD_BLOCK, Items.EMERALD, ButtonType.HARD, ActivationRule.MOBS).withoutRedstone().build();
+        BlockBuilder.createAllShapes(EMERALD_BLOCK, Items.EMERALD, null, ActivationRule.MOBS).build();
 
         // 石英、石英砖、平滑石英块、錾制石英块，只有平滑石英块有按钮和压力板。
         for (final Block block : new Block[]{QUARTZ_BLOCK, CHISELED_QUARTZ_BLOCK, QUARTZ_BRICKS, SMOOTH_QUARTZ}) {
-            BlockBuilder.createAllShapes(block, Items.QUARTZ, ButtonType.STONE, ActivationRule.MOBS).withoutRedstone().build();
+            BlockBuilder.createAllShapes(block, Items.QUARTZ, null, null).build();
         }
         BlockBuilder.createEmpty(SMOOTH_QUARTZ).withButton(ButtonType.STONE).withPressurePlate(ActivationRule.MOBS).build();
 
         // 红色下界砖。
-        BlockBuilder.createAllShapes(RED_NETHER_BRICKS, Items.NETHER_BRICK, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutRedstone().build();
+        BlockBuilder.createAllShapes(RED_NETHER_BRICKS, Items.NETHER_BRICK, ButtonType.STONE, ActivationRule.MOBS).build();
 
         // 陶瓦和彩色陶瓦。
         BlockBuilder.createAllShapes(TERRACOTTA, Items.CLAY, ButtonType.STONE, ActivationRule.MOBS).setDefaultTagOf(Map.of(Shape.STAIRS, TERRACOTTA_STAIRS, Shape.SLAB, TERRACOTTA_SLABS, Shape.VERTICAL_SLAB, TERRACOTTA_VERTICAL_SLABS, Shape.FENCE, TERRACOTTA_FENCES, Shape.FENCE_GATE, TERRACOTTA_FENCE_GATES, Shape.WALL, TERRACOTTA_WALLS, Shape.BUTTON, TERRACOTTA_BUTTONS, Shape.PRESSURE_PLATE, TERRACOTTA_PRESSURE_PLATES)).build();
@@ -155,7 +160,7 @@ public class ExtShapeBlocks {
         BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB).put(SMOOTH_STONE_DOUBLE_SLAB, SMOOTH_STONE_SLAB);
 
         // 紫珀块。
-        BlockBuilder.createBasicShapes(PURPUR_BLOCK).withWall().build();
+        BlockBuilder.createAllShapes(PURPUR_BLOCK, Items.SHULKER_SHELL, null, null).build();
 
         // 下界疣块、诡异疣块。
         BlockBuilder.createAllShapes(NETHER_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().build();
@@ -172,16 +177,16 @@ public class ExtShapeBlocks {
         }
 
         // 菌光体。
-        BlockBuilder.createAllShapes(SHROOMLIGHT, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutButton().withoutWall().build();
+        BlockBuilder.createAllShapes(SHROOMLIGHT, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
         // 蜜脾块。
-        BlockBuilder.createAllShapes(HONEYCOMB_BLOCK, Items.HONEYCOMB, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutButton().build();
+        BlockBuilder.createAllShapes(HONEYCOMB_BLOCK, Items.HONEYCOMB, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
         // 下界合金方块。
-        BlockBuilder.createAllShapes(NETHERITE_BLOCK, Items.NETHERITE_INGOT, ButtonType.HARD, ActivationRule.MOBS).withoutButton().build();
+        BlockBuilder.createAllShapes(NETHERITE_BLOCK, Items.NETHERITE_INGOT, null, ActivationRule.MOBS).withoutButton().build();
 
         // 远古残骸。
-        BlockBuilder.createAllShapes(ANCIENT_DEBRIS, Items.NETHERITE_SCRAP, ButtonType.HARD, ActivationRule.MOBS).withoutButton().build();
+        BlockBuilder.createAllShapes(ANCIENT_DEBRIS, Items.NETHERITE_SCRAP, null, ActivationRule.MOBS).withoutButton().build();
 
         // 哭泣的黑曜石。
         BlockBuilder.createAllShapes(CRYING_OBSIDIAN, Items.STONE, ButtonType.HARD, ActivationRule.MOBS).build();
@@ -189,6 +194,7 @@ public class ExtShapeBlocks {
         // 黑石及其变种。
         BlockBuilder.createBasicShapes(BLACKSTONE).build();
         BlockBuilder.createBasicShapes(POLISHED_BLACKSTONE).build();
+        BlockBuilder.createBasicShapes(POLISHED_BLACKSTONE_BRICKS).build();
         BlockBuilder.createBasicShapes(CHISELED_POLISHED_BLACKSTONE).build();
         BlockBuilder.createBasicShapes(GILDED_BLACKSTONE).build();
 
@@ -216,9 +222,9 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(DRIPSTONE_BLOCK, Items.POINTED_DRIPSTONE, ButtonType.STONE, ActivationRule.MOBS).build();
         BlockBuilder.createAllShapes(MOSS_BLOCK, Items.MOSS_CARPET, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutWall().build();
 
-        // 深板岩及其变种。
+        // 深板岩及其变种。深板岩自身属于 PillarBlock，不适合创建形状。
         for (final Block block : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE, DEEPSLATE_TILES, DEEPSLATE_BRICKS, CHISELED_DEEPSLATE}) {
-            BlockBuilder.createBasicShapes(block).build();
+            BlockBuilder.createAllShapes(block, Items.DEEPSLATE, null, ActivationRule.MOBS).build();
         }
 
         // 平滑玄武岩。
@@ -226,7 +232,7 @@ public class ExtShapeBlocks {
 
         // 粗铁、粗铜、粗金。
         for (Block block : new Block[]{RAW_IRON_BLOCK, RAW_COPPER_BLOCK, RAW_GOLD_BLOCK}) {
-            BlockBuilder.createBasicShapes(block);
+            BlockBuilder.createBasicShapes(block).build();
         }
     }
 

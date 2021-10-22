@@ -45,14 +45,16 @@
     "extshape:amethyst_vertical_stairs",
     "extshape:snow_vertical_stairs",
     "extshape:clay_vertical_stairs",
+    "extshape:pumpkin_vertical_stairs",
     "extshape:netherrack_vertical_stairs",
+    "extshape:polished_blackstone_vertical_stairs",
     "extshape:glowstone_vertical_stairs",
     "extshape:stone_brick_vertical_stairs",
     "extshape:mossy_stone_brick_vertical_stairs",
     "extshape:chiseled_stone_brick_vertical_stairs",
+    "extshape:melon_vertical_stairs",
     "extshape:nether_brick_vertical_stairs",
     "extshape:end_stone_vertical_stairs",
-    "extshape:end_stone_brick_vertical_stairs",
     "extshape:emerald_vertical_stairs",
     "extshape:quartz_vertical_stairs",
     "extshape:chiseled_quartz_vertical_stairs",
@@ -106,7 +108,7 @@
     "extshape:ancient_debris_vertical_stairs",
     "extshape:crying_obsidian_vertical_stairs",
     "extshape:blackstone_vertical_stairs",
-    "extshape:polished_blackstone_vertical_stairs",
+    "extshape:polished_blackstone_brick_vertical_stairs",
     "extshape:chiseled_polished_blackstone_vertical_stairs",
     "extshape:gilded_blackstone_vertical_stairs",
     "extshape:chiseled_nether_brick_vertical_stairs",
@@ -127,6 +129,9 @@
     "extshape:deepslate_tile_vertical_stairs",
     "extshape:deepslate_brick_vertical_stairs",
     "extshape:chiseled_deepslate_vertical_stairs",
-    "extshape:smooth_basalt_vertical_stairs"
+    "extshape:smooth_basalt_vertical_stairs",
+    "extshape:raw_iron_vertical_stairs",
+    "extshape:raw_copper_vertical_stairs",
+    "extshape:raw_gold_vertical_stairs"
   ]
 }

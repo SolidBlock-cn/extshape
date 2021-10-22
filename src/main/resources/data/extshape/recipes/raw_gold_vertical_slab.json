@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:raw_gold_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:raw_gold_vertical_slab",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:polished_deepslate"
+    },
+    "#": {
+      "item": "minecraft:deepslate"
+    }
+  },
+  "result": {
+    "item": "extshape:polished_deepslate_fence",
+    "count": 3
+  }
+}
