@@ -4,15 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.mappings.IngredientMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class FenceGateGenerator extends AbstractBlockGenerator<FenceGateBlock> {
     protected FenceGateGenerator(Path path, @NotNull FenceGateBlock block) {
@@ -152,12 +151,12 @@ public class FenceGateGenerator extends AbstractBlockGenerator<FenceGateBlock> {
     }
 
     @Override
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier(), this.getBlockModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_open"), this.getOpenBlockModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_wall"), this.getWallBlockModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_wall_open"), this.getWallOpenBlockModelString()));
+    public Map<Identifier, String> getBlockModelCollection() {
+        Map<Identifier, String> modelCollection = new LinkedHashMap<>();
+        modelCollection.put(this.getBlockModelIdentifier(), this.getBlockModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_open"), this.getOpenBlockModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_wall"), this.getWallBlockModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_wall_open"), this.getWallOpenBlockModelString());
         return modelCollection;
     }
 

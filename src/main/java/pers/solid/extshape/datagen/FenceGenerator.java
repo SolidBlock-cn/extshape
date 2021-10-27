@@ -4,15 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.mappings.IngredientMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class FenceGenerator extends AbstractBlockGenerator<FenceBlock> {
     protected FenceGenerator(Path path, @NotNull FenceBlock block) {
@@ -101,11 +100,11 @@ public class FenceGenerator extends AbstractBlockGenerator<FenceBlock> {
     }
 
     @Override
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_inventory"), this.getInventoryBlockModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_side"), this.getSideBlockModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_post"), this.getPostBlockModelString()));
+    public Map<Identifier, String> getBlockModelCollection() {
+        Map<Identifier, String> modelCollection = new LinkedHashMap<>();
+        modelCollection.put(this.getBlockModelIdentifier("_inventory"), this.getInventoryBlockModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_side"), this.getSideBlockModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_post"), this.getPostBlockModelString());
         return modelCollection;
     }
 

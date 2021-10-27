@@ -1,14 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "wool_pressure_plate",
-  "pattern": [
-    "##"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:lime_wool"
+  "ingredients": [
+    {
+      "item": "minecraft:lime_carpet"
     }
-  },
+  ],
   "result": {
     "item": "extshape:lime_wool_pressure_plate"
   }

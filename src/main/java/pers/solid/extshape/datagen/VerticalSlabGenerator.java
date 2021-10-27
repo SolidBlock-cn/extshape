@@ -51,13 +51,13 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
     @Override
     public String getBlockModelString() {
         return String.format("{\n" +
-                "    \"parent\": \"extshape:block/vertical_slab\",\n" +
-                "    \"textures\": {\n" +
-                "        \"bottom\": \"%s\",\n" +
-                "        \"top\": \"%s\",\n" +
-                "        \"side\": \"%s\"\n" +
-                "    }\n" +
-                "}", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
+                             "    \"parent\": \"extshape:block/vertical_slab\",\n" +
+                             "    \"textures\": {\n" +
+                             "        \"bottom\": \"%s\",\n" +
+                             "        \"top\": \"%s\",\n" +
+                             "        \"side\": \"%s\"\n" +
+                             "    }\n" +
+                             "}", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
     }
 
     @Override
@@ -77,7 +77,7 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                         "    \"item\": \"%s\",\n" +
                         "    \"count\": 1\n" +
                         "  }\n" +
-                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.SLAB,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -104,14 +104,14 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
                         "    \"count\": 1\n" +
                         "  }\n" +
                         "}\n", this.getRecipeGroup().replace("vertical_", ""), this.getIdentifier(),
-                Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+                Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.SLAB,
                         this.getBaseBlock())));
     }
 
     @Override
     public void writeCraftingRecipeFiles() {
         super.writeCraftingRecipeFiles();
-        this.writeRecipeFile("extshape", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.slab,
+        this.writeRecipeFile("extshape", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.SLAB,
                 this.getBaseBlock())).getPath() + "_from_vertical_slab", this.getInverseCraftingString());
     }
 

@@ -1,14 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "wool_pressure_plate",
-  "pattern": [
-    "##"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:yellow_wool"
+  "ingredients": [
+    {
+      "item": "minecraft:yellow_carpet"
     }
-  },
+  ],
   "result": {
     "item": "extshape:yellow_wool_pressure_plate"
   }

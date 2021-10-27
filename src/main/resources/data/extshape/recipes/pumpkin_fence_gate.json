@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:pumpkin_seeds"
+      },
+      "W": {
+        "item": "minecraft:pumpkin"
+      }
+    },
+    "result": {
+      "item": "extshape:pumpkin_fence_gate"
+    }
+  }

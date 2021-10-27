@@ -1,15 +1,14 @@
 package pers.solid.extshape.datagen;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class PressurePlateGenerator extends AbstractBlockGenerator<PressurePlateBlock> {
     protected PressurePlateGenerator(Path path, @NotNull PressurePlateBlock block) {
@@ -50,30 +49,18 @@ public class PressurePlateGenerator extends AbstractBlockGenerator<PressurePlate
     }
 
     @Override
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        return ImmutableList.of(
-                new Pair<>(this.getBlockModelIdentifier(), this.getBlockModelString()),
-                new Pair<>(this.getBlockModelIdentifier("_down"), this.getDownModelString())
-        );
+    public Map<Identifier, String> getBlockModelCollection() {
+        Map<Identifier, String> map = new LinkedHashMap<>();
+        map.put(this.getBlockModelIdentifier(), this.getBlockModelString());
+        map.put(this.getBlockModelIdentifier("_down"), this.getDownModelString());
+        return map;
     }
 
     @Override
     public String getCraftingRecipeString() {
-        return String.format("{\n" +
-                "  \"type\": \"minecraft:crafting_shaped\",\n" +
-                "  \"group\": \"%s\",\n" +
-                "  \"pattern\": [\n" +
-                "    \"##\"\n" +
-                "  ],\n" +
-                "  \"key\": {\n" +
-                "    \"#\": {\n" +
-                "      \"item\": \"%s\"\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"result\": {\n" +
-                "    \"item\": \"%s\"\n" +
-                "  }\n" +
-                "}", this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier());
+        if (!ExtShapeBlockTag.WOOLS.contains(this.getBaseBlock()))
+            return String.format("{\n  \"type\": \"minecraft:crafting_shaped\",\n  \"group\": \"%s\",\n  \"pattern\": [\n    \"##\"\n  ],\n  \"key\": {\n    \"#\": {\n      \"item\": \"%s\"\n    }\n  },\n  \"result\": {\n    \"item\": \"%s\"\n  }\n}",this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier());
+        else return String.format("{\n  \"type\": \"minecraft:crafting_shapeless\",\n  \"group\": \"%s\",\n  \"ingredients\": [\n    {\n      \"item\": \"%s\"\n    }\n  ],\n  \"result\": {\n    \"item\": \"%s\"\n  }\n}",this.getRecipeGroup(), this.getBaseBlockIdentifier().toString().replaceAll("_wool\\b", "_carpet"), this.getIdentifier());
     }
 
     @Override

@@ -3,6 +3,7 @@ package pers.solid.extshape.datagen;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.*;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
@@ -46,8 +47,8 @@ public class Generator {
     public static void main() {
         if (!DATA_GENERATION_SWITCH) return;
         ExtShapeBlocks.init();
-        System.out.println("[EXTSHAPE] 开始生成数据！（只有在开发环境中才应该出现这行字，否则是模组出bug了。）");
-        Generator generator = new Generator(Paths.get(("../src/main/resources")));
+        ExtShape.EXTSHAPE_LOGGER.info("开始生成数据！（只有在开发环境中才应该出现这行字，否则是模组出bug了。）");
+        Generator generator = new Generator(Paths.get("../src/main/resources"));
         generator.generateForAllBlocks(ExtShapeBlockTag.EXTSHAPE_BLOCKS);
         VerticalSlabGenerator.init(generator);
         QuarterPieceGenerator.init(generator);
@@ -55,18 +56,17 @@ public class Generator {
         VerticalStairsGenerator.init(generator);
         VerticalQuarterPieceGenerator.init(generator);
         TagGenerator.writeAllBlockTagFiles(generator);
-        System.out.printf("[EXTSHAPE] 数据生成完成，总共生成了%s个文件，好耶！！（你可能需要重新构建项目（无需重启游戏）才能看到更改。）%n", stat);
+        ExtShape.EXTSHAPE_LOGGER.info(String.format("数据生成完成，总共生成了%s个文件，好耶！！（你可能需要重新构建项目（无需重启游戏）才能看到更改。）", stat));
     }
 
     /**
      * 在指定的位置，写入指定字符串的文件。如果目录不存在，则创建此目录。写入成功后，计入统计。
      *
-     * @param path 文件路径（将会自动基于 {@link #basePath} 生成完整路径。
+     * @param path 文件路径（将会自动基于 {@link #basePath} 生成完整路径）。
      */
     public void write(String path, @Nullable String content) {
         if (content == null) return;
         File file = new File(String.valueOf(basePath), path);
-//        System.out.printf("正在写入文件：%s\n",file.getAbsolutePath());
         try {
             File fileParent = file.getParentFile();
             if (!fileParent.exists()) {
@@ -123,8 +123,7 @@ public class Generator {
     public void writeBlockTagFile(ExtShapeBlockTag blockTag) {
         @Nullable Identifier identifier = blockTag.identifier;
         if (blockTag.identifier == null) return;
-        write(String.format("data/%s/tags/blocks/%s.json", identifier.getNamespace(), identifier.getPath()),
-                blockTag.generateString());
+        write(String.format("data/%s/tags/blocks/%s.json", identifier.getNamespace(), identifier.getPath()), blockTag.generateString());
     }
 
     /**
@@ -135,8 +134,7 @@ public class Generator {
     public void writeItemTagFile(ExtShapeBlockTag blockTag) {
         @Nullable Identifier identifier = blockTag.identifier;
         if (blockTag.identifier == null) return;
-        write(String.format("data/%s/tags/items/%s.json", identifier.getNamespace(), identifier.getPath()),
-                blockTag.generateString());
+        write(String.format("data/%s/tags/items/%s.json", identifier.getNamespace(), identifier.getPath()), blockTag.generateString());
     }
 
     /**
@@ -161,15 +159,15 @@ public class Generator {
         AbstractBlockGenerator<? extends Block> generator;
         Path path = basePath;
         if (block instanceof StairsBlock) generator = new StairsGenerator(path, (StairsBlock) block);
-        else if (block instanceof GlazedTerracottaSlabBlock) generator = new GlazedTerracottaSlabGenerator(path,
-                (GlazedTerracottaSlabBlock) block);
+        else if (block instanceof GlazedTerracottaSlabBlock)
+            generator = new GlazedTerracottaSlabGenerator(path, (GlazedTerracottaSlabBlock) block);
         else if (block instanceof SlabBlock) generator = new SlabGenerator(path, (SlabBlock) block);
-        else if (block instanceof VerticalSlabBlock) generator = new VerticalSlabGenerator(path,
-                (VerticalSlabBlock) block);
-        else if (block instanceof QuarterPieceBlock) generator = new QuarterPieceGenerator(path,
-                (QuarterPieceBlock) block);
-        else if (block instanceof VerticalQuarterPieceBlock) generator = new VerticalQuarterPieceGenerator(path,
-                (VerticalQuarterPieceBlock) block);
+        else if (block instanceof VerticalSlabBlock)
+            generator = new VerticalSlabGenerator(path, (VerticalSlabBlock) block);
+        else if (block instanceof QuarterPieceBlock)
+            generator = new QuarterPieceGenerator(path, (QuarterPieceBlock) block);
+        else if (block instanceof VerticalQuarterPieceBlock)
+            generator = new VerticalQuarterPieceGenerator(path, (VerticalQuarterPieceBlock) block);
         else if (block instanceof VerticalStairsBlock)
             generator = new VerticalStairsGenerator(path, (VerticalStairsBlock) block);
         else if (block instanceof FenceBlock) generator = new FenceGenerator(path, (FenceBlock) block);
@@ -177,8 +175,8 @@ public class Generator {
         else if (block instanceof WallBlock) generator = new WallGenerator(path, (WallBlock) block);
         else if (block instanceof AbstractButtonBlock)
             generator = new ButtonGenerator(path, (AbstractButtonBlock) block);
-        else if (block instanceof PressurePlateBlock) generator = new PressurePlateGenerator(path,
-                (PressurePlateBlock) block);
+        else if (block instanceof PressurePlateBlock)
+            generator = new PressurePlateGenerator(path, (PressurePlateBlock) block);
         else generator = null;
         return generator;
     }

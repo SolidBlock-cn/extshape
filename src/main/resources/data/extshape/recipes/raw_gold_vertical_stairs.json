@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:raw_gold_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:raw_gold_vertical_stairs",
+    "count": 1
+  }
+}

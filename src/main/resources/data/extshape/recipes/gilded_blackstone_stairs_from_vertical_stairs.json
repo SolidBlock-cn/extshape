@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:gilded_blackstone_vertical_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:gilded_blackstone_stairs",
+    "count": 1
+  }
+}

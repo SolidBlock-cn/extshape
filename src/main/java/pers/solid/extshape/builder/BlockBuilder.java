@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.Item;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.block.ExtShapeBlock;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
@@ -28,35 +27,32 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
         return new BlocksBuilder(baseBlock);
     }
 
-    public static AbstractBlockBuilder<? extends Block> create(Shape shape, Block baseBlock,
-                                                               @Nullable Item fenceCraftingIngredient,
-                                                               @Nullable ExtShapeButtonBlock.ButtonType buttonType,
-                                                               @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+    public static AbstractBlockBuilder<? extends Block> create(Shape shape, Block baseBlock, @Nullable Item fenceCraftingIngredient, @Nullable ExtShapeButtonBlock.ButtonType buttonType, @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         switch (shape) {
-            case stairs:
+            case STAIRS:
                 return new StairsBuilder(baseBlock);
-            case slab:
+            case SLAB:
                 return new SlabBuilder(baseBlock);
-            case verticalSlab:
+            case VERTICAL_SLAB:
                 return new VerticalSlabBuilder(baseBlock);
-            case verticalStairs:
+            case VERTICAL_STAIRS:
                 return new VerticalStairsBuilder(baseBlock);
-            case quarterPiece:
+            case QUARTER_PIECE:
                 return new QuarterPieceBuilder(baseBlock);
-            case verticalQuarterPiece:
+            case VERTICAL_QUARTER_PIECE:
                 return new VerticalQuarterPieceBuilder(baseBlock);
-            case fence:
+            case FENCE:
                 return new FenceBuilder(baseBlock, fenceCraftingIngredient);
-            case fenceGate:
+            case FENCE_GATE:
                 return new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
-            case button:
+            case BUTTON:
                 return new ButtonBuilder(buttonType, baseBlock);
-            case pressurePlate:
+            case PRESSURE_PLATE:
                 return new PressurePlateBuilder(pressurePlateActivationRule, baseBlock);
-            case wall:
+            case WALL:
                 return new WallBuilder(baseBlock);
             default:
-                return null;
+                throw new IllegalArgumentException();
         }
     }
 
@@ -72,10 +68,5 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
     @Override
     protected @Nullable ExtShapeBlockTag getDefaultTag() {
         return null;
-    }
-
-    @Override
-    public void createInstance() {
-        this.block = new ExtShapeBlock(this.blockSettings);
     }
 }

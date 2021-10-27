@@ -83,7 +83,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                         "    \"item\": \"%s\",\n" +
                         "    \"count\": 1\n" +
                         "  }\n" +
-                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.quarterPiece,
+                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.QUARTER_PIECE,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -107,7 +107,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                         "    \"item\": \"%s\",\n" +
                         "    \"count\": 6\n" +
                         "  }\n" +
-                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab,
+                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -145,7 +145,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                         "  },\n" +
                         "  \"result\": \"%s\",\n" +
                         "  \"count\": 3\n" +
-                        "}", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalStairs,
+                        "}", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -161,7 +161,7 @@ public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<Vertic
                         "  },\n" +
                         "  \"result\": \"%s\",\n" +
                         "  \"count\": 2\n" +
-                        "}", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.verticalSlab, this.getBaseBlock())),
+                        "}", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, this.getBaseBlock())),
                 this.getIdentifier());
     }
 

@@ -1,14 +1,11 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "group": "wool_pressure_plate",
-  "pattern": [
-    "##"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:black_wool"
+  "ingredients": [
+    {
+      "item": "minecraft:black_carpet"
     }
-  },
+  ],
   "result": {
     "item": "extshape:black_wool_pressure_plate"
   }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:waxed_weathered_copper_vertical_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:waxed_weathered_copper_stairs",
+    "count": 1
+  }
+}

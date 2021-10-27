@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.mappings.BlockMappings;
@@ -19,23 +20,42 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
      * 从基础方块命名空间id路径到其对应变种方块的命名空间id路径前缀的映射。
      * 例如石砖是stone_bricks，但其变种方块的命名空间id路径前缀是stone_brick，因此其变种方块的id路径会形如stone_brick_stairs而非stone_bricks_stairs。
      */
-    Map<String, String> pathPrefixMappings = new HashMap<>();
+    Map<String, String> PATH_PREFIX_MAPPINGS = Util.make(new HashMap<>(), map -> {
+        map.put("chiseled_quartz", "chiseled_quartz");
+        map.put("clay", "clay");
+        map.put("cut_copper", "cut_copper");
+        map.put("exposed_copper", "exposed_copper");
+        map.put("exposed_cut_copper", "exposed_cut_copper");
+        map.put("oxidized_copper", "oxidized_copper");
+        map.put("oxidized_cut_copper", "oxidized_cut_copper");
+        map.put("smooth_quartz", "smooth_quartz");
+        map.put("waxed_cut_copper", "waxed_cut_copper");
+        map.put("waxed_exposed_cut_copper", "waxed_exposed_cut_copper");
+        map.put("waxed_oxidized_cut_copper", "waxed_oxidized_cut_copper");
+        map.put("waxed_weathered_cut_copper", "waxed_weathered_cut_copper");
+        map.put("weathered_cut_copper", "weathered_cut_copper");
+    });
 
+    /**
+     * 获得 {@code path} 对应的名称前缀。
+     *
+     * @param path 命名空间id中的路径。如 {@code iron_block}、{@code stone_bricks}。
+     * @return 转换得到的路径前缀。
+     */
     static String getPathPrefixOf(@NotNull String path) {
-        // @paras: path: 基础方块的id路径，如iron_block、stone_bricks。
-        if (pathPrefixMappings.containsKey(path)) return pathPrefixMappings.get(path);
-        String convertedPath = path.replaceAll("_planks$", "")
+        return PATH_PREFIX_MAPPINGS.getOrDefault(path, Util.make(path
+                .replaceAll("_planks$", "")
                 .replaceAll("_block$", "")
                 .replaceAll("^block_of_", "")
                 .replaceAll("tiles$", "tile")
-                .replaceAll("bricks$", "brick");
-        if (!path.equals(convertedPath))
-            pathPrefixMappings.put(path, convertedPath);
-        return convertedPath;
+                .replaceAll("bricks$", "brick"), convertedPath -> {
+            if (!path.equals(convertedPath))
+                PATH_PREFIX_MAPPINGS.put(path, convertedPath);
+        }));
     }
 
     /**
-     * 根据基础方块的命名空间id以及指定的后缀，利用{@link #pathPrefixMappings}，组合一个extshape命名空间下的新的id。
+     * 根据基础方块的命名空间id以及指定的后缀，利用{@link #PATH_PREFIX_MAPPINGS}，组合一个extshape命名空间下的新的id。
      *
      * @param identifier 基础方块的id，如<code>minecraft:quartz_bricks</code>。
      * @param suffix     后缀，例如<code>"_stairs"</code>或<code>"_fence"</code>。
@@ -44,8 +64,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
      */
     static Identifier convertIdentifier(Identifier identifier, String suffix) {
         if (identifier == Registry.BLOCK.getDefaultId())
-            throw new RuntimeException(String.format("Attempt to convert a default block" +
-                    " ID %s with suffix %s!", identifier, suffix));
+            throw new RuntimeException(String.format("Attempt to convert a default block ID %s with suffix %s!", identifier, suffix));
         String path = identifier.getPath();
         String basePath = getPathPrefixOf(path);
         return new Identifier("extshape", basePath + suffix);
@@ -86,6 +105,6 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
      * 例如，石砖楼梯的id路径前缀为 <code>stone_brick</code>，而其基础方块石砖的id路径为 <code>stone_bricks</code>，不同，所以返回 <code>true</code>。
      */
     default boolean hasPathPrefixChanged() {
-        return pathPrefixMappings.containsKey(this.getBaseBlockIdentifier().getPath());
+        return PATH_PREFIX_MAPPINGS.containsKey(this.getBaseBlockIdentifier().getPath());
     }
 }

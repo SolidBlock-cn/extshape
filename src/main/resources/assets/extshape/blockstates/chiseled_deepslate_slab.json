@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/chiseled_deepslate_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/chiseled_deepslate"
+    },
+    "type=top": {
+      "model": "extshape:block/chiseled_deepslate_slab_top"
+    }
+  }
+}

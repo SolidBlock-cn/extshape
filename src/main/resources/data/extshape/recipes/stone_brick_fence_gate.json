@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:flint"
+      },
+      "W": {
+        "item": "minecraft:stone_bricks"
+      }
+    },
+    "result": {
+      "item": "extshape:stone_brick_fence_gate"
+    }
+  }

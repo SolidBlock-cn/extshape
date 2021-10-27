@@ -88,7 +88,7 @@ public class VerticalStairsGenerator extends AbstractBlockGenerator<VerticalStai
                         "    \"item\": \"%s\",\n" +
                         "    \"count\": 1\n" +
                         "  }\n" +
-                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.stairs,
+                        "}\n", this.getRecipeGroup(), Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.STAIRS,
                         this.getBaseBlock())),
                 this.getIdentifier());
     }
@@ -115,14 +115,14 @@ public class VerticalStairsGenerator extends AbstractBlockGenerator<VerticalStai
                         "    \"count\": 1\n" +
                         "  }\n" +
                         "}\n", this.getRecipeGroup().replace("vertical_", ""), this.getIdentifier(),
-                Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.stairs,
+                Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.STAIRS,
                         this.getBaseBlock())));
     }
 
     @Override
     public void writeCraftingRecipeFiles() {
         super.writeCraftingRecipeFiles();
-        this.writeRecipeFile("extshape", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.stairs,
+        this.writeRecipeFile("extshape", Registry.BLOCK.getId(BlockMappings.getBlockOf(Shape.STAIRS,
                 this.getBaseBlock())).getPath() + "_from_vertical_stairs", this.getInverseCraftingString());
     }
 

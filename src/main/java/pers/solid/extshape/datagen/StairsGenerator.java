@@ -3,13 +3,12 @@ package pers.solid.extshape.datagen;
 import net.minecraft.block.Block;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import net.minecraft.util.registry.Registry;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class StairsGenerator extends AbstractBlockGenerator<StairsBlock> {
     protected StairsGenerator(Path path, StairsBlock block) {
@@ -51,11 +50,11 @@ public class StairsGenerator extends AbstractBlockGenerator<StairsBlock> {
     }
 
     @Override
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier(), this.getBlockModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_inner"), this.getInnerBlockModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_outer"), this.getOuterBlockModelString()));
+    public Map<Identifier, String> getBlockModelCollection() {
+        Map<Identifier, String> modelCollection = new LinkedHashMap<>();
+        modelCollection.put(this.getBlockModelIdentifier(), this.getBlockModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_inner"), this.getInnerBlockModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_outer"), this.getOuterBlockModelString());
         return modelCollection;
     }
 

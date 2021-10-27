@@ -48,7 +48,7 @@ public class TagGenerator extends Generator {
     }
 
     static {
-        ExtShape.EXTSHAPE_LOGGER.info("Preparing for block tags. Make sure you are in the development environment!");
+        ExtShape.EXTSHAPE_LOGGER.info("正在准备方块标签。确保当前是在开发环境！");
         for (Block block : ExtShapeBlockTag.EXTSHAPE_BLOCKS) {
             Block baseBlock = BlockMappings.getBaseBlockOf(block);
             if (baseBlock == null) continue;
@@ -67,7 +67,7 @@ public class TagGenerator extends Generator {
 //            if (baseBlock == Blocks.IRON_BLOCK || baseBlock == Blocks.LAPIS_BLOCK) NEEDS_STONE_TOOL.add(block);
             if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) NON_FLAMMABLE_WOOD.add(block);
         }
-        ExtShape.EXTSHAPE_LOGGER.info("Tags have been completed.");
+        ExtShape.EXTSHAPE_LOGGER.info("用于数据生成的标签已完成填充。");
     }
 
     /**

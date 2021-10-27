@@ -3,13 +3,12 @@ package pers.solid.extshape.datagen;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock> {
     protected ButtonGenerator(Path path, @NotNull AbstractButtonBlock block) {
@@ -30,11 +29,11 @@ public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock>
     }
 
 
-    public List<Pair<Identifier, String>> getBlockModelCollection() {
-        List<Pair<Identifier, String>> modelCollection = new ArrayList<>();
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier(), this.getModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_inventory"), this.getInventoryModelString()));
-        modelCollection.add(new Pair<>(this.getBlockModelIdentifier("_pressed"), this.getPressedModelString()));
+    public Map<Identifier, String> getBlockModelCollection() {
+        Map<Identifier, String> modelCollection = new LinkedHashMap<>();
+        modelCollection.put(this.getBlockModelIdentifier(), this.getModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_inventory"), this.getInventoryModelString());
+        modelCollection.put(this.getBlockModelIdentifier("_pressed"), this.getPressedModelString());
         return modelCollection;
     }
 

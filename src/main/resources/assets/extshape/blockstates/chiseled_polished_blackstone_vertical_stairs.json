@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=south_west": { "model": "extshape:block/chiseled_polished_blackstone_vertical_stairs" , "uvlock":true },
+    "facing=north_west":  { "model": "extshape:block/chiseled_polished_blackstone_vertical_stairs", "y":  90 , "uvlock":true},
+    "facing=north_east": { "model": "extshape:block/chiseled_polished_blackstone_vertical_stairs", "y": 180 , "uvlock":true },
+    "facing=south_east":  { "model": "extshape:block/chiseled_polished_blackstone_vertical_stairs", "y": 270 , "uvlock":true }
+  }
+}
