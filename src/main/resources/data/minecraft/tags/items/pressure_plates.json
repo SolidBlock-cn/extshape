@@ -4,7 +4,6 @@
     "#extshape:concrete_pressure_plates",
     "#extshape:terracotta_pressure_plates",
     "#extshape:woolen_pressure_plates",
-    "extshape:smooth_stone_pressure_plate",
     "extshape:granite_pressure_plate",
     "extshape:polished_granite_pressure_plate",
     "extshape:diorite_pressure_plate",
@@ -39,16 +38,6 @@
     "extshape:honeycomb_pressure_plate",
     "extshape:netherite_pressure_plate",
     "extshape:ancient_debris_pressure_plate",
-    "extshape:crying_obsidian_pressure_plate",
-    "extshape:tuff_pressure_plate",
-    "extshape:calcite_pressure_plate",
-    "extshape:dripstone_pressure_plate",
-    "extshape:moss_pressure_plate",
-    "extshape:cobbled_deepslate_pressure_plate",
-    "extshape:polished_deepslate_pressure_plate",
-    "extshape:deepslate_tile_pressure_plate",
-    "extshape:deepslate_brick_pressure_plate",
-    "extshape:chiseled_deepslate_pressure_plate",
-    "extshape:smooth_basalt_pressure_plate"
+    "extshape:crying_obsidian_pressure_plate"
   ]
 }

@@ -10,16 +10,14 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 public class BlockBuilder extends AbstractBlockBuilder<Block> {
 
     public BlockBuilder() {
-        super(null, null);
+        super(null, null, builder -> new Block(builder.blockSettings));
     }
 
     public static BlocksBuilder createBasicShapes(Block baseBlock) {
         return createEmpty(baseBlock).withShapes();
     }
 
-    public static BlocksBuilder createAllShapes(Block baseBlock, Item fenceCraftingIngredient,
-                                                ExtShapeButtonBlock.ButtonType buttonType,
-                                                PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+    public static BlocksBuilder createAllShapes(Block baseBlock, Item fenceCraftingIngredient, ExtShapeButtonBlock.ButtonType buttonType, PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
     }
 

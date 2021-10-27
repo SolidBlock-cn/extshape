@@ -4,7 +4,6 @@
     "#extshape:concrete_buttons",
     "#extshape:terracotta_buttons",
     "#extshape:woolen_buttons",
-    "extshape:smooth_stone_button",
     "extshape:granite_button",
     "extshape:polished_granite_button",
     "extshape:diorite_button",
@@ -37,16 +36,6 @@
     "extshape:purpur_button",
     "extshape:shroomlight_button",
     "extshape:honeycomb_button",
-    "extshape:crying_obsidian_button",
-    "extshape:tuff_button",
-    "extshape:calcite_button",
-    "extshape:dripstone_button",
-    "extshape:moss_button",
-    "extshape:cobbled_deepslate_button",
-    "extshape:polished_deepslate_button",
-    "extshape:deepslate_tile_button",
-    "extshape:deepslate_brick_button",
-    "extshape:chiseled_deepslate_button",
-    "extshape:smooth_basalt_button"
+    "extshape:crying_obsidian_button"
   ]
 }
