@@ -1,7 +1,5 @@
 package pers.solid.extshape.tag;
 
-import com.google.common.collect.ImmutableList;
-import com.google.gson.JsonArray;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;

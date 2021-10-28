@@ -252,7 +252,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
     }
 
     public BlocksBuilder breakByTool(Tag<Item> tag) {
-        return this.breakByTool(tag,0);
+        return this.breakByTool(tag, 0);
     }
 
     /**

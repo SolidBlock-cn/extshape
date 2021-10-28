@@ -51,13 +51,13 @@ public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBl
     @Override
     public String getBlockModelString() {
         return String.format("{\n" +
-                             "    \"parent\": \"extshape:block/vertical_slab\",\n" +
-                             "    \"textures\": {\n" +
-                             "        \"bottom\": \"%s\",\n" +
-                             "        \"top\": \"%s\",\n" +
-                             "        \"side\": \"%s\"\n" +
-                             "    }\n" +
-                             "}", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
+                "    \"parent\": \"extshape:block/vertical_slab\",\n" +
+                "    \"textures\": {\n" +
+                "        \"bottom\": \"%s\",\n" +
+                "        \"top\": \"%s\",\n" +
+                "        \"side\": \"%s\"\n" +
+                "    }\n" +
+                "}", this.getBottomTexture(), this.getTopTexture(), this.getSideTexture());
     }
 
     @Override

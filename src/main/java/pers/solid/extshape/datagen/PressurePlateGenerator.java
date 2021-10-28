@@ -59,8 +59,8 @@ public class PressurePlateGenerator extends AbstractBlockGenerator<PressurePlate
     @Override
     public String getCraftingRecipeString() {
         if (!ExtShapeBlockTag.WOOLS.contains(this.getBaseBlock()))
-            return String.format("{\n  \"type\": \"minecraft:crafting_shaped\",\n  \"group\": \"%s\",\n  \"pattern\": [\n    \"##\"\n  ],\n  \"key\": {\n    \"#\": {\n      \"item\": \"%s\"\n    }\n  },\n  \"result\": {\n    \"item\": \"%s\"\n  }\n}",this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier());
-        else return String.format("{\n  \"type\": \"minecraft:crafting_shapeless\",\n  \"group\": \"%s\",\n  \"ingredients\": [\n    {\n      \"item\": \"%s\"\n    }\n  ],\n  \"result\": {\n    \"item\": \"%s\"\n  }\n}",this.getRecipeGroup(), this.getBaseBlockIdentifier().toString().replaceAll("_wool\\b", "_carpet"), this.getIdentifier());
+            return String.format("{\n  \"type\": \"minecraft:crafting_shaped\",\n  \"group\": \"%s\",\n  \"pattern\": [\n    \"##\"\n  ],\n  \"key\": {\n    \"#\": {\n      \"item\": \"%s\"\n    }\n  },\n  \"result\": {\n    \"item\": \"%s\"\n  }\n}", this.getRecipeGroup(), this.getBaseBlockIdentifier(), this.getIdentifier());
+        else return String.format("{\n  \"type\": \"minecraft:crafting_shapeless\",\n  \"group\": \"%s\",\n  \"ingredients\": [\n    {\n      \"item\": \"%s\"\n    }\n  ],\n  \"result\": {\n    \"item\": \"%s\"\n  }\n}", this.getRecipeGroup(), this.getBaseBlockIdentifier().toString().replaceAll("_wool\\b", "_carpet"), this.getIdentifier());
     }
 
     @Override

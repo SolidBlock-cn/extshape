@@ -14,7 +14,7 @@ import java.util.Set;
  * 此类中定义的所有标签均<b>只在数据生成过程中使用</b>，平时运行游戏时，不会运行此处的代码。
  */
 public class TagGenerator extends Generator {
-//    public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = new ExtShapeBlockTag(new Identifier("minecraft"
+    //    public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = new ExtShapeBlockTag(new Identifier("minecraft"
 //            , "occludes_vibration_signals"));
     public static final ExtShapeBlockTag DRAGON_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
             "dragon_immune"));
@@ -26,7 +26,7 @@ public class TagGenerator extends Generator {
             "geode_invalid_blocks"));
     public static final ExtShapeBlockTag WITHER_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
             "wither_immune"));
-//    public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = new ExtShapeBlockTag(new Identifier("minecraft",
+    //    public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = new ExtShapeBlockTag(new Identifier("minecraft",
 //            "needs_diamond_tool"));
 //    public static final ExtShapeBlockTag NEEDS_IRON_TOOL = new ExtShapeBlockTag(new Identifier("minecraft",
 //            "needs_iron_tool"));

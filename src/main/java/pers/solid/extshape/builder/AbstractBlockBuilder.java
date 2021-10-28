@@ -131,6 +131,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 设置破坏方块需要的工具。请参见 {@link FabricBlockSettings#breakByTool(Tag)}。
+     *
      * @param tag 物品标签，如 <code>FabricToolTags.PICKAXES</code>。
      */
     public AbstractBlockBuilder<T> breakByTool(Tag<Item> tag) {
@@ -140,11 +141,12 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
 
     /**
      * 设置破坏方块需要的工具。请参见 {@link FabricBlockSettings#breakByTool(Tag, int)}。
-     * @param tag 物品标签，如 <code>FabricToolTags.PICKAXES</code>。
+     *
+     * @param tag         物品标签，如 <code>FabricToolTags.PICKAXES</code>。
      * @param miningLevel 挖掘等级，如 2。
      */
     public AbstractBlockBuilder<T> breakByTool(Tag<Item> tag, int miningLevel) {
-        this.blockSettings.breakByTool(tag,miningLevel);
+        this.blockSettings.breakByTool(tag, miningLevel);
         return this;
     }
 
