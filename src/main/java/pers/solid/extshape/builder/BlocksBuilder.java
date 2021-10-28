@@ -245,10 +245,14 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         return this;
     }
 
-    public BlocksBuilder breakByTool(Tag<Item> tag,int miningLevel) {
+    public BlocksBuilder breakByTool(Tag<Item> tag, int miningLevel) {
         this.breakByToolTag = tag;
         this.miningLevel = miningLevel;
         return this;
+    }
+
+    public BlocksBuilder breakByTool(Tag<Item> tag) {
+        return this.breakByTool(tag,0);
     }
 
     /**
@@ -277,11 +281,11 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
         for (AbstractBlockBuilder<? extends Block> builder : values) {
             if (this.fireproof) builder.fireproof();
             tagList.forEach(builder::putTag);
-            if (this.breakByToolTag !=null) {
+            if (this.breakByToolTag != null) {
                 if (builder instanceof ButtonBuilder || builder instanceof PressurePlateBuilder) { // 对于按钮、压力板，不应用挖掘等级。
                     builder = builder.breakByTool(breakByToolTag);
                 } else {
-                    builder = builder.breakByTool(breakByToolTag,miningLevel);
+                    builder = builder.breakByTool(breakByToolTag, miningLevel);
                 }
             }
         }
