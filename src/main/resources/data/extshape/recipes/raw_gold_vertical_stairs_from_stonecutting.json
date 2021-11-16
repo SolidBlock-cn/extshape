@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:raw_gold_block"
+  },
+  "result": "extshape:raw_gold_vertical_stairs",
+  "count": 1
+}

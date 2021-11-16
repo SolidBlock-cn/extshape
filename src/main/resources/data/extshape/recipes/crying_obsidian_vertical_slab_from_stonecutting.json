@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:crying_obsidian"
-  },
-  "result": "extshape:crying_obsidian_vertical_slab",
-  "count": 2
-}

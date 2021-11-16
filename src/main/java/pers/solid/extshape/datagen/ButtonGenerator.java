@@ -2,19 +2,25 @@ package pers.solid.extshape.datagen;
 
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock> {
+    /**
+     * 该集合内的方块将不会生成按钮配方。
+     */
+    private static final Collection<Block> REFUSE_RECIPES = new ExtShapeBlockTag(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COPPER_BLOCK, Blocks.LAPIS_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_IRON_BLOCK);
+
     protected ButtonGenerator(Path path, @NotNull AbstractButtonBlock block) {
         super(path, block);
     }
-
 
     public String getModelString() {
         return String.format("""
@@ -189,6 +195,9 @@ public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock>
 
     @Override
     public String getCraftingRecipeString() {
+        if (REFUSE_RECIPES.contains(this.getBaseBlock())) {
+            return null;
+        }
         return String.format("""
                 {
                   "type": "minecraft:crafting_shapeless",

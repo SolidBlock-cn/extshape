@@ -3,6 +3,8 @@ package pers.solid.extshape.builder;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.Item;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
@@ -17,7 +19,8 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
         return createEmpty(baseBlock).withShapes();
     }
 
-    public static BlocksBuilder createAllShapes(Block baseBlock, Item fenceCraftingIngredient, ExtShapeButtonBlock.ButtonType buttonType, PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+    @Contract("_, _, _, _ -> new")
+    public static @NotNull BlocksBuilder createAllShapes(Block baseBlock, @Nullable Item fenceCraftingIngredient, @Nullable ExtShapeButtonBlock.ButtonType buttonType, @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
     }
 
@@ -25,7 +28,7 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
         return new BlocksBuilder(baseBlock);
     }
 
-    public static AbstractBlockBuilder<? extends Block> create(Shape shape, Block baseBlock, @Nullable Item fenceCraftingIngredient, @Nullable ExtShapeButtonBlock.ButtonType buttonType, @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+    public static @Nullable AbstractBlockBuilder<? extends Block> create(Shape shape, Block baseBlock, @Nullable Item fenceCraftingIngredient, @Nullable ExtShapeButtonBlock.ButtonType buttonType, @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         return switch (shape) {
             case STAIRS -> new StairsBuilder(baseBlock);
             case SLAB -> new SlabBuilder(baseBlock);
@@ -35,8 +38,8 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
             case VERTICAL_QUARTER_PIECE -> new VerticalQuarterPieceBuilder(baseBlock);
             case FENCE -> new FenceBuilder(baseBlock, fenceCraftingIngredient);
             case FENCE_GATE -> new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
-            case BUTTON -> new ButtonBuilder(buttonType, baseBlock);
-            case PRESSURE_PLATE -> new PressurePlateBuilder(pressurePlateActivationRule, baseBlock);
+            case BUTTON -> buttonType!=null ? new ButtonBuilder(buttonType, baseBlock) : null;
+            case PRESSURE_PLATE -> pressurePlateActivationRule!=null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock) : null;
             case WALL -> new WallBuilder(baseBlock);
         };
     }

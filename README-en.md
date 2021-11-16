@@ -67,13 +67,11 @@ If you installed Reasonable Sorting mod (≥1.3 version), these blocks will sort
 
 ## This update
 
-### 1.3.0
-
-This update is for version only 1.17 and above. Versions for older versions will come later.
-
-- Added co-working with Reasonable Sorting mod (versions above 1.13).
-- Fixed the conflict between wool pressure plate and wool carpet. Wool pressure plates are crafted from a carpet in the same color now.
-- Adjust some code.
-- Added different shapes for dripstone, honeycomb block, moss block, etc.
+- <span style="color:red">Removed nether wart wall and warped wart wall.</span>
+- Added more blocks, main buttons.
+- Fixed the issue that, in constructor of BlocksBuilder with <code>null</code> parameters, objecteds are created unexpectedly, which may cause some buttons and pressure plates to crash.
+- Fixed the potential recipe conflict of block of iron, gold, diamond, emerald and lapis. <b>These blocks still exist, but can no longer be crafted.</b>
+- Slightly adjusted item groups.
+- Fixed the issue that some stone blocks cannot be cut in stone-cutters.
 
 See [Update Log](UpdateLog.md) for previous update logs.

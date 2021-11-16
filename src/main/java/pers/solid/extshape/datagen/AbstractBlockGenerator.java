@@ -1,19 +1,18 @@
 package pers.solid.extshape.datagen;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Material;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mappings.TextureMappings;
+import pers.solid.extshape.mixin.AbstractBlockMixin;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static net.minecraft.block.Blocks.*;
-import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
 
 public abstract class AbstractBlockGenerator<T extends Block> extends Generator {
 
@@ -181,8 +180,7 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
         this.writeCraftingRecipeFiles();
         Block baseBlock = this.getBaseBlock();
         // 特定方块允许使用切石机合成。
-        if (baseBlock == OBSIDIAN || baseBlock == CRYING_OBSIDIAN || STONES.contains(baseBlock) || CONCRETES.contains(baseBlock) || baseBlock == TERRACOTTA || STAINED_TERRACOTTAS.contains(baseBlock) || GLAZED_TERRACOTTAS.contains(baseBlock) || ORE_BLOCKS.contains(baseBlock) || SANDSTONES.contains(baseBlock) || baseBlock == PRISMARINE || baseBlock == DARK_PRISMARINE || baseBlock == PRISMARINE_BRICKS)
-            this.writeStoneCuttingRecipeFiles();
+        if (baseBlock != null && ((AbstractBlockMixin) baseBlock).getMaterial() == Material.STONE) this.writeStoneCuttingRecipeFiles();
     }
 
     public void writeCraftingRecipeFiles() {

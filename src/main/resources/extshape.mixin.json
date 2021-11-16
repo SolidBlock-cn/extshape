@@ -3,9 +3,7 @@
   "minVersion": "0.8",
   "package": "pers.solid.extshape.mixin",
   "compatibilityLevel": "JAVA_16",
-  "mixins": [
-    "ButtonMixin"
-  ],
+  "mixins": ["AbstractBlockMixin", "ButtonMixin"],
   "client": [
   ],
   "injectors": {
