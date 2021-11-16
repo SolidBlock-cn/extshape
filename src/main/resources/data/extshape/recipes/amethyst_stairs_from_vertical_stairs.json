@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:amethyst_vertical_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:amethyst_stairs",
+    "count": 1
+  }
+}

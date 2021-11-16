@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:mossy_cobblestone_stairs"
+  },
+  "result": "extshape:mossy_cobblestone_quarter_piece",
+  "count": 3
+}

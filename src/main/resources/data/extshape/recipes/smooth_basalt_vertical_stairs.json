@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:smooth_basalt_stairs"
+    }
+  },
+  "result": {
+    "item": "extshape:smooth_basalt_vertical_stairs",
+    "count": 1
+  }
+}

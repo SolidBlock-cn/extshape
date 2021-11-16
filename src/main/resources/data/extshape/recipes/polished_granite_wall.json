@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:polished_granite"
+    }
+  },
+  "result": {
+    "item": "extshape:polished_granite_wall",
+    "count": 6
+  }
+}

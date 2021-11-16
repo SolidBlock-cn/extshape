@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bedrock"
+    }
+  },
+  "result": {
+    "item": "extshape:bedrock_wall",
+    "count": 6
+  }
+}

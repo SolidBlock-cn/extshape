@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wool_vertical_slab",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:cyan_wool_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:cyan_wool_vertical_slab",
+    "count": 1
+  }
+}

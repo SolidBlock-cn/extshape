@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=south_east": { "model": "extshape:block/red_terracotta_vertical_quarter_piece" , "uvlock":true },
+    "facing=south_west":  { "model": "extshape:block/red_terracotta_vertical_quarter_piece", "y":  90 , "uvlock":true},
+    "facing=north_west": { "model": "extshape:block/red_terracotta_vertical_quarter_piece", "y": 180 , "uvlock":true },
+    "facing=north_east":  { "model": "extshape:block/red_terracotta_vertical_quarter_piece", "y": 270 , "uvlock":true }
+  }
+}

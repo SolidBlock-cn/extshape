@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:snow_vertical_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:snow_slab",
+    "count": 1
+  }
+}

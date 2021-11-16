@@ -27,6 +27,7 @@ public enum Shape implements StringIdentifiable {
     BUTTON(AbstractButtonBlock.class, BlockFamily.Variant.BUTTON, "button"),
     PRESSURE_PLATE(PressurePlateBlock.class, BlockFamily.Variant.PRESSURE_PLATE, "pressure_place");
 
+    public static final BiMap<Shape, String> SHAPE_TO_STRING = Arrays.stream(values()).collect(ImmutableBiMap.toImmutableBiMap(value -> value, Shape::asString));
     /**
      * 该形状对应的方块类。
      */
@@ -36,8 +37,6 @@ public enum Shape implements StringIdentifiable {
      */
     public final @Nullable BlockFamily.Variant vanillaVariant;
     private final @NotNull String name;
-
-    public static final BiMap<Shape,String> SHAPE_TO_STRING = Arrays.stream(values()).collect(ImmutableBiMap.toImmutableBiMap(value -> value, Shape::asString));
 
     Shape(Class<? extends Block> withClass, @Nullable BlockFamily.Variant vanillaVariant, @NotNull String name) {
         this.withClass = withClass;

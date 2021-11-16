@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:white_wool_slab",
+    "extshape:orange_wool_slab",
+    "extshape:magenta_wool_slab",
+    "extshape:light_blue_wool_slab",
+    "extshape:yellow_wool_slab",
+    "extshape:lime_wool_slab",
+    "extshape:pink_wool_slab",
+    "extshape:gray_wool_slab",
+    "extshape:light_gray_wool_slab",
+    "extshape:cyan_wool_slab",
+    "extshape:purple_wool_slab",
+    "extshape:blue_wool_slab",
+    "extshape:brown_wool_slab",
+    "extshape:green_wool_slab",
+    "extshape:red_wool_slab",
+    "extshape:black_wool_slab"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:smooth_quartz"
+  },
+  "result": "extshape:smooth_quartz_vertical_quarter_piece",
+  "count": 4
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wool_slab",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:lime_wool_vertical_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:lime_wool_slab",
+    "count": 1
+  }
+}

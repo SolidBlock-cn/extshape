@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:polished_andesite_vertical_stairs"
+    }
+  },
+  "result": {
+    "item": "minecraft:polished_andesite_stairs",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:cobbled_deepslate_vertical_slab"
+    }
+  },
+  "result": {
+    "item": "minecraft:cobbled_deepslate_slab",
+    "count": 1
+  }
+}

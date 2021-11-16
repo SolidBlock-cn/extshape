@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wool_pressure_plate",
+  "ingredients": [
+    {
+      "item": "minecraft:blue_carpet"
+    }
+  ],
+  "result": {
+    "item": "extshape:blue_wool_pressure_plate"
+  }
+}

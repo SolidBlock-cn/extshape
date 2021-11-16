@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:raw_copper_block"
+  },
+  "result": "extshape:raw_copper_vertical_slab",
+  "count": 2
+}

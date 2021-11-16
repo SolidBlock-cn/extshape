@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:deepslate_tiles"
+  },
+  "result": "extshape:deepslate_tile_vertical_quarter_piece",
+  "count": 4
+}

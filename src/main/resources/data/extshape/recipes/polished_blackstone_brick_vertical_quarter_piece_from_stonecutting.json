@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:polished_blackstone_bricks"
+  },
+  "result": "extshape:polished_blackstone_brick_vertical_quarter_piece",
+  "count": 4
+}

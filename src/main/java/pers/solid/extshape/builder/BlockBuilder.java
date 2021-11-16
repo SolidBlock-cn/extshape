@@ -38,8 +38,8 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
             case VERTICAL_QUARTER_PIECE -> new VerticalQuarterPieceBuilder(baseBlock);
             case FENCE -> new FenceBuilder(baseBlock, fenceCraftingIngredient);
             case FENCE_GATE -> new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
-            case BUTTON -> buttonType!=null ? new ButtonBuilder(buttonType, baseBlock) : null;
-            case PRESSURE_PLATE -> pressurePlateActivationRule!=null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock) : null;
+            case BUTTON -> buttonType != null ? new ButtonBuilder(buttonType, baseBlock) : null;
+            case PRESSURE_PLATE -> pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock) : null;
             case WALL -> new WallBuilder(baseBlock);
         };
     }
