@@ -4,7 +4,7 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [this file](BlockList.md).
 
-At present this mod supports Minecraft Java Edition 1.17.x and 1.16.x and requires Fabric API.
+At present this mod supports Minecraft Java Edition 1.17.x and 1.16.x and requires Fabric API. The mod for 1.17 is compatible with 1.18 snapshot versions in theory.
 
 **NOTICE: If you update the mod from 1.2.3 to ≥1.2.4, please remove all _plank wall_ and _clay wall_ blocks from your worlds! As of 1.2.4, plank walls and clay walls are no longer a feature of this mod.**
 
@@ -23,6 +23,8 @@ Netherite blocks when dropped as items resist fire and lava.
 The hardness, mining tools and mining time of all stairs, slabs, fences and walls are equal to their base blocks. For example, a wool slab and a wool block will take the same time to mine.
 
 In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of their basic blocks. All pressure plates and buttons added in this mod have the same hardness as 1/4 of their base blocks. (Bedrock blocks are invulnerable in Survival Mode, but bedrock pressure plates and bedrock buttons drop normally when losing blocks relied on.) This mod simply extends buttons: soft buttons (wool buttons, snow buttons) trigger 60 ticks (3 seconds); hard buttons (obsidian buttons, bedrock buttons) trigger 5 ticks (1/4 second). All buttons and pressure plates have no collision box like in vanilla MC.
+
+To avoid recipe conflicts, some buttons are not craftable.
 
 This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs.
 
