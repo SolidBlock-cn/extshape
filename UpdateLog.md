@@ -1,6 +1,23 @@
 
 # 更新日志 Update Log
 
+### 1.3.0
+
+本次更新仅限 Minecraft 1.17 以上版本。用于旧版本的模组更新将会稍后发布。
+
+- 加入了与合理排序（Reasonable Sorting）模组（仅限1.3以上）的联动。
+- 修复了羊毛压力板与地毯合成表冲突的问题。羊毛压力板的合成方式改为由对应的地毯合成。
+- 调整了一些代码。
+- 修改了一些方块名称，例如“平滑石英块纵台阶”改为“平滑石英纵台阶”。
+- 增加了滴水石、蜜脾块、苔藓块等方块的不同形状。
+
+This update is for version only 1.17 and above. Versions for older versions will come later.
+
+- Added co-working with Reasonable Sorting mod (versions above 1.13).
+- Fixed the conflict between wool pressure plate and wool carpet. Wool pressure plates are crafted from a carpet in the same color now.
+- Adjust some code.
+- Added different shapes for dripstone, honeycomb block, moss block, etc.
+
 ### 1.2.6
 此更新仅限 1.17 以上版本。
 

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:white_concrete"
-  },
-  "result": "extshape:white_concrete_wall",
-  "count": 1
-}

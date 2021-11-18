@@ -1,8 +1,0 @@
-{
-  "parent": "extshape:block/glazed_terracotta_slab",
-  "textures": {
-    "bottom": "minecraft:block/pink_glazed_terracotta",
-    "top": "minecraft:block/pink_glazed_terracotta",
-    "side": "minecraft:block/pink_glazed_terracotta"
-  }
-}

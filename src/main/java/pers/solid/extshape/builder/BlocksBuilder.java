@@ -42,8 +42,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param buttonType                  按钮类型。
      * @param pressurePlateActivationRule 压力板激活类型。
      */
-    public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType,
-                         PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
+    public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
         super();
         this.fenceCraftingIngredient = fenceCraftingIngredient;
         this.buttonType = buttonType;
@@ -264,11 +263,15 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
             boolean whetherBuild = entry.getBooleanValue();
             // 自动排除现成的。
             if (whetherBuild && BlockMappings.getBlockOf(shape, baseBlock) == null) {
-                final AbstractBlockBuilder<? extends Block> blockBuilder = BlockBuilder.create(shape, baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
-                this.put(shape, blockBuilder);
+                final @Nullable AbstractBlockBuilder<? extends Block> blockBuilder = BlockBuilder.create(shape, baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
+                if (blockBuilder != null) {
+                    this.put(shape, blockBuilder);
+                }
                 if (this.preparationConsumer != null) {
                     this.preparationConsumer.accept(shape, blockBuilder);
                 }
+//            } else if (whetherBuild) {
+//                ExtShape.EXTSHAPE_LOGGER.info("已忽略{}的{}变种，因为已经存在{}。这是预期现象。", Registry.BLOCK.getId(baseBlock), shape.asString(), Registry.BLOCK.getId(BlockMappings.getBlockOf(shape, baseBlock)));
             }
         }
 

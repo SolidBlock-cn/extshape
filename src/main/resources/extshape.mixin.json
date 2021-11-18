@@ -4,6 +4,7 @@
   "package": "pers.solid.extshape.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractBlockMixin",
     "ButtonMixin",
     "HardnessAccessor",
     "SettingsAccessor"

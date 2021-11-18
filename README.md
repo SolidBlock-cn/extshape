@@ -1,77 +1,38 @@
-# 扩展方块形状模组 Extended Block Shapes Mod
+# 扩展方块形状模组
+
+If you do not understand Chinese, you may refer to the [document in English](README-en.md).
 
 本模组为许多的原版方块添加了其楼梯、台阶、栅栏、栅栏门、按钮和压力板，以及原版不具有的纵台阶、纵楼梯、横条、纵条。具体内容列表请参考[此文件](BlockList.md)。
 
-This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with
-vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that does not exist in vanilla Minecraft.
-List of the contents can be found in [this file](BlockList.md).
+模组目前支持 Minecraft Java 版 1.17.x 和 1.16.x，并需要 Fabric API。其中，在 1.17.x 的模组理论上也是兼容 1.18 的快照版本的。
 
-模组目前支持 Minecraft Java 版 1.17.x 和 1.16.x，并需要 Fabric API。
+**请注意：如果将模组由 1.2.3 更新到 1.2.4 以上的版本，请提前拆除所有的 木板墙 和 粘土墙 方块。从 1.2.4 开始，木板墙和粘土墙被移除。**
 
-At present this mod supports Minecraft Java Edition 1.17.x and 1.16.x and requires Fabric API.
+## 特性
 
-**请注意：如果将模组由 1.2.3 更新到 1.2.4 的版本，请提前拆除所有的 木板墙 和 粘土墙 方块。从 1.2.4 开始，木板墙和粘土墙被移除。**
-
-**NOTICE: If you update the mod from 1.2.3 to 1.2.4, please take off all _plank wall_ and _clay wall_ blocks! Since 1.2.
-4, plank walls and clay walls are _removed_!** 
-
-## 特性 Features
-
-### 方块 Blocks
+### 方块
 
 本模组添加的方块继承了其基础方块的大多数特性。
 
-Blocks added by this mod inherit most features of their base blocks.
-
 所有的羊毛制品（即以羊毛为基础的方块，包括各种颜色的羊毛楼梯、羊毛台阶等）均可以燃烧且可以作为燃料（其燃烧时间与原版完整方块相同）。羊毛制品无论是否占了一整格，均具有阻挡潜声传感器（Sculk Sensor）的功能。
-
-All woolen blocks (blocks based on wool block, including wool stairs, woo slabs in all colors) are flammable and can be
-used as fuels (fueling time equals their base blocks). All woolen blocks, no matter they occupy a full block, can block
-sculk sensors.
 
 所有的下界岩制品（下界岩1.16之前称为地狱岩）均可无限燃烧，基岩制品在末地可无限燃烧。
 
-All netherrack blocks are infiniburn. Bedrock blocks are infiniburn in the end.
-
 下界合金制品的掉落形式能够抵抗火焰、熔岩。
-
-Netherite blocks as dropped items resist fire and lava.
 
 所有的楼梯、台阶、栅栏、墙的硬度、挖掘工具和挖掘时间与其基础方块相当（这是参照了原版的特性），而非与其基础方块成正比。例如，破坏羊毛台阶的时间与破坏整个羊毛的时间相同，而非前者是后者的一半。
 
-The hardness, mining tools and mining time of all stairs, slabs, fences and walls equal to their basic blocks (like
-vanilla features). For example, the time spent breaking a wool slab equals to a full wool block, instead of half of the
-latter.
+在原版中，大多数压力板和按钮的硬度为其基础方块的1/4到1/3。本模组添加的压力板和按钮的硬度均为基础方块的1/4。（基岩制品在生存模式不可破坏，但是基岩按钮、基岩压力板在失去其依靠的方块时仍会正常掉落）。本模组对按钮进行了扩展，质地较软的按钮（如羊毛按钮、雪按钮）的触发时长为60刻（3秒），质地很硬的按钮（如黑曜石按钮、基岩按钮）的触发时长为5 刻（1/4秒）。参照原版代码，所有的按钮、压力板均无碰撞箱。
 
-在原版中，大多数压力板和按钮的硬度为其基础方块的1/4到1/3。本模组添加的压力板和按钮的硬度均为基础方块的1/4。（基岩制品在生存模式不可破坏，但是基岩按钮、基岩压力板在失去其依靠的方块时仍会正常掉落）。本模组对按钮进行了扩展，质地较软的按钮（如羊毛按钮、雪按钮）的触发时长为60刻（3秒），质地很硬的按钮（如黑曜石按钮、基岩按钮）的触发时长为5
-刻（1/4秒）。参照原版代码，所有的按钮、压力板均无碰撞箱。
-
-In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of their basic blocks. All pressure plates
-and buttons added in this mod have the hardness same as 1/4 of their base blocks. (Bedrock blocks are invulnerable in
-Survival Mode, but bedrock pressure plates and bedrock buttons drop normally when losing blocks relied on.) This mod
-simply extends buttons: soft buttons (wool buttons, snow buttons) trigger 60 ticks (3 seconds); hard buttons
-(obsidian buttons, bedrock buttons) trigger 5 ticks (1/4 second). All buttons and pressure plates have no collision box
-like vanilla MC.
+为避免合成表冲突，部分按钮不可合成。
 
 另外此模组还添加了“双层平滑石台阶”方块和“石化橡木木板”方块，分别可以合成平滑石台阶和石化橡木台阶（原版的平滑石块也可以合成平滑石台阶）。
-
-Besides, this mod also adds "double smooth stone slab" and "petrified oak planks" block, respectively crafting
-ingredient of smooth stone slab and petrified oak slab. (Still, vanilla smooth stone block can also be crafted into
-smooth stone slab).
 
 ### 合成与烧炼 Crafting and smelting
 
 所有的方块均可使用其基础方块参照类似原版合成表合成，部分可以通过切石机合成。具体为：楼梯在工作台可3:2合成（原料:产物，下同），在切石机可1:1合成。台阶和纵台阶在工作台、切石机可1:2合成。
 
-The crafting recipes of all blocks in this mod are similar to those in vanilla. Some can also be crafted with a stone
-cutter. Stairs can be crafted 3:2 in crafting table (ingredient:result) and 1:1 in the stone cutter. Slabs and vertical
-slabs are craftable 1:2 in either crafting table or stone cutter.
-
 台阶、楼梯、横条可以直接在合成表中旋转形成对应的纵向方块，也可以“转回来”。例如 1 个台阶可以合成 1 个对应的纵台阶，1 个纵台阶也可以直接合成 1 个对应的台阶。
-
-Slabs, stairs and quarter pieces can be rotated in crafting recipes to be corresponding vertical blocks; you can also "
-rotate them back". For instance, one slab can be crafted into one corresponding vertical slab, and one vertical slab can
-also be crafted into a corresponding slab directly.
 
 各个形状方块在工作台中的合成关系如下：
 
@@ -83,16 +44,6 @@ also be crafted into a corresponding slab directly.
 - 1×横条 ↔ 1×纵条
 - 3×纵台阶 → 6×纵条 （纵台阶竖直排列）
 
-Crafting recipes of blocks in different shapes are as follows:
-
-- 6×base blocks → 4×stairs
-- 3×base blocks → 6×slabs
-- 3×slabs → 6×quarter pieces (slabs arranged horizontally)
-- 1×slab ↔ 1×vertical slab
-- 1×stairs ↔ 1×vertical stairs
-- 1×quarter piece ↔ 1×vertical quarter piece
-- 3×vertical slabs → 6×vertical quarter pieces (vertical slabs arranged vertically)
-
 部分方块的各个形状的方块在切石机中的合成关系如下：
 
 - 1×基础方块 → 1×楼梯 / 1×纵楼梯 / 2×台阶 / 2×纵台阶 / 4×横条 / 4×纵条
@@ -101,53 +52,29 @@ Crafting recipes of blocks in different shapes are as follows:
 - 1×纵楼梯 → 3×纵条
 - 1×纵台阶 → 2×横条 / 2×纵条
 
-Stone-cutting recipe of some blocks are as follows:
-
-- 1×base block → 1×stairs / 1×vertical stairs / 2×slabs / 2×vertical slabs / 4×quarter pieces / 4×vertical quarter
-  pieces
-- 1×stairs → 3×quarter pieces
-- 1×slab → 2×quarter pieces
-- 1×vertical stairs → 3×vertical quarter pieces
-- 1×vertical slab → 2×quarter pieces / 2×vertical quarter pieces
-
 注意：本模组中的物品暂不能通过切石机像原版 Minecraft 那样进行“递归切石”。例如，原版游戏中，一个未磨制的安山岩可以直接切石成磨制的安山岩楼梯或者台阶。模组中的方块暂时不能这样切石。
-
-NOTE: Items in this mod are not recursively stone-cuttable like some items in vanilla Minecraft. For example, in vanilla
-Minecraft, an unpolished andesite can be cut into a polished andesite stairs or slab. Blocks in this mod can not be cut
-like this.
 
 栅栏和栅栏门合成时的原材料（除了基础方块之外），参照既有合成表。石质栅栏和栅栏门的原材料使用燧石，羊毛的为线，砂岩及其变种的为木棍。
 
-Ingredients of fences and fence gates, apart from base blocks, resemble vanilla recipes. For the crafting of stone
-fences and fence gates, flint is used along with base blocks, and string for wool, stick for sandstone and its variants.
-
 台阶和纵台阶作燃料时，其燃烧时间为基础方块的一半。按钮作燃料时，其燃烧时间为基础方块的1/3。横条、纵条作燃料时，其燃烧时间为基础方块的1/4。
 
-Used as fuels, slab and vertical slab burn half the time of its base blocks, button burns 1/3 the time of base blocks,
-and quarter piece and vertical quarter piece burns 1/4 the time of basic blocks.
-
-### 创造模式物品栏 Creative Inventory
+### 创造模式物品栏
 
 在创造模式下，我们设置了多个物品组来以不同方式区分物品。
 
-In creative mode, multiple item groups are set in order to sort items in different ways.
+本模组将新增加的方块添加至原版物品组。此外，还设置了几个物品组，以按照不同的基础方块排列各方块（含原版方块），以便玩家快速获取同一方块的多个形状。
 
-参照原版的物品分组，将本模组添加的方块分为建筑方块、装饰性方块和红石。此外，还设置了几个物品组，以按照不同的基础方块排列各方块（含原版方块），以便玩家快速获取同一方块的多个形状。
+如果安装了1.3以上版本的合理排序（Reasonable Sorting）模组，则这些方块会按照基础方块进行排序。请注意合理排序模组依赖 Cloth Config，但是本模组不依赖。
 
-Referring to vanilla item grouping, blocks added in this mod are sorted as building blocks, decoration blocks and
-redstone. Besides, several extra item groups are set to sort blocks (including vanilla blocks) by their basic blocks, so
-that players can easily fetch blocks of a same block in different shapes.
+## 本次更新
 
-## 本次更新 This update
+### 1.3.1
 
-### 1.2.5
-- 修复了垂直台阶底部部分材质不渲染的问题。
-- Fixed the issue of missing rendering at the bottom of vertical stairs blocks.
-- 对于 1.16 版本：移除不必要的标签，并修复挖掘等级问题。
-- For 1.16 versions: Removed unnecessary tags and fixed mining level issue.
-  - 请注意：1.16 版本的语言文件仍会存有未来版本的语言文件。
-  - Note: For 1.16 versions, language files for future versions are still stored.
+- <span style="color:red">删除了下界疣墙、诡异疣墙。</span>
+- 添加了更多方块，主要是按钮。
+- 修复了 BlocksBuilder 的构造函数中，参数若为 <code>null</code>仍会创建对应对象的问题（可能导致部分压力板或按钮有崩溃风险）的问题。
+- 修复了铁、金、钻石、绿宝石、青金石块可能存在的与合成表冲突的问题。<b>这些方块仍然存在，但是不再能够合成。</b>
+- 稍微调整了物品分组。
+- 修复了部分石质方块无法用切石机切石的问题。
 
 此前的更新请参考[更新日志](UpdateLog.md)。
-
-See [Update Log](UpdateLog.md) for previous update logs.

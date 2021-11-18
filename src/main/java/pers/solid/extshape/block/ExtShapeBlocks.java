@@ -1,18 +1,18 @@
 package pers.solid.extshape.block;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
 import pers.solid.extshape.builder.BlockBuilder;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.builder.SlabBuilder;
 import pers.solid.extshape.mappings.BlockMappings;
+
+import java.util.Map;
 
 import static net.minecraft.block.Blocks.*;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
@@ -34,16 +34,18 @@ public class ExtShapeBlocks {
         }
 
         // 圆石。
-        BlockBuilder.createAllShapes(COBBLESTONE, Items.FLINT, null, null).breakByTool(FabricToolTags.PICKAXES).withoutRedstone().build();
+        BlockBuilder.createAllShapes(COBBLESTONE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES).withoutRedstone().build();
 
         // 木板。
         for (final Block block : PLANKS) {
             final boolean isOverworld = OVERWORLD_PLANKS.contains(block);
-            BlockBuilder.createBasicShapes(block)
+            BlockBuilder.createAllShapes(block, null, ButtonType.WOODEN, ActivationRule.EVERYTHING)
                     .setDefaultTagOf(Shape.VERTICAL_SLAB, WOODEN_VERTICAL_SLABS)
                     .setDefaultTagOf(Shape.VERTICAL_STAIRS, WOODEN_VERTICAL_STAIRS)
                     .setDefaultTagOf(Shape.QUARTER_PIECE, WOODEN_QUARTER_PIECES)
                     .setDefaultTagOf(Shape.VERTICAL_QUARTER_PIECE, WOODEN_VERTICAL_QUARTER_PIECES)
+                    .putTag(isOverworld ? OVERWORLD_WOODEN_BLOCKS : null)
+                    .withoutWall().build();
                     .breakByTool(FabricToolTags.AXES)
                     .putTag(isOverworld ? OVERWORLD_WOODEN_BLOCKS : null).build();
         }
@@ -56,11 +58,11 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(BEDROCK, Items.STICK, ButtonType.HARD, ActivationRule.MOBS).setPreparationConsumer(((shape, abstractBlockBuilder) -> abstractBlockBuilder.setPreparationConsumer(builder -> builder.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state, world, pos, type) -> false)))).build();
 
         // 青金石块。
-        BlockBuilder.createAllShapes(LAPIS_BLOCK, Items.LAPIS_LAZULI, null, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 1).build();
+        BlockBuilder.createAllShapes(LAPIS_BLOCK, Items.LAPIS_LAZULI, ButtonType.STONE, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 1).build();
 
         // 砂岩、红砂岩及其切制、錾制、平滑变种。其中，只有平滑砂岩有栅栏、压力板和按钮。
         for (final Block block : SANDSTONES) {
-            BlockBuilder.createEmpty(block).withShapes().withWall().breakByTool(FabricToolTags.PICKAXES).build();
+            BlockBuilder.createBasicShapes(block).withWall().breakByTool(FabricToolTags.PICKAXES).build();
         }
         for (final Block block : new Block[]{SMOOTH_SANDSTONE, SMOOTH_RED_SANDSTONE}) {
             BlockBuilder.createEmpty(block).withFences(Items.STICK).withPressurePlate(ActivationRule.MOBS).withButton(ButtonType.STONE).breakByTool(FabricToolTags.PICKAXES).build();
@@ -80,24 +82,24 @@ public class ExtShapeBlocks {
         }
 
         // 金块。
-        BlockBuilder.createAllShapes(GOLD_BLOCK, Items.GOLD_INGOT, null, null).withoutRedstone().breakByTool(FabricToolTags.PICKAXES, 2).build();
+        BlockBuilder.createAllShapes(GOLD_BLOCK, Items.GOLD_INGOT, ButtonType.STONE, null).breakByTool(FabricToolTags.PICKAXES, 2).build();
         // 铁块。
-        BlockBuilder.createAllShapes(IRON_BLOCK, Items.IRON_INGOT, null, null).breakByTool(FabricToolTags.PICKAXES, 1).withoutRedstone().build();
+        BlockBuilder.createAllShapes(IRON_BLOCK, Items.IRON_INGOT, ButtonType.STONE, null).breakByTool(FabricToolTags.PICKAXES, 1).build();
 
         // 砖栅栏和栅栏门。
         BlockBuilder.createBasicShapes(BRICKS).withFences(Items.BRICK).withWall().build();
 
         // 苔石栅栏和栅栏门。
-        BlockBuilder.createBasicShapes(MOSSY_COBBLESTONE).withFences(Items.STICK).withWall().build();
+        BlockBuilder.createAllShapes(MOSSY_COBBLESTONE, Items.STICK, ButtonType.STONE, ActivationRule.MOBS).build();
 
         // 黑曜石。
         BlockBuilder.createAllShapes(OBSIDIAN, Items.STONE, ButtonType.HARD, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 3).build();
 
         // 钻石块。
-        BlockBuilder.createAllShapes(DIAMOND_BLOCK, Items.DIAMOND, null, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 2).build();
+        BlockBuilder.createAllShapes(DIAMOND_BLOCK, Items.DIAMOND, ButtonType.HARD, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 2).build();
 
         // 紫水晶块。
-//        BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD, null, null).withoutRedstone().build();
+//        BlockBuilder.createAllShapes(AMETHYST_BLOCK, Items.AMETHYST_SHARD, ButtonType.STONE, ActivationRule.MOBS).withoutRedstone().build();
 
         // 冰，由于技术原因，暂不产生。
 
@@ -113,8 +115,8 @@ public class ExtShapeBlocks {
         // 下界岩。
         BlockBuilder.createAllShapes(NETHERRACK, Items.NETHER_BRICK, ButtonType.STONE, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES).build();
 
-        // 磨制玄武岩。
-        BlockBuilder.createAllShapes(POLISHED_BLACKSTONE, Items.NETHERRACK, null, null).build();
+//        // 磨制玄武岩。
+//        BlockBuilder.createAllShapes(POLISHED_BASALT, Items.NETHERRACK, ButtonType.STONE, ActivationRule.MOBS).build();
 
         // 荧石可以发光。
         BlockBuilder.createAllShapes(GLOWSTONE, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
@@ -131,16 +133,15 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(NETHER_BRICKS, Items.NETHER_BRICK, ButtonType.STONE, ActivationRule.MOBS).withoutRedstone().breakByTool(FabricToolTags.PICKAXES).build();
 
         // 末地石、末地石砖。
-        BlockBuilder.createAllShapes(END_STONE, Items.END_STONE_BRICKS, null, null).breakByTool(FabricToolTags.PICKAXES).build();
+        BlockBuilder.createAllShapes(END_STONE, Items.END_STONE_BRICKS, ButtonType.STONE, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES).build();
 
         // 绿宝石块。
-        BlockBuilder.createAllShapes(EMERALD_BLOCK, Items.EMERALD, null, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 2).build();
+        BlockBuilder.createAllShapes(EMERALD_BLOCK, Items.EMERALD, ButtonType.STONE, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 2).build();
 
-        // 石英、石英砖、平滑石英块、錾制石英块，只有平滑石英块有按钮和压力板。
+        // 石英、石英砖、平滑石英块、錾制石英块均有按钮和压力板。
         for (final Block block : new Block[]{QUARTZ_BLOCK, CHISELED_QUARTZ_BLOCK, QUARTZ_BRICKS, SMOOTH_QUARTZ}) {
-            BlockBuilder.createAllShapes(block, Items.QUARTZ, null, null).breakByTool(FabricToolTags.PICKAXES).build();
+            BlockBuilder.createAllShapes(block, Items.QUARTZ, ButtonType.STONE, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES).build();
         }
-        BlockBuilder.createEmpty(SMOOTH_QUARTZ).withButton(ButtonType.STONE).withPressurePlate(ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES).build();
 
         // 红色下界砖。
         BlockBuilder.createAllShapes(RED_NETHER_BRICKS, Items.NETHER_BRICK, ButtonType.STONE, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES).build();
@@ -186,11 +187,11 @@ public class ExtShapeBlocks {
         BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB).put(SMOOTH_STONE_DOUBLE_SLAB, SMOOTH_STONE_SLAB);
 
         // 紫珀块。
-        BlockBuilder.createAllShapes(PURPUR_BLOCK, Items.SHULKER_SHELL, null, null).breakByTool(FabricToolTags.PICKAXES).build();
+        BlockBuilder.createAllShapes(PURPUR_BLOCK, Items.SHULKER_SHELL, ButtonType.STONE, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES).build();
 
         // 下界疣块、诡异疣块。
-        BlockBuilder.createAllShapes(NETHER_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().breakByTool(FabricToolTags.HOES).build();
-        BlockBuilder.createAllShapes(WARPED_WART_BLOCK, Items.WARPED_WART_BLOCK, null, null).withoutRedstone().breakByTool(FabricToolTags.HOES).build();
+        BlockBuilder.createAllShapes(NETHER_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().withoutWall().breakByTool(FabricToolTags.HOES).build();
+        BlockBuilder.createAllShapes(WARPED_WART_BLOCK, Items.WARPED_WART_BLOCK, null, null).withoutRedstone().withoutWall().breakByTool(FabricToolTags.HOES).build();
 
         // 带釉陶瓦只注册台阶。
         for (final Block block : GLAZED_TERRACOTTAS) {
@@ -218,10 +219,10 @@ public class ExtShapeBlocks {
         BlockBuilder.createAllShapes(HONEYCOMB_BLOCK, Items.HONEYCOMB, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
         // 下界合金方块。
-        BlockBuilder.createAllShapes(NETHERITE_BLOCK, Items.NETHERITE_INGOT, null, ActivationRule.MOBS).withoutButton().breakByTool(FabricToolTags.PICKAXES, 3).build();
+        BlockBuilder.createAllShapes(NETHERITE_BLOCK, Items.NETHERITE_INGOT, ButtonType.HARD, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 3).build();
 
         // 远古残骸。
-        BlockBuilder.createAllShapes(ANCIENT_DEBRIS, Items.NETHERITE_SCRAP, null, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 3).withoutButton().build();
+        BlockBuilder.createAllShapes(ANCIENT_DEBRIS, Items.NETHERITE_SCRAP, ButtonType.HARD, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 3).build();
 
         // 哭泣的黑曜石。
         BlockBuilder.createAllShapes(CRYING_OBSIDIAN, Items.STONE, ButtonType.HARD, ActivationRule.MOBS).breakByTool(FabricToolTags.PICKAXES, 3).build();
@@ -263,7 +264,7 @@ public class ExtShapeBlocks {
 //        }
 
         // 平滑玄武岩。
-//        BlockBuilder.createAllShapes(SMOOTH_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.EVERYTHING).build();
+        BlockBuilder.createAllShapes(SMOOTH_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.EVERYTHING).build();
 
         // 粗铁、粗铜、粗金。
 //        for (Block block : new Block[]{RAW_IRON_BLOCK, RAW_COPPER_BLOCK, RAW_GOLD_BLOCK}) {

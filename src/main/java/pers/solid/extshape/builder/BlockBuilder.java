@@ -17,7 +17,8 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
         return createEmpty(baseBlock).withShapes();
     }
 
-    public static BlocksBuilder createAllShapes(Block baseBlock, Item fenceCraftingIngredient, ExtShapeButtonBlock.ButtonType buttonType, PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+    @Contract("_, _, _, _ -> new")
+    public static @NotNull BlocksBuilder createAllShapes(Block baseBlock, @Nullable Item fenceCraftingIngredient, @Nullable ExtShapeButtonBlock.ButtonType buttonType, @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule);
     }
 

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "minecraft:block/sea_lantern",
-    "top": "minecraft:block/sea_lantern",
-    "side": "minecraft:block/sea_lantern"
-  }
-}
