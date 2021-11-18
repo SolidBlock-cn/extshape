@@ -4,7 +4,7 @@ If you do not understand Chinese, you may refer to the [document in English](REA
 
 本模组为许多的原版方块添加了其楼梯、台阶、栅栏、栅栏门、按钮和压力板，以及原版不具有的纵台阶、纵楼梯、横条、纵条。具体内容列表请参考[此文件](BlockList.md)。
 
-模组目前支持 Minecraft Java 版 1.17.x 和 1.16.x，并需要 Fabric API。其中，在 1.17.x 的模组理论上也是兼容 1.18 的快照版本的。
+模组目前支持 Minecraft Java 版 1.17.x 和 1.16.x（**除 1.16-1.16.1**），并需要 Fabric API。其中，在 1.17.x 的模组理论上也是兼容 1.18 的快照版本的。
 
 **请注意：如果将模组由 1.2.3 更新到 1.2.4 以上的版本，请提前拆除所有的 木板墙 和 粘土墙 方块。从 1.2.4 开始，木板墙和粘土墙被移除。**
 
