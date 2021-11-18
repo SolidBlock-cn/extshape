@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:emerald"
+      },
+      "W": {
+        "item": "minecraft:emerald_block"
+      }
+    },
+    "result": {
+      "item": "extshape:emerald_fence_gate"
+    }
+  }

@@ -1,0 +1,12 @@
+{
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:polished_granite"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:polished_granite_button"
+                  }
+                }

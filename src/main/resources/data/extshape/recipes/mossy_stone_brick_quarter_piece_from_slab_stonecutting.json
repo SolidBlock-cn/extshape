@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:mossy_stone_brick_slab"
+  },
+  "result": "extshape:mossy_stone_brick_quarter_piece",
+  "count": 2
+}

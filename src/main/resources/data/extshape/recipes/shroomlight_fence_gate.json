@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "W": {
+        "item": "minecraft:shroomlight"
+      }
+    },
+    "result": {
+      "item": "extshape:shroomlight_fence_gate"
+    }
+  }

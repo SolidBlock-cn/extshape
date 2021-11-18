@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:mossy_stone_brick_vertical_stairs"
+    }
+  },
+  "result": {
+    "item": "minecraft:mossy_stone_brick_stairs",
+    "count": 1
+  }
+}

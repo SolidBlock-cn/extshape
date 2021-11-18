@@ -3,6 +3,8 @@ package pers.solid.extshape.builder;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.Item;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
@@ -26,7 +28,7 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
         return new BlocksBuilder(baseBlock);
     }
 
-    public static AbstractBlockBuilder<? extends Block> create(Shape shape, Block baseBlock, @Nullable Item fenceCraftingIngredient, @Nullable ExtShapeButtonBlock.ButtonType buttonType, @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+    public static @Nullable AbstractBlockBuilder<? extends Block> create(Shape shape, Block baseBlock, @Nullable Item fenceCraftingIngredient, @Nullable ExtShapeButtonBlock.ButtonType buttonType, @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
         switch (shape) {
             case STAIRS:
                 return new StairsBuilder(baseBlock);
@@ -45,9 +47,9 @@ public class BlockBuilder extends AbstractBlockBuilder<Block> {
             case FENCE_GATE:
                 return new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
             case BUTTON:
-                return new ButtonBuilder(buttonType, baseBlock);
+                return buttonType != null ? new ButtonBuilder(buttonType, baseBlock) : null;
             case PRESSURE_PLATE:
-                return new PressurePlateBuilder(pressurePlateActivationRule, baseBlock);
+                return pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock) : null;
             case WALL:
                 return new WallBuilder(baseBlock);
             default:

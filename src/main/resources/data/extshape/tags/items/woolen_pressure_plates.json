@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:white_wool_pressure_plate",
+    "extshape:orange_wool_pressure_plate",
+    "extshape:magenta_wool_pressure_plate",
+    "extshape:light_blue_wool_pressure_plate",
+    "extshape:yellow_wool_pressure_plate",
+    "extshape:lime_wool_pressure_plate",
+    "extshape:pink_wool_pressure_plate",
+    "extshape:gray_wool_pressure_plate",
+    "extshape:light_gray_wool_pressure_plate",
+    "extshape:cyan_wool_pressure_plate",
+    "extshape:purple_wool_pressure_plate",
+    "extshape:blue_wool_pressure_plate",
+    "extshape:brown_wool_pressure_plate",
+    "extshape:green_wool_pressure_plate",
+    "extshape:red_wool_pressure_plate",
+    "extshape:black_wool_pressure_plate"
+  ]
+}

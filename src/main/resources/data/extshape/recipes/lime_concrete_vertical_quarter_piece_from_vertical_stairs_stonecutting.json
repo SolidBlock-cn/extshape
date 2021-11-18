@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "extshape:lime_concrete_vertical_stairs"
+  },
+  "result": "extshape:lime_concrete_vertical_quarter_piece",
+  "count": 3
+}

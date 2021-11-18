@@ -1,0 +1,12 @@
+{
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:quartz_bricks"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:quartz_brick_button"
+                  }
+                }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:gold_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:gold_quarter_piece",
+    "count": 6
+  }
+}

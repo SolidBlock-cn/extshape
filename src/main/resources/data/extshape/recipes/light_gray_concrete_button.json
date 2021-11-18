@@ -1,0 +1,12 @@
+{
+                  "type": "minecraft:crafting_shapeless",
+                  "group": "concrete_button",
+                  "ingredients": [
+                    {
+                      "item": "minecraft:light_gray_concrete"
+                    }
+                  ],
+                  "result": {
+                    "item": "extshape:light_gray_concrete_button"
+                  }
+                }

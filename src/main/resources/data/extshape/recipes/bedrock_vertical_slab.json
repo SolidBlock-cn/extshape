@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:bedrock_slab"
+    }
+  },
+  "result": {
+    "item": "extshape:bedrock_vertical_slab",
+    "count": 1
+  }
+}

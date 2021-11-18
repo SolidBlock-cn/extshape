@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:melon"
+    }
+  },
+  "result": {
+    "item": "extshape:melon_pressure_plate"
+  }
+}

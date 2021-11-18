@@ -1,18 +1,18 @@
 package pers.solid.extshape.block;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
 import pers.solid.extshape.builder.BlockBuilder;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.builder.SlabBuilder;
 import pers.solid.extshape.mappings.BlockMappings;
-
-import java.util.Map;
 
 import static net.minecraft.block.Blocks.*;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
@@ -45,7 +45,7 @@ public class ExtShapeBlocks {
                     .setDefaultTagOf(Shape.QUARTER_PIECE, WOODEN_QUARTER_PIECES)
                     .setDefaultTagOf(Shape.VERTICAL_QUARTER_PIECE, WOODEN_VERTICAL_QUARTER_PIECES)
                     .putTag(isOverworld ? OVERWORLD_WOODEN_BLOCKS : null)
-                    .withoutWall().build();
+                    .withoutWall()
                     .breakByTool(FabricToolTags.AXES)
                     .putTag(isOverworld ? OVERWORLD_WOODEN_BLOCKS : null).build();
         }
@@ -264,7 +264,7 @@ public class ExtShapeBlocks {
 //        }
 
         // 平滑玄武岩。
-        BlockBuilder.createAllShapes(SMOOTH_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.EVERYTHING).build();
+//        BlockBuilder.createAllShapes(SMOOTH_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.EVERYTHING).build();
 
         // 粗铁、粗铜、粗金。
 //        for (Block block : new Block[]{RAW_IRON_BLOCK, RAW_COPPER_BLOCK, RAW_GOLD_BLOCK}) {

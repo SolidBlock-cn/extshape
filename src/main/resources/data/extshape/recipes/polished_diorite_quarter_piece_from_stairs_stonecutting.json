@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:polished_diorite_stairs"
+  },
+  "result": "extshape:polished_diorite_quarter_piece",
+  "count": 3
+}

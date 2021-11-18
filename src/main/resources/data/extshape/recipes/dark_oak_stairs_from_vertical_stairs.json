@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "extshape:dark_oak_vertical_stairs"
+    }
+  },
+  "result": {
+    "item": "minecraft:dark_oak_stairs",
+    "count": 1
+  }
+}

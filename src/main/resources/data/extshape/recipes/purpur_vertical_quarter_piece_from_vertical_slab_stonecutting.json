@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "extshape:purpur_vertical_slab"
+  },
+  "result": "extshape:purpur_vertical_quarter_piece",
+  "count": 2
+}

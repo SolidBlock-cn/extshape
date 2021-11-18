@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "extshape:petrified_oak_planks"
+  },
+  "result": "minecraft:petrified_oak_slab",
+  "count": 2
+}
