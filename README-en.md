@@ -4,7 +4,7 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [this file](BlockList.md).
 
-At present this mod supports Minecraft Java Edition 1.17.x and 1.16.x (**except 1.16-1.16.1**) and requires Fabric API. The mod for 1.17 is compatible with 1.18 snapshot versions in theory.
+At present this mod supports Minecraft Java Edition 1.17.x and 1.16.x (**except 1.16-1.16.1**) and requires Fabric API. The mod for 1.17 is compatible with 1.18 versions in theory.
 
 **NOTICE: If you update the mod from 1.2.3 to ≥1.2.4, please remove all _plank wall_ and _clay wall_ blocks from your worlds! As of 1.2.4, plank walls and clay walls are no longer a feature of this mod.**
 
