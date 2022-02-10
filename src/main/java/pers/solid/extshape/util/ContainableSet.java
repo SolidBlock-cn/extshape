@@ -41,7 +41,7 @@ public class ContainableSet<E> extends AbstractContainableSet<E, Set<E>, Set<Set
         for (ContainableSet<E> element : elements) {
             builder.add(element);
         }
-        return new ContainableSet<E>(builder.build());
+        return new ContainableSet<>(builder.build());
     }
 
     @Override

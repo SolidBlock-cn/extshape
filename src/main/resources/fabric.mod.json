@@ -1,59 +1,60 @@
 {
-  "schemaVersion": 1,
-  "id": "extshape",
-  "version": "1.3.1",
-  "icon": "assets/extshape/icon.png",
-  "name": "Extended Block Shapes",
-  "description": "More blocks in more shapes!",
-  "authors": [
-    "SolidBlock"
-  ],
-  "contact": {
-    "homepage": "https://space.bilibili.com/87328531",
-    "sources": "https://github.com/SolidBlock-cn/reasonable-sorting",
-    "issues": "https://github.com/SolidBlock-cn/reasonable-sorting/issues"
-  },
-
-  "license": "GPLv3",
-
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "pers.solid.extshape.ExtShape"
+    "schemaVersion": 1,
+    "id": "extshape",
+    "version": "1.4.0",
+    "icon": "assets/extshape/icon.png",
+    "name": "Extended Block Shapes",
+    "description": "More blocks in more shapes!",
+    "authors": [
+        "SolidBlock"
     ],
-    "extshape:_modLoaded": [
-      "pers.solid.extshape.ShapesSorting::modLoaded"
+    "contact": {
+        "homepage": "https://space.bilibili.com/87328531",
+        "sources": "https://github.com/SolidBlock-cn/reasonable-sorting",
+        "issues": "https://github.com/SolidBlock-cn/reasonable-sorting/issues"
+    },
+    "license": "GPLv3",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "pers.solid.extshape.ExtShape"
+        ],
+        "client": [
+            "pers.solid.extshape.ExtShapeClient"
+        ],
+        "extshape:_modLoaded": [
+            "pers.solid.extshape.ShapesSorting::modLoaded"
+        ],
+        "extshape:_updateShapeList": [
+            "pers.solid.extshape.ShapesSorting::updateShapeList"
+        ],
+        "extshape:_getValidShapeNames": [
+            "pers.solid.extshape.ShapesSorting::getValidShapeNames"
+        ],
+        "extshape:_isValidShapeName": [
+            "pers.solid.extshape.ShapesSorting::isValidShapeName"
+        ],
+        "extshape:_updateShapeTransferRules": [
+            "pers.solid.extshape.ShapesTransfer::updateShapeTransferRules"
+        ],
+        "extshape:_setBaseBlocksInBuildingBlocks": [
+            "pers.solid.extshape.ShapesTransfer::setBaseBlocksInBuildingBlocks"
+        ],
+        "reasonable-sorting:item_sorting_rules": [
+            "pers.solid.extshape.ShapesSorting"
+        ],
+        "reasonable-sorting:item_group_transfer_rules": [
+            "pers.solid.extshape.ShapesTransfer"
+        ]
+    },
+    "mixins": [
+        "extshape.mixin.json"
     ],
-    "extshape:_updateShapeList": [
-      "pers.solid.extshape.ShapesSorting::updateShapeList"
-    ],
-    "extshape:_getValidShapeNames": [
-      "pers.solid.extshape.ShapesSorting::getValidShapeNames"
-    ],
-    "extshape:_isValidShapeName": [
-      "pers.solid.extshape.ShapesSorting::isValidShapeName"
-    ],
-    "extshape:_updateShapeTransferRules": [
-      "pers.solid.extshape.ShapesTransfer::updateShapeTransferRules"
-    ],
-    "extshape:_setBaseBlocksInBuildingBlocks": [
-      "pers.solid.extshape.ShapesTransfer::setBaseBlocksInBuildingBlocks"
-    ],
-    "reasonable-sorting:item_sorting_rules": [
-      "pers.solid.extshape.ShapesSorting"
-    ],
-    "reasonable-sorting:item_group_transfer_rules": [
-      "pers.solid.extshape.ShapesTransfer"
-    ]
-  },
-  "mixins": [
-    "extshape.mixin.json"
-  ],
-
-  "depends": {
-    "fabricloader": ">=0.11.3",
-    "fabric": "*",
-    "minecraft": ">1.17",
-    "java": ">=16"
-  }
+    "depends": {
+        "fabricloader": ">=0.11.3",
+        "fabric": "*",
+        "minecraft": ">1.17",
+        "java": ">=16",
+        "advanced_runtime_resource_pack": "*"
+    }
 }

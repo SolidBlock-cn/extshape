@@ -13,7 +13,6 @@
     "extshape:iron_slab",
     "extshape:obsidian_slab",
     "extshape:diamond_slab",
-    "extshape:amethyst_slab",
     "extshape:snow_slab",
     "extshape:clay_slab",
     "extshape:pumpkin_slab",
@@ -36,19 +35,6 @@
     "extshape:crying_obsidian_slab",
     "extshape:chiseled_polished_blackstone_slab",
     "extshape:gilded_blackstone_slab",
-    "extshape:chiseled_nether_brick_slab",
-    "extshape:tuff_slab",
-    "extshape:calcite_slab",
-    "extshape:waxed_copper_slab",
-    "extshape:waxed_weathered_copper_slab",
-    "extshape:waxed_exposed_copper_slab",
-    "extshape:waxed_oxidized_copper_slab",
-    "extshape:dripstone_slab",
-    "extshape:moss_slab",
-    "extshape:chiseled_deepslate_slab",
-    "extshape:smooth_basalt_slab",
-    "extshape:raw_iron_slab",
-    "extshape:raw_copper_slab",
-    "extshape:raw_gold_slab"
+    "extshape:chiseled_nether_brick_slab"
   ]
 }

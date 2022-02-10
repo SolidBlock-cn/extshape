@@ -11,6 +11,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
 
+@Deprecated
 public class VerticalQuarterPieceGenerator extends AbstractBlockGenerator<VerticalQuarterPieceBlock> {
     protected VerticalQuarterPieceGenerator(Path path, @NotNull VerticalQuarterPieceBlock block) {
         super(path, block);

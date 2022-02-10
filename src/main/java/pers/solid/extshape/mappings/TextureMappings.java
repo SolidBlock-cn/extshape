@@ -37,6 +37,14 @@ public class TextureMappings {
         BLOCK_TO_TEXTURE.put(Blocks.ANCIENT_DEBRIS, new Identifier("minecraft", "block/ancient_debris_side"));
         BLOCK_TO_TEXTURE.put(Blocks.MELON, new Identifier("minecraft", "block/melon_side"));
         BLOCK_TO_TEXTURE.put(Blocks.PUMPKIN, new Identifier("minecraft", "block/pumpkin_side"));
+        BLOCK_TO_TEXTURE.put(Blocks.WAXED_COPPER_BLOCK, new Identifier("minecraft", "block/copper_block"));
+        BLOCK_TO_TEXTURE.put(Blocks.WAXED_EXPOSED_COPPER, new Identifier("minecraft", "block/exposed_copper"));
+        BLOCK_TO_TEXTURE.put(Blocks.WAXED_OXIDIZED_COPPER, new Identifier("minecraft", "block/oxidized_copper"));
+        BLOCK_TO_TEXTURE.put(Blocks.WAXED_WEATHERED_COPPER, new Identifier("minecraft", "block/weathered_copper"));
+        BLOCK_TO_TEXTURE.put(Blocks.WAXED_CUT_COPPER, new Identifier("minecraft", "block/cut_copper"));
+        BLOCK_TO_TEXTURE.put(Blocks.WAXED_EXPOSED_CUT_COPPER, new Identifier("minecraft", "block/exposed_cut_copper"));
+        BLOCK_TO_TEXTURE.put(Blocks.WAXED_OXIDIZED_CUT_COPPER, new Identifier("minecraft", "block/oxidized_cut_copper"));
+        BLOCK_TO_TEXTURE.put(Blocks.WAXED_WEATHERED_CUT_COPPER, new Identifier("minecraft", "block/weathered_cut_copper"));
 
         BLOCK_TO_TOP_TEXTURE.put(Blocks.SANDSTONE, new Identifier("minecraft", "block/sandstone_top"));
         BLOCK_TO_BOTTOM_TEXTURE.put(Blocks.SANDSTONE, new Identifier("minecraft", "block/sandstone_bottom"));

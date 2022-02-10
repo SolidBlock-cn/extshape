@@ -41,16 +41,6 @@
     "extshape:honeycomb_button",
     "extshape:netherite_button",
     "extshape:ancient_debris_button",
-    "extshape:crying_obsidian_button",
-    "extshape:tuff_button",
-    "extshape:calcite_button",
-    "extshape:dripstone_button",
-    "extshape:moss_button",
-    "extshape:cobbled_deepslate_button",
-    "extshape:polished_deepslate_button",
-    "extshape:deepslate_tile_button",
-    "extshape:deepslate_brick_button",
-    "extshape:chiseled_deepslate_button",
-    "extshape:smooth_basalt_button"
+    "extshape:crying_obsidian_button"
   ]
 }

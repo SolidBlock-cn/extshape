@@ -22,7 +22,6 @@
     "extshape:mossy_cobblestone_fence",
     "extshape:obsidian_fence",
     "extshape:diamond_fence",
-    "extshape:amethyst_fence",
     "extshape:snow_fence",
     "extshape:pumpkin_fence",
     "extshape:netherrack_fence",
@@ -50,16 +49,6 @@
     "extshape:honeycomb_fence",
     "extshape:netherite_fence",
     "extshape:ancient_debris_fence",
-    "extshape:crying_obsidian_fence",
-    "extshape:tuff_fence",
-    "extshape:calcite_fence",
-    "extshape:dripstone_fence",
-    "extshape:moss_fence",
-    "extshape:cobbled_deepslate_fence",
-    "extshape:polished_deepslate_fence",
-    "extshape:deepslate_tile_fence",
-    "extshape:deepslate_brick_fence",
-    "extshape:chiseled_deepslate_fence",
-    "extshape:smooth_basalt_fence"
+    "extshape:crying_obsidian_fence"
   ]
 }

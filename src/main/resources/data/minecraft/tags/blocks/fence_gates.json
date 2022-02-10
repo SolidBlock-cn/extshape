@@ -22,7 +22,6 @@
     "extshape:mossy_cobblestone_fence_gate",
     "extshape:obsidian_fence_gate",
     "extshape:diamond_fence_gate",
-    "extshape:amethyst_fence_gate",
     "extshape:snow_fence_gate",
     "extshape:pumpkin_fence_gate",
     "extshape:netherrack_fence_gate",
@@ -51,16 +50,6 @@
     "extshape:honeycomb_fence_gate",
     "extshape:netherite_fence_gate",
     "extshape:ancient_debris_fence_gate",
-    "extshape:crying_obsidian_fence_gate",
-    "extshape:tuff_fence_gate",
-    "extshape:calcite_fence_gate",
-    "extshape:dripstone_fence_gate",
-    "extshape:moss_fence_gate",
-    "extshape:cobbled_deepslate_fence_gate",
-    "extshape:polished_deepslate_fence_gate",
-    "extshape:deepslate_tile_fence_gate",
-    "extshape:deepslate_brick_fence_gate",
-    "extshape:chiseled_deepslate_fence_gate",
-    "extshape:smooth_basalt_fence_gate"
+    "extshape:crying_obsidian_fence_gate"
   ]
 }

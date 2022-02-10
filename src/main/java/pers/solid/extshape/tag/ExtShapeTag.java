@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.internal.Streams;
 import com.google.gson.stream.JsonWriter;
+import net.devtech.arrp.json.tags.JTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
@@ -13,9 +14,7 @@ import pers.solid.extshape.util.AbstractContainableSet;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,7 +32,7 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E, TagEntry<E>, Set<T
     /**
      * 类似于数据包中的标签的“replace”参数。该参数目前仅用于生成JSON格式的数据，除此之外其值并无意义。
      */
-    public boolean replace;
+    public final boolean replace;
 
     @SafeVarargs
     public ExtShapeTag(E... elements) {
@@ -216,13 +215,13 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E, TagEntry<E>, Set<T
         return stringWriter.toString();
     }
 
-    /**
-     * 将标签转换为普通列表。标签内的标签会被完全展开。列表元素有可能会重复。
-     *
-     * @return 转换后的列表。其大小应当于标签 {@link #size()} 返回的结果一致。
-     */
-    public List<E> asList() {
-        return new ArrayList<>(this);
+    public JTag toARRP() {
+        final JTag tag = new JTag();
+        for (TagEntry<E> entry : entries) {
+            if (entry instanceof ExtShapeTag) tag.tag(((ExtShapeTag<Object>) entry).getIdentifier());
+            else if (entry instanceof TagEntrySingleton) tag.add(getIdentifierOf(((TagEntrySingleton<E>) entry).get()));
+        }
+        return tag;
     }
 
     @Override

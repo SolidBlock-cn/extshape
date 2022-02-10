@@ -54,7 +54,6 @@ public class TagGenerator extends Generator {
     }
 
     static {
-        ExtShape.EXTSHAPE_LOGGER.info("正在准备方块标签。确保当前是在开发环境！");
         for (Block block : ExtShapeBlockTag.EXTSHAPE_BLOCKS) {
             Block baseBlock = BlockMappings.getBaseBlockOf(block);
             if (baseBlock == null) continue;
@@ -78,19 +77,18 @@ public class TagGenerator extends Generator {
             if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) PICKAXE_MINEABLE.add(block);
             if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) SHOVEL_MINEABLE.add(block);
         }
-        ExtShape.EXTSHAPE_LOGGER.info("用于数据生成的标签已完成填充。");
     }
 
     /**
      * 写入所有的方块标签文件。
-     *
-     * @param generator 生成器。
      */
-    public static void writeAllBlockTagFiles(Generator generator) {
+    public static void writeAllBlockTagFiles() {
         for (ExtShapeBlockTag tag : ExtShapeBlockTag.ALL_EXTSHAPE_BLOCK_TAGS) {
-            generator.writeBlockTagFile(tag);
+            final Identifier identifier = tag.getIdentifier();
+            if (identifier == null) continue;
+            ExtShape.EXTSHAPE_PACK.addTag(new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath()), tag.toARRP());
             if (!NO_ITEM_TAGS.contains(tag)) {
-                generator.writeItemTagFile(tag);
+                ExtShape.EXTSHAPE_PACK.addTag(new Identifier(identifier.getNamespace(), "items/" + identifier.getPath()), tag.toARRP());
             }
         }
     }

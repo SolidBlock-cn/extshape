@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:cobbled_deepslate_stairs"
-  },
-  "result": "extshape:cobbled_deepslate_quarter_piece",
-  "count": 3
-}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:raw_copper_block"
-  },
-  "result": "extshape:raw_copper_stairs",
-  "count": 1
-}

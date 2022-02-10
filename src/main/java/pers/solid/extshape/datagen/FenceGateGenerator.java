@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public class FenceGateGenerator extends AbstractBlockGenerator<FenceGateBlock> {
     protected FenceGateGenerator(Path path, @NotNull FenceGateBlock block) {
         super(path, block);
@@ -114,6 +115,7 @@ public class FenceGateGenerator extends AbstractBlockGenerator<FenceGateBlock> {
                  }""", identifier.getNamespace(), identifier.getPath());
     }
 
+    @Override
     public String getBlockModelString() {
         return String.format("""
                 {

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:purpur_slab"
-  },
-  "result": "extshape:purpur_quarter_piece",
-  "count": 2
-}

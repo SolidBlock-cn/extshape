@@ -7,6 +7,7 @@ import pers.solid.extshape.block.GlazedTerracottaSlabBlock;
 import java.nio.file.Path;
 import java.util.Objects;
 
+@Deprecated
 public class GlazedTerracottaSlabGenerator extends SlabGenerator {
     protected GlazedTerracottaSlabGenerator(Path path, @NotNull GlazedTerracottaSlabBlock block) {
         super(path, block);
@@ -71,6 +72,7 @@ public class GlazedTerracottaSlabGenerator extends SlabGenerator {
                 """);
     }
 
+    @Override
     public String getTopBlockModelString() {
         return String.format("""
                 {

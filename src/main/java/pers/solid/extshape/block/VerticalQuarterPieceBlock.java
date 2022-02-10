@@ -14,15 +14,19 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
     public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new HashMap<>();
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -30,8 +34,8 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
             HorizontalCornerDirection.class);
 
     static {
-        for (var dir : HorizontalCornerDirection.values()) {
-            var vec = dir.getVector();
+        for (HorizontalCornerDirection dir : HorizontalCornerDirection.values()) {
+            Vec3i vec = dir.getVector();
             VOXELS.put(dir, VoxelShapes.cuboid(Math.min(vec.getX() + 1, 1) * 0.5, 0,
                     Math.min(vec.getZ() + 1, 1) * 0.5, Math.max(vec.getX() + 1, 1) * 0.5, 1,
                     Math.max(vec.getZ() + 1, 1) * 0.5));
@@ -59,7 +63,7 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        var dir = state.get(FACING);
+        HorizontalCornerDirection dir = state.get(FACING);
         return VOXELS.get(dir);
     }
 
@@ -76,5 +80,14 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    }
+
+
+    @Override
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+        if (state.get(WATERLOGGED)) {
+            world.getFluidTickScheduler().schedule(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 }

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:calcite"
-  },
-  "result": "extshape:calcite_quarter_piece",
-  "count": 4
-}

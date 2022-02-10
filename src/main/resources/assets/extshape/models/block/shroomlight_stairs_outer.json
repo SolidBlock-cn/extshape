@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "minecraft:block/shroomlight",
-    "top": "minecraft:block/shroomlight",
-    "side": "minecraft:block/shroomlight"
-  }
-}

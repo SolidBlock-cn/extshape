@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public class WallGenerator extends AbstractBlockGenerator<WallBlock> {
     protected WallGenerator(Path path, @NotNull WallBlock block) {
         super(path, block);
@@ -55,6 +56,7 @@ public class WallGenerator extends AbstractBlockGenerator<WallBlock> {
                 }""", this.getBaseTexture());
     }
 
+    @Override
     public Map<Identifier, String> getBlockModelCollection() {
         Map<Identifier, String> modelCollection = new LinkedHashMap<>();
         modelCollection.put(this.getBlockModelIdentifier("_inventory"), this.getInventoryModelString());

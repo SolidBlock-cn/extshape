@@ -1,16 +1,37 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.BiMap;
+import net.devtech.arrp.api.RuntimeResourcePack;
+import net.devtech.arrp.json.blockstate.JBlockModel;
+import net.devtech.arrp.json.blockstate.JState;
+import net.devtech.arrp.json.loot.JCondition;
+import net.devtech.arrp.json.loot.JEntry;
+import net.devtech.arrp.json.loot.JLootTable;
+import net.devtech.arrp.json.loot.JPool;
+import net.devtech.arrp.json.models.JModel;
+import net.devtech.arrp.json.models.JTextures;
+import net.devtech.arrp.json.recipe.JIngredient;
+import net.devtech.arrp.json.recipe.JRecipe;
+import net.devtech.arrp.json.recipe.JResult;
+import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.minecraft.block.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.ExtShapeClient;
 import pers.solid.extshape.block.ExtShapeVariantBlockInterface;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.mappings.TextureMappings;
+import pers.solid.extshape.mixin.AbstractBlockMixin;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.ArrayList;
@@ -18,6 +39,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+@SuppressWarnings("UnusedReturnValue")
 public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T> {
     public final Block baseBlock;
     public final boolean addToDefaultTag;
@@ -35,11 +57,8 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      * @see #createInstance()
      * @see #setInstanceSupplier(Function)
      */
-    protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier = builder -> {
-        throw new IllegalStateException("Instance supplier is not provided. Failed to create instance. Please specify an instance supplier for " + this + ".");
-    };
+    protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier;
     protected @Nullable Consumer<? super AbstractBlockBuilder<T>> preparationConsumer;
-    Identifier identifier;
     /**
      * 构造器的方块实例。需要注意，只有在调用{@link #build()}之后，这个实例才会存在，从而对实例进行实际操作。
      */
@@ -48,6 +67,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     @Nullable FabricItemSettings itemSettings;
     boolean fireproof;
     @Nullable ItemGroup group;
+    private Identifier identifier;
 
     protected AbstractBlockBuilder(Block baseBlock, FabricBlockSettings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
         this.baseBlock = baseBlock;
@@ -66,9 +86,56 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     }
 
     /**
+     * 将标识符转化为方块标识符并添加后缀。<br>
+     * <b>例如：</b>{@code minecraft:oak_slab} 和 {@code _top} 转化为 {@code minecraft:block/oak_slab_top}。
+     *
+     * @param identifier 要转化的标识符。
+     * @param suffix     标识符后缀。
+     * @return 转化后的标识符。
+     */
+    protected static Identifier blockIdentifier(Identifier identifier, String suffix) {
+        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath() + suffix);
+    }
+
+
+    /**
+     * 将标识符转化为方块标识符。<br>
+     * <b>例如：</b>{@code minecraft:dirt} 转化为 {@code minecraft:block/dirt}。
+     *
+     * @param identifier 要转化的标识符。
+     * @return 转化后的标识符。
+     */
+    public static Identifier blockIdentifier(Identifier identifier) {
+        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath());
+    }
+
+    /**
+     * 将标识符转化为战利品表中方块标识符。<br>
+     * <b>例如：</b>{@code minecraft:dirt} 转化为 {@code minecraft:blocks/dirt}。
+     *
+     * @param identifier 要转化的标识符。
+     * @return 转化后的标识符。
+     */
+    public static Identifier blocksIdentifier(Identifier identifier) {
+        return new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath());
+    }
+
+    /**
+     * 将标识符转化为物品标识符。<br>
+     * <b>例如：</b>{@code minecraft:dirt} 转化为 {@code minecraft:item/dirt}。
+     *
+     * @param identifier 要转化的标识符。
+     * @return 转化后的标识符。
+     */
+    public static Identifier itemIdentifier(Identifier identifier) {
+        return new Identifier(identifier.getNamespace(), "item/" + identifier.getPath());
+    }
+
+    /**
      * 将方块注册到注册表，不影响其对应方块物品。需确保方块已构造。
      * 如需要在构建时，设置需要注册的命名空间id，应使用{@link #setInstanceSupplier}。
      */
+    @Override
     public void register() {
         Registry.register(Registry.BLOCK, this.getIdentifier(), instance);
     }
@@ -111,10 +178,12 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     /**
      * @return 方块将要注册的命名空间id。
      */
+    @Override
     public Identifier getIdentifier() {
-        if (identifier == null)
-            return ExtShapeVariantBlockInterface.convertIdentifier(getBaseIdentifier(), this.getSuffix());
-        else return identifier;
+        if (identifier == null) {
+            identifier = ExtShapeVariantBlockInterface.convertIdentifier(getBaseIdentifier(), this.getSuffix());
+        }
+        return identifier;
     }
 
     /**
@@ -122,6 +191,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      *
      * @param identifier 方块将要注册的命名空间id。
      */
+    @Override
     public AbstractBlockBuilder<T> setIdentifier(Identifier identifier) {
         this.identifier = identifier;
         return this;
@@ -164,16 +234,6 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     public AbstractBlockBuilder<T> noRegister() {
         this.registerItem = false;
         return this.noRegisterBlock();
-    }
-
-    /**
-     * 设置方块亮度。
-     *
-     * @param luminance 亮度。
-     */
-    public AbstractBlockBuilder<T> luminance(int luminance) {
-        this.blockSettings.luminance(ignored -> luminance);
-        return this;
     }
 
     /**
@@ -264,6 +324,22 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
         return this;
     }
 
+    public Identifier getBaseTexture() {
+        return TextureMappings.getTextureOf(this.baseBlock);
+    }
+
+    public Identifier getTopTexture() {
+        return TextureMappings.getTopTextureOf(this.baseBlock);
+    }
+
+    public Identifier getBottomTexture() {
+        return TextureMappings.getBottomTextureOf(this.baseBlock);
+    }
+
+    public Identifier getSideTexture() {
+        return TextureMappings.getSideTextureOf(this.baseBlock);
+    }
+
     /**
      * 构建方块，并按照构建时的设置进行一系列操作。
      *
@@ -288,6 +364,181 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
             if (fireproof) itemBuilder.fireproof();
             this.itemBuilder.setIdentifier(this.getIdentifier()).build();
         }
+
+        // 添加资源包
+        final RuntimeResourcePack pack = ExtShape.EXTSHAPE_PACK;
+        writeRecipe(pack);
+        writeLootTable(pack);
+        if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+            final RuntimeResourcePack packClient = ExtShapeClient.EXTSHAPE_PACK_CLIENT;
+            writeBlockModel(packClient);
+            writeBlockStates(packClient);
+            if (buildItem) writeItemModel(packClient);
+        }
+
         return this.instance;
+    }
+
+    /**
+     * 根据该方块的各类纹理，返回其简单的模型。
+     */
+    @Environment(EnvType.CLIENT)
+    protected JModel simpleModel(String parent) {
+        return JModel.model(parent).textures(
+                new JTextures().var("bottom", getBottomTexture().toString())
+                        .var("top", getTopTexture().toString())
+                        .var("side", getSideTexture().toString())
+        );
+    }
+
+    /**
+     * 根据方块的基础纹理，返回其简单的模型，模型内使用名称为 texture 的变量。
+     */
+    @Environment(EnvType.CLIENT)
+    protected JModel simpleTextureModel(String parent) {
+        return JModel.model(parent).textures(new JTextures().var("texture", getBaseTexture().toString()));
+    }
+
+    /**
+     * 返回一个简单的切石配方。
+     */
+    protected JStonecuttingRecipe simpleStoneCuttingRecipe(int count) {
+        return JRecipe.stonecutting(JIngredient.ingredient().item(getBaseIdentifier().toString()), JResult.stackedResult(getIdentifier().toString(), count));
+    }
+
+    public boolean isStoneCut() {
+        return baseBlock != null && ((AbstractBlockMixin) baseBlock).getMaterial() == Material.STONE;
+    }
+
+
+    /**
+     * 返回该方块的方块模型。<br>
+     * 若为 {@code null}，则表示没有模型。
+     */
+    @Environment(EnvType.CLIENT)
+    public @Nullable JModel getBlockModel() {
+        return null;
+    }
+
+    /**
+     * 将方块模型注册到资源包中。通常直接使用 {@link #getBlockModel()} 的值，不过对于有多个方块模型或者没有方块模型的方块，你也可以让它注册多次或者不注册。
+     */
+    @Environment(EnvType.CLIENT)
+    public void writeBlockModel(RuntimeResourcePack pack) {
+        final JModel blockModel = getBlockModel();
+        if (blockModel != null)
+            pack.addModel(blockModel, blockIdentifier(getIdentifier()));
+    }
+
+    /**
+     * 返回该方块的物品模型。通常情况下，该方块的物品模型直接继承方块模型。
+     */
+    @Environment(EnvType.CLIENT)
+    public @Nullable JModel getItemModel() {
+        final Identifier identifier = getIdentifier();
+        return JModel.model(new Identifier(identifier.getNamespace(), "block/" + identifier.getPath()));
+    }
+
+    /**
+     * 将物品模型注册到资源包中，通常直接使用 {@link #getItemModel()} 的值，不过对于有多个物品模型或者没有物品模型的方块，你也可以让它注册多次或者不注册。
+     */
+    @Environment(EnvType.CLIENT)
+    public void writeItemModel(RuntimeResourcePack pack) {
+        final JModel itemModel = getItemModel();
+        if (itemModel != null)
+            pack.addModel(itemModel, itemIdentifier(getIdentifier()));
+    }
+
+    /**
+     * 返回该方块对应的方块状态定义。<br>
+     * 若为 {@code null}，则表示没有方块状态定义。<br>
+     */
+    @Environment(EnvType.CLIENT)
+    public @Nullable JState getBlockStates() {
+        return JState.state(JState.variant(new JBlockModel(blockIdentifier(getIdentifier()))));
+    }
+
+    /**
+     * 将方块的方块状态定义注册到资源包中，通常直接使用 {@link #getBlockStates()} 的值。通常一个方块只有一个方块状态定义文件。
+     */
+    @Environment(EnvType.CLIENT)
+    public void writeBlockStates(RuntimeResourcePack pack) {
+        final JState blockStates = getBlockStates();
+        if (blockStates != null)
+            pack.addBlockState(blockStates, getIdentifier());
+    }
+
+    /**
+     * 该方块对应的战利品表。<br>
+     * 若为 {@code null}，则表示没有战利品表。<br>
+     * 默认的战利品表格式如下：
+     * <pre>
+     * {
+     *   "type": "minecraft:block",
+     *   "pools": [{
+     *       "rolls": 1.0,
+     *       "bonus_rolls": 0.0,
+     *       "entries": [{
+     *           "type": "minecraft:item",
+     *           "name": "%s"
+     *         }],
+     *       "conditions": [{
+     *           "condition": "minecraft:survives_explosion"
+     *         }]}]}
+     * </pre>
+     */
+    public @Nullable JLootTable getLootTable() {
+        return new JLootTable("block").pool(new JPool()
+                .rolls(1)
+                .bonus(0)
+                .entry(new JEntry().type("item").name(getIdentifier().toString()))
+                .condition(new JCondition("survives_explosion")));
+    }
+
+    public void writeLootTable(RuntimeResourcePack pack) {
+        final JLootTable lootTable = getLootTable();
+        if (lootTable != null)
+            pack.addLootTable(blocksIdentifier(getIdentifier()), lootTable);
+    }
+
+    /**
+     * 该方块对应的合成配方。<br>若为 {@code null}，则表示没有配方。
+     */
+    public @Nullable JRecipe getCraftingRecipe() {
+        return null;
+    }
+
+    /**
+     * 该方块对应的切石配方。<br>
+     * 若为 {@code null}，则表示没有配方。
+     */
+    public @Nullable JRecipe getStonecuttingRecipe() {
+        return null;
+    }
+
+
+    /**
+     * 该方块合成配方中对应的 {@code group} 参数。
+     */
+    public String getRecipeGroup() {
+        return "";
+    }
+
+    /**
+     * 将该方块的合成配方注册到资源包中。会同时注册合成和烧制的。
+     *
+     * @see #getCraftingRecipe()
+     * @see #getStonecuttingRecipe()
+     */
+    public void writeRecipe(RuntimeResourcePack pack) {
+        final JRecipe craftingRecipe = getCraftingRecipe();
+        final Identifier identifier = getIdentifier();
+        if (craftingRecipe != null)
+            pack.addRecipe(identifier, craftingRecipe);
+        if (isStoneCut()) {
+            final JRecipe stonecuttingRecipe = getStonecuttingRecipe();
+            if (stonecuttingRecipe != null)
+                pack.addRecipe(new Identifier(identifier.getNamespace(), identifier.getPath() + "_from_stonecutting"), stonecuttingRecipe);
+        }
     }
 }

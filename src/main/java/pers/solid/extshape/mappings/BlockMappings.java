@@ -8,21 +8,21 @@ import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.Shape;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
 public class BlockMappings {
-    public static final Map<Shape, BiMap<Block, Block>> SHAPE_TO_MAPPING;
+    public static final EnumMap<Shape, BiMap<Block, Block>> SHAPE_TO_MAPPING;
     /**
      * 基础方块集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。
      */
     public static final Set<Block> BASE_BLOCKS = new LinkedHashSet<>();
 
     static {
-        SHAPE_TO_MAPPING = new HashMap<>();
+        SHAPE_TO_MAPPING = new EnumMap<>(Shape.class);
         for (Shape shape : Shape.values()) {
             SHAPE_TO_MAPPING.put(shape, HashBiMap.create());
         }
@@ -73,7 +73,7 @@ public class BlockMappings {
      */
     @Nullable
     public static Block getBlockOf(Shape shape, Block baseBlock) {
-        var mapping = SHAPE_TO_MAPPING.get(shape);
+        BiMap<Block, Block> mapping = SHAPE_TO_MAPPING.get(shape);
         if (mapping == null) return null;
         return mapping.get(baseBlock);
     }

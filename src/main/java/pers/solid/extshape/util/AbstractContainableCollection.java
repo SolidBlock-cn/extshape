@@ -82,6 +82,7 @@ public abstract class AbstractContainableCollection<E, CE extends Collection<E>,
     /**
      * @return <code>true</code> if the {@link #entries} contains the entry <code>o</code>.
      */
+    @Override
     public boolean containsEntry(Object o) {
         if (entries.contains(o)) return true;
         for (CE entry : entries) {
@@ -94,6 +95,7 @@ public abstract class AbstractContainableCollection<E, CE extends Collection<E>,
      * @return <code>true</code> if {@link #entries} directly contains a singleton of <code>o</code>.
      * @see #singletonOf(Object)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public boolean directlyContains(Object o) {
         E element;
@@ -129,14 +131,17 @@ public abstract class AbstractContainableCollection<E, CE extends Collection<E>,
         return entries.add(es);
     }
 
+    @Override
     public boolean addAllCollections(Collection<CE> c) {
         return entries.addAll(c);
     }
 
+    @Override
     public boolean removeCollection(CE c) {
         return entries.remove(c);
     }
 
+    @Override
     public boolean removeAllCollections(Collection<CE> c) {
         return entries.removeAll(c);
     }

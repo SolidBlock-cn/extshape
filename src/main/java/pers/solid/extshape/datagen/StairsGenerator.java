@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public class StairsGenerator extends AbstractBlockGenerator<StairsBlock> {
     protected StairsGenerator(Path path, StairsBlock block) {
         super(path, block);

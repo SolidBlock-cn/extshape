@@ -15,11 +15,11 @@ import java.util.*;
 import java.util.function.BiConsumer;
 
 /**
- * 由多个方块构造器组成的一个从形状到构造器的映射。
- * 调用其方法时，会修改构造器参数，但不会进行实际构造，而调用 {@link #build()} 之后，就会正式执行构造，将会调用这些构造器的 <code>build</code>
- * 方法，这时候才产生方块对象，并根据参数进行一系列操作，如加入注册表、标签等。
+ * 　　由多个方块构造器组成的一个从形状到构造器的映射。<br>
+ * 　　用其方法时，会修改构造器参数，但不会进行实际构造，而调用 {@link #build()} 之后，就会正式执行构造，将会调用这些构造器的 <code>build</code>方法，这时候才产生方块对象，并根据参数进行一系列操作，如加入注册表、标签等。<br>
+ * 　　调用这些 {@code build} 方法时，会自动往运行时资源包（RRP）中添加内容，同时 {@link #build()} 会添加一些方块之间的转换配方，如台阶与纵台阶的合成配方。
  */
-public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends Block>> {
+public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends Block>> {
     final Map<@NotNull Shape, @Nullable ExtShapeBlockTag> defaultTags = new HashMap<>();
     final Object2BooleanMap<Shape> shapeToWhetherBuild;
     @NotNull
@@ -40,7 +40,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param pressurePlateActivationRule 压力板激活类型。
      */
     public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
-        super();
+        super(Shape.class);
         this.fenceCraftingIngredient = fenceCraftingIngredient;
         this.buttonType = buttonType;
         this.pressurePlateActivationRule = pressurePlateActivationRule;
@@ -57,7 +57,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param baseBlock 基础方块。
      */
     public BlocksBuilder(@NotNull Block baseBlock) {
-        super();
+        super(Shape.class);
         this.baseBlock = baseBlock;
         this.shapeToWhetherBuild = new Object2BooleanOpenHashMap<>();
         for (Shape shape : Shape.values()) {
@@ -224,7 +224,7 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
      * @param map 由形状到方块标签的映射。
      */
     public BlocksBuilder setDefaultTagOf(Map<@Nullable Shape, @Nullable ExtShapeBlockTag> map) {
-        for (var entry : map.entrySet()) {
+        for (Entry<@Nullable Shape, @Nullable ExtShapeBlockTag> entry : map.entrySet()) {
             if (entry.getKey() == null || entry.getValue() == null) continue;
             defaultTags.put(entry.getKey(), entry.getValue());
         }
@@ -257,8 +257,6 @@ public class BlocksBuilder extends HashMap<Shape, AbstractBlockBuilder<? extends
                 if (this.preparationConsumer != null) {
                     this.preparationConsumer.accept(shape, blockBuilder);
                 }
-//            } else if (whetherBuild) {
-//                ExtShape.EXTSHAPE_LOGGER.info("已忽略{}的{}变种，因为已经存在{}。这是预期现象。", Registry.BLOCK.getId(baseBlock), shape.asString(), Registry.BLOCK.getId(BlockMappings.getBlockOf(shape, baseBlock)));
             }
         }
 

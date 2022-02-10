@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public class PressurePlateGenerator extends AbstractBlockGenerator<PressurePlateBlock> {
     protected PressurePlateGenerator(Path path, @NotNull PressurePlateBlock block) {
         super(path, block);

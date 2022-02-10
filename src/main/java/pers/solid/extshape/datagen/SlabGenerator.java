@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public class SlabGenerator extends AbstractBlockGenerator<SlabBlock> {
     protected SlabGenerator(Path path, @NotNull SlabBlock block) {
         super(path, block);

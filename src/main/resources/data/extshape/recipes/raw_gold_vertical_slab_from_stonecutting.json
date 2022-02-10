@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:raw_gold_block"
-  },
-  "result": "extshape:raw_gold_vertical_slab",
-  "count": 2
-}

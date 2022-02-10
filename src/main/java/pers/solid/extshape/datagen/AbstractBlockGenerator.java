@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public abstract class AbstractBlockGenerator<T extends Block> extends Generator {
 
     private final T block;
@@ -180,7 +181,8 @@ public abstract class AbstractBlockGenerator<T extends Block> extends Generator 
         this.writeCraftingRecipeFiles();
         Block baseBlock = this.getBaseBlock();
         // 特定方块允许使用切石机合成。
-        if (baseBlock != null && ((AbstractBlockMixin) baseBlock).getMaterial() == Material.STONE) this.writeStoneCuttingRecipeFiles();
+        if (baseBlock != null && ((AbstractBlockMixin) baseBlock).getMaterial() == Material.STONE)
+            this.writeStoneCuttingRecipeFiles();
     }
 
     public void writeCraftingRecipeFiles() {

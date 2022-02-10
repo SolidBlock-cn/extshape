@@ -10,6 +10,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.nio.file.Path;
 
+@Deprecated
 public class VerticalSlabGenerator extends AbstractBlockGenerator<VerticalSlabBlock> {
     protected VerticalSlabGenerator(Path path, @NotNull VerticalSlabBlock block) {
         super(path, block);

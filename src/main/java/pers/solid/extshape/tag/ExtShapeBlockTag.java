@@ -133,6 +133,8 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             LAPIS_BLOCK,
             EMERALD_BLOCK,
             NETHERITE_BLOCK);
+
+
     // 所有方块。
     public static final ExtShapeBlockTag EXTSHAPE_BLOCKS = new ExtShapeBlockTag();
     public static final ExtShapeBlockTag WOOLEN_BLOCKS = new ExtShapeBlockTag(new Identifier("extshape", "woolen_blocks"));
@@ -140,6 +142,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     public static final ExtShapeBlockTag OVERWORLD_WOODEN_BLOCKS = new ExtShapeBlockTag(); // 仅包含由模组添加的方块，用于模组内部使用
     // 完整方块（主要用于双石台阶方块）
     public static final ExtShapeBlockTag FULL_BLOCKS = new ExtShapeBlockTag().addToTag(EXTSHAPE_BLOCKS);
+
     // 楼梯
     public static final ExtShapeBlockTag STAIRS = new ExtShapeBlockTag(new Identifier("minecraft", "stairs")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag CONCRETE_STAIRS = new ExtShapeBlockTag(new Identifier("extshape", "concrete_stairs")).addToTag(STAIRS);

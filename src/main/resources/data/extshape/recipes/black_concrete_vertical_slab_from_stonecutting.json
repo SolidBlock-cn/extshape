@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:black_concrete"
-  },
-  "result": "extshape:black_concrete_vertical_slab",
-  "count": 2
-}
