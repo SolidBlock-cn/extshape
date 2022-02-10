@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "",
+  "group": "%3$s",
   "pattern": [
     "###"
   ],
@@ -10,7 +10,7 @@
     }
   },
   "result": {
-    "item": "minecraft:smooth_stone_slab",
+    "item": "smooth_stone_slab",
     "count": 6
   }
 }

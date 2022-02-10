@@ -36,6 +36,8 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
         builder.add(FACING);
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public PistonBehavior getPistonBehavior(BlockState state) {
         return PistonBehavior.PUSH_ONLY;
     }

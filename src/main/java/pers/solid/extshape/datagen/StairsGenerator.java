@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public class StairsGenerator extends AbstractBlockGenerator<StairsBlock> {
     protected StairsGenerator(Path path, StairsBlock block) {
         super(path, block);
@@ -29,6 +30,7 @@ public class StairsGenerator extends AbstractBlockGenerator<StairsBlock> {
 
     public String getInnerBlockModelString() {
         return String.format("{\n" +
+                "" +
                 "  \"parent\": \"minecraft:block/inner_stairs\",\n" +
                 "  \"textures\": {\n" +
                 "    \"bottom\": \"%s\",\n" +

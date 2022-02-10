@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 /**
  * 数据生成器。
  */
+@Deprecated
 public class Generator {
 
     /**
@@ -55,7 +56,7 @@ public class Generator {
         GlazedTerracottaSlabGenerator.init(generator);
         VerticalStairsGenerator.init(generator);
         VerticalQuarterPieceGenerator.init(generator);
-        TagGenerator.writeAllBlockTagFiles(generator);
+        TagGenerator.writeAllBlockTagFiles();
         ExtShape.EXTSHAPE_LOGGER.info(String.format("数据生成完成，总共生成了%s个文件，好耶！！（你可能需要重新构建项目（无需重启游戏）才能看到更改。）", stat));
     }
 

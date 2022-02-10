@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock> {
     /**
      * 该集合内的方块将不会生成按钮配方。
@@ -36,6 +37,7 @@ public class ButtonGenerator extends AbstractBlockGenerator<AbstractButtonBlock>
     }
 
 
+    @Override
     public Map<Identifier, String> getBlockModelCollection() {
         Map<Identifier, String> modelCollection = new LinkedHashMap<>();
         modelCollection.put(this.getBlockModelIdentifier(), this.getModelString());

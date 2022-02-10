@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Deprecated
 public class FenceGenerator extends AbstractBlockGenerator<FenceBlock> {
     protected FenceGenerator(Path path, @NotNull FenceBlock block) {
         super(path, block);

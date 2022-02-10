@@ -1,11 +1,10 @@
 package pers.solid.extshape.block;
 
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.Waterloggable;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 
-public class ExtShapeSlabBlock extends SlabBlock implements Waterloggable, ExtShapeVariantBlockInterface {
+public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlockInterface {
 
 
     public ExtShapeSlabBlock(Settings settings) {

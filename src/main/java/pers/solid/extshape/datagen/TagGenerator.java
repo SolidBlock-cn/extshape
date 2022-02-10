@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * 此类中定义的所有标签均<b>只在数据生成过程中使用</b>，平时运行游戏时，不会运行此处的代码。
  */
-public class TagGenerator extends Generator {
+public class TagGenerator {
     //    public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = new ExtShapeBlockTag(new Identifier("minecraft"
 //            , "occludes_vibration_signals"));
     public static final ExtShapeBlockTag DRAGON_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft",
@@ -67,19 +67,19 @@ public class TagGenerator extends Generator {
 //            if (baseBlock == Blocks.IRON_BLOCK || baseBlock == Blocks.LAPIS_BLOCK) NEEDS_STONE_TOOL.add(block);
             if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) NON_FLAMMABLE_WOOD.add(block);
         }
-        ExtShape.EXTSHAPE_LOGGER.info("用于数据生成的标签已完成填充。");
+        ExtShape.EXTSHAPE_LOGGER.info("Tags for data generation have been completed.");
     }
 
     /**
      * 写入所有的方块标签文件。
-     *
-     * @param generator 生成器。
      */
-    public static void writeAllBlockTagFiles(Generator generator) {
+    public static void writeAllBlockTagFiles() {
         for (ExtShapeBlockTag tag : ExtShapeBlockTag.ALL_EXTSHAPE_BLOCK_TAGS) {
-            generator.writeBlockTagFile(tag);
+            final Identifier identifier = tag.getIdentifier();
+            if (identifier == null) continue;
+            ExtShape.EXTSHAPE_PACK.addTag(new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath()), tag.toARRP());
             if (!NO_ITEM_TAGS.contains(tag)) {
-                generator.writeItemTagFile(tag);
+                ExtShape.EXTSHAPE_PACK.addTag(new Identifier(identifier.getNamespace(), "items/" + identifier.getPath()), tag.toARRP());
             }
         }
     }
