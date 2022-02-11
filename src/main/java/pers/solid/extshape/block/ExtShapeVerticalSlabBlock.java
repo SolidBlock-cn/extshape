@@ -6,12 +6,12 @@ import net.minecraft.text.TranslatableText;
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
 
 
-    public ExtShapeVerticalSlabBlock(Settings settings) {
-        super(settings);
-    }
+  public ExtShapeVerticalSlabBlock(Settings settings) {
+    super(settings);
+  }
 
-    @Override
-    public MutableText getName() {
-        return new TranslatableText("block.extshape.?_vertical_slab", this.getNamePrefix());
-    }
+  @Override
+  public MutableText getName() {
+    return new TranslatableText("block.extshape.?_vertical_slab", this.getNamePrefix());
+  }
 }

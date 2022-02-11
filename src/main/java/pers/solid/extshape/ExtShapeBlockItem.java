@@ -10,17 +10,17 @@ import net.minecraft.text.Text;
  */
 public class ExtShapeBlockItem extends BlockItem {
 
-    public ExtShapeBlockItem(Block block, Settings settings) {
-        super(block, settings);
-    }
+  public ExtShapeBlockItem(Block block, Settings settings) {
+    super(block, settings);
+  }
 
-    @Override
-    public Text getName() {
-        return this.getBlock().getName();
-    }
+  @Override
+  public Text getName() {
+    return this.getBlock().getName();
+  }
 
-    @Override
-    public Text getName(ItemStack stack) {
-        return stack.getItem().getName();
-    }
+  @Override
+  public Text getName(ItemStack stack) {
+    return stack.getItem().getName();
+  }
 }

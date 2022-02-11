@@ -10,10 +10,10 @@ import java.util.Set;
  * @param <CCE> The collection of {@code CE}. Must extend {@code Set<CE>}.
  */
 public abstract class AbstractContainableSet<E, CE extends Set<E>, CCE extends Set<CE>> extends AbstractContainableCollection<E, CE, CCE> implements Set<E> {
-    protected AbstractContainableSet(CCE entryCollection) {
-        super(entryCollection);
-    }
+  protected AbstractContainableSet(CCE entryCollection) {
+    super(entryCollection);
+  }
 
-    @Override
-    public abstract CE singletonOf(E o);
+  @Override
+  public abstract CE singletonOf(E o);
 }
