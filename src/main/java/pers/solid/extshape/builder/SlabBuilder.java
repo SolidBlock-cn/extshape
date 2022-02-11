@@ -69,7 +69,7 @@ public class SlabBuilder extends AbstractBlockBuilder<SlabBlock> {
     public void writeBlockModel(RuntimeResourcePack pack) {
         super.writeBlockModel(pack);
         final Identifier identifier = getIdentifier();
-        pack.addModel(getTopBlockModel(), new Identifier(identifier.getNamespace(), "block/" + identifier.getPath() + "_top"));
+        pack.addModel(getTopBlockModel(), blockIdentifier(identifier, "_top"));
     }
 
     /**

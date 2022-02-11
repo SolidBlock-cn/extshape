@@ -126,14 +126,6 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
             RED_TERRACOTTA,
             BLACK_TERRACOTTA
     );
-    public static final ExtShapeBlockTag ORE_BLOCKS = new ExtShapeBlockTag(COAL_BLOCK,
-            GOLD_BLOCK,
-            IRON_BLOCK,
-            DIAMOND_BLOCK,
-            LAPIS_BLOCK,
-            EMERALD_BLOCK,
-            NETHERITE_BLOCK);
-
 
     // 所有方块。
     public static final ExtShapeBlockTag EXTSHAPE_BLOCKS = new ExtShapeBlockTag();
@@ -195,13 +187,25 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
     // 横条
     public static final ExtShapeBlockTag QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "wooden_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(QUARTER_PIECES);
+    public static final ExtShapeBlockTag CONCRETE_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "concrete_quarter_pieces")).addToTag(QUARTER_PIECES);
+    public static final ExtShapeBlockTag TERRACOTTA_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "terracotta_quarter_pieces")).addToTag(QUARTER_PIECES);
+    public static final ExtShapeBlockTag WOOLEN_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "woolen_quarter_pieces")).addToTag(WOOLEN_BLOCKS).addToTag(QUARTER_PIECES);
+    public static final ExtShapeBlockTag STAINED_TERRACOTTA_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "stained_terracotta_quarter_pieces"));
     // 纵楼梯
     public static final ExtShapeBlockTag VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape",
             "vertical_stairs")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape", "wooden_vertical_stairs")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_STAIRS);
+    public static final ExtShapeBlockTag CONCRETE_VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape", "concrete_vertical_stairs")).addToTag(VERTICAL_STAIRS);
+    public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape", "terracotta_vertical_stairs")).addToTag(VERTICAL_STAIRS);
+    public static final ExtShapeBlockTag WOOLEN_VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape", "woolen_vertical_stairs")).addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_STAIRS);
+    public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_STAIRS = new ExtShapeBlockTag(new Identifier("extshape", "stained_terracotta_vertical_stairs"));
     // 纵条
     public static final ExtShapeBlockTag VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "vertical_quarter_pieces")).addToTag(EXTSHAPE_BLOCKS);
     public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "wooden_vertical_quarter_pieces")).addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
+    public static final ExtShapeBlockTag CONCRETE_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "concrete_vertical_quarter_pieces")).addToTag(VERTICAL_QUARTER_PIECES);
+    public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "terracotta_vertical_quarter_pieces")).addToTag(VERTICAL_QUARTER_PIECES);
+    public static final ExtShapeBlockTag WOOLEN_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "woolen_vertical_quarter_pieces")).addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
+    public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_QUARTER_PIECES = new ExtShapeBlockTag(new Identifier("extshape", "stained_terracotta_vertical_quarter_pieces"));
 
     public ExtShapeBlockTag() {
         super();

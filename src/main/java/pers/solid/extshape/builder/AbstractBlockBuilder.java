@@ -94,7 +94,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      * @return 转化后的标识符。
      */
     protected static Identifier blockIdentifier(Identifier identifier, String suffix) {
-        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath() + suffix);
+        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath().replaceFirst("^waxed_", "") + suffix);
     }
 
 
@@ -106,7 +106,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
      * @return 转化后的标识符。
      */
     public static Identifier blockIdentifier(Identifier identifier) {
-        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath());
+        return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath().replaceFirst("^waxed_", ""));
     }
 
     /**
@@ -436,7 +436,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     @Environment(EnvType.CLIENT)
     public @Nullable JModel getItemModel() {
         final Identifier identifier = getIdentifier();
-        return JModel.model(new Identifier(identifier.getNamespace(), "block/" + identifier.getPath()));
+        return JModel.model(blockIdentifier(identifier));
     }
 
     /**

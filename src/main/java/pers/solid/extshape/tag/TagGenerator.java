@@ -1,4 +1,4 @@
-package pers.solid.extshape.datagen;
+package pers.solid.extshape.tag;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -6,15 +6,15 @@ import net.minecraft.util.Identifier;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 此类中定义的所有标签均<b>只在数据生成过程中使用</b>，平时运行游戏时，不会运行此处的代码。
+ * 此类中定义的所有标签将会写入 ARRP 资源包。<br>
+ * Tags defined in this class will be written to ARRP resource pack.
  */
-public class TagGenerator extends Generator {
+public class TagGenerator {
     public static final ExtShapeBlockTag AXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/axe"));
     public static final ExtShapeBlockTag HOE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/hoe"));
     public static final ExtShapeBlockTag PICKAXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/pickaxe"), ExtShapeBlocks.PETRIFIED_OAK_PLANKS, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
@@ -40,9 +40,6 @@ public class TagGenerator extends Generator {
         NO_ITEM_TAGS.add(HOE_MINEABLE);
         NO_ITEM_TAGS.add(PICKAXE_MINEABLE);
         NO_ITEM_TAGS.add(SHOVEL_MINEABLE);
-    }
-
-    static {
         NO_ITEM_TAGS.add(DRAGON_IMMUNE);
         NO_ITEM_TAGS.add(INFINIBURN_END);
         NO_ITEM_TAGS.add(INFINIBURN_OVERWORLD);
@@ -51,9 +48,7 @@ public class TagGenerator extends Generator {
         NO_ITEM_TAGS.add(NEEDS_IRON_TOOL);
         NO_ITEM_TAGS.add(NEEDS_STONE_TOOL);
         NO_ITEM_TAGS.add(NEEDS_DIAMOND_TOOL);
-    }
-
-    static {
+        OCCLUDES_VIBRATION_SIGNALS.addTag(ExtShapeBlockTag.WOOLEN_BLOCKS);
         for (Block block : ExtShapeBlockTag.EXTSHAPE_BLOCKS) {
             Block baseBlock = BlockMappings.getBaseBlockOf(block);
             if (baseBlock == null) continue;
@@ -61,7 +56,6 @@ public class TagGenerator extends Generator {
                 DRAGON_IMMUNE.add(block);
             if (baseBlock == Blocks.NETHERRACK) INFINIBURN_OVERWORLD.add(block);
             if (baseBlock == Blocks.BEDROCK) INFINIBURN_END.add(block);
-            if (ExtShapeBlockTag.WOOLEN_BLOCKS.contains(baseBlock)) OCCLUDES_VIBRATION_SIGNALS.add(block);
             if (baseBlock == Blocks.BEDROCK || baseBlock == Blocks.PACKED_ICE || baseBlock == Blocks.BLUE_ICE || baseBlock == Blocks.ICE)
                 GEODE_INVALID_BLOCKS.add(block);
             if (baseBlock == Blocks.BEDROCK) WITHER_IMMUNE.add(block);

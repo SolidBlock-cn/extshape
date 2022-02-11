@@ -13,8 +13,6 @@ import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.builder.SlabBuilder;
 import pers.solid.extshape.mappings.BlockMappings;
 
-import java.util.Map;
-
 import static net.minecraft.block.Blocks.*;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
 
@@ -70,7 +68,18 @@ public final class ExtShapeBlocks {
 
         // 羊毛不注册墙。
         for (final Block block : WOOLS) {
-            new BlocksBuilder(block, Items.STRING, ButtonType.SOFT, ActivationRule.EVERYTHING).putTag(WOOLEN_BLOCKS).withoutWall().setDefaultTagOf(Map.of(Shape.STAIRS, WOOLEN_STAIRS, Shape.SLAB, WOOLEN_SLABS, Shape.VERTICAL_SLAB, WOOLEN_VERTICAL_SLABS, Shape.FENCE, WOOLEN_FENCES, Shape.FENCE_GATE, WOOLEN_FENCE_GATES, Shape.BUTTON, WOOLEN_BUTTONS, Shape.PRESSURE_PLATE, WOOLEN_PRESSURE_PLATES)).build();
+            new BlocksBuilder(block, Items.STRING, ButtonType.SOFT, ActivationRule.EVERYTHING).putTag(WOOLEN_BLOCKS).withoutWall()
+                    .setDefaultTagOf(Shape.STAIRS, WOOLEN_STAIRS)
+                    .setDefaultTagOf(Shape.VERTICAL_STAIRS, WOOLEN_VERTICAL_STAIRS)
+                    .setDefaultTagOf(Shape.SLAB, WOOLEN_SLABS)
+                    .setDefaultTagOf(Shape.VERTICAL_SLAB, WOOLEN_VERTICAL_SLABS)
+                    .setDefaultTagOf(Shape.QUARTER_PIECE, WOOLEN_QUARTER_PIECES)
+                    .setDefaultTagOf(Shape.VERTICAL_QUARTER_PIECE, WOOLEN_VERTICAL_QUARTER_PIECES)
+                    .setDefaultTagOf(Shape.FENCE, WOOLEN_FENCES)
+                    .setDefaultTagOf(Shape.FENCE_GATE, WOOLEN_FENCE_GATES)
+                    .setDefaultTagOf(Shape.BUTTON, WOOLEN_BUTTONS)
+                    .setDefaultTagOf(Shape.PRESSURE_PLATE, WOOLEN_PRESSURE_PLATES)
+                    .build();
         }
 
         // 金块。
@@ -107,9 +116,6 @@ public final class ExtShapeBlocks {
         // 下界岩。
         new BlocksBuilder(NETHERRACK, Items.NETHER_BRICK, ButtonType.STONE, ActivationRule.MOBS).build();
 
-//        // 磨制玄武岩。
-//        BlockBuilder.createAllShapes(POLISHED_BASALT, Items.NETHERRACK, ButtonType.STONE, ActivationRule.MOBS).build();
-
         // 荧石可以发光。
         new BlocksBuilder(GLOWSTONE, Items.GLOWSTONE_DUST, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
@@ -139,9 +145,33 @@ public final class ExtShapeBlocks {
         new BlocksBuilder(RED_NETHER_BRICKS, Items.NETHER_BRICK, ButtonType.STONE, ActivationRule.MOBS).build();
 
         // 陶瓦和彩色陶瓦。
-        new BlocksBuilder(TERRACOTTA, Items.CLAY, ButtonType.STONE, ActivationRule.MOBS).setDefaultTagOf(Map.of(Shape.STAIRS, TERRACOTTA_STAIRS, Shape.SLAB, TERRACOTTA_SLABS, Shape.VERTICAL_SLAB, TERRACOTTA_VERTICAL_SLABS, Shape.FENCE, TERRACOTTA_FENCES, Shape.FENCE_GATE, TERRACOTTA_FENCE_GATES, Shape.WALL, TERRACOTTA_WALLS, Shape.BUTTON, TERRACOTTA_BUTTONS, Shape.PRESSURE_PLATE, TERRACOTTA_PRESSURE_PLATES)).build();
+        new BlocksBuilder(TERRACOTTA, Items.CLAY, ButtonType.STONE, ActivationRule.MOBS)
+                .setDefaultTagOf(Shape.STAIRS, TERRACOTTA_STAIRS)
+                .setDefaultTagOf(Shape.VERTICAL_STAIRS, TERRACOTTA_VERTICAL_STAIRS)
+                .setDefaultTagOf(Shape.SLAB, TERRACOTTA_SLABS)
+                .setDefaultTagOf(Shape.VERTICAL_SLAB, TERRACOTTA_VERTICAL_SLABS)
+                .setDefaultTagOf(Shape.QUARTER_PIECE, TERRACOTTA_QUARTER_PIECES)
+                .setDefaultTagOf(Shape.VERTICAL_QUARTER_PIECE, TERRACOTTA_VERTICAL_QUARTER_PIECES)
+                .setDefaultTagOf(Shape.FENCE, TERRACOTTA_FENCES)
+                .setDefaultTagOf(Shape.FENCE_GATE, TERRACOTTA_FENCE_GATES)
+                .setDefaultTagOf(Shape.WALL, TERRACOTTA_WALLS)
+                .setDefaultTagOf(Shape.BUTTON, TERRACOTTA_BUTTONS)
+                .setDefaultTagOf(Shape.PRESSURE_PLATE, TERRACOTTA_PRESSURE_PLATES)
+                .build();
         for (final Block block : STAINED_TERRACOTTAS) {
-            new BlocksBuilder(block, Items.CLAY, ButtonType.STONE, ActivationRule.MOBS).setDefaultTagOf(Map.of(Shape.STAIRS, STAINED_TERRACOTTA_STAIRS, Shape.SLAB, STAINED_TERRACOTTA_SLABS, Shape.VERTICAL_SLAB, STAINED_TERRACOTTA_VERTICAL_SLABS, Shape.FENCE, STAINED_TERRACOTTA_FENCES, Shape.FENCE_GATE, STAINED_TERRACOTTA_FENCE_GATES, Shape.WALL, STAINED_TERRACOTTA_WALLS, Shape.BUTTON, STAINED_TERRACOTTA_BUTTONS, Shape.PRESSURE_PLATE, STAINED_TERRACOTTA_PRESSURE_PLATES)).build();
+            new BlocksBuilder(block, Items.CLAY, ButtonType.STONE, ActivationRule.MOBS)
+                    .setDefaultTagOf(Shape.STAIRS, STAINED_TERRACOTTA_STAIRS)
+                    .setDefaultTagOf(Shape.VERTICAL_STAIRS, STAINED_TERRACOTTA_VERTICAL_STAIRS)
+                    .setDefaultTagOf(Shape.SLAB, STAINED_TERRACOTTA_SLABS)
+                    .setDefaultTagOf(Shape.VERTICAL_SLAB, STAINED_TERRACOTTA_VERTICAL_SLABS)
+                    .setDefaultTagOf(Shape.QUARTER_PIECE, STAINED_TERRACOTTA_QUARTER_PIECES)
+                    .setDefaultTagOf(Shape.VERTICAL_QUARTER_PIECE, STAINED_TERRACOTTA_VERTICAL_QUARTER_PIECES)
+                    .setDefaultTagOf(Shape.FENCE, STAINED_TERRACOTTA_FENCES)
+                    .setDefaultTagOf(Shape.FENCE_GATE, STAINED_TERRACOTTA_FENCE_GATES)
+                    .setDefaultTagOf(Shape.WALL, STAINED_TERRACOTTA_WALLS)
+                    .setDefaultTagOf(Shape.BUTTON, STAINED_TERRACOTTA_BUTTONS)
+                    .setDefaultTagOf(Shape.PRESSURE_PLATE, STAINED_TERRACOTTA_PRESSURE_PLATES)
+                    .build();
         }
 
         // 浮冰。
@@ -174,7 +204,18 @@ public final class ExtShapeBlocks {
 
         // 彩色混凝土。
         for (final Block block : CONCRETES) {
-            new BlocksBuilder(block, Items.GRAVEL, ButtonType.STONE, ActivationRule.MOBS).setDefaultTagOf(Map.of(Shape.STAIRS, CONCRETE_STAIRS, Shape.SLAB, CONCRETE_SLABS, Shape.VERTICAL_SLAB, CONCRETE_VERTICAL_SLABS, Shape.FENCE, CONCRETE_FENCES, Shape.FENCE_GATE, CONCRETE_FENCE_GATES, Shape.WALL, CONCRETE_WALLS, Shape.BUTTON, CONCRETE_BUTTONS, Shape.PRESSURE_PLATE, CONCRETE_PRESSURE_PLATES)).build();
+            new BlocksBuilder(block, Items.GRAVEL, ButtonType.STONE, ActivationRule.MOBS)
+                    .setDefaultTagOf(Shape.STAIRS, CONCRETE_STAIRS)
+                    .setDefaultTagOf(Shape.VERTICAL_STAIRS, CONCRETE_VERTICAL_STAIRS)
+                    .setDefaultTagOf(Shape.SLAB, CONCRETE_SLABS)
+                    .setDefaultTagOf(Shape.VERTICAL_SLAB, CONCRETE_VERTICAL_SLABS)
+                    .setDefaultTagOf(Shape.QUARTER_PIECE, CONCRETE_QUARTER_PIECES)
+                    .setDefaultTagOf(Shape.VERTICAL_QUARTER_PIECE, CONCRETE_VERTICAL_QUARTER_PIECES)
+                    .setDefaultTagOf(Shape.FENCE, CONCRETE_FENCES)
+                    .setDefaultTagOf(Shape.FENCE_GATE, CONCRETE_FENCE_GATES)
+                    .setDefaultTagOf(Shape.WALL, CONCRETE_WALLS)
+                    .setDefaultTagOf(Shape.BUTTON, CONCRETE_BUTTONS)
+                    .setDefaultTagOf(Shape.PRESSURE_PLATE, CONCRETE_PRESSURE_PLATES).build();
         }
 
         // 菌光体。
