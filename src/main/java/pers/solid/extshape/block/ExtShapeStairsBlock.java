@@ -7,12 +7,12 @@ import net.minecraft.text.TranslatableText;
 
 public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantBlockInterface {
 
-    public ExtShapeStairsBlock(BlockState baseBlockState, Settings settings) {
-        super(baseBlockState, settings);
-    }
+  public ExtShapeStairsBlock(BlockState baseBlockState, Settings settings) {
+    super(baseBlockState, settings);
+  }
 
-    @Override
-    public MutableText getName() {
-        return new TranslatableText("block.extshape.?_stairs", this.getNamePrefix());
-    }
+  @Override
+  public MutableText getName() {
+    return new TranslatableText("block.extshape.?_stairs", this.getNamePrefix());
+  }
 }

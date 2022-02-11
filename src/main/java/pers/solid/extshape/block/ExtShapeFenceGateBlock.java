@@ -6,13 +6,13 @@ import net.minecraft.text.TranslatableText;
 
 public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVariantBlockInterface {
 
-    public ExtShapeFenceGateBlock(Settings settings) {
-        super(settings);
-    }
+  public ExtShapeFenceGateBlock(Settings settings) {
+    super(settings);
+  }
 
-    @Override
-    public MutableText getName() {
-        return new TranslatableText("block.extshape.?_fence_gate", this.getNamePrefix());
-    }
+  @Override
+  public MutableText getName() {
+    return new TranslatableText("block.extshape.?_fence_gate", this.getNamePrefix());
+  }
 
 }
