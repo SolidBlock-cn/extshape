@@ -1,10 +1,12 @@
 package pers.solid.extshape.tag;
 
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +20,9 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
   /**
    * 包含所有已创建的标签。
    **/
-  public static final List<ExtShapeBlockTag> ALL_EXTSHAPE_BLOCK_TAGS = new ArrayList<>();
+  public static final List<ExtShapeBlockTag> TAG_LIST = new ArrayList<>();
 
-  public static final ExtShapeBlockTag PLANKS = new ExtShapeBlockTag(
+  public static final @Unmodifiable ImmutableSet<Block> PLANKS = ImmutableSet.of(
       OAK_PLANKS,
       SPRUCE_PLANKS,
       BIRCH_PLANKS,
@@ -30,7 +32,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
       CRIMSON_PLANKS,
       WARPED_PLANKS
   );
-  public static final ExtShapeBlockTag OVERWORLD_PLANKS = new ExtShapeBlockTag(
+  public static final @Unmodifiable ImmutableSet<Block> OVERWORLD_PLANKS = ImmutableSet.of(
       OAK_PLANKS,
       SPRUCE_PLANKS,
       BIRCH_PLANKS,
@@ -48,7 +50,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
   );
   public static final ExtShapeBlockTag STONES = Util.make(new ExtShapeBlockTag(
       STONE), blockTag -> blockTag.addTag(STONE_VARIANTS));
-  public static final ExtShapeBlockTag SANDSTONES = new ExtShapeBlockTag(
+  public static final ImmutableSet<Block> SANDSTONES = ImmutableSet.of(
       SANDSTONE,
       CUT_SANDSTONE,
       CHISELED_SANDSTONE,
@@ -58,7 +60,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
       CHISELED_RED_SANDSTONE,
       SMOOTH_RED_SANDSTONE
   );
-  public static final ExtShapeBlockTag WOOLS = new ExtShapeBlockTag(WHITE_WOOL,
+  public static final ImmutableSet<Block> WOOLS = ImmutableSet.of(WHITE_WOOL,
       ORANGE_WOOL,
       MAGENTA_WOOL,
       LIGHT_BLUE_WOOL,
@@ -74,7 +76,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
       GREEN_WOOL,
       RED_WOOL,
       BLACK_WOOL);
-  public static final ExtShapeBlockTag GLAZED_TERRACOTTAS = new ExtShapeBlockTag(
+  public static final ImmutableSet<Block> GLAZED_TERRACOTTAS = ImmutableSet.of(
       WHITE_GLAZED_TERRACOTTA,
       ORANGE_GLAZED_TERRACOTTA,
       MAGENTA_GLAZED_TERRACOTTA,
@@ -92,7 +94,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
       RED_GLAZED_TERRACOTTA,
       BLACK_GLAZED_TERRACOTTA
   );
-  public static final ExtShapeBlockTag CONCRETES = new ExtShapeBlockTag(WHITE_CONCRETE,
+  public static final ImmutableSet<Block> CONCRETES = ImmutableSet.of(WHITE_CONCRETE,
       ORANGE_CONCRETE,
       MAGENTA_CONCRETE,
       LIGHT_BLUE_CONCRETE,
@@ -108,7 +110,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
       GREEN_CONCRETE,
       RED_CONCRETE,
       BLACK_CONCRETE);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTAS = new ExtShapeBlockTag(
+  public static final ImmutableSet<Block> STAINED_TERRACOTTAS = ImmutableSet.of(
       WHITE_TERRACOTTA,
       ORANGE_TERRACOTTA,
       MAGENTA_TERRACOTTA,
@@ -221,7 +223,7 @@ public class ExtShapeBlockTag extends ExtShapeTag<Block> {
 
   public ExtShapeBlockTag(Identifier identifier, List<Block> list) {
     super(identifier, list);
-    ALL_EXTSHAPE_BLOCK_TAGS.add(this);
+    TAG_LIST.add(this);
   }
 
   /**

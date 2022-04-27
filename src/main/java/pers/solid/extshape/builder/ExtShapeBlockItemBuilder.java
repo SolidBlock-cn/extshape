@@ -3,7 +3,6 @@ package pers.solid.extshape.builder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemGroup;
-import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.QuarterPieceBlock;
 import pers.solid.extshape.block.VerticalQuarterPieceBlock;
@@ -12,7 +11,6 @@ import pers.solid.extshape.block.VerticalStairsBlock;
 
 public class ExtShapeBlockItemBuilder extends AbstractItemBuilder<ExtShapeBlockItem> {
   final Block block;
-  @Nullable ItemGroup group;
 
   protected ExtShapeBlockItemBuilder(Block block, FabricItemSettings settings) {
     super(settings);

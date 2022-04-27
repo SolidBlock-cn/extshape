@@ -7,6 +7,7 @@ import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.mixin.BlockFamiliesAccessor;
 
 import java.util.EnumMap;
 import java.util.LinkedHashSet;
@@ -76,5 +77,18 @@ public class BlockMappings {
     BiMap<Block, Block> mapping = SHAPE_TO_MAPPING.get(shape);
     if (mapping == null) return null;
     return mapping.get(baseBlock);
+  }
+
+  public static void completeBlockFamilies() {
+    final Map<Block, BlockFamily> baseBlocksToFamilies = BlockFamiliesAccessor.getBaseBlocksToFamilies();
+    for (Block baseBlock : BASE_BLOCKS) {
+      final BlockFamily blockFamily = baseBlocksToFamilies.computeIfAbsent(baseBlock, x -> new BlockFamily.Builder(baseBlock).build());
+      final Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
+      SHAPE_TO_MAPPING.forEach((shape, map) -> {
+        if (map.containsKey(baseBlock)) {
+          map.putIfAbsent(baseBlock, map.get(baseBlock));
+        }
+      });
+    }
   }
 }
