@@ -78,5 +78,30 @@
   "itemGroup.extshape.stone_blocks": "扩展方块形状：石质方块（按基础方块排序，含原版方块）",
   "itemGroup.extshape.wooden_blocks": "扩展方块形状：木制方块（按基础方块排序，含原版方块）",
 
-  "modmenu.descriptionTranslation.extshape": "本模组为许多方块添加了更多形状，包括原版不存在的形状，如垂直台阶。大多数方块都像原版一样可以合成。借助此模组，你可以制作出更加精美的建筑。"
+  "modmenu.descriptionTranslation.extshape": "本模组为许多方块添加了更多形状，包括原版不存在的形状，如垂直台阶。大多数方块都像原版一样可以合成。借助此模组，你可以制作出更加精美的建筑。",
+
+  "options.extshape.title": "扩展方块形状模组配置",
+  "options.extshape.addToVanillaGroups": "添加至原版物品组",
+  "options.extshape.addToVanillaGroups.tooltip": "将本模组添加的方块添加至Minecraft的原版创造模式物品组中。例如，所有的楼梯和台阶都加入“%s”物品组，栅栏和墙加入“%s”物品组，按钮和压力板则加入“%s”物品组。物品是按照被定义时的顺序加入的，所以可能会有点乱，但是如果您安装了合理排序模组，则推荐开启此项。",
+  "options.extshape.showSpecificGroups": "显示专门物品组",
+  "options.extshape.showSpecificGroups.tooltip": "添加一些专门的物品组以显示所有拥有不同形状的方块（含原版和模组中的），这些方块按照其基础方块的顺序排列，基础方块相同的方块显示在一起。",
+  "options.extshape.default": "默认：%s",
+  "options.extshape.confirm": "确定？",
+  "options.extshape.confirm.noGroups": "您的“%s”和“%s”都设置为“%s”，这意味着您在创造模式下，无法从创造模式物品栏中获取模组中的物品。确定要继续吗？",
+  "options.extshape.confirm.redo": "我再考虑下",
+  "options.extshape.registerBlockFamilies": "注册BlockFamilies",
+
+  "options.extshape.rrp.title": "运行时资源包设置",
+  "options.extshape.rrp.regenClientResources": "重新生成客户端资源包",
+  "options.extshape.rrp.regenClientResources.process": "正在重新生成客户端资源包…",
+  "options.extshape.rrp.regenServerData": "重新生成服务器数据包",
+  "options.extshape.rrp.regenServerData.process": "正在重新生成服务器数据包…",
+  "options.extshape.rrp.exportClientResources": "导出客户端资源包",
+  "options.extshape.rrp.exportClientResources.process": "正在导出客户端资源包…",
+  "options.extshape.rrp.exportServerData": "导出服务器数据包",
+  "options.extshape.rrp.exportServerData.process": "正在导出服务器数据包…",
+  "options.extshape.rrp.exportFilePath": "导出文件路径",
+  "options.extshape.rrp.textFieldHeader": "资源将导出至以下路径：",
+  "options.extshape.rrp.fullPath": "完整路径如下：%s",
+  "options.extshape.rrp.invalidPath": "无效的路径：%s"
 }

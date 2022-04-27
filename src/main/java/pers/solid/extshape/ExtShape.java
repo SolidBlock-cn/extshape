@@ -12,7 +12,6 @@ import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.block.QuarterPieceBlock;
 import pers.solid.extshape.block.VerticalQuarterPieceBlock;
 import pers.solid.extshape.block.VerticalSlabBlock;
-import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 public class ExtShape implements ModInitializer {
@@ -27,8 +26,6 @@ public class ExtShape implements ModInitializer {
     registerFlammableBlocks();
 
     ExtShapeRRP.registerRRP();
-
-    ExtShapeConfig.save();
   }
 
   /**

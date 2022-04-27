@@ -76,7 +76,7 @@ public class ExtShapeItemGroup extends ItemGroup {
 
     MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
 
-    if (!ExtShapeConfig.CURRENT_CONFIG.hasSpecificGroup) {
+    if (!ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
       ItemGroupAccessor.setGroups(groups);
     }
   }
@@ -139,7 +139,7 @@ public class ExtShapeItemGroup extends ItemGroup {
   }
 
   /**
-   * 在游戏运行中途将本模组的物品组加到 {@link ItemGroup#GROUPS} 中。一开始运行时不会执行此方法，只有在模组中途通过配置屏幕将已关闭的 {@link ExtShapeConfig#hasSpecificGroup} 设为 {@code true} 时才会执行本方法。
+   * 在游戏运行中途将本模组的物品组加到 {@link ItemGroup#GROUPS} 中。一开始运行时不会执行此方法，只有在模组中途通过配置屏幕将已关闭的 {@link ExtShapeConfig#showSpecificGroups} 设为 {@code true} 时才会执行本方法。
    */
   public static void implementGroups() {
     final ItemGroup[] groups = ItemGroup.GROUPS;
