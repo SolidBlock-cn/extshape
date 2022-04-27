@@ -1,5 +1,7 @@
 package pers.solid.extshape.block;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.devtech.arrp.generator.BRRPCubeBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
@@ -7,11 +9,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
-import pers.solid.extshape.builder.BlockBuilder;
-import pers.solid.extshape.builder.BlocksBuilder;
-import pers.solid.extshape.builder.Shape;
-import pers.solid.extshape.builder.SlabBuilder;
+import pers.solid.extshape.builder.*;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.tag.ExtShapeBlockTag;
+
+import java.util.List;
 
 import static net.minecraft.block.Blocks.*;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
@@ -20,13 +22,18 @@ import static pers.solid.extshape.tag.ExtShapeBlockTag.*;
  * @see net.minecraft.block.Blocks
  */
 public final class ExtShapeBlocks {
-  public static final Block PETRIFIED_OAK_PLANKS =
-      new BlockBuilder().setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB)).setIdentifier(new Identifier("extshape", "petrified_oak_planks")).group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(FULL_BLOCKS).build();
+  /**
+   * 存储本模组所有方块的列表。其功能类似于 {@link ExtShapeBlockTag#EXTSHAPE_BLOCKS}，但是使用该列表进行迭代显然更加迅速。该列表的内容是在 {@link AbstractBlockBuilder#build()} 中添加的。
+   */
+  public static final List<Block> BLOCKS = new ObjectArrayList<>();
+  /**
+   * 石化橡木方块。
+   */
+  public static final Block PETRIFIED_OAK_PLANKS;
+  /**
+   * 双层石台阶。
+   */
   public static final Block SMOOTH_STONE_DOUBLE_SLAB;
-
-  static {
-    BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
-  }
 
   /*
     使用BlockBuilder并利用迭代器来批量注册多个方块及其对应方块物品，提高效率。
@@ -52,6 +59,15 @@ public final class ExtShapeBlocks {
           .putTag(isOverworld ? OVERWORLD_WOODEN_BLOCKS : null)
           .withoutWall().build();
     }
+
+    // 石化橡木木板
+    PETRIFIED_OAK_PLANKS = new BlockBuilder()
+        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeAll(builder.blockSettings, "block/oak_planks"))
+        .setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB))
+        .setIdentifier(new Identifier("extshape", "petrified_oak_planks"))
+        .group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(FULL_BLOCKS).build();
+
+    BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
 
     // 基岩。
     new BlocksBuilder(BEDROCK, Items.STICK, ButtonType.HARD, ActivationRule.MOBS).setPreparationConsumer(((shape, abstractBlockBuilder) -> abstractBlockBuilder.setPreparationConsumer(builder -> builder.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state, world, pos, type) -> false)))).build();
@@ -187,8 +203,14 @@ public final class ExtShapeBlocks {
     new BlocksBuilder(SEA_LANTERN).withShapes().build();
 
     // 平滑石头比较特殊，完整方块和台阶不同。
-    SMOOTH_STONE_DOUBLE_SLAB = new BlockBuilder().setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE)).setIdentifier(new Identifier("extshape", "smooth_stone_slab_double")).group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(FULL_BLOCKS).build();
+    SMOOTH_STONE_DOUBLE_SLAB = new BlockBuilder()
+        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, "block/smooth_stone_slab_top", "block/smooth_stone_slab", "block/smooth_stone_slab_top"))
+        .setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE))
+        .setIdentifier(new Identifier("extshape", "smooth_stone_slab_double"))
+        .group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(FULL_BLOCKS).build();
+
     new BlocksBuilder(SMOOTH_STONE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).withoutShapes().build();
+
     BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB).put(SMOOTH_STONE_DOUBLE_SLAB, SMOOTH_STONE_SLAB);
 
     // 紫珀块。
@@ -200,7 +222,7 @@ public final class ExtShapeBlocks {
 
     // 带釉陶瓦只注册台阶。
     for (final Block block : GLAZED_TERRACOTTAS) {
-      new SlabBuilder(block).setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(FabricBlockSettings.copyOf(builder.baseBlock))).setDefaultTag(GLAZED_TERRACOTTA_SLABS).build();
+      new SlabBuilder(block).setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, FabricBlockSettings.copyOf(builder.baseBlock))).setDefaultTag(GLAZED_TERRACOTTA_SLABS).build();
     }
 
     // 彩色混凝土。

@@ -2,9 +2,10 @@
   "required": true,
   "minVersion": "0.8",
   "package": "pers.solid.extshape.mixin",
-  "compatibilityLevel": "JAVA_16",
-  "mixins": ["AbstractBlockMixin", "ButtonMixin"],
+  "compatibilityLevel": "JAVA_17",
+  "mixins": ["AbstractBlockMixin", "BlockFamiliesAccessor", "ButtonMixin", "CreativeInventoryScreenMixin", "ItemGroupAccessor"],
   "client": [
+    "CreativeInventoryScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

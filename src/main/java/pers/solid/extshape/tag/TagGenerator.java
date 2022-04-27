@@ -1,9 +1,9 @@
 package pers.solid.extshape.tag;
 
+import net.devtech.arrp.api.RuntimeResourcePack;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
-import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.mappings.BlockMappings;
 
@@ -49,7 +49,7 @@ public class TagGenerator {
     NO_ITEM_TAGS.add(NEEDS_STONE_TOOL);
     NO_ITEM_TAGS.add(NEEDS_DIAMOND_TOOL);
     OCCLUDES_VIBRATION_SIGNALS.addTag(ExtShapeBlockTag.WOOLEN_BLOCKS);
-    for (Block block : ExtShapeBlockTag.EXTSHAPE_BLOCKS) {
+    for (Block block : ExtShapeBlocks.BLOCKS) {
       Block baseBlock = BlockMappings.getBaseBlockOf(block);
       if (baseBlock == null) continue;
       if (baseBlock == Blocks.END_STONE || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN)
@@ -76,13 +76,13 @@ public class TagGenerator {
   /**
    * 写入所有的方块标签文件。
    */
-  public static void writeAllBlockTagFiles() {
-    for (ExtShapeBlockTag tag : ExtShapeBlockTag.ALL_EXTSHAPE_BLOCK_TAGS) {
+  public static void writeAllBlockTagFiles(RuntimeResourcePack pack) {
+    for (ExtShapeBlockTag tag : ExtShapeBlockTag.TAG_LIST) {
       final Identifier identifier = tag.getIdentifier();
       if (identifier == null) continue;
-      ExtShape.EXTSHAPE_PACK.addTag(new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath()), tag.toARRP());
+      pack.addTag(new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath()), tag.toARRP());
       if (!NO_ITEM_TAGS.contains(tag)) {
-        ExtShape.EXTSHAPE_PACK.addTag(new Identifier(identifier.getNamespace(), "items/" + identifier.getPath()), tag.toARRP());
+        pack.addTag(new Identifier(identifier.getNamespace(), "items/" + identifier.getPath()), tag.toARRP());
       }
     }
   }

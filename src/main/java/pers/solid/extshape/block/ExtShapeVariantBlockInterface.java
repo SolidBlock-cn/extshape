@@ -7,7 +7,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
-import pers.solid.extshape.mappings.BlockMappings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,26 +70,37 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
   }
 
   /**
+   * 将标识符转化为方块标识符并添加后缀。<br>
+   * <b>例如：</b>{@code minecraft:oak_slab} 和 {@code _top} 转化为 {@code minecraft:block/oak_slab_top}。
+   *
+   * @param identifier 要转化的标识符。
+   * @param suffix     标识符后缀。
+   * @return 转化后的标识符。
+   */
+  static Identifier blockIdentifier(Identifier identifier, String suffix) {
+    return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath().replaceFirst("^waxed_", "") + suffix);
+  }
+
+  /**
    * 获取基础方块的id。
    *
    * @return 基础方块的id。
    */
-  default Identifier getBaseBlockIdentifier() {
+  default Identifier getBaseBlockId() {
     return Registry.BLOCK.getId(this.getBaseBlock());
   }
 
   /**
    * @return 该方块的基础方块。
    */
-  default Block getBaseBlock() {
-    return BlockMappings.getBaseBlockOf((Block) this);
-  }
+  @Override
+  Block getBaseBlock();
 
   /**
    * @return 该方块的id路径前缀。
    */
   default String getPathPrefix() {
-    return getPathPrefixOf(this.getBaseBlockIdentifier().getPath());
+    return getPathPrefixOf(this.getBaseBlockId().getPath());
   }
 
   default MutableText getNamePrefix() {
@@ -105,6 +115,6 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
    * 例如，石砖楼梯的id路径前缀为 <code>stone_brick</code>，而其基础方块石砖的id路径为 <code>stone_bricks</code>，不同，所以返回 <code>true</code>。
    */
   default boolean hasPathPrefixChanged() {
-    return PATH_PREFIX_MAPPINGS.containsKey(this.getBaseBlockIdentifier().getPath());
+    return PATH_PREFIX_MAPPINGS.containsKey(this.getBaseBlockId().getPath());
   }
 }

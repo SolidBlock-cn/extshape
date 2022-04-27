@@ -1,39 +1,40 @@
 package pers.solid.extshape;
 
-import net.devtech.arrp.api.RRPCallback;
-import net.devtech.arrp.api.RuntimeResourcePack;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.block.QuarterPieceBlock;
 import pers.solid.extshape.block.VerticalQuarterPieceBlock;
 import pers.solid.extshape.block.VerticalSlabBlock;
+import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
-import pers.solid.extshape.tag.TagGenerator;
 
 public class ExtShape implements ModInitializer {
-
-  public static final Logger EXTSHAPE_LOGGER = LogManager.getLogger("EXTSHAPE");
-  /**
-   * 适用于整个模组的 ARRP 资源包，服务端和客户端都会运行。
-   *
-   * @see ExtShapeClient#EXTSHAPE_PACK_CLIENT
-   */
-  public static final RuntimeResourcePack EXTSHAPE_PACK = RuntimeResourcePack.create(new Identifier("extshape", "standard"));
+  public static final String MOD_ID = "extshape";
+  public static final Logger LOGGER = LogManager.getLogger("EXTSHAPE");
 
   @Override
   public void onInitialize() {
     ExtShapeBlocks.init();
-    ItemGroups.init();
-    TagGenerator.writeAllBlockTagFiles();
+    ExtShapeItemGroup.init();
 
+    registerFlammableBlocks();
+
+    ExtShapeRRP.registerRRP();
+
+    ExtShapeConfig.save();
+  }
+
+  /**
+   * 在初始化时，注册所有的可燃方块。
+   */
+  private void registerFlammableBlocks() {
     // 羊毛方块加入可燃方块
     for (final Block block : ExtShapeBlockTag.WOOLEN_BLOCKS) {
       FlammableBlockRegistry.getDefaultInstance().add(block, 30, 60);
@@ -50,7 +51,5 @@ public class ExtShape implements ModInitializer {
         FuelRegistry.INSTANCE.add(block, 75);
       else FuelRegistry.INSTANCE.add(block, 300);
     }
-
-    RRPCallback.BEFORE_VANILLA.register(resources -> resources.add(EXTSHAPE_PACK));
   }
 }

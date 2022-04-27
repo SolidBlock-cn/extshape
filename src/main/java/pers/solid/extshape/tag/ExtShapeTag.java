@@ -1,5 +1,6 @@
 package pers.solid.extshape.tag;
 
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -14,7 +15,9 @@ import pers.solid.extshape.util.AbstractContainableSet;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -63,11 +66,9 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E, TagEntry<E>, Set<T
    */
   @SafeVarargs
   public ExtShapeTag(@Nullable Identifier identifier, E... elements) {
-    super(Util.make(Sets.newLinkedHashSet(), set -> {
-      for (E element : elements) {
-        set.add(TagEntry.of(element));
-      }
-    }));
+    super(Util.make(
+        new LinkedHashSet<>(),
+        set -> Iterators.addAll(set, Arrays.stream(elements).map(TagEntry::of).iterator())));
     this.identifier = identifier;
     this.replace = false;
   }
@@ -94,17 +95,22 @@ public class ExtShapeTag<E> extends AbstractContainableSet<E, TagEntry<E>, Set<T
    */
   public boolean addTag(ExtShapeTag<E> element) {
     if (element == null) {
-      ExtShape.EXTSHAPE_LOGGER.error(String.format("Trying to add a null tag to tag %s.", this));
+      ExtShape.LOGGER.error("Trying to add a null tag to tag {}.", this);
       return false;
     }
-    if (this.identifier != null && element.identifier == null)
-      throw new UnsupportedOperationException("Cannot add a tag without identifier to a tag with an identifier");
-    if (element == this) throw new UnsupportedOperationException("Cannot add to a tag itself!");
-    if (element.containsTag(this))
+    if (this.identifier != null && element.identifier == null) {
+      throw new UnsupportedOperationException("Cannot add a tag without identifier to a tag with an identifier.");
+    }
+    if (element == this) {
+      throw new UnsupportedOperationException("Cannot add to a tag itself!");
+    }
+    if (element.containsTag(this)) {
       throw new UnsupportedOperationException(String.format("Cannot add into this tag another tag that contains it! %s already contains %s.", element, this));
-    if (this.directlyContainsTag(element))
+    }
+    if (this.directlyContainsTag(element)) {
       throw new UnsupportedOperationException(String.format("Cannot add a duplicate tag to a tag! %s already contains %s.", this,
           element));
+    }
     return super.addCollection(element);
   }
 

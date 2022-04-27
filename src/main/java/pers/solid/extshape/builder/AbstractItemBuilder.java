@@ -45,7 +45,7 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
   }
 
   @Override
-  public Identifier getIdentifier() {
+  public Identifier getBlockId() {
     return this.identifier;
   }
 

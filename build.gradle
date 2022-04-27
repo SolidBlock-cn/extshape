@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.10-SNAPSHOT'
+    id 'fabric-loom' version '0.11-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -16,12 +16,18 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
-//	maven {
-//        url 'https://maven.aliyun.com/nexus/content/groups/public'
-//    }
-//    maven {
-//        url 'https://repository.hanbings.io/proxy'
-//    }
+
+    /*maven {
+        url 'https://maven.aliyun.com/nexus/content/groups/public'
+    }
+    maven {
+        url 'https://repository.hanbings.io/proxy'
+    }*/
+
+    // Mod Menu 模组
+    maven { url 'https://maven.terraformersmc.com/releases/' }
+    // BRRP 模组，存储于本地
+    flatDir { dir '../brrp/build/libs/' }
 }
 
 dependencies {
@@ -30,26 +36,12 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    // Fabric API. This is technically optional, but you probably want it anyway.
+    // Fabric API
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-    // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-    // You may need to force-disable transitiveness on them.
-}
-
-// should work for both groovy and kotlin DSL
-repositories {
-    maven {
-        url = uri("https://storage.googleapis.com/devan-maven/")
-        // for 0.4.2 and older
-        // url uri("https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/")
-    }
-}
-
-dependencies {
-    modImplementation("net.devtech:arrp:0.5.4")
-    // I never break backwards compatibility, so just fetching the latest version should be fine
-    // modImplementation("net.devtech:arrp:0.+")
+    // ModMenu 模组，最后一个兼容 1.18.1 的是 3.0.1（此后的版本因内嵌了不兼容的 Fabric Screen Api 而与此不兼容）
+    modImplementation "com.terraformersmc:modmenu:2.0.14"
+    // BRRP 模组
+    modImplementation "net.devtech:brrp:0.6.2-1.17.1"
 }
 
 processResources {
