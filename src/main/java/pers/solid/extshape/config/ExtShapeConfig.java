@@ -5,10 +5,12 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.option.CyclingOption;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
@@ -26,57 +28,85 @@ public class ExtShapeConfig implements Cloneable {
    */
   public static final @Unmodifiable ExtShapeConfig DEFAULT_CONFIG = new ExtShapeConfig();
   public static final File CONFIG_FILE = new File("config/extshape.nbt");
-  private static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-configs");
+  static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-configs");
   /**
    * 本模组当前的配置。
    */
   public static ExtShapeConfig CURRENT_CONFIG = new ExtShapeConfig();
 
   static {
-    CURRENT_CONFIG.readFile(CONFIG_FILE);
+    CURRENT_CONFIG.writeFile(CURRENT_CONFIG.readFile(CONFIG_FILE), CONFIG_FILE);
   }
 
   /**
    * 是否将本模组的物品添加到创造模式物品栏中的原版的物品组中。如果需要搭配合理排序（Reasonable Sorting）模组以显示在原版物品组中，可以设为 {@code true}。
    */
-  public boolean addToVanillaGroup = false;
+  public boolean addToVanillaGroups = false;
   /**
-   * 是否为与本模组有关的方块创建专门的物品组。默认为 {@code true}。如果不创建，则建议将 {@link #addToVanillaGroup} 设为 {@code true} 以免这些物品不再出现在创造模式物品栏中。
+   * 是否为与本模组有关的方块创建专门的物品组。默认为 {@code true}。如果不创建，则建议将 {@link #addToVanillaGroups} 设为 {@code true} 以免这些物品不再出现在创造模式物品栏中。
    */
-  public boolean hasSpecificGroup = true;
+  public boolean showSpecificGroups = true;
+  /**
+   * 是否将本模组的物品关系注册到 Minecraft 原版的 {@link net.minecraft.data.family.BlockFamilies} 中。<span style=color:maroon>仅支持 Minecraft 1.17 以上版本。</span>
+   */
+  public boolean registerBlockFamilies = true;
 
-  public static void save() {
+  /**
+   * 从配置文件中读取并保存配置文件。如果捕获到异常，将会在控制台中输出。读取到的文件中，所有其他的 NBT 标签都被保留。
+   */
+  public void writeFile(File file) {
     final NbtCompound nbtCompound;
     try {
-      nbtCompound = NbtIo.read(CONFIG_FILE);
+      nbtCompound = NbtIo.read(file);
     } catch (IOException e) {
-      LOGGER.error("Failed to read NBT config file {}.", CONFIG_FILE, e);
+      LOGGER.error("Failed to read NBT config file {}.", file, e);
       return;
     }
-    try {
-      CURRENT_CONFIG.writeFile(nbtCompound, CONFIG_FILE);
-    } catch (IOException e) {
-      LOGGER.error("Failed to write NBT config file {}.", CONFIG_FILE, e);
-    }
+    writeFile(nbtCompound, file);
   }
 
-  public void writeFile(NbtCompound nbtCompound, File file) throws IOException {
-    if (file.createNewFile()) {
-      LOGGER.info("Creating a new config file.");
+  /**
+   * 将配置文件的内容存储在文件中。
+   *
+   * @param nbtCompound 文件已有的 NBT 复合标签。写入时，保留原有的标签，即使这些标签无法识别。
+   */
+  @Contract(mutates = "param1")
+  public void writeFile(NbtCompound nbtCompound, File file) {
+    try {
+      if (file.createNewFile()) {
+        LOGGER.info("Creating a new config file.");
+      }
+    } catch (IOException e) {
+      LOGGER.error("Cannot write config file {}.", file, e);
     }
-    NbtIo.write(writeNbt(nbtCompound), file);
+    try {
+      NbtIo.write(writeNbt(nbtCompound), file);
+    } catch (IOException e) {
+      LOGGER.error("Failed to write config file {}.", file, e);
+    }
     LOGGER.info("Successfully wrote config file {}.", file);
   }
 
+  @Contract(mutates = "this")
   public void readNbt(NbtCompound nbtCompound) {
-    if (nbtCompound.contains("addToVanillaGroup")) {
-      addToVanillaGroup = nbtCompound.getBoolean("addToVanillaGroup");
+    if (nbtCompound.contains("addToVanillaGroups")) {
+      addToVanillaGroups = nbtCompound.getBoolean("addToVanillaGroups");
     }
-    if (nbtCompound.contains("hasSpecificGroup")) {
-      hasSpecificGroup = nbtCompound.getBoolean("hasSpecificGroup");
+    if (nbtCompound.contains("showSpecificGroups")) {
+      showSpecificGroups = nbtCompound.getBoolean("showSpecificGroups");
+    }
+    if (nbtCompound.contains("registerBlockFamilies")) {
+      registerBlockFamilies = nbtCompound.getBoolean("registerBlockFamilies");
     }
   }
 
+  /**
+   * 读取配置文件并写入配置对象中。
+   *
+   * @param file 被读取的文件。
+   * @return 读取到的配置文件中的 NBT。
+   */
+  @Contract(mutates = "this")
   public @NotNull NbtCompound readFile(File file) {
     final NbtCompound read;
     try {
@@ -94,19 +124,24 @@ public class ExtShapeConfig implements Cloneable {
     return read == null ? new NbtCompound() : read;
   }
 
-  public NbtCompound writeNbt(NbtCompound nbtCompound) {
-    nbtCompound.putBoolean("addToVanillaGroup", addToVanillaGroup);
-    nbtCompound.putBoolean("hasSpecificGroup", hasSpecificGroup);
-    return nbtCompound;
+  @Contract(mutates = "param1", value = "_ -> param1")
+  public NbtCompound writeNbt(NbtCompound nbt) {
+    nbt.putBoolean("addToVanillaGroups", addToVanillaGroups);
+    nbt.putBoolean("showSpecificGroups", showSpecificGroups);
+    nbt.putBoolean("registerBlockFamilies", registerBlockFamilies);
+    return nbt;
   }
 
   @Environment(EnvType.CLIENT)
   public void addOptionsTo(ButtonListWidget list) {
     list.addOptionEntry(
-        CyclingOption.create("添加至原版物品组", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> this.addToVanillaGroup, (gameOptions, option, value) -> this.addToVanillaGroup = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(new TranslatableText("将本模组中的物品添加至Minecraft原版物品组中，可能导致物品杂乱，如果安装了合理排序（Reasonable Sorting）模组则可以开启此项。").append("\n\n").append(new TranslatableText("默认值：%s", ScreenTexts.onOrOff(DEFAULT_CONFIG.addToVanillaGroup)).formatted(Formatting.GRAY)), 200)),
-        CyclingOption.create("添加特定物品组", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> this.hasSpecificGroup, (gameOptions, option, value) -> this.hasSpecificGroup = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(new TranslatableText("添加专门的物品组以分类安排各类方块的内容。").append("\n\n").append(new TranslatableText("默认值：%s", ScreenTexts.onOrOff(DEFAULT_CONFIG.hasSpecificGroup)).formatted(Formatting.GRAY)), 200))
+        CyclingOption.create("options.extshape.addToVanillaGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> this.addToVanillaGroups, (gameOptions, option, value) -> this.addToVanillaGroups = value)
+            .tooltip(client -> b -> client.textRenderer.wrapLines(new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName()).append("\n\n").append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)), 256)),
+        CyclingOption.create("options.extshape.showSpecificGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> this.showSpecificGroups, (gameOptions, option, value) -> this.showSpecificGroups = value)
+            .tooltip(client -> b -> client.textRenderer.wrapLines(new TranslatableText("options.extshape.showSpecificGroups.tooltip").append("\n\n").append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY)), 256))
+    );
+    list.addOptionEntry(
+        CyclingOption.create("options.extshape.registerBlockFamilies", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> this.registerBlockFamilies, (gameOptions, option, value) -> this.registerBlockFamilies = value), null
     );
   }
 

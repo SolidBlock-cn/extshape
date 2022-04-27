@@ -28,7 +28,7 @@ public class ExtShapeBlockItem extends BlockItem {
 
   @Override
   public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
-    if (ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroup) {
+    if (ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups) {
       super.appendStacks(group, stacks);
     }
   }

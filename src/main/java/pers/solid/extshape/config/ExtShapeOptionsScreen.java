@@ -3,13 +3,18 @@ package pers.solid.extshape.config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.option.GameOptions;
+import net.minecraft.client.option.Option;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
 
@@ -20,13 +25,21 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
   public ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
 
   public ExtShapeOptionsScreen(Screen parent) {
-    super(parent, MinecraftClient.getInstance().options, new TranslatableText("扩展方块形状模组配置屏幕"));
+    super(parent, MinecraftClient.getInstance().options, new TranslatableText("options.extshape.title"));
   }
 
   @Override
   protected void init() {
     list = new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25);
     newConfig.addOptionsTo(list);
+    list.addSingleOptionEntry(new Option("options.extshape.rrp.title") {
+      @Override
+      public ClickableWidget createButton(GameOptions options, int x, int y, int width) {
+        return new ButtonWidget(x, y, width, 20, getDisplayPrefix(), button -> {
+          if (client != null) client.setScreen(new ExtShapeRRPScreen(ExtShapeOptionsScreen.this));
+        });
+      }
+    });
     this.addDrawableChild(list);
     this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, (button) -> onClose()));
   }
@@ -34,22 +47,22 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
   @Override
   public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
     super.render(matrices, mouseX, mouseY, delta);
-    drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 5, 0xffffff);
+    drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 16, 0xffffff);
     renderOrderedTooltip(matrices, getHoveredButtonTooltip(list, mouseX, mouseY), mouseX, mouseY);
   }
 
   public void save() {
     final ExtShapeConfig oldConfig = ExtShapeConfig.CURRENT_CONFIG;
     ExtShapeConfig.CURRENT_CONFIG = newConfig;
-    ExtShapeConfig.save();
+    ExtShapeConfig.CURRENT_CONFIG.writeFile(ExtShapeConfig.CONFIG_FILE);
 
     // 应用物品组。
-    if (oldConfig.hasSpecificGroup != newConfig.hasSpecificGroup) {
-      if (newConfig.hasSpecificGroup) {
+    if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {
+      if (newConfig.showSpecificGroups) {
         ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
         ExtShapeItemGroup.implementGroups();
       } else {
-        ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
+        ExtShape.LOGGER.info("Removing item groups at runtime. This may cause some instability.");
         ExtShapeItemGroup.removeGroups();
       }
     }
@@ -57,8 +70,24 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
 
   @Override
   public void onClose() {
-    if (client != null && !newConfig.addToVanillaGroup && !newConfig.hasSpecificGroup) {
-      client.setScreen(new ExtShapeConfirmScreen(this));
+    if (client != null && !newConfig.addToVanillaGroups && !newConfig.showSpecificGroups) {
+      // 由于两个设置都被关闭，因此需要确认是否不添加到任何物品栏。
+      client.setScreen(new ConfirmScreen(
+          t -> {
+            if (t) {
+              // 确定要继续
+              save();
+              client.setScreen(parent);
+            } else {
+              // 返回重新修改
+              client.setScreen(this);
+            }
+          },
+          new TranslatableText("options.extshape.confirm"),
+          new TranslatableText("options.extshape.confirm.noGroups", new TranslatableText("options.extshape.addToVanillaGroups").formatted(Formatting.GRAY), new TranslatableText("options.extshape.showSpecificGroups").formatted(Formatting.GRAY), ScreenTexts.OFF),
+          ScreenTexts.YES,
+          new TranslatableText("options.extshape.confirm.redo")
+      ));
       return;
     }
     save();

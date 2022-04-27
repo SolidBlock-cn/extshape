@@ -78,5 +78,30 @@
   "itemGroup.extshape.stone_blocks": "擴展方塊形狀：石質方塊（按基礎方塊排序，含原版方塊）",
   "itemGroup.extshape.other_blocks": "擴展方塊形狀：其他（按基礎方塊排序，含原版方塊）",
 
-  "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗多啲形狀，包括原版唔存在嘅形狀，如縱半磚。大多數方塊都好似原版一样可以合成。藉助此模組，你可以製作出更加精美嘅建築。"
+  "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗多啲形狀，包括原版唔存在嘅形狀，如縱半磚。大多數方塊都好似原版一样可以合成。藉助此模組，你可以製作出更加精美嘅建築。",
+
+  "options.extshape.title": "擴展方塊形狀模組配置",
+  "options.extshape.addToVanillaGroups": "添加至原版物品組",
+  "options.extshape.addToVanillaGroups.tooltip": "將本模組添加嘅方塊添加至Minecraft嘅原版創造模式物品組中。例如，所有階梯和半磚都加入“%s”物品組，欄杆和牆加入“%s”物品組，按鈕和壓力板則加入“%s”物品組。物品係以定義時順序加入，所以可能會有啲混亂，但是如果你安裝合理排序模組，則推薦開啟此項。",
+  "options.extshape.showSpecificGroups": "顯示專門物品組",
+  "options.extshape.showSpecificGroups.tooltip": "添加啲專用物品組以顯示所有擁有不同形狀嘅方塊（含原版和模組中），依啲方塊按照其基礎方塊的順序排列，基礎方塊相同嘅方塊顯示在一起。",
+  "options.extshape.default": "默認：%s",
+  "options.extshape.confirm": "確定？",
+  "options.extshape.confirm.noGroups": "你嘅“%s”和“%s”都設置為“%s”，這意味著你玩創造模式時，無法從創造模式物品欄中獲取模組中嘅物品。你真係要繼續？",
+  "options.extshape.confirm.redo": "我再考慮一下",
+  "options.extshape.registerBlockFamilies": "註冊BlockFamilies",
+
+  "options.extshape.rrp.title": "運行時資源包設置",
+  "options.extshape.rrp.regenClientResources": "重新生成用戶端資源包",
+  "options.extshape.rrp.regenClientResources.process": "正在重新生成用戶端資源包…",
+  "options.extshape.rrp.regenServerData": "重新生成伺服器數據包",
+  "options.extshape.rrp.regenServerData.process": "正在重新生成伺服器數據包…",
+  "options.extshape.rrp.exportClientResources": "匯出用戶端資源包",
+  "options.extshape.rrp.exportClientResources.process": "正在匯出用戶端資源包…",
+  "options.extshape.rrp.exportServerData": "匯出伺服器數據包",
+  "options.extshape.rrp.exportServerData.process": "正在匯出伺服器數據包…",
+  "options.extshape.rrp.exportFilePath": "匯出檔路徑",
+  "options.extshape.rrp.textFieldHeader": "資源將匯出至以下路徑：",
+  "options.extshape.rrp.fullPath": "完整路徑如下：%s",
+  "options.extshape.rrp.invalidPath": "無效路徑：%s"
 }
