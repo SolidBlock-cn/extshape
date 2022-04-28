@@ -10,7 +10,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Util;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -24,7 +24,7 @@ public class ShapesTransfer implements Supplier<Collection<Map<Item, ItemGroup>>
         .put(Items.SHROOMLIGHT, ItemGroup.BUILDING_BLOCKS)
         .put(Items.MOSS_BLOCK, ItemGroup.BUILDING_BLOCKS)
         .put(Items.HONEYCOMB_BLOCK, ItemGroup.BUILDING_BLOCKS);
-    for (Block block : ExtShapeBlockTag.GLAZED_TERRACOTTAS) {
+    for (Block block : ExtShapeBlockTags.GLAZED_TERRACOTTA) {
       builder.put(block.asItem(), ItemGroup.BUILDING_BLOCKS);
     }
     return builder.build();

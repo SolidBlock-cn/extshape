@@ -29,8 +29,11 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
     map.put("oxidized_cut_copper", "oxidized_cut_copper");
     map.put("smooth_quartz", "smooth_quartz");
     map.put("waxed_cut_copper", "waxed_cut_copper");
+    map.put("waxed_exposed_copper", "waxed_exposed_copper");
     map.put("waxed_exposed_cut_copper", "waxed_exposed_cut_copper");
+    map.put("waxed_oxidized_copper", "waxed_oxidized_copper");
     map.put("waxed_oxidized_cut_copper", "waxed_oxidized_cut_copper");
+    map.put("waxed_weathered_copper", "waxed_weathered_copper");
     map.put("waxed_weathered_cut_copper", "waxed_weathered_cut_copper");
     map.put("weathered_cut_copper", "weathered_cut_copper");
   });
@@ -106,7 +109,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
   default MutableText getNamePrefix() {
     if (this.getBaseBlock() == null) return new TranslatableText("block.extshape.prefix.unknown");
     if (this.hasPathPrefixChanged())
-      return new TranslatableText(String.format("block.extshape.prefix.%s", this.getPathPrefix()));
+      return new TranslatableText("block.extshape.prefix." + this.getPathPrefix());
     else return this.getBaseBlock().getName();
   }
 

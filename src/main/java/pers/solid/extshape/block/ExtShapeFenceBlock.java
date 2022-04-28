@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
 
@@ -45,10 +45,10 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeBlockTag.WOOLS).contains(baseBlock)) return "wool_fence";
-    if ((ExtShapeBlockTag.CONCRETES).contains(baseBlock)) return "concrete_fence";
-    if ((ExtShapeBlockTag.STAINED_TERRACOTTAS).contains(baseBlock)) return "stained_terracotta_fence";
-    if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return "glazed_terracotta_fence";
+    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_fence";
+    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_fence";
+    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_fence";
+    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_fence";
     return "";
   }
 }

@@ -32,6 +32,7 @@ import pers.solid.extshape.block.ExtShapeVariantBlockInterface;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mixin.AbstractBlockMixin;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
   public FabricBlockSettings blockSettings;
   public ExtShapeBlockItemBuilder itemBuilder;
 
-  protected @Nullable ExtShapeBlockTag defaultTag = ExtShapeBlockTag.EXTSHAPE_BLOCKS;
+  protected @Nullable ExtShapeBlockTag defaultTag = ExtShapeBlockTags.EXTSHAPE_BLOCKS;
   protected BiMap<Block, ? super T> mapping;
   /**
    * 是否将方块添加到相应的映射中。如果不需要添加，可使用 {@link #noAddToMapping()} 进行取消。

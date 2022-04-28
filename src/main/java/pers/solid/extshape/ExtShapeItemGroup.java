@@ -1,6 +1,7 @@
 package pers.solid.extshape;
 
 import com.google.common.base.Suppliers;
+import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -8,12 +9,13 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
+import org.jetbrains.annotations.Contract;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mixin.CreativeInventoryScreenAccessor;
 import pers.solid.extshape.mixin.ItemGroupAccessor;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -32,6 +34,7 @@ public class ExtShapeItemGroup extends ItemGroup {
   private static final ArrayList<Block> WOODEN_BLOCKS = new ArrayList<>();
   private static final ArrayList<Block> COLORFUL_BLOCKS = new ArrayList<>();
   private static final ArrayList<Block> STONE_BLOCKS = new ArrayList<>();
+  private static final LinkedHashSet<Block> OTHER_BLOCKS = new LinkedHashSet<>();
 
   static {
     final ItemGroup[] groups = ItemGroup.GROUPS;
@@ -66,13 +69,7 @@ public class ExtShapeItemGroup extends ItemGroup {
         groups.length + 3,
         new Identifier("extshape", "other_blocks"),
         Suppliers.ofInstance(new ItemStack(Blocks.CHISELED_QUARTZ_BLOCK)),
-        (stacks, group) -> {
-          Set<Block> baseBlockList = new LinkedHashSet<>(BlockMappings.BASE_BLOCKS);
-          WOODEN_BLOCKS.forEach(baseBlockList::remove);
-          COLORFUL_BLOCKS.forEach(baseBlockList::remove);
-          STONE_BLOCKS.forEach(baseBlockList::remove);
-          baseBlockList.forEach(block -> importTo(block, stacks));
-        });
+        (stacks, group) -> OTHER_BLOCKS.forEach(block -> importTo(block, stacks)));
 
     MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
 
@@ -82,14 +79,14 @@ public class ExtShapeItemGroup extends ItemGroup {
   }
 
   static {
-    WOODEN_BLOCKS.addAll(ExtShapeBlockTag.PLANKS);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTag.WOOLS);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTag.CONCRETES);
+    WOODEN_BLOCKS.addAll(ExtShapeBlockTags.PLANKS);
+    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.WOOLS);
+    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.CONCRETES);
     COLORFUL_BLOCKS.add(Blocks.TERRACOTTA);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTag.STAINED_TERRACOTTAS);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTag.GLAZED_TERRACOTTAS);
-    STONE_BLOCKS.addAll(ExtShapeBlockTag.STONES);
-    STONE_BLOCKS.addAll(List.of(
+    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.STAINED_TERRACOTTA);
+    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.GLAZED_TERRACOTTA);
+    STONE_BLOCKS.addAll(ExtShapeBlockTags.STONES);
+    STONE_BLOCKS.addAll(Arrays.asList(
         Blocks.SMOOTH_STONE,
         Blocks.STONE_BRICKS,
         Blocks.MOSSY_STONE_BRICKS,
@@ -127,6 +124,50 @@ public class ExtShapeItemGroup extends ItemGroup {
         Blocks.BEDROCK,
         Blocks.END_STONE,
         Blocks.END_STONE_BRICKS));
+    OTHER_BLOCKS.addAll(Arrays.asList(
+        // 未氧化的
+        Blocks.COPPER_BLOCK,
+        Blocks.WAXED_COPPER_BLOCK,
+        Blocks.CUT_COPPER,
+        Blocks.WAXED_CUT_COPPER,
+
+        // 斑驳的
+        Blocks.EXPOSED_COPPER,
+        Blocks.WAXED_EXPOSED_COPPER,
+        Blocks.EXPOSED_CUT_COPPER,
+        Blocks.WAXED_EXPOSED_CUT_COPPER,
+
+        // 锈蚀的
+        Blocks.WEATHERED_COPPER,
+        Blocks.WAXED_WEATHERED_COPPER,
+        Blocks.WEATHERED_CUT_COPPER,
+        Blocks.WAXED_WEATHERED_CUT_COPPER,
+
+        // 氧化的
+        Blocks.OXIDIZED_COPPER,
+        Blocks.WAXED_OXIDIZED_COPPER,
+        Blocks.OXIDIZED_CUT_COPPER,
+        Blocks.WAXED_OXIDIZED_CUT_COPPER,
+
+
+        // 石英部分
+        Blocks.QUARTZ_BLOCK,
+        Blocks.CHISELED_QUARTZ_BLOCK,
+        Blocks.QUARTZ_BRICKS,
+        Blocks.SMOOTH_QUARTZ,
+
+        // 海晶
+        Blocks.PRISMARINE,
+        Blocks.PRISMARINE_BRICKS,
+        Blocks.DARK_PRISMARINE,
+        Blocks.SEA_LANTERN
+    ));
+
+    Set<Block> baseBlockList = new LinkedHashSet<>(BlockMappings.BASE_BLOCKS);
+    WOODEN_BLOCKS.forEach(baseBlockList::remove);
+    COLORFUL_BLOCKS.forEach(baseBlockList::remove);
+    STONE_BLOCKS.forEach(baseBlockList::remove);
+    OTHER_BLOCKS.addAll(baseBlockList);
   }
 
   private final Supplier<ItemStack> stackSupplier;
@@ -161,17 +202,20 @@ public class ExtShapeItemGroup extends ItemGroup {
     }
   }
 
-  // 以下为按方块排序的列表。
+  /**
+   * 将方块及其变种都添加到物品堆的列表中。
+   *
+   * @param baseBlock  其基础方块。
+   * @param itemStacks 需要被添加至的物品堆的列表。
+   */
+  @Contract(mutates = "param2")
   protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
-    Block t;
-    List<ItemStack> is = new ArrayList<>();
     if (baseBlock == null) return;
+    final BiMap<Block, ? extends Block> mapping = BlockMappings.getBlockMappingOf(baseBlock);
+    itemStacks.add(new ItemStack(baseBlock));
     for (Shape shape : Shape.values()) {
-      if ((t = BlockMappings.getBlockOf(shape, baseBlock)) != null) is.add(new ItemStack(t));
-    }
-    if (is.size() > 0) {
-      itemStacks.add(new ItemStack(baseBlock));
-      itemStacks.addAll(is);
+      final Block shapeBlock = BlockMappings.getBlockOf(shape, baseBlock);
+      if (shapeBlock != null) itemStacks.add(new ItemStack(shapeBlock));
     }
   }
 

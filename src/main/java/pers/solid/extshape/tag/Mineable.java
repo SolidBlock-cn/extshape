@@ -8,9 +8,11 @@ import net.minecraft.block.Blocks;
 /**
  * 原版 Minecraft 的 Mineable 标签的内容，更新于 1.17。<br>
  * 若基础方块为这些方块，则会加入对应的标签。
+ *
+ * @since 1.5.0 降低了本类内容的可访问性。
  */
-public final class Mineable {
-  public static final ImmutableCollection<Block> VANILLA_AXE_MINEABLE = ImmutableSet.of(
+final class Mineable {
+  static final ImmutableCollection<Block> VANILLA_AXE_MINEABLE = ImmutableSet.of(
       Blocks.NOTE_BLOCK,
       Blocks.ATTACHED_MELON_STEM,
       Blocks.ATTACHED_PUMPKIN_STEM,
@@ -77,7 +79,7 @@ public final class Mineable {
       Blocks.WEEPING_VINES_PLANT,
       Blocks.WEEPING_VINES,
       Blocks.WHEAT);
-  public static final ImmutableCollection<Block> VANILLA_HOE_MINEABLE = ImmutableSet.of(
+  static final ImmutableCollection<Block> VANILLA_HOE_MINEABLE = ImmutableSet.of(
       Blocks.NETHER_WART_BLOCK,
       Blocks.WARPED_WART_BLOCK,
       Blocks.HAY_BLOCK,
@@ -97,7 +99,7 @@ public final class Mineable {
       Blocks.SCULK_SENSOR,
       Blocks.MOSS_BLOCK,
       Blocks.MOSS_CARPET);
-  public static final ImmutableCollection<Block> VANILLA_PICKAXE_MINEABLE = ImmutableSet.of(
+  static final ImmutableCollection<Block> VANILLA_PICKAXE_MINEABLE = ImmutableSet.of(
       Blocks.STONE,
       Blocks.GRANITE,
       Blocks.POLISHED_GRANITE,
@@ -417,7 +419,7 @@ public final class Mineable {
       Blocks.INFESTED_STONE,
       Blocks.INFESTED_MOSSY_STONE_BRICKS,
       Blocks.INFESTED_STONE_BRICKS);
-  public static final ImmutableCollection<Block> VANILLA_SHOVEL_MINEABLE = ImmutableSet.of(
+  static final ImmutableCollection<Block> VANILLA_SHOVEL_MINEABLE = ImmutableSet.of(
       Blocks.CLAY,
       Blocks.DIRT,
       Blocks.COARSE_DIRT,

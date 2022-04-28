@@ -8,7 +8,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtShapeVariantBlockInterface {
 
@@ -38,11 +38,11 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeBlockTag.WOOLS).contains(baseBlock)) return "wool_fence_gate";
-    if ((ExtShapeBlockTag.CONCRETES).contains(baseBlock)) return "concrete_fence_gate";
-    if ((ExtShapeBlockTag.STAINED_TERRACOTTAS).contains(baseBlock)) return
+    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_fence_gate";
+    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_fence_gate";
+    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return
         "stained_terracotta_fence_gate";
-    if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return
+    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
         "glazed_terracotta_fence_gate";
     return "";
   }

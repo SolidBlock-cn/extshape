@@ -53,19 +53,6 @@ public class BlockMappings {
   }
 
   /**
-   * @param block 变种方块。
-   * @return 方块所属类的映射表。如果不存在，则为 null。
-   */
-  public static @Nullable Block getBaseBlockOf(Block block) {
-    BiMap<Block, ? extends Block> mapping = getBlockMappingOf(block);
-    if (mapping == null) return null;
-    for (Map.Entry<Block, ? extends Block> entry : mapping.entrySet()) {
-      if (entry.getValue() == block) return entry.getKey();
-    }
-    return mapping.inverse().get(block);
-  }
-
-  /**
    * 根据指定的形状和基础方块，获取变种方块。
    *
    * @param shape     形状。

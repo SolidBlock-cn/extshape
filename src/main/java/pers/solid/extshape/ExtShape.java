@@ -12,7 +12,7 @@ import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.block.QuarterPieceBlock;
 import pers.solid.extshape.block.VerticalQuarterPieceBlock;
 import pers.solid.extshape.block.VerticalSlabBlock;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShape implements ModInitializer {
   public static final String MOD_ID = "extshape";
@@ -33,7 +33,7 @@ public class ExtShape implements ModInitializer {
    */
   private void registerFlammableBlocks() {
     // 羊毛方块加入可燃方块
-    for (final Block block : ExtShapeBlockTag.WOOLEN_BLOCKS) {
+    for (final Block block : ExtShapeBlockTags.WOOLEN_BLOCKS) {
       FlammableBlockRegistry.getDefaultInstance().add(block, 30, 60);
       if (block instanceof SlabBlock || block instanceof VerticalSlabBlock) FuelRegistry.INSTANCE.add(block, 50);
       else if (block instanceof AbstractButtonBlock) FuelRegistry.INSTANCE.add(block, 33);
@@ -41,7 +41,7 @@ public class ExtShape implements ModInitializer {
     }
 
     // 木头加入可燃方块
-    for (final Block block : ExtShapeBlockTag.OVERWORLD_WOODEN_BLOCKS) {
+    for (final Block block : ExtShapeBlockTags.OVERWORLD_WOODEN_BLOCKS) {
       FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
       if (block instanceof VerticalSlabBlock) FuelRegistry.INSTANCE.add(block, 150);
       else if (block instanceof VerticalQuarterPieceBlock || block instanceof QuarterPieceBlock)
