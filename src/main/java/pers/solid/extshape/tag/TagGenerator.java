@@ -16,24 +16,24 @@ import pers.solid.extshape.block.ExtShapeBlocks;
  * Tags defined in this class will be written to ARRP resource pack.
  */
 public final class TagGenerator {
-  public static final ExtShapeBlockTag AXE_MINEABLE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "mineable/axe"));
-  public static final ExtShapeBlockTag HOE_MINEABLE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "mineable/hoe"));
-  public static final ExtShapeBlockTag PICKAXE_MINEABLE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "mineable/pickaxe"), ExtShapeBlocks.PETRIFIED_OAK_PLANKS, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
-  public static final ExtShapeBlockTag SHOVEL_MINEABLE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "mineable/shovel"));
+  public static final ExtShapeBlockTag AXE_MINEABLE = ExtShapeBlockTag.create("minecraft", "mineable/axe");
+  public static final ExtShapeBlockTag HOE_MINEABLE = ExtShapeBlockTag.create("minecraft", "mineable/hoe");
+  public static final ExtShapeBlockTag PICKAXE_MINEABLE = ExtShapeBlockTag.create("minecraft", "mineable/pickaxe", ExtShapeBlocks.PETRIFIED_OAK_PLANKS, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
+  public static final ExtShapeBlockTag SHOVEL_MINEABLE = ExtShapeBlockTag.create("minecraft", "mineable/shovel");
 
-  public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "occludes_vibration_signals"));
+  public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = ExtShapeBlockTag.create("minecraft", "occludes_vibration_signals");
 
-  public static final ExtShapeBlockTag DRAGON_IMMUNE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "dragon_immune"));
-  public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "infiniburn_overworld"));
-  public static final ExtShapeBlockTag INFINIBURN_END = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "infiniburn_end"));
-  public static final ExtShapeBlockTag GEODE_INVALID_BLOCKS = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "geode_invalid_blocks"));
-  public static final ExtShapeBlockTag WITHER_IMMUNE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "wither_immune"));
+  public static final ExtShapeBlockTag DRAGON_IMMUNE = ExtShapeBlockTag.create("minecraft", "dragon_immune");
+  public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = ExtShapeBlockTag.create("minecraft", "infiniburn_overworld");
+  public static final ExtShapeBlockTag INFINIBURN_END = ExtShapeBlockTag.create("minecraft", "infiniburn_end");
+  public static final ExtShapeBlockTag GEODE_INVALID_BLOCKS = ExtShapeBlockTag.create("minecraft", "geode_invalid_blocks");
+  public static final ExtShapeBlockTag WITHER_IMMUNE = ExtShapeBlockTag.create("minecraft", "wither_immune");
 
-  public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "needs_diamond_tool"));
-  public static final ExtShapeBlockTag NEEDS_IRON_TOOL = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "needs_iron_tool"));
-  public static final ExtShapeBlockTag NEEDS_STONE_TOOL = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "needs_stone_tool"));
-  public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "non_flammable_wood"));
-  public static final ExtShapeItemTag PIGLIN_LOVED = ExtShapeItemTag.createBiPart(new Identifier("minecraft", "piglin_loved"));
+  public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = ExtShapeBlockTag.create("minecraft", "needs_diamond_tool");
+  public static final ExtShapeBlockTag NEEDS_IRON_TOOL = ExtShapeBlockTag.create("minecraft", "needs_iron_tool");
+  public static final ExtShapeBlockTag NEEDS_STONE_TOOL = ExtShapeBlockTag.create("minecraft", "needs_stone_tool");
+  public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = ExtShapeBlockTag.create("minecraft", "non_flammable_wood");
+  public static final ExtShapeItemTag PIGLIN_LOVED = ExtShapeItemTag.create("minecraft", "piglin_loved");
 
   /**
    * 这个集合中的标签不会加入方块标签中。
@@ -96,8 +96,8 @@ public final class TagGenerator {
    * 写入所有的方块标签文件。
    */
   public static void writeAllBlockTagFiles(RuntimeResourcePack pack) {
-    for (UsableTag<?> tag : ExtShapeBlockTags.TAG_LIST) {
-      final Identifier identifier = tag.getIdentifier();
+    for (UsableTag<?> tag : UsableTag.TAG_LIST) {
+      final Identifier identifier = tag.identifier;
       if (identifier == null) continue;
       if (!NO_BLOCK_TAGS.contains(tag)) {
         pack.addTag(new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath()), tag.toARRP());

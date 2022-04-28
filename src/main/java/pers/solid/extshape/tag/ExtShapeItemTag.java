@@ -1,31 +1,24 @@
 package pers.solid.extshape.tag;
 
+import com.google.common.collect.Lists;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.apache.commons.compress.utils.Sets;
-import pers.solid.extshape.util.AbstractBiPartRecursiveCollection;
 
 import java.util.Collection;
 import java.util.HashSet;
 
-public interface ExtShapeItemTag extends UsableTag<ItemConvertible> {
-  static ExtShapeItemTag createBiPart(Identifier identifier, ItemConvertible... itemConvertibles) {
-    return createBiPart(identifier, Sets.newHashSet(itemConvertibles));
+public class ExtShapeItemTag extends UsableTag<ItemConvertible> {
+  protected ExtShapeItemTag(Identifier identifier, Collection<ItemConvertible> entryList, Collection<UsableTag<ItemConvertible>> tagList) {
+    super(identifier, entryList, tagList);
   }
 
-  static ExtShapeItemTag createBiPart(Identifier identifier, Collection<ItemConvertible> itemConvertibles) {
-    return new BiPart(itemConvertibles, new HashSet<>(), identifier);
+  public static ExtShapeItemTag create(String namespace, String path, ItemConvertible... itemConvertibles) {
+    return new ExtShapeItemTag(new Identifier(namespace, path), Lists.newArrayList(itemConvertibles), new HashSet<>());
   }
 
   @Override
-  default Identifier getIdentifierOf(ItemConvertible item) {
+  public Identifier getIdentifierOf(ItemConvertible item) {
     return Registry.ITEM.getId(item.asItem());
-  }
-
-  final class BiPart extends AbstractBiPartRecursiveCollection.TagImpl<ItemConvertible> implements ExtShapeItemTag {
-    private BiPart(Collection<ItemConvertible> directCollection, Collection<TagEntry<ItemConvertible>> collectionCollection, Identifier identifier) {
-      super(directCollection, collectionCollection, identifier);
-    }
   }
 }

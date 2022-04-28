@@ -1,43 +1,27 @@
 package pers.solid.extshape.tag;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import org.apache.commons.compress.utils.Sets;
-import pers.solid.extshape.util.AbstractBiPartRecursiveCollection;
-import pers.solid.extshape.util.AbstractLinkedRecursiveCollection;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.stream.Collectors;
 
 /**
  * 本模组使用的方块标签。需要注意的是，这些标签是内置的会直接存储内容，不会从数据包中加载。不应与 {@link net.minecraft.tag.BlockTags} 混淆。
  */
-public interface ExtShapeBlockTag extends UsableTag<Block> {
-  static ExtShapeBlockTag createLinked(Block... elements) {
-    return createLinked(null, elements);
+public class ExtShapeBlockTag extends UsableTag<Block> {
+  protected ExtShapeBlockTag(Identifier identifier, Collection<Block> entryList, Collection<UsableTag<Block>> usableTags) {
+    super(identifier, entryList, usableTags);
   }
 
-  static ExtShapeBlockTag createLinked(Identifier identifier, Block... elements) {
-    return createLinked(identifier, Arrays.asList(elements));
+  public static ExtShapeBlockTag create(Block... elements) {
+    return new ExtShapeBlockTag(null, Lists.newArrayList(elements), new ArrayList<>());
   }
 
-  static ExtShapeBlockTag createLinked(Identifier identifier, Collection<Block> list) {
-    final Linked o = new Linked(list.stream().map(TagEntry::of).collect(Collectors.toSet()), identifier);
-    ExtShapeBlockTags.TAG_LIST.add(o);
-    return o;
-  }
-
-  static ExtShapeBlockTag createBiPart(Identifier identifier, Block... elements) {
-    return createBiPart(identifier, Sets.newHashSet(elements));
-  }
-
-  static ExtShapeBlockTag createBiPart(Identifier identifier, Collection<Block> list) {
-    final BiPart o = new BiPart(list, new HashSet<>(), identifier);
-    ExtShapeBlockTags.TAG_LIST.add(o);
-    return o;
+  public static ExtShapeBlockTag create(String namespace, String path, Block... elements) {
+    return new ExtShapeBlockTag(new Identifier(namespace, path), Lists.newArrayList(elements), new ArrayList<>());
   }
 
   /**
@@ -46,8 +30,8 @@ public interface ExtShapeBlockTag extends UsableTag<Block> {
    * @param anotherTag 需要将此标签添加到的标签。
    */
   @Override
-  default ExtShapeBlockTag addToTag(UsableTag<Block> anotherTag) {
-    return (ExtShapeBlockTag) UsableTag.super.addToTag(anotherTag);
+  public ExtShapeBlockTag addToTag(UsableTag<Block> anotherTag) {
+    return (ExtShapeBlockTag) super.addToTag(anotherTag);
   }
 
   /**
@@ -57,19 +41,7 @@ public interface ExtShapeBlockTag extends UsableTag<Block> {
    * @return 方块的命名空间id。
    */
   @Override
-  default Identifier getIdentifierOf(Block element) {
+  public Identifier getIdentifierOf(Block element) {
     return Registry.BLOCK.getId(element);
-  }
-
-  final class Linked extends AbstractLinkedRecursiveCollection.TagImpl<Block> implements ExtShapeBlockTag {
-    private Linked(Collection<TagEntry<Block>> elements, Identifier identifier) {
-      super(elements, identifier);
-    }
-  }
-
-  final class BiPart extends AbstractBiPartRecursiveCollection.TagImpl<Block> implements ExtShapeBlockTag {
-    private BiPart(Collection<Block> directCollection, Collection<TagEntry<Block>> collectionCollection, Identifier identifier) {
-      super(directCollection, collectionCollection, identifier);
-    }
   }
 }
