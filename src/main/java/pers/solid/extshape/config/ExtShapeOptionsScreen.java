@@ -10,9 +10,11 @@ import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.option.CyclingOption;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.Option;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShape;
@@ -31,15 +33,7 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
   @Override
   protected void init() {
     list = new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25);
-    newConfig.addOptionsTo(list);
-    list.addSingleOptionEntry(new Option("options.extshape.rrp.title") {
-      @Override
-      public ClickableWidget createButton(GameOptions options, int x, int y, int width) {
-        return new ButtonWidget(x, y, width, 20, getDisplayPrefix(), button -> {
-          if (client != null) client.setScreen(new ExtShapeRRPScreen(ExtShapeOptionsScreen.this));
-        });
-      }
-    });
+    addOptions(newConfig);
     this.addDrawableChild(list);
     this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, (button) -> onClose()));
   }
@@ -94,7 +88,33 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
     client.setScreen(parent);
   }
 
-  protected Screen getParent() {
-    return parent;
+  public void addOptions(ExtShapeConfig config) {
+    list.addOptionEntry(
+        CyclingOption.create("options.extshape.addToVanillaGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.addToVanillaGroups, (gameOptions, option, value) -> config.addToVanillaGroups = value)
+            .tooltip(client -> b -> client.textRenderer.wrapLines(
+                new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName())
+                    .append("\n\n")
+                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)), 256)),
+        CyclingOption.create("options.extshape.showSpecificGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.showSpecificGroups, (gameOptions, option, value) -> config.showSpecificGroups = value)
+            .tooltip(client -> b -> client.textRenderer.wrapLines(
+                new TranslatableText("options.extshape.showSpecificGroups.tooltip")
+                    .append("\n\n")
+                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY)), 256))
+    );
+    list.addOptionEntry(
+        CyclingOption.create("options.extshape.registerBlockFamilies", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.registerBlockFamilies, (gameOptions, option, value) -> config.registerBlockFamilies = value)
+            .tooltip(client -> b -> client.textRenderer.wrapLines(
+                new TranslatableText("options.extshape.registerBlockFamilies.description")
+                    .append("\n\n")
+                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY)), 256)),
+        new Option("options.extshape.rrp.title") {
+          @Override
+          public ClickableWidget createButton(GameOptions options, int x, int y, int width) {
+            return new ButtonWidget(x, y, width, 20, getDisplayPrefix(), button -> {
+              if (client != null) client.setScreen(new ExtShapeRRPScreen(ExtShapeOptionsScreen.this));
+            });
+          }
+        }
+    );
   }
 }

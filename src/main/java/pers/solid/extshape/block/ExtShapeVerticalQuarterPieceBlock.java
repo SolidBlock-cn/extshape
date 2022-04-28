@@ -12,7 +12,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -59,12 +59,12 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeBlockTag.PLANKS).contains(baseBlock)) return "wooden_vertical_quarter_piece";
-    if ((ExtShapeBlockTag.WOOLS).contains(baseBlock)) return "wool_vertical_quarter_piece";
-    if ((ExtShapeBlockTag.CONCRETES).contains(baseBlock)) return "concrete_vertical_quarter_piece";
-    if ((ExtShapeBlockTag.STAINED_TERRACOTTAS).contains(baseBlock)) return
+    if ((ExtShapeBlockTags.PLANKS).contains(baseBlock)) return "wooden_vertical_quarter_piece";
+    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_vertical_quarter_piece";
+    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_quarter_piece";
+    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return
         "stained_terracotta_vertical_quarter_piece";
-    if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return
+    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
         "glazed_terracotta_vertical_quarter_piece";
     return "";
   }

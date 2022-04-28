@@ -13,7 +13,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantBlockInterface {
   public ExtShapeSlabBlock(@NotNull Block baseBlock, Settings settings) {
@@ -48,10 +48,10 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
   @Override
   public String getRecipeGroup() {
     Block baseBlock = this.baseBlock;
-    if ((ExtShapeBlockTag.WOOLS).contains(baseBlock)) return "wool_slab";
-    if ((ExtShapeBlockTag.CONCRETES).contains(baseBlock)) return "concrete_slab";
-    if ((ExtShapeBlockTag.STAINED_TERRACOTTAS).contains(baseBlock)) return "stained_terracotta_slab";
-    if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return "glazed_terracotta_slab";
+    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_slab";
+    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_slab";
+    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_slab";
+    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_slab";
     return "";
   }
 }

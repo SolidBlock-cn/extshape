@@ -2,11 +2,15 @@ package pers.solid.extshape.tag;
 
 import it.unimi.dsi.fastutil.objects.ObjectSets;
 
-import java.util.Set;
+import java.util.Collection;
 
-interface TagEntry<E> extends Set<E> {
+public interface TagEntry<E> extends Collection<E> {
   static <E> TagEntrySingleton<E> of(E element) {
     return new TagEntrySingleton<>(element);
+  }
+
+  static <E> boolean isSingleton(TagEntry<E> e) {
+    return e instanceof TagEntry.TagEntrySingleton<E>;
   }
 
   final class TagEntrySingleton<E> extends ObjectSets.Singleton<E> implements TagEntry<E> {

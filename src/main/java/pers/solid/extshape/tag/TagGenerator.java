@@ -1,71 +1,90 @@
 package pers.solid.extshape.tag;
 
+import com.google.common.collect.ImmutableSet;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.mappings.BlockMappings;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * 此类中定义的所有标签将会写入 ARRP 资源包。<br>
  * Tags defined in this class will be written to ARRP resource pack.
  */
-public class TagGenerator {
-  public static final ExtShapeBlockTag AXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/axe"));
-  public static final ExtShapeBlockTag HOE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/hoe"));
-  public static final ExtShapeBlockTag PICKAXE_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/pickaxe"), ExtShapeBlocks.PETRIFIED_OAK_PLANKS, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
-  public static final ExtShapeBlockTag SHOVEL_MINEABLE = new ExtShapeBlockTag(new Identifier("minecraft", "mineable/shovel"));
+public final class TagGenerator {
+  public static final ExtShapeBlockTag AXE_MINEABLE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "mineable/axe"));
+  public static final ExtShapeBlockTag HOE_MINEABLE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "mineable/hoe"));
+  public static final ExtShapeBlockTag PICKAXE_MINEABLE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "mineable/pickaxe"), ExtShapeBlocks.PETRIFIED_OAK_PLANKS, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
+  public static final ExtShapeBlockTag SHOVEL_MINEABLE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "mineable/shovel"));
 
-  public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = new ExtShapeBlockTag(new Identifier("minecraft", "occludes_vibration_signals"));
+  public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "occludes_vibration_signals"));
 
-  public static final ExtShapeBlockTag DRAGON_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft", "dragon_immune"));
-  public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = new ExtShapeBlockTag(new Identifier("minecraft", "infiniburn_overworld"));
-  public static final ExtShapeBlockTag INFINIBURN_END = new ExtShapeBlockTag(new Identifier("minecraft", "infiniburn_end"));
-  public static final ExtShapeBlockTag GEODE_INVALID_BLOCKS = new ExtShapeBlockTag(new Identifier("minecraft", "geode_invalid_blocks"));
-  public static final ExtShapeBlockTag WITHER_IMMUNE = new ExtShapeBlockTag(new Identifier("minecraft", "wither_immune"));
+  public static final ExtShapeBlockTag DRAGON_IMMUNE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "dragon_immune"));
+  public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "infiniburn_overworld"));
+  public static final ExtShapeBlockTag INFINIBURN_END = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "infiniburn_end"));
+  public static final ExtShapeBlockTag GEODE_INVALID_BLOCKS = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "geode_invalid_blocks"));
+  public static final ExtShapeBlockTag WITHER_IMMUNE = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "wither_immune"));
 
-  public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = new ExtShapeBlockTag(new Identifier("minecraft", "needs_diamond_tool"));
-  public static final ExtShapeBlockTag NEEDS_IRON_TOOL = new ExtShapeBlockTag(new Identifier("minecraft", "needs_iron_tool"));
-  public static final ExtShapeBlockTag NEEDS_STONE_TOOL = new ExtShapeBlockTag(new Identifier("minecraft", "needs_stone_tool"));
-  public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = new ExtShapeBlockTag(new Identifier("minecraft", "non_flammable_wood"));
+  public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "needs_diamond_tool"));
+  public static final ExtShapeBlockTag NEEDS_IRON_TOOL = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "needs_iron_tool"));
+  public static final ExtShapeBlockTag NEEDS_STONE_TOOL = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "needs_stone_tool"));
+  public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = ExtShapeBlockTag.createBiPart(new Identifier("minecraft", "non_flammable_wood"));
+  public static final ExtShapeItemTag PIGLIN_LOVED = ExtShapeItemTag.createBiPart(new Identifier("minecraft", "piglin_loved"));
 
-  private static final Set<ExtShapeBlockTag> NO_ITEM_TAGS = new HashSet<>();
+  /**
+   * 这个集合中的标签不会加入方块标签中。
+   */
+  private static final @Unmodifiable ImmutableSet<UsableTag<? extends ItemConvertible>> NO_BLOCK_TAGS = ImmutableSet.of(PIGLIN_LOVED);
+  /**
+   * 这个集合中的标签不会加入物品标签中。
+   */
+  private static final @Unmodifiable ImmutableSet<UsableTag<? extends ItemConvertible>> NO_ITEM_TAGS = ImmutableSet.of(AXE_MINEABLE, HOE_MINEABLE, PICKAXE_MINEABLE, SHOVEL_MINEABLE, DRAGON_IMMUNE, INFINIBURN_END, INFINIBURN_OVERWORLD, GEODE_INVALID_BLOCKS, WITHER_IMMUNE, NEEDS_IRON_TOOL, NEEDS_STONE_TOOL, NEEDS_DIAMOND_TOOL);
+  /**
+   * 需要石质工具的基础方块。基础方块为这些方块的将会加入 {@link #NEEDS_STONE_TOOL}。
+   */
+  @ApiStatus.AvailableSince("1.5.0")
+  private static final ImmutableSet<Block> BASE_BLOCKS_THAT_NEEDS_STONE_TOOL = ImmutableSet.of(
+      Blocks.IRON_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.LAPIS_BLOCK, Blocks.COPPER_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.CUT_COPPER, Blocks.WEATHERED_COPPER, Blocks.OXIDIZED_COPPER, Blocks.OXIDIZED_CUT_COPPER, Blocks.EXPOSED_COPPER, Blocks.EXPOSED_CUT_COPPER, Blocks.WAXED_COPPER_BLOCK, Blocks.WAXED_CUT_COPPER, Blocks.WAXED_EXPOSED_COPPER, Blocks.WAXED_EXPOSED_CUT_COPPER, Blocks.WAXED_WEATHERED_COPPER, Blocks.WAXED_WEATHERED_CUT_COPPER, Blocks.WAXED_OXIDIZED_COPPER, Blocks.WAXED_OXIDIZED_CUT_COPPER
+  );
 
   static {
-    NO_ITEM_TAGS.add(AXE_MINEABLE);
-    NO_ITEM_TAGS.add(HOE_MINEABLE);
-    NO_ITEM_TAGS.add(PICKAXE_MINEABLE);
-    NO_ITEM_TAGS.add(SHOVEL_MINEABLE);
-    NO_ITEM_TAGS.add(DRAGON_IMMUNE);
-    NO_ITEM_TAGS.add(INFINIBURN_END);
-    NO_ITEM_TAGS.add(INFINIBURN_OVERWORLD);
-    NO_ITEM_TAGS.add(GEODE_INVALID_BLOCKS);
-    NO_ITEM_TAGS.add(WITHER_IMMUNE);
-    NO_ITEM_TAGS.add(NEEDS_IRON_TOOL);
-    NO_ITEM_TAGS.add(NEEDS_STONE_TOOL);
-    NO_ITEM_TAGS.add(NEEDS_DIAMOND_TOOL);
-    OCCLUDES_VIBRATION_SIGNALS.addTag(ExtShapeBlockTag.WOOLEN_BLOCKS);
+    OCCLUDES_VIBRATION_SIGNALS.addTag(ExtShapeBlockTags.WOOLEN_BLOCKS);
     for (Block block : ExtShapeBlocks.BLOCKS) {
-      Block baseBlock = BlockMappings.getBaseBlockOf(block);
+      final Block baseBlock;
+      if (!(block instanceof ExtShapeBlockInterface bi)) {
+        continue;
+      } else {
+        baseBlock = bi.getBaseBlock();
+      }
       if (baseBlock == null) continue;
-      if (baseBlock == Blocks.END_STONE || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN)
+      if (baseBlock == Blocks.END_STONE || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN) {
         DRAGON_IMMUNE.add(block);
+      }
       if (baseBlock == Blocks.NETHERRACK) INFINIBURN_OVERWORLD.add(block);
       if (baseBlock == Blocks.BEDROCK) INFINIBURN_END.add(block);
-      if (baseBlock == Blocks.BEDROCK || baseBlock == Blocks.PACKED_ICE || baseBlock == Blocks.BLUE_ICE || baseBlock == Blocks.ICE)
+      if (baseBlock == Blocks.BEDROCK || baseBlock == Blocks.PACKED_ICE || baseBlock == Blocks.BLUE_ICE || baseBlock == Blocks.ICE) {
         GEODE_INVALID_BLOCKS.add(block);
+      }
       if (baseBlock == Blocks.BEDROCK) WITHER_IMMUNE.add(block);
-      if (baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN || baseBlock == Blocks.NETHERITE_BLOCK || baseBlock == Blocks.ANCIENT_DEBRIS)
+      if (baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN || baseBlock == Blocks.NETHERITE_BLOCK || baseBlock == Blocks.ANCIENT_DEBRIS) {
         NEEDS_DIAMOND_TOOL.add(block);
-      if (baseBlock == Blocks.DIAMOND_BLOCK || baseBlock == Blocks.EMERALD_BLOCK || baseBlock == Blocks.GOLD_BLOCK || baseBlock == Blocks.RAW_GOLD_BLOCK)
+      }
+      if (baseBlock == Blocks.DIAMOND_BLOCK || baseBlock == Blocks.EMERALD_BLOCK || baseBlock == Blocks.GOLD_BLOCK || baseBlock == Blocks.RAW_GOLD_BLOCK) {
         NEEDS_IRON_TOOL.add(block);
-      if (baseBlock == Blocks.IRON_BLOCK || baseBlock == Blocks.RAW_IRON_BLOCK || baseBlock == Blocks.LAPIS_BLOCK || baseBlock == Blocks.COPPER_BLOCK || baseBlock == Blocks.RAW_COPPER_BLOCK || baseBlock == Blocks.CUT_COPPER || baseBlock == Blocks.WEATHERED_COPPER || baseBlock == Blocks.OXIDIZED_COPPER || baseBlock == Blocks.OXIDIZED_CUT_COPPER || baseBlock == Blocks.EXPOSED_COPPER || baseBlock == Blocks.EXPOSED_CUT_COPPER || baseBlock == Blocks.WAXED_COPPER_BLOCK || baseBlock == Blocks.WAXED_CUT_COPPER || baseBlock == Blocks.WAXED_EXPOSED_COPPER || baseBlock == Blocks.WAXED_EXPOSED_CUT_COPPER || baseBlock == Blocks.WAXED_WEATHERED_COPPER || baseBlock == Blocks.WAXED_WEATHERED_CUT_COPPER || baseBlock == Blocks.WAXED_OXIDIZED_COPPER || baseBlock == Blocks.WAXED_OXIDIZED_CUT_COPPER)
+      }
+      if (BASE_BLOCKS_THAT_NEEDS_STONE_TOOL.contains(baseBlock)) {
         NEEDS_STONE_TOOL.add(block);
-      if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) NON_FLAMMABLE_WOOD.add(block);
+      }
+      if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) {
+        NON_FLAMMABLE_WOOD.add(block);
+      }
+      if (baseBlock == Blocks.GOLD_BLOCK || baseBlock == Blocks.RAW_GOLD_BLOCK) {
+        PIGLIN_LOVED.add(block);
+      }
       if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) AXE_MINEABLE.add(block);
       if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) HOE_MINEABLE.add(block);
       if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) PICKAXE_MINEABLE.add(block);
@@ -77,10 +96,12 @@ public class TagGenerator {
    * 写入所有的方块标签文件。
    */
   public static void writeAllBlockTagFiles(RuntimeResourcePack pack) {
-    for (ExtShapeBlockTag tag : ExtShapeBlockTag.TAG_LIST) {
+    for (UsableTag<?> tag : ExtShapeBlockTags.TAG_LIST) {
       final Identifier identifier = tag.getIdentifier();
       if (identifier == null) continue;
-      pack.addTag(new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath()), tag.toARRP());
+      if (!NO_BLOCK_TAGS.contains(tag)) {
+        pack.addTag(new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath()), tag.toARRP());
+      }
       if (!NO_ITEM_TAGS.contains(tag)) {
         pack.addTag(new Identifier(identifier.getNamespace(), "items/" + identifier.getPath()), tag.toARRP());
       }

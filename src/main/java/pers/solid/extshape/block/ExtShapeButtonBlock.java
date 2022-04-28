@@ -19,7 +19,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.ButtonBuilder;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShapeVariantBlockInterface {
   public final ButtonType type;
@@ -98,11 +98,11 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   @Override
   public String getRecipeGroup() {
     final Block baseBlock = getBaseBlock();
-    if (ExtShapeBlockTag.WOOLS.contains(baseBlock)) return "wool_button";
-    if (ExtShapeBlockTag.CONCRETES.contains(baseBlock)) return "concrete_button";
-    if (ExtShapeBlockTag.STAINED_TERRACOTTAS.contains(baseBlock)) return "stained_terracotta_button";
-    if (ExtShapeBlockTag.GLAZED_TERRACOTTAS.contains(baseBlock)) return "glazed_terracotta_button";
-    if (ExtShapeBlockTag.PLANKS.contains(baseBlock)) return "wooden_button";
+    if (ExtShapeBlockTags.WOOLS.contains(baseBlock)) return "wool_button";
+    if (ExtShapeBlockTags.CONCRETES.contains(baseBlock)) return "concrete_button";
+    if (ExtShapeBlockTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_button";
+    if (ExtShapeBlockTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_button";
+    if (ExtShapeBlockTags.PLANKS.contains(baseBlock)) return "wooden_button";
     return "";
   }
 

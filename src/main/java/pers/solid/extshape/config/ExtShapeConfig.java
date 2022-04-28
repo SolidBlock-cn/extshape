@@ -1,15 +1,8 @@
 package pers.solid.extshape.config;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.screen.ScreenTexts;
-import net.minecraft.client.gui.widget.ButtonListWidget;
-import net.minecraft.client.option.CyclingOption;
-import net.minecraft.item.ItemGroup;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
@@ -27,7 +20,7 @@ public class ExtShapeConfig implements Cloneable {
    * 本模组的默认配置，即为实例初始化时使用的值。用于屏幕显示。
    */
   public static final @Unmodifiable ExtShapeConfig DEFAULT_CONFIG = new ExtShapeConfig();
-  public static final File CONFIG_FILE = new File("config/extshape.nbt");
+  public static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "extshape.nbt");
   static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-configs");
   /**
    * 本模组当前的配置。
@@ -130,19 +123,6 @@ public class ExtShapeConfig implements Cloneable {
     nbt.putBoolean("showSpecificGroups", showSpecificGroups);
     nbt.putBoolean("registerBlockFamilies", registerBlockFamilies);
     return nbt;
-  }
-
-  @Environment(EnvType.CLIENT)
-  public void addOptionsTo(ButtonListWidget list) {
-    list.addOptionEntry(
-        CyclingOption.create("options.extshape.addToVanillaGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> this.addToVanillaGroups, (gameOptions, option, value) -> this.addToVanillaGroups = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName()).append("\n\n").append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)), 256)),
-        CyclingOption.create("options.extshape.showSpecificGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> this.showSpecificGroups, (gameOptions, option, value) -> this.showSpecificGroups = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(new TranslatableText("options.extshape.showSpecificGroups.tooltip").append("\n\n").append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY)), 256))
-    );
-    list.addOptionEntry(
-        CyclingOption.create("options.extshape.registerBlockFamilies", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> this.registerBlockFamilies, (gameOptions, option, value) -> this.registerBlockFamilies = value), null
-    );
   }
 
   @Override

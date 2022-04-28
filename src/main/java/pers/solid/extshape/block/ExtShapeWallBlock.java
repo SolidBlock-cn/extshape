@@ -7,7 +7,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantBlockInterface {
   public ExtShapeWallBlock(@NotNull Block baseBlock, Settings settings) {
@@ -32,11 +32,11 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
 
   @Override
   public String getRecipeGroup() {
-    if (ExtShapeBlockTag.WOOLS.contains(baseBlock)) return "wool_wall";
-    if (ExtShapeBlockTag.CONCRETES.contains(baseBlock)) return "concrete_wall";
-    if (ExtShapeBlockTag.STAINED_TERRACOTTAS.contains(baseBlock)) return "stained_terracotta_wall";
-    if (ExtShapeBlockTag.GLAZED_TERRACOTTAS.contains(baseBlock)) return "glazed_terracotta_wall";
-    if (ExtShapeBlockTag.PLANKS.contains(baseBlock)) return "wooden_wall";
+    if (ExtShapeBlockTags.WOOLS.contains(baseBlock)) return "wool_wall";
+    if (ExtShapeBlockTags.CONCRETES.contains(baseBlock)) return "concrete_wall";
+    if (ExtShapeBlockTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_wall";
+    if (ExtShapeBlockTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_wall";
+    if (ExtShapeBlockTags.PLANKS.contains(baseBlock)) return "wooden_wall";
     return "";
   }
 }

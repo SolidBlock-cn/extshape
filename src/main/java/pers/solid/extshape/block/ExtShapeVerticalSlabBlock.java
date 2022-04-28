@@ -12,7 +12,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -53,11 +53,11 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeBlockTag.PLANKS).contains(baseBlock)) return "wooden_vertical_slab";
-    if ((ExtShapeBlockTag.WOOLS).contains(baseBlock)) return "wool_vertical_slab";
-    if ((ExtShapeBlockTag.CONCRETES).contains(baseBlock)) return "concrete_vertical_slab";
-    if ((ExtShapeBlockTag.STAINED_TERRACOTTAS).contains(baseBlock)) return "stained_terracotta_vertical_slab";
-    if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return "glazed_terracotta_vertical_slab";
+    if ((ExtShapeBlockTags.PLANKS).contains(baseBlock)) return "wooden_vertical_slab";
+    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_vertical_slab";
+    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_slab";
+    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_vertical_slab";
+    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_vertical_slab";
     return "";
   }
 

@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -78,11 +78,11 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeBlockTag.PLANKS).contains(baseBlock)) return "wooden_quarter_piece";
-    if ((ExtShapeBlockTag.WOOLS).contains(baseBlock)) return "wool_quarter_piece";
-    if ((ExtShapeBlockTag.CONCRETES).contains(baseBlock)) return "concrete_quarter_piece";
-    if ((ExtShapeBlockTag.STAINED_TERRACOTTAS).contains(baseBlock)) return "stained_terracotta_quarter_piece";
-    if ((ExtShapeBlockTag.GLAZED_TERRACOTTAS).contains(baseBlock)) return "glazed_terracotta_quarter_piece";
+    if ((ExtShapeBlockTags.PLANKS).contains(baseBlock)) return "wooden_quarter_piece";
+    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_quarter_piece";
+    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_quarter_piece";
+    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_quarter_piece";
+    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_quarter_piece";
     return "";
   }
 }

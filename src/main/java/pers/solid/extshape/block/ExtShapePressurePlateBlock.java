@@ -16,7 +16,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.Collections;
 
@@ -72,7 +72,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   @Override
   public @NotNull JRecipe getCraftingRecipe() {
-    if (ExtShapeBlockTag.WOOLS.contains(baseBlock)) {
+    if (ExtShapeBlockTags.WOOLS.contains(baseBlock)) {
       return new JShapelessRecipe(this.getItemId().toString(), Collections.singleton(getBaseBlockId().toString().replaceAll("_wool$", "_carpet")));
     } else {
       return new JShapedRecipe(this)
@@ -85,11 +85,11 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   @Override
   public String getRecipeGroup() {
-    if (ExtShapeBlockTag.WOOLS.contains(baseBlock)) return "wool_pressure_plate";
-    if (ExtShapeBlockTag.CONCRETES.contains(baseBlock)) return "concrete_pressure_plate";
-    if (ExtShapeBlockTag.STAINED_TERRACOTTAS.contains(baseBlock)) return "stained_terracotta_pressure_plate";
-    if (ExtShapeBlockTag.GLAZED_TERRACOTTAS.contains(baseBlock)) return "glazed_terracotta_pressure_plate";
-    if (ExtShapeBlockTag.PLANKS.contains(baseBlock)) return "wooden_pressure_plate";
+    if (ExtShapeBlockTags.WOOLS.contains(baseBlock)) return "wool_pressure_plate";
+    if (ExtShapeBlockTags.CONCRETES.contains(baseBlock)) return "concrete_pressure_plate";
+    if (ExtShapeBlockTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_pressure_plate";
+    if (ExtShapeBlockTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_pressure_plate";
+    if (ExtShapeBlockTags.PLANKS.contains(baseBlock)) return "wooden_pressure_plate";
     return "";
   }
 }
