@@ -1,13 +1,29 @@
 package pers.solid.extshape.tag;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import net.devtech.arrp.api.RuntimeResourcePack;
 import net.minecraft.block.Block;
-import net.minecraft.util.Util;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.WallBlock;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.ItemTags;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
+import pers.solid.extshape.block.ExtShapeBlocks;
+import pers.solid.extshape.builder.Shape;
 
 import static net.minecraft.block.Blocks.*;
 
-public class ExtShapeBlockTags {
+/**
+ * 本模组提供的方块标签，其中包括了少量物品标签。
+ */
+public final class ExtShapeBlockTags {
   public static final @Unmodifiable ImmutableSet<Block> PLANKS = ImmutableSet.of(
       OAK_PLANKS,
       SPRUCE_PLANKS,
@@ -26,7 +42,7 @@ public class ExtShapeBlockTags {
       ACACIA_PLANKS,
       DARK_OAK_PLANKS
   );
-  public static final ExtShapeBlockTag STONE_VARIANTS = ExtShapeBlockTag.create(
+  public static final @Unmodifiable ImmutableList<Block> STONE_VARIANTS = ImmutableList.of(
       GRANITE,
       POLISHED_GRANITE,
       DIORITE,
@@ -34,9 +50,8 @@ public class ExtShapeBlockTags {
       ANDESITE,
       POLISHED_ANDESITE
   );
-  public static final ExtShapeBlockTag STONES = Util.make(ExtShapeBlockTag.create(
-      STONE), blockTag -> blockTag.addTag(STONE_VARIANTS));
-  public static final ImmutableSet<Block> SANDSTONES = ImmutableSet.of(
+  public static final @Unmodifiable ImmutableList<Block> STONES = new ImmutableList.Builder<Block>().add(STONE).addAll(STONE_VARIANTS).build();
+  public static final @Unmodifiable ImmutableSet<Block> SANDSTONES = ImmutableSet.of(
       SANDSTONE,
       CUT_SANDSTONE,
       CHISELED_SANDSTONE,
@@ -46,7 +61,7 @@ public class ExtShapeBlockTags {
       CHISELED_RED_SANDSTONE,
       SMOOTH_RED_SANDSTONE
   );
-  public static final ImmutableSet<Block> WOOLS = ImmutableSet.of(WHITE_WOOL,
+  public static final @Unmodifiable ImmutableSet<Block> WOOLS = ImmutableSet.of(WHITE_WOOL,
       ORANGE_WOOL,
       MAGENTA_WOOL,
       LIGHT_BLUE_WOOL,
@@ -62,7 +77,7 @@ public class ExtShapeBlockTags {
       GREEN_WOOL,
       RED_WOOL,
       BLACK_WOOL);
-  public static final ImmutableSet<Block> GLAZED_TERRACOTTA = ImmutableSet.of(
+  public static final @Unmodifiable ImmutableSet<Block> GLAZED_TERRACOTTA = ImmutableSet.of(
       WHITE_GLAZED_TERRACOTTA,
       ORANGE_GLAZED_TERRACOTTA,
       MAGENTA_GLAZED_TERRACOTTA,
@@ -80,7 +95,7 @@ public class ExtShapeBlockTags {
       RED_GLAZED_TERRACOTTA,
       BLACK_GLAZED_TERRACOTTA
   );
-  public static final ImmutableSet<Block> CONCRETES = ImmutableSet.of(WHITE_CONCRETE,
+  public static final @Unmodifiable ImmutableSet<Block> CONCRETES = ImmutableSet.of(WHITE_CONCRETE,
       ORANGE_CONCRETE,
       MAGENTA_CONCRETE,
       LIGHT_BLUE_CONCRETE,
@@ -96,7 +111,7 @@ public class ExtShapeBlockTags {
       GREEN_CONCRETE,
       RED_CONCRETE,
       BLACK_CONCRETE);
-  public static final ImmutableSet<Block> STAINED_TERRACOTTA = ImmutableSet.of(
+  public static final @Unmodifiable ImmutableSet<Block> STAINED_TERRACOTTA = ImmutableSet.of(
       WHITE_TERRACOTTA,
       ORANGE_TERRACOTTA,
       MAGENTA_TERRACOTTA,
@@ -126,13 +141,13 @@ public class ExtShapeBlockTags {
   public static final ExtShapeBlockTag FULL_BLOCKS = ExtShapeBlockTag.create().addToTag(EXTSHAPE_BLOCKS);
 
   /**
-   * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，并被加入到 {@link TagGenerator#OCCLUDES_VIBRATION_SIGNALS} 中（仅限 1.17 以上版本）。
+   * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，会被剪刀剪掉，并被加入到 {@link #OCCLUDES_VIBRATION_SIGNALS} 中（仅限 1.17 以上版本）。
    */
-  public static final ExtShapeBlockTag WOOLEN_BLOCKS = ExtShapeBlockTag.create("extshape", "woolen_blocks");
+  public static final ExtShapeBlockTag WOOLEN_BLOCKS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_blocks");
   /**
    * 所有的木质方块，包括下界木，不含原版方块。
    */
-  public static final ExtShapeBlockTag WOODEN_BLOCKS = ExtShapeBlockTag.create("extshape", "wooden_blocks");
+  public static final ExtShapeBlockTag WOODEN_BLOCKS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "wooden_blocks");
   /**
    * 所有主世界的木质方块，用于可燃，不含原版方块。
    */
@@ -142,113 +157,247 @@ public class ExtShapeBlockTags {
   /* 楼梯 */
 
   public static final ExtShapeBlockTag STAIRS = ExtShapeBlockTag.create("minecraft", "stairs").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOOLEN_STAIRS = ExtShapeBlockTag.create("extshape", "woolen_stairs").addToTag(WOOLEN_BLOCKS).addToTag(STAIRS);
-  public static final ExtShapeBlockTag CONCRETE_STAIRS = ExtShapeBlockTag.create("extshape", "concrete_stairs").addToTag(STAIRS);
-  public static final ExtShapeBlockTag TERRACOTTA_STAIRS = ExtShapeBlockTag.create("extshape", "terracotta_stairs").addToTag(STAIRS);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_STAIRS = ExtShapeBlockTag.create("extshape", "stained_terracotta_stairs").addToTag(TERRACOTTA_STAIRS);
+  public static final ExtShapeBlockTag WOOLEN_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_stairs").addToTag(WOOLEN_BLOCKS).addToTag(STAIRS);
+  public static final ExtShapeBlockTag CONCRETE_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_stairs").addToTag(STAIRS);
+  public static final ExtShapeBlockTag TERRACOTTA_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_stairs").addToTag(STAIRS);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_stairs").addToTag(TERRACOTTA_STAIRS);
 
 
 
   /* 台阶 */
 
   public static final ExtShapeBlockTag SLABS = ExtShapeBlockTag.create("minecraft", "slabs").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOOLEN_SLABS = ExtShapeBlockTag.create("extshape", "woolen_slabs").addToTag(WOOLEN_BLOCKS).addToTag(SLABS);
-  public static final ExtShapeBlockTag CONCRETE_SLABS = ExtShapeBlockTag.create("extshape", "concrete_slabs").addToTag(SLABS);
-  public static final ExtShapeBlockTag TERRACOTTA_SLABS = ExtShapeBlockTag.create("extshape", "terracotta_slabs").addToTag(SLABS);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_SLABS = ExtShapeBlockTag.create("extshape", "stained_terracotta_slabs").addToTag(TERRACOTTA_SLABS);
-  public static final ExtShapeBlockTag GLAZED_TERRACOTTA_SLABS = ExtShapeBlockTag.create("extshape", "glazed_terracotta_slabs").addToTag(SLABS);
+  public static final ExtShapeBlockTag WOOLEN_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_slabs").addToTag(WOOLEN_BLOCKS).addToTag(SLABS);
+  public static final ExtShapeBlockTag CONCRETE_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_slabs").addToTag(SLABS);
+  public static final ExtShapeBlockTag TERRACOTTA_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_slabs").addToTag(SLABS);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_slabs").addToTag(TERRACOTTA_SLABS);
+  public static final ExtShapeBlockTag GLAZED_TERRACOTTA_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "glazed_terracotta_slabs").addToTag(SLABS);
 
 
 
   /* 栅栏 */
 
   public static final ExtShapeBlockTag FENCES = ExtShapeBlockTag.create("minecraft", "fences").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOOLEN_FENCES = ExtShapeBlockTag.create("extshape", "woolen_fences").addToTag(WOOLEN_BLOCKS).addToTag(FENCES);
-  public static final ExtShapeBlockTag CONCRETE_FENCES = ExtShapeBlockTag.create("extshape", "concrete_fences").addToTag(FENCES);
-  public static final ExtShapeBlockTag TERRACOTTA_FENCES = ExtShapeBlockTag.create("extshape", "terracotta_fences").addToTag(FENCES);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_FENCES = ExtShapeBlockTag.create("extshape", "stained_terracotta_fences").addToTag(TERRACOTTA_FENCES);
+  public static final ExtShapeBlockTag WOOLEN_FENCES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_fences").addToTag(WOOLEN_BLOCKS).addToTag(FENCES);
+  public static final ExtShapeBlockTag CONCRETE_FENCES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_fences").addToTag(FENCES);
+  public static final ExtShapeBlockTag TERRACOTTA_FENCES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_fences").addToTag(FENCES);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_FENCES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_fences").addToTag(TERRACOTTA_FENCES);
 
 
 
   /* 栅栏门 */
 
   public static final ExtShapeBlockTag FENCE_GATES = ExtShapeBlockTag.create("minecraft", "fence_gates").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOOLEN_FENCE_GATES = ExtShapeBlockTag.create("extshape", "woolen_fence_gates").addToTag(WOOLEN_BLOCKS).addToTag(FENCE_GATES);
-  public static final ExtShapeBlockTag CONCRETE_FENCE_GATES = ExtShapeBlockTag.create("extshape", "concrete_fence_gates").addToTag(FENCE_GATES);
-  public static final ExtShapeBlockTag TERRACOTTA_FENCE_GATES = ExtShapeBlockTag.create("extshape", "terracotta_fence_gates").addToTag(FENCE_GATES);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_FENCE_GATES = ExtShapeBlockTag.create("extshape", "stained_terracotta_fence_gates").addToTag(TERRACOTTA_FENCE_GATES);
+  public static final ExtShapeBlockTag WOOLEN_FENCE_GATES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_fence_gates").addToTag(WOOLEN_BLOCKS).addToTag(FENCE_GATES);
+  public static final ExtShapeBlockTag CONCRETE_FENCE_GATES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_fence_gates").addToTag(FENCE_GATES);
+  public static final ExtShapeBlockTag TERRACOTTA_FENCE_GATES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_fence_gates").addToTag(FENCE_GATES);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_FENCE_GATES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_fence_gates").addToTag(TERRACOTTA_FENCE_GATES);
 
 
 
   /* 墙 */
 
   public static final ExtShapeBlockTag WALLS = ExtShapeBlockTag.create("minecraft", "walls").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag CONCRETE_WALLS = ExtShapeBlockTag.create("extshape", "concrete_fence_walls").addToTag(WALLS);
-  public static final ExtShapeBlockTag TERRACOTTA_WALLS = ExtShapeBlockTag.create("extshape", "terracotta_fence_walls").addToTag(WALLS);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_WALLS = ExtShapeBlockTag.create("extshape", "stained_terracotta_fence_walls").addToTag(TERRACOTTA_WALLS);
+  @ApiStatus.AvailableSince("1.5.0")
+  public static final ExtShapeBlockTag WOODEN_WALLS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "wooden_walls").addToTag(WALLS).addToTag(WOODEN_BLOCKS);
+  @ApiStatus.AvailableSince("1.5.0")
+  public static final ExtShapeBlockTag WOOLEN_WALLS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_walls").addToTag(WALLS).addToTag(WOOLEN_BLOCKS);
+  public static final ExtShapeBlockTag CONCRETE_WALLS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_fence_walls").addToTag(WALLS);
+  public static final ExtShapeBlockTag TERRACOTTA_WALLS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_fence_walls").addToTag(WALLS);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_WALLS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_fence_walls").addToTag(TERRACOTTA_WALLS);
 
 
 
   /* 按钮 */
 
   public static final ExtShapeBlockTag BUTTONS = ExtShapeBlockTag.create("minecraft", "buttons").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOOLEN_BUTTONS = ExtShapeBlockTag.create("extshape", "woolen_buttons").addToTag(WOOLEN_BLOCKS).addToTag(BUTTONS);
-  public static final ExtShapeBlockTag CONCRETE_BUTTONS = ExtShapeBlockTag.create("extshape", "concrete_buttons").addToTag(BUTTONS);
-  public static final ExtShapeBlockTag TERRACOTTA_BUTTONS = ExtShapeBlockTag.create("extshape", "terracotta_buttons").addToTag(BUTTONS);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_BUTTONS = ExtShapeBlockTag.create("extshape", "stained_terracotta_buttons").addToTag(TERRACOTTA_BUTTONS);
+  public static final ExtShapeBlockTag WOOLEN_BUTTONS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_buttons").addToTag(WOOLEN_BLOCKS).addToTag(BUTTONS);
+  public static final ExtShapeBlockTag CONCRETE_BUTTONS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_buttons").addToTag(BUTTONS);
+  public static final ExtShapeBlockTag TERRACOTTA_BUTTONS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_buttons").addToTag(BUTTONS);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_BUTTONS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_buttons").addToTag(TERRACOTTA_BUTTONS);
 
 
 
   /* 压力板 */
 
   public static final ExtShapeBlockTag PRESSURE_PLATES = ExtShapeBlockTag.create("minecraft", "pressure_plates").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag CONCRETE_PRESSURE_PLATES = ExtShapeBlockTag.create("extshape", "concrete_pressure_plates").addToTag(PRESSURE_PLATES);
-  public static final ExtShapeBlockTag TERRACOTTA_PRESSURE_PLATES = ExtShapeBlockTag.create("extshape", "terracotta_pressure_plates").addToTag(PRESSURE_PLATES);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_PRESSURE_PLATES = ExtShapeBlockTag.create("extshape", "stained_terracotta_pressure_plates").addToTag(TERRACOTTA_PRESSURE_PLATES);
-  public static final ExtShapeBlockTag WOOLEN_PRESSURE_PLATES = ExtShapeBlockTag.create("extshape", "woolen_pressure_plates").addToTag(PRESSURE_PLATES);
+  public static final ExtShapeBlockTag WOOLEN_PRESSURE_PLATES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_pressure_plates").addToTag(PRESSURE_PLATES).addToTag(WOOLEN_BLOCKS);
+  public static final ExtShapeBlockTag CONCRETE_PRESSURE_PLATES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_pressure_plates").addToTag(PRESSURE_PLATES);
+  public static final ExtShapeBlockTag TERRACOTTA_PRESSURE_PLATES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_pressure_plates").addToTag(PRESSURE_PLATES);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_PRESSURE_PLATES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_pressure_plates").addToTag(TERRACOTTA_PRESSURE_PLATES);
 
 
 
   /* 纵向台阶 */
 
-  public static final ExtShapeBlockTag VERTICAL_SLABS = ExtShapeBlockTag.create("extshape", "vertical_slabs").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOODEN_VERTICAL_SLABS = ExtShapeBlockTag.create("extshape", "wooden_vertical_slabs").addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_SLABS);
-  public static final ExtShapeBlockTag WOOLEN_VERTICAL_SLABS = ExtShapeBlockTag.create("extshape", "woolen_vertical_slabs").addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_SLABS);
-  public static final ExtShapeBlockTag CONCRETE_VERTICAL_SLABS = ExtShapeBlockTag.create("extshape", "concrete_vertical_slabs").addToTag(VERTICAL_SLABS);
-  public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_SLABS = ExtShapeBlockTag.create("extshape", "terracotta_vertical_slabs").addToTag(VERTICAL_SLABS);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_SLABS = ExtShapeBlockTag.create("extshape", "stained_terracotta_vertical_slabs").addToTag(TERRACOTTA_VERTICAL_SLABS);
+  public static final ExtShapeBlockTag VERTICAL_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "vertical_slabs").addToTag(EXTSHAPE_BLOCKS);
+  public static final ExtShapeBlockTag WOODEN_VERTICAL_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "wooden_vertical_slabs").addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_SLABS);
+  public static final ExtShapeBlockTag WOOLEN_VERTICAL_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_vertical_slabs").addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_SLABS);
+  public static final ExtShapeBlockTag CONCRETE_VERTICAL_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_vertical_slabs").addToTag(VERTICAL_SLABS);
+  public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_vertical_slabs").addToTag(VERTICAL_SLABS);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_SLABS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_vertical_slabs").addToTag(TERRACOTTA_VERTICAL_SLABS);
 
 
 
   /* 横条 */
 
-  public static final ExtShapeBlockTag QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "quarter_pieces").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOODEN_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "wooden_quarter_pieces").addToTag(WOODEN_BLOCKS).addToTag(QUARTER_PIECES);
-  public static final ExtShapeBlockTag WOOLEN_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "woolen_quarter_pieces").addToTag(WOOLEN_BLOCKS).addToTag(QUARTER_PIECES);
-  public static final ExtShapeBlockTag CONCRETE_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "concrete_quarter_pieces").addToTag(QUARTER_PIECES);
-  public static final ExtShapeBlockTag TERRACOTTA_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "terracotta_quarter_pieces").addToTag(QUARTER_PIECES);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "stained_terracotta_quarter_pieces").addToTag(TERRACOTTA_QUARTER_PIECES);
+  public static final ExtShapeBlockTag QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "quarter_pieces").addToTag(EXTSHAPE_BLOCKS);
+  public static final ExtShapeBlockTag WOODEN_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "wooden_quarter_pieces").addToTag(WOODEN_BLOCKS).addToTag(QUARTER_PIECES);
+  public static final ExtShapeBlockTag WOOLEN_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_quarter_pieces").addToTag(WOOLEN_BLOCKS).addToTag(QUARTER_PIECES);
+  public static final ExtShapeBlockTag CONCRETE_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_quarter_pieces").addToTag(QUARTER_PIECES);
+  public static final ExtShapeBlockTag TERRACOTTA_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_quarter_pieces").addToTag(QUARTER_PIECES);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_quarter_pieces").addToTag(TERRACOTTA_QUARTER_PIECES);
 
 
 
 
   /* 纵楼梯 */
 
-  public static final ExtShapeBlockTag VERTICAL_STAIRS = ExtShapeBlockTag.create("extshape", "vertical_stairs").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOODEN_VERTICAL_STAIRS = ExtShapeBlockTag.create("extshape", "wooden_vertical_stairs").addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_STAIRS);
-  public static final ExtShapeBlockTag WOOLEN_VERTICAL_STAIRS = ExtShapeBlockTag.create("extshape", "woolen_vertical_stairs").addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_STAIRS);
-  public static final ExtShapeBlockTag CONCRETE_VERTICAL_STAIRS = ExtShapeBlockTag.create("extshape", "concrete_vertical_stairs").addToTag(VERTICAL_STAIRS);
-  public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_STAIRS = ExtShapeBlockTag.create("extshape", "terracotta_vertical_stairs").addToTag(VERTICAL_STAIRS);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_STAIRS = ExtShapeBlockTag.create("extshape", "stained_terracotta_vertical_stairs").addToTag(TERRACOTTA_VERTICAL_STAIRS);
+  public static final ExtShapeBlockTag VERTICAL_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "vertical_stairs").addToTag(EXTSHAPE_BLOCKS);
+  public static final ExtShapeBlockTag WOODEN_VERTICAL_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "wooden_vertical_stairs").addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_STAIRS);
+  public static final ExtShapeBlockTag WOOLEN_VERTICAL_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_vertical_stairs").addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_STAIRS);
+  public static final ExtShapeBlockTag CONCRETE_VERTICAL_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_vertical_stairs").addToTag(VERTICAL_STAIRS);
+  public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_vertical_stairs").addToTag(VERTICAL_STAIRS);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_STAIRS = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_vertical_stairs").addToTag(TERRACOTTA_VERTICAL_STAIRS);
 
 
 
   /* 纵条 */
 
-  public static final ExtShapeBlockTag VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "vertical_quarter_pieces").addToTag(EXTSHAPE_BLOCKS);
-  public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "wooden_vertical_quarter_pieces").addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
-  public static final ExtShapeBlockTag WOOLEN_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "woolen_vertical_quarter_pieces").addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
-  public static final ExtShapeBlockTag CONCRETE_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "concrete_vertical_quarter_pieces").addToTag(VERTICAL_QUARTER_PIECES);
-  public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "terracotta_vertical_quarter_pieces").addToTag(VERTICAL_QUARTER_PIECES);
-  public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create("extshape", "stained_terracotta_vertical_quarter_pieces").addToTag(TERRACOTTA_VERTICAL_QUARTER_PIECES);
+  public static final ExtShapeBlockTag VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "vertical_quarter_pieces").addToTag(EXTSHAPE_BLOCKS);
+  public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "wooden_vertical_quarter_pieces").addToTag(WOODEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
+  public static final ExtShapeBlockTag WOOLEN_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "woolen_vertical_quarter_pieces").addToTag(WOOLEN_BLOCKS).addToTag(VERTICAL_QUARTER_PIECES);
+  public static final ExtShapeBlockTag CONCRETE_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "concrete_vertical_quarter_pieces").addToTag(VERTICAL_QUARTER_PIECES);
+  public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "terracotta_vertical_quarter_pieces").addToTag(VERTICAL_QUARTER_PIECES);
+  public static final ExtShapeBlockTag STAINED_TERRACOTTA_VERTICAL_QUARTER_PIECES = ExtShapeBlockTag.create(ExtShape.MOD_ID, "stained_terracotta_vertical_quarter_pieces").addToTag(TERRACOTTA_VERTICAL_QUARTER_PIECES);
+
+
+  /*
+   * 原版部分
+   */
+
+  public static final ExtShapeBlockTag AXE_MINEABLE = ExtShapeBlockTag.create(BlockTags.AXE_MINEABLE);
+  public static final ExtShapeBlockTag HOE_MINEABLE = ExtShapeBlockTag.create(BlockTags.HOE_MINEABLE);
+  public static final ExtShapeBlockTag PICKAXE_MINEABLE = ExtShapeBlockTag.create(BlockTags.PICKAXE_MINEABLE);
+  public static final ExtShapeBlockTag SHOVEL_MINEABLE = ExtShapeBlockTag.create(BlockTags.SHOVEL_MINEABLE);
+
+  public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = ExtShapeBlockTag.create(BlockTags.OCCLUDES_VIBRATION_SIGNALS);
+  public static final ExtShapeBlockTag DRAGON_IMMUNE = ExtShapeBlockTag.create(BlockTags.DRAGON_IMMUNE);
+  public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = ExtShapeBlockTag.create(BlockTags.INFINIBURN_OVERWORLD);
+  public static final ExtShapeBlockTag INFINIBURN_END = ExtShapeBlockTag.create(BlockTags.INFINIBURN_END);
+  public static final ExtShapeBlockTag GEODE_INVALID_BLOCKS = ExtShapeBlockTag.create(BlockTags.GEODE_INVALID_BLOCKS);
+  public static final ExtShapeBlockTag WITHER_IMMUNE = ExtShapeBlockTag.create(BlockTags.WITHER_IMMUNE);
+  public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = ExtShapeBlockTag.create(BlockTags.NEEDS_DIAMOND_TOOL);
+  public static final ExtShapeBlockTag NEEDS_IRON_TOOL = ExtShapeBlockTag.create(BlockTags.NEEDS_IRON_TOOL);
+  public static final ExtShapeBlockTag NEEDS_STONE_TOOL = ExtShapeBlockTag.create(BlockTags.NEEDS_STONE_TOOL);
+  public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = ExtShapeBlockTag.create(BlockTags.NON_FLAMMABLE_WOOD);
+  /**
+   * 类似于 {@link BlockTags#SNOW}，但是不同的是，该方块标签中，{@link net.minecraft.block.SnowyBlock#isSnow(BlockState)} 对于该标签的方块必须有底部的完整碰撞箱才会让 方块显示为雪。
+   */
+  @SuppressWarnings("JavadocReference")
+  public static final ExtShapeBlockTag SNOW = ExtShapeBlockTag.create(ExtShape.MOD_ID, "snow");
+  public static final ExtShapeItemTag PIGLIN_LOVED = ExtShapeItemTag.create(ItemTags.PIGLIN_LOVED);
+  public static final ExtShapeBlockTag GUARDER_BY_PIGLINS = ExtShapeBlockTag.create(BlockTags.GUARDED_BY_PIGLINS);
+  public static final ExtShapeBlockTag SMALL_DRIPLEAF_PLACEABLE = ExtShapeBlockTag.create(BlockTags.SMALL_DRIPLEAF_PLACEABLE);
+
+  /**
+   * 这个标签主要是考虑到，{@link BlockTags#PICKAXE_MINEABLE} 加入了所有的墙，但事实上墙并不一定是可以使用镐来开采的，因此这里设置了一个专门的标签，如果某个方块属于 {@code minecraft:mineable/pickaxe} 但同时属于 {@code extshape:pickaxe_unmineable}，则认为镐子不能开采这个方块。
+   */
+  @ApiStatus.AvailableSince("0.1.5")
+  public static final ExtShapeBlockTag PICKAXE_UNMINEABLE = ExtShapeBlockTag.create(ExtShape.MOD_ID, "pickaxe_unmineable");
+
+  /**
+   * 这个集合中的标签不会加入方块标签中。
+   */
+  private static final @Unmodifiable ImmutableSet<UsableTag<? extends ItemConvertible>> NO_BLOCK_TAGS = ImmutableSet.of(PIGLIN_LOVED);
+  /**
+   * 这个集合中的标签不会加入物品标签中。
+   */
+  private static final @Unmodifiable ImmutableSet<UsableTag<? extends ItemConvertible>> NO_ITEM_TAGS = ImmutableSet.of(AXE_MINEABLE, HOE_MINEABLE, PICKAXE_MINEABLE, SHOVEL_MINEABLE, DRAGON_IMMUNE, INFINIBURN_END, INFINIBURN_OVERWORLD, GEODE_INVALID_BLOCKS, WITHER_IMMUNE, NEEDS_IRON_TOOL, NEEDS_STONE_TOOL, NEEDS_DIAMOND_TOOL, PICKAXE_UNMINEABLE);
+
+  private ExtShapeBlockTags() {
+  }
+
+  /**
+   * 填充所有的方块标签内容，会先删除既有内容。
+   */
+  public static void refillTags() {
+    OCCLUDES_VIBRATION_SIGNALS.addTag(WOOLEN_BLOCKS);
+    for (Block block : ExtShapeBlocks.BLOCKS) {
+      final Block baseBlock;
+      if (!(block instanceof ExtShapeBlockInterface bi)) {
+        continue;
+      } else {
+        baseBlock = bi.getBaseBlock();
+      }
+      if (baseBlock == null) continue;
+      if (baseBlock == Blocks.END_STONE || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN) {
+        DRAGON_IMMUNE.add(block);
+      }
+      if (baseBlock == Blocks.NETHERRACK) INFINIBURN_OVERWORLD.add(block);
+      if (baseBlock == Blocks.BEDROCK) INFINIBURN_END.add(block);
+      if (baseBlock == Blocks.BEDROCK || baseBlock == Blocks.PACKED_ICE || baseBlock == Blocks.BLUE_ICE || baseBlock == Blocks.ICE) {
+        GEODE_INVALID_BLOCKS.add(block);
+      }
+      if (baseBlock == Blocks.BEDROCK) WITHER_IMMUNE.add(block);
+      if (Mineable.NEEDS_DIAMOND_TOOL.contains(baseBlock)) {
+        NEEDS_DIAMOND_TOOL.add(block);
+      }
+      if (Mineable.NEEDS_IRON_TOOL.contains(baseBlock)) {
+        NEEDS_IRON_TOOL.add(block);
+      }
+      if (Mineable.NEEDS_STONE_TOOL.contains(baseBlock)) {
+        NEEDS_STONE_TOOL.add(block);
+      }
+      if (baseBlock == Blocks.CRIMSON_PLANKS || baseBlock == Blocks.WARPED_PLANKS) {
+        NON_FLAMMABLE_WOOD.add(block);
+      }
+      if (baseBlock == Blocks.GOLD_BLOCK || baseBlock == Blocks.RAW_GOLD_BLOCK) {
+        PIGLIN_LOVED.add(block);
+        GUARDER_BY_PIGLINS.add(block);
+      } else if (baseBlock == Blocks.GILDED_BLACKSTONE) {
+        GUARDER_BY_PIGLINS.add(block);
+      }
+      if (baseBlock == Blocks.SNOW_BLOCK) {
+        SNOW.add(block);
+      }
+
+      // 以下部分仅限建筑方块
+      final Shape shape;
+      if ((shape = Shape.getShapeOf(block)) != null && switch (shape) {
+        case STAIRS, SLAB, VERTICAL_STAIRS, VERTICAL_SLAB, QUARTER_PIECE, VERTICAL_QUARTER_PIECE -> true;
+        default -> false;
+      }) {
+        if (baseBlock == Blocks.MOSS_BLOCK || baseBlock == Blocks.CLAY) {
+          SMALL_DRIPLEAF_PLACEABLE.add(block);
+        }
+      }
+      PICKAXE_MINEABLE.add(ExtShapeBlocks.PETRIFIED_OAK_PLANKS);
+      PICKAXE_MINEABLE.add(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
+      if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock) || PLANKS.contains(baseBlock)) AXE_MINEABLE.add(block);
+      if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) HOE_MINEABLE.add(block);
+      if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) {
+        PICKAXE_MINEABLE.add(block);
+      } else if (block instanceof WallBlock) {
+        PICKAXE_UNMINEABLE.add(block);
+      }
+      if (Mineable.VANILLA_SHOVEL_MINEABLE.contains(baseBlock)) SHOVEL_MINEABLE.add(block);
+    }
+  }
+
+  /**
+   * 写入所有的方块标签文件。
+   */
+  public static void writeAllBlockTagFiles(RuntimeResourcePack pack) {
+    for (UsableTag<?> tag : UsableTag.TAG_LIST) {
+      final Identifier identifier = tag.identifier;
+      if (identifier == null) continue;
+      if (!NO_BLOCK_TAGS.contains(tag)) {
+        pack.addTag(new Identifier(identifier.getNamespace(), "blocks/" + identifier.getPath()), tag.toARRP());
+      }
+      if (!NO_ITEM_TAGS.contains(tag)) {
+        pack.addTag(new Identifier(identifier.getNamespace(), "items/" + identifier.getPath()), tag.toARRP());
+      }
+    }
+  }
 }

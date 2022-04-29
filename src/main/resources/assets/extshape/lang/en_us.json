@@ -90,7 +90,7 @@
   "options.extshape.confirm.noGroups": "Your both '%s' and '%s' are set '%s', which means in Creative Mode you may not directly obtain items in this mod in your Creative inventory. Are you sure to continue?",
   "options.extshape.confirm.redo": "I reconsider",
   "options.extshape.registerBlockFamilies": "Register BlockFamilies",
-  "options.extshape.registerBlockFamilies.description": "Register the relations of the block to Minecraft's vanilla BlockFamilies. The BlockFamilies registry may be identified by some mods, but may cause potential problems when other mods use the BlockFamilies.",
+  "options.extshape.registerBlockFamilies.description": "Register the relations of the block to Minecraft's vanilla BlockFamilies. The BlockFamilies registry may be identified by some mods, but may cause potential problems when other mods use the BlockFamilies.\nTakes effect after restarting game.",
 
   "options.extshape.rrp.title": "Runtime Resource Pack settings",
   "options.extshape.rrp.regenClientResources": "Regenerate client resources",

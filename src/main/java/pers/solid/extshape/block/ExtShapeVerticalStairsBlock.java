@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlocksBuilder;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -35,7 +36,7 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
   @Override
   @Environment(EnvType.CLIENT)
-  public @Nullable JBlockStates getBlockStates() {
+  public @NotNull JBlockStates getBlockStates() {
     final Identifier identifier = getBlockModelId();
     return JBlockStates.ofVariants(new JVariants()
         .addVariant("facing", "south_west", new JBlockModel(identifier).uvlock())
@@ -48,7 +49,7 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
   @Override
   @Environment(EnvType.CLIENT)
-  public @Nullable JModel getBlockModel() {
+  public @NotNull JModel getBlockModel() {
     return simpleModel("extshape:block/vertical_stairs");
   }
 

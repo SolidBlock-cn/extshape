@@ -1,20 +1,30 @@
 package pers.solid.extshape.tag;
 
-import com.google.common.collect.Lists;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.ApiStatus;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
+/**
+ * 本模组使用的物品标签。通常来说，方块标签已经可以顶替物品标签。
+ */
+@ApiStatus.AvailableSince("1.5.0")
 public class ExtShapeItemTag extends UsableTag<ItemConvertible> {
   protected ExtShapeItemTag(Identifier identifier, Collection<ItemConvertible> entryList, Collection<UsableTag<ItemConvertible>> tagList) {
     super(identifier, entryList, tagList);
   }
 
-  public static ExtShapeItemTag create(String namespace, String path, ItemConvertible... itemConvertibles) {
-    return new ExtShapeItemTag(new Identifier(namespace, path), Lists.newArrayList(itemConvertibles), new HashSet<>());
+  public static ExtShapeItemTag create(String namespace, String path) {
+    return new ExtShapeItemTag(new Identifier(namespace, path), new ArrayList<>(), new ArrayList<>());
+  }
+
+  public static ExtShapeItemTag create(Tag.Identified<Item> vanillaItemTag) {
+    return new ExtShapeItemTag(vanillaItemTag.getId(), new ArrayList<>(), new ArrayList<>());
   }
 
   @Override

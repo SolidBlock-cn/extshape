@@ -12,36 +12,59 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.block.Block;
+import net.minecraft.block.Material;
 import net.minecraft.data.client.model.TextureKey;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.mixin.AbstractBlockAccessor;
 
 /**
  * 该模组中的绝大多数方块共用的接口。
  */
 public interface ExtShapeBlockInterface extends BlockResourceGenerator {
+  /**
+   * 方块所在的合成配方的组。
+   *
+   * @return 方块合成配方中的 {@code group} 字段。
+   * @see JRecipe#group(String)
+   */
   default String getRecipeGroup() {
     return "";
   }
 
+  /**
+   * 方块的切石配方。该方法在生成数据时，只有在确认了 {@link #isStoneCut(Block)} 的情况下才会被使用，因此该方法内部无需判断方块是否可以切石。
+   *
+   * @return 方块的切石配方。用于切石机。
+   */
   default @Nullable JRecipe getStonecuttingRecipe() {
     return null;
+  }
+
+  /**
+   * 通过判断方块的材料是否为石头，来确定方块是否可以被切石。用于生成运行时数据。
+   *
+   * @param baseBlock 基础方块。
+   * @return 方块能否被切石机切石。
+   */
+  static boolean isStoneCut(Block baseBlock) {
+    return baseBlock != null && ((AbstractBlockAccessor) baseBlock).getMaterial() == Material.STONE;
   }
 
   @Override
   default void writeRecipes(RuntimeResourcePack pack) {
     BlockResourceGenerator.super.writeRecipes(pack);
     final JRecipe stonecuttingRecipe = getStonecuttingRecipe();
-    if (stonecuttingRecipe != null) {
-      final Identifier recipeId = getRecipeId().brrp_prepend("_from_stonecutting");
+    if (stonecuttingRecipe != null && isStoneCut(getBaseBlock())) {
+      final Identifier recipeId = getRecipeId().brrp_append("_from_stonecutting");
       pack.addRecipe(recipeId, stonecuttingRecipe);
       // the advancement that corresponds to the advancement
       final Advancement.Task advancement = stonecuttingRecipe.asAdvancement();
       if (advancement != null && !advancement.getCriteria().isEmpty()) {
         stonecuttingRecipe.prepareAdvancement(recipeId);
-        pack.addAdvancement(recipeId.brrp_pend("recipes/", "_from_stonecutting"), advancement);
+        pack.addAdvancement(recipeId.brrp_prepend("recipes/"), advancement);
       }
     }
   }

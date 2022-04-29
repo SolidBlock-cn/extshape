@@ -7,7 +7,6 @@ import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class ExtShapeClient implements ClientModInitializer {
-
   @Override
   public void onInitializeClient() {
     RRPCallback.BEFORE_VANILLA.register(resources -> resources.add(ExtShapeRRP.CLIENT_PACK));

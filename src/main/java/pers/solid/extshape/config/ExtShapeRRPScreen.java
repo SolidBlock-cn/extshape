@@ -63,6 +63,7 @@ public class ExtShapeRRPScreen extends Screen {
             }
           })
       ).start();
+      regenClientResourcesThread.setName("RegenClientResources");
     }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.regenClientResources.description"), 250), mouseX, mouseY)));
     addDrawableChild(regenServerDataButton = new ButtonWidget(width / 2 + 5, 36, 200, 20, new TranslatableText("options.extshape.rrp.regenServerData"), button -> {
       if (regenServerDataThread != null && regenServerDataThread.getState() != Thread.State.TERMINATED) return;
@@ -79,6 +80,7 @@ public class ExtShapeRRPScreen extends Screen {
           regenServerDataButton.active = true;
         }
       })).start();
+      regenServerDataThread.setName("RegenServerData");
     }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.regenServerData.description"), 250), mouseX, mouseY)));
     addDrawableChild(dumpClientResourcesButton = new ButtonWidget(width / 2 - 205, 61, 200, 20, new TranslatableText("options.extshape.rrp.exportClientResources"), button -> {
       if (dumpClientResourcesThread != null && dumpClientResourcesThread.getState() != Thread.State.TERMINATED) return;
@@ -87,6 +89,7 @@ public class ExtShapeRRPScreen extends Screen {
         dumpClientResourcesButton.active = false;
         try {
           ExtShapeRRP.CLIENT_PACK.dump(dumpPath);
+          ExtShapeConfig.LOGGER.info("FINISH!");
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when dumping client resource.", throwable);
         } finally {
@@ -94,6 +97,7 @@ public class ExtShapeRRPScreen extends Screen {
           dumpClientResourcesButton.active = true;
         }
       })).start();
+      dumpClientResourcesThread.setName("DumpClientResources");
     }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.exportClientResources.description"), 250), mouseX, mouseY)));
     addDrawableChild(dumpServerDataButton = new ButtonWidget(width / 2 + 5, 61, 200, 20, new TranslatableText("options.extshape.rrp.exportServerData"), button -> {
       if (dumpServerDataThread != null && dumpServerDataThread.getState() != Thread.State.TERMINATED) return;
@@ -102,6 +106,7 @@ public class ExtShapeRRPScreen extends Screen {
         dumpServerDataButton.active = false;
         try {
           ExtShapeRRP.STANDARD_PACK.dump(dumpPath);
+          ExtShapeConfig.LOGGER.info("FINISH!");
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when dumping server data.", throwable);
         } finally {
@@ -109,6 +114,7 @@ public class ExtShapeRRPScreen extends Screen {
           dumpServerDataButton.active = true;
         }
       })).start();
+      dumpServerDataThread.setName("DumpServerData");
     }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.exportServerData.description"), 250), mouseX, mouseY)));
     if (dumpPathField == null) {
       addDrawableChild(dumpPathField = new TextFieldWidget(textRenderer, width / 2 - 140, 115, 250, 20, new TranslatableText("options.extshape.rrp.exportFilePath")));
@@ -170,12 +176,32 @@ public class ExtShapeRRPScreen extends Screen {
   public void removed() {
     super.removed();
     if (regenClientResourcesThread != null) {
+      if (regenClientResourcesThread.getState() != Thread.State.TERMINATED) {
+        ExtShapeConfig.LOGGER.warn("Screen closed. Interrupting {}!", regenClientResourcesThread);
+      }
       regenClientResourcesThread.interrupt();
+      regenClientResourcesThread = null;
     }
     if (regenServerDataThread != null) {
+      if (regenServerDataThread.getState() != Thread.State.TERMINATED) {
+        ExtShapeConfig.LOGGER.warn("Screen closed. Interrupting {}!", regenServerDataThread);
+      }
       regenServerDataThread.interrupt();
+      regenServerDataThread = null;
     }
-    if (dumpClientResourcesThread != null) dumpClientResourcesThread.interrupt();
-    if (dumpServerDataThread != null) dumpServerDataThread.interrupt();
+    if (dumpClientResourcesThread != null) {
+      if (dumpClientResourcesThread.getState() != Thread.State.TERMINATED) {
+        ExtShapeConfig.LOGGER.warn("Screen closed. Interrupting {}!", dumpClientResourcesThread);
+      }
+      dumpClientResourcesThread.interrupt();
+      dumpClientResourcesThread = null;
+    }
+    if (dumpServerDataThread != null) {
+      if (dumpServerDataThread.getState() != Thread.State.TERMINATED) {
+        ExtShapeConfig.LOGGER.warn("Screen closed. Interrupting {}!", dumpServerDataThread);
+      }
+      dumpServerDataThread.interrupt();
+      dumpServerDataThread = null;
+    }
   }
 }

@@ -1,7 +1,6 @@
 package pers.solid.extshape;
 
 import com.google.common.base.Suppliers;
-import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -45,7 +44,7 @@ public class ExtShapeItemGroup extends ItemGroup {
     ItemGroupAccessor.setGroups(newGroups);
     WOODEN_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length,
-        new Identifier("extshape", "wooden_blocks"),
+        new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
         Suppliers.ofInstance(new ItemStack(Blocks.BIRCH_PLANKS)),
         (stacks, group) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
             stacks)))
@@ -53,21 +52,21 @@ public class ExtShapeItemGroup extends ItemGroup {
 
     COLORFUL_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 1,
-        new Identifier("extshape", "colorful_blocks"),
+        new Identifier(ExtShape.MOD_ID, "colorful_blocks"),
         Suppliers.ofInstance(new ItemStack(Blocks.YELLOW_WOOL)),
         (stacks, group) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, stacks))
     );
 
     STONE_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 2,
-        new Identifier("extshape", "stone_blocks"),
+        new Identifier(ExtShape.MOD_ID, "stone_blocks"),
         Suppliers.ofInstance(new ItemStack(Blocks.STONE)),
         (stacks, group) -> STONE_BLOCKS.forEach(block -> importTo(block, stacks))
     );
 
     OTHER_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 3,
-        new Identifier("extshape", "other_blocks"),
+        new Identifier(ExtShape.MOD_ID, "other_blocks"),
         Suppliers.ofInstance(new ItemStack(Blocks.CHISELED_QUARTZ_BLOCK)),
         (stacks, group) -> OTHER_BLOCKS.forEach(block -> importTo(block, stacks)));
 
@@ -211,7 +210,6 @@ public class ExtShapeItemGroup extends ItemGroup {
   @Contract(mutates = "param2")
   protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
     if (baseBlock == null) return;
-    final BiMap<Block, ? extends Block> mapping = BlockMappings.getBlockMappingOf(baseBlock);
     itemStacks.add(new ItemStack(baseBlock));
     for (Shape shape : Shape.values()) {
       final Block shapeBlock = BlockMappings.getBlockOf(shape, baseBlock);

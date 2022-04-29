@@ -7,6 +7,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
+import pers.solid.extshape.ExtShape;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
     map.put("waxed_oxidized_cut_copper", "waxed_oxidized_cut_copper");
     map.put("waxed_weathered_copper", "waxed_weathered_copper");
     map.put("waxed_weathered_cut_copper", "waxed_weathered_cut_copper");
+    map.put("weathered_copper", "weathered_copper");
     map.put("weathered_cut_copper", "weathered_cut_copper");
   });
 
@@ -44,16 +46,22 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
    * @param path 命名空间id中的路径。如 {@code iron_block}、{@code stone_bricks}。
    * @return 转换得到的路径前缀。
    */
-  static String getPathPrefixOf(@NotNull String path) {
-    return PATH_PREFIX_MAPPINGS.getOrDefault(path, Util.make(path
+  static @NotNull String getPathPrefixOf(@NotNull String path) {
+    if (PATH_PREFIX_MAPPINGS.containsKey(path)) {
+      return PATH_PREFIX_MAPPINGS.get(path);
+    }
+    final String newPath = path
         .replaceAll("_planks$", "")
         .replaceAll("_block$", "")
         .replaceAll("^block_of_", "")
         .replaceAll("tiles$", "tile")
-        .replaceAll("bricks$", "brick"), convertedPath -> {
-      if (!path.equals(convertedPath))
-        PATH_PREFIX_MAPPINGS.put(path, convertedPath);
-    }));
+        .replaceAll("bricks$", "brick");
+    if (path.equals(newPath)) {
+      return newPath;
+    } else {
+      PATH_PREFIX_MAPPINGS.putIfAbsent(path, newPath);
+      return newPath;
+    }
   }
 
   /**
@@ -65,32 +73,9 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
    * <code>extshape:quartz_stairs</code>。
    */
   static Identifier convertIdentifier(Identifier identifier, String suffix) {
-    if (identifier == Registry.BLOCK.getDefaultId())
-      throw new RuntimeException(String.format("Attempt to convert a default block ID %s with suffix %s!", identifier, suffix));
     String path = identifier.getPath();
     String basePath = getPathPrefixOf(path);
-    return new Identifier("extshape", basePath + suffix);
-  }
-
-  /**
-   * 将标识符转化为方块标识符并添加后缀。<br>
-   * <b>例如：</b>{@code minecraft:oak_slab} 和 {@code _top} 转化为 {@code minecraft:block/oak_slab_top}。
-   *
-   * @param identifier 要转化的标识符。
-   * @param suffix     标识符后缀。
-   * @return 转化后的标识符。
-   */
-  static Identifier blockIdentifier(Identifier identifier, String suffix) {
-    return new Identifier(identifier.getNamespace(), "block/" + identifier.getPath().replaceFirst("^waxed_", "") + suffix);
-  }
-
-  /**
-   * 获取基础方块的id。
-   *
-   * @return 基础方块的id。
-   */
-  default Identifier getBaseBlockId() {
-    return Registry.BLOCK.getId(this.getBaseBlock());
+    return new Identifier(ExtShape.MOD_ID, basePath + suffix);
   }
 
   /**
@@ -99,25 +84,14 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
   @Override
   Block getBaseBlock();
 
-  /**
-   * @return 该方块的id路径前缀。
-   */
-  default String getPathPrefix() {
-    return getPathPrefixOf(this.getBaseBlockId().getPath());
-  }
-
   default MutableText getNamePrefix() {
-    if (this.getBaseBlock() == null) return new TranslatableText("block.extshape.prefix.unknown");
-    if (this.hasPathPrefixChanged())
-      return new TranslatableText("block.extshape.prefix." + this.getPathPrefix());
-    else return this.getBaseBlock().getName();
-  }
-
-  /**
-   * @return id路径前缀与基础方块的id路径是否不同。
-   * 例如，石砖楼梯的id路径前缀为 <code>stone_brick</code>，而其基础方块石砖的id路径为 <code>stone_bricks</code>，不同，所以返回 <code>true</code>。
-   */
-  default boolean hasPathPrefixChanged() {
-    return PATH_PREFIX_MAPPINGS.containsKey(this.getBaseBlockId().getPath());
+    final Block baseBlock = this.getBaseBlock();
+    if (baseBlock == null) return new TranslatableText("block.extshape.prefix.unknown");
+    final String path = Registry.BLOCK.getId(baseBlock).getPath();
+    if (PATH_PREFIX_MAPPINGS.containsKey(path)) {
+      return new TranslatableText("block.extshape.prefix." + getPathPrefixOf(path));
+    } else {
+      return baseBlock.getName();
+    }
   }
 }

@@ -9,51 +9,80 @@ import net.devtech.arrp.json.recipe.JShapelessRecipe;
 import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
-import net.minecraft.block.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mappings.TextureMappings;
-import pers.solid.extshape.mixin.AbstractBlockMixin;
-import pers.solid.extshape.tag.TagGenerator;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import static net.minecraft.item.Item.BLOCK_ITEMS;
 
+/**
+ * 本类包含所有有关运行时资源包（runtime resource pack）的代码。<p>
+ * 从 1.5.0 开始，扩展方块形状模组开始依赖 BRRP（更好的运行时资源包）。
+ */
 public final class ExtShapeRRP {
+  private ExtShapeRRP() {
+  }
+
   /**
    * 仅适用于客户端的资源包。
    *
    * @see ExtShapeRRP#STANDARD_PACK
    */
   @Environment(EnvType.CLIENT)
-  public static final RuntimeResourcePack CLIENT_PACK = RuntimeResourcePack.create(new Identifier("extshape", "client"));
+  public static final RuntimeResourcePack CLIENT_PACK = RuntimeResourcePack.create(new Identifier(ExtShape.MOD_ID, "client"));
   /**
    * 适用于整个模组的运行时资源包，服务端和客户端都会运行。之所以称为“standard”而非“server”，是因为即使在客户端启动时，该资源包也会存在。
    *
    * @see ExtShapeRRP#CLIENT_PACK
    */
-  public static final RuntimeResourcePack STANDARD_PACK = RuntimeResourcePack.create(new Identifier("extshape", "standard"));
+  public static final RuntimeResourcePack STANDARD_PACK = RuntimeResourcePack.create(new Identifier(ExtShape.MOD_ID, "standard"));
+
+  /**
+   * 是否在每次重新加载资源时都生成一次资源。<ul>
+   * <li>若为 <code>false</code>，则游戏初始化后就会将所有的资源生成好。</li>
+   * <li>若为 <code>true</code>，则每次加载资源包时（例如 F3 + T）生成一次资源包，每次加载数据包时（例如 {@code /reload}）重新生成一次数据包。</li>
+   * </ul>
+   * 通常建议此项在开发环境时为 <code>true</code>，在发布时为 <code>false</code>。
+   */
+  private static final boolean GENERATE_EACH_RELOAD = false;
 
   private static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-Runtime resource pack");
 
-  public static void registerRRP() {
+  /**
+   * 注册所有的运行时资源。
+   */
+  static void registerRRP() {
+    if (!GENERATE_EACH_RELOAD) {
+      generateServerData(STANDARD_PACK);
+      if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+        generateClientResources(CLIENT_PACK);
+      }
+    }
     RRPCallbackConditional.BEFORE_VANILLA.register((resourceType, builder) -> {
       if (resourceType == ResourceType.SERVER_DATA || resourceType == null) {
-        STANDARD_PACK.clearResources(ResourceType.SERVER_DATA);
-        generateServerData(STANDARD_PACK);
+        if (GENERATE_EACH_RELOAD) {
+          STANDARD_PACK.clearResources(ResourceType.SERVER_DATA);
+          generateServerData(STANDARD_PACK);
+        }
         builder.add(STANDARD_PACK);
       }
       if (resourceType == ResourceType.CLIENT_RESOURCES || resourceType == null) {
         try {
-          CLIENT_PACK.clearResources(ResourceType.CLIENT_RESOURCES);
-          generateClientResources(CLIENT_PACK);
+          if (GENERATE_EACH_RELOAD) {
+            CLIENT_PACK.clearResources(ResourceType.CLIENT_RESOURCES);
+            generateClientResources(CLIENT_PACK);
+          }
           builder.add(CLIENT_PACK);
         } catch (NoSuchFieldError throwable) {
           throw new AssertionError(throwable);
@@ -81,6 +110,11 @@ public final class ExtShapeRRP {
     }
   }
 
+  /**
+   * 为运行时资源包添加服务器数据。该方法执行时不会清除已经生成的数据（若有），因此调用之前您可能需要先自行清除一次。
+   *
+   * @param pack 运行时数据包。
+   */
   public static void generateServerData(RuntimeResourcePack pack) {
     LOGGER.info("Generating server data for Extended Block Shapes mod!");
 
@@ -95,7 +129,7 @@ public final class ExtShapeRRP {
     }
 
     // 添加方块标签。
-    TagGenerator.writeAllBlockTagFiles(pack);
+    ExtShapeBlockTags.writeAllBlockTagFiles(pack);
   }
 
   /**
@@ -118,7 +152,7 @@ public final class ExtShapeRRP {
   /**
    * 获取方块所对应的特定配方的id，会加上后缀并<b>强制使用 {@link ExtShape#MOD_ID} 作为命名空间</b>。例如：
    * <pre>{@code recipeIdOf(Blocks.OAK_SLAB, "from_vertical_slab")
-   * -> new Identifier("extshape", "oak_slab_from_vertical_slab")}</pre>
+   * -> new Identifier("extshape", "building_blocks/oak_slab_from_vertical_slab")}</pre>
    */
   private static Identifier recipeIdOf(Block block, String prefix) {
     final Identifier recipeId = recipeIdOf(block);
@@ -131,7 +165,7 @@ public final class ExtShapeRRP {
    * @param baseBlock 基础方块。
    * @param pack      运行时资源包。
    */
-  public static void generateCrossShapeDataFor(Block baseBlock, RuntimeResourcePack pack) {
+  private static void generateCrossShapeDataFor(Block baseBlock, RuntimeResourcePack pack) {
     // 台阶与垂直台阶之间的配方。
     final Block slab = BlockMappings.getBlockOf(Shape.SLAB, baseBlock);
     final Block verticalSlab = BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, baseBlock);
@@ -184,7 +218,7 @@ public final class ExtShapeRRP {
     }
 
     // 该方块是否允许被切石
-    final boolean stoneCut = ((AbstractBlockMixin) baseBlock).getMaterial() == Material.STONE;
+    final boolean stoneCut = ExtShapeBlockInterface.isStoneCut(baseBlock);
 
     if (quarterPiece != null && BLOCK_ITEMS.containsKey(quarterPiece)) {
       // 1x楼梯 -> 3x横条

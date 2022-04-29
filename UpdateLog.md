@@ -1,5 +1,37 @@
 # 更新日志 Update Log
 
+### 1.5.0
+
+- 自从该版本，模组将依赖 BRRP（更好的运行时资源包）才能运行。由于本模组内嵌了 ARRP 功能，因此您可以不再安装 BRRP 模组。
+- 大幅度优化代码，删除了不必要的代码内容。
+- 现在木制方块和羊毛方块可以用作熔炉燃料了。
+- 南瓜、西瓜、苔藓、菌光体、下界疣块、诡异疣块制成的方块可以在堆肥桶中堆肥。
+- 重新加入了下界疣墙和诡异疣墙，并加入了羊毛、苔藓块等制成的墙。
+- 加入了更多标签：
+    - 现在，所有基于金块和粗金块的方块都会被猪灵喜欢（物品标签 `#piglin_loved`）。
+    - 雪楼梯、雪台阶放置在草方块时，如果把整个草方块覆盖住，草方块会显示为覆雪的格式（方块标签 `#extshape:snow`）。
+    - 破坏由金块、粗金块或镶金黑石制成的方块时，猪灵会被激怒（方块标签 `#piglin_guarded`）。
+    - 垂滴叶可以放置在苔藓和黏土制成的方块上（方块标签 `#small_dripleaf_placeable_on`）。
+    - 羊毛制品现在可以像羊毛一样用剪刀更快破坏了（方块标签 `#fabric:mineable/shears`）。
+- 为配方加入了对应的解锁进度，当获得配方原料时，进度会被触发，从而解锁该配方。
+    - 该版本更名了运行时数据包内的配方。因此更新后初次进入游戏可能会显示未识别的配方，通常影响不大。
+- 加入了配置界面。可以配置是否将物品加入原版物品组，以及是否加入本模组专用的物品组。此外，还加入了手动重新生成和导出运行时资源包内容的功能。
+- 调整语言文件中的一些错误。
+- 为各类锈蚀程度的涂蜡铜块添加所有形状的方块。
+- 修复苔藓压力板与苔藓地毯配方冲突的问题，参照羊毛的做法，改为配方与压力板相互合成。
+
+### 1.4.0
+
+- 使用 ARRP（高级运行时资源包）取代了传统的资源包和数据包文件。模组文件可以大幅度减小，但是自从该版本，模组将依赖 ARRP 才能运行。请确保同时安装了 ARRP 模组。
+- 修复西瓜按钮和南瓜按钮合成配方冲突的问题，因此移除了这两个方块的合成表。
+- 修复压力板在按压与未按压时使用相同模型的问题。
+- 修复含水方块在附近有方块更新时水不流动的问题。
+
+- Replaced traditional resource packs and data packs with ARRP (Advanced Runtime Resource Pack). File size of the mod has been largely reduced, but since this version, the mod depends on ARRP to run. Make sure you have ARRP mod installed.
+- Fixed the conflict in recipes of melon buttons and pumpkin buttons. Recipes of the two are removed.
+- Fixed the issue that pressure plates uses the same model whether pressed down.
+- Fixed the issue that water logged in blocks does not flow when there is a block update.
+
 ### 1.3.1
 
 - <span style="color:red">删除了下界疣墙、诡异疣墙。</span>

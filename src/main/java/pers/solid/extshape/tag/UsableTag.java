@@ -101,4 +101,10 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
   public int size() {
     return entryList.size() + tagList.stream().mapToInt(UsableTag::size).sum();
   }
+
+  @Override
+  public void clear() {
+    entryList.clear();
+    tagList.clear();
+  }
 }

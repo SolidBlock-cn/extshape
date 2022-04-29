@@ -8,6 +8,7 @@ import net.minecraft.data.client.model.TextureKey;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.ExtShapeBlocks;
 
+@Environment(EnvType.CLIENT)
 public class TextureMappings {
   @Environment(EnvType.CLIENT)
   public static void registerTextures() {

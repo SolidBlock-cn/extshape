@@ -1,5 +1,7 @@
 package pers.solid.extshape.mixin;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.impl.item.group.CreativeGuiExtensions;
 import net.fabricmc.fabric.impl.item.group.FabricCreativeGuiComponents;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
@@ -17,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @see net.fabricmc.fabric.mixin.item.group.client.MixinCreativePlayerInventoryGui
  */
 @Mixin(CreativeInventoryScreen.class)
+@Environment(EnvType.CLIENT)
 public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> implements CreativeGuiExtensions {
   private CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
     super(screenHandler, playerInventory, text);

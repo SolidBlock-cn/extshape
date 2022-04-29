@@ -1,12 +1,12 @@
 package pers.solid.extshape.util;
 
-import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3i;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -26,9 +26,6 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
   private static final HorizontalCornerDirection[] ALL = values();
   private static final Map<String, HorizontalCornerDirection> NAME_MAP = Arrays.stream(ALL).collect(Collectors.toMap(HorizontalCornerDirection::getName, (direction) -> direction));
   private static final HorizontalCornerDirection[] VALUES = Arrays.stream(ALL).sorted(Comparator.comparingInt((direction) -> direction.id)).toArray(HorizontalCornerDirection[]::new);
-  private static final Long2ObjectMap<HorizontalCornerDirection> VECTOR_TO_DIRECTION = Arrays.stream(ALL).collect(Collectors.toMap((direction) -> (new BlockPos(direction.getVector())).asLong(), (direction) -> direction, (direction1, direction2) -> {
-    throw new IllegalArgumentException("Duplicate keys");
-  }, Long2ObjectOpenHashMap::new));
   private final String name;
   private final int idOpposite;
   private final int id;
@@ -60,16 +57,6 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     return VALUES[MathHelper.abs(value % VALUES.length)];
   }
 
-  @Nullable
-  public static HorizontalCornerDirection fromVector(BlockPos pos) {
-    return VECTOR_TO_DIRECTION.get(pos.asLong());
-  }
-
-  @Nullable
-  public static HorizontalCornerDirection fromVector(int x, int y, int z) {
-    return VECTOR_TO_DIRECTION.get(BlockPos.asLong(x, y, z));
-  }
-
   /**
    * 从旋转角度算出距离该旋转角度最近的方向。用于方块放置。
    *
@@ -97,43 +84,12 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     return byId(this.idOpposite);
   }
 
-  public HorizontalCornerDirection rotateClockwise(Direction.Axis axis) {
-    if (axis == Direction.Axis.Y) {
-      return this.rotateYClockwise();
-    } else {
-      throw new IllegalStateException("Unable to get CW facing for axis " + axis);
-    }
-  }
-
-  public HorizontalCornerDirection rotateCounterclockwise(Direction.Axis axis) {
-    if (axis == Direction.Axis.Y) {
-      return this.rotateYCounterclockwise();
-    }
-    throw new IllegalStateException("Unable to get CW facing for axis " + axis);
-  }
-
   public HorizontalCornerDirection rotateYClockwise() {
     return byId(Math.floorMod(this.id + 1, VALUES.length));
   }
 
   public HorizontalCornerDirection rotateYCounterclockwise() {
     return byId(Math.floorMod(this.id - 1, VALUES.length));
-  }
-
-  public int getOffsetX() {
-    return this.vector.getX();
-  }
-
-  public int getOffsetY() {
-    return this.vector.getY();
-  }
-
-  public int getOffsetZ() {
-    return this.vector.getZ();
-  }
-
-  public Vec3f getUnitVector() {
-    return new Vec3f((float) this.getOffsetX(), (float) this.getOffsetY(), (float) this.getOffsetZ());
   }
 
   public String getName() {
