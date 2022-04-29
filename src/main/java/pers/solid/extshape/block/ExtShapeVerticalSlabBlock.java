@@ -11,7 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
@@ -29,7 +29,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   @Environment(EnvType.CLIENT)
   @Override
-  public @Nullable JBlockStates getBlockStates() {
+  public @NotNull JBlockStates getBlockStates() {
     final Identifier identifier = getBlockModelId();
     return JBlockStates.ofVariants(new JVariants()
         .addVariant("facing", "south", new JBlockModel(identifier).uvlock())
@@ -42,12 +42,12 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   @Environment(EnvType.CLIENT)
   @Override
-  public @Nullable JModel getBlockModel() {
+  public @NotNull JModel getBlockModel() {
     return simpleModel("extshape:block/vertical_slab");
   }
 
   @Override
-  public @Nullable JRecipe getStonecuttingRecipe() {
+  public @NotNull JRecipe getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(2);
   }
 

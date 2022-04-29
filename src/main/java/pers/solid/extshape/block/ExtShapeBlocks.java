@@ -8,6 +8,7 @@ import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.mappings.BlockMappings;
@@ -55,15 +56,16 @@ public final class ExtShapeBlocks {
           .setDefaultTagOf(Shape.VERTICAL_STAIRS, ExtShapeBlockTags.WOODEN_VERTICAL_STAIRS)
           .setDefaultTagOf(Shape.QUARTER_PIECE, ExtShapeBlockTags.WOODEN_QUARTER_PIECES)
           .setDefaultTagOf(Shape.VERTICAL_QUARTER_PIECE, ExtShapeBlockTags.WOODEN_VERTICAL_QUARTER_PIECES)
+          .setDefaultTagOf(Shape.WALL, ExtShapeBlockTags.WOODEN_WALLS)
           .putTag(isOverworld ? ExtShapeBlockTags.OVERWORLD_WOODEN_BLOCKS : null)
-          .withoutWall().build();
+          .build();
     }
 
     // 石化橡木木板
     PETRIFIED_OAK_PLANKS = new BlockBuilder()
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeAll(builder.blockSettings, "block/oak_planks"))
         .setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB))
-        .setIdentifier(new Identifier("extshape", "petrified_oak_planks"))
+        .setIdentifier(new Identifier(ExtShape.MOD_ID, "petrified_oak_planks"))
         .group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(ExtShapeBlockTags.FULL_BLOCKS).build();
 
     BlockMappings.SHAPE_TO_MAPPING.get(Shape.SLAB).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
@@ -82,9 +84,9 @@ public final class ExtShapeBlocks {
       new BlocksBuilder(block).withFences(Items.STICK).withPressurePlate(ActivationRule.MOBS).withButton(ButtonType.STONE).build();
     }
 
-    // 羊毛不注册墙。
+    // 羊毛。
     for (final Block block : ExtShapeBlockTags.WOOLS) {
-      new BlocksBuilder(block, Items.STRING, ButtonType.SOFT, ActivationRule.EVERYTHING).putTag(ExtShapeBlockTags.WOOLEN_BLOCKS).withoutWall()
+      new BlocksBuilder(block, Items.STRING, ButtonType.SOFT, ActivationRule.EVERYTHING).putTag(ExtShapeBlockTags.WOOLEN_BLOCKS)
           .setDefaultTagOf(Shape.STAIRS, ExtShapeBlockTags.WOOLEN_STAIRS)
           .setDefaultTagOf(Shape.VERTICAL_STAIRS, ExtShapeBlockTags.WOOLEN_VERTICAL_STAIRS)
           .setDefaultTagOf(Shape.SLAB, ExtShapeBlockTags.WOOLEN_SLABS)
@@ -95,6 +97,7 @@ public final class ExtShapeBlocks {
           .setDefaultTagOf(Shape.FENCE_GATE, ExtShapeBlockTags.WOOLEN_FENCE_GATES)
           .setDefaultTagOf(Shape.BUTTON, ExtShapeBlockTags.WOOLEN_BUTTONS)
           .setDefaultTagOf(Shape.PRESSURE_PLATE, ExtShapeBlockTags.WOOLEN_PRESSURE_PLATES)
+          .setDefaultTagOf(Shape.WALL, ExtShapeBlockTags.WOOLEN_WALLS)
           .build();
     }
 
@@ -205,7 +208,7 @@ public final class ExtShapeBlocks {
     SMOOTH_STONE_DOUBLE_SLAB = new BlockBuilder()
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, "block/smooth_stone_slab_top", "block/smooth_stone_slab", "block/smooth_stone_slab_top"))
         .setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE))
-        .setIdentifier(new Identifier("extshape", "smooth_stone_slab_double"))
+        .setIdentifier(new Identifier(ExtShape.MOD_ID, "smooth_stone_slab_double"))
         .group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(ExtShapeBlockTags.FULL_BLOCKS).build();
 
     new BlocksBuilder(SMOOTH_STONE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).withoutShapes().build();
@@ -216,8 +219,8 @@ public final class ExtShapeBlocks {
     new BlocksBuilder(PURPUR_BLOCK, Items.SHULKER_SHELL, ButtonType.STONE, ActivationRule.MOBS).build();
 
     // 下界疣块、诡异疣块。
-    new BlocksBuilder(NETHER_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().withoutWall().build();
-    new BlocksBuilder(WARPED_WART_BLOCK, Items.WARPED_WART_BLOCK, null, null).withoutRedstone().withoutWall().build();
+    new BlocksBuilder(NETHER_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().build();
+    new BlocksBuilder(WARPED_WART_BLOCK, Items.WARPED_WART_BLOCK, null, null).withoutRedstone().build();
 
     // 带釉陶瓦只注册台阶。
     for (final Block block : ExtShapeBlockTags.GLAZED_TERRACOTTA) {
@@ -279,12 +282,12 @@ public final class ExtShapeBlocks {
         WAXED_OXIDIZED_COPPER,
         WAXED_OXIDIZED_CUT_COPPER
     }) {
-      new BlocksBuilder(block).withShapes().build();
+      new BlocksBuilder(block, Items.COPPER_INGOT, ButtonType.STONE, ActivationRule.MOBS).build();
     }
 
     // 滴水石、苔藓。
     new BlocksBuilder(DRIPSTONE_BLOCK, Items.POINTED_DRIPSTONE, ButtonType.STONE, ActivationRule.MOBS).build();
-    new BlocksBuilder(MOSS_BLOCK, Items.MOSS_CARPET, ButtonType.SOFT, ActivationRule.EVERYTHING).withoutWall().build();
+    new BlocksBuilder(MOSS_BLOCK, Items.MOSS_CARPET, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
     // 深板岩变种。深板岩自身属于 PillarBlock，不适合创建形状。
     for (final Block block : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE, DEEPSLATE_TILES, DEEPSLATE_BRICKS, CHISELED_DEEPSLATE}) {

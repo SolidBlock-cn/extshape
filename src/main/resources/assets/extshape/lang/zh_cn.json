@@ -90,7 +90,7 @@
   "options.extshape.confirm.noGroups": "您的“%s”和“%s”都设置为“%s”，这意味着您在创造模式下，无法从创造模式物品栏中获取模组中的物品。确定要继续吗？",
   "options.extshape.confirm.redo": "我再考虑下",
   "options.extshape.registerBlockFamilies": "注册BlockFamilies",
-  "options.extshape.registerBlockFamilies.description": "将本模组内的方块关系注册到Minecraft原版的BlockFamilies中。BlockFamilies可能会被其他模组识别，但是如果其他模组也使用这些BlockFamilies则有可能出现一些问题。",
+  "options.extshape.registerBlockFamilies.description": "将本模组内的方块关系注册到Minecraft原版的BlockFamilies中。BlockFamilies可能会被其他模组识别，但是如果其他模组也使用这些BlockFamilies则有可能出现一些问题。\n重启游戏后生效。",
 
   "options.extshape.rrp.title": "运行时资源包设置",
   "options.extshape.rrp.regenClientResources": "重新生成客户端资源包",

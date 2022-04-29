@@ -50,7 +50,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
 
   @Override
   @Environment(EnvType.CLIENT)
-  public @Nullable JBlockStates getBlockStates() {
+  public @NotNull JBlockStates getBlockStates() {
     final Identifier blockModelId = getBlockModelId();
     return JBlockStates.delegate(BlockStateModelGenerator.createButtonBlockState(
         this,

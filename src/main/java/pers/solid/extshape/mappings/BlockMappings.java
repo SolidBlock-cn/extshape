@@ -15,7 +15,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class BlockMappings {
+/**
+ * 本类包含所有有关方块映射关系的数据。<p>
+ * 本模组的逻辑时，每个形状（{@link Shape}）都有一个由基础方块到对应形状方块的双射，这与 Minecraft 的 BlockFamily 的逻辑略有不同。
+ */
+public final class BlockMappings {
+  private BlockMappings() {
+  }
+
   public static final EnumMap<Shape, BiMap<Block, Block>> SHAPE_TO_MAPPING;
   /**
    * 基础方块集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。
@@ -66,14 +73,19 @@ public class BlockMappings {
     return mapping.get(baseBlock);
   }
 
+  /**
+   * 将本模组定义的方块关系添加到原版的 {@link BlockFamilies} 中。
+   *
+   * @see pers.solid.extshape.config.ExtShapeConfig#registerBlockFamilies
+   */
   public static void completeBlockFamilies() {
     final Map<Block, BlockFamily> baseBlocksToFamilies = BlockFamiliesAccessor.getBaseBlocksToFamilies();
     for (Block baseBlock : BASE_BLOCKS) {
       final BlockFamily blockFamily = baseBlocksToFamilies.computeIfAbsent(baseBlock, x -> new BlockFamily.Builder(baseBlock).build());
       final Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
       SHAPE_TO_MAPPING.forEach((shape, map) -> {
-        if (map.containsKey(baseBlock)) {
-          map.putIfAbsent(baseBlock, map.get(baseBlock));
+        if (map.containsKey(baseBlock) && shape.vanillaVariant != null) {
+          variants.put(shape.vanillaVariant, map.get(baseBlock));
         }
       });
     }

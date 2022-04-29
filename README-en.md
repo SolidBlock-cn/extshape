@@ -10,6 +10,8 @@ At present this mod supports Minecraft Java Edition 1.18.1, 1.17.1 and 1.16.5. P
 
 **NOTICE: If you update the mod from 1.2.3 to ≥1.2.4, please remove all _plank wall_ and _clay wall_ blocks from your worlds! As of 1.2.4, plank walls and clay walls are no longer a feature of this mod.**
 
+[Click here](UpdateLog.md) for previous update logs.
+
 ## Features
 
 ### Blocks
@@ -72,21 +74,11 @@ If you installed Reasonable Sorting mod (≥1.3 version), these blocks will sort
 
 ARRP (short for Advanced Runtime Resource Pack) is a third-party library mod, which allows you to create asset and data files when initializing the instance internally, instead of writing the files in the mod file.
 
-Usually a block requires a corresponding block states definition and block model for a correct visual, as well as a loot table to drop correctly after being broken, and a recipe that defined how the block is crafted. A block has also an item, which needs an item model. The "block states definitions", "block models", "item models", "loot tables" and "recipes" as referred to above are json files. In mods, creating these json files for each block is very troublesome, and the json files are basically duplicate. For example, models of block items usually directly inherit corresponding block models, yet requiring each definition in each file. Another example, block states of stairs are quite complicated, but block states of different stairs blocks are basically the same, with the only difference of name. It's hard to understand to define such a complicated file for each stairs block.
+Usually a block requires a corresponding block states definition and block model for a correct visual, as well as a loot table to drop correctly after being broken, and a recipe that defined how the block is crafted. A block has also an item, which needs an item model. The "block states definitions", "block models", "item models", "loot tables" and "recipes" as referred to above are json files. In mods, creating these json files for each block is very troublesome, and the json files are basically duplicate. For example, models of block items usually directly inherit corresponding block models, yet requiring each definition in each file. Another example, block states of stairs are quite complicated, but block states of different stairs blocks are basically the same, with the only difference
+of name. It's hard to understand to define such a complicated file for each stairs block.
 
 But when using ARRP, the files can be generated in runtime, instead of stored in the mod file. The filesize of mod has been largely reduced, and so does as I/O stream. Of course, you must install ARRP first.
 
 However, while creating runtime resource packs with ARRP, though large numbers of repetitive contents reduced, the grammar in the Java code is still complex. Besides, although I/O reduces, objects are converted to json, serialized as bytes and stored internally, and when used by MC, these bytes are deserialized to json and converted to relevant objects in MC. In the process, ARRP objects and MC vanilla objects are not directly convertible. Therefore, ARRP does not reduce the process of deserializing to json and reading as object, and even adds a process of converting and serailizing json.
 
 ARRP is just designed for this, and the issue should be attributed to Mojang. To fulfill data packs and resource packs, Minecraft takes such a wierd and inefficient method to read game assets and data (including vanilla ones). As mod developers, we can do anything but changing this.
-
-## This update
-
-### 1.4.0
-
-- Replaced traditional resource packs and data packs with ARRP (Advanced Runtime Resource Pack). File size of the mod has been largely reduced, but since this version, the mod depends on ARRP to run. Make sure you have ARRP mod installed.
-- Fixed the conflict in recipes of melon buttons and pumpkin buttons. Recipes of the two are removed.
-- Fixed the issue that pressure plates uses the same model whether pressed down.
-- Fixed the issue that water logged in blocks does not flow when there is a block update.
-
-See [Update Log](UpdateLog.md) for previous update logs.
