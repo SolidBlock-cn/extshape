@@ -28,7 +28,8 @@ public class SnowyBlockMixin extends Block {
   public static BooleanProperty SNOWY;
   private static final TagKey<Block> SNOW = TagKey.of(Registry.BLOCK_KEY, new Identifier(ExtShape.MOD_ID, "snow"));
 
-  public SnowyBlockMixin(Settings settings) {
+  @SuppressWarnings("unused")
+  private SnowyBlockMixin(Settings settings) {
     super(settings);
   }
 
