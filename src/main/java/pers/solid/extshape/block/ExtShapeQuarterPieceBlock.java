@@ -10,7 +10,7 @@ import net.devtech.arrp.json.recipe.JRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.model.TextureKey;
+import net.minecraft.data.client.TextureKey;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;

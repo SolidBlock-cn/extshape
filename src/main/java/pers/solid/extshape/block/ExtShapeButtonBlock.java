@@ -9,8 +9,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.model.BlockStateModelGenerator;
-import net.minecraft.data.client.model.TextureKey;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.TextureKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
@@ -69,7 +69,6 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   @Environment(EnvType.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
-    final Identifier identifier = this.getBlockId();
     final Identifier blockModelId = getBlockModelId();
     final JModel blockModel = getBlockModel();
     pack.addModel(blockModel, blockModelId);

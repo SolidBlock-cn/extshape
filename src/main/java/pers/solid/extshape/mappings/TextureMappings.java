@@ -4,7 +4,7 @@ import net.devtech.arrp.generator.TextureRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.client.model.TextureKey;
+import net.minecraft.data.client.TextureKey;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.ExtShapeBlocks;
 

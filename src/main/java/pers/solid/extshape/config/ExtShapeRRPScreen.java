@@ -1,7 +1,7 @@
 package pers.solid.extshape.config;
 
 import com.mojang.datafixers.util.Either;
-import net.devtech.arrp.impl.RuntimeResourcePackImpl;
+import net.devtech.arrp.api.RuntimeResourcePack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.font.MultilineText;
@@ -32,7 +32,7 @@ public class ExtShapeRRPScreen extends Screen {
   protected transient Thread dumpServerDataThread;
   protected TextFieldWidget dumpPathField;
   protected Either<String, Throwable> fullPath;
-  protected Path dumpPath = RuntimeResourcePackImpl.DEFAULT_OUTPUT;
+  protected Path dumpPath = RuntimeResourcePack.DEFAULT_OUTPUT;
 
   protected ButtonWidget finishButton;
 
@@ -167,7 +167,7 @@ public class ExtShapeRRPScreen extends Screen {
   }
 
   @Override
-  public void onClose() {
+  public void close() {
     assert client != null;  // super 里面就忽略了 client==null 的情况
     client.setScreen(parent);
   }

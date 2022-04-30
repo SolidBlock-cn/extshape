@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Util;
+import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -59,7 +60,7 @@ public class ShapesTransfer implements Supplier<Collection<Map<Item, ItemGroup>>
   public Collection<Map<Item, ItemGroup>> get() {
     return ImmutableList.of(COMPILED_SHAPE_TRANSFER_RULES, new ForwardingMap<>() {
       @Override
-      protected Map<Item, ItemGroup> delegate() {
+      protected @NotNull Map<Item, ItemGroup> delegate() {
         return baseBlocksInBuildingBlocks ? BASE_BLOCKS_IN_BUILDING_BLOCKS : ImmutableMap.of();
       }
     });

@@ -11,7 +11,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.data.client.model.TextureKey;
+import net.minecraft.data.client.TextureKey;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;

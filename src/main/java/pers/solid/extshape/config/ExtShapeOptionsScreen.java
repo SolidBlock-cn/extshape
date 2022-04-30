@@ -35,7 +35,7 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
     list = new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25);
     addOptions(newConfig);
     this.addDrawableChild(list);
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, (button) -> onClose()));
+    this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, button -> close()));
   }
 
   @Override
@@ -63,7 +63,7 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
   }
 
   @Override
-  public void onClose() {
+  public void close() {
     if (client != null && !newConfig.addToVanillaGroups && !newConfig.showSpecificGroups) {
       // 由于两个设置都被关闭，因此需要确认是否不添加到任何物品栏。
       client.setScreen(new ConfirmScreen(

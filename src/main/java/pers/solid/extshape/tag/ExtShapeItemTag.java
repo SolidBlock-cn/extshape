@@ -2,7 +2,7 @@ package pers.solid.extshape.tag;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.ApiStatus;
@@ -23,8 +23,8 @@ public class ExtShapeItemTag extends UsableTag<ItemConvertible> {
     return new ExtShapeItemTag(new Identifier(namespace, path), new ArrayList<>(), new ArrayList<>());
   }
 
-  public static ExtShapeItemTag create(Tag.Identified<Item> vanillaItemTag) {
-    return new ExtShapeItemTag(vanillaItemTag.getId(), new ArrayList<>(), new ArrayList<>());
+  public static ExtShapeItemTag create(TagKey<Item> vanillaItemTag) {
+    return new ExtShapeItemTag(vanillaItemTag.id(), new ArrayList<>(), new ArrayList<>());
   }
 
   @Override

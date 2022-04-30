@@ -56,12 +56,10 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
         .replaceAll("^block_of_", "")
         .replaceAll("tiles$", "tile")
         .replaceAll("bricks$", "brick");
-    if (path.equals(newPath)) {
-      return newPath;
-    } else {
+    if (!path.equals(newPath)) {
       PATH_PREFIX_MAPPINGS.putIfAbsent(path, newPath);
-      return newPath;
     }
+    return newPath;
   }
 
   /**
