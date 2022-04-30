@@ -11,8 +11,10 @@ import net.minecraft.item.HoneycombItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
-import pers.solid.extshape.block.*;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
+import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
@@ -22,6 +24,7 @@ public class ExtShape implements ModInitializer {
 
   @Override
   public void onInitialize() {
+    ExtShapeConfig.init();
     ExtShapeBlocks.init();
     ExtShapeItemGroup.init();
     ExtShapeBlockTags.refillTags();
@@ -117,6 +120,7 @@ public class ExtShape implements ModInitializer {
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_VERTICAL_SLABS.toItemTag(), 150);
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_QUARTER_PIECES.toItemTag(), 75);
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_VERTICAL_QUARTER_PIECES.toItemTag(), 75);
+    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_WALLS.toItemTag(), 100);
 
     // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_STAIRS.toItemTag(), 100);
@@ -131,27 +135,23 @@ public class ExtShape implements ModInitializer {
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_FENCE_GATES.toItemTag(), 100);
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_PRESSURE_PLATES.toItemTag(), 67);
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_BUTTONS.toItemTag(), 33);
+    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_WALLS.toItemTag(), 100);
   }
 
   /**
    * 在初始化时，注册所有的可燃方块。
+   *
+   * @see FireBlock#registerDefaultFlammables()
    */
   private void registerFlammableBlocks() {
     // 羊毛方块加入可燃方块
     for (final Block block : ExtShapeBlockTags.WOOLEN_BLOCKS) {
       FlammableBlockRegistry.getDefaultInstance().add(block, 30, 60);
-      if (block instanceof SlabBlock || block instanceof VerticalSlabBlock) FuelRegistry.INSTANCE.add(block, 50);
-      else if (block instanceof AbstractButtonBlock) FuelRegistry.INSTANCE.add(block, 33);
-      else FuelRegistry.INSTANCE.add(block, 100);
     }
 
     // 木头加入可燃方块
     for (final Block block : ExtShapeBlockTags.OVERWORLD_WOODEN_BLOCKS) {
       FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
-      if (block instanceof VerticalSlabBlock) FuelRegistry.INSTANCE.add(block, 150);
-      else if (block instanceof VerticalQuarterPieceBlock || block instanceof QuarterPieceBlock)
-        FuelRegistry.INSTANCE.add(block, 75);
-      else FuelRegistry.INSTANCE.add(block, 300);
     }
   }
 }

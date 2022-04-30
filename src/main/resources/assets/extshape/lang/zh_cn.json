@@ -78,7 +78,8 @@
   "itemGroup.extshape.stone_blocks": "\u00a78扩展方块形状：\u00a7r石质方块",
   "itemGroup.extshape.wooden_blocks": "\u00a78扩展方块形状：\u00a7r木制方块",
 
-  "modmenu.descriptionTranslation.extshape": "本模组为许多方块添加了更多形状，包括原版不存在的形状，如垂直台阶。大多数方块都像原版一样可以合成。借助此模组，你可以制作出更加精美的建筑。",
+  "modmenu.descriptionTranslation.extshape": "本模组为许多原版方块添加了更多形状，包括原版不存在的形状，如垂直台阶、垂直楼梯和横条。大多数方块都具有类似原版的行为，就像其基础方块一样。例如，基岩楼梯和基岩台阶像基岩本身一样可以防爆防凋灵，羊毛栅栏和羊毛栅栏门可燃且可以被剪刀剪。借助此模组，你可以制作出更加精美的建筑，玩生存也会更加有趣。",
+  "modmenu.summaryTranslation.extshape": "为许多原版的方块添加了更多形状，且具有类似原版的行为。",
 
   "options.extshape.title": "扩展方块形状模组配置",
   "options.extshape.addToVanillaGroups": "添加至原版物品组",
@@ -95,10 +96,10 @@
   "options.extshape.rrp.title": "运行时资源包设置",
   "options.extshape.rrp.regenClientResources": "重新生成客户端资源包",
   "options.extshape.rrp.regenClientResources.process": "正在重新生成客户端资源包…",
-  "options.extshape.rrp.regenClientResources.description": "重新生成运行时资源包的客户端资源包。通常不起效果，因为生成的资源往往是相同的。",
+  "options.extshape.rrp.regenClientResources.description": "重新生成本模组的运行时资源包的客户端资源包，不影响原版和其他模组。主要用于开发，一般不起效果。重新生成的资源需按F3+T才会被应用。",
   "options.extshape.rrp.regenServerData": "重新生成服务器数据包",
   "options.extshape.rrp.regenServerData.process": "正在重新生成服务器数据包…",
-  "options.extshape.rrp.regenServerData.description": "重新生成运行时资源包的服务器数据包。通常不起效果，因为生成的资源往往是相同的。",
+  "options.extshape.rrp.regenServerData.description": "重新生成本模组的运行时资源包的服务器数据包，不影响原版和其他模组。主要用于开发，一般不起效果。重新生成的资源需使用/data命令才会被应用。",
   "options.extshape.rrp.exportClientResources": "导出客户端资源包",
   "options.extshape.rrp.exportClientResources.process": "正在导出客户端资源包…",
   "options.extshape.rrp.exportClientResources.description": "将运行时资源包的客户端资源导出到指定的路径中，以便于像普通的资源包一样查看其内容。",

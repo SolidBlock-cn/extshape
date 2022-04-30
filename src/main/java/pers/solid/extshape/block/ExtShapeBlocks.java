@@ -127,7 +127,7 @@ public final class ExtShapeBlocks {
     new BlocksBuilder(SNOW_BLOCK, Items.SNOW_BLOCK, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
     // 黏土块。
-    new BlocksBuilder(CLAY).withShapes().build();
+    new BlocksBuilder(CLAY, Items.CLAY, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
     // 南瓜。
     new BlocksBuilder(PUMPKIN, Items.PUMPKIN_SEEDS, ButtonType.WOODEN, ActivationRule.EVERYTHING).build();

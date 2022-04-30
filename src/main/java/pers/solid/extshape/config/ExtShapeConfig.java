@@ -28,7 +28,7 @@ public class ExtShapeConfig implements Cloneable {
    */
   public static ExtShapeConfig CURRENT_CONFIG = new ExtShapeConfig();
 
-  static {
+  public static void init() {
     CURRENT_CONFIG.writeFile(CURRENT_CONFIG.readFile(CONFIG_FILE), CONFIG_FILE);
     if (CURRENT_CONFIG.registerBlockFamilies) {
       BlockMappings.completeBlockFamilies();
