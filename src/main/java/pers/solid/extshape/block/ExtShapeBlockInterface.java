@@ -1,7 +1,6 @@
 package pers.solid.extshape.block;
 
 import com.google.common.collect.BiMap;
-import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.models.JModel;
@@ -10,7 +9,6 @@ import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.advancement.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.data.client.model.TextureKey;
@@ -39,6 +37,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
    *
    * @return 方块的切石配方。用于切石机。
    */
+  @Override
   default @Nullable JRecipe getStonecuttingRecipe() {
     return null;
   }
@@ -54,19 +53,8 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
   }
 
   @Override
-  default void writeRecipes(RuntimeResourcePack pack) {
-    BlockResourceGenerator.super.writeRecipes(pack);
-    final JRecipe stonecuttingRecipe = getStonecuttingRecipe();
-    if (stonecuttingRecipe != null && isStoneCut(getBaseBlock())) {
-      final Identifier recipeId = getRecipeId().brrp_append("_from_stonecutting");
-      pack.addRecipe(recipeId, stonecuttingRecipe);
-      // the advancement that corresponds to the advancement
-      final Advancement.Task advancement = stonecuttingRecipe.asAdvancement();
-      if (advancement != null && !advancement.getCriteria().isEmpty()) {
-        stonecuttingRecipe.prepareAdvancement(recipeId);
-        pack.addAdvancement(recipeId.brrp_prepend("recipes/"), advancement);
-      }
-    }
+  default boolean shouldWriteStonecuttingRecipe() {
+    return isStoneCut(getBaseBlock());
   }
 
   @Environment(EnvType.CLIENT)

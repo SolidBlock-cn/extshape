@@ -2,9 +2,10 @@
 
 ### 1.5.0
 
-- 自从该版本，模组将依赖 BRRP（更好的运行时资源包）才能运行。由于本模组内嵌了 ARRP 功能，因此您可以不再安装 BRRP 模组。
+这次更新表面上看上去不是很明显，但实际上代码几乎从头到尾都被改了。模组进行过多轮的测试，以确保能够稳定运行，经过反复调试与修改才发布。该版本是与 BRRP 同时开发的，开发过程中也可以一并排查 BRRP 模组中的问题。
+
+- 自从该版本，模组将依赖 BRRP（更好的运行时资源包）才能运行。由于 BRRP 内嵌了 ARRP 功能，因此您可以不再安装 ARRP 模组。
 - 大幅度优化代码，删除了不必要的代码内容。
-- 现在木制方块和羊毛方块可以用作熔炉燃料了。
 - 南瓜、西瓜、苔藓、菌光体、下界疣块、诡异疣块制成的方块可以在堆肥桶中堆肥。
 - 重新加入了下界疣墙和诡异疣墙，并加入了羊毛、苔藓块等制成的墙。
 - 加入了更多标签：
@@ -13,12 +14,31 @@
     - 破坏由金块、粗金块或镶金黑石制成的方块时，猪灵会被激怒（方块标签 `#piglin_guarded`）。
     - 垂滴叶可以放置在苔藓和黏土制成的方块上（方块标签 `#small_dripleaf_placeable_on`）。
     - 羊毛制品现在可以像羊毛一样用剪刀更快破坏了（方块标签 `#fabric:mineable/shears`）。
+    - 重新加入了非石质方块的墙，且不能由石镐更快地破坏。尽管 `#minecraft:mineable/pickaxes` 直接包含了 `#minecraft:walls`，但是本模组让 `#extshape:pickaxe_unmineable` 的方块不再能被镐更快破坏。
 - 为配方加入了对应的解锁进度，当获得配方原料时，进度会被触发，从而解锁该配方。
-    - 该版本更名了运行时数据包内的配方。因此更新后初次进入游戏可能会显示未识别的配方，通常影响不大。
 - 加入了配置界面。可以配置是否将物品加入原版物品组，以及是否加入本模组专用的物品组。此外，还加入了手动重新生成和导出运行时资源包内容的功能。
-- 调整语言文件中的一些错误。
-- 为各类锈蚀程度的涂蜡铜块添加所有形状的方块。
+- 修正语言文件中的一些错误，优化了语言文件中的一些表述。
+- 为各类锈蚀程度的涂蜡铜块添加其他所有形状的方块。
 - 修复苔藓压力板与苔藓地毯配方冲突的问题，参照羊毛的做法，改为配方与压力板相互合成。
+
+The update does not seem obvious, but code is changed from head to toe, actually. Mod is tested repetitively to ensure the stability, and published only rounds of debugs and modifications. This version is developed at the same time with BRRP, so the developing process can find out BRRP-related issues as well.
+
+- Since this version, the mod relies on BRRP (Better Runtime Resource Pack). As BRRP nests ARRP, it's not required to install ARRP anymore.
+- Optimized code massively, and unnecessary codes are removed.
+- Blocks base on pumpkin, melon, moss, shroomlight, nether wart block, warped wart block can be composted.
+- Re-added nether wart walls and crimson wart walls, and added walls made from wool and moss.
+- Added more tags:
+    - Now more blocks based on gold block and raw gold block are loved by piglins (item tag `#piglin_loved`).
+    - If the whole top face of a grass block is covered by a snow stairs or snow slab, the grass block will display snowy (block tag `#extshape:snow`).
+    - Mining blocks based on gold block, raw gold block and gilded blackstone irritates piglins (block tag `#piglin_guarded`).
+    - Dripleaves can be placed on blocks of moss and clay (block tag `#small_dripleaf_placeable_on`).
+    - Wool blocks, like vanilla wools, can be sheared quickly (block tag `#fabric:mineable/shears`).
+    - Re-added walls of non-stone blocks, which cannot be harvested quickly by pickaxes. Although `#minecraft:mineable/pickaxes` directly contains `#minecraft:walls`, this mod lets blocks of `#extshape:pickaxe_unmineable` no possible to be harvested quickly by pickaxes.
+- Added a corresponding unlocking advancement for recipes. When obtaining some ingredients, the advancement is triggered and the recipe is unlocked.
+- Added configuration screen, to config whether to add items into vanilla item groups, and whether to add extra item groups for this block. Besides, the mod adds the feature of manually re-generate and dump runtime resource packs.
+- Fixed some issues in language files, and refined some wording.
+- Added blocks in other all shapes for waxed copper blocks of all oxidation level.
+- Fixed the conflict in the recipe of moss pressure plate and moss carpet. Like wool blocks, a moss pressure plate is now crafted from a moss carpet.
 
 ### 1.4.0
 

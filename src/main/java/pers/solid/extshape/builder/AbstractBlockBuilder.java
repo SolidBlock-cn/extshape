@@ -9,6 +9,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeBlocks;
@@ -61,19 +62,19 @@ public abstract class AbstractBlockBuilder<T extends Block>
   /**
    * 是否注册方块和物品。
    */
-  boolean registerBlock, registerItem;
+  protected boolean registerBlock, registerItem;
   /**
    * 物品设置。
    */
-  @Nullable FabricItemSettings itemSettings;
+  protected @Nullable FabricItemSettings itemSettings;
   /**
    * 物品是否防火。
    */
-  boolean fireproof;
+  protected boolean fireproof;
   /**
    * 该物品所属的物品组。通常是原版的物品组。
    */
-  @Nullable ItemGroup group;
+  protected @Nullable ItemGroup group;
   /**
    * 该方块所拥有的 id。
    */
@@ -111,6 +112,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param settings 方块设置。
    */
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setBlockSettings(FabricBlockSettings settings) {
     this.blockSettings = settings;
     return this;
@@ -122,6 +124,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param settings 物品设置。
    */
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setItemSettings(FabricItemSettings settings) {
     this.itemSettings = settings;
     return this;
@@ -131,6 +134,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * 将方块物品设置为防火。
    */
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> fireproof() {
     this.fireproof = true;
     return this;
@@ -184,6 +188,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param tag 方块标签。
    */
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setDefaultTag(ExtShapeBlockTag tag) {
     this.defaultTag = tag;
     return this;
@@ -194,6 +199,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @Override
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> noRegister() {
     this.registerBlock = false;
     this.registerItem = false;
@@ -231,6 +237,8 @@ public abstract class AbstractBlockBuilder<T extends Block>
    *
    * @param tag 方块构建后，需要添加到的标签。
    */
+  @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> putTag(ExtShapeBlockTag tag) {
     this.tagList.add(tag);
     return this;
@@ -243,12 +251,14 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @ApiStatus.Internal
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setInstance(T instance) {
     this.instance = instance;
     return this;
   }
 
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setInstanceSupplier(Function<AbstractBlockBuilder<T>, T> supplier) {
     this.instanceSupplier = supplier;
     return this;
@@ -260,6 +270,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param group 物品组。若为 {@code null}，则表示不添加到物品组中。
    */
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public AbstractBlockBuilder<T> group(@Nullable ItemGroup group) {
     this.group = group;
     return this;
@@ -271,6 +282,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
   }
 
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   public final AbstractBlockBuilder<T> setPreparationConsumer(@Nullable Consumer<? super AbstractBlockBuilder<T>> consumer) {
     this.preparationConsumer = consumer;
     return this;

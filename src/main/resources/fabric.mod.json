@@ -58,6 +58,6 @@
     "fabric": "*",
     "minecraft": ">=1.18",
     "java": ">=17",
-    "better_runtime_resource_pack": "*"
+    "better_runtime_resource_pack": ">=0.6.2"
   }
 }

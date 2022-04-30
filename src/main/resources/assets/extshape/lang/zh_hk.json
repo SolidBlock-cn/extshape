@@ -78,7 +78,8 @@
   "itemGroup.extshape.stone_blocks": "\u00a78擴展方塊形狀：\u00a7r石質方塊",
   "itemGroup.extshape.other_blocks": "\u00a78擴展方塊形狀：\u00a7r其他",
 
-  "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗多啲形狀，包括原版唔存在嘅形狀，如縱半磚。大多數方塊都好似原版一样可以合成。藉助此模組，你可以製作出更加精美嘅建築。",
+  "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗更多形狀，包括原版唔存在嘅形狀，如縱半磚、縱樓梯和橫條。大多數方塊都有好似原版一样嘅行為，就類似於基礎方塊。比如，基岩樓梯和基岩半磚像基岩本身一樣，可以防爆防凋零怪，羊毛欄杆和羊毛閘門可燃且可以被鉸剪剪碎。藉助此模組，你可以製作出更加精美嘅建築，玩生成也會更貪得意。",
+  "modmenu.summaryTranslation.extshape": "為好多原版方塊添加咗更多形狀，且具有類似原版嘅行為。",
 
   "options.extshape.title": "擴展方塊形狀模組配置",
   "options.extshape.addToVanillaGroups": "添加至原版物品組",
@@ -95,10 +96,10 @@
   "options.extshape.rrp.title": "運行時資源包設置",
   "options.extshape.rrp.regenClientResources": "重新生成用戶端資源包",
   "options.extshape.rrp.regenClientResources.process": "正在重新生成用戶端資源包…",
-  "options.extshape.rrp.regenClientResources.description": "重新生成運行時資源包嘅用戶端資源包。通常唔產生效果，因為生成嘅資源往往一樣。",
+  "options.extshape.rrp.regenClientResources.description": "重新生成本模組嘅運行時資源包嘅用戶端資源包，唔會影響原版同其他模組。主要用於開發，一般不起效果。重新生成的資源需按 F3+T 才會被應用。",
   "options.extshape.rrp.regenServerData": "重新生成伺服器數據包",
   "options.extshape.rrp.regenServerData.process": "正在重新生成伺服器數據包…",
-  "options.extshape.rrp.regenServerData.description": "重新生成運行時資源包開伺服器數據包。通常唔產生效果，因為生成嘅數據往往一樣。",
+  "options.extshape.rrp.regenServerData.description": "重新生成本模組嘅運行時資源包開伺服器數據包，唔會影響原版同其他模組。主要用於開發，一般不起作用。重新生成的資源需使用 /data 指令才會被應用。",
   "options.extshape.rrp.exportClientResources": "匯出用戶端資源包",
   "options.extshape.rrp.exportClientResources.process": "正在匯出用戶端資源包…",
   "options.extshape.rrp.exportClientResources.description": "將運行時資源包嘅用戶端資源匯出到指定路徑中，以便於像通常嘅資源包一樣查看其內容。",

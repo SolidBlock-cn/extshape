@@ -1,6 +1,7 @@
 package pers.solid.extshape.block;
 
 import net.devtech.arrp.api.RuntimeResourcePack;
+import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.recipe.JRecipe;
@@ -13,6 +14,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.data.client.model.BlockStateModelGenerator;
 import net.minecraft.data.client.model.TextureKey;
+import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
@@ -99,15 +101,16 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       final Identifier woolId = Registry.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final JShapelessRecipe recipe = new JShapelessRecipe(carpetId, this.getItemId());
-      recipe.addInventoryChangedCriterion("has_pressure_plate", Registry.ITEM.get(carpetId));
-      final Identifier recipeId = new Identifier(ExtShape.MOD_ID, "decorations/" + carpetId.getPath() + "_from_pressure_plate");
+      final Item carpet = Registry.ITEM.get(carpetId);
+      recipe.addInventoryChangedCriterion("has_pressure_plate", this);
+      final Identifier recipeId = new Identifier(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
       pack.addRecipe(recipeId, recipe);
-      pack.addAdvancement(recipeId.brrp_prepend("recipes/"), recipe.prepareAdvancement(recipeId).advancementBuilder);
+      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(carpet, recipeId), recipe);
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
       final JShapelessRecipe recipe = (JShapelessRecipe) new JShapelessRecipe(Blocks.MOSS_CARPET, this).addInventoryChangedCriterion("has_pressure_plate", this);
-      final Identifier recipeId = new Identifier(ExtShape.MOD_ID, "decorations/moss_carpet_from_pressure_plate");
+      final Identifier recipeId = new Identifier(ExtShape.MOD_ID, "moss_carpet_from_pressure_plate");
       pack.addRecipe(recipeId, recipe);
-      pack.addAdvancement(recipeId.brrp_prepend("recipes/"), recipe.prepareAdvancement(recipeId).advancementBuilder);
+      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(Blocks.MOSS_CARPET, recipeId), recipe);
     }
   }
 

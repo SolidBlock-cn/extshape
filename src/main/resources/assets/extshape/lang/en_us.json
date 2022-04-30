@@ -78,7 +78,8 @@
   "itemGroup.extshape.stone_blocks": "\u00a78Extended Block Shape:\u00a7r Stone Blocks",
   "itemGroup.extshape.other_blocks": "\u00a78Extended Block Shape:\u00a7r Other Blocks",
 
-  "modmenu.descriptionTranslation.extshape": "Added more shapes for many blocks, including shapes that does not exist in vanilla Minecraft, like vertical slabs. Most of the blocks are craftable like in vanilla. With this mod you can make more fascinating buildings!",
+  "modmenu.descriptionTranslation.extshape": "This mod adds more shapes for many vanilla blocks, including shapes that does not exist in vanilla Minecraft, like vertical slabs, vertical stairs or quarter pieces. Most of the blocks have vanilla behaviours, like what their base block behaves. For example, bedrock stairs and slabs are explosion-immune and wither-immune like bedrock, and wool fences and fence gates are flammable and can be shared.\nWith this mod you can make more fascinating buildings, and your survival can be also more interesting.",
+  "modmenu.summaryTranslation.extshape": "More shapes for many vanilla blocks, which behave like in vanilla.",
 
   "options.extshape.title": "Configuration of Extended Block Shapes Mod",
   "options.extshape.addToVanillaGroups": "Add to vanilla groups",
@@ -95,10 +96,10 @@
   "options.extshape.rrp.title": "Runtime Resource Pack settings",
   "options.extshape.rrp.regenClientResources": "Regenerate client resources",
   "options.extshape.rrp.regenClientResources.process": "Regenerating client resources...",
-  "options.extshape.rrp.regenClientResources.description": "Regenerate the client resources of the runtime resource pack. This usually does not take effect, as the resources generated are always the same.",
+  "options.extshape.rrp.regenClientResources.description": "Regenerate the client resources of the runtime resource pack of this mod, not influencing vanilla and other mods. This is primitively used for development and does not take effect. Regenerated resources are applied only after pressing F3+T.",
   "options.extshape.rrp.regenServerData": "Regenerate server data",
   "options.extshape.rrp.regenServerData.process": "Regenerating server data...",
-  "options.extshape.rrp.regenServerData.description": "Regenerate the server data of the runtime resource pack. This usually does not take effect, as the resources generated are always the same.",
+  "options.extshape.rrp.regenServerData.description": "Regenerate the server data of the runtime resource pack of this mod, not influencing vanilla and other mods. This is primitively used for development and does not take effect. Regenerated resources are applied only after using \"/data\" command.",
   "options.extshape.rrp.exportClientResources": "Export client resource pack",
   "options.extshape.rrp.exportClientResources.process": "Exporting client resource pack...",
   "options.extshape.rrp.exportClientResources.description": "Export client resource of runtime resource pack in the specified path so that you can see its content, as if it is a regular resource pack.",
