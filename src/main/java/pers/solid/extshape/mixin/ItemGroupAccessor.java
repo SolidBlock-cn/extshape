@@ -10,7 +10,4 @@ public interface ItemGroupAccessor {
   static void setGroups(ItemGroup[] groups) {
     throw new AssertionError("Mixin is not loaded!");
   }
-
-  @Accessor("index")
-  void setIndex(int index);
 }

@@ -69,7 +69,6 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   @Environment(EnvType.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
-    final Identifier identifier = this.getBlockId();
     final Identifier blockModelId = getBlockModelId();
     final JModel blockModel = getBlockModel();
     pack.addModel(blockModel, blockModelId);

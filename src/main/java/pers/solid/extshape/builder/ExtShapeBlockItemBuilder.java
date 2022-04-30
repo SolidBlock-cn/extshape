@@ -1,5 +1,6 @@
 package pers.solid.extshape.builder;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemGroup;
@@ -19,12 +20,14 @@ public class ExtShapeBlockItemBuilder extends AbstractItemBuilder<ExtShapeBlockI
   }
 
   @Contract(value = "_ -> this", mutates = "this")
+  @CanIgnoreReturnValue
   public ExtShapeBlockItemBuilder group(ItemGroup group) {
     settings.group(group);
     return this;
   }
 
   @Contract(value = "-> this", mutates = "this")
+  @CanIgnoreReturnValue
   public ExtShapeBlockItemBuilder group() {
     Block block = this.block;
     if (block instanceof StairsBlock || block instanceof SlabBlock || block instanceof VerticalSlabBlock || block instanceof QuarterPieceBlock || block instanceof VerticalStairsBlock || block instanceof VerticalQuarterPieceBlock)

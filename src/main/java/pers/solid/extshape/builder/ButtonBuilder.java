@@ -18,11 +18,9 @@ public class ButtonBuilder extends AbstractBlockBuilder<AbstractButtonBlock> {
    * 该集合内的方块将不会生成按钮配方。
    */
   public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.of(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.LAPIS_BLOCK, Blocks.MELON, Blocks.PUMPKIN);
-  public final @NotNull ExtShapeButtonBlock.ButtonType type;
 
   public ButtonBuilder(@NotNull ExtShapeButtonBlock.ButtonType type, Block baseBlock) {
     super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f), builder -> new ExtShapeButtonBlock(baseBlock, type, builder.blockSettings));
-    this.type = type;
     this.defaultTag = ExtShapeBlockTags.BUTTONS;
     this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.BUTTON);
   }

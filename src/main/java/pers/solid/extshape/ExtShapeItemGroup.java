@@ -217,6 +217,7 @@ public class ExtShapeItemGroup extends ItemGroup {
     }
   }
 
+  @SuppressWarnings("EmptyMethod")
   public static void init() {
   }
 

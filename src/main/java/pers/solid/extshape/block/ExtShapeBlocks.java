@@ -306,6 +306,7 @@ public final class ExtShapeBlocks {
   /**
    * 虽然此函数不执行操作，但是执行此函数会确保此类中的静态部分都遍历一遍。
    */
+  @SuppressWarnings("EmptyMethod")
   public static void init() {
   }
 }
