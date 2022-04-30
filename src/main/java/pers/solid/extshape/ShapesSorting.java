@@ -45,6 +45,7 @@ public class ShapesSorting implements Supplier<Collection<Map<Item, Collection<I
   };
   public static final Map<Item, Collection<Item>> COMPILED_ITEM_SHAPE_SORTING_RULES = new HashMap<>();
 
+  @SuppressWarnings("SameReturnValue")
   public static boolean modLoaded() {
     return true;
   }

@@ -9,11 +9,9 @@ import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBlock> {
-  public final @NotNull PressurePlateBlock.ActivationRule type;
 
   protected PressurePlateBuilder(@NotNull PressurePlateBlock.ActivationRule type, Block baseBlock) {
     super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f), builder -> new ExtShapePressurePlateBlock(baseBlock, type, builder.blockSettings));
-    this.type = type;
     this.defaultTag = ExtShapeBlockTags.PRESSURE_PLATES;
     this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.PRESSURE_PLATE);
   }

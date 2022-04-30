@@ -24,7 +24,7 @@ import pers.solid.extshape.ExtShapeItemGroup;
 public class ExtShapeOptionsScreen extends GameOptionsScreen {
 
   public ButtonListWidget list;
-  public ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
+  public final ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
 
   public ExtShapeOptionsScreen(Screen parent) {
     super(parent, MinecraftClient.getInstance().options, new TranslatableText("options.extshape.title"));

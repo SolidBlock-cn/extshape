@@ -43,7 +43,6 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    *
    * @param namespace 标识符的命名空间。
    * @param path      标识符的路径。
-   * @param blocks    方块标签内的初始元素。
    * @return 新的具有指定 id 的方块标签。
    */
   @Contract("_, _ -> new")
@@ -55,7 +54,6 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    * 根据 Minecraft 原版代码中的方块标签（即 {@link net.minecraft.tag.BlockTags} 中的）创建一个新的元素。这里的标识符将直接使用那个标签拥有的标识符。
    *
    * @param vanillaBlockTag 原版的方块标签对象。
-   * @param blocks          标签内的初始元素，通常仅包含本模组内的元素。
    * @return 新的使用已有参数的标识符的方块标签。
    */
   @Contract("_-> new")
