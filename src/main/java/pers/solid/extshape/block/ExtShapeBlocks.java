@@ -295,12 +295,12 @@ public final class ExtShapeBlocks {
     }
 
     // 平滑玄武岩。
-    new BlocksBuilder(SMOOTH_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.EVERYTHING).build();
+    new BlocksBuilder(SMOOTH_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
 
     // 粗铁、粗铜、粗金。
-    for (Block block : new Block[]{RAW_IRON_BLOCK, RAW_COPPER_BLOCK, RAW_GOLD_BLOCK}) {
-      new BlocksBuilder(block).withShapes().build();
-    }
+    new BlocksBuilder(RAW_IRON_BLOCK, Items.RAW_IRON, ButtonType.STONE, ActivationRule.MOBS).build();
+    new BlocksBuilder(RAW_COPPER_BLOCK, Items.RAW_COPPER, ButtonType.STONE, ActivationRule.MOBS).build();
+    new BlocksBuilder(RAW_GOLD_BLOCK, Items.RAW_GOLD, ButtonType.STONE, ActivationRule.MOBS).build();
   }
 
   /**

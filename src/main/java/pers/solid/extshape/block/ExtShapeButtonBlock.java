@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.google.common.collect.ImmutableSet;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.devtech.arrp.json.models.JModel;
@@ -9,6 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.sound.SoundEvent;
@@ -18,10 +20,16 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.builder.ButtonBuilder;
+import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
+import java.util.Collection;
+
 public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShapeVariantBlockInterface {
+  /**
+   * 该集合内的方块将不会生成按钮配方。
+   */
+  public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.of(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK);
   public final ButtonType type;
   public final Block baseBlock;
 
@@ -86,7 +94,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
     final Block baseBlock = getBaseBlock();
-    if (ButtonBuilder.REFUSE_RECIPES.contains(baseBlock)) {
+    if (REFUSE_RECIPES.contains(baseBlock)) {
       return null;
     }
     return new JShapelessRecipe(this, baseBlock)

@@ -18,8 +18,10 @@
 - 为配方加入了对应的解锁进度，当获得配方原料时，进度会被触发，从而解锁该配方。
 - 加入了配置界面。可以配置是否将物品加入原版物品组，以及是否加入本模组专用的物品组。此外，还加入了手动重新生成和导出运行时资源包内容的功能。
 - 修正语言文件中的一些错误，优化了语言文件中的一些表述。
-- 为各类锈蚀程度的涂蜡铜块添加其他所有形状的方块。
+- 为各类锈蚀程度的涂蜡铜块、黏土块和粗矿石方块添加其他所有形状的方块。
 - 修复苔藓压力板与苔藓地毯配方冲突的问题，参照羊毛的做法，改为配方与压力板相互合成。
+- 为解决与 Minecraft 版权协议不兼容的问题，版权协议调整为 LGPL 3.0。
+- 由于合成表并无冲突，西瓜按钮现在可以使用一个西瓜方块合成了。
 
 The update does not seem obvious, but code is changed from head to toe, actually. Mod is tested repetitively to ensure the stability, and published only rounds of debugs and modifications. This version is developed at the same time with BRRP, so the developing process can find out BRRP-related issues as well.
 
@@ -37,8 +39,10 @@ The update does not seem obvious, but code is changed from head to toe, actually
 - Added a corresponding unlocking advancement for recipes. When obtaining some ingredients, the advancement is triggered and the recipe is unlocked.
 - Added configuration screen, to config whether to add items into vanilla item groups, and whether to add extra item groups for this block. Besides, the mod adds the feature of manually re-generate and dump runtime resource packs.
 - Fixed some issues in language files, and refined some wording.
-- Added blocks in other all shapes for waxed copper blocks of all oxidation level.
+- Added blocks in other all shapes for waxed copper blocks of all oxidation level and raw ore blocks.
 - Fixed the conflict in the recipe of moss pressure plate and moss carpet. Like wool blocks, a moss pressure plate is now crafted from a moss carpet.
+- The license is widened to LGPL 3.0 to fix copyright incompatibility with Minecraft.
+- As there is no conflicts in recipes, melon buttons can be crafted with a melon block now.
 
 ### 1.4.0
 
