@@ -45,7 +45,7 @@ public class ExtShapeItemGroup extends ItemGroup {
     WOODEN_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length,
         new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
-        Suppliers.ofInstance(new ItemStack(Blocks.BIRCH_PLANKS)),
+        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.WALL, Blocks.BIRCH_PLANKS))),
         (stacks, group) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
             stacks)))
     );
@@ -53,21 +53,21 @@ public class ExtShapeItemGroup extends ItemGroup {
     COLORFUL_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 1,
         new Identifier(ExtShape.MOD_ID, "colorful_blocks"),
-        Suppliers.ofInstance(new ItemStack(Blocks.YELLOW_WOOL)),
+        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.STAIRS, Blocks.LIME_WOOL))),
         (stacks, group) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, stacks))
     );
 
     STONE_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 2,
         new Identifier(ExtShape.MOD_ID, "stone_blocks"),
-        Suppliers.ofInstance(new ItemStack(Blocks.STONE)),
+        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.FENCE, Blocks.CALCITE))),
         (stacks, group) -> STONE_BLOCKS.forEach(block -> importTo(block, stacks))
     );
 
     OTHER_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 3,
         new Identifier(ExtShape.MOD_ID, "other_blocks"),
-        Suppliers.ofInstance(new ItemStack(Blocks.CHISELED_QUARTZ_BLOCK)),
+        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
         (stacks, group) -> OTHER_BLOCKS.forEach(block -> importTo(block, stacks)));
 
     MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
@@ -185,6 +185,10 @@ public class ExtShapeItemGroup extends ItemGroup {
     final ItemGroup[] groups = ItemGroup.GROUPS;
     final ItemGroup[] newGroups = new ItemGroup[groups.length + 4];
     System.arraycopy(groups, 0, newGroups, 0, groups.length);
+    ((ItemGroupAccessor) WOODEN_BLOCK_GROUP).setIndex(groups.length);
+    ((ItemGroupAccessor) COLORFUL_BLOCK_GROUP).setIndex(groups.length + 1);
+    ((ItemGroupAccessor) STONE_BLOCK_GROUP).setIndex(groups.length + 2);
+    ((ItemGroupAccessor) OTHER_BLOCK_GROUP).setIndex(groups.length + 3);
     newGroups[groups.length] = WOODEN_BLOCK_GROUP;
     newGroups[groups.length + 1] = COLORFUL_BLOCK_GROUP;
     newGroups[groups.length + 2] = STONE_BLOCK_GROUP;
@@ -193,7 +197,17 @@ public class ExtShapeItemGroup extends ItemGroup {
   }
 
   public static void removeGroups() {
-    final ItemGroup[] newGroups = Arrays.stream(ItemGroup.GROUPS).filter(group -> !MOD_GROUPS.contains(group)).toArray(ItemGroup[]::new);
+    final ItemGroup[] newGroups = new ItemGroup[ItemGroup.GROUPS.length - 4];
+    int i = 0;
+    for (ItemGroup group : ItemGroup.GROUPS) {
+      if (!MOD_GROUPS.contains(group)) {
+        newGroups[i] = group;
+        ((ItemGroupAccessor) group).setIndex(i);
+        i += 1;
+      } else {
+        ((ItemGroupAccessor) group).setIndex(-1);
+      }
+    }
     ItemGroupAccessor.setGroups(newGroups);
     final int selectedTab = CreativeInventoryScreenAccessor.getSelectedTab();
     if (selectedTab >= newGroups.length) {
