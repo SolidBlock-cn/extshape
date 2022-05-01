@@ -49,7 +49,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
    * @return 方块能否被切石机切石。
    */
   static boolean isStoneCut(Block baseBlock) {
-    return baseBlock != null && ((AbstractBlockAccessor) baseBlock).getMaterial() == Material.STONE;
+    return baseBlock != null && (((AbstractBlockAccessor) baseBlock).getMaterial() == Material.STONE || ((AbstractBlockAccessor) baseBlock).getMaterial() == Material.METAL);
   }
 
   @Override

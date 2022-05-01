@@ -22,6 +22,8 @@
 - 修复苔藓压力板与苔藓地毯配方冲突的问题，参照羊毛的做法，改为配方与压力板相互合成。
 - 为解决与 Minecraft 版权协议不兼容的问题，版权协议调整为 LGPL 3.0。
 - 由于合成表并无冲突，西瓜按钮现在可以使用一个西瓜方块合成了。
+- 现在，金属制的方块（如下界合金块、远古残骸）也可以被切石了。
+- 调整了创造模式物品组中的物品排列。
 
 The update does not seem obvious, but code is changed from head to toe, actually. Mod is tested repetitively to ensure the stability, and published only rounds of debugs and modifications. This version is developed at the same time with BRRP, so the developing process can find out BRRP-related issues as well.
 
@@ -43,6 +45,8 @@ The update does not seem obvious, but code is changed from head to toe, actually
 - Fixed the conflict in the recipe of moss pressure plate and moss carpet. Like wool blocks, a moss pressure plate is now crafted from a moss carpet.
 - The license is widened to LGPL 3.0 to fix copyright incompatibility with Minecraft.
 - As there is no conflicts in recipes, melon buttons can be crafted with a melon block now.
+- Metal blocks (such as netherite blocks and ancient debris) can be stonecut now.
+- Adjusted arrangement of items in Creative Mode item groups.
 
 ### 1.4.0
 

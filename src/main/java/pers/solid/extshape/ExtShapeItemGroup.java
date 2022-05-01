@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.Contract;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.mixin.AbstractBlockAccessor;
 import pers.solid.extshape.mixin.CreativeInventoryScreenAccessor;
 import pers.solid.extshape.mixin.ItemGroupAccessor;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -95,6 +97,7 @@ public class ExtShapeItemGroup extends ItemGroup {
         Blocks.DEEPSLATE_BRICKS,
         Blocks.DEEPSLATE_TILES,
         Blocks.CHISELED_DEEPSLATE,
+        Blocks.BEDROCK,
         Blocks.TUFF,
         Blocks.CALCITE,
         Blocks.COBBLESTONE,
@@ -111,16 +114,11 @@ public class ExtShapeItemGroup extends ItemGroup {
         Blocks.NETHER_BRICKS,
         Blocks.SMOOTH_BASALT,
         Blocks.RED_NETHER_BRICKS,
-        Blocks.PRISMARINE,
-        Blocks.PRISMARINE_BRICKS,
-        Blocks.DARK_PRISMARINE,
-        Blocks.BRICKS,
         Blocks.BLACKSTONE,
         Blocks.POLISHED_BLACKSTONE,
         Blocks.POLISHED_BLACKSTONE_BRICKS,
         Blocks.OBSIDIAN,
         Blocks.CRYING_OBSIDIAN,
-        Blocks.BEDROCK,
         Blocks.END_STONE,
         Blocks.END_STONE_BRICKS));
     OTHER_BLOCKS.addAll(Arrays.asList(
@@ -166,7 +164,13 @@ public class ExtShapeItemGroup extends ItemGroup {
     WOODEN_BLOCKS.forEach(baseBlockList::remove);
     COLORFUL_BLOCKS.forEach(baseBlockList::remove);
     STONE_BLOCKS.forEach(baseBlockList::remove);
-    OTHER_BLOCKS.addAll(baseBlockList);
+    for (Block block : baseBlockList) {
+      if (((AbstractBlockAccessor) block).getMaterial() == Material.STONE) {
+        STONE_BLOCKS.add(block);
+      } else {
+        OTHER_BLOCKS.add(block);
+      }
+    }
   }
 
   private final Supplier<ItemStack> stackSupplier;
