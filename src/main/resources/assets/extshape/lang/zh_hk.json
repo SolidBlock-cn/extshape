@@ -73,10 +73,10 @@
   "block.extshape.prefix.weathered_copper": "生鏽嘅銅",
   "block.extshape.prefix.weathered_cut_copper": "生鏽嘅切製銅",
 
-  "itemGroup.extshape.wooden_blocks": "\u00a78擴展方塊形狀：\u00a7r木製方塊",
-  "itemGroup.extshape.colorful_blocks": "\u00a78擴展方塊形狀：\u00a7r彩色方塊",
-  "itemGroup.extshape.stone_blocks": "\u00a78擴展方塊形狀：\u00a7r石質方塊",
-  "itemGroup.extshape.other_blocks": "\u00a78擴展方塊形狀：\u00a7r其他",
+  "itemGroup.extshape.wooden_blocks": "\u00a79擴展方塊形狀：\u00a7r木製方塊",
+  "itemGroup.extshape.colorful_blocks": "\u00a79擴展方塊形狀：\u00a7r彩色方塊",
+  "itemGroup.extshape.stone_blocks": "\u00a79擴展方塊形狀：\u00a7r石質方塊",
+  "itemGroup.extshape.other_blocks": "\u00a79擴展方塊形狀：\u00a7r其他",
 
   "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗更多形狀，包括原版唔存在嘅形狀，如縱半磚、縱樓梯和橫條。大多數方塊都有好似原版一样嘅行為，就類似於基礎方塊。比如，基岩樓梯和基岩半磚像基岩本身一樣，可以防爆防凋零怪，羊毛欄杆和羊毛閘門可燃且可以被鉸剪剪碎。藉助此模組，你可以製作出更加精美嘅建築，玩生成也會更貪得意。",
   "modmenu.summaryTranslation.extshape": "為好多原版方塊添加咗更多形狀，且具有類似原版嘅行為。",

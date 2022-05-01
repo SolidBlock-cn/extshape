@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "extshape",
-  "version": "1.5.0-snapshot.2",
+  "version": "1.5.0",
   "icon": "assets/extshape/icon.png",
   "name": "Extended Block Shapes",
   "description": "More blocks in more shapes!",
@@ -13,7 +13,7 @@
     "sources": "https://github.com/SolidBlock-cn/reasonable-sorting",
     "issues": "https://github.com/SolidBlock-cn/reasonable-sorting/issues"
   },
-  "license": "GPLv3",
+  "license": "LGPLv3",
   "environment": "*",
   "entrypoints": {
     "main": [

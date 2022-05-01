@@ -43,7 +43,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
    */
   @Inject(method = "init", at = @At("HEAD"))
   private void injectedInit(CallbackInfo ci) {
-    if (fabric_getPageOffset(fabric_currentPage()) >= ItemGroup.GROUPS.length) {
+    while (fabric_getPageOffset(fabric_currentPage()) >= ItemGroup.GROUPS.length) {
       fabric_previousPage();
     }
   }

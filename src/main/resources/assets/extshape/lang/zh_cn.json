@@ -73,10 +73,10 @@
   "block.extshape.prefix.weathered_copper": "锈蚀的铜",
   "block.extshape.prefix.weathered_cut_copper": "锈蚀的切制铜",
 
-  "itemGroup.extshape.colorful_blocks": "\u00a78扩展方块形状：\u00a7r彩色方块",
-  "itemGroup.extshape.other_blocks": "\u00a78扩展方块形状：\u00a7r其他",
-  "itemGroup.extshape.stone_blocks": "\u00a78扩展方块形状：\u00a7r石质方块",
-  "itemGroup.extshape.wooden_blocks": "\u00a78扩展方块形状：\u00a7r木制方块",
+  "itemGroup.extshape.colorful_blocks": "\u00a79扩展方块形状：\u00a7r彩色方块",
+  "itemGroup.extshape.other_blocks": "\u00a79扩展方块形状：\u00a7r其他",
+  "itemGroup.extshape.stone_blocks": "\u00a79扩展方块形状：\u00a7r石质方块",
+  "itemGroup.extshape.wooden_blocks": "\u00a79扩展方块形状：\u00a7r木制方块",
 
   "modmenu.descriptionTranslation.extshape": "本模组为许多原版方块添加了更多形状，包括原版不存在的形状，如垂直台阶、垂直楼梯和横条。大多数方块都具有类似原版的行为，就像其基础方块一样。例如，基岩楼梯和基岩台阶像基岩本身一样可以防爆防凋灵，羊毛栅栏和羊毛栅栏门可燃且可以被剪刀剪。借助此模组，你可以制作出更加精美的建筑，玩生存也会更加有趣。",
   "modmenu.summaryTranslation.extshape": "为许多原版的方块添加了更多形状，且具有类似原版的行为。",

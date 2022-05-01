@@ -73,10 +73,10 @@
   "block.extshape.prefix.weathered_copper": "風化的銅",
   "block.extshape.prefix.weathered_cut_copper": "風化的切製銅",
 
-  "itemGroup.extshape.wooden_blocks": "\u00a78擴展方塊形狀：\u00a7r木製方塊",
-  "itemGroup.extshape.colorful_blocks": "\u00a78擴展方塊形狀：\u00a7r彩色方塊",
-  "itemGroup.extshape.stone_blocks": "\u00a78擴展方塊形狀：\u00a7r石質方塊",
-  "itemGroup.extshape.other_blocks": "\u00a78擴展方塊形狀：\u00a7r其他",
+  "itemGroup.extshape.wooden_blocks": "\u00a79擴展方塊形狀：\u00a7r木製方塊",
+  "itemGroup.extshape.colorful_blocks": "\u00a79擴展方塊形狀：\u00a7r彩色方塊",
+  "itemGroup.extshape.stone_blocks": "\u00a79擴展方塊形狀：\u00a7r石質方塊",
+  "itemGroup.extshape.other_blocks": "\u00a79擴展方塊形狀：\u00a7r其他",
 
   "modmenu.descriptionTranslation.extshape": "本模組為許多原版方塊添加了更多形狀，包括原版不存在的形狀，如縱半磚、縱樓梯和橫條。大多數方塊都具有類似於原版的行為，就像其基礎方塊一樣。例如，基岩階梯和基岩半磚像基岩本身一樣可以防爆防凋零怪，羊毛柵欄和羊毛柵欄門可燃且可以被剪刀剪。藉助此模組，你可以製作出更加精美的建築，玩生存也會更加有趣。",
   "modmenu.summaryTranslation.extshape": "為許多原版方塊添加了更多形狀，且具有類似原版的行為。",
