@@ -92,7 +92,7 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
     list.addOptionEntry(
         CyclingOption.create("options.extshape.addToVanillaGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.addToVanillaGroups, (gameOptions, option, value) -> config.addToVanillaGroups = value)
             .tooltip(client -> b -> client.textRenderer.wrapLines(
-                new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName())
+                new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getTranslationKey(), ItemGroup.DECORATIONS.getTranslationKey(), ItemGroup.REDSTONE.getTranslationKey())
                     .append("\n\n")
                     .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)), 256)),
         CyclingOption.create("options.extshape.showSpecificGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.showSpecificGroups, (gameOptions, option, value) -> config.showSpecificGroups = value)

@@ -1,6 +1,6 @@
 package pers.solid.extshape.tag;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import net.devtech.arrp.json.tags.JTag;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
@@ -48,7 +48,6 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
     return entryList.addAll(c);
   }
 
-  @CanIgnoreReturnValue
   @SuppressWarnings("UnusedReturnValue")
   public boolean addTag(UsableTag<E> es) {
     if (this.identifier != null && es.identifier == null) {

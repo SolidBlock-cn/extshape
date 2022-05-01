@@ -1,6 +1,6 @@
 package pers.solid.extshape.builder;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import net.minecraft.util.Identifier;
 
 interface Builder<T> {
@@ -12,7 +12,6 @@ interface Builder<T> {
   /**
    * 构造对象时，不将其注册到注册表。
    */
-  @CanIgnoreReturnValue
   Builder<T> noRegister();
 
   /**
@@ -25,7 +24,6 @@ interface Builder<T> {
    *
    * @param identifier 命名空间id。
    */
-  @CanIgnoreReturnValue
   Builder<T> setIdentifier(Identifier identifier);
 
   /**

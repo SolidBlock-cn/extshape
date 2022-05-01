@@ -1,7 +1,6 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.BiMap;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -111,7 +110,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
    *
    * @param settings 方块设置。
    */
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setBlockSettings(FabricBlockSettings settings) {
     this.blockSettings = settings;
@@ -123,7 +121,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
    *
    * @param settings 物品设置。
    */
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setItemSettings(FabricItemSettings settings) {
     this.itemSettings = settings;
@@ -133,7 +130,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
   /**
    * 将方块物品设置为防火。
    */
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> fireproof() {
     this.fireproof = true;
@@ -187,7 +183,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
    *
    * @param tag 方块标签。
    */
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setDefaultTag(ExtShapeBlockTag tag) {
     this.defaultTag = tag;
@@ -198,7 +193,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * 不注册方块和物品。
    */
   @Override
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> noRegister() {
     this.registerBlock = false;
@@ -237,7 +231,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
    *
    * @param tag 方块构建后，需要添加到的标签。
    */
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> putTag(ExtShapeBlockTag tag) {
     this.tagList.add(tag);
@@ -250,14 +243,12 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param instance 方块实例。一般是一个新的方块对象。
    */
   @ApiStatus.Internal
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setInstance(T instance) {
     this.instance = instance;
     return this;
   }
 
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> setInstanceSupplier(Function<AbstractBlockBuilder<T>, T> supplier) {
     this.instanceSupplier = supplier;
@@ -269,7 +260,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
    *
    * @param group 物品组。若为 {@code null}，则表示不添加到物品组中。
    */
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public AbstractBlockBuilder<T> group(@Nullable ItemGroup group) {
     this.group = group;
@@ -281,7 +271,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
     this.instance = this.instanceSupplier.apply(this);
   }
 
-  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   public final AbstractBlockBuilder<T> setPreparationConsumer(@Nullable Consumer<? super AbstractBlockBuilder<T>> consumer) {
     this.preparationConsumer = consumer;

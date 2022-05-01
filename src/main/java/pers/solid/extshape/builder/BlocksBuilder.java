@@ -1,6 +1,6 @@
 package pers.solid.extshape.builder;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
 import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.block.Block;
@@ -66,7 +66,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
     }
   }
 
-  @CanIgnoreReturnValue
   public BlocksBuilder setPreparationConsumer(@Nullable BiConsumer<Shape, AbstractBlockBuilder<? extends Block>> preparationConsumer) {
     this.preparationConsumer = preparationConsumer;
     return this;
@@ -78,7 +77,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    * @param condition 条件。
    * @param shapes    条件成立时，构造这些形状，否则不构造这些形状。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withIf(boolean condition, Shape... shapes) {
     for (Shape shape : shapes) shapeToWhetherBuild.put(shape, condition);
     return this;
@@ -89,7 +87,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    *
    * @param shapes 形状。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder with(Shape... shapes) {
     return this.withIf(true, shapes);
   }
@@ -99,7 +96,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    *
    * @param shapes 形状。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder without(Shape... shapes) {
     return this.withIf(false, shapes);
   }
@@ -107,7 +103,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
   /**
    * 不构造栅栏。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withoutFences() {
     shapeToWhetherBuild.put(Shape.FENCE, false);
     shapeToWhetherBuild.put(Shape.FENCE_GATE, false);
@@ -118,7 +113,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    * 构造基础形状。
    * 基础形状包括楼梯、台阶、垂直楼梯等。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withShapes() {
     return this.with(Shape.STAIRS, Shape.SLAB, Shape.VERTICAL_QUARTER_PIECE, Shape.VERTICAL_STAIRS, Shape.VERTICAL_SLAB, Shape.QUARTER_PIECE);
   }
@@ -126,7 +120,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
   /**
    * 不构造基础形状。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withoutShapes() {
     return this.without(Shape.STAIRS, Shape.SLAB, Shape.VERTICAL_QUARTER_PIECE, Shape.VERTICAL_SLAB, Shape.VERTICAL_STAIRS, Shape.QUARTER_PIECE);
   }
@@ -136,7 +129,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    *
    * @param fenceCraftingIngredient 合成栅栏或栅栏门需要使用的第二合成材料。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withFences(@NotNull Item fenceCraftingIngredient) {
     shapeToWhetherBuild.put(Shape.FENCE, true);
     shapeToWhetherBuild.put(Shape.FENCE_GATE, true);
@@ -147,7 +139,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
   /**
    * 不构造墙。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withoutWall() {
     shapeToWhetherBuild.put(Shape.WALL, false);
     return this;
@@ -156,7 +147,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
   /**
    * 构造墙。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withWall() {
     shapeToWhetherBuild.put(Shape.WALL, true);
     return this;
@@ -165,7 +155,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
   /**
    * 不构造红石机关。按钮、压力板都将不会构造，栅栏门虽也属于红石机关但不受影响。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withoutRedstone() {
     shapeToWhetherBuild.put(Shape.BUTTON, false);
     shapeToWhetherBuild.put(Shape.PRESSURE_PLATE, false);
@@ -175,7 +164,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
   /**
    * 不构造按钮。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withoutButton() {
     shapeToWhetherBuild.put(Shape.BUTTON, false);
     return this;
@@ -186,7 +174,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    *
    * @param type 按钮类型。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withButton(@NotNull ExtShapeButtonBlock.ButtonType type) {
     shapeToWhetherBuild.put(Shape.BUTTON, true);
     this.buttonType = type;
@@ -196,7 +183,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
   /**
    * 不构造压力板。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withoutPressurePlate() {
     shapeToWhetherBuild.put(Shape.PRESSURE_PLATE, false);
     return this;
@@ -207,7 +193,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    *
    * @param type 压力板类型。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder withPressurePlate(@NotNull PressurePlateBlock.ActivationRule type) {
     shapeToWhetherBuild.put(Shape.PRESSURE_PLATE, true);
     this.pressurePlateActivationRule = type;
@@ -217,7 +202,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
   /**
    * 如果需要构造的方块都会构造对应的方块物品，则这些方块物品将会是防火的。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder fireproof() {
     this.fireproof = true;
     return this;
@@ -229,7 +213,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    * @param shape 形状。
    * @param tag   默认方块标签。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder setDefaultTagOf(@Nullable Shape shape, @Nullable ExtShapeBlockTag tag) {
     if (shape == null || tag == null) return this;
     defaultTags.put(shape, tag);
@@ -241,7 +224,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    *
    * @param map 由形状到方块标签的映射。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder setDefaultTagOf(Map<@Nullable Shape, @Nullable ExtShapeBlockTag> map) {
     for (Entry<@Nullable Shape, @Nullable ExtShapeBlockTag> entry : map.entrySet()) {
       if (entry.getKey() == null || entry.getValue() == null) continue;
@@ -255,7 +237,6 @@ public class BlocksBuilder extends EnumMap<Shape, AbstractBlockBuilder<? extends
    *
    * @param tag 构造后所有的方块都需要放入的标签。
    */
-  @CanIgnoreReturnValue
   public BlocksBuilder putTag(ExtShapeBlockTag tag) {
     this.tagList.add(tag);
     return this;
