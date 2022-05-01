@@ -73,7 +73,7 @@ Since 1.5.0, all recipes can be unlocked when obtaining any of the base block. T
 
 ### Creative Inventory
 
-In creative mode, multiple item groups are set in order to sort items in order. Blocks based on a same block (including vanilla blocks) are arranged together, so that it's possible conveniently obtains multiple shapes of one block.
+In creative mode, multiple item groups are set in order to sort items in order. Blocks based on a same block (including vanilla blocks) are arranged together, so that it's possible to conveniently obtain multiple shapes of one block.
 
 Besides, you can choose to make blocks added by the mod appear in vanilla item groups, which however may case the item list messy. You can configure it in your mod config screen (requires Mod Menu).
 
