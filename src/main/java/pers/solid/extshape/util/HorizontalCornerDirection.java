@@ -7,9 +7,13 @@ import net.minecraft.util.Util;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -67,8 +71,8 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     return fromHorizontal(MathHelper.floor(rotation / 90.0D) & 3);
   }
 
-  public static Direction random(Random random) {
-    return (Direction) Util.getRandom((Object[]) ALL, random);
+  public static HorizontalCornerDirection random(Random random) {
+    return Util.getRandom(ALL, random);
   }
 
   @Override
