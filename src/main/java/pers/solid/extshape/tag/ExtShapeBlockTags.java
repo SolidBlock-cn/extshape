@@ -31,6 +31,7 @@ public final class ExtShapeBlockTags {
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
       DARK_OAK_PLANKS,
+      MANGROVE_PLANKS /* 1.19 */,
       CRIMSON_PLANKS,
       WARPED_PLANKS
   );
@@ -40,7 +41,8 @@ public final class ExtShapeBlockTags {
       BIRCH_PLANKS,
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
-      DARK_OAK_PLANKS
+      DARK_OAK_PLANKS,
+      MANGROVE_PLANKS /* 1.19 */
   );
   public static final @Unmodifiable ImmutableList<Block> STONE_VARIANTS = ImmutableList.of(
       GRANITE,

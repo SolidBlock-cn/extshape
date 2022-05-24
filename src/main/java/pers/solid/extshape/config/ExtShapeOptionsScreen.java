@@ -5,17 +5,14 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.option.CyclingOption;
-import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.Option;
+import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.screen.ScreenTexts;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
@@ -27,7 +24,7 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
   public final ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
 
   public ExtShapeOptionsScreen(Screen parent) {
-    super(parent, MinecraftClient.getInstance().options, new TranslatableText("options.extshape.title"));
+    super(parent, MinecraftClient.getInstance().options, Text.translatable("options.extshape.title"));
   }
 
   @Override
@@ -77,10 +74,10 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
               client.setScreen(this);
             }
           },
-          new TranslatableText("options.extshape.confirm"),
-          new TranslatableText("options.extshape.confirm.noGroups", new TranslatableText("options.extshape.addToVanillaGroups").formatted(Formatting.GRAY), new TranslatableText("options.extshape.showSpecificGroups").formatted(Formatting.GRAY), ScreenTexts.OFF),
+          Text.translatable("options.extshape.confirm"),
+          Text.translatable("options.extshape.confirm.noGroups", Text.translatable("options.extshape.addToVanillaGroups").formatted(Formatting.GRAY), Text.translatable("options.extshape.showSpecificGroups").formatted(Formatting.GRAY), ScreenTexts.OFF),
           ScreenTexts.YES,
-          new TranslatableText("options.extshape.confirm.redo")
+          Text.translatable("options.extshape.confirm.redo")
       ));
       return;
     }
@@ -90,31 +87,25 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
 
   public void addOptions(ExtShapeConfig config) {
     list.addOptionEntry(
-        CyclingOption.create("options.extshape.addToVanillaGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.addToVanillaGroups, (gameOptions, option, value) -> config.addToVanillaGroups = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(
-                new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName())
+        SimpleOption.ofBoolean("options.extshape.addToVanillaGroups", SimpleOption.constantTooltip(
+                Text.translatable("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName())
                     .append("\n\n")
-                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)), 256)),
-        CyclingOption.create("options.extshape.showSpecificGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.showSpecificGroups, (gameOptions, option, value) -> config.showSpecificGroups = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(
-                new TranslatableText("options.extshape.showSpecificGroups.tooltip")
+                    .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))), config.addToVanillaGroups
+            , value -> config.addToVanillaGroups = value),
+        SimpleOption.ofBoolean("options.extshape.showSpecificGroups", (SimpleOption.constantTooltip(
+                Text.translatable("options.extshape.showSpecificGroups.tooltip")
                     .append("\n\n")
-                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY)), 256))
-    );
+                    .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY)))), config.showSpecificGroups
+            , value -> config.showSpecificGroups = value
+        ));
     list.addOptionEntry(
-        CyclingOption.create("options.extshape.registerBlockFamilies", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.registerBlockFamilies, (gameOptions, option, value) -> config.registerBlockFamilies = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(
-                new TranslatableText("options.extshape.registerBlockFamilies.description")
-                    .append("\n\n")
-                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY)), 256)),
-        new Option("options.extshape.rrp.title") {
-          @Override
-          public ClickableWidget createButton(GameOptions options, int x, int y, int width) {
-            return new ButtonWidget(x, y, width, 20, getDisplayPrefix(), button -> {
-              if (client != null) client.setScreen(new ExtShapeRRPScreen(ExtShapeOptionsScreen.this));
-            });
-          }
-        }
+        SimpleOption.ofBoolean("options.extshape.registerBlockFamilies", SimpleOption.constantTooltip(
+            Text.translatable("options.extshape.registerBlockFamilies.description")
+                .append("\n\n")
+                .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY))), config.registerBlockFamilies, value -> config.registerBlockFamilies = value),
+        new SimpleOption<Void>("options.extshape.rrp.title", SimpleOption.emptyTooltip(), null, new SimpleOption.LazyCyclingCallbacks<>(null, null, null), null, value -> {
+          if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
+        })
     );
   }
 }

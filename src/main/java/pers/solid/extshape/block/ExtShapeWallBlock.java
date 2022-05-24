@@ -4,7 +4,7 @@ import net.devtech.arrp.generator.BRRPWallBlock;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -16,7 +16,7 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
 
   @Override
   public MutableText getName() {
-    return new TranslatableText("block.extshape.?_wall", this.getNamePrefix());
+    return Text.translatable("block.extshape.?_wall", this.getNamePrefix());
   }
 
   @Override

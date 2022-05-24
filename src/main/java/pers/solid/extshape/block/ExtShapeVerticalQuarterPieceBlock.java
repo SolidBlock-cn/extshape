@@ -9,7 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -29,7 +29,7 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
 
   @Override
   public MutableText getName() {
-    return new TranslatableText("block.extshape.?_vertical_quarter_piece", this.getNamePrefix());
+    return Text.translatable("block.extshape.?_vertical_quarter_piece", this.getNamePrefix());
   }
 
   @Environment(EnvType.CLIENT)

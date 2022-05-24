@@ -5,7 +5,7 @@ import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -21,7 +21,7 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
 
   @Override
   public MutableText getName() {
-    return new TranslatableText("block.extshape.?_fence_gate", this.getNamePrefix());
+    return Text.translatable("block.extshape.?_fence_gate", this.getNamePrefix());
   }
 
   @NotNull

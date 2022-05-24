@@ -16,7 +16,7 @@ import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +39,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   @Override
   public MutableText getName() {
-    return new TranslatableText("block.extshape.?_pressure_plate", this.getNamePrefix());
+    return Text.translatable("block.extshape.?_pressure_plate", this.getNamePrefix());
   }
 
 

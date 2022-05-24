@@ -6,13 +6,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.font.MultilineText;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ScreenTexts;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.ResourceType;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.screen.ScreenTexts;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShapeRRP;
 
@@ -37,7 +37,7 @@ public class ExtShapeRRPScreen extends Screen {
   protected ButtonWidget finishButton;
 
   protected ExtShapeRRPScreen(Screen parent) {
-    super(new TranslatableText("options.extshape.rrp.title"));
+    super(Text.translatable("options.extshape.rrp.title"));
     this.parent = parent;
   }
 
@@ -46,11 +46,11 @@ public class ExtShapeRRPScreen extends Screen {
     super.init();
     // 里面的内容不需要被选中，所以只是drawable。
     addDrawable(new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25));
-    addDrawableChild(regenClientResourcesButton = new ButtonWidget(width / 2 - 205, 36, 200, 20, new TranslatableText("options.extshape.rrp.regenClientResources"), button -> {
+    addDrawableChild(regenClientResourcesButton = new ButtonWidget(width / 2 - 205, 36, 200, 20, Text.translatable("options.extshape.rrp.regenClientResources"), button -> {
       if (regenClientResourcesThread != null && regenClientResourcesThread.getState() != Thread.State.TERMINATED) return;
       (
           regenClientResourcesThread = new Thread(() -> {
-            regenClientResourcesButton.setMessage(new TranslatableText("options.extshape.rrp.regenClientResources.process"));
+            regenClientResourcesButton.setMessage(Text.translatable("options.extshape.rrp.regenClientResources.process"));
             regenClientResourcesButton.active = false;
             try {
               ExtShapeRRP.CLIENT_PACK.clearResources(ResourceType.CLIENT_RESOURCES);
@@ -58,17 +58,17 @@ public class ExtShapeRRPScreen extends Screen {
             } catch (Throwable throwable) {
               ExtShapeConfig.LOGGER.error("Error when regenerating client resources.", throwable);
             } finally {
-              regenClientResourcesButton.setMessage(new TranslatableText("options.extshape.rrp.regenClientResources"));
+              regenClientResourcesButton.setMessage(Text.translatable("options.extshape.rrp.regenClientResources"));
               regenClientResourcesButton.active = true;
             }
           })
       ).start();
       regenClientResourcesThread.setName("RegenClientResources");
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.regenClientResources.description"), 250), mouseX, mouseY)));
-    addDrawableChild(regenServerDataButton = new ButtonWidget(width / 2 + 5, 36, 200, 20, new TranslatableText("options.extshape.rrp.regenServerData"), button -> {
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.regenClientResources.description"), 250), mouseX, mouseY)));
+    addDrawableChild(regenServerDataButton = new ButtonWidget(width / 2 + 5, 36, 200, 20, Text.translatable("options.extshape.rrp.regenServerData"), button -> {
       if (regenServerDataThread != null && regenServerDataThread.getState() != Thread.State.TERMINATED) return;
       (regenServerDataThread = new Thread(() -> {
-        regenServerDataButton.setMessage(new TranslatableText("options.extshape.rrp.regenServerData.process"));
+        regenServerDataButton.setMessage(Text.translatable("options.extshape.rrp.regenServerData.process"));
         regenServerDataButton.active = false;
         try {
           ExtShapeRRP.STANDARD_PACK.clearResources(ResourceType.SERVER_DATA);
@@ -76,16 +76,16 @@ public class ExtShapeRRPScreen extends Screen {
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when regenerating server data.", throwable);
         } finally {
-          regenServerDataButton.setMessage(new TranslatableText("options.extshape.rrp.regenServerData"));
+          regenServerDataButton.setMessage(Text.translatable("options.extshape.rrp.regenServerData"));
           regenServerDataButton.active = true;
         }
       })).start();
       regenServerDataThread.setName("RegenServerData");
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.regenServerData.description"), 250), mouseX, mouseY)));
-    addDrawableChild(dumpClientResourcesButton = new ButtonWidget(width / 2 - 205, 61, 200, 20, new TranslatableText("options.extshape.rrp.exportClientResources"), button -> {
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.regenServerData.description"), 250), mouseX, mouseY)));
+    addDrawableChild(dumpClientResourcesButton = new ButtonWidget(width / 2 - 205, 61, 200, 20, Text.translatable("options.extshape.rrp.exportClientResources"), button -> {
       if (dumpClientResourcesThread != null && dumpClientResourcesThread.getState() != Thread.State.TERMINATED) return;
       (dumpClientResourcesThread = new Thread(() -> {
-        dumpClientResourcesButton.setMessage(new TranslatableText("options.extshape.rrp.exportClientResources.process"));
+        dumpClientResourcesButton.setMessage(Text.translatable("options.extshape.rrp.exportClientResources.process"));
         dumpClientResourcesButton.active = false;
         try {
           ExtShapeRRP.CLIENT_PACK.dump(dumpPath);
@@ -93,16 +93,16 @@ public class ExtShapeRRPScreen extends Screen {
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when dumping client resource.", throwable);
         } finally {
-          dumpClientResourcesButton.setMessage(new TranslatableText("options.extshape.rrp.exportClientResources"));
+          dumpClientResourcesButton.setMessage(Text.translatable("options.extshape.rrp.exportClientResources"));
           dumpClientResourcesButton.active = true;
         }
       })).start();
       dumpClientResourcesThread.setName("DumpClientResources");
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.exportClientResources.description"), 250), mouseX, mouseY)));
-    addDrawableChild(dumpServerDataButton = new ButtonWidget(width / 2 + 5, 61, 200, 20, new TranslatableText("options.extshape.rrp.exportServerData"), button -> {
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.exportClientResources.description"), 250), mouseX, mouseY)));
+    addDrawableChild(dumpServerDataButton = new ButtonWidget(width / 2 + 5, 61, 200, 20, Text.translatable("options.extshape.rrp.exportServerData"), button -> {
       if (dumpServerDataThread != null && dumpServerDataThread.getState() != Thread.State.TERMINATED) return;
       (dumpServerDataThread = new Thread(() -> {
-        dumpServerDataButton.setMessage(new TranslatableText("options.extshape.rrp.exportServerData.process"));
+        dumpServerDataButton.setMessage(Text.translatable("options.extshape.rrp.exportServerData.process"));
         dumpServerDataButton.active = false;
         try {
           ExtShapeRRP.STANDARD_PACK.dump(dumpPath);
@@ -110,14 +110,14 @@ public class ExtShapeRRPScreen extends Screen {
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when dumping server data.", throwable);
         } finally {
-          dumpServerDataButton.setMessage(new TranslatableText("options.extshape.rrp.exportServerData"));
+          dumpServerDataButton.setMessage(Text.translatable("options.extshape.rrp.exportServerData"));
           dumpServerDataButton.active = true;
         }
       })).start();
       dumpServerDataThread.setName("DumpServerData");
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.exportServerData.description"), 250), mouseX, mouseY)));
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.exportServerData.description"), 250), mouseX, mouseY)));
     if (dumpPathField == null) {
-      addDrawableChild(dumpPathField = new TextFieldWidget(textRenderer, width / 2 - 140, 115, 250, 20, new TranslatableText("options.extshape.rrp.exportFilePath")));
+      addDrawableChild(dumpPathField = new TextFieldWidget(textRenderer, width / 2 - 140, 115, 250, 20, Text.translatable("options.extshape.rrp.exportFilePath")));
       dumpPathField.setMaxLength(Integer.MAX_VALUE);
       dumpPathField.setChangedListener(s -> {
         try {
@@ -150,9 +150,9 @@ public class ExtShapeRRPScreen extends Screen {
 
     super.render(matrices, mouseX, mouseY, delta);
     drawCenteredText(matrices, textRenderer, title, width / 2, 16, 0xffffff);
-    drawCenteredText(matrices, textRenderer, new TranslatableText("options.extshape.rrp.textFieldHeader"), width / 2, 100, 0xffffff);
+    drawCenteredText(matrices, textRenderer, Text.translatable("options.extshape.rrp.textFieldHeader"), width / 2, 100, 0xffffff);
     if (fullPath != null) {
-      MultilineText.create(textRenderer, fullPath.map(s -> new TranslatableText("options.extshape.rrp.fullPath", s).formatted(Formatting.GRAY), throwable -> new TranslatableText("options.extshape.rrp.invalidPath", throwable.getMessage()).formatted(Formatting.RED)), width - 40).drawCenterWithShadow(matrices, width / 2, 140);
+      MultilineText.create(textRenderer, fullPath.map(s -> Text.translatable("options.extshape.rrp.fullPath", s).formatted(Formatting.GRAY), throwable -> Text.translatable("options.extshape.rrp.invalidPath", throwable.getMessage()).formatted(Formatting.RED)), width - 40).drawCenterWithShadow(matrices, width / 2, 140);
     }
   }
 

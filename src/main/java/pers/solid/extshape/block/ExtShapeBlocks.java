@@ -143,6 +143,11 @@ public final class ExtShapeBlocks {
       new BlocksBuilder(block).withShapes().withFences(Items.FLINT).withWall().build();
     }
 
+    // 泥（自 1.19）。
+    for (final Block block : new Block[]{PACKED_MUD, MUD_BRICKS}) {
+      new BlocksBuilder(block, Items.MUD, ButtonType.STONE, ActivationRule.MOBS).build();
+    }
+
     // 西瓜。
     new BlocksBuilder(MELON, Items.MELON_SLICE, ButtonType.WOODEN, ActivationRule.EVERYTHING).build();
 

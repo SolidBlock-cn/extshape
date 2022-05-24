@@ -419,7 +419,7 @@ final class Mineable {
 //      Blocks.MEDIUM_AMETHYST_BUD,
 //      Blocks.LARGE_AMETHYST_BUD,
       Blocks.AMETHYST_BLOCK,
-      Blocks.BUDDING_AMETHYST
+      Blocks.BUDDING_AMETHYST,
 //      Blocks.INFESTED_COBBLESTONE,
 //      Blocks.INFESTED_CHISELED_STONE_BRICKS,
 //      Blocks.INFESTED_CRACKED_STONE_BRICKS,
@@ -427,6 +427,8 @@ final class Mineable {
 //      Blocks.INFESTED_STONE,
 //      Blocks.INFESTED_MOSSY_STONE_BRICKS,
 //      Blocks.INFESTED_STONE_BRICKS
+      Blocks.MUD_BRICKS,
+      Blocks.PACKED_MUD
   );
   static final @Unmodifiable ImmutableSet<Block> VANILLA_SHOVEL_MINEABLE = ImmutableSet.of(Blocks.CLAY,
       Blocks.DIRT,

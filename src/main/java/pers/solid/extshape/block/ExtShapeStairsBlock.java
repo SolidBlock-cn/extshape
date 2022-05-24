@@ -4,7 +4,7 @@ import net.devtech.arrp.generator.BRRPStairsBlock;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
@@ -16,7 +16,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
 
   @Override
   public MutableText getName() {
-    return new TranslatableText("block.extshape.?_stairs", this.getNamePrefix());
+    return Text.translatable("block.extshape.?_stairs", this.getNamePrefix());
   }
 
   @Override

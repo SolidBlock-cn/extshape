@@ -12,7 +12,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +34,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
 
   @Override
   public MutableText getName() {
-    return new TranslatableText("block.extshape.?_quarter_piece", this.getNamePrefix());
+    return Text.translatable("block.extshape.?_quarter_piece", this.getNamePrefix());
   }
 
 

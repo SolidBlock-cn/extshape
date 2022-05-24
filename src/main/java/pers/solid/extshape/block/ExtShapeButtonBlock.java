@@ -16,7 +16,7 @@ import net.minecraft.data.client.TextureKey;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,7 +53,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
 
   @Override
   public MutableText getName() {
-    return new TranslatableText("block.extshape.?_button", this.getNamePrefix());
+    return Text.translatable("block.extshape.?_button", this.getNamePrefix());
   }
 
   @Override

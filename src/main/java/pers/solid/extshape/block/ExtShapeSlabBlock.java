@@ -9,7 +9,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +22,7 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
 
   @Override
   public MutableText getName() {
-    return new TranslatableText("block.extshape.?_slab", this.getNamePrefix());
+    return Text.translatable("block.extshape.?_slab", this.getNamePrefix());
   }
 
   @Environment(EnvType.CLIENT)
