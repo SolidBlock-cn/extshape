@@ -63,7 +63,7 @@ Stone-cutting recipe of some blocks are as follows:
 - 1×vertical stairs → 3×vertical quarter pieces
 - 1×vertical slab → 2×quarter pieces / 2×vertical quarter pieces
 
-NOTE: Items in this mod are not recursively stonecuttable like some items in vanilla Minecraft. For example, in vanilla Minecraft, an unpolished andesite can be cut into a polished andesite stairs or slab. Blocks in this mod can not be cut like this.
+Since 1.5.1, items in this mod are recursively stonecuttable. For example, an unpolished andesite can be cut into a polished andesite vertical slab.
 
 Ingredients of fences and fence gates, aside from base blocks, resemble their vanilla recipes. For the crafting of stone fences and fence gates, flint is used alongside base blocks. Similarly, string is used for wool fences and fence gates, and sticks for sandstone and its variants.
 
