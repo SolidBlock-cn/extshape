@@ -39,7 +39,7 @@ dependencies {
     // Fabric API
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     // ModMenu 模组，最后一个兼容 1.18.1 的是 3.0.1（此后的版本因内嵌了不兼容的 Fabric Screen Api 而与此不兼容）
-    modImplementation "com.terraformersmc:modmenu:3.2.1"
+    modImplementation "com.terraformersmc:modmenu:3.2.2"
     // BRRP 模组
     modImplementation "net.devtech:brrp:0.6.2-1.18.2"
 }
