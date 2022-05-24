@@ -1,5 +1,17 @@
 # 更新日志 Update Log
 
+### 1.5.1
+
+- （对于 Minecraft 1.19）加入了红树木板、泥坯、泥砖的各个形状。
+- （对于 Minecraft 1.19）参照原版 Minecraft 译名，将“砖”的简体中文译名更改为“红砖”。
+- 修复 `HorizontalCornerDirection.random` 方法的错误。
+- 现在允许方块递归切石了。
+
+- (For Minecraft 1.19) Added shapes for mangrove planks, packed mud, and mud bricks.
+- (For Minecraft 1.19) Altered the `zh-cn` translation for "Brick", as vanilla Minecraft does.
+- Fixed the incorrect method of `HorizontalCornerDirection.random`.
+- Recurvsive stonecutting is allowed now.
+
 ### 1.5.0
 
 这次更新表面上看上去不是很明显，但实际上代码几乎从头到尾都被改了。模组进行过多轮的测试，以确保能够稳定运行，经过反复调试与修改才发布。该版本是与 BRRP 同时开发的，开发过程中也可以一并排查 BRRP 模组中的问题。
