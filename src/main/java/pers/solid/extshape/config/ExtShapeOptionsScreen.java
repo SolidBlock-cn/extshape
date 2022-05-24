@@ -103,7 +103,7 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
             Text.translatable("options.extshape.registerBlockFamilies.description")
                 .append("\n\n")
                 .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY))), config.registerBlockFamilies, value -> config.registerBlockFamilies = value),
-        new SimpleOption<Void>("options.extshape.rrp.title", SimpleOption.emptyTooltip(), null, new SimpleOption.LazyCyclingCallbacks<>(null, null, null), null, value -> {
+        new SimpleOption<>("options.extshape.rrp.title", SimpleOption.emptyTooltip(), (optionText, value) -> Text.empty(), new SimpleOption.MaxSuppliableIntCallbacks(0, () -> 1), 0, value -> {
           if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
         })
     );

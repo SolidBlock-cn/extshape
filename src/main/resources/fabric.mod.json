@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "extshape",
-  "version": "1.5.0",
+  "version": "1.5.1-build.1",
   "icon": "assets/extshape/icon.png",
   "name": "Extended Block Shapes",
   "description": "More blocks in more shapes!",
@@ -56,7 +56,7 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.18.2",
+    "minecraft": ">1.18.2",
     "java": ">=17",
     "better_runtime_resource_pack": ">=0.6.2"
   }
