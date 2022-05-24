@@ -1,10 +1,12 @@
 package pers.solid.extshape.block;
 
 import com.google.common.collect.BiMap;
+import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
+import net.devtech.arrp.json.recipe.JIngredient;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
 import net.fabricmc.api.EnvType;
@@ -15,7 +17,10 @@ import net.minecraft.data.client.TextureKey;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
 
 /**
@@ -84,6 +89,68 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
       final JStonecuttingRecipe stonecuttingRecipe = new JStonecuttingRecipe(baseBlock, (ItemConvertible) this, resultCount);
       stonecuttingRecipe.addInventoryChangedCriterion("has_base_block", baseBlock);
       return stonecuttingRecipe;
+    }
+  }
+
+  /**
+   * <p>为该方块写入合成配方。</p>
+   *
+   * @param pack 运行时资源包。
+   * @see net.devtech.arrp.generator.ItemResourceGenerator#writeRecipes(RuntimeResourcePack)
+   * @since 1.5.1
+   */
+  @ApiStatus.AvailableSince("1.5.1")
+  default void writeCraftingRecipe(RuntimeResourcePack pack) {
+    final JRecipe craftingRecipe = getCraftingRecipe();
+    if (craftingRecipe != null) {
+      final Identifier recipeId = getRecipeId();
+      pack.addRecipe(recipeId, craftingRecipe);
+      pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(recipeId), craftingRecipe);
+    }
+  }
+
+  /**
+   * 为该方块写入切石配方。该方法并不会检查方块是否可切石，因此你可能需要先调用 {@link #shouldWriteStonecuttingRecipe()}。
+   *
+   * @param pack 运行时资源包。
+   * @since 1.5.1
+   */
+  @ApiStatus.AvailableSince("1.5.1")
+  default void writeStonecuttingRecipe(RuntimeResourcePack pack) {
+    final JRecipe stonecuttingRecipe = getStonecuttingRecipe();
+    if (stonecuttingRecipe != null) {
+      final Identifier stonecuttingRecipeId = getStonecuttingRecipeId();
+      pack.addRecipe(stonecuttingRecipeId, stonecuttingRecipe);
+      pack.addRecipeAdvancement(stonecuttingRecipeId, getAdvancementIdForRecipe(stonecuttingRecipeId), stonecuttingRecipe);
+
+      // 处理二次切石一步到位的情况。
+      if (stonecuttingRecipe instanceof JStonecuttingRecipe jStonecuttingRecipe) {
+        // block 是切石前的基础方块。
+        for (Block block : VanillaStonecutting.INSTANCE.get(getBaseBlock())) {
+          final String path = Registry.BLOCK.getId(block).getPath();
+          final Identifier secondaryId = getRecipeId().brrp_append("_from_" + path + "_stonecutting");
+          final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
+              JIngredient.ofItem(block),
+              jStonecuttingRecipe.result,
+              jStonecuttingRecipe.count
+          );
+          secondaryRecipe.addInventoryChangedCriterion("has_" + path, block);
+          pack.addRecipe(secondaryId, secondaryRecipe);
+          pack.addRecipeAdvancement(secondaryId, getAdvancementIdForRecipe(secondaryId), secondaryRecipe);
+        }
+      }
+    }
+  }
+
+  /**
+   * @since 1.5.1 覆盖了原先的方法，以便于更好地控制流程。
+   */
+  @ApiStatus.AvailableSince("1.5.1")
+  @Override
+  default void writeRecipes(RuntimeResourcePack pack) {
+    writeCraftingRecipe(pack);
+    if (shouldWriteStonecuttingRecipe()) {
+      writeStonecuttingRecipe(pack);
     }
   }
 }
