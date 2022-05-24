@@ -62,5 +62,8 @@
     ],
     "java": ">=17",
     "better_runtime_resource_pack": ">=0.6.2"
+  },
+  "breaks": {
+    "minecraft": ">=1.19"
   }
 }
