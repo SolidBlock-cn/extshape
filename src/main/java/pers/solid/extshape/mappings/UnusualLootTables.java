@@ -130,33 +130,9 @@ public final class UnusualLootTables {
   }
 
   private static LootTableFunction dropsShaped(ItemConvertible drop, float fullCount) {
-    return (baseBlock, shape, block) -> {
-      final LeafEntry.Builder<?> entryBuilder = entryBuilder(drop, fullCount, shape, block);
-      final LootTable.Builder builder = BlockLootTableGenerator.dropsWithSilkTouch(block, BlockLootTableGenerator.applyExplosionDecay(block, entryBuilder
-      ));
-      return JLootTable.delegate(builder.build());
-    };
-  }
-
-  /**
-   * 构建一个战利品表项，且当该方块形状为台阶时，掉落原先两倍数量的物品。
-   *
-   * @param drop      需要掉落的物品。
-   * @param fullCount 完整数量
-   * @param shape     方块所属的形状。参见 {@link Shape#getShapeOf(Block)}。
-   * @param block     方块自身。
-   * @return 战利品表项。
-   */
-  private static LeafEntry.Builder<?> entryBuilder(ItemConvertible drop, float fullCount, Shape shape, Block block) {
-    final ConstantLootNumberProvider countRange = shapeVolumeConstantProvider(shape, fullCount * 2);
-    final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop)
-        // 根据该方块的形状确定数量。
-        .apply(SetCountLootFunction.builder(shapeVolumeConstantProvider(shape, fullCount)));
-    if (shape == Shape.SLAB) itemEntryBuilder
-        .apply(SetCountLootFunction.builder(countRange)
-            .conditionally(BlockStatePropertyLootCondition.builder(block)
-                .properties(EXACT_MATCH_DOUBLE_SLAB)));
-    return itemEntryBuilder;
+    return (baseBlock, shape, block) -> JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, BlockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(drop)
+        .apply(SetCountLootFunction.builder(shapeVolumeConstantProvider(shape, fullCount)))
+    ), shape == Shape.SLAB).build());
   }
 
   /**
