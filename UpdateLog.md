@@ -5,12 +5,14 @@
 - （对于 Minecraft 1.19）加入了红树木板、泥坯、泥砖的各个形状。
 - （对于 Minecraft 1.19）参照原版 Minecraft 译名，将“砖”的简体中文译名更改为“红砖”。
 - 修复 `HorizontalCornerDirection.random` 方法的错误。
-- 现在允许方块递归切石了。
+- 现在允许方块递归切石了。例如，石头可以直接切石成錾制石砖的多个形状。
+- 调整了雪台阶的配方，以避免与雪配方冲突。
 
 - (For Minecraft 1.19) Added shapes for mangrove planks, packed mud, and mud bricks.
 - (For Minecraft 1.19) Altered the `zh-cn` translation for "Brick", as vanilla Minecraft does.
 - Fixed the incorrect method of `HorizontalCornerDirection.random`.
-- Recurvsive stonecutting is allowed now.
+- Recursive stonecutting is allowed now. For example, a stone can be cut into multiple shapes of chiseled stone bricks.
+- Adjusted the recipe of snow slab, avoiding conflict to the recipe of snow.
 
 ### 1.5.0
 

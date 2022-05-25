@@ -4,7 +4,7 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [this file](BlockList.md).
 
-At present this mod supports Minecraft Java Edition 1.18.2, 1.18.1, 1.17.1 and 1.16.5. Please install the relevant mod according to your MC version (nearby versions compatible in theory, **except 1.16-1.16.1**) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
+At present this mod supports Minecraft Java Edition 1.18.2, 1.18.1, 1.18, 1.17.1 and 1.16.5. Please install the relevant mod according to your MC version (mod for 1.16.5 is not compatible with **1.16-1.16.1**) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
 
 **Notice: Since mod version 1.4.0, the mod requires ARRP (Advanced Runtime Resource Pack) to run, so you must have this mod installed. If you install Extended Block Shapes without installing ARRP, the game instance will refuse to run.**
 
@@ -38,6 +38,8 @@ Blocks added by this mod inherit most features of their base blocks:
 - A snow stairs or snow slab, when placed on a grass block, if it just covers the whole top of the grass block, makes it snowy, just like covered by a snow block or snow.
 - Small dripleaves and large dripleaves can be placed on blocks base on moss blocks and clay (only building blocks).
 - Blocks base on pumpkin, melon, moss block, shroomlight, nether wart block and warped wart block can be composted.
+- Blocks based on packed ice drop only mined with items with Silk Touch enchantment.
+- Blocks based on clay block, snow block, melon block, etc., drop their corresponding items when mined, such as clay ball, snow ball (only when shoveled) and melon slice. Number of items dropped by slabs, quarter pieces, vertical slabs, vertical slabs are based on that of base blocks divided by 2 or 4, and double slabs drop the double. Some items dropped may be affected by Fortune enchantment, and blocks themselves are dropped when mined with tools with Silk Touch.
 
 ### Crafting and smelting
 
@@ -67,7 +69,7 @@ Since 1.5.1, items in this mod are recursively stonecuttable. For example, an un
 
 Ingredients of fences and fence gates, aside from base blocks, resemble their vanilla recipes. For the crafting of stone fences and fence gates, flint is used alongside base blocks. Similarly, string is used for wool fences and fence gates, and sticks for sandstone and its variants.
 
-To avoid recipe conflicts, some buttons are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be converted 1:1 from their corresponding carpets.
+To avoid recipe conflicts, some buttons are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be converted 1:1 from their corresponding carpets. Snow slabs can not be crafted directly from snow, either; instead, craft a snow (layer) with three snow blocks, and then craft the slab with the snow.
 
 Since 1.5.0, all recipes can be unlocked when obtaining any of the base block. To put explicitly, each recipe has a corresponding advancement, and as soon as the player obtains the base block or unlocks the recipe, the advancement is triggered and relative recipe is unlocked.
 

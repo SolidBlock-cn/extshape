@@ -4,9 +4,11 @@ import net.devtech.arrp.generator.BRRPSlabBlock;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.devtech.arrp.json.recipe.JRecipe;
+import net.devtech.arrp.json.recipe.JShapelessRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -36,7 +38,7 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
-    final JRecipe craftingRecipe = super.getCraftingRecipe();
+    final JRecipe craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK) ? new JShapelessRecipe(this, Blocks.SNOW).addInventoryChangedCriterion("has_snow", Blocks.SNOW) : super.getCraftingRecipe();
     return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 
