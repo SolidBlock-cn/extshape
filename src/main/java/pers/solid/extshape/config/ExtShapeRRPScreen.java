@@ -139,7 +139,7 @@ public class ExtShapeRRPScreen extends Screen {
 
     addDrawableChild(finishButton = new ButtonWidget(width / 2 - 100, height - 27, 200, 20, ScreenTexts.BACK, button -> {
       if (client != null) {
-        client.setScreen(parent);
+        client.openScreen(parent);
       }
     }));
   }
@@ -169,7 +169,7 @@ public class ExtShapeRRPScreen extends Screen {
   @Override
   public void onClose() {
     assert client != null;  // super 里面就忽略了 client==null 的情况
-    client.setScreen(parent);
+    client.openScreen(parent);
   }
 
   @Override

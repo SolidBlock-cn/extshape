@@ -66,15 +66,15 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
   public void onClose() {
     if (client != null && !newConfig.addToVanillaGroups && !newConfig.showSpecificGroups) {
       // 由于两个设置都被关闭，因此需要确认是否不添加到任何物品栏。
-      client.setScreen(new ConfirmScreen(
+      client.openScreen(new ConfirmScreen(
           t -> {
             if (t) {
               // 确定要继续
               save();
-              client.setScreen(parent);
+              client.openScreen(parent);
             } else {
               // 返回重新修改
-              client.setScreen(this);
+              client.openScreen(this);
             }
           },
           new TranslatableText("options.extshape.confirm"),
@@ -85,7 +85,7 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
       return;
     }
     save();
-    client.setScreen(parent);
+    client.openScreen(parent);
   }
 
   public void addOptions(ExtShapeConfig config) {
@@ -111,7 +111,7 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
           @Override
           public ClickableWidget createButton(GameOptions options, int x, int y, int width) {
             return new ButtonWidget(x, y, width, 20, getDisplayPrefix(), button -> {
-              if (client != null) client.setScreen(new ExtShapeRRPScreen(ExtShapeOptionsScreen.this));
+              if (client != null) client.openScreen(new ExtShapeRRPScreen(ExtShapeOptionsScreen.this));
             });
           }
         }

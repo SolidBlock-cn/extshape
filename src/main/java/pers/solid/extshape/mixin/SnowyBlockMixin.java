@@ -1,6 +1,6 @@
 package pers.solid.extshape.mixin;
 
-import net.fabricmc.fabric.api.tag.TagFactory;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SnowyBlock;
@@ -26,7 +26,7 @@ public class SnowyBlockMixin extends Block {
   @Shadow
   @Final
   public static BooleanProperty SNOWY;
-  private static final Tag<Block> SNOW = TagFactory.BLOCK.create(new Identifier(ExtShape.MOD_ID, "snow"));
+  private static final Tag<Block> SNOW = TagRegistry.block(new Identifier(ExtShape.MOD_ID, "snow"));
 
   @SuppressWarnings("unused")
   private SnowyBlockMixin(Settings settings) {
