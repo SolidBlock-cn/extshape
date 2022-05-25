@@ -56,7 +56,7 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.17",
+    "minecraft": ">=1.17.1",
     "java": ">=16",
     "better_runtime_resource_pack": ">=0.6.2"
   },
