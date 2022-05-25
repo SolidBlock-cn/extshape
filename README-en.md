@@ -4,7 +4,7 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [this file](BlockList.md).
 
-At present this mod supports Minecraft Java Edition 1.18.2, 1.18.1, 1.18, 1.17.1 and 1.16.5. Please install the relevant mod according to your MC version (mod for 1.16.5 is not compatible with **1.16-1.16.1**) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
+At present this mod supports Minecraft Java Edition 1.18.2, 1.18.1, 1.18, 1.17.1, 1.16.5 and 1.16.4. Please install the relevant mod according to your MC version (mod for 1.18.1 is compatible with 1.18; mod for 1.16.5 is compatible for 1.16.4) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
 
 **Notice: Since mod version 1.4.0, the mod requires ARRP (Advanced Runtime Resource Pack) to run, so you must have this mod installed. If you install Extended Block Shapes without installing ARRP, the game instance will refuse to run.**
 
