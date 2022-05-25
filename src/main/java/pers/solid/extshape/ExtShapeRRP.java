@@ -23,6 +23,7 @@ import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mappings.TextureMappings;
+import pers.solid.extshape.mappings.UnusualLootTables;
 import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
@@ -126,7 +127,13 @@ public final class ExtShapeRRP {
     // 为方块添加数据。
     for (Block block : ExtShapeBlocks.BLOCKS) {
       if (!(block instanceof BlockResourceGenerator generator)) continue;
-      generator.writeData(pack);
+      generator.writeRecipes(pack);
+      final Block baseBlock = generator.getBaseBlock();
+      if (UnusualLootTables.INSTANCE.containsKey(baseBlock)) {
+        pack.addLootTable(generator.getLootTableId(), UnusualLootTables.INSTANCE.get(baseBlock).apply(baseBlock, Shape.getShapeOf(block), block));
+      } else {
+        generator.writeLootTable(pack);
+      }
     }
 
     for (Block baseBlock : BlockMappings.BASE_BLOCKS) {
