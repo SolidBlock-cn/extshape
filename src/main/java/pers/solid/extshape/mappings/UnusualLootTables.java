@@ -1,5 +1,6 @@
 package pers.solid.extshape.mappings;
 
+import com.mojang.datafixers.util.Function3;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.json.loot.JLootTable;
@@ -29,7 +30,6 @@ import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.state.property.Properties;
-import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -108,7 +108,7 @@ public final class UnusualLootTables {
     LOOT_TABLE_PROVIDERS.put(Blocks.PACKED_ICE, dropsWithSilkTouch);
   }
 
-  public interface LootTableFunction extends TriFunction<Block, Shape, Block, JLootTable> {
+  public interface LootTableFunction extends Function3<Block, Shape, Block, JLootTable> {
     @Override
     JLootTable apply(Block baseBlock, Shape shape, Block block);
   }
