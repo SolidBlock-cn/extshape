@@ -1,5 +1,19 @@
 # 更新日志 Update Log
 
+### 1.5.2
+
+- 优化了模组配置界面。
+- 錾制砂岩、錾制红砂岩、錾制石英、切制砂岩、切制红砂岩不再能够合成楼梯、台阶，以免与原版合成表冲突。
+- 不再允许合成木墙，以免与原版合成表冲突。
+- 修复雪块、黏土块的栅栏和栅栏门的配方与墙的配方冲突。
+- 加入了 `/extshape:check-conflict` 命令，用来检查配方是否存在冲突。
+
+- Optimized the configuration screen of the mod.
+- Chiseled sandstone, chiseled red sandstone, chiseled quartz, cut sandstone, cut red sandstone cannot be used to craft stairs and slab, in order to avoid conflict with vanilla crafting recipe.
+- Wooden walls are no longer allowed to craft, to avoid conflict with vanilla crafting recipe.
+- Fixed the recipe conflict of fence and fence gate of snow block and clay block to walls.
+- Added `/extshape:check-conflict` command to test conflict between recipes.
+
 ### 1.5.1
 
 - （对于 Minecraft 1.19）加入了红树木板、泥坯、泥砖的各个形状。

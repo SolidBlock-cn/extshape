@@ -94,6 +94,7 @@
   "options.extshape.registerBlockFamilies.description": "将本模组内的方块关系注册到Minecraft原版的BlockFamilies中。BlockFamilies可能会被其他模组识别，但是如果其他模组也使用这些BlockFamilies则有可能出现一些问题。\n重启游戏后生效。",
 
   "options.extshape.rrp.title": "运行时资源包设置",
+  "options.extshape.rrp.description": "管理扩展方块形状模组的运行时资源包。",
   "options.extshape.rrp.regenClientResources": "重新生成客户端资源包",
   "options.extshape.rrp.regenClientResources.process": "正在重新生成客户端资源包…",
   "options.extshape.rrp.regenClientResources.description": "重新生成本模组的运行时资源包的客户端资源包，不影响原版和其他模组。主要用于开发，一般不起效果。重新生成的资源需按F3+T才会被应用。",
@@ -109,5 +110,12 @@
   "options.extshape.rrp.exportFilePath": "导出文件路径",
   "options.extshape.rrp.textFieldHeader": "资源将导出至以下路径：",
   "options.extshape.rrp.fullPath": "完整路径如下：%s",
-  "options.extshape.rrp.invalidPath": "无效的路径：%s"
+  "options.extshape.rrp.invalidPath": "无效的路径：%s",
+
+  "message.extshape.recipe_conflict.detected": "检测到合成表存在撞车：%s",
+  "message.extshape.recipe_conflict.unknown": "检测到合成表存在未知情况：%s",
+  "message.extshape.recipe_conflict.exception": "检测合成表撞车时出现未知错误",
+  "message.extshape.recipe_conflict.finish.none": "检测完成，未检测到合成表撞车",
+  "message.extshape.recipe_conflict.finish.single": "检测完成，共检测到%s个合成表撞车",
+  "message.extshape.recipe_conflict.finish.plural": "检测完成，共检测到%s个合成表撞车"
 }
