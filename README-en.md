@@ -69,7 +69,7 @@ Since 1.5.1, items in this mod are recursively stonecuttable. For example, an un
 
 Ingredients of fences and fence gates, aside from base blocks, resemble their vanilla recipes. For the crafting of stone fences and fence gates, flint is used alongside base blocks. Similarly, string is used for wool fences and fence gates, and sticks for sandstone and its variants.
 
-To avoid recipe conflicts, some buttons are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be converted 1:1 from their corresponding carpets. Snow slabs can not be crafted directly from snow, either; instead, craft a snow (layer) with three snow blocks, and then craft the slab with the snow.
+To avoid recipe conflicts, some blocks are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be converted 1:1 from their corresponding carpets. Snow slabs can not be crafted directly from snow, either; instead, craft a snow (layer) with three snow blocks, and then craft the slab with the snow. You can test potential recipe conflicts via `/extshape:check-conflict` command.
 
 Since 1.5.0, all recipes can be unlocked when obtaining any of the base block. To put explicitly, each recipe has a corresponding advancement, and as soon as the player obtains the base block or unlocks the recipe, the advancement is triggered and relative recipe is unlocked.
 
