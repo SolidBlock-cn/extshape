@@ -96,6 +96,7 @@
   "options.extshape.registerBlockFamilies.description": "塊之增益於是改也，咸入簿礦藝之BlockFamilies也。他或用也，然若亦用BlockFamilies或現衝突。\n複啟以效見",
 
   "options.extshape.rrp.title": "運行時資囊設置",
+  "options.extshape.rrp.description": "理運行時資囊之於塊形之擴模組也。",
   "options.extshape.rrp.regenClientResources": "復生客端資囊",
   "options.extshape.rrp.regenClientResources.process": "正在復生客端資囊…",
   "options.extshape.rrp.regenClientResources.description": "復生改囊之運行時資囊之客端資囊，無作於原生與他囊。用以開發，效常不見。復生之囊，應于F3+T。",
@@ -111,5 +112,12 @@
   "options.extshape.rrp.exportFilePath": "出錄檔路徑",
   "options.extshape.rrp.textFieldHeader": "錄資于是路：",
   "options.extshape.rrp.fullPath": "完整路徑：%s",
-  "options.extshape.rrp.invalidPath": "是路無效：%s"
+  "options.extshape.rrp.invalidPath": "是路無效：%s",
+
+  "message.extshape.recipe_conflict.detected": "驗方之撞：%s",
+  "message.extshape.recipe_conflict.unknown": "驗方之異：%s",
+  "message.extshape.recipe_conflict.exception": "驗方撞而生異常",
+  "message.extshape.recipe_conflict.finish.none": "驗畢，未見撞",
+  "message.extshape.recipe_conflict.finish.single": "驗畢，%s撞尋",
+  "message.extshape.recipe_conflict.finish.plural": "驗畢，%s撞尋"
 }

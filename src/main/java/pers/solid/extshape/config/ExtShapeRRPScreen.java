@@ -64,7 +64,7 @@ public class ExtShapeRRPScreen extends Screen {
           })
       ).start();
       regenClientResourcesThread.setName("RegenClientResources");
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.regenClientResources.description"), 250), mouseX, mouseY)));
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.regenClientResources.description"), 200), mouseX, mouseY)));
     addDrawableChild(regenServerDataButton = new ButtonWidget(width / 2 + 5, 36, 200, 20, Text.translatable("options.extshape.rrp.regenServerData"), button -> {
       if (regenServerDataThread != null && regenServerDataThread.getState() != Thread.State.TERMINATED) return;
       (regenServerDataThread = new Thread(() -> {
@@ -81,7 +81,7 @@ public class ExtShapeRRPScreen extends Screen {
         }
       })).start();
       regenServerDataThread.setName("RegenServerData");
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.regenServerData.description"), 250), mouseX, mouseY)));
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.regenServerData.description"), 200), mouseX, mouseY)));
     addDrawableChild(dumpClientResourcesButton = new ButtonWidget(width / 2 - 205, 61, 200, 20, Text.translatable("options.extshape.rrp.exportClientResources"), button -> {
       if (dumpClientResourcesThread != null && dumpClientResourcesThread.getState() != Thread.State.TERMINATED) return;
       (dumpClientResourcesThread = new Thread(() -> {
@@ -98,7 +98,7 @@ public class ExtShapeRRPScreen extends Screen {
         }
       })).start();
       dumpClientResourcesThread.setName("DumpClientResources");
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.exportClientResources.description"), 250), mouseX, mouseY)));
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.exportClientResources.description"), 200), mouseX, mouseY)));
     addDrawableChild(dumpServerDataButton = new ButtonWidget(width / 2 + 5, 61, 200, 20, Text.translatable("options.extshape.rrp.exportServerData"), button -> {
       if (dumpServerDataThread != null && dumpServerDataThread.getState() != Thread.State.TERMINATED) return;
       (dumpServerDataThread = new Thread(() -> {
@@ -115,7 +115,7 @@ public class ExtShapeRRPScreen extends Screen {
         }
       })).start();
       dumpServerDataThread.setName("DumpServerData");
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.exportServerData.description"), 250), mouseX, mouseY)));
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.exportServerData.description"), 200), mouseX, mouseY)));
     if (dumpPathField == null) {
       addDrawableChild(dumpPathField = new TextFieldWidget(textRenderer, width / 2 - 140, 115, 250, 20, Text.translatable("options.extshape.rrp.exportFilePath")));
       dumpPathField.setMaxLength(Integer.MAX_VALUE);
@@ -146,8 +146,6 @@ public class ExtShapeRRPScreen extends Screen {
 
   @Override
   public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-    renderBackgroundTexture(5);
-
     super.render(matrices, mouseX, mouseY, delta);
     drawCenteredText(matrices, textRenderer, title, width / 2, 16, 0xffffff);
     drawCenteredText(matrices, textRenderer, Text.translatable("options.extshape.rrp.textFieldHeader"), width / 2, 100, 0xffffff);

@@ -124,10 +124,10 @@ public final class ExtShapeBlocks {
     // 冰，由于技术原因，暂不产生。
 
     // 雪块。
-    new BlocksBuilder(SNOW_BLOCK, Items.SNOW_BLOCK, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
+    new BlocksBuilder(SNOW_BLOCK, Items.SNOW, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
     // 黏土块。
-    new BlocksBuilder(CLAY, Items.CLAY, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
+    new BlocksBuilder(CLAY, Items.CLAY_BALL, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
     // 南瓜。
     new BlocksBuilder(PUMPKIN, Items.PUMPKIN_SEEDS, ButtonType.WOODEN, ActivationRule.EVERYTHING).build();
@@ -225,7 +225,7 @@ public final class ExtShapeBlocks {
 
     // 下界疣块、诡异疣块。
     new BlocksBuilder(NETHER_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().build();
-    new BlocksBuilder(WARPED_WART_BLOCK, Items.WARPED_WART_BLOCK, null, null).withoutRedstone().build();
+    new BlocksBuilder(WARPED_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().build();
 
     // 带釉陶瓦只注册台阶。
     for (final Block block : ExtShapeBlockTags.GLAZED_TERRACOTTA) {

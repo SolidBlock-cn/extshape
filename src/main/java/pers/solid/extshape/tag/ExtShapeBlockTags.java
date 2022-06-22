@@ -284,6 +284,7 @@ public final class ExtShapeBlockTags {
   public static final ExtShapeBlockTag SHOVEL_MINEABLE = ExtShapeBlockTag.create(BlockTags.SHOVEL_MINEABLE);
 
   public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = ExtShapeBlockTag.create(BlockTags.OCCLUDES_VIBRATION_SIGNALS);
+  public static final ExtShapeBlockTag DAMPENS_VIBRATIONS = ExtShapeBlockTag.create(BlockTags.DAMPENS_VIBRATIONS);
   public static final ExtShapeBlockTag DRAGON_IMMUNE = ExtShapeBlockTag.create(BlockTags.DRAGON_IMMUNE);
   public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = ExtShapeBlockTag.create(BlockTags.INFINIBURN_OVERWORLD);
   public static final ExtShapeBlockTag INFINIBURN_END = ExtShapeBlockTag.create(BlockTags.INFINIBURN_END);
@@ -325,6 +326,7 @@ public final class ExtShapeBlockTags {
    */
   public static void refillTags() {
     OCCLUDES_VIBRATION_SIGNALS.addTag(WOOLEN_BLOCKS);
+    DAMPENS_VIBRATIONS.addTag(WOOLEN_BLOCKS);
     for (Block block : ExtShapeBlocks.BLOCKS) {
       final Block baseBlock;
       if (!(block instanceof ExtShapeBlockInterface bi)) {
