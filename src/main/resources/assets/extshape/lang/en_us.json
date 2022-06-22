@@ -94,6 +94,7 @@
   "options.extshape.registerBlockFamilies.description": "Register the relations of the block to Minecraft's vanilla BlockFamilies. The BlockFamilies registry may be identified by some mods, but may cause potential problems when other mods use the BlockFamilies.\nTakes effect after restarting game.",
 
   "options.extshape.rrp.title": "Runtime Resource Pack settings",
+  "options.extshape.rrp.description": "Manage the Runtime Resource Pack of Extended Block Shapes mod.",
   "options.extshape.rrp.regenClientResources": "Regenerate client resources",
   "options.extshape.rrp.regenClientResources.process": "Regenerating client resources...",
   "options.extshape.rrp.regenClientResources.description": "Regenerate the client resources of the runtime resource pack of this mod, not influencing vanilla and other mods. This is primitively used for development and does not take effect. Regenerated resources are applied only after pressing F3+T.",
@@ -109,5 +110,12 @@
   "options.extshape.rrp.exportFilePath": "Export file path",
   "options.extshape.rrp.textFieldHeader": "Resources will be exported at:",
   "options.extshape.rrp.fullPath": "Full path: %s",
-  "options.extshape.rrp.invalidPath": "Invalid path: %s"
+  "options.extshape.rrp.invalidPath": "Invalid path: %s",
+
+  "message.extshape.recipe_conflict.detected": "Recipe conflict detected: %s",
+  "message.extshape.recipe_conflict.unknown": "Unknown situation of recipe detected: %s",
+  "message.extshape.recipe_conflict.exception": "Exceptions were found when detecting recipe conflict",
+  "message.extshape.recipe_conflict.finish.none": "Finished checking. In total no recipe conflicts have been found.",
+  "message.extshape.recipe_conflict.finish.single": "Finished checking. In total %s recipe conflict has been found.",
+  "message.extshape.recipe_conflict.finish.plural": "Finished checking. In total %s recip conflicts have been found."
 }

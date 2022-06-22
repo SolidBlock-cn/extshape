@@ -27,7 +27,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
     final JRecipe craftingRecipe = super.getCraftingRecipe();
-    return craftingRecipe == null ? null : craftingRecipe.group(getRecipeGroup());
+    return craftingRecipe == null || NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? null : craftingRecipe.group(getRecipeGroup());
   }
 
   @Override

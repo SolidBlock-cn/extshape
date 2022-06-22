@@ -1,17 +1,23 @@
 package pers.solid.extshape;
 
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.FireBlock;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.item.HoneycombItem;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.TranslatableText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
-import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.config.ExtShapeConfig;
@@ -31,40 +37,22 @@ public class ExtShape implements ModInitializer {
 
     registerFlammableBlocks();
     registerComposingChances();
-//    registerOxidizableBlocks();
     registerFuels();
 
     ExtShapeRRP.registerRRP();
-  }
+    CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("extshape:check-conflict")
+        .requires(source -> source.hasPermissionLevel(2))
+        .executes(context -> {
+          final ServerCommandSource source = context.getSource();
+          final ServerWorld world = source.getWorld();
+          final ServerPlayerEntity player = source.getPlayer();
+          if (player == null) {
+            source.sendFeedback(new TranslatableText("argument.entity.notfound.player"), false);
+            return 0;
+          }
+          return RecipeConflict.checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
+        })));
 
-  /**
-   * 本方法暂时不使用，因为还未加入可以氧化的方块。
-   */
-  @SuppressWarnings("unused")
-  @Deprecated
-  private void registerOxidizableBlocks() {
-    Oxidizable.OXIDATION_LEVEL_INCREASES.get().forEach(
-        (lessBase, moreBase) -> {
-          for (Shape shape : Shape.values()) {
-            final Block less = BlockMappings.getBlockOf(shape, lessBase);
-            final Block more = BlockMappings.getBlockOf(shape, moreBase);
-            if (less instanceof ExtShapeBlockInterface && more instanceof ExtShapeBlockInterface) {
-              OxidizableBlocksRegistry.registerOxidizableBlockPair(less, more);
-            }
-          }
-        }
-    );
-    HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().forEach(
-        (unwaxedBase, waxedBase) -> {
-          for (Shape shape : Shape.values()) {
-            final Block unwaxed = BlockMappings.getBlockOf(shape, unwaxedBase);
-            final Block waxed = BlockMappings.getBlockOf(shape, waxedBase);
-            if (unwaxed instanceof ExtShapeBlockInterface && waxed instanceof ExtShapeBlockInterface) {
-              OxidizableBlocksRegistry.registerWaxableBlockPair(unwaxed, waxed);
-            }
-          }
-        }
-    );
   }
 
   /**
