@@ -22,7 +22,7 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
     final JRecipe craftingRecipe = super.getCraftingRecipe();
-    return craftingRecipe == null ? null : craftingRecipe.group(getRecipeGroup());
+    return craftingRecipe == null || ExtShapeBlockTags.PLANKS.contains(baseBlock) ? null : craftingRecipe.group(getRecipeGroup());
   }
 
   @Override

@@ -3,16 +3,15 @@ package pers.solid.extshape.config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
-import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.option.CyclingOption;
 import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.Option;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.text.TranslatableText;
@@ -21,28 +20,66 @@ import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
 
 @Environment(EnvType.CLIENT)
-public class ExtShapeOptionsScreen extends GameOptionsScreen {
+public class ExtShapeOptionsScreen extends Screen {
 
-  public ButtonListWidget list;
+  private final Screen parent;
+  private final GameOptions gameOptions;
   public final ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
 
   public ExtShapeOptionsScreen(Screen parent) {
-    super(parent, MinecraftClient.getInstance().options, new TranslatableText("options.extshape.title"));
+    super(new TranslatableText("options.extshape.title"));
+    this.parent = parent;
+    this.gameOptions = MinecraftClient.getInstance().options;
   }
 
   @Override
   protected void init() {
-    list = new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25);
-    addOptions(newConfig);
-    this.addDrawableChild(list);
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, (button) -> onClose()));
+    // 里面的内容不需要被选中，所以只是drawable。
+    addDrawable(new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25));
+    ExtShapeConfig config = newConfig;
+    this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, button -> onClose()));
+
+    // addToVanillaGroups
+    addDrawableChild(CyclingOption.create(
+        "options.extshape.addToVanillaGroups",
+        new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getTranslationKey(), ItemGroup.DECORATIONS.getTranslationKey(), ItemGroup.REDSTONE.getTranslationKey())
+            .append("\n\n")
+            .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)),
+        g -> config.addToVanillaGroups,
+        (g, o, value) -> config.addToVanillaGroups = value
+    ).createButton(gameOptions, width / 2 - 205, 36, 200));
+    // showSpecificGroups
+    addDrawableChild(CyclingOption.create(
+        "options.extshape.showSpecificGroups",
+        new TranslatableText("options.extshape.showSpecificGroups.tooltip")
+            .append("\n\n")
+            .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY)),
+        g -> config.showSpecificGroups,
+        (g, o, value) -> config.showSpecificGroups = value
+    ).createButton(gameOptions, width / 2 + 5, 36, 200));
+    // registerBlockFamilies
+    addDrawableChild(CyclingOption.create(
+        "options.extshape.registerBlockFamilies",
+        new TranslatableText("options.extshape.registerBlockFamilies.description")
+            .append("\n\n")
+            .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY)),
+        g -> config.registerBlockFamilies,
+        (g, o, value) -> config.registerBlockFamilies = value
+    ).createButton(gameOptions, width / 2 - 205, 61, 200));
+    addDrawableChild(new ButtonWidget(width / 2 + 5, 61, 200, 20, new TranslatableText("options.extshape.rrp.title"), button -> {
+      if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
+    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(new TranslatableText("options.extshape.rrp.description"), 200), mouseX, mouseY)));
   }
 
   @Override
   public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
     super.render(matrices, mouseX, mouseY, delta);
     drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 16, 0xffffff);
-    renderOrderedTooltip(matrices, getHoveredButtonTooltip(list, mouseX, mouseY), mouseX, mouseY);
+    for (Element child : children()) {
+      if (child instanceof CyclingButtonWidget<?> widget && widget.isHovered()) {
+        renderOrderedTooltip(matrices, widget.getOrderedTooltip(), mouseX, mouseY);
+      }
+    }
   }
 
   public void save() {
@@ -86,35 +123,5 @@ public class ExtShapeOptionsScreen extends GameOptionsScreen {
     }
     save();
     client.setScreen(parent);
-  }
-
-  public void addOptions(ExtShapeConfig config) {
-    list.addOptionEntry(
-        CyclingOption.create("options.extshape.addToVanillaGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.addToVanillaGroups, (gameOptions, option, value) -> config.addToVanillaGroups = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(
-                new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getTranslationKey(), ItemGroup.DECORATIONS.getTranslationKey(), ItemGroup.REDSTONE.getTranslationKey())
-                    .append("\n\n")
-                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)), 256)),
-        CyclingOption.create("options.extshape.showSpecificGroups", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.showSpecificGroups, (gameOptions, option, value) -> config.showSpecificGroups = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(
-                new TranslatableText("options.extshape.showSpecificGroups.tooltip")
-                    .append("\n\n")
-                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY)), 256))
-    );
-    list.addOptionEntry(
-        CyclingOption.create("options.extshape.registerBlockFamilies", ScreenTexts.ON, ScreenTexts.OFF, gameOptions -> config.registerBlockFamilies, (gameOptions, option, value) -> config.registerBlockFamilies = value)
-            .tooltip(client -> b -> client.textRenderer.wrapLines(
-                new TranslatableText("options.extshape.registerBlockFamilies.description")
-                    .append("\n\n")
-                    .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY)), 256)),
-        new Option("options.extshape.rrp.title") {
-          @Override
-          public ClickableWidget createButton(GameOptions options, int x, int y, int width) {
-            return new ButtonWidget(x, y, width, 20, getDisplayPrefix(), button -> {
-              if (client != null) client.setScreen(new ExtShapeRRPScreen(ExtShapeOptionsScreen.this));
-            });
-          }
-        }
-    );
   }
 }
