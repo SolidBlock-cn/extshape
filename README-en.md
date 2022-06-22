@@ -4,13 +4,9 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [this file](BlockList.md).
 
-At present this mod supports Minecraft Java Edition 1.18.2, 1.18.1, 1.18, 1.17.1, 1.16.5 and 1.16.4. Please install the relevant mod according to your MC version (mod for 1.18.1 is compatible with 1.18; mod for 1.16.5 is compatible for 1.16.4) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
+At present this mod supports Minecraft Java Edition 1.19, 1.18.2, 1.18.1, 1.18, 1.17.1, 1.16.5 and 1.16.4. Please install the relevant mod according to your MC version (mod for 1.18.1 is compatible with 1.18; mod for 1.16.5 is compatible for 1.16.4) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
 
-**Notice: Since mod version 1.4.0, the mod requires ARRP (Advanced Runtime Resource Pack) to run, so you must have this mod installed. If you install Extended Block Shapes without installing ARRP, the game instance will refuse to run.**
-
-**Notice: Since mod version 1.5.0, the mod requires BRRP (Better Runtime Resource Pack) to run, so you must have this mod installed. BRRP has ARRP nested; you do not have to install ARRP again, or some issues may be raised.**
-
-<s>If you update the mod from 1.2.3 to ≥1.2.4, please remove all _plank wall_ and _clay wall_ blocks from your worlds! As of 1.2.4, plank walls and clay walls are no longer a feature of this mod.</s> Since 1.5.0, plank walls and clay walls are re-added.
+**Notice: Since mod version 1.5.0, the mod requires BRRP (Better Runtime Resource Pack) to run, so you must have this mod installed. BRRP has ARRP nested; please do not install both BRRP and ARRP simultaneously, or some unexpected issues may happen.**
 
 [Click here](UpdateLog.md) for previous update logs. Welcome to join Tencent QQ group **587928350** or KaiHeiLa channel invitation code **KlFS0n** to experience the latest update of this mod.
 
