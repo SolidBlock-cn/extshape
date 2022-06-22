@@ -31,6 +31,7 @@ Blocks added by this mod inherit most features of their base blocks:
 - All blocks based on the wool blocks and planks are flammable (burning time equals vanilla full blocks).
 - Wool blocks and plank blocks can be used as fuels. Slabs and vertical slabs when use as fuel can consume half the time of their base blocks. Buttons used as fuels smelts about 1/3 the time of their base blocks. Quarter pieces and vertical quarter pieces when used as fuels smelts 1/4 the time of the base blocks.
 - All wool blocks, no matter whether they occupy the space of a whole block, can block sculk sensors.
+    - Note that in vanilla, wool carpets dampen vibrations but cannot occlude signals. However, all woolen blocks in this mod occlude all vibration signals.
 - All netherrack blocks are infiniburn. Bedrock blocks are infiniburn in the end.
 - All blocks of endstone, obsidian and crying obsidian are immune to ender dragons.
 - Netherite blocks and ancient debris blocks, when dropped as items, resist fire and lava.
