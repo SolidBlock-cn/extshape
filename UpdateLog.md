@@ -7,6 +7,7 @@
 - 不再允许合成木墙，以免与原版合成表冲突。
 - 修复雪块、黏土块的栅栏和栅栏门的配方与墙的配方冲突。
 - 加入了 `/extshape:check-conflict` 命令，用来检查配方是否存在冲突。
+- （仅限 1.19）加入了 `dampens_vibrations` 标签，其内容与 `occludes_vibration_signals` 相同。
 
 - Optimized the configuration screen of the mod.
 - Chiseled sandstone, chiseled red sandstone, chiseled quartz, cut sandstone, cut red sandstone cannot be used to craft stairs and slab, in order to avoid conflict with vanilla crafting recipe.
