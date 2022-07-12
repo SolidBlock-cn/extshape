@@ -9,6 +9,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.Contract;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.config.ExtShapeConfig;
@@ -43,7 +45,7 @@ public class ExtShapeItemGroup extends ItemGroup {
 
     System.arraycopy(groups, 0, newGroups, 0, groups.length);
 
-    ItemGroupAccessor.setGroups(newGroups);
+    GROUPS = newGroups;
     WOODEN_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length,
         new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
@@ -75,7 +77,7 @@ public class ExtShapeItemGroup extends ItemGroup {
     MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
 
     if (!ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
-      ItemGroupAccessor.setGroups(groups);
+      GROUPS = groups;
     }
   }
 
@@ -197,7 +199,7 @@ public class ExtShapeItemGroup extends ItemGroup {
     newGroups[groups.length + 1] = COLORFUL_BLOCK_GROUP;
     newGroups[groups.length + 2] = STONE_BLOCK_GROUP;
     newGroups[groups.length + 3] = OTHER_BLOCK_GROUP;
-    ItemGroupAccessor.setGroups(newGroups);
+    ItemGroup.GROUPS = newGroups;
   }
 
   public static void removeGroups() {
@@ -212,11 +214,16 @@ public class ExtShapeItemGroup extends ItemGroup {
         ((ItemGroupAccessor) group).setIndex(-1);
       }
     }
-    ItemGroupAccessor.setGroups(newGroups);
-    final int selectedTab = CreativeInventoryScreenAccessor.getSelectedTab();
-    if (selectedTab >= newGroups.length) {
-      CreativeInventoryScreenAccessor.setSelectedTab(newGroups.length - 1);
-    }
+    ItemGroup.GROUPS = newGroups;
+    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+      final int selectedTab = CreativeInventoryScreenAccessor.getSelectedTab();
+      if (selectedTab >= newGroups.length) {
+        CreativeInventoryScreenAccessor.setSelectedTab(newGroups.length - 1);
+      }
+      if (newGroups.length <= 12) {
+        CreativeInventoryScreenAccessor.setTabPage(0);
+      }
+    });
   }
 
   /**

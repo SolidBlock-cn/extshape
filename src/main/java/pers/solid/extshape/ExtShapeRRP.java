@@ -1,20 +1,20 @@
 package pers.solid.extshape;
 
-import net.devtech.arrp.api.RRPCallbackConditional;
+import net.devtech.arrp.api.RRPCallbackForge;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.recipe.JShapedRecipe;
 import net.devtech.arrp.json.recipe.JShapelessRecipe;
 import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +28,7 @@ import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.Collection;
+import java.util.Objects;
 
 import static net.devtech.arrp.generator.ResourceGeneratorHelper.getAdvancementIdForRecipe;
 import static net.minecraft.item.Item.BLOCK_ITEMS;
@@ -45,7 +46,7 @@ public final class ExtShapeRRP {
    *
    * @see ExtShapeRRP#STANDARD_PACK
    */
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static final RuntimeResourcePack CLIENT_PACK = RuntimeResourcePack.create(new Identifier(ExtShape.MOD_ID, "client"));
   /**
    * 适用于整个模组的运行时资源包，服务端和客户端都会运行。之所以称为“standard”而非“server”，是因为即使在客户端启动时，该资源包也会存在。
@@ -71,29 +72,31 @@ public final class ExtShapeRRP {
   static void registerRRP() {
     if (!GENERATE_EACH_RELOAD) {
       generateServerData(STANDARD_PACK);
-      if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-        generateClientResources(CLIENT_PACK);
-      }
+      DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> generateClientResources(CLIENT_PACK));
     }
-    RRPCallbackConditional.BEFORE_VANILLA.register((resourceType, builder) -> {
+    RRPCallbackForge.BEFORE_VANILLA.add(resourceType -> {
       if (resourceType == ResourceType.SERVER_DATA || resourceType == null) {
         if (GENERATE_EACH_RELOAD) {
           STANDARD_PACK.clearResources(ResourceType.SERVER_DATA);
           generateServerData(STANDARD_PACK);
         }
-        builder.add(STANDARD_PACK);
+        return (STANDARD_PACK);
       }
+      return null;
+    });
+    RRPCallbackForge.BEFORE_VANILLA.add(resourceType -> {
       if (resourceType == ResourceType.CLIENT_RESOURCES || resourceType == null) {
         try {
           if (GENERATE_EACH_RELOAD) {
             CLIENT_PACK.clearResources(ResourceType.CLIENT_RESOURCES);
             generateClientResources(CLIENT_PACK);
           }
-          builder.add(CLIENT_PACK);
+          return (CLIENT_PACK);
         } catch (NoSuchFieldError throwable) {
           throw new AssertionError(throwable);
         }
       }
+      return null;
     });
   }
 
@@ -102,7 +105,7 @@ public final class ExtShapeRRP {
    *
    * @param pack 运行时资源包。
    */
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void generateClientResources(RuntimeResourcePack pack) {
     LOGGER.info("Generating client resources for Extended Block Shapes mod!");
 
@@ -248,7 +251,7 @@ public final class ExtShapeRRP {
         for (Block block : stonecuttingBase) {
           final Block stairs0 = BlockMappings.getBlockOf(Shape.STAIRS, block);
           if (stairs0 == null) continue;
-          final String name0 = Registry.BLOCK.getId(stairs0).getPath();
+          final String name0 = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(stairs0), "Block is not registered.").getPath();
           generateSimpleStonecuttingRecipe(stairs0, quarterPiece, 3, "_from_" + name0 + "_stonecutting", "has_stairs", pack);
         }
       }
@@ -268,7 +271,7 @@ public final class ExtShapeRRP {
           for (Block block : stonecuttingBase) {
             final Block slab0 = BlockMappings.getBlockOf(Shape.SLAB, block);
             if (slab0 == null) continue;
-            final String name0 = Registry.BLOCK.getId(slab0).getPath();
+            final String name0 = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(slab0), "Block is not registered.").getPath();
             generateSimpleStonecuttingRecipe(slab0, quarterPiece, 2, "_from_" + name0 + "_stonecutting", "has_slab", pack);
           }
         }
@@ -289,7 +292,7 @@ public final class ExtShapeRRP {
           for (Block block0 : stonecuttingBase) {
             final Block verticalSlab0 = BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, block0);
             if (verticalSlab0 == null) continue;
-            generateSimpleStonecuttingRecipe(verticalSlab0, quarterPiece, 2, "_from_" + Registry.BLOCK.getId(verticalSlab0).getPath() + "_stonecutting", "has_vertical_slab", pack);
+            generateSimpleStonecuttingRecipe(verticalSlab0, quarterPiece, 2, "_from_" + Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(verticalSlab0), "Block is not registered.").getPath() + "_stonecutting", "has_vertical_slab", pack);
           }
         }
       }
@@ -311,7 +314,7 @@ public final class ExtShapeRRP {
           for (Block block0 : stonecuttingBase) {
             final Block verticalSlab0 = BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, block0);
             if (verticalSlab0 == null) return;
-            generateSimpleStonecuttingRecipe(verticalSlab0, verticalQuarterPiece, 2, "_from_" + Registry.BLOCK.getId(verticalSlab0).getPath() + "_stonecutting", "has_vertical_slab", pack);
+            generateSimpleStonecuttingRecipe(verticalSlab0, verticalQuarterPiece, 2, "_from_" + Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(verticalSlab0), "Block is not registered.").getPath() + "_stonecutting", "has_vertical_slab", pack);
           }
         }
       }
@@ -322,7 +325,7 @@ public final class ExtShapeRRP {
         for (Block block0 : stonecuttingBase) {
           final Block verticalStairs0 = BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS, block0);
           if (verticalStairs0 == null) continue;
-          generateSimpleStonecuttingRecipe(verticalStairs0, verticalQuarterPiece, 3, "_from_" + Registry.BLOCK.getId(verticalStairs0).getPath(), "has_vertical_stairs", pack);
+          generateSimpleStonecuttingRecipe(verticalStairs0, verticalQuarterPiece, 3, "_from_" + Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(verticalStairs0), "Block is not registered.").getPath(), "has_vertical_stairs", pack);
         }
       }
     }

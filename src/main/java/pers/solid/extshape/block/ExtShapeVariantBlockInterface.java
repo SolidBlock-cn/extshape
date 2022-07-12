@@ -8,7 +8,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.util.registry.Registry;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
@@ -103,7 +103,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
   default MutableText getNamePrefix() {
     final Block baseBlock = this.getBaseBlock();
     if (baseBlock == null) return new TranslatableText("block.extshape.prefix.unknown");
-    final String path = Registry.BLOCK.getId(baseBlock).getPath();
+    final String path = ForgeRegistries.BLOCKS.getKey(baseBlock).getPath();
     if (PATH_PREFIX_MAPPINGS.containsKey(path)) {
       return new TranslatableText("block.extshape.prefix." + getPathPrefixOf(path));
     } else {

@@ -2,8 +2,6 @@ package pers.solid.extshape.config;
 
 import com.mojang.datafixers.util.Either;
 import net.devtech.arrp.api.RuntimeResourcePack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.font.MultilineText;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ScreenTexts;
@@ -14,12 +12,14 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import pers.solid.extshape.ExtShapeRRP;
 
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ExtShapeRRPScreen extends Screen {
   public final Screen parent;
   protected ButtonWidget regenClientResourcesButton;
