@@ -5,12 +5,12 @@ import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.devtech.arrp.json.blockstate.JVariants;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.recipe.JRecipe;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
@@ -32,7 +32,7 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
     return Text.translatable("block.extshape.?_vertical_quarter_piece", this.getNamePrefix());
   }
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public @NotNull JBlockStates getBlockStates() {
     final Identifier identifier = getBlockModelId();
@@ -46,7 +46,7 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
 
 
   @Override
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public @NotNull JModel getBlockModel() {
     return simpleModel("extshape:block/vertical_quarter_piece");
   }

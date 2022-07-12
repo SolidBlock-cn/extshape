@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    */
   @Override
   public Identifier getIdentifierOf(Block element) {
-    return Registry.BLOCK.getId(element);
+    return ForgeRegistries.BLOCKS.getKey(element);
   }
 
   /**

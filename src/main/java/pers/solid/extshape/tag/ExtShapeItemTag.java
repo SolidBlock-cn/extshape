@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
@@ -29,6 +29,6 @@ public class ExtShapeItemTag extends UsableTag<ItemConvertible> {
 
   @Override
   public Identifier getIdentifierOf(ItemConvertible item) {
-    return Registry.ITEM.getId(item.asItem());
+    return ForgeRegistries.ITEMS.getKey(item.asItem());
   }
 }

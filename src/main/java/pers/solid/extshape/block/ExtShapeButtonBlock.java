@@ -6,8 +6,6 @@ import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JShapelessRecipe;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.AbstractButtonBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -18,6 +16,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
@@ -57,7 +57,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   }
 
   @Override
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public @NotNull JBlockStates getBlockStates() {
     final Identifier blockModelId = getBlockModelId();
     return JBlockStates.delegate(BlockStateModelGenerator.createButtonBlockState(
@@ -67,14 +67,14 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
     ));
   }
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   @NotNull
   public JModel getBlockModel() {
     return new JModel("block/button").addTexture("texture", getTextureId(TextureKey.TEXTURE));
   }
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
     final Identifier blockModelId = getBlockModelId();
@@ -85,7 +85,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   }
 
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public @NotNull JModel getItemModel() {
     return new JModel(getBlockModelId().brrp_append("_inventory"));

@@ -2,7 +2,6 @@ package pers.solid.extshape.block;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.devtech.arrp.generator.BRRPCubeBlock;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemGroup;
@@ -64,7 +63,7 @@ public final class ExtShapeBlocks {
     // 石化橡木木板
     PETRIFIED_OAK_PLANKS = new BlockBuilder()
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeAll(builder.blockSettings, "block/oak_planks"))
-        .setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB))
+        .setBlockSettings(Block.Settings.copy(PETRIFIED_OAK_SLAB))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "petrified_oak_planks"))
         .group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(ExtShapeBlockTags.FULL_BLOCKS).build();
 
@@ -212,7 +211,7 @@ public final class ExtShapeBlocks {
     // 平滑石头比较特殊，完整方块和台阶不同。
     SMOOTH_STONE_DOUBLE_SLAB = new BlockBuilder()
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, "block/smooth_stone_slab_top", "block/smooth_stone_slab", "block/smooth_stone_slab_top"))
-        .setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE))
+        .setBlockSettings(Block.Settings.copy(SMOOTH_STONE))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "smooth_stone_slab_double"))
         .group(ItemGroup.BUILDING_BLOCKS).setDefaultTag(ExtShapeBlockTags.FULL_BLOCKS).build();
 
@@ -229,7 +228,7 @@ public final class ExtShapeBlocks {
 
     // 带釉陶瓦只注册台阶。
     for (final Block block : ExtShapeBlockTags.GLAZED_TERRACOTTA) {
-      new SlabBuilder(block).setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, FabricBlockSettings.copyOf(builder.baseBlock))).setDefaultTag(ExtShapeBlockTags.GLAZED_TERRACOTTA_SLABS).build();
+      new SlabBuilder(block).setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, Block.Settings.copy(builder.baseBlock))).setDefaultTag(ExtShapeBlockTags.GLAZED_TERRACOTTA_SLABS).build();
     }
 
     // 彩色混凝土。

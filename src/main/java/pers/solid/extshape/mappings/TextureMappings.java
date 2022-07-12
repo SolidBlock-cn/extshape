@@ -1,16 +1,16 @@
 package pers.solid.extshape.mappings;
 
 import net.devtech.arrp.generator.TextureRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import pers.solid.extshape.block.ExtShapeBlocks;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class TextureMappings {
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void registerTextures() {
     TextureRegistry.register(Blocks.SMOOTH_QUARTZ, new Identifier("minecraft", "block/quartz_block_bottom"));
     TextureRegistry.register(Blocks.SMOOTH_RED_SANDSTONE, new Identifier("minecraft", "block/red_sandstone_top"));
