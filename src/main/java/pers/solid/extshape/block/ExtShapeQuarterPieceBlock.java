@@ -7,14 +7,14 @@ import net.devtech.arrp.json.blockstate.JVariants;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
 import net.devtech.arrp.json.recipe.JRecipe;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -39,7 +39,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
 
 
   @Override
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public @NotNull JBlockStates getBlockStates() {
     final JVariants variant = new JVariants();
     final Identifier blockModelId = getBlockModelId();
@@ -52,7 +52,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
   }
 
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public @NotNull JModel getBlockModel() {
     return new JModel("extshape:block/quarter_piece")

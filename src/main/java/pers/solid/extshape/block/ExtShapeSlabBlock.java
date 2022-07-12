@@ -5,14 +5,14 @@ import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JShapelessRecipe;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -27,7 +27,7 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
     return new TranslatableText("block.extshape.?_slab", this.getNamePrefix());
   }
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public @NotNull JBlockStates getBlockStates() {
     final Identifier id = getBlockModelId();

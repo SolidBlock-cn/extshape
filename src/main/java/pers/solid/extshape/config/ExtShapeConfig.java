@@ -1,8 +1,8 @@
 package pers.solid.extshape.config;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
+import net.minecraftforge.fml.loading.FMLPaths;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
@@ -21,7 +21,7 @@ public class ExtShapeConfig implements Cloneable {
    * 本模组的默认配置，即为实例初始化时使用的值。用于屏幕显示。
    */
   public static final @Unmodifiable ExtShapeConfig DEFAULT_CONFIG = new ExtShapeConfig();
-  public static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "extshape.nbt");
+  public static final File CONFIG_FILE = FMLPaths.CONFIGDIR.get().resolve("extshape.nbt").toFile();
   static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-configs");
   /**
    * 本模组当前的配置。

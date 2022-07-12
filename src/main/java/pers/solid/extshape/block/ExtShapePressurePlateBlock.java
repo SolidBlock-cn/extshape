@@ -7,8 +7,6 @@ import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JShapedRecipe;
 import net.devtech.arrp.json.recipe.JShapelessRecipe;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock;
@@ -18,7 +16,9 @@ import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -43,7 +43,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public @NotNull JBlockStates getBlockStates() {
     final Identifier blockModelId = getBlockModelId();
@@ -54,7 +54,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     ));
   }
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   @NotNull
   public JModel getBlockModel() {
@@ -64,7 +64,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
 
   @Override
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void writeBlockModel(RuntimeResourcePack pack) {
     final Identifier blockModelId = getBlockModelId();
     final JModel blockModel = getBlockModel();
@@ -76,10 +76,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   @Override
   public @NotNull JRecipe getCraftingRecipe() {
     if (ExtShapeBlockTags.WOOLS.contains(baseBlock)) {
-      final Identifier woolId = Registry.BLOCK.getId(baseBlock);
+      final Identifier woolId = ForgeRegistries.BLOCKS.getKey(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final JShapelessRecipe recipe = new JShapelessRecipe(this.getItemId(), carpetId);
-      recipe.addInventoryChangedCriterion("has_carpet", Registry.ITEM.get(carpetId));
+      recipe.addInventoryChangedCriterion("has_carpet", ForgeRegistries.ITEMS.getValue(carpetId));
       return recipe;
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
       return new JShapelessRecipe(this, Blocks.MOSS_CARPET).addInventoryChangedCriterion("has_carpet", Blocks.MOSS_CARPET);
@@ -98,10 +98,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
     // 反向合成配方。
     if (ExtShapeBlockTags.WOOLS.contains(baseBlock)) {
-      final Identifier woolId = Registry.BLOCK.getId(baseBlock);
+      final Identifier woolId = ForgeRegistries.BLOCKS.getKey(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final JShapelessRecipe recipe = new JShapelessRecipe(carpetId, this.getItemId());
-      final Item carpet = Registry.ITEM.get(carpetId);
+      final Item carpet = ForgeRegistries.ITEMS.getValue(carpetId);
       recipe.addInventoryChangedCriterion("has_pressure_plate", this);
       final Identifier recipeId = new Identifier(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
       pack.addRecipe(recipeId, recipe);

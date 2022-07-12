@@ -2,12 +2,12 @@ package pers.solid.extshape.builder;
 
 import com.google.common.collect.BiMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +38,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   public final boolean buildItem;
   private final List<ExtShapeBlockTag> tagList = new ArrayList<>();
-  public FabricBlockSettings blockSettings;
+  public AbstractBlock.Settings blockSettings;
   public ExtShapeBlockItemBuilder itemBuilder;
 
   protected @Nullable ExtShapeBlockTag defaultTag = ExtShapeBlockTags.EXTSHAPE_BLOCKS;
@@ -66,7 +66,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
   /**
    * 物品设置。
    */
-  protected @Nullable FabricItemSettings itemSettings;
+  protected @Nullable Item.Settings itemSettings;
   /**
    * 物品是否防火。
    */
@@ -80,7 +80,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   private Identifier identifier;
 
-  protected AbstractBlockBuilder(Block baseBlock, FabricBlockSettings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
+  protected AbstractBlockBuilder(Block baseBlock, AbstractBlock.Settings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
     this.baseBlock = baseBlock;
     this.registerBlock = true;
     this.registerItem = true;
@@ -93,7 +93,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
   }
 
   protected AbstractBlockBuilder(Block baseBlock, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
-    this(baseBlock, FabricBlockSettings.copyOf(baseBlock), instanceSupplier);
+    this(baseBlock, AbstractBlock.Settings.copy(baseBlock), instanceSupplier);
   }
 
 
@@ -103,7 +103,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @Override
   public void register() {
-    Registry.register(Registry.BLOCK, this.getBlockId(), instance);
+    ForgeRegistries.BLOCKS.register(getBlockId(), instance);
   }
 
   /**
@@ -113,7 +113,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @CanIgnoreReturnValue
   @Contract(mutates = "this")
-  public AbstractBlockBuilder<T> setBlockSettings(FabricBlockSettings settings) {
+  public AbstractBlockBuilder<T> setBlockSettings(AbstractBlock.Settings settings) {
     this.blockSettings = settings;
     return this;
   }
@@ -125,7 +125,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @CanIgnoreReturnValue
   @Contract(mutates = "this")
-  public AbstractBlockBuilder<T> setItemSettings(FabricItemSettings settings) {
+  public AbstractBlockBuilder<T> setItemSettings(Item.Settings settings) {
     this.itemSettings = settings;
     return this;
   }
@@ -144,7 +144,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @return 从注册表获取方块对应基础方块的命名空间id。
    */
   protected Identifier getBaseIdentifier() {
-    return Registry.BLOCK.getId(baseBlock);
+    return ForgeRegistries.BLOCKS.getKey(baseBlock);
   }
 
   /**
@@ -303,8 +303,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
     if (this.addToMapping) this.addToMapping();
 
     if (buildItem) {
-      this.itemBuilder = new ExtShapeBlockItemBuilder(this.instance, itemSettings != null ? itemSettings :
-          new FabricItemSettings());
+      this.itemBuilder = new ExtShapeBlockItemBuilder(this.instance, itemSettings != null ? itemSettings : new Item.Settings());
       itemBuilder.setIdentifier(identifier);
       if (group == null) itemBuilder.group();
       else itemBuilder.group(group);

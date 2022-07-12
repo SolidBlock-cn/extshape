@@ -3,30 +3,40 @@ package pers.solid.extshape.block;
 import com.google.common.collect.BiMap;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
+import net.devtech.arrp.generator.ItemResourceGenerator;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
 import net.devtech.arrp.json.recipe.JIngredient;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.data.client.TextureKey;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.extensions.IForgeBlock;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
 
+import java.util.Objects;
+
 /**
  * 该模组中的绝大多数方块共用的接口。
  */
-public interface ExtShapeBlockInterface extends BlockResourceGenerator {
+public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBlock {
   /**
    * 方块所在的合成配方的组。
    *
@@ -62,7 +72,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     return isStoneCut(getBaseBlock());
   }
 
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   default JModel simpleModel(String parent) {
     return new JModel(parent).textures(JTextures.ofSides(getTextureId(TextureKey.TOP), getTextureId(TextureKey.SIDE), getTextureId(TextureKey.BOTTOM)));
   }
@@ -70,7 +80,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
   /**
    * 考虑到上蜡的方块使用的模型均为未上蜡的方块的模型，故在此做出调整。
    */
-  @Environment(EnvType.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   default Identifier getBlockModelId() {
     final BiMap<Block, Block> map = HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get();
@@ -96,7 +106,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
    * <p>为该方块写入合成配方。</p>
    *
    * @param pack 运行时资源包。
-   * @see net.devtech.arrp.generator.ItemResourceGenerator#writeRecipes(RuntimeResourcePack)
+   * @see ItemResourceGenerator#writeRecipes(RuntimeResourcePack)
    * @since 1.5.1
    */
   @ApiStatus.AvailableSince("1.5.1")
@@ -127,7 +137,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
       if (stonecuttingRecipe instanceof JStonecuttingRecipe jStonecuttingRecipe) {
         // block 是切石前的基础方块。
         for (Block block : VanillaStonecutting.INSTANCE.get(getBaseBlock())) {
-          final String path = Registry.BLOCK.getId(block).getPath();
+          final String path = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block), "Unregistered block.").getPath();
           final Identifier secondaryId = getRecipeId().brrp_append("_from_" + path + "_stonecutting");
           final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
               JIngredient.ofItem(block),
@@ -151,6 +161,42 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     writeCraftingRecipe(pack);
     if (shouldWriteStonecuttingRecipe()) {
       writeStonecuttingRecipe(pack);
+    }
+  }
+
+  @Override
+  default int getFlammability(BlockState state, BlockView level, BlockPos pos, Direction direction) {
+    final Block block = getBaseBlock();
+    if (block != null) {
+      if (state.contains(Properties.WATERLOGGED) && state.get(Properties.WATERLOGGED)) {
+        return 0;
+      }
+      return block.getFlammability(block.getDefaultState(), level, pos, direction);
+    } else {
+      return IForgeBlock.super.getFlammability(state, level, pos, direction);
+    }
+  }
+
+  @Override
+  default int getFireSpreadSpeed(BlockState state, BlockView level, BlockPos pos, Direction direction) {
+    final Block block = getBaseBlock();
+    if (block != null) {
+      if (state.contains(Properties.WATERLOGGED) && state.get(Properties.WATERLOGGED)) {
+        return 0;
+      }
+      return block.getFireSpreadSpeed(block.getDefaultState(), level, pos, direction);
+    } else {
+      return IForgeBlock.super.getFireSpreadSpeed(state, level, pos, direction);
+    }
+  }
+
+  @Override
+  default boolean canEntityDestroy(BlockState state, BlockView level, BlockPos pos, Entity entity) {
+    final Block block = getBaseBlock();
+    if (block != null) {
+      return block.canEntityDestroy(block.getDefaultState(), level, pos, entity);
+    } else {
+      return IForgeBlock.super.canEntityDestroy(state, level, pos, entity);
     }
   }
 }

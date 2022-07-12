@@ -1,12 +1,10 @@
 package pers.solid.extshape;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.common.Mod;
 
-@Environment(EnvType.CLIENT)
-public class ExtShapeClient implements ClientModInitializer {
-  @Override
-  public void onInitializeClient() {
-  }
+@OnlyIn(Dist.CLIENT)
+@Mod("extshape")
+public class ExtShapeClient {
 }
