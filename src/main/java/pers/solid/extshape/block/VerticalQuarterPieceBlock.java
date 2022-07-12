@@ -26,7 +26,6 @@ import pers.solid.extshape.util.HorizontalCornerDirection;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("deprecation")
 public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
   public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new HashMap<>();
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -61,6 +60,7 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
         fluidState.getFluid() == Fluids.WATER);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
     HorizontalCornerDirection dir = state.get(FACING);
@@ -68,21 +68,24 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
   }
 
   @Override
-  public BlockState rotate(BlockState state, BlockRotation rotation) {
-    return super.rotate(state, rotation).with(FACING, state.get(FACING).rotate(rotation));
+  public BlockState rotate(BlockState state, WorldAccess level, BlockPos pos, BlockRotation direction) {
+    return super.rotate(state, level, pos, direction).with(FACING, state.get(FACING).rotate(direction));
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public BlockState mirror(BlockState state, BlockMirror mirror) {
     return super.mirror(state, mirror).with(FACING, state.get(FACING).mirror(mirror));
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public FluidState getFluidState(BlockState state) {
     return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
   }
 
 
+  @SuppressWarnings("deprecation")
   @Override
   public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
     if (state.get(WATERLOGGED)) {

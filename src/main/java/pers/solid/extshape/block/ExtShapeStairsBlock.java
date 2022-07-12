@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.google.common.base.Suppliers;
 import net.devtech.arrp.generator.BRRPStairsBlock;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
@@ -10,8 +11,11 @@ import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
 
+  public final Block baseBlock;
+
   public ExtShapeStairsBlock(Block baseBlock, Settings settings) {
-    super(baseBlock, settings);
+    super(Suppliers.ofInstance(baseBlock), settings);
+    this.baseBlock = baseBlock;
   }
 
   @Override

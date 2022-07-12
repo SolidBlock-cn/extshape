@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": ["AbstractBlockAccessor", "BlockFamiliesAccessor", "ButtonMixin", "ItemGroupAccessor", "PickaxeItemMixin", "SnowyBlockMixin"],
   "client": [
-    "CreativeInventoryScreenAccessor", "CreativeInventoryScreenMixin"
+    "CreativeInventoryScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
