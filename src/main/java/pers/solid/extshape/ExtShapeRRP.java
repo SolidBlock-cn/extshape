@@ -15,9 +15,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.Shape;
@@ -64,7 +64,7 @@ public final class ExtShapeRRP {
    */
   private static final boolean GENERATE_EACH_RELOAD = false;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-Runtime resource pack");
+  private static final Logger LOGGER = LogManager.getLogger("EXTSHAPE-Runtime resource pack");
 
   /**
    * 注册所有的运行时资源。

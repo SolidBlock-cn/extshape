@@ -1,12 +1,11 @@
 package pers.solid.extshape.tag;
 
 import com.google.common.collect.Lists;
-import net.fabricmc.fabric.api.tag.TagFactory;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Contract;
 
@@ -90,7 +89,7 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    */
   @Contract(value = "-> new", pure = true)
   public Tag<Block> toBlockTag() {
-    return TagFactory.BLOCK.create(identifier);
+    return ForgeTagHandler.makeWrapperTag(ForgeRegistries.BLOCKS, identifier);
   }
 
   /**
@@ -100,6 +99,6 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    */
   @Contract(value = "-> new", pure = true)
   public Tag<Item> toItemTag() {
-    return TagFactory.ITEM.create(identifier);
+    return ForgeTagHandler.makeWrapperTag(ForgeRegistries.ITEMS, identifier);
   }
 }

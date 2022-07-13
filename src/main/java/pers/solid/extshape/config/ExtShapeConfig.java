@@ -3,11 +3,11 @@ package pers.solid.extshape.config;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtIo;
 import net.minecraftforge.fml.loading.FMLPaths;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pers.solid.extshape.mappings.BlockMappings;
 
 import java.io.File;
@@ -22,7 +22,7 @@ public class ExtShapeConfig implements Cloneable {
    */
   public static final @Unmodifiable ExtShapeConfig DEFAULT_CONFIG = new ExtShapeConfig();
   public static final File CONFIG_FILE = FMLPaths.CONFIGDIR.get().resolve("extshape.nbt").toFile();
-  static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-configs");
+  static final Logger LOGGER = LogManager.getLogger("EXTSHAPE-configs");
   /**
    * 本模组当前的配置。
    */
