@@ -103,7 +103,8 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @Override
   public void register() {
-    ForgeRegistries.BLOCKS.register(getBlockId(), instance);
+    instance.setRegistryName(getBlockId());
+    ForgeRegistries.BLOCKS.register(instance);
   }
 
   /**
