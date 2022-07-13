@@ -3,11 +3,7 @@ package pers.solid.extshape;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
@@ -15,7 +11,14 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraftforge.client.ConfigGuiHandler;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pers.solid.extshape.block.ExtShapeBlocks;
@@ -33,18 +36,16 @@ public class ExtShape {
   public ExtShape() {
     ExtShapeConfig.init();
     MinecraftForge.EVENT_BUS.addListener(ExtShape::registerCommand);
-    FMLJavaModLoadingContext.get().getModEventBus().addListener(ExtShape::register);
-    ModLoadingContext.get().getActiveContainer().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, Suppliers.ofInstance(new ConfigScreenHandler.ConfigScreenFactory((client, screen) -> new ExtShapeOptionsScreen(screen))));
+    FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, ExtShape::register);
+    ModLoadingContext.get().getActiveContainer().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, Suppliers.ofInstance(new ConfigGuiHandler.ConfigGuiFactory((client, screen) -> new ExtShapeOptionsScreen(screen))));
   }
 
-  public static void register(RegisterEvent event) {
-    event.register(ForgeRegistries.Keys.BLOCKS, helper -> {
-      ExtShapeBlocks.init();
-      ExtShapeItemGroup.init();
-      ExtShapeBlockTags.refillTags();
-      registerComposingChances();
-      ExtShapeRRP.registerRRP();
-    });
+  public static void register(RegistryEvent.Register<Block> event) {
+    ExtShapeBlocks.init();
+    ExtShapeItemGroup.init();
+    ExtShapeBlockTags.refillTags();
+    registerComposingChances();
+    ExtShapeRRP.registerRRP();
   }
 
   public static void registerCommand(RegisterCommandsEvent event) {
