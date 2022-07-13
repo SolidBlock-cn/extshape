@@ -40,7 +40,7 @@ modId = "forge"
 mandatory = true # do you **need** this mod to be able to launch?
 # A version range using interval notation.
 # Brackets mean "inclusive" bounds, while parentheses mean "exclusive".
-versionRange = "[41,)" # This essentially means any forge >= @FORGE_LOADER_MAJOR@
+versionRange = "[40,)" # This essentially means any forge >= @FORGE_LOADER_MAJOR@
 ordering = "NONE" # Use this if you want your mod to be loaded specifically BEFORE or AFTER another mod
 side = "BOTH" # Specify where this mod is required: can be BOTH, CLIENT or SERVER
 
@@ -50,7 +50,7 @@ modId = "minecraft"
 mandatory = true
 # See above for how to read this notation, this essentially means any
 # version of Minecraft from @MINECRAFT@ (inclusive).
-versionRange = "[1.19,1.20)"
+versionRange = "[1.18.2,1.19)"
 ordering = "NONE"
 side = "BOTH"
 

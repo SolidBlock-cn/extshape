@@ -27,7 +27,8 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
    */
   @Override
   public void register() {
-    ForgeRegistries.ITEMS.register(identifier, item);
+    item.setRegistryName(identifier);
+    ForgeRegistries.ITEMS.register(item);
   }
 
   /**
