@@ -1,7 +1,6 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.BiMap;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

@@ -1,8 +1,5 @@
 package pers.solid.extshape.builder;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.registries.ForgeRegistries;
