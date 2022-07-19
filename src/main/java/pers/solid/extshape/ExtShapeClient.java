@@ -5,6 +5,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
 
 @OnlyIn(Dist.CLIENT)
-@Mod("extshape")
+@Mod(ExtShape.MOD_ID)
 public class ExtShapeClient {
 }
