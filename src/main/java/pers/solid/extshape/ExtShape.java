@@ -28,7 +28,7 @@ import pers.solid.extshape.config.ExtShapeOptionsScreen;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
-@Mod("extshape")
+@Mod(ExtShape.MOD_ID)
 public class ExtShape {
   public static final String MOD_ID = "extshape";
   public static final Logger LOGGER = LogManager.getLogger("EXTSHAPE");
