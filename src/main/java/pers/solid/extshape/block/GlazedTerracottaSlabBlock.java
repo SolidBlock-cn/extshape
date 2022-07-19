@@ -1,9 +1,11 @@
 package pers.solid.extshape.block;
 
+import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.blockstate.JBlockModel;
 import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.devtech.arrp.json.blockstate.JVariants;
+import net.devtech.arrp.json.models.JModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
@@ -18,6 +20,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 
 public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
   public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
@@ -66,5 +69,18 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
       variant.addVariant("type=double,facing", direction, new JBlockModel(baseBlockModelId).y(rotation));
     }
     return JBlockStates.ofVariants(variant);
+  }
+
+  @Override
+  public @NotNull JModel getBlockModel() {
+    return super.getBlockModel().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
+  }
+
+  @Override
+  public void writeBlockModel(RuntimeResourcePack pack) {
+    final JModel model = getBlockModel();
+    final Identifier id = getBlockModelId();
+    pack.addModel(model, id);
+    pack.addModel(model.clone().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")), id.brrp_append("_top"));
   }
 }
