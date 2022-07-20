@@ -70,7 +70,17 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
     Direction direction = ctx.getSide();
     BlockPos blockPos = ctx.getBlockPos();
     FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-    return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER).with(HALF, direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double) blockPos.getY() > 0.5D)) ? BlockHalf.BOTTOM : BlockHalf.TOP);
+    final Direction.Axis axis = ctx.getPlayerFacing().getAxis();
+    final double d = ctx.getHitPos().getComponentAlongAxis(axis) - blockPos.getComponentAlongAxis(axis);
+    final Direction facing = switch (axis) {
+      case X -> d < 0.5 ? Direction.WEST : Direction.EAST;
+      case Z -> d < 0.5 ? Direction.NORTH : Direction.SOUTH;
+      default -> Direction.NORTH;
+    };
+    return this.getDefaultState()
+        .with(FACING, facing)
+        .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER)
+        .with(HALF, direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double) blockPos.getY() > 0.5D)) ? BlockHalf.BOTTOM : BlockHalf.TOP);
   }
 
   @SuppressWarnings("deprecation")
