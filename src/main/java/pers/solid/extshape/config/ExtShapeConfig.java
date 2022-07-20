@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.extshape.block.ExtShapeSlabBlock;
 import pers.solid.extshape.mappings.BlockMappings;
 
 import java.io.File;
@@ -47,6 +48,23 @@ public class ExtShapeConfig implements Cloneable {
    * 是否将本模组的物品关系注册到 Minecraft 原版的 {@link net.minecraft.data.family.BlockFamilies} 中。<span style=color:maroon>仅支持 Minecraft 1.17 以上版本。</span>
    */
   public boolean registerBlockFamilies = true;
+  /**
+   * 是否避免部分按钮的配方，以解决配方冲突的问题。默认为开启。如果安装了能修复合成配方冲突的问题的模组，则可以关闭。
+   *
+   * @see pers.solid.extshape.block.ExtShapeButtonBlock#REFUSE_RECIPES
+   */
+  public boolean avoidSomeButtonRecipes = true;
+
+  /**
+   * 是否避免木墙的合成配方，以解决与木质活板门的配方冲突问题。默认为开启。如果安装了能修复合成配方冲突的问题的模组，则可以关闭。
+   */
+  public boolean preventWoodenWallRecipes = true;
+  /**
+   * 是否为雪台阶方块应用特殊合成配方，以解决与雪的配方冲突问题。
+   *
+   * @see ExtShapeSlabBlock#getCraftingRecipe()
+   */
+  public boolean specialSnowSlabCrafting = true;
 
   /**
    * 从配置文件中读取并保存配置文件。如果捕获到异常，将会在控制台中输出。读取到的文件中，所有其他的 NBT 标签都被保留。
@@ -95,6 +113,15 @@ public class ExtShapeConfig implements Cloneable {
     if (nbtCompound.contains("registerBlockFamilies")) {
       registerBlockFamilies = nbtCompound.getBoolean("registerBlockFamilies");
     }
+    if (nbtCompound.contains("avoidSomeButtonRecipes")) {
+      avoidSomeButtonRecipes = nbtCompound.getBoolean("avoidSomeButtonRecipes");
+    }
+    if (nbtCompound.contains("preventWoodenWallRecipes")) {
+      preventWoodenWallRecipes = nbtCompound.getBoolean("preventWoodenWallRecipes");
+    }
+    if (nbtCompound.contains("specialSnowSlabCrafting")) {
+      specialSnowSlabCrafting = nbtCompound.getBoolean("specialSnowSlabCrafting");
+    }
   }
 
   /**
@@ -126,6 +153,9 @@ public class ExtShapeConfig implements Cloneable {
     nbt.putBoolean("addToVanillaGroups", addToVanillaGroups);
     nbt.putBoolean("showSpecificGroups", showSpecificGroups);
     nbt.putBoolean("registerBlockFamilies", registerBlockFamilies);
+    nbt.putBoolean("avoidSomeButtonRecipes", avoidSomeButtonRecipes);
+    nbt.putBoolean("preventWoodenWallRecipes", preventWoodenWallRecipes);
+    nbt.putBoolean("specialSnowSlabCrafting", specialSnowSlabCrafting);
     return nbt;
   }
 

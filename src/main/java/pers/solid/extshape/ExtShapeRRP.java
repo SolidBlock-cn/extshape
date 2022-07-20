@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mappings.TextureMappings;
 import pers.solid.extshape.mappings.UnusualLootTables;
@@ -133,7 +133,7 @@ public final class ExtShapeRRP {
       generator.writeRecipes(pack);
       final Block baseBlock = generator.getBaseBlock();
       if (UnusualLootTables.INSTANCE.containsKey(baseBlock)) {
-        pack.addLootTable(generator.getLootTableId(), UnusualLootTables.INSTANCE.get(baseBlock).apply(baseBlock, Shape.getShapeOf(block), block));
+        pack.addLootTable(generator.getLootTableId(), UnusualLootTables.INSTANCE.get(baseBlock).apply(baseBlock, BlockShape.getShapeOf(block), block));
       } else {
         generator.writeLootTable(pack);
       }
@@ -191,8 +191,8 @@ public final class ExtShapeRRP {
     final Collection<Block> stonecuttingBase = VanillaStonecutting.INSTANCE.get(baseBlock);
 
     // 台阶与垂直台阶之间的配方。
-    final Block slab = BlockMappings.getBlockOf(Shape.SLAB, baseBlock);
-    final Block verticalSlab = BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, baseBlock);
+    final Block slab = BlockMappings.getBlockOf(BlockShape.SLAB, baseBlock);
+    final Block verticalSlab = BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, baseBlock);
     if (slab != null && verticalSlab != null
         && BLOCK_ITEMS.containsKey(slab) && BLOCK_ITEMS.containsKey(verticalSlab)) {
       Identifier toVerticalId = recipeIdOf(verticalSlab);
@@ -208,8 +208,8 @@ public final class ExtShapeRRP {
     }
 
     // 楼梯与垂直楼梯之间的配方。
-    final Block stairs = BlockMappings.getBlockOf(Shape.STAIRS, baseBlock);
-    final Block verticalStairs = BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS, baseBlock);
+    final Block stairs = BlockMappings.getBlockOf(BlockShape.STAIRS, baseBlock);
+    final Block verticalStairs = BlockMappings.getBlockOf(BlockShape.VERTICAL_STAIRS, baseBlock);
     if (stairs != null && verticalStairs != null
         && BLOCK_ITEMS.containsKey(stairs) && BLOCK_ITEMS.containsKey(verticalStairs)) {
       Identifier toVerticalId = recipeIdOf(verticalStairs);
@@ -225,8 +225,8 @@ public final class ExtShapeRRP {
     }
 
     // 横条与纵条之间的配方。
-    final Block quarterPiece = BlockMappings.getBlockOf(Shape.QUARTER_PIECE, baseBlock);
-    final Block verticalQuarterPiece = BlockMappings.getBlockOf(Shape.VERTICAL_QUARTER_PIECE, baseBlock);
+    final Block quarterPiece = BlockMappings.getBlockOf(BlockShape.QUARTER_PIECE, baseBlock);
+    final Block verticalQuarterPiece = BlockMappings.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, baseBlock);
     if (quarterPiece != null && verticalQuarterPiece != null
         && BLOCK_ITEMS.containsKey(quarterPiece) && BLOCK_ITEMS.containsKey(verticalQuarterPiece)) {
       Identifier toVerticalId = recipeIdOf(verticalQuarterPiece);
@@ -249,7 +249,7 @@ public final class ExtShapeRRP {
       if (stairs != null && BLOCK_ITEMS.containsKey(stairs) && stoneCut) {
         generateSimpleStonecuttingRecipe(stairs, quarterPiece, 3, "_from_stairs_stonecutting", "has_stairs", pack);
         for (Block block : stonecuttingBase) {
-          final Block stairs0 = BlockMappings.getBlockOf(Shape.STAIRS, block);
+          final Block stairs0 = BlockMappings.getBlockOf(BlockShape.STAIRS, block);
           if (stairs0 == null) continue;
           final String name0 = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(stairs0), "Block is not registered.").getPath();
           generateSimpleStonecuttingRecipe(stairs0, quarterPiece, 3, "_from_" + name0 + "_stonecutting", "has_stairs", pack);
@@ -269,7 +269,7 @@ public final class ExtShapeRRP {
         if (stoneCut) {
           generateSimpleStonecuttingRecipe(slab, quarterPiece, 2, "_from_slab_stonecutting", "has_slab", pack);
           for (Block block : stonecuttingBase) {
-            final Block slab0 = BlockMappings.getBlockOf(Shape.SLAB, block);
+            final Block slab0 = BlockMappings.getBlockOf(BlockShape.SLAB, block);
             if (slab0 == null) continue;
             final String name0 = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(slab0), "Block is not registered.").getPath();
             generateSimpleStonecuttingRecipe(slab0, quarterPiece, 2, "_from_" + name0 + "_stonecutting", "has_slab", pack);
@@ -290,7 +290,7 @@ public final class ExtShapeRRP {
         if (stoneCut) {
           generateSimpleStonecuttingRecipe(verticalSlab, quarterPiece, 2, "_from_vertical_slab_stonecutting", "has_vertical_slab", pack);
           for (Block block0 : stonecuttingBase) {
-            final Block verticalSlab0 = BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, block0);
+            final Block verticalSlab0 = BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, block0);
             if (verticalSlab0 == null) continue;
             generateSimpleStonecuttingRecipe(verticalSlab0, quarterPiece, 2, "_from_" + Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(verticalSlab0), "Block is not registered.").getPath() + "_stonecutting", "has_vertical_slab", pack);
           }
@@ -312,7 +312,7 @@ public final class ExtShapeRRP {
         if (stoneCut) {
           generateSimpleStonecuttingRecipe(verticalSlab, verticalQuarterPiece, 2, "_from_vertical_slab_stonecutting", "has_vertical_slab", pack);
           for (Block block0 : stonecuttingBase) {
-            final Block verticalSlab0 = BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, block0);
+            final Block verticalSlab0 = BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, block0);
             if (verticalSlab0 == null) return;
             generateSimpleStonecuttingRecipe(verticalSlab0, verticalQuarterPiece, 2, "_from_" + Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(verticalSlab0), "Block is not registered.").getPath() + "_stonecutting", "has_vertical_slab", pack);
           }
@@ -323,7 +323,7 @@ public final class ExtShapeRRP {
       if (verticalStairs != null && BLOCK_ITEMS.containsKey(verticalStairs) && stoneCut) {
         generateSimpleStonecuttingRecipe(verticalStairs, verticalQuarterPiece, 3, "_from_vertical_stairs_stonecutting", "has_vertical_stairs", pack);
         for (Block block0 : stonecuttingBase) {
-          final Block verticalStairs0 = BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS, block0);
+          final Block verticalStairs0 = BlockMappings.getBlockOf(BlockShape.VERTICAL_STAIRS, block0);
           if (verticalStairs0 == null) continue;
           generateSimpleStonecuttingRecipe(verticalStairs0, verticalQuarterPiece, 3, "_from_" + Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(verticalStairs0), "Block is not registered.").getPath(), "has_vertical_stairs", pack);
         }

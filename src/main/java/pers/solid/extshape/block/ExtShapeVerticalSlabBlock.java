@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
@@ -64,5 +65,10 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   @Override
   public Block getBaseBlock() {
     return baseBlock;
+  }
+
+  @Override
+  public BlockShape getBlockShape() {
+    return BlockShape.VERTICAL_SLAB;
   }
 }
