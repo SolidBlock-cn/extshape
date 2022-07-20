@@ -2,6 +2,7 @@ package pers.solid.extshape.builder;
 
 
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Contract;
 
 interface Builder<T> {
   /**
@@ -12,11 +13,13 @@ interface Builder<T> {
   /**
    * 构造对象时，不将其注册到注册表。
    */
+  @Contract(mutates = "this")
   Builder<T> noRegister();
 
   /**
    * 该构造器需要构造的对象的命名空间id。
    */
+  @Contract(pure = true)
   Identifier getBlockId();
 
   /**
@@ -24,6 +27,7 @@ interface Builder<T> {
    *
    * @param identifier 命名空间id。
    */
+  @Contract(mutates = "this")
   Builder<T> setIdentifier(Identifier identifier);
 
   /**

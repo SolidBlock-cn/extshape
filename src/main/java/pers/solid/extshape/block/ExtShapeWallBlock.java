@@ -7,6 +7,8 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantBlockInterface {
@@ -22,7 +24,7 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
     final JRecipe craftingRecipe = super.getCraftingRecipe();
-    return craftingRecipe == null || ExtShapeBlockTags.PLANKS.contains(baseBlock) ? null : craftingRecipe.group(getRecipeGroup());
+    return craftingRecipe == null || (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes && ExtShapeBlockTags.PLANKS.contains(baseBlock)) ? null : craftingRecipe.group(getRecipeGroup());
   }
 
   @Override
@@ -38,5 +40,10 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
     if (ExtShapeBlockTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_wall";
     if (ExtShapeBlockTags.PLANKS.contains(baseBlock)) return "wooden_wall";
     return "";
+  }
+
+  @Override
+  public BlockShape getBlockShape() {
+    return BlockShape.WALL;
   }
 }
