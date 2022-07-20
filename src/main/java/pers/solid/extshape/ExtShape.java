@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
@@ -15,18 +16,19 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.rs.ExtShapeBridgeImpl;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShape implements ModInitializer {
   public static final String MOD_ID = "extshape";
-  public static final Logger LOGGER = LogManager.getLogger("EXTSHAPE");
+  public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
 
   @Override
   public void onInitialize() {
@@ -53,6 +55,15 @@ public class ExtShape implements ModInitializer {
           return RecipeConflict.checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
         })));
 
+    if (FabricLoader.getInstance().isModLoaded("reasonable-sorting")) {
+      try {
+        ExtShapeBridgeImpl.initialize();
+      } catch (LinkageError e) {
+        LOGGER.info("An error ({}) was thrown when initializing Reasonable Sorting Mod with Extended Block Shapes mod. This is expected.", e.getClass().getSimpleName());
+      } catch (Throwable e) {
+        LOGGER.warn("Failed to call ExtShapeBridgeImpl.initialize():", e);
+      }
+    }
   }
 
   /**

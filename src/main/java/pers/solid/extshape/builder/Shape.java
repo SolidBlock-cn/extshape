@@ -25,7 +25,7 @@ public enum Shape implements StringIdentifiable {
   FENCE_GATE(FenceGateBlock.class, BlockFamily.Variant.FENCE_GATE, "fence_gate"),
   WALL(WallBlock.class, BlockFamily.Variant.WALL, "wall"),
   BUTTON(AbstractButtonBlock.class, BlockFamily.Variant.BUTTON, "button"),
-  PRESSURE_PLATE(PressurePlateBlock.class, BlockFamily.Variant.PRESSURE_PLATE, "pressure_place");
+  PRESSURE_PLATE(PressurePlateBlock.class, BlockFamily.Variant.PRESSURE_PLATE, "pressure_plate");
 
   public static final BiMap<Shape, String> SHAPE_TO_STRING = Arrays.stream(values()).collect(ImmutableBiMap.toImmutableBiMap(value -> value, Shape::asString));
   /**
