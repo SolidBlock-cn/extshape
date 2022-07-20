@@ -74,13 +74,15 @@ To avoid recipe conflicts, some blocks are not craftable. For example, iron bloc
 
 Since 1.5.0, all recipes can be unlocked when obtaining any of the base block. To put explicitly, each recipe has a corresponding advancement, and as soon as the player obtains the base block or unlocks the recipe, the advancement is triggered and relative recipe is unlocked.
 
+Since 1.6.0, you can configure to cancel avoiding recipes that conflict. For instance, if you disable "prevent wooden wall recipes", wooden walls can be crafted like other wall blocks, which conflict with the recipe of wooden trapdoors. It's advised to modify these settings on condition that you have installed mods that can solve recipe conflict.
+
 ### Creative Inventory
 
 In creative mode, multiple item groups are set in order to sort items in order. Blocks based on a same block (including vanilla blocks) are arranged together, so that it's possible to conveniently obtain multiple shapes of one block.
 
 Besides, you can choose to make blocks added by the mod appear in vanilla item groups, which however may case the item list messy. You can configure it in your mod config screen (requires Mod Menu).
 
-If you installed Reasonable Sorting mod (≥1.3 version), the blocks in vanilla item groups will be sorted by their base blocks.
+If you installed Reasonable Sorting mod (≥2.0.1 version), the blocks in vanilla item groups will be sorted by their base blocks.
 
 ## About ARRP
 

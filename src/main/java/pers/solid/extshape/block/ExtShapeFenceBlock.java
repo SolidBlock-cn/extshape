@@ -3,11 +3,13 @@ package pers.solid.extshape.block;
 import net.devtech.arrp.generator.BRRPFenceBlock;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JShapedRecipe;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
@@ -17,7 +19,7 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
    */
   private final Item secondIngredient;
 
-  public ExtShapeFenceBlock(Block baseBlock, Item secondIngredient, Settings settings) {
+  public ExtShapeFenceBlock(Block baseBlock, Item secondIngredient, AbstractBlock.Settings settings) {
     super(baseBlock, settings);
     this.secondIngredient = secondIngredient;
   }
@@ -50,5 +52,10 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
     if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_fence";
     if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_fence";
     return "";
+  }
+
+  @Override
+  public BlockShape getBlockShape() {
+    return BlockShape.FENCE;
   }
 }
