@@ -22,7 +22,12 @@ repositories {
     }
     maven {
         url 'https://repository.hanbings.io/proxy'
-    }
+    }*/
+
+    // 合理排序模组依赖的 Cloth Config
+    maven { url "https://maven.shedaniel.me/" }
+    // 合理排序模组
+    mavenLocal()
     // BRRP 模组，存储于本地
     flatDir { dir '../brrp/build/libs/' }
 }
@@ -34,8 +39,10 @@ dependencies {
 
     forge "net.minecraftforge:forge:${project.minecraft_version}-${forge_version}"
     // BRRP 模组
-    def brrp_mc_version = project.getProperties().getOrDefault("brrp_mc_version", project.minecraft_version)
+    def brrp_mc_version = project.properties.getOrDefault "brrp_mc_version", project.minecraft_version
     modImplementation "net.devtech:brrp-forge:${project.brrp_version}-${brrp_mc_version}"
+    // 合理排序模组
+    modImplementation "pers.solid.mod:reasonable-sorting-fabric:${project.reasonable_sorting_version}-mc${project.minecraft_version}"
 }
 
 loom {

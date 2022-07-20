@@ -3,7 +3,11 @@ package pers.solid.extshape;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Suppliers;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import it.unimi.dsi.fastutil.objects.Object2FloatMap;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
@@ -12,27 +16,21 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.ApiStatus;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.Shape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.config.ExtShapeOptionsScreen;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.rs.ExtShapeBridgeImpl;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 @Mod(ExtShape.MOD_ID)
 public class ExtShape {
   public static final String MOD_ID = "extshape";
-  public static final Logger LOGGER = LogManager.getLogger("EXTSHAPE");
+  public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
 
   public ExtShape() {
     ExtShapeConfig.init();
@@ -63,7 +61,8 @@ public class ExtShape {
             return 0;
           }
           return RecipeConflict.checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
-        }));
+        })));
+
   }
 
   /**
