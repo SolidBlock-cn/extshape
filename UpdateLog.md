@@ -1,5 +1,21 @@
 # 更新日志 Update Log
 
+### 1.6.0
+
+- 调整了纵楼梯、纵台阶、横条、纵条方块放置时的方向，现在取决于准星对准的位置而非玩家朝向。
+- （仅限 Fabric）修复了模组描述中的语法错误以及链接错误。
+- （仅限 Fabric）修复了带釉陶瓦台阶的纹理方向问题。
+- （仅限 Fabric）将木墙作为燃料时的供燃时间调整为与木板一致。
+- 调整了部分语言文件。
+- 现在可以配置允许哪些撞车的配方。
+
+- Adjusted the direction of vertical stairs, vertical slab, quarter piece, vertical quarter piece when placed. Now it depends on the position that the cross-hair aims instead of player facing.
+- (Only Fabric) Fixed the grammatical error in the mod description and incorrect link.
+- (Only Fabric) Fixed the issue of texture direction of glazed terracotta slabs.
+- (Only Fabric) Adjusted the fuel burn time of wooden wall to be same as wooden planks.
+- Adjusted some language files.
+- You may configure which conflicting recipes to allow.
+
 ### 1.5.2
 
 - 优化了模组配置界面。
@@ -8,12 +24,19 @@
 - 修复雪块、黏土块的栅栏和栅栏门的配方与墙的配方冲突。
 - 加入了 `/extshape:check-conflict` 命令，用来检查配方是否存在冲突。
 - （仅限 1.19）加入了 `dampens_vibrations` 标签，其内容与 `occludes_vibration_signals` 相同。
+- （仅限 Forge）修复了模组描述中的语法错误以及链接错误。
+- （仅限 Forge）修复了带釉陶瓦台阶的纹理方向问题。
+- （仅限 Forge）将木墙作为燃料时的供燃时间调整为与木板一致。
 
 - Optimized the configuration screen of the mod.
 - Chiseled sandstone, chiseled red sandstone, chiseled quartz, cut sandstone, cut red sandstone cannot be used to craft stairs and slab, in order to avoid conflict with vanilla crafting recipe.
 - Wooden walls are no longer allowed to craft, to avoid conflict with vanilla crafting recipe.
 - Fixed the recipe conflict of fence and fence gate of snow block and clay block to walls.
 - Added `/extshape:check-conflict` command to test conflict between recipes.
+- (Only 1.19) Added `dampens_vibrations` tag, with the same content as `occludes_vibration_signals`.
+- (Only Forge) Fixed the grammatical error in the mod description and incorrect link.
+- (Only Forge) Fixed the issue of texture direction of glazed terracotta slabs.
+- (Only Forge) Adjusted the fuel burn time of wooden wall to be same as wooden planks.
 
 ### 1.5.1
 

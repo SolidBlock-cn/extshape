@@ -5,45 +5,52 @@ import com.google.common.collect.HashBiMap;
 import net.minecraft.block.Block;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.BlockFamiliesAccessor;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
 /**
- * 本类包含所有有关方块映射关系的数据。<p>
- * 本模组的逻辑时，每个形状（{@link Shape}）都有一个由基础方块到对应形状方块的双射，这与 Minecraft 的 BlockFamily 的逻辑略有不同。
+ * <p>本类用来原版和本模组中的所有方块之间的关系。方块映射的逻辑是，每个方块形状（{@link BlockShape}）都有一个由基础方块到对应形状方块的双向映射（BiMap）。可以使用 {@link #getBlockOf(BlockShape, Block)} 获取基础方块对应形状的方块。如需获取一个特定方块所属的形状，可以使用 {@link BlockShape#getShapeOf(Block)}。
+ * <hr>
+ * <p>This mod handles relations of blocks in vanilla and this mod. The logic of block mapping is, each {@linkplain BlockShape} has a bi-map between base blocks and blocks in that shape. You can use {@link #getBlockOf(BlockShape, Block)} to get the corresponding block in that shape of a base block. To get the shape of a block, you can use {@link BlockShape#getShapeOf(Block)}.
  */
 public final class BlockMappings {
   private BlockMappings() {
   }
 
-  public static final EnumMap<Shape, BiMap<Block, Block>> SHAPE_TO_MAPPING;
+  /**
+   * 由方块形状到 BiMap 的映射，这个 BiMap 则是由基础方块到对应方块的映射。
+   */
+  private static final Map<BlockShape, BiMap<Block, Block>> SHAPE_TO_MAPPING = new HashMap<>();
   /**
    * 基础方块集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。
    */
   public static final Set<Block> BASE_BLOCKS = new LinkedHashSet<>();
 
   static {
-    SHAPE_TO_MAPPING = new EnumMap<>(Shape.class);
-    for (Shape shape : Shape.values()) {
-      SHAPE_TO_MAPPING.put(shape, HashBiMap.create());
-    }
-    // 从原版的BlockFamilies导入数据至BlockMappings。
+    importFromVanilla();
+  }
+
+  /**
+   * 从原版的 {@link BlockFamilies} 导入数据至 BlockMappings 中。
+   */
+  private static void importFromVanilla() {
     Stream<BlockFamily> vanillaBlockFamilies = BlockFamilies.getFamilies();
     vanillaBlockFamilies.forEach(blockFamily -> {
       Block baseBlock = blockFamily.getBaseBlock();
       Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
-      for (Shape shape : Shape.values()) {
+      for (BlockShape shape : BlockShape.values()) {
         if (shape.vanillaVariant == null) continue;
         Block variant = variants.get(shape.vanillaVariant);
         if (variant != null) {
-          SHAPE_TO_MAPPING.get(shape).put(baseBlock, variant);
+          getMappingOf(shape).put(baseBlock, variant);
           BASE_BLOCKS.add(baseBlock);
         }
       }
@@ -51,12 +58,13 @@ public final class BlockMappings {
   }
 
   /**
-   * @param block 方块。
-   * @return 某个方块所在类地方块映射表。
+   * 获取指定形状的方块映射。这个映射的键为基础方块，值为其对应的方块。如果这个映射不存在，则会创建新的。
+   *
+   * @param shape 方块形状。
+   * @return 方块映射。
    */
-  @Nullable
-  public static BiMap<Block, ? extends Block> getBlockMappingOf(Block block) {
-    return SHAPE_TO_MAPPING.get(Shape.getShapeOf(block));
+  public static @NotNull BiMap<Block, Block> getMappingOf(@NotNull BlockShape shape) {
+    return SHAPE_TO_MAPPING.computeIfAbsent(shape, shape1 -> HashBiMap.create());
   }
 
   /**
@@ -67,14 +75,13 @@ public final class BlockMappings {
    * @return 变种方块。
    */
   @Nullable
-  public static Block getBlockOf(Shape shape, Block baseBlock) {
-    BiMap<Block, Block> mapping = SHAPE_TO_MAPPING.get(shape);
-    if (mapping == null) return null;
+  public static Block getBlockOf(@NotNull BlockShape shape, Block baseBlock) {
+    BiMap<Block, Block> mapping = getMappingOf(shape);
     return mapping.get(baseBlock);
   }
 
   /**
-   * 将本模组定义的方块关系添加到原版的 {@link BlockFamilies} 中。
+   * 将本模组的方块的映射添加到原版的 {@link BlockFamilies} 中。通常不需要使用。
    *
    * @see pers.solid.extshape.config.ExtShapeConfig#registerBlockFamilies
    */

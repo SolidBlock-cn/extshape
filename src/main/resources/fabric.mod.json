@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "extshape",
-  "version": "1.5.2",
+  "version": "${version}",
   "icon": "assets/extshape/icon.png",
   "name": "Extended Block Shapes",
   "description": "More blocks in more shapes!",
@@ -10,8 +10,8 @@
   ],
   "contact": {
     "homepage": "https://space.bilibili.com/87328531",
-    "sources": "https://github.com/SolidBlock-cn/reasonable-sorting",
-    "issues": "https://github.com/SolidBlock-cn/reasonable-sorting/issues"
+    "sources": "https://github.com/SolidBlock-cn/extshape",
+    "issues": "https://github.com/SolidBlock-cn/extshape/issues"
   },
   "license": "LGPLv3",
   "environment": "*",
@@ -25,29 +25,8 @@
     "modmenu": [
       "pers.solid.extshape.config.ExtShapeModMenu"
     ],
-    "extshape:_modLoaded": [
-      "pers.solid.extshape.ShapesSorting::modLoaded"
-    ],
-    "extshape:_updateShapeList": [
-      "pers.solid.extshape.ShapesSorting::updateShapeList"
-    ],
-    "extshape:_getValidShapeNames": [
-      "pers.solid.extshape.ShapesSorting::getValidShapeNames"
-    ],
-    "extshape:_isValidShapeName": [
-      "pers.solid.extshape.ShapesSorting::isValidShapeName"
-    ],
-    "extshape:_updateShapeTransferRules": [
-      "pers.solid.extshape.ShapesTransfer::updateShapeTransferRules"
-    ],
-    "extshape:_setBaseBlocksInBuildingBlocks": [
-      "pers.solid.extshape.ShapesTransfer::setBaseBlocksInBuildingBlocks"
-    ],
-    "reasonable-sorting:item_sorting_rules": [
-      "pers.solid.extshape.ShapesSorting"
-    ],
-    "reasonable-sorting:item_group_transfer_rules": [
-      "pers.solid.extshape.ShapesTransfer"
+    "reasonable-sorting:extshape-bridge": [
+      "pers.solid.extshape.rs.ExtShapeBridgeImpl"
     ]
   },
   "mixins": [
@@ -62,5 +41,8 @@
   },
   "breaks": {
     "minecraft": ">=1.18.2"
+  },
+  "recommends": {
+    "reasonable-sorting": ">=2.0.1"
   }
 }

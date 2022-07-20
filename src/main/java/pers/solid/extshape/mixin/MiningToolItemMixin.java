@@ -7,15 +7,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pers.solid.extshape.ExtShape;
 
-@Mixin(PickaxeItem.class)
-public class PickaxeItemMixin extends MiningToolItem {
-  protected PickaxeItemMixin(float attackDamage, float attackSpeed, ToolMaterial material, Tag<Block> effectiveBlocks, Settings settings) {
-    super(attackDamage, attackSpeed, material, effectiveBlocks, settings);
+@Mixin(MiningToolItem.class)
+public class MiningToolItemMixin extends ToolItem {
+  public MiningToolItemMixin(ToolMaterial material, Settings settings) {
+    super(material, settings);
   }
 
   /**
@@ -26,9 +29,11 @@ public class PickaxeItemMixin extends MiningToolItem {
   /**
    * 如果方块属于 {@link #PICKAXE_UNMINEABLE} 这个标签中，那么即使属于 {@link net.minecraft.tag.BlockTags#PICKAXE_MINEABLE}，也不能认为可以开采。这是考虑到 Minecraft 将整个 {@link net.minecraft.tag.BlockTags#WALLS}（{@code minecraft:walls}）都加入了镐的可开采行列，但本模组添加的方块并非全都可以用镐开采，因此特地做出修改。
    */
-  @Override
-  public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-    if (state.isIn(PICKAXE_UNMINEABLE)) return 1;
-    return super.getMiningSpeedMultiplier(stack, state);
+  @SuppressWarnings("ConstantConditions")
+  @Inject(at = @At("HEAD"), method = "getMiningSpeedMultiplier", cancellable = true)
+  public void getMiningSpeedMultiplierInjected(ItemStack stack, BlockState state, CallbackInfoReturnable<Float> cir) {
+    if (((MiningToolItem) (Object) this) instanceof PickaxeItem && state.isIn(PICKAXE_UNMINEABLE)) {
+      cir.setReturnValue(1f);
+    }
   }
 }

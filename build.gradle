@@ -6,7 +6,7 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
-archivesBaseName = project.archives_base_name
+archivesBaseName = project.archives_base_name + "-fabric"
 version = project.mod_version + '-mc' + project.minecraft_version
 group = project.maven_group
 
@@ -26,6 +26,10 @@ repositories {
 
     // Mod Menu 模组
     maven { url 'https://maven.terraformersmc.com/releases/' }
+    // 合理排序模组依赖的 Cloth Config
+    maven { url "https://maven.shedaniel.me/" }
+    // 合理排序模组
+    mavenLocal()
     // BRRP 模组，存储于本地
     flatDir { dir '../brrp/build/libs/' }
 }
@@ -41,15 +45,17 @@ dependencies {
     // ModMenu 模组，最后一个兼容 1.18.1 的是 3.0.1（此后的版本因内嵌了不兼容的 Fabric Screen Api 而与此不兼容）
     modImplementation "com.terraformersmc:modmenu:3.0.1"
     // BRRP 模组
-    def brrp_mc_version = project.getProperties().getOrDefault("brrp_mc_version", project.minecraft_version)
+    def brrp_mc_version = project.properties.getOrDefault "brrp_mc_version", project.minecraft_version
     modImplementation "net.devtech:brrp:${project.brrp_version}-${brrp_mc_version}"
+    // 合理排序模组
+    modImplementation "pers.solid.mod:reasonable-sorting-fabric:${project.reasonable_sorting_version}-mc${project.minecraft_version}"
 }
 
 processResources {
-    inputs.property "version", project.version
+    inputs.property "version", project.mod_version
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": project.mod_version
     }
 }
 

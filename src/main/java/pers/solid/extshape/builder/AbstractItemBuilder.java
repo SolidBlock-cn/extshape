@@ -1,24 +1,19 @@
 package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Contract;
 
 public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> {
-  protected FabricItemSettings settings;
+  protected Item.Settings settings;
   protected Identifier identifier;
   protected boolean registerItem = true;
   T item;
 
-  protected AbstractItemBuilder(FabricItemSettings settings) {
+  protected AbstractItemBuilder(Item.Settings settings) {
     this.settings = settings;
-  }
-
-  protected AbstractItemBuilder() {
-    this(new FabricItemSettings());
   }
 
   /**
@@ -38,16 +33,6 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
     return this;
   }
 
-  /**
-   * 将物品设置为防火。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "-> this", mutates = "this")
-  public AbstractItemBuilder<T> fireproof() {
-    this.settings.fireproof();
-    return this;
-  }
-
   @Override
   public Identifier getBlockId() {
     return this.identifier;
@@ -55,7 +40,7 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
 
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public AbstractItemBuilder<T> setSettings(FabricItemSettings settings) {
+  public AbstractItemBuilder<T> setSettings(Item.Settings settings) {
     this.settings = settings;
     return this;
   }

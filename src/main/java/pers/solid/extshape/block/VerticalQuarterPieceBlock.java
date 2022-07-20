@@ -23,12 +23,12 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
-  public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new HashMap<>();
+  public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new EnumMap<>(HorizontalCornerDirection.class);
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
   public static final EnumProperty<HorizontalCornerDirection> FACING = EnumProperty.of("facing",
       HorizontalCornerDirection.class);
@@ -57,8 +57,17 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
   public BlockState getPlacementState(ItemPlacementContext ctx) {
     BlockPos blockPos = ctx.getBlockPos();
     FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-    return this.getDefaultState().with(FACING, HorizontalCornerDirection.fromRotation(ctx.getPlayerYaw())).with(WATERLOGGED,
-        fluidState.getFluid() == Fluids.WATER);
+    double x_diff = ctx.getHitPos().x - ctx.getBlockPos().getX();
+    double z_diff = ctx.getHitPos().z - ctx.getBlockPos().getZ();
+    final HorizontalCornerDirection facing;
+    if (x_diff < 0.5) {
+      facing = z_diff < 0.5 ? HorizontalCornerDirection.NORTH_WEST : HorizontalCornerDirection.SOUTH_WEST;
+    } else {
+      facing = z_diff < 0.5 ? HorizontalCornerDirection.NORTH_EAST : HorizontalCornerDirection.SOUTH_EAST;
+    }
+    return this.getDefaultState()
+        .with(FACING, facing)
+        .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
   }
 
   @Override
