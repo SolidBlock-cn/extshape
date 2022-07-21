@@ -13,6 +13,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
@@ -78,5 +79,10 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
     if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
         "glazed_terracotta_vertical_stairs";
     return "";
+  }
+
+  @Override
+  public BlockShape getBlockShape() {
+    return BlockShape.VERTICAL_STAIRS;
   }
 }

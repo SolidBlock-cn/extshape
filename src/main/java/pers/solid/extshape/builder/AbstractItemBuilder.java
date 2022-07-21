@@ -8,17 +8,13 @@ import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Contract;
 
 public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> {
-  protected FabricItemSettings settings;
+  protected Item.Settings settings;
   protected Identifier identifier;
   protected boolean registerItem = true;
   T item;
 
-  protected AbstractItemBuilder(FabricItemSettings settings) {
+  protected AbstractItemBuilder(Item.Settings settings) {
     this.settings = settings;
-  }
-
-  protected AbstractItemBuilder() {
-    this(new FabricItemSettings());
   }
 
   /**
@@ -35,16 +31,6 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
   @Override
   public AbstractItemBuilder<T> noRegister() {
     this.registerItem = false;
-    return this;
-  }
-
-  /**
-   * 将物品设置为防火。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "-> this", mutates = "this")
-  public AbstractItemBuilder<T> fireproof() {
-    this.settings.fireproof();
     return this;
   }
 

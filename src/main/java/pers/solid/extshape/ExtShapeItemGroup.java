@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import org.jetbrains.annotations.Contract;
-import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
@@ -47,7 +47,7 @@ public class ExtShapeItemGroup extends ItemGroup {
     WOODEN_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length,
         new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.WALL, Blocks.BIRCH_PLANKS))),
+        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(BlockShape.WALL, Blocks.BIRCH_PLANKS))),
         (stacks, group) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
             stacks)))
     );
@@ -55,21 +55,21 @@ public class ExtShapeItemGroup extends ItemGroup {
     COLORFUL_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 1,
         new Identifier(ExtShape.MOD_ID, "colorful_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.STAIRS, Blocks.LIME_WOOL))),
+        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(BlockShape.STAIRS, Blocks.LIME_WOOL))),
         (stacks, group) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, stacks))
     );
 
     STONE_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 2,
         new Identifier(ExtShape.MOD_ID, "stone_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.FENCE, Blocks.CALCITE))),
+        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(BlockShape.FENCE, Blocks.CALCITE))),
         (stacks, group) -> STONE_BLOCKS.forEach(block -> importTo(block, stacks))
     );
 
     OTHER_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 3,
         new Identifier(ExtShape.MOD_ID, "other_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
+        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
         (stacks, group) -> OTHER_BLOCKS.forEach(block -> importTo(block, stacks)));
 
     MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
@@ -229,7 +229,7 @@ public class ExtShapeItemGroup extends ItemGroup {
   protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
     if (baseBlock == null) return;
     itemStacks.add(new ItemStack(baseBlock));
-    for (Shape shape : Shape.values()) {
+    for (BlockShape shape : BlockShape.values()) {
       final Block shapeBlock = BlockMappings.getBlockOf(shape, baseBlock);
       if (shapeBlock != null) itemStacks.add(new ItemStack(shapeBlock));
     }
