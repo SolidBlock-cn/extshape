@@ -80,7 +80,7 @@ In creative mode, multiple item groups are set in order to sort items in order. 
 
 Besides, you can choose to make blocks added by the mod appear in vanilla item groups, which however may case the item list messy. You can configure it in your mod config screen (requires Mod Menu).
 
-If you installed Reasonable Sorting mod (≥1.3 version), the blocks in vanilla item groups will be sorted by their base blocks.
+If you installed Reasonable Sorting mod (≥2.0.1 version), the blocks in vanilla item groups will be sorted by their base blocks.
 
 ## About ARRP
 

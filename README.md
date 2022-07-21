@@ -78,7 +78,7 @@ If you do not understand Chinese, you may refer to the [document in English](REA
 
 此外，你也可以选择让本模组新增的方块出现在原版物品组，但这有可能会导致物品混乱。你可以在模组配置界面（需要安装 Mod Menu）进行配置。
 
-如果安装了 1.3 以上版本的合理排序（Reasonable Sorting）模组，原版物品组内的方块也会按照基础方块进行排序。
+如果安装了 2.0.1 以上版本的合理排序（Reasonable Sorting）模组，原版物品组内的方块也会按照基础方块进行排序。
 
 ## 关于运行时资源包
 
