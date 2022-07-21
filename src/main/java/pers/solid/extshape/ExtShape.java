@@ -20,7 +20,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.rs.ExtShapeBridgeImpl;
@@ -77,31 +77,31 @@ public class ExtShape implements ModInitializer {
     for (final Block compostableBlock : new Block[]{
         Blocks.PUMPKIN, Blocks.MELON, Blocks.MOSS_BLOCK, Blocks.SHROOMLIGHT
     }) {
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.STAIRS, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.SLAB, compostableBlock), 0.325f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, compostableBlock), 0.325f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.QUARTER_PIECE, compostableBlock), 0.15625f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.15625f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.FENCE, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.FENCE_GATE, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.WALL, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.BUTTON, compostableBlock), 0.2f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.PRESSURE_PLATE, compostableBlock), 0.2f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.65f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.SLAB, compostableBlock), 0.325f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.65f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.325f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.15625f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.15625f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.FENCE, compostableBlock), 0.65f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.65f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.WALL, compostableBlock), 0.65f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.BUTTON, compostableBlock), 0.2f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.PRESSURE_PLATE, compostableBlock), 0.2f);
     }
     // 原版的下界疣和诡异疣的堆肥概率为 0.9。
     for (final Block compostableBlock : new Block[]{
         Blocks.WARPED_WART_BLOCK, Blocks.NETHER_WART_BLOCK
     }) {
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.STAIRS, compostableBlock), 0.8f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.SLAB, compostableBlock), 0.4f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS, compostableBlock), 0.8f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, compostableBlock), 0.4f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.QUARTER_PIECE, compostableBlock), 0.2f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.2f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.FENCE, compostableBlock), 0.8f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.FENCE_GATE, compostableBlock), 0.8f);
-      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(Shape.WALL, compostableBlock), 0.8f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.8f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.SLAB, compostableBlock), 0.4f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.8f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.4f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.2f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.2f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.FENCE, compostableBlock), 0.8f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.8f);
+      CompostingChanceRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.WALL, compostableBlock), 0.8f);
     }
   }
 
@@ -119,7 +119,7 @@ public class ExtShape implements ModInitializer {
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_VERTICAL_SLABS.toItemTag(), 150);
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_QUARTER_PIECES.toItemTag(), 75);
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_VERTICAL_QUARTER_PIECES.toItemTag(), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_WALLS.toItemTag(), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_WALLS.toItemTag(), 300);
 
     // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
     FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_STAIRS.toItemTag(), 100);
