@@ -143,14 +143,15 @@ public class ExtShape implements ModInitializer {
    * @see FireBlock#registerDefaultFlammables()
    */
   private void registerFlammableBlocks() {
+    final FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
     // 羊毛方块加入可燃方块
     for (final Block block : ExtShapeBlockTags.WOOLEN_BLOCKS) {
-      FlammableBlockRegistry.getDefaultInstance().add(block, 30, 60);
+      registry.add(block, 30, 60);
     }
 
     // 木头加入可燃方块
     for (final Block block : ExtShapeBlockTags.OVERWORLD_WOODEN_BLOCKS) {
-      FlammableBlockRegistry.getDefaultInstance().add(block, 5, 20);
+      registry.add(block, 5, 20);
     }
   }
 }
