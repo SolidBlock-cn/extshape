@@ -16,10 +16,6 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
     this.settings = settings;
   }
 
-  protected AbstractItemBuilder() {
-    this(new Item.Settings());
-  }
-
   /**
    * 将物品注册到注册表。
    */
@@ -34,16 +30,6 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
   @Override
   public AbstractItemBuilder<T> noRegister() {
     this.registerItem = false;
-    return this;
-  }
-
-  /**
-   * 将物品设置为防火。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "-> this", mutates = "this")
-  public AbstractItemBuilder<T> fireproof() {
-    this.settings.fireproof();
     return this;
   }
 

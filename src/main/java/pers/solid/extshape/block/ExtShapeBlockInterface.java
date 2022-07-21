@@ -27,7 +27,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeBlock;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
 
@@ -198,5 +200,16 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
     } else {
       return IForgeBlock.super.canEntityDestroy(state, level, pos, entity);
     }
+  }
+
+  /**
+   * 获取当前方块所属的形状。{@link BlockShape#getShapeOf(Block)} 方法会尝试先调用此方法，如果方块不在此接口，则使用其内在的方法判断。
+   *
+   * @return 方块所属的形状。
+   * @implNote 实现了此类的必须适当返回。如果返回 {@code null}，那么即使 {@link BlockShape#getShapeOf} 找得到对应类的形状对象，也不会再去查找了。
+   */
+  @Contract(pure = true)
+  default BlockShape getBlockShape() {
+    return null;
   }
 }

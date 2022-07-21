@@ -21,6 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.Collection;
@@ -111,6 +112,11 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
     if (ExtShapeBlockTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_button";
     if (ExtShapeBlockTags.PLANKS.contains(baseBlock)) return "wooden_button";
     return "";
+  }
+
+  @Override
+  public BlockShape getBlockShape() {
+    return BlockShape.BUTTON;
   }
 
   public enum ButtonType {

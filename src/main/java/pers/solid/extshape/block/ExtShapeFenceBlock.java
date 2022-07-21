@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
@@ -50,5 +51,10 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
     if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_fence";
     if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_fence";
     return "";
+  }
+
+  @Override
+  public BlockShape getBlockShape() {
+    return BlockShape.FENCE;
   }
 }

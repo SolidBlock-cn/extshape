@@ -8,6 +8,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtShapeVariantBlockInterface {
@@ -45,5 +46,10 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
         "glazed_terracotta_fence_gate";
     return "";
+  }
+
+  @Override
+  public BlockShape getBlockShape() {
+    return BlockShape.FENCE_GATE;
   }
 }

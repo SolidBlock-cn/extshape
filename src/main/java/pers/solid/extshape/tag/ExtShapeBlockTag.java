@@ -67,8 +67,8 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    * @param anotherTag 需要将此标签添加到的标签。
    */
   @Override
-  public ExtShapeBlockTag addToTag(UsableTag<Block> anotherTag) {
-    return (ExtShapeBlockTag) super.addToTag(anotherTag);
+  public ExtShapeBlockTag addSelfToTag(UsableTag<Block> anotherTag) {
+    return (ExtShapeBlockTag) super.addSelfToTag(anotherTag);
   }
 
   /**

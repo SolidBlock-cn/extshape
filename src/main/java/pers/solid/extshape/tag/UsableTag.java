@@ -66,7 +66,7 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
    * 将自身添加到另一个标签中，并允许串联。
    */
   @Contract(value = "_ -> this", mutates = "param1")
-  public UsableTag<E> addToTag(UsableTag<E> anotherTag) {
+  public UsableTag<E> addSelfToTag(UsableTag<E> anotherTag) {
     anotherTag.addTag(this);
     return this;
   }

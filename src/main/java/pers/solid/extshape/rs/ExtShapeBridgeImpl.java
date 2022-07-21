@@ -11,7 +11,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.registry.Registry;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.mod.*;
 
@@ -19,8 +19,8 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class ExtShapeBridgeImpl extends ExtShapeBridge {
-  public static final LinkedHashSet<Shape> SHAPES_FOLLOWING_BASE_BLOCKS = new LinkedHashSet<>();
-  public static final Multimap<Shape, ItemGroup> SHAPE_TRANSFER_RULES = HashMultimap.create();
+  public static final LinkedHashSet<BlockShape> SHAPES_FOLLOWING_BASE_BLOCKS = new LinkedHashSet<>();
+  public static final Multimap<BlockShape, ItemGroup> SHAPE_TRANSFER_RULES = HashMultimap.create();
   public static final SortingRule<Block> SHAPE_FOLLOWING_BASE_BLOCKS_RULE = new ShapeSortingRule(BlockMappings.BASE_BLOCKS::contains, SHAPES_FOLLOWING_BASE_BLOCKS);
   public static final SortingRule<Item> SHAPE_FOLLOWING_BASE_BLOCKS_ITEM_RULE = new BlockItemRule(SHAPE_FOLLOWING_BASE_BLOCKS_RULE);
   public static final TransferRule BASE_BLOCKS_IN_BUILDING_RULE = item -> item instanceof BlockItem blockItem && BlockMappings.BASE_BLOCKS.contains(blockItem.getBlock()) ? Collections.singleton(ItemGroup.BUILDING_BLOCKS) : null;
@@ -33,12 +33,12 @@ public class ExtShapeBridgeImpl extends ExtShapeBridge {
 
   @Override
   public boolean isValidShapeName(String s) {
-    return Shape.SHAPE_TO_STRING.containsValue(s);
+    return BlockShape.byName(s) != null;
   }
 
   @Override
   public Stream<String> getValidShapeNames() {
-    return Arrays.stream(Shape.values()).map(Shape::asString);
+    return BlockShape.values().stream().map(BlockShape::asString);
   }
 
 
@@ -46,10 +46,10 @@ public class ExtShapeBridgeImpl extends ExtShapeBridge {
   public void updateShapeList(String s) {
     SHAPES_FOLLOWING_BASE_BLOCKS.clear();
     if (s.equals("*")) {
-      Collections.addAll(SHAPES_FOLLOWING_BASE_BLOCKS, Shape.values());
+      SHAPES_FOLLOWING_BASE_BLOCKS.addAll(BlockShape.values());
     } else {
       Arrays.stream(s.split("\\s+"))
-          .map(Shape.SHAPE_TO_STRING.inverse()::get)
+          .map(BlockShape::byName)
           .filter(Objects::nonNull)
           .forEach(SHAPES_FOLLOWING_BASE_BLOCKS::add);
     }
@@ -62,7 +62,7 @@ public class ExtShapeBridgeImpl extends ExtShapeBridge {
     for (String s : list) {
       final String[] split1 = s.split("\\s+");
       if (split1.length < 2) continue;
-      final Shape shape = Shape.SHAPE_TO_STRING.inverse().get(split1[0]);
+      final BlockShape shape = BlockShape.byName(split1[0]);
       final String[] split2 = split1[1].split("\\s+");
       Arrays.stream(split2)
           .map(groupName -> Arrays.stream(ItemGroup.GROUPS)

@@ -3,6 +3,10 @@ package pers.solid.extshape.builder;
 import com.google.common.collect.BiMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -20,7 +24,6 @@ import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class AbstractBlockBuilder<T extends Block>
@@ -30,7 +33,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   public final Block baseBlock;
   /**
-   * 是否将方块添加到默认的标签中。默认的标签可以使用 {@link #setDefaultTag(ExtShapeBlockTag)} 修改。
+   * 是否将方块添加到默认的标签中。默认的标签可以使用 {@link #setDefaultTagToAdd(ExtShapeBlockTag)} 修改。
    */
   public final boolean addToDefaultTag;
   /**
@@ -41,7 +44,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
   public AbstractBlock.Settings blockSettings;
   public ExtShapeBlockItemBuilder itemBuilder;
 
-  protected @Nullable ExtShapeBlockTag defaultTag = ExtShapeBlockTags.EXTSHAPE_BLOCKS;
+  protected @Nullable ExtShapeBlockTag defaultTagToAdd = ExtShapeBlockTags.EXTSHAPE_BLOCKS;
   protected BiMap<Block, ? super T> mapping;
   /**
    * 是否将方块添加到相应的映射中。
@@ -54,7 +57,6 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @see #setInstanceSupplier(Function)
    */
   protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier;
-  protected @Nullable Consumer<? super AbstractBlockBuilder<T>> preparationConsumer;
   /**
    * 构造器的方块实例。需要注意，只有在调用{@link #build()}之后，这个实例才会存在，从而对实例进行实际操作。
    */
@@ -66,11 +68,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
   /**
    * 物品设置。
    */
-  protected @Nullable Item.Settings itemSettings;
-  /**
-   * 物品是否防火。
-   */
-  protected boolean fireproof;
+  protected Item.Settings itemSettings;
   /**
    * 该物品所属的物品组。通常是原版的物品组。
    */
@@ -88,7 +86,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
     this.blockSettings = settings;
     this.buildItem = true;
     this.addToMapping = true;
-    this.itemSettings = null;
+    this.itemSettings = new FabricItemSettings();
     this.instanceSupplier = instanceSupplier;
   }
 
@@ -112,7 +110,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param settings 方块设置。
    */
   @CanIgnoreReturnValue
-  @Contract(mutates = "this")
+  @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setBlockSettings(AbstractBlock.Settings settings) {
     this.blockSettings = settings;
     return this;
@@ -124,19 +122,9 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param settings 物品设置。
    */
   @CanIgnoreReturnValue
-  @Contract(mutates = "this")
+  @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setItemSettings(Item.Settings settings) {
     this.itemSettings = settings;
-    return this;
-  }
-
-  /**
-   * 将方块物品设置为防火。
-   */
-  @CanIgnoreReturnValue
-  @Contract(mutates = "this")
-  public AbstractBlockBuilder<T> fireproof() {
-    this.fireproof = true;
     return this;
   }
 
@@ -165,6 +153,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param identifier 方块将要注册的命名空间id。
    */
   @Override
+  @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setIdentifier(Identifier identifier) {
     this.identifier = identifier;
     return this;
@@ -173,14 +162,8 @@ public abstract class AbstractBlockBuilder<T extends Block>
   /**
    * @return 后缀字符串。
    */
+  @Contract(pure = true)
   protected abstract String getSuffix();
-
-  /**
-   * @return 方块所处的默认方块标签。
-   */
-  protected @Nullable ExtShapeBlockTag getDefaultTag() {
-    return this.defaultTag;
-  }
 
   /**
    * 手动设置方块所处的默认方块标签。
@@ -188,9 +171,9 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param tag 方块标签。
    */
   @CanIgnoreReturnValue
-  @Contract(mutates = "this")
-  public AbstractBlockBuilder<T> setDefaultTag(ExtShapeBlockTag tag) {
-    this.defaultTag = tag;
+  @Contract(value = "_ -> this", mutates = "this")
+  public AbstractBlockBuilder<T> setDefaultTagToAdd(ExtShapeBlockTag tag) {
+    this.defaultTagToAdd = tag;
     return this;
   }
 
@@ -199,27 +182,11 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @Override
   @CanIgnoreReturnValue
-  @Contract(mutates = "this")
+  @Contract(value = "-> this", mutates = "this")
   public AbstractBlockBuilder<T> noRegister() {
     this.registerBlock = false;
     this.registerItem = false;
     return this;
-  }
-
-  /**
-   * 添加到某个方块标签中。不影响默认标签。
-   *
-   * @param tag 需要添加到的方块标签。
-   */
-  protected void addToTag(@Nullable ExtShapeBlockTag tag) {
-    if (tag != null) tag.add(this.instance);
-  }
-
-  /**
-   * 添加到对应的默认方块标签。
-   */
-  protected void addToDefaultTag() {
-    this.addToTag(this.getDefaultTag());
   }
 
   /**
@@ -238,8 +205,8 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param tag 方块构建后，需要添加到的标签。
    */
   @CanIgnoreReturnValue
-  @Contract(mutates = "this")
-  public AbstractBlockBuilder<T> putTag(ExtShapeBlockTag tag) {
+  @Contract(value = "_ -> this", mutates = "this")
+  public AbstractBlockBuilder<T> addTagToAdd(ExtShapeBlockTag tag) {
     this.tagList.add(tag);
     return this;
   }
@@ -251,14 +218,14 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @ApiStatus.Internal
   @CanIgnoreReturnValue
-  @Contract(mutates = "this")
-  public AbstractBlockBuilder<T> setInstance(T instance) {
+  @Contract(value = "_ -> this", mutates = "this")
+  public AbstractBlockBuilder<T> setInstanceDirectly(T instance) {
     this.instance = instance;
     return this;
   }
 
   @CanIgnoreReturnValue
-  @Contract(mutates = "this")
+  @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setInstanceSupplier(Function<AbstractBlockBuilder<T>, T> supplier) {
     this.instanceSupplier = supplier;
     return this;
@@ -270,22 +237,15 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * @param group 物品组。若为 {@code null}，则表示不添加到物品组中。
    */
   @CanIgnoreReturnValue
-  @Contract(mutates = "this")
+  @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> group(@Nullable ItemGroup group) {
-    this.group = group;
+    this.itemSettings.group(group);
     return this;
   }
 
   @Override
   public final void createInstance() {
     this.instance = this.instanceSupplier.apply(this);
-  }
-
-  @CanIgnoreReturnValue
-  @Contract(mutates = "this")
-  public final AbstractBlockBuilder<T> setPreparationConsumer(@Nullable Consumer<? super AbstractBlockBuilder<T>> consumer) {
-    this.preparationConsumer = consumer;
-    return this;
   }
 
   /**
@@ -295,20 +255,18 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @Override
   public T build() {
-    if (this.preparationConsumer != null) this.preparationConsumer.accept(this);
     if (this.instance == null) this.createInstance();
     if (this.registerBlock) this.register();
-    if (this.addToDefaultTag) this.addToDefaultTag();
-    this.tagList.forEach(this::addToTag);
+    if (this.addToDefaultTag && this.defaultTagToAdd != null) this.defaultTagToAdd.add(this.instance);
+    this.tagList.forEach(tag -> {
+      if (tag != null) tag.add(this.instance);
+    });
     if (this.addToMapping) this.addToMapping();
 
     if (buildItem) {
-      this.itemBuilder = new ExtShapeBlockItemBuilder(this.instance, itemSettings != null ? itemSettings : new Item.Settings());
+      this.itemBuilder = new ExtShapeBlockItemBuilder(this.instance, itemSettings);
       itemBuilder.setIdentifier(identifier);
-      if (group == null) itemBuilder.group();
-      else itemBuilder.group(group);
       if (!registerItem) itemBuilder.noRegister();
-      if (fireproof) itemBuilder.fireproof();
       this.itemBuilder.setIdentifier(this.getBlockId()).build();
     }
 

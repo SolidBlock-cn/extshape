@@ -20,17 +20,17 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.config.ExtShapeOptionsScreen;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.rs.ExtShapeBridgeImpl;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
-@Mod(ExtShape.MOD_ID)
+@Mod(ExtBlockBlockShape.MOD_ID)
 public class ExtShape {
   public static final String MOD_ID = "extshape";
-  public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger(ExtBlockBlockShape.class);
 
   public ExtShape() {
     ExtShapeConfig.init();
@@ -77,31 +77,31 @@ public class ExtShape {
     for (final Block compostableBlock : new Block[]{
         Blocks.PUMPKIN, Blocks.MELON, Blocks.MOSS_BLOCK, Blocks.SHROOMLIGHT
     }) {
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.STAIRS, compostableBlock)).asItem(), 0.65f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.SLAB, compostableBlock)).asItem(), 0.325f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS, compostableBlock)).asItem(), 0.65f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, compostableBlock)).asItem(), 0.325f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.QUARTER_PIECE, compostableBlock)).asItem(), 0.15625f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.VERTICAL_QUARTER_PIECE, compostableBlock)).asItem(), 0.15625f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.FENCE, compostableBlock)).asItem(), 0.65f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.FENCE_GATE, compostableBlock)).asItem(), 0.65f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.WALL, compostableBlock)).asItem(), 0.65f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.BUTTON, compostableBlock)).asItem(), 0.2f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.PRESSURE_PLATE, compostableBlock)).asItem(), 0.2f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.STAIRS, compostableBlock)).asItem(), 0.65f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.SLAB, compostableBlock)).asItem(), 0.325f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.VERTICAL_STAIRS, compostableBlock)).asItem(), 0.65f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.VERTICAL_SLAB, compostableBlock)).asItem(), 0.325f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.QUARTER_PIECE, compostableBlock)).asItem(), 0.15625f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.VERTICAL_QUARTER_PIECE, compostableBlock)).asItem(), 0.15625f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.FENCE, compostableBlock)).asItem(), 0.65f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.FENCE_GATE, compostableBlock)).asItem(), 0.65f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.WALL, compostableBlock)).asItem(), 0.65f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.BUTTON, compostableBlock)).asItem(), 0.2f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockBlockShape.PRESSURE_PLATE, compostableBlock)).asItem(), 0.2f);
     }
     // 原版的下界疣和诡异疣的堆肥概率为 0.9。
     for (final Block compostableBlock : new Block[]{
         Blocks.WARPED_WART_BLOCK, Blocks.NETHER_WART_BLOCK
     }) {
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.STAIRS, compostableBlock)).asItem(), 0.8f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.SLAB, compostableBlock)).asItem(), 0.4f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.VERTICAL_STAIRS, compostableBlock)).asItem(), 0.8f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, compostableBlock)).asItem(), 0.4f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.QUARTER_PIECE, compostableBlock)).asItem(), 0.2f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.VERTICAL_QUARTER_PIECE, compostableBlock)).asItem(), 0.2f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.FENCE, compostableBlock)).asItem(), 0.8f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.FENCE_GATE, compostableBlock)).asItem(), 0.8f);
-      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(Shape.WALL, compostableBlock)).asItem(), 0.8f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.STAIRS, compostableBlock)).asItem(), 0.8f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.SLAB, compostableBlock)).asItem(), 0.4f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock)).asItem(), 0.8f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock)).asItem(), 0.4f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock)).asItem(), 0.2f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock)).asItem(), 0.2f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.FENCE, compostableBlock)).asItem(), 0.8f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.FENCE_GATE, compostableBlock)).asItem(), 0.8f);
+      map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.WALL, compostableBlock)).asItem(), 0.8f);
     }
   }
 }

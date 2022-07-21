@@ -21,6 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
@@ -122,5 +123,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     if (ExtShapeBlockTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_pressure_plate";
     if (ExtShapeBlockTags.PLANKS.contains(baseBlock)) return "wooden_pressure_plate";
     return "";
+  }
+
+  @Override
+  public BlockShape getBlockShape() {
+    return BlockShape.PRESSURE_PLATE;
   }
 }
