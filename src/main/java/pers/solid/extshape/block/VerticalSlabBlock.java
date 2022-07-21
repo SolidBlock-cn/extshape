@@ -18,7 +18,6 @@ import net.minecraft.world.WorldAccess;
 /**
  * 垂直台阶方块类。
  */
-@SuppressWarnings("deprecation")
 public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterloggable {
   public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -33,6 +32,7 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
   }
 
 
+  @SuppressWarnings("deprecation")
   @Override
   public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
     if (state.get(WATERLOGGED)) {
@@ -46,6 +46,7 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
     stateManager.add(HORIZONTAL_FACING).add(WATERLOGGED);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
     Direction dir = state.get(HORIZONTAL_FACING);
@@ -62,9 +63,17 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
   public BlockState getPlacementState(ItemPlacementContext ctx) {
     BlockPos blockPos = ctx.getBlockPos();
     FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-    return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+    final Direction.Axis axis = ctx.getPlayerFacing().getAxis();
+    final double d = ctx.getHitPos().getComponentAlongAxis(axis) - blockPos.getComponentAlongAxis(axis);
+    final Direction facing = switch (axis) {
+      case X -> d < 0.5 ? Direction.WEST : Direction.EAST;
+      case Z -> d < 0.5 ? Direction.NORTH : Direction.SOUTH;
+      default -> Direction.NORTH;
+    };
+    return this.getDefaultState().with(FACING, facing).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public FluidState getFluidState(BlockState state) {
     return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
