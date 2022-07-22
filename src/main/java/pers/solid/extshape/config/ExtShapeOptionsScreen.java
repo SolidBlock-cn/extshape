@@ -1,5 +1,8 @@
 package pers.solid.extshape.config;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.ConfirmScreen;
@@ -12,18 +15,22 @@ import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.screen.ScreenTexts;
+import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
+import pers.solid.extshape.ExtShapeRRP;
+import pers.solid.mod.fabric.ConfigScreenFabric;
 
 @OnlyIn(Dist.CLIENT)
 public class ExtShapeOptionsScreen extends Screen {
 
   private final Screen parent;
   private final GameOptions gameOptions;
+  public final ExtShapeConfig oldConfig = ExtShapeConfig.CURRENT_CONFIG;
   public final ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
 
   public ExtShapeOptionsScreen(Screen parent) {
@@ -69,9 +76,56 @@ public class ExtShapeOptionsScreen extends Screen {
         config.registerBlockFamilies,
         value -> config.registerBlockFamilies = value
     ).createButton(gameOptions, width / 2 - 205, 61, 200));
-    addDrawableChild(new ButtonWidget(width / 2 + 5, 61, 200, 20, Text.translatable("options.extshape.rrp.title"), button -> {
+
+    // preventWoodenWallRecipes
+    addDrawableChild(SimpleOption.ofBoolean(
+        "options.extshape.preventWoodenWallRecipes",
+        SimpleOption.constantTooltip(
+            Text.translatable("options.extshape.preventWoodenWallRecipes.tooltip")
+                .append("\n\n")
+                .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.preventWoodenWallRecipes)))),
+        config.preventWoodenWallRecipes,
+        value -> config.preventWoodenWallRecipes = value
+    ).createButton(gameOptions, width / 2 + 5, 61, 200));
+    // avoidSomeButtonRecipes
+    addDrawableChild(SimpleOption.ofBoolean(
+        "options.extshape.avoidSomeButtonRecipes",
+        SimpleOption.constantTooltip(
+            Text.translatable("options.extshape.avoidSomeButtonRecipes.tooltip")
+                .append("\n\n")
+                .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.avoidSomeButtonRecipes)))),
+        config.avoidSomeButtonRecipes,
+        value -> config.avoidSomeButtonRecipes = value
+    ).createButton(gameOptions, width / 2 - 205, 86, 200));
+    // specialPressurePlateRecipes
+    addDrawableChild(SimpleOption.ofBoolean(
+        "options.extshape.specialSnowSlabCrafting",
+        SimpleOption.constantTooltip(
+            Text.translatable("options.extshape.specialSnowSlabCrafting.tooltip")
+                .append("\n\n")
+                .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.specialSnowSlabCrafting)))),
+        config.specialSnowSlabCrafting,
+        value -> config.specialSnowSlabCrafting = value
+    ).createButton(gameOptions, width / 2 + 5, 86, 200));
+
+    // 运行时资源包设置。
+    addDrawableChild(new ButtonWidget(width / 2 - 150, 111, 300, 20, Text.translatable("options.extshape.rrp.title"), button -> {
       if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
     }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.description"), 200), mouseX, mouseY)));
+
+    {
+      final ButtonWidget reasonableSortingButton = new ButtonWidget(width / 2 - 150, 135, 300, 20, Text.translatable("options.extshape.reasonable-sorting"), button -> {
+        if (client != null) {
+          try {
+            client.setScreen(ConfigScreenFabric.INSTANCE.createScreen(this));
+          } catch (LinkageError e) {
+            ExtShape.LOGGER.error("Failed to open Reasonable Sorting config screen:", e);
+          }
+        }
+      }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.reasonable-sorting.description"), 200), mouseX, mouseY));
+      reasonableSortingButton.active = client != null && FabricLoader.getInstance().isModLoaded("reasonable-sorting");
+      addDrawableChild(reasonableSortingButton);
+    }
   }
 
   @Override
@@ -102,16 +156,21 @@ public class ExtShapeOptionsScreen extends Screen {
     }
   }
 
+  private boolean suppressedGroupsWarning = false;
+  private boolean suppressedDataWarning = false;
+
   @Override
   public void close() {
-    if (client != null && !newConfig.addToVanillaGroups && !newConfig.showSpecificGroups) {
+    assert client != null;
+    if (!suppressedGroupsWarning && !newConfig.addToVanillaGroups && !newConfig.showSpecificGroups
+        && !(!oldConfig.addToVanillaGroups && !oldConfig.showSpecificGroups)) {
       // 由于两个设置都被关闭，因此需要确认是否不添加到任何物品栏。
       client.setScreen(new ConfirmScreen(
           t -> {
             if (t) {
               // 确定要继续
-              save();
-              client.setScreen(parent);
+              suppressedGroupsWarning = true;
+              close();
             } else {
               // 返回重新修改
               client.setScreen(this);
@@ -121,6 +180,25 @@ public class ExtShapeOptionsScreen extends Screen {
           Text.translatable("options.extshape.confirm.noGroups", Text.translatable("options.extshape.addToVanillaGroups").formatted(Formatting.GRAY), Text.translatable("options.extshape.showSpecificGroups").formatted(Formatting.GRAY), ScreenTexts.OFF),
           ScreenTexts.YES,
           Text.translatable("options.extshape.confirm.redo")
+      ));
+      return;
+    }
+    if (!suppressedDataWarning && (newConfig.preventWoodenWallRecipes != oldConfig.preventWoodenWallRecipes
+        || newConfig.avoidSomeButtonRecipes != oldConfig.avoidSomeButtonRecipes || newConfig.specialSnowSlabCrafting != oldConfig.specialSnowSlabCrafting)) {
+      client.setScreen(new ConfirmScreen(
+          t -> {
+            suppressedDataWarning = true;
+            close();
+            if (t) {
+              ExtShapeRRP.STANDARD_PACK.clearResources();
+              ExtShapeRRP.generateServerData(ExtShapeRRP.STANDARD_PACK);
+              client.inGameHud.getChatHud().addMessage(
+                  Text.translatable("options.dataChanged.finish",
+                      Text.literal("/reload").styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reload"))).formatted(Formatting.GRAY)));
+            }
+          },
+          Text.translatable("options.extshape.dataChanged"),
+          Text.translatable("options.extshape.dataChanged.details")
       ));
       return;
     }

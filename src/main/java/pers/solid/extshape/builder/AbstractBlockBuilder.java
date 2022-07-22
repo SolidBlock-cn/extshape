@@ -22,8 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public abstract class AbstractBlockBuilder<T extends Block>
-    implements Builder<T> {
+public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T> {
   /**
    * 该方块的基础方块。
    */
@@ -36,7 +35,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
    * 是否为该方块构建物品。
    */
   public final boolean buildItem;
-  private final List<ExtShapeBlockTag> tagList = new ArrayList<>();
+  private final List<@NotNull ExtShapeBlockTag> tagsToAdd = new ArrayList<>();
   public AbstractBlock.Settings blockSettings;
   public ExtShapeBlockItemBuilder itemBuilder;
 
@@ -56,7 +55,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
   /**
    * 构造器的方块实例。需要注意，只有在调用{@link #build()}之后，这个实例才会存在，从而对实例进行实际操作。
    */
-  T instance;
+  protected T instance;
   /**
    * 是否注册方块和物品。
    */
@@ -202,8 +201,8 @@ public abstract class AbstractBlockBuilder<T extends Block>
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> addTagToAdd(ExtShapeBlockTag tag) {
-    this.tagList.add(tag);
+  public AbstractBlockBuilder<T> addTagToAdd(@NotNull ExtShapeBlockTag tag) {
+    this.tagsToAdd.add(tag);
     return this;
   }
 
@@ -254,9 +253,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
     if (this.instance == null) this.createInstance();
     if (this.registerBlock) this.register();
     if (this.addToDefaultTag && this.defaultTagToAdd != null) this.defaultTagToAdd.add(this.instance);
-    this.tagList.forEach(tag -> {
-      if (tag != null) tag.add(this.instance);
-    });
+    this.tagsToAdd.forEach(tag -> tag.add(this.instance));
     if (this.addToMapping) this.addToMapping();
 
     if (buildItem) {

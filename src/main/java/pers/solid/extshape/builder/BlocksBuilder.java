@@ -1,5 +1,6 @@
 package pers.solid.extshape.builder;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -16,19 +17,33 @@ import java.util.*;
 import java.util.function.BiConsumer;
 
 /**
- * 　　由多个方块构造器组成的一个从形状到构造器的映射。<br>
- * 　　用其方法时，会修改构造器参数，但不会进行实际构造，而调用 {@link #build()} 之后，就会正式执行构造，将会调用这些构造器的 <code>build</code>方法，这时候才产生方块对象，并根据参数进行一系列操作，如加入注册表、标签等。<br>
- * 　　调用这些 {@code build} 方法时，会自动往运行时资源包（RRP）中添加内容，同时 {@link #build()} 会添加一些方块之间的转换配方，如台阶与纵台阶的合成配方。
+ * <p>此类相当于将一个基础方块的多个形状的构建器整合到一起，其本质为从方块形状到对应方块构建器的映射。
+ * <p>调用其方法时，会修改构造器参数，但不会进行实际构建，而调用 {@link #build()} 之后，就会正式执行构建，将会调用这些构建器的 {@link AbstractBlockBuilder#build()} 方法，这时候才产生方块对象，并根据参数进行一系列操作，如加入注册表、标签等。
  */
 public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? extends Block>> {
-  public final Map<@NotNull BlockShape, @Nullable ExtShapeBlockTag> defaultTags = new HashMap<>();
-  private final Set<BlockShape> shapesToBuild;
-
+  /**
+   * 本模组内置的所有方块形状。注意这并不包括其他模组添加的方块形状。因此，其他模组如需使用 BlocksBuilder，需自行通过 {@link #with(BlockShape...)} 添加。
+   */
+  private static final ImmutableSet<BlockShape> SHAPES = ImmutableSet.of(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_STAIRS, BlockShape.QUARTER_PIECE, BlockShape.VERTICAL_QUARTER_PIECE, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.WALL, BlockShape.BUTTON, BlockShape.PRESSURE_PLATE);
+  /**
+   * 为指定形状的 {@link AbstractBlockBuilder} 调用 {@link AbstractBlockBuilder#setDefaultTagToAdd(ExtShapeBlockTag) #setDefaultTagToAdd}。
+   */
+  public final Map<@NotNull BlockShape, @Nullable ExtShapeBlockTag> defaultTagsToAdd = new HashMap<>();
+  /**
+   * 该基础方块需要构建哪些形状的变种。可以通过 {@link #with} 和 {@link #without} 进行增减。
+   */
+  protected final Set<BlockShape> shapesToBuild;
+  /**
+   * 基础方块。对于 BlocksBuilder 而言，基础方块不能是 {@code null}。
+   */
   public final @NotNull Block baseBlock;
-  private final List<ExtShapeBlockTag> tagsToAddEach = new ArrayList<>();
-  private @Nullable Item fenceCraftingIngredient;
-  private @Nullable ExtShapeButtonBlock.ButtonType buttonType;
-  private @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
+  /**
+   * 构建器需要构建的所有对象都需要添加到的标签的列表。也就是说，构建的时候，这里面的标签会添加此构建器构建的所有方块。
+   */
+  protected final List<@NotNull ExtShapeBlockTag> tagsToAddEach = new ArrayList<>();
+  protected @Nullable Item fenceCraftingIngredient;
+  protected @Nullable ExtShapeButtonBlock.ButtonType buttonType;
+  protected @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
 
   /**
    * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
@@ -37,6 +52,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    * @param fenceCraftingIngredient     合成栅栏和栅栏门时，需要使用的第二合成材料。
    * @param buttonType                  按钮类型。
    * @param pressurePlateActivationRule 压力板激活类型。
+   * @param shapesToBuild               需要构建哪些方块形状。
    */
   public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, Set<BlockShape> shapesToBuild) {
     super(BlockShape.values().size());
@@ -47,16 +63,52 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
     this.shapesToBuild = shapesToBuild;
   }
 
-  public static BlocksBuilder createComprehensive(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
-    return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule, new HashSet<>(BlockShape.values()));
+  /**
+   * 创建一个 BlocksBuilder，将会创建所有形状的，但不包括第三方模组新增加的形状。
+   *
+   * @param baseBlock                   基础方块。
+   * @param fenceCraftingIngredient     栅栏的第二合成材料。若为 {@code null}，则意味着不产生栅栏和栅栏门。
+   * @param buttonType                  按钮的类型。若为 {@code null}，则意味着不产生按钮。
+   * @param pressurePlateActivationRule 压力板的类型。若为 {@code null}，则意味着不产生压力板。
+   * @return 新的 BlocksBuilder。
+   */
+  @Contract("_,_,_,_ -> new")
+  public static BlocksBuilder createAllShapes(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
+    return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule, new HashSet<>(SHAPES));
   }
 
+  /**
+   * 创建一个 BlocksBuilder，但暂时不会创建任何形状的方块，可以在后续通过 {@link #with} 等方法添加。
+   *
+   * @param baseBlock 基础方块。
+   * @return 新的 BlocksBuilder。
+   */
+  @Contract("_ -> new")
   public static BlocksBuilder createEmpty(@NotNull Block baseBlock) {
     return new BlocksBuilder(baseBlock, null, null, null, new HashSet<>());
   }
 
+  /**
+   * 创建一个 BlocksBuilder，但是只包含建筑方块，可以在后续通过 {@link #with}、{@link #without} 等方法增加或删除需要创建的形状。
+   *
+   * @param baseBlock 基础方块。
+   * @return 新的 BlocksBuilder。
+   */
+  @Contract("_ -> new")
   public static BlocksBuilder createConstructionOnly(@NotNull Block baseBlock) {
     return createEmpty(baseBlock).withConstructionShapes();
+  }
+
+  /**
+   * 构造此形状的变种。
+   *
+   * @param shape 形状。
+   */
+  @CanIgnoreReturnValue
+  @Contract(value = "_ -> this", mutates = "this")
+  public BlocksBuilder with(BlockShape shape) {
+    shapesToBuild.add(shape);
+    return this;
   }
 
   /**
@@ -68,6 +120,18 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   @Contract(value = "_ -> this", mutates = "this")
   public BlocksBuilder with(BlockShape... shapes) {
     Collections.addAll(shapesToBuild, shapes);
+    return this;
+  }
+
+  /**
+   * 不构造此形状的变种。
+   *
+   * @param shape 形状。
+   */
+  @CanIgnoreReturnValue
+  @Contract(value = "_ -> this", mutates = "this")
+  public BlocksBuilder without(BlockShape shape) {
+    shapesToBuild.remove(shape);
     return this;
   }
 
@@ -119,26 +183,6 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   }
 
   /**
-   * 不构造墙。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "-> this", mutates = "this")
-  public BlocksBuilder withoutWall() {
-    shapesToBuild.add(BlockShape.WALL);
-    return this;
-  }
-
-  /**
-   * 构造墙。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "-> this", mutates = "this")
-  public BlocksBuilder withWall() {
-    shapesToBuild.add(BlockShape.WALL);
-    return this;
-  }
-
-  /**
    * 不构造红石机关。按钮、压力板都将不会构造，栅栏门虽也属于红石机关但不受影响。
    */
   @CanIgnoreReturnValue
@@ -186,7 +230,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   @Contract(value = "_, _, -> this", mutates = "this")
   public BlocksBuilder setDefaultTagOf(@Nullable BlockShape shape, @Nullable ExtShapeBlockTag tag) {
     if (shape == null || tag == null) return this;
-    defaultTags.put(shape, tag);
+    defaultTagsToAdd.put(shape, tag);
     return this;
   }
 
@@ -197,11 +241,14 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder addTagToAddEach(ExtShapeBlockTag tag) {
+  public BlocksBuilder addTagToAddEach(@NotNull ExtShapeBlockTag tag) {
     this.tagsToAddEach.add(tag);
     return this;
   }
 
+  /**
+   * 和 {@link #forEach} 类似，但是会返回以允许串联。
+   */
   @CanIgnoreReturnValue
   @Contract(value = "_-> this", mutates = "this")
   public BlocksBuilder consumeEach(BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> biConsumer) {
@@ -209,32 +256,25 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
     return this;
   }
 
+  /**
+   * 对各个构建器的方块设置应用 BiConsumer。可用于一次性修改所有将要构建的方块的方块设置，然后串联。
+   */
   @CanIgnoreReturnValue
   @Contract(value = "_-> this", mutates = "this")
-  public BlocksBuilder consumeEachSettings(BiConsumer<BlockShape, AbstractBlock.Settings> consumer) {
-    forEach((blockShape, builder) -> consumer.accept(blockShape, builder.blockSettings));
+  public BlocksBuilder consumeEachSettings(BiConsumer<BlockShape, AbstractBlock.Settings> biConsumer) {
+    forEach((blockShape, builder) -> biConsumer.accept(blockShape, builder.blockSettings));
     return this;
   }
 
   /**
-   * 进行构造。构造后不会返回。
+   * 进行构建。构建后不会返回。
    */
   public void build() {
     for (final BlockShape shape : shapesToBuild) {
       // 自动排除现成的。
       if (BlockMappings.getBlockOf(shape, baseBlock) == null) {
         final @Nullable AbstractBlockBuilder<? extends Block> blockBuilder;
-        if (shape == BlockShape.FENCE) {
-          blockBuilder = fenceCraftingIngredient == null ? null : new FenceBuilder(baseBlock, fenceCraftingIngredient);
-        } else if (shape == BlockShape.FENCE_GATE) {
-          blockBuilder = fenceCraftingIngredient == null ? null : new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
-        } else if (shape == BlockShape.BUTTON) {
-          blockBuilder = buttonType != null ? new ButtonBuilder(buttonType, baseBlock) : null;
-        } else if (shape == BlockShape.PRESSURE_PLATE) {
-          blockBuilder = pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock) : null;
-        } else {
-          blockBuilder = shape.createBuilder(baseBlock);
-        }
+        blockBuilder = createBlockBuilderFor(shape);
         if (blockBuilder != null) {
           this.put(shape, blockBuilder);
         }
@@ -242,7 +282,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
     }
 
     final Collection<AbstractBlockBuilder<? extends Block>> values = this.values();
-    for (Entry<BlockShape, ExtShapeBlockTag> entry : this.defaultTags.entrySet()) {
+    for (Entry<BlockShape, ExtShapeBlockTag> entry : this.defaultTagsToAdd.entrySet()) {
       AbstractBlockBuilder<?> builder = this.get(entry.getKey());
       if (builder != null && entry.getValue() != null) builder.setDefaultTagToAdd(entry.getValue());
     }
@@ -251,5 +291,32 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
       tagsToAddEach.forEach(builder::addTagToAdd);
     }
     values.forEach(AbstractBlockBuilder::build);
+  }
+
+  /**
+   * 根据指定的形状，为这个 BlocksBuilder 对象创建该方块的 BlockBuilder。注意这个 {@code shape} 只能是本模组内置的 11 个方块形状，不能是自行添加的，但是你可以创建子类修改此方法的行为。
+   *
+   * @param shape 方块形状。仅限 {@link BlockShape} 中预置的 11 种。
+   * @return 此对象的 {@link #baseBlock} 的此形状的变种的 {@link BlocksBuilder}。
+   * @throws IllegalArgumentException 如果提供的 {@code shape} 参数不是本模组预置的 11 种之一（子类覆盖了此方法的除外）。
+   */
+  @Contract(pure = true)
+  @Nullable
+  protected AbstractBlockBuilder<? extends Block> createBlockBuilderFor(@NotNull BlockShape shape) {
+    final int id = shape.id;
+    return switch (id) {
+      case 0 -> new StairsBuilder(baseBlock);
+      case 1 -> new SlabBuilder(baseBlock);
+      case 2 -> new VerticalSlabBuilder(baseBlock);
+      case 3 -> new VerticalStairsBuilder(baseBlock);
+      case 4 -> new QuarterPieceBuilder(baseBlock);
+      case 5 -> new VerticalQuarterPieceBuilder(baseBlock);
+      case 6 -> new FenceBuilder(baseBlock, fenceCraftingIngredient);
+      case 7 -> new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
+      case 8 -> new WallBuilder(baseBlock);
+      case 9 -> buttonType != null ? new ButtonBuilder(buttonType, baseBlock) : null;
+      case 10 -> pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock) : null;
+      default -> throw new IllegalArgumentException("The Shape object " + shape.asString() + " is not supported, which may be provided by other mod. You may extend BlocksBuilder class and define your own 'createBlockBuilderFor' with support for your Shape object.");
+    };
   }
 }

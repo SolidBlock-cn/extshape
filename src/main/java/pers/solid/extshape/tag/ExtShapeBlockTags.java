@@ -373,8 +373,6 @@ public final class ExtShapeBlockTags {
           SMALL_DRIPLEAF_PLACEABLE.add(block);
         }
       }
-      PICKAXE_MINEABLE.add(ExtShapeBlocks.PETRIFIED_OAK_PLANKS);
-      PICKAXE_MINEABLE.add(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
       if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock) || PLANKS.contains(baseBlock)) AXE_MINEABLE.add(block);
       if (Mineable.VANILLA_HOE_MINEABLE.contains(baseBlock)) HOE_MINEABLE.add(block);
       if (Mineable.VANILLA_PICKAXE_MINEABLE.contains(baseBlock)) {
