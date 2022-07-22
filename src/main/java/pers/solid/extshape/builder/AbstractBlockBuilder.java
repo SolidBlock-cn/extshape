@@ -3,10 +3,6 @@ package pers.solid.extshape.builder;
 import com.google.common.collect.BiMap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -86,7 +82,7 @@ public abstract class AbstractBlockBuilder<T extends Block>
     this.blockSettings = settings;
     this.buildItem = true;
     this.addToMapping = true;
-    this.itemSettings = new FabricItemSettings();
+    this.itemSettings = new Item.Settings();
     this.instanceSupplier = instanceSupplier;
   }
 

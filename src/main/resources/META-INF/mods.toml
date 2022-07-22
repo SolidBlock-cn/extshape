@@ -60,3 +60,10 @@ mandatory = true
 versionRange = "[0.6.2,)"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.extshape]]
+modId = "reasonable_sorting"
+mandatory = false
+versionRange = "[2.0.1,)"
+ordering = "NONE"
+side = "BOTH"

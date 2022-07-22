@@ -18,7 +18,7 @@ import pers.solid.mod.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class ExtShapeBridgeImpl extends ExtShapeBridge {
+public class ExtShapeBridgeImplementation extends ExtShapeBridge {
   public static final LinkedHashSet<BlockShape> SHAPES_FOLLOWING_BASE_BLOCKS = new LinkedHashSet<>();
   public static final Multimap<BlockShape, ItemGroup> SHAPE_TRANSFER_RULES = HashMultimap.create();
   public static final SortingRule<Block> SHAPE_FOLLOWING_BASE_BLOCKS_RULE = new ShapeSortingRule(BlockMappings.BASE_BLOCKS::contains, SHAPES_FOLLOWING_BASE_BLOCKS);
