@@ -32,7 +32,7 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    * @param blocks 方块标签内的初始元素。
    * @return 新的没有 id 的方块标签。
    */
-  @Contract("_ -> new")
+  @Contract(value = "_ -> new", pure = true)
   public static ExtShapeBlockTag create(Block... blocks) {
     return new ExtShapeBlockTag(null, Lists.newArrayList(blocks), new ArrayList<>());
   }
@@ -44,7 +44,7 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    * @param path      标识符的路径。
    * @return 新的具有指定 id 的方块标签。
    */
-  @Contract("_, _ -> new")
+  @Contract(value = "_, _ -> new", pure = true)
   public static ExtShapeBlockTag create(String namespace, String path) {
     return new ExtShapeBlockTag(new Identifier(namespace, path), new ArrayList<>(), new ArrayList<>());
   }
@@ -55,7 +55,7 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    * @param vanillaBlockTag 原版的方块标签对象。
    * @return 新的使用已有参数的标识符的方块标签。
    */
-  @Contract("_-> new")
+  @Contract(value = "_ -> new", pure = true)
   public static ExtShapeBlockTag create(TagKey<Block> vanillaBlockTag) {
     return new ExtShapeBlockTag(vanillaBlockTag.id(), new ArrayList<>(), new ArrayList<>());
   }

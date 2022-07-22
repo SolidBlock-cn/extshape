@@ -1,10 +1,19 @@
 package pers.solid.extshape;
 
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
 import net.minecraft.screen.CraftingScreenHandler;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+import net.minecraft.text.Texts;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.collection.DefaultedList;
@@ -76,5 +85,21 @@ public final class RecipeConflict {
     MutableText text = new TranslatableText(numberOfConflicts == 0 ? "message.extshape.recipe_conflict.finish.none" : numberOfConflicts == 1 ? "message.extshape.recipe_conflict.finish.single" : "message.extshape.recipe_conflict.finish.plural", Integer.toString(numberOfConflicts));
     messageConsumer.accept(text);
     return numberOfConflicts;
+  }
+
+  public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
+    dispatcher.register(CommandManager.literal("extshape:check-conflict")
+        .requires(source -> source.hasPermissionLevel(2))
+        .executes(context -> {
+          final ServerCommandSource source = context.getSource();
+          source.sendFeedback(Text.translatable("message.extshape.recipe_conflict.start"), true);
+          final ServerWorld world = source.getWorld();
+          final ServerPlayerEntity player = source.getPlayer();
+          if (player == null) {
+            source.sendFeedback(Text.translatable("argument.entity.notfound.player"), false);
+            return 0;
+          }
+          return checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
+        }));
   }
 }

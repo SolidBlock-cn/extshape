@@ -22,13 +22,16 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.Collection;
 
 public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShapeVariantBlockInterface {
   /**
-   * 该集合内的方块将不会生成按钮配方。
+   * 该集合内的方块将不会生成按钮配方，以解决合成配方的冲突。
+   *
+   * @see pers.solid.extshape.config.ExtShapeConfig#avoidSomeButtonRecipes
    */
   public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.of(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK);
   public final ButtonType type;
@@ -95,7 +98,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
     final Block baseBlock = getBaseBlock();
-    if (REFUSE_RECIPES.contains(baseBlock)) {
+    if (REFUSE_RECIPES.contains(baseBlock) && ExtShapeConfig.CURRENT_CONFIG.avoidSomeButtonRecipes) {
       return null;
     }
     return new JShapelessRecipe(this, baseBlock)
