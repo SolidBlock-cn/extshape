@@ -85,15 +85,22 @@
 
   "options.extshape.title": "擴展方塊形狀模組配置",
   "options.extshape.addToVanillaGroups": "添加至原版物品組",
-  "options.extshape.addToVanillaGroups.tooltip": "將本模組添加的方塊添加至 Minecraft 的原版創造模式物品組中。例如，所有的階梯和半磚都加入「%s」物品組，柵欄和牆加入「%s」物品組，按鈕和壓力板則加入「%s」物品組。物品是按照被定義時的順序加入的，所以可能會有點亂，但是如果您安裝了合理排序模組，則推薦開啟此項。",
+  "options.extshape.addToVanillaGroups.tooltip": "將本模組添加的方塊添加至麥塊的原版創造模式物品組中。例如，所有的階梯和半磚都加入「%s」物品組，柵欄和牆加入「%s」物品組，按鈕和壓力板則加入「%s」物品組。物品是按照被定義時的順序加入的，所以可能會有點亂，但是如果您安裝了合理排序模組，則推薦開啟此項。",
   "options.extshape.showSpecificGroups": "顯示專門物品組",
   "options.extshape.showSpecificGroups.tooltip": "添加一些專門的物品組以顯示所有擁有不同形狀的方塊（含原版和模組中的），這些方塊按照其基礎方塊的順序排列，基礎方塊相同的方塊顯示在一起。",
+  "options.extshape.preventWoodenWallRecipes": "避免木牆合成配方",
+  "options.extshape.preventWoodenWallRecipes.tooltip": "避免木牆的合成配方，以解決與木質地板門的配方撞車問題。若開啟，您將無法合成木牆。如果您安裝了可以修復合成表撞車的模組，可以將本選項關閉。",
+  "options.extshape.avoidSomeButtonRecipes": "避免部分按鈕配方",
+  "options.extshape.avoidSomeButtonRecipes.tooltip": "避免部分按鈕的合成配方，以修復與其他物品配方撞車的問題。例如，由一個鑽石塊合成鑽石按鈕的配方與將鑽石方塊分解為 9 個鑽石物品的配方是撞車的。若開啟，您將無法合成這些按鈕，以確保其他物品能正常合成。如果您安裝了可以修復合成表撞車的模組，可以將本選項關閉。",
+  "options.extshape.specialSnowSlabCrafting": "特殊的雪半磚配方",
+  "options.extshape.specialSnowSlabCrafting.tooltip": "若開啟，雪半磚則由一個雪合成，而不是由 3 個雪塊。這是為了避免與雪的合成配方的撞車。如果你安裝了可以修復合成表撞車的模組，可以將本選項關閉。",
+
   "options.extshape.default": "默認：%s",
   "options.extshape.confirm": "確定？",
   "options.extshape.confirm.noGroups": "您的「%s」和「%s」都設置為「%s」，這意味著您在創造模式下，無法從創造模式物品欄中獲取模組中的物品。確定要繼續嗎？",
   "options.extshape.confirm.redo": "我再考慮下",
   "options.extshape.registerBlockFamilies": "註冊 BlockFamilies",
-  "options.extshape.registerBlockFamilies.description": "將本模組內的方塊關係註冊到 Minecraft 原版的 BlockFamilies 中。BlockFamilies 可能會被其他模組識別，但是如果其他模組也使用這些 BlockFamilies 則有可能出現一些問題。\n重啟遊戲後生效。",
+  "options.extshape.registerBlockFamilies.description": "將本模組內的方塊關係註冊到 Minecraft 原版的 BlockFamilies 中。BlockFamilies 可能會被其他模組識別，但是如果其他模組也使用這些 BlockFamilies 則有可能出現一些問題。一般不需要開啟。\n重啟遊戲後生效。",
 
   "options.extshape.rrp.title": "運行時資源包設置",
   "options.extshape.rrp.description": "管理擴展方塊形狀模組的運行時資源包。",
@@ -114,6 +121,13 @@
   "options.extshape.rrp.fullPath": "完整路徑如下：%s",
   "options.extshape.rrp.invalidPath": "無效的路徑：%s",
 
+  "options.extshape.reasonable-sorting": "合理排序模組配置",
+  "options.extshape.reasonable-sorting.description": "如果您安裝了合理排序模組，你可以定義方塊物品根據其形狀如何排序，這些形狀包括本模組提供的方塊形狀。其他模組提供的方塊並不會受到影響。\n\n你也可以在模組功能表中選擇“Reasonable Sorting”以進入其模組配置介面。",
+  "options.extshape.dataChanged": "伺服器資料已改變，是否重新生成伺服器資料？",
+  "options.extshape.dataChanged.details": "本模組使用的運行時資源包在 Minecraft 初始化時就會生成。您剛修改了與資料生成有關的選項，這需要在重新生成伺服器資料後才能生效。此外，如果當前伺服器（包括單人遊戲的內置伺服器）正在運行，你還需要輸入 \u00a77/reload\u00a7r 指令。",
+  "options.dataChanged.finish": "已重新生成運行時資源包的伺服器資料。如果您是在單人遊戲，或者是服主，請執行%s以加載合成表的更改。注意：多人遊戲下只有伺服器主機的設置才是有效的。",
+
+  "message.extshape.recipe_conflict.start": "開始檢測合成表撞車，可能需要一段時間",
   "message.extshape.recipe_conflict.detected": "檢測到合成表存在撞車：%s",
   "message.extshape.recipe_conflict.unknown": "檢測到合成表存在未知情況：%s",
   "message.extshape.recipe_conflict.exception": "檢測合成表撞車時出現未知錯誤",

@@ -11,18 +11,11 @@ import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class ButtonBuilder extends AbstractBlockBuilder<AbstractButtonBlock> {
 
-  private ExtShapeButtonBlock.ButtonType type;
-
   public ButtonBuilder(@NotNull ExtShapeButtonBlock.ButtonType type, Block baseBlock) {
-    super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f), builder -> new ExtShapeButtonBlock(baseBlock, ((ButtonBuilder) builder).type, builder.blockSettings));
-    this.type = type;
+    super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f), builder -> new ExtShapeButtonBlock(baseBlock, type, builder.blockSettings));
     this.defaultTagToAdd = ExtShapeBlockTags.BUTTONS;
     this.mapping = BlockMappings.getMappingOf(BlockShape.BUTTON);
     itemSettings.group(ItemGroup.REDSTONE);
-  }
-
-  protected ButtonBuilder(Block baseBlock) {
-    this(ExtShapeButtonBlock.ButtonType.STONE, baseBlock);
   }
 
   @Override

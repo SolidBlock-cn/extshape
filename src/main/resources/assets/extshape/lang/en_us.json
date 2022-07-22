@@ -80,7 +80,7 @@
   "itemGroup.extshape.stone_blocks": "\u00a79Extended Block Shape:\u00a7r Stone Blocks",
   "itemGroup.extshape.other_blocks": "\u00a79Extended Block Shape:\u00a7r Other Blocks",
 
-  "modmenu.descriptionTranslation.extshape": "This mod adds more shapes for many vanilla blocks, including shapes that do not exist in vanilla Minecraft, like vertical slabs, vertical stairs or quarter pieces. Most of the blocks have vanilla behaviours, like what their base block behaves. For example, bedrock stairs and slabs are explosion-immune and wither-immune like bedrock, and wool fences and fence gates are flammable and can be shared.\nWith this mod you can make more fascinating buildings, and your survival can be also more interesting.",
+  "modmenu.descriptionTranslation.extshape": "This mod adds more shapes for many vanilla blocks, including shapes that do not exist in vanilla Minecraft, like vertical slabs, vertical stairs or quarter pieces. Most of the blocks have vanilla behaviours, like what their base block behaves. For example, bedrock stairs and slabs are explosion-immune and wither-immune like bedrock, and wool fences and fence gates are flammable and can be sheared.\nWith this mod you can make more fascinating buildings, and your survival can be also more interesting.",
   "modmenu.summaryTranslation.extshape": "More shapes for many vanilla blocks, which behave like in vanilla.",
 
   "options.extshape.title": "Configuration of Extended Block Shapes Mod",
@@ -88,12 +88,19 @@
   "options.extshape.addToVanillaGroups.tooltip": "Add blocks added by this mod to Minecraft's vanilla Creative Mode item groups. For example, all stairs, slabs, etc., are added to \"%s\" groups; fences and walls are added to \"%s\" group, and fence gates, pressure plates and buttons are added to \"%s\" group. Items are sort in the order they are defined, so the item list could be messy, but if you installed Reasonable Sorting Mod, then this option is preferred.",
   "options.extshape.showSpecificGroups": "Show specific groups",
   "options.extshape.showSpecificGroups.tooltip": "Add four specific item groups to display blocks that have different shapes (including vanilla and mod) in a fancy order. They are sorted by their base blocks, and blocks based on a same block are displayed together.",
+  "options.extshape.preventWoodenWallRecipes": "Prevent wooden wall recipes",
+  "options.extshape.preventWoodenWallRecipes.tooltip": "Prevent the crafting recipes of wooden walls, in order to avoid the conflict with wooden trapdoors. When ON, you cannot craft wooden walls. If you installed mods that solve recipe conflict, you can turn this option OFF.",
+  "options.extshape.avoidSomeButtonRecipes": "Avoid some button recipes",
+  "options.extshape.avoidSomeButtonRecipes.tooltip": "Avoid the crafting recipes of some buttons, in order to avoid the conflict with other items. For instance, the recipe of diamond button from a diamond block conflicts with breaking a diamond block down to 9 diamond items. When ON, you cannot craft those buttons, so that the crafting of other items are ensured. If you installed mods that solve recipe conflict, you can turn this option OFF.",
+  "options.extshape.specialSnowSlabCrafting": "Special snow slab crafting",
+  "options.extshape.specialSnowSlabCrafting.tooltip": "When ON, snow slab is crafted from a snow layer block, instead of three snow blocks. This is intended to avoid the conflict with the recipe of snow layer. If you have installed mods that solve recipe conflict, you can turn this option OFF.",
+
   "options.extshape.default": "Default: %s",
   "options.extshape.confirm": "Are you sure?",
   "options.extshape.confirm.noGroups": "Your both '%s' and '%s' are set '%s', which means in Creative Mode you may not directly obtain items in this mod in your Creative inventory. Are you sure to continue?",
   "options.extshape.confirm.redo": "I reconsider",
   "options.extshape.registerBlockFamilies": "Register BlockFamilies",
-  "options.extshape.registerBlockFamilies.description": "Register the relations of the block to Minecraft's vanilla BlockFamilies. The BlockFamilies registry may be identified by some mods, but may cause potential problems when other mods use the BlockFamilies.\nTakes effect after restarting game.",
+  "options.extshape.registerBlockFamilies.description": "Register the relations of the block to Minecraft's vanilla BlockFamilies. The BlockFamilies registry may be identified by some mods, but may cause potential problems when other mods use the BlockFamilies. You usually do not need to enable it.\nTakes effect after restarting game.",
 
   "options.extshape.rrp.title": "Runtime Resource Pack settings",
   "options.extshape.rrp.description": "Manage the Runtime Resource Pack of Extended Block Shapes mod.",
@@ -114,6 +121,13 @@
   "options.extshape.rrp.fullPath": "Full path: %s",
   "options.extshape.rrp.invalidPath": "Invalid path: %s",
 
+  "options.extshape.reasonable-sorting": "Reasonable Sorting mod config",
+  "options.extshape.reasonable-sorting.description": "If you installed Reasonable Sorting mod, you can define how block items are sorted according to their shape, including shapes provided this mod. It may not affect blocks provided by other mods.\n\nYou can also access the mod config screen of Reasonable Sorting by selecting the mod in the mod menu.",
+  "options.extshape.dataChanged": "Server data changed. Regenerated server data?",
+  "options.extshape.dataChanged.details": "The mod uses runtime resource pack, which is generated on the initialization of Minecraft. You have modified options related to data generation, which may take affect by regenerating server data of this mod. You should also type \u00a77/reload\u00a7r command if the server (including the integrated server of single-player mode) is currently running.",
+  "options.dataChanged.finish": "The server data of runtime resource pack is re-generated. If you're in single player mode or you're the server owner, please execute %s to apply recipe change. Note that in multiplayer mode only the configuration of server host is valid.",
+
+  "message.extshape.recipe_conflict.start": "Starting recipe conflict check, which may take a while.",
   "message.extshape.recipe_conflict.detected": "Recipe conflict detected: %s",
   "message.extshape.recipe_conflict.unknown": "Unknown situation of recipe detected: %s",
   "message.extshape.recipe_conflict.exception": "Exceptions were found when detecting recipe conflict",

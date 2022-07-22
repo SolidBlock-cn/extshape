@@ -36,6 +36,7 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
    * @param e 一个元素。不一定是标签内元素的类型，但必须与符合类参 {@code E}。
    * @return 标签内元素所拥有的标识符。
    */
+  @Contract(pure = true)
   public abstract Identifier getIdentifierOf(E e);
 
   @Override
@@ -49,6 +50,7 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
   }
 
   @CanIgnoreReturnValue
+  @Contract(mutates = "this")
   @SuppressWarnings("UnusedReturnValue")
   public boolean addTag(UsableTag<E> es) {
     if (this.identifier != null && es.identifier == null) {
