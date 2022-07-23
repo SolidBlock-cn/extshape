@@ -43,6 +43,6 @@
     "better_runtime_resource_pack": ">=0.6.2"
   },
   "recommends": {
-    "reasonable-sorting": ">2.0.1"
+    "reasonable-sorting": ">=2.0.1"
   }
 }

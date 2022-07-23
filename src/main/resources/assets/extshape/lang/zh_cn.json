@@ -122,7 +122,7 @@
   "options.extshape.rrp.invalidPath": "无效的路径：%s",
 
   "options.extshape.reasonable-sorting": "合理排序模组配置",
-  "options.extshape.reasonable-sorting.description": "如果您安装了合理排序模组，你可以定义方块物品根据其形状如何排序，这些形状包括本模组提供的方块形状。其他模组提供的方块并不会受到影响。\n\n你也可以在模组菜单中选择“Reasonable Sorting”以进入其模组配置界面。",
+  "options.extshape.reasonable-sorting.description": "如果您安装了“合理排序”模组，你可以定义方块物品根据其形状如何排序，这些形状包括本模组提供的方块形状。其他模组提供的方块并不会受到影响。\n\n你也可以在模组菜单中选择“Reasonable Sorting”以进入其模组配置界面。\n\n如果此按钮点击无响应，可能是“合理排序”模组未安装或版本过低。",
   "options.extshape.dataChanged": "服务器数据已改变，是否重新生成服务器数据？",
   "options.extshape.dataChanged.details": "本模组使用的运行时资源包在Minecraft初始化时就会生成。您刚修改了与数据生成有关的选项，这需要在重新生成服务器数据后才能生效。此外，如果当前服务器（包括单人游戏的内置服务器）正在运行，你还需要输入\u00a77/reload\u00a7r命令。",
   "options.dataChanged.finish": "已重新生成运行时资源包的服务器数据。如果您是在单人游戏，或者是服主，请执行%s以加载合成表的更改。注意：多人游戏下只有服务器主机的设置才是有效的。",
