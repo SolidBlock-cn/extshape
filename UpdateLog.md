@@ -6,11 +6,15 @@
 - （仅限 Fabric）修复了模组描述中的语法错误以及链接错误。
 - （仅限 Fabric）修复了带釉陶瓦台阶的纹理方向问题。
 - （仅限 Fabric）将木墙作为燃料时的供燃时间调整为与木板一致。
+- 调整了部分语言文件。
+- 现在可以配置允许哪些撞车的配方。
 
 - Adjusted the direction of vertical stairs, vertical slab, quarter piece, vertical quarter piece when placed. Now it depends on the position that the cross-hair aims instead of player facing.
 - (Only Fabric) Fixed the grammatical error in the mod description and incorrect link.
 - (Only Fabric) Fixed the issue of texture direction of glazed terracotta slabs.
 - (Only Fabric) Adjusted the fuel burn time of wooden wall to be same as wooden planks.
+- Adjusted some language files.
+- You may configure which conflicting recipes to allow.
 
 ### 1.5.2
 
