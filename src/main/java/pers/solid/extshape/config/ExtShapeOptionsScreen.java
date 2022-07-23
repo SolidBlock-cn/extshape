@@ -1,8 +1,5 @@
 package pers.solid.extshape.config;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.ConfirmScreen;
@@ -20,10 +17,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.ConfigScreenHandler;
+import net.minecraftforge.fml.ModList;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
 import pers.solid.extshape.ExtShapeRRP;
-import pers.solid.mod.fabric.ConfigScreenFabric;
 
 @OnlyIn(Dist.CLIENT)
 public class ExtShapeOptionsScreen extends Screen {
@@ -117,13 +115,16 @@ public class ExtShapeOptionsScreen extends Screen {
       final ButtonWidget reasonableSortingButton = new ButtonWidget(width / 2 - 150, 135, 300, 20, Text.translatable("options.extshape.reasonable-sorting"), button -> {
         if (client != null) {
           try {
-            client.setScreen(ConfigScreenFabric.INSTANCE.createScreen(this));
+            ModList.get().getModContainerById("reasonable_sorting")
+                .map(container -> container.getCustomExtension(ConfigScreenHandler.ConfigScreenFactory.class))
+                .flatMap(optional -> optional.map(ConfigScreenHandler.ConfigScreenFactory::screenFunction))
+                .ifPresent(f -> client.setScreen(f.apply(client, this)));
           } catch (LinkageError e) {
             ExtShape.LOGGER.error("Failed to open Reasonable Sorting config screen:", e);
           }
         }
       }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.reasonable-sorting.description"), 200), mouseX, mouseY));
-      reasonableSortingButton.active = client != null && FabricLoader.getInstance().isModLoaded("reasonable-sorting");
+      reasonableSortingButton.active = client != null && ModList.get().isLoaded("reasonable_sorting");
       addDrawableChild(reasonableSortingButton);
     }
   }

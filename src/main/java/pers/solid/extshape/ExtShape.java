@@ -7,8 +7,6 @@ import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.block.FireBlock;
-import org.jetbrains.annotations.ApiStatus;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
