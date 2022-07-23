@@ -122,7 +122,7 @@
   "options.extshape.rrp.invalidPath": "無效的路徑：%s",
 
   "options.extshape.reasonable-sorting": "合理排序模組配置",
-  "options.extshape.reasonable-sorting.description": "如果您安裝了合理排序模組，你可以定義方塊物品根據其形狀如何排序，這些形狀包括本模組提供的方塊形狀。其他模組提供的方塊並不會受到影響。\n\n你也可以在模組功能表中選擇“Reasonable Sorting”以進入其模組配置介面。",
+  "options.extshape.reasonable-sorting.description": "如果您安裝了合理排序模組，你可以定義方塊物品根據其形狀如何排序，這些形狀包括本模組提供的方塊形狀。其他模組提供的方塊並不會受到影響。\n\n你也可以在模組功能表中選擇“Reasonable Sorting”以進入其模組配置介面。\n\n如果此按鈕點擊無響應，可能是合理排序模組未安裝或版本過低。",
   "options.extshape.dataChanged": "伺服器資料已改變，是否重新生成伺服器資料？",
   "options.extshape.dataChanged.details": "本模組使用的運行時資源包在 Minecraft 初始化時就會生成。您剛修改了與資料生成有關的選項，這需要在重新生成伺服器資料後才能生效。此外，如果當前伺服器（包括單人遊戲的內置伺服器）正在運行，你還需要輸入 \u00a77/reload\u00a7r 指令。",
   "options.dataChanged.finish": "已重新生成運行時資源包的伺服器資料。如果您是在單人遊戲，或者是服主，請執行%s以加載合成表的更改。注意：多人遊戲下只有伺服器主機的設置才是有效的。",
