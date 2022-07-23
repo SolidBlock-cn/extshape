@@ -120,7 +120,7 @@
   "options.extshape.rrp.invalidPath": "Invalid path: %s",
 
   "options.extshape.reasonable-sorting": "Reasonable Sorting mod config",
-  "options.extshape.reasonable-sorting.description": "If you installed Reasonable Sorting mod, you can define how block items are sorted according to their shape, including shapes provided this mod. It may not affect blocks provided by other mods.\n\nYou can also access the mod config screen of Reasonable Sorting by selecting the mod in the mod menu.",
+  "options.extshape.reasonable-sorting.description": "If you installed Reasonable Sorting mod, you can define how block items are sorted according to their shape, including shapes provided this mod. It may not affect blocks provided by other mods.\n\nYou can also access the mod config screen of Reasonable Sorting by selecting the mod in the mod menu.\n\nIf there is no response on clicking this button, it's likely that you have not installed Reasonable Sorting mod or the version is too low.",
   "options.extshape.dataChanged": "Server data changed. Regenerated server data?",
   "options.extshape.dataChanged.details": "The mod uses runtime resource pack, which is generated on the initialization of Minecraft. You have modified options related to data generation, which may take affect by regenerating server data of this mod. You should also type \u00a77/reload\u00a7r command if the server (including the integrated server of single-player mode) is currently running.",
   "options.dataChanged.finish": "The server data of runtime resource pack is re-generated. If you're in single player mode or you're the server owner, please execute %s to apply recipe change. Note that in multiplayer mode only the configuration of server host is valid.",

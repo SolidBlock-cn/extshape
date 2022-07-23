@@ -80,7 +80,7 @@ public class ExtShapeOptionsScreen extends Screen {
         SimpleOption.constantTooltip(
             new TranslatableText("options.extshape.preventWoodenWallRecipes.tooltip")
                 .append("\n\n")
-                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.preventWoodenWallRecipes)))),
+                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.preventWoodenWallRecipes)).formatted(Formatting.GRAY))),
         config.preventWoodenWallRecipes,
         value -> config.preventWoodenWallRecipes = value
     ).createButton(gameOptions, width / 2 + 5, 61, 200));
@@ -90,7 +90,7 @@ public class ExtShapeOptionsScreen extends Screen {
         SimpleOption.constantTooltip(
             new TranslatableText("options.extshape.avoidSomeButtonRecipes.tooltip")
                 .append("\n\n")
-                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.avoidSomeButtonRecipes)))),
+                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.avoidSomeButtonRecipes)).formatted(Formatting.GRAY))),
         config.avoidSomeButtonRecipes,
         value -> config.avoidSomeButtonRecipes = value
     ).createButton(gameOptions, width / 2 - 205, 86, 200));
@@ -100,7 +100,7 @@ public class ExtShapeOptionsScreen extends Screen {
         SimpleOption.constantTooltip(
             new TranslatableText("options.extshape.specialSnowSlabCrafting.tooltip")
                 .append("\n\n")
-                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.specialSnowSlabCrafting)))),
+                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.specialSnowSlabCrafting)).formatted(Formatting.GRAY))),
         config.specialSnowSlabCrafting,
         value -> config.specialSnowSlabCrafting = value
     ).createButton(gameOptions, width / 2 + 5, 86, 200));

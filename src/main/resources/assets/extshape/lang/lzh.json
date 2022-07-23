@@ -120,7 +120,7 @@
   "options.extshape.rrp.invalidPath": "是路無效：%s",
 
   "options.extshape.reasonable-sorting": "調《知序》之規",
-  "options.extshape.reasonable-sorting.description": "如既載改囊《知序》，君可明何以序塊物據其形也，含形之是改囊（塊形之擴）供者。是規者，無動塊之他囊供者。\n\n君亦可選「Reasonable Sorting」於改囊選單以入其規頁。",
+  "options.extshape.reasonable-sorting.description": "如既載改囊《知序》，君可明何以序塊物據其形也，含形之是改囊（塊形之擴）供者。是規者，無動塊之他囊供者。\n\n君亦可選「Reasonable Sorting」於改囊選單以入其規頁。\n\n若無應，以《知序》改囊未载或係低版也。",
   "options.extshape.dataChanged": "伺服器錄囊既變，複生其耶？",
   "options.extshape.dataChanged.details": "運行時資囊之此改囊用這，生於礦藝之既蘇之時。君既纂有關錄生之項，其果于復生伺服器之錄囊也。若當下之伺服器（含獨戲內置者）正作，需執\u00a77/reload\u00a7r命令以成效。",
   "options.dataChanged.finish": "既複生運行時資囊之伺服器錄。若為獨戲或為伺服器主，揮%s以顯方之更。注：惟伺服器主機之設可見效也。",
