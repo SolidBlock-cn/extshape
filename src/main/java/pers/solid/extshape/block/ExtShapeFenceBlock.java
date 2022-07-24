@@ -3,7 +3,6 @@ package pers.solid.extshape.block;
 import net.devtech.arrp.generator.BRRPFenceBlock;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JShapedRecipe;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
@@ -19,7 +18,7 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
    */
   private final Item secondIngredient;
 
-  public ExtShapeFenceBlock(Block baseBlock, Item secondIngredient, AbstractBlock.Settings settings) {
+  public ExtShapeFenceBlock(Block baseBlock, Item secondIngredient, Settings settings) {
     super(baseBlock, settings);
     this.secondIngredient = secondIngredient;
   }

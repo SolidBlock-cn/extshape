@@ -1,7 +1,6 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
@@ -126,7 +125,6 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    *
    * @param shape 形状。
    */
-  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public BlocksBuilder without(BlockShape shape) {
     shapesToBuild.remove(shape);
@@ -247,7 +245,6 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 对各个构建器的方块设置应用 BiConsumer。可用于一次性修改所有将要构建的方块的方块设置，然后串联。
    */
-  @CanIgnoreReturnValue
   @Contract(value = "_-> this", mutates = "this")
   public BlocksBuilder consumeEachSettings(BiConsumer<BlockShape, AbstractBlock.Settings> biConsumer) {
     forEach((blockShape, builder) -> biConsumer.accept(blockShape, builder.blockSettings));
