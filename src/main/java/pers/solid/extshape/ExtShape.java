@@ -76,19 +76,7 @@ public class ExtShape {
   }
 
   public static void registerCommand(RegisterCommandsEvent event) {
-    event.getDispatcher().register(LiteralArgumentBuilder.<ServerCommandSource>literal("extshape:check-conflict")
-        .requires(source -> source.hasPermissionLevel(2))
-        .executes(context -> {
-          final ServerCommandSource source = context.getSource();
-          final ServerWorld world = source.getWorld();
-          final ServerPlayerEntity player = source.getPlayer();
-          if (player == null) {
-            source.sendFeedback(Text.translatable("argument.entity.notfound.player"), false);
-            return 0;
-          }
-          return RecipeConflict.checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
-        }));
-
+    RecipeConflict.registerCommand(event.getDispatcher());
   }
 
   /**
