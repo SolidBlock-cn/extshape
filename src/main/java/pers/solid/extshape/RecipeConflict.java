@@ -83,7 +83,7 @@ public final class RecipeConflict {
     return numberOfConflicts;
   }
 
-  public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
+  public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher) {
     dispatcher.register(CommandManager.literal("extshape:check-conflict")
         .requires(source -> source.hasPermissionLevel(2))
         .executes(context -> {
