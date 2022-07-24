@@ -15,10 +15,9 @@ import net.minecraft.client.option.CyclingOption;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.ClickEvent;
-import net.minecraft.text.Text;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
@@ -75,34 +74,31 @@ public class ExtShapeOptionsScreen extends Screen {
     ).createButton(gameOptions, width / 2 - 205, 61, 200));
 
     // preventWoodenWallRecipes
-    addDrawableChild(SimpleOption.ofBoolean(
+    addDrawableChild(CyclingOption.create(
         "options.extshape.preventWoodenWallRecipes",
-        SimpleOption.constantTooltip(
-            new TranslatableText("options.extshape.preventWoodenWallRecipes.tooltip")
-                .append("\n\n")
-                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.preventWoodenWallRecipes)).formatted(Formatting.GRAY))),
-        config.preventWoodenWallRecipes,
-        value -> config.preventWoodenWallRecipes = value
+        new TranslatableText("options.extshape.preventWoodenWallRecipes.tooltip")
+            .append("\n\n")
+            .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.preventWoodenWallRecipes)).formatted(Formatting.GRAY)),
+        g -> config.preventWoodenWallRecipes,
+        (g, o, value) -> config.preventWoodenWallRecipes = value
     ).createButton(gameOptions, width / 2 + 5, 61, 200));
     // avoidSomeButtonRecipes
-    addDrawableChild(SimpleOption.ofBoolean(
+    addDrawableChild(CyclingOption.create(
         "options.extshape.avoidSomeButtonRecipes",
-        SimpleOption.constantTooltip(
-            new TranslatableText("options.extshape.avoidSomeButtonRecipes.tooltip")
-                .append("\n\n")
-                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.avoidSomeButtonRecipes)).formatted(Formatting.GRAY))),
-        config.avoidSomeButtonRecipes,
-        value -> config.avoidSomeButtonRecipes = value
+        new TranslatableText("options.extshape.avoidSomeButtonRecipes.tooltip")
+            .append("\n\n")
+            .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.avoidSomeButtonRecipes)).formatted(Formatting.GRAY)),
+        g -> config.avoidSomeButtonRecipes,
+        (g, o, value) -> config.avoidSomeButtonRecipes = value
     ).createButton(gameOptions, width / 2 - 205, 86, 200));
     // specialPressurePlateRecipes
-    addDrawableChild(SimpleOption.ofBoolean(
+    addDrawableChild(CyclingOption.create(
         "options.extshape.specialSnowSlabCrafting",
-        SimpleOption.constantTooltip(
-            new TranslatableText("options.extshape.specialSnowSlabCrafting.tooltip")
-                .append("\n\n")
-                .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.specialSnowSlabCrafting)).formatted(Formatting.GRAY))),
-        config.specialSnowSlabCrafting,
-        value -> config.specialSnowSlabCrafting = value
+        new TranslatableText("options.extshape.specialSnowSlabCrafting.tooltip")
+            .append("\n\n")
+            .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.specialSnowSlabCrafting)).formatted(Formatting.GRAY)),
+        g -> config.specialSnowSlabCrafting,
+        (g, o, value) -> config.specialSnowSlabCrafting = value
     ).createButton(gameOptions, width / 2 + 5, 86, 200));
 
     // 运行时资源包设置。
@@ -191,7 +187,7 @@ public class ExtShapeOptionsScreen extends Screen {
               ExtShapeRRP.generateServerData(ExtShapeRRP.STANDARD_PACK);
               client.inGameHud.getChatHud().addMessage(
                   new TranslatableText("options.dataChanged.finish",
-                      Text.literal("/reload").styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reload"))).formatted(Formatting.GRAY)));
+                      new LiteralText("/reload").styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reload"))).formatted(Formatting.GRAY)));
             }
           },
           new TranslatableText("options.extshape.dataChanged"),
