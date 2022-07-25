@@ -8,6 +8,7 @@
 - （仅限 Fabric）将木墙作为燃料时的供燃时间调整为与木板一致。
 - 调整了部分语言文件。
 - 现在可以配置允许哪些撞车的配方。
+- （仅限 Forge）修复了不能用剪刀剪羊毛制品的问题。
 
 - Adjusted the direction of vertical stairs, vertical slab, quarter piece, vertical quarter piece when placed. Now it depends on the position that the cross-hair aims instead of player facing.
 - (Only Fabric) Fixed the grammatical error in the mod description and incorrect link.
@@ -15,6 +16,7 @@
 - (Only Fabric) Adjusted the fuel burn time of wooden wall to be same as wooden planks.
 - Adjusted some language files.
 - You may configure which conflicting recipes to allow.
+- (Only Forge) Fixed the issue that you cannot shear woolen blocks with shear
 
 ### 1.5.2
 
