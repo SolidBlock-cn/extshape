@@ -1,11 +1,7 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
-
-import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
-import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.Item;
@@ -129,7 +125,6 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    *
    * @param shape 形状。
    */
-  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public BlocksBuilder without(BlockShape shape) {
     shapesToBuild.remove(shape);
