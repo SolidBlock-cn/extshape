@@ -3,7 +3,7 @@ package pers.solid.extshape.mixin;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.*;
-import net.minecraft.tag.TagKey;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 @Mixin(MiningToolItem.class)
 public class MiningToolItemMixin extends ToolItem {
@@ -20,9 +21,9 @@ public class MiningToolItemMixin extends ToolItem {
   }
 
   /**
-   * @see pers.solid.extshape.tag.ExtShapeBlockTags#PICKAXE_UNMINEABLE
+   * @see ExtShapeBlockTags#PICKAXE_UNMINEABLE
    */
-  private static final Tag<Block> PICKAXE_UNMINEABLE = ForgeTagHandler.makeWrapperTag(ForgeRegistries.BLOCKS, new Identifier(ExtShape.MOD_ID, "pickaxe_unmineable"));
+  private static final Tag.Identified<Block> PICKAXE_UNMINEABLE = ForgeTagHandler.makeWrapperTag(ForgeRegistries.BLOCKS, new Identifier(ExtShape.MOD_ID, "pickaxe_unmineable"));
 
   /**
    * 如果方块属于 {@link #PICKAXE_UNMINEABLE} 这个标签中，那么即使属于 {@link net.minecraft.tag.BlockTags#PICKAXE_MINEABLE}，也不能认为可以开采。这是考虑到 Minecraft 将整个 {@link net.minecraft.tag.BlockTags#WALLS}（{@code minecraft:walls}）都加入了镐的可开采行列，但本模组添加的方块并非全都可以用镐开采，因此特地做出修改。
