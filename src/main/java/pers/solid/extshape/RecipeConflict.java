@@ -14,9 +14,9 @@ import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -26,7 +26,7 @@ import java.util.function.Consumer;
  */
 @ApiStatus.AvailableSince("1.5.2")
 public final class RecipeConflict {
-  private static final Logger LOGGER = LoggerFactory.getLogger(RecipeConflict.class);
+  private static final Logger LOGGER = LogManager.getLogger(RecipeConflict.class);
 
   public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, Consumer<Text> messageConsumer) {
     final CraftingInventory craftingInventory = new CraftingInventory(new CraftingScreenHandler(0, player.getInventory()), 3, 3);

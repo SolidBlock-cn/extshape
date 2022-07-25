@@ -15,9 +15,9 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -63,7 +63,7 @@ public final class ExtShapeRRP {
    */
   private static final boolean GENERATE_EACH_RELOAD = false;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-Runtime resource pack");
+  private static final Logger LOGGER = LogManager.getLogger("EXTSHAPE-Runtime resource pack");
 
   /**
    * 注册所有的运行时资源。
