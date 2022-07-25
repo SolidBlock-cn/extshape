@@ -11,6 +11,7 @@ import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -21,7 +22,9 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.config.ExtShapeOptionsScreen;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.rs.ExtShapeBridgeImplementation;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.mod.forge.ExtShapeBridgeImpl;
 
 /**
  * <p>欢迎使用扩展方块形状模组。本模组为许多方块提供了各个形状的变种，包括原版不存在的形状。
@@ -45,6 +48,14 @@ public class ExtShape {
     ExtShapeConfig.init();
     MinecraftForge.EVENT_BUS.addListener(ExtShape::registerCommand);
     FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, ExtShape::register);
+    if (ModList.get().isLoaded("reasonable_sorting")) {
+      try {
+        ExtShapeBridgeImpl.setValue(ExtShapeBridgeImplementation::new);
+      } catch (LinkageError e) {
+        LOGGER.info("Unexpected expected error was thrown when loading between Extended Block Shapes and Reasonable Sorting mod", e);
+      }
+    }
+    FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, ExtShape::initializeBridge);
     ModLoadingContext.get().getActiveContainer().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, Suppliers.ofInstance(new ConfigGuiHandler.ConfigGuiFactory((client, screen) -> new ExtShapeOptionsScreen(screen))));
   }
 
@@ -97,6 +108,19 @@ public class ExtShape {
       map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.FENCE, compostableBlock)).asItem(), 0.8f);
       map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.FENCE_GATE, compostableBlock)).asItem(), 0.8f);
       map.put(Preconditions.checkNotNull(BlockMappings.getBlockOf(BlockShape.WALL, compostableBlock)).asItem(), 0.8f);
+    }
+  }
+
+  private static void initializeBridge(RegistryEvent.Register<Block> event) {
+
+    if (ModList.get().isLoaded("reasonable_sorting")) {
+      try {
+        ExtShapeBridgeImplementation.initialize();
+      } catch (LinkageError e) {
+        LOGGER.info("An error ({}) was thrown when initializing Reasonable Sorting Mod with Extended Block Shapes mod. This is expected.", e.getClass().getSimpleName());
+      } catch (Throwable e) {
+        LOGGER.warn("Failed to call ExtShapeBridgeImpl.initialize():", e);
+      }
     }
   }
 }
