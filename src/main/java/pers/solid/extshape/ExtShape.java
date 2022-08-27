@@ -7,9 +7,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ItemConvertible;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -56,6 +59,11 @@ public class ExtShape {
       }
     }
     FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, ExtShape::initializeBridge);
+    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ExtShape::registerConfig);
+  }
+
+  @OnlyIn(Dist.CLIENT)
+  private static void registerConfig() {
     ModLoadingContext.get().getActiveContainer().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, Suppliers.ofInstance(new ConfigGuiHandler.ConfigGuiFactory((client, screen) -> new ExtShapeOptionsScreen(screen))));
   }
 
