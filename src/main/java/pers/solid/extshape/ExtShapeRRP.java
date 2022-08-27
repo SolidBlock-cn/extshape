@@ -46,7 +46,6 @@ public final class ExtShapeRRP {
    *
    * @see ExtShapeRRP#STANDARD_PACK
    */
-  @OnlyIn(Dist.CLIENT)
   public static final RuntimeResourcePack CLIENT_PACK = RuntimeResourcePack.create(new Identifier(ExtShape.MOD_ID, "client"));
   /**
    * 适用于整个模组的运行时资源包，服务端和客户端都会运行。之所以称为“standard”而非“server”，是因为即使在客户端启动时，该资源包也会存在。
