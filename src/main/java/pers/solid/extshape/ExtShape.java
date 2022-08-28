@@ -7,11 +7,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ItemConvertible;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
@@ -19,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.config.ExtShapeOptionsScreen;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.rs.ExtShapeBridgeImplementation;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -53,7 +58,13 @@ public class ExtShape {
         LOGGER.info("Unexpected expected error was thrown when loading between Extended Block Shapes and Reasonable Sorting mod", e);
       }
     }
-    FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class,ExtShape::initializeBridge);
+    FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, ExtShape::initializeBridge);
+    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ExtShape::registerConfig);
+  }
+
+  @OnlyIn(Dist.CLIENT)
+  private static void registerConfig() {
+    ModLoadingContext.get().getActiveContainer().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, Suppliers.ofInstance(new ConfigGuiHandler.ConfigGuiFactory((client, screen) -> new ExtShapeOptionsScreen(screen))));
   }
 
   public static void register(RegistryEvent.Register<Block> event) {
