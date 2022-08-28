@@ -1,14 +1,20 @@
 package pers.solid.extshape;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Suppliers;
 import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ItemConvertible;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -18,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.config.ExtShapeOptionsScreen;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.rs.ExtShapeBridgeImplementation;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
@@ -53,6 +60,12 @@ public class ExtShape {
       }
     }
     FMLJavaModLoadingContext.get().getModEventBus().addListener(ExtShape::initializeBridge);
+    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ExtShape::registerConfig);
+  }
+
+  @OnlyIn(Dist.CLIENT)
+  private static void registerConfig() {
+    ModLoadingContext.get().getActiveContainer().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, Suppliers.ofInstance(new ConfigScreenHandler.ConfigScreenFactory((client, screen) -> new ExtShapeOptionsScreen(screen))));
   }
 
   public static void register(RegisterEvent event) {
