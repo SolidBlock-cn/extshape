@@ -1,7 +1,7 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.BiMap;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import net.devtech.arrp.util.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
@@ -192,6 +192,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   protected void addToMapping() {
     if (mapping != null) {
       mapping.put(baseBlock, instance);
+      BlockMappings.BASE_BLOCKS.remove(baseBlock);
       BlockMappings.BASE_BLOCKS.add(baseBlock);
     }
   }

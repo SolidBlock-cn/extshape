@@ -1,9 +1,7 @@
 package pers.solid.extshape.block;
 
-import com.google.common.collect.BiMap;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
-import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
 import net.devtech.arrp.json.recipe.JIngredient;
@@ -14,7 +12,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.data.client.TextureKey;
-import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -75,11 +72,12 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
   @Environment(EnvType.CLIENT)
   @Override
   default Identifier getBlockModelId() {
-    final BiMap<Block, Block> map = HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get();
-    if (this instanceof Block && map.containsKey(this)) {
-      return ResourceGeneratorHelper.getBlockModelId(map.get(this));
+    final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
+    final String path = blockModelId.getPath();
+    if (path.contains("waxed_") && path.contains("copper")) {
+      return new Identifier(blockModelId.getNamespace(), path.replace("waxed_", ""));
     } else {
-      return BlockResourceGenerator.super.getBlockModelId();
+      return blockModelId;
     }
   }
 
