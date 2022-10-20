@@ -13,7 +13,6 @@ import pers.solid.extshape.mixin.BlockFamiliesAccessor;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -32,7 +31,7 @@ public final class BlockMappings {
   /**
    * 基础方块集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。
    */
-  public static final Set<Block> BASE_BLOCKS = new LinkedHashSet<>();
+  public static final LinkedHashSet<Block> BASE_BLOCKS = new LinkedHashSet<>();
 
   static {
     importFromVanilla();

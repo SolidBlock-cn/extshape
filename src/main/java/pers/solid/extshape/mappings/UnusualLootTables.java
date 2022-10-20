@@ -74,7 +74,7 @@ public final class UnusualLootTables {
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2 * shapeVolume, 4 * shapeVolume)))
           .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE))
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4))))), shape == BlockShape.SLAB);
-      return JLootTable.delegate(builder.build());
+      return JLootTable.delegate(builder);
     });
     LOOT_TABLE_PROVIDERS.put(Blocks.MELON, (baseBlock, shape, block) -> {
       final float shapeVolume = shapeVolume(shape);
@@ -82,7 +82,7 @@ public final class UnusualLootTables {
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(shapeVolume * 2, shapeVolume * 4)))
           .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE))
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4))))
-      ), shape == BlockShape.SLAB).build());
+      ), shape == BlockShape.SLAB));
     });
     LOOT_TABLE_PROVIDERS.put(Blocks.SEA_LANTERN, (baseBlock, shape, block) -> {
       final float shapeVolume = shapeVolume(shape);
@@ -90,7 +90,7 @@ public final class UnusualLootTables {
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2 * shapeVolume, 3 * shapeVolume)))
           .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE))
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (5 * shapeVolume))))
-      ), shape == BlockShape.SLAB).build());
+      ), shape == BlockShape.SLAB));
     });
     LOOT_TABLE_PROVIDERS.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block) -> {
       final float shapeVolume = shapeVolume(shape);
@@ -98,14 +98,15 @@ public final class UnusualLootTables {
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(shapeVolume * 2, shapeVolume * 5)))
           .conditionally(TableBonusLootCondition.builder(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
           .alternatively(ItemEntry.builder(block))
-      ), shape == BlockShape.SLAB).build());
+      ), shape == BlockShape.SLAB));
     });
 
     // 只有带有精准采集附魔时才会掉落的方块。
-    final LootTableFunction dropsWithSilkTouch = (baseBlock, shape, block) -> JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, shape == BlockShape.SLAB).build());
+    final LootTableFunction dropsWithSilkTouch = (baseBlock, shape, block) -> JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, shape == BlockShape.SLAB));
     LOOT_TABLE_PROVIDERS.put(Blocks.ICE, dropsWithSilkTouch);
     LOOT_TABLE_PROVIDERS.put(Blocks.BLUE_ICE, dropsWithSilkTouch);
     LOOT_TABLE_PROVIDERS.put(Blocks.PACKED_ICE, dropsWithSilkTouch);
+    LOOT_TABLE_PROVIDERS.put(Blocks.SCULK, dropsWithSilkTouch);
   }
 
   public interface LootTableFunction extends TriFunction<Block, BlockShape, Block, JLootTable> {
@@ -130,7 +131,7 @@ public final class UnusualLootTables {
       final LeafEntry.Builder<?> entryBuilder = entryBuilder(drop, fullCount, shape, block);
       final LootTable.Builder builder = BlockLootTableGenerator.dropsWithSilkTouch(block, BlockLootTableGenerator.applyExplosionDecay(block, entryBuilder
       ));
-      return JLootTable.delegate(builder.build());
+      return JLootTable.delegate(builder);
     };
   }
 

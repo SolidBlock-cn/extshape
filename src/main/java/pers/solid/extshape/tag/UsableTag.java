@@ -1,6 +1,6 @@
 package pers.solid.extshape.tag;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import net.devtech.arrp.util.CanIgnoreReturnValue;
 import net.devtech.arrp.json.tags.JTag;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;

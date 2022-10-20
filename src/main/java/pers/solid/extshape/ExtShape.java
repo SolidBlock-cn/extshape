@@ -1,5 +1,8 @@
 package pers.solid.extshape;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
+import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -20,6 +23,10 @@ import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.rs.ExtShapeBridgeImpl;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
+
 /**
  * <p>欢迎使用扩展方块形状模组。本模组为许多方块提供了各个形状的变种，包括原版不存在的形状。
  * <p>本模组中的所有方块是在 {@link ExtShapeBlocks} 中创建的，创建的同时将其注册，并创建和注册对应的方块物品。物品组由 {@link ExtShapeItemGroup} 提供。本模组还提供了一定的配置功能，参见 {@link ExtShapeConfig}。
@@ -35,7 +42,7 @@ import pers.solid.extshape.tag.ExtShapeBlockTags;
  */
 public class ExtShape implements ModInitializer {
   public static final String MOD_ID = "extshape";
-  public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes");
 
   @Override
   public void onInitialize() {
@@ -46,6 +53,7 @@ public class ExtShape implements ModInitializer {
 
     registerFlammableBlocks();
     registerComposingChances();
+    registerStrippableBlocks();
     registerFuels();
 
     ExtShapeRRP.registerRRP();
@@ -60,6 +68,30 @@ public class ExtShape implements ModInitializer {
         LOGGER.warn("Failed to call ExtShapeBridgeImpl.initialize():", e);
       }
     }
+  }
+
+  public static final Map<Block, Block> EXTENDED_STRIPPABLE_BLOCKS = new HashMap<>();
+
+  /**
+   * 考虑到存在复杂的方块状态的情况，故不使用 {@link net.fabricmc.fabric.api.registry.StrippableBlockRegistry}，而使用 {@link pers.solid.extshape.mixin.AxeItemMixin}。
+   */
+  private void registerStrippableBlocks() {
+    Streams.concat(
+        IntStream.range(0, ExtShapeBlockTags.LOGS.size()).mapToObj(i -> Pair.of(ExtShapeBlockTags.LOGS.get(i), ExtShapeBlockTags.STRIPPED_LOGS.get(i))),
+        IntStream.range(0, ExtShapeBlockTags.WOODS.size()).mapToObj(i -> Pair.of(ExtShapeBlockTags.WOODS.get(i), ExtShapeBlockTags.STRIPPED_WOODS.get(i))),
+        IntStream.range(0, ExtShapeBlockTags.HYPHAES.size()).mapToObj(i -> Pair.of(ExtShapeBlockTags.HYPHAES.get(i), ExtShapeBlockTags.STRIPPED_HYPHAES.get(i))),
+        IntStream.range(0, ExtShapeBlockTags.STEMS.size()).mapToObj(i -> Pair.of(ExtShapeBlockTags.STEMS.get(i), ExtShapeBlockTags.STRIPPED_STEMS.get(i)))
+    ).forEach(pair -> {
+      final Block inputBase = pair.getFirst();
+      final Block outputBase = pair.getSecond();
+      for (BlockShape shape : BlockShape.values()) {
+        final Block input = BlockMappings.getBlockOf(shape, inputBase);
+        final Block output = BlockMappings.getBlockOf(shape, outputBase);
+        if (input != null && output != null) {
+          EXTENDED_STRIPPABLE_BLOCKS.put(input, output);
+        }
+      }
+    });
   }
 
   /**
@@ -145,9 +177,19 @@ public class ExtShape implements ModInitializer {
       registry.add(block, 30, 60);
     }
 
-    // 木头加入可燃方块
-    for (final Block block : ExtShapeBlockTags.OVERWORLD_WOODEN_BLOCKS) {
-      registry.add(block, 5, 20);
+    // 木板加入可燃方块
+    for (final Block baseBlock : ExtShapeBlockTags.OVERWORLD_PLANKS) {
+      for (BlockShape shape : BlockShape.values()) {
+        final Block block = BlockMappings.getBlockOf(shape, baseBlock);
+        if (block != null) registry.add(block, 5, 20);
+      }
+    }
+    // 原木
+    for (final Block baseBlock : Iterables.concat(ExtShapeBlockTags.LOGS, ExtShapeBlockTags.STRIPPED_LOGS, ExtShapeBlockTags.WOODS, ExtShapeBlockTags.STRIPPED_WOODS)) {
+      for (BlockShape shape : BlockShape.values()) {
+        final Block block = BlockMappings.getBlockOf(shape, baseBlock);
+        if (block != null) registry.add(block, 5, 5);
+      }
     }
   }
 }

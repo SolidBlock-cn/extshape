@@ -1,5 +1,21 @@
 # 更新日志 Update Log
 
+### 1.7.0
+
+- 将“XXX纵楼梯”“XXX纵台阶”更名为“竖直XXX楼梯”“竖直XXX台阶”，文言文名称以及纵条的中文名称保持不变。
+- 添加了原木、木头（六面均为树皮的方块）的各种形状，包括其去皮变种。
+- 添加了泥土、砂土、煤炭块和幽匿块的各种形状。
+- 修复了横条纹理错误。
+- `extshape:check-conflict` 命令现在仅允许玩家执行。
+- 进一步优化代码。
+
+- Renamed "XXX Vertical Stairs", "XXX Vertical Slab" to "Vertical XXX Stairs" and "Vertical XXX Slab". Names in `lzh` will be left unchanged.
+- Added shapes for logs and woods (blocks with 6-face sparks), including their stripped variants.
+- Added shapes for dirt, coarse dirt, coal block and sculk.
+- Fixed incorrect texture for quarter piece block.
+- The command `extshape:check-confict` can only be executed by player now.
+- Optimized the code.
+
 ### 1.6.0
 
 - 调整了纵楼梯、纵台阶、横条、纵条方块放置时的方向，现在取决于准星对准的位置而非玩家朝向。

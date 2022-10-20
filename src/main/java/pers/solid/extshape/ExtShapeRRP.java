@@ -1,7 +1,7 @@
 package pers.solid.extshape;
 
-import net.devtech.arrp.api.RRPCallbackConditional;
 import net.devtech.arrp.api.RuntimeResourcePack;
+import net.devtech.arrp.api.SidedRRPCallback;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.recipe.JShapedRecipe;
@@ -61,9 +61,9 @@ public final class ExtShapeRRP {
    * </ul>
    * 通常建议此项在开发环境时为 <code>true</code>，在发布时为 <code>false</code>。
    */
-  private static final boolean GENERATE_EACH_RELOAD = false;
+  private static final boolean GENERATE_EACH_RELOAD = FabricLoader.getInstance().isDevelopmentEnvironment();
 
-  private static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-Runtime resource pack");
+  private static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes-Runtime resource pack");
 
   /**
    * 注册所有的运行时资源。
@@ -75,7 +75,7 @@ public final class ExtShapeRRP {
         generateClientResources(CLIENT_PACK);
       }
     }
-    RRPCallbackConditional.BEFORE_VANILLA.register((resourceType, builder) -> {
+    SidedRRPCallback.BEFORE_VANILLA.register((resourceType, builder) -> {
       if (resourceType == ResourceType.SERVER_DATA || resourceType == null) {
         if (GENERATE_EACH_RELOAD) {
           STANDARD_PACK.clearResources(ResourceType.SERVER_DATA);

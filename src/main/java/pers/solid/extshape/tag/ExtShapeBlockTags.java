@@ -24,6 +24,60 @@ import static net.minecraft.block.Blocks.*;
  * 本模组提供的方块标签，其中包括了少量物品标签。
  */
 public final class ExtShapeBlockTags {
+  public static final ImmutableList<Block> LOGS = ImmutableList.of(
+      OAK_LOG,
+      SPRUCE_LOG,
+      BIRCH_LOG,
+      JUNGLE_LOG,
+      ACACIA_LOG,
+      DARK_OAK_LOG,
+      MANGROVE_LOG
+  );
+  public static final ImmutableList<Block> STRIPPED_LOGS = ImmutableList.of(
+      STRIPPED_OAK_LOG,
+      STRIPPED_SPRUCE_LOG,
+      STRIPPED_BIRCH_LOG,
+      STRIPPED_JUNGLE_LOG,
+      STRIPPED_ACACIA_LOG,
+      STRIPPED_DARK_OAK_LOG,
+      STRIPPED_OAK_LOG,
+      STRIPPED_MANGROVE_LOG
+  );
+  public static final ImmutableList<Block> WOODS = ImmutableList.of(
+      OAK_WOOD,
+      SPRUCE_WOOD,
+      BIRCH_WOOD,
+      JUNGLE_WOOD,
+      ACACIA_WOOD,
+      DARK_OAK_WOOD,
+      MANGROVE_WOOD
+  );
+  public static final ImmutableList<Block> STRIPPED_WOODS = ImmutableList.of(
+      STRIPPED_OAK_WOOD,
+      STRIPPED_SPRUCE_WOOD,
+      STRIPPED_BIRCH_WOOD,
+      STRIPPED_JUNGLE_WOOD,
+      STRIPPED_ACACIA_WOOD,
+      STRIPPED_DARK_OAK_WOOD,
+      STRIPPED_MANGROVE_WOOD
+  );
+  public static final ImmutableList<Block> STEMS = ImmutableList.of(
+      WARPED_STEM,
+      CRIMSON_STEM
+  );
+  public static final ImmutableList<Block> STRIPPED_STEMS = ImmutableList.of(
+      STRIPPED_WARPED_STEM,
+      STRIPPED_CRIMSON_STEM
+  );
+  public static final ImmutableList<Block> HYPHAES = ImmutableList.of(
+      WARPED_HYPHAE,
+      CRIMSON_HYPHAE
+  );
+  public static final ImmutableList<Block> STRIPPED_HYPHAES = ImmutableList.of(
+      STRIPPED_WARPED_HYPHAE,
+      STRIPPED_CRIMSON_HYPHAE
+  );
+
   public static final @Unmodifiable ImmutableSet<Block> PLANKS = ImmutableSet.of(
       OAK_PLANKS,
       SPRUCE_PLANKS,
