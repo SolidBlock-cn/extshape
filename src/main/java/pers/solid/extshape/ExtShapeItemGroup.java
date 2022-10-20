@@ -80,7 +80,6 @@ public class ExtShapeItemGroup extends ItemGroup {
   }
 
   static {
-    WOODEN_BLOCKS.addAll(ExtShapeBlockTags.PLANKS);
     COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.WOOLS);
     COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.CONCRETES);
     COLORFUL_BLOCKS.add(Blocks.TERRACOTTA);
@@ -165,8 +164,11 @@ public class ExtShapeItemGroup extends ItemGroup {
     COLORFUL_BLOCKS.forEach(baseBlockList::remove);
     STONE_BLOCKS.forEach(baseBlockList::remove);
     for (Block block : baseBlockList) {
-      if (((AbstractBlockAccessor) block).getMaterial() == Material.STONE) {
+      final Material material = ((AbstractBlockAccessor) block).getMaterial();
+      if (material == Material.STONE) {
         STONE_BLOCKS.add(block);
+      } else if (material == Material.WOOD || material == Material.NETHER_WOOD) {
+        WOODEN_BLOCKS.add(block);
       } else {
         OTHER_BLOCKS.add(block);
       }

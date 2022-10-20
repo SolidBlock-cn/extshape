@@ -8,11 +8,14 @@ import net.devtech.arrp.json.recipe.JShapelessRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.HoneycombItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -34,8 +37,11 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
   public @NotNull JBlockStates getBlockStates() {
     final Identifier id = getBlockModelId();
     // 对于上蜡的铜，其自身的方块模型以及对应完整方块的模型均为未上蜡的方块模型，故在此处做出调整。
-    final Block baseBlock = HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get().getOrDefault(this.baseBlock, this.baseBlock);
-    return JBlockStates.simpleSlab(baseBlock != null ? ResourceGeneratorHelper.getBlockModelId(baseBlock) : id.brrp_append("_double"), id, id.brrp_append("_top"));
+    Identifier blockModelId = baseBlock == null ? null : ResourceGeneratorHelper.getBlockModelId(baseBlock);
+    if (blockModelId != null && blockModelId.getPath().contains("waxed_") && blockModelId.getPath().contains("copper")) {
+      blockModelId = new Identifier(blockModelId.getNamespace(), blockModelId.getPath().replace("waxed_", ""));
+    }
+    return JBlockStates.simpleSlab(baseBlock != null ? blockModelId : id.brrp_append("_double"), id, id.brrp_append("_top"));
   }
 
   @Override
@@ -62,5 +68,23 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.SLAB;
+  }
+
+
+  public static class WithExtension extends ExtShapeSlabBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+      super(baseBlock, settings);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.onStacksDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack, dropExperience);
+    }
+
   }
 }
