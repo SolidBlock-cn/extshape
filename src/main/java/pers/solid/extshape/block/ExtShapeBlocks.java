@@ -9,10 +9,12 @@ import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.mixin.BlockAccessor;
 import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import static net.minecraft.block.Blocks.*;
@@ -48,8 +50,21 @@ public final class ExtShapeBlocks {
       BlocksBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
     }
 
+    // 泥土。
+    BlocksBuilder.createAllShapes(DIRT, Items.STICK, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
+    BlocksBuilder.createAllShapes(COARSE_DIRT, Items.STICK, null, null).build();
+
     // 圆石。
     BlocksBuilder.createAllShapes(COBBLESTONE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).withoutRedstone().build();
+
+    ExtShapeBlockTags.LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().build());
+    ExtShapeBlockTags.STRIPPED_LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().build());
+    ExtShapeBlockTags.WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build());
+    ExtShapeBlockTags.STRIPPED_WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build());
+    ExtShapeBlockTags.STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().build());
+    ExtShapeBlockTags.STRIPPED_STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().build());
+    ExtShapeBlockTags.HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build());
+    ExtShapeBlockTags.STRIPPED_HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build());
 
     // 木板。
     for (final Block block : ExtShapeBlockTags.PLANKS) {
@@ -60,13 +75,10 @@ public final class ExtShapeBlocks {
           .setDefaultTagOf(BlockShape.QUARTER_PIECE, ExtShapeBlockTags.WOODEN_QUARTER_PIECES)
           .setDefaultTagOf(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeBlockTags.WOODEN_VERTICAL_QUARTER_PIECES)
           .setDefaultTagOf(BlockShape.WALL, ExtShapeBlockTags.WOODEN_WALLS)
-          .consumeEach((shape, abstractBlockBuilder) -> {
-            if (isOverworld) abstractBlockBuilder.addTagToAdd(ExtShapeBlockTags.OVERWORLD_WOODEN_BLOCKS);
-          })
           .build();
     }
 
-    // 石化橡木木板
+    // 石化橡木木板。
     PETRIFIED_OAK_PLANKS = new BlockBuilder()
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeAll(builder.blockSettings, "block/oak_planks"))
         .setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB))
@@ -202,6 +214,9 @@ public final class ExtShapeBlocks {
           .build();
     }
 
+    // 煤炭块。
+    BlocksBuilder.createAllShapes(COAL_BLOCK, Items.COAL, ButtonType.STONE, ActivationRule.MOBS).build();
+
     // 浮冰。
     BlocksBuilder.createAllShapes(PACKED_ICE, Items.ICE, ButtonType.STONE, ActivationRule.MOBS).build();
 
@@ -281,6 +296,9 @@ public final class ExtShapeBlocks {
     // 凝灰岩，方解石。
     BlocksBuilder.createAllShapes(TUFF, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
     BlocksBuilder.createAllShapes(CALCITE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
+
+    // 幽匿块
+    BlocksBuilder.createConstructionOnly(SCULK).withExtension(BlockExtension.builder().setStacksDroppedCallback((state, world, pos, stack, dropExperience) -> ((BlockAccessor) state.getBlock()).callDropExperienceWhenMined(world, pos, stack, ConstantIntProvider.create(1))).build()).build();
 
     // 涂蜡的铜块。
     for (final Block block : new Block[]{

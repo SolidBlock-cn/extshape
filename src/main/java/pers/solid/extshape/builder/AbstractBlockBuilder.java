@@ -187,6 +187,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   protected void addToMapping() {
     if (mapping != null) {
       mapping.put(baseBlock, instance);
+      BlockMappings.BASE_BLOCKS.remove(baseBlock);
       BlockMappings.BASE_BLOCKS.add(baseBlock);
     }
   }

@@ -1,15 +1,16 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.*;
 import net.minecraft.item.Item;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.block.ExtShapeButtonBlock;
+import pers.solid.extshape.block.*;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.mixin.AbstractBlockStateAccessor;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.*;
@@ -43,6 +44,10 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   protected @Nullable Item fenceCraftingIngredient;
   protected @Nullable ExtShapeButtonBlock.ButtonType buttonType;
   protected @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
+  /**
+   * 在执行 {@link #build()} 之前会为每个值执行。
+   */
+  protected @Nullable BiConsumer<BlockShape, AbstractBlockBuilder<?>> blockBuilderConsumer;
 
   /**
    * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
@@ -96,6 +101,33 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   @Contract("_ -> new")
   public static BlocksBuilder createConstructionOnly(@NotNull Block baseBlock) {
     return createEmpty(baseBlock).withConstructionShapes();
+  }
+
+  @SuppressWarnings({"unchecked", "RedundantCast"})
+  @Contract(value = "_ -> this", mutates = "this")
+  public BlocksBuilder withExtension(@NotNull BlockExtension blockExtension) {
+    blockBuilderConsumer = (blockShape, abstractBlockBuilder) -> {
+      if (blockShape == BlockShape.STAIRS) ((AbstractBlockBuilder<StairsBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeStairsBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.SLAB) ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeSlabBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.QUARTER_PIECE) ((AbstractBlockBuilder<QuarterPieceBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeQuarterPieceBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.VERTICAL_STAIRS) ((AbstractBlockBuilder<VerticalStairsBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeVerticalStairsBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.VERTICAL_SLAB) ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeVerticalSlabBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.VERTICAL_QUARTER_PIECE) ((AbstractBlockBuilder<VerticalQuarterPieceBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeVerticalQuarterPieceBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+    };
+    return this;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Contract(value = "-> this", mutates = "this")
+  public BlocksBuilder setPillar() {
+    blockBuilderConsumer = (blockShape, abstractBlockBuilder) -> {
+      if (blockShape == BlockShape.SLAB) {
+        ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarSlabBlock(builder.baseBlock, builder.blockSettings);
+      } else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
+        abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
+      }
+    };
+    return this;
   }
 
   /**
@@ -238,7 +270,11 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @Contract(value = "_-> this", mutates = "this")
   public BlocksBuilder consumeEach(BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> biConsumer) {
-    forEach(biConsumer);
+    if (blockBuilderConsumer == null) {
+      blockBuilderConsumer = biConsumer;
+    } else {
+      blockBuilderConsumer = blockBuilderConsumer.andThen(biConsumer);
+    }
     return this;
   }
 
@@ -247,7 +283,12 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @Contract(value = "_-> this", mutates = "this")
   public BlocksBuilder consumeEachSettings(BiConsumer<BlockShape, AbstractBlock.Settings> biConsumer) {
-    forEach((blockShape, builder) -> biConsumer.accept(blockShape, builder.blockSettings));
+    consumeEach((blockShape, builder) -> biConsumer.accept(blockShape, builder.blockSettings));
+    return this;
+  }
+
+  public <T extends Block> BlocksBuilder setBuilderOf(BlockShape shape, AbstractBlockBuilder<T> builder) {
+    put(shape, builder);
     return this;
   }
 
@@ -257,7 +298,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   public void build() {
     for (final BlockShape shape : shapesToBuild) {
       // 自动排除现成的。
-      if (BlockMappings.getBlockOf(shape, baseBlock) == null) {
+      if (BlockMappings.getBlockOf(shape, baseBlock) == null && !this.containsKey(shape)) {
         final @Nullable AbstractBlockBuilder<? extends Block> blockBuilder;
         blockBuilder = createBlockBuilderFor(shape);
         if (blockBuilder != null) {
@@ -274,6 +315,9 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
     for (AbstractBlockBuilder<? extends Block> builder : values) {
       if (this.baseBlock.asItem().isFireproof()) builder.itemSettings.fireproof();
       tagsToAddEach.forEach(builder::addTagToAdd);
+    }
+    if (blockBuilderConsumer != null) {
+      forEach(blockBuilderConsumer);
     }
     values.forEach(AbstractBlockBuilder::build);
   }

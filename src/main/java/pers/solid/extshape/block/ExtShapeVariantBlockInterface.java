@@ -28,6 +28,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
     map.put("chiseled_quartz", "chiseled_quartz");
     map.put("clay", "clay");
     map.put("cut_copper", "cut_copper");
+    map.put("sculk", "sculk");
     map.put("exposed_copper", "exposed_copper");
     map.put("exposed_cut_copper", "exposed_cut_copper");
     map.put("oxidized_copper", "oxidized_copper");
@@ -99,6 +100,10 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
    */
   @Override
   Block getBaseBlock();
+
+  default BlockExtension getBlockExtension() {
+    return BlockExtension.EMPTY;
+  }
 
   default MutableText getNamePrefix() {
     final Block baseBlock = this.getBaseBlock();
