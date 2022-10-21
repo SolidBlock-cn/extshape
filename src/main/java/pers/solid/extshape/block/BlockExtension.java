@@ -19,10 +19,10 @@ public class BlockExtension implements Cloneable {
 
   @FunctionalInterface
   public interface StacksDroppedCallback {
-    StacksDroppedCallback EMPTY = (state, world, pos, stack, dropExperience) -> {
+    StacksDroppedCallback EMPTY = (state, world, pos, stack) -> {
     };
 
-    void onStackDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience);
+    void onStackDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack);
   }
 
   public final StacksDroppedCallback stacksDroppedCallback;

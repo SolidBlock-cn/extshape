@@ -259,7 +259,6 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 设置各个形状的方块需要添加的方块标签。会覆盖已有的值。
    */
-  @CanIgnoreReturnValue
   @Contract(value = "_, -> this", mutates = "this")
   public BlocksBuilder setTagToAddForShape(Map<BlockShape, ExtShapeBlockTag> map) {
     tagToAddForShape = map;

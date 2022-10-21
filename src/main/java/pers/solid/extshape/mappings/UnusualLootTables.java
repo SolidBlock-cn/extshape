@@ -106,7 +106,6 @@ public final class UnusualLootTables {
     LOOT_TABLE_PROVIDERS.put(Blocks.ICE, dropsWithSilkTouch);
     LOOT_TABLE_PROVIDERS.put(Blocks.BLUE_ICE, dropsWithSilkTouch);
     LOOT_TABLE_PROVIDERS.put(Blocks.PACKED_ICE, dropsWithSilkTouch);
-    LOOT_TABLE_PROVIDERS.put(Blocks.SCULK, dropsWithSilkTouch);
   }
 
   public interface LootTableFunction extends Function3<Block, BlockShape, Block, JLootTable> {

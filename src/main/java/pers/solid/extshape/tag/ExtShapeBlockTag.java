@@ -93,9 +93,9 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    *
    * @return 方块标签对象。
    */
+  @SuppressWarnings("deprecation")
   @Contract(value = "-> new", pure = true)
   public Tag<Block> toBlockTag() {
-    //noinspection deprecation
     return TagRegistry.block(identifier);
   }
 
@@ -104,9 +104,9 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    *
    * @return 物品标签对象。
    */
+  @SuppressWarnings("deprecation")
   @Contract(value = "-> new", pure = true)
   public Tag<Item> toItemTag() {
-    //noinspection deprecation
     return TagRegistry.item(identifier);
   }
 }
