@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantBlockInterface {
   public ExtShapeWallBlock(@NotNull Block baseBlock, Settings settings) {
@@ -24,7 +24,7 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
     final JRecipe craftingRecipe = super.getCraftingRecipe();
-    return craftingRecipe == null || (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes && ExtShapeBlockTags.PLANKS.contains(baseBlock)) ? null : craftingRecipe.group(getRecipeGroup());
+    return craftingRecipe == null || (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes && ExtShapeTags.PLANKS.contains(baseBlock)) ? null : craftingRecipe.group(getRecipeGroup());
   }
 
   @Override
@@ -34,11 +34,11 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
 
   @Override
   public String getRecipeGroup() {
-    if (ExtShapeBlockTags.WOOLS.contains(baseBlock)) return "wool_wall";
-    if (ExtShapeBlockTags.CONCRETES.contains(baseBlock)) return "concrete_wall";
-    if (ExtShapeBlockTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_wall";
-    if (ExtShapeBlockTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_wall";
-    if (ExtShapeBlockTags.PLANKS.contains(baseBlock)) return "wooden_wall";
+    if (ExtShapeTags.WOOLS.contains(baseBlock)) return "wool_wall";
+    if (ExtShapeTags.CONCRETES.contains(baseBlock)) return "concrete_wall";
+    if (ExtShapeTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_wall";
+    if (ExtShapeTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_wall";
+    if (ExtShapeTags.PLANKS.contains(baseBlock)) return "wooden_wall";
     return "";
   }
 
