@@ -6,7 +6,6 @@ import net.devtech.arrp.json.loot.JLootTable;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -15,16 +14,11 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.MatchToolLootCondition;
-import net.minecraft.loot.condition.TableBonusLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
-import net.minecraft.loot.function.ApplyBonusLootFunction;
-import net.minecraft.loot.function.LimitCountLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
-import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
-import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.predicate.item.EnchantmentPredicate;
@@ -63,11 +57,11 @@ public final class UnusualLootTables {
   /**
    * 参照原版的战利品表生成器，生成对应变种的特殊战利品表。如果没有指定，则按照默认战利品表生成。特别需要注意：双台阶的战利品表掉落数量应该为两倍。
    *
-   * @see BlockLootTableGenerator#accept
+   * @see net.minecraft.data.server.loottable.BlockLootTableGenerator#accept
    */
   private static void register() {
     LOOT_TABLE_PROVIDERS.put(Blocks.CLAY, dropsShaped(Items.CLAY_BALL, 4));
-    LOOT_TABLE_PROVIDERS.put(Blocks.SNOW_BLOCK, dropsShaped(Items.SNOWBALL, 4));
+    LOOT_TABLE_PROVIDERS.put(Blocks.SNOW_BLOCK, dropsShaped(Items.SNOWBALL, 4));/*
     LOOT_TABLE_PROVIDERS.put(Blocks.GLOWSTONE, (baseBlock, shape, block) -> {
       final float shapeVolume = shapeVolume(shape);
       final LootTable.Builder builder = dropsDoubleSlabWithSilkTouch(block, BlockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
@@ -99,7 +93,7 @@ public final class UnusualLootTables {
           .conditionally(TableBonusLootCondition.builder(Enchantments.FORTUNE, 0.1F, 0.14285715F, 0.25F, 1.0F))
           .alternatively(ItemEntry.builder(block))
       ), shape == BlockShape.SLAB));
-    });
+    });*/
 
     // 只有带有精准采集附魔时才会掉落的方块。
     final LootTableFunction dropsWithSilkTouch = (baseBlock, shape, block) -> JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, shape == BlockShape.SLAB));
@@ -128,10 +122,10 @@ public final class UnusualLootTables {
 
   private static LootTableFunction dropsShaped(@NotNull ItemConvertible drop, float fullCount) {
     return (baseBlock, shape, block) -> {
-      final LeafEntry.Builder<?> entryBuilder = entryBuilder(drop, fullCount, shape, block);
+      final LeafEntry.Builder<?> entryBuilder = entryBuilder(drop, fullCount, shape, block);/*
       final LootTable.Builder builder = BlockLootTableGenerator.dropsWithSilkTouch(block, BlockLootTableGenerator.applyExplosionDecay(block, entryBuilder
-      ));
-      return JLootTable.delegate(builder);
+      ));*/
+      return JLootTable.delegate(LootTable.EMPTY); // TODO: 2022/10/21, 021  
     };
   }
 
@@ -162,7 +156,7 @@ public final class UnusualLootTables {
    * @param drop             需要掉落的方块。
    * @param conditionBuilder 掉落该方块的条件。
    * @param child            不符合条件时，需要使用的战利品表池。
-   * @param isSlab           该方块是否为台阶。如果为 <code>false</code>，则与 {@link BlockLootTableGenerator#drops(Block, LootCondition.Builder, LootPoolEntry.Builder)} 一致。
+   * @param isSlab           该方块是否为台阶。如果为 <code>false</code>，则与 {@link net.minecraft.data.server.loottable.BlockLootTableGenerator#drops(ItemConvertible)} 一致。
    * @return 战利品表。
    */
   private static LootTable.Builder dropsDoubleSlab(@NotNull Block drop, @NotNull LootCondition.Builder conditionBuilder, @NotNull LootPoolEntry.Builder<?> child, boolean isSlab) {
@@ -183,7 +177,7 @@ public final class UnusualLootTables {
   }
 
   /**
-   * 类似于 {@link BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)}，但是若方块为双层台阶，则掉落两倍。
+   * 类似于 {@link net.minecraft.data.server.loottable.BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)}，但是若方块为双层台阶，则掉落两倍。
    *
    * @param drop   需要掉落的方块。
    * @param child  没有精准采集时，使用的战利品表。
@@ -201,7 +195,7 @@ public final class UnusualLootTables {
    * @param drop   需要掉落的方块。
    * @param isSlab 该方块是否为台阶。
    * @return 战利品表。
-   * @see BlockLootTableGenerator#dropsWithSilkTouch(ItemConvertible)
+   * @see net.minecraft.data.server.loottable.BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)
    */
   private static LootTable.Builder dropsDoubleSlabWithSilkTouch(@NotNull Block drop, boolean isSlab) {
     final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop);

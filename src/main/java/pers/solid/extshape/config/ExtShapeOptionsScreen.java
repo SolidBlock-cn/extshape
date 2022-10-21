@@ -13,7 +13,6 @@ import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
@@ -21,7 +20,6 @@ import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
 import pers.solid.extshape.ExtShapeRRP;
-import pers.solid.mod.fabric.ConfigScreenFabric;
 
 @Environment(EnvType.CLIENT)
 public class ExtShapeOptionsScreen extends Screen {
@@ -45,7 +43,7 @@ public class ExtShapeOptionsScreen extends Screen {
     this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, button -> close()));
 
     // addToVanillaGroups
-    addDrawableChild(SimpleOption.ofBoolean(
+    /*addDrawableChild(SimpleOption.ofBoolean(
         "options.extshape.addToVanillaGroups",
         SimpleOption.constantTooltip(
             Text.translatable("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName())
@@ -53,7 +51,7 @@ public class ExtShapeOptionsScreen extends Screen {
                 .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))),
         config.addToVanillaGroups,
         value -> config.addToVanillaGroups = value
-    ).createButton(gameOptions, width / 2 - 205, 36, 200));
+    ).createButton(gameOptions, width / 2 - 205, 36, 200));*/
     // showSpecificGroups
     addDrawableChild(SimpleOption.ofBoolean(
         "options.extshape.showSpecificGroups",
@@ -115,7 +113,7 @@ public class ExtShapeOptionsScreen extends Screen {
       final ButtonWidget reasonableSortingButton = new ButtonWidget(width / 2 - 150, 135, 300, 20, Text.translatable("options.extshape.reasonable-sorting"), button -> {
         if (client != null) {
           try {
-            client.setScreen(ConfigScreenFabric.INSTANCE.createScreen(this));
+//            client.setScreen(ConfigScreenFabric.INSTANCE.createScreen(this));
           } catch (LinkageError e) {
             ExtShape.LOGGER.error("Failed to open Reasonable Sorting config screen:", e);
           }

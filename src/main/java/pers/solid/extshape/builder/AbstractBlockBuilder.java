@@ -242,7 +242,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> group(@Nullable ItemGroup group) {
-    this.itemSettings.group(group);
+//    this.blockSettings.method_45476(group);
     return this;
   }
 

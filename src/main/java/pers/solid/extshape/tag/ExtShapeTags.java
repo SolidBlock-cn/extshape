@@ -85,6 +85,7 @@ public final class ExtShapeTags {
       ACACIA_PLANKS,
       DARK_OAK_PLANKS,
       MANGROVE_PLANKS /* 1.19 */,
+      BAMBOO_PLANKS,
       CRIMSON_PLANKS,
       WARPED_PLANKS
   );

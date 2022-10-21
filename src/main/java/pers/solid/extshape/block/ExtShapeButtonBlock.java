@@ -37,8 +37,30 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   public final ButtonType type;
   public final Block baseBlock;
 
-  public ExtShapeButtonBlock(Block baseBlock, @NotNull ButtonType type, Settings settings) {
-    super(type == ButtonType.WOODEN, settings);
+  public ExtShapeButtonBlock(Block baseBlock, Settings settings, int i, boolean bl, SoundEvent soundEvent, SoundEvent soundEvent2) {
+    super(settings, i, bl, soundEvent, soundEvent2);
+    this.baseBlock = baseBlock;
+    this.type = null;
+  }
+
+  public ExtShapeButtonBlock(Block baseBlock, ButtonType type, Settings blockSettings) {
+    super(blockSettings, switch (type) {
+      case STONE -> 20;
+      case SOFT -> 60;
+      case WOODEN, BAMBOO -> 30;
+      case HARD -> 5;
+    }, switch (type) {
+      case WOODEN, SOFT, BAMBOO -> true;
+      case STONE, HARD -> false;
+    }, switch (type) {
+      case WOODEN, SOFT -> SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF;
+      case STONE, HARD -> SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF;
+      case BAMBOO -> SoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_OFF;
+    }, switch (type) {
+      case WOODEN, SOFT -> SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON;
+      case STONE, HARD -> SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON;
+      case BAMBOO -> SoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_ON;
+    });
     this.baseBlock = baseBlock;
     this.type = type;
   }
@@ -126,6 +148,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
     WOODEN,
     STONE,
     HARD,
-    SOFT
+    SOFT,
+    BAMBOO
   }
 }

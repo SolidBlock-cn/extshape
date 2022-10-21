@@ -15,6 +15,7 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.item.Item;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -29,7 +30,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   public final Block baseBlock;
 
   public ExtShapePressurePlateBlock(Block baseBlock, ActivationRule type, Settings settings) {
-    super(type, settings);
+    super(type, settings, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON);
     this.baseBlock = baseBlock;
   }
 
