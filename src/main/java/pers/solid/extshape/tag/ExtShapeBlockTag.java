@@ -7,6 +7,7 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Contract;
+import pers.solid.extshape.ExtShape;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,6 +48,11 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
   @Contract(value = "_, _ -> new", pure = true)
   public static ExtShapeBlockTag create(String namespace, String path) {
     return new ExtShapeBlockTag(new Identifier(namespace, path), new ArrayList<>(), new ArrayList<>());
+  }
+
+  @Contract(value = "_ -> new", pure = true)
+  static ExtShapeBlockTag create(String path) {
+    return create(ExtShape.MOD_ID, path);
   }
 
   /**

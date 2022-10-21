@@ -18,7 +18,6 @@ import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.block.ExtShapeVariantBlockInterface;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   public AbstractBlock.Settings blockSettings;
   public ExtShapeBlockItemBuilder itemBuilder;
 
-  protected @Nullable ExtShapeBlockTag defaultTagToAdd = ExtShapeBlockTags.EXTSHAPE_BLOCKS;
+  protected @Nullable ExtShapeBlockTag defaultTagToAdd = null;
   protected BiMap<Block, ? super T> mapping;
   /**
    * 是否将方块添加到相应的映射中。

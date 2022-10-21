@@ -9,19 +9,15 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -68,12 +64,12 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeBlockTags.PLANKS).contains(baseBlock)) return "wooden_vertical_quarter_piece";
-    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_vertical_quarter_piece";
-    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_quarter_piece";
-    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return
+    if ((ExtShapeTags.PLANKS).contains(baseBlock)) return "wooden_vertical_quarter_piece";
+    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_vertical_quarter_piece";
+    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_quarter_piece";
+    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return
         "stained_terracotta_vertical_quarter_piece";
-    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
+    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
         "glazed_terracotta_vertical_quarter_piece";
     return "";
   }

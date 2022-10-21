@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Unmodifiable;
  */
 final class Mineable {
   /**
-   * 不含间接的方块标签，如木板。部分不可能作为基础方块的予以注释掉。
+   * 不含木板、原木等。部分不可能作为基础方块的予以注释掉。
    *
    * @see net.minecraft.tag.BlockTags#AXE_MINEABLE
    */

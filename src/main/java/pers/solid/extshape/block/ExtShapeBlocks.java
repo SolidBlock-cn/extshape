@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.devtech.arrp.generator.BRRPCubeBlock;
@@ -15,7 +16,8 @@ import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mixin.BlockAccessor;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 import static net.minecraft.block.Blocks.*;
 
@@ -28,7 +30,7 @@ import static net.minecraft.block.Blocks.*;
  */
 public final class ExtShapeBlocks {
   /**
-   * 存储本模组所有方块的列表。其功能类似于 {@link ExtShapeBlockTags#EXTSHAPE_BLOCKS}，但是使用该列表进行迭代显然更加迅速。该列表的内容是在 {@link AbstractBlockBuilder#build()} 中添加的。
+   * 存储本模组所有方块的列表。该列表的内容是在 {@link AbstractBlockBuilder#build()} 中添加的。
    */
   public static final ObjectList<Block> BLOCKS = new ObjectArrayList<>();
   /**
@@ -46,7 +48,7 @@ public final class ExtShapeBlocks {
    */
   static {
     // 石头及其变种（含磨制变种），已存在其楼梯、台阶、墙，但是还没有栅栏和栅栏门。
-    for (final Block block : ExtShapeBlockTags.STONES) {
+    for (final Block block : ExtShapeTags.STONES) {
       BlocksBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
     }
 
@@ -57,24 +59,37 @@ public final class ExtShapeBlocks {
     // 圆石。
     BlocksBuilder.createAllShapes(COBBLESTONE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).withoutRedstone().build();
 
-    ExtShapeBlockTags.LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().build());
-    ExtShapeBlockTags.STRIPPED_LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().build());
-    ExtShapeBlockTags.WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build());
-    ExtShapeBlockTags.STRIPPED_WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build());
-    ExtShapeBlockTags.STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().build());
-    ExtShapeBlockTags.STRIPPED_STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().build());
-    ExtShapeBlockTags.HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build());
-    ExtShapeBlockTags.STRIPPED_HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build());
+    ImmutableMap<BlockShape, ExtShapeBlockTag> WOODEN_TAGS = new ImmutableMap.Builder<BlockShape, ExtShapeBlockTag>()
+        .put(BlockShape.STAIRS, ExtShapeTags.LOG_STAIRS)
+        .put(BlockShape.SLAB, ExtShapeTags.LOG_SLABS)
+        .put(BlockShape.VERTICAL_SLAB, ExtShapeTags.LOG_VERTICAL_SLABS)
+        .put(BlockShape.VERTICAL_STAIRS, ExtShapeTags.LOG_VERTICAL_STAIRS)
+        .put(BlockShape.QUARTER_PIECE, ExtShapeTags.LOG_QUARTER_PIECES)
+        .put(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.LOG_VERTICAL_QUARTER_PIECES)
+        .put(BlockShape.FENCE, ExtShapeTags.LOG_FENCES)
+        .put(BlockShape.FENCE_GATE, ExtShapeTags.LOG_FENCE_GATES)
+        .put(BlockShape.BUTTON, ExtShapeTags.LOG_BUTTONS)
+        .put(BlockShape.PRESSURE_PLATE, ExtShapeTags.LOG_PRESSURE_PLATES)
+        .build();
+
+    ExtShapeTags.LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
+    ExtShapeTags.STRIPPED_LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
+    ExtShapeTags.WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
+    ExtShapeTags.STRIPPED_WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
+    ExtShapeTags.STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
+    ExtShapeTags.STRIPPED_STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
+    ExtShapeTags.HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
+    ExtShapeTags.STRIPPED_HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
 
     // 木板。
-    for (final Block block : ExtShapeBlockTags.PLANKS) {
-      final boolean isOverworld = ExtShapeBlockTags.OVERWORLD_PLANKS.contains(block);
+    for (final Block block : ExtShapeTags.PLANKS) {
+      final boolean isOverworld = ExtShapeTags.OVERWORLD_PLANKS.contains(block);
       BlocksBuilder.createAllShapes(block, null, ButtonType.WOODEN, ActivationRule.EVERYTHING)
-          .setDefaultTagOf(BlockShape.VERTICAL_SLAB, ExtShapeBlockTags.WOODEN_VERTICAL_SLABS)
-          .setDefaultTagOf(BlockShape.VERTICAL_STAIRS, ExtShapeBlockTags.WOODEN_VERTICAL_STAIRS)
-          .setDefaultTagOf(BlockShape.QUARTER_PIECE, ExtShapeBlockTags.WOODEN_QUARTER_PIECES)
-          .setDefaultTagOf(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeBlockTags.WOODEN_VERTICAL_QUARTER_PIECES)
-          .setDefaultTagOf(BlockShape.WALL, ExtShapeBlockTags.WOODEN_WALLS)
+          .setTagToAddForShape(BlockShape.VERTICAL_SLAB, ExtShapeTags.WOODEN_VERTICAL_SLABS)
+          .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.WOODEN_VERTICAL_STAIRS)
+          .setTagToAddForShape(BlockShape.QUARTER_PIECE, ExtShapeTags.WOODEN_QUARTER_PIECES)
+          .setTagToAddForShape(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES)
+          .setTagToAddForShape(BlockShape.WALL, ExtShapeTags.WOODEN_WALLS)
           .build();
     }
 
@@ -83,8 +98,8 @@ public final class ExtShapeBlocks {
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeAll(builder.blockSettings, "block/oak_planks"))
         .setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "petrified_oak_planks"))
-        .addTagToAdd(ExtShapeBlockTags.PICKAXE_MINEABLE)
-        .group(ItemGroup.BUILDING_BLOCKS).setDefaultTagToAdd(ExtShapeBlockTags.FULL_BLOCKS).build();
+        .addTagToAdd(ExtShapeTags.PICKAXE_MINEABLE)
+        .group(ItemGroup.BUILDING_BLOCKS).build();
 
     BlockMappings.getMappingOf(BlockShape.SLAB).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
 
@@ -97,7 +112,7 @@ public final class ExtShapeBlocks {
     BlocksBuilder.createAllShapes(LAPIS_BLOCK, Items.LAPIS_LAZULI, ButtonType.STONE, ActivationRule.MOBS).build();
 
     // 砂岩、红砂岩及其切制、錾制、平滑变种。其中，只有平滑砂岩有栅栏、压力板和按钮。
-    for (final Block block : ExtShapeBlockTags.SANDSTONES) {
+    for (final Block block : ExtShapeTags.SANDSTONES) {
       BlocksBuilder.createConstructionOnly(block).with(BlockShape.WALL).build();
     }
     for (final Block block : new Block[]{SMOOTH_SANDSTONE, SMOOTH_RED_SANDSTONE}) {
@@ -105,20 +120,20 @@ public final class ExtShapeBlocks {
     }
 
     // 羊毛。
-    for (final Block block : ExtShapeBlockTags.WOOLS) {
+    for (final Block block : ExtShapeTags.WOOLS) {
       BlocksBuilder.createAllShapes(block, Items.STRING, ButtonType.SOFT, ActivationRule.EVERYTHING)
-          .addTagToAddEach(ExtShapeBlockTags.WOOLEN_BLOCKS)
-          .setDefaultTagOf(BlockShape.STAIRS, ExtShapeBlockTags.WOOLEN_STAIRS)
-          .setDefaultTagOf(BlockShape.VERTICAL_STAIRS, ExtShapeBlockTags.WOOLEN_VERTICAL_STAIRS)
-          .setDefaultTagOf(BlockShape.SLAB, ExtShapeBlockTags.WOOLEN_SLABS)
-          .setDefaultTagOf(BlockShape.VERTICAL_SLAB, ExtShapeBlockTags.WOOLEN_VERTICAL_SLABS)
-          .setDefaultTagOf(BlockShape.QUARTER_PIECE, ExtShapeBlockTags.WOOLEN_QUARTER_PIECES)
-          .setDefaultTagOf(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeBlockTags.WOOLEN_VERTICAL_QUARTER_PIECES)
-          .setDefaultTagOf(BlockShape.FENCE, ExtShapeBlockTags.WOOLEN_FENCES)
-          .setDefaultTagOf(BlockShape.FENCE_GATE, ExtShapeBlockTags.WOOLEN_FENCE_GATES)
-          .setDefaultTagOf(BlockShape.BUTTON, ExtShapeBlockTags.WOOLEN_BUTTONS)
-          .setDefaultTagOf(BlockShape.PRESSURE_PLATE, ExtShapeBlockTags.WOOLEN_PRESSURE_PLATES)
-          .setDefaultTagOf(BlockShape.WALL, ExtShapeBlockTags.WOOLEN_WALLS)
+          .addTagToAddEach(ExtShapeTags.WOOLEN_BLOCKS)
+          .setTagToAddForShape(BlockShape.STAIRS, ExtShapeTags.WOOLEN_STAIRS)
+          .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.WOOLEN_VERTICAL_STAIRS)
+          .setTagToAddForShape(BlockShape.SLAB, ExtShapeTags.WOOLEN_SLABS)
+          .setTagToAddForShape(BlockShape.VERTICAL_SLAB, ExtShapeTags.WOOLEN_VERTICAL_SLABS)
+          .setTagToAddForShape(BlockShape.QUARTER_PIECE, ExtShapeTags.WOOLEN_QUARTER_PIECES)
+          .setTagToAddForShape(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES)
+          .setTagToAddForShape(BlockShape.FENCE, ExtShapeTags.WOOLEN_FENCES)
+          .setTagToAddForShape(BlockShape.FENCE_GATE, ExtShapeTags.WOOLEN_FENCE_GATES)
+          .setTagToAddForShape(BlockShape.BUTTON, ExtShapeTags.WOOLEN_BUTTONS)
+          .setTagToAddForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.WOOLEN_PRESSURE_PLATES)
+          .setTagToAddForShape(BlockShape.WALL, ExtShapeTags.WOOLEN_WALLS)
           .build();
     }
 
@@ -191,31 +206,31 @@ public final class ExtShapeBlocks {
 
     // 陶瓦和彩色陶瓦。
     BlocksBuilder.createAllShapes(TERRACOTTA, Items.CLAY, ButtonType.STONE, ActivationRule.MOBS)
-        .setDefaultTagOf(BlockShape.STAIRS, ExtShapeBlockTags.TERRACOTTA_STAIRS)
-        .setDefaultTagOf(BlockShape.VERTICAL_STAIRS, ExtShapeBlockTags.TERRACOTTA_VERTICAL_STAIRS)
-        .setDefaultTagOf(BlockShape.SLAB, ExtShapeBlockTags.TERRACOTTA_SLABS)
-        .setDefaultTagOf(BlockShape.VERTICAL_SLAB, ExtShapeBlockTags.TERRACOTTA_VERTICAL_SLABS)
-        .setDefaultTagOf(BlockShape.QUARTER_PIECE, ExtShapeBlockTags.TERRACOTTA_QUARTER_PIECES)
-        .setDefaultTagOf(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeBlockTags.TERRACOTTA_VERTICAL_QUARTER_PIECES)
-        .setDefaultTagOf(BlockShape.FENCE, ExtShapeBlockTags.TERRACOTTA_FENCES)
-        .setDefaultTagOf(BlockShape.FENCE_GATE, ExtShapeBlockTags.TERRACOTTA_FENCE_GATES)
-        .setDefaultTagOf(BlockShape.WALL, ExtShapeBlockTags.TERRACOTTA_WALLS)
-        .setDefaultTagOf(BlockShape.BUTTON, ExtShapeBlockTags.TERRACOTTA_BUTTONS)
-        .setDefaultTagOf(BlockShape.PRESSURE_PLATE, ExtShapeBlockTags.TERRACOTTA_PRESSURE_PLATES)
+        .setTagToAddForShape(BlockShape.STAIRS, ExtShapeTags.TERRACOTTA_STAIRS)
+        .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.TERRACOTTA_VERTICAL_STAIRS)
+        .setTagToAddForShape(BlockShape.SLAB, ExtShapeTags.TERRACOTTA_SLABS)
+        .setTagToAddForShape(BlockShape.VERTICAL_SLAB, ExtShapeTags.TERRACOTTA_VERTICAL_SLABS)
+        .setTagToAddForShape(BlockShape.QUARTER_PIECE, ExtShapeTags.TERRACOTTA_QUARTER_PIECES)
+        .setTagToAddForShape(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.TERRACOTTA_VERTICAL_QUARTER_PIECES)
+        .setTagToAddForShape(BlockShape.FENCE, ExtShapeTags.TERRACOTTA_FENCES)
+        .setTagToAddForShape(BlockShape.FENCE_GATE, ExtShapeTags.TERRACOTTA_FENCE_GATES)
+        .setTagToAddForShape(BlockShape.WALL, ExtShapeTags.TERRACOTTA_WALLS)
+        .setTagToAddForShape(BlockShape.BUTTON, ExtShapeTags.TERRACOTTA_BUTTONS)
+        .setTagToAddForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.TERRACOTTA_PRESSURE_PLATES)
         .build();
-    for (final Block block : ExtShapeBlockTags.STAINED_TERRACOTTA) {
+    for (final Block block : ExtShapeTags.STAINED_TERRACOTTA) {
       BlocksBuilder.createAllShapes(block, Items.CLAY, ButtonType.STONE, ActivationRule.MOBS)
-          .setDefaultTagOf(BlockShape.STAIRS, ExtShapeBlockTags.STAINED_TERRACOTTA_STAIRS)
-          .setDefaultTagOf(BlockShape.VERTICAL_STAIRS, ExtShapeBlockTags.STAINED_TERRACOTTA_VERTICAL_STAIRS)
-          .setDefaultTagOf(BlockShape.SLAB, ExtShapeBlockTags.STAINED_TERRACOTTA_SLABS)
-          .setDefaultTagOf(BlockShape.VERTICAL_SLAB, ExtShapeBlockTags.STAINED_TERRACOTTA_VERTICAL_SLABS)
-          .setDefaultTagOf(BlockShape.QUARTER_PIECE, ExtShapeBlockTags.STAINED_TERRACOTTA_QUARTER_PIECES)
-          .setDefaultTagOf(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeBlockTags.STAINED_TERRACOTTA_VERTICAL_QUARTER_PIECES)
-          .setDefaultTagOf(BlockShape.FENCE, ExtShapeBlockTags.STAINED_TERRACOTTA_FENCES)
-          .setDefaultTagOf(BlockShape.FENCE_GATE, ExtShapeBlockTags.STAINED_TERRACOTTA_FENCE_GATES)
-          .setDefaultTagOf(BlockShape.WALL, ExtShapeBlockTags.STAINED_TERRACOTTA_WALLS)
-          .setDefaultTagOf(BlockShape.BUTTON, ExtShapeBlockTags.STAINED_TERRACOTTA_BUTTONS)
-          .setDefaultTagOf(BlockShape.PRESSURE_PLATE, ExtShapeBlockTags.STAINED_TERRACOTTA_PRESSURE_PLATES)
+          .setTagToAddForShape(BlockShape.STAIRS, ExtShapeTags.STAINED_TERRACOTTA_STAIRS)
+          .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.STAINED_TERRACOTTA_VERTICAL_STAIRS)
+          .setTagToAddForShape(BlockShape.SLAB, ExtShapeTags.STAINED_TERRACOTTA_SLABS)
+          .setTagToAddForShape(BlockShape.VERTICAL_SLAB, ExtShapeTags.STAINED_TERRACOTTA_VERTICAL_SLABS)
+          .setTagToAddForShape(BlockShape.QUARTER_PIECE, ExtShapeTags.STAINED_TERRACOTTA_QUARTER_PIECES)
+          .setTagToAddForShape(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.STAINED_TERRACOTTA_VERTICAL_QUARTER_PIECES)
+          .setTagToAddForShape(BlockShape.FENCE, ExtShapeTags.STAINED_TERRACOTTA_FENCES)
+          .setTagToAddForShape(BlockShape.FENCE_GATE, ExtShapeTags.STAINED_TERRACOTTA_FENCE_GATES)
+          .setTagToAddForShape(BlockShape.WALL, ExtShapeTags.STAINED_TERRACOTTA_WALLS)
+          .setTagToAddForShape(BlockShape.BUTTON, ExtShapeTags.STAINED_TERRACOTTA_BUTTONS)
+          .setTagToAddForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.STAINED_TERRACOTTA_PRESSURE_PLATES)
           .build();
     }
 
@@ -238,8 +253,8 @@ public final class ExtShapeBlocks {
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, "block/smooth_stone_slab_top", "block/smooth_stone_slab", "block/smooth_stone_slab_top"))
         .setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "smooth_stone_slab_double"))
-        .addTagToAdd(ExtShapeBlockTags.PICKAXE_MINEABLE)
-        .group(ItemGroup.BUILDING_BLOCKS).setDefaultTagToAdd(ExtShapeBlockTags.FULL_BLOCKS).build();
+        .addTagToAdd(ExtShapeTags.PICKAXE_MINEABLE)
+        .group(ItemGroup.BUILDING_BLOCKS).build();
 
     BlocksBuilder.createAllShapes(SMOOTH_STONE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).withoutConstructionShapes().build();
 
@@ -253,24 +268,24 @@ public final class ExtShapeBlocks {
     BlocksBuilder.createAllShapes(WARPED_WART_BLOCK, Items.NETHER_WART, null, null).withoutRedstone().build();
 
     // 带釉陶瓦只注册台阶。
-    for (final Block block : ExtShapeBlockTags.GLAZED_TERRACOTTA) {
-      new SlabBuilder(block).setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, FabricBlockSettings.copyOf(builder.baseBlock))).setDefaultTagToAdd(ExtShapeBlockTags.GLAZED_TERRACOTTA_SLABS).build();
+    for (final Block block : ExtShapeTags.GLAZED_TERRACOTTA) {
+      new SlabBuilder(block).setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, FabricBlockSettings.copyOf(builder.baseBlock))).setDefaultTagToAdd(ExtShapeTags.GLAZED_TERRACOTTA_SLABS).build();
     }
 
     // 彩色混凝土。
-    for (final Block block : ExtShapeBlockTags.CONCRETES) {
+    for (final Block block : ExtShapeTags.CONCRETES) {
       BlocksBuilder.createAllShapes(block, Items.GRAVEL, ButtonType.STONE, ActivationRule.MOBS)
-          .setDefaultTagOf(BlockShape.STAIRS, ExtShapeBlockTags.CONCRETE_STAIRS)
-          .setDefaultTagOf(BlockShape.VERTICAL_STAIRS, ExtShapeBlockTags.CONCRETE_VERTICAL_STAIRS)
-          .setDefaultTagOf(BlockShape.SLAB, ExtShapeBlockTags.CONCRETE_SLABS)
-          .setDefaultTagOf(BlockShape.VERTICAL_SLAB, ExtShapeBlockTags.CONCRETE_VERTICAL_SLABS)
-          .setDefaultTagOf(BlockShape.QUARTER_PIECE, ExtShapeBlockTags.CONCRETE_QUARTER_PIECES)
-          .setDefaultTagOf(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeBlockTags.CONCRETE_VERTICAL_QUARTER_PIECES)
-          .setDefaultTagOf(BlockShape.FENCE, ExtShapeBlockTags.CONCRETE_FENCES)
-          .setDefaultTagOf(BlockShape.FENCE_GATE, ExtShapeBlockTags.CONCRETE_FENCE_GATES)
-          .setDefaultTagOf(BlockShape.WALL, ExtShapeBlockTags.CONCRETE_WALLS)
-          .setDefaultTagOf(BlockShape.BUTTON, ExtShapeBlockTags.CONCRETE_BUTTONS)
-          .setDefaultTagOf(BlockShape.PRESSURE_PLATE, ExtShapeBlockTags.CONCRETE_PRESSURE_PLATES)
+          .setTagToAddForShape(BlockShape.STAIRS, ExtShapeTags.CONCRETE_STAIRS)
+          .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.CONCRETE_VERTICAL_STAIRS)
+          .setTagToAddForShape(BlockShape.SLAB, ExtShapeTags.CONCRETE_SLABS)
+          .setTagToAddForShape(BlockShape.VERTICAL_SLAB, ExtShapeTags.CONCRETE_VERTICAL_SLABS)
+          .setTagToAddForShape(BlockShape.QUARTER_PIECE, ExtShapeTags.CONCRETE_QUARTER_PIECES)
+          .setTagToAddForShape(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.CONCRETE_VERTICAL_QUARTER_PIECES)
+          .setTagToAddForShape(BlockShape.FENCE, ExtShapeTags.CONCRETE_FENCES)
+          .setTagToAddForShape(BlockShape.FENCE_GATE, ExtShapeTags.CONCRETE_FENCE_GATES)
+          .setTagToAddForShape(BlockShape.WALL, ExtShapeTags.CONCRETE_WALLS)
+          .setTagToAddForShape(BlockShape.BUTTON, ExtShapeTags.CONCRETE_BUTTONS)
+          .setTagToAddForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.CONCRETE_PRESSURE_PLATES)
           .build();
     }
 
@@ -323,18 +338,26 @@ public final class ExtShapeBlocks {
     BlocksBuilder.createAllShapes(DRIPSTONE_BLOCK, Items.POINTED_DRIPSTONE, ButtonType.STONE, ActivationRule.MOBS).build();
     BlocksBuilder.createAllShapes(MOSS_BLOCK, Items.MOSS_CARPET, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
 
-    // 深板岩变种。深板岩自身属于 PillarBlock，不适合创建形状。
+    // 深板岩。
+    BlocksBuilder.createAllShapes(DEEPSLATE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).setPillar().build();
     for (final Block block : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE, DEEPSLATE_TILES, DEEPSLATE_BRICKS, CHISELED_DEEPSLATE}) {
-      BlocksBuilder.createAllShapes(block, Items.DEEPSLATE, ButtonType.STONE, ActivationRule.MOBS).build();
+      BlocksBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
     }
 
-    // 平滑玄武岩。
+    // 玄武岩及其变种。。
+    BlocksBuilder.createAllShapes(BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).setPillar().build();
+    BlocksBuilder.createAllShapes(POLISHED_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).setPillar().build();
     BlocksBuilder.createAllShapes(SMOOTH_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
 
     // 粗铁、粗铜、粗金。
     BlocksBuilder.createAllShapes(RAW_IRON_BLOCK, Items.RAW_IRON, ButtonType.STONE, ActivationRule.MOBS).build();
     BlocksBuilder.createAllShapes(RAW_COPPER_BLOCK, Items.RAW_COPPER, ButtonType.STONE, ActivationRule.MOBS).build();
     BlocksBuilder.createAllShapes(RAW_GOLD_BLOCK, Items.RAW_GOLD, ButtonType.STONE, ActivationRule.MOBS).build();
+
+    // 蛙明灯。
+    BlocksBuilder.createAllShapes(OCHRE_FROGLIGHT, Items.SLIME_BALL, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build();
+    BlocksBuilder.createAllShapes(VERDANT_FROGLIGHT, Items.SLIME_BALL, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build();
+    BlocksBuilder.createAllShapes(PEARLESCENT_FROGLIGHT, Items.SLIME_BALL, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build();
   }
 
   private ExtShapeBlocks() {

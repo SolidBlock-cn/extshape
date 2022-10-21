@@ -21,7 +21,7 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.rs.ExtShapeBridgeImpl;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +49,7 @@ public class ExtShape implements ModInitializer {
     ExtShapeConfig.init();
     ExtShapeBlocks.init();
     ExtShapeItemGroup.init();
-    ExtShapeBlockTags.refillTags();
+    ExtShapeTags.refillTags();
 
     registerFlammableBlocks();
     registerComposingChances();
@@ -77,10 +77,10 @@ public class ExtShape implements ModInitializer {
    */
   private void registerStrippableBlocks() {
     Streams.concat(
-        IntStream.range(0, ExtShapeBlockTags.LOGS.size()).mapToObj(i -> Pair.of(ExtShapeBlockTags.LOGS.get(i), ExtShapeBlockTags.STRIPPED_LOGS.get(i))),
-        IntStream.range(0, ExtShapeBlockTags.WOODS.size()).mapToObj(i -> Pair.of(ExtShapeBlockTags.WOODS.get(i), ExtShapeBlockTags.STRIPPED_WOODS.get(i))),
-        IntStream.range(0, ExtShapeBlockTags.HYPHAES.size()).mapToObj(i -> Pair.of(ExtShapeBlockTags.HYPHAES.get(i), ExtShapeBlockTags.STRIPPED_HYPHAES.get(i))),
-        IntStream.range(0, ExtShapeBlockTags.STEMS.size()).mapToObj(i -> Pair.of(ExtShapeBlockTags.STEMS.get(i), ExtShapeBlockTags.STRIPPED_STEMS.get(i)))
+        IntStream.range(0, ExtShapeTags.LOGS.size()).mapToObj(i -> Pair.of(ExtShapeTags.LOGS.get(i), ExtShapeTags.STRIPPED_LOGS.get(i))),
+        IntStream.range(0, ExtShapeTags.WOODS.size()).mapToObj(i -> Pair.of(ExtShapeTags.WOODS.get(i), ExtShapeTags.STRIPPED_WOODS.get(i))),
+        IntStream.range(0, ExtShapeTags.HYPHAES.size()).mapToObj(i -> Pair.of(ExtShapeTags.HYPHAES.get(i), ExtShapeTags.STRIPPED_HYPHAES.get(i))),
+        IntStream.range(0, ExtShapeTags.STEMS.size()).mapToObj(i -> Pair.of(ExtShapeTags.STEMS.get(i), ExtShapeTags.STRIPPED_STEMS.get(i)))
     ).forEach(pair -> {
       final Block inputBase = pair.getFirst();
       final Block outputBase = pair.getSecond();
@@ -143,26 +143,37 @@ public class ExtShape implements ModInitializer {
   private void registerFuels() {
     // 参照原版木制（含下界木）楼梯和台阶，楼梯燃烧时间为 300 刻，台阶燃烧时间为 150 刻。
     // 但是，non_flammable_wood 标签的仍然不会被熔炉接受。
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_VERTICAL_STAIRS.toItemTag(), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_VERTICAL_SLABS.toItemTag(), 150);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_QUARTER_PIECES.toItemTag(), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_VERTICAL_QUARTER_PIECES.toItemTag(), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOODEN_WALLS.toItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_VERTICAL_STAIRS.toItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_VERTICAL_SLABS.toItemTag(), 150);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_QUARTER_PIECES.toItemTag(), 75);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES.toItemTag(), 75);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_WALLS.toItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_STAIRS.toItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_SLABS.toItemTag(), 150);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_VERTICAL_STAIRS.toItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_VERTICAL_SLABS.toItemTag(), 150);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_QUARTER_PIECES.toItemTag(), 75);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_VERTICAL_QUARTER_PIECES.toItemTag(), 75);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_WALLS.toItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_FENCES.toItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_FENCE_GATES.toItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_BUTTONS.toItemTag(), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_PRESSURE_PLATES.toItemTag(), 300);
 
     // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_STAIRS.toItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_SLABS.toItemTag(), 50);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_QUARTER_PIECES.toItemTag(), 25);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_VERTICAL_STAIRS.toItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_VERTICAL_SLABS.toItemTag(), 50);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_VERTICAL_QUARTER_PIECES.toItemTag(), 25);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_STAIRS.toItemTag(), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_SLABS.toItemTag(), 50);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_QUARTER_PIECES.toItemTag(), 25);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_VERTICAL_STAIRS.toItemTag(), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_VERTICAL_SLABS.toItemTag(), 50);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES.toItemTag(), 25);
     // 栅栏、栅栏门、压力板、燃烧时间和基础方块一致，门的燃烧时间为三分之二，按钮为三分之一。
     // 但考虑到羊毛压力板是与地毯相互合成的，故燃烧时间与地毯一致，为 67。
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_FENCES.toItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_FENCE_GATES.toItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_PRESSURE_PLATES.toItemTag(), 67);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_BUTTONS.toItemTag(), 33);
-    FuelRegistry.INSTANCE.add(ExtShapeBlockTags.WOOLEN_WALLS.toItemTag(), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_FENCES.toItemTag(), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_FENCE_GATES.toItemTag(), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_PRESSURE_PLATES.toItemTag(), 67);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_BUTTONS.toItemTag(), 33);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_WALLS.toItemTag(), 100);
   }
 
   /**
@@ -173,19 +184,19 @@ public class ExtShape implements ModInitializer {
   private void registerFlammableBlocks() {
     final FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
     // 羊毛方块加入可燃方块
-    for (final Block block : ExtShapeBlockTags.WOOLEN_BLOCKS) {
+    for (final Block block : ExtShapeTags.WOOLEN_BLOCKS) {
       registry.add(block, 30, 60);
     }
 
     // 木板加入可燃方块
-    for (final Block baseBlock : ExtShapeBlockTags.OVERWORLD_PLANKS) {
+    for (final Block baseBlock : ExtShapeTags.OVERWORLD_PLANKS) {
       for (BlockShape shape : BlockShape.values()) {
         final Block block = BlockMappings.getBlockOf(shape, baseBlock);
         if (block != null) registry.add(block, 5, 20);
       }
     }
     // 原木
-    for (final Block baseBlock : Iterables.concat(ExtShapeBlockTags.LOGS, ExtShapeBlockTags.STRIPPED_LOGS, ExtShapeBlockTags.WOODS, ExtShapeBlockTags.STRIPPED_WOODS)) {
+    for (final Block baseBlock : Iterables.concat(ExtShapeTags.LOGS, ExtShapeTags.STRIPPED_LOGS, ExtShapeTags.WOODS, ExtShapeTags.STRIPPED_WOODS)) {
       for (BlockShape shape : BlockShape.values()) {
         final Block block = BlockMappings.getBlockOf(shape, baseBlock);
         if (block != null) registry.add(block, 5, 5);
