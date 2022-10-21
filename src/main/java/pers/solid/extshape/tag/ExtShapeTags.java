@@ -29,8 +29,7 @@ public final class ExtShapeTags {
       BIRCH_LOG,
       JUNGLE_LOG,
       ACACIA_LOG,
-      DARK_OAK_LOG,
-      MANGROVE_LOG
+      DARK_OAK_LOG
   );
   public static final ImmutableList<Block> STRIPPED_LOGS = ImmutableList.of(
       STRIPPED_OAK_LOG,
@@ -39,8 +38,7 @@ public final class ExtShapeTags {
       STRIPPED_JUNGLE_LOG,
       STRIPPED_ACACIA_LOG,
       STRIPPED_DARK_OAK_LOG,
-      STRIPPED_OAK_LOG,
-      STRIPPED_MANGROVE_LOG
+      STRIPPED_OAK_LOG
   );
   public static final ImmutableList<Block> WOODS = ImmutableList.of(
       OAK_WOOD,
@@ -48,8 +46,7 @@ public final class ExtShapeTags {
       BIRCH_WOOD,
       JUNGLE_WOOD,
       ACACIA_WOOD,
-      DARK_OAK_WOOD,
-      MANGROVE_WOOD
+      DARK_OAK_WOOD
   );
   public static final ImmutableList<Block> STRIPPED_WOODS = ImmutableList.of(
       STRIPPED_OAK_WOOD,
@@ -57,8 +54,7 @@ public final class ExtShapeTags {
       STRIPPED_BIRCH_WOOD,
       STRIPPED_JUNGLE_WOOD,
       STRIPPED_ACACIA_WOOD,
-      STRIPPED_DARK_OAK_WOOD,
-      STRIPPED_MANGROVE_WOOD
+      STRIPPED_DARK_OAK_WOOD
   );
   public static final ImmutableList<Block> STEMS = ImmutableList.of(
       WARPED_STEM,
@@ -337,7 +333,6 @@ public final class ExtShapeTags {
   public static final ExtShapeBlockTag SHEARS_MINEABLE = create(FabricMineableTags.SHEARS_MINEABLE);
 
   public static final ExtShapeBlockTag OCCLUDES_VIBRATION_SIGNALS = create(BlockTags.OCCLUDES_VIBRATION_SIGNALS);
-  public static final ExtShapeBlockTag DAMPENS_VIBRATIONS = create(BlockTags.DAMPENS_VIBRATIONS);
   public static final ExtShapeBlockTag DRAGON_IMMUNE = create(BlockTags.DRAGON_IMMUNE);
   public static final ExtShapeBlockTag ENDERMAN_HOLDABLE = create(BlockTags.ENDERMAN_HOLDABLE);
   public static final ExtShapeBlockTag INFINIBURN_OVERWORLD = create(BlockTags.INFINIBURN_OVERWORLD);
@@ -357,7 +352,6 @@ public final class ExtShapeTags {
   public static final ExtShapeBlockTag GUARDER_BY_PIGLINS = create(BlockTags.GUARDED_BY_PIGLINS);
   public static final ExtShapeBlockTag SMALL_DRIPLEAF_PLACEABLE = create(BlockTags.SMALL_DRIPLEAF_PLACEABLE);
   public static final ExtShapeBlockTag BAMBOO_PLANTABLE_ON = create(BlockTags.BAMBOO_PLANTABLE_ON);
-  public static final ExtShapeBlockTag DEAD_BUSH_MAY_PLACE_ON = create(BlockTags.DEAD_BUSH_MAY_PLACE_ON);
 
   /**
    * 这个标签主要是考虑到，{@link BlockTags#PICKAXE_MINEABLE} 加入了所有的墙，但事实上墙并不一定是可以使用镐来开采的，因此这里设置了一个专门的标签，如果某个方块属于 {@code minecraft:mineable/pickaxe} 但同时属于 {@code extshape:pickaxe_unmineable}，则认为镐子不能开采这个方块。
@@ -372,7 +366,7 @@ public final class ExtShapeTags {
   /**
    * 这个集合中的标签不会加入物品标签中。
    */
-  private static final @Unmodifiable ImmutableSet<UsableTag<? extends ItemConvertible>> NO_ITEM_TAGS = ImmutableSet.of(AXE_MINEABLE, HOE_MINEABLE, PICKAXE_MINEABLE, SHOVEL_MINEABLE, DRAGON_IMMUNE, INFINIBURN_END, INFINIBURN_OVERWORLD, GEODE_INVALID_BLOCKS, WITHER_IMMUNE, NEEDS_IRON_TOOL, NEEDS_STONE_TOOL, NEEDS_DIAMOND_TOOL, PICKAXE_UNMINEABLE, DEAD_BUSH_MAY_PLACE_ON, SMALL_DRIPLEAF_PLACEABLE, BAMBOO_PLANTABLE_ON, ENDERMAN_HOLDABLE, GUARDER_BY_PIGLINS, SHEARS_MINEABLE, SNOW, OCCLUDES_VIBRATION_SIGNALS);
+  private static final @Unmodifiable ImmutableSet<UsableTag<? extends ItemConvertible>> NO_ITEM_TAGS = ImmutableSet.of(AXE_MINEABLE, HOE_MINEABLE, PICKAXE_MINEABLE, SHOVEL_MINEABLE, DRAGON_IMMUNE, INFINIBURN_END, INFINIBURN_OVERWORLD, GEODE_INVALID_BLOCKS, WITHER_IMMUNE, NEEDS_IRON_TOOL, NEEDS_STONE_TOOL, NEEDS_DIAMOND_TOOL, PICKAXE_UNMINEABLE, SMALL_DRIPLEAF_PLACEABLE, BAMBOO_PLANTABLE_ON, ENDERMAN_HOLDABLE, GUARDER_BY_PIGLINS, SHEARS_MINEABLE, SNOW, OCCLUDES_VIBRATION_SIGNALS);
 
   private ExtShapeTags() {
   }
@@ -382,7 +376,6 @@ public final class ExtShapeTags {
    */
   public static void refillTags() {
     OCCLUDES_VIBRATION_SIGNALS.addTag(WOOLEN_BLOCKS);
-    DAMPENS_VIBRATIONS.addTag(WOOLEN_BLOCKS);
     SHEARS_MINEABLE.addTag(WOOLEN_BLOCKS);
     for (Block block : ExtShapeBlocks.BLOCKS) {
       final Block baseBlock;
@@ -434,10 +427,6 @@ public final class ExtShapeTags {
         }
         if (baseBlock == DIRT) {
           BAMBOO_PLANTABLE_ON.add(block);
-          DEAD_BUSH_MAY_PLACE_ON.add(block);
-        }
-        if (STAINED_TERRACOTTA.contains(baseBlock) || baseBlock == TERRACOTTA) {
-          DEAD_BUSH_MAY_PLACE_ON.add(block);
         }
       }
       if (Mineable.VANILLA_AXE_MINEABLE.contains(baseBlock)) AXE_MINEABLE.add(block);

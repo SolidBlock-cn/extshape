@@ -32,7 +32,7 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
   public static final Set<Block> BASE_BLOCKS_WITH_HORIZONTAL_COLUMN = Sets.newHashSet(Iterables.concat(
       ExtShapeTags.LOGS,
       ExtShapeTags.STRIPPED_LOGS,
-      Arrays.asList(Blocks.HAY_BLOCK, Blocks.PURPUR_PILLAR, Blocks.QUARTZ_PILLAR, Blocks.OCHRE_FROGLIGHT, Blocks.VERDANT_FROGLIGHT, Blocks.PEARLESCENT_FROGLIGHT)
+      Arrays.asList(Blocks.HAY_BLOCK, Blocks.PURPUR_PILLAR, Blocks.QUARTZ_PILLAR)
   ));
   public static final EnumProperty<Direction.Axis> AXIS = PillarBlock.AXIS;
 
