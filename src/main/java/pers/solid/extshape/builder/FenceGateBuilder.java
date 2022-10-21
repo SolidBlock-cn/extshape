@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import pers.solid.extshape.block.ExtShapeFenceGateBlock;
 import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
 
@@ -14,7 +14,7 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
 
   public FenceGateBuilder(Block baseBlock, Item secondIngredient) {
     super(baseBlock, builder -> new ExtShapeFenceGateBlock(baseBlock, ((FenceGateBuilder) builder).secondIngredient, builder.blockSettings));
-    this.defaultTagToAdd = ExtShapeBlockTags.FENCE_GATES;
+    this.defaultTagToAdd = ExtShapeTags.FENCE_GATES;
     this.mapping = BlockMappings.getMappingOf(BlockShape.FENCE_GATE);
     this.secondIngredient = secondIngredient;
     itemSettings.group(ItemGroup.REDSTONE);
