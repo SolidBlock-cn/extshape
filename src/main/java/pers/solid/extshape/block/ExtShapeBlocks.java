@@ -10,12 +10,10 @@ import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.mixin.BlockAccessor;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 import pers.solid.extshape.tag.ExtShapeTags;
 
@@ -312,9 +310,6 @@ public final class ExtShapeBlocks {
     BlocksBuilder.createAllShapes(TUFF, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
     BlocksBuilder.createAllShapes(CALCITE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
 
-    // 幽匿块
-    BlocksBuilder.createConstructionOnly(SCULK).withExtension(BlockExtension.builder().setStacksDroppedCallback((state, world, pos, stack, dropExperience) -> ((BlockAccessor) state.getBlock()).callDropExperienceWhenMined(world, pos, stack, ConstantIntProvider.create(1))).build()).build();
-
     // 涂蜡的铜块。
     for (final Block block : new Block[]{
         WAXED_COPPER_BLOCK,
@@ -348,11 +343,6 @@ public final class ExtShapeBlocks {
     BlocksBuilder.createAllShapes(RAW_IRON_BLOCK, Items.RAW_IRON, ButtonType.STONE, ActivationRule.MOBS).build();
     BlocksBuilder.createAllShapes(RAW_COPPER_BLOCK, Items.RAW_COPPER, ButtonType.STONE, ActivationRule.MOBS).build();
     BlocksBuilder.createAllShapes(RAW_GOLD_BLOCK, Items.RAW_GOLD, ButtonType.STONE, ActivationRule.MOBS).build();
-
-    // 蛙明灯。
-    BlocksBuilder.createAllShapes(OCHRE_FROGLIGHT, Items.SLIME_BALL, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build();
-    BlocksBuilder.createAllShapes(VERDANT_FROGLIGHT, Items.SLIME_BALL, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build();
-    BlocksBuilder.createAllShapes(PEARLESCENT_FROGLIGHT, Items.SLIME_BALL, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().build();
   }
 
   private ExtShapeBlocks() {

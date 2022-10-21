@@ -101,9 +101,9 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
-      super.onStacksDropped(state, world, pos, stack, dropExperience);
-      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack, dropExperience);
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
+      super.onStacksDropped(state, world, pos, stack);
+      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack);
     }
 
   }

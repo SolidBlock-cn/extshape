@@ -85,7 +85,7 @@ public final class RecipeConflict {
 
   public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
     dispatcher.register(CommandManager.literal("extshape:check-conflict")
-        .requires(source -> source.isExecutedByPlayer() && source.hasPermissionLevel(2))
+        .requires(source -> source.getEntity() instanceof ServerPlayerEntity && source.hasPermissionLevel(2))
         .executes(context -> {
           final ServerCommandSource source = context.getSource();
           source.sendFeedback(new TranslatableText("message.extshape.recipe_conflict.start"), true);
