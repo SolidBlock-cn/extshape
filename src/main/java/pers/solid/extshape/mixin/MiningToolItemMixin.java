@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 @Mixin(MiningToolItem.class)
 public class MiningToolItemMixin extends ToolItem {
@@ -19,7 +20,7 @@ public class MiningToolItemMixin extends ToolItem {
   }
 
   /**
-   * @see pers.solid.extshape.tag.ExtShapeBlockTags#PICKAXE_UNMINEABLE
+   * @see ExtShapeTags#PICKAXE_UNMINEABLE
    */
   @SuppressWarnings("deprecation")
   private static final Tag<Block> PICKAXE_UNMINEABLE = TagRegistry.block(new Identifier(ExtShape.MOD_ID, "pickaxe_unmineable"));

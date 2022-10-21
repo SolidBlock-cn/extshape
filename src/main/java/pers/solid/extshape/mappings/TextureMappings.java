@@ -59,7 +59,7 @@ public class TextureMappings {
     TextureRegistry.register(Blocks.MANGROVE_WOOD, new Identifier("minecraft", "block/mangrove_log"));
     TextureRegistry.register(Blocks.WARPED_HYPHAE, new Identifier("minecraft", "block/warped_stem"));
     TextureRegistry.register(Blocks.CRIMSON_HYPHAE, new Identifier("minecraft", "block/crimson_stem"));
-    TextureRegistry.register(Blocks.STRIPPED_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/oak_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_oak_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_SPRUCE_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_spruce_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_BIRCH_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_birch_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_JUNGLE_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_jungle_log_top"));
@@ -77,5 +77,18 @@ public class TextureMappings {
     TextureRegistry.register(Blocks.STRIPPED_MANGROVE_WOOD, new Identifier("minecraft", "block/stripped_mangrove_log"));
     TextureRegistry.register(Blocks.STRIPPED_WARPED_HYPHAE, new Identifier("minecraft", "block/stripped_warped_stem"));
     TextureRegistry.register(Blocks.STRIPPED_CRIMSON_HYPHAE, new Identifier("minecraft", "block/stripped_crimson_stem"));
+
+    TextureRegistry.registerAppended(Blocks.OCHRE_FROGLIGHT, TextureKey.ALL, "_side");
+    TextureRegistry.registerAppended(Blocks.OCHRE_FROGLIGHT, TextureKey.END, "_top");
+    TextureRegistry.registerAppended(Blocks.VERDANT_FROGLIGHT, TextureKey.ALL, "_side");
+    TextureRegistry.registerAppended(Blocks.VERDANT_FROGLIGHT, TextureKey.END, "_top");
+    TextureRegistry.registerAppended(Blocks.PEARLESCENT_FROGLIGHT, TextureKey.ALL, "_side");
+    TextureRegistry.registerAppended(Blocks.PEARLESCENT_FROGLIGHT, TextureKey.END, "_top");
+
+    TextureRegistry.registerAppended(Blocks.BASALT, TextureKey.ALL, "_side");
+    TextureRegistry.registerAppended(Blocks.BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.ALL, "_side");
+    TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerAppended(Blocks.DEEPSLATE, TextureKey.END, "_top");
   }
 }

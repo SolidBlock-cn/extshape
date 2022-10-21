@@ -28,7 +28,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 为指定形状的 {@link AbstractBlockBuilder} 调用 {@link AbstractBlockBuilder#setDefaultTagToAdd(ExtShapeBlockTag) #setDefaultTagToAdd}。
    */
-  public final Map<@NotNull BlockShape, @Nullable ExtShapeBlockTag> defaultTagsToAdd = new HashMap<>();
+  private Map<@NotNull BlockShape, @Nullable ExtShapeBlockTag> tagToAddForShape = new HashMap<>();
   /**
    * 该基础方块需要构建哪些形状的变种。可以通过 {@link #with} 和 {@link #without} 进行增减。
    */
@@ -123,6 +123,8 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
     blockBuilderConsumer = (blockShape, abstractBlockBuilder) -> {
       if (blockShape == BlockShape.SLAB) {
         ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarSlabBlock(builder.baseBlock, builder.blockSettings);
+      } else if (blockShape == BlockShape.VERTICAL_SLAB) {
+        ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarVerticalSlabBlock(builder.baseBlock, builder.blockSettings);
       } else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
         abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
       }
@@ -248,9 +250,19 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    * @param tag   默认方块标签。
    */
   @Contract(value = "_, _, -> this", mutates = "this")
-  public BlocksBuilder setDefaultTagOf(@Nullable BlockShape shape, @Nullable ExtShapeBlockTag tag) {
+  public BlocksBuilder setTagToAddForShape(@Nullable BlockShape shape, @Nullable ExtShapeBlockTag tag) {
     if (shape == null || tag == null) return this;
-    defaultTagsToAdd.put(shape, tag);
+    tagToAddForShape.put(shape, tag);
+    return this;
+  }
+
+  /**
+   * 设置各个形状的方块需要添加的方块标签。会覆盖已有的值。
+   */
+  @CanIgnoreReturnValue
+  @Contract(value = "_, -> this", mutates = "this")
+  public BlocksBuilder setTagToAddForShape(Map<BlockShape, ExtShapeBlockTag> map) {
+    tagToAddForShape = map;
     return this;
   }
 
@@ -308,7 +320,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
     }
 
     final Collection<AbstractBlockBuilder<? extends Block>> values = this.values();
-    for (Entry<BlockShape, ExtShapeBlockTag> entry : this.defaultTagsToAdd.entrySet()) {
+    for (Entry<BlockShape, ExtShapeBlockTag> entry : this.tagToAddForShape.entrySet()) {
       AbstractBlockBuilder<?> builder = this.get(entry.getKey());
       if (builder != null && entry.getValue() != null) builder.setDefaultTagToAdd(entry.getValue());
     }

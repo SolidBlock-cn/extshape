@@ -25,7 +25,7 @@ import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mappings.TextureMappings;
 import pers.solid.extshape.mappings.UnusualLootTables;
 import pers.solid.extshape.mappings.VanillaStonecutting;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 import java.util.Collection;
 
@@ -141,7 +141,7 @@ public final class ExtShapeRRP {
     }
 
     // 添加方块标签。
-    ExtShapeBlockTags.writeAllBlockTagFiles(pack);
+    ExtShapeTags.writeAllBlockTagFiles(pack);
   }
 
   /**
