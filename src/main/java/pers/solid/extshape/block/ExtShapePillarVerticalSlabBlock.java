@@ -5,6 +5,8 @@ import net.devtech.arrp.json.blockstate.JBlockModel;
 import net.devtech.arrp.json.blockstate.JBlockStates;
 import net.devtech.arrp.json.blockstate.JVariants;
 import net.devtech.arrp.json.models.JModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
@@ -26,6 +28,7 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
     setDefaultState(getDefaultState().with(AXIS, Direction.Axis.Y));
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public @NotNull JBlockStates getBlockStates() {
     final JVariants variants = new JVariants();
@@ -43,6 +46,7 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
     return JBlockStates.ofVariants(variants);
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
     super.writeBlockModel(pack);
