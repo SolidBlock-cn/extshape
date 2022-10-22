@@ -35,14 +35,20 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    * 是否为该方块构建物品。
    */
   public final boolean buildItem;
+  /**
+   * 创建实例并构建后，将自身添加到这些标签中。
+   */
   private final List<@NotNull ExtShapeBlockTag> tagsToAdd = new ArrayList<>();
   public AbstractBlock.Settings blockSettings;
   public ExtShapeBlockItemBuilder itemBuilder;
 
   protected @Nullable ExtShapeBlockTag defaultTagToAdd = null;
+  /**
+   * 与该形状相关的方块映射。
+   */
   protected BiMap<Block, ? super T> mapping;
   /**
-   * 是否将方块添加到相应的映射中。
+   * 是否将方块添加到相应的方块映射中。
    */
   protected boolean addToMapping;
   /**
@@ -57,11 +63,11 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    */
   protected T instance;
   /**
-   * 是否注册方块和物品。
+   * 是否注册方块。
    */
   protected boolean registerBlock, registerItem;
   /**
-   * 物品设置。
+   * 该方块对应物品的物品设置。
    */
   protected Item.Settings itemSettings;
   /**

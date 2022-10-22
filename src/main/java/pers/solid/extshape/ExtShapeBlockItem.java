@@ -23,7 +23,7 @@ public class ExtShapeBlockItem extends BlockItem {
 
   @Override
   public Text getName(ItemStack stack) {
-    return stack.getItem().getName();
+    return getBlock().getName();
   }
 
   @Override
