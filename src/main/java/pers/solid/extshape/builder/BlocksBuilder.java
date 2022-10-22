@@ -295,7 +295,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_-> this", mutates = "this")
-  public BlocksBuilder consumeEach(BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> biConsumer) {
+  public BlocksBuilder setConsumesEach(BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> biConsumer) {
     if (blockBuilderConsumer == null) {
       blockBuilderConsumer = biConsumer;
     } else {
@@ -310,7 +310,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   @CanIgnoreReturnValue
   @Contract(value = "_-> this", mutates = "this")
   public BlocksBuilder consumeEachSettings(BiConsumer<BlockShape, AbstractBlock.Settings> biConsumer) {
-    consumeEach((blockShape, builder) -> biConsumer.accept(blockShape, builder.blockSettings));
+    setConsumesEach((blockShape, builder) -> biConsumer.accept(blockShape, builder.blockSettings));
     return this;
   }
 

@@ -36,11 +36,10 @@
     "fabricloader": "*",
     "fabric": "*",
     "minecraft": [
-      ">=1.19-beta.2",
       ">=1.19"
     ],
     "java": ">=17",
-    "better_runtime_resource_pack": ">=0.6.2"
+    "better_runtime_resource_pack": ">=0.8.0"
   },
   "recommends": {
     "reasonable-sorting": ">=2.0.1"

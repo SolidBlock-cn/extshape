@@ -43,7 +43,7 @@ public final class ExtShapeBlocks {
   public static final Block SMOOTH_STONE_DOUBLE_SLAB;
 
   /*
-    使用BlockBuilder并利用迭代器来批量注册多个方块及其对应方块物品，提高效率。
+    使用 {@link BlocksBuilder} 并利用迭代器来批量注册多个方块及其对应方块物品，提高效率。
     只有极少数方块会以静态常量成员变量的形式存储。
    */
   static {
@@ -52,14 +52,15 @@ public final class ExtShapeBlocks {
       BlocksBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
     }
 
-    // 泥土。
+    // 泥土和砂土。其中砂土没有按钮和压力板。
     BlocksBuilder.createAllShapes(DIRT, Items.STICK, ButtonType.SOFT, ActivationRule.EVERYTHING).build();
     BlocksBuilder.createAllShapes(COARSE_DIRT, Items.STICK, null, null).build();
 
     // 圆石。
-    BlocksBuilder.createAllShapes(COBBLESTONE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).withoutRedstone().build();
+    BlocksBuilder.createAllShapes(COBBLESTONE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
 
-    ImmutableMap<BlockShape, ExtShapeBlockTag> WOODEN_TAGS = new ImmutableMap.Builder<BlockShape, ExtShapeBlockTag>()
+    // 原木、木头、菌柄、菌核及其去皮变种。
+    final ImmutableMap<BlockShape, ExtShapeBlockTag> woodenTags = new ImmutableMap.Builder<BlockShape, ExtShapeBlockTag>()
         .put(BlockShape.STAIRS, ExtShapeTags.LOG_STAIRS)
         .put(BlockShape.SLAB, ExtShapeTags.LOG_SLABS)
         .put(BlockShape.VERTICAL_SLAB, ExtShapeTags.LOG_VERTICAL_SLABS)
@@ -72,18 +73,17 @@ public final class ExtShapeBlocks {
         .put(BlockShape.PRESSURE_PLATE, ExtShapeTags.LOG_PRESSURE_PLATES)
         .build();
 
-    ExtShapeTags.LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
-    ExtShapeTags.STRIPPED_LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
-    ExtShapeTags.WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
-    ExtShapeTags.STRIPPED_WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
-    ExtShapeTags.STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
-    ExtShapeTags.STRIPPED_STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
-    ExtShapeTags.HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
-    ExtShapeTags.STRIPPED_HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(WOODEN_TAGS).build());
+    ExtShapeTags.LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(woodenTags).build());
+    ExtShapeTags.STRIPPED_LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(woodenTags).build());
+    ExtShapeTags.WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(woodenTags).build());
+    ExtShapeTags.STRIPPED_WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(woodenTags).build());
+    ExtShapeTags.STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(woodenTags).build());
+    ExtShapeTags.STRIPPED_STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(woodenTags).build());
+    ExtShapeTags.HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(woodenTags).build());
+    ExtShapeTags.STRIPPED_HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, Items.STICK, ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(woodenTags).build());
 
     // 木板。
     for (final Block block : ExtShapeTags.PLANKS) {
-      final boolean isOverworld = ExtShapeTags.OVERWORLD_PLANKS.contains(block);
       BlocksBuilder.createAllShapes(block, null, ButtonType.WOODEN, ActivationRule.EVERYTHING)
           .setTagToAddForShape(BlockShape.VERTICAL_SLAB, ExtShapeTags.WOODEN_VERTICAL_SLABS)
           .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.WOODEN_VERTICAL_STAIRS)
@@ -317,7 +317,7 @@ public final class ExtShapeBlocks {
     BlocksBuilder.createAllShapes(TUFF, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
     BlocksBuilder.createAllShapes(CALCITE, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
 
-    // 幽匿块
+    // 幽匿块。
     BlocksBuilder.createConstructionOnly(SCULK).withExtension(BlockExtension.builder().setStacksDroppedCallback((state, world, pos, stack, dropExperience) -> ((BlockAccessor) state.getBlock()).callDropExperienceWhenMined(world, pos, stack, ConstantIntProvider.create(1))).build()).build();
 
     // 涂蜡的铜块。
@@ -344,7 +344,7 @@ public final class ExtShapeBlocks {
       BlocksBuilder.createAllShapes(block, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
     }
 
-    // 玄武岩及其变种。。
+    // 玄武岩及其变种。
     BlocksBuilder.createAllShapes(BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).setPillar().build();
     BlocksBuilder.createAllShapes(POLISHED_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).setPillar().build();
     BlocksBuilder.createAllShapes(SMOOTH_BASALT, Items.FLINT, ButtonType.STONE, ActivationRule.MOBS).build();
