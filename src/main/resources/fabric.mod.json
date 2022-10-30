@@ -36,7 +36,8 @@
     "fabricloader": "*",
     "fabric": "*",
     "minecraft": [
-      ">=1.19"
+      ">=1.19.3-alpha.22.43.a",
+      ">=1.19.3"
     ],
     "java": ">=17",
     "better_runtime_resource_pack": ">=0.8.0"

@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.ApiStatus;
@@ -71,10 +70,6 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    * 该方块对应物品的物品设置。
    */
   protected Item.Settings itemSettings;
-  /**
-   * 该物品所属的物品组。通常是原版的物品组。
-   */
-  protected @Nullable ItemGroup group;
   /**
    * 该方块所拥有的 id。
    */
@@ -231,18 +226,6 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setInstanceSupplier(Function<AbstractBlockBuilder<T>, T> supplier) {
     this.instanceSupplier = supplier;
-    return this;
-  }
-
-  /**
-   * 方块构建后，将其方块物品添加到指定的物品组中。
-   *
-   * @param group 物品组。若为 {@code null}，则表示不添加到物品组中。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> group(@Nullable ItemGroup group) {
-//    this.blockSettings.method_45476(group);
     return this;
   }
 

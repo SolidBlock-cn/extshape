@@ -5,8 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractBlockAccessor", "AbstractBlockStateAccessor", "AxeItemMixin",
-    "BlockAccessor", "BlockFamiliesAccessor", "ItemGroupAccessor",
-    "MiningToolItemMixin", "SimpleRegistryMixin_temp", "SnowyBlockMixin"
+    "BlockAccessor", "BlockFamiliesAccessor", "MiningToolItemMixin",
+    "SnowyBlockMixin"
   ],
   "client": [
     "CreativeInventoryScreenAccessor", "CreativeInventoryScreenMixin"

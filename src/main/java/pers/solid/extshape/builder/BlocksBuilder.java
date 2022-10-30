@@ -3,7 +3,6 @@ package pers.solid.extshape.builder;
 import com.google.common.collect.ImmutableSet;
 import net.devtech.arrp.util.CanIgnoreReturnValue;
 import net.minecraft.block.*;
-import net.minecraft.item.Item;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Contract;
@@ -13,6 +12,7 @@ import pers.solid.extshape.block.*;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mixin.AbstractBlockStateAccessor;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
+import pers.solid.extshape.util.FenceSettings;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -42,7 +42,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 构建器需要构建的所有对象都需要添加到的标签的列表。也就是说，构建的时候，这里面的标签会添加此构建器构建的所有方块。
    */
   protected final List<@NotNull ExtShapeBlockTag> tagsToAddEach = new ArrayList<>();
-  protected @Nullable Item fenceCraftingIngredient;
+  protected @Nullable FenceSettings fenceSettings;
   protected @Nullable ExtShapeButtonBlock.ButtonType buttonType;
   protected @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
   /**
@@ -54,13 +54,13 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
    *
    * @param baseBlock                   基础方块。
-   * @param fenceCraftingIngredient     合成栅栏和栅栏门时，需要使用的第二合成材料。
+   * @param fenceSettings               合成栅栏和栅栏门时，需要使用的第二合成材料以及栅栏门的声音。
    * @param buttonType                  按钮类型。
    * @param pressurePlateActivationRule 压力板激活类型。
    * @param shapesToBuild               需要构建哪些方块形状。
    */
-  public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, SortedSet<BlockShape> shapesToBuild) {
-    this.fenceCraftingIngredient = fenceCraftingIngredient;
+  public BlocksBuilder(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, SortedSet<BlockShape> shapesToBuild) {
+    this.fenceSettings = fenceSettings;
     this.buttonType = buttonType;
     this.pressurePlateActivationRule = pressurePlateActivationRule;
     this.baseBlock = baseBlock;
@@ -71,14 +71,14 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 创建一个 BlocksBuilder，将会创建所有形状的，但不包括第三方模组新增加的形状。
    *
    * @param baseBlock                   基础方块。
-   * @param fenceCraftingIngredient     栅栏的第二合成材料。若为 {@code null}，则意味着不产生栅栏和栅栏门。
+   * @param fenceSettings               栅栏的第二合成材料以及声音。若为 {@code null}，则意味着不产生栅栏和栅栏门。
    * @param buttonType                  按钮的类型。若为 {@code null}，则意味着不产生按钮。
    * @param pressurePlateActivationRule 压力板的类型。若为 {@code null}，则意味着不产生压力板。
    * @return 新的 BlocksBuilder。
    */
   @Contract("_,_,_,_ -> new")
-  public static BlocksBuilder createAllShapes(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
-    return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule, new TreeSet<>(SHAPES));
+  public static BlocksBuilder createAllShapes(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
+    return new BlocksBuilder(baseBlock, fenceSettings, buttonType, pressurePlateActivationRule, new TreeSet<>(SHAPES));
   }
 
   /**
@@ -204,14 +204,14 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 构造栅栏和栅栏门，并指定合成材料。
    *
-   * @param fenceCraftingIngredient 合成栅栏或栅栏门需要使用的第二合成材料。
+   * @param fenceSettings 合成栅栏或栅栏门需要使用的第二合成材料以及声音。
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder withFences(@NotNull Item fenceCraftingIngredient) {
+  public BlocksBuilder withFences(@NotNull FenceSettings fenceSettings) {
     shapesToBuild.add(BlockShape.FENCE);
     shapesToBuild.add(BlockShape.FENCE_GATE);
-    this.fenceCraftingIngredient = fenceCraftingIngredient;
+    this.fenceSettings = fenceSettings;
     return this;
   }
 
@@ -366,8 +366,8 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       case 3 -> new VerticalStairsBuilder(baseBlock);
       case 4 -> new QuarterPieceBuilder(baseBlock);
       case 5 -> new VerticalQuarterPieceBuilder(baseBlock);
-      case 6 -> new FenceBuilder(baseBlock, fenceCraftingIngredient);
-      case 7 -> new FenceGateBuilder(baseBlock, fenceCraftingIngredient);
+      case 6 -> fenceSettings == null ? null : new FenceBuilder(baseBlock, fenceSettings.secondIngredient());
+      case 7 -> fenceSettings == null ? null : new FenceGateBuilder(baseBlock, fenceSettings);
       case 8 -> new WallBuilder(baseBlock);
       case 9 -> buttonType != null ? new ButtonBuilder(buttonType, baseBlock) : null;
       case 10 -> pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock) : null;

@@ -45,7 +45,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
   public static final BlockShape FENCE = new BlockShape(FenceBlock.class, BlockFamily.Variant.FENCE, "fence", 1f, false);
   public static final BlockShape FENCE_GATE = new BlockShape(FenceGateBlock.class, BlockFamily.Variant.FENCE_GATE, "fence_gate", 1f, false);
   public static final BlockShape WALL = new BlockShape(WallBlock.class, BlockFamily.Variant.WALL, "wall", 1f, false);
-  public static final BlockShape BUTTON = new BlockShape(AbstractButtonBlock.class, BlockFamily.Variant.BUTTON, "button", 1 / 3f, false);
+  public static final BlockShape BUTTON = new BlockShape(ButtonBlock.class, BlockFamily.Variant.BUTTON, "button", 1 / 3f, false);
 
   public static final BlockShape PRESSURE_PLATE = new BlockShape(PressurePlateBlock.class, BlockFamily.Variant.PRESSURE_PLATE, "pressure_plate", 1 / 3f, false);
 

@@ -16,6 +16,7 @@
 
   "block.extshape.prefix.acacia": "Acacia",
   "block.extshape.prefix.amethyst": "Amethyst",
+  "block.extshape.prefix.bamboo": "Bamboo",
   "block.extshape.prefix.birch": "Birch",
   "block.extshape.prefix.brick": "Brick",
   "block.extshape.prefix.chiseled_nether_brick": "Chiseled Nether Brick",
@@ -77,7 +78,7 @@
   "block.extshape.prefix.weathered_copper": "Weathered Copper",
   "block.extshape.prefix.weathered_cut_copper": "Weathered Cut Copper",
 
-  "itemGroup.extshape.wooden_blocks": "\u00a79Extended Block Shape:\u00a7r Wooden Blocks",
+  "itemGroup.extshape.wooden_blocks": "\u00a79Extended Block Shape:\u00a7r Wooden and Bamboo Blocks",
   "itemGroup.extshape.colorful_blocks": "\u00a79Extended Block Shape:\u00a7r Colorful Blocks",
   "itemGroup.extshape.stone_blocks": "\u00a79Extended Block Shape:\u00a7r Stone Blocks",
   "itemGroup.extshape.other_blocks": "\u00a79Extended Block Shape:\u00a7r Other Blocks",

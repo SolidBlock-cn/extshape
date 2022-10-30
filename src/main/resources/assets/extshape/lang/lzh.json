@@ -16,6 +16,7 @@
 
   "block.extshape.prefix.acacia": "㭜",
   "block.extshape.prefix.amethyst": "紫水玉",
+  "block.extshape.prefix.bamboo": "竹",
   "block.extshape.prefix.birch": "樺",
   "block.extshape.prefix.brick": "磚",
   "block.extshape.prefix.chiseled_nether_brick": "鏨焱界磚",
@@ -77,7 +78,7 @@
   "block.extshape.prefix.weathered_copper": "鏽刻銅",
   "block.extshape.prefix.weathered_cut_copper": "鏽刻割銅",
 
-  "itemGroup.extshape.wooden_blocks": "\u00a79塊形之擴：\u00a7r木",
+  "itemGroup.extshape.wooden_blocks": "\u00a79塊形之擴：\u00a7r木与竹",
   "itemGroup.extshape.colorful_blocks": "\u00a79塊形之擴：\u00a7r彩",
   "itemGroup.extshape.stone_blocks": "\u00a79塊形之擴：\u00a7r石",
   "itemGroup.extshape.other_blocks": "\u00a79塊形之擴：\u00a7r餘",

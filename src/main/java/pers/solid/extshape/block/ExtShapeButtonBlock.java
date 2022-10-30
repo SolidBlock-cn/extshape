@@ -8,9 +8,10 @@ import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JShapelessRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.AbstractButtonBlock;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ButtonBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.sound.SoundEvent;
@@ -27,7 +28,7 @@ import pers.solid.extshape.tag.ExtShapeTags;
 
 import java.util.Collection;
 
-public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShapeVariantBlockInterface {
+public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantBlockInterface {
   /**
    * 该集合内的方块将不会生成按钮配方，以解决合成配方的冲突。
    *
@@ -43,7 +44,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
     this.type = null;
   }
 
-  public ExtShapeButtonBlock(Block baseBlock, ButtonType type, Settings blockSettings) {
+  public ExtShapeButtonBlock(Block baseBlock, ButtonType type, AbstractBlock.Settings blockSettings) {
     super(blockSettings, switch (type) {
       case STONE -> 20;
       case SOFT -> 60;

@@ -23,6 +23,94 @@ import static pers.solid.extshape.tag.ExtShapeBlockTag.create;
  * 本模组提供的方块标签，其中包括了少量物品标签。这些标签都是在运行时生成的。
  */
 public final class ExtShapeTags {
+  /**
+   * {@link net.minecraft.item.ItemGroups#NATURAL} 中的基础方块。
+   */
+  public static final ImmutableSet<Block> NATURAL_BASE_BLOCKS = ImmutableSet.of(
+      DIRT,
+      COARSE_DIRT,
+      MUD,
+      CLAY,
+      GRAVEL,
+      NETHERRACK,
+      CRIMSON_NYLIUM,
+      WARPED_NYLIUM,
+      BONE_BLOCK,
+      PACKED_ICE,
+      SNOW_BLOCK,
+      STONE,
+      GRANITE,
+      DIORITE,
+      ANDESITE,
+      DEEPSLATE,
+      SANDSTONE,
+      RED_SANDSTONE,
+      PRISMARINE,
+      CALCITE,
+      TUFF,
+      DRIPSTONE_BLOCK,
+      OBSIDIAN,
+      CRYING_OBSIDIAN,
+      BLACKSTONE,
+      BASALT,
+      SMOOTH_BASALT,
+      END_STONE,
+      ANCIENT_DEBRIS,
+      COAL_BLOCK,
+      RAW_IRON_BLOCK,
+      RAW_COPPER_BLOCK,
+      RAW_GOLD_BLOCK,
+      GLOWSTONE,
+      AMETHYST_BLOCK,
+      OAK_LOG,
+      SPRUCE_LOG,
+      BIRCH_LOG,
+      JUNGLE_LOG,
+      ACACIA_LOG,
+      DARK_OAK_LOG,
+      MANGROVE_LOG,
+      CRIMSON_STEM,
+      WARPED_STEM,
+      MUSHROOM_STEM,
+      NETHER_WART_BLOCK,
+      WARPED_WART_BLOCK,
+      SHROOMLIGHT,
+      MELON,
+      PUMPKIN,
+      MOSS_BLOCK,
+      SCULK,
+      HONEYCOMB_BLOCK,
+      HONEY_BLOCK,
+      OCHRE_FROGLIGHT,
+      VERDANT_FROGLIGHT,
+      PEARLESCENT_FROGLIGHT,
+      BEDROCK
+  );
+  /**
+   * 同时存在于 {@link net.minecraft.item.ItemGroups#NATURAL} 和 {@link net.minecraft.item.ItemGroups#BUILDING_BLOCKS} 中的方块。
+   */
+  public static final ImmutableSet<Block> NATURAL_BUILDING_BASE_BLOCKS = ImmutableSet.of(
+      OAK_LOG,
+      SPRUCE_LOG,
+      BIRCH_LOG,
+      JUNGLE_LOG,
+      ACACIA_LOG,
+      DARK_OAK_LOG,
+      MANGROVE_LOG,
+      CRIMSON_STEM,
+      WARPED_STEM,
+      MUSHROOM_STEM,
+      STONE,
+      GRANITE,
+      DIORITE,
+      ANDESITE,
+      DEEPSLATE,
+      SANDSTONE,
+      RED_SANDSTONE,
+      NETHERRACK,
+      BASALT,
+      END_STONE
+  );
   public static final ImmutableList<Block> LOGS = ImmutableList.of(
       OAK_LOG,
       SPRUCE_LOG,
@@ -86,6 +174,7 @@ public final class ExtShapeTags {
       DARK_OAK_PLANKS,
       MANGROVE_PLANKS /* 1.19 */,
       BAMBOO_PLANKS,
+      BAMBOO_MOSAIC,
       CRIMSON_PLANKS,
       WARPED_PLANKS
   );
@@ -136,8 +225,6 @@ public final class ExtShapeTags {
   public static final @Unmodifiable ImmutableSet<Block> GLAZED_TERRACOTTA = ImmutableSet.of(
       WHITE_GLAZED_TERRACOTTA,
       ORANGE_GLAZED_TERRACOTTA,
-      MAGENTA_GLAZED_TERRACOTTA,
-      LIGHT_BLUE_GLAZED_TERRACOTTA,
       YELLOW_GLAZED_TERRACOTTA,
       LIME_GLAZED_TERRACOTTA,
       PINK_GLAZED_TERRACOTTA,

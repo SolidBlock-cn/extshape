@@ -10,14 +10,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.FenceSettings;
 
 public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtShapeVariantBlockInterface {
 
   private final Item secondIngredient;
 
-  public ExtShapeFenceGateBlock(Block baseBlock, Item secondIngredient, Settings settings) {
-    super(baseBlock, settings);
-    this.secondIngredient = secondIngredient;
+  public ExtShapeFenceGateBlock(Block baseBlock, FenceSettings fenceSettings, Settings settings) {
+    super(baseBlock, settings, fenceSettings.closeSoundEvent(), fenceSettings.openSoundEvent());
+    this.secondIngredient = fenceSettings.secondIngredient();
   }
 
   @Override

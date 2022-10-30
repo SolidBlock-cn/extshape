@@ -40,7 +40,7 @@ public class ExtShapeOptionsScreen extends Screen {
     // 里面的内容不需要被选中，所以只是drawable。
     addDrawable(new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25));
     ExtShapeConfig config = newConfig;
-    this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, button -> close()));
+    this.addDrawableChild(new ButtonWidget.class_7840(ScreenTexts.DONE, button -> close()).method_46433(this.width / 2 - 100, this.height - 27).method_46437(200, 20).method_46431());
 
     // addToVanillaGroups
     /*addDrawableChild(SimpleOption.ofBoolean(
@@ -105,12 +105,12 @@ public class ExtShapeOptionsScreen extends Screen {
     ).createButton(gameOptions, width / 2 + 5, 86, 200));
 
     // 运行时资源包设置。
-    addDrawableChild(new ButtonWidget(width / 2 - 150, 111, 300, 20, Text.translatable("options.extshape.rrp.title"), button -> {
+    addDrawableChild(new ButtonWidget.class_7840(Text.translatable("options.extshape.rrp.title"), button -> {
       if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
-    }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.description"), 200), mouseX, mouseY)));
+    }).method_46433(width / 2 - 150, 111).method_46437(300, 20).method_46436((button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.description"), 200), mouseX, mouseY)).method_46431());
 
     {
-      final ButtonWidget reasonableSortingButton = new ButtonWidget(width / 2 - 150, 135, 300, 20, Text.translatable("options.extshape.reasonable-sorting"), button -> {
+      final ButtonWidget reasonableSortingButton = new ButtonWidget.class_7840(Text.translatable("options.extshape.reasonable-sorting"), button -> {
         if (client != null) {
           try {
 //            client.setScreen(ConfigScreenFabric.INSTANCE.createScreen(this));
@@ -118,7 +118,7 @@ public class ExtShapeOptionsScreen extends Screen {
             ExtShape.LOGGER.error("Failed to open Reasonable Sorting config screen:", e);
           }
         }
-      }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.reasonable-sorting.description"), 200), mouseX, mouseY));
+      }).method_46433(width / 2 - 150, 135).method_46437(300, 20).method_46436((button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.reasonable-sorting.description"), 200), mouseX, mouseY)).method_46431();
       reasonableSortingButton.active = client != null && FabricLoader.getInstance().isModLoaded("reasonable-sorting");
       addDrawableChild(reasonableSortingButton);
     }

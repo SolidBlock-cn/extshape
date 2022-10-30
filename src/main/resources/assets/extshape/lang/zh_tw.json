@@ -16,6 +16,7 @@
 
   "block.extshape.prefix.acacia": "相思木",
   "block.extshape.prefix.amethyst": "紫水晶",
+  "block.extshape.prefix.bamboo": "竹",
   "block.extshape.prefix.birch": "樺木",
   "block.extshape.prefix.brick": "紅磚",
   "block.extshape.prefix.chiseled_nether_brick": "浮雕地獄磚",
@@ -77,7 +78,7 @@
   "block.extshape.prefix.weathered_copper": "風化的銅",
   "block.extshape.prefix.weathered_cut_copper": "風化的切製銅",
 
-  "itemGroup.extshape.wooden_blocks": "\u00a79擴展方塊形狀：\u00a7r木製方塊",
+  "itemGroup.extshape.wooden_blocks": "\u00a79擴展方塊形狀：\u00a7r木製和竹製方塊",
   "itemGroup.extshape.colorful_blocks": "\u00a79擴展方塊形狀：\u00a7r彩色方塊",
   "itemGroup.extshape.stone_blocks": "\u00a79擴展方塊形狀：\u00a7r石質方塊",
   "itemGroup.extshape.other_blocks": "\u00a79擴展方塊形狀：\u00a7r其他",
