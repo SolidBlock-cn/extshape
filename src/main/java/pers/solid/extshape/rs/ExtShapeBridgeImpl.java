@@ -1,15 +1,14 @@
 package pers.solid.extshape.rs;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.base.Predicates;
+import com.google.common.collect.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Items;
 import net.minecraft.util.registry.Registry;
+import org.apache.commons.lang3.ObjectUtils;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mappings.BlockMappings;
@@ -75,11 +74,45 @@ public class ExtShapeBridgeImpl extends ExtShapeBridge {
   }
 
   public static void initialize() {
-    SortingRule.addConditionalSortingRule(Registry.BLOCK_KEY, () -> Configs.instance.enableDefaultItemSortingRules && !Configs.instance.blockItemsOnly, ImmutableMultimap.of(Blocks.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS, Blocks.SMOOTH_STONE, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB)::get);
-    SortingRule.addConditionalSortingRule(Registry.ITEM_KEY, () -> Configs.instance.enableDefaultItemSortingRules, ImmutableMultimap.of(Items.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem(), Items.SMOOTH_STONE, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem())::get);
-    SortingRule.addConditionalSortingRule(Registry.BLOCK_KEY, () -> !Configs.instance.blockItemsOnly, SHAPE_FOLLOWING_BASE_BLOCKS_RULE);
-    SortingRule.addSortingRule(Registry.ITEM_KEY, SHAPE_FOLLOWING_BASE_BLOCKS_ITEM_RULE);
+    final ImmutableMultimap<Block, Block> defaultRules = ImmutableMultimap.of(Blocks.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS, Blocks.SMOOTH_STONE, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
+    SortingRule.addConditionalSortingRule(Registry.BLOCK_KEY, () -> Configs.instance.enableDefaultItemSortingRules && !Configs.instance.blockItemsOnly, new MultimapSortingRule<>(defaultRules), "default sorting rules of extshape");
+    SortingRule.addConditionalSortingRule(Registry.ITEM_KEY, () -> Configs.instance.enableDefaultItemSortingRules, new MultimapSortingRule<>(ImmutableMultimap.copyOf((Iterable<? extends Map.Entry<Item, Item>>) defaultRules.entries().stream().map(entry -> Maps.immutableEntry(entry.getKey().asItem(), entry.getValue().asItem()))::iterator)), "default sorting rules of extshape");
+    SortingRule.addConditionalSortingRule(Registry.BLOCK_KEY, () -> !Configs.instance.blockItemsOnly, SHAPE_FOLLOWING_BASE_BLOCKS_RULE, 8, "shape_following_base");
+    SortingRule.addSortingRule(Registry.ITEM_KEY, SHAPE_FOLLOWING_BASE_BLOCKS_ITEM_RULE, 8, "shape_following_base");
     TransferRule.addTransferRule(SHAPE_TRANSFER_RULE);
     TransferRule.addConditionalTransferRule(() -> Configs.instance.baseBlocksInBuildingBlocks, BASE_BLOCKS_IN_BUILDING_RULE);
+
+    // 如果不添加以下规则的话，那么与颜色排序规则作用时会存在错误，例如白色羊毛之后会是各种颜色的羊毛变种，然后再是其他颜色的羊毛完整方块。因此这里添加一个优先级更高的规则，仅对基础方块进行颜色排序，以解决这个问题。
+
+    final SortingRule<Block> variantAndShapeSortingRule = block -> {
+      final Iterable<Block> iterable1 = !Configs.VARIANTS_FOLLOWING_BASE_BLOCKS.isEmpty() ? SortingRules.VARIANT_FOLLOWS_BASE.getFollowers(block) : null;
+      final Iterable<Block> iterable2 = SHAPE_FOLLOWING_BASE_BLOCKS_RULE.getFollowers(block);
+
+      if (iterable1 != null && iterable2 != null) {
+        return Iterables.concat(iterable1, iterable2);
+      } else if (iterable1 != null) {
+        return iterable1;
+      } else {
+        return iterable2; // 可能为 null
+      }
+    };
+    final SortingRule<Block> colorBaseBlockSortingRule = block -> {
+      if (BlockMappings.BASE_BLOCKS.contains(block)) {
+        final Iterable<Block> colorFollowers = SortingRules.COLOR_SORTING_RULE.getFollowers(block);
+        if (colorFollowers != null) {
+          return Iterables.concat(
+              ObjectUtils.defaultIfNull(variantAndShapeSortingRule.getFollowers(block), Collections.emptyList()),
+              Iterables.concat(Iterables.filter(
+                  Iterables.transform(colorFollowers, leadingObj -> {
+                    final Iterable<Block> followers = variantAndShapeSortingRule.getFollowers(leadingObj);
+                    return followers == null ? Collections.singleton(leadingObj) : Iterables.concat(Collections.singleton(leadingObj), followers);
+                  }),
+                  Predicates.notNull())));
+        }
+      }
+      return null;
+    };
+    SortingRule.addConditionalSortingRule(Registry.BLOCK_KEY, () -> Configs.instance.fancyColorsSorting && !Configs.instance.blockItemsOnly, colorBaseBlockSortingRule, 11, "color sorting rule override");
+    SortingRule.addConditionalSortingRule(Registry.ITEM_KEY, () -> Configs.instance.fancyColorsSorting, new BlockItemRule(colorBaseBlockSortingRule), 11, "color sorting rule override");
   }
 }
