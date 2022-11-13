@@ -10,4 +10,4 @@
 - 扩展的形状包括：纵楼梯、纵台阶、横条、纵条。
 - Extended shapes include: vertical stairs, vertical slabs, quarter pieces, vertical quarter pieces.
 
-![方块列表.png](img.png)
+![方块列表](img.png)

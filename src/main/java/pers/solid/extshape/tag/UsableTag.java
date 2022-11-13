@@ -1,8 +1,9 @@
 package pers.solid.extshape.tag;
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.devtech.arrp.json.tags.JTag;
+import net.devtech.arrp.util.CanIgnoreReturnValue;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -41,6 +42,9 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
 
   @Override
   public boolean add(E e) {
+    if (!FMLEnvironment.production && entryList.contains(e)) {
+      throw new IllegalArgumentException("Duplicated element " + e + " in tag " + this);
+    }
     return entryList.add(e);
   }
 
@@ -60,6 +64,9 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
     if (es == this) {
       // 不允许将标签加入它自己（以免无限循环）。
       throw new IllegalArgumentException("Cannot add a tag that is identical to the tag to be added to!");
+    }
+    if (!FMLEnvironment.production && tagList.contains(es)) {
+      throw new IllegalArgumentException("Duplicate tag " + es + " in the tag " + this);
     }
     return tagList.add(es);
   }
@@ -108,5 +115,18 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
   public void clear() {
     entryList.clear();
     tagList.clear();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof UsableTag<?> usableTag)) return false;
+
+    return Objects.equals(identifier, usableTag.identifier);
+  }
+
+  @Override
+  public int hashCode() {
+    return identifier != null ? identifier.hashCode() : 0;
   }
 }
