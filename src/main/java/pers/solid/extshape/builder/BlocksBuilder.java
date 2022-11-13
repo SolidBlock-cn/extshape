@@ -1,16 +1,17 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.ImmutableSet;
-import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.PressurePlateBlock;
+import net.devtech.arrp.util.CanIgnoreReturnValue;
+import net.minecraft.block.*;
 import net.minecraft.item.Item;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.block.ExtShapeButtonBlock;
+import pers.solid.extshape.block.*;
 import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.mixin.AbstractBlockStateAccessor;
 import pers.solid.extshape.tag.ExtShapeBlockTag;
 
 import java.util.*;
@@ -20,7 +21,7 @@ import java.util.function.BiConsumer;
  * <p>此类相当于将一个基础方块的多个形状的构建器整合到一起，其本质为从方块形状到对应方块构建器的映射。
  * <p>调用其方法时，会修改构造器参数，但不会进行实际构建，而调用 {@link #build()} 之后，就会正式执行构建，将会调用这些构建器的 {@link AbstractBlockBuilder#build()} 方法，这时候才产生方块对象，并根据参数进行一系列操作，如加入注册表、标签等。
  */
-public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? extends Block>> {
+public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? extends Block>> {
   /**
    * 本模组内置的所有方块形状。注意这并不包括其他模组添加的方块形状。因此，其他模组如需使用 BlocksBuilder，需自行通过 {@link #with(BlockShape...)} 添加。
    */
@@ -28,11 +29,11 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 为指定形状的 {@link AbstractBlockBuilder} 调用 {@link AbstractBlockBuilder#setDefaultTagToAdd(ExtShapeBlockTag) #setDefaultTagToAdd}。
    */
-  public final Map<@NotNull BlockShape, @Nullable ExtShapeBlockTag> defaultTagsToAdd = new HashMap<>();
+  private Map<@NotNull BlockShape, @Nullable ExtShapeBlockTag> tagToAddForShape = new HashMap<>();
   /**
    * 该基础方块需要构建哪些形状的变种。可以通过 {@link #with} 和 {@link #without} 进行增减。
    */
-  protected final Set<BlockShape> shapesToBuild;
+  protected final SortedSet<BlockShape> shapesToBuild;
   /**
    * 基础方块。对于 BlocksBuilder 而言，基础方块不能是 {@code null}。
    */
@@ -44,6 +45,10 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   protected @Nullable Item fenceCraftingIngredient;
   protected @Nullable ExtShapeButtonBlock.ButtonType buttonType;
   protected @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
+  /**
+   * 在执行 {@link #build()} 之前会为每个值执行。
+   */
+  protected @Nullable BiConsumer<BlockShape, AbstractBlockBuilder<?>> blockBuilderConsumer;
 
   /**
    * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
@@ -54,8 +59,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    * @param pressurePlateActivationRule 压力板激活类型。
    * @param shapesToBuild               需要构建哪些方块形状。
    */
-  public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, Set<BlockShape> shapesToBuild) {
-    super(BlockShape.values().size());
+  public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, SortedSet<BlockShape> shapesToBuild) {
     this.fenceCraftingIngredient = fenceCraftingIngredient;
     this.buttonType = buttonType;
     this.pressurePlateActivationRule = pressurePlateActivationRule;
@@ -74,7 +78,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @Contract("_,_,_,_ -> new")
   public static BlocksBuilder createAllShapes(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
-    return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule, new HashSet<>(SHAPES));
+    return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule, new TreeSet<>(SHAPES));
   }
 
   /**
@@ -85,7 +89,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @Contract("_ -> new")
   public static BlocksBuilder createEmpty(@NotNull Block baseBlock) {
-    return new BlocksBuilder(baseBlock, null, null, null, new HashSet<>());
+    return new BlocksBuilder(baseBlock, null, null, null, new TreeSet<>());
   }
 
   /**
@@ -97,6 +101,35 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   @Contract("_ -> new")
   public static BlocksBuilder createConstructionOnly(@NotNull Block baseBlock) {
     return createEmpty(baseBlock).withConstructionShapes();
+  }
+
+  @SuppressWarnings({"unchecked", "RedundantCast"})
+  @Contract(value = "_ -> this", mutates = "this")
+  public BlocksBuilder withExtension(@NotNull BlockExtension blockExtension) {
+    blockBuilderConsumer = (blockShape, abstractBlockBuilder) -> {
+      if (blockShape == BlockShape.STAIRS) ((AbstractBlockBuilder<StairsBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeStairsBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.SLAB) ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeSlabBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.QUARTER_PIECE) ((AbstractBlockBuilder<QuarterPieceBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeQuarterPieceBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.VERTICAL_STAIRS) ((AbstractBlockBuilder<VerticalStairsBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeVerticalStairsBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.VERTICAL_SLAB) ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeVerticalSlabBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+      if (blockShape == BlockShape.VERTICAL_QUARTER_PIECE) ((AbstractBlockBuilder<VerticalQuarterPieceBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeVerticalQuarterPieceBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension);
+    };
+    return this;
+  }
+
+  @SuppressWarnings("unchecked")
+  @Contract(value = "-> this", mutates = "this")
+  public BlocksBuilder setPillar() {
+    blockBuilderConsumer = (blockShape, abstractBlockBuilder) -> {
+      if (blockShape == BlockShape.SLAB) {
+        ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarSlabBlock(builder.baseBlock, builder.blockSettings);
+      } else if (blockShape == BlockShape.VERTICAL_SLAB) {
+        ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarVerticalSlabBlock(builder.baseBlock, builder.blockSettings);
+      } else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
+        abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
+      }
+    };
+    return this;
   }
 
   /**
@@ -228,9 +261,19 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_, _, -> this", mutates = "this")
-  public BlocksBuilder setDefaultTagOf(@Nullable BlockShape shape, @Nullable ExtShapeBlockTag tag) {
+  public BlocksBuilder setTagToAddForShape(@Nullable BlockShape shape, @Nullable ExtShapeBlockTag tag) {
     if (shape == null || tag == null) return this;
-    defaultTagsToAdd.put(shape, tag);
+    tagToAddForShape.put(shape, tag);
+    return this;
+  }
+
+  /**
+   * 设置各个形状的方块需要添加的方块标签。会覆盖已有的值。
+   */
+  @CanIgnoreReturnValue
+  @Contract(value = "_, -> this", mutates = "this")
+  public BlocksBuilder setTagToAddForShape(Map<BlockShape, ExtShapeBlockTag> map) {
+    tagToAddForShape = map;
     return this;
   }
 
@@ -251,8 +294,12 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_-> this", mutates = "this")
-  public BlocksBuilder consumeEach(BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> biConsumer) {
-    forEach(biConsumer);
+  public BlocksBuilder setConsumesEach(BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> biConsumer) {
+    if (blockBuilderConsumer == null) {
+      blockBuilderConsumer = biConsumer;
+    } else {
+      blockBuilderConsumer = blockBuilderConsumer.andThen(biConsumer);
+    }
     return this;
   }
 
@@ -262,7 +309,12 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   @CanIgnoreReturnValue
   @Contract(value = "_-> this", mutates = "this")
   public BlocksBuilder consumeEachSettings(BiConsumer<BlockShape, AbstractBlock.Settings> biConsumer) {
-    forEach((blockShape, builder) -> biConsumer.accept(blockShape, builder.blockSettings));
+    setConsumesEach((blockShape, builder) -> biConsumer.accept(blockShape, builder.blockSettings));
+    return this;
+  }
+
+  public <T extends Block> BlocksBuilder setBuilderOf(BlockShape shape, AbstractBlockBuilder<T> builder) {
+    put(shape, builder);
     return this;
   }
 
@@ -272,7 +324,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   public void build() {
     for (final BlockShape shape : shapesToBuild) {
       // 自动排除现成的。
-      if (BlockMappings.getBlockOf(shape, baseBlock) == null) {
+      if (BlockMappings.getBlockOf(shape, baseBlock) == null && !this.containsKey(shape)) {
         final @Nullable AbstractBlockBuilder<? extends Block> blockBuilder;
         blockBuilder = createBlockBuilderFor(shape);
         if (blockBuilder != null) {
@@ -282,13 +334,16 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
     }
 
     final Collection<AbstractBlockBuilder<? extends Block>> values = this.values();
-    for (Entry<BlockShape, ExtShapeBlockTag> entry : this.defaultTagsToAdd.entrySet()) {
+    for (Map.Entry<BlockShape, ExtShapeBlockTag> entry : this.tagToAddForShape.entrySet()) {
       AbstractBlockBuilder<?> builder = this.get(entry.getKey());
       if (builder != null && entry.getValue() != null) builder.setDefaultTagToAdd(entry.getValue());
     }
     for (AbstractBlockBuilder<? extends Block> builder : values) {
       if (this.baseBlock.asItem().isFireproof()) builder.itemSettings.fireproof();
       tagsToAddEach.forEach(builder::addTagToAdd);
+    }
+    if (blockBuilderConsumer != null) {
+      forEach(blockBuilderConsumer);
     }
     values.forEach(AbstractBlockBuilder::build);
   }

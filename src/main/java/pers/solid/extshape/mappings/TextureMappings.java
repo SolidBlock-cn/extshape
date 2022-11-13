@@ -39,5 +39,45 @@ public class TextureMappings {
     TextureRegistry.register(Blocks.ANCIENT_DEBRIS, TextureKey.END, new Identifier("minecraft", "block/ancient_debris_top"));
     TextureRegistry.register(Blocks.MELON, TextureKey.END, new Identifier("minecraft", "block/melon_top"));
     TextureRegistry.register(Blocks.PUMPKIN, TextureKey.END, new Identifier("minecraft", "block/pumpkin_top"));
+
+    // 原木系列
+    TextureRegistry.register(Blocks.OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/oak_log_top"));
+    TextureRegistry.register(Blocks.SPRUCE_LOG, TextureKey.END, new Identifier("minecraft", "block/spruce_log_top"));
+    TextureRegistry.register(Blocks.BIRCH_LOG, TextureKey.END, new Identifier("minecraft", "block/birch_log_top"));
+    TextureRegistry.register(Blocks.JUNGLE_LOG, TextureKey.END, new Identifier("minecraft", "block/jungle_log_top"));
+    TextureRegistry.register(Blocks.ACACIA_LOG, TextureKey.END, new Identifier("minecraft", "block/acacia_log_top"));
+    TextureRegistry.register(Blocks.DARK_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/dark_oak_log_top"));
+    TextureRegistry.register(Blocks.WARPED_STEM, TextureKey.END, new Identifier("minecraft", "block/warped_stem_top"));
+    TextureRegistry.register(Blocks.CRIMSON_STEM, TextureKey.END, new Identifier("minecraft", "block/crimson_stem_top"));
+    TextureRegistry.register(Blocks.OAK_WOOD, new Identifier("minecraft", "block/oak_log"));
+    TextureRegistry.register(Blocks.SPRUCE_WOOD, new Identifier("minecraft", "block/spruce_log"));
+    TextureRegistry.register(Blocks.BIRCH_WOOD, new Identifier("minecraft", "block/birch_log"));
+    TextureRegistry.register(Blocks.JUNGLE_WOOD, new Identifier("minecraft", "block/jungle_log"));
+    TextureRegistry.register(Blocks.ACACIA_WOOD, new Identifier("minecraft", "block/acacia_log"));
+    TextureRegistry.register(Blocks.DARK_OAK_WOOD, new Identifier("minecraft", "block/dark_oak_log"));
+    TextureRegistry.register(Blocks.WARPED_HYPHAE, new Identifier("minecraft", "block/warped_stem"));
+    TextureRegistry.register(Blocks.CRIMSON_HYPHAE, new Identifier("minecraft", "block/crimson_stem"));
+    TextureRegistry.register(Blocks.STRIPPED_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_oak_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_SPRUCE_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_spruce_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_BIRCH_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_birch_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_JUNGLE_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_jungle_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_ACACIA_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_acacia_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_DARK_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_dark_oak_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_WARPED_STEM, TextureKey.END, new Identifier("minecraft", "block/stripped_warped_stem_top"));
+    TextureRegistry.register(Blocks.STRIPPED_CRIMSON_STEM, TextureKey.END, new Identifier("minecraft", "block/stripped_crimson_stem_top"));
+    TextureRegistry.register(Blocks.STRIPPED_OAK_WOOD, new Identifier("minecraft", "block/stripped_oak_log"));
+    TextureRegistry.register(Blocks.STRIPPED_SPRUCE_WOOD, new Identifier("minecraft", "block/stripped_spruce_log"));
+    TextureRegistry.register(Blocks.STRIPPED_BIRCH_WOOD, new Identifier("minecraft", "block/stripped_birch_log"));
+    TextureRegistry.register(Blocks.STRIPPED_JUNGLE_WOOD, new Identifier("minecraft", "block/stripped_jungle_log"));
+    TextureRegistry.register(Blocks.STRIPPED_ACACIA_WOOD, new Identifier("minecraft", "block/stripped_acacia_log"));
+    TextureRegistry.register(Blocks.STRIPPED_DARK_OAK_WOOD, new Identifier("minecraft", "block/stripped_dark_oak_log"));
+    TextureRegistry.register(Blocks.STRIPPED_WARPED_HYPHAE, new Identifier("minecraft", "block/stripped_warped_stem"));
+    TextureRegistry.register(Blocks.STRIPPED_CRIMSON_HYPHAE, new Identifier("minecraft", "block/stripped_crimson_stem"));
+
+    TextureRegistry.registerAppended(Blocks.BASALT, TextureKey.ALL, "_side");
+    TextureRegistry.registerAppended(Blocks.BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.ALL, "_side");
+    TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerAppended(Blocks.DEEPSLATE, TextureKey.END, "_top");
   }
 }

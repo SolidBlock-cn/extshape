@@ -1,6 +1,7 @@
 package pers.solid.extshape;
 
-import net.devtech.arrp.api.RRPCallbackForge;
+import net.devtech.arrp.IdentifierExtension;
+import net.devtech.arrp.api.RRPEvent;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
@@ -14,6 +15,8 @@ import net.minecraft.util.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
@@ -25,7 +28,7 @@ import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mappings.TextureMappings;
 import pers.solid.extshape.mappings.UnusualLootTables;
 import pers.solid.extshape.mappings.VanillaStonecutting;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -61,9 +64,9 @@ public final class ExtShapeRRP {
    * </ul>
    * 通常建议此项在开发环境时为 <code>true</code>，在发布时为 <code>false</code>。
    */
-  private static final boolean GENERATE_EACH_RELOAD = false;
+  private static final boolean GENERATE_EACH_RELOAD = !FMLEnvironment.production;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger("EXTSHAPE-Runtime resource pack");
+  private static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes-Runtime resource pack");
 
   /**
    * 注册所有的运行时资源。
@@ -73,29 +76,29 @@ public final class ExtShapeRRP {
       generateServerData(STANDARD_PACK);
       DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> generateClientResources(CLIENT_PACK));
     }
-    RRPCallbackForge.BEFORE_VANILLA.add(resourceType -> {
+    FMLJavaModLoadingContext.get().getModEventBus().addListener((RRPEvent.BeforeVanilla event) -> {
+      final ResourceType resourceType = event.resourceType;
       if (resourceType == ResourceType.SERVER_DATA || resourceType == null) {
         if (GENERATE_EACH_RELOAD) {
           STANDARD_PACK.clearResources(ResourceType.SERVER_DATA);
           generateServerData(STANDARD_PACK);
         }
-        return (STANDARD_PACK);
+        event.addPack(STANDARD_PACK);
       }
-      return null;
     });
-    RRPCallbackForge.BEFORE_VANILLA.add(resourceType -> {
+    FMLJavaModLoadingContext.get().getModEventBus().addListener((RRPEvent.BeforeVanilla event) -> {
+      final ResourceType resourceType = event.resourceType;
       if (resourceType == ResourceType.CLIENT_RESOURCES || resourceType == null) {
         try {
           if (GENERATE_EACH_RELOAD) {
             CLIENT_PACK.clearResources(ResourceType.CLIENT_RESOURCES);
             generateClientResources(CLIENT_PACK);
           }
-          return (CLIENT_PACK);
+          event.addPack(CLIENT_PACK);
         } catch (NoSuchFieldError throwable) {
           throw new AssertionError(throwable);
         }
       }
-      return null;
     });
   }
 
@@ -143,7 +146,7 @@ public final class ExtShapeRRP {
     }
 
     // 添加方块标签。
-    ExtShapeBlockTags.writeAllBlockTagFiles(pack);
+    ExtShapeTags.writeAllBlockTagFiles(pack);
   }
 
   /**
@@ -257,7 +260,7 @@ public final class ExtShapeRRP {
 
       // 1x台阶 -> 2x横条
       if (slab != null && BLOCK_ITEMS.containsKey(slab)) {
-        final Identifier craftingId = recipeIdOf(quarterPiece).brrp_append("_from_slab");
+        final Identifier craftingId = ((IdentifierExtension) recipeIdOf(quarterPiece)).brrp_append("_from_slab");
         final JShapedRecipe craftingRecipe = new JShapedRecipe(quarterPiece)
             .pattern("###")
             .addKey("#", slab)
@@ -278,7 +281,7 @@ public final class ExtShapeRRP {
 
       // 1x纵台阶 -> 2x横条
       if (verticalSlab != null && BLOCK_ITEMS.containsKey(verticalSlab)) {
-        final Identifier craftingId = recipeIdOf(quarterPiece).brrp_append("_from_vertical_slab");
+        final Identifier craftingId = ((IdentifierExtension) recipeIdOf(quarterPiece)).brrp_append("_from_vertical_slab");
         final JShapedRecipe craftingRecipe = new JShapedRecipe(quarterPiece)
             .pattern("###")
             .addKey("#", verticalSlab)
@@ -300,7 +303,7 @@ public final class ExtShapeRRP {
     if (verticalQuarterPiece != null && BLOCK_ITEMS.containsKey(verticalQuarterPiece)) {
       // 1x纵台阶 -> 2x纵条
       if (verticalSlab != null && BLOCK_ITEMS.containsKey(verticalSlab)) {
-        final Identifier craftingId = recipeIdOf(verticalQuarterPiece).brrp_append("_from_vertical_slab");
+        final Identifier craftingId = ((IdentifierExtension) recipeIdOf(verticalQuarterPiece)).brrp_append("_from_vertical_slab");
         final JShapedRecipe craftingRecipe = new JShapedRecipe(verticalQuarterPiece)
             .pattern("#", "#", "#")
             .addKey("#", verticalSlab)

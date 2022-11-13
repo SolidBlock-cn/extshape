@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 import java.util.Collection;
 
@@ -33,7 +33,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
    *
    * @see pers.solid.extshape.config.ExtShapeConfig#avoidSomeButtonRecipes
    */
-  public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.of(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK);
+  public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK).addAll(ExtShapeTags.LOGS).addAll(ExtShapeTags.WOODS).addAll(ExtShapeTags.HYPHAES).addAll(ExtShapeTags.STEMS).addAll(ExtShapeTags.STRIPPED_LOGS).addAll(ExtShapeTags.STRIPPED_WOODS).addAll(ExtShapeTags.STRIPPED_HYPHAES).addAll(ExtShapeTags.STRIPPED_STEMS).build();
   public final ButtonType type;
   public final Block baseBlock;
 
@@ -109,11 +109,11 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   @Override
   public String getRecipeGroup() {
     final Block baseBlock = getBaseBlock();
-    if (ExtShapeBlockTags.WOOLS.contains(baseBlock)) return "wool_button";
-    if (ExtShapeBlockTags.CONCRETES.contains(baseBlock)) return "concrete_button";
-    if (ExtShapeBlockTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_button";
-    if (ExtShapeBlockTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_button";
-    if (ExtShapeBlockTags.PLANKS.contains(baseBlock)) return "wooden_button";
+    if (ExtShapeTags.WOOLS.contains(baseBlock)) return "wool_button";
+    if (ExtShapeTags.CONCRETES.contains(baseBlock)) return "concrete_button";
+    if (ExtShapeTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_button";
+    if (ExtShapeTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_button";
+    if (ExtShapeTags.PLANKS.contains(baseBlock)) return "wooden_button";
     return "";
   }
 

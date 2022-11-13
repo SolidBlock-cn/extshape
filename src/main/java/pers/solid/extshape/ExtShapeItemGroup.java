@@ -18,7 +18,7 @@ import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
 import pers.solid.extshape.mixin.CreativeInventoryScreenAccessor;
 import pers.solid.extshape.mixin.ItemGroupAccessor;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -82,18 +82,18 @@ public class ExtShapeItemGroup extends ItemGroup {
   }
 
   static {
-    WOODEN_BLOCKS.addAll(ExtShapeBlockTags.PLANKS);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.WOOLS);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.CONCRETES);
+    COLORFUL_BLOCKS.addAll(ExtShapeTags.WOOLS);
+    COLORFUL_BLOCKS.addAll(ExtShapeTags.CONCRETES);
     COLORFUL_BLOCKS.add(Blocks.TERRACOTTA);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.STAINED_TERRACOTTA);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.GLAZED_TERRACOTTA);
-    STONE_BLOCKS.addAll(ExtShapeBlockTags.STONES);
+    COLORFUL_BLOCKS.addAll(ExtShapeTags.STAINED_TERRACOTTA);
+    COLORFUL_BLOCKS.addAll(ExtShapeTags.GLAZED_TERRACOTTA);
+    STONE_BLOCKS.addAll(ExtShapeTags.STONES);
     STONE_BLOCKS.addAll(Arrays.asList(
         Blocks.SMOOTH_STONE,
         Blocks.STONE_BRICKS,
         Blocks.MOSSY_STONE_BRICKS,
         Blocks.CHISELED_STONE_BRICKS,
+        Blocks.DEEPSLATE,
         Blocks.COBBLED_DEEPSLATE,
         Blocks.POLISHED_DEEPSLATE,
         Blocks.DEEPSLATE_BRICKS,
@@ -114,6 +114,7 @@ public class ExtShapeItemGroup extends ItemGroup {
         Blocks.SMOOTH_RED_SANDSTONE,
         Blocks.NETHERRACK,
         Blocks.NETHER_BRICKS,
+        Blocks.BASALT,
         Blocks.SMOOTH_BASALT,
         Blocks.RED_NETHER_BRICKS,
         Blocks.BLACKSTONE,
@@ -167,8 +168,11 @@ public class ExtShapeItemGroup extends ItemGroup {
     COLORFUL_BLOCKS.forEach(baseBlockList::remove);
     STONE_BLOCKS.forEach(baseBlockList::remove);
     for (Block block : baseBlockList) {
-      if (((AbstractBlockAccessor) block).getMaterial() == Material.STONE) {
+      final Material material = ((AbstractBlockAccessor) block).getMaterial();
+      if (material == Material.STONE) {
         STONE_BLOCKS.add(block);
+      } else if (material == Material.WOOD || material == Material.NETHER_WOOD) {
+        WOODEN_BLOCKS.add(block);
       } else {
         OTHER_BLOCKS.add(block);
       }
