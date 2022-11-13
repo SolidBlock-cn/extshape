@@ -8,17 +8,21 @@ import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.data.client.TextureKey;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -59,8 +63,8 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
     return new JModel("extshape:block/quarter_piece")
         .textures(JTextures.ofSides(
             getTextureId(TextureKey.TOP),
-            getTextureId(TextureKey.BOTTOM),
-            getTextureId(TextureKey.SIDE)));
+            getTextureId(TextureKey.SIDE),
+            getTextureId(TextureKey.BOTTOM)));
   }
 
   @Override
@@ -79,16 +83,34 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeBlockTags.PLANKS).contains(baseBlock)) return "wooden_quarter_piece";
-    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_quarter_piece";
-    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_quarter_piece";
-    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_quarter_piece";
-    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_quarter_piece";
+    if ((ExtShapeTags.PLANKS).contains(baseBlock)) return "wooden_quarter_piece";
+    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_quarter_piece";
+    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_quarter_piece";
+    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_quarter_piece";
+    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_quarter_piece";
     return "";
   }
 
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.QUARTER_PIECE;
+  }
+
+
+  public static class WithExtension extends ExtShapeQuarterPieceBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+      super(baseBlock, settings);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.onStacksDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack, dropExperience);
+    }
+
   }
 }

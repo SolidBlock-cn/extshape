@@ -1,10 +1,9 @@
 package pers.solid.extshape.block;
 
-import com.google.common.collect.BiMap;
+import net.devtech.arrp.IdentifierExtension;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.generator.ItemResourceGenerator;
-import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
 import net.devtech.arrp.json.recipe.JIngredient;
@@ -15,8 +14,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.HoneycombItem;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -24,11 +23,15 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.extensions.IForgeBlock;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
@@ -85,11 +88,12 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
   @OnlyIn(Dist.CLIENT)
   @Override
   default Identifier getBlockModelId() {
-    final BiMap<Block, Block> map = HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get();
-    if (this instanceof Block && map.containsKey(this)) {
-      return ResourceGeneratorHelper.getBlockModelId(map.get(this));
+    final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
+    final String path = blockModelId.getPath();
+    if (path.contains("waxed_") && path.contains("copper")) {
+      return new Identifier(blockModelId.getNamespace(), path.replace("waxed_", ""));
     } else {
-      return BlockResourceGenerator.super.getBlockModelId();
+      return blockModelId;
     }
   }
 
@@ -140,7 +144,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
         // block 是切石前的基础方块。
         for (Block block : VanillaStonecutting.INSTANCE.get(getBaseBlock())) {
           final String path = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block), "Unregistered block.").getPath();
-          final Identifier secondaryId = getRecipeId().brrp_append("_from_" + path + "_stonecutting");
+          final Identifier secondaryId = ((IdentifierExtension) getRecipeId()).brrp_append("_from_" + path + "_stonecutting");
           final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
               JIngredient.ofItem(block),
               jStonecuttingRecipe.result,
@@ -211,5 +215,15 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
   @Contract(pure = true)
   default BlockShape getBlockShape() {
     return null;
+  }
+
+  @Override
+  @Nullable
+  default BlockState getToolModifiedState(BlockState state, ItemUsageContext context, ToolAction toolAction, boolean simulate) {
+    state = ObjectUtils.defaultIfNull(IForgeBlock.super.getToolModifiedState(state, context, toolAction, simulate), state);
+    if (toolAction == ToolActions.AXE_SCRAPE && ExtShape.EXTENDED_STRIPPABLE_BLOCKS.containsKey(state.getBlock())) {
+      return ExtShape.EXTENDED_STRIPPABLE_BLOCKS.get(state.getBlock()).getStateWithProperties(state);
+    }
+    return state;
   }
 }

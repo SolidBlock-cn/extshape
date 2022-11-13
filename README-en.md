@@ -4,9 +4,9 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [this file](BlockList.md).
 
-At present this mod supports Minecraft Java Edition 1.19, 1.18.2, 1.18.1, 1.18, 1.17.1, 1.16.5 and 1.16.4. Please install the relevant mod according to your MC version (mod for 1.18.1 is compatible with 1.18; mod for 1.16.5 is compatible for 1.16.4) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
+At present this mod supports Minecraft Java Edition 1.19.3-1.16.4. Please install the relevant mod according to your MC version (mod for 1.19.2 is compatible with 1.19.1 and 1.19, mod for 1.18.1 is compatible with 1.18; mod for 1.16.5 is compatible for 1.16.4) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
 
-**Notice: Since mod version 1.5.0, the mod requires BRRP (Better Runtime Resource Pack) to run, so you must have this mod installed. BRRP has ARRP nested; please do not install both BRRP and ARRP simultaneously, or some unexpected issues may happen.**
+**Notice: The mod requires BRRP (Better Runtime Resource Pack) to run, so you must have this mod installed. BRRP is a branch of ARRP; please do not install both BRRP and ARRP simultaneously, or some unexpected issues may happen.**
 
 [Click here](UpdateLog.md) for previous update logs. Welcome to join Tencent QQ group **587928350** or KaiHeiLa channel invitation code **KlFS0n** to experience the latest update of this mod.
 
@@ -78,19 +78,4 @@ In creative mode, multiple item groups are set in order to sort items in order. 
 
 Besides, you can choose to make blocks added by the mod appear in vanilla item groups, which however may case the item list messy. You can configure it in your mod config screen (requires Mod Menu).
 
-If you installed Reasonable Sorting mod (≥2.0.1 version), the blocks in vanilla item groups will be sorted by their base blocks.
-
-## About ARRP
-
-The mod relies on BRRP (Better Runtime Resource Pack) mod, which is base on previous ARRP (Advanced Runtime Resource Pack). THd mod allows you to create resources and data inside Minecraft instance at runtime, instead of dumped to your mod file.
-
-Usually a block requires a corresponding block states definition and block model for a correct visual, as well as a loot table to drop correctly after being broken, and a recipe that defines how the block is crafted, plus a corresponding advancement for each recipe, which is triggered when the player obtains one of ingredients and allows the player to unlock the recipe. A block has also an item, which needs an item model. The "block states definitions", "block models", "item models", "loot tables", "recipes" and "advancements" as referred to above are json files. In mods, creating these json files for each block is very troublesome, and the json files are basically duplicate. For example, models of block items typically directly inherit corresponding block models, yet requiring each
-definition in each file. Another example, block states of stairs are quite complicated, but block states of different stairs blocks are basically the same, with the only difference of name. It's hard to understand to define such a complicated file for each stairs block.
-
-But when using ARRP, the files can be generated in runtime, instead of stored in the mod file. The file size of mod has been largely reduced, and so does as I/O stream. This is what ARRP is indented, and BRRP adds enhancements based on it.
-
-However, while creating runtime resource packs with ARRP, though large numbers of repetitive contents reduced, the grammar in the Java code is still complex. Besides, although I/O reduces, objects are converted to json, serialized as bytes and stored internally, and when used by Minecraft, these bytes are deserialized to json and converted to relevant objects in Minecraft. In the process, ARRP objects and MC vanilla objects are not directly convertible. However, BRRP is trying to bridge between ARRP and Minecraft.
-
-Therefore, runtime resource packs do not reduce the process of deserializing to json and reading as object, and even adds a process of converting and serializing json. But it's proved that the process of generating runtime resources is much faster than reading from mod files.
-
-ARRP is just designed for this, and the issue should be attributed to Mojang. To fulfill data packs and resource packs, Minecraft takes such a wierd and inefficient method to read game assets and data (including vanilla ones). As mod developers, what we can do is anything but changing this.
+If you installed Reasonable Sorting mod, the blocks in vanilla item groups will be sorted by their base blocks.

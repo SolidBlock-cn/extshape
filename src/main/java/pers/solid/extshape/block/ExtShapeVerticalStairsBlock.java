@@ -6,16 +6,20 @@ import net.devtech.arrp.json.blockstate.JVariants;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -71,12 +75,12 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeBlockTags.PLANKS).contains(baseBlock)) return "wooden_vertical_stairs";
-    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_vertical_stairs";
-    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_stairs";
-    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return
+    if ((ExtShapeTags.PLANKS).contains(baseBlock)) return "wooden_vertical_stairs";
+    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_vertical_stairs";
+    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_stairs";
+    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return
         "stained_terracotta_vertical_stairs";
-    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
+    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
         "glazed_terracotta_vertical_stairs";
     return "";
   }
@@ -84,5 +88,23 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.VERTICAL_STAIRS;
+  }
+
+
+  public static class WithExtension extends ExtShapeVerticalStairsBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+      super(baseBlock, settings);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.onStacksDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack, dropExperience);
+    }
+
   }
 }
