@@ -1,21 +1,24 @@
 package pers.solid.extshape.block;
 
-import com.google.common.base.Suppliers;
 import net.devtech.arrp.generator.BRRPStairsBlock;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
 
   public final Block baseBlock;
 
   public ExtShapeStairsBlock(Block baseBlock, Settings settings) {
-    super(Suppliers.ofInstance(baseBlock), settings);
+    super(baseBlock, settings);
     this.baseBlock = baseBlock;
   }
 
@@ -38,15 +41,32 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   @Override
   public String getRecipeGroup() {
     Block baseBlock = this.baseBlock;
-    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_stairs";
-    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_stairs";
-    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_stairs";
-    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_stairs";
+    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_stairs";
+    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_stairs";
+    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_stairs";
+    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_stairs";
     return "";
   }
 
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.STAIRS;
+  }
+
+  public static class WithExtension extends ExtShapeStairsBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+      super(baseBlock, settings);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
+      super.onStacksDropped(state, world, pos, stack);
+      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack);
+    }
+
   }
 }
