@@ -21,7 +21,7 @@ displayName = "Extended Block Shapes"
 # This is your mod's "homepage" and will be displayed on the mod's information screen in the Mods panel.
 # displayURL="https://changeme.dev/" #optional
 # This will be displayed as your mod's logo in the Mods panel.
-logoFile = "icon.png" #optional
+logoFile = "icon-forge.png" #optional
 # Some more fluff displayed in the Mods panel. Feel free to issue your special thanks here!
 # credits="Thanks to Mojang for making this great game" #optional
 # Some more fluff displayed in the Mods panel. Plug your stuff here!
