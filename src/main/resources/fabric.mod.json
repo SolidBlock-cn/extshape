@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "extshape",
   "version": "${version}",
-  "icon": "assets/extshape/icon.png",
+  "icon": "assets/extshape/icon-fabric.png",
   "name": "Extended Block Shapes",
   "description": "More blocks in more shapes!",
   "authors": [
@@ -42,7 +42,7 @@
   "breaks": {
     "minecraft": ">=1.18"
   },
-  "recommends": {
-    "reasonable-sorting": ">=2.0.1"
+  "suggests": {
+    "reasonable-sorting": ">=2.1.0"
   }
 }
