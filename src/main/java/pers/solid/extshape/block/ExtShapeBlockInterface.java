@@ -223,9 +223,9 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
   @Nullable
   default BlockState getToolModifiedState(BlockState state, World level, BlockPos pos, PlayerEntity player, ItemStack stack, ToolAction toolAction) {
     state = ObjectUtils.defaultIfNull(IForgeBlock.super.getToolModifiedState(state, level, pos, player, stack, toolAction), state);
-    if (toolAction == ToolActions.AXE_SCRAPE && ExtShape.EXTENDED_STRIPPABLE_BLOCKS.containsKey(state.getBlock())) {
+    if (toolAction == ToolActions.AXE_STRIP && ExtShape.EXTENDED_STRIPPABLE_BLOCKS.containsKey(state.getBlock())) {
       return ExtShape.EXTENDED_STRIPPABLE_BLOCKS.get(state.getBlock()).getStateWithProperties(state);
     }
-    return state;
+    return null;
   }
 }
