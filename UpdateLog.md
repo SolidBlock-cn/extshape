@@ -1,5 +1,15 @@
 # 更新日志 Update Log
 
+### 1.7.1
+
+- 适应新版本的合理排序（Reasonable Sorting）模组。
+- 修复方块和物品没有按照其形状的顺序注册的问题。
+- 修正了部分译名。
+
+- Adapted to new version Reasonable Sorting mod.
+- Fixed the issue that blocks and items are not registered according to their shapes.
+- Fixed some translations.
+
 ### 1.7.0
 
 - 将“XXX纵楼梯”“XXX纵台阶”更名为“竖直XXX楼梯”“竖直XXX台阶”，文言文名称以及纵条的中文名称保持不变。
