@@ -52,9 +52,6 @@ loom {
         mixinConfigs = [
                 "extshape.mixin.json"
         ]
-//        convertAccessWideners = true
-//        accessWidenerPath = file("src/main/resources/extshape-imported-hidden.accesswidener")
-//        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
     }
     launches {
         data {
@@ -102,8 +99,6 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
-
-    exclude "META-INF/accesstransformer.cfg"
 }
 
 // configure the maven publication
