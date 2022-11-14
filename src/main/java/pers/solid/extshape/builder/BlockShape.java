@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 方块形状。以前是枚举，现在不是了。每个形状对象创建时，都会自动加入 {@link #NAME_TO_SHAPE} 和 {@link #SHAPES} 中，相当于一个“注册表”。部分形状有对应的原版的方块变种类型（{@link #vanillaVariant}）。
  */
-public class BlockShape implements StringIdentifiable {
+public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
 
   // 方块形状注册表部分。
 
@@ -109,5 +109,10 @@ public class BlockShape implements StringIdentifiable {
 
   public static BlockShape byName(String name) {
     return NAME_TO_SHAPE.get(name);
+  }
+
+  @Override
+  public int compareTo(@NotNull BlockShape o) {
+    return id - o.id;
   }
 }

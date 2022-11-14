@@ -20,7 +20,7 @@ import java.util.function.BiConsumer;
  * <p>此类相当于将一个基础方块的多个形状的构建器整合到一起，其本质为从方块形状到对应方块构建器的映射。
  * <p>调用其方法时，会修改构造器参数，但不会进行实际构建，而调用 {@link #build()} 之后，就会正式执行构建，将会调用这些构建器的 {@link AbstractBlockBuilder#build()} 方法，这时候才产生方块对象，并根据参数进行一系列操作，如加入注册表、标签等。
  */
-public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? extends Block>> {
+public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? extends Block>> {
   /**
    * 本模组内置的所有方块形状。注意这并不包括其他模组添加的方块形状。因此，其他模组如需使用 BlocksBuilder，需自行通过 {@link #with(BlockShape...)} 添加。
    */
@@ -32,7 +32,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 该基础方块需要构建哪些形状的变种。可以通过 {@link #with} 和 {@link #without} 进行增减。
    */
-  protected final Set<BlockShape> shapesToBuild;
+  protected final SortedSet<BlockShape> shapesToBuild;
   /**
    * 基础方块。对于 BlocksBuilder 而言，基础方块不能是 {@code null}。
    */
@@ -58,8 +58,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    * @param pressurePlateActivationRule 压力板激活类型。
    * @param shapesToBuild               需要构建哪些方块形状。
    */
-  public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, Set<BlockShape> shapesToBuild) {
-    super(BlockShape.values().size());
+  public BlocksBuilder(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, SortedSet<BlockShape> shapesToBuild) {
     this.fenceCraftingIngredient = fenceCraftingIngredient;
     this.buttonType = buttonType;
     this.pressurePlateActivationRule = pressurePlateActivationRule;
@@ -78,7 +77,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @Contract("_,_,_,_ -> new")
   public static BlocksBuilder createAllShapes(@NotNull Block baseBlock, @Nullable Item fenceCraftingIngredient, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
-    return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule, new HashSet<>(SHAPES));
+    return new BlocksBuilder(baseBlock, fenceCraftingIngredient, buttonType, pressurePlateActivationRule, new TreeSet<>(SHAPES));
   }
 
   /**
@@ -89,7 +88,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @Contract("_ -> new")
   public static BlocksBuilder createEmpty(@NotNull Block baseBlock) {
-    return new BlocksBuilder(baseBlock, null, null, null, new HashSet<>());
+    return new BlocksBuilder(baseBlock, null, null, null, new TreeSet<>());
   }
 
   /**
@@ -319,7 +318,7 @@ public class BlocksBuilder extends HashMap<BlockShape, AbstractBlockBuilder<? ex
     }
 
     final Collection<AbstractBlockBuilder<? extends Block>> values = this.values();
-    for (Entry<BlockShape, ExtShapeBlockTag> entry : this.tagToAddForShape.entrySet()) {
+    for (Map.Entry<BlockShape, ExtShapeBlockTag> entry : this.tagToAddForShape.entrySet()) {
       AbstractBlockBuilder<?> builder = this.get(entry.getKey());
       if (builder != null && entry.getValue() != null) builder.setDefaultTagToAdd(entry.getValue());
     }

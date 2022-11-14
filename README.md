@@ -4,7 +4,7 @@ If you do not understand Chinese, you may refer to the [document in English](REA
 
 本模组为许多的原版方块添加了其楼梯、台阶、栅栏、栅栏门、按钮和压力板，以及原版不具有的竖直台阶、竖直楼梯、横条、纵条。具体内容列表请参考[此文件](BlockList.md)。
 
-模组目前支持 Minecraft Java 版 1.19.2-1.16.4，请根据你的游戏版本安装对应的模组（1.19.2 的模组兼容 1.19.1 和 1.19，1.18.1 的模组兼容 1.18，1.16.5 的模组兼容 1.16.4），并需要 Fabric API 和 BRRP。此外，通常还需要 Mod Menu（非必须）以打开模组配置界面。
+模组目前支持 Minecraft Java 版 1.19.3-1.16.4，请根据你的游戏版本安装对应的模组（1.19.2 的模组兼容 1.19.1 和 1.19，1.18.1 的模组兼容 1.18，1.16.5 的模组兼容 1.16.4），并需要 Fabric API 和 BRRP。此外，通常还需要 Mod Menu（非必须）以打开模组配置界面。
 
 **请注意：本模组依赖 BRRP（更好的运行时资源包，Better Runtime Resource Pack）模组才能运行，因此您必须同时安装该模组。BRRP 包含 ARRP 的所有功能，请不要同时安装 BRRP 和 ARRP，以免出现问题。**
 
@@ -78,4 +78,4 @@ If you do not understand Chinese, you may refer to the [document in English](REA
 
 此外，你也可以选择让本模组新增的方块出现在原版物品组，但这有可能会导致物品混乱。你可以在模组配置界面（需要安装 Mod Menu）进行配置。
 
-如果安装了 2.0.1 以上版本的合理排序（Reasonable Sorting）模组，原版物品组内的方块也会按照基础方块进行排序。
+如果安装了合理排序（Reasonable Sorting）模组，原版物品组内的方块也会按照基础方块进行排序。
