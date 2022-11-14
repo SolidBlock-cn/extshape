@@ -1,7 +1,10 @@
+import com.modrinth.minotaur.dependencies.ModDependency
+
 plugins {
     id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
     id 'maven-publish'
     id 'io.github.juuxel.loom-quiltflower' version '1.7.+'
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 sourceCompatibility = JavaVersion.VERSION_16
@@ -122,4 +125,17 @@ publishing {
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
     }
+}
+
+
+modrinth {
+    projectId = 'tb7kCxSW'
+    String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
+    versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
+    uploadFile = remapJar
+    gameVersions = (project.supported_minecraft_versions as String).split(',') as List<String>
+    loaders = [platform]
+    var list = [new ModDependency('JnrDtPAE', 'required')]
+    if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
+    dependencies = list
 }
