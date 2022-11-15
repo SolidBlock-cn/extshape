@@ -9,14 +9,13 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * @see net.fabricmc.fabric.impl.item.group.CreativeGuiExtensions
- * @see net.fabricmc.fabric.mixin.item.group.client.MixinCreativePlayerInventoryGui
+ * @see net.fabricmc.fabric.impl.itemgroup.CreativeGuiExtensions
+ * @see net.fabricmc.fabric.mixin.itemgroup.client.CreativeInventoryScreenMixin
  */
 @Mixin(CreativeInventoryScreen.class)
 @Environment(EnvType.CLIENT)
 public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeScreenHandler> /*implements CreativeGuiExtensions*/ {
-  @SuppressWarnings("unused")
-  private CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
+  public CreativeInventoryScreenMixin(CreativeInventoryScreen.CreativeScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
     super(screenHandler, playerInventory, text);
   }
 

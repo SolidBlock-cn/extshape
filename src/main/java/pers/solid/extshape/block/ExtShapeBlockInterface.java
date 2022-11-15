@@ -14,7 +14,7 @@ import net.minecraft.block.Material;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.Registries;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
@@ -127,7 +127,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
       if (stonecuttingRecipe instanceof JStonecuttingRecipe jStonecuttingRecipe) {
         // block 是切石前的基础方块。
         for (Block block : VanillaStonecutting.INSTANCE.get(getBaseBlock())) {
-          final String path = Registry.BLOCK.getId(block).getPath();
+          final String path = Registries.BLOCK.getId(block).getPath();
           final Identifier secondaryId = getRecipeId().brrp_append("_from_" + path + "_stonecutting");
           final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
               JIngredient.ofItem(block),

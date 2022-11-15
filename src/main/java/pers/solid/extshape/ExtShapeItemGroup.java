@@ -1,35 +1,12 @@
 package pers.solid.extshape;
 
-import com.google.common.base.Suppliers;
-import com.google.common.collect.ImmutableSet;
-import net.fabricmc.fabric.mixin.itemgroup.ItemGroupAccessor;
-import net.fabricmc.fabric.mixin.itemgroup.ItemGroupsAccessor;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.ItemStack;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Contract;
-import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.mixin.AbstractBlockAccessor;
-import pers.solid.extshape.mixin.CreativeInventoryScreenAccessor;
-import pers.solid.extshape.tag.ExtShapeTags;
-
-import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
 /**
  * 本模组中的物品组。
  * 物品将会添加到原版物品组，然后再添加四个额外的物品组，用于分类存放物品，且这些额外物品组包括原版方块。
  */
-public class ExtShapeItemGroup extends ItemGroup {
+public class ExtShapeItemGroup /*extends ItemGroup*/ {/*
   public static final ItemGroup WOODEN_BLOCK_GROUP;
   public static final ItemGroup COLORFUL_BLOCK_GROUP;
   public static final ItemGroup STONE_BLOCK_GROUP;
@@ -41,12 +18,11 @@ public class ExtShapeItemGroup extends ItemGroup {
   private static final LinkedHashSet<Block> OTHER_BLOCKS = new LinkedHashSet<>();
 
   static {
-    final ItemGroup[] groups = ItemGroups.GROUPS;
-    final ItemGroup[] newGroups = new ItemGroup[groups.length + 4];
+    final List<ItemGroup> groups = ItemGroups.getGroups();
+    final ImmutableList.Builder<ItemGroup> newGroups = ImmutableList.builderWithExpectedSize(groups.size() + 4);
+    newGroups.addAll(groups);
 
-    System.arraycopy(groups, 0, newGroups, 0, groups.length);
-
-    ItemGroupsAccessor.setGroups(newGroups);
+    ItemGroupsAccessor.setGroups(newGroups.build());
     WOODEN_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length,
         new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
@@ -249,15 +225,13 @@ public class ExtShapeItemGroup extends ItemGroup {
   private final Supplier<ItemStack> stackSupplier;
   private final BiConsumer<FeatureSet, Entries> stacksForDisplay;
 
-  public ExtShapeItemGroup(int index, Identifier id, Supplier<ItemStack> stackSupplier, BiConsumer<FeatureSet, Entries> stacksForDisplay) {
-    super(index, Text.translatable("itemGroup." + id.getNamespace() + "." + id.getPath()));
-    this.stackSupplier = stackSupplier;
-    this.stacksForDisplay = stacksForDisplay;
+  public ExtShapeItemGroup(Row row, int column, Type type, Identifier id, Supplier<ItemStack> iconSupplier, EntryCollector entryCollector) {
+    super(row, column, type, Text.translatable("itemGroup." + id.getNamespace() + "." + id.getPath()), iconSupplier, entryCollector);
   }
 
-  /**
-   * 在游戏运行中途将本模组的物品组加到 {@link net.minecraft.item.ItemGroups#GROUPS} 中。一开始运行时不会执行此方法，只有在模组中途通过配置屏幕将已关闭的 {@link ExtShapeConfig#showSpecificGroups} 设为 {@code true} 时才会执行本方法。
-   */
+  *//**
+ * 在游戏运行中途将本模组的物品组加到 {@link net.minecraft.item.ItemGroups#GROUPS} 中。一开始运行时不会执行此方法，只有在模组中途通过配置屏幕将已关闭的 {@link ExtShapeConfig#showSpecificGroups} 设为 {@code true} 时才会执行本方法。
+ *//*
   public static void implementGroups() {
     final ItemGroup[] groups = ItemGroups.GROUPS;
     final ItemGroup[] newGroups = new ItemGroup[groups.length + 4];
@@ -292,12 +266,12 @@ public class ExtShapeItemGroup extends ItemGroup {
     }
   }
 
-  /**
-   * 将方块及其变种都添加到物品堆的列表中。
-   *
-   * @param baseBlock 其基础方块。
-   * @param entries   需要被添加至的物品堆的列表。
-   */
+  *//**
+ * 将方块及其变种都添加到物品堆的列表中。
+ *
+ * @param baseBlock 其基础方块。
+ * @param entries   需要被添加至的物品堆的列表。
+ *//*
   @Contract(mutates = "param2")
   protected static void importTo(Block baseBlock, FeatureSet featureSet, Entries entries) {
     if (baseBlock == null) return;
@@ -327,5 +301,5 @@ public class ExtShapeItemGroup extends ItemGroup {
     final int index = super.getIndex();
     if (index == -1) ExtShape.LOGGER.warn("Attempt to find an unactivated group!");
     return index;
-  }
+  }*/
 }

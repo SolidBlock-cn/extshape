@@ -8,7 +8,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.Registries;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
@@ -25,6 +25,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
    * 例如石砖是stone_bricks，但其变种方块的命名空间id路径前缀是stone_brick，因此其变种方块的id路径会形如stone_brick_stairs而非stone_bricks_stairs。
    */
   Map<String, String> PATH_PREFIX_MAPPINGS = Util.make(new HashMap<>(), map -> {
+    map.put("bamboo_block", "bamboo_block");
     map.put("chiseled_quartz", "chiseled_quartz");
     map.put("clay", "clay");
     map.put("cut_copper", "cut_copper");
@@ -108,7 +109,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
   default MutableText getNamePrefix() {
     final Block baseBlock = this.getBaseBlock();
     if (baseBlock == null) return Text.translatable("block.extshape.prefix.unknown");
-    final String path = Registry.BLOCK.getId(baseBlock).getPath();
+    final String path = Registries.BLOCK.getId(baseBlock).getPath();
     if (PATH_PREFIX_MAPPINGS.containsKey(path)) {
       return Text.translatable("block.extshape.prefix." + getPathPrefixOf(path));
     } else {

@@ -14,7 +14,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.Registries;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -248,7 +248,7 @@ public final class ExtShapeRRP {
         for (Block block : stonecuttingBase) {
           final Block stairs0 = BlockMappings.getBlockOf(BlockShape.STAIRS, block);
           if (stairs0 == null) continue;
-          final String name0 = Registry.BLOCK.getId(stairs0).getPath();
+          final String name0 = Registries.BLOCK.getId(stairs0).getPath();
           generateSimpleStonecuttingRecipe(stairs0, quarterPiece, 3, "_from_" + name0 + "_stonecutting", "has_stairs", pack);
         }
       }
@@ -268,7 +268,7 @@ public final class ExtShapeRRP {
           for (Block block : stonecuttingBase) {
             final Block slab0 = BlockMappings.getBlockOf(BlockShape.SLAB, block);
             if (slab0 == null) continue;
-            final String name0 = Registry.BLOCK.getId(slab0).getPath();
+            final String name0 = Registries.BLOCK.getId(slab0).getPath();
             generateSimpleStonecuttingRecipe(slab0, quarterPiece, 2, "_from_" + name0 + "_stonecutting", "has_slab", pack);
           }
         }
@@ -289,7 +289,7 @@ public final class ExtShapeRRP {
           for (Block block0 : stonecuttingBase) {
             final Block verticalSlab0 = BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, block0);
             if (verticalSlab0 == null) continue;
-            generateSimpleStonecuttingRecipe(verticalSlab0, quarterPiece, 2, "_from_" + Registry.BLOCK.getId(verticalSlab0).getPath() + "_stonecutting", "has_vertical_slab", pack);
+            generateSimpleStonecuttingRecipe(verticalSlab0, quarterPiece, 2, "_from_" + Registries.BLOCK.getId(verticalSlab0).getPath() + "_stonecutting", "has_vertical_slab", pack);
           }
         }
       }
@@ -311,7 +311,7 @@ public final class ExtShapeRRP {
           for (Block block0 : stonecuttingBase) {
             final Block verticalSlab0 = BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, block0);
             if (verticalSlab0 == null) return;
-            generateSimpleStonecuttingRecipe(verticalSlab0, verticalQuarterPiece, 2, "_from_" + Registry.BLOCK.getId(verticalSlab0).getPath() + "_stonecutting", "has_vertical_slab", pack);
+            generateSimpleStonecuttingRecipe(verticalSlab0, verticalQuarterPiece, 2, "_from_" + Registries.BLOCK.getId(verticalSlab0).getPath() + "_stonecutting", "has_vertical_slab", pack);
           }
         }
       }
@@ -322,7 +322,7 @@ public final class ExtShapeRRP {
         for (Block block0 : stonecuttingBase) {
           final Block verticalStairs0 = BlockMappings.getBlockOf(BlockShape.VERTICAL_STAIRS, block0);
           if (verticalStairs0 == null) continue;
-          generateSimpleStonecuttingRecipe(verticalStairs0, verticalQuarterPiece, 3, "_from_" + Registry.BLOCK.getId(verticalStairs0).getPath(), "has_vertical_stairs", pack);
+          generateSimpleStonecuttingRecipe(verticalStairs0, verticalQuarterPiece, 3, "_from_" + Registries.BLOCK.getId(verticalStairs0).getPath(), "has_vertical_stairs", pack);
         }
       }
     }

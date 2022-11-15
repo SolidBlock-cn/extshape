@@ -5,7 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.Registries;
+import net.minecraft.util.registry.RegistryKeys;
 import org.jetbrains.annotations.Contract;
 import pers.solid.extshape.ExtShape;
 
@@ -84,7 +85,7 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    */
   @Override
   public Identifier getIdentifierOf(Block element) {
-    return Registry.BLOCK.getId(element);
+    return Registries.BLOCK.getId(element);
   }
 
   /**
@@ -94,7 +95,7 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    */
   @Contract(value = "-> new", pure = true)
   public TagKey<Block> toBlockTag() {
-    return TagKey.of(Registry.BLOCK_KEY, identifier);
+    return TagKey.of(RegistryKeys.BLOCK, identifier);
   }
 
   /**
@@ -104,6 +105,6 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
    */
   @Contract(value = "-> new", pure = true)
   public TagKey<Item> toItemTag() {
-    return TagKey.of(Registry.ITEM_KEY, identifier);
+    return TagKey.of(RegistryKeys.ITEM, identifier);
   }
 }

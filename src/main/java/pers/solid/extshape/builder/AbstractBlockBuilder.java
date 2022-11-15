@@ -8,6 +8,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registries;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
@@ -98,7 +99,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    */
   @Override
   public void register() {
-    Registry.register(Registry.BLOCK, this.getBlockId(), instance);
+    Registry.register(Registries.BLOCK, this.getBlockId(), instance);
   }
 
   /**
@@ -129,7 +130,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    * @return 从注册表获取方块对应基础方块的命名空间id。
    */
   protected Identifier getBaseIdentifier() {
-    return Registry.BLOCK.getId(baseBlock);
+    return Registries.BLOCK.getId(baseBlock);
   }
 
   /**

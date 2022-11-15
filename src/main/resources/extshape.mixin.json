@@ -9,7 +9,7 @@
     "SnowyBlockMixin"
   ],
   "client": [
-    "CreativeInventoryScreenAccessor", "CreativeInventoryScreenMixin"
+    "CreativeInventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

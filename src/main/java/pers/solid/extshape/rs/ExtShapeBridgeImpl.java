@@ -76,9 +76,9 @@ public class ExtShapeBridgeImpl /*extends ExtShapeBridge*/ {
 
   public static void initialize() {/*
     final ImmutableMultimap<Block, Block> defaultRules = ImmutableMultimap.of(Blocks.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS, Blocks.SMOOTH_STONE, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
-    SortingRule.addConditionalSortingRule(Registry.BLOCK_KEY, () -> Configs.instance.enableDefaultItemSortingRules && !Configs.instance.blockItemsOnly, new MultimapSortingRule<>(defaultRules), "default sorting rules of extshape");
+    SortingRule.addConditionalSortingRule(Registries.BLOCK_KEY, () -> Configs.instance.enableDefaultItemSortingRules && !Configs.instance.blockItemsOnly, new MultimapSortingRule<>(defaultRules), "default sorting rules of extshape");
     SortingRule.addConditionalSortingRule(Registry.ITEM_KEY, () -> Configs.instance.enableDefaultItemSortingRules, new MultimapSortingRule<>(ImmutableMultimap.copyOf((Iterable<? extends Map.Entry<Item, Item>>) defaultRules.entries().stream().map(entry -> Maps.immutableEntry(entry.getKey().asItem(), entry.getValue().asItem()))::iterator)), "default sorting rules of extshape");
-    SortingRule.addConditionalSortingRule(Registry.BLOCK_KEY, () -> !Configs.instance.blockItemsOnly, SHAPE_FOLLOWING_BASE_BLOCKS_RULE, 8, "shape_following_base");
+    SortingRule.addConditionalSortingRule(Registries.BLOCK_KEY, () -> !Configs.instance.blockItemsOnly, SHAPE_FOLLOWING_BASE_BLOCKS_RULE, 8, "shape_following_base");
     SortingRule.addSortingRule(Registry.ITEM_KEY, SHAPE_FOLLOWING_BASE_BLOCKS_ITEM_RULE, 8, "shape_following_base");
     TransferRule.addTransferRule(SHAPE_TRANSFER_RULE);
     TransferRule.addConditionalTransferRule(() -> Configs.instance.baseBlocksInBuildingBlocks, BASE_BLOCKS_IN_BUILDING_RULE);
@@ -113,7 +113,7 @@ public class ExtShapeBridgeImpl /*extends ExtShapeBridge*/ {
       }
       return null;
     };
-    SortingRule.addConditionalSortingRule(Registry.BLOCK_KEY, () -> Configs.instance.fancyColorsSorting && !Configs.instance.blockItemsOnly, colorBaseBlockSortingRule, 11, "color sorting rule override");
+    SortingRule.addConditionalSortingRule(Registries.BLOCK_KEY, () -> Configs.instance.fancyColorsSorting && !Configs.instance.blockItemsOnly, colorBaseBlockSortingRule, 11, "color sorting rule override");
     SortingRule.addConditionalSortingRule(Registry.ITEM_KEY, () -> Configs.instance.fancyColorsSorting, new BlockItemRule(colorBaseBlockSortingRule), 11, "color sorting rule override");*/
   }
 }

@@ -9,7 +9,7 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKeys;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Final;
@@ -26,7 +26,7 @@ public class SnowyBlockMixin extends Block {
   @Shadow
   @Final
   public static BooleanProperty SNOWY;
-  private static final TagKey<Block> SNOW = TagKey.of(Registry.BLOCK_KEY, new Identifier(ExtShape.MOD_ID, "snow"));
+  private static final TagKey<Block> SNOW = TagKey.of(RegistryKeys.BLOCK, new Identifier(ExtShape.MOD_ID, "snow"));
 
   @SuppressWarnings("unused")
   private SnowyBlockMixin(Settings settings) {

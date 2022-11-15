@@ -3,6 +3,7 @@ package pers.solid.extshape.config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.class_7919;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.ConfirmScreen;
@@ -13,12 +14,12 @@ import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.ExtShapeItemGroup;
 import pers.solid.extshape.ExtShapeRRP;
 
 @Environment(EnvType.CLIENT)
@@ -40,18 +41,18 @@ public class ExtShapeOptionsScreen extends Screen {
     // 里面的内容不需要被选中，所以只是drawable。
     addDrawable(new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25));
     ExtShapeConfig config = newConfig;
-    this.addDrawableChild(new ButtonWidget.class_7840(ScreenTexts.DONE, button -> close()).method_46433(this.width / 2 - 100, this.height - 27).method_46437(200, 20).method_46431());
+    this.addDrawableChild(new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).setPosition(this.width / 2 - 100, this.height - 27).setSize(200, 20).build());
 
     // addToVanillaGroups
-    /*addDrawableChild(SimpleOption.ofBoolean(
+    addDrawableChild(SimpleOption.ofBoolean(
         "options.extshape.addToVanillaGroups",
         SimpleOption.constantTooltip(
-            Text.translatable("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName())
+            Text.translatable("options.extshape.addToVanillaGroups.tooltip", ItemGroups.BUILDING_BLOCKS.getDisplayName(), ItemGroups.FUNCTIONAL.getDisplayName(), ItemGroups.REDSTONE.getDisplayName())
                 .append("\n\n")
                 .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))),
         config.addToVanillaGroups,
         value -> config.addToVanillaGroups = value
-    ).createButton(gameOptions, width / 2 - 205, 36, 200));*/
+    ).createButton(gameOptions, width / 2 - 205, 36, 200));
     // showSpecificGroups
     addDrawableChild(SimpleOption.ofBoolean(
         "options.extshape.showSpecificGroups",
@@ -105,20 +106,24 @@ public class ExtShapeOptionsScreen extends Screen {
     ).createButton(gameOptions, width / 2 + 5, 86, 200));
 
     // 运行时资源包设置。
-    addDrawableChild(new ButtonWidget.class_7840(Text.translatable("options.extshape.rrp.title"), button -> {
+    addDrawableChild(new ButtonWidget.Builder(Text.translatable("options.extshape.rrp.title"), button -> {
       if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
-    }).method_46433(width / 2 - 150, 111).method_46437(300, 20).method_46436((button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.description"), 200), mouseX, mouseY)).method_46431());
+    }).setPosition(width / 2 - 150, 111).setSize(300, 20)
+        .setTooltipSupplier(class_7919.method_47407(Text.translatable("options.extshape.rrp.description")))
+        .build());
 
     {
-      final ButtonWidget reasonableSortingButton = new ButtonWidget.class_7840(Text.translatable("options.extshape.reasonable-sorting"), button -> {
+      final ButtonWidget reasonableSortingButton = new ButtonWidget.Builder(Text.translatable("options.extshape.reasonable-sorting"), button -> {
         if (client != null) {
           try {
-//            client.setScreen(ConfigScreenFabric.INSTANCE.createScreen(this));
+//            client.setScreen(ConfigScreenFabric.INSTANCE.createScreen(this)); todo
           } catch (LinkageError e) {
             ExtShape.LOGGER.error("Failed to open Reasonable Sorting config screen:", e);
           }
         }
-      }).method_46433(width / 2 - 150, 135).method_46437(300, 20).method_46436((button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.reasonable-sorting.description"), 200), mouseX, mouseY)).method_46431();
+      }).setPosition(width / 2 - 150, 135).setSize(300, 20)
+          .setTooltipSupplier(class_7919.method_47407(Text.translatable("options.extshape.reasonable-sorting.description")))
+          .build();
       reasonableSortingButton.active = client != null && FabricLoader.getInstance().isModLoaded("reasonable-sorting");
       addDrawableChild(reasonableSortingButton);
     }
@@ -130,7 +135,7 @@ public class ExtShapeOptionsScreen extends Screen {
     drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 16, 0xffffff);
     for (Element child : children()) {
       if (child instanceof CyclingButtonWidget<?> widget && widget.isHovered()) {
-        renderOrderedTooltip(matrices, widget.getOrderedTooltip(), mouseX, mouseY);
+//        renderOrderedTooltip(matrices, widget.method_47400();, mouseX, mouseY);
       }
     }
   }
@@ -144,10 +149,10 @@ public class ExtShapeOptionsScreen extends Screen {
     if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {
       if (newConfig.showSpecificGroups) {
         ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
-        ExtShapeItemGroup.implementGroups();
+//        ExtShapeItemGroup.implementGroups();
       } else {
         ExtShape.LOGGER.info("Removing item groups at runtime. This may cause some instability.");
-        ExtShapeItemGroup.removeGroups();
+//        ExtShapeItemGroup.removeGroups();
       }
     }
   }

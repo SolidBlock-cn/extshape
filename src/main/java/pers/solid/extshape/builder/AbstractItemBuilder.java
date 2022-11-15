@@ -3,6 +3,7 @@ package pers.solid.extshape.builder;
 import net.devtech.arrp.util.CanIgnoreReturnValue;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registries;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Contract;
 
@@ -21,7 +22,7 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
    */
   @Override
   public void register() {
-    Registry.register(Registry.ITEM, this.identifier, this.item);
+    Registry.register(Registries.ITEM, this.identifier, this.item);
   }
 
   /**

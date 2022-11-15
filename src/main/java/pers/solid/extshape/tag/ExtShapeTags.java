@@ -4,7 +4,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.WallBlock;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
@@ -14,7 +17,6 @@ import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mixin.AbstractBlockAccessor;
 
 import static net.minecraft.block.Blocks.*;
 import static pers.solid.extshape.tag.ExtShapeBlockTag.create;
@@ -23,94 +25,6 @@ import static pers.solid.extshape.tag.ExtShapeBlockTag.create;
  * 本模组提供的方块标签，其中包括了少量物品标签。这些标签都是在运行时生成的。
  */
 public final class ExtShapeTags {
-  /**
-   * {@link net.minecraft.item.ItemGroups#NATURAL} 中的基础方块。
-   */
-  public static final ImmutableSet<Block> NATURAL_BASE_BLOCKS = ImmutableSet.of(
-      DIRT,
-      COARSE_DIRT,
-      MUD,
-      CLAY,
-      GRAVEL,
-      NETHERRACK,
-      CRIMSON_NYLIUM,
-      WARPED_NYLIUM,
-      BONE_BLOCK,
-      PACKED_ICE,
-      SNOW_BLOCK,
-      STONE,
-      GRANITE,
-      DIORITE,
-      ANDESITE,
-      DEEPSLATE,
-      SANDSTONE,
-      RED_SANDSTONE,
-      PRISMARINE,
-      CALCITE,
-      TUFF,
-      DRIPSTONE_BLOCK,
-      OBSIDIAN,
-      CRYING_OBSIDIAN,
-      BLACKSTONE,
-      BASALT,
-      SMOOTH_BASALT,
-      END_STONE,
-      ANCIENT_DEBRIS,
-      COAL_BLOCK,
-      RAW_IRON_BLOCK,
-      RAW_COPPER_BLOCK,
-      RAW_GOLD_BLOCK,
-      GLOWSTONE,
-      AMETHYST_BLOCK,
-      OAK_LOG,
-      SPRUCE_LOG,
-      BIRCH_LOG,
-      JUNGLE_LOG,
-      ACACIA_LOG,
-      DARK_OAK_LOG,
-      MANGROVE_LOG,
-      CRIMSON_STEM,
-      WARPED_STEM,
-      MUSHROOM_STEM,
-      NETHER_WART_BLOCK,
-      WARPED_WART_BLOCK,
-      SHROOMLIGHT,
-      MELON,
-      PUMPKIN,
-      MOSS_BLOCK,
-      SCULK,
-      HONEYCOMB_BLOCK,
-      HONEY_BLOCK,
-      OCHRE_FROGLIGHT,
-      VERDANT_FROGLIGHT,
-      PEARLESCENT_FROGLIGHT,
-      BEDROCK
-  );
-  /**
-   * 同时存在于 {@link net.minecraft.item.ItemGroups#NATURAL} 和 {@link net.minecraft.item.ItemGroups#BUILDING_BLOCKS} 中的方块。
-   */
-  public static final ImmutableSet<Block> NATURAL_BUILDING_BASE_BLOCKS = ImmutableSet.of(
-      OAK_LOG,
-      SPRUCE_LOG,
-      BIRCH_LOG,
-      JUNGLE_LOG,
-      ACACIA_LOG,
-      DARK_OAK_LOG,
-      MANGROVE_LOG,
-      CRIMSON_STEM,
-      WARPED_STEM,
-      MUSHROOM_STEM,
-      STONE,
-      GRANITE,
-      DIORITE,
-      ANDESITE,
-      DEEPSLATE,
-      SANDSTONE,
-      RED_SANDSTONE,
-      NETHERRACK,
-      BASALT,
-      END_STONE
-  );
   public static final ImmutableList<Block> LOGS = ImmutableList.of(
       OAK_LOG,
       SPRUCE_LOG,
@@ -437,7 +351,6 @@ public final class ExtShapeTags {
   public static final ExtShapeBlockTag NEEDS_DIAMOND_TOOL = create(BlockTags.NEEDS_DIAMOND_TOOL);
   public static final ExtShapeBlockTag NEEDS_IRON_TOOL = create(BlockTags.NEEDS_IRON_TOOL);
   public static final ExtShapeBlockTag NEEDS_STONE_TOOL = create(BlockTags.NEEDS_STONE_TOOL);
-  public static final ExtShapeBlockTag NON_FLAMMABLE_WOOD = create(BlockTags.NON_FLAMMABLE_WOOD);
   /**
    * 类似于 {@link BlockTags#SNOW}，但是不同的是，该方块标签中，{@link net.minecraft.block.SnowyBlock#isSnow(BlockState)} 对于该标签的方块必须有底部的完整碰撞箱才会让 方块显示为雪。
    */
@@ -499,9 +412,6 @@ public final class ExtShapeTags {
       }
       if (Mineable.NEEDS_STONE_TOOL.contains(baseBlock)) {
         NEEDS_STONE_TOOL.add(block);
-      }
-      if (((AbstractBlockAccessor) baseBlock).getMaterial() == Material.NETHER_WOOD) {
-        NON_FLAMMABLE_WOOD.add(block);
       }
       if (baseBlock == Blocks.GOLD_BLOCK || baseBlock == Blocks.RAW_GOLD_BLOCK) {
         PIGLIN_LOVED.add(block);

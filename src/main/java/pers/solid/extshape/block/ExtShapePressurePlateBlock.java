@@ -19,6 +19,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registries;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
@@ -78,10 +79,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   @Override
   public @NotNull JRecipe getCraftingRecipe() {
     if (ExtShapeTags.WOOLS.contains(baseBlock)) {
-      final Identifier woolId = Registry.BLOCK.getId(baseBlock);
+      final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final JShapelessRecipe recipe = new JShapelessRecipe(this.getItemId(), carpetId);
-      recipe.addInventoryChangedCriterion("has_carpet", Registry.ITEM.get(carpetId));
+      recipe.addInventoryChangedCriterion("has_carpet", Registries.ITEM.get(carpetId));
       return recipe;
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
       return new JShapelessRecipe(this, Blocks.MOSS_CARPET).addInventoryChangedCriterion("has_carpet", Blocks.MOSS_CARPET);
@@ -100,10 +101,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
     // 反向合成配方。
     if (ExtShapeTags.WOOLS.contains(baseBlock)) {
-      final Identifier woolId = Registry.BLOCK.getId(baseBlock);
+      final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final JShapelessRecipe recipe = new JShapelessRecipe(carpetId, this.getItemId());
-      final Item carpet = Registry.ITEM.get(carpetId);
+      final Item carpet = Registries.ITEM.get(carpetId);
       recipe.addInventoryChangedCriterion("has_pressure_plate", this);
       final Identifier recipeId = new Identifier(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
       pack.addRecipe(recipeId, recipe);
