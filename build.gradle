@@ -36,6 +36,20 @@ repositories {
     mavenLocal()
 }
 
+loom {
+    runs {
+        server {
+        }
+        client {
+            programArg "-username=Solid"
+        }
+    }
+
+    runConfigs.configureEach {
+        println it.configName
+    }
+}
+
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"

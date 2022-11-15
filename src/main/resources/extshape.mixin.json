@@ -6,7 +6,8 @@
   "mixins": [
     "AbstractBlockAccessor", "AbstractBlockStateAccessor", "AxeItemMixin",
     "BlockAccessor", "BlockFamiliesAccessor", "ButtonMixin",
-    "ItemGroupAccessor", "MiningToolItemMixin", "SnowyBlockMixin"
+    "ItemGroupAccessor", "MiningToolItemMixin", "SnowyBlockMixin", "TranslatableTextContentMixin",
+    "TranslatableTextContentAccessor"
   ],
   "client": [
     "CreativeInventoryScreenAccessor", "CreativeInventoryScreenMixin"
