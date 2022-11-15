@@ -28,10 +28,7 @@ import pers.solid.extshape.rs.ExtShapeBridgeImpl;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.EntryVariantAppender;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 /**
@@ -226,8 +223,9 @@ public class ExtShape implements ModInitializer {
       if (!ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups) return;
       entries.addBefore(Items.SMOOTH_STONE_SLAB, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
     });
-    ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(new EntryVariantAppender(ItemGroups.BUILDING_BLOCKS, shapes));
-    ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(new EntryVariantAppender(ItemGroups.NATURAL, shapes));
+    ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(new EntryVariantAppender(ItemGroups.BUILDING_BLOCKS, shapes, Iterables.filter(BlockMappings.BASE_BLOCKS, block -> !(ExtShapeTags.WOOLS.contains(block) || ExtShapeTags.STAINED_TERRACOTTA.contains(block) || ExtShapeTags.CONCRETES.contains(block) || ExtShapeTags.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA))));
+    ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(new EntryVariantAppender(ItemGroups.COLORED_BLOCKS, shapes, Iterables.concat(ExtShapeTags.WOOLS, Collections.singleton(Blocks.TERRACOTTA), ExtShapeTags.STAINED_TERRACOTTA, ExtShapeTags.CONCRETES, ExtShapeTags.GLAZED_TERRACOTTA)));
+    ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(new EntryVariantAppender(ItemGroups.NATURAL, shapes, Iterables.filter(BlockMappings.BASE_BLOCKS, block -> !(ExtShapeTags.LOGS.contains(block) || ExtShapeTags.STEMS.contains(block)))));
     ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> {
       if (!ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups) return;
       final List<ItemStack> buttons = new ArrayList<>();

@@ -4,27 +4,24 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.tag.ExtShapeTags;
 
 /**
  * 用于在原版物品组中添加本模组中的方块。
  */
-public record EntryVariantAppender(ItemGroup itemgroup, BlockShape[] shapes) implements ItemGroupEvents.ModifyEntries {
+public record EntryVariantAppender(ItemGroup itemgroup, BlockShape[] shapes, Iterable<Block> baseBlocks) implements ItemGroupEvents.ModifyEntries {
 
   @Override
   public void modifyEntries(FabricItemGroupEntries entries) {
     if (!ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups) return;
     final long prevTime = System.currentTimeMillis();
-    for (final Block baseBlock : BlockMappings.BASE_BLOCKS) {
+    for (final Block baseBlock : baseBlocks) {
       // 当已有物品中有基础方块时，才会将其各种形状的方块加到其后。
-      if (itemgroup == ItemGroups.NATURAL && (ExtShapeTags.LOGS.contains(baseBlock) || ExtShapeTags.STEMS.contains(baseBlock))) continue;
       final boolean displays = entries.getDisplayStacks().stream().anyMatch(stack -> baseBlock != null && stack.isOf(baseBlock.asItem()));
       if (!displays) continue;
       @NotNull Block anchor = baseBlock;
