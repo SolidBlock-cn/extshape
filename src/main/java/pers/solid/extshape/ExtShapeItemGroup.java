@@ -2,33 +2,34 @@ package pers.solid.extshape;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.resource.featuretoggle.FeatureSet;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.Contract;
+import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
-import pers.solid.extshape.mixin.CreativeInventoryScreenAccessor;
-import pers.solid.extshape.mixin.ItemGroupAccessor;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockBiMaps;
+import pers.solid.extshape.util.BlockCollections;
 
 import java.util.*;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 /**
  * 本模组中的物品组。
  * 物品将会添加到原版物品组，然后再添加四个额外的物品组，用于分类存放物品，且这些额外物品组包括原版方块。
+ *
+ * @see VanillaItemGroup
  */
-public class ExtShapeItemGroup extends ItemGroup {
+public class ExtShapeItemGroup {
   public static final ItemGroup WOODEN_BLOCK_GROUP;
   public static final ItemGroup COLORFUL_BLOCK_GROUP;
   public static final ItemGroup STONE_BLOCK_GROUP;
@@ -40,54 +41,106 @@ public class ExtShapeItemGroup extends ItemGroup {
   private static final LinkedHashSet<Block> OTHER_BLOCKS = new LinkedHashSet<>();
 
   static {
-    final ItemGroup[] groups = ItemGroup.GROUPS;
-    final ItemGroup[] newGroups = new ItemGroup[groups.length + 4];
-
-    System.arraycopy(groups, 0, newGroups, 0, groups.length);
-
-    GROUPS = newGroups;
-    WOODEN_BLOCK_GROUP = new ExtShapeItemGroup(
-        groups.length,
+    WOODEN_BLOCK_GROUP = create(
         new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(BlockShape.WALL, Blocks.BIRCH_PLANKS))),
-        (stacks, group) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
-            stacks)))
+        Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.WALL, Blocks.BAMBOO_MOSAIC))),
+        (featureSet, entries, operatorsEnabled) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
+            featureSet, entries, operatorsEnabled)))
     );
 
-    COLORFUL_BLOCK_GROUP = new ExtShapeItemGroup(
-        groups.length + 1,
+    COLORFUL_BLOCK_GROUP = create(
         new Identifier(ExtShape.MOD_ID, "colorful_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(BlockShape.STAIRS, Blocks.LIME_WOOL))),
-        (stacks, group) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, stacks))
+        Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.STAIRS, Blocks.LIME_WOOL))),
+        (featureSet, entries, operatorsEnabled) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled))
     );
 
-    STONE_BLOCK_GROUP = new ExtShapeItemGroup(
-        groups.length + 2,
+    STONE_BLOCK_GROUP = create(
         new Identifier(ExtShape.MOD_ID, "stone_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(BlockShape.FENCE, Blocks.CALCITE))),
-        (stacks, group) -> STONE_BLOCKS.forEach(block -> importTo(block, stacks))
+        Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.FENCE, Blocks.CALCITE))),
+        (featureSet, entries, operatorsEnabled) -> STONE_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled))
     );
 
-    OTHER_BLOCK_GROUP = new ExtShapeItemGroup(
-        groups.length + 3,
+    OTHER_BLOCK_GROUP = create(
         new Identifier(ExtShape.MOD_ID, "other_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
-        (stacks, group) -> OTHER_BLOCKS.forEach(block -> importTo(block, stacks)));
+        Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
+        (featureSet, entries, operatorsEnabled) -> OTHER_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled)));
 
     MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
 
-    if (!ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
-      GROUPS = groups;
+    if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
+      implementGroups();
     }
   }
 
   static {
-    COLORFUL_BLOCKS.addAll(ExtShapeTags.WOOLS);
-    COLORFUL_BLOCKS.addAll(ExtShapeTags.CONCRETES);
-    COLORFUL_BLOCKS.add(Blocks.TERRACOTTA);
-    COLORFUL_BLOCKS.addAll(ExtShapeTags.STAINED_TERRACOTTA);
-    COLORFUL_BLOCKS.addAll(ExtShapeTags.GLAZED_TERRACOTTA);
-    STONE_BLOCKS.addAll(ExtShapeTags.STONES);
+    Collections.addAll(COLORFUL_BLOCKS,
+        Blocks.WHITE_WOOL,
+        Blocks.LIGHT_GRAY_WOOL,
+        Blocks.GRAY_WOOL,
+        Blocks.BLACK_WOOL,
+        Blocks.BROWN_WOOL,
+        Blocks.RED_WOOL,
+        Blocks.ORANGE_WOOL,
+        Blocks.YELLOW_WOOL,
+        Blocks.LIME_WOOL,
+        Blocks.GREEN_WOOL,
+        Blocks.CYAN_WOOL,
+        Blocks.LIGHT_BLUE_WOOL,
+        Blocks.BLUE_WOOL,
+        Blocks.PURPLE_WOOL,
+        Blocks.MAGENTA_WOOL,
+        Blocks.PINK_WOOL,
+        Blocks.WHITE_CONCRETE,
+        Blocks.LIGHT_GRAY_CONCRETE,
+        Blocks.GRAY_CONCRETE,
+        Blocks.BLACK_CONCRETE,
+        Blocks.BROWN_CONCRETE,
+        Blocks.RED_CONCRETE,
+        Blocks.ORANGE_CONCRETE,
+        Blocks.YELLOW_CONCRETE,
+        Blocks.LIME_CONCRETE,
+        Blocks.GREEN_CONCRETE,
+        Blocks.CYAN_CONCRETE,
+        Blocks.LIGHT_BLUE_CONCRETE,
+        Blocks.BLUE_CONCRETE,
+        Blocks.PURPLE_CONCRETE,
+        Blocks.MAGENTA_CONCRETE,
+        Blocks.PINK_CONCRETE,
+        Blocks.TERRACOTTA,
+        Blocks.WHITE_TERRACOTTA,
+        Blocks.LIGHT_GRAY_TERRACOTTA,
+        Blocks.GRAY_TERRACOTTA,
+        Blocks.BLACK_TERRACOTTA,
+        Blocks.BROWN_TERRACOTTA,
+        Blocks.RED_TERRACOTTA,
+        Blocks.ORANGE_TERRACOTTA,
+        Blocks.YELLOW_TERRACOTTA,
+        Blocks.LIME_TERRACOTTA,
+        Blocks.GREEN_TERRACOTTA,
+        Blocks.CYAN_TERRACOTTA,
+        Blocks.LIGHT_BLUE_TERRACOTTA,
+        Blocks.BLUE_TERRACOTTA,
+        Blocks.PURPLE_TERRACOTTA,
+        Blocks.MAGENTA_TERRACOTTA,
+        Blocks.PINK_TERRACOTTA,
+        Blocks.WHITE_GLAZED_TERRACOTTA,
+        Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA,
+        Blocks.GRAY_GLAZED_TERRACOTTA,
+        Blocks.BLACK_GLAZED_TERRACOTTA,
+        Blocks.BROWN_GLAZED_TERRACOTTA,
+        Blocks.RED_GLAZED_TERRACOTTA,
+        Blocks.ORANGE_GLAZED_TERRACOTTA,
+        Blocks.YELLOW_GLAZED_TERRACOTTA,
+        Blocks.LIME_GLAZED_TERRACOTTA,
+        Blocks.GREEN_GLAZED_TERRACOTTA,
+        Blocks.CYAN_GLAZED_TERRACOTTA,
+        Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA,
+        Blocks.BLUE_GLAZED_TERRACOTTA,
+        Blocks.PURPLE_GLAZED_TERRACOTTA,
+        Blocks.MAGENTA_GLAZED_TERRACOTTA,
+        Blocks.PINK_GLAZED_TERRACOTTA
+    );
+    STONE_BLOCKS.addAll(BlockCollections.STONES);
     STONE_BLOCKS.addAll(Arrays.asList(
         Blocks.SMOOTH_STONE,
         Blocks.STONE_BRICKS,
@@ -163,11 +216,11 @@ public class ExtShapeItemGroup extends ItemGroup {
         Blocks.SEA_LANTERN
     ));
 
-    Set<Block> baseBlockList = new LinkedHashSet<>(BlockMappings.BASE_BLOCKS);
-    WOODEN_BLOCKS.forEach(baseBlockList::remove);
-    COLORFUL_BLOCKS.forEach(baseBlockList::remove);
-    STONE_BLOCKS.forEach(baseBlockList::remove);
-    for (Block block : baseBlockList) {
+    ObjectSet<Block> baseBlocks = new ObjectLinkedOpenHashSet<>(ExtShapeBlocks.getBaseBlocks());
+    WOODEN_BLOCKS.forEach(baseBlocks::remove);
+    COLORFUL_BLOCKS.forEach(baseBlocks::remove);
+    STONE_BLOCKS.forEach(baseBlocks::remove);
+    for (Block block : baseBlocks) {
       final Material material = ((AbstractBlockAccessor) block).getMaterial();
       if (material == Material.STONE) {
         STONE_BLOCKS.add(block);
@@ -179,91 +232,65 @@ public class ExtShapeItemGroup extends ItemGroup {
     }
   }
 
-  private final Supplier<ItemStack> stackSupplier;
-  private final BiConsumer<List<ItemStack>, ItemGroup> stacksForDisplay;
-
-  public ExtShapeItemGroup(int index, Identifier id, Supplier<ItemStack> stackSupplier, BiConsumer<List<ItemStack>, ItemGroup> stacksForDisplay) {
-    super(index, id.getNamespace() + "." + id.getPath());
-    this.stackSupplier = stackSupplier;
-    this.stacksForDisplay = stacksForDisplay;
+  public static ItemGroup create(Identifier id, Supplier<ItemStack> iconSupplier, ItemGroup.EntryCollector entryCollector) {
+    final ItemGroup group = new ItemGroup.Builder(null, -1)
+        .entries((enabledFeatures, entries, operatorEnabled) -> {
+          if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
+            entryCollector.accept(enabledFeatures, entries, operatorEnabled);
+          }
+        })
+        .displayName(Text.translatable("itemGroup.%s.%s".formatted(id.getNamespace(), id.getPath())))
+        .icon(iconSupplier)
+        .build();
+//    group.setId(id);
+    return group;
   }
 
-  /**
-   * 在游戏运行中途将本模组的物品组加到 {@link ItemGroup#GROUPS} 中。一开始运行时不会执行此方法，只有在模组中途通过配置屏幕将已关闭的 {@link ExtShapeConfig#showSpecificGroups} 设为 {@code true} 时才会执行本方法。
-   */
   public static void implementGroups() {
-    final ItemGroup[] groups = ItemGroup.GROUPS;
-    final ItemGroup[] newGroups = new ItemGroup[groups.length + 4];
-    System.arraycopy(groups, 0, newGroups, 0, groups.length);
-    ((ItemGroupAccessor) WOODEN_BLOCK_GROUP).setIndex(groups.length);
-    ((ItemGroupAccessor) COLORFUL_BLOCK_GROUP).setIndex(groups.length + 1);
-    ((ItemGroupAccessor) STONE_BLOCK_GROUP).setIndex(groups.length + 2);
-    ((ItemGroupAccessor) OTHER_BLOCK_GROUP).setIndex(groups.length + 3);
-    newGroups[groups.length] = WOODEN_BLOCK_GROUP;
-    newGroups[groups.length + 1] = COLORFUL_BLOCK_GROUP;
-    newGroups[groups.length + 2] = STONE_BLOCK_GROUP;
-    newGroups[groups.length + 3] = OTHER_BLOCK_GROUP;
-    ItemGroup.GROUPS = newGroups;
+//    MOD_GROUPS.forEach(ItemGroupHelper::appendItemGroup);
   }
 
   public static void removeGroups() {
-    final ItemGroup[] newGroups = new ItemGroup[ItemGroup.GROUPS.length - 4];
-    int i = 0;
-    for (ItemGroup group : ItemGroup.GROUPS) {
-      if (!MOD_GROUPS.contains(group)) {
-        newGroups[i] = group;
-        ((ItemGroupAccessor) group).setIndex(i);
-        i += 1;
-      } else {
-        ((ItemGroupAccessor) group).setIndex(-1);
-      }
-    }
-    ItemGroup.GROUPS = newGroups;
-    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-      final int selectedTab = CreativeInventoryScreenAccessor.getSelectedTab();
-      if (selectedTab >= newGroups.length) {
-        CreativeInventoryScreenAccessor.setSelectedTab(newGroups.length - 1);
-      }
-      if (newGroups.length <= 12) {
-        CreativeInventoryScreenAccessor.setTabPage(0);
-      }
-    });
+//    MOD_GROUPS.forEach(ExtShapeItemGroup::removeItemGroup);
   }
+/*
+  public static void removeItemGroup(ItemGroup itemGroup) {
+    if (ItemGroups.getGroups().stream().noneMatch(group -> group.getId().equals(itemGroup.getId()))) {
+      ExtShape.LOGGER.warn("Seems trying to remove a group with id {} that does not exist.", itemGroup.getId());
+    }
+
+    var itemGroups = new ArrayList<>(ItemGroups.getGroups());
+    itemGroups.remove(itemGroup);
+
+    List<ItemGroup> validated = ItemGroupsAccessor.invokeCollect(itemGroups.toArray(ItemGroup[]::new));
+    ItemGroupsAccessor.setGroups(validated);
+    ItemGroupHelper.sortedGroups = validated.stream().sorted((a, b) -> {
+      if (a.isSpecial() && !b.isSpecial()) return 1;
+      if (!a.isSpecial() && b.isSpecial()) return -1;
+      return 0;
+    }).toList();
+  }*/
+
 
   /**
    * 将方块及其变种都添加到物品堆的列表中。
    *
-   * @param baseBlock  其基础方块。
-   * @param itemStacks 需要被添加至的物品堆的列表。
+   * @param baseBlock 其基础方块。
+   * @param entries   需要被添加至的物品堆的列表。
    */
   @Contract(mutates = "param2")
-  protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
+  protected static void importTo(Block baseBlock, FeatureSet featureSet, ItemGroup.Entries entries, boolean operatorsEnabled) {
     if (baseBlock == null) return;
-    itemStacks.add(new ItemStack(baseBlock));
-    for (BlockShape shape : BlockShape.values()) {
-      final Block shapeBlock = BlockMappings.getBlockOf(shape, baseBlock);
-      if (shapeBlock != null) itemStacks.add(new ItemStack(shapeBlock));
+    entries.add(baseBlock);
+    for (BlockShape shape : ExtShapeConfig.CURRENT_CONFIG.shapesInSpecificGroups) {
+      final Block shapeBlock = BlockBiMaps.getBlockOf(shape, baseBlock);
+      if (shapeBlock != null) {
+        entries.add(shapeBlock);
+      }
     }
   }
 
-  @SuppressWarnings("EmptyMethod")
   public static void init() {
-  }
-
-  @Override
-  public void appendStacks(DefaultedList<ItemStack> stacks) {
-    stacksForDisplay.accept(stacks, this);
-  }
-
-  @Override
-  public ItemStack createIcon() {
-    return stackSupplier.get();
-  }
-
-  @Override
-  public int getIndex() {
-    final int index = super.getIndex();
-    if (index == -1) ExtShape.LOGGER.warn("Attempt to find an unactivated group!");
-    return index;
+    Objects.requireNonNull(MOD_GROUPS);
   }
 }

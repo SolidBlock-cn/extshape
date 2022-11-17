@@ -70,7 +70,6 @@ public class VerticalStairsBlock extends Block implements Waterloggable {
     return VOXELS.get(state.get(FACING));
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public BlockState rotate(BlockState state, WorldAccess level, BlockPos pos, BlockRotation rotation) {
     return super.rotate(state, level, pos, rotation).with(FACING, state.get(FACING).rotate(rotation));
@@ -92,7 +91,7 @@ public class VerticalStairsBlock extends Block implements Waterloggable {
   @Override
   public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
     if (state.get(WATERLOGGED)) {
-      world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+      world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
     }
     return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
   }

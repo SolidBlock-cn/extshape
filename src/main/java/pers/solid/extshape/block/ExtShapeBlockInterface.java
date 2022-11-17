@@ -15,6 +15,8 @@ import net.minecraft.block.Material;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -33,8 +35,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
+import pers.solid.extshape.rrp.VanillaStonecutting;
 
 import java.util.Objects;
 
@@ -121,7 +123,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
     if (craftingRecipe != null) {
       final Identifier recipeId = getRecipeId();
       pack.addRecipe(recipeId, craftingRecipe);
-      pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(recipeId), craftingRecipe);
+      pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(recipeId, craftingRecipe), craftingRecipe);
     }
   }
 
@@ -137,7 +139,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
     if (stonecuttingRecipe != null) {
       final Identifier stonecuttingRecipeId = getStonecuttingRecipeId();
       pack.addRecipe(stonecuttingRecipeId, stonecuttingRecipe);
-      pack.addRecipeAdvancement(stonecuttingRecipeId, getAdvancementIdForRecipe(stonecuttingRecipeId), stonecuttingRecipe);
+      pack.addRecipeAdvancement(stonecuttingRecipeId, getAdvancementIdForRecipe(stonecuttingRecipeId, stonecuttingRecipe), stonecuttingRecipe);
 
       // 处理二次切石一步到位的情况。
       if (stonecuttingRecipe instanceof JStonecuttingRecipe jStonecuttingRecipe) {
@@ -149,10 +151,10 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
               JIngredient.ofItem(block),
               jStonecuttingRecipe.result,
               jStonecuttingRecipe.count
-          );
+          ).recipeCategory(jStonecuttingRecipe.recipeCategory);
           secondaryRecipe.addInventoryChangedCriterion("has_" + path, block);
           pack.addRecipe(secondaryId, secondaryRecipe);
-          pack.addRecipeAdvancement(secondaryId, getAdvancementIdForRecipe(secondaryId), secondaryRecipe);
+          pack.addRecipeAdvancement(secondaryId, getAdvancementIdForRecipe(secondaryId, secondaryRecipe), secondaryRecipe);
         }
       }
     }

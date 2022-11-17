@@ -28,7 +28,7 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
 
   public VerticalSlabBlock(Settings settings) {
     super(settings);
-    setDefaultState(this.stateManager.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
+    setDefaultState(getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
   }
 
 
@@ -36,7 +36,7 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
   @Override
   public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
     if (state.get(WATERLOGGED)) {
-      world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+      world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
     }
     return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
   }

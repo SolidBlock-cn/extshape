@@ -9,7 +9,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
 
@@ -31,6 +31,7 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
     return new JShapedRecipe(this).resultCount(3)
+        .recipeCategory(getRecipeCategory())
         .pattern("W#W", "W#W")
         .group(getRecipeGroup())
         .addKey("W", baseBlock)
@@ -46,10 +47,10 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_fence";
-    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_fence";
-    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_fence";
-    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_fence";
+    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_fence";
+    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_fence";
+    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_fence";
+    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_fence";
     return "";
   }
 

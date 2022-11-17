@@ -1,4 +1,4 @@
-package pers.solid.extshape.mappings;
+package pers.solid.extshape.rrp;
 
 import net.devtech.arrp.generator.TextureRegistry;
 import net.minecraft.block.Blocks;
@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import pers.solid.extshape.block.ExtShapeBlocks;
 
 @OnlyIn(Dist.CLIENT)
-public class TextureMappings {
+public class VanillaTextures {
   @OnlyIn(Dist.CLIENT)
   public static void registerTextures() {
     TextureRegistry.register(Blocks.SMOOTH_QUARTZ, new Identifier("minecraft", "block/quartz_block_bottom"));

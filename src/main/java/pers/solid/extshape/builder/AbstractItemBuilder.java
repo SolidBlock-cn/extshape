@@ -1,9 +1,11 @@
 package pers.solid.extshape.builder;
 
-import net.devtech.arrp.util.CanIgnoreReturnValue;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import org.jetbrains.annotations.Contract;
 
 public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> {

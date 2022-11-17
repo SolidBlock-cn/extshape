@@ -3,9 +3,7 @@ package pers.solid.extshape.builder;
 import net.minecraft.block.Block;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import pers.solid.extshape.block.ExtShapeFenceBlock;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeTags;
 
 public class FenceBuilder extends AbstractBlockBuilder<FenceBlock> {
@@ -15,8 +13,7 @@ public class FenceBuilder extends AbstractBlockBuilder<FenceBlock> {
     super(baseBlock, builder -> new ExtShapeFenceBlock(baseBlock, ((FenceBuilder) builder).secondIngredient, builder.blockSettings));
     this.secondIngredient = secondIngredient;
     this.defaultTagToAdd = ExtShapeTags.FENCES;
-    this.mapping = BlockMappings.getMappingOf(BlockShape.FENCE);
-    itemSettings.group(ItemGroup.DECORATIONS);
+    this.shape = BlockShape.FENCE;
   }
 
   @Override

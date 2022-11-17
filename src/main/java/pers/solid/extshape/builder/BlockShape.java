@@ -2,6 +2,7 @@ package pers.solid.extshape.builder;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.gson.*;
 import net.minecraft.block.*;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.util.StringIdentifiable;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.block.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,7 +47,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
   public static final BlockShape FENCE = new BlockShape(FenceBlock.class, BlockFamily.Variant.FENCE, "fence", 1f, false);
   public static final BlockShape FENCE_GATE = new BlockShape(FenceGateBlock.class, BlockFamily.Variant.FENCE_GATE, "fence_gate", 1f, false);
   public static final BlockShape WALL = new BlockShape(WallBlock.class, BlockFamily.Variant.WALL, "wall", 1f, false);
-  public static final BlockShape BUTTON = new BlockShape(AbstractButtonBlock.class, BlockFamily.Variant.BUTTON, "button", 1 / 3f, false);
+  public static final BlockShape BUTTON = new BlockShape(ButtonBlock.class, BlockFamily.Variant.BUTTON, "button", 1 / 3f, false);
 
   public static final BlockShape PRESSURE_PLATE = new BlockShape(PressurePlateBlock.class, BlockFamily.Variant.PRESSURE_PLATE, "pressure_plate", 1 / 3f, false);
 
@@ -114,5 +116,19 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
   @Override
   public int compareTo(@NotNull BlockShape o) {
     return id - o.id;
+  }
+
+  public enum Serializer implements JsonSerializer<BlockShape>, JsonDeserializer<BlockShape> {
+    INSTANCE;
+
+    @Override
+    public BlockShape deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+      return byName(json.getAsString());
+    }
+
+    @Override
+    public JsonElement serialize(BlockShape src, Type typeOfSrc, JsonSerializationContext context) {
+      return new JsonPrimitive(src.asString());
+    }
   }
 }

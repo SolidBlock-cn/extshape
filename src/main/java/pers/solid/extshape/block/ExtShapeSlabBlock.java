@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantBlockInterface {
   public ExtShapeSlabBlock(@NotNull Block baseBlock, Settings settings) {
@@ -46,22 +46,22 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
-    final JRecipe craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK && ExtShapeConfig.CURRENT_CONFIG.specialSnowSlabCrafting) ? new JShapelessRecipe(this, Blocks.SNOW).addInventoryChangedCriterion("has_snow", Blocks.SNOW) : super.getCraftingRecipe();
+    final JRecipe craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK && ExtShapeConfig.CURRENT_CONFIG.specialSnowSlabCrafting) ? new JShapelessRecipe(this, Blocks.SNOW).addInventoryChangedCriterion("has_snow", Blocks.SNOW).recipeCategory(getRecipeCategory()) : super.getCraftingRecipe();
     return craftingRecipe != null && !NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 
   @Override
   public @Nullable JRecipe getStonecuttingRecipe() {
-    return baseBlock == null ? null : simpleStoneCuttingRecipe(2);
+    return baseBlock == null ? null : simpleStoneCuttingRecipe(2).recipeCategory(getRecipeCategory());
   }
 
   @Override
   public String getRecipeGroup() {
     Block baseBlock = this.baseBlock;
-    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_slab";
-    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_slab";
-    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_slab";
-    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_slab";
+    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_slab";
+    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_slab";
+    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_slab";
+    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_slab";
     return "";
   }
 

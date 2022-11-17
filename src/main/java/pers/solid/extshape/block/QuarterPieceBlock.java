@@ -34,7 +34,7 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
 
   public QuarterPieceBlock(Settings settings) {
     super(settings);
-    setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(HALF, BlockHalf.BOTTOM));
+    setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(HALF, BlockHalf.BOTTOM));
   }
 
   @Override
@@ -93,7 +93,7 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
   @Override
   public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
     if (state.get(WATERLOGGED)) {
-      world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+      world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
     }
     return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
   }
