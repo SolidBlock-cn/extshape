@@ -2,9 +2,9 @@ package pers.solid.extshape.tag;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registries;
+import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;

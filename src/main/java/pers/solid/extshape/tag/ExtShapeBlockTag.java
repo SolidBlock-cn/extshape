@@ -3,10 +3,11 @@ package pers.solid.extshape.tag;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registries;
-import net.minecraft.util.registry.RegistryKeys;
 import org.jetbrains.annotations.Contract;
 import pers.solid.extshape.ExtShape;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * 本模组使用的方块标签。需要注意的是，这些标签是内置的会直接存储内容，不会从数据包中加载。不应与 {@link net.minecraft.tag.BlockTags} 混淆。但是，可以使用 {@link #toBlockTag()} 以在需要原版标签对象时使用，或者使用 {@link #toARRP()} 转换成运行时资源包使用的数据。
+ * 本模组使用的方块标签。需要注意的是，这些标签是内置的会直接存储内容，不会从数据包中加载。不应与 {@link BlockTags} 混淆。但是，可以使用 {@link #toBlockTag()} 以在需要原版标签对象时使用，或者使用 {@link #toARRP()} 转换成运行时资源包使用的数据。
  */
 public class ExtShapeBlockTag extends UsableTag<Block> {
   /**
@@ -57,7 +58,7 @@ public class ExtShapeBlockTag extends UsableTag<Block> {
   }
 
   /**
-   * 根据 Minecraft 原版代码中的方块标签（即 {@link net.minecraft.tag.BlockTags} 中的）创建一个新的元素。这里的标识符将直接使用那个标签拥有的标识符。
+   * 根据 Minecraft 原版代码中的方块标签（即 {@link BlockTags} 中的）创建一个新的元素。这里的标识符将直接使用那个标签拥有的标识符。
    *
    * @param vanillaBlockTag 原版的方块标签对象。
    * @return 新的使用已有参数的标识符的方块标签。

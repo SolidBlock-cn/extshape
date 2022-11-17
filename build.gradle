@@ -44,10 +44,6 @@ loom {
             programArg "-username=Solid"
         }
     }
-
-    runConfigs.configureEach {
-        println it.configName
-    }
 }
 
 dependencies {

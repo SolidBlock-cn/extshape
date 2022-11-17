@@ -3,8 +3,8 @@ package pers.solid.extshape.builder;
 import net.devtech.arrp.util.CanIgnoreReturnValue;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registries;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import org.jetbrains.annotations.Contract;
 
 public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> {

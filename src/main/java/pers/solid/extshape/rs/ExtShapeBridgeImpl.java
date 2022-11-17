@@ -7,7 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registry;
 import org.apache.commons.lang3.ObjectUtils;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;

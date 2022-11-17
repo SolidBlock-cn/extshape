@@ -3,11 +3,11 @@ package pers.solid.extshape.config;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.class_7919;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.Tooltip;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
@@ -109,7 +109,7 @@ public class ExtShapeOptionsScreen extends Screen {
     addDrawableChild(new ButtonWidget.Builder(Text.translatable("options.extshape.rrp.title"), button -> {
       if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
     }).setPosition(width / 2 - 150, 111).setSize(300, 20)
-        .setTooltipSupplier(class_7919.method_47407(Text.translatable("options.extshape.rrp.description")))
+        .setTooltip(Tooltip.of(Text.translatable("options.extshape.rrp.description")))
         .build());
 
     {
@@ -122,7 +122,7 @@ public class ExtShapeOptionsScreen extends Screen {
           }
         }
       }).setPosition(width / 2 - 150, 135).setSize(300, 20)
-          .setTooltipSupplier(class_7919.method_47407(Text.translatable("options.extshape.reasonable-sorting.description")))
+          .setTooltip(Tooltip.of(Text.translatable("options.extshape.reasonable-sorting.description")))
           .build();
       reasonableSortingButton.active = client != null && FabricLoader.getInstance().isModLoaded("reasonable-sorting");
       addDrawableChild(reasonableSortingButton);
