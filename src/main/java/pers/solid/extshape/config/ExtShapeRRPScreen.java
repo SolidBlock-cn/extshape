@@ -66,8 +66,8 @@ public class ExtShapeRRPScreen extends Screen {
       ).start();
       regenClientResourcesThread.setName("RegenClientResources");
     })
-        .setTooltip(Tooltip.of(Text.translatable("options.extshape.rrp.regenClientResources.description")))
-        .setPosition(width / 2 - 205, 36).setSize(200, 20).build());
+        .tooltip(Tooltip.of(Text.translatable("options.extshape.rrp.regenClientResources.description")))
+        .position(width / 2 - 205, 36).size(200, 20).build());
     addDrawableChild(regenServerDataButton = new ButtonWidget.Builder(Text.translatable("options.extshape.rrp.regenServerData"), button -> {
       if (regenServerDataThread != null && regenServerDataThread.getState() != Thread.State.TERMINATED) return;
       (regenServerDataThread = new Thread(() -> {
@@ -85,8 +85,8 @@ public class ExtShapeRRPScreen extends Screen {
       })).start();
       regenServerDataThread.setName("RegenServerData");
     })
-        .setTooltip(Tooltip.of(Text.translatable("options.extshape.rrp.regenServerData.description")))
-        .setPosition(width / 2 + 5, 36).setSize(200, 20).build());
+        .tooltip(Tooltip.of(Text.translatable("options.extshape.rrp.regenServerData.description")))
+        .position(width / 2 + 5, 36).size(200, 20).build());
     addDrawableChild(dumpClientResourcesButton = new ButtonWidget.Builder(Text.translatable("options.extshape.rrp.exportClientResources"), button -> {
       if (dumpClientResourcesThread != null && dumpClientResourcesThread.getState() != Thread.State.TERMINATED) return;
       (dumpClientResourcesThread = new Thread(() -> {
@@ -104,8 +104,8 @@ public class ExtShapeRRPScreen extends Screen {
       })).start();
       dumpClientResourcesThread.setName("DumpClientResources");
     })
-        .setTooltip(Tooltip.of(Text.translatable("options.extshape.rrp.exportClientResources.description")))
-        .setPosition(width / 2 - 205, 61).setSize(200, 20).build());
+        .tooltip(Tooltip.of(Text.translatable("options.extshape.rrp.exportClientResources.description")))
+        .position(width / 2 - 205, 61).size(200, 20).build());
     addDrawableChild(dumpServerDataButton = new ButtonWidget.Builder(Text.translatable("options.extshape.rrp.exportServerData"), button -> {
       if (dumpServerDataThread != null && dumpServerDataThread.getState() != Thread.State.TERMINATED) return;
       (dumpServerDataThread = new Thread(() -> {
@@ -123,8 +123,8 @@ public class ExtShapeRRPScreen extends Screen {
       })).start();
       dumpServerDataThread.setName("DumpServerData");
     })
-        .setTooltip(Tooltip.of(Text.translatable("options.extshape.rrp.exportServerData.description")))
-        .setPosition(width / 2 + 5, 61).setSize(200, 20).build());
+        .tooltip(Tooltip.of(Text.translatable("options.extshape.rrp.exportServerData.description")))
+        .position(width / 2 + 5, 61).size(200, 20).build());
     if (dumpPathField == null) {
       addDrawableChild(dumpPathField = new TextFieldWidget(textRenderer, width / 2 - 140, 115, 250, 20, Text.translatable("options.extshape.rrp.exportFilePath")));
       dumpPathField.setMaxLength(Integer.MAX_VALUE);
@@ -150,7 +150,7 @@ public class ExtShapeRRPScreen extends Screen {
       if (client != null) {
         client.setScreen(parent);
       }
-    }).setPosition(width / 2 - 100, height - 27).setSize(200, 20).build());
+    }).position(width / 2 - 100, height - 27).size(200, 20).build());
   }
 
   @Override

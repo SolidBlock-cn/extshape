@@ -41,7 +41,7 @@ public class ExtShapeOptionsScreen extends Screen {
     // 里面的内容不需要被选中，所以只是drawable。
     addDrawable(new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25));
     ExtShapeConfig config = newConfig;
-    this.addDrawableChild(new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).setPosition(this.width / 2 - 100, this.height - 27).setSize(200, 20).build());
+    this.addDrawableChild(new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).position(this.width / 2 - 100, this.height - 27).size(200, 20).build());
 
     // addToVanillaGroups
     addDrawableChild(SimpleOption.ofBoolean(
@@ -108,8 +108,8 @@ public class ExtShapeOptionsScreen extends Screen {
     // 运行时资源包设置。
     addDrawableChild(new ButtonWidget.Builder(Text.translatable("options.extshape.rrp.title"), button -> {
       if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
-    }).setPosition(width / 2 - 150, 111).setSize(300, 20)
-        .setTooltip(Tooltip.of(Text.translatable("options.extshape.rrp.description")))
+    }).position(width / 2 - 150, 111).size(300, 20)
+        .tooltip(Tooltip.of(Text.translatable("options.extshape.rrp.description")))
         .build());
 
     {
@@ -121,7 +121,7 @@ public class ExtShapeOptionsScreen extends Screen {
             ExtShape.LOGGER.error("Failed to open Reasonable Sorting config screen:", e);
           }
         }
-      }).setPosition(width / 2 - 150, 135).setSize(300, 20)
+      }).position(width / 2 - 150, 135).setSize(300, 20)
           .setTooltip(Tooltip.of(Text.translatable("options.extshape.reasonable-sorting.description")))
           .build();
       reasonableSortingButton.active = client != null && FabricLoader.getInstance().isModLoaded("reasonable-sorting");
