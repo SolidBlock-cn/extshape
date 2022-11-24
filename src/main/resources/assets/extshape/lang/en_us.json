@@ -14,14 +14,6 @@
   "block.extshape.?_vertical_stairs": "Vertical %s Stairs",
   "block.extshape.?_vertical_quarter_piece": "Vertical %s Quarter Piece",
 
-  "block.extshape.prefix_removal.block_of.from": "Block of",
-  "block.extshape.suffix_conversion.brick.from": " Bricks",
-  "block.extshape.suffix_conversion.brick.to": " Brick",
-  "block.extshape.suffix_conversion.planks.from": " Planks",
-  "block.extshape.suffix_conversion.planks.to": "",
-  "block.extshape.suffix_conversion.tiles.from": " Tile",
-  "block.extshape.suffix_conversion.tiles.to": "",
-
   "itemGroup.extshape.wooden_blocks": "\u00a79Extended Block Shape:\u00a7r Wooden Blocks",
   "itemGroup.extshape.colorful_blocks": "\u00a79Extended Block Shape:\u00a7r Colorful Blocks",
   "itemGroup.extshape.stone_blocks": "\u00a79Extended Block Shape:\u00a7r Stone Blocks",

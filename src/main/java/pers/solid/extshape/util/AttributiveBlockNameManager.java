@@ -48,6 +48,7 @@ public class AttributiveBlockNameManager {
 
   public static final Map<Pattern, String> JA_REPLACEMENT = ImmutableMap.<Pattern, String>builder()
       .put(Pattern.compile("ブロック$"), StringUtils.EMPTY)
+      .put(Pattern.compile("の板材$"), StringUtils.EMPTY)
       .put(Pattern.compile("板材$"), StringUtils.EMPTY)
       .build();
   public static final String ATTRIBUTIVE_KEY = "extshape.special.attributive";
@@ -105,7 +106,7 @@ public class AttributiveBlockNameManager {
       if (result != null) {
         if (result.endsWith("歪ん")) {
           result += "だ";
-        } else {
+        } else if (!result.endsWith("歪んだ")) {
           result += "の";
         }
       }
