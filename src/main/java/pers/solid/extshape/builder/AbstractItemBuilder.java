@@ -1,5 +1,6 @@
 package pers.solid.extshape.builder;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -37,12 +38,14 @@ public abstract class AbstractItemBuilder<T extends Item> implements Builder<T> 
     return this.identifier;
   }
 
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public AbstractItemBuilder<T> setSettings(Item.Settings settings) {
     this.settings = settings;
     return this;
   }
 
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   @Override
   public Builder<T> setIdentifier(Identifier identifier) {

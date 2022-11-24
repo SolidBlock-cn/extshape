@@ -28,7 +28,7 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
 
   public VerticalSlabBlock(Settings settings) {
     super(settings);
-    setDefaultState(this.stateManager.getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
+    setDefaultState(getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
   }
 
 
