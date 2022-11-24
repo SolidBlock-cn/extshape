@@ -2,8 +2,8 @@ package pers.solid.extshape.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.impl.item.group.CreativeGuiExtensions;
-import net.fabricmc.fabric.impl.item.group.FabricCreativeGuiComponents;
+import net.fabricmc.fabric.impl.client.item.group.CreativeGuiExtensions;
+import net.fabricmc.fabric.impl.client.item.group.FabricCreativeGuiComponents;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * @see net.fabricmc.fabric.impl.item.group.CreativeGuiExtensions
- * @see net.fabricmc.fabric.mixin.item.group.client.MixinCreativePlayerInventoryGui
+ * @see CreativeGuiExtensions
+ * @see net.fabricmc.fabric.mixin.item.group.client.CreativeInventoryScreenMixin
  */
 @Mixin(CreativeInventoryScreen.class)
 @Environment(EnvType.CLIENT)
@@ -27,7 +27,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
   }
 
   /**
-   * @see net.fabricmc.fabric.mixin.item.group.client.MixinCreativePlayerInventoryGui#fabric_getPageOffset(int)
+   * @see net.fabricmc.fabric.mixin.item.group.client.CreativeInventoryScreenMixin#fabric_getPageOffset(int)
    */
   @SuppressWarnings("JavadocReference")
   private static int fabric_getPageOffset_copied(int page) {
