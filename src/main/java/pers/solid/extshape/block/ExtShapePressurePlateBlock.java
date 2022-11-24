@@ -22,7 +22,7 @@ import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
 
@@ -76,7 +76,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   @Override
   public @NotNull JRecipe getCraftingRecipe() {
-    if (ExtShapeTags.WOOLS.contains(baseBlock)) {
+    if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registry.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final JShapelessRecipe recipe = new JShapelessRecipe(this.getItemId(), carpetId);
@@ -98,7 +98,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     ExtShapeVariantBlockInterface.super.writeRecipes(pack);
 
     // 反向合成配方。
-    if (ExtShapeTags.WOOLS.contains(baseBlock)) {
+    if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registry.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final JShapelessRecipe recipe = new JShapelessRecipe(carpetId, this.getItemId());
@@ -117,11 +117,11 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   @Override
   public String getRecipeGroup() {
-    if (ExtShapeTags.WOOLS.contains(baseBlock)) return "wool_pressure_plate";
-    if (ExtShapeTags.CONCRETES.contains(baseBlock)) return "concrete_pressure_plate";
-    if (ExtShapeTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_pressure_plate";
-    if (ExtShapeTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_pressure_plate";
-    if (ExtShapeTags.PLANKS.contains(baseBlock)) return "wooden_pressure_plate";
+    if (BlockCollections.WOOLS.contains(baseBlock)) return "wool_pressure_plate";
+    if (BlockCollections.CONCRETES.contains(baseBlock)) return "concrete_pressure_plate";
+    if (BlockCollections.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_pressure_plate";
+    if (BlockCollections.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_pressure_plate";
+    if (BlockCollections.PLANKS.contains(baseBlock)) return "wooden_pressure_plate";
     return "";
   }
 
