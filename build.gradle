@@ -32,8 +32,24 @@ repositories {
     maven { url 'https://maven.terraformersmc.com/releases/' }
     // 合理排序模组依赖的 Cloth Config
     maven { url "https://maven.shedaniel.me/" }
+    /*
+    这个是存储在 GitHub 上的 BRRP 模组
+    maven {
+        url 'https://raw.nuaa.cf/SolidBlock-cn/mvn-repo/main'
+    }*/
     // 合理排序和 BRRP 模组。这两个模组均存储于本地的 maven 仓库。
     mavenLocal()
+}
+
+loom {
+    runs {
+        client {
+            programArg "-username=Solid"
+        }
+    }
+    runConfigs.configureEach {
+        it.configName = "Minecraft Fabric ${it.name.capitalize()}"
+    }
 }
 
 dependencies {
@@ -51,10 +67,13 @@ dependencies {
 
     // BRRP 模组
     def brrp_mc_version = project.properties.getOrDefault "brrp_mc_version", project.minecraft_version
-    modImplementation "net.devtech:brrp-fabric:${project.brrp_version}-${brrp_mc_version}"
+    modImplementation "pers.solid:brrp-fabric:${project.brrp_version}-${brrp_mc_version}"
     // 合理排序模组
     def reasonable_sorting_mc_version = project.properties.getOrDefault "reasonable_sorting_mc_version", project.minecraft_version
     modImplementation "pers.solid.mod:reasonable-sorting-fabric:${project.reasonable_sorting_version}-mc${reasonable_sorting_mc_version}"
+
+    // 由于新版的 Loom 没有 @CanIgnoreReturnValue 等注解，故在这里手动添加。
+    modImplementation "com.google.errorprone:error_prone_annotations:+"
 }
 
 processResources {
@@ -103,6 +122,11 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+        maven {
+            // 将模块导出至本地另一个项目的位置中，该项目与 GitHub 项目关联。
+            // 随后，推送那个项目至 GitHub 上。
+            url = 'file:../mvn-repo'
+        }
     }
 }
 
@@ -111,6 +135,7 @@ modrinth {
     projectId = 'tb7kCxSW'
     String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
+    versionType = 'release'
     uploadFile = remapJar
     gameVersions = (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]

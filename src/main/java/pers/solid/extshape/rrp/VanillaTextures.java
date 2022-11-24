@@ -1,4 +1,4 @@
-package pers.solid.extshape.mappings;
+package pers.solid.extshape.rrp;
 
 import net.devtech.arrp.generator.TextureRegistry;
 import net.fabricmc.api.EnvType;
@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.ExtShapeBlocks;
 
 @Environment(EnvType.CLIENT)
-public class TextureMappings {
+public class VanillaTextures {
   @Environment(EnvType.CLIENT)
   public static void registerTextures() {
     TextureRegistry.register(Blocks.SMOOTH_QUARTZ, new Identifier("minecraft", "block/quartz_block_bottom"));
