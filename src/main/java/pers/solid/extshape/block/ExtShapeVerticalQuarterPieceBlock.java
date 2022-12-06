@@ -59,7 +59,7 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
 
   @Override
   public @NotNull JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(4);
+    return simpleStoneCuttingRecipe(4).category(getRecipeCategory());
   }
 
   @Override

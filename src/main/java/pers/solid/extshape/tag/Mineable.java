@@ -16,7 +16,7 @@ final class Mineable {
   /**
    * 不含木板、原木等。部分不可能作为基础方块的予以注释掉。
    *
-   * @see net.minecraft.tag.BlockTags#AXE_MINEABLE
+   * @see net.minecraft.registry.tag.BlockTags#AXE_MINEABLE
    */
   static final @Unmodifiable ImmutableSet<Block> VANILLA_AXE_MINEABLE = ImmutableSet.of(
 //      Blocks.NOTE_BLOCK,
@@ -81,10 +81,16 @@ final class Mineable {
 //      Blocks.TWISTING_VINES_PLANT,
 //      Blocks.TWISTING_VINES,
 //      Blocks.VINE,
-      Blocks.WARPED_FUNGUS
+      Blocks.WARPED_FUNGUS,
 //      Blocks.WEEPING_VINES_PLANT,
 //      Blocks.WEEPING_VINES,
 //      Blocks.WHEAT
+
+      // 1.20
+      Blocks.BAMBOO_BLOCK,
+      Blocks.STRIPPED_BAMBOO_BLOCK,
+      Blocks.BAMBOO_PLANKS,
+      Blocks.BAMBOO_MOSAIC
   );
   static final @Unmodifiable ImmutableSet<Block> VANILLA_HOE_MINEABLE = ImmutableSet.of(
       Blocks.NETHER_WART_BLOCK,
@@ -465,14 +471,14 @@ final class Mineable {
   );
 
   /**
-   * @see net.minecraft.tag.BlockTags#NEEDS_DIAMOND_TOOL
+   * @see net.minecraft.registry.tag.BlockTags#NEEDS_DIAMOND_TOOL
    */
   @ApiStatus.AvailableSince("1.5.0")
   static final @Unmodifiable ImmutableSet<Block> NEEDS_DIAMOND_TOOL = ImmutableSet.of(
       Blocks.OBSIDIAN, Blocks.CRYING_OBSIDIAN, Blocks.NETHERITE_BLOCK, Blocks.RESPAWN_ANCHOR, Blocks.ANCIENT_DEBRIS
   );
   /**
-   * @see net.minecraft.tag.BlockTags#NEEDS_IRON_TOOL
+   * @see net.minecraft.registry.tag.BlockTags#NEEDS_IRON_TOOL
    */
   @ApiStatus.AvailableSince("1.5.0")
   static final @Unmodifiable ImmutableSet<Block> NEEDS_IRON_TOOL = ImmutableSet.of(
@@ -490,7 +496,7 @@ final class Mineable {
       Blocks.DEEPSLATE_REDSTONE_ORE
   );
   /**
-   * @see net.minecraft.tag.BlockTags#NEEDS_STONE_TOOL
+   * @see net.minecraft.registry.tag.BlockTags#NEEDS_STONE_TOOL
    */
   @ApiStatus.AvailableSince("1.5.0")
   static final @Unmodifiable ImmutableSet<Block> NEEDS_STONE_TOOL = ImmutableSet.of(

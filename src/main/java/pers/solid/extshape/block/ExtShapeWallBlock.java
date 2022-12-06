@@ -29,7 +29,7 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1);
+    return simpleStoneCuttingRecipe(1).category(getRecipeCategory());
   }
 
   @Override

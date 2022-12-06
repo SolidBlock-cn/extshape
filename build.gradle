@@ -11,7 +11,7 @@ sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name + "-fabric"
-version = project.mod_version + '-mc' + project.minecraft_version
+version = project.mod_version + '-mc1.19.3'
 group = project.maven_group
 
 repositories {
@@ -121,7 +121,7 @@ modrinth {
     projectId = 'tb7kCxSW'
     String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
-    versionType = 'beta'
+    versionType = 'release'
     uploadFile = remapJar
     gameVersions = (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]

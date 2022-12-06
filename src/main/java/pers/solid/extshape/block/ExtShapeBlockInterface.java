@@ -13,8 +13,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.util.Identifier;
 import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
@@ -105,7 +105,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     if (craftingRecipe != null) {
       final Identifier recipeId = getRecipeId();
       pack.addRecipe(recipeId, craftingRecipe);
-      pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(recipeId), craftingRecipe);
+      pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(recipeId, craftingRecipe), craftingRecipe);
     }
   }
 
@@ -121,7 +121,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     if (stonecuttingRecipe != null) {
       final Identifier stonecuttingRecipeId = getStonecuttingRecipeId();
       pack.addRecipe(stonecuttingRecipeId, stonecuttingRecipe);
-      pack.addRecipeAdvancement(stonecuttingRecipeId, getAdvancementIdForRecipe(stonecuttingRecipeId), stonecuttingRecipe);
+      pack.addRecipeAdvancement(stonecuttingRecipeId, getAdvancementIdForRecipe(stonecuttingRecipeId, stonecuttingRecipe), stonecuttingRecipe);
 
       // 处理二次切石一步到位的情况。
       if (stonecuttingRecipe instanceof JStonecuttingRecipe jStonecuttingRecipe) {
@@ -133,10 +133,10 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
               JIngredient.ofItem(block),
               jStonecuttingRecipe.result,
               jStonecuttingRecipe.count
-          );
+          ).category(jStonecuttingRecipe.category);
           secondaryRecipe.addInventoryChangedCriterion("has_" + path, block);
           pack.addRecipe(secondaryId, secondaryRecipe);
-          pack.addRecipeAdvancement(secondaryId, getAdvancementIdForRecipe(secondaryId), secondaryRecipe);
+          pack.addRecipeAdvancement(secondaryId, getAdvancementIdForRecipe(secondaryId, secondaryRecipe), secondaryRecipe);
         }
       }
     }

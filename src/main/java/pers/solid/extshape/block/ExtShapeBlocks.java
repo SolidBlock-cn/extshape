@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.devtech.arrp.generator.BRRPCubeBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.Items;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
@@ -61,7 +62,7 @@ public final class ExtShapeBlocks {
     BlocksBuilder.createAllShapes(COBBLESTONE, FenceSettings.common(Items.FLINT), ButtonType.STONE, ActivationRule.MOBS).build();
 
     // 原木、木头、菌柄、菌核及其去皮变种。
-    final ImmutableMap<BlockShape, ExtShapeBlockTag> woodenTags = new ImmutableMap.Builder<BlockShape, ExtShapeBlockTag>()
+    final ImmutableMap<BlockShape, ExtShapeBlockTag> logTags = new ImmutableMap.Builder<BlockShape, ExtShapeBlockTag>()
         .put(BlockShape.STAIRS, ExtShapeTags.LOG_STAIRS)
         .put(BlockShape.SLAB, ExtShapeTags.LOG_SLABS)
         .put(BlockShape.VERTICAL_SLAB, ExtShapeTags.LOG_VERTICAL_SLABS)
@@ -74,26 +75,46 @@ public final class ExtShapeBlocks {
         .put(BlockShape.PRESSURE_PLATE, ExtShapeTags.LOG_PRESSURE_PLATES)
         .build();
 
-    ExtShapeTags.LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(woodenTags).build());
-    ExtShapeTags.STRIPPED_LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(woodenTags).build());
-    ExtShapeTags.WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, FenceSettings.common(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(woodenTags).build());
-    ExtShapeTags.STRIPPED_WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, FenceSettings.common(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(woodenTags).build());
-    ExtShapeTags.STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(woodenTags).build());
-    ExtShapeTags.STRIPPED_STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(woodenTags).build());
-    ExtShapeTags.HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, FenceSettings.netherWood(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(woodenTags).build());
-    ExtShapeTags.STRIPPED_HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, FenceSettings.netherWood(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(woodenTags).build());
+    final ImmutableMap<BlockShape, ExtShapeBlockTag> woodenTags = ImmutableMap.<BlockShape, ExtShapeBlockTag>builder()
+        .put(BlockShape.STAIRS, ExtShapeTags.WOODEN_STAIRS)
+        .put(BlockShape.SLAB, ExtShapeTags.WOODEN_SLABS)
+        .put(BlockShape.VERTICAL_SLAB, ExtShapeTags.WOODEN_VERTICAL_SLABS)
+        .put(BlockShape.VERTICAL_STAIRS, ExtShapeTags.WOODEN_VERTICAL_STAIRS)
+        .put(BlockShape.QUARTER_PIECE, ExtShapeTags.WOODEN_QUARTER_PIECES)
+        .put(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES)
+        .put(BlockShape.FENCE, ExtShapeTags.WOODEN_FENCES)
+        .put(BlockShape.PRESSURE_PLATE, ExtShapeTags.PRESSURE_PLATES)
+        .put(BlockShape.BUTTON, ExtShapeTags.WOODEN_BUTTONS)
+        .put(BlockShape.WALL, ExtShapeTags.WOODEN_WALLS)
+        .build();
+    ExtShapeTags.LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(logTags).build());
+    final FenceSettings bambooFenceSettings = FenceSettings.bambooWood(Items.BAMBOO);
+    BlocksBuilder.createAllShapes(BAMBOO_BLOCK, bambooFenceSettings, ButtonType.BAMBOO, ActivationRule.EVERYTHING)
+        .consumeEachSettings((blockShape, settings) -> settings.requires(FeatureFlags.UPDATE_1_20).mapColor(MapColor.DARK_GREEN))
+        .setTagToAddForShape(woodenTags)
+        .build();
+    ExtShapeTags.STRIPPED_LOGS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(logTags).build());
+    BlocksBuilder.createAllShapes(STRIPPED_BAMBOO_BLOCK, bambooFenceSettings, ButtonType.BAMBOO, ActivationRule.EVERYTHING)
+        .consumeEachSettings((blockShape, settings) -> settings.requires(FeatureFlags.UPDATE_1_20).mapColor(MapColor.YELLOW))
+        .setTagToAddForShape(woodenTags)
+        .build();
+    ExtShapeTags.WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, FenceSettings.common(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
+    ExtShapeTags.STRIPPED_WOODS.forEach(block -> BlocksBuilder.createAllShapes(block, FenceSettings.common(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
+    ExtShapeTags.STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(logTags).build());
+    ExtShapeTags.STRIPPED_STEMS.forEach(block -> BlocksBuilder.createConstructionOnly(block).setPillar().setTagToAddForShape(logTags).build());
+    ExtShapeTags.HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, FenceSettings.netherWood(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
+    ExtShapeTags.STRIPPED_HYPHAES.forEach(block -> BlocksBuilder.createAllShapes(block, FenceSettings.netherWood(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
 
     // 木板。
     for (final Block block : ExtShapeTags.PLANKS) {
       if (block == BAMBOO_PLANKS || block == BAMBOO_MOSAIC) {
-        BlocksBuilder.createAllShapes(block, FenceSettings.bambooWood(Items.BAMBOO), ButtonType.BAMBOO, ActivationRule.EVERYTHING).consumeEachSettings((blockShape, settings) -> settings.requires(FeatureFlags.UPDATE_1_20)).build();
+        BlocksBuilder.createAllShapes(block, bambooFenceSettings, ButtonType.BAMBOO, ActivationRule.EVERYTHING)
+            .consumeEachSettings((blockShape, settings) -> settings.requires(FeatureFlags.UPDATE_1_20))
+            .setTagToAddForShape(woodenTags)
+            .build();
       } else {
         BlocksBuilder.createAllShapes(block, null, ButtonType.WOODEN, ActivationRule.EVERYTHING)
-            .setTagToAddForShape(BlockShape.VERTICAL_SLAB, ExtShapeTags.WOODEN_VERTICAL_SLABS)
-            .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.WOODEN_VERTICAL_STAIRS)
-            .setTagToAddForShape(BlockShape.QUARTER_PIECE, ExtShapeTags.WOODEN_QUARTER_PIECES)
-            .setTagToAddForShape(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES)
-            .setTagToAddForShape(BlockShape.WALL, ExtShapeTags.WOODEN_WALLS)
+            .setTagToAddForShape(woodenTags)
             .build();
       }
     }

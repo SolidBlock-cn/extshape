@@ -53,7 +53,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   @Override
   public @NotNull JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(2);
+    return simpleStoneCuttingRecipe(2).category(getRecipeCategory());
   }
 
   @Override

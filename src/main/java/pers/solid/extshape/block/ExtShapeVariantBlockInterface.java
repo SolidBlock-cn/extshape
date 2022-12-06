@@ -46,7 +46,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
    * @return 转换得到的路径前缀。
    */
   static @NotNull String getPathPrefixOf(@NotNull String path) {
-    return PATH_PREFIXES.computeIfAbsent(path, s -> s
+    return PATH_PREFIXES.computeIfAbsent(path, s -> s.endsWith("bamboo_block") ? s : s
         .replaceAll("_planks$", "")
         .replaceAll("_block$", "")
         .replaceAll("^block_of_", "")

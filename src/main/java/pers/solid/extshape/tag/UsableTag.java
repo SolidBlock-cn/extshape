@@ -19,7 +19,7 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
   /**
    * 包含所有已创建的标签。
    **/
-  public static final List<UsableTag<?>> TAG_LIST = new ArrayList<>();
+  public static final Collection<UsableTag<?>> TAG_LIST = new LinkedHashSet<>();
   public final Identifier identifier;
   public final Collection<E> entryList;
   public final Collection<UsableTag<E>> tagList;
@@ -28,6 +28,9 @@ public abstract class UsableTag<E> extends AbstractCollection<E> {
     this.identifier = identifier;
     this.entryList = entryList;
     this.tagList = tagList;
+    if (TAG_LIST.contains(this)) {
+      throw new IllegalStateException("Duplicate tag: " + this);
+    }
     TAG_LIST.add(this);
   }
 

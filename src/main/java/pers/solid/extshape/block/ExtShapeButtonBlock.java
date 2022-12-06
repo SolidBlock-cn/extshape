@@ -34,7 +34,7 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
    *
    * @see pers.solid.extshape.config.ExtShapeConfig#avoidSomeButtonRecipes
    */
-  public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK).addAll(ExtShapeTags.LOGS).addAll(ExtShapeTags.WOODS).addAll(ExtShapeTags.HYPHAES).addAll(ExtShapeTags.STEMS).addAll(ExtShapeTags.STRIPPED_LOGS).addAll(ExtShapeTags.STRIPPED_WOODS).addAll(ExtShapeTags.STRIPPED_HYPHAES).addAll(ExtShapeTags.STRIPPED_STEMS).build();
+  public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK, Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).addAll(ExtShapeTags.LOGS).addAll(ExtShapeTags.WOODS).addAll(ExtShapeTags.HYPHAES).addAll(ExtShapeTags.STEMS).addAll(ExtShapeTags.STRIPPED_LOGS).addAll(ExtShapeTags.STRIPPED_WOODS).addAll(ExtShapeTags.STRIPPED_HYPHAES).addAll(ExtShapeTags.STRIPPED_STEMS).build();
   public final ButtonType type;
   public final Block baseBlock;
 
@@ -69,13 +69,6 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   @Override
   public Block getBaseBlock() {
     return baseBlock;
-  }
-
-  @Override
-  protected SoundEvent getClickSound(boolean powered) {
-    if (this.type == ButtonType.WOODEN)
-      return powered ? SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON : SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF;
-    else return powered ? SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON : SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF;
   }
 
   @Override
@@ -126,6 +119,7 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     }
     return new JShapelessRecipe(this, baseBlock)
         .addInventoryChangedCriterion("has_ingredient", baseBlock)
+        .category(getRecipeCategory())
         .group(getRecipeGroup());
   }
 

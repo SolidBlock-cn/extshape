@@ -4,17 +4,17 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.ComposterBlock;
+import net.minecraft.block.FireBlock;
 import net.minecraft.item.ItemGroups;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
@@ -22,14 +22,17 @@ import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.config.ExtShapeOptionsScreen;
 import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.rs.ExtShapeBridgeImpl;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.EntryVariantAppender;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * <p>欢迎使用扩展方块形状模组。本模组为许多方块提供了各个形状的变种，包括原版不存在的形状。
@@ -63,12 +66,6 @@ public class ExtShape implements ModInitializer {
 
     ExtShapeRRP.registerRRP();
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
-    ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-      dispatcher.register(ClientCommandManager.literal("extshape:config").executes(context -> {
-        context.getSource().getClient().setScreen(new ExtShapeOptionsScreen(null));
-        return 1;
-      }));
-    });
 
     if (FabricLoader.getInstance().isModLoaded("reasonable-sorting")) {
       try {
@@ -91,7 +88,8 @@ public class ExtShape implements ModInitializer {
         IntStream.range(0, ExtShapeTags.LOGS.size()).mapToObj(i -> Pair.of(ExtShapeTags.LOGS.get(i), ExtShapeTags.STRIPPED_LOGS.get(i))),
         IntStream.range(0, ExtShapeTags.WOODS.size()).mapToObj(i -> Pair.of(ExtShapeTags.WOODS.get(i), ExtShapeTags.STRIPPED_WOODS.get(i))),
         IntStream.range(0, ExtShapeTags.HYPHAES.size()).mapToObj(i -> Pair.of(ExtShapeTags.HYPHAES.get(i), ExtShapeTags.STRIPPED_HYPHAES.get(i))),
-        IntStream.range(0, ExtShapeTags.STEMS.size()).mapToObj(i -> Pair.of(ExtShapeTags.STEMS.get(i), ExtShapeTags.STRIPPED_STEMS.get(i)))
+        IntStream.range(0, ExtShapeTags.STEMS.size()).mapToObj(i -> Pair.of(ExtShapeTags.STEMS.get(i), ExtShapeTags.STRIPPED_STEMS.get(i))),
+        Stream.of(Pair.of(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK))
     ).forEach(pair -> {
       final Block inputBase = pair.getFirst();
       final Block outputBase = pair.getSecond();
@@ -171,6 +169,21 @@ public class ExtShape implements ModInitializer {
     FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_BUTTONS.toItemTag(), 100);
     FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_PRESSURE_PLATES.toItemTag(), 300);
 
+    // 对于竹块和去皮竹块的。
+    for (final var block : new Block[]{Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK}) {
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.STAIRS, block), 300);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.SLAB, block), 150);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_STAIRS, block), 300);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_SLAB, block), 150);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.QUARTER_PIECE, block), 75);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, block), 75);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.WALL, block), 300);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.FENCE, block), 300);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.FENCE_GATE, block), 300);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.BUTTON, block), 100);
+      FuelRegistry.INSTANCE.add(BlockMappings.getBlockOf(BlockShape.PRESSURE_PLATE, block), 300);
+    }
+
     // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
     FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_STAIRS.toItemTag(), 100);
     FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_SLABS.toItemTag(), 50);
@@ -207,7 +220,7 @@ public class ExtShape implements ModInitializer {
       }
     }
     // 原木
-    for (final Block baseBlock : Iterables.concat(ExtShapeTags.LOGS, ExtShapeTags.STRIPPED_LOGS, ExtShapeTags.WOODS, ExtShapeTags.STRIPPED_WOODS)) {
+    for (final Block baseBlock : Iterables.concat(ExtShapeTags.LOGS, ExtShapeTags.STRIPPED_LOGS, ExtShapeTags.WOODS, ExtShapeTags.STRIPPED_WOODS, List.of(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK))) {
       for (BlockShape shape : BlockShape.values()) {
         final Block block = BlockMappings.getBlockOf(shape, baseBlock);
         if (block != null) registry.add(block, 5, 5);
@@ -217,32 +230,20 @@ public class ExtShape implements ModInitializer {
 
   private void registerItemGroups() {
     final BlockShape[] shapes = {
-        BlockShape.STAIRS, BlockShape.SLAB, BlockShape.QUARTER_PIECE, BlockShape.VERTICAL_STAIRS, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_QUARTER_PIECE, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.WALL
+        BlockShape.STAIRS, BlockShape.SLAB, BlockShape.QUARTER_PIECE, BlockShape.VERTICAL_STAIRS, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_QUARTER_PIECE, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.WALL, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON
     };
     ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
       if (!ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups) return;
       entries.addBefore(Items.SMOOTH_STONE_SLAB, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
+      entries.addAfter(Items.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS);
     });
     ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(new EntryVariantAppender(ItemGroups.BUILDING_BLOCKS, shapes, Iterables.filter(BlockMappings.BASE_BLOCKS, block -> !(ExtShapeTags.WOOLS.contains(block) || ExtShapeTags.STAINED_TERRACOTTA.contains(block) || ExtShapeTags.CONCRETES.contains(block) || ExtShapeTags.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA))));
     ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(new EntryVariantAppender(ItemGroups.COLORED_BLOCKS, shapes, Iterables.concat(ExtShapeTags.WOOLS, Collections.singleton(Blocks.TERRACOTTA), ExtShapeTags.STAINED_TERRACOTTA, ExtShapeTags.CONCRETES, ExtShapeTags.GLAZED_TERRACOTTA)));
     ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(new EntryVariantAppender(ItemGroups.NATURAL, shapes, Iterables.filter(BlockMappings.BASE_BLOCKS, block -> !(ExtShapeTags.LOGS.contains(block) || ExtShapeTags.STEMS.contains(block)))));
     ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> {
       if (!ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups) return;
-      final List<ItemStack> buttons = new ArrayList<>();
-      final List<ItemStack> pressurePlates = new ArrayList<>();
-      final List<ItemStack> fenceGates = new ArrayList<>();
-      for (Block block : ExtShapeBlocks.BLOCKS) {
-        if (block instanceof ButtonBlock) {
-          buttons.add(block.asItem().getDefaultStack());
-        } else if (block instanceof PressurePlateBlock) {
-          pressurePlates.add(block.asItem().getDefaultStack());
-        } else if (block instanceof FenceGateBlock) {
-          fenceGates.add(block.asItem().getDefaultStack());
-        }
-      }
-      entries.addAfter(Items.WARPED_BUTTON, buttons);
-      entries.addAfter(Items.WARPED_PRESSURE_PLATE, pressurePlates);
-      entries.addAfter(Items.WARPED_FENCE_GATE, fenceGates);
+      entries.addAfter(Items.STONE_BUTTON, BlockMappings.getBlockOf(BlockShape.BUTTON, Blocks.OBSIDIAN));
+      entries.addBefore(Items.OAK_BUTTON, BlockMappings.getBlockOf(BlockShape.BUTTON, Blocks.WHITE_WOOL));
     });
   }
 

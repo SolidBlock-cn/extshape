@@ -4,13 +4,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.Tooltip;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.CyclingButtonWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.util.math.MatrixStack;
@@ -54,15 +53,18 @@ public class ExtShapeOptionsScreen extends Screen {
         value -> config.addToVanillaGroups = value
     ).createButton(gameOptions, width / 2 - 205, 36, 200));
     // showSpecificGroups
-    addDrawableChild(SimpleOption.ofBoolean(
+    final ClickableWidget showSpecificGroupsButton = SimpleOption.ofBoolean(
         "options.extshape.showSpecificGroups",
         SimpleOption.constantTooltip(
             Text.translatable("options.extshape.showSpecificGroups.tooltip")
                 .append("\n\n")
                 .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))),
-        config.showSpecificGroups,
-        value -> config.showSpecificGroups = value
-    ).createButton(gameOptions, width / 2 + 5, 36, 200));
+        false, //config.showSpecificGroups,
+        value -> {
+        }//value -> config.showSpecificGroups = value
+    ).createButton(gameOptions, width / 2 + 5, 36, 200);
+    showSpecificGroupsButton.active = false;
+    addDrawableChild(showSpecificGroupsButton);
     // registerBlockFamilies
     addDrawableChild(SimpleOption.ofBoolean(
         "options.extshape.registerBlockFamilies",
@@ -116,13 +118,13 @@ public class ExtShapeOptionsScreen extends Screen {
       final ButtonWidget reasonableSortingButton = new ButtonWidget.Builder(Text.translatable("options.extshape.reasonable-sorting"), button -> {
         if (client != null) {
           try {
-//            client.setScreen(ConfigScreenFabric.INSTANCE.createScreen(this)); todo
+            ExtShape.LOGGER.warn("Reasonable Sorting implementation is not yet supported in 1.19.3!");
           } catch (LinkageError e) {
             ExtShape.LOGGER.error("Failed to open Reasonable Sorting config screen:", e);
           }
         }
-      }).position(width / 2 - 150, 135).setSize(300, 20)
-          .setTooltip(Tooltip.of(Text.translatable("options.extshape.reasonable-sorting.description")))
+      }).position(width / 2 - 150, 135).size(300, 20)
+          .tooltip(Tooltip.of(Text.translatable("options.extshape.reasonable-sorting.description")))
           .build();
       reasonableSortingButton.active = client != null && FabricLoader.getInstance().isModLoaded("reasonable-sorting");
       addDrawableChild(reasonableSortingButton);
@@ -133,11 +135,6 @@ public class ExtShapeOptionsScreen extends Screen {
   public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
     super.render(matrices, mouseX, mouseY, delta);
     drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 16, 0xffffff);
-    for (Element child : children()) {
-      if (child instanceof CyclingButtonWidget<?> widget && widget.isHovered()) {
-//        renderOrderedTooltip(matrices, widget.method_47400();, mouseX, mouseY);
-      }
-    }
   }
 
   public void save() {

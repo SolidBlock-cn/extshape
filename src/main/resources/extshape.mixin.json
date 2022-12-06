@@ -5,12 +5,11 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractBlockAccessor", "AbstractBlockStateAccessor", "AxeItemMixin",
-    "BlockAccessor", "BlockFamiliesAccessor", "MiningToolItemMixin",
-    "SnowyBlockMixin", "TranslatableTextContentMixin",
-    "TranslatableTextContentAccessor"
+    "BlockAccessor", "BlockFamiliesAccessor", "ItemGroupsMixin",
+    "MiningToolItemMixin", "SnowyBlockMixin", "TranslatableTextContentAccessor",
+    "TranslatableTextContentMixin"
   ],
   "client": [
-    "CreativeInventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

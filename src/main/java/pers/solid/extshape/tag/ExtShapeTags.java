@@ -99,7 +99,9 @@ public final class ExtShapeTags {
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
       DARK_OAK_PLANKS,
-      MANGROVE_PLANKS /* 1.19 */
+      MANGROVE_PLANKS, /* 1.19 */
+      BAMBOO_PLANKS,
+      BAMBOO_MOSAIC
   );
   public static final @Unmodifiable ImmutableList<Block> STONE_VARIANTS = ImmutableList.of(
       GRANITE,
@@ -204,7 +206,8 @@ public final class ExtShapeTags {
   /* 楼梯 */
 
   public static final ExtShapeBlockTag STAIRS = create("minecraft", "stairs");
-  public static final ExtShapeBlockTag LOG_STAIRS = create("log_stairs").addSelfToTag(STAIRS).addSelfToTag(LOG_BLOCKS);
+  public static final ExtShapeBlockTag WOODEN_STAIRS = create(BlockTags.WOODEN_STAIRS);
+  public static final ExtShapeBlockTag LOG_STAIRS = create("log_stairs").addSelfToTag(WOODEN_STAIRS).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOOLEN_STAIRS = create("woolen_stairs").addSelfToTag(WOOLEN_BLOCKS).addSelfToTag(STAIRS);
   public static final ExtShapeBlockTag CONCRETE_STAIRS = create("concrete_stairs").addSelfToTag(STAIRS);
   public static final ExtShapeBlockTag TERRACOTTA_STAIRS = create("terracotta_stairs").addSelfToTag(STAIRS);
@@ -215,7 +218,8 @@ public final class ExtShapeTags {
   /* 台阶 */
 
   public static final ExtShapeBlockTag SLABS = create("minecraft", "slabs");
-  public static final ExtShapeBlockTag LOG_SLABS = create("log_slabs").addSelfToTag(SLABS).addSelfToTag(LOG_BLOCKS);
+  public static final ExtShapeBlockTag WOODEN_SLABS = create(BlockTags.WOODEN_SLABS);
+  public static final ExtShapeBlockTag LOG_SLABS = create("log_slabs").addSelfToTag(WOODEN_SLABS).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOOLEN_SLABS = create("woolen_slabs").addSelfToTag(WOOLEN_BLOCKS).addSelfToTag(SLABS);
   public static final ExtShapeBlockTag CONCRETE_SLABS = create("concrete_slabs").addSelfToTag(SLABS);
   public static final ExtShapeBlockTag TERRACOTTA_SLABS = create("terracotta_slabs").addSelfToTag(SLABS);
@@ -227,7 +231,8 @@ public final class ExtShapeTags {
   /* 栅栏 */
 
   public static final ExtShapeBlockTag FENCES = create("minecraft", "fences");
-  public static final ExtShapeBlockTag LOG_FENCES = create("log_fences").addSelfToTag(LOG_BLOCKS).addSelfToTag(FENCES);
+  public static final ExtShapeBlockTag WOODEN_FENCES = create(BlockTags.WOODEN_FENCES);
+  public static final ExtShapeBlockTag LOG_FENCES = create("log_fences").addSelfToTag(LOG_BLOCKS).addSelfToTag(WOODEN_FENCES);
   public static final ExtShapeBlockTag WOOLEN_FENCES = create("woolen_fences").addSelfToTag(WOOLEN_BLOCKS).addSelfToTag(FENCES);
   public static final ExtShapeBlockTag CONCRETE_FENCES = create("concrete_fences").addSelfToTag(FENCES);
   public static final ExtShapeBlockTag TERRACOTTA_FENCES = create("terracotta_fences").addSelfToTag(FENCES);
@@ -249,9 +254,9 @@ public final class ExtShapeTags {
   /* 墙 */
 
   public static final ExtShapeBlockTag WALLS = create("minecraft", "walls");
-  public static final ExtShapeBlockTag LOG_WALLS = create("log_walls").addSelfToTag(WALLS).addSelfToTag(LOG_BLOCKS);
   @ApiStatus.AvailableSince("1.5.0")
   public static final ExtShapeBlockTag WOODEN_WALLS = create("wooden_walls").addSelfToTag(WALLS).addSelfToTag(WOODEN_BLOCKS);
+  public static final ExtShapeBlockTag LOG_WALLS = create("log_walls").addSelfToTag(WOODEN_WALLS).addSelfToTag(LOG_BLOCKS);
   @ApiStatus.AvailableSince("1.5.0")
   public static final ExtShapeBlockTag WOOLEN_WALLS = create("woolen_walls").addSelfToTag(WALLS).addSelfToTag(WOOLEN_BLOCKS);
   public static final ExtShapeBlockTag CONCRETE_WALLS = create("concrete_fence_walls").addSelfToTag(WALLS);
@@ -263,7 +268,8 @@ public final class ExtShapeTags {
   /* 按钮 */
 
   public static final ExtShapeBlockTag BUTTONS = create("minecraft", "buttons");
-  public static final ExtShapeBlockTag LOG_BUTTONS = create("log_buttons").addSelfToTag(LOG_BLOCKS).addSelfToTag(BUTTONS);
+  public static final ExtShapeBlockTag WOODEN_BUTTONS = create(BlockTags.WOODEN_BUTTONS);
+  public static final ExtShapeBlockTag LOG_BUTTONS = create("log_buttons").addSelfToTag(LOG_BLOCKS).addSelfToTag(WOODEN_BUTTONS);
   public static final ExtShapeBlockTag WOOLEN_BUTTONS = create("woolen_buttons").addSelfToTag(WOOLEN_BLOCKS).addSelfToTag(BUTTONS);
   public static final ExtShapeBlockTag CONCRETE_BUTTONS = create("concrete_buttons").addSelfToTag(BUTTONS);
   public static final ExtShapeBlockTag TERRACOTTA_BUTTONS = create("terracotta_buttons").addSelfToTag(BUTTONS);
@@ -274,7 +280,8 @@ public final class ExtShapeTags {
   /* 压力板 */
 
   public static final ExtShapeBlockTag PRESSURE_PLATES = create("minecraft", "pressure_plates");
-  public static final ExtShapeBlockTag LOG_PRESSURE_PLATES = create("log_pressure_plates").addSelfToTag(PRESSURE_PLATES).addSelfToTag(LOG_BLOCKS);
+  public static final ExtShapeBlockTag WOODEN_PRESSURE_PLATES = create(BlockTags.WOODEN_PRESSURE_PLATES);
+  public static final ExtShapeBlockTag LOG_PRESSURE_PLATES = create("log_pressure_plates").addSelfToTag(WOODEN_PRESSURE_PLATES).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOOLEN_PRESSURE_PLATES = create("woolen_pressure_plates").addSelfToTag(PRESSURE_PLATES).addSelfToTag(WOOLEN_BLOCKS);
   public static final ExtShapeBlockTag CONCRETE_PRESSURE_PLATES = create("concrete_pressure_plates").addSelfToTag(PRESSURE_PLATES);
   public static final ExtShapeBlockTag TERRACOTTA_PRESSURE_PLATES = create("terracotta_pressure_plates").addSelfToTag(PRESSURE_PLATES);
@@ -285,8 +292,8 @@ public final class ExtShapeTags {
   /* 竖直台阶 */
 
   public static final ExtShapeBlockTag VERTICAL_SLABS = create("vertical_slabs");
-  public static final ExtShapeBlockTag LOG_VERTICAL_SLABS = create("log_vertical_slabs").addSelfToTag(LOG_BLOCKS).addSelfToTag(VERTICAL_SLABS);
   public static final ExtShapeBlockTag WOODEN_VERTICAL_SLABS = create("wooden_vertical_slabs").addSelfToTag(WOODEN_BLOCKS).addSelfToTag(VERTICAL_SLABS);
+  public static final ExtShapeBlockTag LOG_VERTICAL_SLABS = create("log_vertical_slabs").addSelfToTag(LOG_BLOCKS).addSelfToTag(WOODEN_VERTICAL_SLABS);
   public static final ExtShapeBlockTag WOOLEN_VERTICAL_SLABS = create("woolen_vertical_slabs").addSelfToTag(WOOLEN_BLOCKS).addSelfToTag(VERTICAL_SLABS);
   public static final ExtShapeBlockTag CONCRETE_VERTICAL_SLABS = create("concrete_vertical_slabs").addSelfToTag(VERTICAL_SLABS);
   public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_SLABS = create("terracotta_vertical_slabs").addSelfToTag(VERTICAL_SLABS);
@@ -297,8 +304,8 @@ public final class ExtShapeTags {
   /* 横条 */
 
   public static final ExtShapeBlockTag QUARTER_PIECES = create("quarter_pieces");
-  public static final ExtShapeBlockTag LOG_QUARTER_PIECES = create("log_quarter_pieces").addSelfToTag(QUARTER_PIECES).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOODEN_QUARTER_PIECES = create("wooden_quarter_pieces").addSelfToTag(WOODEN_BLOCKS).addSelfToTag(QUARTER_PIECES);
+  public static final ExtShapeBlockTag LOG_QUARTER_PIECES = create("log_quarter_pieces").addSelfToTag(WOODEN_QUARTER_PIECES).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOOLEN_QUARTER_PIECES = create("woolen_quarter_pieces").addSelfToTag(WOOLEN_BLOCKS).addSelfToTag(QUARTER_PIECES);
   public static final ExtShapeBlockTag CONCRETE_QUARTER_PIECES = create("concrete_quarter_pieces").addSelfToTag(QUARTER_PIECES);
   public static final ExtShapeBlockTag TERRACOTTA_QUARTER_PIECES = create("terracotta_quarter_pieces").addSelfToTag(QUARTER_PIECES);
@@ -310,8 +317,8 @@ public final class ExtShapeTags {
   /* 纵楼梯 */
 
   public static final ExtShapeBlockTag VERTICAL_STAIRS = create("vertical_stairs");
-  public static final ExtShapeBlockTag LOG_VERTICAL_STAIRS = create("log_vertical_stairs").addSelfToTag(VERTICAL_STAIRS).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOODEN_VERTICAL_STAIRS = create("wooden_vertical_stairs").addSelfToTag(WOODEN_BLOCKS).addSelfToTag(VERTICAL_STAIRS);
+  public static final ExtShapeBlockTag LOG_VERTICAL_STAIRS = create("log_vertical_stairs").addSelfToTag(WOODEN_VERTICAL_STAIRS).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOOLEN_VERTICAL_STAIRS = create("woolen_vertical_stairs").addSelfToTag(WOOLEN_BLOCKS).addSelfToTag(VERTICAL_STAIRS);
   public static final ExtShapeBlockTag CONCRETE_VERTICAL_STAIRS = create("concrete_vertical_stairs").addSelfToTag(VERTICAL_STAIRS);
   public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_STAIRS = create("terracotta_vertical_stairs").addSelfToTag(VERTICAL_STAIRS);
@@ -322,8 +329,8 @@ public final class ExtShapeTags {
   /* 纵条 */
 
   public static final ExtShapeBlockTag VERTICAL_QUARTER_PIECES = create("vertical_quarter_pieces");
-  public static final ExtShapeBlockTag LOG_VERTICAL_QUARTER_PIECES = create("log_vertical_quarter_pieces").addSelfToTag(VERTICAL_QUARTER_PIECES).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOODEN_VERTICAL_QUARTER_PIECES = create("wooden_vertical_quarter_pieces").addSelfToTag(WOODEN_BLOCKS).addSelfToTag(VERTICAL_QUARTER_PIECES);
+  public static final ExtShapeBlockTag LOG_VERTICAL_QUARTER_PIECES = create("log_vertical_quarter_pieces").addSelfToTag(WOODEN_VERTICAL_QUARTER_PIECES).addSelfToTag(LOG_BLOCKS);
   public static final ExtShapeBlockTag WOOLEN_VERTICAL_QUARTER_PIECES = create("woolen_vertical_quarter_pieces").addSelfToTag(WOOLEN_BLOCKS).addSelfToTag(VERTICAL_QUARTER_PIECES);
   public static final ExtShapeBlockTag CONCRETE_VERTICAL_QUARTER_PIECES = create("concrete_vertical_quarter_pieces").addSelfToTag(VERTICAL_QUARTER_PIECES);
   public static final ExtShapeBlockTag TERRACOTTA_VERTICAL_QUARTER_PIECES = create("terracotta_vertical_quarter_pieces").addSelfToTag(VERTICAL_QUARTER_PIECES);

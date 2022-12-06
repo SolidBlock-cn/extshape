@@ -26,7 +26,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
 
   @Override
   public @Nullable JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1);
+    return simpleStoneCuttingRecipe(1).category(getRecipeCategory());
   }
 
   @Override
