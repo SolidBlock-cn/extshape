@@ -40,9 +40,6 @@
       ">=1.19.2"
     ],
     "java": ">=17",
-    "better_runtime_resource_pack": ">=0.8.0"
-  },
-  "suggests": {
-    "reasonable-sorting": ">=2.1.0"
+    "better_runtime_resource_pack": ">=0.8.1"
   }
 }

@@ -1,5 +1,23 @@
 # 更新日志 Update Log
 
+### 1.7.2
+
+- 调整了一些语言的译名显示。
+- 对于 1.19.3，为竹块、去皮竹块、竹板、竹马赛克加入了扩展方块形状，需启用 Update 1.20 数据包。
+    - 这些方块都可燃，且可用作燃料。
+    - 为避免合成表冲突，竹块、去皮竹块不能合成按钮。
+- 现在在方块标签中，各形状的原木和木头方块也属于木制方块了。木头制成的栅栏、竹栅栏均视为木制栅栏，可以和原版的木板栅栏连接。
+- 对于 1.19.3，不再实现与合理排序模组的联动。
+- 对于 1.19.3，由于暂未受支持，禁用了“显示专门物品组”按钮。
+
+- Added the name of translations in some languages.
+- For 1.19.3, added extended shapes for bamboo block, stripped bamboo block, bamboo planks, and bamboo mosaic, which require Update 1.20 datapack.
+    - The blocks are flammable and can be used as fuels.
+    - In order to avoid recipe conflict, bamboo blocks and stripped bamboo blocks cannot be crafted into buttons.
+- In block tags, log and wood blocks belong to wooden blocks now. Wood fences and bamboo fences are considered as wooden fences and can be connected with vanilla wooden plank fences.
+- For 1.19.3, no longer interact with Reasonable Sorting mod.
+- For 1.19.3, as not supported yet, disabled "Display Specific Groups" button.
+
 ### 1.7.1
 
 - 适应新版本的合理排序（Reasonable Sorting）模组。
