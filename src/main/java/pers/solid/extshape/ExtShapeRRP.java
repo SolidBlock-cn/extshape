@@ -173,10 +173,10 @@ public final class ExtShapeRRP {
   ) {
     if (ingredient == null || result == null) return;
     final Identifier recipeId = recipeIdOf(result, suffix);
-    final JStonecuttingRecipe recipe = new JStonecuttingRecipe(ingredient, result, count).category(RecipeCategory.BUILDING_BLOCKS);
+    final JStonecuttingRecipe recipe = new JStonecuttingRecipe(ingredient, result, count).recipeCategory(RecipeCategory.BUILDING_BLOCKS);
     recipe.addInventoryChangedCriterion(criterionName, ingredient);
     pack.addRecipe(recipeId, recipe);
-    pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(result, recipeId, recipe.category), recipe);
+    pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(result, recipeId, recipe.recipeCategory), recipe);
   }
 
   /**
@@ -196,13 +196,13 @@ public final class ExtShapeRRP {
       Identifier toVerticalId = recipeIdOf(verticalSlab);
       Identifier toSlabId = recipeIdOf(slab, "_from_vertical_slab");
       final JShapelessRecipe toVertical = new JShapelessRecipe(verticalSlab, slab);
-      toVertical.addInventoryChangedCriterion("has_slab", slab).category(RecipeCategory.BUILDING_BLOCKS);
+      toVertical.addInventoryChangedCriterion("has_slab", slab).recipeCategory(RecipeCategory.BUILDING_BLOCKS);
       pack.addRecipe(toVerticalId, toVertical);
-      pack.addRecipeAdvancement(toVerticalId, getAdvancementIdForRecipe(verticalSlab, toVerticalId, toVertical.category), toVertical);
+      pack.addRecipeAdvancement(toVerticalId, getAdvancementIdForRecipe(verticalSlab, toVerticalId, toVertical), toVertical);
       final JShapelessRecipe toSlab = new JShapelessRecipe(slab, verticalSlab);
-      toSlab.addInventoryChangedCriterion("has_vertical_slab", verticalSlab).category(RecipeCategory.BUILDING_BLOCKS);
+      toSlab.addInventoryChangedCriterion("has_vertical_slab", verticalSlab).recipeCategory(RecipeCategory.BUILDING_BLOCKS);
       pack.addRecipe(toSlabId, toSlab);
-      pack.addRecipeAdvancement(toSlabId, getAdvancementIdForRecipe(slab, toSlabId, toSlab.category), toSlab);
+      pack.addRecipeAdvancement(toSlabId, getAdvancementIdForRecipe(slab, toSlabId, toSlab), toSlab);
     }
 
     // 楼梯与垂直楼梯之间的配方。
@@ -213,13 +213,13 @@ public final class ExtShapeRRP {
       Identifier toVerticalId = recipeIdOf(verticalStairs);
       Identifier toStairsId = recipeIdOf(stairs, "_from_vertical_stairs");
       final JShapelessRecipe toVertical = new JShapelessRecipe(verticalStairs, stairs);
-      toVertical.addInventoryChangedCriterion("has_stairs", stairs).category(RecipeCategory.BUILDING_BLOCKS);
+      toVertical.addInventoryChangedCriterion("has_stairs", stairs).recipeCategory(RecipeCategory.BUILDING_BLOCKS);
       pack.addRecipe(toVerticalId, toVertical);
-      pack.addRecipeAdvancement(toVerticalId, getAdvancementIdForRecipe(verticalStairs, toVerticalId, toVertical.category), toVertical);
+      pack.addRecipeAdvancement(toVerticalId, getAdvancementIdForRecipe(verticalStairs, toVerticalId, toVertical.recipeCategory), toVertical);
       final JShapelessRecipe toStairs = new JShapelessRecipe(stairs, verticalStairs);
-      toStairs.addInventoryChangedCriterion("has_vertical_stairs", verticalStairs).category(RecipeCategory.BUILDING_BLOCKS);
+      toStairs.addInventoryChangedCriterion("has_vertical_stairs", verticalStairs).recipeCategory(RecipeCategory.BUILDING_BLOCKS);
       pack.addRecipe(toStairsId, toStairs);
-      pack.addRecipeAdvancement(toStairsId, getAdvancementIdForRecipe(stairs, toStairsId, toStairs.category), toStairs);
+      pack.addRecipeAdvancement(toStairsId, getAdvancementIdForRecipe(stairs, toStairsId, toStairs.recipeCategory), toStairs);
     }
 
     // 横条与纵条之间的配方。
@@ -230,13 +230,13 @@ public final class ExtShapeRRP {
       Identifier toVerticalId = recipeIdOf(verticalQuarterPiece);
       Identifier toQuarterPieceId = recipeIdOf(quarterPiece, "_from_vertical_quarter_piece");
       final JShapelessRecipe toVertical = new JShapelessRecipe(verticalQuarterPiece, quarterPiece);
-      toVertical.addInventoryChangedCriterion("has_stairs", quarterPiece).category(RecipeCategory.BUILDING_BLOCKS);
+      toVertical.addInventoryChangedCriterion("has_stairs", quarterPiece).recipeCategory(RecipeCategory.BUILDING_BLOCKS);
       pack.addRecipe(toVerticalId, toVertical);
-      pack.addRecipeAdvancement(toVerticalId, getAdvancementIdForRecipe(verticalQuarterPiece, toVerticalId, toVertical.category), toVertical);
+      pack.addRecipeAdvancement(toVerticalId, getAdvancementIdForRecipe(verticalQuarterPiece, toVerticalId, toVertical.recipeCategory), toVertical);
       final JShapelessRecipe toQuarterPiece = new JShapelessRecipe(quarterPiece, verticalQuarterPiece);
-      toQuarterPiece.addInventoryChangedCriterion("has_vertical_stairs", verticalQuarterPiece).category(RecipeCategory.BUILDING_BLOCKS);
+      toQuarterPiece.addInventoryChangedCriterion("has_vertical_stairs", verticalQuarterPiece).recipeCategory(RecipeCategory.BUILDING_BLOCKS);
       pack.addRecipe(toQuarterPieceId, toQuarterPiece);
-      pack.addRecipeAdvancement(toQuarterPieceId, getAdvancementIdForRecipe(quarterPiece, toQuarterPieceId, toQuarterPiece.category), toQuarterPiece);
+      pack.addRecipeAdvancement(toQuarterPieceId, getAdvancementIdForRecipe(quarterPiece, toQuarterPieceId, toQuarterPiece.recipeCategory), toQuarterPiece);
     }
 
     // 该方块是否允许被切石
@@ -261,10 +261,10 @@ public final class ExtShapeRRP {
             .pattern("###")
             .addKey("#", slab)
             .resultCount(6)
-            .category(RecipeCategory.BUILDING_BLOCKS);
+            .recipeCategory(RecipeCategory.BUILDING_BLOCKS);
         pack.addRecipe(craftingId, craftingRecipe);
         craftingRecipe.addInventoryChangedCriterion("has_slab", slab);
-        pack.addRecipeAdvancement(craftingId, getAdvancementIdForRecipe(quarterPiece, craftingId, craftingRecipe.category), craftingRecipe);
+        pack.addRecipeAdvancement(craftingId, getAdvancementIdForRecipe(quarterPiece, craftingId, craftingRecipe.recipeCategory), craftingRecipe);
         if (stoneCut) {
           generateSimpleStonecuttingRecipe(slab, quarterPiece, 2, "_from_slab_stonecutting", "has_slab", pack);
           for (Block block : stonecuttingBase) {
@@ -282,11 +282,11 @@ public final class ExtShapeRRP {
         final JShapedRecipe craftingRecipe = new JShapedRecipe(quarterPiece)
             .pattern("###")
             .addKey("#", verticalSlab)
-            .category(RecipeCategory.BUILDING_BLOCKS)
+            .recipeCategory(RecipeCategory.BUILDING_BLOCKS)
             .resultCount(6);
         pack.addRecipe(craftingId, craftingRecipe);
         craftingRecipe.addInventoryChangedCriterion("has_vertical_slab", verticalSlab);
-        pack.addRecipeAdvancement(craftingId, getAdvancementIdForRecipe(quarterPiece, craftingId, craftingRecipe.category), craftingRecipe);
+        pack.addRecipeAdvancement(craftingId, getAdvancementIdForRecipe(quarterPiece, craftingId, craftingRecipe.recipeCategory), craftingRecipe);
         if (stoneCut) {
           generateSimpleStonecuttingRecipe(verticalSlab, quarterPiece, 2, "_from_vertical_slab_stonecutting", "has_vertical_slab", pack);
           for (Block block0 : stonecuttingBase) {
@@ -305,11 +305,11 @@ public final class ExtShapeRRP {
         final JShapedRecipe craftingRecipe = new JShapedRecipe(verticalQuarterPiece)
             .pattern("#", "#", "#")
             .addKey("#", verticalSlab)
-            .category(RecipeCategory.BUILDING_BLOCKS)
+            .recipeCategory(RecipeCategory.BUILDING_BLOCKS)
             .resultCount(2);
         pack.addRecipe(craftingId, craftingRecipe);
         craftingRecipe.addInventoryChangedCriterion("has_vertical_slab", verticalSlab);
-        pack.addRecipeAdvancement(craftingId, getAdvancementIdForRecipe(verticalQuarterPiece, craftingId, craftingRecipe.category), craftingRecipe);
+        pack.addRecipeAdvancement(craftingId, getAdvancementIdForRecipe(verticalQuarterPiece, craftingId, craftingRecipe.recipeCategory), craftingRecipe);
         if (stoneCut) {
           generateSimpleStonecuttingRecipe(verticalSlab, verticalQuarterPiece, 2, "_from_vertical_slab_stonecutting", "has_vertical_slab", pack);
           for (Block block0 : stonecuttingBase) {

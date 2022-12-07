@@ -133,7 +133,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
               JIngredient.ofItem(block),
               jStonecuttingRecipe.result,
               jStonecuttingRecipe.count
-          ).category(jStonecuttingRecipe.category);
+          ).recipeCategory(jStonecuttingRecipe.recipeCategory);
           secondaryRecipe.addInventoryChangedCriterion("has_" + path, block);
           pack.addRecipe(secondaryId, secondaryRecipe);
           pack.addRecipeAdvancement(secondaryId, getAdvancementIdForRecipe(secondaryId, secondaryRecipe), secondaryRecipe);

@@ -246,5 +246,4 @@ public class ExtShape implements ModInitializer {
       entries.addBefore(Items.OAK_BUTTON, BlockMappings.getBlockOf(BlockShape.BUTTON, Blocks.WHITE_WOOL));
     });
   }
-
 }

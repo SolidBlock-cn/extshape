@@ -46,13 +46,13 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
-    final JRecipe craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK && ExtShapeConfig.CURRENT_CONFIG.specialSnowSlabCrafting) ? new JShapelessRecipe(this, Blocks.SNOW).addInventoryChangedCriterion("has_snow", Blocks.SNOW).category(getRecipeCategory()) : super.getCraftingRecipe();
+    final JRecipe craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK && ExtShapeConfig.CURRENT_CONFIG.specialSnowSlabCrafting) ? new JShapelessRecipe(this, Blocks.SNOW).addInventoryChangedCriterion("has_snow", Blocks.SNOW).recipeCategory(getRecipeCategory()) : super.getCraftingRecipe();
     return craftingRecipe != null && !NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 
   @Override
   public @Nullable JRecipe getStonecuttingRecipe() {
-    return baseBlock == null ? null : simpleStoneCuttingRecipe(2).category(getRecipeCategory());
+    return baseBlock == null ? null : simpleStoneCuttingRecipe(2).recipeCategory(getRecipeCategory());
   }
 
   @Override

@@ -31,7 +31,7 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
   @Override
   public @Nullable JRecipe getCraftingRecipe() {
     return new JShapedRecipe(this).resultCount(3)
-        .category(getRecipeCategory())
+        .recipeCategory(getRecipeCategory())
         .pattern("W#W", "W#W")
         .group(getRecipeGroup())
         .addKey("W", baseBlock)

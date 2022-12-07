@@ -78,7 +78,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
 
   @Override
   public @Nullable JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(4).category(getRecipeCategory());
+    return simpleStoneCuttingRecipe(4).recipeCategory(getRecipeCategory());
   }
 
   @Override

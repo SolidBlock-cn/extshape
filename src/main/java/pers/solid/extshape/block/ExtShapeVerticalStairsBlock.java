@@ -69,7 +69,7 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
   @Override
   public @Nullable JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1).category(getRecipeCategory());
+    return simpleStoneCuttingRecipe(1).recipeCategory(getRecipeCategory());
   }
 
 

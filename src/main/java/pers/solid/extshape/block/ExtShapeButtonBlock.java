@@ -119,7 +119,7 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     }
     return new JShapelessRecipe(this, baseBlock)
         .addInventoryChangedCriterion("has_ingredient", baseBlock)
-        .category(getRecipeCategory())
+        .recipeCategory(getRecipeCategory())
         .group(getRecipeGroup());
   }
 

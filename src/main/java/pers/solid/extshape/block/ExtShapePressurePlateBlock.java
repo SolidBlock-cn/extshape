@@ -81,15 +81,15 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     if (ExtShapeTags.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
-      final JShapelessRecipe recipe = new JShapelessRecipe(this.getItemId(), carpetId).category(getRecipeCategory());
+      final JShapelessRecipe recipe = new JShapelessRecipe(this.getItemId(), carpetId).recipeCategory(getRecipeCategory());
       recipe.addInventoryChangedCriterion("has_carpet", Registries.ITEM.get(carpetId));
       return recipe;
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
       return new JShapelessRecipe(this, Blocks.MOSS_CARPET)
-          .category(getRecipeCategory()).addInventoryChangedCriterion("has_carpet", Blocks.MOSS_CARPET);
+          .recipeCategory(getRecipeCategory()).addInventoryChangedCriterion("has_carpet", Blocks.MOSS_CARPET);
     } else {
       return new JShapedRecipe(this)
-          .category(getRecipeCategory())
+          .recipeCategory(getRecipeCategory())
           .pattern("##")
           .addKey("#", baseBlock)
           .addInventoryChangedCriterion("has_ingredient", baseBlock)
@@ -105,17 +105,17 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     if (ExtShapeTags.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
-      final JShapelessRecipe recipe = new JShapelessRecipe(carpetId, this.getItemId()).category(RecipeCategory.DECORATIONS);
+      final JShapelessRecipe recipe = new JShapelessRecipe(carpetId, this.getItemId()).recipeCategory(RecipeCategory.DECORATIONS);
       final Item carpet = Registries.ITEM.get(carpetId);
       recipe.addInventoryChangedCriterion("has_pressure_plate", this);
       final Identifier recipeId = new Identifier(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
       pack.addRecipe(recipeId, recipe);
-      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(carpet, recipeId, recipe.category), recipe);
+      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(carpet, recipeId, recipe), recipe);
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      final JShapelessRecipe recipe = (JShapelessRecipe) new JShapelessRecipe(Blocks.MOSS_CARPET, this).addInventoryChangedCriterion("has_pressure_plate", this).category(RecipeCategory.DECORATIONS);
+      final JShapelessRecipe recipe = (JShapelessRecipe) new JShapelessRecipe(Blocks.MOSS_CARPET, this).addInventoryChangedCriterion("has_pressure_plate", this).recipeCategory(RecipeCategory.DECORATIONS);
       final Identifier recipeId = new Identifier(ExtShape.MOD_ID, "moss_carpet_from_pressure_plate");
       pack.addRecipe(recipeId, recipe);
-      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(Blocks.MOSS_CARPET, recipeId, recipe.category), recipe);
+      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(Blocks.MOSS_CARPET, recipeId, recipe), recipe);
     }
   }
 
