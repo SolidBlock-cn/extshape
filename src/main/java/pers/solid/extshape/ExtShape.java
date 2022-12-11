@@ -52,11 +52,11 @@ public class ExtShape implements ModInitializer {
   public void onInitialize() {
     ExtShapeConfig.init();
     ExtShapeBlocks.init();
-//    ExtShapeItemGroup.init();
+    ExtShapeItemGroup.init();
     ExtShapeTags.refillTags();
 
     registerFlammableBlocks();
-    ExtShapeNewItemGroup.registerForMod();
+    VanillaItemGroup.registerForMod();
     registerComposingChances();
     registerStrippableBlocks();
     registerFuels();

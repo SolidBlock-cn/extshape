@@ -37,13 +37,13 @@ public class ExtShapeConfig implements Cloneable {
   }
 
   /**
-   * 是否将本模组的物品添加到创造模式物品栏中的原版的物品组中。对于 1.19.3 的版本而言，默认为 {@code true}。
+   * 是否将本模组的物品添加到创造模式物品栏中的原版的物品组中。
    */
-  public boolean addToVanillaGroups = true;
+  public boolean addToVanillaGroups = false;
   /**
-   * 是否为与本模组有关的方块创建专门的物品组。默认为 {@code true}。如果不创建，则建议将 {@link #addToVanillaGroups} 设为 {@code true} 以免这些物品不再出现在创造模式物品栏中。注意：1.19.3 暂不支持。
+   * 是否为与本模组有关的方块创建专门的物品组。默认为 {@code true}。如果不创建，则建议将 {@link #addToVanillaGroups} 设为 {@code true} 以免这些物品不再出现在创造模式物品栏中。
    */
-  public boolean showSpecificGroups = false;
+  public boolean showSpecificGroups = true;
   /**
    * 是否将本模组的物品关系注册到 Minecraft 原版的 {@link net.minecraft.data.family.BlockFamilies} 中。<span style=color:maroon>仅支持 Minecraft 1.17 以上版本。</span>
    */

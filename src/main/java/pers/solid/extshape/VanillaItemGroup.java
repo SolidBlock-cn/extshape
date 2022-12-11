@@ -19,9 +19,17 @@ import pers.solid.extshape.util.EntryVariantAppender;
 import java.util.Collections;
 import java.util.Map;
 
-public class ExtShapeNewItemGroup {
+/**
+ * 本类用于将物品添加到原版物品组。
+ *
+ * @see ExtShapeItemGroup
+ */
+public final class VanillaItemGroup {
   private static final Map<ItemGroup, Multimap<Item, Item>> APPENDING_RULES = new Object2ObjectLinkedOpenHashMap<>();
   private static final Map<ItemGroup, Multimap<Item, Item>> PREPENDING_RULES = new Object2ObjectLinkedOpenHashMap<>();
+
+  private VanillaItemGroup() {
+  }
 
   public static Multimap<Item, Item> getAppendingRule(ItemGroup group) {
     return APPENDING_RULES.computeIfAbsent(group, itemGroup -> LinkedHashMultimap.create());

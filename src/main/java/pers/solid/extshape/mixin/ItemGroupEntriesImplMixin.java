@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pers.solid.extshape.ExtShapeNewItemGroup;
+import pers.solid.extshape.VanillaItemGroup;
 import pers.solid.extshape.config.ExtShapeConfig;
 
 @Mixin(targets = "net.minecraft.item.ItemGroup$EntriesImpl")
@@ -28,7 +28,7 @@ public abstract class ItemGroupEntriesImplMixin {
     if (ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups && allowTransitive) {
       allowTransitive = false;
       // 为了避免递归添加物品，故添加一个布尔值进行控制。下面的 postAdd 同理。
-      for (Item item : ExtShapeNewItemGroup.getPrependingRule(this.group).get(stack.getItem())) {
+      for (Item item : VanillaItemGroup.getPrependingRule(this.group).get(stack.getItem())) {
         add(new ItemStack(item), visibility);
       }
       allowTransitive = true;
@@ -40,7 +40,7 @@ public abstract class ItemGroupEntriesImplMixin {
     if (ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups && allowTransitive) {
       allowTransitive = false;
       // 为了避免递归添加物品，故添加一个布尔值进行控制。下面的 postAdd 同理。
-      for (Item item : ExtShapeNewItemGroup.getAppendingRule(this.group).get(stack.getItem())) {
+      for (Item item : VanillaItemGroup.getAppendingRule(this.group).get(stack.getItem())) {
         add(new ItemStack(item), visibility);
       }
       allowTransitive = true;

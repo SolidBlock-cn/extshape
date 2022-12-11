@@ -19,6 +19,7 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.ExtShapeItemGroup;
 import pers.solid.extshape.rrp.ExtShapeRRP;
 
 @Environment(EnvType.CLIENT)
@@ -59,11 +60,9 @@ public class ExtShapeOptionsScreen extends Screen {
             Text.translatable("options.extshape.showSpecificGroups.tooltip")
                 .append("\n\n")
                 .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))),
-        false, //config.showSpecificGroups,
-        value -> {
-        }//value -> config.showSpecificGroups = value
+        config.showSpecificGroups,
+        value -> config.showSpecificGroups = value
     ).createButton(gameOptions, width / 2 + 5, 36, 200);
-    showSpecificGroupsButton.active = false;
     addDrawableChild(showSpecificGroupsButton);
     // registerBlockFamilies
     addDrawableChild(SimpleOption.ofBoolean(
@@ -146,10 +145,10 @@ public class ExtShapeOptionsScreen extends Screen {
     if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {
       if (newConfig.showSpecificGroups) {
         ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
-//        ExtShapeItemGroup.implementGroups();
+        ExtShapeItemGroup.implementGroups();
       } else {
         ExtShape.LOGGER.info("Removing item groups at runtime. This may cause some instability.");
-//        ExtShapeItemGroup.removeGroups();
+        ExtShapeItemGroup.removeGroups();
       }
     }
   }
