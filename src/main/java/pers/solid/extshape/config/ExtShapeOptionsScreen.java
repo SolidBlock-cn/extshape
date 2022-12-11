@@ -19,7 +19,7 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.ExtShapeRRP;
+import pers.solid.extshape.rrp.ExtShapeRRP;
 
 @Environment(EnvType.CLIENT)
 public class ExtShapeOptionsScreen extends Screen {

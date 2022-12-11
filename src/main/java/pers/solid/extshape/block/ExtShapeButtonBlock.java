@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Collection;
 
@@ -34,7 +34,7 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
    *
    * @see pers.solid.extshape.config.ExtShapeConfig#avoidSomeButtonRecipes
    */
-  public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK, Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).addAll(ExtShapeTags.LOGS).addAll(ExtShapeTags.WOODS).addAll(ExtShapeTags.HYPHAES).addAll(ExtShapeTags.STEMS).addAll(ExtShapeTags.STRIPPED_LOGS).addAll(ExtShapeTags.STRIPPED_WOODS).addAll(ExtShapeTags.STRIPPED_HYPHAES).addAll(ExtShapeTags.STRIPPED_STEMS).build();
+  public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK, Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).addAll(BlockCollections.LOGS).addAll(BlockCollections.WOODS).addAll(BlockCollections.HYPHAES).addAll(BlockCollections.STEMS).addAll(BlockCollections.STRIPPED_LOGS).addAll(BlockCollections.STRIPPED_WOODS).addAll(BlockCollections.STRIPPED_HYPHAES).addAll(BlockCollections.STRIPPED_STEMS).build();
   public final ButtonType type;
   public final Block baseBlock;
 
@@ -126,11 +126,11 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   @Override
   public String getRecipeGroup() {
     final Block baseBlock = getBaseBlock();
-    if (ExtShapeTags.WOOLS.contains(baseBlock)) return "wool_button";
-    if (ExtShapeTags.CONCRETES.contains(baseBlock)) return "concrete_button";
-    if (ExtShapeTags.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_button";
-    if (ExtShapeTags.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_button";
-    if (ExtShapeTags.PLANKS.contains(baseBlock)) return "wooden_button";
+    if (BlockCollections.WOOLS.contains(baseBlock)) return "wool_button";
+    if (BlockCollections.CONCRETES.contains(baseBlock)) return "concrete_button";
+    if (BlockCollections.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_button";
+    if (BlockCollections.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_button";
+    if (BlockCollections.PLANKS.contains(baseBlock)) return "wooden_button";
     return "";
   }
 

@@ -1,4 +1,4 @@
-package pers.solid.extshape.mappings;
+package pers.solid.extshape.util;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -7,6 +7,7 @@ import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.BlockFamiliesAccessor;
 
@@ -20,14 +21,14 @@ import java.util.stream.Stream;
  * <hr>
  * <p>This mod handles relations of blocks in vanilla and this mod. The logic of block mapping is, each {@linkplain BlockShape} has a bi-map between base blocks and blocks in that shape. You can use {@link #getBlockOf(BlockShape, Block)} to get the corresponding block in that shape of a base block. To get the shape of a block, you can use {@link BlockShape#getShapeOf(Block)}.
  */
-public final class BlockMappings {
-  private BlockMappings() {
+public final class BlockBiMaps {
+  private BlockBiMaps() {
   }
 
   /**
    * 由方块形状到 BiMap 的映射，这个 BiMap 则是由基础方块到对应方块的映射。
    */
-  private static final Map<BlockShape, BiMap<Block, Block>> SHAPE_TO_MAPPING = new HashMap<>();
+  private static final Map<BlockShape, BiMap<Block, Block>> SHAPE_TO_BI_MAP = new HashMap<>();
   /**
    * 基础方块集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。
    */
@@ -56,7 +57,7 @@ public final class BlockMappings {
           }
         }
         if (variant != null) {
-          getMappingOf(shape).put(baseBlock, variant);
+          of(shape).put(baseBlock, variant);
           BASE_BLOCKS.add(baseBlock);
         }
       }
@@ -69,8 +70,8 @@ public final class BlockMappings {
    * @param shape 方块形状。
    * @return 方块映射。
    */
-  public static @NotNull BiMap<Block, Block> getMappingOf(@NotNull BlockShape shape) {
-    return SHAPE_TO_MAPPING.computeIfAbsent(shape, shape1 -> HashBiMap.create());
+  public static @NotNull BiMap<Block, Block> of(@NotNull BlockShape shape) {
+    return SHAPE_TO_BI_MAP.computeIfAbsent(shape, shape1 -> HashBiMap.create());
   }
 
   /**
@@ -82,8 +83,16 @@ public final class BlockMappings {
    */
   @Nullable
   public static Block getBlockOf(@NotNull BlockShape shape, Block baseBlock) {
-    BiMap<Block, Block> mapping = getMappingOf(shape);
-    return mapping.get(baseBlock);
+    return of(shape).get(baseBlock);
+  }
+
+  public static void setBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock, @NotNull Block block) {
+    final BiMap<Block, Block> biMap = of(shape);
+    if (biMap.containsKey(baseBlock)) {
+      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape, baseBlock, biMap.get(baseBlock), block);
+    }
+    biMap.put(baseBlock, block);
+    BASE_BLOCKS.add(baseBlock);
   }
 
   /**
@@ -96,7 +105,7 @@ public final class BlockMappings {
     for (Block baseBlock : BASE_BLOCKS) {
       final BlockFamily blockFamily = baseBlocksToFamilies.computeIfAbsent(baseBlock, x -> new BlockFamily.Builder(baseBlock).build());
       final Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
-      SHAPE_TO_MAPPING.forEach((shape, map) -> {
+      SHAPE_TO_BI_MAP.forEach((shape, map) -> {
         if (map.containsKey(baseBlock) && shape.vanillaVariant != null) {
           variants.put(shape.vanillaVariant, map.get(baseBlock));
         }

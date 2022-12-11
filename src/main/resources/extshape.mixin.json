@@ -4,9 +4,16 @@
   "package": "pers.solid.extshape.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AbstractBlockAccessor", "AbstractBlockStateAccessor", "AxeItemMixin",
-    "BlockAccessor", "BlockFamiliesAccessor", "ItemGroupsMixin",
-    "MiningToolItemMixin", "SnowyBlockMixin", "TranslatableTextContentAccessor",
+    "AbstractBlockAccessor",
+    "AbstractBlockStateAccessor",
+    "AxeItemMixin",
+    "BlockAccessor",
+    "BlockFamiliesAccessor",
+    "ItemGroupEntriesImplMixin",
+    "ItemGroupsMixin",
+    "MiningToolItemMixin",
+    "SnowyBlockMixin",
+    "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"
   ],
   "client": [

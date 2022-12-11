@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeSlabBlock;
-import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.util.BlockBiMaps;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class ExtShapeConfig implements Cloneable {
   public static void init() {
     CURRENT_CONFIG.writeFile(CURRENT_CONFIG.readFile(CONFIG_FILE), CONFIG_FILE);
     if (CURRENT_CONFIG.registerBlockFamilies) {
-      BlockMappings.completeBlockFamilies();
+      BlockBiMaps.completeBlockFamilies();
     }
   }
 

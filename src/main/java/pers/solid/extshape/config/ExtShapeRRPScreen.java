@@ -15,7 +15,7 @@ import net.minecraft.resource.ResourceType;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import pers.solid.extshape.ExtShapeRRP;
+import pers.solid.extshape.rrp.ExtShapeRRP;
 
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;

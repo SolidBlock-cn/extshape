@@ -11,7 +11,7 @@ sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name + "-fabric"
-version = project.mod_version + '-mc1.19.3'
+version = project.mod_version + '-mc' + project.minecraft_version
 group = project.maven_group
 
 repositories {
@@ -65,6 +65,9 @@ dependencies {
     // 合理排序模组
     def reasonable_sorting_mc_version = project.properties.getOrDefault "reasonable_sorting_mc_version", project.minecraft_version
 //    modImplementation "pers.solid.mod:reasonable-sorting-fabric:${project.reasonable_sorting_version}-mc${reasonable_sorting_mc_version}"
+
+    // 由于新版的 Loom 没有 @CanIgnoreReturnValue 等注解，故在这里手动添加。
+    modImplementation "com.google.errorprone:error_prone_annotations:+"
 }
 
 processResources {

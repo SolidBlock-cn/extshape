@@ -1,5 +1,6 @@
-package pers.solid.extshape.mappings;
+package pers.solid.extshape.rrp;
 
+import com.google.common.collect.ImmutableMap;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.json.loot.JLootTable;
@@ -34,31 +35,27 @@ import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.UnmodifiableView;
+import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * 本类记录了用于本模组的不掉落方块本身的基础方块的战利品表。
- * <p>
- * 注册在 {@link #LOOT_TABLE_PROVIDERS} 中的方块，在通过 {@link pers.solid.extshape.ExtShapeRRP#generateServerData(RuntimeResourcePack)} 生成战利品表时，不会使用 {@link BlockResourceGenerator#getLootTable()}，而是直接使用这里面注册了的战利品表函数。
+ * <p>本类记录了用于本模组的不掉落方块本身的基础方块的战利品表。
+ * <p>注册在 {@link #INSTANCE} 中的方块，在通过 {@link ExtShapeRRP#generateServerData(RuntimeResourcePack)} 生成战利品表时，不会使用 {@link BlockResourceGenerator#getLootTable()}，而是直接使用这里面注册了的战利品表函数。
  *
  * @author SolidBlock
  * @since 1.5.1
  */
 @ApiStatus.AvailableSince("1.5.1")
 public final class UnusualLootTables {
-  private static final HashMap<Block, LootTableFunction> LOOT_TABLE_PROVIDERS = new HashMap<>();
-  @UnmodifiableView
-  public static final Map<Block, LootTableFunction> INSTANCE = Collections.unmodifiableMap(LOOT_TABLE_PROVIDERS);
+  @Unmodifiable
+  public static final ImmutableMap<Block, @NotNull LootTableFunction> INSTANCE;
   private static final LootCondition.Builder WITH_SILK_TOUCH = MatchToolLootCondition.builder(net.minecraft.predicate.item.ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))));
   private static final StatePredicate.Builder EXACT_MATCH_DOUBLE_SLAB = StatePredicate.Builder.create().exactMatch(Properties.SLAB_TYPE, SlabType.DOUBLE);
 
   static {
-    register();
+    final ImmutableMap.Builder<Block, LootTableFunction> builder = new ImmutableMap.Builder<>();
+    registerUnusualLootTables(builder);
+    INSTANCE = builder.build();
   }
 
   /**
@@ -66,19 +63,19 @@ public final class UnusualLootTables {
    *
    * @see net.minecraft.data.server.loottable.BlockLootTableGenerator#accept
    */
-  private static void register() {
+  private static void registerUnusualLootTables(ImmutableMap.Builder<Block, LootTableFunction> builder) {
     final VanillaBlockLootTableGenerator blockLootTableGenerator = new VanillaBlockLootTableGenerator();
-    LOOT_TABLE_PROVIDERS.put(Blocks.CLAY, dropsShaped(Items.CLAY_BALL, 4));
-    LOOT_TABLE_PROVIDERS.put(Blocks.SNOW_BLOCK, dropsShaped(Items.SNOWBALL, 4));
-    LOOT_TABLE_PROVIDERS.put(Blocks.GLOWSTONE, (baseBlock, shape, block) -> {
+    builder.put(Blocks.CLAY, dropsShaped(Items.CLAY_BALL, 4));
+    builder.put(Blocks.SNOW_BLOCK, dropsShaped(Items.SNOWBALL, 4));
+    builder.put(Blocks.GLOWSTONE, (baseBlock, shape, block) -> {
       final float shapeVolume = shapeVolume(shape);
-      final LootTable.Builder builder = dropsDoubleSlabWithSilkTouch(block, blockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
+      final LootTable.Builder lootTableBuilder = dropsDoubleSlabWithSilkTouch(block, blockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2 * shapeVolume, 4 * shapeVolume)))
           .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE))
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4))))), shape == BlockShape.SLAB);
-      return JLootTable.delegate(builder);
+      return JLootTable.delegate(lootTableBuilder);
     });
-    LOOT_TABLE_PROVIDERS.put(Blocks.MELON, (baseBlock, shape, block) -> {
+    builder.put(Blocks.MELON, (baseBlock, shape, block) -> {
       final float shapeVolume = shapeVolume(shape);
       return JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, blockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(Items.MELON_SLICE)
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(shapeVolume * 2, shapeVolume * 4)))
@@ -86,7 +83,7 @@ public final class UnusualLootTables {
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4))))
       ), shape == BlockShape.SLAB));
     });
-    LOOT_TABLE_PROVIDERS.put(Blocks.SEA_LANTERN, (baseBlock, shape, block) -> {
+    builder.put(Blocks.SEA_LANTERN, (baseBlock, shape, block) -> {
       final float shapeVolume = shapeVolume(shape);
       return JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, blockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(Items.PRISMARINE_CRYSTALS)
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2 * shapeVolume, 3 * shapeVolume)))
@@ -94,7 +91,7 @@ public final class UnusualLootTables {
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (5 * shapeVolume))))
       ), shape == BlockShape.SLAB));
     });
-    LOOT_TABLE_PROVIDERS.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block) -> {
+    builder.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block) -> {
       final float shapeVolume = shapeVolume(shape);
       return JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, blockLootTableGenerator.addSurvivesExplosionCondition(block, ItemEntry.builder(Items.GOLD_NUGGET)
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(shapeVolume * 2, shapeVolume * 5)))
@@ -105,10 +102,10 @@ public final class UnusualLootTables {
 
     // 只有带有精准采集附魔时才会掉落的方块。
     final LootTableFunction dropsWithSilkTouch = (baseBlock, shape, block) -> JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, shape == BlockShape.SLAB));
-    LOOT_TABLE_PROVIDERS.put(Blocks.ICE, dropsWithSilkTouch);
-    LOOT_TABLE_PROVIDERS.put(Blocks.BLUE_ICE, dropsWithSilkTouch);
-    LOOT_TABLE_PROVIDERS.put(Blocks.PACKED_ICE, dropsWithSilkTouch);
-    LOOT_TABLE_PROVIDERS.put(Blocks.SCULK, dropsWithSilkTouch);
+    builder.put(Blocks.ICE, dropsWithSilkTouch);
+    builder.put(Blocks.BLUE_ICE, dropsWithSilkTouch);
+    builder.put(Blocks.PACKED_ICE, dropsWithSilkTouch);
+    builder.put(Blocks.SCULK, dropsWithSilkTouch);
   }
 
   public interface LootTableFunction extends TriFunction<Block, BlockShape, Block, JLootTable> {
