@@ -161,6 +161,7 @@ public class ExtShapeRRPScreen extends Screen {
     if (fullPath != null) {
       MultilineText.create(textRenderer, fullPath.map(s -> Text.translatable("options.extshape.rrp.fullPath", s).formatted(Formatting.GRAY), throwable -> Text.translatable("options.extshape.rrp.invalidPath", throwable.getMessage()).formatted(Formatting.RED)), width - 40).drawCenterWithShadow(matrices, width / 2, 140);
     }
+    MultilineText.create(textRenderer, Text.translatable("options.extshape.rrp.info", ScreenTexts.BACK).formatted(Formatting.YELLOW), width - 40).drawCenterWithShadow(matrices, width / 2, 170);
   }
 
   @Override

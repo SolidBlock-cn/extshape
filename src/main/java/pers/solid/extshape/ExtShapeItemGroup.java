@@ -288,7 +288,7 @@ public class ExtShapeItemGroup {
   protected static void importTo(Block baseBlock, FeatureSet featureSet, ItemGroup.Entries entries, boolean operatorsEnabled) {
     if (baseBlock == null) return;
     entries.add(baseBlock);
-    for (BlockShape shape : BlockShape.values()) {
+    for (BlockShape shape : ExtShapeConfig.CURRENT_CONFIG.shapesInSpecificGroups) {
       final Block shapeBlock = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (shapeBlock != null) {
         entries.add(shapeBlock);

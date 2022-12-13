@@ -9,6 +9,7 @@
 - 修复带釉陶瓦台阶的默认方块状态的方向未被成功设置的问题。
 - 现在 `#extshape:log_blocks` 也属于方块标签 `#extshape:wooden_blocks` 中了。
 - 优化了在 1.19.3 中添加物品的逻辑，使之更加高效。
+- 修复 `/extshape:config` 不生效的问题。
 
 - Adjusted the code structure and improved extension behaviour.
     - Added `BlocksBuilderFactory` class, to allow different mods to add their blocks. Also, made sure `ExtShapeBlocks.BLOCKS` and `ExtShapeBlocks.BASE_BLOCKS` contains only blocks in this mod.
@@ -17,6 +18,7 @@
 - Fixed the issue that the direction of the default block state of glazed terracotta slab is not successfully set.
 - Now `#extshape:log_blocks` belongs to block tag `#extshape:wooden_blocks`.
 - Optimized the logic of adding items in 1.19.3 to be more efficient.
+- Fixed the issue that `/extshape:config` has no effect.
 
 ### 1.7.2
 

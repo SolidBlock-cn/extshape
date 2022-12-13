@@ -2,6 +2,7 @@ package pers.solid.extshape.builder;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.gson.*;
 import net.minecraft.block.*;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.util.StringIdentifiable;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.block.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -114,5 +116,19 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
   @Override
   public int compareTo(@NotNull BlockShape o) {
     return id - o.id;
+  }
+
+  public enum Serializer implements JsonSerializer<BlockShape>, JsonDeserializer<BlockShape> {
+    INSTANCE;
+
+    @Override
+    public BlockShape deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+      return byName(json.getAsString());
+    }
+
+    @Override
+    public JsonElement serialize(BlockShape src, Type typeOfSrc, JsonSerializationContext context) {
+      return new JsonPrimitive(src.asString());
+    }
   }
 }
