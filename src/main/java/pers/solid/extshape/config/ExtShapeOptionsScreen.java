@@ -3,7 +3,6 @@ package pers.solid.extshape.config;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -134,19 +133,8 @@ public class ExtShapeOptionsScreen extends Screen {
   // 运行时资源包设置。
   private final ButtonWidget rrpOptionsButton = new ButtonWidget.Builder(Text.translatable("options.extshape.rrp.title"), button -> {
     if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
-  }).position(width / 2 - 205, 191).size(200, 20)
+  }).position(width / 2 - 100, 191).size(200, 20)
       .tooltip(Tooltip.of(Text.translatable("options.extshape.rrp.description")))
-      .build();
-  private final ButtonWidget reasonableSortingButton = new ButtonWidget.Builder(Text.translatable("options.extshape.reasonable-sorting"), button -> {
-    if (client != null) {
-      try {
-        ExtShape.LOGGER.warn("Reasonable Sorting implementation is not yet supported in 1.19.3!");
-      } catch (LinkageError e) {
-        ExtShape.LOGGER.error("Failed to open Reasonable Sorting config screen:", e);
-      }
-    }
-  }).position(width / 2 + 5, 191).size(200, 20)
-      .tooltip(Tooltip.of(Text.translatable("options.extshape.reasonable-sorting.description")))
       .build();
 
   // 完成按钮
@@ -183,12 +171,8 @@ public class ExtShapeOptionsScreen extends Screen {
     addDrawableChild(avoidSomeButtonRecipesButton);
     specialPressurePlateRecipesButton.setX(width / 2 + 5);
     addDrawableChild(specialPressurePlateRecipesButton);
-    rrpOptionsButton.setX(width / 2 - 205);
+    rrpOptionsButton.setX(width / 2 - 100);
     addDrawableChild(rrpOptionsButton);
-
-    reasonableSortingButton.active = client != null && FabricLoader.getInstance().isModLoaded("reasonable-sorting");
-    reasonableSortingButton.setX(width / 2 + 5);
-    addDrawableChild(reasonableSortingButton);
 
     finishButton.setPos(width / 2 - 100, height - 27);
     addDrawableChild(finishButton);

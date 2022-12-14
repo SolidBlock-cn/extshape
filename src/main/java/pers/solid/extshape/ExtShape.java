@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
@@ -20,7 +19,6 @@ import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.rrp.ExtShapeRRP;
-import pers.solid.extshape.rs.ExtShapeBridgeImpl;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
@@ -63,16 +61,6 @@ public class ExtShape implements ModInitializer {
 
     ExtShapeRRP.registerRRP();
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
-
-    if (FabricLoader.getInstance().isModLoaded("reasonable-sorting")) {
-      try {
-        ExtShapeBridgeImpl.initialize();
-      } catch (LinkageError e) {
-        LOGGER.info("An error ({}) was thrown when initializing Reasonable Sorting Mod with Extended Block Shapes mod. This is expected.", e.getClass().getSimpleName());
-      } catch (Throwable e) {
-        LOGGER.warn("Failed to call ExtShapeBridgeImpl.initialize():", e);
-      }
-    }
   }
 
   /**
