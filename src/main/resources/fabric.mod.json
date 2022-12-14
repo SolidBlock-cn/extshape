@@ -24,9 +24,6 @@
     ],
     "modmenu": [
       "pers.solid.extshape.config.ExtShapeModMenu"
-    ],
-    "reasonable-sorting:extshape-bridge": [
-      "pers.solid.extshape.rs.ExtShapeBridgeImpl"
     ]
   },
   "mixins": [

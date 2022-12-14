@@ -44,7 +44,8 @@
   "options.extshape.confirm.noGroups": "你嘅「%s」和「%s」都設置為「%s」，這意味著你玩創造模式時，無法從創造模式物品欄中獲取模組中嘅物品。你真係要繼續？",
   "options.extshape.confirm.redo": "我再考慮一下",
   "options.extshape.registerBlockFamilies": "註冊 BlockFamilies",
-  "options.extshape.registerBlockFamilies.description": "一般不建議開啟。如果啟用，初始化 Minecraft 的時候，本模組中的方塊與 Minecraft 的原版方塊之間的關係將會註冊到 BlockFamilies 中。BlockFamilies 的註冊表可以被其他模組識別，但有可能導致不穩定，因此一般不需要開啟。\n重啟遊戲後生效。",
+  "options.extshape.registerBlockFamilies.description": "一般不建議開啟。如果啟用，初始化 Minecraft 的時候，本模組中的方塊與 Minecraft 的原版方塊之間的關係將會註冊到 BlockFamilies 中。BlockFamilies 的註冊表可以被其他模組識別，但有可能導致不穩定，因此一般不需要開啟。",
+  "options.extshape.requires_restart": "重啟遊戲後生效。",
 
   "options.extshape.rrp.title": "運行時資源包設置",
   "options.extshape.rrp.description": "管理擴展方塊形狀模組中嘅運行時資源包。",

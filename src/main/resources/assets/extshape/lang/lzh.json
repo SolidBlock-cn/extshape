@@ -44,7 +44,8 @@
   "options.extshape.confirm.noGroups": "君「%s」並「%s」咸為「%s」，是形也，如為創法，無從取物自是囊者于創之囊。確行此乎？",
   "options.extshape.confirm.redo": "吾欲三思",
   "options.extshape.registerBlockFamilies": "入簿BlockFamilies",
-  "options.extshape.registerBlockFamilies.description": "常無諫啟。如啟，始發塊藝之時，塊之關係者咸入 BlockFamilies 也，或可識於他囊，亦有致不穩之險，因無諫之啟。\n複啟以效見",
+  "options.extshape.registerBlockFamilies.description": "常無諫啟。如啟，始發塊藝之時，塊之關係者咸入 BlockFamilies 也，或可識於他囊，亦有致不穩之險，因無諫之啟。",
+  "options.extshape.requires_restart": "複啟以效見。",
 
   "options.extshape.rrp.title": "運行時資囊設置",
   "options.extshape.rrp.description": "理運行時資囊之於塊形之擴模組也。",

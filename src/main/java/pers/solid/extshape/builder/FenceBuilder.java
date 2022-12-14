@@ -7,7 +7,7 @@ import pers.solid.extshape.block.ExtShapeFenceBlock;
 import pers.solid.extshape.tag.ExtShapeTags;
 
 public class FenceBuilder extends AbstractBlockBuilder<FenceBlock> {
-  public Item secondIngredient;
+  public final Item secondIngredient;
 
   public FenceBuilder(Block baseBlock, Item secondIngredient) {
     super(baseBlock, builder -> new ExtShapeFenceBlock(baseBlock, ((FenceBuilder) builder).secondIngredient, builder.blockSettings));

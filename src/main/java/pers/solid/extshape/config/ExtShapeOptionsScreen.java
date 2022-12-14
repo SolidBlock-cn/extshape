@@ -94,6 +94,8 @@ public class ExtShapeOptionsScreen extends Screen {
       SimpleOption.constantTooltip(
           Text.translatable("options.extshape.registerBlockFamilies.description")
               .append("\n\n")
+              .append(Text.translatable("options.extshape.requires_restart"))
+              .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY))),
       newConfig.registerBlockFamilies,
       value -> newConfig.registerBlockFamilies = value

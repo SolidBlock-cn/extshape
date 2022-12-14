@@ -94,7 +94,7 @@ public class ExtShapeRRPScreen extends Screen {
         dumpClientResourcesButton.active = false;
         try {
           ExtShapeRRP.CLIENT_PACK.dump(dumpPath);
-          ExtShapeConfig.LOGGER.info("FINISH!");
+          ExtShapeConfig.LOGGER.info("Successfully dumped the client resources of Extended Block Shapes at {}.", dumpPath.toAbsolutePath());
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when dumping client resource.", throwable);
         } finally {
@@ -113,7 +113,7 @@ public class ExtShapeRRPScreen extends Screen {
         dumpServerDataButton.active = false;
         try {
           ExtShapeRRP.STANDARD_PACK.dump(dumpPath);
-          ExtShapeConfig.LOGGER.info("FINISH!");
+          ExtShapeConfig.LOGGER.info("Successfully dumped the server data of Extended Block Shapes at {}.", dumpPath.toAbsolutePath());
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when dumping server data.", throwable);
         } finally {
