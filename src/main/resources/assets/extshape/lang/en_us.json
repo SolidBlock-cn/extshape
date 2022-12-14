@@ -44,7 +44,8 @@
   "options.extshape.confirm.noGroups": "Your both '%s' and '%s' are set '%s', which means in Creative Mode you may not directly obtain items in this mod in your Creative inventory. Are you sure to continue?",
   "options.extshape.confirm.redo": "I reconsider",
   "options.extshape.registerBlockFamilies": "Register BlockFamilies",
-  "options.extshape.registerBlockFamilies.description": "Usually not recommended to open. If enabled, when initializing Minecraft, the relations of the block in this mod to Minecraft's vanilla blocks will be registered in BlockFamilies. The BlockFamilies registry may be identified by some mods, but may cause potential instability. You usually do not need to enable it.\n\nTakes effect after restarting game.",
+  "options.extshape.registerBlockFamilies.description": "Usually not recommended to open. If enabled, when initializing Minecraft, the relations of the block in this mod to Minecraft's vanilla blocks will be registered in BlockFamilies. The BlockFamilies registry may be identified by some mods, but may cause potential instability. You usually do not need to enable it.",
+  "options.extshape.requires_restart": "Takes effect after restarting game.",
 
   "options.extshape.rrp.title": "Runtime Resource Pack settings",
   "options.extshape.rrp.description": "Manage the Runtime Resource Pack of Extended Block Shapes mod.",

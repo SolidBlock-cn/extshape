@@ -20,7 +20,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.ModList;
 import org.apache.commons.lang3.StringUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
@@ -94,6 +93,8 @@ public class ExtShapeOptionsScreen extends Screen {
       "options.extshape.registerBlockFamilies",
       SimpleOption.constantTooltip(
           Text.translatable("options.extshape.registerBlockFamilies.description")
+              .append("\n\n")
+              .append(Text.translatable("options.extshape.requires_restart"))
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY))),
       newConfig.registerBlockFamilies,
