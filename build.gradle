@@ -43,11 +43,12 @@ repositories {
 
 loom {
     runs {
-        server {
-        }
         client {
             programArg "-username=Solid"
         }
+    }
+    runConfigs.configureEach {
+        it.configName = "Minecraft Fabric ${it.name.capitalize()}"
     }
 }
 
