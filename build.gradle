@@ -41,14 +41,15 @@ repositories {
 
 loom {
     runs {
-        server {
-        }
         client {
             programArg "-username=Solid"
         }
     }
     forge {
         mixinConfig "extshape.mixin.json"
+    }
+    runConfigs.configureEach {
+        it.configName = "Minecraft Forge ${it.name.capitalize()}"
     }
 }
 
