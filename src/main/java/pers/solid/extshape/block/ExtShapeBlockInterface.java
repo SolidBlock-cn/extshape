@@ -1,9 +1,7 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.IdentifierExtension;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
-import net.devtech.arrp.generator.ItemResourceGenerator;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
 import net.devtech.arrp.json.recipe.JIngredient;
@@ -15,8 +13,6 @@ import net.minecraft.block.Material;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -114,7 +110,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
    * <p>为该方块写入合成配方。</p>
    *
    * @param pack 运行时资源包。
-   * @see ItemResourceGenerator#writeRecipes(RuntimeResourcePack)
+   * @see net.devtech.arrp.generator.ItemResourceGenerator#writeRecipes(RuntimeResourcePack)
    * @since 1.5.1
    */
   @ApiStatus.AvailableSince("1.5.1")
@@ -146,7 +142,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
         // block 是切石前的基础方块。
         for (Block block : VanillaStonecutting.INSTANCE.get(getBaseBlock())) {
           final String path = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block), "Unregistered block.").getPath();
-          final Identifier secondaryId = ((IdentifierExtension) getRecipeId()).brrp_append("_from_" + path + "_stonecutting");
+          final Identifier secondaryId = getRecipeId().brrp_append("_from_" + path + "_stonecutting");
           final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
               JIngredient.ofItem(block),
               jStonecuttingRecipe.result,

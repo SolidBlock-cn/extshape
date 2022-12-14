@@ -1,7 +1,7 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
 plugins {
-    id 'dev.architectury.loom' version '1.0-SNAPSHOT'
+    id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
     id 'maven-publish'
     id 'io.github.juuxel.loom-quiltflower' version '1.7.+'
     id "com.modrinth.minotaur" version "2.+"
@@ -21,12 +21,12 @@ repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
 
-    maven {
+    /*maven {
         url 'https://maven.aliyun.com/nexus/content/groups/public'
     }
-//    maven {
-//        url 'https://repository.hanbings.io/proxy'
-//    }
+    maven {
+        url 'https://repository.hanbings.io/proxy'
+    }*/
 
     // 合理排序模组依赖的 Cloth Config
     maven { url "https://maven.shedaniel.me/" }

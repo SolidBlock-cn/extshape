@@ -6,13 +6,16 @@ import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -93,7 +96,7 @@ public class ExtShape {
   public static final Map<Block, Block> EXTENDED_STRIPPABLE_BLOCKS = new HashMap<>();
 
   /**
-   * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故不使用 {@link net.fabricmc.fabric.api.registry.StrippableBlockRegistry}，而使用 {@link pers.solid.extshape.mixin.AxeItemMixin}。
+   * 注册所有可去皮的方块。对于 Forge 而言，使用 {@link net.minecraftforge.common.extensions.IForgeBlock#getToolModifiedState(BlockState, ItemUsageContext, ToolAction, boolean)}。
    */
   private static void registerStrippableBlocks() {
     Streams.concat(

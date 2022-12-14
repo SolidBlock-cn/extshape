@@ -306,7 +306,7 @@ public final class ExtShapeBlocks {
 
     // 平滑石头比较特殊，完整方块和台阶不同。
     SMOOTH_STONE_DOUBLE_SLAB = FACTORY.modify(new BlockBuilder())
-        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, "block/smooth_stone_slab_top", "block/smooth_stone_slab", "block/smooth_stone_slab_top"))
+        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, "block/smooth_stone", "block/smooth_stone_slab_side", "block/smooth_stone"))
         .setBlockSettings(AbstractBlock.Settings.copy(SMOOTH_STONE))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "smooth_stone_slab_double"))
         .addTagToAdd(ExtShapeTags.PICKAXE_MINEABLE).build();

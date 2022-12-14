@@ -80,6 +80,8 @@ public class ExtShapeOptionsScreen extends Screen {
       SimpleOption.constantTooltip(
           Text.translatable("options.extshape.showSpecificGroups.tooltip")
               .append("\n\n")
+              .append(Text.translatable("options.extshape.requires_restart"))
+              .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))),
       newConfig.showSpecificGroups,
       value -> {

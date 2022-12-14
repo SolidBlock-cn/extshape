@@ -17,7 +17,6 @@
     "TranslatableTextContentMixin"
   ],
   "client": [
-    "ClientCommandSourceAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

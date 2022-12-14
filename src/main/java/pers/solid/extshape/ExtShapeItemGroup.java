@@ -1,7 +1,6 @@
 package pers.solid.extshape;
 
 import com.google.common.base.Suppliers;
-import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.block.Block;
@@ -12,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.Contract;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -20,7 +21,10 @@ import pers.solid.extshape.mixin.AbstractBlockAccessor;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.function.Supplier;
 
 /**
@@ -30,42 +34,35 @@ import java.util.function.Supplier;
  * @see VanillaItemGroup
  */
 public class ExtShapeItemGroup {
-  public static final ItemGroup WOODEN_BLOCK_GROUP;
-  public static final ItemGroup COLORFUL_BLOCK_GROUP;
-  public static final ItemGroup STONE_BLOCK_GROUP;
-  public static final ItemGroup OTHER_BLOCK_GROUP;
-  public static final ImmutableSet<ItemGroup> MOD_GROUPS;
   private static final ArrayList<Block> WOODEN_BLOCKS = new ArrayList<>();
   private static final ArrayList<Block> COLORFUL_BLOCKS = new ArrayList<>();
   private static final ArrayList<Block> STONE_BLOCKS = new ArrayList<>();
   private static final LinkedHashSet<Block> OTHER_BLOCKS = new LinkedHashSet<>();
 
   static {
-    WOODEN_BLOCK_GROUP = create(
+    create(
         new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
         Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.WALL, Blocks.BAMBOO_MOSAIC))),
         (featureSet, entries, operatorsEnabled) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
             featureSet, entries, operatorsEnabled)))
     );
 
-    COLORFUL_BLOCK_GROUP = create(
+    create(
         new Identifier(ExtShape.MOD_ID, "colorful_blocks"),
         Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.STAIRS, Blocks.LIME_WOOL))),
         (featureSet, entries, operatorsEnabled) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled))
     );
 
-    STONE_BLOCK_GROUP = create(
+    create(
         new Identifier(ExtShape.MOD_ID, "stone_blocks"),
         Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.FENCE, Blocks.CALCITE))),
         (featureSet, entries, operatorsEnabled) -> STONE_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled))
     );
 
-    OTHER_BLOCK_GROUP = create(
+    create(
         new Identifier(ExtShape.MOD_ID, "other_blocks"),
         Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
         (featureSet, entries, operatorsEnabled) -> OTHER_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled)));
-
-    MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
 
     if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
       implementGroups();
@@ -232,44 +229,22 @@ public class ExtShapeItemGroup {
     }
   }
 
-  public static ItemGroup create(Identifier id, Supplier<ItemStack> iconSupplier, ItemGroup.EntryCollector entryCollector) {
-    final ItemGroup group = new ItemGroup.Builder(null, -1)
-        .entries((enabledFeatures, entries, operatorEnabled) -> {
-          if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
-            entryCollector.accept(enabledFeatures, entries, operatorEnabled);
-          }
-        })
-        .displayName(Text.translatable("itemGroup.%s.%s".formatted(id.getNamespace(), id.getPath())))
-        .icon(iconSupplier)
-        .build();
-//    group.setId(id);
-    return group;
+  public static void create(Identifier id, Supplier<ItemStack> iconSupplier, ItemGroup.EntryCollector entryCollector) {
+    FMLJavaModLoadingContext.get().getModEventBus().addListener((CreativeModeTabEvent.Register event) -> {
+      if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups)
+        event.registerCreativeModeTab(id, builder -> builder
+            .entries(entryCollector)
+            .displayName(Text.translatable("itemGroup.%s.%s".formatted(id.getNamespace(), id.getPath())))
+            .icon(iconSupplier)
+        );
+    });
   }
 
   public static void implementGroups() {
-//    MOD_GROUPS.forEach(ItemGroupHelper::appendItemGroup);
   }
 
   public static void removeGroups() {
-//    MOD_GROUPS.forEach(ExtShapeItemGroup::removeItemGroup);
   }
-/*
-  public static void removeItemGroup(ItemGroup itemGroup) {
-    if (ItemGroups.getGroups().stream().noneMatch(group -> group.getId().equals(itemGroup.getId()))) {
-      ExtShape.LOGGER.warn("Seems trying to remove a group with id {} that does not exist.", itemGroup.getId());
-    }
-
-    var itemGroups = new ArrayList<>(ItemGroups.getGroups());
-    itemGroups.remove(itemGroup);
-
-    List<ItemGroup> validated = ItemGroupsAccessor.invokeCollect(itemGroups.toArray(ItemGroup[]::new));
-    ItemGroupsAccessor.setGroups(validated);
-    ItemGroupHelper.sortedGroups = validated.stream().sorted((a, b) -> {
-      if (a.isSpecial() && !b.isSpecial()) return 1;
-      if (!a.isSpecial() && b.isSpecial()) return -1;
-      return 0;
-    }).toList();
-  }*/
 
 
   /**
@@ -291,6 +266,5 @@ public class ExtShapeItemGroup {
   }
 
   public static void init() {
-    Objects.requireNonNull(MOD_GROUPS);
   }
 }

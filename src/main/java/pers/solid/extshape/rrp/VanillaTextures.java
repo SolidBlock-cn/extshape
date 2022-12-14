@@ -90,5 +90,8 @@ public class VanillaTextures {
     TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.ALL, "_side");
     TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.END, "_top");
     TextureRegistry.registerAppended(Blocks.DEEPSLATE, TextureKey.END, "_top");
+
+    TextureRegistry.registerAppended(Blocks.BAMBOO_BLOCK, TextureKey.END, "_top");
+    TextureRegistry.registerAppended(Blocks.STRIPPED_BAMBOO_BLOCK, TextureKey.END, "_top");
   }
 }

@@ -49,6 +49,13 @@ public final class BlockBiMaps {
       for (BlockShape shape : BlockShape.values()) {
         if (shape.vanillaVariant == null) continue;
         Block variant = variants.get(shape.vanillaVariant);
+        if (variant == null) {
+          if (shape == BlockShape.FENCE) {
+            variant = variants.get(BlockFamily.Variant.CUSTOM_FENCE);
+          } else if (shape == BlockShape.FENCE_GATE) {
+            variant = variants.get(BlockFamily.Variant.CUSTOM_FENCE_GATE);
+          }
+        }
         if (variant != null) {
           of(shape).put(baseBlock, variant);
           BASE_BLOCKS.add(baseBlock);
