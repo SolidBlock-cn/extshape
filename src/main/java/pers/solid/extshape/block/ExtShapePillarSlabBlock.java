@@ -22,7 +22,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -32,8 +32,8 @@ import java.util.Set;
  */
 public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
   public static final Set<Block> BASE_BLOCKS_WITH_HORIZONTAL_COLUMN = Sets.newHashSet(Iterables.concat(
-      ExtShapeTags.LOGS,
-      ExtShapeTags.STRIPPED_LOGS,
+      BlockCollections.LOGS,
+      BlockCollections.STRIPPED_LOGS,
       Arrays.asList(Blocks.HAY_BLOCK, Blocks.PURPUR_PILLAR, Blocks.QUARTZ_PILLAR)
   ));
   public static final EnumProperty<Direction.Axis> AXIS = PillarBlock.AXIS;
@@ -57,7 +57,7 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
 
 
     // axis = x
-    final boolean isLog = ExtShapeTags.LOGS.contains(baseBlock) || ExtShapeTags.STRIPPED_LOGS.contains(baseBlock);
+    final boolean isLog = BlockCollections.LOGS.contains(baseBlock) || BlockCollections.STRIPPED_LOGS.contains(baseBlock);
     final Identifier horizontalBaseModelId = isLog ? baseModelId.brrp_append("_horizontal") : baseModelId;
     final Identifier horizontalModelId = modelId.brrp_append("_horizontal");
     variants.addVariant("type=double,axis=x", new JBlockModel(horizontalBaseModelId).x(90).y(90));

@@ -7,11 +7,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.util.AttributiveBlockNameManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,25 +23,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
    * 从基础方块命名空间id路径到其对应变种方块的命名空间id路径前缀的映射。
    * 例如石砖是stone_bricks，但其变种方块的命名空间id路径前缀是stone_brick，因此其变种方块的id路径会形如stone_brick_stairs而非stone_bricks_stairs。
    */
-  Map<String, String> PATH_PREFIX_MAPPINGS = Util.make(new HashMap<>(), map -> {
-    map.put("chiseled_quartz", "chiseled_quartz");
-    map.put("clay", "clay");
-    map.put("cut_copper", "cut_copper");
-    map.put("exposed_copper", "exposed_copper");
-    map.put("exposed_cut_copper", "exposed_cut_copper");
-    map.put("oxidized_copper", "oxidized_copper");
-    map.put("oxidized_cut_copper", "oxidized_cut_copper");
-    map.put("smooth_quartz", "smooth_quartz");
-    map.put("waxed_cut_copper", "waxed_cut_copper");
-    map.put("waxed_exposed_copper", "waxed_exposed_copper");
-    map.put("waxed_exposed_cut_copper", "waxed_exposed_cut_copper");
-    map.put("waxed_oxidized_copper", "waxed_oxidized_copper");
-    map.put("waxed_oxidized_cut_copper", "waxed_oxidized_cut_copper");
-    map.put("waxed_weathered_copper", "waxed_weathered_copper");
-    map.put("waxed_weathered_cut_copper", "waxed_weathered_cut_copper");
-    map.put("weathered_copper", "weathered_copper");
-    map.put("weathered_cut_copper", "weathered_cut_copper");
-  });
+  Map<String, String> PATH_PREFIXES = new HashMap<>();
 
   /**
    * 此集合内的所有方块不能合成楼梯和台阶。此举是为了避免合成表冲突。
@@ -65,23 +46,16 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
    * @return 转换得到的路径前缀。
    */
   static @NotNull String getPathPrefixOf(@NotNull String path) {
-    if (PATH_PREFIX_MAPPINGS.containsKey(path)) {
-      return PATH_PREFIX_MAPPINGS.get(path);
-    }
-    final String newPath = path
+    return PATH_PREFIXES.computeIfAbsent(path, s -> s
         .replaceAll("_planks$", "")
         .replaceAll("_block$", "")
         .replaceAll("^block_of_", "")
         .replaceAll("tiles$", "tile")
-        .replaceAll("bricks$", "brick");
-    if (!path.equals(newPath)) {
-      PATH_PREFIX_MAPPINGS.putIfAbsent(path, newPath);
-    }
-    return newPath;
+        .replaceAll("bricks$", "brick"));
   }
 
   /**
-   * 根据基础方块的命名空间id以及指定的后缀，利用{@link #PATH_PREFIX_MAPPINGS}，组合一个extshape命名空间下的新的id。
+   * 根据基础方块的命名空间id以及指定的后缀，组合一个extshape命名空间下的新的id。
    *
    * @param identifier 基础方块的id，如<code>minecraft:quartz_bricks</code>。
    * @param suffix     后缀，例如<code>"_stairs"</code>或<code>"_fence"</code>。
@@ -107,11 +81,6 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
   default MutableText getNamePrefix() {
     final Block baseBlock = this.getBaseBlock();
     if (baseBlock == null) return new TranslatableText("block.extshape.prefix.unknown");
-    final String path = ForgeRegistries.BLOCKS.getKey(baseBlock).getPath();
-    if (PATH_PREFIX_MAPPINGS.containsKey(path)) {
-      return new TranslatableText("block.extshape.prefix." + getPathPrefixOf(path));
-    } else {
-      return baseBlock.getName();
-    }
+    return AttributiveBlockNameManager.getAttributiveBlockName(baseBlock.getName());
   }
 }

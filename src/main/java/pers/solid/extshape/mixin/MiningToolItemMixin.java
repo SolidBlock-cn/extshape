@@ -3,6 +3,7 @@ package pers.solid.extshape.mixin;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.*;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -25,7 +26,7 @@ public class MiningToolItemMixin extends ToolItem {
   private static final TagKey<Block> PICKAXE_UNMINEABLE = TagKey.of(Registry.BLOCK_KEY, new Identifier(ExtShape.MOD_ID, "pickaxe_unmineable"));
 
   /**
-   * 如果方块属于 {@link #PICKAXE_UNMINEABLE} 这个标签中，那么即使属于 {@link net.minecraft.tag.BlockTags#PICKAXE_MINEABLE}，也不能认为可以开采。这是考虑到 Minecraft 将整个 {@link net.minecraft.tag.BlockTags#WALLS}（{@code minecraft:walls}）都加入了镐的可开采行列，但本模组添加的方块并非全都可以用镐开采，因此特地做出修改。
+   * 如果方块属于 {@link #PICKAXE_UNMINEABLE} 这个标签中，那么即使属于 {@link BlockTags#PICKAXE_MINEABLE}，也不能认为可以开采。这是考虑到 Minecraft 将整个 {@link BlockTags#WALLS}（{@code minecraft:walls}）都加入了镐的可开采行列，但本模组添加的方块并非全都可以用镐开采，因此特地做出修改。
    */
   @SuppressWarnings("ConstantConditions")
   @Inject(at = @At("HEAD"), method = "getMiningSpeedMultiplier", cancellable = true)

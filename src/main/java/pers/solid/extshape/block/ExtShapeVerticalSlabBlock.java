@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -58,11 +58,11 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeTags.PLANKS).contains(baseBlock)) return "wooden_vertical_slab";
-    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_vertical_slab";
-    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_slab";
-    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_vertical_slab";
-    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_vertical_slab";
+    if ((BlockCollections.PLANKS).contains(baseBlock)) return "wooden_vertical_slab";
+    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_vertical_slab";
+    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_vertical_slab";
+    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_vertical_slab";
+    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_vertical_slab";
     return "";
   }
 

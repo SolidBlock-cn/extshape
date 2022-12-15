@@ -18,7 +18,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
   public static final EnumProperty<Direction.Axis> AXIS = PillarBlock.AXIS;
@@ -50,7 +50,7 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
     super.writeBlockModel(pack);
-    final boolean isLog = ExtShapeTags.LOGS.contains(baseBlock) || ExtShapeTags.STRIPPED_LOGS.contains(baseBlock);
+    final boolean isLog = BlockCollections.LOGS.contains(baseBlock) || BlockCollections.STRIPPED_LOGS.contains(baseBlock);
     final JModel blockModel = getBlockModel();
     if (isLog) {
       pack.addModel(blockModel.clone().parent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal")), getBlockModelId().brrp_append("_horizontal"));

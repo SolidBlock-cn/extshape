@@ -3,7 +3,7 @@ package pers.solid.extshape.rs;
 import net.minecraft.block.Block;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.mod.SortingRule;
 
 import java.util.Collection;
@@ -16,7 +16,7 @@ public record ShapeSortingRule(Predicate<Block> blockPredicate, Collection<Block
   public @Nullable Iterable<Block> getFollowers(Block leadingObj) {
     if (blockPredicate.test(leadingObj)) {
       return shapes.stream()
-          .map(shape -> BlockMappings.getBlockOf(shape, leadingObj))
+          .map(shape -> BlockBiMaps.getBlockOf(shape, leadingObj))
           .filter(Objects::nonNull)
           ::iterator;
     }
