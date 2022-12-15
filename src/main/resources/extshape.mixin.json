@@ -4,12 +4,19 @@
   "package": "pers.solid.extshape.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "AbstractBlockAccessor", "AbstractBlockStateAccessor",
-    "BlockAccessor", "BlockFamiliesAccessor", "ButtonMixin",
-    "ItemGroupAccessor", "MiningToolItemMixin", "ShearsItemMixin", "SnowyBlockMixin"
+    "AbstractBlockAccessor",
+    "AbstractBlockStateAccessor",
+    "BlockAccessor",
+    "BlockFamiliesAccessor",
+    "ButtonMixin",
+    "ItemGroupAccessor",
+    "MiningToolItemMixin",
+    "ShearsItemMixin",
+    "SnowyBlockMixin",
+    "TranslatableTextContentAccessor",
+    "TranslatableTextContentMixin"
   ],
   "client": [
-    "CreativeInventoryScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

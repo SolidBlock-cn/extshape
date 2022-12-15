@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.IdentifierExtension;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.generator.ItemResourceGenerator;
@@ -33,8 +32,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
+import pers.solid.extshape.rrp.VanillaStonecutting;
 
 import java.util.Objects;
 
@@ -144,7 +143,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
         // block 是切石前的基础方块。
         for (Block block : VanillaStonecutting.INSTANCE.get(getBaseBlock())) {
           final String path = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block), "Unregistered block.").getPath();
-          final Identifier secondaryId = ((IdentifierExtension) getRecipeId()).brrp_append("_from_" + path + "_stonecutting");
+          final Identifier secondaryId = getRecipeId().brrp_append("_from_" + path + "_stonecutting");
           final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
               JIngredient.ofItem(block),
               jStonecuttingRecipe.result,

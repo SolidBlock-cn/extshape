@@ -11,7 +11,7 @@ import net.minecraft.util.registry.Registry;
 import org.apache.commons.lang3.ObjectUtils;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mappings.BlockMappings;
+import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.mod.*;
 
 import java.util.*;
@@ -20,9 +20,9 @@ import java.util.stream.Stream;
 public class ExtShapeBridgeImplementation extends ExtShapeBridge {
   public static final LinkedHashSet<BlockShape> SHAPES_FOLLOWING_BASE_BLOCKS = new LinkedHashSet<>();
   public static final Multimap<BlockShape, ItemGroup> SHAPE_TRANSFER_RULES = HashMultimap.create();
-  public static final SortingRule<Block> SHAPE_FOLLOWING_BASE_BLOCKS_RULE = new ShapeSortingRule(BlockMappings.BASE_BLOCKS::contains, SHAPES_FOLLOWING_BASE_BLOCKS);
+  public static final SortingRule<Block> SHAPE_FOLLOWING_BASE_BLOCKS_RULE = new ShapeSortingRule(BlockBiMaps.BASE_BLOCKS::contains, SHAPES_FOLLOWING_BASE_BLOCKS);
   public static final SortingRule<Item> SHAPE_FOLLOWING_BASE_BLOCKS_ITEM_RULE = new BlockItemRule(SHAPE_FOLLOWING_BASE_BLOCKS_RULE);
-  public static final TransferRule BASE_BLOCKS_IN_BUILDING_RULE = item -> item instanceof BlockItem blockItem && BlockMappings.BASE_BLOCKS.contains(blockItem.getBlock()) && item.getGroup() != ItemGroup.BUILDING_BLOCKS ? Collections.singleton(ItemGroup.BUILDING_BLOCKS) : null;
+  public static final TransferRule BASE_BLOCKS_IN_BUILDING_RULE = item -> item instanceof BlockItem blockItem && BlockBiMaps.BASE_BLOCKS.contains(blockItem.getBlock()) && item.getGroup() != ItemGroup.BUILDING_BLOCKS ? Collections.singleton(ItemGroup.BUILDING_BLOCKS) : null;
   public static final TransferRule SHAPE_TRANSFER_RULE = new ShapeTransferRule(SHAPE_TRANSFER_RULES);
 
   @Override
@@ -97,7 +97,7 @@ public class ExtShapeBridgeImplementation extends ExtShapeBridge {
       }
     };
     final SortingRule<Block> colorBaseBlockSortingRule = block -> {
-      if (BlockMappings.BASE_BLOCKS.contains(block)) {
+      if (BlockBiMaps.BASE_BLOCKS.contains(block)) {
         final Iterable<Block> colorFollowers = SortingRules.COLOR_SORTING_RULE.getFollowers(block);
         if (colorFollowers != null) {
           return Iterables.concat(

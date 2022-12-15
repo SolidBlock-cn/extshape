@@ -14,7 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import pers.solid.extshape.ExtShapeRRP;
+import pers.solid.extshape.rrp.ExtShapeRRP;
 
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -89,7 +89,7 @@ public class ExtShapeRRPScreen extends Screen {
         dumpClientResourcesButton.active = false;
         try {
           ExtShapeRRP.CLIENT_PACK.dump(dumpPath);
-          ExtShapeConfig.LOGGER.info("FINISH!");
+          ExtShapeConfig.LOGGER.info("Successfully dumped the client resources of Extended Block Shapes at {}.", dumpPath.toAbsolutePath());
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when dumping client resource.", throwable);
         } finally {
@@ -106,7 +106,7 @@ public class ExtShapeRRPScreen extends Screen {
         dumpServerDataButton.active = false;
         try {
           ExtShapeRRP.STANDARD_PACK.dump(dumpPath);
-          ExtShapeConfig.LOGGER.info("FINISH!");
+          ExtShapeConfig.LOGGER.info("Successfully dumped the server data of Extended Block Shapes at {}.", dumpPath.toAbsolutePath());
         } catch (Throwable throwable) {
           ExtShapeConfig.LOGGER.error("Error when dumping server data.", throwable);
         } finally {
@@ -152,6 +152,7 @@ public class ExtShapeRRPScreen extends Screen {
     if (fullPath != null) {
       MultilineText.create(textRenderer, fullPath.map(s -> Text.translatable("options.extshape.rrp.fullPath", s).formatted(Formatting.GRAY), throwable -> Text.translatable("options.extshape.rrp.invalidPath", throwable.getMessage()).formatted(Formatting.RED)), width - 40).drawCenterWithShadow(matrices, width / 2, 140);
     }
+    MultilineText.create(textRenderer, Text.translatable("options.extshape.rrp.info", ScreenTexts.BACK).formatted(Formatting.YELLOW), width - 40).drawCenterWithShadow(matrices, width / 2, 170);
   }
 
   @Override

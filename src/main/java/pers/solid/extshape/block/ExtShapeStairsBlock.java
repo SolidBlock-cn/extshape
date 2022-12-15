@@ -11,7 +11,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
 
@@ -41,10 +41,10 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   @Override
   public String getRecipeGroup() {
     Block baseBlock = this.baseBlock;
-    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_stairs";
-    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_stairs";
-    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_stairs";
-    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_stairs";
+    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_stairs";
+    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_stairs";
+    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_stairs";
+    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_stairs";
     return "";
   }
 

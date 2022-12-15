@@ -6,6 +6,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 
 /**
@@ -28,7 +30,9 @@ public class ExtShapeBlockItem extends BlockItem {
 
   @Override
   public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
-    if (ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups || group == ItemGroup.SEARCH) {
+    // 如果启用了添加至原版物品组，当该方块不属于形状，或者允许添加的形状包含当前形状时，添加至原版物品组。
+    final BlockShape shape;
+    if (ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups && (!(getBlock() instanceof ExtShapeBlockInterface i) || (shape = i.getBlockShape()) == null || ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla.contains(shape)) || group == ItemGroup.SEARCH) {
       super.appendStacks(group, stacks);
     }
   }
