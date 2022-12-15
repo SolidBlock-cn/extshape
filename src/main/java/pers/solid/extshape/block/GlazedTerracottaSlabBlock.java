@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.IdentifierExtension;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.json.blockstate.JBlockModel;
@@ -28,7 +27,8 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
 
   public GlazedTerracottaSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
-    this.getDefaultState().with(FACING, Direction.NORTH);
+    // 注意这里不使用 stateManager.getDefaultState，因为 super 中设置了 WATERLOGGED = false。
+    setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
   }
 
   @Nullable
@@ -66,22 +66,24 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
     for (Direction direction : Direction.Type.HORIZONTAL) {
       final int rotation = (int) direction.asRotation();
       variant.addVariant("type=bottom,facing", direction, new JBlockModel(blockModelId).y(rotation));
-      variant.addVariant("type=top,facing", direction, new JBlockModel(((IdentifierExtension) blockModelId).brrp_append("_top")).y(rotation));
+      variant.addVariant("type=top,facing", direction, new JBlockModel(blockModelId.brrp_append("_top")).y(rotation));
       variant.addVariant("type=double,facing", direction, new JBlockModel(baseBlockModelId).y(rotation));
     }
     return JBlockStates.ofVariants(variant);
   }
 
+  @OnlyIn(Dist.CLIENT)
   @Override
   public @NotNull JModel getBlockModel() {
     return super.getBlockModel().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
   }
 
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
     final JModel model = getBlockModel();
     final Identifier id = getBlockModelId();
     pack.addModel(model, id);
-    pack.addModel(model.clone().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")), ((IdentifierExtension) id).brrp_append("_top"));
+    pack.addModel(model.clone().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")), id.brrp_append("_top"));
   }
 }

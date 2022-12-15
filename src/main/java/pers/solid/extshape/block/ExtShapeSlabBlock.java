@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantBlockInterface {
   public ExtShapeSlabBlock(@NotNull Block baseBlock, Settings settings) {
@@ -58,10 +58,10 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
   @Override
   public String getRecipeGroup() {
     Block baseBlock = this.baseBlock;
-    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_slab";
-    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_slab";
-    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_slab";
-    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_slab";
+    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_slab";
+    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_slab";
+    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_slab";
+    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_slab";
     return "";
   }
 
