@@ -34,7 +34,7 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
 
   public QuarterPieceBlock(Settings settings) {
     super(settings);
-    setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(HALF, BlockHalf.BOTTOM));
+    setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(HALF, BlockHalf.BOTTOM));
   }
 
   @Override

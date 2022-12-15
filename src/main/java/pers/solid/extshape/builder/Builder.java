@@ -1,6 +1,6 @@
 package pers.solid.extshape.builder;
 
-import net.devtech.arrp.util.CanIgnoreReturnValue;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 
@@ -13,6 +13,7 @@ interface Builder<T> {
   /**
    * 构造对象时，不将其注册到注册表。
    */
+  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   Builder<T> noRegister();
 
@@ -27,6 +28,7 @@ interface Builder<T> {
    *
    * @param identifier 命名空间id。
    */
+  @CanIgnoreReturnValue
   @Contract(mutates = "this")
   Builder<T> setIdentifier(Identifier identifier);
 

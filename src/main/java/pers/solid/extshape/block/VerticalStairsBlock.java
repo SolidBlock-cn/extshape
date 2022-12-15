@@ -70,7 +70,6 @@ public class VerticalStairsBlock extends Block implements Waterloggable {
     return VOXELS.get(state.get(FACING));
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public BlockState rotate(BlockState state, WorldAccess level, BlockPos pos, BlockRotation rotation) {
     return super.rotate(state, level, pos, rotation).with(FACING, state.get(FACING).rotate(rotation));

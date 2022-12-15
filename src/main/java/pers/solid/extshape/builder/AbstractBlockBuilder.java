@@ -1,33 +1,38 @@
 package pers.solid.extshape.builder;
 
-import com.google.common.collect.BiMap;
-import net.devtech.arrp.util.CanIgnoreReturnValue;
+import com.google.common.collect.ImmutableMap;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.block.ExtShapeVariantBlockInterface;
-import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.tag.ExtShapeBlockTag;
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.*;
+import pers.solid.extshape.tag.BlockTagPreparation;
+import pers.solid.extshape.util.BlockBiMaps;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+/**
+ * 这个类可以用来方便地创建方块和物品对象，并在创建时进行一系列附加的操作。
+ *
+ * @param <T>
+ */
 public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T> {
   /**
    * 该方块的基础方块。
    */
   public final Block baseBlock;
   /**
-   * 是否将方块添加到默认的标签中。默认的标签可以使用 {@link #setDefaultTagToAdd(ExtShapeBlockTag)} 修改。
+   * 是否将方块添加到默认的标签中。默认的标签可以使用 {@link #setDefaultTagToAdd(BlockTagPreparation)} 修改。
    */
   public final boolean addToDefaultTag;
   /**
@@ -37,19 +42,27 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   /**
    * 创建实例并构建后，将自身添加到这些标签中。
    */
-  private final List<@NotNull ExtShapeBlockTag> tagsToAdd = new ArrayList<>();
+  private final List<@NotNull BlockTagPreparation> tagsToAdd = new ArrayList<>();
   public AbstractBlock.Settings blockSettings;
   public ExtShapeBlockItemBuilder itemBuilder;
-
-  protected @Nullable ExtShapeBlockTag defaultTagToAdd = null;
   /**
-   * 与该形状相关的方块映射。
+   * 构建之后将构建后的方块添加到这个集合中。
    */
-  protected BiMap<Block, ? super T> mapping;
+  protected @Nullable Collection<Block> instanceCollection;
+  /**
+   * 计算方块注册时使用的 id 时使用的默认命名空间。如果为 {@code null}，则直接使用基础方块的 id。如果使用 {@link #setIdentifier(Identifier)} 设置好了 id，那么不会使用 {@code defaultNamespace} 来计算 id。
+   */
+  protected @Nullable String defaultNamespace;
+
+  protected @Nullable BlockTagPreparation defaultTagToAdd = null;
+  /**
+   * 需要创建的方块的方块形状，主要用于在创建之后注册方块映射。
+   */
+  protected BlockShape shape;
   /**
    * 是否将方块添加到相应的方块映射中。
    */
-  protected boolean addToMapping;
+  protected boolean shouldAddToBlockBiMap;
   /**
    * 用于构造实例的匿名函数。该值必须非 {@code null}，否则实例化无法进行。
    *
@@ -85,13 +98,54 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     this.addToDefaultTag = true;
     this.blockSettings = settings;
     this.buildItem = true;
-    this.addToMapping = true;
+    this.shouldAddToBlockBiMap = true;
     this.itemSettings = new Item.Settings();
     this.instanceSupplier = instanceSupplier;
   }
 
   protected AbstractBlockBuilder(Block baseBlock, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
     this(baseBlock, AbstractBlock.Settings.copy(baseBlock), instanceSupplier);
+  }
+
+  private static final @Unmodifiable Map<Pattern, String> blockNameConversion = new ImmutableMap.Builder<Pattern, String>()
+      .put(Pattern.compile("bamboo_block$"), "bamboo_block")
+      .put(Pattern.compile("_planks$"), StringUtils.EMPTY)
+      .put(Pattern.compile("_block$"), StringUtils.EMPTY)
+      .put(Pattern.compile("^block_of_"), StringUtils.EMPTY)
+      .put(Pattern.compile("tiles$"), "tile")
+      .put(Pattern.compile("bricks$"), "brick")
+      .build();
+
+  /**
+   * 获得 {@code path} 对应的名称前缀。
+   *
+   * @param path 命名空间id中的路径。如 {@code iron_block}、{@code stone_bricks}。
+   * @return 转换得到的路径前缀。
+   */
+  public static @NotNull String getPathPrefixOf(@NotNull String path) {
+    for (Map.Entry<Pattern, String> entry : blockNameConversion.entrySet()) {
+      final Pattern key = entry.getKey();
+      final Matcher matcher = key.matcher(path);
+      if (matcher.find()) {
+        return matcher.replaceFirst(entry.getValue());
+      }
+    }
+    return path;
+  }
+
+  /**
+   * 根据基础方块的命名空间id以及指定的后缀，组合一个extshape命名空间下的新的id。
+   *
+   * @param identifier 基础方块的id，如<code>minecraft:quartz_bricks</code>。
+   * @param namespace  命名空间，如果为 null，则使用 {@code identifier} 的命名空间。
+   * @param suffix     后缀，例如<code>"_stairs"</code>或<code>"_fence"</code>。
+   * @return 组合后的id，例如 <code>minecraft:quartz_bricks</code> 和 <code>"_stairs"</code> 组合形成
+   * <code>extshape:quartz_stairs</code>。
+   */
+  public static Identifier convertIdentifier(@NotNull Identifier identifier, @Nullable String namespace, @NotNull String suffix) {
+    String path = identifier.getPath();
+    String basePath = getPathPrefixOf(path);
+    return new Identifier(namespace == null ? identifier.getNamespace() : namespace, basePath + suffix);
   }
 
 
@@ -110,6 +164,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    *
    * @param settings 方块设置。
    */
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setBlockSettings(AbstractBlock.Settings settings) {
     this.blockSettings = settings;
@@ -121,6 +176,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    *
    * @param settings 物品设置。
    */
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setItemSettings(Item.Settings settings) {
     this.itemSettings = settings;
@@ -140,7 +196,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   @Override
   public Identifier getBlockId() {
     if (identifier == null) {
-      identifier = ExtShapeVariantBlockInterface.convertIdentifier(getBaseIdentifier(), this.getSuffix());
+      identifier = convertIdentifier(getBaseIdentifier(), defaultNamespace, this.getSuffix());
     }
     return identifier;
   }
@@ -169,8 +225,9 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    *
    * @param tag 方块标签。
    */
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> setDefaultTagToAdd(ExtShapeBlockTag tag) {
+  public AbstractBlockBuilder<T> setDefaultTagToAdd(BlockTagPreparation tag) {
     this.defaultTagToAdd = tag;
     return this;
   }
@@ -179,6 +236,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    * 不注册方块和物品。
    */
   @Override
+  @CanIgnoreReturnValue
   @Contract(value = "-> this", mutates = "this")
   public AbstractBlockBuilder<T> noRegister() {
     this.registerBlock = false;
@@ -189,11 +247,9 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   /**
    * 添加到方块映射表中。如果方块映射表不存在，则不执行。
    */
-  protected void addToMapping() {
-    if (mapping != null) {
-      mapping.put(baseBlock, instance);
-      BlockMappings.BASE_BLOCKS.remove(baseBlock);
-      BlockMappings.BASE_BLOCKS.add(baseBlock);
+  protected void addToBlockBiMap() {
+    if (shape != null) {
+      BlockBiMaps.setBlockOf(shape, baseBlock, instance);
     }
   }
 
@@ -202,8 +258,9 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    *
    * @param tag 方块构建后，需要添加到的标签。
    */
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> addTagToAdd(@NotNull ExtShapeBlockTag tag) {
+  public AbstractBlockBuilder<T> addTagToAdd(@NotNull BlockTagPreparation tag) {
     this.tagsToAdd.add(tag);
     return this;
   }
@@ -214,12 +271,17 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    * @param instance 方块实例。一般是一个新的方块对象。
    */
   @ApiStatus.Internal
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setInstanceDirectly(T instance) {
     this.instance = instance;
     return this;
   }
 
+  /**
+   * 设置如何生成方块实例。
+   */
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> setInstanceSupplier(Function<AbstractBlockBuilder<T>, T> supplier) {
     this.instanceSupplier = supplier;
@@ -231,12 +293,16 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    *
    * @param group 物品组。若为 {@code null}，则表示不添加到物品组中。
    */
+  @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
   public AbstractBlockBuilder<T> group(@Nullable ItemGroup group) {
     this.itemSettings.group(group);
     return this;
   }
 
+  /**
+   * 立即使用当前的 {@link #instanceSupplier} 生成方块实例。
+   */
   @Override
   public final void createInstance() {
     this.instance = this.instanceSupplier.apply(this);
@@ -253,7 +319,7 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     if (this.registerBlock) this.register();
     if (this.addToDefaultTag && this.defaultTagToAdd != null) this.defaultTagToAdd.add(this.instance);
     this.tagsToAdd.forEach(tag -> tag.add(this.instance));
-    if (this.addToMapping) this.addToMapping();
+    if (this.shouldAddToBlockBiMap) this.addToBlockBiMap();
 
     if (buildItem) {
       this.itemBuilder = new ExtShapeBlockItemBuilder(this.instance, itemSettings);
@@ -262,8 +328,10 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
       this.itemBuilder.setIdentifier(this.getBlockId()).build();
     }
 
-    // 将方块添加到列表中。
-    ExtShapeBlocks.BLOCKS.add(instance);
+    // 将方块添加到指定的集合中。
+    if (instanceCollection != null) {
+      instanceCollection.add(instance);
+    }
 
     return this.instance;
   }
