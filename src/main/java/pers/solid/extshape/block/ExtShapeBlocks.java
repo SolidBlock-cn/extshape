@@ -13,7 +13,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
@@ -388,6 +387,8 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(RAW_IRON_BLOCK, Items.RAW_IRON, ButtonType.STONE, ActivationRule.MOBS).build();
     FACTORY.createAllShapes(RAW_COPPER_BLOCK, Items.RAW_COPPER, ButtonType.STONE, ActivationRule.MOBS).build();
     FACTORY.createAllShapes(RAW_GOLD_BLOCK, Items.RAW_GOLD, ButtonType.STONE, ActivationRule.MOBS).build();
+
+    ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());
   }
 
   private ExtShapeBlocks() {

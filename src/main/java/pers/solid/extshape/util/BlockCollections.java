@@ -113,6 +113,8 @@ public final class BlockCollections {
   public static final @Unmodifiable ImmutableSet<Block> GLAZED_TERRACOTTA = ImmutableSet.of(
       WHITE_GLAZED_TERRACOTTA,
       ORANGE_GLAZED_TERRACOTTA,
+      MAGENTA_GLAZED_TERRACOTTA,
+      LIGHT_BLUE_GLAZED_TERRACOTTA,
       YELLOW_GLAZED_TERRACOTTA,
       LIME_GLAZED_TERRACOTTA,
       PINK_GLAZED_TERRACOTTA,
