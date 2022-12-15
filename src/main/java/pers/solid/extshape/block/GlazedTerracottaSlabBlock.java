@@ -27,7 +27,8 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
 
   public GlazedTerracottaSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
-    this.getDefaultState().with(FACING, Direction.NORTH);
+    // 注意这里不使用 stateManager.getDefaultState，因为 super 中设置了 WATERLOGGED = false。
+    setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
   }
 
   @Nullable
@@ -71,11 +72,13 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
     return JBlockStates.ofVariants(variant);
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public @NotNull JModel getBlockModel() {
     return super.getBlockModel().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
     final JModel model = getBlockModel();

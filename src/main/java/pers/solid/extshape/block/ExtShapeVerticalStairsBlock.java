@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
-import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -75,12 +75,12 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
   @Override
   public String getRecipeGroup() {
-    if ((ExtShapeTags.PLANKS).contains(baseBlock)) return "wooden_vertical_stairs";
-    if ((ExtShapeTags.WOOLS).contains(baseBlock)) return "wool_vertical_stairs";
-    if ((ExtShapeTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_stairs";
-    if ((ExtShapeTags.STAINED_TERRACOTTA).contains(baseBlock)) return
-        "stained_terracotta_vertical_stairs";
-    if ((ExtShapeTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
+    if ((BlockCollections.PLANKS).contains(baseBlock)) return "wooden_vertical_stairs";
+    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_vertical_stairs";
+    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_vertical_stairs";
+    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return
+        "BlockCollectionsacotta_vertical_stairs";
+    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return
         "glazed_terracotta_vertical_stairs";
     return "";
   }

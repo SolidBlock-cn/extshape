@@ -6,11 +6,12 @@
   "mixins": [
     "AbstractBlockAccessor", "AbstractBlockStateAccessor", "AxeItemMixin",
     "BlockAccessor", "BlockFamiliesAccessor", "ButtonMixin",
-    "ItemGroupAccessor", "MiningToolItemMixin", "SnowyBlockMixin", "TranslatableTextContentMixin",
-    "TranslatableTextContentAccessor"
+    "ItemGroupAccessor", "MiningToolItemMixin", "SnowyBlockMixin",
+    "TranslatableTextContentAccessor", "TranslatableTextContentMixin"
   ],
   "client": [
-    "CreativeInventoryScreenAccessor", "CreativeInventoryScreenMixin"
+    "CreativeInventoryScreenAccessor",
+    "CreativeInventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

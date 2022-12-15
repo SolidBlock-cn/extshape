@@ -1,5 +1,25 @@
 # 更新日志 Update Log
 
+### 1.7.3
+
+- 大幅度调整代码结构，提高可扩展性。
+    - 添加了 `BlocksBuilderFactory` 类，以允许不同模组添加自己的方块。同时，确保 `ExtShapeBlocks.BLOCKS` 和 `ExtShapeBlocks.BASE_BLOCKS` 只包含此模组的方块。
+    - 添加了 `TagPreparationFactory` 类，以允许不同模组使用本模组的类来添加标签，并减少与已有内容的冲突。
+    - 将关于不同方块形状之间的数据生成的代码单独放到 `CrossShapeDataGeneration` 中，并提高代码可读性。
+- 修复带釉陶瓦台阶的默认方块状态的方向未被成功设置的问题。
+- 现在 `#extshape:log_blocks` 也属于方块标签 `#extshape:wooden_blocks` 中了。
+- 优化了在 1.19.3 中添加物品的逻辑，使之更加高效。
+- 修复 `/extshape:config` 不生效的问题。
+
+- Adjusted the code structure and improved extension behaviour.
+    - Added `BlocksBuilderFactory` class, to allow different mods to add their blocks. Also, made sure `ExtShapeBlocks.BLOCKS` and `ExtShapeBlocks.BASE_BLOCKS` contains only blocks in this mod.
+    - Added `TagPreparationFactory` class, to allow different mods to add tags with classes of this mod, and reduce conflicts to existing content.
+    - Split the code about generating data between different block shapes to `CrossShapeDataGeneration` and improved the readability.
+- Fixed the issue that the direction of the default block state of glazed terracotta slab is not successfully set.
+- Now `#extshape:log_blocks` belongs to block tag `#extshape:wooden_blocks`.
+- Optimized the logic of adding items in 1.19.3 to be more efficient.
+- Fixed the issue that `/extshape:config` has no effect.
+
 ### 1.7.2
 
 - 调整了一些语言的译名显示。

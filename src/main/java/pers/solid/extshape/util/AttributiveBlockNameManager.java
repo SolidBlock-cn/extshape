@@ -36,7 +36,9 @@ public class AttributiveBlockNameManager {
       .put(Pattern.compile("块$"), StringUtils.EMPTY)
       .put(Pattern.compile("塊$"), StringUtils.EMPTY)
       .put(Pattern.compile("木+板$"), "木")
+      .put(Pattern.compile("竹板"), "竹")
       .put(Pattern.compile("木材$"), StringUtils.EMPTY)
+      .put(Pattern.compile("竹材"), "竹")
       .build();
 
   public static final Map<Pattern, String> LZH_REPLACEMENT = ImmutableMap.<Pattern, String>builder()

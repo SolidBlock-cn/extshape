@@ -101,4 +101,5 @@ public final class RecipeConflict {
           return checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
         }));
   }
+
 }

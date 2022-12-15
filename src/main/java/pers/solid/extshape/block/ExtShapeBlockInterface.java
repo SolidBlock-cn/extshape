@@ -19,8 +19,8 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mappings.VanillaStonecutting;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
+import pers.solid.extshape.rrp.VanillaStonecutting;
 
 /**
  * 该模组中的绝大多数方块共用的接口。

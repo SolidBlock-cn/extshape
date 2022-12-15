@@ -6,7 +6,6 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.item.ItemGroup;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.tag.ExtShapeTags;
 
 public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBlock> {
@@ -14,7 +13,7 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
   public PressurePlateBuilder(@NotNull PressurePlateBlock.ActivationRule type, Block baseBlock) {
     super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f), builder -> new ExtShapePressurePlateBlock(baseBlock, type, builder.blockSettings));
     this.defaultTagToAdd = ExtShapeTags.PRESSURE_PLATES;
-    this.mapping = BlockMappings.getMappingOf(BlockShape.PRESSURE_PLATE);
+    this.shape = BlockShape.PRESSURE_PLATE;
     itemSettings.group(ItemGroup.REDSTONE);
   }
 
