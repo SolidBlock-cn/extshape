@@ -143,7 +143,8 @@ public final class ExtShapeBlocks {
         .addTagToAdd(ExtShapeTags.PICKAXE_MINEABLE)
         .group(ItemGroup.BUILDING_BLOCKS).build();
 
-    BlockBiMaps.of(BlockShape.SLAB).put(PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
+    BASE_BLOCKS.add(PETRIFIED_OAK_PLANKS);
+    BlockBiMaps.setBlockOf(BlockShape.SLAB, PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
 
     // 基岩。
     FACTORY.createAllShapes(BEDROCK, Items.STICK, ButtonType.HARD, ActivationRule.MOBS)

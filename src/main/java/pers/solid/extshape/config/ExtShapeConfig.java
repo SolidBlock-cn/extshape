@@ -72,7 +72,7 @@ public class ExtShapeConfig implements Cloneable {
   }
 
   /**
-   * 是否将本模组的物品添加到创造模式物品栏中的原版的物品组中。如果需要搭配合理排序（Reasonable Sorting）模组以显示在原版物品组中，可以设为 {@code true}。
+   * 是否将本模组的物品添加到创造模式物品栏中的原版的物品组中。
    */
   public boolean addToVanillaGroups = false;
   /**

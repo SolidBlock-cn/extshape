@@ -42,7 +42,7 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_fence_gate";
     if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_fence_gate";
     if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return
-        "BlockCollectionsacotta_fence_gate";
+        "stained_terracotta_fence_gate";
     if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return
         "glazed_terracotta_fence_gate";
     return "";

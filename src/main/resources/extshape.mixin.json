@@ -17,6 +17,7 @@
     "TranslatableTextContentMixin"
   ],
   "client": [
+    "CreativeInventoryScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
