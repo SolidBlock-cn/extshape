@@ -55,8 +55,8 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.extshape]]
-modId = "better_runtime_resource_pack"
+modId = "brrp_v1"
 mandatory = true
-versionRange = "[0.8.2,)"
+versionRange = "[1.0.0-beta.2,)"
 ordering = "NONE"
 side = "BOTH"

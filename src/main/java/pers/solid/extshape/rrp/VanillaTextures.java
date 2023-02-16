@@ -1,14 +1,16 @@
 package pers.solid.extshape.rrp;
 
-import net.devtech.arrp.generator.TextureRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.client.model.TextureKey;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.ApiStatus;
+import pers.solid.brrp.v1.generator.TextureRegistry;
 import pers.solid.extshape.block.ExtShapeBlocks;
 
 @OnlyIn(Dist.CLIENT)
+@ApiStatus.Internal
 public class VanillaTextures {
   @OnlyIn(Dist.CLIENT)
   public static void registerTextures() {
@@ -74,10 +76,10 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.STRIPPED_WARPED_HYPHAE, new Identifier("minecraft", "block/stripped_warped_stem"));
     TextureRegistry.register(Blocks.STRIPPED_CRIMSON_HYPHAE, new Identifier("minecraft", "block/stripped_crimson_stem"));
 
-    TextureRegistry.registerAppended(Blocks.BASALT, TextureKey.ALL, "_side");
-    TextureRegistry.registerAppended(Blocks.BASALT, TextureKey.END, "_top");
-    TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.ALL, "_side");
-    TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.END, "_top");
-    TextureRegistry.registerAppended(Blocks.DEEPSLATE, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.BASALT, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.POLISHED_BASALT, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.POLISHED_BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.DEEPSLATE, TextureKey.END, "_top");
   }
 }

@@ -1,25 +1,38 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.generator.ResourceGeneratorHelper;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.recipe.JRecipe;
-import net.devtech.arrp.json.recipe.JShapedRecipe;
-import net.devtech.arrp.json.recipe.JShapelessRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.data.client.model.BlockStateModelGenerator;
+import net.minecraft.data.client.model.BlockStateSupplier;
+import net.minecraft.data.client.model.Models;
 import net.minecraft.data.client.model.TextureKey;
+import net.minecraft.data.server.RecipesProvider;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonFactory;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonFactory;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonFactory;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonFactory;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.BlockCollections;
@@ -46,20 +59,19 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   @OnlyIn(Dist.CLIENT)
   @Override
-  public @NotNull JBlockStates getBlockStates() {
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier blockModelId = getBlockModelId();
-    return JBlockStates.delegate(BlockStateModelGenerator.createPressurePlateBlockState(
+    return BlockStateModelGenerator.createPressurePlateBlockState(
         this,
         blockModelId,
-        blockModelId.brrp_append("_down")
-    ));
+        blockModelId.brrp_suffixed("_down")
+    );
   }
 
   @OnlyIn(Dist.CLIENT)
   @Override
-  @NotNull
-  public JModel getBlockModel() {
-    return new JModel("block/pressure_plate_up")
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    return ModelJsonBuilder.create(Models.PRESSURE_PLATE_UP)
         .addTexture("texture", getTextureId(TextureKey.TEXTURE));
   }
 
@@ -68,27 +80,26 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   @OnlyIn(Dist.CLIENT)
   public void writeBlockModel(RuntimeResourcePack pack) {
     final Identifier blockModelId = getBlockModelId();
-    final JModel blockModel = getBlockModel();
-    pack.addModel(blockModel, blockModelId);
-    pack.addModel(blockModel.parent("block/pressure_plate_down"), blockModelId.brrp_append("_down"));
+    final ModelJsonBuilder blockModel = getBlockModel();
+    ModelUtils.writeModelsWithVariants(pack, blockModelId, blockModel, Models.PRESSURE_PLATE_UP, Models.PRESSURE_PLATE_DOWN);
   }
 
 
   @Override
-  public @NotNull JRecipe getCraftingRecipe() {
+  public @Nullable CraftingRecipeJsonFactory getCraftingRecipe() {
     if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = ForgeRegistries.BLOCKS.getKey(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
-      final JShapelessRecipe recipe = new JShapelessRecipe(this.getItemId(), carpetId);
-      recipe.addInventoryChangedCriterion("has_carpet", ForgeRegistries.ITEMS.getValue(carpetId));
-      return recipe;
+      final Item carpet = ForgeRegistries.ITEMS.getValue(carpetId);
+      return ShapelessRecipeJsonFactory.create(this).input(carpet).criterion("has_carpet", RecipesProvider.conditionsFromItem(carpet));
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      return new JShapelessRecipe(this, Blocks.MOSS_CARPET).addInventoryChangedCriterion("has_carpet", Blocks.MOSS_CARPET);
+      return ShapelessRecipeJsonFactory.create(this).input(Blocks.MOSS_CARPET)
+          .criterion("has_carpet", RecipesProvider.conditionsFromItem(Blocks.MOSS_CARPET));
     } else {
-      return new JShapedRecipe(this)
+      return ShapedRecipeJsonFactory.create(this)
           .pattern("##")
-          .addKey("#", baseBlock)
-          .addInventoryChangedCriterion("has_ingredient", baseBlock)
+          .input('#', baseBlock)
+          .criterion(RecipesProvider.hasItem(baseBlock), RecipesProvider.conditionsFromItem(baseBlock))
           .group(getRecipeGroup());
     }
   }
@@ -101,32 +112,49 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = ForgeRegistries.BLOCKS.getKey(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
-      final JShapelessRecipe recipe = new JShapelessRecipe(carpetId, this.getItemId());
       final Item carpet = ForgeRegistries.ITEMS.getValue(carpetId);
-      recipe.addInventoryChangedCriterion("has_pressure_plate", this);
+      final SingleItemRecipeJsonFactory recipe = SingleItemRecipeJsonFactory.createStonecutting(Ingredient.ofItems(this), carpet).criterion("has_pressure_plate", RecipesProvider.conditionsFromItem(this));
       final Identifier recipeId = new Identifier(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
-      pack.addRecipe(recipeId, recipe);
-      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(carpet, recipeId), recipe);
+      pack.addRecipeAndAdvancement(recipeId, recipe);
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      final JShapelessRecipe recipe = (JShapelessRecipe) new JShapelessRecipe(Blocks.MOSS_CARPET, this).addInventoryChangedCriterion("has_pressure_plate", this);
+      final SingleItemRecipeJsonFactory recipe = SingleItemRecipeJsonFactory.createStonecutting(Ingredient.ofItems(this), Blocks.MOSS_CARPET).criterion("has_pressure_plate", RecipesProvider.conditionsFromItem(this));
       final Identifier recipeId = new Identifier(ExtShape.MOD_ID, "moss_carpet_from_pressure_plate");
-      pack.addRecipe(recipeId, recipe);
-      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(Blocks.MOSS_CARPET, recipeId), recipe);
+      pack.addRecipeAndAdvancement(recipeId, recipe);
     }
-  }
-
-  @Override
-  public String getRecipeGroup() {
-    if (BlockCollections.WOOLS.contains(baseBlock)) return "wool_pressure_plate";
-    if (BlockCollections.CONCRETES.contains(baseBlock)) return "concrete_pressure_plate";
-    if (BlockCollections.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_pressure_plate";
-    if (BlockCollections.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_pressure_plate";
-    if (BlockCollections.PLANKS.contains(baseBlock)) return "wooden_pressure_plate";
-    return "";
   }
 
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.PRESSURE_PLATE;
+  }
+
+
+  public static class WithExtension extends ExtShapePressurePlateBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, ActivationRule type, Settings settings, BlockExtension extension) {
+      super(baseBlock, type, settings);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
+      super.onStacksDropped(state, world, pos, stack);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }
