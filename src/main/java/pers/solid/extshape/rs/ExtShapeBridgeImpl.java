@@ -22,7 +22,7 @@ public class ExtShapeBridgeImpl extends ExtShapeBridge {
   public static final Multimap<BlockShape, ItemGroup> SHAPE_TRANSFER_RULES = HashMultimap.create();
   public static final SortingRule<Block> SHAPE_FOLLOWING_BASE_BLOCKS_RULE = new ShapeSortingRule(BlockBiMaps.BASE_BLOCKS::contains, SHAPES_FOLLOWING_BASE_BLOCKS);
   public static final SortingRule<Item> SHAPE_FOLLOWING_BASE_BLOCKS_ITEM_RULE = new BlockItemRule(SHAPE_FOLLOWING_BASE_BLOCKS_RULE);
-  public static final TransferRule BASE_BLOCKS_IN_BUILDING_RULE = item -> item instanceof BlockItem blockItem && BlockBiMaps.BASE_BLOCKS.contains(blockItem.getBlock()) && item.getGroup() != ItemGroup.BUILDING_BLOCKS ? Collections.singleton(ItemGroup.BUILDING_BLOCKS) : null;
+  public static final TransferRule BASE_BLOCKS_IN_BUILDING_RULE = item -> item instanceof BlockItem blockItem && ExtShapeBlocks.getBaseBlocks().contains(blockItem.getBlock()) && item.getGroup() != ItemGroup.BUILDING_BLOCKS ? Collections.singleton(ItemGroup.BUILDING_BLOCKS) : null;
   public static final TransferRule SHAPE_TRANSFER_RULE = new ShapeTransferRule(SHAPE_TRANSFER_RULES);
 
   @Override

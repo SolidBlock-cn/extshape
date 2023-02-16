@@ -2,18 +2,17 @@ package pers.solid.extshape.block;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.generator.ResourceGeneratorHelper;
-import net.devtech.arrp.json.blockstate.JBlockModel;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.blockstate.JVariants;
-import net.devtech.arrp.json.models.JModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PillarBlock;
+import net.minecraft.block.enums.SlabType;
+import net.minecraft.data.client.model.BlockStateSupplier;
+import net.minecraft.data.client.model.BlockStateVariant;
+import net.minecraft.data.client.model.BlockStateVariantMap;
+import net.minecraft.data.client.model.VariantsBlockStateSupplier;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -21,11 +20,17 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.BRRPUtils;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;
 import java.util.Set;
+
+import static net.minecraft.data.client.model.VariantSettings.*;
 
 /**
  * 类似于普通的台阶，但是像 {@link PillarBlock} 那样拥有摆放的方向。
@@ -45,30 +50,28 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
 
   @Environment(EnvType.CLIENT)
   @Override
-  public @NotNull JBlockStates getBlockStates() {
-    final JVariants variants = new JVariants();
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
+    final BlockStateVariantMap.DoubleProperty<SlabType, Direction.Axis> variants = BlockStateVariantMap.create(TYPE, AXIS);
     final Identifier modelId = getBlockModelId();
-    final Identifier topModelId = modelId.brrp_append("_top");
-    final Identifier baseModelId = baseBlock == null ? modelId.brrp_append("_double") : ResourceGeneratorHelper.getBlockModelId(baseBlock);
+    final Identifier topModelId = modelId.brrp_suffixed("_top");
+    final Identifier baseModelId = baseBlock == null ? modelId.brrp_suffixed("_double") : BRRPUtils.getBlockModelId(baseBlock);
     // axis = y
-    variants.addVariant("type=double,axis=y", new JBlockModel(baseModelId));
-    variants.addVariant("type=top,axis=y", new JBlockModel(topModelId));
-    variants.addVariant("type=bottom,axis=y", new JBlockModel(modelId));
-
-
+    variants.register(SlabType.DOUBLE, Direction.Axis.Y, BlockStateVariant.create().put(MODEL, baseModelId));
+    variants.register(SlabType.TOP, Direction.Axis.Y, BlockStateVariant.create().put(MODEL, topModelId));
+    variants.register(SlabType.BOTTOM, Direction.Axis.Y, BlockStateVariant.create().put(MODEL, modelId));
     // axis = x
     final boolean isLog = BlockCollections.LOGS.contains(baseBlock) || BlockCollections.STRIPPED_LOGS.contains(baseBlock);
-    final Identifier horizontalBaseModelId = isLog ? baseModelId.brrp_append("_horizontal") : baseModelId;
-    final Identifier horizontalModelId = modelId.brrp_append("_horizontal");
-    variants.addVariant("type=double,axis=x", new JBlockModel(horizontalBaseModelId).x(90).y(90));
-    variants.addVariant("type=bottom,axis=x", new JBlockModel(horizontalModelId).x(90).y(90));
-    variants.addVariant("type=top,axis=x", new JBlockModel(horizontalModelId.brrp_append("_top")).x(90).y(90));
+    final Identifier horizontalBaseModelId = isLog ? baseModelId.brrp_suffixed("_horizontal") : baseModelId;
+    final Identifier horizontalModelId = modelId.brrp_suffixed("_horizontal");
+    variants.register(SlabType.DOUBLE, Direction.Axis.X, BlockStateVariant.create().put(MODEL, horizontalBaseModelId).put(X, Rotation.R90).put(Y, Rotation.R90));
+    variants.register(SlabType.BOTTOM, Direction.Axis.X, BlockStateVariant.create().put(MODEL, horizontalModelId).put(X, Rotation.R90).put(Y, Rotation.R90));
+    variants.register(SlabType.TOP, Direction.Axis.X, BlockStateVariant.create().put(MODEL, horizontalModelId.brrp_suffixed("_top")).put(X, Rotation.R90).put(Y, Rotation.R90));
     // axis = z
-    variants.addVariant("type=double,axis=z", new JBlockModel(horizontalBaseModelId).x(90));
-    variants.addVariant("type=bottom,axis=z", new JBlockModel(horizontalModelId).x(90));
-    variants.addVariant("type=top,axis=z", new JBlockModel(horizontalModelId.brrp_append("_top")).x(90));
+    variants.register(SlabType.DOUBLE, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, horizontalModelId).put(X, Rotation.R90));
+    variants.register(SlabType.BOTTOM, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, horizontalModelId).put(X, Rotation.R90));
+    variants.register(SlabType.TOP, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, horizontalModelId.brrp_suffixed("_top")).put(X, Rotation.R90));
 
-    return JBlockStates.ofVariants(variants);
+    return VariantsBlockStateSupplier.create(this).coordinate(variants);
   }
 
   @Environment(EnvType.CLIENT)
@@ -76,13 +79,13 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
   public void writeBlockModel(RuntimeResourcePack pack) {
     super.writeBlockModel(pack);
     final boolean hasHorizontalColumn = BASE_BLOCKS_WITH_HORIZONTAL_COLUMN.contains(baseBlock);
-    final JModel blockModel = getBlockModel();
+    final ModelJsonBuilder blockModel = getBlockModel();
     if (hasHorizontalColumn) {
-      pack.addModel(blockModel.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_horizontal")), getBlockModelId().brrp_append("_horizontal"));
-      pack.addModel(blockModel.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_horizontal_top")), getBlockModelId().brrp_append("_horizontal_top"));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/slab_column_horizontal")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/slab_column_horizontal_top")));
     } else {
-      pack.addModel(blockModel.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column")), getBlockModelId().brrp_append("_horizontal"));
-      pack.addModel(blockModel.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_top")), getBlockModelId().brrp_append("_horizontal_top"));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/slab_column")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/slab_column_top")));
     }
   }
 
