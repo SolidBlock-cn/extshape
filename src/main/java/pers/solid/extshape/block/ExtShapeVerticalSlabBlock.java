@@ -1,23 +1,27 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.json.blockstate.JBlockModel;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.blockstate.JVariants;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.data.client.model.*;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonFactory;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -34,36 +38,21 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   @Environment(EnvType.CLIENT)
   @Override
-  public @NotNull JBlockStates getBlockStates() {
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier identifier = getBlockModelId();
-    return JBlockStates.ofVariants(new JVariants()
-        .addVariant("facing", "south", new JBlockModel(identifier).uvlock())
-        .addVariant("facing", "west", new JBlockModel(identifier).uvlock().y(90))
-        .addVariant("facing", "north", new JBlockModel(identifier).uvlock().y(180))
-        .addVariant("facing", "east", new JBlockModel(identifier).uvlock().y(270))
-    );
+    return VariantsBlockStateSupplier.create(this, new BlockStateVariant().put(VariantSettings.MODEL, identifier)).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
   }
 
 
   @Environment(EnvType.CLIENT)
   @Override
-  public @NotNull JModel getBlockModel() {
-    return simpleModel("extshape:block/vertical_slab");
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID, "block/vertical_slab")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
   @Override
-  public @NotNull JRecipe getStonecuttingRecipe() {
+  public @Nullable SingleItemRecipeJsonFactory getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(2);
-  }
-
-  @Override
-  public String getRecipeGroup() {
-    if ((BlockCollections.PLANKS).contains(baseBlock)) return "wooden_vertical_slab";
-    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_vertical_slab";
-    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_vertical_slab";
-    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_vertical_slab";
-    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_vertical_slab";
-    return "";
   }
 
   @Override
@@ -89,8 +78,21 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
     @Override
     public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
       super.onStacksDropped(state, world, pos, stack);
-      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack);
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

@@ -35,14 +35,14 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.18",
+    "minecraft": [
+      "~1.18",
+      "~1.18.1"
+    ],
     "java": ">=17",
-    "better_runtime_resource_pack": ">=0.8.2"
-  },
-  "breaks": {
-    "minecraft": ">=1.18.2"
+    "brrp_v1": "*"
   },
   "suggests": {
-    "reasonable-sorting": ">=2.1.0"
+    "reasonable-sorting": "*"
   }
 }
