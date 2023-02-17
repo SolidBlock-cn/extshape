@@ -176,7 +176,7 @@ public class ExtShapeOptionsScreen extends Screen {
     rrpOptionsButton.setX(width / 2 - 100);
     addDrawableChild(rrpOptionsButton);
 
-    finishButton.setPos(width / 2 - 100, height - 27);
+    finishButton.setPosition(width / 2 - 100, height - 27);
     addDrawableChild(finishButton);
   }
 

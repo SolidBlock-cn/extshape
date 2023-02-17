@@ -137,7 +137,7 @@ modrinth {
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
     versionType = 'beta'
     uploadFile = remapJar
-    gameVersions = (project.supported_minecraft_versions as String).split(',') as List<String>
+    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
     var list = [new ModDependency('JnrDtPAE', 'required')]
     if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')

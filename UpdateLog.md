@@ -1,5 +1,13 @@
 # 更新日志 Update Log
 
+### 1.8.1
+
+- 为竹块、樱木等具有 uvLock 的柱状方块添加了带有方向的台阶。
+- 修复了以“木材”结尾的方块名称的转换问题，例如“豎直橡木半磚”误转换为“豎直橡半磚”。
+
+- Added slabs with directions for pillar blocks with uvLock, such as bamboo block and cherry log.
+- Fixed the conversion issue for block names that end with "木材".
+
 ### 1.7.3
 
 - 大幅度调整代码结构，提高可扩展性。

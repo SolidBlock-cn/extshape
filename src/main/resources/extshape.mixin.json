@@ -9,6 +9,7 @@
     "AxeItemMixin",
     "BlockAccessor",
     "BlockFamiliesAccessor",
+    "DisplayContextMixin",
     "ItemGroupEntriesImplMixin",
     "ItemGroupsMixin",
     "MiningToolItemMixin",

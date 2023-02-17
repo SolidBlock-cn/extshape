@@ -46,6 +46,7 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.BIRCH_LOG, TextureKey.END, new Identifier("minecraft", "block/birch_log_top"));
     TextureRegistry.register(Blocks.JUNGLE_LOG, TextureKey.END, new Identifier("minecraft", "block/jungle_log_top"));
     TextureRegistry.register(Blocks.ACACIA_LOG, TextureKey.END, new Identifier("minecraft", "block/acacia_log_top"));
+    TextureRegistry.register(Blocks.CHERRY_LOG, TextureKey.END, new Identifier("minecraft", "block/cherry_log_top"));
     TextureRegistry.register(Blocks.DARK_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/dark_oak_log_top"));
     TextureRegistry.register(Blocks.MANGROVE_LOG, TextureKey.END, new Identifier("minecraft", "block/mangrove_log_top"));
     TextureRegistry.register(Blocks.WARPED_STEM, TextureKey.END, new Identifier("minecraft", "block/warped_stem_top"));
@@ -55,6 +56,7 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.BIRCH_WOOD, new Identifier("minecraft", "block/birch_log"));
     TextureRegistry.register(Blocks.JUNGLE_WOOD, new Identifier("minecraft", "block/jungle_log"));
     TextureRegistry.register(Blocks.ACACIA_WOOD, new Identifier("minecraft", "block/acacia_log"));
+    TextureRegistry.register(Blocks.CHERRY_WOOD, new Identifier("minecraft", "block/cherry_log"));
     TextureRegistry.register(Blocks.DARK_OAK_WOOD, new Identifier("minecraft", "block/dark_oak_log"));
     TextureRegistry.register(Blocks.MANGROVE_WOOD, new Identifier("minecraft", "block/mangrove_log"));
     TextureRegistry.register(Blocks.WARPED_HYPHAE, new Identifier("minecraft", "block/warped_stem"));
@@ -64,6 +66,7 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.STRIPPED_BIRCH_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_birch_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_JUNGLE_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_jungle_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_ACACIA_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_acacia_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_CHERRY_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_cherry_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_DARK_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_dark_oak_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_MANGROVE_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_mangrove_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_WARPED_STEM, TextureKey.END, new Identifier("minecraft", "block/stripped_warped_stem_top"));
@@ -73,6 +76,7 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.STRIPPED_BIRCH_WOOD, new Identifier("minecraft", "block/stripped_birch_log"));
     TextureRegistry.register(Blocks.STRIPPED_JUNGLE_WOOD, new Identifier("minecraft", "block/stripped_jungle_log"));
     TextureRegistry.register(Blocks.STRIPPED_ACACIA_WOOD, new Identifier("minecraft", "block/stripped_acacia_log"));
+    TextureRegistry.register(Blocks.STRIPPED_CHERRY_WOOD, new Identifier("minecraft", "block/stripped_cherry_log"));
     TextureRegistry.register(Blocks.STRIPPED_DARK_OAK_WOOD, new Identifier("minecraft", "block/stripped_dark_oak_log"));
     TextureRegistry.register(Blocks.STRIPPED_MANGROVE_WOOD, new Identifier("minecraft", "block/stripped_mangrove_log"));
     TextureRegistry.register(Blocks.STRIPPED_WARPED_HYPHAE, new Identifier("minecraft", "block/stripped_warped_stem"));

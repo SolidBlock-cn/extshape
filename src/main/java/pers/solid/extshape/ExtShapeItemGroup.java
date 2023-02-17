@@ -12,7 +12,6 @@ import net.minecraft.block.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
-import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
@@ -47,26 +46,26 @@ public class ExtShapeItemGroup {
     WOODEN_BLOCK_GROUP = create(
         new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
         Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.WALL, Blocks.BAMBOO_MOSAIC))),
-        (featureSet, entries, operatorsEnabled) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
-            featureSet, entries, operatorsEnabled)))
+        (displayContext, entries) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
+            displayContext, entries)))
     );
 
     COLORFUL_BLOCK_GROUP = create(
         new Identifier(ExtShape.MOD_ID, "colorful_blocks"),
         Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.STAIRS, Blocks.LIME_WOOL))),
-        (featureSet, entries, operatorsEnabled) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled))
+        (displayContext, entries) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, displayContext, entries))
     );
 
     STONE_BLOCK_GROUP = create(
         new Identifier(ExtShape.MOD_ID, "stone_blocks"),
         Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.FENCE, Blocks.CALCITE))),
-        (featureSet, entries, operatorsEnabled) -> STONE_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled))
+        (displayContext, entries) -> STONE_BLOCKS.forEach(block -> importTo(block, displayContext, entries))
     );
 
     OTHER_BLOCK_GROUP = create(
         new Identifier(ExtShape.MOD_ID, "other_blocks"),
         Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
-        (featureSet, entries, operatorsEnabled) -> OTHER_BLOCKS.forEach(block -> importTo(block, featureSet, entries, operatorsEnabled)));
+        (displayContext, entries) -> OTHER_BLOCKS.forEach(block -> importTo(block, displayContext, entries)));
 
     MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
 
@@ -237,9 +236,9 @@ public class ExtShapeItemGroup {
 
   public static ItemGroup create(Identifier id, Supplier<ItemStack> iconSupplier, ItemGroup.EntryCollector entryCollector) {
     final ItemGroup group = new ItemGroup.Builder(null, -1)
-        .entries((enabledFeatures, entries, operatorEnabled) -> {
+        .entries((displayContext, entries) -> {
           if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
-            entryCollector.accept(enabledFeatures, entries, operatorEnabled);
+            entryCollector.accept(displayContext, entries);
           }
         })
         .displayName(Text.translatable("itemGroup.%s.%s".formatted(id.getNamespace(), id.getPath())))
@@ -284,8 +283,8 @@ public class ExtShapeItemGroup {
    * @param baseBlock 其基础方块。
    * @param entries   需要被添加至的物品堆的列表。
    */
-  @Contract(mutates = "param2")
-  protected static void importTo(Block baseBlock, FeatureSet featureSet, ItemGroup.Entries entries, boolean operatorsEnabled) {
+  @Contract(mutates = "param3")
+  protected static void importTo(Block baseBlock, ItemGroup.DisplayContext displayContext, ItemGroup.Entries entries) {
     if (baseBlock == null) return;
     entries.add(baseBlock);
     for (BlockShape shape : ExtShapeConfig.CURRENT_CONFIG.shapesInSpecificGroups) {

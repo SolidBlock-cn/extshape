@@ -2,11 +2,12 @@ package pers.solid.extshape.builder;
 
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSetType;
 import net.minecraft.block.PressurePlateBlock;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.block.ExtShapeButtonBlock;
+import pers.solid.extshape.util.ButtonSettings;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.Collection;
@@ -49,8 +50,8 @@ public class BlocksBuilderFactory {
     return blocksBuilderFactory;
   }
 
-  protected BlocksBuilder createInternal(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, SortedSet<BlockShape> shapesToBuild) {
-    final BlocksBuilder blocksBuilder = new BlocksBuilder(baseBlock, fenceSettings, buttonType, pressurePlateActivationRule, shapesToBuild);
+  protected BlocksBuilder createInternal(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ButtonSettings buttonSettings, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, BlockSetType blockSetType, SortedSet<BlockShape> shapesToBuild) {
+    final BlocksBuilder blocksBuilder = new BlocksBuilder(baseBlock, fenceSettings, buttonSettings, pressurePlateActivationRule, blockSetType, shapesToBuild);
     blocksBuilder.defaultNamespace = defaultNamespace;
     blocksBuilder.instanceCollection = instanceCollection;
     if (baseBlockCollection != null) {
@@ -65,13 +66,13 @@ public class BlocksBuilderFactory {
    *
    * @param baseBlock                   基础方块。
    * @param fenceSettings               栅栏的第二合成材料以及声音。若为 {@code null}，则意味着不产生栅栏和栅栏门。
-   * @param buttonType                  按钮的类型。若为 {@code null}，则意味着不产生按钮。
+   * @param buttonSettings              按钮的类型。若为 {@code null}，则意味着不产生按钮。
    * @param pressurePlateActivationRule 压力板的类型。若为 {@code null}，则意味着不产生压力板。
    * @return 新的 BlocksBuilder。
    */
   @Contract("_,_,_,_ -> new")
-  public BlocksBuilder createAllShapes(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
-    return createInternal(baseBlock, fenceSettings, buttonType, pressurePlateActivationRule, new TreeSet<>(SHAPES));
+  public BlocksBuilder createAllShapes(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ButtonSettings buttonSettings, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
+    return createInternal(baseBlock, fenceSettings, buttonSettings, pressurePlateActivationRule, buttonSettings == null ? null : buttonSettings.blockSetType(), new TreeSet<>(SHAPES));
   }
 
   /**
@@ -82,7 +83,7 @@ public class BlocksBuilderFactory {
    */
   @Contract("_ -> new")
   public BlocksBuilder createEmpty(@NotNull Block baseBlock) {
-    return createInternal(baseBlock, null, null, null, new TreeSet<>());
+    return createInternal(baseBlock, null, null, null, null, new TreeSet<>());
   }
 
   /**

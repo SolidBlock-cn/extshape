@@ -14,6 +14,7 @@ public final class BlockCollections {
       BIRCH_LOG,
       JUNGLE_LOG,
       ACACIA_LOG,
+      CHERRY_LOG,
       DARK_OAK_LOG,
       MANGROVE_LOG
   );
@@ -23,6 +24,7 @@ public final class BlockCollections {
       STRIPPED_BIRCH_LOG,
       STRIPPED_JUNGLE_LOG,
       STRIPPED_ACACIA_LOG,
+      STRIPPED_CHERRY_LOG,
       STRIPPED_DARK_OAK_LOG,
       STRIPPED_OAK_LOG,
       STRIPPED_MANGROVE_LOG
@@ -33,6 +35,7 @@ public final class BlockCollections {
       BIRCH_WOOD,
       JUNGLE_WOOD,
       ACACIA_WOOD,
+      CHERRY_WOOD,
       DARK_OAK_WOOD,
       MANGROVE_WOOD
   );
@@ -42,6 +45,7 @@ public final class BlockCollections {
       STRIPPED_BIRCH_WOOD,
       STRIPPED_JUNGLE_WOOD,
       STRIPPED_ACACIA_WOOD,
+      STRIPPED_CHERRY_WOOD,
       STRIPPED_DARK_OAK_WOOD,
       STRIPPED_MANGROVE_WOOD
   );
@@ -67,8 +71,9 @@ public final class BlockCollections {
       BIRCH_PLANKS,
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
+      CHERRY_PLANKS,
       DARK_OAK_PLANKS,
-      MANGROVE_PLANKS /* 1.19 */,
+      MANGROVE_PLANKS,
       BAMBOO_PLANKS,
       BAMBOO_MOSAIC,
       CRIMSON_PLANKS,
@@ -80,8 +85,9 @@ public final class BlockCollections {
       BIRCH_PLANKS,
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
+      CHERRY_PLANKS,
       DARK_OAK_PLANKS,
-      MANGROVE_PLANKS, /* 1.19 */
+      MANGROVE_PLANKS,
       BAMBOO_PLANKS,
       BAMBOO_MOSAIC
   );

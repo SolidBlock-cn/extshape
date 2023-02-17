@@ -3,9 +3,11 @@ package pers.solid.extshape.block;
 import net.devtech.arrp.generator.BRRPFenceGateBlock;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.WoodType;
 import net.minecraft.item.Item;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -17,7 +19,8 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
   private final Item secondIngredient;
 
   public ExtShapeFenceGateBlock(Block baseBlock, FenceSettings fenceSettings, Settings settings) {
-    super(baseBlock, settings, fenceSettings.closeSoundEvent(), fenceSettings.openSoundEvent());
+    super(baseBlock, settings, ObjectUtils.getIfNull(fenceSettings.woodType(), () -> WoodType.OAK));
+    // 未来可能需要设置更加复杂的 WoodType，包括考虑其声音，而不是简单地设置其橡木的 WoodType。
     this.secondIngredient = fenceSettings.secondIngredient();
   }
 

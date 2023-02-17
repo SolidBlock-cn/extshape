@@ -11,6 +11,7 @@ import pers.solid.extshape.block.*;
 import pers.solid.extshape.mixin.AbstractBlockStateAccessor;
 import pers.solid.extshape.tag.BlockTagPreparation;
 import pers.solid.extshape.util.BlockBiMaps;
+import pers.solid.extshape.util.ButtonSettings;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.*;
@@ -48,26 +49,28 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   protected final List<@NotNull BlockTagPreparation> tagsToAddEach = new ArrayList<>();
   protected @Nullable FenceSettings fenceSettings;
-  protected @Nullable ExtShapeButtonBlock.ButtonType buttonType;
+  protected @Nullable ButtonSettings buttonSettings;
   protected @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
   /**
    * 在执行 {@link #build()} 之前会为每个值执行。
    */
   protected @Nullable BiConsumer<BlockShape, AbstractBlockBuilder<?>> blockBuilderConsumer;
+  protected @Nullable BlockSetType blockSetType;
 
   /**
    * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
    *
    * @param baseBlock                   基础方块。
    * @param fenceSettings               合成栅栏和栅栏门时，需要使用的第二合成材料以及栅栏门的声音。
-   * @param buttonType                  按钮类型。
+   * @param buttonSettings              按钮类型。
    * @param pressurePlateActivationRule 压力板激活类型。
    * @param shapesToBuild               需要构建哪些方块形状。
    */
-  public BlocksBuilder(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ExtShapeButtonBlock.@Nullable ButtonType buttonType, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, SortedSet<BlockShape> shapesToBuild) {
+  public BlocksBuilder(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, @Nullable ButtonSettings buttonSettings, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, @Nullable BlockSetType blockSetType, SortedSet<BlockShape> shapesToBuild) {
     this.fenceSettings = fenceSettings;
-    this.buttonType = buttonType;
+    this.buttonSettings = buttonSettings;
     this.pressurePlateActivationRule = pressurePlateActivationRule;
+    this.blockSetType = blockSetType;
     this.baseBlock = baseBlock;
     this.shapesToBuild = shapesToBuild;
   }
@@ -98,6 +101,25 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       } else if (blockShape == BlockShape.VERTICAL_SLAB) {
         ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarVerticalSlabBlock(builder.baseBlock, builder.blockSettings);
       } else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
+        abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
+      }
+    };
+    return this;
+  }
+
+  public BlocksBuilder setPillar(boolean uvLocked) {
+    return uvLocked ? setPillarUvLocked() : setPillar();
+  }
+
+  @SuppressWarnings({"unchecked", "RedundantCast"})
+  @Contract(value = "-> this", mutates = "this")
+  public BlocksBuilder setPillarUvLocked() {
+    blockBuilderConsumer = (blockShape, abstractBlockBuilder) -> {
+      if (blockShape == BlockShape.SLAB) {
+        ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarUvLockedSlabBlock(builder.baseBlock, builder.blockSettings);
+      } /*else if (blockShape == BlockShape.VERTICAL_SLAB) {
+        ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarVerticalSlabBlock(builder.baseBlock, builder.blockSettings);
+      } */ else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
         abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
       }
     };
@@ -203,9 +225,9 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder withButton(@NotNull ExtShapeButtonBlock.ButtonType type) {
+  public BlocksBuilder withButton(@NotNull ButtonSettings type) {
     with(BlockShape.BUTTON);
-    this.buttonType = type;
+    this.buttonSettings = type;
     return this;
   }
 
@@ -215,10 +237,11 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * @param type 压力板类型。
    */
   @CanIgnoreReturnValue
-  @Contract(value = "_, -> this", mutates = "this")
-  public BlocksBuilder withPressurePlate(@NotNull PressurePlateBlock.ActivationRule type) {
+  @Contract(value = "_, _ -> this", mutates = "this")
+  public BlocksBuilder withPressurePlate(@NotNull PressurePlateBlock.ActivationRule type, @NotNull BlockSetType blockSetType) {
     with(BlockShape.PRESSURE_PLATE);
     this.pressurePlateActivationRule = type;
+    this.blockSetType = blockSetType;
     return this;
   }
 
@@ -342,8 +365,8 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       case 6 -> fenceSettings == null ? null : new FenceBuilder(baseBlock, fenceSettings.secondIngredient());
       case 7 -> fenceSettings == null ? null : new FenceGateBuilder(baseBlock, fenceSettings);
       case 8 -> new WallBuilder(baseBlock);
-      case 9 -> buttonType != null ? new ButtonBuilder(buttonType, baseBlock) : null;
-      case 10 -> pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock) : null;
+      case 9 -> buttonSettings != null ? new ButtonBuilder(buttonSettings, baseBlock) : null;
+      case 10 -> pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock, blockSetType) : null;
       default -> throw new IllegalArgumentException("The Shape object " + shape.asString() + " is not supported, which may be provided by other mod. You may extend BlocksBuilder class and define your own 'createBlockBuilderFor' with support for your Shape object.");
     };
     if (builder != null) {

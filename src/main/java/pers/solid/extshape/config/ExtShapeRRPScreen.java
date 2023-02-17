@@ -156,8 +156,8 @@ public class ExtShapeRRPScreen extends Screen {
   @Override
   public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
     super.render(matrices, mouseX, mouseY, delta);
-    drawCenteredText(matrices, textRenderer, title, width / 2, 16, 0xffffff);
-    drawCenteredText(matrices, textRenderer, Text.translatable("options.extshape.rrp.textFieldHeader"), width / 2, 100, 0xffffff);
+    drawCenteredTextWithShadow(matrices, textRenderer, title, width / 2, 16, 0xffffff);
+    drawCenteredTextWithShadow(matrices, textRenderer, Text.translatable("options.extshape.rrp.textFieldHeader"), width / 2, 100, 0xffffff);
     if (fullPath != null) {
       MultilineText.create(textRenderer, fullPath.map(s -> Text.translatable("options.extshape.rrp.fullPath", s).formatted(Formatting.GRAY), throwable -> Text.translatable("options.extshape.rrp.invalidPath", throwable.getMessage()).formatted(Formatting.RED)), width - 40).drawCenterWithShadow(matrices, width / 2, 140);
     }
