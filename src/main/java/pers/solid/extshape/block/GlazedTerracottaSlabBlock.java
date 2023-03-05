@@ -38,7 +38,7 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
     BlockState blockState = ctx.getWorld().getBlockState(blockPos);
     BlockState state = super.getPlacementState(ctx);
     if (!blockState.isOf(this) && state != null) {
-      return state.with(FACING, ctx.getPlayerFacing().getOpposite());
+      return state.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     } else {
       return state;
     }

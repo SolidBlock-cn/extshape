@@ -7,8 +7,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.font.MultilineText;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
-import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.OptionListWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.ResourceType;
@@ -46,7 +46,7 @@ public class ExtShapeRRPScreen extends Screen {
   protected void init() {
     super.init();
     // 里面的内容不需要被选中，所以只是drawable。
-    addDrawable(new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25));
+    addDrawable(new OptionListWidget(this.client, this.width, this.height, 32, this.height - 32, 25));
     addDrawableChild(regenClientResourcesButton = new ButtonWidget.Builder(Text.translatable("options.extshape.rrp.regenClientResources"), button -> {
       if (regenClientResourcesThread != null && regenClientResourcesThread.getState() != Thread.State.TERMINATED) return;
       (
