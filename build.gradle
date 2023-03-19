@@ -3,7 +3,7 @@ import com.modrinth.minotaur.dependencies.ModDependency
 plugins {
     id 'dev.architectury.loom' version '0.12.0-SNAPSHOT'
     id 'maven-publish'
-    id 'io.github.juuxel.loom-quiltflower' version '1.7.+'
+    id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
     id "com.modrinth.minotaur" version "2.+"
 }
 
