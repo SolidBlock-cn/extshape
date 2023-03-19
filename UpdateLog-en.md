@@ -4,6 +4,7 @@
 
 - Added slabs with directions for pillar blocks with uvLock, such as bamboo block and cherry log.
 - Fixed the conversion issue for block names that end with "木材".
+- Added Korean translation, contributed by PR#25。
 
 ### 1.7.3
 
