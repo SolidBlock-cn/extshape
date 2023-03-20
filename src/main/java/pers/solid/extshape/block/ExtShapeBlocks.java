@@ -120,12 +120,14 @@ public final class ExtShapeBlocks {
     BlockCollections.LOGS.forEach(block -> FACTORY.createConstructionOnly(block).setPillar().setTagToAddForShape(logTags).build());
     final FenceSettings bambooFenceSettings = FenceSettings.bambooWood(Items.BAMBOO);
     FACTORY.createAllShapes(BAMBOO_BLOCK, bambooFenceSettings, ButtonType.BAMBOO, ActivationRule.EVERYTHING)
-        .consumeEachSettings((blockShape, settings) -> settings.requires(FeatureFlags.UPDATE_1_20).mapColor(MapColor.DARK_GREEN))
+        .setPillarUvLocked()
+        .consumeEachSettings((blockShape, settings) -> settings.mapColor(MapColor.DARK_GREEN))
         .setTagToAddForShape(woodenTags)
         .build();
     BlockCollections.STRIPPED_LOGS.forEach(block -> FACTORY.createConstructionOnly(block).setPillar().setTagToAddForShape(logTags).build());
     FACTORY.createAllShapes(STRIPPED_BAMBOO_BLOCK, bambooFenceSettings, ButtonType.BAMBOO, ActivationRule.EVERYTHING)
-        .consumeEachSettings((blockShape, settings) -> settings.requires(FeatureFlags.UPDATE_1_20).mapColor(MapColor.YELLOW))
+        .setPillarUvLocked()
+        .consumeEachSettings((blockShape, settings) -> settings.mapColor(MapColor.YELLOW))
         .setTagToAddForShape(woodenTags)
         .build();
     BlockCollections.WOODS.forEach(block -> FACTORY.createAllShapes(block, FenceSettings.common(Items.STICK), ButtonType.WOODEN, ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
