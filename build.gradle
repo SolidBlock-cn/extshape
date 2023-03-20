@@ -3,7 +3,7 @@ import com.modrinth.minotaur.dependencies.ModDependency
 plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
-    id 'io.github.juuxel.loom-quiltflower' version '1.7.+'
+    id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
     id "com.modrinth.minotaur" version "2.+"
 }
 
@@ -11,7 +11,7 @@ sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name + "-fabric"
-version = project.mod_version + '-mc' + project.minecraft_version
+version = project.mod_version + '-mc' + '1.19.4' // project.minecraft_version
 group = project.maven_group
 
 repositories {
@@ -68,9 +68,6 @@ dependencies {
     // BRRP 模组
     def brrp_mc_version = project.properties.getOrDefault "brrp_mc_version", project.minecraft_version
     modImplementation "pers.solid:brrp-fabric:${project.brrp_version}-${brrp_mc_version}"
-    // 合理排序模组
-    def reasonable_sorting_mc_version = project.properties.getOrDefault "reasonable_sorting_mc_version", project.minecraft_version
-//    modImplementation "pers.solid.mod:reasonable-sorting-fabric:${project.reasonable_sorting_version}-mc${reasonable_sorting_mc_version}"
 
     // 由于新版的 Loom 没有 @CanIgnoreReturnValue 等注解，故在这里手动添加。
     modImplementation "com.google.errorprone:error_prone_annotations:+"
@@ -135,7 +132,7 @@ modrinth {
     projectId = 'tb7kCxSW'
     String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
-    versionType = 'beta'
+    versionType = 'release'
     uploadFile = remapJar
     gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
