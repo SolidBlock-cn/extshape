@@ -34,10 +34,9 @@
   ],
   "depends": {
     "fabricloader": "*",
-    "fabric": ">=0.67.0",
-    "fabric-item-groups-v0": ">=0.3.35",
+    "fabric": "*",
     "minecraft": [
-      ">=1.19"
+      "~1.19.2"
     ],
     "java": ">=17",
     "better_runtime_resource_pack": ">=0.8.2"
