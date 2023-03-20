@@ -104,6 +104,25 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     return this;
   }
 
+  public BlocksBuilder setPillar(boolean uvLocked) {
+    return uvLocked ? setPillarUvLocked() : setPillar();
+  }
+
+  @SuppressWarnings({"unchecked", "RedundantCast"})
+  @Contract(value = "-> this", mutates = "this")
+  public BlocksBuilder setPillarUvLocked() {
+    blockBuilderConsumer = (blockShape, abstractBlockBuilder) -> {
+      if (blockShape == BlockShape.SLAB) {
+        ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarUvLockedSlabBlock(builder.baseBlock, builder.blockSettings);
+      } /*else if (blockShape == BlockShape.VERTICAL_SLAB) {
+        ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarVerticalSlabBlock(builder.baseBlock, builder.blockSettings);
+      } */ else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
+        abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
+      }
+    };
+    return this;
+  }
+
   /**
    * 设置需要构建此形状的变种。
    *
