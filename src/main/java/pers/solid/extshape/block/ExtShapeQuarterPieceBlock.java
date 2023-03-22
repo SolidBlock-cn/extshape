@@ -1,28 +1,30 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.json.blockstate.JBlockModel;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.blockstate.JVariants;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.models.JTextures;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.data.client.TextureKey;
+import net.minecraft.block.enums.BlockHalf;
+import net.minecraft.data.client.*;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -45,50 +47,33 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
 
   @Override
   @OnlyIn(Dist.CLIENT)
-  public @NotNull JBlockStates getBlockStates() {
-    final JVariants variant = new JVariants();
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
+    final BlockStateVariantMap.SingleProperty<BlockHalf> variant = BlockStateVariantMap.create(HALF);
     final Identifier blockModelId = getBlockModelId();
-    for (Direction direction : Direction.Type.HORIZONTAL) {
-      variant
-          .addVariant("half=top,facing", direction, new JBlockModel(blockModelId.brrp_append("_top")).uvlock().y(((int) direction.asRotation())))
-          .addVariant("half=bottom,facing", direction, new JBlockModel(blockModelId).uvlock().y((int) direction.asRotation()));
-    }
-    return JBlockStates.ofVariants(variant);
+    variant.register(BlockHalf.TOP, BlockStateVariant.create().put(VariantSettings.MODEL, blockModelId.brrp_suffixed("_top")).put(VariantSettings.UVLOCK, true))
+        .register(BlockHalf.BOTTOM, BlockStateVariant.create().put(VariantSettings.MODEL, blockModelId).put(VariantSettings.UVLOCK, true));
+    return VariantsBlockStateSupplier.create(this).coordinate(variant).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
   }
 
 
   @OnlyIn(Dist.CLIENT)
   @Override
-  public @NotNull JModel getBlockModel() {
-    return new JModel("extshape:block/quarter_piece")
-        .textures(JTextures.ofSides(
-            getTextureId(TextureKey.TOP),
-            getTextureId(TextureKey.SIDE),
-            getTextureId(TextureKey.BOTTOM)));
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID, "block/quarter_piece")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
     final Identifier blockModelId = getBlockModelId();
-    final JModel blockModel = getBlockModel();
-    pack.addModel(blockModel, blockModelId);
-    pack.addModel(blockModel.parent("extshape:block/quarter_piece_top"), blockModelId.brrp_append("_top"));
+    final ModelJsonBuilder blockModel = getBlockModel();
+    pack.addModel(blockModelId, blockModel);
+    pack.addModel(blockModelId.brrp_suffixed("_top"), blockModel.parent(new Identifier(ExtShape.MOD_ID, "block/quarter_piece_top")));
   }
 
 
   @Override
-  public @Nullable JRecipe getStonecuttingRecipe() {
+  public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(4);
-  }
-
-  @Override
-  public String getRecipeGroup() {
-    if ((BlockCollections.PLANKS).contains(baseBlock)) return "wooden_quarter_piece";
-    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_quarter_piece";
-    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_quarter_piece";
-    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_quarter_piece";
-    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_quarter_piece";
-    return "";
   }
 
   @Override
@@ -109,8 +94,20 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
     @Override
     public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
       super.onStacksDropped(state, world, pos, stack);
-      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack);
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

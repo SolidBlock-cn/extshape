@@ -6,7 +6,9 @@ This mod adds stairs, slabs, fences, fence gates, button and pressure plates for
 
 At present this mod supports Minecraft Java Edition 1.19.4-1.16.4. Please install the relevant mod according to your MC version (mod for 1.19.2 is compatible with 1.19.1 and 1.19, mod for 1.18.1 is compatible with 1.18; mod for 1.16.5 is compatible for 1.16.4) and requires Fabric API and BRRP. Besides, Mod Menu is usually needed (but not required) to open mod config screen.
 
-**Notice: The mod requires BRRP (Better Runtime Resource Pack) to run, so you must have this mod installed. BRRP is a branch of ARRP; please do not install both BRRP and ARRP simultaneously, or some unexpected issues may happen.**
+**Notice: The mod requires BRRP (Better Runtime Resource Pack) to run.**
+
+If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blocks](#Blocks), to add inter-mod support for Blockus.
 
 [Click here](UpdateLog-en.md) for previous update logs. Welcome to join Tencent QQ group **587928350** or KaiHeiLa channel invitation code **KlFS0n** to experience the latest update of this mod.
 
@@ -76,8 +78,18 @@ You can configure to cancel avoiding recipes that conflict. For instance, if you
 
 ### Creative Inventory
 
-By default, this mod adds four specific item groups, sorting items in the order of their base blocks. Blocks based on a same block are arranged together, so that you can conveniently obtain multiple different shapes of one block.
+In versions above 1.19.3, items in these mod will by default be added to vanilla item groups. If you do not want to add items into vanilla item groups, instead add four specific groups to place blocks in various shapes in the order of their base blocks, you may go to the config screen of the mod (which can be accessed through the mod menu of Mod Menu mod), and disable "Add to vanilla groups" and enable "Show specific groups".
 
-You can choose to add items in this group into vanilla item groups via the configuration screen of the mod. In 1.19.3, the items are sorted according to their base blocks, like the vanilla ones. In 1.19.2 and below, blocks of this mod will be appended after the existing blocks, which may make item groups appear messy. You may install Reasonable Sorting mod to sort the content.
+In versions 1.19.2 and before, if you enabled "Add to vanilla groups", mods will be directly appended after all existing blocks, which may make item groups appear messy. You may install Reasonable Sorting mod to sort the content. (Reasonable Sorting mod does not support versions above 1.19.3, and it is also not needed.)
 
 You may also configure the shapes to be added into groups. For example, if you enable "add to vanilla groups", and set "shapes added to vanilla groups" to `stairs slab`, then only stairs and slabs in this mod are added into vanilla groups (not affecting vanilla existing items). For 1.19.3, the shapes are added in order (but cannot be duplicate). For example, if you write `slab stairs`, stairs will be added after the slabs (vanilla stairs and slabs will not be affected).
+
+## Inter-mod support
+
+The mod can currently add utilities with Blockus mod.
+
+### Blockus
+
+If you have installed Extended Block Shapes and Blockus mod, you may optionally install "Extended Block Shapes - Blockus" mod based on that two mods, so that extended shapes for Blockus blocks will also be added.
+
+Note: There are no specific groups for these blocks. Therefore, to find these blocks in creative inventory, you need to enable "Add to vanilla groups" in the mod options of "Extended Block Shapes", and find these blocks in Blockus item groups.

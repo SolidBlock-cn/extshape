@@ -5,12 +5,14 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractBlockAccessor",
+    "AbstractBlockSettingsAccessor",
     "AbstractBlockStateAccessor",
     "BlockFamiliesAccessor",
     "ButtonMixin",
     "ItemGroupAccessor",
     "MiningToolItemMixin",
     "ShearsItemMixin",
+    "SingleItemRecipeJsonBuilderAccessor",
     "SnowyBlockMixin",
     "TranslatableTextAccessor",
     "TranslatableTextMixin"
