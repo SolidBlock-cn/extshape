@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "extshape_blockus",
+  "version": "${version}",
+  "icon": "assets/extshape_blockus/icon-fabric.png",
+  "name": "Extended Block Shapes - Blockus",
+  "description": "Adds Extended Block Shapes for Blockus mod!",
+  "authors": [
+    "SolidBlock"
+  ],
+  "contact": {
+    "homepage": "https://space.bilibili.com/87328531",
+    "sources": "https://github.com/SolidBlock-cn/extshape",
+    "issues": "https://github.com/SolidBlock-cn/extshape/issues"
+  },
+  "license": "LGPLv3",
+  "environment": "*",
+  "entrypoints": {
+    "extshape:post_initialize": [
+      "pers.solid.extshape.blockus.ExtShapeBlockus"
+    ]
+  },
+  "mixins": [
+    "extshape_blockus.mixin.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": [
+      "~1.19.2"
+    ],
+    "brrp_v1": "*",
+    "extshape": ">=${version}",
+    "blockus": ">=2.5.9"
+  }
+}
