@@ -1,19 +1,18 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.generator.ResourceGeneratorHelper;
-import net.devtech.arrp.json.blockstate.JBlockModel;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.blockstate.JVariants;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.models.JTextures;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.TextureKey;
+import net.minecraft.block.enums.SlabType;
+import net.minecraft.data.client.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.BRRPUtils;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 
 public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
@@ -23,33 +22,33 @@ public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
 
   @OnlyIn(Dist.CLIENT)
   @Override
-  public @NotNull JBlockStates getBlockStates() {
-    final JVariants variants = new JVariants();
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
+    final BlockStateVariantMap.DoubleProperty<SlabType, Direction.Axis> variants = BlockStateVariantMap.create(TYPE, AXIS);
     final Identifier modelId = getBlockModelId();
-    final Identifier topModelId = modelId.brrp_append("_top");
-    final Identifier baseModelId = baseBlock == null ? modelId.brrp_append("_double") : ResourceGeneratorHelper.getBlockModelId(baseBlock);
+    final Identifier topModelId = modelId.brrp_suffixed("_top");
+    final Identifier baseModelId = baseBlock == null ? modelId.brrp_suffixed("_double") : BRRPUtils.getBlockModelId(baseBlock);
 
     for (Direction.Axis axis : Direction.Axis.values()) {
-      variants.addVariant("type=bottom,axis", axis, new JBlockModel(modelId.brrp_append("_" + axis.asString())));
-      variants.addVariant("type=top,axis", axis, new JBlockModel(topModelId.brrp_append("_" + axis.asString())));
-      variants.addVariant("type=double,axis", axis, new JBlockModel(baseModelId.brrp_append("_" + axis.asString())));
+      variants.register(SlabType.BOTTOM, axis, BlockStateVariant.create().put(VariantSettings.MODEL, modelId.brrp_suffixed("_" + axis.asString())));
+      variants.register(SlabType.TOP, axis, BlockStateVariant.create().put(VariantSettings.MODEL, topModelId.brrp_suffixed("_" + axis.asString())));
+      variants.register(SlabType.DOUBLE, axis, BlockStateVariant.create().put(VariantSettings.MODEL, baseModelId.brrp_suffixed("_" + axis.asString())));
     }
 
-    return JBlockStates.ofVariants(variants);
+    return VariantsBlockStateSupplier.create(this).coordinate(variants);
   }
 
   @OnlyIn(Dist.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
-    final JModel blockModel = getBlockModel();
+    final ModelJsonBuilder blockModel = getBlockModel();
     final Identifier blockModelId = getBlockModelId();
-    pack.addModel(blockModel, blockModelId);
-    final Identifier topModelId = blockModelId.brrp_append("_top");
+    pack.addModel(blockModelId, blockModel);
+    final Identifier topModelId = blockModelId.brrp_suffixed("_top");
 
-    final JModel blockModelUvLocked = getBlockModel().clone().textures(JTextures.of("side", getTextureId(TextureKey.SIDE)).var("end", getTextureId(TextureKey.END)));
+    final ModelJsonBuilder blockModelUvLocked = getBlockModel().clone().setTextures(ModelUtils.getTextureMap(this, TextureKey.SIDE, TextureKey.END));
     for (Direction.Axis axis : Direction.Axis.values()) {
-      pack.addModel(blockModelUvLocked.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_uv_locked_" + axis.asString())), blockModelId.brrp_append("_" + axis.asString()));
-      pack.addModel(blockModelUvLocked.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_uv_locked_" + axis.asString() + "_top")), topModelId.brrp_append("_" + axis.asString()));
+      pack.addModel(blockModelId.brrp_suffixed("_" + axis.asString()), blockModelUvLocked.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_uv_locked_" + axis.asString())));
+      pack.addModel(topModelId.brrp_suffixed("_" + axis.asString()), blockModelUvLocked.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_uv_locked_" + axis.asString() + "_top")));
     }
   }
 }

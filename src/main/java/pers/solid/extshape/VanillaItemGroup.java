@@ -9,9 +9,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.Event;
 import org.jetbrains.annotations.ApiStatus;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 import pers.solid.extshape.util.EntryVariantAppender;
@@ -30,6 +33,12 @@ public final class VanillaItemGroup {
   private static final Map<ItemGroup, Multimap<Item, Item>> APPENDING_RULES = new Object2ObjectLinkedOpenHashMap<>();
   private static final Map<ItemGroup, Multimap<Item, Item>> PREPENDING_RULES = new Object2ObjectLinkedOpenHashMap<>();
 
+  /**
+   * 更新创造模式物品栏时的事件。
+   */
+  public static class UpdateShapesEvent extends Event {
+    }
+
   private VanillaItemGroup() {
   }
 
@@ -43,18 +52,24 @@ public final class VanillaItemGroup {
     return PREPENDING_RULES.computeIfAbsent(group, itemGroup -> LinkedHashMultimap.create());
   }
 
+  @ApiStatus.Internal
   public static void registerForMod() {
     final Multimap<Item, Item> apRedstone = getAppendingRule(ItemGroups.REDSTONE);
     apRedstone.put(Items.STONE_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.OBSIDIAN)).asItem());
     final Multimap<Item, Item> preRedstone = getPrependingRule(ItemGroups.REDSTONE);
     preRedstone.put(Items.OAK_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.WHITE_WOOL)).asItem());
+
+    MinecraftForge.EVENT_BUS.addListener((UpdateShapesEvent event) -> {
+      PREPENDING_RULES.clear();
+      APPENDING_RULES.clear();
+      VanillaItemGroup.recreateVanillaGroupRules(ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla);
+    });
   }
 
+  @ApiStatus.Internal
   public static void recreateVanillaGroupRules(Collection<BlockShape> shapes) {
     final Multimap<Item, Item> apBuilding = getAppendingRule(ItemGroups.BUILDING_BLOCKS);
     final Multimap<Item, Item> preBuilding = getPrependingRule(ItemGroups.BUILDING_BLOCKS);
-    preBuilding.clear();
-    apBuilding.clear();
     preBuilding.put(Items.SMOOTH_STONE_SLAB, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem());
     apBuilding.put(Items.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem());
     new EntryVariantAppender(ItemGroups.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA)), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);

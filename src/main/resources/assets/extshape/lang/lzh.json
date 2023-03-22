@@ -47,26 +47,6 @@
   "options.extshape.registerBlockFamilies.description": "常無諫啟。如啟，始發塊藝之時，塊之關係者咸入 BlockFamilies 也，或可識於他囊，亦有致不穩之險，因無諫之啟。",
   "options.extshape.requires_restart": "複啟以效見。",
 
-  "options.extshape.rrp.title": "運行時資囊設置",
-  "options.extshape.rrp.description": "理運行時資囊之於塊形之擴模組也。",
-  "options.extshape.rrp.regenClientResources": "復生客端資囊",
-  "options.extshape.rrp.regenClientResources.process": "正在復生客端資囊…",
-  "options.extshape.rrp.regenClientResources.description": "復生改囊之運行時資囊之客端資囊，無作於原生與他囊。用以開發，於時可熱重載其變者，他時常無。復生之囊之變者，應于F3+T以見。",
-  "options.extshape.rrp.regenServerData": "復生伺服器錄囊",
-  "options.extshape.rrp.regenServerData.process": "正在復生伺服器錄囊…",
-  "options.extshape.rrp.regenServerData.description": "復生改囊之運行時資囊之伺服器錄囊，無作於原生與他囊。用以開發，於時可熱重載其變者，他時常無。復生之囊之變者，應于/data命令畢時見",
-  "options.extshape.rrp.exportClientResources": "出錄客端資囊",
-  "options.extshape.rrp.exportClientResources.process": "正錄客端資囊…",
-  "options.extshape.rrp.exportClientResources.description": "錄運行時資囊之客端之資至指定路徑，以類常規資囊明顯其內容。",
-  "options.extshape.rrp.exportServerData": "出錄伺服器錄囊",
-  "options.extshape.rrp.exportServerData.process": "正錄伺服器錄囊…",
-  "options.extshape.rrp.exportServerData.description": "錄運行時資囊之伺服器之錄至指定路徑，以類常規錄囊明顯其內容。",
-  "options.extshape.rrp.exportFilePath": "出錄檔路徑",
-  "options.extshape.rrp.textFieldHeader": "錄資于是路：",
-  "options.extshape.rrp.fullPath": "完整路徑：%s",
-  "options.extshape.rrp.invalidPath": "是路無效：%s",
-  "options.extshape.rrp.info": "示：是頁僅於除錯，常無用於遊玩者也。如無能明是頁之效，觸「%s」。",
-
   "options.extshape.reasonable-sorting": "調《知序》之規",
   "options.extshape.reasonable-sorting.description": "如既載改囊《知序》，君可明何以序塊物據其形也，含形之是改囊（塊形之擴）供者。是規者，無動塊之他囊供者。\n\n君亦可選「Reasonable Sorting」於改囊選單以入其規頁。\n\n若無應，以《知序》改囊未载或係低版也。",
   "options.extshape.dataChanged": "伺服器錄囊既變，複生其耶？",
@@ -79,5 +59,7 @@
   "message.extshape.recipe_conflict.exception": "驗方撞而生異常",
   "message.extshape.recipe_conflict.finish.none": "驗畢，未見撞",
   "message.extshape.recipe_conflict.finish.single": "驗畢，%s撞尋",
-  "message.extshape.recipe_conflict.finish.plural": "驗畢，%s撞尋"
+  "message.extshape.recipe_conflict.finish.plural": "驗畢，%s撞尋",
+
+  "modmenu.nameTranslation.extshape": "塊形之擴"
 }
