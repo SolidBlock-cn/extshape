@@ -61,6 +61,7 @@ public class ExtShapeOptionsScreen extends Screen {
       "options.extshape.addToVanillaGroups",
       SimpleOption.constantTooltip(
           Text.translatable("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName())
+              .append(ModList.get().isLoaded("extshape_blockus") ? Text.literal("\n\n").append(Text.translatable("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : Text.empty())
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))),
       newConfig.addToVanillaGroups,
@@ -127,12 +128,7 @@ public class ExtShapeOptionsScreen extends Screen {
       value -> newConfig.specialSnowSlabCrafting = value
   ).createButton(gameOptions, width / 2 + 5, 171, 200);
 
-  // 运行时资源包设置。
-  private final ButtonWidget rrpOptionsButton = new ButtonWidget(width / 2 - 205, 191, 200, 20, Text.translatable("options.extshape.rrp.title"), button -> {
-    if (client != null) client.setScreen(new ExtShapeRRPScreen(this));
-  }, (button, matrices, mouseX, mouseY) -> renderOrderedTooltip(matrices, textRenderer.wrapLines(Text.translatable("options.extshape.rrp.description"), 200), mouseX, mouseY));
-
-  private final ButtonWidget reasonableSortingButton = new ButtonWidget(width / 2 + 5, 191, 200, 20, Text.translatable("options.extshape.reasonable-sorting"), button -> {
+  private final ButtonWidget reasonableSortingButton = new ButtonWidget(width / 2 - 100, 191, 200, 20, Text.translatable("options.extshape.reasonable-sorting"), button -> {
     if (client != null) {
       try {
         ModList.get().getModContainerById("reasonable_sorting")
@@ -179,11 +175,9 @@ public class ExtShapeOptionsScreen extends Screen {
     addDrawableChild(avoidSomeButtonRecipesButton);
     specialPressurePlateRecipesButton.x = width / 2 + 5;
     addDrawableChild(specialPressurePlateRecipesButton);
-    rrpOptionsButton.x = width / 2 - 205;
-    addDrawableChild(rrpOptionsButton);
 
     reasonableSortingButton.active = client != null && ModList.get().isLoaded("reasonable_sorting");
-    reasonableSortingButton.x = width / 2 + 5;
+    reasonableSortingButton.x = width / 2 - 100;
     addDrawableChild(reasonableSortingButton);
 
     finishButton.x = width / 2 - 100;
@@ -257,8 +251,8 @@ public class ExtShapeOptionsScreen extends Screen {
             suppressedDataWarning = true;
             close();
             if (t) {
-              ExtShapeRRP.STANDARD_PACK.clearResources();
-              ExtShapeRRP.generateServerData(ExtShapeRRP.STANDARD_PACK);
+              ExtShapeRRP.PACK.clearResources();
+              ExtShapeRRP.generateServerData(ExtShapeRRP.PACK);
               client.inGameHud.getChatHud().addMessage(
                   Text.translatable("options.dataChanged.finish",
                       Text.literal("/reload").styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reload"))).formatted(Formatting.GRAY)));

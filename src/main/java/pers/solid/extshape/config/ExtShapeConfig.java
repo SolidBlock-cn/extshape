@@ -3,10 +3,7 @@ package pers.solid.extshape.config;
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtIo;
 import net.minecraftforge.fml.loading.FMLPaths;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +28,6 @@ public class ExtShapeConfig implements Cloneable {
    */
   public static final @Unmodifiable ExtShapeConfig DEFAULT_CONFIG = new ExtShapeConfig();
   public static final File CONFIG_FILE = FMLPaths.CONFIGDIR.get().resolve("extshape.json").toFile();
-  public static final File LEGACY_CONFIG_FILE = new File(FMLPaths.CONFIGDIR.get().toFile(), "extshape.nbt");
   static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeConfig.class);
   private static final Gson GSON = new GsonBuilder()
       .setPrettyPrinting()
@@ -46,24 +42,8 @@ public class ExtShapeConfig implements Cloneable {
     try {
       CURRENT_CONFIG = readFile(CONFIG_FILE);
     } catch (IOException e) {
-      try {
-        final ExtShapeConfig newConfig = new ExtShapeConfig();
-        try {
-          final NbtCompound nbtCompound = newConfig.readLegacyFile(LEGACY_CONFIG_FILE);
-          if (nbtCompound != null) {
-            LOGGER.info("Reading the legacy NBT-format file of Extended Block Shapes mod.");
-          }
-        } catch (IOException ignore) {
-          // 读取旧版 NBT 格式的配置文件如果出错，不抛出。
-        }
-        CURRENT_CONFIG = newConfig;
-        if (LEGACY_CONFIG_FILE.delete()) {
-          LOGGER.info("Deleted the legacy NBT-format file of Extended Block Shapes mod.");
-        }
-      } catch (Throwable throwable) {
-        LOGGER.warn("Failed to read config file of Extended Block Shapes mod:", e);
-        CURRENT_CONFIG = new ExtShapeConfig();
-      }
+      LOGGER.warn("Failed to read config file of Extended Block Shapes mod:", e);
+      CURRENT_CONFIG = new ExtShapeConfig();
       CURRENT_CONFIG.tryWriteFile(CONFIG_FILE);
     }
     if (CURRENT_CONFIG.registerBlockFamilies) {
@@ -74,7 +54,7 @@ public class ExtShapeConfig implements Cloneable {
   /**
    * 是否将本模组的物品添加到创造模式物品栏中的原版的物品组中。
    */
-  public boolean addToVanillaGroups = false;
+  public boolean addToVanillaGroups = true;
   /**
    * 需要添加到原版物品组的方块形状的列表。不应该含有重复元素。
    */
@@ -82,9 +62,9 @@ public class ExtShapeConfig implements Cloneable {
       BlockShape.STAIRS, BlockShape.SLAB, BlockShape.QUARTER_PIECE, BlockShape.VERTICAL_STAIRS, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_QUARTER_PIECE, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.WALL, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON
   );
   /**
-   * 是否为与本模组有关的方块创建专门的物品组。默认为 {@code true}。如果不创建，则建议将 {@link #addToVanillaGroups} 设为 {@code true} 以免这些物品不再出现在创造模式物品栏中。
+   * 是否为与本模组有关的方块创建专门的物品组。默认为 {@code false}。如果不创建，则建议将 {@link #addToVanillaGroups} 设为 {@code true} 以免这些物品不再出现在创造模式物品栏中。
    */
-  public boolean showSpecificGroups = true;
+  public boolean showSpecificGroups = false;
   /**
    * 需要添加到专用物品组中的方块形状的列表。不应该含有重复元素。
    */
@@ -120,37 +100,6 @@ public class ExtShapeConfig implements Cloneable {
     } catch (IOException e) {
       LOGGER.warn("Failed to write Extended Block Shapes config file:", e);
     }
-  }
-
-  /**
-   * 读取配置文件并写入配置对象中。
-   *
-   * @param file 被读取的文件。
-   */
-  @Contract(mutates = "this")
-  public NbtCompound readLegacyFile(File file) throws IOException {
-    final NbtCompound nbtCompound = NbtIo.read(file);
-    if (nbtCompound != null) {
-      if (nbtCompound.contains("addToVanillaGroups")) {
-        addToVanillaGroups = nbtCompound.getBoolean("addToVanillaGroups");
-      }
-      if (nbtCompound.contains("showSpecificGroups")) {
-        showSpecificGroups = nbtCompound.getBoolean("showSpecificGroups");
-      }
-      if (nbtCompound.contains("registerBlockFamilies")) {
-        registerBlockFamilies = nbtCompound.getBoolean("registerBlockFamilies");
-      }
-      if (nbtCompound.contains("avoidSomeButtonRecipes")) {
-        avoidSomeButtonRecipes = nbtCompound.getBoolean("avoidSomeButtonRecipes");
-      }
-      if (nbtCompound.contains("preventWoodenWallRecipes")) {
-        preventWoodenWallRecipes = nbtCompound.getBoolean("preventWoodenWallRecipes");
-      }
-      if (nbtCompound.contains("specialSnowSlabCrafting")) {
-        specialSnowSlabCrafting = nbtCompound.getBoolean("specialSnowSlabCrafting");
-      }
-    }
-    return nbtCompound;
   }
 
   public static ExtShapeConfig readFile(File file) throws IOException {

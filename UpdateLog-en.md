@@ -1,10 +1,30 @@
 # Update log
 
+### 2.0.0
+- Adapted to new version of Better Runtime Resource Packs.
+- Fixed the issue that some bedrock blocks occupy the empty loot table.
+- The permission level of `/extshape:check-conflict` has been adjusted to 4.
+
+### 1.9.0
+
+- Added Korean translation, contributed by PR#25。
+- Adapted to Blockus mod.
+- Fixed the issue that amethyst blocks do not play sound effects when hit by projectile.
+- Added the localized mod name in Mod Menu mod.
+- Adjusted tags related to pressure plates and buttons.
+- Fixed the issue that blocks of coal blocks cannot be fuels in the furnace.
+- Fences, fence gates, buttons and pressure plates can also have special features now, such as reaction when hit by projectiles.
+- Added all shapes for sculk blocks.
+- Modified the sound of fence gate open and close of amethyst, which is the same as break sound.
+- Optimized some contents related to RecipeGroup to be more extendable.
+- Fixed the wrong number of vertical quarter pieces crafted from vertical slab.
+- Fixed the issue that block rotation recipe content does not match their names.
+- Fixed the issue of duplicated writing of resource packs.
+
 ### 1.8.1
 
 - Added slabs with directions for pillar blocks with uvLock, such as bamboo block and cherry log.
 - Fixed the conversion issue for block names that end with "木材".
-- Added Korean translation, contributed by PR#25。
 
 ### 1.7.3
 

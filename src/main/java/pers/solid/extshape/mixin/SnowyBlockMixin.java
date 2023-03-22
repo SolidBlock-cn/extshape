@@ -5,13 +5,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SnowyBlock;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,14 +16,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.tag.ExtShapeTags;
 
 @Mixin(SnowyBlock.class)
 public class SnowyBlockMixin extends Block {
   @Shadow
   @Final
   public static BooleanProperty SNOWY;
-  private static final TagKey<Block> SNOW = TagKey.of(ForgeRegistries.Keys.BLOCKS, new Identifier(ExtShape.MOD_ID, "snow"));
 
   @SuppressWarnings("unused")
   private SnowyBlockMixin(Settings settings) {
@@ -49,6 +45,6 @@ public class SnowyBlockMixin extends Block {
   }
 
   private static boolean isSnow2(BlockState state, WorldView world, BlockPos pos) {
-    return state.isIn(SNOW, state0 -> isFaceFullSquare(state0.getCollisionShape(world, pos), Direction.DOWN));
+    return state.isIn(ExtShapeTags.SNOW, state0 -> isFaceFullSquare(state0.getCollisionShape(world, pos), Direction.DOWN));
   }
 }

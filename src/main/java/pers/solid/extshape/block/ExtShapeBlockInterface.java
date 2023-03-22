@@ -1,20 +1,16 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.generator.BlockResourceGenerator;
-import net.devtech.arrp.generator.ItemResourceGenerator;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.models.JTextures;
-import net.devtech.arrp.json.recipe.JIngredient;
-import net.devtech.arrp.json.recipe.JRecipe;
-import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
-import net.minecraft.data.client.TextureKey;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.server.RecipeProvider;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -25,17 +21,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.extensions.IForgeBlock;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.generator.BlockResourceGenerator;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
-import pers.solid.extshape.rrp.VanillaStonecutting;
-
-import java.util.Objects;
+import pers.solid.extshape.rrp.RecipeGroupRegistry;
 
 /**
  * 该模组中的绝大多数方块共用的接口。
@@ -45,10 +42,10 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
    * 方块所在的合成配方的组。
    *
    * @return 方块合成配方中的 {@code group} 字段。
-   * @see JRecipe#group(String)
+   * @see net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder#group(String)
    */
   default String getRecipeGroup() {
-    return "";
+    return RecipeGroupRegistry.getRecipeGroup((ItemConvertible) this);
   }
 
   /**
@@ -57,7 +54,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
    * @return 方块的切石配方。用于切石机。
    */
   @Override
-  default @Nullable JRecipe getStonecuttingRecipe() {
+  default @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
     return null;
   }
 
@@ -77,8 +74,8 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
   }
 
   @OnlyIn(Dist.CLIENT)
-  default JModel simpleModel(String parent) {
-    return new JModel(parent).textures(JTextures.ofSides(getTextureId(TextureKey.TOP), getTextureId(TextureKey.SIDE), getTextureId(TextureKey.BOTTOM)));
+  default ModelJsonBuilder simpleModel(Model parent) {
+    return ModelUtils.createModelWithVariants(this, parent);
   }
 
   /**
@@ -96,14 +93,12 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
     }
   }
 
-  default JStonecuttingRecipe simpleStoneCuttingRecipe(int resultCount) {
+  default SingleItemRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount) {
     final Block baseBlock = getBaseBlock();
     if (baseBlock == null) {
       return null;
     } else {
-      final JStonecuttingRecipe stonecuttingRecipe = new JStonecuttingRecipe(baseBlock, (ItemConvertible) this, resultCount);
-      stonecuttingRecipe.addInventoryChangedCriterion("has_base_block", baseBlock);
-      return stonecuttingRecipe;
+      return SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), (ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
     }
   }
 
@@ -111,16 +106,15 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
    * <p>为该方块写入合成配方。</p>
    *
    * @param pack 运行时资源包。
-   * @see ItemResourceGenerator#writeRecipes(RuntimeResourcePack)
+   * @see pers.solid.brrp.v1.generator.ItemResourceGenerator#writeRecipes(RuntimeResourcePack)
    * @since 1.5.1
    */
   @ApiStatus.AvailableSince("1.5.1")
   default void writeCraftingRecipe(RuntimeResourcePack pack) {
-    final JRecipe craftingRecipe = getCraftingRecipe();
+    final @Nullable CraftingRecipeJsonBuilder craftingRecipe = getCraftingRecipe();
     if (craftingRecipe != null) {
       final Identifier recipeId = getRecipeId();
-      pack.addRecipe(recipeId, craftingRecipe);
-      pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(recipeId), craftingRecipe);
+      pack.addRecipeAndAdvancement(recipeId, craftingRecipe);
     }
   }
 
@@ -132,28 +126,10 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
    */
   @ApiStatus.AvailableSince("1.5.1")
   default void writeStonecuttingRecipe(RuntimeResourcePack pack) {
-    final JRecipe stonecuttingRecipe = getStonecuttingRecipe();
+    final @Nullable SingleItemRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe();
     if (stonecuttingRecipe != null) {
       final Identifier stonecuttingRecipeId = getStonecuttingRecipeId();
-      pack.addRecipe(stonecuttingRecipeId, stonecuttingRecipe);
-      pack.addRecipeAdvancement(stonecuttingRecipeId, getAdvancementIdForRecipe(stonecuttingRecipeId), stonecuttingRecipe);
-
-      // 处理二次切石一步到位的情况。
-      if (stonecuttingRecipe instanceof JStonecuttingRecipe jStonecuttingRecipe) {
-        // block 是切石前的基础方块。
-        for (Block block : VanillaStonecutting.INSTANCE.get(getBaseBlock())) {
-          final String path = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block), "Unregistered block.").getPath();
-          final Identifier secondaryId = getRecipeId().brrp_append("_from_" + path + "_stonecutting");
-          final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
-              JIngredient.ofItem(block),
-              jStonecuttingRecipe.result,
-              jStonecuttingRecipe.count
-          );
-          secondaryRecipe.addInventoryChangedCriterion("has_" + path, block);
-          pack.addRecipe(secondaryId, secondaryRecipe);
-          pack.addRecipeAdvancement(secondaryId, getAdvancementIdForRecipe(secondaryId), secondaryRecipe);
-        }
-      }
+      pack.addRecipeAndAdvancement(stonecuttingRecipeId, stonecuttingRecipe);
     }
   }
 
