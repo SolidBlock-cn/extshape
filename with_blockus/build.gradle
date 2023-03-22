@@ -1,0 +1,19 @@
+archivesBaseName = project.archives_base_name + "-fabric"
+version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
+group = rootProject.maven_group
+repositories {
+    // CurseMaven，用于加载其他模组
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+}
+dependencies {
+    // Blockus 模组
+    modApi "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}"
+    modCompileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
+    modApi "curse.maven:blockus-312289:${project.blockus_version}"
+    implementation project(path: ':', configuration: "namedElements")
+}
