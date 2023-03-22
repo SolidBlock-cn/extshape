@@ -1,18 +1,15 @@
 package pers.solid.extshape;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.block.FireBlock;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +50,7 @@ public class ExtShape implements ModInitializer {
     ExtShapeItemGroup.init();
     ExtShapeTags.refillTags();
 
-    registerFlammableBlocks();
+    // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
     registerComposingChances();
     registerStrippableBlocks();
     registerFuels();
@@ -70,6 +67,8 @@ public class ExtShape implements ModInitializer {
         LOGGER.warn("Failed to call ExtShapeBridgeImpl.initialize():", e);
       }
     }
+
+    FabricLoader.getInstance().getEntrypoints("extshape:post_initialize", ModInitializer.class).forEach(ModInitializer::onInitialize);
   }
 
   /**
@@ -139,7 +138,7 @@ public class ExtShape implements ModInitializer {
   }
 
   /**
-   * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。
+   * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。部分是直接由其标签决定的，例如木制、竹制的楼梯、台阶，原版的标签即定义了可作为燃料。
    *
    * @see ExtShapeBlocks
    * @see net.minecraft.block.entity.AbstractFurnaceBlockEntity#createFuelTimeMap()
@@ -148,64 +147,26 @@ public class ExtShape implements ModInitializer {
   private void registerFuels() {
     // 参照原版木制（含下界木）楼梯和台阶，楼梯燃烧时间为 300 刻，台阶燃烧时间为 150 刻。
     // 但是，non_flammable_wood 标签的仍然不会被熔炉接受。
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_VERTICAL_STAIRS.toVanillaItemTag(), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_VERTICAL_SLABS.toVanillaItemTag(), 150);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_QUARTER_PIECES.toVanillaItemTag(), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES.toVanillaItemTag(), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOODEN_WALLS.toVanillaItemTag(), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_STAIRS.toVanillaItemTag(), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_SLABS.toVanillaItemTag(), 150);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_VERTICAL_STAIRS.toVanillaItemTag(), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_VERTICAL_SLABS.toVanillaItemTag(), 150);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_QUARTER_PIECES.toVanillaItemTag(), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_VERTICAL_QUARTER_PIECES.toVanillaItemTag(), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_WALLS.toVanillaItemTag(), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_FENCES.toVanillaItemTag(), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_FENCE_GATES.toVanillaItemTag(), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_BUTTONS.toVanillaItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.LOG_PRESSURE_PLATES.toVanillaItemTag(), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_STAIRS), 300);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_SLABS), 150);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_QUARTER_PIECES), 75);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES), 75);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_WALLS), 300);
 
     // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_STAIRS.toVanillaItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_SLABS.toVanillaItemTag(), 50);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_QUARTER_PIECES.toVanillaItemTag(), 25);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_VERTICAL_STAIRS.toVanillaItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_VERTICAL_SLABS.toVanillaItemTag(), 50);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES.toVanillaItemTag(), 25);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_STAIRS), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_SLABS), 50);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_QUARTER_PIECES), 25);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_STAIRS), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_SLABS), 50);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES), 25);
+
     // 栅栏、栅栏门、压力板、燃烧时间和基础方块一致，门的燃烧时间为三分之二，按钮为三分之一。
     // 但考虑到羊毛压力板是与地毯相互合成的，故燃烧时间与地毯一致，为 67。
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_FENCES.toVanillaItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_FENCE_GATES.toVanillaItemTag(), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_PRESSURE_PLATES.toVanillaItemTag(), 67);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_BUTTONS.toVanillaItemTag(), 33);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.WOOLEN_WALLS.toVanillaItemTag(), 100);
-  }
-
-  /**
-   * 在初始化时，注册所有的可燃方块。注意：对于 Forge 版本，方块燃烧由 {@code IForgeBlock} 接口的相关方法决定。
-   *
-   * @see FireBlock#registerDefaultFlammables()
-   */
-  private void registerFlammableBlocks() {
-    final FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
-    // 羊毛方块加入可燃方块
-    for (final Block block : ExtShapeTags.WOOLEN_BLOCKS) {
-      registry.add(block, 30, 60);
-    }
-
-    // 木板加入可燃方块
-    for (final Block baseBlock : BlockCollections.OVERWORLD_PLANKS) {
-      for (BlockShape shape : BlockShape.values()) {
-        final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
-        if (block != null) registry.add(block, 5, 20);
-      }
-    }
-    // 原木
-    for (final Block baseBlock : Iterables.concat(BlockCollections.LOGS, BlockCollections.STRIPPED_LOGS, BlockCollections.WOODS, BlockCollections.STRIPPED_WOODS)) {
-      for (BlockShape shape : BlockShape.values()) {
-        final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
-        if (block != null) registry.add(block, 5, 5);
-      }
-    }
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_FENCES), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_FENCE_GATES), 100);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_PRESSURE_PLATES), 67);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_BUTTONS), 33);
+    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_WALLS), 100);
   }
 }
