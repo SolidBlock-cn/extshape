@@ -5,14 +5,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ButtonBlock;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
-import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.ButtonSettings;
 
 public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
 
   public ButtonBuilder(@NotNull ButtonSettings buttonSettings, Block baseBlock) {
     super(baseBlock, FabricBlockSettings.copyOf(baseBlock).noCollision().strength(baseBlock.getHardness() / 4f), builder -> new ExtShapeButtonBlock(baseBlock, buttonSettings, builder.blockSettings));
-    this.defaultTagToAdd = ExtShapeTags.BUTTONS;
     this.shape = BlockShape.BUTTON;
   }
 

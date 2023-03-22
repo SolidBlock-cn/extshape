@@ -8,16 +8,16 @@ import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BRRPCubeBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.block.WoodType;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.*;
@@ -30,7 +30,6 @@ import pers.solid.extshape.util.ButtonSettings;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.Iterator;
-import java.util.SortedSet;
 
 import static net.minecraft.block.Blocks.*;
 
@@ -55,7 +54,7 @@ public final class ExtShapeBlocks {
   }
 
   /**
-   * 存储本模组生成的方块的基础方块（包含原版方块）。该集合的内容是在 {@link BlocksBuilderFactory#createInternal(Block, FenceSettings, ButtonSettings, ActivationRule, SortedSet)} 中添加的，其他模组使用的基础方块不应该添加到这个集合中。{@link pers.solid.extshape.rrp.ExtShapeRRP#generateServerData(RuntimeResourcePack)} 会使用这个集合，因为它不应该为使用了本模组接口的其他模组生成数据。
+   * 存储本模组生成的方块的基础方块（包含原版方块）。该集合的内容是在 {@link BlocksBuilderFactory#create} 中添加的，其他模组使用的基础方块不应该添加到这个集合中。{@link pers.solid.extshape.rrp.ExtShapeRRP#generateServerData(RuntimeResourcePack)} 会使用这个集合，因为它不应该为使用了本模组接口的其他模组生成数据。
    */
   private static final ObjectSet<Block> BASE_BLOCKS = new ObjectLinkedOpenHashSet<>();
 
@@ -69,7 +68,24 @@ public final class ExtShapeBlocks {
   /**
    * 用于生成本模组的方块。由于仅限本模组，故不对外公开。
    */
-  private static final BlocksBuilderFactory FACTORY = BlocksBuilderFactory.create(ExtShape.MOD_ID, BLOCKS, BASE_BLOCKS);
+  private static final BlocksBuilderFactory FACTORY = Util.make(new BlocksBuilderFactory(), blocksBuilderFactory -> {
+    blocksBuilderFactory.defaultNamespace = ExtShape.MOD_ID;
+    blocksBuilderFactory.instanceCollection = BLOCKS;
+    blocksBuilderFactory.baseBlockCollection = BASE_BLOCKS;
+    blocksBuilderFactory.defaultTags = ImmutableMap.<BlockShape, BlockTagPreparation>builder()
+        .put(BlockShape.STAIRS, ExtShapeTags.STAIRS)
+        .put(BlockShape.SLAB, ExtShapeTags.SLABS)
+        .put(BlockShape.VERTICAL_SLAB, ExtShapeTags.VERTICAL_SLABS)
+        .put(BlockShape.VERTICAL_STAIRS, ExtShapeTags.VERTICAL_STAIRS)
+        .put(BlockShape.QUARTER_PIECE, ExtShapeTags.QUARTER_PIECES)
+        .put(BlockShape.VERTICAL_QUARTER_PIECE, ExtShapeTags.VERTICAL_QUARTER_PIECES)
+        .put(BlockShape.FENCE, ExtShapeTags.FENCES)
+        .put(BlockShape.FENCE_GATE, ExtShapeTags.FENCE_GATES)
+        .put(BlockShape.WALL, ExtShapeTags.WALLS)
+        .put(BlockShape.BUTTON, ExtShapeTags.BUTTONS)
+        .put(BlockShape.PRESSURE_PLATE, ExtShapeTags.PRESSURE_PLATES)
+        .build();
+  });
   /**
    * 石化橡木方块。
    */
@@ -86,15 +102,27 @@ public final class ExtShapeBlocks {
   static {
     // 石头及其变种（含磨制变种），已存在其楼梯、台阶、墙，但是还没有栅栏和栅栏门。
     for (final Block block : BlockCollections.STONES) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).build();
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.FLINT)
+          .setButtonSettings(ButtonSettings.STONE)
+          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
     }
 
     // 泥土和砂土。其中砂土没有按钮和压力板。
-    FACTORY.createAllShapes(DIRT, FenceSettings.common(Items.STICK), ButtonSettings.soft(BlockSetType.STONE), ActivationRule.EVERYTHING).build();
-    FACTORY.createAllShapes(COARSE_DIRT, FenceSettings.common(Items.STICK), null, null).build();
+    ButtonSettings buttonSettings2 = ButtonSettings.soft(BlockSetType.STONE);
+    FACTORY.createAllShapes(DIRT)
+        .setCommonFenceSettings(Items.STICK)
+        .setButtonSettings(buttonSettings2)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(COARSE_DIRT)
+        .setCommonFenceSettings(Items.STICK)
+        .setButtonSettings(null)
+        .setPressurePlateActivationRule(null).build();
 
     // 圆石。
-    FACTORY.createAllShapes(COBBLESTONE, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(COBBLESTONE)
+        .setCommonFenceSettings(Items.FLINT)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 原木、木头、菌柄、菌核及其去皮变种。
     final ImmutableMap<BlockShape, BlockTagPreparation> logTags = new ImmutableMap.Builder<BlockShape, BlockTagPreparation>()
@@ -124,13 +152,19 @@ public final class ExtShapeBlocks {
         .build();
     BlockCollections.LOGS.forEach(block -> FACTORY.createConstructionOnly(block).setPillar(block == CHERRY_LOG).setTagToAddForShape(logTags).build());
     final FenceSettings bambooFenceSettings = new FenceSettings(Items.BAMBOO, WoodType.BAMBOO);
-    FACTORY.createAllShapes(BAMBOO_BLOCK, bambooFenceSettings, ButtonSettings.BAMBOO, ActivationRule.EVERYTHING)
+    FACTORY.createAllShapes(BAMBOO_BLOCK)
+        .setFenceSettings(bambooFenceSettings)
+        .setButtonSettings(ButtonSettings.BAMBOO)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
         .setPillarUvLocked()
         .consumeEachSettings((blockShape, settings) -> settings.mapColor(MapColor.DARK_GREEN)) // FabricBlockSettings.copyOf 现在会复制基础方块的 requiredFlags，不再需要手动指定
         .setTagToAddForShape(woodenTags)
         .build();
     BlockCollections.STRIPPED_LOGS.forEach(block -> FACTORY.createConstructionOnly(block).setPillar(block == STRIPPED_CHERRY_LOG).setTagToAddForShape(logTags).build());
-    FACTORY.createAllShapes(STRIPPED_BAMBOO_BLOCK, bambooFenceSettings, ButtonSettings.BAMBOO, ActivationRule.EVERYTHING)
+    FACTORY.createAllShapes(STRIPPED_BAMBOO_BLOCK)
+        .setFenceSettings(bambooFenceSettings)
+        .setButtonSettings(ButtonSettings.BAMBOO)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
         .setPillarUvLocked()
         .consumeEachSettings((blockShape, settings) -> settings.mapColor(MapColor.YELLOW))
         .setTagToAddForShape(woodenTags)
@@ -159,29 +193,53 @@ public final class ExtShapeBlocks {
         WoodType.MANGROVE
     );
     final Iterator<WoodType> netherWoodTypes = Iterators.cycle(WoodType.WARPED, WoodType.CRIMSON);
-    // The following code is just for debugging:
-    if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-      for (Block block : BlockCollections.WOODS) {
-        ExtShape.LOGGER.info("Check if the wood type matches: {}, {}, {}", woodenBlockSetTypes.next().name(), woodTypes.next().name(), Registries.BLOCK.getId(block).getPath());
-      }
-    }
-    BlockCollections.WOODS.forEach(block -> FACTORY.createAllShapes(block, new FenceSettings(Items.STICK, woodTypes.next()), ButtonSettings.wood(woodenBlockSetTypes.next()), ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
-    BlockCollections.STRIPPED_WOODS.forEach(block -> FACTORY.createAllShapes(block, new FenceSettings(Items.STICK, woodTypes.next()), ButtonSettings.wood(woodenBlockSetTypes.next()), ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
+    BlockCollections.WOODS.forEach(block -> {
+      ButtonSettings buttonSettings = ButtonSettings.wood(woodenBlockSetTypes.next());
+      FACTORY.createAllShapes(block)
+          .setFenceSettings(new FenceSettings(Items.STICK, woodTypes.next()))
+          .setButtonSettings(buttonSettings)
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build();
+    });
+    BlockCollections.STRIPPED_WOODS.forEach(block -> {
+      ButtonSettings buttonSettings = ButtonSettings.wood(woodenBlockSetTypes.next());
+      FACTORY.createAllShapes(block)
+          .setFenceSettings(new FenceSettings(Items.STICK, woodTypes.next()))
+          .setButtonSettings(buttonSettings)
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build();
+    });
     BlockCollections.STEMS.forEach(block -> FACTORY.createConstructionOnly(block).setPillar().setTagToAddForShape(logTags).build());
     BlockCollections.STRIPPED_STEMS.forEach(block -> FACTORY.createConstructionOnly(block).setPillar().setTagToAddForShape(logTags).build());
-    BlockCollections.HYPHAES.forEach(block -> FACTORY.createAllShapes(block, new FenceSettings(Items.STICK, netherWoodTypes.next()), ButtonSettings.wood(netherWoodBlockSetTypes.next()), ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
-    BlockCollections.STRIPPED_HYPHAES.forEach(block -> FACTORY.createAllShapes(block, new FenceSettings(Items.STICK, netherWoodTypes.next()), ButtonSettings.wood(netherWoodBlockSetTypes.next()), ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build());
+    BlockCollections.HYPHAES.forEach(block -> {
+      ButtonSettings buttonSettings = ButtonSettings.wood(netherWoodBlockSetTypes.next());
+      FACTORY.createAllShapes(block)
+          .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
+          .setButtonSettings(buttonSettings)
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build();
+    });
+    BlockCollections.STRIPPED_HYPHAES.forEach(block -> {
+      @Nullable FenceSettings fenceSettings = new FenceSettings(Items.STICK, netherWoodTypes.next());
+      FACTORY.createAllShapes(block)
+          .setFenceSettings(fenceSettings)
+          .setButtonSettings(ButtonSettings.wood(netherWoodBlockSetTypes.next()))
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setTagToAddForShape(logTags).build();
+    });
 
     // TODO: 2023/2/16, 016 在每次循环的时候，都会创建一个新的 FenceSettings 和 ButtonSettings 对象，后续还可以继续优化。
 
     // 木板。
     for (final Block block : BlockCollections.PLANKS) {
       if (block == BAMBOO_PLANKS || block == BAMBOO_MOSAIC) {
-        FACTORY.createAllShapes(block, bambooFenceSettings, ButtonSettings.wood(BlockSetType.BAMBOO), ActivationRule.EVERYTHING)
+        FACTORY.createAllShapes(block)
+            .setFenceSettings(bambooFenceSettings)
+            .setButtonSettings(ButtonSettings.wood(BlockSetType.BAMBOO))
+            .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setTagToAddForShape(woodenTags)
             .build();
       } else {
-        FACTORY.createAllShapes(block, null, ButtonSettings.wood(block == WARPED_PLANKS ? BlockSetType.WARPED : block == CRIMSON_PLANKS ? BlockSetType.CRIMSON : woodenBlockSetTypes.next()), ActivationRule.EVERYTHING)
+        FACTORY.createAllShapes(block)
+            .setFenceSettings(null)
+            .setButtonSettings(ButtonSettings.wood(block == WARPED_PLANKS ? BlockSetType.WARPED : block == CRIMSON_PLANKS ? BlockSetType.CRIMSON : woodenBlockSetTypes.next()))
+            .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setTagToAddForShape(woodenTags)
             .build();
       }
@@ -198,12 +256,17 @@ public final class ExtShapeBlocks {
     BlockBiMaps.setBlockOf(BlockShape.SLAB, PETRIFIED_OAK_PLANKS, PETRIFIED_OAK_SLAB);
 
     // 基岩。
-    FACTORY.createAllShapes(BEDROCK, FenceSettings.common(Items.STICK), ButtonSettings.HARD, ActivationRule.MOBS)
+    FACTORY.createAllShapes(BEDROCK)
+        .setCommonFenceSettings(Items.STICK)
+        .setButtonSettings(ButtonSettings.HARD)
+        .setPressurePlateActivationRule(ActivationRule.MOBS)
         .consumeEachSettings((shape, settings) -> settings.strength(-1.0F, 3600000.0F).allowsSpawning((state, world, pos, type) -> false))
         .build();
 
     // 青金石块。
-    FACTORY.createAllShapes(LAPIS_BLOCK, FenceSettings.common(Items.LAPIS_LAZULI), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(LAPIS_BLOCK)
+        .setCommonFenceSettings(Items.LAPIS_LAZULI)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 砂岩、红砂岩及其切制、錾制、平滑变种。其中，只有平滑砂岩有栅栏、压力板和按钮。
     for (final Block block : BlockCollections.SANDSTONES) {
@@ -215,7 +278,10 @@ public final class ExtShapeBlocks {
 
     // 羊毛。
     for (final Block block : BlockCollections.WOOLS) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.STRING), ButtonSettings.SOFT, ActivationRule.EVERYTHING)
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.STRING)
+          .setButtonSettings(ButtonSettings.SOFT)
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
           .addTagToAddEach(ExtShapeTags.WOOLEN_BLOCKS)
           .setTagToAddForShape(BlockShape.STAIRS, ExtShapeTags.WOOLEN_STAIRS)
           .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.WOOLEN_VERTICAL_STAIRS)
@@ -232,41 +298,74 @@ public final class ExtShapeBlocks {
     }
 
     // 金块。
-    FACTORY.createAllShapes(GOLD_BLOCK, FenceSettings.common(Items.GOLD_INGOT), ButtonSettings.stone(BlockSetType.GOLD), null).build();
+    ButtonSettings buttonSettings1 = ButtonSettings.stone(BlockSetType.GOLD);
+    FACTORY.createAllShapes(GOLD_BLOCK)
+        .setCommonFenceSettings(Items.GOLD_INGOT)
+        .setButtonSettings(buttonSettings1)
+        .setPressurePlateActivationRule(null).build();
     // 铁块。
-    FACTORY.createAllShapes(IRON_BLOCK, FenceSettings.common(Items.IRON_INGOT), ButtonSettings.stone(BlockSetType.IRON), null).build();
+    ButtonSettings buttonSettings = ButtonSettings.stone(BlockSetType.IRON);
+    FACTORY.createAllShapes(IRON_BLOCK)
+        .setCommonFenceSettings(Items.IRON_INGOT)
+        .setButtonSettings(buttonSettings)
+        .setPressurePlateActivationRule(null).build();
 
     // 砖栅栏和栅栏门。
     FACTORY.createConstructionOnly(BRICKS).withFences(FenceSettings.common(Items.BRICK)).with(BlockShape.WALL).build();
 
     // 苔石栅栏和栅栏门。
-    FACTORY.createAllShapes(MOSSY_COBBLESTONE, FenceSettings.common(Items.STICK), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(MOSSY_COBBLESTONE)
+        .setCommonFenceSettings(Items.STICK)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 黑曜石。
-    FACTORY.createAllShapes(OBSIDIAN, FenceSettings.common(Items.STONE), ButtonSettings.HARD, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(OBSIDIAN)
+        .setCommonFenceSettings(Items.STONE)
+        .setButtonSettings(ButtonSettings.HARD)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 钻石块。
-    FACTORY.createAllShapes(DIAMOND_BLOCK, FenceSettings.common(Items.DIAMOND), ButtonSettings.HARD, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(DIAMOND_BLOCK)
+        .setCommonFenceSettings(Items.DIAMOND)
+        .setButtonSettings(ButtonSettings.HARD)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 紫水晶块。
-    FACTORY.createAllShapes(AMETHYST_BLOCK, FenceSettings.common(Items.AMETHYST_SHARD), ButtonSettings.STONE, ActivationRule.MOBS).withoutRedstone().build();
+    FACTORY.createAllShapes(AMETHYST_BLOCK)
+        .setCommonFenceSettings(Items.AMETHYST_SHARD)
+        .withExtension(BlockExtension.AMETHYST)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).withoutRedstone().build();
 
     // 冰，由于技术原因，暂不产生。
 
     // 雪块。
-    FACTORY.createAllShapes(SNOW_BLOCK, FenceSettings.common(Items.SNOW), ButtonSettings.SOFT, ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(SNOW_BLOCK)
+        .setCommonFenceSettings(Items.SNOW)
+        .setButtonSettings(ButtonSettings.SOFT)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 黏土块。
-    FACTORY.createAllShapes(CLAY, FenceSettings.common(Items.CLAY_BALL), ButtonSettings.SOFT, ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(CLAY)
+        .setCommonFenceSettings(Items.CLAY_BALL)
+        .setButtonSettings(ButtonSettings.SOFT)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 南瓜。
-    FACTORY.createAllShapes(PUMPKIN, FenceSettings.common(Items.PUMPKIN_SEEDS), ButtonSettings.PSUDO_WOODEN, ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(PUMPKIN)
+        .setCommonFenceSettings(Items.PUMPKIN_SEEDS)
+        .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 下界岩。
-    FACTORY.createAllShapes(NETHERRACK, FenceSettings.common(Items.NETHER_BRICK), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(NETHERRACK)
+        .setCommonFenceSettings(Items.NETHER_BRICK)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 荧石可以发光。
-    FACTORY.createAllShapes(GLOWSTONE, FenceSettings.common(Items.GLOWSTONE_DUST), ButtonSettings.SOFT, ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(GLOWSTONE)
+        .setCommonFenceSettings(Items.GLOWSTONE_DUST)
+        .setButtonSettings(ButtonSettings.SOFT)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 石砖、苔石砖。
     for (final Block block : new Block[]{STONE_BRICKS, MOSSY_STONE_BRICKS, CHISELED_STONE_BRICKS}) {
@@ -275,31 +374,50 @@ public final class ExtShapeBlocks {
 
     // 泥（自 1.19）。
     for (final Block block : new Block[]{PACKED_MUD, MUD_BRICKS}) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.MUD), ButtonSettings.STONE, ActivationRule.MOBS).build();
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.MUD)
+          .setButtonSettings(ButtonSettings.STONE)
+          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
     }
 
     // 西瓜。
-    FACTORY.createAllShapes(MELON, FenceSettings.common(Items.MELON_SLICE), ButtonSettings.PSUDO_WOODEN, ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(MELON)
+        .setCommonFenceSettings(Items.MELON_SLICE)
+        .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 下界砖块的栅栏门、按钮和压力板。
-    FACTORY.createAllShapes(NETHER_BRICKS, FenceSettings.common(Items.NETHER_BRICK), ButtonSettings.STONE, ActivationRule.MOBS).withoutRedstone().build();
+    FACTORY.createAllShapes(NETHER_BRICKS)
+        .setCommonFenceSettings(Items.NETHER_BRICK)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).withoutRedstone().build();
 
     // 末地石、末地石砖。
-    FACTORY.createAllShapes(END_STONE, FenceSettings.common(Items.END_STONE_BRICKS), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(END_STONE)
+        .setCommonFenceSettings(Items.END_STONE_BRICKS)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 绿宝石块。
-    FACTORY.createAllShapes(EMERALD_BLOCK, FenceSettings.common(Items.EMERALD), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(EMERALD_BLOCK)
+        .setCommonFenceSettings(Items.EMERALD)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 石英、石英砖、平滑石英块、錾制石英块均有按钮和压力板。
     for (final Block block : new Block[]{QUARTZ_BLOCK, CHISELED_QUARTZ_BLOCK, QUARTZ_BRICKS, SMOOTH_QUARTZ}) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.QUARTZ), ButtonSettings.STONE, ActivationRule.MOBS).build();
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.QUARTZ)
+          .setButtonSettings(ButtonSettings.STONE)
+          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
     }
 
     // 红色下界砖。
-    FACTORY.createAllShapes(RED_NETHER_BRICKS, FenceSettings.common(Items.NETHER_BRICK), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(RED_NETHER_BRICKS)
+        .setCommonFenceSettings(Items.NETHER_BRICK)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 陶瓦和彩色陶瓦。
-    FACTORY.createAllShapes(TERRACOTTA, FenceSettings.common(Items.CLAY), ButtonSettings.STONE, ActivationRule.MOBS)
+    FACTORY.createAllShapes(TERRACOTTA)
+        .setCommonFenceSettings(Items.CLAY)
+        .setPressurePlateActivationRule(ActivationRule.MOBS)
         .setTagToAddForShape(BlockShape.STAIRS, ExtShapeTags.TERRACOTTA_STAIRS)
         .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.TERRACOTTA_VERTICAL_STAIRS)
         .setTagToAddForShape(BlockShape.SLAB, ExtShapeTags.TERRACOTTA_SLABS)
@@ -313,7 +431,10 @@ public final class ExtShapeBlocks {
         .setTagToAddForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.TERRACOTTA_PRESSURE_PLATES)
         .build();
     for (final Block block : BlockCollections.STAINED_TERRACOTTA) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.CLAY), ButtonSettings.STONE, ActivationRule.MOBS)
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.CLAY)
+          .setButtonSettings(ButtonSettings.STONE)
+          .setPressurePlateActivationRule(ActivationRule.MOBS)
           .setTagToAddForShape(BlockShape.STAIRS, ExtShapeTags.STAINED_TERRACOTTA_STAIRS)
           .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.STAINED_TERRACOTTA_VERTICAL_STAIRS)
           .setTagToAddForShape(BlockShape.SLAB, ExtShapeTags.STAINED_TERRACOTTA_SLABS)
@@ -329,14 +450,21 @@ public final class ExtShapeBlocks {
     }
 
     // 煤炭块。
-    FACTORY.createAllShapes(COAL_BLOCK, FenceSettings.common(Items.COAL), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(COAL_BLOCK)
+        .setCommonFenceSettings(Items.COAL)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 浮冰。
-    FACTORY.createAllShapes(PACKED_ICE, FenceSettings.common(Items.ICE), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(PACKED_ICE)
+        .setCommonFenceSettings(Items.ICE)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 海晶石、海晶石砖、暗海晶石。
     for (final Block block : new Block[]{PRISMARINE, PRISMARINE_BRICKS, DARK_PRISMARINE}) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.PRISMARINE_SHARD), ButtonSettings.STONE, ActivationRule.MOBS).build();
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.PRISMARINE_SHARD)
+          .setButtonSettings(ButtonSettings.STONE)
+          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
     }
 
     // 海晶灯。
@@ -349,17 +477,27 @@ public final class ExtShapeBlocks {
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "smooth_stone_slab_double"))
         .addTagToAdd(ExtShapeTags.PICKAXE_MINEABLE).build();
 
-    FACTORY.createAllShapes(SMOOTH_STONE, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).withoutConstructionShapes().build();
+    FACTORY.createAllShapes(SMOOTH_STONE)
+        .setCommonFenceSettings(Items.FLINT)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).withoutConstructionShapes().build();
 
     BASE_BLOCKS.add(SMOOTH_STONE_DOUBLE_SLAB);
     BlockBiMaps.setBlockOf(BlockShape.SLAB, SMOOTH_STONE_DOUBLE_SLAB, SMOOTH_STONE_SLAB);
 
     // 紫珀块。
-    FACTORY.createAllShapes(PURPUR_BLOCK, FenceSettings.common(Items.SHULKER_SHELL), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(PURPUR_BLOCK)
+        .setCommonFenceSettings(Items.SHULKER_SHELL)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 下界疣块、诡异疣块。
-    FACTORY.createAllShapes(NETHER_WART_BLOCK, FenceSettings.common(Items.NETHER_WART), null, null).withoutRedstone().build();
-    FACTORY.createAllShapes(WARPED_WART_BLOCK, FenceSettings.common(Items.NETHER_WART), null, null).withoutRedstone().build();
+    FACTORY.createAllShapes(NETHER_WART_BLOCK)
+        .setCommonFenceSettings(Items.NETHER_WART)
+        .setButtonSettings(null)
+        .setPressurePlateActivationRule(null).withoutRedstone().build();
+    FACTORY.createAllShapes(WARPED_WART_BLOCK)
+        .setCommonFenceSettings(Items.NETHER_WART)
+        .setButtonSettings(null)
+        .setPressurePlateActivationRule(null).withoutRedstone().build();
 
     // 带釉陶瓦只注册台阶。
     for (final Block block : BlockCollections.GLAZED_TERRACOTTA) {
@@ -368,7 +506,10 @@ public final class ExtShapeBlocks {
 
     // 彩色混凝土。
     for (final Block block : BlockCollections.CONCRETES) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.GRAVEL), ButtonSettings.STONE, ActivationRule.MOBS)
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.GRAVEL)
+          .setButtonSettings(ButtonSettings.STONE)
+          .setPressurePlateActivationRule(ActivationRule.MOBS)
           .setTagToAddForShape(BlockShape.STAIRS, ExtShapeTags.CONCRETE_STAIRS)
           .setTagToAddForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.CONCRETE_VERTICAL_STAIRS)
           .setTagToAddForShape(BlockShape.SLAB, ExtShapeTags.CONCRETE_SLABS)
@@ -384,19 +525,34 @@ public final class ExtShapeBlocks {
     }
 
     // 菌光体。
-    FACTORY.createAllShapes(SHROOMLIGHT, FenceSettings.common(Items.GLOWSTONE_DUST), ButtonSettings.SOFT, ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(SHROOMLIGHT)
+        .setCommonFenceSettings(Items.GLOWSTONE_DUST)
+        .setButtonSettings(ButtonSettings.SOFT)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 蜜脾块。
-    FACTORY.createAllShapes(HONEYCOMB_BLOCK, FenceSettings.common(Items.HONEYCOMB), ButtonSettings.SOFT, ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(HONEYCOMB_BLOCK)
+        .setCommonFenceSettings(Items.HONEYCOMB)
+        .setButtonSettings(ButtonSettings.SOFT)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 下界合金方块。
-    FACTORY.createAllShapes(NETHERITE_BLOCK, FenceSettings.common(Items.NETHERITE_INGOT), ButtonSettings.HARD, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(NETHERITE_BLOCK)
+        .setCommonFenceSettings(Items.NETHERITE_INGOT)
+        .setButtonSettings(ButtonSettings.HARD)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 远古残骸。
-    FACTORY.createAllShapes(ANCIENT_DEBRIS, FenceSettings.common(Items.NETHERITE_SCRAP), ButtonSettings.HARD, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(ANCIENT_DEBRIS)
+        .setCommonFenceSettings(Items.NETHERITE_SCRAP)
+        .setButtonSettings(ButtonSettings.HARD)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 哭泣的黑曜石。
-    FACTORY.createAllShapes(CRYING_OBSIDIAN, FenceSettings.common(Items.STONE), ButtonSettings.HARD, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(CRYING_OBSIDIAN)
+        .setCommonFenceSettings(Items.STONE)
+        .setButtonSettings(ButtonSettings.HARD)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 黑石及其变种。
     FACTORY.createConstructionOnly(BLACKSTONE).build();
@@ -408,8 +564,12 @@ public final class ExtShapeBlocks {
     FACTORY.createConstructionOnly(CHISELED_NETHER_BRICKS).build();
 
     // 凝灰岩，方解石。
-    FACTORY.createAllShapes(TUFF, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).build();
-    FACTORY.createAllShapes(CALCITE, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(TUFF)
+        .setCommonFenceSettings(Items.FLINT)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(CALCITE)
+        .setCommonFenceSettings(Items.FLINT)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 幽匿块。
     FACTORY.createConstructionOnly(SCULK).withExtension(BlockExtension.builder().setStacksDroppedCallback((state, world, pos, stack, dropExperience) -> ((BlockAccessor) state.getBlock()).callDropExperienceWhenMined(world, pos, stack, ConstantIntProvider.create(1))).build()).build();
@@ -425,33 +585,67 @@ public final class ExtShapeBlocks {
         WAXED_OXIDIZED_COPPER,
         WAXED_OXIDIZED_CUT_COPPER
     }) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.COPPER_INGOT), ButtonSettings.STONE, ActivationRule.MOBS).build();
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.COPPER_INGOT)
+          .setButtonSettings(ButtonSettings.STONE)
+          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
     }
 
     // 滴水石、苔藓。
-    FACTORY.createAllShapes(DRIPSTONE_BLOCK, FenceSettings.common(Items.POINTED_DRIPSTONE), ButtonSettings.STONE, ActivationRule.MOBS).build();
-    FACTORY.createAllShapes(MOSS_BLOCK, FenceSettings.common(Items.MOSS_CARPET), ButtonSettings.SOFT, ActivationRule.EVERYTHING).build();
+    FACTORY.createAllShapes(DRIPSTONE_BLOCK)
+        .setCommonFenceSettings(Items.POINTED_DRIPSTONE)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(MOSS_BLOCK)
+        .setCommonFenceSettings(Items.MOSS_CARPET)
+        .setButtonSettings(ButtonSettings.SOFT)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 深板岩。
-    FACTORY.createAllShapes(DEEPSLATE, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).setPillar().build();
+    FACTORY.createAllShapes(DEEPSLATE)
+        .setCommonFenceSettings(Items.FLINT)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).setPillar().build();
     for (final Block block : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE, DEEPSLATE_TILES, DEEPSLATE_BRICKS, CHISELED_DEEPSLATE}) {
-      FACTORY.createAllShapes(block, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).build();
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.FLINT)
+          .setButtonSettings(ButtonSettings.STONE)
+          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
     }
 
     // 玄武岩及其变种。
-    FACTORY.createAllShapes(BASALT, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).setPillar().build();
-    FACTORY.createAllShapes(POLISHED_BASALT, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).setPillar().build();
-    FACTORY.createAllShapes(SMOOTH_BASALT, FenceSettings.common(Items.FLINT), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(BASALT)
+        .setCommonFenceSettings(Items.FLINT)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).setPillar().build();
+    FACTORY.createAllShapes(POLISHED_BASALT)
+        .setCommonFenceSettings(Items.FLINT)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).setPillar().build();
+    FACTORY.createAllShapes(SMOOTH_BASALT)
+        .setCommonFenceSettings(Items.FLINT)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 粗铁、粗铜、粗金。
-    FACTORY.createAllShapes(RAW_IRON_BLOCK, FenceSettings.common(Items.RAW_IRON), ButtonSettings.STONE, ActivationRule.MOBS).build();
-    FACTORY.createAllShapes(RAW_COPPER_BLOCK, FenceSettings.common(Items.RAW_COPPER), ButtonSettings.STONE, ActivationRule.MOBS).build();
-    FACTORY.createAllShapes(RAW_GOLD_BLOCK, FenceSettings.common(Items.RAW_GOLD), ButtonSettings.STONE, ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(RAW_IRON_BLOCK)
+        .setCommonFenceSettings(Items.RAW_IRON)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(RAW_COPPER_BLOCK)
+        .setCommonFenceSettings(Items.RAW_COPPER)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+    FACTORY.createAllShapes(RAW_GOLD_BLOCK)
+        .setCommonFenceSettings(Items.RAW_GOLD)
+        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 蛙明灯。
-    FACTORY.createAllShapes(OCHRE_FROGLIGHT, FenceSettings.common(Items.SLIME_BALL), ButtonSettings.PSUDO_WOODEN, ActivationRule.EVERYTHING).setPillar().build();
-    FACTORY.createAllShapes(VERDANT_FROGLIGHT, FenceSettings.common(Items.SLIME_BALL), ButtonSettings.PSUDO_WOODEN, ActivationRule.EVERYTHING).setPillar().build();
-    FACTORY.createAllShapes(PEARLESCENT_FROGLIGHT, FenceSettings.common(Items.SLIME_BALL), ButtonSettings.PSUDO_WOODEN, ActivationRule.EVERYTHING).setPillar().build();
+    FACTORY.createAllShapes(OCHRE_FROGLIGHT)
+        .setCommonFenceSettings(Items.SLIME_BALL)
+        .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().build();
+    FACTORY.createAllShapes(VERDANT_FROGLIGHT)
+        .setCommonFenceSettings(Items.SLIME_BALL)
+        .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().build();
+    FACTORY.createAllShapes(PEARLESCENT_FROGLIGHT)
+        .setCommonFenceSettings(Items.SLIME_BALL)
+        .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
+        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().build();
 
     ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());
   }

@@ -12,13 +12,17 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.data.client.TextureKey;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -109,8 +113,20 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
     @Override
     public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
       super.onStacksDropped(state, world, pos, stack, dropExperience);
-      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

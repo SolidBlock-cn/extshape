@@ -4,6 +4,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -12,6 +14,7 @@ import net.minecraft.item.Items;
 import org.jetbrains.annotations.ApiStatus;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 import pers.solid.extshape.util.EntryVariantAppender;
@@ -29,6 +32,12 @@ import java.util.Objects;
 public final class VanillaItemGroup {
   private static final Map<ItemGroup, Multimap<Item, Item>> APPENDING_RULES = new Object2ObjectLinkedOpenHashMap<>();
   private static final Map<ItemGroup, Multimap<Item, Item>> PREPENDING_RULES = new Object2ObjectLinkedOpenHashMap<>();
+
+  public static final Event<Runnable> UPDATE_SHAPES_EVENT = EventFactory.createArrayBacked(Runnable.class, runnables -> () -> {
+    for (Runnable runnable : runnables) {
+      runnable.run();
+    }
+  });
 
   private VanillaItemGroup() {
   }
@@ -48,6 +57,8 @@ public final class VanillaItemGroup {
     apRedstone.put(Items.STONE_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.OBSIDIAN)).asItem());
     final Multimap<Item, Item> preRedstone = getPrependingRule(ItemGroups.REDSTONE);
     preRedstone.put(Items.OAK_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.WHITE_WOOL)).asItem());
+
+    UPDATE_SHAPES_EVENT.register(() -> VanillaItemGroup.recreateVanillaGroupRules(ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla));
   }
 
   public static void recreateVanillaGroupRules(Collection<BlockShape> shapes) {

@@ -8,12 +8,17 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * 方块标签的数据生成。
  */
 public class BlockTagPreparation extends TagPreparation<Block> {
+  public BlockTagPreparation(RuntimeResourcePack pack, Identifier identifier) {
+    this(pack, identifier, new ArrayList<>(), new ArrayList<>());
+  }
+
   /**
    * 创建一个基础的用于本模组的方块标签。
    *
@@ -21,7 +26,7 @@ public class BlockTagPreparation extends TagPreparation<Block> {
    * @param entryList       方块自身使用的集合。
    * @param tagPreparations 包含多个方块标签的集合。
    */
-  protected BlockTagPreparation(RuntimeResourcePack pack, Identifier identifier, Collection<Block> entryList, Collection<TagPreparation<Block>> tagPreparations) {
+  public BlockTagPreparation(RuntimeResourcePack pack, Identifier identifier, Collection<Block> entryList, Collection<TagPreparation<Block>> tagPreparations) {
     super(pack, identifier, entryList, tagPreparations);
   }
 

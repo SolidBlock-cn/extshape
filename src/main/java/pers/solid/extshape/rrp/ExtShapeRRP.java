@@ -48,7 +48,7 @@ public final class ExtShapeRRP {
    * </ul>
    * 通常建议此项在开发环境时为 <code>true</code>，在发布时为 <code>false</code>。
    */
-  private static final boolean GENERATE_EACH_RELOAD = FabricLoader.getInstance().isDevelopmentEnvironment();
+  private static final boolean GENERATE_EACH_RELOAD = false;
 
   private static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes-Runtime resource pack");
 
@@ -127,7 +127,7 @@ public final class ExtShapeRRP {
     }
 
     for (Block baseBlock : ExtShapeBlocks.getBaseBlocks()) {
-      new CrossShapeDataGeneration(baseBlock, ExtShape.MOD_ID, STANDARD_PACK).generateCrossShapeData();
+      new CrossShapeDataGeneration(baseBlock, ExtShape.MOD_ID, pack).generateCrossShapeData();
     }
 
     // 添加方块标签。

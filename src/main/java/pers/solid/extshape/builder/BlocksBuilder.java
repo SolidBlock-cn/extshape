@@ -2,6 +2,7 @@ package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.*;
+import net.minecraft.item.Item;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Contract;
@@ -23,6 +24,7 @@ import java.util.function.BiConsumer;
  */
 public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? extends Block>> {
   private static final BlockShape[] CONSTRUCTION_SHAPES = {BlockShape.STAIRS, BlockShape.SLAB, BlockShape.VERTICAL_QUARTER_PIECE, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_STAIRS, BlockShape.QUARTER_PIECE};
+  protected Map<BlockShape, BlockTagPreparation> defaultTags;
   /**
    * 构建方块时使用的命名空间。其引用会传递到 {@link AbstractBlockBuilder#defaultNamespace} 中。
    */
@@ -48,6 +50,34 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 构建器需要构建的所有对象都需要添加到的标签的列表。也就是说，构建的时候，这里面的标签会添加此构建器构建的所有方块。
    */
   protected final List<@NotNull BlockTagPreparation> tagsToAddEach = new ArrayList<>();
+
+  public BlocksBuilder setFenceSettings(FenceSettings fenceSettings) {
+    this.fenceSettings = fenceSettings;
+    return this;
+  }
+
+  public BlocksBuilder setCommonFenceSettings(Item secondIngredient) {
+    return this.setFenceSettings(FenceSettings.common(secondIngredient));
+  }
+
+  public BlocksBuilder setButtonSettings(ButtonSettings buttonSettings) {
+    this.buttonSettings = buttonSettings;
+    if (buttonSettings != null && buttonSettings.blockSetType() != null) {
+      this.blockSetType = buttonSettings.blockSetType();
+    }
+    return this;
+  }
+
+  public BlocksBuilder setPressurePlateActivationRule(PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
+    this.pressurePlateActivationRule = pressurePlateActivationRule;
+    return this;
+  }
+
+  public BlocksBuilder setBlockSetType(BlockSetType blockSetType) {
+    this.blockSetType = blockSetType;
+    return this;
+  }
+
   protected @Nullable FenceSettings fenceSettings;
   protected @Nullable ButtonSettings buttonSettings;
   protected @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
@@ -55,24 +85,15 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 在执行 {@link #build()} 之前会为每个值执行。
    */
   protected @Nullable BiConsumer<BlockShape, AbstractBlockBuilder<?>> blockBuilderConsumer;
-  protected @Nullable BlockSetType blockSetType;
+  protected BlockSetType blockSetType;
 
-  /**
-   * 根据一个基础方块，构造其多个变种方块。需要提供其中部分变种方块的参数。
-   *
-   * @param baseBlock                   基础方块。
-   * @param fenceSettings               合成栅栏和栅栏门时，需要使用的第二合成材料以及栅栏门的声音。
-   * @param buttonSettings              按钮类型。
-   * @param pressurePlateActivationRule 压力板激活类型。
-   * @param shapesToBuild               需要构建哪些方块形状。
-   */
-  public BlocksBuilder(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, @Nullable ButtonSettings buttonSettings, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, @Nullable BlockSetType blockSetType, SortedSet<BlockShape> shapesToBuild) {
-    this.fenceSettings = fenceSettings;
-    this.buttonSettings = buttonSettings;
-    this.pressurePlateActivationRule = pressurePlateActivationRule;
-    this.blockSetType = blockSetType;
+  public BlocksBuilder(@NotNull Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
     this.baseBlock = baseBlock;
     this.shapesToBuild = shapesToBuild;
+    this.fenceSettings = FenceSettings.DEFAULT;
+    this.buttonSettings = ButtonSettings.STONE;
+    this.blockSetType = BlockSetType.STONE;
+    this.pressurePlateActivationRule = PressurePlateBlock.ActivationRule.MOBS;
   }
 
   /**
@@ -102,6 +123,19 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
         ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarVerticalSlabBlock(builder.baseBlock, builder.blockSettings);
       } else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
         abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
+      }
+    };
+    return this;
+  }
+
+  @SuppressWarnings({"unchecked", "RedundantCast"})
+  @Contract(value = "-> this", mutates = "this")
+  public BlocksBuilder setCircularPaving() {
+    blockBuilderConsumer = (blockShape, abstractBlockBuilder) -> {
+      if (blockShape == BlockShape.SLAB) {
+        ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new CircularPavingSlabBlock(builder.baseBlock, builder.blockSettings);
+      } else if (blockShape == BlockShape.PRESSURE_PLATE) {
+        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, pressurePlateActivationRule, builder.blockSettings, blockSetType);
       }
     };
     return this;
@@ -329,11 +363,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       if (builder != null && entry.getValue() != null) builder.setDefaultTagToAdd(entry.getValue());
     }
 
-    // 如果基础方块对应的物品能够防火，那么其构建后产生的方块对应的物品也应该防火。
-    if (this.baseBlock.asItem().isFireproof()) {
-      values.forEach(builder -> builder.itemSettings.fireproof());
-    }
-
     // 设置需要将构建后的方块都添加到指定的标签中。
     for (AbstractBlockBuilder<? extends Block> builder : values) {
       tagsToAddEach.forEach(builder::addTagToAdd);
@@ -372,6 +401,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     if (builder != null) {
       builder.defaultNamespace = this.defaultNamespace;
       builder.instanceCollection = this.instanceCollection;
+      builder.defaultTagToAdd = defaultTags.get(shape);
     }
     return builder;
   }

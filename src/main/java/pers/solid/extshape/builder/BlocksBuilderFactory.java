@@ -1,16 +1,16 @@
 package pers.solid.extshape.builder;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.PressurePlateBlock;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.util.ButtonSettings;
-import pers.solid.extshape.util.FenceSettings;
+import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.extshape.tag.BlockTagPreparation;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -25,54 +25,38 @@ public class BlocksBuilderFactory {
   /**
    * 生成的方块的默认命名空间。例如，在本模组中，即使石头的 id 为 {@code minecraft:stone}，但由于给 BlocksBuilderFactory 设置了 {@code extshape} 命名空间，因此其通过本模组产生的衍生方块都是 {@code extshape} 命名空间的，如 {@code extshape:stone_vertical_slab}。如果为 {@code null}，那么生成的方块都会直接使用其基础方块的命名空间。
    */
-  protected @Nullable String defaultNamespace;
+  public @Nullable String defaultNamespace;
   /**
    * 将构建产生的方块都添加到这个集合中。
    */
-  protected @Nullable Collection<Block> instanceCollection;
+  public @Nullable Collection<Block> instanceCollection;
   /**
    * 将使用的基础方块添加到这个集合中。注意：在利用本对象来创建 {@link BlocksBuilder} 的时候，就会将其使用的基础方块添加到这个集合。
    */
-  protected @Nullable Collection<Block> baseBlockCollection;
+  public @Nullable Collection<Block> baseBlockCollection;
 
-  private BlocksBuilderFactory() {
+  public @Unmodifiable Map<BlockShape, BlockTagPreparation> defaultTags = ImmutableMap.of();
+
+  public BlocksBuilderFactory() {
   }
 
-  public static BlocksBuilderFactory create() {
-    return new BlocksBuilderFactory();
+  protected BlocksBuilder createInternal(@NotNull Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
+    return new BlocksBuilder(baseBlock, shapesToBuild);
   }
 
-  public static BlocksBuilderFactory create(@Nullable String defaultNamespace, @Nullable Collection<Block> instanceCollection, Collection<Block> baseBlockCollection) {
-    final BlocksBuilderFactory blocksBuilderFactory = new BlocksBuilderFactory();
-    blocksBuilderFactory.defaultNamespace = defaultNamespace;
-    blocksBuilderFactory.instanceCollection = instanceCollection;
-    blocksBuilderFactory.baseBlockCollection = baseBlockCollection;
-    return blocksBuilderFactory;
-  }
-
-  protected BlocksBuilder createInternal(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ButtonSettings buttonSettings, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule, BlockSetType blockSetType, SortedSet<BlockShape> shapesToBuild) {
-    final BlocksBuilder blocksBuilder = new BlocksBuilder(baseBlock, fenceSettings, buttonSettings, pressurePlateActivationRule, blockSetType, shapesToBuild);
+  protected BlocksBuilder create(@NotNull Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
+    final BlocksBuilder blocksBuilder = createInternal(baseBlock, shapesToBuild);
     blocksBuilder.defaultNamespace = defaultNamespace;
     blocksBuilder.instanceCollection = instanceCollection;
+    blocksBuilder.defaultTags = defaultTags;
     if (baseBlockCollection != null) {
       baseBlockCollection.add(baseBlock);
     }
     return blocksBuilder;
   }
 
-
-  /**
-   * 创建一个 BlocksBuilder，将会创建所有形状的，但不包括第三方模组新增加的形状。
-   *
-   * @param baseBlock                   基础方块。
-   * @param fenceSettings               栅栏的第二合成材料以及声音。若为 {@code null}，则意味着不产生栅栏和栅栏门。
-   * @param buttonSettings              按钮的类型。若为 {@code null}，则意味着不产生按钮。
-   * @param pressurePlateActivationRule 压力板的类型。若为 {@code null}，则意味着不产生压力板。
-   * @return 新的 BlocksBuilder。
-   */
-  @Contract("_,_,_,_ -> new")
-  public BlocksBuilder createAllShapes(@NotNull Block baseBlock, @Nullable FenceSettings fenceSettings, ButtonSettings buttonSettings, PressurePlateBlock.@Nullable ActivationRule pressurePlateActivationRule) {
-    return createInternal(baseBlock, fenceSettings, buttonSettings, pressurePlateActivationRule, buttonSettings == null ? null : buttonSettings.blockSetType(), new TreeSet<>(SHAPES));
+  public BlocksBuilder createAllShapes(@NotNull Block baseBlock) {
+    return create(baseBlock, new TreeSet<>(SHAPES));
   }
 
   /**
@@ -83,7 +67,7 @@ public class BlocksBuilderFactory {
    */
   @Contract("_ -> new")
   public BlocksBuilder createEmpty(@NotNull Block baseBlock) {
-    return createInternal(baseBlock, null, null, null, null, new TreeSet<>());
+    return create(baseBlock, new TreeSet<>());
   }
 
   /**
@@ -104,6 +88,7 @@ public class BlocksBuilderFactory {
   public <T extends AbstractBlockBuilder<?>> T modify(T blockBuilder) {
     blockBuilder.defaultNamespace = defaultNamespace;
     blockBuilder.instanceCollection = instanceCollection;
+    blockBuilder.defaultTagToAdd = defaultTags.get(blockBuilder.shape);
     return blockBuilder;
   }
 }

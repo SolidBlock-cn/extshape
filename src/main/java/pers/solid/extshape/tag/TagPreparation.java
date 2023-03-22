@@ -24,9 +24,9 @@ import java.util.stream.Stream;
 @ApiStatus.AvailableSince("1.5.0")
 public abstract class TagPreparation<E> extends AbstractCollection<E> {
   /**
-   * 用于存储 {@link TagPreparation} 对象的常量池，参见 {@link TagPreparationFactory#of(Identifier, Collection, Collection)}。当存在相同运行时资源包和 id 的对象时，就会直接从里面取用它。，不再创建新的
+   * 用于存储 {@link TagPreparation} 对象的常量池。当存在相同运行时资源包和 id 的对象时，就会直接从里面取用它，不再创建新的。
    */
-  static final Interner<TagPreparation<?>> INTERNER = Interners.newWeakInterner();
+  public static final Interner<TagPreparation<?>> INTERNER = Interners.newWeakInterner();
   protected final RuntimeResourcePack pack;
   public final Identifier identifier;
   public final Collection<E> entryList;

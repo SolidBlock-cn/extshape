@@ -79,5 +79,7 @@
   "message.extshape.recipe_conflict.exception": "Exceptions were found when detecting recipe conflict",
   "message.extshape.recipe_conflict.finish.none": "Finished checking. In total no recipe conflicts have been found.",
   "message.extshape.recipe_conflict.finish.single": "Finished checking. In total %s recipe conflict has been found.",
-  "message.extshape.recipe_conflict.finish.plural": "Finished checking. In total %s recipe conflicts have been found."
+  "message.extshape.recipe_conflict.finish.plural": "Finished checking. In total %s recipe conflicts have been found.",
+
+  "modmenu.nameTranslation.extshape": "Extended Block Shapes"
 }

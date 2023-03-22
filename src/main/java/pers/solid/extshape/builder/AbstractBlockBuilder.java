@@ -5,6 +5,7 @@ import net.devtech.arrp.generator.ItemResourceGenerator;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -14,6 +15,7 @@ import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.*;
 import org.spongepowered.include.com.google.common.collect.ImmutableMap;
+import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.tag.BlockTagPreparation;
 import pers.solid.extshape.util.BlockBiMaps;
 
@@ -48,7 +50,6 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    */
   private final List<@NotNull BlockTagPreparation> tagsToAdd = new ArrayList<>();
   public AbstractBlock.Settings blockSettings;
-  public ExtShapeBlockItemBuilder itemBuilder;
   /**
    * 构建之后将构建后的方块添加到这个集合中。
    */
@@ -74,10 +75,11 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
    * @see #setInstanceSupplier(Function)
    */
   protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier;
+  protected @NotNull Function<AbstractBlockBuilder<T>, BlockItem> itemInstanceSupplier = builder -> new ExtShapeBlockItem(builder.instance, builder.itemSettings);
   /**
    * 构造器的方块实例。需要注意，只有在调用{@link #build()}之后，这个实例才会存在，从而对实例进行实际操作。
    */
-  protected T instance;
+  public T instance;
   /**
    * 是否注册方块。
    */
@@ -85,13 +87,14 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
   /**
    * 该方块对应物品的物品设置。
    */
-  protected Item.Settings itemSettings;
+  public Item.Settings itemSettings;
   /**
    * 该方块所拥有的 id。
    */
   private Identifier identifier;
+  public BlockItem itemInstance;
 
-  protected AbstractBlockBuilder(Block baseBlock, AbstractBlock.Settings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
+  protected AbstractBlockBuilder(@Nullable Block baseBlock, AbstractBlock.Settings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
     this.baseBlock = baseBlock;
     this.registerBlock = true;
     this.registerItem = true;
@@ -100,6 +103,9 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     this.buildItem = true;
     this.shouldAddToBlockBiMap = true;
     this.itemSettings = new FabricItemSettings();
+    if (baseBlock != null && baseBlock.asItem() != null) {
+      if (baseBlock.asItem().isFireproof()) itemSettings.fireproof();
+    }
     this.instanceSupplier = instanceSupplier;
   }
 
@@ -287,12 +293,23 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     return this;
   }
 
+  @CanIgnoreReturnValue
+  @Contract(value = "_ -> this", mutates = "this")
+  public AbstractBlockBuilder<T> setItemInstanceSupplier(Function<AbstractBlockBuilder<T>, BlockItem> supplier) {
+    this.itemInstanceSupplier = supplier;
+    return this;
+  }
+
   /**
    * 立即使用当前的 {@link #instanceSupplier} 生成方块实例。
    */
   @Override
   public final void createInstance() {
     this.instance = this.instanceSupplier.apply(this);
+  }
+
+  private void createItemInstance() {
+    this.itemInstance = itemInstanceSupplier.apply(this);
   }
 
   /**
@@ -309,11 +326,9 @@ public abstract class AbstractBlockBuilder<T extends Block> implements Builder<T
     if (this.shouldAddToBlockBiMap) this.addToBlockBiMap();
 
     if (buildItem) {
-      this.itemBuilder = new ExtShapeBlockItemBuilder(this.instance, itemSettings);
-      itemBuilder.setIdentifier(identifier);
-      if (!registerItem) itemBuilder.noRegister();
-      this.itemBuilder.setIdentifier(this.getBlockId()).build();
-      this.configRecipeCategory(itemBuilder.block);
+      createItemInstance();
+      if (registerItem) Registry.register(Registries.ITEM, identifier, this.itemInstance);
+      this.configRecipeCategory(itemInstance);
     }
 
     // 将方块添加到指定的集合中。

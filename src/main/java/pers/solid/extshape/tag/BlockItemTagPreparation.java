@@ -13,7 +13,7 @@ import java.util.Collection;
 public class BlockItemTagPreparation extends ItemTagPreparation {
   public final TagPreparation<Block> blockTagPreparation;
 
-  protected BlockItemTagPreparation(TagPreparation<Block> blockTagPreparation) {
+  public BlockItemTagPreparation(TagPreparation<Block> blockTagPreparation) {
     super(blockTagPreparation.pack, blockTagPreparation.identifier, null, null);
     this.blockTagPreparation = blockTagPreparation;
   }

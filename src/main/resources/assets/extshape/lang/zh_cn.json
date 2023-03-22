@@ -79,5 +79,7 @@
   "message.extshape.recipe_conflict.exception": "检测合成表撞车时出现未知错误",
   "message.extshape.recipe_conflict.finish.none": "检测完成，未检测到合成表撞车",
   "message.extshape.recipe_conflict.finish.single": "检测完成，共检测到%s个合成表撞车",
-  "message.extshape.recipe_conflict.finish.plural": "检测完成，共检测到%s个合成表撞车"
+  "message.extshape.recipe_conflict.finish.plural": "检测完成，共检测到%s个合成表撞车",
+
+  "modmenu.nameTranslation.extshape": "扩展方块形状"
 }

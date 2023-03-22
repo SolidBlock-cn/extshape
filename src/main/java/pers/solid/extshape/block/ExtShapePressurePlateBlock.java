@@ -30,7 +30,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   public final Block baseBlock;
 
-  public ExtShapePressurePlateBlock(Block baseBlock, ActivationRule type, Settings settings, BlockSetType blockSetType) {
+  public ExtShapePressurePlateBlock(Block baseBlock, ActivationRule type, Settings settings, @NotNull BlockSetType blockSetType) {
     super(type, settings, blockSetType);
     this.baseBlock = baseBlock;
   }

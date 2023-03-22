@@ -71,5 +71,7 @@
   "message.extshape.recipe_conflict.exception": "제작법 충돌을 감지할 때 예외를 발견했습니다",
   "message.extshape.recipe_conflict.finish.none": "검사 완료. 중복된 제작법이 발견되지 않았습니다.",
   "message.extshape.recipe_conflict.finish.single": "검사 완료. 총 %s개의 중복된 제작법을 찾았습니다.",
-  "message.extshape.recipe_conflict.finish.plural": "검사 완료. 총 %s개의 중복된 제작법이 발견됐습니다."
+  "message.extshape.recipe_conflict.finish.plural": "검사 완료. 총 %s개의 중복된 제작법이 발견됐습니다.",
+
+  "modmenu.nameTranslation.extshape": "Extended Block Shapes"
 }

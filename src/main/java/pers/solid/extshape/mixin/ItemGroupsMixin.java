@@ -14,7 +14,7 @@ public abstract class ItemGroupsMixin {
   @Inject(method = "updateEntries", at = @At("HEAD"))
   private static void modifiedUpdateDisplayParameters(ItemGroup.DisplayContext displayContext, CallbackInfo cir) {
     if (ExtShapeConfig.requireUpdateShapesToAddVanilla) {
-      VanillaItemGroup.recreateVanillaGroupRules(ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla);
+      VanillaItemGroup.UPDATE_SHAPES_EVENT.invoker().run();
       ExtShapeConfig.requireUpdateShapesToAddVanilla = false;
     }
     ExtShapeConfig.requireUpdateDisplay = false;

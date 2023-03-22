@@ -10,11 +10,14 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.rrp.ExtShapeRRP;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Collection;
@@ -23,7 +26,7 @@ import java.util.LinkedHashSet;
 import static net.minecraft.block.Blocks.*;
 
 /**
- * 本模组提供的方块和物品标签，将用于数据生成，亦可在游戏运行中通过 {@link TagPreparation#toVanillaTag()} 转化为原版标签使用。。
+ * 本模组提供的方块和物品标签，将用于数据生成，亦可在游戏运行中通过 {@link TagPreparation#toVanillaTag()} 转化为原版标签使用。这些标签不应该被其他的模组使用。
  */
 public final class ExtShapeTags {
   /**
@@ -267,7 +270,7 @@ public final class ExtShapeTags {
   }
 
   private static BlockTagPreparation ofBlockOnly(@NotNull String path) {
-    final BlockTagPreparation empty = TagPreparationFactory.BLOCK.ofEmpty(path);
+    final BlockTagPreparation empty = new BlockTagPreparation(ExtShapeRRP.STANDARD_PACK, new Identifier(ExtShape.MOD_ID, path));
     TAGS_TO_WRITE.add(empty);
     return empty;
   }
@@ -279,7 +282,7 @@ public final class ExtShapeTags {
   }
 
   private static BlockTagPreparation ofBlockOnly(@NotNull TagKey<Block> tag) {
-    final BlockTagPreparation empty = TagPreparationFactory.BLOCK.ofEmpty(tag);
+    final BlockTagPreparation empty = new BlockTagPreparation(ExtShapeRRP.STANDARD_PACK, tag.id());
     TAGS_TO_WRITE.add(empty);
     return empty;
   }
@@ -292,7 +295,7 @@ public final class ExtShapeTags {
   }
 
   private static ItemTagPreparation ofItemOnly(@NotNull TagKey<Item> tag) {
-    final ItemTagPreparation empty = TagPreparationFactory.ITEM.ofEmpty(tag);
+    final ItemTagPreparation empty = new ItemTagPreparation(ExtShapeRRP.STANDARD_PACK, tag.id());
     TAGS_TO_WRITE.add(empty);
     return empty;
   }

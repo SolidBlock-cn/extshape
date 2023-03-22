@@ -8,6 +8,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -15,8 +16,12 @@ import java.util.Collection;
  */
 @ApiStatus.AvailableSince("1.5.0")
 public class ItemTagPreparation extends TagPreparation<Item> {
-  protected ItemTagPreparation(RuntimeResourcePack pack, Identifier identifier, Collection<Item> entryList, Collection<TagPreparation<Item>> tagList) {
+  public ItemTagPreparation(RuntimeResourcePack pack, Identifier identifier, Collection<Item> entryList, Collection<TagPreparation<Item>> tagList) {
     super(pack, identifier, entryList, tagList);
+  }
+
+  public ItemTagPreparation(RuntimeResourcePack pack, Identifier identifier) {
+    this(pack, identifier, new ArrayList<>(), new ArrayList<>());
   }
 
   @Override

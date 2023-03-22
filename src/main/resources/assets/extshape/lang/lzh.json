@@ -79,5 +79,7 @@
   "message.extshape.recipe_conflict.exception": "驗方撞而生異常",
   "message.extshape.recipe_conflict.finish.none": "驗畢，未見撞",
   "message.extshape.recipe_conflict.finish.single": "驗畢，%s撞尋",
-  "message.extshape.recipe_conflict.finish.plural": "驗畢，%s撞尋"
+  "message.extshape.recipe_conflict.finish.plural": "驗畢，%s撞尋",
+
+  "modmenu.nameTranslation.extshape": "塊形之擴"
 }

@@ -33,9 +33,13 @@
     "fabricloader": "*",
     "fabric": "*",
     "minecraft": [
-      ">1.19.3"
+      "~1.19.4",
+      ">=1.19.4"
     ],
     "java": ">=17",
     "better_runtime_resource_pack": ">=0.8.1"
+  },
+  "suggests": {
+    "blockus": "*"
   }
 }
