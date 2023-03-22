@@ -21,7 +21,7 @@ public abstract class ItemGroupsMixin {
   @Inject(method = "updateDisplayParameters", at = @At(value = "FIELD", target = "Lnet/minecraft/item/ItemGroups;operatorEnabled:Z", shift = At.Shift.AFTER))
   private static void modifiedUpdateDisplayParameters(FeatureSet enabledFeatures, boolean operatorEnabled, CallbackInfoReturnable<Boolean> cir) {
     if (ExtShapeConfig.requireUpdateShapesToAddVanilla) {
-      VanillaItemGroup.recreateVanillaGroupRules(ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla);
+      VanillaItemGroup.UPDATE_SHAPES_EVENT.invoker().run();
       ExtShapeConfig.requireUpdateShapesToAddVanilla = false;
     }
     ExtShapeConfig.requireUpdateDisplay = false;

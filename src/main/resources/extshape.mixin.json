@@ -12,6 +12,7 @@
     "ItemGroupEntriesImplMixin",
     "ItemGroupsMixin",
     "MiningToolItemMixin",
+    "SingleItemRecipeJsonBuilderAccessor",
     "SnowyBlockMixin",
     "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"

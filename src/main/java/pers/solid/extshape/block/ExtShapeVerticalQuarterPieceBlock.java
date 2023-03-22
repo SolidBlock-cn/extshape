@@ -1,23 +1,28 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.json.blockstate.JBlockModel;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.blockstate.JVariants;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.data.client.*;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.util.BlockCollections;
+import pers.solid.extshape.util.HorizontalCornerDirection;
 
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -39,39 +44,26 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
 
   @Environment(EnvType.CLIENT)
   @Override
-  public @NotNull JBlockStates getBlockStates() {
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier identifier = getBlockModelId();
-    return JBlockStates.ofVariants(new JVariants()
-        .addVariant("facing", "south_east", new JBlockModel(identifier).uvlock())
-        .addVariant("facing", "south_west", new JBlockModel(identifier).uvlock().y(90))
-        .addVariant("facing", "north_west", new JBlockModel(identifier).uvlock().y(180))
-        .addVariant("facing", "north_east", new JBlockModel(identifier).uvlock().y(270))
-    );
+    return VariantsBlockStateSupplier.create(this, BlockStateVariant.create().put(VariantSettings.MODEL, identifier).put(VariantSettings.UVLOCK, true)).coordinate(BlockStateVariantMap.create(FACING)
+        .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R0))
+        .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
+        .register(HorizontalCornerDirection.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
+        .register(HorizontalCornerDirection.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270)));
   }
 
 
   @Override
   @Environment(EnvType.CLIENT)
-  public @NotNull JModel getBlockModel() {
-    return simpleModel("extshape:block/vertical_quarter_piece");
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID, "block/vertical_quarter_piece")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
 
   @Override
-  public @NotNull JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(4).recipeCategory(getRecipeCategory());
-  }
-
-  @Override
-  public String getRecipeGroup() {
-    if ((BlockCollections.PLANKS).contains(baseBlock)) return "wooden_vertical_quarter_piece";
-    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_vertical_quarter_piece";
-    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_vertical_quarter_piece";
-    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return
-        "stained_terracotta_vertical_quarter_piece";
-    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return
-        "glazed_terracotta_vertical_quarter_piece";
-    return "";
+  public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
+    return simpleStoneCuttingRecipe(4);
   }
 
   @Override
@@ -92,8 +84,20 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
     @Override
     public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
       super.onStacksDropped(state, world, pos, stack, dropExperience);
-      extension.stacksDroppedCallback.onStackDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

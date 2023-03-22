@@ -26,7 +26,8 @@ public class TranslatableTextContentMixin {
   @Final
   private Object[] args;
 
-  @Shadow private List<StringVisitable> translations;
+  @Shadow
+  private List<StringVisitable> translations;
 
   @Inject(method = "updateTranslations", at = @At(value = "INVOKE", target = "Ljava/util/Objects;requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
   public void modify(CallbackInfo ci, Language language, String string, ImmutableList.Builder<StringVisitable> builder) {
