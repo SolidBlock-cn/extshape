@@ -42,7 +42,7 @@ public final class BlockusBlockCollections {
       () -> BlockusBlocks.CRIMSON_SMALL_STEMS,
       () -> BlockusBlocks.WHITE_OAK_SMALL_LOGS);
 
-  public static final ImmutableList<Supplier<BSSWTypes>> STONE_BRICKS = ImmutableList.of(
+  public static final ImmutableList<Supplier<BSSWTypes>> STAINED_STONE_BRICKS = ImmutableList.of(
       () -> BlockusBlocks.WHITE_STONE_BRICKS,
       () -> BlockusBlocks.ORANGE_STONE_BRICKS,
       () -> BlockusBlocks.MAGENTA_STONE_BRICKS,

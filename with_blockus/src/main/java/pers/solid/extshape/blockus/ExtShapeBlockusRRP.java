@@ -75,14 +75,14 @@ public final class ExtShapeBlockusRRP {
    * @param pack 运行时数据包。
    */
   public static void generateServerData(RuntimeResourcePack pack) {
-    LOGGER.info("Generating server data for Extended Block Shapes mod!");
+    LOGGER.info("Generating server data for Extended Block Shapes - Blockus mod!");
 
     // 为方块添加数据。
     for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
       if (!(block instanceof BlockResourceGenerator generator)) continue;
       generator.writeRecipes(pack);
       final Block baseBlock = generator.getBaseBlock();
-      final UnusualLootTables.LootTableFunction lootTableFunction = UnusualLootTables.INSTANCE.get(baseBlock);
+      final UnusualLootTables.LootTableFunction lootTableFunction = ExtShapeUnusualLootTables.INSTANCE.get(baseBlock);
       if (lootTableFunction != null) {
         pack.addLootTable(generator.getLootTableId(), lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block));
       } else {
