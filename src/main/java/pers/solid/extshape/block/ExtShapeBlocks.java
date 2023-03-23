@@ -136,6 +136,7 @@ public final class ExtShapeBlocks {
         .put(BlockShape.FENCE_GATE, ExtShapeTags.LOG_FENCE_GATES)
         .put(BlockShape.BUTTON, ExtShapeTags.LOG_BUTTONS)
         .put(BlockShape.PRESSURE_PLATE, ExtShapeTags.LOG_PRESSURE_PLATES)
+        .put(BlockShape.WALL, ExtShapeTags.LOG_WALLS)
         .build();
 
     final ImmutableMap<BlockShape, BlockTagPreparation> woodenTags = ImmutableMap.<BlockShape, BlockTagPreparation>builder()

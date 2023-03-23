@@ -204,6 +204,7 @@ public final class ExtShapeTags {
     OCCLUDES_VIBRATION_SIGNALS.addTag(WOOLEN_BLOCKS);
     DAMPENS_VIBRATIONS.addTag(WOOLEN_BLOCKS);
     SHEARS_MINEABLE.addTag(WOOLEN_BLOCKS);
+    PICKAXE_UNMINEABLE.addTag(WOODEN_WALLS);
     for (Block block : ExtShapeBlocks.getBlocks()) {
       final Block baseBlock;
       if (!(block instanceof ExtShapeBlockInterface bi)) {
