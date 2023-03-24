@@ -2,6 +2,9 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.Blockus;
 import com.brand.blockus.content.BlockusBlocks;
+import com.brand.blockus.tags.BlockusBlockTags;
+import com.brand.blockus.tags.BlockusItemTags;
+import com.google.common.collect.ImmutableList;
 import net.devtech.arrp.api.RRPEventHelper;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
@@ -11,6 +14,8 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.TextureKey;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -19,6 +24,9 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.rrp.CrossShapeDataGeneration;
 import pers.solid.extshape.rrp.ExtShapeRRP;
 import pers.solid.extshape.rrp.UnusualLootTables;
+import pers.solid.extshape.tag.ExtShapeTags;
+
+import java.util.function.Supplier;
 
 /**
  * @see ExtShapeRRP
@@ -60,7 +68,28 @@ public final class ExtShapeBlockusRRP {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.STRIPPED_WHITE_OAK_WOOD, block -> TextureRegistry.register(block, new Identifier(Blockus.MOD_ID, "block/stripped_white_oak_log")));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK_LOG, block -> TextureRegistry.registerAppended(block, TextureKey.END, "_top"));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK_WOOD, block -> TextureRegistry.register(block, new Identifier(Blockus.MOD_ID, "block/white_oak_log")));
+
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SOUL_SANDSTONE, bsswTypes -> TextureRegistry.registerAppended(bsswTypes.block, TextureKey.TOP, "_top"));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SMOOTH_SOUL_SANDSTONE, bssTypes -> TextureRegistry.register(bssTypes.block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_top")));
+
+    for (Supplier<Block> supplier : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
+      ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerAppended(block, TextureKey.END, "_top"));
+    }
+
+    for (final Supplier<Block> supplier : ImmutableList.<Supplier<Block>>of(
+        () -> BlockusBlocks.OAK_SMALL_LOGS,
+        () -> BlockusBlocks.SPRUCE_SMALL_LOGS,
+        () -> BlockusBlocks.BIRCH_SMALL_LOGS,
+        () -> BlockusBlocks.JUNGLE_SMALL_LOGS,
+        () -> BlockusBlocks.ACACIA_SMALL_LOGS,
+        () -> BlockusBlocks.DARK_OAK_SMALL_LOGS,
+        () -> BlockusBlocks.MANGROVE_SMALL_LOGS,
+        () -> BlockusBlocks.WARPED_SMALL_STEMS,
+        () -> BlockusBlocks.CRIMSON_SMALL_STEMS,
+        () -> BlockusBlocks.WHITE_OAK_SMALL_LOGS
+    )) {
+      ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerAppended(block, TextureKey.END, "_top"));
+    }
 
     // 为方块添加资源。
     for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
@@ -94,6 +123,22 @@ public final class ExtShapeBlockusRRP {
       new CrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, pack).generateCrossShapeData();
     }
 
-    ExtShapeBlockusTags.writeAllTags();
+    // 方块和物品标签
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.STAIRS, ItemTags.STAIRS);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.SLABS, ItemTags.SLABS);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.FENCES, ItemTags.FENCES);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.WALLS, ItemTags.WALLS);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.BUTTONS, ItemTags.BUTTONS);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_SLABS);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.QUARTER_PIECES);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_STAIRS);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_QUARTER_PIECES);
+
+    ExtShapeTags.SHAPE_TO_LOG_TAG.values().forEach(ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS::forceSetBlockTagWithItem);
+    ExtShapeTags.SHAPE_TO_WOODEN_TAG.values().forEach(ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS::forceSetBlockTagWithItem);
+
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockusBlockTags.ALL_PATTERNED_WOOLS, BlockusItemTags.ALL_PATTERNED_WOOLS);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.write(EXTSHAPE_STANDARD_PACK);
   }
 }

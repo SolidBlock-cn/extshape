@@ -1,4 +1,4 @@
-archivesBaseName = project.archives_base_name + "-fabric"
+archivesBaseName = rootProject.archives_base_name_blockus + "-fabric"
 version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
 group = rootProject.maven_group
 repositories {

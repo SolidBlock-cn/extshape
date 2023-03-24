@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "extshape_blockus",
   "version": "${version}",
-  "icon": "assets/extshape/icon-fabric.png",
+  "icon": "assets/extshape_blockus/icon-fabric.png",
   "name": "Extended Block Shapes - Blockus",
   "description": "Adds Extended Block Shapes for Blockus mod!",
   "authors": [
