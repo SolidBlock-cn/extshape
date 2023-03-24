@@ -33,6 +33,9 @@ public final class VanillaItemGroup {
   private static final Map<ItemGroup, Multimap<Item, Item>> APPENDING_RULES = new Object2ObjectLinkedOpenHashMap<>();
   private static final Map<ItemGroup, Multimap<Item, Item>> PREPENDING_RULES = new Object2ObjectLinkedOpenHashMap<>();
 
+  /**
+   * 更新创造模式物品栏时的事件。
+   */
   public static final Event<Runnable> UPDATE_SHAPES_EVENT = EventFactory.createArrayBacked(Runnable.class, runnables -> () -> {
     for (Runnable runnable : runnables) {
       runnable.run();
@@ -52,20 +55,24 @@ public final class VanillaItemGroup {
     return PREPENDING_RULES.computeIfAbsent(group, itemGroup -> LinkedHashMultimap.create());
   }
 
+  @ApiStatus.Internal
   public static void registerForMod() {
     final Multimap<Item, Item> apRedstone = getAppendingRule(ItemGroups.REDSTONE);
     apRedstone.put(Items.STONE_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.OBSIDIAN)).asItem());
     final Multimap<Item, Item> preRedstone = getPrependingRule(ItemGroups.REDSTONE);
     preRedstone.put(Items.OAK_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.WHITE_WOOL)).asItem());
 
+    UPDATE_SHAPES_EVENT.register(() -> {
+      PREPENDING_RULES.clear();
+      APPENDING_RULES.clear();
+    });
     UPDATE_SHAPES_EVENT.register(() -> VanillaItemGroup.recreateVanillaGroupRules(ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla));
   }
 
+  @ApiStatus.Internal
   public static void recreateVanillaGroupRules(Collection<BlockShape> shapes) {
     final Multimap<Item, Item> apBuilding = getAppendingRule(ItemGroups.BUILDING_BLOCKS);
     final Multimap<Item, Item> preBuilding = getPrependingRule(ItemGroups.BUILDING_BLOCKS);
-    preBuilding.clear();
-    apBuilding.clear();
     preBuilding.put(Items.SMOOTH_STONE_SLAB, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem());
     apBuilding.put(Items.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem());
     new EntryVariantAppender(ItemGroups.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA)), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);

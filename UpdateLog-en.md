@@ -6,6 +6,11 @@
 - Adapted to Blockus mod.
 - Fixed the issue that amethyst blocks do not play sound effects when hit by projectile.
 - Added the localized mod name in Mod Menu mod.
+- Adjusted tags related to pressure plates and buttons.
+- Fixed the issue that blocks of coal blocks cannot be fuels in the furnace.
+- Fences, fence gates, buttons and pressure plates can also have special features now, such as reaction when hit by projectiles.
+- Added all shapes for sculk blocks.
+- Modified the sound of fence gate open and close of amethyst, which is the same as break sound.
 
 ### 1.8.1
 

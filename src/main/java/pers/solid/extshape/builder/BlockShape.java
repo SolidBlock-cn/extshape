@@ -1,11 +1,13 @@
 package pers.solid.extshape.builder;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.gson.*;
 import net.minecraft.block.*;
 import net.minecraft.data.family.BlockFamily;
 import net.minecraft.util.StringIdentifiable;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
@@ -15,13 +17,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * 方块形状。以前是枚举，现在不是了。每个形状对象创建时，都会自动加入 {@link #NAME_TO_SHAPE} 和 {@link #SHAPES} 中，相当于一个“注册表”。部分形状有对应的原版的方块变种类型（{@link #vanillaVariant}）。
  */
-public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
-
-  // 方块形状注册表部分。
+public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, Predicate<Block> {
 
   /**
    * 由形状名称到形状对象的映射，由 {@link #byName(String)} 使用。
@@ -38,18 +39,18 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
 
   // 扩展方块形状模组内置的方块形状部分。
 
-  public static final BlockShape STAIRS = new BlockShape(StairsBlock.class, BlockFamily.Variant.STAIRS, "stairs", 1f, true);
-  public static final BlockShape SLAB = new BlockShape(SlabBlock.class, BlockFamily.Variant.SLAB, "slab", 0.5f, true);
-  public static final BlockShape VERTICAL_SLAB = new BlockShape(VerticalSlabBlock.class, null, "vertical_slab", 0.5f, true);
-  public static final BlockShape VERTICAL_STAIRS = new BlockShape(VerticalStairsBlock.class, null, "vertical_stairs", 1f, true);
-  public static final BlockShape QUARTER_PIECE = new BlockShape(QuarterPieceBlock.class, null, "quarter_piece", 0.25f, true);
-  public static final BlockShape VERTICAL_QUARTER_PIECE = new BlockShape(VerticalQuarterPieceBlock.class, null, "vertical_quarter_piece", 0.25f, true);
-  public static final BlockShape FENCE = new BlockShape(FenceBlock.class, BlockFamily.Variant.FENCE, "fence", 1f, false);
-  public static final BlockShape FENCE_GATE = new BlockShape(FenceGateBlock.class, BlockFamily.Variant.FENCE_GATE, "fence_gate", 1f, false);
-  public static final BlockShape WALL = new BlockShape(WallBlock.class, BlockFamily.Variant.WALL, "wall", 1f, false);
-  public static final BlockShape BUTTON = new BlockShape(ButtonBlock.class, BlockFamily.Variant.BUTTON, "button", 1 / 3f, false);
+  public static final BlockShape STAIRS = new BlockShape(Predicates.instanceOf(StairsBlock.class), BlockFamily.Variant.STAIRS, "stairs", 1f, true);
+  public static final BlockShape SLAB = new BlockShape(Predicates.instanceOf(SlabBlock.class), BlockFamily.Variant.SLAB, "slab", 0.5f, true);
+  public static final BlockShape VERTICAL_SLAB = new BlockShape(Predicates.instanceOf(VerticalSlabBlock.class), null, "vertical_slab", 0.5f, true);
+  public static final BlockShape VERTICAL_STAIRS = new BlockShape(Predicates.instanceOf(VerticalStairsBlock.class), null, "vertical_stairs", 1f, true);
+  public static final BlockShape QUARTER_PIECE = new BlockShape(Predicates.instanceOf(QuarterPieceBlock.class), null, "quarter_piece", 0.25f, true);
+  public static final BlockShape VERTICAL_QUARTER_PIECE = new BlockShape(Predicates.instanceOf(VerticalQuarterPieceBlock.class), null, "vertical_quarter_piece", 0.25f, true);
+  public static final BlockShape FENCE = new BlockShape(Predicates.instanceOf(FenceBlock.class), BlockFamily.Variant.FENCE, "fence", 1f, false);
+  public static final BlockShape FENCE_GATE = new BlockShape(Predicates.instanceOf(FenceGateBlock.class), BlockFamily.Variant.FENCE_GATE, "fence_gate", 1f, false);
+  public static final BlockShape WALL = new BlockShape(Predicates.instanceOf(WallBlock.class), BlockFamily.Variant.WALL, "wall", 1f, false);
+  public static final BlockShape BUTTON = new BlockShape(Predicates.instanceOf(ButtonBlock.class), BlockFamily.Variant.BUTTON, "button", 1 / 3f, false);
 
-  public static final BlockShape PRESSURE_PLATE = new BlockShape(PressurePlateBlock.class, BlockFamily.Variant.PRESSURE_PLATE, "pressure_plate", 1 / 3f, false);
+  public static final BlockShape PRESSURE_PLATE = new BlockShape(Predicates.instanceOf(PressurePlateBlock.class), BlockFamily.Variant.PRESSURE_PLATE, "pressure_plate", 1 / 3f, false);
 
   // 非静态部分
 
@@ -58,7 +59,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
    *
    * @see #getShapeOf(Block)
    */
-  public final Class<? extends Block> withClass;
+  public final Predicate<Block> blockPredicate;
   /**
    * 该形状对应的原版的 {@link BlockFamily.Variant}。
    */
@@ -77,8 +78,8 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
   public final boolean isConstruction;
   public final int id;
 
-  public BlockShape(Class<? extends Block> withClass, @Nullable BlockFamily.Variant vanillaVariant, @NotNull String name, float logicalCompleteness, boolean isConstruction) {
-    this.withClass = withClass;
+  public BlockShape(Predicate<Block> blockPredicate, @Nullable BlockFamily.Variant vanillaVariant, @NotNull String name, float logicalCompleteness, boolean isConstruction) {
+    this.blockPredicate = blockPredicate;
     this.vanillaVariant = vanillaVariant;
     this.name = name;
     this.logicalCompleteness = logicalCompleteness;
@@ -94,7 +95,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
       return e.getBlockShape();
     }
     for (BlockShape shape : BlockShape.values()) {
-      if (shape.withClass.isInstance(block)) return shape;
+      if (shape.test(block)) return shape;
     }
     return null;
   }
@@ -107,6 +108,15 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape> {
   @NotNull
   public String asString() {
     return name;
+  }
+
+  /**
+   * 判断该方块是否属于该形状。
+   */
+  @Override
+  @Contract(pure = true)
+  public boolean test(Block block) {
+    return blockPredicate.test(block);
   }
 
   public static BlockShape byName(String name) {

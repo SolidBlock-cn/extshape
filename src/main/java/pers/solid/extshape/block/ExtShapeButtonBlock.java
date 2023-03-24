@@ -11,9 +11,16 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.TextureKey;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
@@ -114,5 +121,34 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.BUTTON;
+  }
+
+  public static class WithExtension extends ExtShapeButtonBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, Settings settings, BlockSetType blockSetType, int i, boolean bl, BlockExtension extension) {
+      super(baseBlock, settings, blockSetType, i, bl);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.onStacksDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

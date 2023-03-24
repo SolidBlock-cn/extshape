@@ -81,5 +81,7 @@
   "message.extshape.recipe_conflict.finish.single": "Finished checking. In total %s recipe conflict has been found.",
   "message.extshape.recipe_conflict.finish.plural": "Finished checking. In total %s recipe conflicts have been found.",
 
-  "modmenu.nameTranslation.extshape": "Extended Block Shapes"
+  "modmenu.nameTranslation.extshape": "Extended Block Shapes",
+
+  "options.extshape.addToVanillaGroups.blockus": "Please note: to find the extended shapes of blocks in Blockus mod in the creative inventory, you have to enable \"Add To Vanilla Groups\". The blocks only display in item groups of Blockus. There are no specific groups for extended shapes of blocks in Blockus mod."
 }

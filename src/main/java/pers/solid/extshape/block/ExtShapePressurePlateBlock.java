@@ -9,18 +9,22 @@ import net.devtech.arrp.json.recipe.JShapedRecipe;
 import net.devtech.arrp.json.recipe.JShapelessRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.TextureKey;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
@@ -132,5 +136,35 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.PRESSURE_PLATE;
+  }
+
+
+  public static class WithExtension extends ExtShapePressurePlateBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, ActivationRule type, Settings settings, @NotNull BlockSetType blockSetType, BlockExtension extension) {
+      super(baseBlock, type, settings, blockSetType);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.onStacksDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

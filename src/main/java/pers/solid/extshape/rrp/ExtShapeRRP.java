@@ -131,6 +131,6 @@ public final class ExtShapeRRP {
     }
 
     // 添加方块标签。
-    ExtShapeTags.writeAllTags();
+    ExtShapeTags.TAG_PREPARATIONS.write(STANDARD_PACK);
   }
 }

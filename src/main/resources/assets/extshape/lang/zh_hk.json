@@ -81,5 +81,7 @@
   "message.extshape.recipe_conflict.finish.single": "檢測完成，共檢測到%s個合成表撞車",
   "message.extshape.recipe_conflict.finish.plural": "檢測完成，共檢測到%s個合成表撞車",
 
-  "modmenu.nameTranslation.extshape": "擴展方塊形狀"
+  "modmenu.nameTranslation.extshape": "擴展方塊形狀",
+
+  "options.extshape.addToVanillaGroups.blockus": "請注意：如要在創造模式中找到 Blockus 模組中的擴展形狀的方塊，你需要啟用「添加至原版物品組」。這些方塊只會顯示在 Blockus 的物品組中。Blockus 方塊的擴展形狀的方塊沒有專用物品組。"
 }

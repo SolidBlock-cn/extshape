@@ -49,6 +49,7 @@ import pers.solid.extshape.builder.BlockShape;
 @ApiStatus.AvailableSince("1.5.1")
 public final class UnusualLootTables {
   @Unmodifiable
+  @ApiStatus.Internal
   static final ImmutableMap<Block, @NotNull LootTableFunction> INSTANCE;
   public static final LootCondition.Builder WITH_SILK_TOUCH = MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))));
   public static final StatePredicate.Builder EXACT_MATCH_DOUBLE_SLAB = StatePredicate.Builder.create().exactMatch(Properties.SLAB_TYPE, SlabType.DOUBLE);

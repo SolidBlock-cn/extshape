@@ -1,16 +1,13 @@
 package pers.solid.extshape.builder;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Unmodifiable;
-import pers.solid.extshape.tag.BlockTagPreparation;
+import pers.solid.extshape.tag.TagPreparations;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -35,7 +32,10 @@ public class BlocksBuilderFactory {
    */
   public @Nullable Collection<Block> baseBlockCollection;
 
-  public @Unmodifiable Map<BlockShape, BlockTagPreparation> defaultTags = ImmutableMap.of();
+  /**
+   * 将构建产生的所有方块和物品标签到记录到这个对象中。注意，你需要自行利用此对象进行数据生成。
+   */
+  public TagPreparations tagPreparations;
 
   public BlocksBuilderFactory() {
   }
@@ -48,7 +48,7 @@ public class BlocksBuilderFactory {
     final BlocksBuilder blocksBuilder = createInternal(baseBlock, shapesToBuild);
     blocksBuilder.defaultNamespace = defaultNamespace;
     blocksBuilder.instanceCollection = instanceCollection;
-    blocksBuilder.defaultTags = defaultTags;
+    blocksBuilder.tagPreparations = tagPreparations;
     if (baseBlockCollection != null) {
       baseBlockCollection.add(baseBlock);
     }
@@ -88,7 +88,7 @@ public class BlocksBuilderFactory {
   public <T extends AbstractBlockBuilder<?>> T modify(T blockBuilder) {
     blockBuilder.defaultNamespace = defaultNamespace;
     blockBuilder.instanceCollection = instanceCollection;
-    blockBuilder.defaultTagToAdd = defaultTags.get(blockBuilder.shape);
+    blockBuilder.tagPreparations = tagPreparations;
     return blockBuilder;
   }
 }

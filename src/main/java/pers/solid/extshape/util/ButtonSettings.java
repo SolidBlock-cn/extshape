@@ -24,5 +24,4 @@ public record ButtonSettings(BlockSetType blockSetType, int time, boolean wooden
   public static final ButtonSettings HARD = hard(BlockSetType.STONE);
   public static final ButtonSettings SOFT = soft(BlockSetType.STONE);
   public static final ButtonSettings BAMBOO = wood(BlockSetType.BAMBOO);
-  public static final ButtonSettings CHERRY = wood(BlockSetType.CHERRY);
 }

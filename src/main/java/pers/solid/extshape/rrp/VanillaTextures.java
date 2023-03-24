@@ -6,9 +6,11 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.ApiStatus;
 import pers.solid.extshape.block.ExtShapeBlocks;
 
 @Environment(EnvType.CLIENT)
+@ApiStatus.Internal
 public class VanillaTextures {
   @Environment(EnvType.CLIENT)
   public static void registerTextures() {

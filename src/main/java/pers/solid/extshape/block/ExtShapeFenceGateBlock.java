@@ -3,10 +3,18 @@ package pers.solid.extshape.block;
 import net.devtech.arrp.generator.BRRPFenceGateBlock;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.WoodType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,5 +63,35 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.FENCE_GATE;
+  }
+
+
+  public static class WithExtension extends ExtShapeFenceGateBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, FenceSettings fenceSettings, Settings settings, BlockExtension extension) {
+      super(baseBlock, fenceSettings, settings);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.onStacksDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }
