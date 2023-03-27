@@ -45,7 +45,7 @@ allprojects {
         modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
         // Fabric API
-        modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
+        modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
         // ModMenu 模组
         modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
