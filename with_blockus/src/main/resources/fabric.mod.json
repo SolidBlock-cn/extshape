@@ -31,6 +31,6 @@
     ],
     "better_runtime_resource_pack": ">=0.8.2",
     "extshape": ">=${version}",
-    "blockus": ">=2.6.4"
+    "blockus": ">=2.6.5"
   }
 }

@@ -1,5 +1,6 @@
 package pers.solid.extshape.blockus;
 
+import com.brand.blockus.Blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.BlockusItems;
 import com.brand.blockus.content.types.BSSTypes;
@@ -18,6 +19,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.Material;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -28,8 +30,12 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.screen.ScreenTexts;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
@@ -41,6 +47,7 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.ButtonSettings;
 import pers.solid.extshape.util.FenceSettings;
 
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -399,6 +406,17 @@ public final class ExtShapeBlockusBlocks {
         @Override
         public boolean hasGlint(ItemStack stack) {
           return true;
+        }
+
+        @Override
+        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+          super.appendTooltip(stack, world, tooltip, context);
+          this.getBlock().appendTooltip(stack, world, tooltip, context);
+          tooltip.add(ScreenTexts.EMPTY);
+          ExtShapeBlockus.tryConsume(() -> Blockus.STEPPED_ON_TEXT, tooltip::add);
+          tooltip.add(ScreenTexts.space().append(StatusEffects.REGENERATION.getName()).append(" IV").formatted(Formatting.BLUE));
+          tooltip.add(ScreenTexts.space().append(StatusEffects.ABSORPTION.getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
+          tooltip.add(ScreenTexts.space().append(StatusEffects.STRENGTH.getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
         }
       });
     }).build());
