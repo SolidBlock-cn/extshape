@@ -4,7 +4,6 @@ import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.json.models.JModel;
 import net.devtech.arrp.json.models.JTextures;
-import net.devtech.arrp.json.recipe.JIngredient;
 import net.devtech.arrp.json.recipe.JRecipe;
 import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
 import net.fabricmc.api.EnvType;
@@ -13,14 +12,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.registry.Registries;
+import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
-import pers.solid.extshape.rrp.VanillaStonecutting;
+import pers.solid.extshape.rrp.RecipeGroupRegistry;
 
 /**
  * 该模组中的绝大多数方块共用的接口。
@@ -33,7 +32,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
    * @see JRecipe#group(String)
    */
   default String getRecipeGroup() {
-    return "";
+    return RecipeGroupRegistry.getRecipeGroup((ItemConvertible) this);
   }
 
   /**
@@ -122,23 +121,6 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
       final Identifier stonecuttingRecipeId = getStonecuttingRecipeId();
       pack.addRecipe(stonecuttingRecipeId, stonecuttingRecipe);
       pack.addRecipeAdvancement(stonecuttingRecipeId, getAdvancementIdForRecipe(stonecuttingRecipeId, stonecuttingRecipe), stonecuttingRecipe);
-
-      // 处理二次切石一步到位的情况。
-      if (stonecuttingRecipe instanceof JStonecuttingRecipe jStonecuttingRecipe) {
-        // block 是切石前的基础方块。
-        for (Block block : VanillaStonecutting.INSTANCE.get(getBaseBlock())) {
-          final String path = Registries.BLOCK.getId(block).getPath();
-          final Identifier secondaryId = getRecipeId().brrp_append("_from_" + path + "_stonecutting");
-          final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
-              JIngredient.ofItem(block),
-              jStonecuttingRecipe.result,
-              jStonecuttingRecipe.count
-          ).recipeCategory(jStonecuttingRecipe.recipeCategory);
-          secondaryRecipe.addInventoryChangedCriterion("has_" + path, block);
-          pack.addRecipe(secondaryId, secondaryRecipe);
-          pack.addRecipeAdvancement(secondaryId, getAdvancementIdForRecipe(secondaryId, secondaryRecipe), secondaryRecipe);
-        }
-      }
     }
   }
 
@@ -163,5 +145,21 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
   @Contract(pure = true)
   default BlockShape getBlockShape() {
     return null;
+  }
+
+  @Override
+  default @Nullable RecipeCategory getRecipeCategory() {
+    final RecipeCategory registeredCategory = BlockResourceGenerator.super.getRecipeCategory();
+    if (registeredCategory != null) return registeredCategory;
+    final BlockShape blockShape = getBlockShape();
+    if (blockShape.isConstruction) {
+      return RecipeCategory.BUILDING_BLOCKS;
+    } else if (blockShape == BlockShape.FENCE || blockShape == BlockShape.WALL) {
+      return RecipeCategory.DECORATIONS;
+    } else if (blockShape == BlockShape.FENCE_GATE || blockShape == BlockShape.PRESSURE_PLATE || blockShape == BlockShape.BUTTON) {
+      return RecipeCategory.REDSTONE;
+    } else {
+      return null;
+    }
   }
 }

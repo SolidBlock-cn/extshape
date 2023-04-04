@@ -21,6 +21,7 @@
     ]
   },
   "mixins": [
+    "extshape_blockus.mixin.json"
   ],
   "depends": {
     "fabricloader": "*",

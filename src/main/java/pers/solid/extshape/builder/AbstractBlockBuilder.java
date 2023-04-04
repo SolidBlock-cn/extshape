@@ -2,14 +2,13 @@ package pers.solid.extshape.builder;
 
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import net.devtech.arrp.generator.ItemResourceGenerator;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.TagKey;
@@ -322,7 +321,6 @@ public abstract class AbstractBlockBuilder<T extends Block> {
       if (registerItem) {
         Registry.register(Registries.ITEM, identifier, this.itemInstance);
       }
-      this.configRecipeCategory(itemInstance);
     }
 
     // 将方块添加到指定的集合中。
@@ -337,19 +335,6 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     this.extraTags.forEach(tag -> tagPreparations.put(tag, instance));
     if (this.shouldAddToBlockBiMap) this.addToBlockBiMap();
     return this.instance;
-  }
-
-  /**
-   * 利用 BRRP 在生成运行时数据之前配置其配方类型，以用于更好地分类。
-   */
-  protected void configRecipeCategory(ItemConvertible itemConvertible) {
-    if (itemConvertible instanceof FenceBlock || itemConvertible instanceof WallBlock) {
-      ItemResourceGenerator.ITEM_TO_RECIPE_CATEGORY.put(itemConvertible.asItem(), RecipeCategory.DECORATIONS);
-    } else if (itemConvertible instanceof FenceGateBlock || itemConvertible instanceof PressurePlateBlock || itemConvertible instanceof ButtonBlock || itemConvertible instanceof TrapdoorBlock || itemConvertible instanceof DoorBlock) {
-      ItemResourceGenerator.ITEM_TO_RECIPE_CATEGORY.put(itemConvertible.asItem(), RecipeCategory.REDSTONE);
-    } else {
-      ItemResourceGenerator.ITEM_TO_RECIPE_CATEGORY.put(itemConvertible.asItem(), RecipeCategory.BUILDING_BLOCKS);
-    }
   }
 
   @Contract("_ -> this")

@@ -15,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
 
@@ -37,16 +36,6 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   public @Nullable JRecipe getCraftingRecipe() {
     final JRecipe craftingRecipe = super.getCraftingRecipe();
     return craftingRecipe == null || NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? null : craftingRecipe.group(getRecipeGroup());
-  }
-
-  @Override
-  public String getRecipeGroup() {
-    Block baseBlock = this.baseBlock;
-    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_stairs";
-    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_stairs";
-    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_stairs";
-    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_stairs";
-    return "";
   }
 
   @Override

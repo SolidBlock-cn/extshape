@@ -6,6 +6,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.gson.*;
 import net.minecraft.block.*;
 import net.minecraft.data.family.BlockFamily;
+import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -126,6 +127,16 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
   @Override
   public int compareTo(@NotNull BlockShape o) {
     return id - o.id;
+  }
+
+  public RecipeCategory getRecipeCategory() {
+    if (isConstruction) {
+      return RecipeCategory.BUILDING_BLOCKS;
+    } else if (this == PRESSURE_PLATE || this == FENCE_GATE || this == BUTTON) {
+      return RecipeCategory.REDSTONE;
+    } else {
+      return RecipeCategory.DECORATIONS;
+    }
   }
 
   public enum Serializer implements JsonSerializer<BlockShape>, JsonDeserializer<BlockShape> {

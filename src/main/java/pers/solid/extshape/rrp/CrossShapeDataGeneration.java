@@ -1,15 +1,16 @@
 package pers.solid.extshape.rrp;
 
+import com.google.common.collect.ImmutableCollection;
 import net.devtech.arrp.api.RuntimeResourcePack;
+import net.devtech.arrp.generator.BlockResourceGenerator;
 import net.devtech.arrp.generator.ResourceGeneratorHelper;
-import net.devtech.arrp.json.recipe.JShapedRecipe;
-import net.devtech.arrp.json.recipe.JShapelessRecipe;
-import net.devtech.arrp.json.recipe.JStonecuttingRecipe;
+import net.devtech.arrp.json.recipe.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
@@ -66,12 +67,18 @@ public class CrossShapeDataGeneration {
 
   protected void writeBlockRotationRecipe(final @NotNull Block from, final @NotNull Block to, @Nullable String suffix, String criterionName) {
     final Identifier recipeId = recipeIdOf(to, suffix);
-    final JShapelessRecipe recipe = new JShapelessRecipe(from, to);
-    recipe
+    final JShapelessRecipe recipe = new JShapelessRecipe(to, from);
+    final String recipeGroup = getRecipeGroup(to);
+    recipe.group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_rotation")
         .addInventoryChangedCriterion(criterionName, from)
         .recipeCategory(getRecipeCategory());
     pack.addRecipe(recipeId, recipe);
     pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(to, recipeId, recipe.recipeCategory), recipe);
+  }
+
+  @NotNull
+  protected static String getRecipeGroup(@NotNull Block result) {
+    return RecipeGroupRegistry.getRecipeGroup(result);
   }
 
   public void cutStairsToQuarterPiece(final @NotNull Block stairs, final @NotNull Block quarterPiece, @Nullable String suffix) {
@@ -80,10 +87,12 @@ public class CrossShapeDataGeneration {
 
   public void craftSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(quarterPiece, suffix == null ? "_from_slab" : suffix);
+    final String recipeGroup = getRecipeGroup(quarterPiece);
     final JShapedRecipe recipe = new JShapedRecipe(quarterPiece)
         .pattern("###")
         .addKey("#", slab)
         .resultCount(6)
+        .group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_slab")
         .recipeCategory(getRecipeCategory());
     recipe.addInventoryChangedCriterion("has_slab", slab);
     pack.addRecipe(recipeId, recipe);
@@ -96,10 +105,12 @@ public class CrossShapeDataGeneration {
 
   public void craftVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(quarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
+    final String recipeGroup = getRecipeGroup(quarterPiece);
     final JShapedRecipe recipe = new JShapedRecipe(quarterPiece)
         .pattern("###")
         .addKey("#", verticalSlab)
         .recipeCategory(getRecipeCategory())
+        .group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_vertical_slab")
         .resultCount(6);
     recipe.addInventoryChangedCriterion("has_vertical_slab", verticalSlab);
     pack.addRecipe(recipeId, recipe);
@@ -112,11 +123,13 @@ public class CrossShapeDataGeneration {
 
   public void craftVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(verticalQuarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
+    final String recipeGroup = getRecipeGroup(verticalQuarterPiece);
     final JShapedRecipe recipe = new JShapedRecipe(verticalQuarterPiece)
         .pattern("#", "#", "#")
         .addKey("#", verticalSlab)
         .recipeCategory(getRecipeCategory())
-        .resultCount(2);
+        .group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_vertical_slab")
+        .resultCount(6);
     recipe.addInventoryChangedCriterion("has_vertical_slab", verticalSlab);
     pack.addRecipe(recipeId, recipe);
     pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(verticalQuarterPiece, recipeId, recipe), recipe);
@@ -127,7 +140,7 @@ public class CrossShapeDataGeneration {
   }
 
   public void cutVerticalStairsToVerticalQuarterPiece(final @NotNull Block verticalStairs, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
-    generateSimpleStonecuttingRecipe(verticalStairs, verticalQuarterPiece, 3, suffix == null ? "_from_vertical_stairs_stonecutting" : null, "has_vertical_stairs");
+    generateSimpleStonecuttingRecipe(verticalStairs, verticalQuarterPiece, 3, suffix == null ? "_from_vertical_stairs_stonecutting" : suffix, "has_vertical_stairs");
   }
 
   protected void generateSimpleStonecuttingRecipe(
@@ -139,7 +152,7 @@ public class CrossShapeDataGeneration {
   ) {
     if (ingredient == null || result == null) return;
     final Identifier recipeId = recipeIdOf(result, suffix);
-    final JStonecuttingRecipe recipe = new JStonecuttingRecipe(ingredient, result, count).recipeCategory(RecipeCategory.BUILDING_BLOCKS);
+    final JStonecuttingRecipe recipe = new JStonecuttingRecipe(ingredient, result, count).recipeCategory(RecipeCategory.BUILDING_BLOCKS).group(RecipeGroupRegistry.getRecipeGroup(result));
     recipe.addInventoryChangedCriterion(criterionName, ingredient);
     pack.addRecipe(recipeId, recipe);
     pack.addRecipeAdvancement(recipeId, getAdvancementIdForRecipe(result, recipeId, recipe.recipeCategory), recipe);
@@ -150,7 +163,7 @@ public class CrossShapeDataGeneration {
   }
 
   public void generateCrossShapeData() {
-    final Collection<Block> uncutBaseBlocks = VanillaStonecutting.INSTANCE.get(baseBlock);
+    final Collection<Block> uncutBaseBlocks = getUncutBaseBlocks();
 
     // 台阶与垂直台阶之间的配方。
     final @Nullable Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, baseBlock);
@@ -179,6 +192,28 @@ public class CrossShapeDataGeneration {
 
     // 该方块是否允许被切石
     final boolean shouldStoneCut = shouldStoneCut(baseBlock);
+
+    // 跨方块切石
+    for (final BlockShape blockShape : BlockShape.values()) {
+      // block 是切石前的基础方块。
+      for (final Block uncutBaseBlock : uncutBaseBlocks) {
+        final String path = Registries.BLOCK.getId(uncutBaseBlock).getPath();
+        final Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
+        if (!(output instanceof BlockResourceGenerator) || !((BlockResourceGenerator) output).shouldWriteStonecuttingRecipe()) continue;
+        JRecipe recipe = ((BlockResourceGenerator) output).getStonecuttingRecipe();
+        if (recipe instanceof JStonecuttingRecipe jStonecuttingRecipe) {
+          final Identifier secondaryId = ResourceGeneratorHelper.getRecipeId(output).brrp_append("_from_" + path + "_stonecutting");
+          final JStonecuttingRecipe secondaryRecipe = new JStonecuttingRecipe(
+              JIngredient.ofItem(uncutBaseBlock),
+              jStonecuttingRecipe.result,
+              jStonecuttingRecipe.count
+          ).recipeCategory(jStonecuttingRecipe.recipeCategory);
+          secondaryRecipe.addInventoryChangedCriterion("has_" + path, uncutBaseBlock);
+          pack.addRecipe(secondaryId, secondaryRecipe);
+          pack.addRecipeAdvancement(secondaryId, ResourceGeneratorHelper.getAdvancementIdForRecipe(output, secondaryId, secondaryRecipe), secondaryRecipe);
+        }
+      }
+    }
 
     if (quarterPiece != null) {
       // 1x楼梯 -> 3x横条
@@ -244,5 +279,10 @@ public class CrossShapeDataGeneration {
         }
       }
     }
+  }
+
+  @NotNull
+  protected ImmutableCollection<Block> getUncutBaseBlocks() {
+    return VanillaStonecutting.INSTANCE.get(baseBlock);
   }
 }

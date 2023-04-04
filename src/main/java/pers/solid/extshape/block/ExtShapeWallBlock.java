@@ -41,16 +41,6 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
   }
 
   @Override
-  public String getRecipeGroup() {
-    if (BlockCollections.WOOLS.contains(baseBlock)) return "wool_wall";
-    if (BlockCollections.CONCRETES.contains(baseBlock)) return "concrete_wall";
-    if (BlockCollections.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_wall";
-    if (BlockCollections.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_wall";
-    if (BlockCollections.PLANKS.contains(baseBlock)) return "wooden_wall";
-    return "";
-  }
-
-  @Override
   public BlockShape getBlockShape() {
     return BlockShape.WALL;
   }

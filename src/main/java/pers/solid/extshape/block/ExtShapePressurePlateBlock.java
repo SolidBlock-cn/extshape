@@ -124,16 +124,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   @Override
-  public String getRecipeGroup() {
-    if (BlockCollections.WOOLS.contains(baseBlock)) return "wool_pressure_plate";
-    if (BlockCollections.CONCRETES.contains(baseBlock)) return "concrete_pressure_plate";
-    if (BlockCollections.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_pressure_plate";
-    if (BlockCollections.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_pressure_plate";
-    if (BlockCollections.PLANKS.contains(baseBlock)) return "wooden_pressure_plate";
-    return "";
-  }
-
-  @Override
   public BlockShape getBlockShape() {
     return BlockShape.PRESSURE_PLATE;
   }

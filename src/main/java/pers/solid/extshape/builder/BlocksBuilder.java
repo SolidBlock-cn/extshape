@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.*;
 import pers.solid.extshape.mixin.AbstractBlockStateAccessor;
+import pers.solid.extshape.rrp.RecipeGroupRegistry;
 import pers.solid.extshape.tag.TagPreparations;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.ButtonSettings;
@@ -356,6 +357,13 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     } else if (biConsumer != null) {
       postBuildConsumer = postBuildConsumer.andThen(biConsumer);
     }
+    return this;
+  }
+
+  @CanIgnoreReturnValue
+  @Contract(value = "_-> this", mutates = "this")
+  public BlocksBuilder setRecipeGroup(Function<BlockShape, String> function) {
+    addPostBuildConsumer((blockShape, blockBuilder) -> RecipeGroupRegistry.setRecipeGroup(blockBuilder.instance, function.apply(blockShape)));
     return this;
   }
 

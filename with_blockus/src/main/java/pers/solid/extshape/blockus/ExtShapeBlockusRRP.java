@@ -2,30 +2,48 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.Blockus;
 import com.brand.blockus.content.BlockusBlocks;
+import com.brand.blockus.content.types.BSSTypes;
+import com.brand.blockus.content.types.BSSWTypes;
+import com.brand.blockus.data.provider.BlockusRecipeProvider;
 import com.brand.blockus.tags.BlockusBlockTags;
 import com.brand.blockus.tags.BlockusItemTags;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import net.devtech.arrp.api.RRPEventHelper;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.generator.BlockResourceGenerator;
+import net.devtech.arrp.generator.ResourceGeneratorHelper;
 import net.devtech.arrp.generator.TextureRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.client.TextureKey;
+import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pers.solid.extshape.blockus.mixin.CookingRecipeJsonProviderAccessor;
+import pers.solid.extshape.blockus.mixin.ShapedRecipeJsonProviderAccessor;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.rrp.CrossShapeDataGeneration;
 import pers.solid.extshape.rrp.ExtShapeRRP;
 import pers.solid.extshape.rrp.UnusualLootTables;
 import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockBiMaps;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -41,6 +59,8 @@ public final class ExtShapeBlockusRRP {
   }
 
   public static void registerRRP() {
+    EXTSHAPE_CLIENT_PACK.setForbidsDuplicateResource(true);
+    EXTSHAPE_STANDARD_PACK.setForbidsDuplicateResource(true);
     generateServerData(EXTSHAPE_STANDARD_PACK);
     RRPEventHelper.BEFORE_VANILLA.registerSidedPack(ResourceType.SERVER_DATA, EXTSHAPE_STANDARD_PACK);
     if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
@@ -59,6 +79,17 @@ public final class ExtShapeBlockusRRP {
     LOGGER.info("Generating client resources for Extended Block Shapes mod!");
 
     // 注册纹理变量。
+    registerTextures();
+
+    // 为方块添加资源。
+    for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
+      if (!(block instanceof BlockResourceGenerator generator)) continue;
+      generator.writeAssets(pack);
+    }
+  }
+
+  @Environment(EnvType.CLIENT)
+  private static void registerTextures() {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_BASALT.block, block -> TextureRegistry.register(block, new Identifier("block/basalt_top")));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_SANDSTONE.block, block -> TextureRegistry.register(block, new Identifier("block/sandstone_bottom")));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_RED_SANDSTONE.block, block -> TextureRegistry.register(block, new Identifier("block/red_sandstone_bottom")));
@@ -90,12 +121,6 @@ public final class ExtShapeBlockusRRP {
     )) {
       ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerAppended(block, TextureKey.END, "_top"));
     }
-
-    // 为方块添加资源。
-    for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
-      if (!(block instanceof BlockResourceGenerator generator)) continue;
-      generator.writeAssets(pack);
-    }
   }
 
   /**
@@ -106,24 +131,108 @@ public final class ExtShapeBlockusRRP {
   public static void generateServerData(RuntimeResourcePack pack) {
     LOGGER.info("Generating server data for Extended Block Shapes - Blockus mod!");
 
-    // 为方块添加数据。
-    for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
-      if (!(block instanceof BlockResourceGenerator generator)) continue;
-      generator.writeRecipes(pack);
-      final Block baseBlock = generator.getBaseBlock();
-      final UnusualLootTables.LootTableFunction lootTableFunction = ExtShapeUnusualLootTables.INSTANCE.get(baseBlock);
-      if (lootTableFunction != null) {
-        pack.addLootTable(generator.getLootTableId(), lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block));
-      } else {
-        generator.writeLootTable(pack);
+    generateBlockusBlockData(pack);
+    generateBlockusCrossShapeData(pack);
+    generateTags(pack);
+    generatePlankCookingRecipe(pack);
+    generateHerringBonePlanksCookingRecipe(pack);
+    generateStainedStoneBricksRecipe(pack);
+    generateShingleDyeingRecipes(pack);
+    generatePaperCookingRecipes(pack);
+  }
+
+  private static void generatePaperCookingRecipes(RuntimeResourcePack pack) {
+    for (BlockShape blockShape : BlockShape.values()) {
+      final Block burntPaperBlock = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.BURNT_PAPER_BLOCK);
+      final Block paperBlock = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.PAPER_BLOCK);
+      if (burntPaperBlock != null && paperBlock != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(burntPaperBlock)) {
+        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(paperBlock), blockShape.getRecipeCategory(), burntPaperBlock, 0.1F * blockShape.logicalCompleteness, (int) (200 * blockShape.logicalCompleteness)).criterion("has_paper_block", RecipeProvider.conditionsFromItem(paperBlock)).offerTo(recipeJsonProvider -> {
+          pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
+          pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((CookingRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
+        }, ResourceGeneratorHelper.getRecipeId(burntPaperBlock).brrp_append("_from_smelting"));
       }
     }
+  }
 
-    for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
-      new CrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, pack).generateCrossShapeData();
+  private static void generateShingleDyeingRecipes(RuntimeResourcePack pack) {
+    for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHRINGLES) {
+      ExtShapeBlockus.tryConsume(supplier, bssTypes -> {
+        Item dyeItem = Registries.ITEM.get(new Identifier("minecraft", StringUtils.substringBefore(Registries.BLOCK.getId(bssTypes.block).getPath(), "_shingle") + "_dye"));
+        for (BlockShape blockShape : BlockShape.values()) {
+          final Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block);
+          final Block dyed = BlockBiMaps.getBlockOf(blockShape, bssTypes.block);
+          if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
+          final CraftingRecipeJsonBuilder recipe = BlockusRecipeProvider
+              .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
+              .group("shingles_" + blockShape.asString() + "_from_dyeing")
+              .criterion(RecipeProvider.hasItem(BlockusBlocks.SHINGLES.block), RecipeProvider.conditionsFromItem(BlockusBlocks.SHINGLES.block));
+          recipe.offerTo(recipeJsonProvider -> {
+            pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
+            pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((ShapedRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
+          }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
+        }
+      });
     }
+  }
 
-    // 方块和物品标签
+  private static void generateStainedStoneBricksRecipe(RuntimeResourcePack pack) {
+    for (Supplier<BSSWTypes> supplier : BlockusBlockCollections.STAINED_STONE_BRICKS) {
+      ExtShapeBlockus.tryConsume(supplier, bsswTypes -> {
+        Item dyeItem = Registries.ITEM.get(new Identifier("minecraft", StringUtils.substringBefore(Registries.BLOCK.getId(bsswTypes.block).getPath(), "_stone_brick") + "_dye"));
+        for (BlockShape blockShape : BlockShape.values()) {
+          final Block unDyed = BlockBiMaps.getBlockOf(blockShape, Blocks.STONE_BRICKS);
+          final Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswTypes.block);
+          if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
+          final CraftingRecipeJsonBuilder recipe = BlockusRecipeProvider
+              .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
+              .group("stained_stone_brick_" + blockShape.asString() + "_from_dyeing")
+              .criterion(RecipeProvider.hasItem(Blocks.STONE_BRICKS), RecipeProvider.conditionsFromItem(Blocks.STONE_BRICKS));
+          recipe.offerTo(recipeJsonProvider -> {
+            pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
+            pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((ShapedRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
+          }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
+        }
+      });
+    }
+  }
+
+  private static void generateHerringBonePlanksCookingRecipe(RuntimeResourcePack pack) {
+    final List<Block> herringBonePlanksThatBurn = ImmutableList.of(BlockusBlocks.HERRINGBONE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BIRCH_PLANKS, BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS, BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS, BlockusBlocks.HERRINGBONE_ACACIA_PLANKS, BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS, BlockusBlocks.HERRINGBONE_MANGROVE_PLANKS, BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS);
+    for (BlockShape blockShape : BlockShape.values()) {
+      final Block charredOutput = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
+      if (charredOutput != null) {
+        final ItemConvertible[] ingredients = herringBonePlanksThatBurn.stream().map(block -> BlockBiMaps.getBlockOf(blockShape, block)).filter(Predicates.notNull()).toArray(ItemConvertible[]::new);
+        final CookingRecipeJsonBuilder cookingRecipe = CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ingredients), blockShape.getRecipeCategory(), charredOutput, 0.1F * blockShape.logicalCompleteness, (int) (200 * blockShape.logicalCompleteness)).criterion("has_planks", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create().items(ingredients).build()));
+        cookingRecipe.offerTo(recipeJsonProvider -> {
+          pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
+          pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((CookingRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
+        }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(charredOutput) + "_from_smelting"));
+      }
+    }
+  }
+
+  private static void generatePlankCookingRecipe(RuntimeResourcePack pack) {
+    final List<Block> planksThatBurn = ImmutableList.of(Blocks.OAK_PLANKS, Blocks.SPRUCE_PLANKS, Blocks.BIRCH_PLANKS, Blocks.JUNGLE_PLANKS, Blocks.ACACIA_PLANKS, Blocks.DARK_OAK_PLANKS, BlockusBlocks.BAMBOO.planks, BlockusBlocks.WHITE_OAK.planks, Blocks.MANGROVE_PLANKS, Blocks.CHERRY_PLANKS, BlockusBlocks.LEGACY_PLANKS);
+    for (BlockShape blockShape : BlockShape.values()) {
+      final Block charredOutput = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.CHARRED.planks);
+      if (charredOutput != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(charredOutput)) {
+        final ItemConvertible[] ingredients = planksThatBurn.stream().map(block -> BlockBiMaps.getBlockOf(blockShape, block)).filter(Predicates.notNull()).toArray(ItemConvertible[]::new);
+        final CookingRecipeJsonBuilder cookingRecipe = CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ingredients), blockShape.getRecipeCategory(), charredOutput, 0.1F * blockShape.logicalCompleteness, ((int) (200 * blockShape.logicalCompleteness))).criterion("has_planks", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create().items(ingredients).build()));
+        cookingRecipe.offerTo(recipeJsonProvider -> {
+          pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
+          pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((CookingRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
+        }, ResourceGeneratorHelper.getRecipeId(charredOutput).brrp_append("_from_smelting"));
+      }
+    }
+  }
+
+  private static void generateBlockusCrossShapeData(RuntimeResourcePack pack) {
+    for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
+      new BlockusCrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, pack).generateCrossShapeData();
+    }
+  }
+
+  private static void generateTags(RuntimeResourcePack pack) {
     ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.STAIRS, ItemTags.STAIRS);
     ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.SLABS, ItemTags.SLABS);
     ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.FENCES, ItemTags.FENCES);
@@ -139,6 +248,20 @@ public final class ExtShapeBlockusRRP {
     ExtShapeTags.SHAPE_TO_WOODEN_TAG.values().forEach(ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS::forceSetBlockTagWithItem);
 
     ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockusBlockTags.ALL_PATTERNED_WOOLS, BlockusItemTags.ALL_PATTERNED_WOOLS);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.write(EXTSHAPE_STANDARD_PACK);
+    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.write(pack);
+  }
+
+  private static void generateBlockusBlockData(RuntimeResourcePack pack) {
+    for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
+      if (!(block instanceof BlockResourceGenerator generator)) continue;
+      generator.writeRecipes(pack);
+      final Block baseBlock = generator.getBaseBlock();
+      final UnusualLootTables.LootTableFunction lootTableFunction = ExtShapeUnusualLootTables.INSTANCE.get(baseBlock);
+      if (lootTableFunction != null) {
+        pack.addLootTable(generator.getLootTableId(), lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block));
+      } else {
+        generator.writeLootTable(pack);
+      }
+    }
   }
 }

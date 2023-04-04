@@ -4,9 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtIo;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +28,6 @@ public class ExtShapeConfig implements Cloneable {
    */
   public static final @Unmodifiable ExtShapeConfig DEFAULT_CONFIG = new ExtShapeConfig();
   public static final File CONFIG_FILE = FabricLoader.getInstance().getConfigDir().resolve("extshape.json").toFile();
-  public static final File LEGACY_CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "extshape.nbt");
   static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeConfig.class);
   private static final Gson GSON = new GsonBuilder()
       .setPrettyPrinting()
@@ -51,24 +47,8 @@ public class ExtShapeConfig implements Cloneable {
     try {
       CURRENT_CONFIG = readFile(CONFIG_FILE);
     } catch (IOException e) {
-      try {
-        final ExtShapeConfig newConfig = new ExtShapeConfig();
-        try {
-          final NbtCompound nbtCompound = newConfig.readLegacyFile(LEGACY_CONFIG_FILE);
-          if (nbtCompound != null) {
-            LOGGER.info("Reading the legacy NBT-format file of Extended Block Shapes mod.");
-          }
-        } catch (IOException ignore) {
-          // 读取旧版 NBT 格式的配置文件如果出错，不抛出。
-        }
-        CURRENT_CONFIG = newConfig;
-        if (LEGACY_CONFIG_FILE.delete()) {
-          LOGGER.info("Deleted the legacy NBT-format file of Extended Block Shapes mod.");
-        }
-      } catch (Throwable throwable) {
-        LOGGER.warn("Failed to read config file of Extended Block Shapes mod:", e);
-        CURRENT_CONFIG = new ExtShapeConfig();
-      }
+      LOGGER.warn("Failed to read config file of Extended Block Shapes mod:", e);
+      CURRENT_CONFIG = new ExtShapeConfig();
       CURRENT_CONFIG.tryWriteFile(CONFIG_FILE);
     }
     if (CURRENT_CONFIG.registerBlockFamilies) {
@@ -125,37 +105,6 @@ public class ExtShapeConfig implements Cloneable {
     } catch (IOException e) {
       LOGGER.warn("Failed to write Extended Block Shapes config file:", e);
     }
-  }
-
-  /**
-   * 读取配置文件并写入配置对象中。
-   *
-   * @param file 被读取的文件。
-   */
-  @Contract(mutates = "this")
-  public NbtCompound readLegacyFile(File file) throws IOException {
-    final NbtCompound nbtCompound = NbtIo.read(file);
-    if (nbtCompound != null) {
-      if (nbtCompound.contains("addToVanillaGroups")) {
-        addToVanillaGroups = nbtCompound.getBoolean("addToVanillaGroups");
-      }
-      if (nbtCompound.contains("showSpecificGroups")) {
-        showSpecificGroups = nbtCompound.getBoolean("showSpecificGroups");
-      }
-      if (nbtCompound.contains("registerBlockFamilies")) {
-        registerBlockFamilies = nbtCompound.getBoolean("registerBlockFamilies");
-      }
-      if (nbtCompound.contains("avoidSomeButtonRecipes")) {
-        avoidSomeButtonRecipes = nbtCompound.getBoolean("avoidSomeButtonRecipes");
-      }
-      if (nbtCompound.contains("preventWoodenWallRecipes")) {
-        preventWoodenWallRecipes = nbtCompound.getBoolean("preventWoodenWallRecipes");
-      }
-      if (nbtCompound.contains("specialSnowSlabCrafting")) {
-        specialSnowSlabCrafting = nbtCompound.getBoolean("specialSnowSlabCrafting");
-      }
-    }
-    return nbtCompound;
   }
 
   public static ExtShapeConfig readFile(File file) throws IOException {

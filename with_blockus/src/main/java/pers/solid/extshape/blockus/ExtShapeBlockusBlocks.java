@@ -336,18 +336,18 @@ public final class ExtShapeBlockusBlocks {
       ExtShapeBlockus.tryConsume(supplier, block -> {
         final boolean isNonFlammable = ExtShapeBlockus.tryTransform(() -> BlockusBlocks.HERRINGBONE_WARPED_PLANKS, b -> b == block, Suppliers.ofInstance(false)) || ExtShapeBlockus.tryTransform(() -> BlockusBlocks.HERRINGBONE_CRIMSON_PLANKS, b -> b == block, Suppliers.ofInstance(false)) || ExtShapeBlockus.tryTransform(() -> BlockusBlocks.HERRINGBONE_CHARRED_PLANKS, b -> b == block, Suppliers.ofInstance(false));
         if (isNonFlammable) {
-          FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).build();
+          FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
         } else {
-          FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).addPostBuildConsumer(plankFlammable).build();
+          FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).addPostBuildConsumer(plankFlammable).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
         }
       });
     }
     for (var supplier : BlockusBlockCollections.SMALL_LOGS) {
       ExtShapeBlockus.tryConsume(supplier, block -> {
         if (block.getDefaultState().getMaterial() == Material.NETHER_WOOD) {
-          FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).build();
+          FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
         } else {
-          FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addPostBuildConsumer(logFlammable).build();
+          FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addPostBuildConsumer(logFlammable).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
         }
       });
     }
@@ -357,23 +357,23 @@ public final class ExtShapeBlockusBlocks {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHORUS_BLOCK, block -> create(block).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).setCommonFenceSettings(Items.CHORUS_PLANT).setPillar().build());
 
     for (var supplier : BlockusBlockCollections.STAINED_STONE_BRICKS) {
-      ExtShapeBlockus.tryConsume(supplier, bsswTypes -> buildStoneBlocksWithoutButton(create(bsswTypes).addExtraTag(BlockusBlockTags.STAINED_STONE_BRICKS)));
+      ExtShapeBlockus.tryConsume(supplier, bsswTypes -> buildStoneBlocksWithoutButton(create(bsswTypes).addExtraTag(BlockusBlockTags.STAINED_STONE_BRICKS).setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.asString())));
     }
     for (var supplier : BlockusBlockCollections.CONCRETE_BRICKS) {
-      ExtShapeBlockus.tryConsume(supplier, concreteTypes -> FACTORY.createConstructionOnly(concreteTypes.block).without(BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL).addExtraTag(BlockusBlockTags.CONCRETE_BLOCKS).build());
-      ExtShapeBlockus.tryConsume(supplier, concreteTypes -> FACTORY.createConstructionOnly(concreteTypes.chiseled).without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).addExtraTag(BlockusBlockTags.CONCRETE_BLOCKS).build());
+      ExtShapeBlockus.tryConsume(supplier, concreteTypes -> FACTORY.createConstructionOnly(concreteTypes.block).without(BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL).addExtraTag(BlockusBlockTags.CONCRETE_BLOCKS).setRecipeGroup(blockShape -> "concrete_brick_" + blockShape.asString()).build());
+      ExtShapeBlockus.tryConsume(supplier, concreteTypes -> FACTORY.createConstructionOnly(concreteTypes.chiseled).without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).addExtraTag(BlockusBlockTags.CONCRETE_BLOCKS).setRecipeGroup(blockShape -> "chiseled_concrete_brick_" + blockShape.asString()).build());
     }
 
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SHINGLES, block -> create(block).addExtraTag(BlockusBlockTags.SHINGLES).setCommonFenceSettings(Items.FLINT).build());
     for (var supplier : BlockusBlockCollections.TINTED_SHRINGLES) {
-      ExtShapeBlockus.tryConsume(supplier, bssTypes -> create(bssTypes).setCommonFenceSettings(Items.FLINT).build());
+      ExtShapeBlockus.tryConsume(supplier, bssTypes -> create(bssTypes).setCommonFenceSettings(Items.FLINT).setRecipeGroup(blockShape -> "shingles_" + blockShape.asString()).build());
     }
 
     for (var supplier : BlockusBlockCollections.PATTERNED_WOOLS) {
-      ExtShapeBlockus.tryConsume(supplier, patternWoolTypes -> FACTORY.createConstructionOnly(patternWoolTypes.block).addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS).without(BlockShape.STAIRS, BlockShape.SLAB).with(BlockShape.WALL).addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness))).build());
+      ExtShapeBlockus.tryConsume(supplier, patternWoolTypes -> FACTORY.createConstructionOnly(patternWoolTypes.block).addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS).without(BlockShape.STAIRS, BlockShape.SLAB).with(BlockShape.WALL).addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness))).setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString()).build());
     }
     for (var supplier : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
-      ExtShapeBlockus.tryConsume(supplier, block -> FACTORY.createConstructionOnly(block).with(BlockShape.WALL).addExtraTag(BlockusBlockTags.GLAZED_TERRACOTTA_PILLARS).setPillar().build());
+      ExtShapeBlockus.tryConsume(supplier, block -> FACTORY.createConstructionOnly(block).with(BlockShape.WALL).addExtraTag(BlockusBlockTags.GLAZED_TERRACOTTA_PILLARS).setRecipeGroup(blockShape -> "glazed_terracotta_pillar_" + blockShape.asString()).setPillar().build());
     }
 
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.THATCH, bssTypes -> create(bssTypes).addExtraTag(BlockusBlockTags.THATCH).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).addPostBuildConsumer((blockShape, blockBuilder) -> {

@@ -10,11 +10,8 @@ import net.devtech.arrp.generator.BRRPCubeBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.MapColor;
+import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
-import net.minecraft.block.WoodType;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
@@ -27,6 +24,7 @@ import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.mixin.BlockAccessor;
+import pers.solid.extshape.rrp.RecipeGroupRegistry;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
@@ -135,6 +133,7 @@ public final class ExtShapeBlocks {
           .setPillar(block == CHERRY_LOG)
           .setPrimaryTagForShape(logTags)
           .addPostBuildConsumer(woodFlammable)
+          .setRecipeGroup(blockShape -> "log_" + blockShape.asString())
           .build();
     }
     final FenceSettings bambooFenceSettings = new FenceSettings(Items.BAMBOO, WoodType.BAMBOO);
@@ -153,6 +152,7 @@ public final class ExtShapeBlocks {
           .setPillar(block == STRIPPED_CHERRY_LOG)
           .setPrimaryTagForShape(logTags)
           .addPostBuildConsumer(woodFlammable)
+          .setRecipeGroup(blockShape -> "stripped_log_" + blockShape.asString())
           .build();
     }
     FACTORY.createAllShapes(STRIPPED_BAMBOO_BLOCK)
@@ -167,15 +167,6 @@ public final class ExtShapeBlocks {
 
     // an infinite cycling loop for wooden block set types, which each cycle should correspond to
     // BlockCollections.WOODS, which does not include bamboo and nether woods.
-    final Iterator<BlockSetType> woodenBlockSetTypes = Iterators.cycle(
-        BlockSetType.OAK,
-        BlockSetType.SPRUCE,
-        BlockSetType.BIRCH,
-        BlockSetType.JUNGLE,
-        BlockSetType.ACACIA,
-        BlockSetType.CHERRY,
-        BlockSetType.DARK_OAK,
-        BlockSetType.MANGROVE);
     final Iterator<ButtonSettings> woodenButtonSettings = Iterators.cycle(
         ButtonSettings.wood(BlockSetType.OAK),
         ButtonSettings.wood(BlockSetType.SPRUCE),
@@ -185,7 +176,6 @@ public final class ExtShapeBlocks {
         ButtonSettings.wood(BlockSetType.CHERRY),
         ButtonSettings.wood(BlockSetType.DARK_OAK),
         ButtonSettings.wood(BlockSetType.MANGROVE));
-    final Iterator<BlockSetType> netherWoodBlockSetTypes = Iterators.cycle(BlockSetType.WARPED, BlockSetType.CRIMSON);
     final Iterator<ButtonSettings> netherWoodButtonSettings = Iterators.cycle(ButtonSettings.wood(BlockSetType.WARPED), ButtonSettings.wood(BlockSetType.CRIMSON));
     final Iterator<WoodType> woodTypes = Iterators.cycle(
         WoodType.OAK,
@@ -207,6 +197,7 @@ public final class ExtShapeBlocks {
           .setPillar()
           .setPrimaryTagForShape(logTags)
           .addPostBuildConsumer(woodFlammable)
+          .setRecipeGroup(blockShape -> "wood_" + blockShape.asString())
           .build();
     }
     for (final Block block : BlockCollections.STRIPPED_WOODS) {
@@ -217,26 +208,27 @@ public final class ExtShapeBlocks {
           .setPillar()
           .setPrimaryTagForShape(logTags)
           .addPostBuildConsumer(woodFlammable)
+          .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString())
           .build();
     }
     for (final Block block : BlockCollections.STEMS) {
-      FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).build();
+      FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "log_" + blockShape.asString()).build();
     }
     for (final Block block : BlockCollections.STRIPPED_STEMS) {
-      FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).build();
+      FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "stripped_log_" + blockShape.asString()).build();
     }
     for (final Block block : BlockCollections.HYPHAES) {
       ButtonSettings buttonSettings = netherWoodButtonSettings.next();
       FACTORY.createAllShapes(block)
           .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
           .setButtonSettings(buttonSettings)
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).build();
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "wood_" + blockShape.asString()).build();
     }
     for (final Block block : BlockCollections.STRIPPED_HYPHAES) {
       FACTORY.createAllShapes(block)
           .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
           .setButtonSettings(netherWoodButtonSettings.next())
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).build();
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString()).build();
     }
 
     // 木板。
@@ -248,6 +240,7 @@ public final class ExtShapeBlocks {
             .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setPrimaryTagForShape(woodenTags)
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
+            .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
             .build();
       } else if (block == CRIMSON_PLANKS || block == WARPED_PLANKS) {
         FACTORY.createAllShapes(block)
@@ -256,6 +249,7 @@ public final class ExtShapeBlocks {
             .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setPrimaryTagForShape(woodenTags)
             .addExtraTag(ItemTags.NON_FLAMMABLE_WOOD)
+            .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
             .build();
       } else {
         FACTORY.createAllShapes(block)
@@ -264,6 +258,7 @@ public final class ExtShapeBlocks {
             .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setPrimaryTagForShape(woodenTags)
             .addPreBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
+            .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
             .build();
       }
     }
@@ -319,6 +314,7 @@ public final class ExtShapeBlocks {
           .setPrimaryTagForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.WOOLEN_PRESSURE_PLATES)
           .setPrimaryTagForShape(BlockShape.WALL, ExtShapeTags.WOOLEN_WALLS)
           .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 50))
+          .setRecipeGroup(blockShape -> "wool_" + blockShape.asString())
           .build();
     }
 
@@ -484,6 +480,7 @@ public final class ExtShapeBlocks {
           .setPrimaryTagForShape(BlockShape.BUTTON, ExtShapeTags.STAINED_TERRACOTTA_BUTTONS)
           .setPrimaryTagForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.STAINED_TERRACOTTA_PRESSURE_PLATES)
           .addExtraTag(blockShape -> blockShape.isConstruction ? BlockTags.DEAD_BUSH_MAY_PLACE_ON : null)
+          .setRecipeGroup(blockShape -> "stained_terracotta_" + blockShape.asString())
           .build();
     }
 
@@ -541,7 +538,8 @@ public final class ExtShapeBlocks {
 
     // 带釉陶瓦只注册台阶。
     for (final Block block : BlockCollections.GLAZED_TERRACOTTA) {
-      FACTORY.modify(new SlabBuilder(block)).setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, FabricBlockSettings.copyOf(builder.baseBlock))).setPrimaryTagToAddTo(ExtShapeTags.GLAZED_TERRACOTTA_SLABS).build();
+      final SlabBlock slabBlock = FACTORY.modify(new SlabBuilder(block)).setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, FabricBlockSettings.copyOf(builder.baseBlock))).setPrimaryTagToAddTo(ExtShapeTags.GLAZED_TERRACOTTA_SLABS).build();
+      RecipeGroupRegistry.setRecipeGroup(slabBlock, "glazed_terracotta_slab");
     }
 
     // 彩色混凝土。
@@ -561,6 +559,7 @@ public final class ExtShapeBlocks {
           .setPrimaryTagForShape(BlockShape.WALL, ExtShapeTags.CONCRETE_WALLS)
           .setPrimaryTagForShape(BlockShape.BUTTON, ExtShapeTags.CONCRETE_BUTTONS)
           .setPrimaryTagForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.CONCRETE_PRESSURE_PLATES)
+          .setRecipeGroup(blockShape -> "concrete_" + blockShape.asString())
           .build();
     }
 
@@ -619,18 +618,35 @@ public final class ExtShapeBlocks {
     // 涂蜡的铜块。
     for (final Block block : new Block[]{
         WAXED_COPPER_BLOCK,
-        WAXED_CUT_COPPER,
+        WAXED_CUT_COPPER
+    }) {
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.COPPER_INGOT)
+          .setRecipeGroup(blockShape -> "waxed_cut_copper_" + blockShape.asString()).build();
+    }
+    for (final Block block : new Block[]{
         WAXED_EXPOSED_COPPER,
-        WAXED_EXPOSED_CUT_COPPER,
+        WAXED_EXPOSED_CUT_COPPER
+    }) {
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.COPPER_INGOT)
+          .setRecipeGroup(blockShape -> "waxed_exposed_cut_copper_" + blockShape.asString()).build();
+    }
+    for (final Block block : new Block[]{
         WAXED_WEATHERED_COPPER,
-        WAXED_WEATHERED_CUT_COPPER,
+        WAXED_WEATHERED_CUT_COPPER
+    }) {
+      FACTORY.createAllShapes(block)
+          .setCommonFenceSettings(Items.COPPER_INGOT)
+          .setRecipeGroup(blockShape -> "waxed_weathered_cut_copper_" + blockShape.asString()).build();
+    }
+    for (final Block block : new Block[]{
         WAXED_OXIDIZED_COPPER,
         WAXED_OXIDIZED_CUT_COPPER
     }) {
       FACTORY.createAllShapes(block)
           .setCommonFenceSettings(Items.COPPER_INGOT)
-          .setButtonSettings(ButtonSettings.STONE)
-          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+          .setRecipeGroup(blockShape -> "waxed_oxidized_cut_copper_").build();
     }
 
     // 滴水石、苔藓。

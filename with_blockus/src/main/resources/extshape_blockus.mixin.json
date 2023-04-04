@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "pers.solid.extshape.blockus.mixin",
+  "mixins": [
+    "CookingRecipeJsonProviderAccessor",
+    "ShapedRecipeJsonProviderAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

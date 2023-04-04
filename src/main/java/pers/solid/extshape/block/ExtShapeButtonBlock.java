@@ -108,17 +108,6 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   }
 
   @Override
-  public String getRecipeGroup() {
-    final Block baseBlock = getBaseBlock();
-    if (BlockCollections.WOOLS.contains(baseBlock)) return "wool_button";
-    if (BlockCollections.CONCRETES.contains(baseBlock)) return "concrete_button";
-    if (BlockCollections.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_button";
-    if (BlockCollections.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_button";
-    if (BlockCollections.PLANKS.contains(baseBlock)) return "wooden_button";
-    return "";
-  }
-
-  @Override
   public BlockShape getBlockShape() {
     return BlockShape.BUTTON;
   }

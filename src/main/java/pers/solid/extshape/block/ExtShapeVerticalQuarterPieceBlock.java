@@ -21,7 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -64,18 +63,6 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   @Override
   public @NotNull JRecipe getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(4).recipeCategory(getRecipeCategory());
-  }
-
-  @Override
-  public String getRecipeGroup() {
-    if ((BlockCollections.PLANKS).contains(baseBlock)) return "wooden_vertical_quarter_piece";
-    if ((BlockCollections.WOOLS).contains(baseBlock)) return "wool_vertical_quarter_piece";
-    if ((BlockCollections.CONCRETES).contains(baseBlock)) return "concrete_vertical_quarter_piece";
-    if ((BlockCollections.STAINED_TERRACOTTA).contains(baseBlock)) return
-        "stained_terracotta_vertical_quarter_piece";
-    if ((BlockCollections.GLAZED_TERRACOTTA).contains(baseBlock)) return
-        "glazed_terracotta_vertical_quarter_piece";
-    return "";
   }
 
   @Override

@@ -11,6 +11,10 @@
 - Fences, fence gates, buttons and pressure plates can also have special features now, such as reaction when hit by projectiles.
 - Added all shapes for sculk blocks.
 - Modified the sound of fence gate open and close of amethyst, which is the same as break sound.
+- Optimized some contents related to RecipeGroup to be more extendable.
+- Fixed the wrong number of vertical quarter pieces crafted from vertical slab.
+- Fixed the issue that block rotation recipe content does not match their names.
+- Fixed the issue of duplicated writing of resource packs.
 
 ### 1.8.1
 
