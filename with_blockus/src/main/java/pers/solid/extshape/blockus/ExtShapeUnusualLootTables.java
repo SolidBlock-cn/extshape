@@ -3,7 +3,6 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.BlockusItems;
 import com.google.common.collect.ImmutableMap;
-import net.devtech.arrp.json.loot.JLootTable;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
@@ -49,7 +48,7 @@ public final class ExtShapeUnusualLootTables {
           .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1)))
           .apply(ApplyBonusLootFunction.uniformBonusCount(Enchantments.FORTUNE))
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4)))), shape == BlockShape.SLAB);
-      return JLootTable.delegate(lootTableBuilder);
+      return lootTableBuilder;
     });
   }
 }

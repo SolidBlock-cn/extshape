@@ -5,11 +5,10 @@ import com.google.common.collect.Iterators;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.generator.BRRPCubeBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.item.ItemConvertible;
@@ -21,6 +20,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import org.jetbrains.annotations.UnmodifiableView;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.generator.BRRPCubeBlock;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.mixin.BlockAccessor;
@@ -45,7 +46,7 @@ import static net.minecraft.block.Blocks.*;
  */
 public final class ExtShapeBlocks {
   /**
-   * 存储本模组所有方块的列表。该列表的内容是在 {@link AbstractBlockBuilder#build()} 中添加的。其他模组添加的方块（即使使用了本模组的接口）不应该添加到这个集合中，而应该自行建立单独的集合。
+   * 存储本模组所有方块的列表。该列表的内容是在 {@link AbstractBlockBuilder#build()} 中添加的。其他模组添加的方块（即使使用了本模组的接口）不应该添加到这个集合中，而应该自行建立集合。
    */
   private static final ObjectSet<Block> BLOCKS = new ObjectLinkedOpenHashSet<>();
 
@@ -265,7 +266,7 @@ public final class ExtShapeBlocks {
 
     // 石化橡木木板。
     PETRIFIED_OAK_PLANKS = FACTORY.modify(new BlockBuilder())
-        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeAll(builder.blockSettings, "block/oak_planks"))
+        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeAll(builder.blockSettings, new Identifier("minecraft", "block/oak_planks")))
         .setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "petrified_oak_planks"))
         .addExtraTag(BlockTags.PICKAXE_MINEABLE).build();
@@ -280,7 +281,7 @@ public final class ExtShapeBlocks {
         .setCommonFenceSettings(Items.STICK)
         .setButtonSettings(ButtonSettings.HARD)
         .setPressurePlateActivationRule(ActivationRule.MOBS)
-        .addPreBuildConsumer((blockShape1, builder1) -> builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state1, world1, pos1, type) -> false))
+        .addPreBuildConsumer((blockShape1, builder1) -> ((AbstractBlockSettingsAccessor) builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state1, world1, pos1, type) -> false)).setLootTableId(null))
         .build();
 
     // 青金石块。
@@ -509,7 +510,7 @@ public final class ExtShapeBlocks {
 
     // 平滑石头比较特殊，完整方块和台阶不同。
     SMOOTH_STONE_DOUBLE_SLAB = FACTORY.modify(new BlockBuilder())
-        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, "block/smooth_stone", "block/smooth_stone_slab_side", "block/smooth_stone"))
+        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, new Identifier("minecraft", "block/smooth_stone"), new Identifier("minecraft", "block/smooth_stone_slab_side"), new Identifier("minecraft", "block/smooth_stone")))
         .setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "smooth_stone_slab_double"))
         .addExtraTag(BlockTags.PICKAXE_MINEABLE).build();

@@ -5,12 +5,12 @@ import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.ConcreteTypes;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMultimap;
-import net.devtech.arrp.api.RuntimeResourcePack;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.extshape.rrp.CrossShapeDataGeneration;
 import pers.solid.extshape.util.BlockCollections;
 

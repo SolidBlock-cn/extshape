@@ -1,5 +1,9 @@
 # Update log
 
+### 2.0.0
+- Adapted to new version of Better Runtime Resource Packs.
+- Fixed the issue that some bedrock blocks occupy the empty loot table.
+
 ### 1.9.0
 
 - Added Korean translation, contributed by PR#25。

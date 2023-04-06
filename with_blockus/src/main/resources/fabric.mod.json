@@ -30,7 +30,7 @@
       "~1.19.4",
       ">=1.19.4"
     ],
-    "better_runtime_resource_pack": ">=0.8.2",
+    "brrp_v1": "*",
     "extshape": ">=${version}",
     "blockus": ">=2.6.5"
   }

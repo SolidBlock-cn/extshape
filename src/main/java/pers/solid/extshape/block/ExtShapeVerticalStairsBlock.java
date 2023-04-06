@@ -1,14 +1,12 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.json.blockstate.JBlockModel;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.blockstate.JVariants;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.data.client.*;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -19,10 +17,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
+import pers.solid.extshape.util.HorizontalCornerDirection;
 
 public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -44,35 +46,34 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
   @Override
   @Environment(EnvType.CLIENT)
-  public @NotNull JBlockStates getBlockStates() {
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier identifier = getBlockModelId();
-    return JBlockStates.ofVariants(new JVariants()
-        .addVariant("facing", "south_west", new JBlockModel(identifier).uvlock())
-        .addVariant("facing", "north_west", new JBlockModel(identifier).uvlock().y(90))
-        .addVariant("facing", "north_east", new JBlockModel(identifier).uvlock().y(180))
-        .addVariant("facing", "south_east", new JBlockModel(identifier).uvlock().y(270))
-    );
+    return VariantsBlockStateSupplier.create(this, new BlockStateVariant().put(VariantSettings.MODEL, identifier).put(VariantSettings.UVLOCK, true)).coordinate(BlockStateVariantMap.create(FACING)
+        .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R0))
+        .register(HorizontalCornerDirection.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
+        .register(HorizontalCornerDirection.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
+        .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270)));
   }
 
 
   @Override
   @Environment(EnvType.CLIENT)
-  public @NotNull JModel getBlockModel() {
-    return simpleModel("extshape:block/vertical_stairs");
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID,"block/vertical_stairs")).setTextures(ModelUtils.getTextureMap(this,TextureKey.TOP,TextureKey.SIDE,TextureKey.BOTTOM));
   }
 
   /**
    * 注意：跨方块类型的合成表由 {@link BlocksBuilder} 定义。
    */
   @Override
-  public @Nullable JRecipe getCraftingRecipe() {
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     return null;
   }
 
 
   @Override
-  public @Nullable JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1).recipeCategory(getRecipeCategory());
+  public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
+    return simpleStoneCuttingRecipe(1);
   }
 
   @Override

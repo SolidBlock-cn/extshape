@@ -1,9 +1,9 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.generator.BRRPStairsBlock;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -14,6 +14,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.brrp.v1.generator.BRRPStairsBlock;
 import pers.solid.extshape.builder.BlockShape;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
@@ -28,13 +29,13 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   }
 
   @Override
-  public @Nullable JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1).recipeCategory(getRecipeCategory());
+  public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
+    return simpleStoneCuttingRecipe(1);
   }
 
   @Override
-  public @Nullable JRecipe getCraftingRecipe() {
-    final JRecipe craftingRecipe = super.getCraftingRecipe();
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
+    final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
     return craftingRecipe == null || NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? null : craftingRecipe.group(getRecipeGroup());
   }
 

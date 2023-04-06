@@ -1,9 +1,9 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.generator.BRRPWallBlock;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.brrp.v1.generator.BRRPWallBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockCollections;
@@ -30,14 +31,14 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
   }
 
   @Override
-  public @Nullable JRecipe getCraftingRecipe() {
-    final JRecipe craftingRecipe = super.getCraftingRecipe();
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
+    final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
     return craftingRecipe == null || (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes && BlockCollections.PLANKS.contains(baseBlock)) ? null : craftingRecipe.group(getRecipeGroup());
   }
 
   @Override
-  public @Nullable JRecipe getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1).recipeCategory(getRecipeCategory());
+  public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
+    return simpleStoneCuttingRecipe(1);
   }
 
   @Override

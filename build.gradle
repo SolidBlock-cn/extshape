@@ -1,7 +1,7 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
 plugins {
-    id 'fabric-loom' version '1.0-SNAPSHOT'
+    id 'fabric-loom' version '1.1-SNAPSHOT'
     id 'maven-publish'
     id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
     id "com.modrinth.minotaur" version "2.+"
@@ -47,7 +47,10 @@ allprojects {
         // Fabric API
         modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
         // ModMenu 模组
-        modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+        modImplementation ("com.terraformersmc:modmenu:${project.modmenu_version}"){
+            exclude module: "fabric-loader"
+            transitive false
+        }
 
         // 下面两个模组均存储于本地的 maven 仓库。
 

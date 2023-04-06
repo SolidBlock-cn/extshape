@@ -9,11 +9,6 @@ import com.brand.blockus.tags.BlockusBlockTags;
 import com.brand.blockus.tags.BlockusItemTags;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import net.devtech.arrp.api.RRPEventHelper;
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.generator.BlockResourceGenerator;
-import net.devtech.arrp.generator.ResourceGeneratorHelper;
-import net.devtech.arrp.generator.TextureRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
@@ -35,6 +30,11 @@ import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pers.solid.brrp.v1.BRRPUtils;
+import pers.solid.brrp.v1.RRPEventHelper;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.generator.BlockResourceGenerator;
+import pers.solid.brrp.v1.generator.TextureRegistry;
 import pers.solid.extshape.blockus.mixin.CookingRecipeJsonProviderAccessor;
 import pers.solid.extshape.blockus.mixin.ShapedRecipeJsonProviderAccessor;
 import pers.solid.extshape.builder.BlockShape;
@@ -51,22 +51,25 @@ import java.util.function.Supplier;
  */
 public final class ExtShapeBlockusRRP {
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeBlockusRRP.class);
-  @Environment(EnvType.CLIENT)
-  public static final RuntimeResourcePack EXTSHAPE_CLIENT_PACK = RuntimeResourcePack.create(new Identifier(ExtShapeBlockus.NAMESPACE, "client"));
-  public static final RuntimeResourcePack EXTSHAPE_STANDARD_PACK = RuntimeResourcePack.create(new Identifier(ExtShapeBlockus.NAMESPACE, "standard"));
+  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(new Identifier(ExtShapeBlockus.NAMESPACE, "pack"));
 
   private ExtShapeBlockusRRP() {
   }
 
   public static void registerRRP() {
-    EXTSHAPE_CLIENT_PACK.setForbidsDuplicateResource(true);
-    EXTSHAPE_STANDARD_PACK.setForbidsDuplicateResource(true);
-    generateServerData(EXTSHAPE_STANDARD_PACK);
-    RRPEventHelper.BEFORE_VANILLA.registerSidedPack(ResourceType.SERVER_DATA, EXTSHAPE_STANDARD_PACK);
+    generateServerData(PACK);
+    PACK.setSidedRegenerationCallback(ResourceType.SERVER_DATA, () -> {
+      PACK.clearResources(ResourceType.SERVER_DATA);
+      generateServerData(PACK);
+    });
     if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
-      generateClientResources(EXTSHAPE_CLIENT_PACK);
-      RRPEventHelper.BEFORE_VANILLA.registerSidedPack(ResourceType.CLIENT_RESOURCES, EXTSHAPE_CLIENT_PACK);
+      generateClientResources(PACK);
+      PACK.setSidedRegenerationCallback(ResourceType.CLIENT_RESOURCES, () -> {
+        PACK.clearResources(ResourceType.CLIENT_RESOURCES);
+        generateClientResources(PACK);
+      });
     }
+    RRPEventHelper.BEFORE_VANILLA.registerPack(PACK);
   }
 
   /**
@@ -95,16 +98,16 @@ public final class ExtShapeBlockusRRP {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_RED_SANDSTONE.block, block -> TextureRegistry.register(block, new Identifier("block/red_sandstone_bottom")));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_SOUL_SANDSTONE.block, block -> TextureRegistry.register(block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_bottom")));
 
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.STRIPPED_WHITE_OAK_LOG, block -> TextureRegistry.registerAppended(block, TextureKey.END, "_top"));
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.STRIPPED_WHITE_OAK_LOG, block -> TextureRegistry.registerSuffixed(block, TextureKey.END, "_top"));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.STRIPPED_WHITE_OAK_WOOD, block -> TextureRegistry.register(block, new Identifier(Blockus.MOD_ID, "block/stripped_white_oak_log")));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK_LOG, block -> TextureRegistry.registerAppended(block, TextureKey.END, "_top"));
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK_LOG, block -> TextureRegistry.registerSuffixed(block, TextureKey.END, "_top"));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK_WOOD, block -> TextureRegistry.register(block, new Identifier(Blockus.MOD_ID, "block/white_oak_log")));
 
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SOUL_SANDSTONE, bsswTypes -> TextureRegistry.registerAppended(bsswTypes.block, TextureKey.TOP, "_top"));
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SOUL_SANDSTONE, bsswTypes -> TextureRegistry.registerSuffixed(bsswTypes.block, TextureKey.TOP, "_top"));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SMOOTH_SOUL_SANDSTONE, bssTypes -> TextureRegistry.register(bssTypes.block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_top")));
 
     for (Supplier<Block> supplier : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
-      ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerAppended(block, TextureKey.END, "_top"));
+      ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerSuffixed(block, TextureKey.END, "_top"));
     }
 
     for (final Supplier<Block> supplier : ImmutableList.<Supplier<Block>>of(
@@ -119,7 +122,7 @@ public final class ExtShapeBlockusRRP {
         () -> BlockusBlocks.CRIMSON_SMALL_STEMS,
         () -> BlockusBlocks.WHITE_OAK_SMALL_LOGS
     )) {
-      ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerAppended(block, TextureKey.END, "_top"));
+      ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerSuffixed(block, TextureKey.END, "_top"));
     }
   }
 
@@ -149,7 +152,7 @@ public final class ExtShapeBlockusRRP {
         CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(paperBlock), blockShape.getRecipeCategory(), burntPaperBlock, 0.1F * blockShape.logicalCompleteness, (int) (200 * blockShape.logicalCompleteness)).criterion("has_paper_block", RecipeProvider.conditionsFromItem(paperBlock)).offerTo(recipeJsonProvider -> {
           pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
           pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((CookingRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
-        }, ResourceGeneratorHelper.getRecipeId(burntPaperBlock).brrp_append("_from_smelting"));
+        }, BRRPUtils.getRecipeId(burntPaperBlock).brrp_suffixed("_from_smelting"));
       }
     }
   }
@@ -221,7 +224,7 @@ public final class ExtShapeBlockusRRP {
         cookingRecipe.offerTo(recipeJsonProvider -> {
           pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
           pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((CookingRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
-        }, ResourceGeneratorHelper.getRecipeId(charredOutput).brrp_append("_from_smelting"));
+        }, BRRPUtils.getRecipeId(charredOutput).brrp_suffixed("_from_smelting"));
       }
     }
   }

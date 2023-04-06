@@ -1,10 +1,9 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.generator.BRRPFenceGateBlock;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WoodType;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
@@ -18,6 +17,7 @@ import net.minecraft.world.World;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.brrp.v1.generator.BRRPFenceGateBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.FenceSettings;
 
@@ -43,8 +43,8 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
   }
 
   @Override
-  public @Nullable JRecipe getCraftingRecipe() {
-    final JRecipe craftingRecipe = super.getCraftingRecipe();
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
+    final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
     return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 

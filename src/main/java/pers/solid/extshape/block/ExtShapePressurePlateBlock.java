@@ -1,22 +1,18 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.generator.ResourceGeneratorHelper;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.recipe.JRecipe;
-import net.devtech.arrp.json.recipe.JShapedRecipe;
-import net.devtech.arrp.json.recipe.JShapelessRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.BlockStateSupplier;
+import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureKey;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
@@ -26,6 +22,11 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.BlockCollections;
@@ -52,20 +53,19 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   @Environment(EnvType.CLIENT)
   @Override
-  public @NotNull JBlockStates getBlockStates() {
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier blockModelId = getBlockModelId();
-    return JBlockStates.delegate(BlockStateModelGenerator.createPressurePlateBlockState(
+    return BlockStateModelGenerator.createPressurePlateBlockState(
         this,
         blockModelId,
-        blockModelId.brrp_append("_down")
-    ));
+        blockModelId.brrp_suffixed("_down")
+    );
   }
 
   @Environment(EnvType.CLIENT)
   @Override
-  @NotNull
-  public JModel getBlockModel() {
-    return new JModel("block/pressure_plate_up")
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    return ModelJsonBuilder.create(Models.PRESSURE_PLATE_UP)
         .addTexture("texture", getTextureId(TextureKey.TEXTURE));
   }
 
@@ -74,29 +74,27 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   @Environment(EnvType.CLIENT)
   public void writeBlockModel(RuntimeResourcePack pack) {
     final Identifier blockModelId = getBlockModelId();
-    final JModel blockModel = getBlockModel();
-    pack.addModel(blockModel, blockModelId);
-    pack.addModel(blockModel.parent("block/pressure_plate_down"), blockModelId.brrp_append("_down"));
+    final ModelJsonBuilder blockModel = getBlockModel();
+    ModelUtils.writeModelsWithVariants(pack, blockModelId, blockModel, Models.PRESSURE_PLATE_UP, Models.PRESSURE_PLATE_DOWN);
   }
 
 
   @Override
-  public @NotNull JRecipe getCraftingRecipe() {
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
-      final JShapelessRecipe recipe = new JShapelessRecipe(this.getItemId(), carpetId).recipeCategory(getRecipeCategory());
-      recipe.addInventoryChangedCriterion("has_carpet", Registries.ITEM.get(carpetId));
+      final Item carpet = Registries.ITEM.get(carpetId);
+      final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(getRecipeCategory(),this).input(carpet).criterion("has_carpet", RecipeProvider.conditionsFromItem(carpet));
       return recipe;
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      return new JShapelessRecipe(this, Blocks.MOSS_CARPET)
-          .recipeCategory(getRecipeCategory()).addInventoryChangedCriterion("has_carpet", Blocks.MOSS_CARPET);
+      return ShapelessRecipeJsonBuilder.create(getRecipeCategory(),this).input(Blocks.MOSS_CARPET)
+          .criterion("has_carpet", RecipeProvider.conditionsFromItem(Blocks.MOSS_CARPET));
     } else {
-      return new JShapedRecipe(this)
-          .recipeCategory(getRecipeCategory())
+      return ShapedRecipeJsonBuilder.create(getRecipeCategory(),this)
           .pattern("##")
-          .addKey("#", baseBlock)
-          .addInventoryChangedCriterion("has_ingredient", baseBlock)
+          .input('#', baseBlock)
+          .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
           .group(getRecipeGroup());
     }
   }
@@ -109,17 +107,14 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
-      final JShapelessRecipe recipe = new JShapelessRecipe(carpetId, this.getItemId()).recipeCategory(RecipeCategory.DECORATIONS);
       final Item carpet = Registries.ITEM.get(carpetId);
-      recipe.addInventoryChangedCriterion("has_pressure_plate", this);
+      final SingleItemRecipeJsonBuilder recipe = SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), carpet).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
       final Identifier recipeId = new Identifier(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
-      pack.addRecipe(recipeId, recipe);
-      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(carpet, recipeId, recipe), recipe);
+      pack.addRecipeAndAdvancement(recipeId, recipe);
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      final JShapelessRecipe recipe = (JShapelessRecipe) new JShapelessRecipe(Blocks.MOSS_CARPET, this).addInventoryChangedCriterion("has_pressure_plate", this).recipeCategory(RecipeCategory.DECORATIONS);
+      final SingleItemRecipeJsonBuilder recipe = SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), Blocks.MOSS_CARPET).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
       final Identifier recipeId = new Identifier(ExtShape.MOD_ID, "moss_carpet_from_pressure_plate");
-      pack.addRecipe(recipeId, recipe);
-      pack.addRecipeAdvancement(recipeId, ResourceGeneratorHelper.getAdvancementIdForRecipe(Blocks.MOSS_CARPET, recipeId, recipe), recipe);
+      pack.addRecipeAndAdvancement(recipeId, recipe);
     }
   }
 
