@@ -78,6 +78,7 @@ public class ExtShape {
       ExtShapeItemGroup.init();
       ExtShapeTags.refillTags();
 
+    // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
       VanillaItemGroup.registerForMod();
       registerComposingChances();
       registerStrippableBlocks();
@@ -159,7 +160,7 @@ public class ExtShape {
   }
 
   /**
-   * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。
+   * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。部分是直接由其标签决定的，例如木制、竹制的楼梯、台阶，原版的标签即定义了可作为燃料。
    *
    * @see ExtShapeBlocks
    * @see net.minecraft.block.entity.AbstractFurnaceBlockEntity#createFuelTimeMap()
@@ -168,22 +169,22 @@ public class ExtShape {
   private static void registerFuels(FurnaceFuelBurnTimeEvent event) {
     // 参照原版木制（含下界木）楼梯和台阶，楼梯燃烧时间为 300 刻，台阶燃烧时间为 150 刻。
     // 但是，non_flammable_wood 标签的仍然不会被熔炉接受。
-    if (event.getItemStack().isIn(ExtShapeTags.WOODEN_VERTICAL_STAIRS.toVanillaItemTag())) event.setBurnTime(300);
-    if (event.getItemStack().isIn(ExtShapeTags.WOODEN_VERTICAL_SLABS.toVanillaItemTag())) event.setBurnTime(150);
-    if (event.getItemStack().isIn(ExtShapeTags.WOODEN_QUARTER_PIECES.toVanillaItemTag())) event.setBurnTime(75);
-    if (event.getItemStack().isIn(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES.toVanillaItemTag())) event.setBurnTime(75);
-    if (event.getItemStack().isIn(ExtShapeTags.WOODEN_WALLS.toVanillaItemTag())) event.setBurnTime(300);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_STAIRS.toVanillaItemTag())) event.setBurnTime(300);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_SLABS.toVanillaItemTag())) event.setBurnTime(150);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_VERTICAL_STAIRS.toVanillaItemTag())) event.setBurnTime(300);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_VERTICAL_SLABS.toVanillaItemTag())) event.setBurnTime(150);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_QUARTER_PIECES.toVanillaItemTag())) event.setBurnTime(75);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_VERTICAL_QUARTER_PIECES.toVanillaItemTag())) event.setBurnTime(75);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_WALLS.toVanillaItemTag())) event.setBurnTime(300);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_FENCES.toVanillaItemTag())) event.setBurnTime(300);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_FENCE_GATES.toVanillaItemTag())) event.setBurnTime(300);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_BUTTONS.toVanillaItemTag())) event.setBurnTime(100);
-    if (event.getItemStack().isIn(ExtShapeTags.LOG_PRESSURE_PLATES.toVanillaItemTag())) event.setBurnTime(300);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_STAIRS))) event.setBurnTime(300);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_SLABS))) event.setBurnTime(150);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_QUARTER_PIECES))) event.setBurnTime(75);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES))) event.setBurnTime(75);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_WALLS))) event.setBurnTime(300);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_STAIRS))) event.setBurnTime(300);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_SLABS))) event.setBurnTime(150);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_VERTICAL_STAIRS))) event.setBurnTime(300);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_VERTICAL_SLABS))) event.setBurnTime(150);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_QUARTER_PIECES))) event.setBurnTime(75);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_VERTICAL_QUARTER_PIECES))) event.setBurnTime(75);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_WALLS))) event.setBurnTime(300);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_FENCES))) event.setBurnTime(300);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_FENCE_GATES))) event.setBurnTime(300);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_BUTTONS))) event.setBurnTime(100);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.LOG_PRESSURE_PLATES))) event.setBurnTime(300);
 
     // 对于竹块和去皮竹块的。
     for (final var block : new Block[]{Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK}) {
@@ -201,18 +202,18 @@ public class ExtShape {
     }
 
     // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_STAIRS.toVanillaItemTag())) event.setBurnTime(100);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_SLABS.toVanillaItemTag())) event.setBurnTime(50);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_QUARTER_PIECES.toVanillaItemTag())) event.setBurnTime(25);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_VERTICAL_STAIRS.toVanillaItemTag())) event.setBurnTime(100);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_VERTICAL_SLABS.toVanillaItemTag())) event.setBurnTime(50);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES.toVanillaItemTag())) event.setBurnTime(25);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_STAIRS))) event.setBurnTime(100);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_SLABS))) event.setBurnTime(50);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_QUARTER_PIECES))) event.setBurnTime(25);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_STAIRS))) event.setBurnTime(100);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_SLABS))) event.setBurnTime(50);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES))) event.setBurnTime(25);
     // 栅栏、栅栏门、压力板、燃烧时间和基础方块一致，门的燃烧时间为三分之二，按钮为三分之一。
     // 但考虑到羊毛压力板是与地毯相互合成的，故燃烧时间与地毯一致，为 67。
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_FENCES.toVanillaItemTag())) event.setBurnTime(100);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_FENCE_GATES.toVanillaItemTag())) event.setBurnTime(100);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_PRESSURE_PLATES.toVanillaItemTag())) event.setBurnTime(67);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_BUTTONS.toVanillaItemTag())) event.setBurnTime(33);
-    if (event.getItemStack().isIn(ExtShapeTags.WOOLEN_WALLS.toVanillaItemTag())) event.setBurnTime(100);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_FENCES))) event.setBurnTime(100);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_FENCE_GATES))) event.setBurnTime(100);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_PRESSURE_PLATES))) event.setBurnTime(67);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_BUTTONS))) event.setBurnTime(33);
+    if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_WALLS))) event.setBurnTime(100);
   }
 }

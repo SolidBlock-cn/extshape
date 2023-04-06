@@ -70,7 +70,7 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
     Direction direction = ctx.getSide();
     BlockPos blockPos = ctx.getBlockPos();
     FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-    final Direction.Axis axis = ctx.getPlayerFacing().getAxis();
+    final Direction.Axis axis = ctx.getHorizontalPlayerFacing().getAxis();
     final double d = ctx.getHitPos().getComponentAlongAxis(axis) - blockPos.getComponentAlongAxis(axis);
     final Direction facing = switch (axis) {
       case X -> d < 0.5 ? Direction.WEST : Direction.EAST;

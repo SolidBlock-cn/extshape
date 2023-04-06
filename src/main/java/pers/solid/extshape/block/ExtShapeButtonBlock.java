@@ -1,30 +1,36 @@
 package pers.solid.extshape.block;
 
 import com.google.common.collect.ImmutableSet;
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.recipe.JRecipe;
-import net.devtech.arrp.json.recipe.JShapelessRecipe;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ButtonBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.BlockStateSupplier;
+import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureKey;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockCollections;
+import pers.solid.extshape.util.ButtonSettings;
 
 import java.util.Collection;
 
@@ -35,35 +41,16 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
    * @see pers.solid.extshape.config.ExtShapeConfig#avoidSomeButtonRecipes
    */
   public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK, Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).addAll(BlockCollections.LOGS).addAll(BlockCollections.WOODS).addAll(BlockCollections.HYPHAES).addAll(BlockCollections.STEMS).addAll(BlockCollections.STRIPPED_LOGS).addAll(BlockCollections.STRIPPED_WOODS).addAll(BlockCollections.STRIPPED_HYPHAES).addAll(BlockCollections.STRIPPED_STEMS).build();
-  public final ButtonType type;
   public final Block baseBlock;
 
-  public ExtShapeButtonBlock(Block baseBlock, Settings settings, int i, boolean bl, SoundEvent soundEvent, SoundEvent soundEvent2) {
-    super(settings, i, bl, soundEvent, soundEvent2);
+  public ExtShapeButtonBlock(Block baseBlock, Settings settings, BlockSetType blockSetType, int i, boolean bl) {
+    super(settings, blockSetType, i, bl);
     this.baseBlock = baseBlock;
-    this.type = null;
   }
 
-  public ExtShapeButtonBlock(Block baseBlock, ButtonType type, AbstractBlock.Settings blockSettings) {
-    super(blockSettings, switch (type) {
-      case STONE -> 20;
-      case SOFT -> 60;
-      case WOODEN, BAMBOO -> 30;
-      case HARD -> 5;
-    }, switch (type) {
-      case WOODEN, SOFT, BAMBOO -> true;
-      case STONE, HARD -> false;
-    }, switch (type) {
-      case WOODEN, SOFT -> SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF;
-      case STONE, HARD -> SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF;
-      case BAMBOO -> SoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_OFF;
-    }, switch (type) {
-      case WOODEN, SOFT -> SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON;
-      case STONE, HARD -> SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON;
-      case BAMBOO -> SoundEvents.BLOCK_BAMBOO_WOOD_BUTTON_CLICK_ON;
-    });
+  public ExtShapeButtonBlock(Block baseBlock, ButtonSettings buttonSettings, AbstractBlock.Settings blockSettings) {
+    super(blockSettings, buttonSettings.blockSetType(), buttonSettings.time(), buttonSettings.wooden());
     this.baseBlock = baseBlock;
-    this.type = type;
   }
 
   @Override
@@ -78,60 +65,46 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
 
   @Override
   @OnlyIn(Dist.CLIENT)
-  public @NotNull JBlockStates getBlockStates() {
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier blockModelId = getBlockModelId();
-    return JBlockStates.delegate(BlockStateModelGenerator.createButtonBlockState(
+    return BlockStateModelGenerator.createButtonBlockState(
         this,
         blockModelId,
-        blockModelId.brrp_append("_pressed")
-    ));
+        blockModelId.brrp_suffixed("_pressed")
+    );
   }
 
   @OnlyIn(Dist.CLIENT)
   @Override
-  @NotNull
-  public JModel getBlockModel() {
-    return new JModel("block/button").addTexture("texture", getTextureId(TextureKey.TEXTURE));
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    return ModelJsonBuilder.create(Models.BUTTON).addTexture(TextureKey.TEXTURE, getTextureId(TextureKey.TEXTURE));
   }
 
   @OnlyIn(Dist.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
     final Identifier blockModelId = getBlockModelId();
-    final JModel blockModel = getBlockModel();
-    pack.addModel(blockModel, blockModelId);
-    pack.addModel(blockModel.parent("block/button_inventory"), blockModelId.brrp_append("_inventory"));
-    pack.addModel(blockModel.parent("block/button_pressed"), blockModelId.brrp_append("_pressed"));
+    final ModelJsonBuilder blockModel = getBlockModel();
+    ModelUtils.writeModelsWithVariants(pack, blockModelId, blockModel, Models.BUTTON, Models.BUTTON_INVENTORY, Models.BUTTON_PRESSED);
   }
 
 
   @OnlyIn(Dist.CLIENT)
   @Override
-  public @NotNull JModel getItemModel() {
-    return new JModel(getBlockModelId().brrp_append("_inventory"));
+  public @UnknownNullability ModelJsonBuilder getItemModel() {
+    return ModelJsonBuilder.create(ModelUtils.appendVariant(getBlockModelId(), Models.BUTTON_INVENTORY));
   }
 
   @Override
-  public @Nullable JRecipe getCraftingRecipe() {
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     final Block baseBlock = getBaseBlock();
-    if (REFUSE_RECIPES.contains(baseBlock) && ExtShapeConfig.CURRENT_CONFIG.avoidSomeButtonRecipes) {
+    if (REFUSE_RECIPES.contains(baseBlock) && ExtShapeConfig.CURRENT_CONFIG.avoidSomeButtonRecipes || baseBlock == null) {
       return null;
     }
-    return new JShapelessRecipe(this, baseBlock)
-        .addInventoryChangedCriterion("has_ingredient", baseBlock)
-        .recipeCategory(getRecipeCategory())
+    return ShapelessRecipeJsonBuilder.create(getRecipeCategory(),this)
+        .input(baseBlock)
+        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
         .group(getRecipeGroup());
-  }
-
-  @Override
-  public String getRecipeGroup() {
-    final Block baseBlock = getBaseBlock();
-    if (BlockCollections.WOOLS.contains(baseBlock)) return "wool_button";
-    if (BlockCollections.CONCRETES.contains(baseBlock)) return "concrete_button";
-    if (BlockCollections.STAINED_TERRACOTTA.contains(baseBlock)) return "stained_terracotta_button";
-    if (BlockCollections.GLAZED_TERRACOTTA.contains(baseBlock)) return "glazed_terracotta_button";
-    if (BlockCollections.PLANKS.contains(baseBlock)) return "wooden_button";
-    return "";
   }
 
   @Override
@@ -139,11 +112,32 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     return BlockShape.BUTTON;
   }
 
-  public enum ButtonType {
-    WOODEN,
-    STONE,
-    HARD,
-    SOFT,
-    BAMBOO
+  public static class WithExtension extends ExtShapeButtonBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, Settings settings, BlockSetType blockSetType, int i, boolean bl, BlockExtension extension) {
+      super(baseBlock, settings, blockSetType, i, bl);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.onStacksDropped(state, world, pos, stack, dropExperience);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

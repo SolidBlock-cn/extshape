@@ -1,14 +1,11 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.generator.ResourceGeneratorHelper;
-import net.devtech.arrp.json.blockstate.JBlockModel;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.blockstate.JVariants;
-import net.devtech.arrp.json.models.JModel;
+import com.google.gson.JsonPrimitive;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.block.piston.PistonBehavior;
+import net.minecraft.data.client.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -20,6 +17,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.BRRPUtils;
+import pers.solid.brrp.v1.api.RuntimeResourcePack;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
 
 public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
@@ -38,7 +39,7 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
     BlockState blockState = ctx.getWorld().getBlockState(blockPos);
     BlockState state = super.getPlacementState(ctx);
     if (!blockState.isOf(this) && state != null) {
-      return state.with(FACING, ctx.getPlayerFacing().getOpposite());
+      return state.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     } else {
       return state;
     }
@@ -58,32 +59,34 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
 
   @OnlyIn(Dist.CLIENT)
   @Override
-  public @NotNull JBlockStates getBlockStates() {
-    final JVariants variant = new JVariants();
-    final Identifier blockModelId = getBlockModelId();
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
+    final VariantsBlockStateSupplier state = VariantsBlockStateSupplier.create(this);
+    final VariantSetting<Integer> variantSetting = new VariantSetting<>("y", JsonPrimitive::new);
     assert baseBlock != null; // 带釉陶瓦楼梯的基础方块肯定是非 null 的。
-    final Identifier baseBlockModelId = ResourceGeneratorHelper.getBlockModelId(baseBlock);
+    final Identifier baseBlockModelId = BRRPUtils.getBlockModelId(baseBlock);
+    final Identifier blockModelId = getBlockModelId();
+    final BlockStateVariantMap.DoubleProperty<SlabType, Direction> map = BlockStateVariantMap.create(TYPE, FACING);
     for (Direction direction : Direction.Type.HORIZONTAL) {
       final int rotation = (int) direction.asRotation();
-      variant.addVariant("type=bottom,facing", direction, new JBlockModel(blockModelId).y(rotation));
-      variant.addVariant("type=top,facing", direction, new JBlockModel(blockModelId.brrp_append("_top")).y(rotation));
-      variant.addVariant("type=double,facing", direction, new JBlockModel(baseBlockModelId).y(rotation));
+      map.register(SlabType.BOTTOM, direction, BlockStateVariant.create().put(VariantSettings.MODEL, blockModelId).put(variantSetting, rotation));
+      map.register(SlabType.TOP, direction, BlockStateVariant.create().put(VariantSettings.MODEL, blockModelId.brrp_suffixed("_top")).put(variantSetting, rotation));
+      map.register(SlabType.DOUBLE, direction, BlockStateVariant.create().put(VariantSettings.MODEL, baseBlockModelId).put(variantSetting, rotation));
     }
-    return JBlockStates.ofVariants(variant);
+    return state.coordinate(map);
   }
 
   @OnlyIn(Dist.CLIENT)
   @Override
-  public @NotNull JModel getBlockModel() {
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
     return super.getBlockModel().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
   }
 
   @OnlyIn(Dist.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
-    final JModel model = getBlockModel();
+    final ModelJsonBuilder model = getBlockModel();
     final Identifier id = getBlockModelId();
-    pack.addModel(model, id);
-    pack.addModel(model.clone().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")), id.brrp_append("_top"));
+    pack.addModel(id, model);
+    pack.addModel(id.brrp_suffixed("_top"), model.withParent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")));
   }
 }

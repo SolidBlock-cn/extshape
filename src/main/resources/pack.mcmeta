@@ -1,6 +1,7 @@
 {
   "pack": {
-    "pack_format": 8,
+    "forge:server_data_pack_format": 12,
+    "pack_format": 13,
     "description": "The resource pack of Extended Block Shapes mod."
   }
 }

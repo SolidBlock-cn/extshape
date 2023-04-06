@@ -5,6 +5,7 @@ import net.minecraft.text.StringVisitable;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Language;
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,15 +27,21 @@ public class TranslatableTextContentMixin {
   @Final
   private Object[] args;
 
-  @Shadow private List<StringVisitable> translations;
+  @Shadow
+  private List<StringVisitable> translations;
 
-  @Inject(method = "updateTranslations", at = @At(value = "INVOKE", target = "Ljava/util/Objects;requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
+  @Shadow
+  @Final
+  @Nullable
+  private String fallback;
+
+  @Inject(method = "updateTranslations", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/TranslatableTextContent;forEachPart(Ljava/lang/String;Ljava/util/function/Consumer;)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
   public void modify(CallbackInfo ci, Language language, String string, ImmutableList.Builder<StringVisitable> builder) {
     if (key.equals(AttributiveBlockNameManager.ATTRIBUTIVE_KEY)) {
       final String newKey = (String) args[0];
       final String converted = AttributiveBlockNameManager.convertToAttributive(language.get(newKey), language);
       final Object[] newArgs = ArrayUtils.remove(args, 0);
-      final TranslatableTextContent newContent = new TranslatableTextContent(newKey, newArgs);
+      final TranslatableTextContent newContent = new TranslatableTextContent(newKey, fallback, newArgs);
       ((TranslatableTextContentAccessor) newContent).invokeForEachPart(converted, builder::add);
       translations = builder.build();
       ci.cancel();

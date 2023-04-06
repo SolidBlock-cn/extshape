@@ -1,14 +1,16 @@
 package pers.solid.extshape.rrp;
 
-import net.devtech.arrp.generator.TextureRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.util.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.ApiStatus;
+import pers.solid.brrp.v1.generator.TextureRegistry;
 import pers.solid.extshape.block.ExtShapeBlocks;
 
 @OnlyIn(Dist.CLIENT)
+@ApiStatus.Internal
 public class VanillaTextures {
   @OnlyIn(Dist.CLIENT)
   public static void registerTextures() {
@@ -46,6 +48,7 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.BIRCH_LOG, TextureKey.END, new Identifier("minecraft", "block/birch_log_top"));
     TextureRegistry.register(Blocks.JUNGLE_LOG, TextureKey.END, new Identifier("minecraft", "block/jungle_log_top"));
     TextureRegistry.register(Blocks.ACACIA_LOG, TextureKey.END, new Identifier("minecraft", "block/acacia_log_top"));
+    TextureRegistry.register(Blocks.CHERRY_LOG, TextureKey.END, new Identifier("minecraft", "block/cherry_log_top"));
     TextureRegistry.register(Blocks.DARK_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/dark_oak_log_top"));
     TextureRegistry.register(Blocks.MANGROVE_LOG, TextureKey.END, new Identifier("minecraft", "block/mangrove_log_top"));
     TextureRegistry.register(Blocks.WARPED_STEM, TextureKey.END, new Identifier("minecraft", "block/warped_stem_top"));
@@ -55,6 +58,7 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.BIRCH_WOOD, new Identifier("minecraft", "block/birch_log"));
     TextureRegistry.register(Blocks.JUNGLE_WOOD, new Identifier("minecraft", "block/jungle_log"));
     TextureRegistry.register(Blocks.ACACIA_WOOD, new Identifier("minecraft", "block/acacia_log"));
+    TextureRegistry.register(Blocks.CHERRY_WOOD, new Identifier("minecraft", "block/cherry_log"));
     TextureRegistry.register(Blocks.DARK_OAK_WOOD, new Identifier("minecraft", "block/dark_oak_log"));
     TextureRegistry.register(Blocks.MANGROVE_WOOD, new Identifier("minecraft", "block/mangrove_log"));
     TextureRegistry.register(Blocks.WARPED_HYPHAE, new Identifier("minecraft", "block/warped_stem"));
@@ -64,6 +68,7 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.STRIPPED_BIRCH_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_birch_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_JUNGLE_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_jungle_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_ACACIA_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_acacia_log_top"));
+    TextureRegistry.register(Blocks.STRIPPED_CHERRY_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_cherry_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_DARK_OAK_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_dark_oak_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_MANGROVE_LOG, TextureKey.END, new Identifier("minecraft", "block/stripped_mangrove_log_top"));
     TextureRegistry.register(Blocks.STRIPPED_WARPED_STEM, TextureKey.END, new Identifier("minecraft", "block/stripped_warped_stem_top"));
@@ -73,25 +78,26 @@ public class VanillaTextures {
     TextureRegistry.register(Blocks.STRIPPED_BIRCH_WOOD, new Identifier("minecraft", "block/stripped_birch_log"));
     TextureRegistry.register(Blocks.STRIPPED_JUNGLE_WOOD, new Identifier("minecraft", "block/stripped_jungle_log"));
     TextureRegistry.register(Blocks.STRIPPED_ACACIA_WOOD, new Identifier("minecraft", "block/stripped_acacia_log"));
+    TextureRegistry.register(Blocks.STRIPPED_CHERRY_WOOD, new Identifier("minecraft", "block/stripped_cherry_log"));
     TextureRegistry.register(Blocks.STRIPPED_DARK_OAK_WOOD, new Identifier("minecraft", "block/stripped_dark_oak_log"));
     TextureRegistry.register(Blocks.STRIPPED_MANGROVE_WOOD, new Identifier("minecraft", "block/stripped_mangrove_log"));
     TextureRegistry.register(Blocks.STRIPPED_WARPED_HYPHAE, new Identifier("minecraft", "block/stripped_warped_stem"));
     TextureRegistry.register(Blocks.STRIPPED_CRIMSON_HYPHAE, new Identifier("minecraft", "block/stripped_crimson_stem"));
 
-    TextureRegistry.registerAppended(Blocks.OCHRE_FROGLIGHT, TextureKey.ALL, "_side");
-    TextureRegistry.registerAppended(Blocks.OCHRE_FROGLIGHT, TextureKey.END, "_top");
-    TextureRegistry.registerAppended(Blocks.VERDANT_FROGLIGHT, TextureKey.ALL, "_side");
-    TextureRegistry.registerAppended(Blocks.VERDANT_FROGLIGHT, TextureKey.END, "_top");
-    TextureRegistry.registerAppended(Blocks.PEARLESCENT_FROGLIGHT, TextureKey.ALL, "_side");
-    TextureRegistry.registerAppended(Blocks.PEARLESCENT_FROGLIGHT, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.OCHRE_FROGLIGHT, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.OCHRE_FROGLIGHT, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.VERDANT_FROGLIGHT, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.VERDANT_FROGLIGHT, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.PEARLESCENT_FROGLIGHT, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.PEARLESCENT_FROGLIGHT, TextureKey.END, "_top");
 
-    TextureRegistry.registerAppended(Blocks.BASALT, TextureKey.ALL, "_side");
-    TextureRegistry.registerAppended(Blocks.BASALT, TextureKey.END, "_top");
-    TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.ALL, "_side");
-    TextureRegistry.registerAppended(Blocks.POLISHED_BASALT, TextureKey.END, "_top");
-    TextureRegistry.registerAppended(Blocks.DEEPSLATE, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.BASALT, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.POLISHED_BASALT, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.POLISHED_BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.DEEPSLATE, TextureKey.END, "_top");
 
-    TextureRegistry.registerAppended(Blocks.BAMBOO_BLOCK, TextureKey.END, "_top");
-    TextureRegistry.registerAppended(Blocks.STRIPPED_BAMBOO_BLOCK, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.BAMBOO_BLOCK, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.STRIPPED_BAMBOO_BLOCK, TextureKey.END, "_top");
   }
 }
