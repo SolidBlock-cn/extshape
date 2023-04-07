@@ -93,11 +93,7 @@ public final class RecipeConflict {
           final ServerCommandSource source = context.getSource();
           source.sendFeedback(Text.translatable("message.extshape.recipe_conflict.start"), true);
           final ServerWorld world = source.getWorld();
-          final ServerPlayerEntity player = source.getPlayer();
-          if (player == null) {
-            source.sendFeedback(Text.translatable("argument.entity.notfound.player"), false);
-            return 0;
-          }
+          final ServerPlayerEntity player = source.getPlayerOrThrow();
           return checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
         }));
   }

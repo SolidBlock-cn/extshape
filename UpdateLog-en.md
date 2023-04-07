@@ -3,6 +3,7 @@
 ### 2.0.0
 - Adapted to new version of Better Runtime Resource Packs.
 - Fixed the issue that some bedrock blocks occupy the empty loot table.
+- The permission level of `/extshape:check-conflict` has been adjusted to 4.
 
 ### 1.9.0
 
