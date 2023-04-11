@@ -232,7 +232,7 @@ public final class ExtShapeBlockusBlocks {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.LAVA_POLISHED_BLACKSTONE_BRICKS, bsswTypes -> buildStoneBlocksWithButton(create(bsswTypes).addExtraTag(BlockusBlockTags.LAVA_POLISHED_BLACKSTONE_BRICKS).addExtraTag(BlockusBlockTags.BLACKSTONE_BLOCKS)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHISELED_LAVA_POLISHED_BLACKSTONE, block -> buildStoneBlocksWithoutButton(create(block).addExtraTag(BlockusBlockTags.LAVA_POLISHED_BLACKSTONE_BRICKS).addExtraTag(BlockusBlockTags.BLACKSTONE_BLOCKS)));
 
-    // because of issues related to tint index and render layers, water bricks do not have extende shapes
+    // because of issues related to tint index and render layers, water bricks do not have extended shapes
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SNOW_BRICKS, bsswTypes -> buildStoneBlocksWithButton(create(bsswTypes).addExtraTag(BlockusBlockTags.SNOW_BRICKS)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ICE_BRICKS, block -> buildStoneBlocksWithoutButton(create(block).addExtraTag(BlockusBlockTags.ICE_BRICKS)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.OBSIDIAN_BRICKS, bsswTypes -> buildStoneBlocksWithoutButton(create(bsswTypes).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonType(ButtonType.HARD)));

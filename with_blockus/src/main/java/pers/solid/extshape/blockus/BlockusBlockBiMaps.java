@@ -23,8 +23,7 @@ public final class BlockusBlockBiMaps {
       final Stream<BlockFamily> families = BlockusBlockFamilies.getFamilies();
       families.forEach(blockFamily -> {
         Block baseBlock = blockFamily.getBaseBlock();
-        // considering blockus also make variants for netherite blocks, to avoid conflict with
-        // Extended Block Shapes, we do not add it to BlockBiMaps.
+        // ignore netherite block because it belongs to vanilla
         if (baseBlock == Blocks.NETHERITE_BLOCK) return;
         Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
         for (BlockShape shape : BlockShape.values()) {
