@@ -91,8 +91,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       final Identifier woolId = Registry.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = Registry.ITEM.get(carpetId);
-      final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(this).input(carpet).criterion("has_carpet", RecipeProvider.conditionsFromItem(carpet));
-      return recipe;
+      return ShapelessRecipeJsonBuilder.create(this).input(carpet).criterion("has_carpet", RecipeProvider.conditionsFromItem(carpet));
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
       return ShapelessRecipeJsonBuilder.create(this).input(Blocks.MOSS_CARPET)
           .criterion("has_carpet", RecipeProvider.conditionsFromItem(Blocks.MOSS_CARPET));
