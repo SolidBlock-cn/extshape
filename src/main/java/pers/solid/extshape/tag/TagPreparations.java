@@ -26,6 +26,7 @@ public class TagPreparations {
   private final Multimap<TagKey<Item>, Object> itemTags = LinkedHashMultimap.create();
   private final Map<TagKey<Block>, TagKey<Item>> blockTagsToItemTags = new HashMap<>();
 
+  @SuppressWarnings("unchecked")
   @Contract(mutates = "this")
   @CanIgnoreReturnValue
   public boolean put(TagKey<? extends ItemConvertible> tagKey, ItemConvertible object) {
@@ -38,6 +39,7 @@ public class TagPreparations {
     throw new IllegalArgumentException("Only blocks and items are accepted.");
   }
 
+  @SuppressWarnings("unchecked")
   @Contract(mutates = "this")
   @CanIgnoreReturnValue
   public boolean put(TagKey<?> to, TagKey<?> tagKeyInIt) {
@@ -49,6 +51,7 @@ public class TagPreparations {
     throw new IllegalArgumentException("Only block or item tags are accepted");
   }
 
+  @SuppressWarnings("unchecked")
   @Contract(mutates = "this")
   @CanIgnoreReturnValue
   public boolean putAll(TagKey<?> tagKey, Iterable<?> objects) {
@@ -72,6 +75,7 @@ public class TagPreparations {
     return itemTags.put(tagKey, Arrays.asList(items));
   }
 
+  @SuppressWarnings("unchecked")
   @Contract(mutates = "this")
   @CanIgnoreReturnValue
   public boolean putAllTags(TagKey<?> tagKey, Iterable<TagKey<?>> tagKeys) {

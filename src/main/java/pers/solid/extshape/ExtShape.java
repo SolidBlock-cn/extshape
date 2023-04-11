@@ -99,7 +99,7 @@ public class ExtShape {
   }
 
   /**
-   * 可通过斧去皮的方块。
+   * 可通过斧去皮的方块，包括模组中的。
    */
   public static final Map<Block, Block> EXTENDED_STRIPPABLE_BLOCKS = new HashMap<>();
 

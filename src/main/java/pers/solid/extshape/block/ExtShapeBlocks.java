@@ -96,7 +96,6 @@ public final class ExtShapeBlocks {
     }
 
     // 泥土和砂土。其中砂土没有按钮和压力板。
-    ButtonType buttonType2 = ButtonType.SOFT;
     FACTORY.createAllShapes(DIRT)
         .setFenceCraftingIngredient(Items.STICK)
         .addPreBuildConsumer((blockShape, blockBuilder) -> {
@@ -106,7 +105,7 @@ public final class ExtShapeBlocks {
             blockBuilder.addExtraTag(BlockTags.DEAD_BUSH_MAY_PLACE_ON);
           }
         })
-        .setButtonType(buttonType2)
+        .setButtonType(ButtonType.SOFT)
         .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
     FACTORY.createAllShapes(COARSE_DIRT)
         .setFenceCraftingIngredient(Items.STICK)

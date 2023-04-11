@@ -48,7 +48,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   /**
    * 创建实例并构建后，将自身添加到这些标签中。
    */
-  protected List<@NotNull TagKey<? extends ItemConvertible>> extraTags = new ArrayList<>();
+  protected final List<@NotNull TagKey<? extends ItemConvertible>> extraTags = new ArrayList<>();
   public AbstractBlock.Settings blockSettings;
   /**
    * 构建之后将构建后的方块添加到这个集合中，方便以后进行集中的管理。这个一般是在 {@link BlocksBuilderFactory} 中设置的，然后间接传递到这个参数来。
@@ -69,7 +69,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   /**
    * 是否将方块添加到相应的 {@link BlockBiMaps} 中。
    */
-  protected boolean shouldAddToBlockBiMap;
+  public boolean shouldAddToBlockBiMap;
   /**
    * 用于构造实例的匿名函数。该值必须非 {@code null}，否则实例化无法进行。
    *
