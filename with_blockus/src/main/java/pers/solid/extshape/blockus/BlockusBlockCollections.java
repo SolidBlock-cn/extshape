@@ -79,7 +79,7 @@ public final class BlockusBlockCollections {
       () -> BlockusBlocks.PINK_CONCRETE_BRICKS
   );
 
-  public static final ImmutableList<Supplier<BSSTypes>> TINTED_SHRINGLES = ImmutableList.of(
+  public static final ImmutableList<Supplier<BSSTypes>> TINTED_SHINGLES = ImmutableList.of(
       () -> BlockusBlocks.WHITE_SHINGLES,
       () -> BlockusBlocks.ORANGE_SHINGLES,
       () -> BlockusBlocks.MAGENTA_SHINGLES,

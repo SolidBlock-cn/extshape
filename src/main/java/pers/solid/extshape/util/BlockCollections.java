@@ -68,7 +68,7 @@ public final class BlockCollections {
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
       DARK_OAK_PLANKS,
-      MANGROVE_PLANKS /* 1.19 */,
+      MANGROVE_PLANKS,
       BAMBOO_PLANKS,
       BAMBOO_MOSAIC,
       CRIMSON_PLANKS,
@@ -81,7 +81,7 @@ public final class BlockCollections {
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
       DARK_OAK_PLANKS,
-      MANGROVE_PLANKS, /* 1.19 */
+      MANGROVE_PLANKS,
       BAMBOO_PLANKS,
       BAMBOO_MOSAIC
   );
