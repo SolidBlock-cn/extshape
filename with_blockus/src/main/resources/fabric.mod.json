@@ -32,6 +32,6 @@
     ],
     "brrp_v1": "*",
     "extshape": ">=${version}",
-    "blockus": ">=2.6.5"
+    "blockus": ">=2.6.6"
   }
 }

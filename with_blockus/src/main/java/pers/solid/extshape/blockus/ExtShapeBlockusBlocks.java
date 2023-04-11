@@ -350,6 +350,10 @@ public final class ExtShapeBlockusBlocks {
       });
     }
 
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHOCOLATE_BLOCK, bssTypes -> create(bssTypes).addExtraTag(BlockusBlockTags.CHOCOLATE_BLOCKS).build());
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHOCOLATE_BRICKS, bsswTypes -> create(bsswTypes).addExtraTag(BlockusBlockTags.CHOCOLATE_BLOCKS).build());
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHOCOLATE_SQUARES, block -> create(block).addExtraTag(BlockusBlockTags.CHOCOLATE_BLOCKS).build());
+
     final Function<BlockShape, @Nullable TagKey<? extends ItemConvertible>> addWallToUnmineableTag = blockShape -> blockShape == BlockShape.WALL ? ExtShapeTags.PICKAXE_UNMINEABLE : null;
 
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHORUS_BLOCK, block -> create(block).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).setCommonFenceSettings(Items.CHORUS_PLANT).setPillar().build());
