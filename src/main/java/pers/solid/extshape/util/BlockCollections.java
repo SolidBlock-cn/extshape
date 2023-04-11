@@ -68,7 +68,7 @@ public final class BlockCollections {
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
       DARK_OAK_PLANKS,
-      MANGROVE_PLANKS /* 1.19 */,
+      MANGROVE_PLANKS,
       CRIMSON_PLANKS,
       WARPED_PLANKS
   );
@@ -79,7 +79,7 @@ public final class BlockCollections {
       JUNGLE_PLANKS,
       ACACIA_PLANKS,
       DARK_OAK_PLANKS,
-      MANGROVE_PLANKS /* 1.19 */
+      MANGROVE_PLANKS
   );
   public static final @Unmodifiable ImmutableList<Block> STONE_VARIANTS = ImmutableList.of(
       GRANITE,

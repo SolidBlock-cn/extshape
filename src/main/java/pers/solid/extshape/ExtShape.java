@@ -2,6 +2,10 @@ package pers.solid.extshape;
 
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
+import it.unimi.dsi.fastutil.objects.Object2FloatMap;
+import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
@@ -10,6 +14,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ComposterBlock;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.tag.TagKey;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +85,7 @@ public class ExtShape implements ModInitializer {
   /**
    * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故不使用 {@link net.fabricmc.fabric.api.registry.StrippableBlockRegistry}，而使用 {@link pers.solid.extshape.mixin.AxeItemMixin}。
    */
-  private void registerStrippableBlocks() {
+  private static void registerStrippableBlocks() {
     Streams.concat(
         IntStream.range(0, BlockCollections.LOGS.size()).mapToObj(i -> Pair.of(BlockCollections.LOGS.get(i), BlockCollections.STRIPPED_LOGS.get(i))),
         IntStream.range(0, BlockCollections.WOODS.size()).mapToObj(i -> Pair.of(BlockCollections.WOODS.get(i), BlockCollections.STRIPPED_WOODS.get(i))),
@@ -104,37 +110,41 @@ public class ExtShape implements ModInitializer {
    * @see net.fabricmc.fabric.api.registry.CompostingChanceRegistry
    * @see ComposterBlock#registerDefaultCompostableItems()
    */
-  private void registerComposingChances() {
+  private static void registerComposingChances() {
+    final Object2FloatMap<ItemConvertible> map = new Object2FloatOpenHashMap<>();
+
     // 原版这些方块的堆肥概率为 0.65。
     for (final Block compostableBlock : new Block[]{
         Blocks.PUMPKIN, Blocks.MELON, Blocks.MOSS_BLOCK, Blocks.SHROOMLIGHT
     }) {
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.SLAB, compostableBlock), 0.325f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.325f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.15625f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.15625f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.FENCE, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.WALL, compostableBlock), 0.65f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.BUTTON, compostableBlock), 0.2f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, compostableBlock), 0.2f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.65f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.SLAB, compostableBlock), 0.325f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.65f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.325f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.15625f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.15625f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE, compostableBlock), 0.65f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.65f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.WALL, compostableBlock), 0.65f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.BUTTON, compostableBlock), 0.2f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, compostableBlock), 0.2f);
     }
     // 原版的下界疣和诡异疣的堆肥概率为 0.9。
     for (final Block compostableBlock : new Block[]{
         Blocks.WARPED_WART_BLOCK, Blocks.NETHER_WART_BLOCK
     }) {
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.8f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.SLAB, compostableBlock), 0.4f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.8f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.4f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.2f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.2f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.FENCE, compostableBlock), 0.8f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.8f);
-      CompostingChanceRegistry.INSTANCE.add(BlockBiMaps.getBlockOf(BlockShape.WALL, compostableBlock), 0.8f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.8f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.SLAB, compostableBlock), 0.4f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.8f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.4f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.2f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.2f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE, compostableBlock), 0.8f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.8f);
+      map.put(BlockBiMaps.getBlockOf(BlockShape.WALL, compostableBlock), 0.8f);
     }
+
+    map.forEach(CompostingChanceRegistry.INSTANCE::add);
   }
 
   /**
@@ -144,29 +154,33 @@ public class ExtShape implements ModInitializer {
    * @see net.minecraft.block.entity.AbstractFurnaceBlockEntity#createFuelTimeMap()
    */
   @ApiStatus.AvailableSince("1.5.0")
-  private void registerFuels() {
+  private static void registerFuels() {
+    final Object2IntMap<TagKey<Block>> map = new Object2IntOpenHashMap<>();
+
     // 参照原版木制（含下界木）楼梯和台阶，楼梯燃烧时间为 300 刻，台阶燃烧时间为 150 刻。
     // 但是，non_flammable_wood 标签的仍然不会被熔炉接受。
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_STAIRS), 300);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_SLABS), 150);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_QUARTER_PIECES), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES), 75);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOODEN_WALLS), 300);
+    map.put(ExtShapeTags.WOODEN_VERTICAL_STAIRS, 300);
+    map.put(ExtShapeTags.WOODEN_VERTICAL_SLABS, 150);
+    map.put(ExtShapeTags.WOODEN_QUARTER_PIECES, 75);
+    map.put(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES, 75);
+    map.put(ExtShapeTags.WOODEN_WALLS, 300);
 
     // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_STAIRS), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_SLABS), 50);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_QUARTER_PIECES), 25);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_STAIRS), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_SLABS), 50);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES), 25);
+    map.put(ExtShapeTags.WOOLEN_STAIRS, 100);
+    map.put(ExtShapeTags.WOOLEN_SLABS, 50);
+    map.put(ExtShapeTags.WOOLEN_QUARTER_PIECES, 25);
+    map.put(ExtShapeTags.WOOLEN_VERTICAL_STAIRS, 100);
+    map.put(ExtShapeTags.WOOLEN_VERTICAL_SLABS, 50);
+    map.put(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES, 25);
 
     // 栅栏、栅栏门、压力板、燃烧时间和基础方块一致，门的燃烧时间为三分之二，按钮为三分之一。
     // 但考虑到羊毛压力板是与地毯相互合成的，故燃烧时间与地毯一致，为 67。
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_FENCES), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_FENCE_GATES), 100);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_PRESSURE_PLATES), 67);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_BUTTONS), 33);
-    FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(ExtShapeTags.WOOLEN_WALLS), 100);
+    map.put(ExtShapeTags.WOOLEN_FENCES, 100);
+    map.put(ExtShapeTags.WOOLEN_FENCE_GATES, 100);
+    map.put(ExtShapeTags.WOOLEN_PRESSURE_PLATES, 67);
+    map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
+    map.put(ExtShapeTags.WOOLEN_WALLS, 100);
+
+    map.forEach((blockTagKey, integer) -> FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(blockTagKey), integer));
   }
 }

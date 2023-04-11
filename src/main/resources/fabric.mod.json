@@ -42,6 +42,7 @@
     "brrp_v1": "*"
   },
   "suggests": {
-    "blockus": "*"
+    "blockus": "*",
+    "reasonable-sorting": "*"
   }
 }
