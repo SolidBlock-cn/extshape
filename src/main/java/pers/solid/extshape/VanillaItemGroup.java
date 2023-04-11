@@ -37,7 +37,7 @@ public final class VanillaItemGroup {
    * 更新创造模式物品栏时的事件。
    */
   public static class UpdateShapesEvent extends Event {
-    }
+  }
 
   private VanillaItemGroup() {
   }
