@@ -6,6 +6,7 @@ import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.PatternWoolTypes;
 import com.brand.blockus.data.family.BlockusBlockFamilies;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.family.BlockFamily;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -22,6 +23,8 @@ public final class BlockusBlockBiMaps {
       final Stream<BlockFamily> families = BlockusBlockFamilies.getFamilies();
       families.forEach(blockFamily -> {
         Block baseBlock = blockFamily.getBaseBlock();
+        // ignore netherite block because it belongs to vanilla
+        if (baseBlock == Blocks.NETHERITE_BLOCK) return;
         Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
         for (BlockShape shape : BlockShape.values()) {
           if (shape.vanillaVariant == null) continue;
@@ -54,12 +57,12 @@ public final class BlockusBlockBiMaps {
           BlockBiMaps.of(BlockShape.WALL).put(bsswTypes.block, bsswTypes.wall);
         }
       });
-      BSSTypes.values().forEach(bsswTypes -> {
-        if (bsswTypes.stairs != null) {
-          BlockBiMaps.of(BlockShape.STAIRS).put(bsswTypes.block, bsswTypes.stairs);
+      BSSTypes.values().forEach(bssTypes -> {
+        if (bssTypes.stairs != null) {
+          BlockBiMaps.of(BlockShape.STAIRS).put(bssTypes.block, bssTypes.stairs);
         }
-        if (bsswTypes.slab != null) {
-          BlockBiMaps.of(BlockShape.SLAB).put(bsswTypes.block, bsswTypes.slab);
+        if (bssTypes.slab != null) {
+          BlockBiMaps.of(BlockShape.SLAB).put(bssTypes.block, bssTypes.slab);
         }
       });
       PatternWoolTypes.values().forEach(patternWoolTypes -> {
