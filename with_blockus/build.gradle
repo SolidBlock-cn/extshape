@@ -12,11 +12,10 @@ repositories {
 }
 dependencies {
     // Blockus 模组
-    modApi ("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}") {
+    modApi("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}") {
         exclude module: "fabric-loader"
         transitive false
     }
-
     modCompileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
     modApi "curse.maven:blockus-312289:${project.blockus_version}"
     implementation project(path: ':', configuration: "namedElements")
