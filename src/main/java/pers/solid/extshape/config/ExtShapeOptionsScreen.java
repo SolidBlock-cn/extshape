@@ -14,6 +14,7 @@ import net.minecraft.client.option.CyclingOption;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
@@ -243,7 +244,7 @@ public class ExtShapeOptionsScreen extends Screen {
             suppressedDataWarning = true;
             close();
             if (t) {
-              ExtShapeRRP.PACK.clearResources();
+              ExtShapeRRP.PACK.clearResources(ResourceType.SERVER_DATA);
               ExtShapeRRP.generateServerData(ExtShapeRRP.PACK);
               client.inGameHud.getChatHud().addMessage(
                   new TranslatableText("options.dataChanged.finish",

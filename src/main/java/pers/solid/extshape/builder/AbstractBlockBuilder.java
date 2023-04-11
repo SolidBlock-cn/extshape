@@ -71,7 +71,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   /**
    * 是否将方块添加到相应的 {@link BlockBiMaps} 中。
    */
-  protected boolean shouldAddToBlockBiMap;
+  public boolean shouldAddToBlockBiMap;
   /**
    * 用于构造实例的匿名函数。该值必须非 {@code null}，否则实例化无法进行。
    *
