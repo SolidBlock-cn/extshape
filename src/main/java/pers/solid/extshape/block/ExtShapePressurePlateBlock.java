@@ -87,10 +87,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       final Item carpet = ForgeRegistries.ITEMS.getValue(carpetId);
       return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(carpet).criterion("has_carpet", RecipeProvider.conditionsFromItem(carpet));
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      return ShapelessRecipeJsonBuilder.create(getRecipeCategory(),this).input(Blocks.MOSS_CARPET)
+      return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(Blocks.MOSS_CARPET)
           .criterion("has_carpet", RecipeProvider.conditionsFromItem(Blocks.MOSS_CARPET));
     } else {
-      return ShapedRecipeJsonBuilder.create(getRecipeCategory(),this)
+      return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
           .pattern("##")
           .input('#', baseBlock)
           .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))

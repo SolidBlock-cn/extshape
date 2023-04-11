@@ -78,7 +78,7 @@ public class ExtShape {
       ExtShapeItemGroup.init();
       ExtShapeTags.refillTags();
 
-    // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
+      // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
       VanillaItemGroup.registerForMod();
       registerComposingChances();
       registerStrippableBlocks();
@@ -92,7 +92,7 @@ public class ExtShape {
   }
 
   /**
-   * 可通过斧去皮的方块。
+   * 可通过斧去皮的方块，包括模组中的。
    */
   public static final Map<Block, Block> EXTENDED_STRIPPABLE_BLOCKS = new HashMap<>();
 

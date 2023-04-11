@@ -67,7 +67,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
     final Identifier blockModelId = getBlockModelId();
     final ModelJsonBuilder blockModel = getBlockModel();
     pack.addModel(blockModelId, blockModel);
-    pack.addModel(blockModelId.brrp_suffixed("_top"), blockModel.parent(new Identifier(ExtShape.MOD_ID,"block/quarter_piece_top")));
+    pack.addModel(blockModelId.brrp_suffixed("_top"), blockModel.parent(new Identifier(ExtShape.MOD_ID, "block/quarter_piece_top")));
   }
 
 

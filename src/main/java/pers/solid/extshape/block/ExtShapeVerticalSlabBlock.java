@@ -40,7 +40,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   @Override
   public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier identifier = getBlockModelId();
-    return VariantsBlockStateSupplier.create (this, new BlockStateVariant().put(VariantSettings.MODEL, identifier)).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
+    return VariantsBlockStateSupplier.create(this, new BlockStateVariant().put(VariantSettings.MODEL, identifier)).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
   }
 
 

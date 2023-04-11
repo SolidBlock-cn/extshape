@@ -29,9 +29,9 @@ public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
     final Identifier baseModelId = baseBlock == null ? modelId.brrp_suffixed("_double") : BRRPUtils.getBlockModelId(baseBlock);
 
     for (Direction.Axis axis : Direction.Axis.values()) {
-      variants.register(SlabType.BOTTOM, axis , BlockStateVariant.create().put(VariantSettings.MODEL, modelId.brrp_suffixed("_" + axis.asString())));
-      variants.register(SlabType.TOP, axis , BlockStateVariant.create().put(VariantSettings.MODEL, topModelId.brrp_suffixed("_" + axis.asString())));
-      variants.register(SlabType.DOUBLE, axis , BlockStateVariant.create().put(VariantSettings.MODEL, baseModelId.brrp_suffixed("_" + axis.asString())));
+      variants.register(SlabType.BOTTOM, axis, BlockStateVariant.create().put(VariantSettings.MODEL, modelId.brrp_suffixed("_" + axis.asString())));
+      variants.register(SlabType.TOP, axis, BlockStateVariant.create().put(VariantSettings.MODEL, topModelId.brrp_suffixed("_" + axis.asString())));
+      variants.register(SlabType.DOUBLE, axis, BlockStateVariant.create().put(VariantSettings.MODEL, baseModelId.brrp_suffixed("_" + axis.asString())));
     }
 
     return VariantsBlockStateSupplier.create(this).coordinate(variants);

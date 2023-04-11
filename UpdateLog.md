@@ -3,6 +3,8 @@
 ### 2.0.0
 - 适应新的 Better Runtime Resource Packs
 - 修复了一些基岩物品占用空白战利品表的问题。
+- 调整了 `/extshape:check-conflict` 命令的权限等级为 4。
+- 修复 Blockus 的白色橡木不能用斧去皮的问题。
 
 ### 1.9.0
 

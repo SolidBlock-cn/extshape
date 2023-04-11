@@ -99,7 +99,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
     if (baseBlock == null) {
       return null;
     } else {
-      return SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(),(ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
+      return SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
     }
   }
 

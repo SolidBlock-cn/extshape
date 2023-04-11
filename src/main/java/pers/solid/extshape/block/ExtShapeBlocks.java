@@ -97,7 +97,6 @@ public final class ExtShapeBlocks {
     }
 
     // 泥土和砂土。其中砂土没有按钮和压力板。
-    ButtonSettings buttonSettings2 = ButtonSettings.soft(BlockSetType.STONE);
     FACTORY.createAllShapes(DIRT)
         .setCommonFenceSettings(Items.STICK)
         .addPreBuildConsumer((blockShape, blockBuilder) -> {
@@ -107,7 +106,7 @@ public final class ExtShapeBlocks {
             blockBuilder.addExtraTag(BlockTags.DEAD_BUSH_MAY_PLACE_ON);
           }
         })
-        .setButtonSettings(buttonSettings2)
+        .setButtonSettings(ButtonSettings.soft(BlockSetType.STONE))
         .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
     FACTORY.createAllShapes(COARSE_DIRT)
         .setCommonFenceSettings(Items.STICK)
@@ -310,18 +309,16 @@ public final class ExtShapeBlocks {
     }
 
     // 金块。
-    ButtonSettings buttonSettings1 = ButtonSettings.stone(BlockSetType.GOLD);
     FACTORY.createAllShapes(GOLD_BLOCK)
         .setCommonFenceSettings(Items.GOLD_INGOT)
         .addExtraTag(ItemTags.PIGLIN_LOVED)
         .addExtraTag(BlockTags.GUARDED_BY_PIGLINS)
-        .setButtonSettings(buttonSettings1)
+        .setButtonSettings(ButtonSettings.stone(BlockSetType.GOLD))
         .setPressurePlateActivationRule(null).build();
     // 铁块。
-    ButtonSettings buttonSettings = ButtonSettings.stone(BlockSetType.IRON);
     FACTORY.createAllShapes(IRON_BLOCK)
         .setCommonFenceSettings(Items.IRON_INGOT)
-        .setButtonSettings(buttonSettings)
+        .setButtonSettings(ButtonSettings.stone(BlockSetType.IRON))
         .setPressurePlateActivationRule(null).build();
 
     // 砖栅栏和栅栏门。

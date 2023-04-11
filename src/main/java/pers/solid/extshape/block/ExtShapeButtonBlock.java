@@ -101,7 +101,7 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     if (REFUSE_RECIPES.contains(baseBlock) && ExtShapeConfig.CURRENT_CONFIG.avoidSomeButtonRecipes || baseBlock == null) {
       return null;
     }
-    return ShapelessRecipeJsonBuilder.create(getRecipeCategory(),this)
+    return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this)
         .input(baseBlock)
         .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
         .group(getRecipeGroup());
