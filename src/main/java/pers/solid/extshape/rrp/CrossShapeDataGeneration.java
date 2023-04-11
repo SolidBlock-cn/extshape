@@ -144,7 +144,7 @@ public class CrossShapeDataGeneration {
   ) {
     if (ingredient == null || result == null) return;
     final Identifier recipeId = recipeIdOf(result, suffix);
-    final SingleItemRecipeJsonBuilder recipe = SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ingredient), getRecipeCategory(),result, count)
+    final SingleItemRecipeJsonBuilder recipe = SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ingredient), getRecipeCategory(), result, count)
         .group(RecipeGroupRegistry.getRecipeGroup(result))
         .criterion(criterionName, RecipeProvider.conditionsFromItem(ingredient));
     pack.addRecipeAndAdvancement(recipeId, recipe);

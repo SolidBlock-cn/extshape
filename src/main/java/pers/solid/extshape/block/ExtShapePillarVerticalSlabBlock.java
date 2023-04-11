@@ -40,7 +40,7 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
       final int rotation = (int) facing.asRotation();
       variants.register(Direction.Axis.Y, facing, new BlockStateVariant().put(VariantSettings.MODEL, modelId).put(yRotation, rotation).put(VariantSettings.UVLOCK, true));
       final boolean usesTopModel = facing == Direction.NORTH || facing == Direction.EAST;
-      variants.register(facing.getAxis(), facing, new BlockStateVariant().put(VariantSettings.MODEL, modelId).put(yRotation, usesTopModel ? rotation-180 : rotation).put(VariantSettings.X, VariantSettings.Rotation.R90));
+      variants.register(facing.getAxis(), facing, new BlockStateVariant().put(VariantSettings.MODEL, modelId).put(yRotation, usesTopModel ? rotation - 180 : rotation).put(VariantSettings.X, VariantSettings.Rotation.R90));
       variants.register(facing.rotateYClockwise().getAxis(), facing, new BlockStateVariant().put(VariantSettings.MODEL, usesTopModel ? horizontalModelId.brrp_suffixed("_unordered_top") : horizontalModelId.brrp_suffixed("_unordered")).put(yRotation, usesTopModel ? rotation - 90 : rotation + 90).put(VariantSettings.X, VariantSettings.Rotation.R90));
     }
 

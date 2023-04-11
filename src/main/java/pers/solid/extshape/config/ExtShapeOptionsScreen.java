@@ -15,6 +15,7 @@ import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
@@ -243,7 +244,7 @@ public class ExtShapeOptionsScreen extends Screen {
             suppressedDataWarning = true;
             close();
             if (t) {
-              ExtShapeRRP.PACK.clearResources();
+              ExtShapeRRP.PACK.clearResources(ResourceType.SERVER_DATA);
               ExtShapeRRP.generateServerData(ExtShapeRRP.PACK);
               client.inGameHud.getChatHud().addMessage(
                   Text.translatable("options.dataChanged.finish",
