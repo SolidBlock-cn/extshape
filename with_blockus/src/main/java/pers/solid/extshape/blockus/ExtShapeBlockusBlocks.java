@@ -367,7 +367,7 @@ public final class ExtShapeBlockusBlocks {
     }
 
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SHINGLES, block -> create(block).addExtraTag(BlockusBlockTags.SHINGLES).setCommonFenceSettings(Items.FLINT).build());
-    for (var supplier : BlockusBlockCollections.TINTED_SHRINGLES) {
+    for (var supplier : BlockusBlockCollections.TINTED_SHINGLES) {
       ExtShapeBlockus.tryConsume(supplier, bssTypes -> create(bssTypes).setCommonFenceSettings(Items.FLINT).setRecipeGroup(blockShape -> "shingles_" + blockShape.asString()).build());
     }
 

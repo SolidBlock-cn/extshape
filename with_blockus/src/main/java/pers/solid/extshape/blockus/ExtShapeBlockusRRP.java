@@ -158,7 +158,7 @@ public final class ExtShapeBlockusRRP {
   }
 
   private static void generateShingleDyeingRecipes(RuntimeResourcePack pack) {
-    for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHRINGLES) {
+    for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHINGLES) {
       ExtShapeBlockus.tryConsume(supplier, bssTypes -> {
         Item dyeItem = Registries.ITEM.get(new Identifier("minecraft", StringUtils.substringBefore(Registries.BLOCK.getId(bssTypes.block).getPath(), "_shingle") + "_dye"));
         for (BlockShape blockShape : BlockShape.values()) {

@@ -150,7 +150,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     // shingles and terracotta
     builder.put(BlockusBlocks.SHINGLES.block, Blocks.TERRACOTTA);
     final Iterator<Block> terracottaIterator = BlockCollections.STAINED_TERRACOTTA.iterator();
-    for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHRINGLES) {
+    for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHINGLES) {
       ExtShapeBlockus.tryConsume(supplier, bssTypes -> builder.put(bssTypes.block, terracottaIterator.next()));
     }
 

@@ -28,7 +28,7 @@ public final class ExtShapeBlockusItemGroup {
   }
 
   private static final ImmutableSet<Block> SPECIAL_SORTED_RAINBOW_BLOCKS = Streams.concat(
-      plainStream(BlockusBlockCollections.TINTED_SHRINGLES.stream()).map(t -> t.block),
+      plainStream(BlockusBlockCollections.TINTED_SHINGLES.stream()).map(t -> t.block),
       plainStream(BlockusBlockCollections.STAINED_STONE_BRICKS.stream()).map(bsswTypes -> bsswTypes.block),
       plainStream(Stream.<Supplier<BSSTypes>>of(() -> BlockusBlocks.SHINGLES)).map(bssTypes -> bssTypes.block)).collect(ImmutableSet.toImmutableSet());
 
@@ -47,7 +47,7 @@ public final class ExtShapeBlockusItemGroup {
             final Block block = biMap.get(bssTypes.block);
             if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) coloredAppendingRule.put(shingleAnchor, block.asItem());
           });
-          for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHRINGLES) {
+          for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHINGLES) {
             ExtShapeBlockus.tryConsume(supplier, bssTypes -> {
               final Block block = biMap.get(bssTypes.block);
               if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) coloredAppendingRule.put(shingleAnchor, block.asItem());
