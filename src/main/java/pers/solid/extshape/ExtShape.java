@@ -2,19 +2,14 @@ package pers.solid.extshape;
 
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
-import it.unimi.dsi.fastutil.objects.Object2FloatMap;
-import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.ComposterBlock;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.tag.Tag;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,7 +52,7 @@ public class ExtShape implements ModInitializer {
     ExtShapeTags.refillTags();
 
     // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
-    registerComposingChances();
+
     registerStrippableBlocks();
     registerFuels();
 
@@ -102,49 +97,6 @@ public class ExtShape implements ModInitializer {
         }
       }
     });
-  }
-
-  /**
-   * 注册所有的可堆肥方块。注意：对于 Forge 版本，是直接修改的 {@link ComposterBlock#ITEM_TO_LEVEL_INCREASE_CHANCE}。
-   *
-   * @see net.fabricmc.fabric.api.registry.CompostingChanceRegistry
-   * @see ComposterBlock#registerDefaultCompostableItems()
-   */
-  private static void registerComposingChances() {
-    final Object2FloatMap<ItemConvertible> map = new Object2FloatOpenHashMap<>();
-
-    // 原版这些方块的堆肥概率为 0.65。
-    for (final Block compostableBlock : new Block[]{
-        Blocks.PUMPKIN, Blocks.MELON, Blocks.MOSS_BLOCK, Blocks.SHROOMLIGHT
-    }) {
-      map.put(BlockBiMaps.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.SLAB, compostableBlock), 0.325f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.325f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.15625f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.15625f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.WALL, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.BUTTON, compostableBlock), 0.2f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, compostableBlock), 0.2f);
-    }
-    // 原版的下界疣和诡异疣的堆肥概率为 0.9。
-    for (final Block compostableBlock : new Block[]{
-        Blocks.WARPED_WART_BLOCK, Blocks.NETHER_WART_BLOCK
-    }) {
-      map.put(BlockBiMaps.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.8f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.SLAB, compostableBlock), 0.4f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.8f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.4f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.2f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.2f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE, compostableBlock), 0.8f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.8f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.WALL, compostableBlock), 0.8f);
-    }
-
-    map.forEach(CompostingChanceRegistry.INSTANCE::add);
   }
 
   /**
