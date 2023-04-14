@@ -1,6 +1,8 @@
 package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
@@ -345,6 +347,18 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       postBuildConsumer = postBuildConsumer.andThen(biConsumer);
     }
     return this;
+  }
+
+  @CanIgnoreReturnValue
+  @Contract(value = "_-> this")
+  public BlocksBuilder compostingChance(final float baseCompostingChance) {
+    return addPostBuildConsumer((blockShape, builder) -> CompostingChanceRegistry.INSTANCE.add(builder.itemInstance, blockShape.logicalCompleteness * baseCompostingChance));
+  }
+
+  @CanIgnoreReturnValue
+  @Contract(value = "_-> this")
+  public BlocksBuilder fuelTime(final int baseFuelTime) {
+    return addPostBuildConsumer((blockShape, builder) -> FuelRegistry.INSTANCE.add(builder.itemInstance, (int) (blockShape.logicalCompleteness * baseFuelTime)));
   }
 
   @CanIgnoreReturnValue
