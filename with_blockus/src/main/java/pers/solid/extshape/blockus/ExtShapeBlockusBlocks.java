@@ -7,7 +7,7 @@ import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.WoodTypesB;
 import com.brand.blockus.content.types.WoodTypesNB;
-import com.brand.blockus.tags.BlockusBlockTags;
+import com.brand.blockus.tag.BlockusBlockTags;
 import com.google.common.base.Functions;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableMap;
@@ -20,7 +20,6 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -29,16 +28,11 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.screen.ScreenTexts;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
-import net.minecraft.world.World;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
@@ -49,7 +43,6 @@ import pers.solid.extshape.builder.BlocksBuilder;
 import pers.solid.extshape.builder.BlocksBuilderFactory;
 import pers.solid.extshape.tag.ExtShapeTags;
 
-import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -117,10 +110,6 @@ public final class ExtShapeBlockusBlocks {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.HERRINGBONE_GRANITE_BRICKS, block -> buildStoneBlocksWithoutButton(create(block).addExtraTag(BlockusBlockTags.GRANITE_BLOCKS)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.GRANITE_CIRCULAR_PAVING, baseBlock6 -> buildCircularPavingBlock(FACTORY.createEmpty(baseBlock6).addExtraTag(BlockusBlockTags.GRANITE_BLOCKS)));
 
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHISELED_MUD_BRICKS, block -> create(block).addExtraTag(BlockTags.PICKAXE_MINEABLE)
-        .without(BlockShape.BUTTON)
-        .setFenceCraftingIngredient(Items.MUD).build());
-
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_DRIPSTONE, bssTypes -> create(bssTypes).addExtraTag(BlockusBlockTags.DRIPSTONE_BLOCKS)
         .setFenceCraftingIngredient(Items.POINTED_DRIPSTONE).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.DRIPSTONE_BRICKS, bsswTypes -> create(bsswTypes).addExtraTag(BlockusBlockTags.DRIPSTONE_BLOCKS)
@@ -141,18 +130,6 @@ public final class ExtShapeBlockusBlocks {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS, block -> buildStoneBlocksWithoutButton(create(block).addExtraTag(BlockusBlockTags.DEEPSLATE_BLOCKS)
     ));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING, baseBlock4 -> buildCircularPavingBlock(FACTORY.createEmpty(baseBlock4).addExtraTag(BlockusBlockTags.DEEPSLATE_BLOCKS)));
-
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_SCULK, bssTypes -> create(bssTypes).addExtraTag(BlockusBlockTags.SCULK_BLOCKS)
-        .setFenceCraftingIngredient(Items.SCULK)
-        .build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SCULK_BRICKS, bsswTypes -> create(bsswTypes).addExtraTag(BlockusBlockTags.SCULK_BLOCKS)
-        .without(BlockShape.BUTTON)
-        .setFenceCraftingIngredient(Items.SCULK)
-        .build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHISELED_SCULK_BRICKS, block -> create(block).addExtraTag(BlockusBlockTags.SCULK_BLOCKS)
-        .without(BlockShape.BUTTON)
-        .setFenceCraftingIngredient(Items.SCULK)
-        .build());
 
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_AMETHYST, block -> FACTORY.createAllShapes(block).withoutRedstone()
         .addExtraTag(BlockusBlockTags.AMETHYST_BLOCKS)
@@ -182,14 +159,6 @@ public final class ExtShapeBlockusBlocks {
     ));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_BASALT_BRICKS, bsswTypes -> buildStoneBlocksWithoutButton(create(bsswTypes).addExtraTag(BlockusBlockTags.BASALT_BLOCKS)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.HERRINGBONE_POLISHED_BASALT_BRICKS, block -> buildStoneBlocksWithoutButton(create(block).addExtraTag(BlockusBlockTags.BASALT_BLOCKS)));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CRIMSON_WART_BRICKS, bsswTypes -> create(bsswTypes).addExtraTag(BlockTags.PICKAXE_MINEABLE)
-        .setFenceCraftingIngredient(Items.BRICK)
-        .without(BlockShape.BUTTON)
-        .build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WARPED_WART_BRICKS, bsswTypes -> create(bsswTypes).addExtraTag(BlockTags.PICKAXE_MINEABLE)
-        .setFenceCraftingIngredient(Items.BRICK)
-        .without(BlockShape.BUTTON)
-        .build());
 
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.LIMESTONE, bsswTypes -> buildStoneBlocksWithButton(create(bsswTypes).addExtraTag(BlockusBlockTags.LIMESTONE)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_LIMESTONE, bssTypes -> buildStoneBlocksWithButton(create(bssTypes).addExtraTag(BlockusBlockTags.LIMESTONE)));
@@ -233,7 +202,7 @@ public final class ExtShapeBlockusBlocks {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHISELED_LAVA_POLISHED_BLACKSTONE, block -> buildStoneBlocksWithoutButton(create(block).addExtraTag(BlockusBlockTags.LAVA_POLISHED_BLACKSTONE_BRICKS).addExtraTag(BlockusBlockTags.BLACKSTONE_BLOCKS)));
 
     // because of issues related to tint index and render layers, water bricks do not have extended shapes
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SNOW_BRICKS, bsswTypes -> buildStoneBlocksWithButton(create(bsswTypes).addExtraTag(BlockusBlockTags.SNOW_BRICKS)));
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SNOW_BRICKS, block -> buildStoneBlocksWithButton(create(block).addExtraTag(BlockusBlockTags.SNOW_BRICKS)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ICE_BRICKS, block -> buildStoneBlocksWithoutButton(create(block).addExtraTag(BlockusBlockTags.ICE_BRICKS)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.OBSIDIAN_BRICKS, bsswTypes -> buildStoneBlocksWithoutButton(create(bsswTypes).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonType(ButtonType.HARD)));
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SMALL_OBSIDIAN_BRICKS, bsswTypes -> buildStoneBlocksWithoutButton(create(bsswTypes).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonType(ButtonType.HARD)));
@@ -258,7 +227,6 @@ public final class ExtShapeBlockusBlocks {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_RED_NETHER_BRICKS, block -> create(block).addExtraTag(BlockusBlockTags.NETHER_BRICKS).setFenceCraftingIngredient(Items.NETHER_BRICK).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.HERRINGBONE_NETHER_BRICKS, block -> create(block).addExtraTag(BlockusBlockTags.NETHER_BRICKS).setFenceCraftingIngredient(Items.NETHER_BRICK).without(BlockShape.BUTTON).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.HERRINGBONE_RED_NETHER_BRICKS, block -> create(block).addExtraTag(BlockusBlockTags.NETHER_BRICKS).setFenceCraftingIngredient(Items.NETHER_BRICK).without(BlockShape.BUTTON).build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.NETHER_TILES, block -> create(block).setFenceCraftingIngredient(Items.NETHER_BRICK).addExtraTag(BlockTags.PICKAXE_MINEABLE).without(BlockShape.BUTTON).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHARRED_NETHER_BRICKS, block -> create(block).addExtraTag(BlockusBlockTags.NETHER_BRICKS).setFenceCraftingIngredient(Items.NETHER_BRICK).without(BlockShape.BUTTON).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_CHARRED_NETHER_BRICKS, block -> create(block).addExtraTag(BlockusBlockTags.NETHER_BRICKS).setFenceCraftingIngredient(Items.NETHER_BRICK).without(BlockShape.BUTTON).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.TEAL_NETHER_BRICKS, block -> create(block).addExtraTag(BlockusBlockTags.NETHER_BRICKS).setFenceCraftingIngredient(Items.NETHER_BRICK).without(BlockShape.BUTTON).build());
@@ -314,7 +282,6 @@ public final class ExtShapeBlockusBlocks {
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SMALL_END_STONE_BRICKS, bssTypes -> create(bssTypes).addExtraTag(BlockusBlockTags.END_STONE_BLOCKS).setFenceCraftingIngredient(Items.END_STONE_BRICKS).without(BlockShape.BUTTON).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHISELED_END_STONE_BRICKS, bssTypes -> create(bssTypes).addExtraTag(BlockusBlockTags.END_STONE_BLOCKS).setFenceCraftingIngredient(Items.END_STONE_BRICKS).without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.HERRINGBONE_END_STONE_BRICKS, bssTypes -> create(bssTypes).addExtraTag(BlockusBlockTags.END_STONE_BLOCKS).setFenceCraftingIngredient(Items.END_STONE_BRICKS).without(BlockShape.BUTTON).build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.END_TILES, bssTypes -> create(bssTypes).setFenceCraftingIngredient(Items.END_STONE_BRICKS).addExtraTag(BlockTags.PICKAXE_MINEABLE).without(BlockShape.BUTTON).build());
 
     ImmutableMap<BlockShape, TagKey<? extends ItemConvertible>> logTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_LOG_TAG);
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
@@ -369,7 +336,7 @@ public final class ExtShapeBlockusBlocks {
     }
 
     for (var supplier : BlockusBlockCollections.PATTERNED_WOOLS) {
-      ExtShapeBlockus.tryConsume(supplier, patternWoolTypes -> FACTORY.createConstructionOnly(patternWoolTypes.block).addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS).without(BlockShape.STAIRS, BlockShape.SLAB).with(BlockShape.WALL).addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness))).setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString()).build());
+      ExtShapeBlockus.tryConsume(supplier, block -> FACTORY.createConstructionOnly(block).without(BlockShape.STAIRS, BlockShape.SLAB).with(BlockShape.WALL).addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness))).setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString()).build());
     }
     for (var supplier : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
       ExtShapeBlockus.tryConsume(supplier, block -> FACTORY.createConstructionOnly(block).with(BlockShape.WALL).addExtraTag(BlockusBlockTags.GLAZED_TERRACOTTA_PILLARS).setRecipeGroup(blockShape -> "glazed_terracotta_pillar_" + blockShape.asString()).setPillar().build());
@@ -400,22 +367,11 @@ public final class ExtShapeBlockusBlocks {
         ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4, true, false, true));
       }
     }).build()).addPreBuildConsumer((blockShape, builder) -> {
-      builder.setItemSettings(new FabricItemSettings().rarity(Rarity.RARE).group(Blockus.BLOCKUS_BUILDING_BLOCKS));
+      builder.setItemSettings(new FabricItemSettings().group(Blockus.BLOCKUS_BUILDING_BLOCKS));
       builder.setItemInstanceSupplier(builder0 -> new ExtShapeBlockItem(builder0.instance, builder0.itemSettings.rarity(Rarity.UNCOMMON)) {
         @Override
         public boolean hasGlint(ItemStack stack) {
           return true;
-        }
-
-        @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-          super.appendTooltip(stack, world, tooltip, context);
-          this.getBlock().appendTooltip(stack, world, tooltip, context);
-          tooltip.add(ScreenTexts.EMPTY);
-          tooltip.add(Blockus.STEPPED_ON_TEXT);
-          tooltip.add(Text.literal(StringUtils.SPACE).append(StatusEffects.REGENERATION.getName()).append(" IV").formatted(Formatting.BLUE));
-          tooltip.add(Text.literal(StringUtils.SPACE).append(StatusEffects.ABSORPTION.getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
-          tooltip.add(Text.literal(StringUtils.SPACE).append(StatusEffects.STRENGTH.getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
         }
       });
     }).build());

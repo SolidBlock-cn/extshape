@@ -4,7 +4,6 @@ import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.ConcreteTypes;
-import com.brand.blockus.content.types.PatternWoolTypes;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 
@@ -24,7 +23,6 @@ public final class BlockusBlockCollections {
       () -> BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS,
       () -> BlockusBlocks.HERRINGBONE_ACACIA_PLANKS,
       () -> BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS,
-      () -> BlockusBlocks.HERRINGBONE_MANGROVE_PLANKS,
       () -> BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS,
       () -> BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS,
       () -> BlockusBlocks.HERRINGBONE_WARPED_PLANKS,
@@ -37,7 +35,6 @@ public final class BlockusBlockCollections {
       () -> BlockusBlocks.JUNGLE_SMALL_LOGS,
       () -> BlockusBlocks.ACACIA_SMALL_LOGS,
       () -> BlockusBlocks.DARK_OAK_SMALL_LOGS,
-      () -> BlockusBlocks.MANGROVE_SMALL_LOGS,
       () -> BlockusBlocks.WARPED_SMALL_STEMS,
       () -> BlockusBlocks.CRIMSON_SMALL_STEMS,
       () -> BlockusBlocks.WHITE_OAK_SMALL_LOGS);
@@ -98,7 +95,7 @@ public final class BlockusBlockCollections {
       () -> BlockusBlocks.BLACK_SHINGLES
   );
 
-  public static final ImmutableList<Supplier<PatternWoolTypes>> PATTERNED_WOOLS = ImmutableList.of(
+  public static final ImmutableList<Supplier<Block>> PATTERNED_WOOLS = ImmutableList.of(
       () -> BlockusBlocks.WHITE_PATTERNED_WOOL,
       () -> BlockusBlocks.ORANGE_PATTERNED_WOOL,
       () -> BlockusBlocks.MAGENTA_PATTERNED_WOOL,

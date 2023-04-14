@@ -3,7 +3,6 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
-import com.brand.blockus.content.types.PatternWoolTypes;
 import com.brand.blockus.data.family.BlockusBlockFamilies;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -58,14 +57,6 @@ public final class BlockusBlockBiMaps {
           BlockBiMaps.of(BlockShape.SLAB).put(bssTypes.block, bssTypes.slab);
         }
       });
-      PatternWoolTypes.values().forEach(patternWoolTypes -> {
-        if (patternWoolTypes.stairs != null) {
-          BlockBiMaps.of(BlockShape.STAIRS).put(patternWoolTypes.block, patternWoolTypes.slab);
-        }
-        if (patternWoolTypes.slab != null) {
-          BlockBiMaps.of(BlockShape.SLAB).put(patternWoolTypes.block, patternWoolTypes.slab);
-        }
-      });
     } catch (Throwable throwable) {
       ExtShapeBlockus.LOGGER.error("Cannot load BSSWTypes and BSSTypes from Blockus mod. This may cause Extended Block Shapes mod to create duplicate block instances.", throwable);
     }
@@ -77,7 +68,6 @@ public final class BlockusBlockBiMaps {
     tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_PRESSURE_PLATE));
     tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_PRESSURE_PLATE));
     tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.POLISHED_TUFF_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_SCULK.block, BlockusBlocks.POLISHED_SCULK_PRESSURE_PLATE));
     tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_BUTTON));
     tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.MARBLE.block, BlockusBlocks.MARBLE_BUTTON));
     tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.BLUESTONE.block, BlockusBlocks.BLUESTONE_BUTTON));
@@ -85,7 +75,6 @@ public final class BlockusBlockBiMaps {
     tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_BUTTON));
     tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_BUTTON));
     tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.POLISHED_TUFF_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_SCULK.block, BlockusBlocks.POLISHED_SCULK_BUTTON));
   }
 
   private static void tryRun(Runnable runnable) {
