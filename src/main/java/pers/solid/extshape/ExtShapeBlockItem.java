@@ -4,9 +4,13 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraftforge.common.ForgeHooks;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
+import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 
@@ -35,5 +39,21 @@ public class ExtShapeBlockItem extends BlockItem {
     if (ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups && (!(getBlock() instanceof ExtShapeBlockInterface i) || (shape = i.getBlockShape()) == null || ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla.contains(shape)) || group == ItemGroup.SEARCH) {
       super.appendStacks(group, stacks);
     }
+  }
+
+  @Override
+  public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+    if (getBlock() instanceof ExtShapeBlockInterface itf) {
+      final Block baseBlock = itf.getBaseBlock();
+      final BlockShape blockShape = itf.getBlockShape();
+      if (baseBlock != null && blockShape != null && ExtShapeBlocks.getBaseBlocks().contains(baseBlock)) {
+        final int baseBurnTime = ForgeHooks.getBurnTime(baseBlock.asItem().getDefaultStack(), recipeType);
+        if (baseBurnTime > 0) {
+          return ((int) (baseBurnTime * blockShape.logicalCompleteness));
+        }
+      }
+    }
+
+    return super.getBurnTime(itemStack, recipeType);
   }
 }

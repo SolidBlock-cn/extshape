@@ -39,10 +39,16 @@ public class ExtShapeConfig implements Cloneable {
   public static ExtShapeConfig CURRENT_CONFIG;
 
   public static void init() {
-    try {
-      CURRENT_CONFIG = readFile(CONFIG_FILE);
-    } catch (IOException e) {
-      LOGGER.warn("Failed to read config file of Extended Block Shapes mod:", e);
+    if (CONFIG_FILE.exists()) {
+      try {
+        CURRENT_CONFIG = readFile(CONFIG_FILE);
+      } catch (IOException e) {
+        LOGGER.warn("Failed to read config file of Extended Block Shapes mod:", e);
+        CURRENT_CONFIG = new ExtShapeConfig();
+        CURRENT_CONFIG.tryWriteFile(CONFIG_FILE);
+      }
+    } else {
+      LOGGER.info("No config file for Extended Block Shapes mod is found, creating new one.");
       CURRENT_CONFIG = new ExtShapeConfig();
       CURRENT_CONFIG.tryWriteFile(CONFIG_FILE);
     }

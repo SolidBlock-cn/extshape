@@ -312,6 +312,7 @@ public final class ExtShapeBlocks {
         .setFenceCraftingIngredient(Items.PUMPKIN_SEEDS)
         .setButtonType(ButtonType.WOODEN)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.ENDERMAN_HOLDABLE : null)
+        .compostingChance(0.65f)
         .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 下界岩。
@@ -336,6 +337,7 @@ public final class ExtShapeBlocks {
         .setFenceCraftingIngredient(Items.MELON_SLICE)
         .setButtonType(ButtonType.WOODEN)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.ENDERMAN_HOLDABLE : null)
+        .compostingChance(0.65f)
         .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 下界砖块的栅栏门、按钮和压力板。
@@ -447,10 +449,12 @@ public final class ExtShapeBlocks {
 
     // 下界疣块、诡异疣块。
     FACTORY.createAllShapes(NETHER_WART_BLOCK)
+        .compostingChance(0.85f)
         .setFenceCraftingIngredient(Items.NETHER_WART)
         .setButtonType(null)
         .setPressurePlateActivationRule(null).withoutRedstone().build();
     FACTORY.createAllShapes(WARPED_WART_BLOCK)
+        .compostingChance(0.85f)
         .setFenceCraftingIngredient(Items.NETHER_WART)
         .setButtonType(null)
         .setPressurePlateActivationRule(null).withoutRedstone().build();
@@ -486,6 +490,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(SHROOMLIGHT)
         .setFenceCraftingIngredient(Items.GLOWSTONE_DUST)
         .setButtonType(ButtonType.SOFT)
+        .compostingChance(0.65f)
         .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
 
     // 蜜脾块。
@@ -573,6 +578,7 @@ public final class ExtShapeBlocks {
         .setPressurePlateActivationRule(ActivationRule.MOBS).build();
     FACTORY.createAllShapes(MOSS_BLOCK)
         .setFenceCraftingIngredient(Items.MOSS_CARPET)
+        .compostingChance(0.65f)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.SMALL_DRIPLEAF_PLACEABLE : null)
         .setButtonType(ButtonType.SOFT)
         .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
