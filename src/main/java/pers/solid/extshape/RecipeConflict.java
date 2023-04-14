@@ -90,7 +90,7 @@ public final class RecipeConflict {
           final ServerCommandSource source = context.getSource();
           source.sendFeedback(new TranslatableText("message.extshape.recipe_conflict.start"), true);
           final ServerWorld world = source.getWorld();
-          final ServerPlayerEntity player = source.getPlayerOrThrow();
+          final ServerPlayerEntity player = source.getPlayer();
           return checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
         }));
   }

@@ -62,7 +62,7 @@ public class ExtShapeOptionsScreen extends Screen {
   private final ClickableWidget addToVanillaGroupsButton = CyclingOption.create(
       "options.extshape.addToVanillaGroups",
       new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getDisplayName(), ItemGroup.DECORATIONS.getDisplayName(), ItemGroup.REDSTONE.getDisplayName())
-              .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Text.literal("\n\n").append(Text.translatable("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : Text.empty())
+              .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? new LiteralText("\n\n").append(new TranslatableText("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : new LiteralText(StringUtils.EMPTY))
           .append("\n\n")
           .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)),
       gameOptions -> newConfig.addToVanillaGroups,

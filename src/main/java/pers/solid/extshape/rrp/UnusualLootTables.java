@@ -103,7 +103,7 @@ public final class UnusualLootTables {
     });
 
     // 只有带有精准采集附魔时才会掉落的方块。
-    final LootTableFunction dropsWithSilkTouch = (baseBlock, shape, block) -> JLootTable.delegate(dropsDoubleSlabWithSilkTouch(block, shape == BlockShape.SLAB));
+    final LootTableFunction dropsWithSilkTouch = (baseBlock, shape, block) -> dropsDoubleSlabWithSilkTouch(block, shape == BlockShape.SLAB);
     builder.put(Blocks.ICE, dropsWithSilkTouch);
     builder.put(Blocks.BLUE_ICE, dropsWithSilkTouch);
     builder.put(Blocks.PACKED_ICE, dropsWithSilkTouch);
