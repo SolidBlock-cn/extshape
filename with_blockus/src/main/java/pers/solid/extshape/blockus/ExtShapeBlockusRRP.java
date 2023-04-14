@@ -160,7 +160,7 @@ public final class ExtShapeBlockusRRP {
   private static void generateShingleDyeingRecipes(RuntimeResourcePack pack) {
     for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHINGLES) {
       ExtShapeBlockus.tryConsume(supplier, bssTypes -> {
-        Item dyeItem = Registries.ITEM.get(new Identifier("minecraft", StringUtils.substringBefore(Registries.BLOCK.getId(bssTypes.block).getPath(), "_shingle") + "_dye"));
+        Item dyeItem = Registries.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registries.BLOCK.getId(bssTypes.block).getPath(), "_shingle") + "_dye"));
         for (BlockShape blockShape : BlockShape.values()) {
           final Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block);
           final Block dyed = BlockBiMaps.getBlockOf(blockShape, bssTypes.block);
@@ -181,7 +181,7 @@ public final class ExtShapeBlockusRRP {
   private static void generateStainedStoneBricksRecipe(RuntimeResourcePack pack) {
     for (Supplier<BSSWTypes> supplier : BlockusBlockCollections.STAINED_STONE_BRICKS) {
       ExtShapeBlockus.tryConsume(supplier, bsswTypes -> {
-        Item dyeItem = Registries.ITEM.get(new Identifier("minecraft", StringUtils.substringBefore(Registries.BLOCK.getId(bsswTypes.block).getPath(), "_stone_brick") + "_dye"));
+        Item dyeItem = Registries.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registries.BLOCK.getId(bsswTypes.block).getPath(), "_stone_brick") + "_dye"));
         for (BlockShape blockShape : BlockShape.values()) {
           final Block unDyed = BlockBiMaps.getBlockOf(blockShape, Blocks.STONE_BRICKS);
           final Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswTypes.block);
