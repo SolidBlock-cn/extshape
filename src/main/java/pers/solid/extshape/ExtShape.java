@@ -3,22 +3,18 @@ package pers.solid.extshape;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
-import it.unimi.dsi.fastutil.objects.Object2FloatMap;
-import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -32,7 +28,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fmlclient.ConfigGuiHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.ApiStatus;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
@@ -78,7 +74,7 @@ public class ExtShape {
       }
     }
     FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, ExtShape::initializeBridge);
-    MinecraftForge.EVENT_BUS.addListener(ExtShape::registerFuels);
+    registerFuels();
     DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ExtShape::registerConfig);
   }
 
@@ -91,7 +87,7 @@ public class ExtShape {
     ExtShapeBlocks.init();
     ExtShapeItemGroup.init();
     ExtShapeTags.refillTags();
-    registerComposingChances();
+
     registerStrippableBlocks();
 
     ExtShapeRRP.registerRRP();
@@ -129,55 +125,12 @@ public class ExtShape {
   }
 
   /**
-   * 注册所有的可堆肥方块。注意：对于 Forge 版本，是直接修改的 {@link ComposterBlock#ITEM_TO_LEVEL_INCREASE_CHANCE}。
-   *
-   * @see ComposterBlock#ITEM_TO_LEVEL_INCREASE_CHANCE
-   * @see ComposterBlock#registerDefaultCompostableItems()
-   */
-  private static void registerComposingChances() {
-    final Object2FloatMap<ItemConvertible> map = new Object2FloatOpenHashMap<>();
-    // 原版这些方块的堆肥概率为 0.65。
-    for (final Block compostableBlock : new Block[]{
-        Blocks.PUMPKIN, Blocks.MELON, Blocks.MOSS_BLOCK, Blocks.SHROOMLIGHT
-    }) {
-      map.put(BlockBiMaps.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.SLAB, compostableBlock), 0.325f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.325f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.15625f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.15625f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.WALL, compostableBlock), 0.65f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.BUTTON, compostableBlock), 0.2f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, compostableBlock), 0.2f);
-    }
-    // 原版的下界疣和诡异疣的堆肥概率为 0.9。
-    for (final Block compostableBlock : new Block[]{
-        Blocks.WARPED_WART_BLOCK, Blocks.NETHER_WART_BLOCK
-    }) {
-      map.put(BlockBiMaps.getBlockOf(BlockShape.STAIRS, compostableBlock), 0.8f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.SLAB, compostableBlock), 0.4f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, compostableBlock), 0.8f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, compostableBlock), 0.4f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, compostableBlock), 0.2f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, compostableBlock), 0.2f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE, compostableBlock), 0.8f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, compostableBlock), 0.8f);
-      map.put(BlockBiMaps.getBlockOf(BlockShape.WALL, compostableBlock), 0.8f);
-    }
-
-    ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.putAll(map);
-  }
-
-  /**
    * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。部分是直接由其标签决定的，例如木制、竹制的楼梯、台阶，原版的标签即定义了可作为燃料。
    *
    * @see ExtShapeBlocks
    * @see net.minecraft.block.entity.AbstractFurnaceBlockEntity#createFuelTimeMap()
    */
-  @ApiStatus.AvailableSince("1.5.0")
-  private static void registerFuels(FurnaceFuelBurnTimeEvent event) {
+  private static void registerFuels() {
     final Object2IntMap<Tag.Identified<Block>> map = new Object2IntOpenHashMap<>();
     // 参照原版木制（含下界木）楼梯和台阶，楼梯燃烧时间为 300 刻，台阶燃烧时间为 150 刻。
     // 但是，non_flammable_wood 标签的仍然不会被熔炉接受。
@@ -203,10 +156,24 @@ public class ExtShape {
     map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
     map.put(ExtShapeTags.WOOLEN_WALLS, 100);
 
-    map.forEach((blockTagKey, integer) -> {
-      if (event.getItemStack().isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(blockTagKey))) {
-        event.setBurnTime(integer);
+    MinecraftForge.EVENT_BUS.addListener((FurnaceFuelBurnTimeEvent event) -> {
+      final ItemStack itemStack = event.getItemStack();
+      if (itemStack.getItem() instanceof ExtShapeBlockItem blockItem && blockItem.getBlock() instanceof ExtShapeBlockInterface itf) {
+        final Block baseBlock = itf.getBaseBlock();
+        final BlockShape blockShape = itf.getBlockShape();
+        if (baseBlock != null && blockShape != null && ExtShapeBlocks.getBaseBlocks().contains(baseBlock)) {
+          final int baseBurnTime = ForgeHooks.getBurnTime(baseBlock.asItem().getDefaultStack(), event.getRecipeType());
+          if (baseBurnTime > 0) {
+            event.setBurnTime((int) (baseBurnTime * blockShape.logicalCompleteness));
+            return;
+          }
+        }
       }
+      map.forEach((blockTagKey, integer) -> {
+        if (itemStack.isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(blockTagKey))) {
+          event.setBurnTime(integer);
+        }
+      });
     });
   }
 

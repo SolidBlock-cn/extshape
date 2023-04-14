@@ -39,18 +39,18 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
 
   // 扩展方块形状模组内置的方块形状部分。
 
-  public static final BlockShape STAIRS = new BlockShape(Predicates.instanceOf(StairsBlock.class), BlockFamily.Variant.STAIRS, "stairs", 1f, true);
-  public static final BlockShape SLAB = new BlockShape(Predicates.instanceOf(SlabBlock.class), BlockFamily.Variant.SLAB, "slab", 0.5f, true);
-  public static final BlockShape VERTICAL_SLAB = new BlockShape(Predicates.instanceOf(VerticalSlabBlock.class), null, "vertical_slab", 0.5f, true);
-  public static final BlockShape VERTICAL_STAIRS = new BlockShape(Predicates.instanceOf(VerticalStairsBlock.class), null, "vertical_stairs", 1f, true);
-  public static final BlockShape QUARTER_PIECE = new BlockShape(Predicates.instanceOf(QuarterPieceBlock.class), null, "quarter_piece", 0.25f, true);
-  public static final BlockShape VERTICAL_QUARTER_PIECE = new BlockShape(Predicates.instanceOf(VerticalQuarterPieceBlock.class), null, "vertical_quarter_piece", 0.25f, true);
-  public static final BlockShape FENCE = new BlockShape(Predicates.instanceOf(FenceBlock.class), BlockFamily.Variant.FENCE, "fence", 1f, false);
-  public static final BlockShape FENCE_GATE = new BlockShape(Predicates.instanceOf(FenceGateBlock.class), BlockFamily.Variant.FENCE_GATE, "fence_gate", 1f, false);
-  public static final BlockShape WALL = new BlockShape(Predicates.instanceOf(WallBlock.class), BlockFamily.Variant.WALL, "wall", 1f, false);
-  public static final BlockShape BUTTON = new BlockShape(Predicates.instanceOf(AbstractButtonBlock.class), BlockFamily.Variant.BUTTON, "button", 1 / 3f, false);
+  public static final BlockShape STAIRS = new BlockShape(Predicates.instanceOf(StairsBlock.class)::apply, BlockFamily.Variant.STAIRS, "stairs", 1f, true);
+  public static final BlockShape SLAB = new BlockShape(Predicates.instanceOf(SlabBlock.class)::apply, BlockFamily.Variant.SLAB, "slab", 0.5f, true);
+  public static final BlockShape VERTICAL_SLAB = new BlockShape(Predicates.instanceOf(VerticalSlabBlock.class)::apply, null, "vertical_slab", 0.5f, true);
+  public static final BlockShape VERTICAL_STAIRS = new BlockShape(Predicates.instanceOf(VerticalStairsBlock.class)::apply, null, "vertical_stairs", 1f, true);
+  public static final BlockShape QUARTER_PIECE = new BlockShape(Predicates.instanceOf(QuarterPieceBlock.class)::apply, null, "quarter_piece", 0.25f, true);
+  public static final BlockShape VERTICAL_QUARTER_PIECE = new BlockShape(Predicates.instanceOf(VerticalQuarterPieceBlock.class)::apply, null, "vertical_quarter_piece", 0.25f, true);
+  public static final BlockShape FENCE = new BlockShape(Predicates.instanceOf(FenceBlock.class)::apply, BlockFamily.Variant.FENCE, "fence", 1f, false);
+  public static final BlockShape FENCE_GATE = new BlockShape(Predicates.instanceOf(FenceGateBlock.class)::apply, BlockFamily.Variant.FENCE_GATE, "fence_gate", 1f, false);
+  public static final BlockShape WALL = new BlockShape(Predicates.instanceOf(WallBlock.class)::apply, BlockFamily.Variant.WALL, "wall", 1f, false);
+  public static final BlockShape BUTTON = new BlockShape(Predicates.instanceOf(AbstractButtonBlock.class)::apply, BlockFamily.Variant.BUTTON, "button", 1 / 3f, false);
 
-  public static final BlockShape PRESSURE_PLATE = new BlockShape(Predicates.instanceOf(PressurePlateBlock.class), BlockFamily.Variant.PRESSURE_PLATE, "pressure_plate", 1 / 3f, false);
+  public static final BlockShape PRESSURE_PLATE = new BlockShape(Predicates.instanceOf(PressurePlateBlock.class)::apply, BlockFamily.Variant.PRESSURE_PLATE, "pressure_plate", 1 / 3f, false);
 
   // 非静态部分
 

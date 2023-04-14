@@ -61,7 +61,7 @@ public class ExtShapeOptionsScreen extends Screen {
   private final ButtonWidget resetShapesInSpecificGroupsButton = new ButtonWidget(width / 2 + 155, 121, 50, 20, new TranslatableText("options.extshape.reset"), button -> shapesInSpecificGroupsTextField.setText(convertCollectionToString(ExtShapeConfig.DEFAULT_CONFIG.shapesInSpecificGroups)));
   private final ClickableWidget addToVanillaGroupsButton = CyclingOption.create(
       "options.extshape.addToVanillaGroups",
-        new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getTranslationKey(), ItemGroup.DECORATIONS.getTranslationKey(), ItemGroup.REDSTONE.getTranslationKey())
+      new TranslatableText("options.extshape.addToVanillaGroups.tooltip", ItemGroup.BUILDING_BLOCKS.getTranslationKey(), ItemGroup.DECORATIONS.getTranslationKey(), ItemGroup.REDSTONE.getTranslationKey())
           .append(ModList.get().isLoaded("extshape_blockus") ? new LiteralText("\n\n").append(new TranslatableText("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : new LiteralText(StringUtils.EMPTY))
           .append("\n\n")
           .append(new TranslatableText("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY)),
