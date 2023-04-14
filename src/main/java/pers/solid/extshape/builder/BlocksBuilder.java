@@ -4,6 +4,7 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
+import net.minecraft.block.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.tag.TagKey;
@@ -333,6 +334,12 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       postBuildConsumer = postBuildConsumer.andThen(biConsumer);
     }
     return this;
+  }
+
+  @CanIgnoreReturnValue
+  @Contract(value = "_-> this")
+  public BlocksBuilder compostingChance(final float baseCompostingChance) {
+    return addPostBuildConsumer((blockShape, builder) -> ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(builder.itemInstance, blockShape.logicalCompleteness * baseCompostingChance));
   }
 
   @CanIgnoreReturnValue
