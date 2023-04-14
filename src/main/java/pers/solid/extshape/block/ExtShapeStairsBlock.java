@@ -19,11 +19,8 @@ import pers.solid.extshape.builder.BlockShape;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
 
-  public final Block baseBlock;
-
   public ExtShapeStairsBlock(Block baseBlock, Settings settings) {
     super(baseBlock, settings);
-    this.baseBlock = baseBlock;
   }
 
   @Override
