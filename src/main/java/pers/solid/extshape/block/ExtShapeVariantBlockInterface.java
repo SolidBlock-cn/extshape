@@ -34,10 +34,6 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
   @Override
   Block getBaseBlock();
 
-  default BlockExtension getBlockExtension() {
-    return BlockExtension.EMPTY;
-  }
-
   default MutableText getNamePrefix() {
     final Block baseBlock = this.getBaseBlock();
     if (baseBlock == null) return Text.translatable("block.extshape.prefix.unknown");
