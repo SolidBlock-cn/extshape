@@ -60,7 +60,7 @@ import java.util.stream.IntStream;
 @Mod(ExtShape.MOD_ID)
 public class ExtShape {
   public static final String MOD_ID = "extshape";
-  public static final Logger LOGGER = LogManager.getLogger("Extended Block Shapes");
+  public static final Logger LOGGER = LogManager.getLogger(ExtShape.class);
 
   public ExtShape() {
     ExtShapeConfig.init();
