@@ -42,7 +42,7 @@ import java.util.stream.IntStream;
  */
 public class ExtShape implements ModInitializer {
   public static final String MOD_ID = "extshape";
-  public static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes");
+  public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
 
   @Override
   public void onInitialize() {
