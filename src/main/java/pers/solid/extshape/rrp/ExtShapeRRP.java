@@ -31,7 +31,7 @@ public final class ExtShapeRRP {
    */
   public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(new Identifier(ExtShape.MOD_ID, "pack"));
 
-  private static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes-Runtime resource pack");
+  private static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeRRP.class);
 
   /**
    * 注册所有的运行时资源。
