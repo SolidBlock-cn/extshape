@@ -7,17 +7,14 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.tag.TagKey;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigScreenHandler;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -27,7 +24,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
@@ -156,26 +152,6 @@ public class ExtShape {
     map.put(ExtShapeTags.WOOLEN_PRESSURE_PLATES, 67);
     map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
     map.put(ExtShapeTags.WOOLEN_WALLS, 100);
-
-    MinecraftForge.EVENT_BUS.addListener((FurnaceFuelBurnTimeEvent event) -> {
-      final ItemStack itemStack = event.getItemStack();
-      if (itemStack.getItem() instanceof ExtShapeBlockItem blockItem && blockItem.getBlock() instanceof ExtShapeBlockInterface itf) {
-        final Block baseBlock = itf.getBaseBlock();
-        final BlockShape blockShape = itf.getBlockShape();
-        if (baseBlock != null && blockShape != null && ExtShapeBlocks.getBaseBlocks().contains(baseBlock)) {
-          final int baseBurnTime = ForgeHooks.getBurnTime(baseBlock.asItem().getDefaultStack(), event.getRecipeType());
-          if (baseBurnTime > 0) {
-            event.setBurnTime((int) (baseBurnTime * blockShape.logicalCompleteness));
-            return;
-          }
-        }
-      }
-      map.forEach((blockTagKey, integer) -> {
-        if (itemStack.isIn(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(blockTagKey))) {
-          event.setBurnTime(integer);
-        }
-      });
-    });
   }
 
   private static void initializeBridge(RegisterEvent event) {
