@@ -29,13 +29,14 @@ public class TagPreparations {
   @SuppressWarnings("unchecked")
   @Contract(mutates = "this")
   @CanIgnoreReturnValue
-  public boolean put(Tag.Identified<? extends ItemConvertible> tagKey, ItemConvertible object) {
-    if (object instanceof Block) {
-      return blockTags.put((Tag.Identified<Block>) tagKey, object);
-    } else if (object instanceof Item) {
-      return itemTags.put((Tag.Identified<Item>) tagKey, object.asItem());
-    }
-    throw new IllegalArgumentException("Only blocks and items are accepted.");
+  public boolean put(Tag.Identified<Block> blockTag, Block block) {
+    return blockTags.put(blockTag, block);
+  }
+
+  @Contract(mutates = "this")
+  @CanIgnoreReturnValue
+  public boolean putItemTag(Tag.Identified<Item> itemTag, ItemConvertible item) {
+    return itemTags.put(itemTag, item.asItem());
   }
 
   @SuppressWarnings("unchecked")

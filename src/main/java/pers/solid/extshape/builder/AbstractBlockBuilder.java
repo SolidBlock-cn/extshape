@@ -7,7 +7,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
@@ -48,7 +47,8 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   /**
    * 创建实例并构建后，将自身添加到这些标签中。
    */
-  protected final List<Tag.@NotNull Identified<? extends ItemConvertible>> extraTags = new ArrayList<>();
+  protected final List<Tag.@NotNull Identified<Block>> extraTags = new ArrayList<>();
+  protected final List<Tag.@NotNull Identified<Item>> extraItemTags = new ArrayList<>(1);
   public AbstractBlock.Settings blockSettings;
   /**
    * 构建之后将构建后的方块添加到这个集合中，方便以后进行集中的管理。这个一般是在 {@link BlocksBuilderFactory} 中设置的，然后间接传递到这个参数来。
@@ -61,7 +61,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   /**
    * 创建对象后需要将这个方块添加到的主要标签，如 {@code slabs}、{@code extshape:vertical_slabs} 等。
    */
-  protected @Nullable Tag.Identified<? extends ItemConvertible> primaryTagToAddTo = null;
+  protected @Nullable Tag.Identified<Block> primaryTagToAddTo = null;
   /**
    * 需要创建的方块的方块形状，主要用于在创建之后注册 {@link BlockBiMaps}。
    */
@@ -231,7 +231,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> setPrimaryTagToAddTo(Tag.Identified<? extends ItemConvertible> tag) {
+  public AbstractBlockBuilder<T> setPrimaryTagToAddTo(Tag.Identified<Block> tag) {
     this.primaryTagToAddTo = tag;
     return this;
   }
@@ -252,8 +252,13 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> addExtraTag(@NotNull Tag.Identified<? extends ItemConvertible> tag) {
+  public AbstractBlockBuilder<T> addExtraTag(@NotNull Tag.Identified<Block> tag) {
     this.extraTags.add(tag);
+    return this;
+  }
+
+  public AbstractBlockBuilder<T> addExtraItemTag(@NotNull Tag.Identified<Item> itemTag) {
+    this.extraItemTags.add(itemTag);
     return this;
   }
 
@@ -345,6 +350,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
       tagPreparations.put(primaryTagToAddTo, instance);
     }
     this.extraTags.forEach(tag -> tagPreparations.put(tag, instance));
+    this.extraItemTags.forEach(tag -> tagPreparations.putItemTag(tag, instance));
     if (this.shouldAddToBlockBiMap) this.addToBlockBiMap();
     return this.instance;
   }

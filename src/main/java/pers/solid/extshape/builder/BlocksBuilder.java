@@ -6,7 +6,6 @@ import net.minecraft.block.ComposterBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.state.property.Properties;
@@ -43,7 +42,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 为指定形状的 {@link AbstractBlockBuilder} 调用 {@link AbstractBlockBuilder#setPrimaryTagToAddTo}。
    */
-  private @Nullable Map<@NotNull BlockShape, Tag.@Nullable Identified<? extends ItemConvertible>> primaryTagForShape = null;
+  private @Nullable Map<@NotNull BlockShape, Tag.@Nullable Identified<Block>> primaryTagForShape = null;
   /**
    * 为指定形状的 {@link AbstractBlockBuilder} 调用 {@link AbstractBlockBuilder#group(ItemGroup)}。
    */
@@ -59,7 +58,8 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 构建器需要构建的所有对象都需要添加到的标签的列表。也就是说，构建的时候，这里面的标签会添加此构建器构建的所有方块。
    */
-  protected final List<Tag.@NotNull Identified<? extends ItemConvertible>> extraTags = new ArrayList<>();
+  protected final List<Tag.@NotNull Identified<Block>> extraTags = new ArrayList<>();
+  protected final List<Tag.@NotNull Identified<Item>> extraItemTags = new ArrayList<>(1);
   protected TagPreparations tagPreparations;
 
   public BlocksBuilder setFenceCraftingIngredient(Item secondIngredient) {
@@ -264,7 +264,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_, _, -> this", mutates = "this")
-  public BlocksBuilder setPrimaryTagForShape(@Nullable BlockShape shape, @Nullable Tag.Identified<? extends ItemConvertible> tag) {
+  public BlocksBuilder setPrimaryTagForShape(@Nullable BlockShape shape, @Nullable Tag.Identified<Block> tag) {
     if (shape == null || tag == null) return this;
     if (primaryTagForShape == null) {
       primaryTagForShape = new HashMap<>();
@@ -278,7 +278,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_, -> this", mutates = "this")
-  public BlocksBuilder setPrimaryTagForShape(Map<BlockShape, Tag.Identified<? extends ItemConvertible>> map) {
+  public BlocksBuilder setPrimaryTagForShape(Map<BlockShape, Tag.Identified<Block>> map) {
     primaryTagForShape = map;
     return this;
   }
@@ -300,8 +300,13 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder addExtraTag(@NotNull Tag.Identified<? extends ItemConvertible> tag) {
+  public BlocksBuilder addExtraTag(@NotNull Tag.Identified<Block> tag) {
     this.extraTags.add(tag);
+    return this;
+  }
+
+  public BlocksBuilder addExtraItemTag(@NotNull Tag.Identified<Item> itemTag) {
+    this.extraItemTags.add(itemTag);
     return this;
   }
 
@@ -312,9 +317,9 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder addExtraTag(Function<BlockShape, Tag.@Nullable Identified<? extends ItemConvertible>> function) {
+  public BlocksBuilder addExtraTag(Function<BlockShape, Tag.@Nullable Identified<Block>> function) {
     return addPreBuildConsumer((blockShape, builder) -> {
-      final Tag.Identified<? extends ItemConvertible> tag = function.apply(blockShape);
+      final Tag.Identified<Block> tag = function.apply(blockShape);
       if (tag != null) builder.addExtraTag(tag);
     });
   }
@@ -380,6 +385,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     // 设置需要将构建后的方块都添加到指定的标签中。
     for (AbstractBlockBuilder<? extends Block> builder : values) {
       builder.extraTags.addAll(extraTags);
+      builder.extraItemTags.addAll(extraItemTags);
     }
     if (preBuildConsumer != null) {
       forEach(preBuildConsumer);
