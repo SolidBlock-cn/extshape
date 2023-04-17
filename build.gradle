@@ -138,6 +138,10 @@ project(':runtest') {
         implementation project(path: ':', configuration: "namedElements")
         implementation project(path: ':with_blockus', configuration: "namedElements")
     }
+
+    remapJar {
+        enabled = false
+    }
 }
 
 
