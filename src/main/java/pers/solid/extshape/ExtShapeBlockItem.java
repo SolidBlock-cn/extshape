@@ -5,6 +5,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraftforge.common.ForgeHooks;
@@ -43,6 +44,9 @@ public class ExtShapeBlockItem extends BlockItem {
 
   @Override
   public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+    if (itemStack.isIn(ItemTags.NON_FLAMMABLE_WOOD)) {
+      return 0;
+    }
     if (getBlock() instanceof ExtShapeBlockInterface itf) {
       final Block baseBlock = itf.getBaseBlock();
       final BlockShape blockShape = itf.getBlockShape();
