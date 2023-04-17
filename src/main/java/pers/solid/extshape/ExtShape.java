@@ -3,13 +3,10 @@ package pers.solid.extshape;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigScreenHandler;
@@ -60,7 +57,6 @@ public class ExtShape {
     ExtShapeConfig.init();
     MinecraftForge.EVENT_BUS.addListener(ExtShape::registerCommand);
     FMLJavaModLoadingContext.get().getModEventBus().addListener(ExtShape::register);
-    registerFuels();
     DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ExtShape::registerConfig);
   }
 
@@ -114,38 +110,5 @@ public class ExtShape {
         }
       }
     });
-  }
-
-  /**
-   * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。部分是直接由其标签决定的，例如木制、竹制的楼梯、台阶，原版的标签即定义了可作为燃料。
-   *
-   * @see ExtShapeBlocks
-   * @see net.minecraft.block.entity.AbstractFurnaceBlockEntity#createFuelTimeMap()
-   */
-  private static void registerFuels() {
-    final Object2IntMap<TagKey<Block>> map = new Object2IntOpenHashMap<>();
-    // 参照原版木制（含下界木）楼梯和台阶，楼梯燃烧时间为 300 刻，台阶燃烧时间为 150 刻。
-    // 但是，non_flammable_wood 标签的仍然不会被熔炉接受。
-    map.put(ExtShapeTags.WOODEN_VERTICAL_STAIRS, 300);
-    map.put(ExtShapeTags.WOODEN_VERTICAL_SLABS, 150);
-    map.put(ExtShapeTags.WOODEN_QUARTER_PIECES, 75);
-    map.put(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES, 75);
-    map.put(ExtShapeTags.WOODEN_WALLS, 300);
-
-    // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
-    map.put(ExtShapeTags.WOOLEN_STAIRS, 100);
-    map.put(ExtShapeTags.WOOLEN_SLABS, 50);
-    map.put(ExtShapeTags.WOOLEN_QUARTER_PIECES, 25);
-    map.put(ExtShapeTags.WOOLEN_VERTICAL_STAIRS, 100);
-    map.put(ExtShapeTags.WOOLEN_VERTICAL_SLABS, 50);
-    map.put(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES, 25);
-
-    // 栅栏、栅栏门、压力板、燃烧时间和基础方块一致，门的燃烧时间为三分之二，按钮为三分之一。
-    // 但考虑到羊毛压力板是与地毯相互合成的，故燃烧时间与地毯一致，为 67。
-    map.put(ExtShapeTags.WOOLEN_FENCES, 100);
-    map.put(ExtShapeTags.WOOLEN_FENCE_GATES, 100);
-    map.put(ExtShapeTags.WOOLEN_PRESSURE_PLATES, 67);
-    map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
-    map.put(ExtShapeTags.WOOLEN_WALLS, 100);
   }
 }
