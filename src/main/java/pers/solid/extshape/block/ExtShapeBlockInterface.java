@@ -195,8 +195,6 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
 
   @Override
   default @Nullable RecipeCategory getRecipeCategory() {
-    final RecipeCategory registeredCategory = BlockResourceGenerator.super.getRecipeCategory();
-    if (registeredCategory != null) return registeredCategory;
     final BlockShape blockShape = getBlockShape();
     if (blockShape.isConstruction) {
       return RecipeCategory.BUILDING_BLOCKS;
