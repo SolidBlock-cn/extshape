@@ -8,7 +8,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.tag.BlockTags;
@@ -115,8 +114,8 @@ public final class ExtShapeBlocks {
         .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
     // 原木、木头、菌柄、菌核及其去皮变种。
-    final ImmutableMap<BlockShape, Tag.Identified<? extends ItemConvertible>> logTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_LOG_TAG);
-    final ImmutableMap<BlockShape, Tag.Identified<? extends ItemConvertible>> woodenTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_WOODEN_TAG);
+    final ImmutableMap<BlockShape, Tag.Identified<Block>> logTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_LOG_TAG);
+    final ImmutableMap<BlockShape, Tag.Identified<Block>> woodenTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_WOODEN_TAG);
 
     // 原木和竹子。
     for (final Block block : BlockCollections.LOGS) {
@@ -153,21 +152,21 @@ public final class ExtShapeBlocks {
           .build();
     }
     for (final Block block : BlockCollections.STEMS) {
-      FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "log_" + blockShape.asString()).build();
+      FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraItemTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "log_" + blockShape.asString()).build();
     }
     for (final Block block : BlockCollections.STRIPPED_STEMS) {
-      FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "stripped_log_" + blockShape.asString()).build();
+      FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraItemTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "stripped_log_" + blockShape.asString()).build();
     }
     for (final Block block : BlockCollections.HYPHAES) {
       ButtonType buttonSettings = ButtonType.WOODEN;
       FACTORY.createAllShapes(block)
           .setButtonType(buttonSettings)
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "wood_" + blockShape.asString()).build();
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(logTags).addExtraItemTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "wood_" + blockShape.asString()).build();
     }
     for (final Block block : BlockCollections.STRIPPED_HYPHAES) {
       FACTORY.createAllShapes(block)
           .setButtonType(ButtonType.WOODEN)
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString()).build();
+          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(logTags).addExtraItemTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString()).build();
     }
 
     // 木板。
@@ -178,7 +177,7 @@ public final class ExtShapeBlocks {
             .setButtonType(ButtonType.WOODEN)
             .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setPrimaryTagForShape(woodenTags)
-            .addExtraTag(ItemTags.NON_FLAMMABLE_WOOD)
+            .addExtraItemTag(ItemTags.NON_FLAMMABLE_WOOD)
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
             .build();
       } else {
@@ -253,7 +252,7 @@ public final class ExtShapeBlocks {
     // 金块。
     FACTORY.createAllShapes(GOLD_BLOCK)
         .setFenceCraftingIngredient(Items.GOLD_INGOT)
-        .addExtraTag(ItemTags.PIGLIN_LOVED)
+        .addExtraItemTag(ItemTags.PIGLIN_LOVED)
         .addExtraTag(BlockTags.GUARDED_BY_PIGLINS)
         .setButtonType(ButtonType.STONE)
         .setPressurePlateActivationRule(null).build();
@@ -614,7 +613,7 @@ public final class ExtShapeBlocks {
         .setPressurePlateActivationRule(ActivationRule.MOBS).build();
     FACTORY.createAllShapes(RAW_GOLD_BLOCK)
         .setFenceCraftingIngredient(Items.RAW_GOLD)
-        .addExtraTag(ItemTags.PIGLIN_LOVED)
+        .addExtraItemTag(ItemTags.PIGLIN_LOVED)
         .addExtraTag(BlockTags.GUARDED_BY_PIGLINS)
         .setPressurePlateActivationRule(ActivationRule.MOBS).build();
 
