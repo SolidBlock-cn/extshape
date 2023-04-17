@@ -35,11 +35,11 @@ public class TranslatableTextContentMixin {
   @Nullable
   private String fallback;
 
-  @Inject(method = "updateTranslations", at = @At(value = "INVOKE", target = "Ljava/util/Objects;requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
+  @Inject(method = "updateTranslations", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/TranslatableTextContent;forEachPart(Ljava/lang/String;Ljava/util/function/Consumer;)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
   public void modify(CallbackInfo ci, String string, ImmutableList.Builder<StringVisitable> builder) {
+    Language language = Language.getInstance();
     if (key.equals(AttributiveBlockNameManager.ATTRIBUTIVE_KEY)) {
       final String newKey = (String) args[0];
-      Language language = Language.getInstance();
       final String converted = AttributiveBlockNameManager.convertToAttributive(language.get(newKey), language);
       final Object[] newArgs = ArrayUtils.remove(args, 0);
       final TranslatableTextContent newContent = new TranslatableTextContent(newKey, fallback, newArgs);
