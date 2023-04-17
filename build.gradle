@@ -140,6 +140,10 @@ project(':runtest') {
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
     }
+
+    remapJar {
+        enabled = false
+    }
 }
 
 
