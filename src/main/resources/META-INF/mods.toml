@@ -13,7 +13,7 @@ issueTrackerURL = "https://github.com/SolidBlock-cn/extshape/issues" #optional
 modId = "extshape"
 # The version number of the mod - unlike in the Forge MDK,
 # we'll use the processResources task to replace this for us
-version = "1.8.0"
+version = "2.0.0"
 displayName = "Extended Block Shapes"
 # This URL will be queried by the Forge update checker in order to find the latest version of your mod.
 # If an update is found, you'll see a little blinking "emerald" symbol on your Mods button!
@@ -27,10 +27,7 @@ logoFile = "icon-forge.png" #optional
 # Some more fluff displayed in the Mods panel. Plug your stuff here!
 authors = "SolidBlock" #optional
 # A multi-line description for your mod. This has no minimum length, but it *is* required!
-description = '''
-This mod adds more shapes for many vanilla blocks, including shapes that do not exist in vanilla Minecraft, like vertical slabs, vertical stairs or quarter pieces. Most of the blocks have vanilla behaviours, like what their base block behaves. For example, bedrock stairs and slabs are explosion-immune and wither-immune like bedrock, and wool fences and fence gates are flammable and can be sheared. With this mod you can make more fascinating buildings, and your survival can be also more interesting.
-本模组为许多原版方块添加了更多形状，包括原版不存在的形状，如垂直台阶、垂直楼梯和横条。大多数方块都具有类似原版的行为，就像其基础方块一样。例如，基岩楼梯和基岩台阶像基岩本身一样可以防爆防凋灵，羊毛栅栏和羊毛栅栏门可燃且可以被剪刀剪。借助此模组，你可以制作出更加精美的建筑，玩生存也会更加有趣。
-'''
+description = '''This mod adds more shapes for many vanilla blocks, including shapes that do not exist in vanilla Minecraft, like vertical slabs, vertical stairs or quarter pieces. Most of the blocks have vanilla behaviours, like what their base block behaves. For example, bedrock stairs and slabs are explosion-immune and wither-immune like bedrock, and wool fences and fence gates are flammable and can be sheared. With this mod you can make more fascinating buildings, and your survival can be also more interesting.'''
 
 # An (optional) dependency for your mod. Though technically not required,
 # it's always helpful to add these to stop your mod from loading when something is missing
