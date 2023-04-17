@@ -67,7 +67,7 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
     variants.register(SlabType.BOTTOM, Direction.Axis.X, BlockStateVariant.create().put(MODEL, horizontalModelId).put(X, Rotation.R90).put(Y, Rotation.R90));
     variants.register(SlabType.TOP, Direction.Axis.X, BlockStateVariant.create().put(MODEL, horizontalModelId.brrp_suffixed("_top")).put(X, Rotation.R90).put(Y, Rotation.R90));
     // axis = z
-    variants.register(SlabType.DOUBLE, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, horizontalModelId).put(X, Rotation.R90));
+    variants.register(SlabType.DOUBLE, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, horizontalBaseModelId).put(X, Rotation.R90));
     variants.register(SlabType.BOTTOM, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, horizontalModelId).put(X, Rotation.R90));
     variants.register(SlabType.TOP, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, horizontalModelId.brrp_suffixed("_top")).put(X, Rotation.R90));
 
