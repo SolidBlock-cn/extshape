@@ -6,7 +6,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.client.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
@@ -49,12 +48,6 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
   protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
     super.appendProperties(builder);
     builder.add(FACING);
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public PistonBehavior getPistonBehavior(BlockState state) {
-    return PistonBehavior.PUSH_ONLY;
   }
 
   @Environment(EnvType.CLIENT)

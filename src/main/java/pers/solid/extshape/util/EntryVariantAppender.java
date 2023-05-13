@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
@@ -55,6 +56,6 @@ public record EntryVariantAppender(ItemGroup itemGroup, Iterable<BlockShape> sha
       }
     }
     final double afterTime = System.currentTimeMillis();
-    ExtShape.LOGGER.info("Time spent on adding items to group {}: {}", itemGroup.getId(), (afterTime - prevTime) / 1000d);
+    ExtShape.LOGGER.info("Time spent on adding items to group {}: {}", Registries.ITEM_GROUP.getId(itemGroup), (afterTime - prevTime) / 1000d);
   }
 }

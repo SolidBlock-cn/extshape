@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -13,8 +14,8 @@ import net.minecraft.client.gui.widget.OptionListWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.registry.Registries;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.ClickEvent;
@@ -22,8 +23,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import org.apache.commons.lang3.StringUtils;
-import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.ExtShapeItemGroup;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.rrp.ExtShapeRRP;
 
@@ -66,11 +65,11 @@ public class ExtShapeOptionsScreen extends Screen {
   private final ClickableWidget addToVanillaGroupsButton = SimpleOption.ofBoolean(
       "options.extshape.addToVanillaGroups",
       SimpleOption.constantTooltip(
-          Text.translatable("options.extshape.addToVanillaGroups.tooltip", ItemGroups.BUILDING_BLOCKS.getDisplayName(), ItemGroups.COLORED_BLOCKS.getDisplayName(), ItemGroups.NATURAL.getDisplayName())
+          Text.translatable("options.extshape.addToVanillaGroups.tooltip", Registries.ITEM_GROUP.getOrThrow(ItemGroups.BUILDING_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.COLORED_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.NATURAL).getDisplayName())
               .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Text.literal("\n\n").append(Text.translatable("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : Text.empty())
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))),
-      newConfig.addToVanillaGroups,
+      true,
       value -> {
         newConfig.addToVanillaGroups = value;
         shapesToAddToVanillaTextField.setEditable(value);
@@ -83,7 +82,7 @@ public class ExtShapeOptionsScreen extends Screen {
           Text.translatable("options.extshape.showSpecificGroups.tooltip")
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))),
-      newConfig.showSpecificGroups,
+      false,
       value -> {
         newConfig.showSpecificGroups = value;
         shapesInSpecificGroupsTextField.setEditable(value);
@@ -140,6 +139,8 @@ public class ExtShapeOptionsScreen extends Screen {
   public ExtShapeOptionsScreen(Screen parent) {
     super(Text.translatable("options.extshape.title"));
     this.parent = parent;
+    addToVanillaGroupsButton.active = false;
+    showSpecificGroupsButton.active = false;
   }
 
   @Override
@@ -174,11 +175,11 @@ public class ExtShapeOptionsScreen extends Screen {
   }
 
   @Override
-  public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-    super.render(matrices, mouseX, mouseY, delta);
-    drawCenteredTextWithShadow(matrices, this.textRenderer, this.title.asOrderedText(), this.width / 2, 16, 0xffffff);
-    drawTextWithShadow(matrices, textRenderer, Text.translatable("options.extshape.shapesToAddToVanilla.description"), width / 2 - 205, 61, 0xffffff);
-    drawTextWithShadow(matrices, textRenderer, Text.translatable("options.extshape.shapesInSpecificGroups.description"), width / 2 - 205, 106, 0xffffff);
+  public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+    super.render(context, mouseX, mouseY, delta);
+    context.drawCenteredTextWithShadow(this.textRenderer, this.title.asOrderedText(), this.width / 2, 16, 0xffffff);
+    context.drawTextWithShadow(textRenderer, Text.translatable("options.extshape.shapesToAddToVanilla.description"), width / 2 - 205, 61, 0xffffff);
+    context.drawTextWithShadow(textRenderer, Text.translatable("options.extshape.shapesInSpecificGroups.description"), width / 2 - 205, 106, 0xffffff);
   }
 
   public void save() {
@@ -198,16 +199,16 @@ public class ExtShapeOptionsScreen extends Screen {
       ExtShapeConfig.requireUpdateShapesToAddVanilla = true;
     }
 
-    // 应用物品组。
-    if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {
-      if (newConfig.showSpecificGroups) {
-        ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
-        ExtShapeItemGroup.implementGroups();
-      } else {
-        ExtShape.LOGGER.info("Removing item groups at runtime. This may cause some instability.");
-        ExtShapeItemGroup.removeGroups();
-      }
-    }
+    // 应用物品组。/*if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {
+    //      if (newConfig.showSpecificGroups) {
+    //        ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
+    //        ExtShapeItemGroup.implementGroups();
+    //      } else {
+    //        ExtShape.LOGGER.info("Removing item groups at runtime. This may cause some instability.");
+    //        ExtShapeItemGroup.removeGroups();
+    //      }
+    //    }*/
+
   }
 
   private boolean suppressedGroupsWarning = false;

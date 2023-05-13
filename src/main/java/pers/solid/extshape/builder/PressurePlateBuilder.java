@@ -3,12 +3,13 @@ package pers.solid.extshape.builder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
-import net.minecraft.block.Material;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
+import pers.solid.extshape.util.BlockCollections;
 
 public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBlock> {
 
@@ -20,8 +21,8 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
     this.shape = BlockShape.PRESSURE_PLATE;
     this.type = type;
     this.blockSetType = blockSetType;
-    final Material material = baseBlock.getDefaultState().getMaterial();
-    primaryTagToAddTo = material == Material.STONE ? BlockTags.STONE_PRESSURE_PLATES : material == Material.WOOD || material == Material.NETHER_WOOD ? BlockTags.WOODEN_PRESSURE_PLATES : BlockTags.PRESSURE_PLATES;
+    final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
+    primaryTagToAddTo = soundGroup == BlockSoundGroup.STONE ? BlockTags.STONE_PRESSURE_PLATES : BlockCollections.VanillaMineable.AXE.contains(baseBlock) ? BlockTags.WOODEN_PRESSURE_PLATES : BlockTags.PRESSURE_PLATES;
   }
 
   @Override

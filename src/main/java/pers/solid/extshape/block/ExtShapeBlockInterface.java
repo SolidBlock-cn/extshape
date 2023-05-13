@@ -3,7 +3,6 @@ package pers.solid.extshape.block;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.block.Material;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
@@ -20,8 +19,8 @@ import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mixin.AbstractBlockAccessor;
 import pers.solid.extshape.rrp.RecipeGroupRegistry;
+import pers.solid.extshape.util.BlockCollections;
 
 /**
  * 该模组中的绝大多数方块共用的接口。
@@ -54,7 +53,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
    * @return 方块能否被切石机切石。
    */
   static boolean isStoneCut(Block baseBlock) {
-    return baseBlock != null && (((AbstractBlockAccessor) baseBlock).getMaterial() == Material.STONE || ((AbstractBlockAccessor) baseBlock).getMaterial() == Material.METAL);
+    return baseBlock != null && BlockCollections.VanillaMineable.PICKAXE.contains(baseBlock);
   }
 
   @Override
