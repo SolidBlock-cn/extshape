@@ -11,7 +11,6 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
@@ -23,6 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * 本类用来检测合成表冲突的。因为扩展方块形状模组的合成表总是会存在冲突，因此加入此类来进行检测。
@@ -31,7 +31,7 @@ import java.util.function.Consumer;
 public final class RecipeConflict {
   private static final Logger LOGGER = LoggerFactory.getLogger(RecipeConflict.class);
 
-  public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, Consumer<Text> messageConsumer) {
+  public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, Consumer<Supplier<Text>> messageConsumer) {
     final CraftingInventory craftingInventory = new CraftingInventory(new CraftingScreenHandler(0, player.getInventory()), 3, 3);
     int numberOfConflicts = 0;
     for (Recipe<?> recipe : recipeManager.values()) {
@@ -67,22 +67,20 @@ public final class RecipeConflict {
           for (int i = 0; i < 9; i++) {
             LOGGER.info(String.valueOf(craftingInventory.getStack(i)));
           }
-          MutableText text = Text.translatable("message.extshape.recipe_conflict.unknown", recipe.getId().toString()).formatted(Formatting.RED);
-          messageConsumer.accept(text);
+          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.unknown", recipe.getId().toString()).formatted(Formatting.RED));
         } else if (numberOfMatches > 1) {
-          MutableText text = Text.translatable("message.extshape.recipe_conflict.detected", Texts.join(allMatches, craftingRecipe -> Text.literal(craftingRecipe.getId().toString()))).formatted(Formatting.RED);
-          messageConsumer.accept(text);
+          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.detected", Texts.join(allMatches, craftingRecipe -> Text.literal(craftingRecipe.getId().toString()))).formatted(Formatting.RED));
           ++numberOfConflicts;
 
         }
       } catch (Exception exception) {
-        messageConsumer.accept(Text.translatable("message.extshape.recipe_conflict.exception"));
+        messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.exception"));
         LOGGER.error("Unknown exception when testing recipe duplication: ", exception);
         break;
       }
     }
-    MutableText text = Text.translatable(numberOfConflicts == 0 ? "message.extshape.recipe_conflict.finish.none" : numberOfConflicts == 1 ? "message.extshape.recipe_conflict.finish.single" : "message.extshape.recipe_conflict.finish.plural", Integer.toString(numberOfConflicts));
-    messageConsumer.accept(text);
+    int finalNumberOfConflicts = numberOfConflicts;
+    messageConsumer.accept(() -> Text.translatable(finalNumberOfConflicts == 0 ? "message.extshape.recipe_conflict.finish.none" : finalNumberOfConflicts == 1 ? "message.extshape.recipe_conflict.finish.single" : "message.extshape.recipe_conflict.finish.plural", Integer.toString(finalNumberOfConflicts)));
     return numberOfConflicts;
   }
 
@@ -91,7 +89,7 @@ public final class RecipeConflict {
         .requires(source -> source.hasPermissionLevel(4))
         .executes(context -> {
           final ServerCommandSource source = context.getSource();
-          source.sendFeedback(Text.translatable("message.extshape.recipe_conflict.start"), true);
+          source.sendFeedback(() -> Text.translatable("message.extshape.recipe_conflict.start"), true);
           final ServerWorld world = source.getWorld();
           final ServerPlayerEntity player = source.getPlayerOrThrow();
           return checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
