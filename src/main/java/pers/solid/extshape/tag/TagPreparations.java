@@ -3,7 +3,7 @@ package pers.solid.extshape.tag;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import net.fabricmc.fabric.api.tag.TagFactory;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -107,7 +107,7 @@ public class TagPreparations {
 
   @Contract(mutates = "this")
   public void forceSetBlockTagWithItem(Tag.Identified<Block> blockTagKey) {
-    final Tag.Identified<Item> itemTagKey = TagFactory.ITEM.create(blockTagKey.getId());
+    final Tag.Identified<Item> itemTagKey = TagRegistry.item(blockTagKey.getId());
     blockTagsToItemTags.put(blockTagKey, itemTagKey);
   }
 

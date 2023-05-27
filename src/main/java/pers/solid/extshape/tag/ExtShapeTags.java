@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.errorprone.annotations.InlineMe;
 import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
-import net.fabricmc.fabric.api.tag.TagFactory;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WallBlock;
@@ -252,7 +252,7 @@ public final class ExtShapeTags {
   }
 
   private static Tag.Identified<Block> ofBlockOnly(@NotNull String path) {
-    return TagFactory.BLOCK.create(new Identifier(ExtShape.MOD_ID, path));
+    return TagRegistry.block(new Identifier(ExtShape.MOD_ID, path));
   }
 
   private static Tag.Identified<Block> ofBlockAndItem(@NotNull String path) {
