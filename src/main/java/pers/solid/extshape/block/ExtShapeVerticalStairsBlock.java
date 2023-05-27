@@ -1,20 +1,30 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.json.blockstate.JBlockModel;
-import net.devtech.arrp.json.blockstate.JBlockStates;
-import net.devtech.arrp.json.blockstate.JVariants;
-import net.devtech.arrp.json.models.JModel;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.data.client.model.*;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonFactory;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonFactory;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.model.ModelJsonBuilder;
+import pers.solid.brrp.v1.model.ModelUtils;
+import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.util.HorizontalCornerDirection;
 
 public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
@@ -36,47 +46,68 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
   @Override
   @Environment(EnvType.CLIENT)
-  public @NotNull JBlockStates getBlockStates() {
+  public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier identifier = getBlockModelId();
-    return JBlockStates.ofVariants(new JVariants()
-        .addVariant("facing", "south_west", new JBlockModel(identifier).uvlock())
-        .addVariant("facing", "north_west", new JBlockModel(identifier).uvlock().y(90))
-        .addVariant("facing", "north_east", new JBlockModel(identifier).uvlock().y(180))
-        .addVariant("facing", "south_east", new JBlockModel(identifier).uvlock().y(270))
-    );
+    return VariantsBlockStateSupplier.create(this, new BlockStateVariant().put(VariantSettings.MODEL, identifier).put(VariantSettings.UVLOCK, true)).coordinate(BlockStateVariantMap.create(FACING)
+        .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R0))
+        .register(HorizontalCornerDirection.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
+        .register(HorizontalCornerDirection.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
+        .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270)));
   }
 
 
   @Override
   @Environment(EnvType.CLIENT)
-  public @NotNull JModel getBlockModel() {
-    return simpleModel("extshape:block/vertical_stairs");
+  public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID, "block/vertical_stairs")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
   /**
    * 注意：跨方块类型的合成表由 {@link BlocksBuilder} 定义。
    */
   @Override
-  public @Nullable JRecipe getCraftingRecipe() {
+  public @Nullable CraftingRecipeJsonFactory getCraftingRecipe() {
     return null;
   }
 
 
   @Override
-  public @Nullable JRecipe getStonecuttingRecipe() {
+  public @Nullable SingleItemRecipeJsonFactory getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(1);
   }
 
-
   @Override
-  public String getRecipeGroup() {
-    if ((ExtShapeBlockTags.PLANKS).contains(baseBlock)) return "wooden_vertical_stairs";
-    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_vertical_stairs";
-    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_vertical_stairs";
-    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return
-        "stained_terracotta_vertical_stairs";
-    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return
-        "glazed_terracotta_vertical_stairs";
-    return "";
+  public BlockShape getBlockShape() {
+    return BlockShape.VERTICAL_STAIRS;
+  }
+
+
+  public static class WithExtension extends ExtShapeVerticalStairsBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+      super(baseBlock, settings);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
+      super.onStacksDropped(state, world, pos, stack);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

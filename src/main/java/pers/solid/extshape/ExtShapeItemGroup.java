@@ -2,6 +2,8 @@ package pers.solid.extshape;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
@@ -10,13 +12,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import org.jetbrains.annotations.Contract;
-import pers.solid.extshape.builder.Shape;
+import pers.solid.extshape.block.ExtShapeBlocks;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.mappings.BlockMappings;
 import pers.solid.extshape.mixin.AbstractBlockAccessor;
 import pers.solid.extshape.mixin.CreativeInventoryScreenAccessor;
 import pers.solid.extshape.mixin.ItemGroupAccessor;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.extshape.util.BlockBiMaps;
+import pers.solid.extshape.util.BlockCollections;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -47,7 +50,7 @@ public class ExtShapeItemGroup extends ItemGroup {
     WOODEN_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length,
         new Identifier(ExtShape.MOD_ID, "wooden_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.WALL, Blocks.BIRCH_PLANKS))),
+        Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.WALL, Blocks.BIRCH_PLANKS))),
         (stacks, group) -> WOODEN_BLOCKS.forEach((block -> importTo(block,
             stacks)))
     );
@@ -55,21 +58,21 @@ public class ExtShapeItemGroup extends ItemGroup {
     COLORFUL_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 1,
         new Identifier(ExtShape.MOD_ID, "colorful_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.STAIRS, Blocks.LIME_WOOL))),
+        Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.STAIRS, Blocks.LIME_WOOL))),
         (stacks, group) -> COLORFUL_BLOCKS.forEach(block -> importTo(block, stacks))
     );
 
     STONE_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 2,
         new Identifier(ExtShape.MOD_ID, "stone_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.FENCE, Blocks.CALCITE))),
+        Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.FENCE, Blocks.CALCITE))),
         (stacks, group) -> STONE_BLOCKS.forEach(block -> importTo(block, stacks))
     );
 
     OTHER_BLOCK_GROUP = new ExtShapeItemGroup(
         groups.length + 3,
         new Identifier(ExtShape.MOD_ID, "other_blocks"),
-        Suppliers.ofInstance(new ItemStack(BlockMappings.getBlockOf(Shape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
+        Suppliers.ofInstance(new ItemStack(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER))),
         (stacks, group) -> OTHER_BLOCKS.forEach(block -> importTo(block, stacks)));
 
     MOD_GROUPS = ImmutableSet.of(WOODEN_BLOCK_GROUP, COLORFUL_BLOCK_GROUP, STONE_BLOCK_GROUP, OTHER_BLOCK_GROUP);
@@ -80,18 +83,18 @@ public class ExtShapeItemGroup extends ItemGroup {
   }
 
   static {
-    WOODEN_BLOCKS.addAll(ExtShapeBlockTags.PLANKS);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.WOOLS);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.CONCRETES);
+    COLORFUL_BLOCKS.addAll(BlockCollections.WOOLS);
+    COLORFUL_BLOCKS.addAll(BlockCollections.CONCRETES);
     COLORFUL_BLOCKS.add(Blocks.TERRACOTTA);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.STAINED_TERRACOTTA);
-    COLORFUL_BLOCKS.addAll(ExtShapeBlockTags.GLAZED_TERRACOTTA);
-    STONE_BLOCKS.addAll(ExtShapeBlockTags.STONES);
+    COLORFUL_BLOCKS.addAll(BlockCollections.STAINED_TERRACOTTA);
+    COLORFUL_BLOCKS.addAll(BlockCollections.GLAZED_TERRACOTTA);
+    STONE_BLOCKS.addAll(BlockCollections.STONES);
     STONE_BLOCKS.addAll(Arrays.asList(
         Blocks.SMOOTH_STONE,
         Blocks.STONE_BRICKS,
         Blocks.MOSSY_STONE_BRICKS,
         Blocks.CHISELED_STONE_BRICKS,
+        Blocks.DEEPSLATE,
         Blocks.COBBLED_DEEPSLATE,
         Blocks.POLISHED_DEEPSLATE,
         Blocks.DEEPSLATE_BRICKS,
@@ -112,6 +115,7 @@ public class ExtShapeItemGroup extends ItemGroup {
         Blocks.SMOOTH_RED_SANDSTONE,
         Blocks.NETHERRACK,
         Blocks.NETHER_BRICKS,
+        Blocks.BASALT,
         Blocks.SMOOTH_BASALT,
         Blocks.RED_NETHER_BRICKS,
         Blocks.BLACKSTONE,
@@ -160,13 +164,16 @@ public class ExtShapeItemGroup extends ItemGroup {
         Blocks.SEA_LANTERN
     ));
 
-    Set<Block> baseBlockList = new LinkedHashSet<>(BlockMappings.BASE_BLOCKS);
-    WOODEN_BLOCKS.forEach(baseBlockList::remove);
-    COLORFUL_BLOCKS.forEach(baseBlockList::remove);
-    STONE_BLOCKS.forEach(baseBlockList::remove);
-    for (Block block : baseBlockList) {
-      if (((AbstractBlockAccessor) block).getMaterial() == Material.STONE) {
+    ObjectSet<Block> baseBlocks = new ObjectLinkedOpenHashSet<>(ExtShapeBlocks.getBaseBlocks());
+    WOODEN_BLOCKS.forEach(baseBlocks::remove);
+    COLORFUL_BLOCKS.forEach(baseBlocks::remove);
+    STONE_BLOCKS.forEach(baseBlocks::remove);
+    for (Block block : baseBlocks) {
+      final Material material = ((AbstractBlockAccessor) block).getMaterial();
+      if (material == Material.STONE) {
         STONE_BLOCKS.add(block);
+      } else if (material == Material.WOOD || material == Material.NETHER_WOOD) {
+        WOODEN_BLOCKS.add(block);
       } else {
         OTHER_BLOCKS.add(block);
       }
@@ -219,6 +226,7 @@ public class ExtShapeItemGroup extends ItemGroup {
     }
   }
 
+
   /**
    * 将方块及其变种都添加到物品堆的列表中。
    *
@@ -229,14 +237,14 @@ public class ExtShapeItemGroup extends ItemGroup {
   protected static void importTo(Block baseBlock, List<ItemStack> itemStacks) {
     if (baseBlock == null) return;
     itemStacks.add(new ItemStack(baseBlock));
-    for (Shape shape : Shape.values()) {
-      final Block shapeBlock = BlockMappings.getBlockOf(shape, baseBlock);
+    for (BlockShape shape : ExtShapeConfig.CURRENT_CONFIG.shapesInSpecificGroups) {
+      final Block shapeBlock = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (shapeBlock != null) itemStacks.add(new ItemStack(shapeBlock));
     }
   }
 
-  @SuppressWarnings("EmptyMethod")
   public static void init() {
+    Objects.requireNonNull(MOD_GROUPS);
   }
 
   @Override

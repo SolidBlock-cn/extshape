@@ -1,19 +1,24 @@
 package pers.solid.extshape.builder;
 
 import net.minecraft.block.Block;
+import net.minecraft.tag.BlockTags;
+import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeWallBlock;
-import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class WallBuilder extends AbstractBlockBuilder<ExtShapeWallBlock> {
-  protected WallBuilder(Block baseBlock) {
-    super(baseBlock, builder -> new ExtShapeWallBlock(baseBlock, builder.blockSettings));
-    this.defaultTag = ExtShapeBlockTags.WALLS;
-    this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.WALL);
+  public WallBuilder(Block baseBlock) {
+    super(baseBlock, builder -> new ExtShapeWallBlock(builder.baseBlock, builder.blockSettings));
+    this.shape = BlockShape.WALL;
+    primaryTagToAddTo = BlockTags.WALLS;
   }
 
   @Override
   protected String getSuffix() {
     return "_wall";
+  }
+
+  @Override
+  public AbstractBlockBuilder<ExtShapeWallBlock> withExtension(BlockExtension blockExtension) {
+    return setInstanceSupplier(builder -> new ExtShapeWallBlock.WithExtension(builder.baseBlock, builder.blockSettings, blockExtension));
   }
 }

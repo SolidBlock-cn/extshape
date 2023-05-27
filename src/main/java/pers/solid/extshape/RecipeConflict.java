@@ -1,17 +1,22 @@
 package pers.solid.extshape;
 
+import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
 import net.minecraft.screen.CraftingScreenHandler;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.ApiStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -21,7 +26,7 @@ import java.util.function.Consumer;
  */
 @ApiStatus.AvailableSince("1.5.2")
 public final class RecipeConflict {
-  private static final Logger LOGGER = LoggerFactory.getLogger(RecipeConflict.class);
+  private static final Logger LOGGER = LogManager.getLogger(RecipeConflict.class);
 
   public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, Consumer<Text> messageConsumer) {
     final CraftingInventory craftingInventory = new CraftingInventory(new CraftingScreenHandler(0, player.getInventory()), 3, 3);
@@ -36,7 +41,7 @@ public final class RecipeConflict {
           for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
               final Ingredient ingredient = ingredients.get(x + y * width);
-              final ItemStack[] matchingStacks = ingredient.getMatchingStacksClient();
+              final ItemStack[] matchingStacks = ingredient.getMatchingStacks();
               craftingInventory.setStack(x + y * craftingInventory.getWidth(), matchingStacks.length == 0 ? ItemStack.EMPTY : matchingStacks[0]);
             }
           }
@@ -44,7 +49,7 @@ public final class RecipeConflict {
           craftingInventory.clear();
           final DefaultedList<Ingredient> ingredients = shapelessRecipe.getIngredients();
           for (int i = 0; i < ingredients.size(); i++) {
-            final ItemStack[] matchingStacks = ingredients.get(i).getMatchingStacksClient();
+            final ItemStack[] matchingStacks = ingredients.get(i).getMatchingStacks();
             if (matchingStacks.length > 0) {
               craftingInventory.setStack(i, matchingStacks[0]);
             }
@@ -77,4 +82,17 @@ public final class RecipeConflict {
     messageConsumer.accept(text);
     return numberOfConflicts;
   }
+
+  public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher, boolean dedicated) {
+    dispatcher.register(CommandManager.literal("extshape:check-conflict")
+        .requires(source -> source.hasPermissionLevel(4))
+        .executes(context -> {
+          final ServerCommandSource source = context.getSource();
+          source.sendFeedback(new TranslatableText("message.extshape.recipe_conflict.start"), true);
+          final ServerWorld world = source.getWorld();
+          final ServerPlayerEntity player = source.getPlayer();
+          return checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
+        }));
+  }
+
 }

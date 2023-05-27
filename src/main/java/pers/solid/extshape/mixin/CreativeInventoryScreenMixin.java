@@ -30,7 +30,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
    * @see net.fabricmc.fabric.mixin.item.group.client.MixinCreativePlayerInventoryGui#fabric_getPageOffset(int)
    */
   @SuppressWarnings("JavadocReference")
-  private int fabric_getPageOffset(int page) {
+  private static int fabric_getPageOffset_copied(int page) {
     return switch (page) {
       case 0 -> 0;
       case 1 -> 12;
@@ -43,7 +43,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
    */
   @Inject(method = "init", at = @At("HEAD"))
   private void injectedInit(CallbackInfo ci) {
-    while (fabric_getPageOffset(fabric_currentPage()) >= ItemGroup.GROUPS.length) {
+    while (fabric_getPageOffset_copied(fabric_currentPage()) >= ItemGroup.GROUPS.length) {
       fabric_previousPage();
     }
   }

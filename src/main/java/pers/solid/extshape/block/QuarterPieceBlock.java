@@ -17,7 +17,6 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
-@SuppressWarnings("deprecation")
 public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterloggable {
   public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -35,7 +34,7 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
 
   public QuarterPieceBlock(Settings settings) {
     super(settings);
-    setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(HALF, BlockHalf.BOTTOM));
+    setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(HALF, BlockHalf.BOTTOM));
   }
 
   @Override
@@ -43,6 +42,7 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
     stateManager.add(FACING).add(HALF).add(WATERLOGGED);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
     Direction dir = state.get(FACING);
@@ -70,14 +70,26 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
     Direction direction = ctx.getSide();
     BlockPos blockPos = ctx.getBlockPos();
     FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-    return this.getDefaultState().with(FACING, ctx.getPlayerFacing()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER).with(HALF, direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double) blockPos.getY() > 0.5D)) ? BlockHalf.BOTTOM : BlockHalf.TOP);
+    final Direction.Axis axis = ctx.getPlayerFacing().getAxis();
+    final double d = ctx.getHitPos().getComponentAlongAxis(axis) - blockPos.getComponentAlongAxis(axis);
+    final Direction facing = switch (axis) {
+      case X -> d < 0.5 ? Direction.WEST : Direction.EAST;
+      case Z -> d < 0.5 ? Direction.NORTH : Direction.SOUTH;
+      default -> Direction.NORTH;
+    };
+    return this.getDefaultState()
+        .with(FACING, facing)
+        .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER)
+        .with(HALF, direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double) blockPos.getY() > 0.5D)) ? BlockHalf.BOTTOM : BlockHalf.TOP);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public FluidState getFluidState(BlockState state) {
     return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
     if (state.get(WATERLOGGED)) {

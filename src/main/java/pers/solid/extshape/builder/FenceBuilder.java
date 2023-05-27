@@ -3,19 +3,27 @@ package pers.solid.extshape.builder;
 import net.minecraft.block.Block;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.item.Item;
+import net.minecraft.tag.BlockTags;
+import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeFenceBlock;
-import pers.solid.extshape.mappings.BlockMappings;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
 
 public class FenceBuilder extends AbstractBlockBuilder<FenceBlock> {
-  protected FenceBuilder(Block baseBlock, Item secondIngredient) {
-    super(baseBlock, builder -> new ExtShapeFenceBlock(baseBlock, secondIngredient, builder.blockSettings));
-    this.defaultTag = ExtShapeBlockTags.FENCES;
-    this.mapping = BlockMappings.SHAPE_TO_MAPPING.get(Shape.FENCE);
+  public final Item secondIngredient;
+
+  public FenceBuilder(Block baseBlock, Item secondIngredient) {
+    super(baseBlock, builder -> new ExtShapeFenceBlock(baseBlock, ((FenceBuilder) builder).secondIngredient, builder.blockSettings));
+    this.secondIngredient = secondIngredient;
+    this.shape = BlockShape.FENCE;
+    primaryTagToAddTo = BlockTags.FENCES;
   }
 
   @Override
   protected String getSuffix() {
     return "_fence";
+  }
+
+  @Override
+  public AbstractBlockBuilder<FenceBlock> withExtension(BlockExtension blockExtension) {
+    return setInstanceSupplier(builder -> new ExtShapeFenceBlock.WithExtension(baseBlock, ((FenceBuilder) builder).secondIngredient, builder.blockSettings, blockExtension));
   }
 }

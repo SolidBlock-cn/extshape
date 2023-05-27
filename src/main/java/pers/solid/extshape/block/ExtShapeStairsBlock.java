@@ -1,12 +1,21 @@
 package pers.solid.extshape.block;
 
-import net.devtech.arrp.generator.BRRPStairsBlock;
-import net.devtech.arrp.json.recipe.JRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonFactory;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonFactory;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.tag.ExtShapeBlockTags;
+import pers.solid.brrp.v1.generator.BRRPStairsBlock;
+import pers.solid.extshape.builder.BlockShape;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
 
@@ -20,23 +29,47 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   }
 
   @Override
-  public @Nullable JRecipe getStonecuttingRecipe() {
+  public @Nullable SingleItemRecipeJsonFactory getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(1);
   }
 
   @Override
-  public @Nullable JRecipe getCraftingRecipe() {
-    final JRecipe craftingRecipe = super.getCraftingRecipe();
+  public @Nullable CraftingRecipeJsonFactory getCraftingRecipe() {
+    final CraftingRecipeJsonFactory craftingRecipe = super.getCraftingRecipe();
     return craftingRecipe == null || NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? null : craftingRecipe.group(getRecipeGroup());
   }
 
   @Override
-  public String getRecipeGroup() {
-    Block baseBlock = this.baseBlock;
-    if ((ExtShapeBlockTags.WOOLS).contains(baseBlock)) return "wool_stairs";
-    if ((ExtShapeBlockTags.CONCRETES).contains(baseBlock)) return "concrete_stairs";
-    if ((ExtShapeBlockTags.STAINED_TERRACOTTA).contains(baseBlock)) return "stained_terracotta_stairs";
-    if ((ExtShapeBlockTags.GLAZED_TERRACOTTA).contains(baseBlock)) return "glazed_terracotta_stairs";
-    return "";
+  public BlockShape getBlockShape() {
+    return BlockShape.STAIRS;
+  }
+
+  public static class WithExtension extends ExtShapeStairsBlock {
+    private final BlockExtension extension;
+
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+      super(baseBlock, settings);
+      this.extension = extension;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
+      super.onStacksDropped(state, world, pos, stack);
+      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+      super.onProjectileHit(world, state, hit, projectile);
+      extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
+    }
+
+    @Override
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+      super.onSteppedOn(world, pos, state, entity);
+      extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
   }
 }

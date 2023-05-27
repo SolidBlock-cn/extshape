@@ -1,0 +1,16 @@
+{
+  "block.extshape.petrified_oak_planks": "石化したオーク",
+  "block.extshape.smooth_stone_slab_double": "滑らかな石チヲヌズハーフブロック",
+
+  "block.extshape.?_button": "%sボタン",
+  "block.extshape.?_fence": "%sフェンス",
+  "block.extshape.?_fence_gate": "%sフェンスゲート",
+  "block.extshape.?_pressure_plate": "%s感圧板",
+  "block.extshape.?_quarter_piece": "%sクォータブロック",
+  "block.extshape.?_slab": "%sハーフブロック",
+  "block.extshape.?_stairs": "%s階段",
+  "block.extshape.?_vertical_quarter_piece": "垂直%sクォータブロック",
+  "block.extshape.?_vertical_slab": "垂直%sハーフブロック",
+  "block.extshape.?_vertical_stairs": "垂直%s階段",
+  "block.extshape.?_wall": "%s塀"
+}
