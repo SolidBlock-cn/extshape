@@ -1,5 +1,5 @@
 archivesBaseName = rootProject.archives_base_name_blockus + "-fabric"
-version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
+version = rootProject.mod_version_blockus + '-mc' + rootProject.minecraft_version
 group = rootProject.maven_group
 repositories {
     // CurseMaven，用于加载其他模组

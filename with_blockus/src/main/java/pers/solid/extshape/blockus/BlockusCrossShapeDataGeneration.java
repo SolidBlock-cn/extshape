@@ -67,8 +67,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.POLISHED_TUFF.block, Blocks.TUFF);
     putMultipleWithMid(builder, BlockusBlocks.TUFF_BRICKS.block, Blocks.TUFF, BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.CHISELED_TUFF, BlockusBlocks.TUFF_PILLAR, BlockusBlocks.HERRINGBONE_TUFF_BRICKS, BlockusBlocks.TUFF_CIRCULAR_PAVING);
 
-    builder.put(BlockusBlocks.POLISHED_AMETHYST, Blocks.AMETHYST_BLOCK);
-    putMultipleWithMid(builder, BlockusBlocks.AMETHYST_BRICKS, Blocks.AMETHYST_BLOCK, BlockusBlocks.POLISHED_AMETHYST, BlockusBlocks.CHISELED_AMETHYST, BlockusBlocks.AMETHYST_PILLAR);
+    builder.put(BlockusBlocks.POLISHED_AMETHYST.block, Blocks.AMETHYST_BLOCK);
+    putMultipleWithMid(builder, BlockusBlocks.AMETHYST_BRICKS.block, Blocks.AMETHYST_BLOCK, BlockusBlocks.POLISHED_AMETHYST.block, BlockusBlocks.CHISELED_AMETHYST, BlockusBlocks.AMETHYST_PILLAR);
 
     builder.putAll(BlockusBlocks.DEEPSLATE_PILLAR, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
     builder.putAll(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);

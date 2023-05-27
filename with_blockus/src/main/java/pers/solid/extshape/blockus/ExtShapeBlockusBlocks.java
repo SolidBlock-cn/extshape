@@ -39,10 +39,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
-import pers.solid.extshape.builder.AbstractBlockBuilder;
-import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.builder.BlocksBuilder;
-import pers.solid.extshape.builder.BlocksBuilderFactory;
+import pers.solid.extshape.builder.*;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.ButtonSettings;
 import pers.solid.extshape.util.FenceSettings;
@@ -56,6 +53,7 @@ import static pers.solid.extshape.blockus.ExtShapeBlockusTags.ofBlockAndItem;
 public final class ExtShapeBlockusBlocks {
   static final ObjectSet<Block> BLOCKUS_BLOCKS = new ObjectLinkedOpenHashSet<>();
   static final ObjectSet<Block> BLOCKUS_BASE_BLOCKS = new ObjectLinkedOpenHashSet<>();
+  static final ObjectSet<Block> DEPRECATE_BLOCKS = new ObjectLinkedOpenHashSet<>();
   private static final BlocksBuilderFactory FACTORY = Util.make(new BlocksBuilderFactory(), blocksBuilderFactory -> {
     blocksBuilderFactory.defaultNamespace = ExtShapeBlockus.NAMESPACE;
     blocksBuilderFactory.instanceCollection = BLOCKUS_BLOCKS;
@@ -153,17 +151,25 @@ public final class ExtShapeBlockusBlocks {
         .setCommonFenceSettings(Items.SCULK)
         .build());
 
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_AMETHYST, block -> FACTORY.createAllShapes(block).withoutRedstone()
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_AMETHYST, bssTypes -> create(bssTypes).withoutRedstone()
         .addExtraTag(BlockusBlockTags.AMETHYST_BLOCKS)
         .withExtension(BlockExtension.AMETHYST)
         .setFenceSettings(FenceSettings.AMETHYST)
         .build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.AMETHYST_BRICKS, block -> FACTORY.createAllShapes(block).withoutRedstone()
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_AMETHYST.block, block -> Util.make(FACTORY.createEmpty(block).with(BlockShape.STAIRS, BlockShape.SLAB), blocksBuilder -> {
+      blocksBuilder.put(BlockShape.STAIRS, FACTORY.modify(new StairsBuilder(blocksBuilder.baseBlock).setInstanceSupplier(builder -> new DeprecateStairsBlock(builder.baseBlock, builder.blockSettings, BlockusBlocks.POLISHED_AMETHYST.stairs))));
+      blocksBuilder.put(BlockShape.SLAB, FACTORY.modify(new SlabBuilder(blocksBuilder.baseBlock).setInstanceSupplier(builder -> new DeprecatedSlabBlock(builder.baseBlock, builder.blockSettings, BlockusBlocks.POLISHED_AMETHYST.slab))));
+    }).addPreBuildConsumer((blockShape, builder) -> builder.shouldAddToBlockBiMap = false).addPostBuildConsumer((blockShape, builder) -> DEPRECATE_BLOCKS.add(builder.instance)).addExtraTag(BlockTags.PICKAXE_MINEABLE).build());
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.AMETHYST_BRICKS, bsswTypes -> create(bsswTypes).withoutRedstone()
         .addExtraTag(BlockusBlockTags.AMETHYST_BLOCKS)
         .withExtension(BlockExtension.AMETHYST)
         .setFenceSettings(FenceSettings.AMETHYST)
         .without(BlockShape.BUTTON)
         .build());
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.AMETHYST_BRICKS.block, block -> Util.make(FACTORY.createEmpty(block).with(BlockShape.STAIRS, BlockShape.SLAB), blocksBuilder -> {
+      blocksBuilder.put(BlockShape.STAIRS, FACTORY.modify(new StairsBuilder(blocksBuilder.baseBlock).setInstanceSupplier(builder -> new DeprecateStairsBlock(builder.baseBlock, builder.blockSettings, BlockusBlocks.AMETHYST_BRICKS.stairs))));
+      blocksBuilder.put(BlockShape.SLAB, FACTORY.modify(new SlabBuilder(blocksBuilder.baseBlock).setInstanceSupplier(builder -> new DeprecatedSlabBlock(builder.baseBlock, builder.blockSettings, BlockusBlocks.AMETHYST_BRICKS.slab))));
+    }).addPreBuildConsumer((blockShape, builder) -> builder.shouldAddToBlockBiMap = false).addPostBuildConsumer((blockShape, builder) -> DEPRECATE_BLOCKS.add(builder.instance)).addExtraTag(BlockTags.PICKAXE_MINEABLE).build());
     ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHISELED_AMETHYST, block -> FACTORY.createAllShapes(block).withoutRedstone()
         .addExtraTag(BlockusBlockTags.AMETHYST_BLOCKS)
         .withExtension(BlockExtension.AMETHYST)

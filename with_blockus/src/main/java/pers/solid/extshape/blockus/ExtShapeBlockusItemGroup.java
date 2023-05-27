@@ -38,7 +38,7 @@ public final class ExtShapeBlockusItemGroup {
         new EntryVariantAppender(group, shapes, ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains).appendItems(VanillaItemGroup.getAppendingRule(group));
       } else if (group.getId().equals(new Identifier("blockus", "blockus_colored"))) {
         final Multimap<Item, Item> coloredAppendingRule = VanillaItemGroup.getAppendingRule(group);
-        new EntryVariantAppender(group, shapes, Iterables.filter(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, input -> !SPECIAL_SORTED_RAINBOW_BLOCKS.contains(input)), ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains).appendItems(coloredAppendingRule);
+        new EntryVariantAppender(group, shapes, Iterables.filter(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, input -> !SPECIAL_SORTED_RAINBOW_BLOCKS.contains(input)), o -> ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(o) && !ExtShapeBlockusBlocks.DEPRECATE_BLOCKS.contains(o)).appendItems(coloredAppendingRule);
         final Item shingleAnchor = BlockusBlocks.PINK_SHINGLES.slab.asItem();
         final Item stainedStoneBrickAnchor = BlockusBlocks.PINK_STONE_BRICKS.wall.asItem();
         for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {

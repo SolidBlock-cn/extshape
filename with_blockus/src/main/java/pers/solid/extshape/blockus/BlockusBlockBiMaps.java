@@ -3,6 +3,7 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
+import com.brand.blockus.content.types.ConcreteTypes;
 import com.brand.blockus.content.types.PatternWoolTypes;
 import com.brand.blockus.data.family.BlockusBlockFamilies;
 import net.minecraft.block.Block;
@@ -71,6 +72,17 @@ public final class BlockusBlockBiMaps {
         }
         if (patternWoolTypes.slab != null) {
           BlockBiMaps.of(BlockShape.SLAB).put(patternWoolTypes.block, patternWoolTypes.slab);
+        }
+      });
+      ConcreteTypes.values().forEach(concreteTypes -> {
+        if (concreteTypes.stairs != null) {
+          BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteTypes.block, concreteTypes.stairs);
+        }
+        if (concreteTypes.slab != null) {
+          BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteTypes.block, concreteTypes.slab);
+        }
+        if (concreteTypes.wall != null) {
+          BlockBiMaps.setBlockOf(BlockShape.WALL, concreteTypes.block, concreteTypes.wall);
         }
       });
     } catch (Throwable throwable) {

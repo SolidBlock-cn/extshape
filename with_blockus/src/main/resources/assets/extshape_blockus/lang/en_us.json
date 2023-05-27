@@ -1,4 +1,5 @@
 {
   "modmenu.nameTranslation.extshape_blockus": "Extended Block Shapes - Blockus",
-  "modmenu.descriptionTranslation.extshape_blockus": "Adds Extended Block Shapes for Blockus mod!"
+  "modmenu.descriptionTranslation.extshape_blockus": "Adds Extended Block Shapes for Blockus mod!",
+  "block.extshape_blockus.deprecated": "Deprecated block. Please replace with another block with the same name via crafting."
 }
