@@ -4,9 +4,9 @@ import com.brand.blockus.Blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
-import com.brand.blockus.data.provider.BlockusRecipeProvider;
-import com.brand.blockus.tags.BlockusBlockTags;
-import com.brand.blockus.tags.BlockusItemTags;
+import com.brand.blockus.data.providers.BlockusRecipeProvider;
+import com.brand.blockus.utils.tags.BlockusBlockTags;
+import com.brand.blockus.utils.tags.BlockusItemTags;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
@@ -215,7 +215,7 @@ public final class ExtShapeBlockusRRP {
   }
 
   private static void generatePlankCookingRecipe(RuntimeResourcePack pack) {
-    final List<Block> planksThatBurn = ImmutableList.of(Blocks.OAK_PLANKS, Blocks.SPRUCE_PLANKS, Blocks.BIRCH_PLANKS, Blocks.JUNGLE_PLANKS, Blocks.ACACIA_PLANKS, Blocks.DARK_OAK_PLANKS, BlockusBlocks.BAMBOO.planks, BlockusBlocks.WHITE_OAK.planks, Blocks.MANGROVE_PLANKS, Blocks.CHERRY_PLANKS, BlockusBlocks.LEGACY_PLANKS);
+    final List<Block> planksThatBurn = ImmutableList.of(Blocks.OAK_PLANKS, Blocks.SPRUCE_PLANKS, Blocks.BIRCH_PLANKS, Blocks.JUNGLE_PLANKS, Blocks.ACACIA_PLANKS, Blocks.DARK_OAK_PLANKS, BlockusBlocks.RAW_BAMBOO.planks, BlockusBlocks.WHITE_OAK.planks, Blocks.MANGROVE_PLANKS, Blocks.CHERRY_PLANKS, BlockusBlocks.LEGACY_PLANKS);
     for (BlockShape blockShape : BlockShape.values()) {
       final Block charredOutput = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.CHARRED.planks);
       if (charredOutput != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(charredOutput)) {

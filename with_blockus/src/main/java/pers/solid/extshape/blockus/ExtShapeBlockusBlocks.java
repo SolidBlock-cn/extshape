@@ -5,9 +5,8 @@ import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.BlockusItems;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
-import com.brand.blockus.content.types.WoodTypesF;
-import com.brand.blockus.content.types.WoodTypesFP;
-import com.brand.blockus.tags.BlockusBlockTags;
+import com.brand.blockus.content.types.WoodTypes;
+import com.brand.blockus.utils.tags.BlockusBlockTags;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
@@ -18,7 +17,6 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
-import net.minecraft.block.Material;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -85,12 +83,8 @@ public final class ExtShapeBlockusBlocks {
     return blocksBuilder;
   }
 
-  private static BlocksBuilder create(WoodTypesF woodTypesF) {
-    return FACTORY.createAllShapes(woodTypesF.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
-  }
-
-  private static BlocksBuilder create(WoodTypesFP woodTypesFp) {
-    return FACTORY.createAllShapes(woodTypesFp.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
+  private static BlocksBuilder create(WoodTypes woodTypes) {
+    return FACTORY.createAllShapes(woodTypes.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
   }
 
   private static final FenceSettings stoneFenceSettings = FenceSettings.common(Items.FLINT);
@@ -153,12 +147,12 @@ public final class ExtShapeBlockusBlocks {
         .setCommonFenceSettings(Items.SCULK)
         .build());
 
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_AMETHYST, block -> FACTORY.createAllShapes(block).withoutRedstone()
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.POLISHED_AMETHYST, block -> create(block).withoutRedstone()
         .addExtraTag(BlockusBlockTags.AMETHYST_BLOCKS)
         .withExtension(BlockExtension.AMETHYST)
         .setFenceSettings(FenceSettings.AMETHYST)
         .build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.AMETHYST_BRICKS, block -> FACTORY.createAllShapes(block).withoutRedstone()
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.AMETHYST_BRICKS, block -> create(block).withoutRedstone()
         .addExtraTag(BlockusBlockTags.AMETHYST_BLOCKS)
         .withExtension(BlockExtension.AMETHYST)
         .setFenceSettings(FenceSettings.AMETHYST)
@@ -326,9 +320,9 @@ public final class ExtShapeBlockusBlocks {
     final ImmutableMap<BlockShape, TagKey<? extends ItemConvertible>> woodenTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_WOODEN_TAG);
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20);
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFuel = (blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape.logicalCompleteness * 300));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK, woodTypesF -> create(woodTypesF).setPrimaryTagForShape(woodenTags).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.BAMBOO, woodTypesF -> create(woodTypesF).setPrimaryTagForShape(woodenTags).setButtonSettings(ButtonSettings.BAMBOO).setCommonFenceSettings(Items.BAMBOO).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build());
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHARRED, woodTypesFP -> create(woodTypesFP).setPrimaryTagForShape(woodenTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).build());
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK, woodTypes -> create(woodTypes).setPrimaryTagForShape(woodenTags).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build());
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.RAW_BAMBOO, woodTypes -> create(woodTypes).setPrimaryTagForShape(woodenTags).setButtonSettings(ButtonSettings.BAMBOO).setCommonFenceSettings(Items.BAMBOO).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build());
+    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.CHARRED, woodTypes -> create(woodTypes).setPrimaryTagForShape(woodenTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).build());
 
     for (var supplier : BlockusBlockCollections.HERRINGBONE_PLANKS) {
       ExtShapeBlockus.tryConsume(supplier, block -> {
@@ -342,7 +336,7 @@ public final class ExtShapeBlockusBlocks {
     }
     for (var supplier : BlockusBlockCollections.SMALL_LOGS) {
       ExtShapeBlockus.tryConsume(supplier, block -> {
-        if (block.getDefaultState().getMaterial() == Material.NETHER_WOOD) {
+        if (block == BlockusBlocks.CRIMSON_SMALL_STEMS || block == BlockusBlocks.WARPED_SMALL_STEMS) {
           FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
         } else {
           FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addPostBuildConsumer(logFlammable).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();

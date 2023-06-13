@@ -68,7 +68,9 @@ public class ExtShapeOptionsScreen extends Screen {
           Text.translatable("options.extshape.addToVanillaGroups.tooltip", Registries.ITEM_GROUP.getOrThrow(ItemGroups.BUILDING_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.COLORED_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.NATURAL).getDisplayName())
               .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Text.literal("\n\n").append(Text.translatable("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : Text.empty())
               .append("\n\n")
-              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))),
+              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))
+              .append("\n\n")
+              .append(Text.translatable("options.extshape.addToVanillaGroups.warning_for_1.20").formatted(Formatting.YELLOW))),
       true,
       value -> {
         newConfig.addToVanillaGroups = value;
@@ -81,7 +83,9 @@ public class ExtShapeOptionsScreen extends Screen {
       SimpleOption.constantTooltip(
           Text.translatable("options.extshape.showSpecificGroups.tooltip")
               .append("\n\n")
-              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))),
+              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))
+              .append("\n\n")
+              .append(Text.translatable("options.extshape.showSpecificGroups.warning_for_1.20").formatted(Formatting.YELLOW))),
       false,
       value -> {
         newConfig.showSpecificGroups = value;
@@ -141,6 +145,8 @@ public class ExtShapeOptionsScreen extends Screen {
     this.parent = parent;
     addToVanillaGroupsButton.active = false;
     showSpecificGroupsButton.active = false;
+    shapesInSpecificGroupsTextField.active = false;
+    resetShapesInSpecificGroupsButton.active = false;
   }
 
   @Override
