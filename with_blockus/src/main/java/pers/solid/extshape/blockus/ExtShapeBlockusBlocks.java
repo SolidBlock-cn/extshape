@@ -61,7 +61,7 @@ public final class ExtShapeBlockusBlocks {
     blocksBuilderFactory.defaultNamespace = ExtShapeBlockus.NAMESPACE;
     blocksBuilderFactory.instanceCollection = BLOCKUS_BLOCKS;
     blocksBuilderFactory.baseBlockCollection = BLOCKUS_BASE_BLOCKS;
-    blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS;
+    blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.TAG_PREPARATIONS;
     blocksBuilderFactory.itemGroupForShape = Maps.transformValues(BlocksBuilderFactory.DEFAULT_GROUP_FOR_SHAPE, Functions.forMap(ImmutableMap.of(ItemGroup.BUILDING_BLOCKS, Blockus.BLOCKUS_BUILDING_BLOCKS, ItemGroup.DECORATIONS, Blockus.BLOCKUS_DECORATIONS, ItemGroup.REDSTONE, Blockus.BLOCKUS_REDSTONE), null));
   });
 

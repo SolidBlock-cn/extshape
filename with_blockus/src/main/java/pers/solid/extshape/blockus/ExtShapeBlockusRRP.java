@@ -230,21 +230,21 @@ public final class ExtShapeBlockusRRP {
   }
 
   private static void generateTags(RuntimeResourcePack pack) {
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.STAIRS, ItemTags.STAIRS);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.SLABS, ItemTags.SLABS);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.FENCES, ItemTags.FENCES);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.WALLS, ItemTags.WALLS);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.BUTTONS, ItemTags.BUTTONS);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_SLABS);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.QUARTER_PIECES);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_STAIRS);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_QUARTER_PIECES);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.STAIRS, ItemTags.STAIRS);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.SLABS, ItemTags.SLABS);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.FENCES, ItemTags.FENCES);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.WALLS, ItemTags.WALLS);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.setBlockTagWithItem(BlockTags.BUTTONS, ItemTags.BUTTONS);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_SLABS);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.QUARTER_PIECES);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_STAIRS);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.forceSetBlockTagWithItem(ExtShapeTags.VERTICAL_QUARTER_PIECES);
 
-    ExtShapeTags.SHAPE_TO_LOG_TAG.values().forEach(ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS::forceSetBlockTagWithItem);
-    ExtShapeTags.SHAPE_TO_WOODEN_TAG.values().forEach(ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS::forceSetBlockTagWithItem);
+    ExtShapeTags.SHAPE_TO_LOG_TAG.values().forEach(ExtShapeBlockusTags.TAG_PREPARATIONS::forceSetBlockTagWithItem);
+    ExtShapeTags.SHAPE_TO_WOODEN_TAG.values().forEach(ExtShapeBlockusTags.TAG_PREPARATIONS::forceSetBlockTagWithItem);
 
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.setBlockTagWithItem(BlockusBlockTags.ALL_PATTERNED_WOOLS, BlockusItemTags.ALL_PATTERNED_WOOLS);
-    ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS.write(pack);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.setBlockTagWithItem(BlockusBlockTags.ALL_PATTERNED_WOOLS, BlockusItemTags.ALL_PATTERNED_WOOLS);
+    ExtShapeBlockusTags.TAG_PREPARATIONS.write(pack);
   }
 
   private static void generateBlockusBlockData(RuntimeResourcePack pack) {
@@ -252,7 +252,7 @@ public final class ExtShapeBlockusRRP {
       if (!(block instanceof BlockResourceGenerator generator)) continue;
       generator.writeRecipes(pack);
       final Block baseBlock = generator.getBaseBlock();
-      final UnusualLootTables.LootTableFunction lootTableFunction = ExtShapeUnusualLootTables.INSTANCE.get(baseBlock);
+      final UnusualLootTables.LootTableFunction lootTableFunction = BlockusUnusualLootTables.INSTANCE.get(baseBlock);
       if (lootTableFunction != null) {
         pack.addLootTable(generator.getLootTableId(), lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block));
       } else {

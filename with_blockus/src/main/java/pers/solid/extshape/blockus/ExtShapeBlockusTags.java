@@ -11,7 +11,7 @@ import pers.solid.extshape.tag.TagPreparations;
 
 public final class ExtShapeBlockusTags {
 
-  public static final TagPreparations EXTSHAPE_TAG_PREPARATIONS = new TagPreparations();
+  public static final TagPreparations TAG_PREPARATIONS = new TagPreparations();
 
 
   static TagKey<Block> ofBlockOnly(@NotNull Identifier identifier) {
@@ -20,7 +20,7 @@ public final class ExtShapeBlockusTags {
 
   static TagKey<Block> ofBlockAndItem(@NotNull Identifier identifier) {
     final TagKey<Block> blockTag = ofBlockOnly(identifier);
-    EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(blockTag);
+    TAG_PREPARATIONS.forceSetBlockTagWithItem(blockTag);
     return blockTag;
   }
 
@@ -30,7 +30,7 @@ public final class ExtShapeBlockusTags {
 
   static TagKey<Block> ofBlockAndItem(@NotNull TagKey<Block> blockTag, @NotNull TagKey<Item> itemTag) {
     Preconditions.checkArgument(blockTag.id().equals(itemTag.id()));
-    EXTSHAPE_TAG_PREPARATIONS.forceSetBlockTagWithItem(blockTag);
+    TAG_PREPARATIONS.forceSetBlockTagWithItem(blockTag);
     return blockTag;
   }
 
