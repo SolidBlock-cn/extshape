@@ -1,5 +1,12 @@
 # Update log
 
+### 2.0.2
+
+- Adapt to new version Blockus mod.
+- Fixed the issue that vertical stiars have the incorrect tag `extshape:vertical_slabs` instead
+  of `extshape:vertical_stairs`.
+- Adjusted the way item groups are modified.
+
 ### 2.0.0
 - Adapted to new version of Better Runtime Resource Packs.
 - Fixed the issue that some bedrock blocks occupy the empty loot table.

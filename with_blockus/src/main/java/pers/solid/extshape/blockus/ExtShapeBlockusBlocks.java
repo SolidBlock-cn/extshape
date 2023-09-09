@@ -30,7 +30,6 @@ import net.minecraft.item.Items;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
@@ -54,7 +53,7 @@ public final class ExtShapeBlockusBlocks {
     blocksBuilderFactory.defaultNamespace = ExtShapeBlockus.NAMESPACE;
     blocksBuilderFactory.instanceCollection = BLOCKUS_BLOCKS;
     blocksBuilderFactory.baseBlockCollection = BLOCKUS_BASE_BLOCKS;
-    blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS;
+    blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.TAG_PREPARATIONS;
     blocksBuilderFactory.itemGroupForShape = Maps.transformValues(BlocksBuilderFactory.DEFAULT_GROUP_FOR_SHAPE, Functions.forMap(ImmutableMap.of(ItemGroup.BUILDING_BLOCKS, Blockus.BLOCKUS_BUILDING_BLOCKS, ItemGroup.DECORATIONS, Blockus.BLOCKUS_DECORATIONS, ItemGroup.REDSTONE, Blockus.BLOCKUS_REDSTONE), null));
   });
 
@@ -363,7 +362,7 @@ public final class ExtShapeBlockusBlocks {
       }
     }).build()).addPreBuildConsumer((blockShape, builder) -> {
       builder.setItemSettings(new FabricItemSettings().group(Blockus.BLOCKUS_BUILDING_BLOCKS));
-      builder.setItemInstanceSupplier(builder0 -> new ExtShapeBlockItem(builder0.instance, builder0.itemSettings.rarity(Rarity.UNCOMMON)) {
+      builder.setItemInstanceSupplier(builder0 -> new ExtShapeBlockItem(builder0.instance, builder0.itemSettings) {
         @Override
         public boolean hasGlint(ItemStack stack) {
           return true;
