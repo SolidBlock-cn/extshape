@@ -4,7 +4,7 @@ import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.PatternWoolTypes;
-import com.brand.blockus.data.family.BlockusBlockFamilies;
+import com.brand.blockus.data.family.BlockusWoodFamilies;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.family.BlockFamily;
@@ -20,7 +20,7 @@ public final class BlockusBlockBiMaps {
 
   static void importFromBlockus() {
     try {
-      final Stream<BlockFamily> families = BlockusBlockFamilies.getFamilies();
+      final Stream<BlockFamily> families = BlockusWoodFamilies.getFamilies();
       families.forEach(blockFamily -> {
         Block baseBlock = blockFamily.getBaseBlock();
         // ignore netherite block because it belongs to vanilla

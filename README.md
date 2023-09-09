@@ -10,7 +10,7 @@ If you do not understand Chinese, you may refer to the [document in English](REA
 
 如果您同时安装了扩展方块形状和 Blockus 模组，你可以一并安装[扩展方块形状 - Blocks](#Blocks)，以实现本模组与 Blockus 的联动。
 
-本模组的更新记录[点击此处](UpdateLog.md)。欢迎加入QQ群 **587928350** 或开黑啦频道邀请码 **KlFS0n** 体验本模组的最新更新。
+本模组的更新记录[点击此处](UpdateLog.md)。欢迎加入QQ群 **587928350** 体验本模组的最新更新。
 
 ## 特性
 

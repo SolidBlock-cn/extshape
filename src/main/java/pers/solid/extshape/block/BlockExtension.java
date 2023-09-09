@@ -9,11 +9,13 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Contract;
 
-public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, ProjectileHitCallback projectileHitCallback, SteppedOnCallback steppedOnCallback) implements Cloneable {
-  public static final BlockExtension EMPTY = new BlockExtension(StacksDroppedCallback.EMPTY, ProjectileHitCallback.EMPTY, SteppedOnCallback.EMPTY);
+public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, ProjectileHitCallback projectileHitCallback, SteppedOnCallback steppedOnCallback, EmitsRedstonePower emitsRedstonePower, WeakRedstonePower weakRedstonePower) implements Cloneable {
+  public static final BlockExtension EMPTY = new BlockExtension(StacksDroppedCallback.EMPTY, ProjectileHitCallback.EMPTY, SteppedOnCallback.EMPTY, EmitsRedstonePower.EMPTY, WeakRedstonePower.EMPTY);
   public static final BlockExtension AMETHYST = BlockExtension.builder().setProjectileHitCallback((world, state, hit, projectile) -> {
     if (!world.isClient) {
       BlockPos blockPos = hit.getBlockPos();
@@ -24,6 +26,15 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
 
   public static Builder builder() {
     return new Builder();
+  }
+
+  @Override
+  public BlockExtension clone() {
+    try {
+      return (BlockExtension) super.clone();
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError();
+    }
   }
 
   @FunctionalInterface
@@ -44,31 +55,36 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
 
   @FunctionalInterface
   public interface SteppedOnCallback {
-    SteppedOnCallback EMPTY = (world, pos, state, entity) -> {
-    };
+    SteppedOnCallback EMPTY = (world, pos, state, entity) -> {};
 
     void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity);
   }
 
-  @Override
-  public BlockExtension clone() {
-    try {
-      return (BlockExtension) super.clone();
-    } catch (CloneNotSupportedException e) {
-      throw new AssertionError();
-    }
+  @FunctionalInterface
+  public interface EmitsRedstonePower {
+    EmitsRedstonePower EMPTY = state -> false;
+
+    boolean emitsRedstonePower(BlockState state);
+  }
+
+  @FunctionalInterface
+  public interface WeakRedstonePower {
+    WeakRedstonePower EMPTY = (state, world, pos, direction) -> 0;
+
+    int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction);
   }
 
   public static class Builder {
     private StacksDroppedCallback stacksDroppedCallback = StacksDroppedCallback.EMPTY;
+    private ProjectileHitCallback projectileHitCallback = ProjectileHitCallback.EMPTY;
+    private SteppedOnCallback steppedOnCallback = SteppedOnCallback.EMPTY;
+    private EmitsRedstonePower emitsRedstonePower = EmitsRedstonePower.EMPTY;
+    private WeakRedstonePower weakRedstonePower = WeakRedstonePower.EMPTY;
 
     public Builder setProjectileHitCallback(ProjectileHitCallback projectileHitCallback) {
       this.projectileHitCallback = projectileHitCallback;
       return this;
     }
-
-    private ProjectileHitCallback projectileHitCallback = ProjectileHitCallback.EMPTY;
-
 
     @Contract(value = "_ -> this", mutates = "this")
     public Builder setStacksDroppedCallback(StacksDroppedCallback stacksDroppedCallback) {
@@ -76,16 +92,24 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
       return this;
     }
 
-    private SteppedOnCallback steppedOnCallback = SteppedOnCallback.EMPTY;
-
     @Contract(value = "_ -> this", mutates = "this")
     public Builder setSteppedOnCallback(SteppedOnCallback steppedOnCallback) {
       this.steppedOnCallback = steppedOnCallback;
       return this;
     }
 
+    public Builder setEmitsRedstonePower(EmitsRedstonePower emitsRedstonePower) {
+      this.emitsRedstonePower = emitsRedstonePower;
+      return this;
+    }
+
+    public Builder setWeakRedstonePower(WeakRedstonePower weakRedstonePower) {
+      this.weakRedstonePower = weakRedstonePower;
+      return this;
+    }
+
     public BlockExtension build() {
-      return new BlockExtension(stacksDroppedCallback, projectileHitCallback, steppedOnCallback);
+      return new BlockExtension(stacksDroppedCallback, projectileHitCallback, steppedOnCallback, emitsRedstonePower, weakRedstonePower);
     }
   }
 }

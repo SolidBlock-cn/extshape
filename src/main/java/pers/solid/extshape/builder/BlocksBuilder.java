@@ -446,4 +446,15 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     }
     return builder;
   }
+
+  /**
+   * 预留。将基础方块添加到可切石的方块中，以要求在后续生成数据时要生成相应的切石配方。
+   *
+   * @return 原对象自身。
+   */
+  @Contract("-> this")
+  public BlocksBuilder markStoneCuttable() {
+    ExtShapeBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(baseBlock);
+    return this;
+  }
 }

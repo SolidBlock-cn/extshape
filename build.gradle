@@ -136,7 +136,7 @@ subprojects {
 project(':runtest') {
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
-//        implementation project(path: ':with_blockus', configuration: "namedElements")
+        implementation project(path: ':with_blockus', configuration: "namedElements")
     }
 
     remapJar {

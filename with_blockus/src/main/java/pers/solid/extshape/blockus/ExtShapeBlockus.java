@@ -9,33 +9,9 @@ import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.BlockBiMaps;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 public class ExtShapeBlockus implements ModInitializer {
   public static final String NAMESPACE = "extshape_blockus";
   public static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes for Blockus");
-
-  public static <T> void tryConsume(Supplier<T> supplier, Consumer<T> consumer) {
-    final T t;
-    try {
-      t = supplier.get();
-    } catch (Throwable throwable) {
-      return;
-    }
-    consumer.accept(t);
-  }
-
-  public static <L, R> R tryTransform(Supplier<L> supplier, Function<L, R> transformer, Supplier<R> defaultSupplier) {
-    final L left;
-    try {
-      left = supplier.get();
-    } catch (Throwable throwable) {
-      return defaultSupplier.get();
-    }
-    return transformer.apply(left);
-  }
 
   @Override
   public void onInitialize() {

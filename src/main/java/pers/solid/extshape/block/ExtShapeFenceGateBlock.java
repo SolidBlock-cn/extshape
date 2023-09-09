@@ -13,6 +13,8 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
@@ -80,6 +82,18 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
       super.onSteppedOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean emitsRedstonePower(BlockState state) {
+      return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
+      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction);
     }
   }
 }

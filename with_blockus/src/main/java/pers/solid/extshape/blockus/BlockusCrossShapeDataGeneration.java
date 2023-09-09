@@ -1,7 +1,6 @@
 package pers.solid.extshape.blockus;
 
 import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.ConcreteTypes;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMultimap;
@@ -17,7 +16,6 @@ import pers.solid.extshape.util.BlockCollections;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * @see pers.solid.extshape.rrp.VanillaStonecutting
@@ -146,18 +144,20 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     putMultipleWithMid(builder, Blocks.END_STONE_BRICKS, Blocks.END_STONE, BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.SMALL_END_STONE_BRICKS.block, BlockusBlocks.CHISELED_END_STONE_BRICKS, BlockusBlocks.END_STONE_PILLAR, BlockusBlocks.HERRINGBONE_END_STONE_BRICKS);
 
     builder.put(BlockusBlocks.RAINBOW_BRICKS.block, BlockusBlocks.RAINBOW_BLOCK);
+    builder.put(BlockusBlocks.CHOCOLATE_BRICKS.block, BlockusBlocks.CHOCOLATE_BLOCK.block);
+    builder.put(BlockusBlocks.CHOCOLATE_SQUARES, BlockusBlocks.CHOCOLATE_BLOCK.block);
 
     // shingles and terracotta
     builder.put(BlockusBlocks.SHINGLES.block, Blocks.TERRACOTTA);
     final Iterator<Block> terracottaIterator = BlockCollections.STAINED_TERRACOTTA.iterator();
-    for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHINGLES) {
-      ExtShapeBlockus.tryConsume(supplier, bssTypes -> builder.put(bssTypes.block, terracottaIterator.next()));
+    for (var bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
+      builder.put(bssTypes.block, terracottaIterator.next());
     }
 
     // glazed terracotta
     final Iterator<Block> glazedTerracottaIterator = BlockCollections.GLAZED_TERRACOTTA.iterator();
-    for (Supplier<Block> supplier : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
-      ExtShapeBlockus.tryConsume(supplier, block -> builder.put(block, glazedTerracottaIterator.next()));
+    for (var block : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
+      builder.put(block, glazedTerracottaIterator.next());
     }
   }
 

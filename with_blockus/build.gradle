@@ -1,3 +1,6 @@
+import com.modrinth.minotaur.dependencies.ModDependency
+
+apply plugin: "com.modrinth.minotaur"
 archivesBaseName = rootProject.archives_base_name_blockus + "-fabric"
 version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
 group = rootProject.maven_group
@@ -14,9 +17,22 @@ dependencies {
     // Blockus 模组
     modApi("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}") {
         exclude module: "fabric-loader"
-        transitive false
     }
     modCompileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
     modApi "curse.maven:blockus-312289:${project.blockus_version}"
     implementation project(path: ':', configuration: "namedElements")
+}
+
+
+modrinth {
+    projectId = 'qAQHIBF8'
+    String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
+    versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
+    versionType = 'release'
+    uploadFile = remapJar
+    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
+    loaders = [platform]
+    var list = [new ModDependency('JnrDtPAE', 'required'), new ModDependency('tb7kCxSW', 'required')]
+    if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
+    dependencies = list
 }

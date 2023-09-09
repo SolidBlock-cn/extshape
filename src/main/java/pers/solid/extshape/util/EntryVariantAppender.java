@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
@@ -22,7 +22,7 @@ import java.util.function.Predicate;
  * @param baseBlocks     需要添加指定的这些基础方块。
  * @param blockPredicate 判断方块是否是需要被添加的（返回 true），还是已在物品栏中存在、需要作为锚点的（返回 false）。
  */
-public record EntryVariantAppender(ItemGroup itemGroup, Iterable<BlockShape> shapes, Iterable<Block> baseBlocks, Predicate<Block> blockPredicate) {
+public record EntryVariantAppender(RegistryKey<ItemGroup> itemGroup, Iterable<BlockShape> shapes, Iterable<Block> baseBlocks, Predicate<Block> blockPredicate) {
   public static final Multimap<Block, Block> ADJACENT_BASE_BLOCKS = ImmutableSetMultimap.<Block, Block>builder()
       .put(Blocks.BAMBOO_PLANKS, Blocks.BAMBOO_MOSAIC)
       .build();
@@ -56,6 +56,6 @@ public record EntryVariantAppender(ItemGroup itemGroup, Iterable<BlockShape> sha
       }
     }
     final double afterTime = System.currentTimeMillis();
-    ExtShape.LOGGER.info("Time spent on adding items to group {}: {}", Registries.ITEM_GROUP.getId(itemGroup), (afterTime - prevTime) / 1000d);
+    ExtShape.LOGGER.info("Time spent on adding items to group {}: {}", itemGroup.getValue(), (afterTime - prevTime) / 1000d);
   }
 }
