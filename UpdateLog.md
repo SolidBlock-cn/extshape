@@ -5,6 +5,7 @@
 - 适应新版本的 Blockus 模组。
 - 修复竖直楼梯错误地拥有 `extshape:vertical_slabs` 而非 `extshape:vertical_stairs` 标签的问题。
 - 调整了物品组修改的方式。
+- 修改了 Blockus 模组中的繁星块和下界之星块的不同形状方块的战利品表。
 
 ### 2.0.0
 - 适应新的 Better Runtime Resource Packs

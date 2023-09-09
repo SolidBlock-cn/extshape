@@ -1,5 +1,8 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
+apply plugin: 'com.matthewprenger.cursegradle'
+apply plugin: "com.github.breadmoirai.github-release"
+apply plugin: "com.modrinth.minotaur"
 archivesBaseName = rootProject.archives_base_name_blockus + "-fabric"
 version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
 group = rootProject.maven_group
@@ -23,15 +26,58 @@ dependencies {
 }
 
 
+curseforge {
+    def getenv = System.getenv("CURSEFORGE_TOKEN")
+    println("CurseForge 令牌: $getenv")
+    if (getenv) apiKey = getenv
+    project {
+        id = '841655'  // extended block shapes blockus
+        releaseType = release_type
+        mainArtifact remapJar
+
+        for (final String v in (rootProject.supported_minecraft_versions.split(','))) {
+            addGameVersion v
+        }
+        addGameVersion 'Fabric'
+
+        relations {
+            requiredDependency 'fabric-api'
+            requiredDependency 'better-runtime-resource-pack'
+            requiredDependency 'blockus'
+        }
+    }
+
+    options {
+        forgeGradleIntegration = false
+    }
+}
 modrinth {
     projectId = 'qAQHIBF8'
     String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
-    versionType = 'release'
+    versionType = release_type
     uploadFile = remapJar
     gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
     var list = [new ModDependency('JnrDtPAE', 'required'), new ModDependency('tb7kCxSW', 'required')]
     if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
     dependencies = list
+}
+githubRelease {
+    def getenv = System.getenv("GITHUB_TOKEN")
+    println "GitHub 令牌: $getenv"
+    if (getenv) token getenv
+    owner "SolidBlock-cn"
+    repo "extshape"
+    tagName "v$project.mod_version"
+    targetCommitish "1.20.1"
+    draft true
+    prerelease false
+    releaseAssets remapJar, remapSourcesJar
+    allowUploadToExisting true
+    apiEndpoint "https://api.github.com"
+}
+
+publish {
+    dependsOn tasks.curseforge, tasks.modrinth, tasks.githubRelease
 }
