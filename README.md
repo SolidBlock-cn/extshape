@@ -4,12 +4,11 @@ If you do not understand Chinese, you may refer to the [document in English](REA
 
 本模组为许多的原版方块添加了其楼梯、台阶、栅栏、栅栏门、按钮和压力板，以及原版不具有的竖直台阶、竖直楼梯、横条、纵条。具体内容列表请参考[此文件](BlockList.md)。
 
-模组目前支持 Minecraft Java 版 1.20.1-1.16.5，请根据你的游戏版本安装对应的模组，并需要 Fabric API 和 BRRP。此外，对于
-Fabric，通常还需要 Mod Menu（非必须）以打开模组配置界面。
+模组目前支持 Minecraft Java 版 1.20.1-1.16.5，请根据你的游戏版本安装对应的模组，并需要 Fabric API 和 BRRP。此外，对于 Fabric，通常还需要 Mod Menu（非必须）以打开模组配置界面。
 
 本模组依赖 BRRP（更好的运行时资源包，Better Runtime Resource Pack）模组才能运行。
 
-如果您同时安装了扩展方块形状和 Blockus 模组，你可以一并安装[扩展方块形状 - Blocks](#Blocks)，以实现本模组与 Blockus 的联动。
+如果您同时安装了扩展方块形状和 Blockus 模组，你可以一并安装[扩展方块形状 - Blockus](#Blockus)，以实现本模组与 Blockus 的联动。
 
 本模组的更新记录[点击此处](UpdateLog.md)。欢迎加入QQ群 **587928350** 体验本模组的最新更新。
 
@@ -91,6 +90,6 @@ Fabric，通常还需要 Mod Menu（非必须）以打开模组配置界面。
 
 ### Blockus
 
-如果你已经同时安装“扩展方块形状”和 Blockus 模组，你在此基础上再安装“扩展方块形状 - Blocks”模组，从而为 Blockus 模组中的方块也添加扩展的形状。
+如果你已经同时安装“扩展方块形状”和 Blockus 模组，你在此基础上再安装“扩展方块形状 - Blockus”模组，从而为 Blockus 模组中的方块也添加扩展的形状。
 
 注意：此部分的方块没有专门的物品组，因此如果需要在创造模式物品栏中见到这些方块，需要在“扩展方块形状”的模组设置中，将“添加至原版物品组”开启，然后在 Blockus 模组的物品组中找到这些方块。
