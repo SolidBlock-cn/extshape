@@ -3,7 +3,6 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
-import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -16,7 +15,6 @@ import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.EntryVariantAppender;
 
 import java.util.Collection;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -28,9 +26,9 @@ public final class ExtShapeBlockusItemGroup {
   }
 
   private static final ImmutableSet<Block> SPECIAL_SORTED_RAINBOW_BLOCKS = Streams.concat(
-      plainStream(BlockusBlockCollections.TINTED_SHINGLES.stream()).map(t -> t.block),
-      plainStream(BlockusBlockCollections.STAINED_STONE_BRICKS.stream()).map(bsswTypes -> bsswTypes.block),
-      plainStream(Stream.<Supplier<BSSTypes>>of(() -> BlockusBlocks.SHINGLES)).map(bssTypes -> bssTypes.block)).collect(ImmutableSet.toImmutableSet());
+      BlockusBlockCollections.TINTED_SHINGLES.stream().map(t -> t.block),
+      BlockusBlockCollections.STAINED_STONE_BRICKS.stream().map(bsswTypes -> bsswTypes.block),
+      Stream.of(BlockusBlocks.SHINGLES).map(bssTypes -> bssTypes.block)).collect(ImmutableSet.toImmutableSet());
 
   public static void addVanillaGroupRules(Collection<BlockShape> shapes) {
     ItemGroups.getGroups().forEach(group -> {
@@ -43,35 +41,22 @@ public final class ExtShapeBlockusItemGroup {
         final Item stainedStoneBrickAnchor = BlockusBlocks.PINK_STONE_BRICKS.wall.asItem();
         for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
           BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
-          ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SHINGLES, bssTypes -> {
+          final Block block1 = biMap.get(BlockusBlocks.SHINGLES.block);
+          if (block1 != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block1))
+            coloredAppendingRule.put(shingleAnchor, block1.asItem());
+          for (BSSTypes bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
             final Block block = biMap.get(bssTypes.block);
-            if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) coloredAppendingRule.put(shingleAnchor, block.asItem());
-          });
-          for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHINGLES) {
-            ExtShapeBlockus.tryConsume(supplier, bssTypes -> {
-              final Block block = biMap.get(bssTypes.block);
-              if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) coloredAppendingRule.put(shingleAnchor, block.asItem());
-            });
+            if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
+              coloredAppendingRule.put(shingleAnchor, block.asItem());
           }
-          for (Supplier<BSSWTypes> supplier : BlockusBlockCollections.STAINED_STONE_BRICKS) {
-            ExtShapeBlockus.tryConsume(supplier, bsswTypes -> {
-              final Block block = biMap.get(bsswTypes.block);
-              if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) coloredAppendingRule.put(stainedStoneBrickAnchor, block.asItem());
-            });
+          for (BSSWTypes bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
+            final Block block = biMap.get(bsswTypes.block);
+            if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
+              coloredAppendingRule.put(stainedStoneBrickAnchor, block.asItem());
           }
         }
       }
     });
-  }
-
-  private static <T> Stream<T> plainStream(Stream<? extends Supplier<T>> stream) {
-    return stream.map(supplier -> {
-      try {
-        return supplier.get();
-      } catch (Throwable throwable) {
-        return null;
-      }
-    }).filter(Predicates.notNull());
   }
 
   public static void registerEvent() {
