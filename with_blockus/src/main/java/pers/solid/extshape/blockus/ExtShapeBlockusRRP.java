@@ -44,8 +44,6 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 
 import java.util.List;
-import java.util.function.Supplier;
-
 /**
  * @see ExtShapeRRP
  */
@@ -93,36 +91,36 @@ public final class ExtShapeBlockusRRP {
 
   @Environment(EnvType.CLIENT)
   private static void registerTextures() {
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_BASALT.block, block -> TextureRegistry.register(block, new Identifier("block/basalt_top")));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_SANDSTONE.block, block -> TextureRegistry.register(block, new Identifier("block/sandstone_bottom")));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_RED_SANDSTONE.block, block -> TextureRegistry.register(block, new Identifier("block/red_sandstone_bottom")));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.ROUGH_SOUL_SANDSTONE.block, block -> TextureRegistry.register(block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_bottom")));
+    TextureRegistry.register(BlockusBlocks.ROUGH_BASALT.block, new Identifier("block/basalt_top"));
+    TextureRegistry.register(BlockusBlocks.ROUGH_SANDSTONE.block, new Identifier("block/sandstone_bottom"));
+    TextureRegistry.register(BlockusBlocks.ROUGH_RED_SANDSTONE.block, new Identifier("block/red_sandstone_bottom"));
+    TextureRegistry.register(BlockusBlocks.ROUGH_SOUL_SANDSTONE.block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_bottom"));
 
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.STRIPPED_WHITE_OAK_LOG, block -> TextureRegistry.registerSuffixed(block, TextureKey.END, "_top"));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.STRIPPED_WHITE_OAK_WOOD, block -> TextureRegistry.register(block, new Identifier(Blockus.MOD_ID, "block/stripped_white_oak_log")));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK_LOG, block -> TextureRegistry.registerSuffixed(block, TextureKey.END, "_top"));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.WHITE_OAK_WOOD, block -> TextureRegistry.register(block, new Identifier(Blockus.MOD_ID, "block/white_oak_log")));
+    TextureRegistry.registerSuffixed(BlockusBlocks.STRIPPED_WHITE_OAK_LOG, TextureKey.END, "_top");
+    TextureRegistry.register(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD, new Identifier(Blockus.MOD_ID, "block/stripped_white_oak_log"));
+    TextureRegistry.registerSuffixed(BlockusBlocks.WHITE_OAK_LOG, TextureKey.END, "_top");
+    TextureRegistry.register(BlockusBlocks.WHITE_OAK_WOOD, new Identifier(Blockus.MOD_ID, "block/white_oak_log"));
 
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SOUL_SANDSTONE, bsswTypes -> TextureRegistry.registerSuffixed(bsswTypes.block, TextureKey.TOP, "_top"));
-    ExtShapeBlockus.tryConsume(() -> BlockusBlocks.SMOOTH_SOUL_SANDSTONE, bssTypes -> TextureRegistry.register(bssTypes.block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_top")));
+    TextureRegistry.registerSuffixed(BlockusBlocks.SOUL_SANDSTONE.block, TextureKey.TOP, "_top");
+    TextureRegistry.register(BlockusBlocks.SMOOTH_SOUL_SANDSTONE.block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_top"));
 
-    for (Supplier<Block> supplier : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
-      ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerSuffixed(block, TextureKey.END, "_top"));
+    for (Block block : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
+      TextureRegistry.registerSuffixed(block, TextureKey.END, "_top");
     }
 
-    for (final Supplier<Block> supplier : ImmutableList.<Supplier<Block>>of(
-        () -> BlockusBlocks.OAK_SMALL_LOGS,
-        () -> BlockusBlocks.SPRUCE_SMALL_LOGS,
-        () -> BlockusBlocks.BIRCH_SMALL_LOGS,
-        () -> BlockusBlocks.JUNGLE_SMALL_LOGS,
-        () -> BlockusBlocks.ACACIA_SMALL_LOGS,
-        () -> BlockusBlocks.DARK_OAK_SMALL_LOGS,
-        () -> BlockusBlocks.MANGROVE_SMALL_LOGS,
-        () -> BlockusBlocks.WARPED_SMALL_STEMS,
-        () -> BlockusBlocks.CRIMSON_SMALL_STEMS,
-        () -> BlockusBlocks.WHITE_OAK_SMALL_LOGS
+    for (final Block block : ImmutableList.of(
+        BlockusBlocks.OAK_SMALL_LOGS,
+        BlockusBlocks.SPRUCE_SMALL_LOGS,
+        BlockusBlocks.BIRCH_SMALL_LOGS,
+        BlockusBlocks.JUNGLE_SMALL_LOGS,
+        BlockusBlocks.ACACIA_SMALL_LOGS,
+        BlockusBlocks.DARK_OAK_SMALL_LOGS,
+        BlockusBlocks.MANGROVE_SMALL_LOGS,
+        BlockusBlocks.WARPED_SMALL_STEMS,
+        BlockusBlocks.CRIMSON_SMALL_STEMS,
+        BlockusBlocks.WHITE_OAK_SMALL_LOGS
     )) {
-      ExtShapeBlockus.tryConsume(supplier, block -> TextureRegistry.registerSuffixed(block, TextureKey.END, "_top"));
+      TextureRegistry.registerSuffixed(block, TextureKey.END, "_top");
     }
   }
 
@@ -158,44 +156,40 @@ public final class ExtShapeBlockusRRP {
   }
 
   private static void generateShingleDyeingRecipes(RuntimeResourcePack pack) {
-    for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHINGLES) {
-      ExtShapeBlockus.tryConsume(supplier, bssTypes -> {
-        Item dyeItem = Registry.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registry.BLOCK.getId(bssTypes.block).getPath(), "_shingle") + "_dye"));
-        for (BlockShape blockShape : BlockShape.values()) {
-          final Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block);
-          final Block dyed = BlockBiMaps.getBlockOf(blockShape, bssTypes.block);
-          if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
-          final CraftingRecipeJsonBuilder recipe = BlockusRecipeProvider
-              .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
-              .group("shingles_" + blockShape.asString() + "_from_dyeing")
-              .criterion(RecipeProvider.hasItem(BlockusBlocks.SHINGLES.block), RecipeProvider.conditionsFromItem(BlockusBlocks.SHINGLES.block));
-          recipe.offerTo(recipeJsonProvider -> {
-            pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
-            pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((ShapedRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
-          }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
-        }
-      });
+    for (BSSTypes bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
+      Item dyeItem = Registry.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registry.BLOCK.getId(bssTypes.block).getPath(), "_shingle") + "_dye"));
+      for (BlockShape blockShape : BlockShape.values()) {
+        final Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block);
+        final Block dyed = BlockBiMaps.getBlockOf(blockShape, bssTypes.block);
+        if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
+        final CraftingRecipeJsonBuilder recipe = BlockusRecipeProvider
+            .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
+            .group("shingles_" + blockShape.asString() + "_from_dyeing")
+            .criterion(RecipeProvider.hasItem(BlockusBlocks.SHINGLES.block), RecipeProvider.conditionsFromItem(BlockusBlocks.SHINGLES.block));
+        recipe.offerTo(recipeJsonProvider -> {
+          pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
+          pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((ShapedRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
+        }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
+      }
     }
   }
 
   private static void generateStainedStoneBricksRecipe(RuntimeResourcePack pack) {
-    for (Supplier<BSSWTypes> supplier : BlockusBlockCollections.STAINED_STONE_BRICKS) {
-      ExtShapeBlockus.tryConsume(supplier, bsswTypes -> {
-        Item dyeItem = Registry.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registry.BLOCK.getId(bsswTypes.block).getPath(), "_stone_brick") + "_dye"));
-        for (BlockShape blockShape : BlockShape.values()) {
-          final Block unDyed = BlockBiMaps.getBlockOf(blockShape, Blocks.STONE_BRICKS);
-          final Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswTypes.block);
-          if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
-          final CraftingRecipeJsonBuilder recipe = BlockusRecipeProvider
-              .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
-              .group("stained_stone_brick_" + blockShape.asString() + "_from_dyeing")
-              .criterion(RecipeProvider.hasItem(Blocks.STONE_BRICKS), RecipeProvider.conditionsFromItem(Blocks.STONE_BRICKS));
-          recipe.offerTo(recipeJsonProvider -> {
-            pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
-            pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((ShapedRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
-          }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
-        }
-      });
+    for (BSSWTypes bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
+      Item dyeItem = Registry.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registry.BLOCK.getId(bsswTypes.block).getPath(), "_stone_brick") + "_dye"));
+      for (BlockShape blockShape : BlockShape.values()) {
+        final Block unDyed = BlockBiMaps.getBlockOf(blockShape, Blocks.STONE_BRICKS);
+        final Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswTypes.block);
+        if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
+        final CraftingRecipeJsonBuilder recipe = BlockusRecipeProvider
+            .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
+            .group("stained_stone_brick_" + blockShape.asString() + "_from_dyeing")
+            .criterion(RecipeProvider.hasItem(Blocks.STONE_BRICKS), RecipeProvider.conditionsFromItem(Blocks.STONE_BRICKS));
+        recipe.offerTo(recipeJsonProvider -> {
+          pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
+          pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((ShapedRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
+        }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
+      }
     }
   }
 
