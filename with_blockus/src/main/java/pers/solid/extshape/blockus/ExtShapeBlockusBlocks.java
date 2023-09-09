@@ -16,7 +16,6 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -27,13 +26,8 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
-import net.minecraft.world.World;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
@@ -45,7 +39,6 @@ import pers.solid.extshape.builder.BlocksBuilderFactory;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.FenceSettings;
 
-import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -58,7 +51,7 @@ public final class ExtShapeBlockusBlocks {
     blocksBuilderFactory.defaultNamespace = ExtShapeBlockus.NAMESPACE;
     blocksBuilderFactory.instanceCollection = BLOCKUS_BLOCKS;
     blocksBuilderFactory.baseBlockCollection = BLOCKUS_BASE_BLOCKS;
-    blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS;
+    blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.TAG_PREPARATIONS;
   });
 
   private ExtShapeBlockusBlocks() {
@@ -398,16 +391,6 @@ public final class ExtShapeBlockusBlocks {
         @Override
         public boolean hasGlint(ItemStack stack) {
           return true;
-        }
-
-        @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-          super.appendTooltip(stack, world, tooltip, context);
-          this.getBlock().appendTooltip(stack, world, tooltip, context);
-          tooltip.add(ScreenTexts.EMPTY);
-          tooltip.add(Text.literal(StringUtils.SPACE).append(StatusEffects.REGENERATION.getName()).append(" IV").formatted(Formatting.BLUE));
-          tooltip.add(Text.literal(StringUtils.SPACE).append(StatusEffects.ABSORPTION.getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
-          tooltip.add(Text.literal(StringUtils.SPACE).append(StatusEffects.STRENGTH.getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
         }
       });
     }).build();

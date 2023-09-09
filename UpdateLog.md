@@ -1,5 +1,11 @@
 # 更新日志
 
+### 2.0.2
+
+- 适应新版本的 Blockus 模组。
+- 修复竖直楼梯错误地拥有 `extshape:vertical_slabs` 而非 `extshape:vertical_stairs` 标签的问题。
+- 调整了物品组修改的方式。
+
 ### 2.0.0
 - 适应新的 Better Runtime Resource Packs
 - 修复了一些基岩物品占用空白战利品表的问题。

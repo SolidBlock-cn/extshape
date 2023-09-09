@@ -31,14 +31,20 @@
   ],
   "depends": {
     "fabricloader": "*",
-    "fabric": ">=0.76.0",
-    "minecraft": [
-      "~1.19.3"
-    ],
+    "fabric": "*",
+    "minecraft": "1.19.3",
     "java": ">=17",
     "brrp_v1": "*"
   },
   "suggests": {
     "blockus": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/extended-block-shapes",
+        "modmenu.modrinth": "https://modrinth.com/mod/extshape"
+      }
+    }
   }
 }
