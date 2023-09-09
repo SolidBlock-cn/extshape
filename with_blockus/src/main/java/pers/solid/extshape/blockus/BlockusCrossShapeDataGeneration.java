@@ -17,8 +17,6 @@ import pers.solid.extshape.util.BlockCollections;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
-
 /**
  * @see pers.solid.extshape.rrp.VanillaStonecutting
  */
@@ -144,14 +142,14 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     // shingles and terracotta
     builder.put(BlockusBlocks.SHINGLES.block, Blocks.TERRACOTTA);
     final Iterator<Block> terracottaIterator = BlockCollections.STAINED_TERRACOTTA.iterator();
-    for (Supplier<BSSTypes> supplier : BlockusBlockCollections.TINTED_SHINGLES) {
-      ExtShapeBlockus.tryConsume(supplier, bssTypes -> builder.put(bssTypes.block, terracottaIterator.next()));
+    for (BSSTypes bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
+      builder.put(bssTypes.block, terracottaIterator.next());
     }
 
     // glazed terracotta
     final Iterator<Block> glazedTerracottaIterator = BlockCollections.GLAZED_TERRACOTTA.iterator();
-    for (Supplier<Block> supplier : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
-      ExtShapeBlockus.tryConsume(supplier, block -> builder.put(block, glazedTerracottaIterator.next()));
+    for (Block block : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
+      builder.put(block, glazedTerracottaIterator.next());
     }
   }
 
