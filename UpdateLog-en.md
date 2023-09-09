@@ -3,9 +3,10 @@
 ### 2.0.2
 
 - Adapt to new version Blockus mod.
-- Fixed the issue that vertical stiars have the incorrect tag `extshape:vertical_slabs` instead
+- Fixed the issue that vertical stairs have the incorrect tag `extshape:vertical_slabs` instead
   of `extshape:vertical_stairs`.
 - Adjusted the way item groups are modified.
+- Modified the loot table of variants of Stars Block and Nether Star Block in Blockus mod.
 
 ### 2.0.0
 - Adapted to new version of Better Runtime Resource Packs.
