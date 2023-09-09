@@ -8,7 +8,7 @@ At present this mod supports Minecraft Java Edition 1.20.1-1.16.5. Please instal
 
 **Notice: The mod requires BRRP (Better Runtime Resource Pack) to run.**
 
-If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blocks](#Blocks), to add inter-mod support for Blockus.
+If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blockus](#Blockus), to add inter-mod support for Blockus.
 
 [Click here](UpdateLog-en.md) for previous update logs. Welcome to join Tencent QQ group **587928350** to experience the latest update of this mod.
 
