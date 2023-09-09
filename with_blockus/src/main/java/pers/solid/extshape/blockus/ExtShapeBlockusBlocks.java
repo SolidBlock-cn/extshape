@@ -57,7 +57,7 @@ public final class ExtShapeBlockusBlocks {
     blocksBuilderFactory.defaultNamespace = ExtShapeBlockus.NAMESPACE;
     blocksBuilderFactory.instanceCollection = BLOCKUS_BLOCKS;
     blocksBuilderFactory.baseBlockCollection = BLOCKUS_BASE_BLOCKS;
-    blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.EXTSHAPE_TAG_PREPARATIONS;
+    blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.TAG_PREPARATIONS;
   });
 
   private ExtShapeBlockusBlocks() {

@@ -26,12 +26,17 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": [
-      "~1.19.4",
-      ">=1.19.4"
-    ],
+    "minecraft": "1.19.4",
     "brrp_v1": "*",
     "extshape": ">=${version}",
     "blockus": ">=2.6.7"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/extended-block-shapes-blockus",
+        "modmenu.modrinth": "https://modrinth.com/mod/extshape_blockus"
+      }
+    }
   }
 }
