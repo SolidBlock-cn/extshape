@@ -31,12 +31,12 @@ allprojects {
 
         // Mod Menu 模组
         maven { url 'https://maven.terraformersmc.com/releases/' }
-        // 合理排序模组依赖的 Cloth Config
+        // Cloth Config、Roughly Enough Items
         maven { url "https://maven.shedaniel.me/" }
         /*
         这个是存储在 GitHub 上的 BRRP 模组
         maven {
-            url 'https://raw.nuaa.cf/SolidBlock-cn/mvn-repo/main'
+            url 'https://github.com/SolidBlock-cn/mvn-repo/main'
         }*/
         // 合理排序和 BRRP 模组。这两个模组均存储于本地的 maven 仓库。
         mavenLocal()
@@ -137,9 +137,20 @@ subprojects {
 }
 
 project(':runtest') {
+    repositories {
+        // Mods on CurseForge
+        maven {
+            url "https://cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
+        }
+    }
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
         implementation project(path: ':with_blockus', configuration: "namedElements")
+        modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
+        modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
     }
 
     tasks.each {

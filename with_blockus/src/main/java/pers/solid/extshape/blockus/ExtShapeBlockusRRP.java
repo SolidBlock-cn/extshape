@@ -43,6 +43,7 @@ import pers.solid.extshape.rrp.UnusualLootTables;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 
+import java.util.Collection;
 import java.util.List;
 /**
  * @see ExtShapeRRP
@@ -136,7 +137,7 @@ public final class ExtShapeBlockusRRP {
     generateBlockusCrossShapeData(pack);
     generateTags(pack);
     generatePlankCookingRecipe(pack);
-    generateHerringBonePlanksCookingRecipe(pack);
+    generateWoodCharringRecipes(pack, ImmutableList.of(BlockusBlocks.HERRINGBONE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BIRCH_PLANKS, BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS, BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS, BlockusBlocks.HERRINGBONE_ACACIA_PLANKS, BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS, BlockusBlocks.HERRINGBONE_MANGROVE_PLANKS, BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS), BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
     generateStainedStoneBricksRecipe(pack);
     generateShingleDyeingRecipes(pack);
     generatePaperCookingRecipes(pack);
@@ -193,12 +194,11 @@ public final class ExtShapeBlockusRRP {
     }
   }
 
-  private static void generateHerringBonePlanksCookingRecipe(RuntimeResourcePack pack) {
-    final List<Block> herringBonePlanksThatBurn = ImmutableList.of(BlockusBlocks.HERRINGBONE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BIRCH_PLANKS, BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS, BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS, BlockusBlocks.HERRINGBONE_ACACIA_PLANKS, BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS, BlockusBlocks.HERRINGBONE_MANGROVE_PLANKS, BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS);
+  private static void generateWoodCharringRecipes(RuntimeResourcePack pack, Collection<Block> charrablePlanks, Block charredBaseBlock) {
     for (BlockShape blockShape : BlockShape.values()) {
-      final Block charredOutput = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
-      if (charredOutput != null) {
-        final ItemConvertible[] ingredients = herringBonePlanksThatBurn.stream().map(block -> BlockBiMaps.getBlockOf(blockShape, block)).filter(Predicates.notNull()).toArray(ItemConvertible[]::new);
+      final Block charredOutput = BlockBiMaps.getBlockOf(blockShape, charredBaseBlock);
+      if (charredOutput != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(charredOutput)) {
+        final ItemConvertible[] ingredients = charrablePlanks.stream().map(block -> BlockBiMaps.getBlockOf(blockShape, block)).filter(Predicates.notNull()).toArray(ItemConvertible[]::new);
         final CookingRecipeJsonBuilder cookingRecipe = CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ingredients), blockShape.getRecipeCategory(), charredOutput, 0.1F * blockShape.logicalCompleteness, (int) (200 * blockShape.logicalCompleteness)).criterion("has_planks", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create().items(ingredients).build()));
         cookingRecipe.offerTo(recipeJsonProvider -> {
           pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);

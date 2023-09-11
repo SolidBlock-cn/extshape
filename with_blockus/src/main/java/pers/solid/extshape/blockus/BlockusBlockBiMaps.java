@@ -38,7 +38,7 @@ public final class BlockusBlockBiMaps {
             }
           }
           if (variant != null) {
-            BlockBiMaps.of(shape).put(baseBlock, variant);
+            BlockBiMaps.setBlockOf(shape, baseBlock, variant);
             BlockBiMaps.BASE_BLOCKS.add(baseBlock);
           }
         }
@@ -49,29 +49,29 @@ public final class BlockusBlockBiMaps {
     try {
       BSSWTypes.values().forEach(bsswTypes -> {
         if (bsswTypes.stairs != null) {
-          BlockBiMaps.of(BlockShape.STAIRS).put(bsswTypes.block, bsswTypes.stairs);
+          BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswTypes.block, bsswTypes.stairs);
         }
         if (bsswTypes.slab != null) {
-          BlockBiMaps.of(BlockShape.SLAB).put(bsswTypes.block, bsswTypes.slab);
+          BlockBiMaps.setBlockOf(BlockShape.SLAB, bsswTypes.block, bsswTypes.slab);
         }
         if (bsswTypes.wall != null) {
-          BlockBiMaps.of(BlockShape.WALL).put(bsswTypes.block, bsswTypes.wall);
+          BlockBiMaps.setBlockOf(BlockShape.WALL, bsswTypes.block, bsswTypes.wall);
         }
       });
       BSSTypes.values().forEach(bssTypes -> {
         if (bssTypes.stairs != null) {
-          BlockBiMaps.of(BlockShape.STAIRS).put(bssTypes.block, bssTypes.stairs);
+          BlockBiMaps.setBlockOf(BlockShape.STAIRS, bssTypes.block, bssTypes.stairs);
         }
         if (bssTypes.slab != null) {
-          BlockBiMaps.of(BlockShape.SLAB).put(bssTypes.block, bssTypes.slab);
+          BlockBiMaps.setBlockOf(BlockShape.SLAB, bssTypes.block, bssTypes.slab);
         }
       });
       PatternWoolTypes.values().forEach(patternWoolTypes -> {
         if (patternWoolTypes.stairs != null) {
-          BlockBiMaps.of(BlockShape.STAIRS).put(patternWoolTypes.block, patternWoolTypes.slab);
+          BlockBiMaps.setBlockOf(BlockShape.STAIRS, patternWoolTypes.block, patternWoolTypes.stairs);
         }
         if (patternWoolTypes.slab != null) {
-          BlockBiMaps.of(BlockShape.SLAB).put(patternWoolTypes.block, patternWoolTypes.slab);
+          BlockBiMaps.setBlockOf(BlockShape.SLAB, patternWoolTypes.block, patternWoolTypes.slab);
         }
       });
       ConcreteTypes.values().forEach(concreteTypes -> {
@@ -89,22 +89,22 @@ public final class BlockusBlockBiMaps {
       ExtShapeBlockus.LOGGER.error("Cannot load BSSWTypes and BSSTypes from Blockus mod. This may cause Extended Block Shapes mod to create duplicate block instances.", throwable);
     }
 
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.MARBLE.block, BlockusBlocks.MARBLE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.BLUESTONE.block, BlockusBlocks.BLUESTONE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.VIRIDITE.block, BlockusBlocks.VIRIDITE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.POLISHED_TUFF_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_SCULK.block, BlockusBlocks.POLISHED_SCULK_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.MARBLE.block, BlockusBlocks.MARBLE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.BLUESTONE.block, BlockusBlocks.BLUESTONE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.VIRIDITE.block, BlockusBlocks.VIRIDITE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.POLISHED_TUFF_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_SCULK.block, BlockusBlocks.POLISHED_SCULK_BUTTON));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_PRESSURE_PLATE));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.MARBLE.block, BlockusBlocks.MARBLE_PRESSURE_PLATE));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.BLUESTONE.block, BlockusBlocks.BLUESTONE_PRESSURE_PLATE));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.VIRIDITE.block, BlockusBlocks.VIRIDITE_PRESSURE_PLATE));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_PRESSURE_PLATE));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_PRESSURE_PLATE));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.POLISHED_TUFF_PRESSURE_PLATE));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.POLISHED_SCULK.block, BlockusBlocks.POLISHED_SCULK_PRESSURE_PLATE));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_BUTTON));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.MARBLE.block, BlockusBlocks.MARBLE_BUTTON));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.BLUESTONE.block, BlockusBlocks.BLUESTONE_BUTTON));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.VIRIDITE.block, BlockusBlocks.VIRIDITE_BUTTON));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_BUTTON));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_BUTTON));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.POLISHED_TUFF_BUTTON));
+    tryRun(() -> BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.POLISHED_SCULK.block, BlockusBlocks.POLISHED_SCULK_BUTTON));
   }
 
   private static void tryRun(Runnable runnable) {
