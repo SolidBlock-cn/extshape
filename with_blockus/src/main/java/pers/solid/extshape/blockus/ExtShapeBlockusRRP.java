@@ -195,7 +195,7 @@ public final class ExtShapeBlockusRRP {
   }
 
   private static void generateHerringBonePlanksCookingRecipe(RuntimeResourcePack pack) {
-    final List<Block> herringBonePlanksThatBurn = ImmutableList.of(BlockusBlocks.HERRINGBONE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BIRCH_PLANKS, BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS, BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS, BlockusBlocks.HERRINGBONE_ACACIA_PLANKS, BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS, BlockusBlocks.HERRINGBONE_MANGROVE_PLANKS, BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS);
+    final List<Block> herringBonePlanksThatBurn = ImmutableList.of(BlockusBlocks.HERRINGBONE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BIRCH_PLANKS, BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS, BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS, BlockusBlocks.HERRINGBONE_ACACIA_PLANKS, BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS, BlockusBlocks.HERRINGBONE_CHERRY_PLANKS, BlockusBlocks.HERRINGBONE_MANGROVE_PLANKS, BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS);
     for (BlockShape blockShape : BlockShape.values()) {
       final Block charredOutput = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
       if (charredOutput != null) {
