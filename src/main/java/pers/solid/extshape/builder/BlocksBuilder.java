@@ -43,7 +43,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 为指定形状的 {@link AbstractBlockBuilder} 调用 {@link AbstractBlockBuilder#setPrimaryTagToAddTo}。
    */
-  private @Nullable Map<@NotNull BlockShape, @Nullable TagKey<? extends ItemConvertible>> primaryTagForShape = null;
+  private @Nullable Map<@NotNull BlockShape, @Nullable TagKey<Block>> primaryTagForShape = null;
   /**
    * 该基础方块需要构建哪些形状的变种。可以通过 {@link #with} 和 {@link #without} 进行增减。
    */
@@ -276,7 +276,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_, _, -> this", mutates = "this")
-  public BlocksBuilder setPrimaryTagForShape(@Nullable BlockShape shape, @Nullable TagKey<? extends ItemConvertible> tag) {
+  public BlocksBuilder setPrimaryTagForShape(@Nullable BlockShape shape, @Nullable TagKey<Block> tag) {
     if (shape == null || tag == null) return this;
     if (primaryTagForShape == null) {
       primaryTagForShape = new HashMap<>();
@@ -290,7 +290,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_, -> this", mutates = "this")
-  public BlocksBuilder setPrimaryTagForShape(Map<BlockShape, TagKey<? extends ItemConvertible>> map) {
+  public BlocksBuilder setPrimaryTagForShape(Map<BlockShape, TagKey<Block>> map) {
     primaryTagForShape = map;
     return this;
   }
@@ -432,5 +432,16 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       }
     }
     return builder;
+  }
+
+  /**
+   * 预留。将基础方块添加到可切石的方块中，以要求在后续生成数据时要生成相应的切石配方。
+   *
+   * @return 原对象自身。
+   */
+  @Contract("-> this")
+  public BlocksBuilder markStoneCuttable() {
+    ExtShapeBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(baseBlock);
+    return this;
   }
 }
