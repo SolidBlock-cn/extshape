@@ -18,7 +18,7 @@ group = project.maven_group
 allprojects {
     apply plugin: 'fabric-loom'
     apply plugin: 'maven-publish'
-    apply plugin: 'io.github.juuxel.loom-quiltflower'
+    apply plugin: 'io.github.juuxel.loom-vineflower'
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 
@@ -153,10 +153,8 @@ project(':runtest') {
 //        modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
     }
 
-    tasks.each {
-        if (it != tasks.runClient && it != tasks.runServer && it != tasks.ideaSyncTask) {
-            it.enabled = false
-        }
+    [tasks.remapJar, tasks.remapSourcesJar, tasks.build].each {
+        it.enabled = false
     }
 }
 
