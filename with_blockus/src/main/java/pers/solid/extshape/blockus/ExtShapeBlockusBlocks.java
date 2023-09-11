@@ -134,15 +134,6 @@ public final class ExtShapeBlockusBlocks {
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_POLISHED_BASALT_BRICKS).addExtraTag(BlockusBlockTags.BASALT_BLOCKS));
     buildCircularPavingBlock(create(BlockusBlocks.POLISHED_BASALT_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.BASALT_BLOCKS));
 
-    create(BlockusBlocks.CRIMSON_WART_BRICKS).addExtraTag(BlockTags.PICKAXE_MINEABLE)
-        .setFenceCraftingIngredient(Items.BRICK)
-        .without(BlockShape.BUTTON)
-        .build();
-    create(BlockusBlocks.WARPED_WART_BRICKS).addExtraTag(BlockTags.PICKAXE_MINEABLE)
-        .setFenceCraftingIngredient(Items.BRICK)
-        .without(BlockShape.BUTTON)
-        .build();
-
     buildStoneBlocksWithButton(create(BlockusBlocks.LIMESTONE).addExtraTag(BlockusBlockTags.LIMESTONE));
     buildStoneBlocksWithButton(create(BlockusBlocks.POLISHED_LIMESTONE).addExtraTag(BlockusBlockTags.LIMESTONE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.LIMESTONE_BRICKS).addExtraTag(BlockusBlockTags.LIMESTONE));
@@ -319,7 +310,6 @@ public final class ExtShapeBlockusBlocks {
     for (var block : BlockusBlockCollections.PATTERNED_WOOLS) {
       FACTORY.createConstructionOnly(block)
           .addExtraTag(FabricMineableTags.SHEARS_MINEABLE)
-          .without(BlockShape.STAIRS, BlockShape.SLAB)
           .with(BlockShape.WALL)
           .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness)))
           .addExtraTag(addWallToUnmineableTag)

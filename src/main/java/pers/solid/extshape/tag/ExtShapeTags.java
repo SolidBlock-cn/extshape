@@ -21,7 +21,6 @@ import pers.solid.extshape.builder.BlockShape;
  */
 public final class ExtShapeTags {
   public static final TagPreparations TAG_PREPARATIONS = new TagPreparations();
-  public static final TagKey<Block> DAMPENS_VIBRATIONS = ofBlockAndItem(BlockTags.DAMPENS_VIBRATIONS, ItemTags.DAMPENS_VIBRATIONS);
   /**
    * 这个标签主要是考虑到，{@link BlockTags#PICKAXE_MINEABLE} 加入了所有的墙，但事实上墙并不一定是可以使用镐来开采的，因此这里设置了一个专门的标签，如果某个方块属于 {@code minecraft:mineable/pickaxe} 但同时属于 {@code extshape:pickaxe_unmineable}，则认为镐子不能开采这个方块。
    */
@@ -30,7 +29,7 @@ public final class ExtShapeTags {
   /**
    * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，会被剪刀剪掉，并被加入到 {@link BlockTags#OCCLUDES_VIBRATION_SIGNALS} 中（仅限 1.17 以上版本）。
    */
-  public static final TagKey<Block> WOOLEN_BLOCKS = ofBlockAndItem("woolen_blocks", FabricMineableTags.SHEARS_MINEABLE, DAMPENS_VIBRATIONS, BlockTags.OCCLUDES_VIBRATION_SIGNALS);
+  public static final TagKey<Block> WOOLEN_BLOCKS = ofBlockAndItem("woolen_blocks", FabricMineableTags.SHEARS_MINEABLE, BlockTags.OCCLUDES_VIBRATION_SIGNALS);
   /**
    * 所有的木质方块，包括下界木，不含原版方块。
    */

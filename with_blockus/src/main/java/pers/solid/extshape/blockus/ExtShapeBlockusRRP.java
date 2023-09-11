@@ -134,7 +134,7 @@ public final class ExtShapeBlockusRRP {
     generateBlockusCrossShapeData(pack);
     generateTags(pack);
     generatePlankCookingRecipe(pack);
-    generateWoodCharringRecipes(pack, ImmutableList.of(BlockusBlocks.HERRINGBONE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BIRCH_PLANKS, BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS, BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS, BlockusBlocks.HERRINGBONE_ACACIA_PLANKS, BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS, BlockusBlocks.HERRINGBONE_MANGROVE_PLANKS, BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS), BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
+    generateWoodCharringRecipes(pack, ImmutableList.of(BlockusBlocks.HERRINGBONE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BIRCH_PLANKS, BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS, BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS, BlockusBlocks.HERRINGBONE_ACACIA_PLANKS, BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS, BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS), BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
     generateStainedStoneBricksRecipe(pack);
     generateShingleDyeingRecipes(pack);
     generatePaperCookingRecipes(pack);
