@@ -48,7 +48,7 @@ public class ExtShape implements ModInitializer {
   public void onInitialize() {
     ExtShapeConfig.init();
     ExtShapeBlocks.init();
-    ExtShapeTags.refillTags();
+    ExtShapeTags.init();
 
     // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
     VanillaItemGroup.registerForMod();

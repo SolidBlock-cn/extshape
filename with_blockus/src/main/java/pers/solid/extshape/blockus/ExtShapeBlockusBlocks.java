@@ -7,10 +7,10 @@ import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.WoodTypes;
 import com.brand.blockus.utils.tags.BlockusBlockTags;
-import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -291,24 +291,22 @@ public final class ExtShapeBlockusBlocks {
 
     markStoneCuttableWhenCreating = false;
 
-    ImmutableMap<BlockShape, TagKey<? extends ItemConvertible>> logTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_LOG_TAG);
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
-    FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG).setPrimaryTagForShape(logTags).addExtraTag(ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
-    FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG).setPrimaryTagForShape(logTags).addExtraTag(ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
-    FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD).setPrimaryTagForShape(logTags).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK))
+    FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
+    FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
+    FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK))
         .setPillar().addPostBuildConsumer(logFlammable).build();
-    FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD).setPrimaryTagForShape(logTags).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).setPillar().addPostBuildConsumer(logFlammable).build();
+    FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).setPillar().addPostBuildConsumer(logFlammable).build();
 
-    final ImmutableMap<BlockShape, TagKey<? extends ItemConvertible>> woodenTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_WOODEN_TAG);
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20);
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFuel = (blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape.logicalCompleteness * 300));
-    create(BlockusBlocks.WHITE_OAK).setPrimaryTagForShape(woodenTags).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
-    create(BlockusBlocks.RAW_BAMBOO).setPrimaryTagForShape(woodenTags).setButtonSettings(ButtonSettings.BAMBOO).setCommonFenceSettings(Items.BAMBOO).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
-    create(BlockusBlocks.CHARRED).setPrimaryTagForShape(woodenTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).build();
+    create(BlockusBlocks.WHITE_OAK).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
+    create(BlockusBlocks.RAW_BAMBOO).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setButtonSettings(ButtonSettings.BAMBOO).setCommonFenceSettings(Items.BAMBOO).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
+    create(BlockusBlocks.CHARRED).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).build();
 
     for (var bssTypes : BlockusBlockCollections.WOODEN_MOSAICS) {
       final boolean isNonFlammable = BlockusBlocks.WARPED_MOSAIC == bssTypes || BlockusBlocks.CRIMSON_MOSAIC == bssTypes || BlockusBlocks.CHARRED_MOSAIC == bssTypes;
-      final BlocksBuilder builder = FACTORY.createConstructionOnly(bssTypes.block).without(BlockShape.STAIRS, BlockShape.SLAB).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).setRecipeGroup(blockShape -> "wooden_mosaic_" + blockShape.asString()).addExtraTag(BlockTags.AXE_MINEABLE);
+      final BlocksBuilder builder = FACTORY.createConstructionOnly(bssTypes.block).without(BlockShape.STAIRS, BlockShape.SLAB).with(BlockShape.WALL).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setRecipeGroup(blockShape -> "wooden_mosaic_" + blockShape.asString()).addExtraTag(BlockTags.AXE_MINEABLE);
       if (isNonFlammable) {
         builder.addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).build();
       } else {
@@ -318,16 +316,16 @@ public final class ExtShapeBlockusBlocks {
     for (var block : BlockusBlockCollections.HERRINGBONE_PLANKS) {
       final boolean isNonFlammable = BlockusBlocks.HERRINGBONE_WARPED_PLANKS == block || BlockusBlocks.HERRINGBONE_CRIMSON_PLANKS == block || BlockusBlocks.HERRINGBONE_CHARRED_PLANKS == block;
       if (isNonFlammable) {
-        FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
+        FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
       } else {
-        FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).addPostBuildConsumer(plankFlammable).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
+        FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).addPostBuildConsumer(plankFlammable).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
       }
     }
     for (var block : BlockusBlockCollections.SMALL_LOGS) {
       if (block == BlockusBlocks.CRIMSON_SMALL_STEMS || block == BlockusBlocks.WARPED_SMALL_STEMS) {
-        FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
+        FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
       } else {
-        FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addPostBuildConsumer(logFlammable).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
+        FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addPostBuildConsumer(logFlammable).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
       }
     }
 
@@ -365,7 +363,15 @@ public final class ExtShapeBlockusBlocks {
     }
 
     for (var patternWoolTypes : BlockusBlockCollections.PATTERNED_WOOLS) {
-      FACTORY.createConstructionOnly(patternWoolTypes.block).addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS).without(BlockShape.STAIRS, BlockShape.SLAB).with(BlockShape.WALL).addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness))).setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString()).build();
+      FACTORY.createConstructionOnly(patternWoolTypes.block)
+          .addExtraTag(FabricMineableTags.SHEARS_MINEABLE)
+          .addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS)
+          .without(BlockShape.STAIRS, BlockShape.SLAB)
+          .with(BlockShape.WALL)
+          .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness)))
+          .addExtraTag(addWallToUnmineableTag)
+          .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString())
+          .build();
     }
     for (var block : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
       FACTORY.createConstructionOnly(block).markStoneCuttable().with(BlockShape.WALL).addExtraTag(BlockusBlockTags.GLAZED_TERRACOTTA_PILLARS).setRecipeGroup(blockShape -> "glazed_terracotta_pillar_" + blockShape.asString()).setPillar().build();

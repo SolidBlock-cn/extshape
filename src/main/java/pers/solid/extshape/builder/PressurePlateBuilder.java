@@ -9,7 +9,6 @@ import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
-import pers.solid.extshape.util.BlockCollections;
 
 public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBlock> {
 
@@ -22,7 +21,7 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
     this.type = type;
     this.blockSetType = blockSetType;
     final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
-    primaryTagToAddTo = soundGroup == BlockSoundGroup.STONE ? BlockTags.STONE_PRESSURE_PLATES : BlockCollections.VanillaMineable.AXE.contains(baseBlock) ? BlockTags.WOODEN_PRESSURE_PLATES : BlockTags.PRESSURE_PLATES;
+    primaryTagToAddTo = soundGroup == BlockSoundGroup.STONE ? BlockTags.STONE_PRESSURE_PLATES : (soundGroup == BlockSoundGroup.WOOD || soundGroup == BlockSoundGroup.BAMBOO_WOOD || soundGroup == BlockSoundGroup.NETHER_WOOD || soundGroup == BlockSoundGroup.CHERRY_WOOD) ? BlockTags.WOODEN_PRESSURE_PLATES : BlockTags.PRESSURE_PLATES;
   }
 
   @Override

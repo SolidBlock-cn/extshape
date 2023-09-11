@@ -19,7 +19,6 @@ import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.rrp.RecipeGroupRegistry;
-import pers.solid.extshape.util.BlockCollections;
 
 /**
  * 该模组中的绝大多数方块共用的接口。
@@ -28,7 +27,8 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
   /**
    * 所有可以被切石的方块，包含其他模组中的。其他模组不应该对此集合进行任何与本模组无关的修改。
    */
-  ObjectSet<Block> STONECUTTABLE_BASE_BLOCKS = new ObjectOpenHashSet<>(BlockCollections.VanillaMineable.PICKAXE);
+  ObjectSet<Block> STONECUTTABLE_BASE_BLOCKS = new ObjectOpenHashSet<>();
+  ObjectSet<Block> STONECUTTABLE_BLOCKS = new ObjectOpenHashSet<>();
 
   /**
    * 方块所在的合成配方的组。
@@ -62,7 +62,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
 
   @Override
   default boolean shouldWriteStonecuttingRecipe() {
-    return isStoneCut(getBaseBlock());
+    return (this instanceof Block && STONECUTTABLE_BLOCKS.contains(this)) || isStoneCut(getBaseBlock());
   }
 
   /**
