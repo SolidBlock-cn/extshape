@@ -8,6 +8,7 @@
 - Fixed the issue that some blocks of pattered wools in Blockus are not shears-mineable.
 - Fixed the issue that herringbone cherry planks blocks cannot be charred into relevant charred planks blocks.
 - Fixed the identifying of mining tools of blocks during data generation.
+- For versions 1.20 and above, ore blocks can now be crafted into Blockus ore brick blocks.
 
 ### 2.0.2
 
