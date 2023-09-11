@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -41,6 +42,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeButtonBlock.ButtonType;
 import pers.solid.extshape.builder.AbstractBlockBuilder;
 import pers.solid.extshape.builder.BlockShape;
@@ -51,8 +53,6 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-
-import static pers.solid.extshape.blockus.ExtShapeBlockusTags.ofBlockAndItem;
 
 public final class ExtShapeBlockusBlocks {
   static final ObjectSet<Block> BLOCKUS_BLOCKS = new ObjectLinkedOpenHashSet<>();
@@ -65,56 +65,29 @@ public final class ExtShapeBlockusBlocks {
     blocksBuilderFactory.itemGroupForShape = Maps.transformValues(BlocksBuilderFactory.DEFAULT_GROUP_FOR_SHAPE, Functions.forMap(ImmutableMap.of(ItemGroup.BUILDING_BLOCKS, Blockus.BLOCKUS_BUILDING_BLOCKS, ItemGroup.DECORATIONS, Blockus.BLOCKUS_DECORATIONS, ItemGroup.REDSTONE, Blockus.BLOCKUS_REDSTONE), null));
   });
 
-  private ExtShapeBlockusBlocks() {
-  }
-
-  private static BlocksBuilder create(Block baseBlock) {
-    return FACTORY.createAllShapes(baseBlock);
-  }
-
-  private static BlocksBuilder create(BSSWTypes bsswTypes) {
-    final BlocksBuilder blocksBuilder = create(bsswTypes.block);
-    if (bsswTypes.stairs != null) blocksBuilder.without(BlockShape.STAIRS);
-    if (bsswTypes.slab != null) blocksBuilder.without(BlockShape.SLAB);
-    if (bsswTypes.wall != null) blocksBuilder.without(BlockShape.WALL);
-    return blocksBuilder;
-  }
-
-  private static BlocksBuilder create(BSSTypes bssTypes) {
-    final BlocksBuilder blocksBuilder = create(bssTypes.block);
-    if (bssTypes.stairs != null) blocksBuilder.without(BlockShape.STAIRS);
-    if (bssTypes.slab != null) blocksBuilder.without(BlockShape.SLAB);
-    return blocksBuilder;
-  }
-
-  private static BlocksBuilder create(WoodTypesB woodTypesF) {
-    return FACTORY.createAllShapes(woodTypesF.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
-  }
-
-  private static BlocksBuilder create(WoodTypesNB woodTypesFp) {
-    return FACTORY.createAllShapes(woodTypesFp.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
-  }
+  private static boolean markStoneCuttableWhenCreating = false;
 
   static {
     BlockusBlockBiMaps.importFromBlockus();
+    markStoneCuttableWhenCreating = true;
     buildStoneBlocksWithoutButton(create(BlockusBlocks.STONE_TILES).addExtraTag(BlockusBlockTags.STONE_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_STONE_BRICKS).addExtraTag(BlockusBlockTags.STONE_BLOCKS));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.STONE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.STONE_BLOCKS));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.STONE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.STONE_BLOCKS));
 
     buildStoneBlocksWithButton(create(BlockusBlocks.ANDESITE_BRICKS).addExtraTag(BlockusBlockTags.ANDESITE_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_ANDESITE_BRICKS).addExtraTag(BlockusBlockTags.ANDESITE_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_ANDESITE_BRICKS).addExtraTag(BlockusBlockTags.ANDESITE_BLOCKS));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.ANDESITE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.ANDESITE_BLOCKS));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.ANDESITE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.ANDESITE_BLOCKS));
 
     buildStoneBlocksWithoutButton(create(BlockusBlocks.DIORITE_BRICKS).addExtraTag(BlockusBlockTags.DIORITE_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_DIORITE_BRICKS).addExtraTag(BlockusBlockTags.DIORITE_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_DIORITE_BRICKS).addExtraTag(BlockusBlockTags.DIORITE_BLOCKS));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.DIORITE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.DIORITE_BLOCKS));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.DIORITE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.DIORITE_BLOCKS));
 
     buildStoneBlocksWithoutButton(create(BlockusBlocks.GRANITE_BRICKS).addExtraTag(BlockusBlockTags.GRANITE_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_GRANITE_BRICKS).addExtraTag(BlockusBlockTags.GRANITE_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_GRANITE_BRICKS).addExtraTag(BlockusBlockTags.GRANITE_BLOCKS));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.GRANITE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.GRANITE_BLOCKS));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.GRANITE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.GRANITE_BLOCKS));
 
     create(BlockusBlocks.CHISELED_MUD_BRICKS).addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .without(BlockShape.BUTTON)
@@ -133,13 +106,13 @@ public final class ExtShapeBlockusBlocks {
     buildStoneBlocksWithoutButton(create(BlockusBlocks.TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_TUFF).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.TUFF_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.TUFF_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
 
     buildStoneBlocksWithoutButton(create(BlockusBlocks.MOSSY_DEEPSLATE_BRICKS).addExtraTag(BlockusBlockTags.DEEPSLATE_BLOCKS)
     );
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS).addExtraTag(BlockusBlockTags.DEEPSLATE_BLOCKS)
     );
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.DEEPSLATE_BLOCKS));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.DEEPSLATE_BLOCKS));
 
     create(BlockusBlocks.POLISHED_SCULK).addExtraTag(BlockusBlockTags.SCULK_BLOCKS)
         .setFenceCraftingIngredient(Items.SCULK)
@@ -164,7 +137,9 @@ public final class ExtShapeBlockusBlocks {
         .setFenceCraftingIngredient(Items.AMETHYST_SHARD)
         .without(BlockShape.BUTTON)
         .build();
-    FACTORY.createAllShapes(BlockusBlocks.CHISELED_AMETHYST).withoutRedstone()
+    FACTORY.createAllShapes(BlockusBlocks.CHISELED_AMETHYST)
+        .markStoneCuttable()
+        .withoutRedstone()
         .addExtraTag(BlockusBlockTags.AMETHYST_BLOCKS)
         .withExtension(BlockExtension.AMETHYST)
         .setFenceCraftingIngredient(Items.AMETHYST_SHARD)
@@ -175,12 +150,14 @@ public final class ExtShapeBlockusBlocks {
     buildStoneBlocksWithoutButton(create(BlockusBlocks.WARPED_WARTY_BLACKSTONE_BRICKS).addExtraTag(BlockusBlockTags.BLACKSTONE_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_POLISHED_BLACKSTONE_BRICKS).addExtraTag(BlockusBlockTags.BLACKSTONE_BLOCKS));
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.POLISHED_BLACKSTONE_CIRCULAR_PAVING)
-        .addExtraTag(BlockusBlockTags.BLACKSTONE_BLOCKS));
+        .markStoneCuttable());
 
     buildStoneBlocksWithButton(create(BlockusBlocks.ROUGH_BASALT).addExtraTag(BlockusBlockTags.BASALT_BLOCKS)
     );
     buildStoneBlocksWithoutButton(create(BlockusBlocks.POLISHED_BASALT_BRICKS).addExtraTag(BlockusBlockTags.BASALT_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_POLISHED_BASALT_BRICKS).addExtraTag(BlockusBlockTags.BASALT_BLOCKS));
+    buildCircularPavingBlock(create(BlockusBlocks.POLISHED_BASALT_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.BASALT_BLOCKS));
+
     create(BlockusBlocks.CRIMSON_WART_BRICKS).addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setFenceCraftingIngredient(Items.BRICK)
         .without(BlockShape.BUTTON)
@@ -197,7 +174,7 @@ public final class ExtShapeBlockusBlocks {
     buildStoneBlocksWithoutButton(create(BlockusBlocks.LIMESTONE_TILES).addExtraTag(BlockusBlockTags.LIMESTONE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_LIMESTONE).addExtraTag(BlockusBlockTags.LIMESTONE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.LIMESTONE_SQUARES).addExtraTag(BlockusBlockTags.LIMESTONE));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.LIMESTONE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.LIMESTONE));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.LIMESTONE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.LIMESTONE));
 
     buildStoneBlocksWithButton(create(BlockusBlocks.MARBLE).addExtraTag(BlockusBlockTags.MARBLE));
     buildStoneBlocksWithButton(create(BlockusBlocks.POLISHED_MARBLE).addExtraTag(BlockusBlockTags.MARBLE));
@@ -206,7 +183,7 @@ public final class ExtShapeBlockusBlocks {
     buildStoneBlocksWithoutButton(create(BlockusBlocks.MARBLE_TILES).addExtraTag(BlockusBlockTags.MARBLE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_MARBLE).addExtraTag(BlockusBlockTags.MARBLE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.MARBLE_SQUARES).addExtraTag(BlockusBlockTags.MARBLE));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.MARBLE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.MARBLE));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.MARBLE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.MARBLE));
 
     buildStoneBlocksWithButton(create(BlockusBlocks.BLUESTONE).addExtraTag(BlockusBlockTags.BLUESTONE));
     buildStoneBlocksWithButton(create(BlockusBlocks.POLISHED_BLUESTONE).addExtraTag(BlockusBlockTags.BLUESTONE));
@@ -215,7 +192,7 @@ public final class ExtShapeBlockusBlocks {
     buildStoneBlocksWithoutButton(create(BlockusBlocks.BLUESTONE_TILES).addExtraTag(BlockusBlockTags.BLUESTONE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_BLUESTONE).addExtraTag(BlockusBlockTags.BLUESTONE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.BLUESTONE_SQUARES).addExtraTag(BlockusBlockTags.BLUESTONE));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.BLUESTONE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.BLUESTONE));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.BLUESTONE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.BLUESTONE));
 
     buildStoneBlocksWithButton(create(BlockusBlocks.VIRIDITE).addExtraTag(BlockusBlockTags.VIRIDITE));
     buildStoneBlocksWithButton(create(BlockusBlocks.POLISHED_VIRIDITE).addExtraTag(BlockusBlockTags.VIRIDITE));
@@ -224,7 +201,7 @@ public final class ExtShapeBlockusBlocks {
     buildStoneBlocksWithoutButton(create(BlockusBlocks.VIRIDITE_TILES).addExtraTag(BlockusBlockTags.VIRIDITE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_VIRIDITE).addExtraTag(BlockusBlockTags.VIRIDITE));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.VIRIDITE_SQUARES).addExtraTag(BlockusBlockTags.VIRIDITE));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.VIRIDITE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.VIRIDITE));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.VIRIDITE_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.VIRIDITE));
 
     buildStoneBlocksWithButton(create(BlockusBlocks.LAVA_BRICKS).addExtraTag(BlockusBlockTags.LAVA_BRICKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_LAVA_BRICKS).addExtraTag(BlockusBlockTags.LAVA_BRICKS));
@@ -236,15 +213,15 @@ public final class ExtShapeBlockusBlocks {
     buildStoneBlocksWithoutButton(create(BlockusBlocks.ICE_BRICKS).addExtraTag(BlockusBlockTags.ICE_BRICKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.OBSIDIAN_BRICKS).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonType(ButtonType.HARD));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.SMALL_OBSIDIAN_BRICKS).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonType(ButtonType.HARD));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonType(ButtonType.HARD));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonType(ButtonType.HARD));
     buildStoneBlocksWithButton(create(BlockusBlocks.GLOWING_OBSIDIAN).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonType(ButtonType.HARD));
 
     buildStoneBlocksWithButton(create(BlockusBlocks.POLISHED_NETHERRACK).addExtraTag(BlockusBlockTags.NETHERRACK_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.NETHERRACK_BRICKS).addExtraTag(BlockusBlockTags.NETHERRACK_BLOCKS));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.NETHERRACK_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.NETHERRACK_BLOCKS));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.NETHERRACK_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.NETHERRACK_BLOCKS));
 
     buildStoneBlocksWithoutButton(create(BlockusBlocks.QUARTZ_TILES).addExtraTag(BlockusBlockTags.QUARTZ_BLOCKS).setFenceCraftingIngredient(Items.QUARTZ));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.QUARTZ_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.QUARTZ_BLOCKS).setFenceCraftingIngredient(Items.QUARTZ));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.QUARTZ_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.QUARTZ_BLOCKS).setFenceCraftingIngredient(Items.QUARTZ));
 
     buildStoneBlocksWithButton(create(BlockusBlocks.MAGMA_BRICKS).addExtraTag(BlockusBlockTags.MAGMA_BRICKS));
     buildStoneBlocksWithButton(create(BlockusBlocks.SMALL_MAGMA_BRICKS).addExtraTag(BlockusBlockTags.MAGMA_BRICKS));
@@ -283,7 +260,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.ROUGH_RED_SANDSTONE).addExtraTag(BlockusBlockTags.RED_SANDSTONE).setFenceCraftingIngredient(Items.RED_SAND).build();
     create(BlockusBlocks.RED_SANDSTONE_BRICKS).addExtraTag(BlockusBlockTags.RED_SANDSTONE).setFenceCraftingIngredient(Items.RED_SAND).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.SMALL_RED_SANDSTONE_BRICKS).addExtraTag(BlockusBlockTags.RED_SANDSTONE).setFenceCraftingIngredient(Items.RED_SAND).without(BlockShape.BUTTON).build();
-    FACTORY.createConstructionOnly(BlockusBlocks.SOUL_SANDSTONE.block).addExtraTag(BlockusBlockTags.SOUL_SANDSTONE).setFenceCraftingIngredient(Items.SOUL_SAND).build();
+    FACTORY.createConstructionOnly(BlockusBlocks.SOUL_SANDSTONE.block).markStoneCuttable().addExtraTag(BlockusBlockTags.SOUL_SANDSTONE).setFenceCraftingIngredient(Items.SOUL_SAND).build();
     create(BlockusBlocks.ROUGH_SOUL_SANDSTONE).addExtraTag(BlockusBlockTags.SOUL_SANDSTONE).setFenceCraftingIngredient(Items.SOUL_SAND).build();
     create(BlockusBlocks.SOUL_SANDSTONE_BRICKS).addExtraTag(BlockusBlockTags.SOUL_SANDSTONE).setFenceCraftingIngredient(Items.SOUL_SAND).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS).addExtraTag(BlockusBlockTags.SOUL_SANDSTONE).setFenceCraftingIngredient(Items.SOUL_SAND).without(BlockShape.BUTTON).build();
@@ -315,59 +292,69 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.HERRINGBONE_END_STONE_BRICKS).addExtraTag(BlockusBlockTags.END_STONE_BLOCKS).setFenceCraftingIngredient(Items.END_STONE_BRICKS).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.END_TILES).setFenceCraftingIngredient(Items.END_STONE_BRICKS).addExtraTag(BlockTags.PICKAXE_MINEABLE).without(BlockShape.BUTTON).build();
 
-    ImmutableMap<BlockShape, TagKey<? extends ItemConvertible>> logTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_LOG_TAG);
-    final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
-    FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG).setPrimaryTagForShape(logTags).addExtraTag(ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
-    FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG).setPrimaryTagForShape(logTags).addExtraTag(ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
-    FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD).setPrimaryTagForShape(logTags).setButtonType(ButtonType.WOODEN)
-        .setPillar().addPostBuildConsumer(logFlammable).build();
-    FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD).setPrimaryTagForShape(logTags).setButtonType(ButtonType.WOODEN).setPillar().addPostBuildConsumer(logFlammable).build();
+    markStoneCuttableWhenCreating = false;
 
-    final ImmutableMap<BlockShape, TagKey<? extends ItemConvertible>> woodenTags = ImmutableMap.copyOf(ExtShapeTags.SHAPE_TO_WOODEN_TAG);
+    final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
+    FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ExtShapeBlockusTags.ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
+    FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ExtShapeBlockusTags.ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
+    FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).setButtonType(ButtonType.WOODEN)
+        .setPillar().addPostBuildConsumer(logFlammable).build();
+    FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).setButtonType(ButtonType.WOODEN).setPillar().addPostBuildConsumer(logFlammable).build();
+
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20);
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFuel = (blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape.logicalCompleteness * 300));
-    create(BlockusBlocks.WHITE_OAK).setPrimaryTagForShape(woodenTags).setButtonType(ButtonType.WOODEN).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
-    create(BlockusBlocks.BAMBOO).setPrimaryTagForShape(woodenTags).setButtonType(ButtonType.WOODEN).setFenceCraftingIngredient(Items.BAMBOO).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
-    create(BlockusBlocks.CHARRED).setPrimaryTagForShape(woodenTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setButtonType(ButtonType.WOODEN).build();
+    create(BlockusBlocks.WHITE_OAK).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setButtonType(ButtonType.WOODEN).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
+    create(BlockusBlocks.BAMBOO).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setButtonType(ButtonType.WOODEN).setFenceCraftingIngredient(Items.BAMBOO).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
+    create(BlockusBlocks.CHARRED).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setButtonType(ButtonType.WOODEN).build();
 
     for (var block : BlockusBlockCollections.HERRINGBONE_PLANKS) {
       final boolean isNonFlammable = BlockusBlocks.HERRINGBONE_WARPED_PLANKS == block || BlockusBlocks.HERRINGBONE_CRIMSON_PLANKS == block || BlockusBlocks.HERRINGBONE_CHARRED_PLANKS == block;
       if (isNonFlammable) {
-        FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
+        FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
       } else {
-        FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(woodenTags).addPostBuildConsumer(plankFlammable).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
+        FACTORY.createConstructionOnly(block).with(BlockShape.WALL).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).addPostBuildConsumer(plankFlammable).setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString()).build();
       }
     }
     for (var block : BlockusBlockCollections.SMALL_LOGS) {
       if (block.getDefaultState().getMaterial() == Material.NETHER_WOOD) {
-        FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
+        FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
       } else {
-        FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(logTags).addPostBuildConsumer(logFlammable).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
+        FACTORY.createConstructionOnly(block).setPillar().setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addPostBuildConsumer(logFlammable).setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString()).build();
       }
     }
+
+    markStoneCuttableWhenCreating = true;
 
     final Function<BlockShape, @Nullable TagKey<? extends ItemConvertible>> addWallToUnmineableTag = blockShape -> blockShape == BlockShape.WALL ? ExtShapeTags.PICKAXE_UNMINEABLE : null;
 
     create(BlockusBlocks.CHORUS_BLOCK).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).setFenceCraftingIngredient(Items.CHORUS_PLANT).setPillar().build();
 
     for (var bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
-      buildStoneBlocksWithoutButton(create(bsswTypes).addExtraTag(BlockusBlockTags.STAINED_STONE_BRICKS).setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.asString()));
+      buildStoneBlocksWithoutButton(create(bsswTypes).markStoneCuttable().addExtraTag(BlockusBlockTags.STAINED_STONE_BRICKS).setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.asString()));
     }
     for (var concreteTypes : BlockusBlockCollections.CONCRETE_BRICKS) {
-      FACTORY.createConstructionOnly(concreteTypes.block).without(BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL).addExtraTag(BlockusBlockTags.CONCRETE_BLOCKS).setRecipeGroup(blockShape1 -> "concrete_brick_" + blockShape1.asString()).build();
-      FACTORY.createConstructionOnly(concreteTypes.chiseled).without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).addExtraTag(BlockusBlockTags.CONCRETE_BLOCKS).setRecipeGroup(blockShape -> "chiseled_concrete_brick_" + blockShape.asString()).build();
+      FACTORY.createConstructionOnly(concreteTypes.block).markStoneCuttable().without(BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL).addExtraTag(BlockusBlockTags.CONCRETE_BLOCKS).setRecipeGroup(blockShape1 -> "concrete_brick_" + blockShape1.asString()).build();
+      FACTORY.createConstructionOnly(concreteTypes.chiseled).markStoneCuttable().without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).addExtraTag(BlockusBlockTags.CONCRETE_BLOCKS).setRecipeGroup(blockShape -> "chiseled_concrete_brick_" + blockShape.asString()).build();
     }
 
-    create(BlockusBlocks.SHINGLES).addExtraTag(BlockusBlockTags.SHINGLES).setFenceCraftingIngredient(Items.FLINT).build();
+    create(BlockusBlocks.SHINGLES).markStoneCuttable().addExtraTag(BlockusBlockTags.SHINGLES).setFenceCraftingIngredient(Items.FLINT).build();
     for (var bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
-      create(bssTypes).setFenceCraftingIngredient(Items.FLINT).setRecipeGroup(blockShape -> "shingles_" + blockShape.asString()).build();
+      create(bssTypes).markStoneCuttable().setFenceCraftingIngredient(Items.FLINT).setRecipeGroup(blockShape -> "shingles_" + blockShape.asString()).build();
     }
 
     for (var patternWoolTypes : BlockusBlockCollections.PATTERNED_WOOLS) {
-      FACTORY.createConstructionOnly(patternWoolTypes.block).addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS).without(BlockShape.STAIRS, BlockShape.SLAB).with(BlockShape.WALL).addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness))).setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString()).build();
+      FACTORY.createConstructionOnly(patternWoolTypes.block)
+          .addExtraTag(FabricMineableTags.SHEARS_MINEABLE)
+          .addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS)
+          .without(BlockShape.STAIRS, BlockShape.SLAB)
+          .with(BlockShape.WALL)
+          .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness)))
+          .addExtraTag(addWallToUnmineableTag)
+          .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString())
+          .build();
     }
     for (var block : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
-      FACTORY.createConstructionOnly(block).with(BlockShape.WALL).addExtraTag(BlockusBlockTags.GLAZED_TERRACOTTA_PILLARS).setRecipeGroup(blockShape -> "glazed_terracotta_pillar_" + blockShape.asString()).setPillar().build();
+      FACTORY.createConstructionOnly(block).markStoneCuttable().with(BlockShape.WALL).addExtraTag(BlockusBlockTags.GLAZED_TERRACOTTA_PILLARS).setRecipeGroup(blockShape -> "glazed_terracotta_pillar_" + blockShape.asString()).setPillar().build();
     }
 
     create(BlockusBlocks.THATCH).addExtraTag(BlockusBlockTags.THATCH).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).addPostBuildConsumer((blockShape4, blockBuilder3) -> {
@@ -380,15 +367,15 @@ public final class ExtShapeBlockusBlocks {
     }).build();
     create(BlockusBlocks.BURNT_PAPER_BLOCK).addExtraTag(addWallToUnmineableTag).addPostBuildConsumer((blockShape2, blockBuilder1) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder1.instance, 5, 60)).build();
 
-    create(BlockusBlocks.IRON_PLATING).addExtraTag(BlockusBlockTags.PLATINGS).without(BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.BUTTON).build();
-    create(BlockusBlocks.GOLD_PLATING).addExtraTag(BlockusBlockTags.PLATINGS).addExtraTag(BlockTags.GUARDED_BY_PIGLINS).without(BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.BUTTON).build();
+    create(BlockusBlocks.IRON_PLATING).markStoneCuttable().addExtraTag(BlockusBlockTags.PLATINGS).without(BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.BUTTON).build();
+    create(BlockusBlocks.GOLD_PLATING).markStoneCuttable().addExtraTag(BlockusBlockTags.PLATINGS).addExtraTag(BlockTags.GUARDED_BY_PIGLINS).without(BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.BUTTON).build();
 
-    create(BlockusBlocks.CHARCOAL_BLOCK).setFenceCraftingIngredient(Items.CHARCOAL).addExtraTag(BlockTags.INFINIBURN_OVERWORLD).addExtraTag(BlockTags.PICKAXE_MINEABLE).addPostBuildConsumer((blockShape1, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape1.logicalCompleteness * 16000))).build();
+    create(BlockusBlocks.CHARCOAL_BLOCK).markStoneCuttable().setFenceCraftingIngredient(Items.CHARCOAL).addExtraTag(BlockTags.INFINIBURN_OVERWORLD).addExtraTag(BlockTags.PICKAXE_MINEABLE).addPostBuildConsumer((blockShape1, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape1.logicalCompleteness * 16000))).build();
     create(BlockusBlocks.SUGAR_BLOCK).setFenceCraftingIngredient(Items.SUGAR).addExtraTag(BlockTags.SHOVEL_MINEABLE).addExtraTag(addWallToUnmineableTag).build();
-    create(BlockusBlocks.ENDER_BLOCK).setFenceCraftingIngredient(Items.ENDER_PEARL).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_STONE_TOOL).build();
+    create(BlockusBlocks.ENDER_BLOCK).markStoneCuttable().setFenceCraftingIngredient(Items.ENDER_PEARL).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_STONE_TOOL).build();
     create(BlockusBlocks.ROTTEN_FLESH_BLOCK).setFenceCraftingIngredient(Items.ROTTEN_FLESH).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).build();
     create(BlockusBlocks.MEMBRANE_BLOCK).setFenceCraftingIngredient(Items.PHANTOM_MEMBRANE).addExtraTag(addWallToUnmineableTag).build();
-    FACTORY.createAllShapes(BlockusBlocks.NETHER_STAR_BLOCK).withoutRedstone().setFenceCraftingIngredient(Items.NETHER_STAR).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_IRON_TOOL).addExtraTag(BlockTags.DRAGON_IMMUNE).withExtension(BlockExtension.builder().setSteppedOnCallback((world, pos, state, entity) -> {
+    FACTORY.createAllShapes(BlockusBlocks.NETHER_STAR_BLOCK).markStoneCuttable().withoutRedstone().setFenceCraftingIngredient(Items.NETHER_STAR).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_IRON_TOOL).addExtraTag(BlockTags.DRAGON_IMMUNE).withExtension(BlockExtension.builder().setSteppedOnCallback((world, pos, state, entity) -> {
       if (entity.getType() == EntityType.PLAYER) {
         ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 4, true, false, false));
         ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 100, 3, true, false, true));
@@ -415,7 +402,40 @@ public final class ExtShapeBlockusBlocks {
       });
     }).build();
 
-    create(BlockusBlocks.STARS_BLOCK).setFenceCraftingIngredient(Items.COAL).addExtraTag(BlockTags.PICKAXE_MINEABLE).build();
+    create(BlockusBlocks.STARS_BLOCK).markStoneCuttable().setFenceCraftingIngredient(Items.COAL).addExtraTag(BlockTags.PICKAXE_MINEABLE).build();
+  }
+
+  private ExtShapeBlockusBlocks() {
+  }
+
+  private static BlocksBuilder create(Block baseBlock) {
+    if (markStoneCuttableWhenCreating) {
+      ExtShapeBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(baseBlock);
+    }
+    return FACTORY.createAllShapes(baseBlock);
+  }
+
+  private static BlocksBuilder create(BSSWTypes bsswTypes) {
+    final BlocksBuilder blocksBuilder = create(bsswTypes.block);
+    if (bsswTypes.stairs != null) blocksBuilder.without(BlockShape.STAIRS);
+    if (bsswTypes.slab != null) blocksBuilder.without(BlockShape.SLAB);
+    if (bsswTypes.wall != null) blocksBuilder.without(BlockShape.WALL);
+    return blocksBuilder;
+  }
+
+  private static BlocksBuilder create(BSSTypes bssTypes) {
+    final BlocksBuilder blocksBuilder = create(bssTypes.block);
+    if (bssTypes.stairs != null) blocksBuilder.without(BlockShape.STAIRS);
+    if (bssTypes.slab != null) blocksBuilder.without(BlockShape.SLAB);
+    return blocksBuilder;
+  }
+
+  private static BlocksBuilder create(WoodTypesB woodTypes) {
+    return create(woodTypes.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
+  }
+
+  private static BlocksBuilder create(WoodTypesNB woodTypes) {
+    return create(woodTypes.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
   }
 
   private static void buildStoneBlocksWithButton(BlocksBuilder blocksBuilder) {

@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -29,6 +30,7 @@ public abstract class CreativeInventoryScreenMixin extends AbstractInventoryScre
   /**
    * @see net.fabricmc.fabric.mixin.item.group.client.CreativeInventoryScreenMixin#fabric_getPageOffset(int)
    */
+  @Unique
   @SuppressWarnings("JavadocReference")
   private static int fabric_getPageOffset_copied(int page) {
     return switch (page) {
