@@ -153,13 +153,11 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean emitsRedstonePower(BlockState state) {
       return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
       return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction);

@@ -159,6 +159,15 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     for (var block : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
       builder.put(block, glazedTerracottaIterator.next());
     }
+
+    // 1.20 新增：矿物方块与矿物砖的转换
+    builder.put(BlockusBlocks.IRON_BRICKS.block, Blocks.IRON_BLOCK);
+    builder.put(BlockusBlocks.GOLD_BRICKS.block, Blocks.GOLD_BLOCK);
+    builder.put(BlockusBlocks.LAPIS_BRICKS.block, Blocks.LAPIS_BLOCK);
+    builder.put(BlockusBlocks.REDSTONE_BRICKS.block, Blocks.REDSTONE_BLOCK);
+    builder.put(BlockusBlocks.EMERALD_BRICKS.block, Blocks.EMERALD_BLOCK);
+    builder.put(BlockusBlocks.DIAMOND_BRICKS.block, Blocks.DIAMOND_BLOCK);
+    builder.put(BlockusBlocks.NETHERITE_BRICKS.block, Blocks.NETHERITE_BLOCK);
   }
 
   private static void putMultipleWithMid(ImmutableMultimap.Builder<Block, Block> builder, Block midOutput, Block ingredient1, Block ingredient2, Block... outputs) {
