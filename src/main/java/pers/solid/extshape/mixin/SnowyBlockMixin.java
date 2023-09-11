@@ -12,6 +12,7 @@ import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
@@ -44,6 +45,7 @@ public class SnowyBlockMixin extends Block {
     cir.setReturnValue(returnValue.with(SNOWY, returnValue.get(SNOWY) || isSnow2(neighborState, world, neighborPos)));
   }
 
+  @Unique
   private static boolean isSnow2(BlockState state, WorldView world, BlockPos pos) {
     return state.isIn(ExtShapeTags.SNOW, state0 -> isFaceFullSquare(state0.getCollisionShape(world, pos), Direction.DOWN));
   }

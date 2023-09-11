@@ -1,5 +1,14 @@
 # Update log
 
+### 2.0.3
+
+- Fixed the issue that some blocks lack tags such as `minecraft:mineable/pickaxe`.
+- Fixed the issue that walls of non-`mineable/pickaxe` blocks are pickaxe-mineable.
+- Fixed the correct recipes of slabs and stairs of pattered wools in Blockus mod.
+- Fixed the issue that some blocks of pattered wools in Blockus are not shears-mineable.
+- Fixed the issue that herringbone cherry planks blocks cannot be charred into relevant charred planks blocks.
+- Fixed the identifying of mining tools of blocks during data generation.
+
 ### 2.0.2
 
 - Adapt to new version Blockus mod.

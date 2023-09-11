@@ -29,7 +29,7 @@ public final class BlockusBlockBiMaps {
           if (shape.vanillaVariant == null) continue;
           Block variant = variants.get(shape.vanillaVariant);
           if (variant != null) {
-            BlockBiMaps.of(shape).put(baseBlock, variant);
+            BlockBiMaps.setBlockOf(shape, baseBlock, variant);
             BlockBiMaps.BASE_BLOCKS.add(baseBlock);
           }
         }
@@ -40,21 +40,21 @@ public final class BlockusBlockBiMaps {
     try {
       BSSWTypes.values().forEach(bsswTypes -> {
         if (bsswTypes.stairs != null) {
-          BlockBiMaps.of(BlockShape.STAIRS).put(bsswTypes.block, bsswTypes.stairs);
+          BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswTypes.block, bsswTypes.stairs);
         }
         if (bsswTypes.slab != null) {
-          BlockBiMaps.of(BlockShape.SLAB).put(bsswTypes.block, bsswTypes.slab);
+          BlockBiMaps.setBlockOf(BlockShape.SLAB, bsswTypes.block, bsswTypes.slab);
         }
         if (bsswTypes.wall != null) {
-          BlockBiMaps.of(BlockShape.WALL).put(bsswTypes.block, bsswTypes.wall);
+          BlockBiMaps.setBlockOf(BlockShape.WALL, bsswTypes.block, bsswTypes.wall);
         }
       });
       BSSTypes.values().forEach(bssTypes -> {
         if (bssTypes.stairs != null) {
-          BlockBiMaps.of(BlockShape.STAIRS).put(bssTypes.block, bssTypes.stairs);
+          BlockBiMaps.setBlockOf(BlockShape.STAIRS, bssTypes.block, bssTypes.stairs);
         }
         if (bssTypes.slab != null) {
-          BlockBiMaps.of(BlockShape.SLAB).put(bssTypes.block, bssTypes.slab);
+          BlockBiMaps.setBlockOf(BlockShape.SLAB, bssTypes.block, bssTypes.slab);
         }
       });
     } catch (Throwable throwable) {
