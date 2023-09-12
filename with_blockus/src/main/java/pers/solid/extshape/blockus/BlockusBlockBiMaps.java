@@ -1,6 +1,5 @@
 package pers.solid.extshape.blockus;
 
-import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.data.family.BlockusBlockFamilies;
@@ -28,7 +27,8 @@ public final class BlockusBlockBiMaps {
         for (BlockShape shape : BlockShape.values()) {
           if (shape.vanillaVariant == null) continue;
           Block variant = variants.get(shape.vanillaVariant);
-          if (variant != null) {
+          if (variant != null && !BlockBiMaps.of(shape).containsKey(baseBlock)) {
+            // 避免 Blockus 创建的原版方块的一些形状与本模组中的发生冲突
             BlockBiMaps.setBlockOf(shape, baseBlock, variant);
             BlockBiMaps.BASE_BLOCKS.add(baseBlock);
           }
@@ -60,27 +60,6 @@ public final class BlockusBlockBiMaps {
     } catch (Throwable throwable) {
       ExtShapeBlockus.LOGGER.error("Cannot load BSSWTypes and BSSTypes from Blockus mod. This may cause Extended Block Shapes mod to create duplicate block instances.", throwable);
     }
-
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.MARBLE.block, BlockusBlocks.MARBLE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.BLUESTONE.block, BlockusBlocks.BLUESTONE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.VIRIDITE.block, BlockusBlocks.VIRIDITE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.PRESSURE_PLATE).put(BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.POLISHED_TUFF_PRESSURE_PLATE));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.MARBLE.block, BlockusBlocks.MARBLE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.BLUESTONE.block, BlockusBlocks.BLUESTONE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.VIRIDITE.block, BlockusBlocks.VIRIDITE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_BUTTON));
-    tryRun(() -> BlockBiMaps.of(BlockShape.BUTTON).put(BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.POLISHED_TUFF_BUTTON));
   }
 
-  private static void tryRun(Runnable runnable) {
-    try {
-      runnable.run();
-    } catch (Throwable ignored) {
-    }
-  }
 }
