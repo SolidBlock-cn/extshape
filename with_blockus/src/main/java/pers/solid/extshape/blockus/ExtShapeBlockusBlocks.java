@@ -339,7 +339,7 @@ public final class ExtShapeBlockusBlocks {
 
     create(BlockusBlocks.SHINGLES).markStoneCuttable().addExtraTag(BlockusBlockTags.SHINGLES).setFenceCraftingIngredient(Items.FLINT).build();
     for (var bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
-      create(bssTypes).markStoneCuttable().setFenceCraftingIngredient(Items.FLINT).setRecipeGroup(blockShape -> "shingles_" + blockShape.asString()).build();
+      create(bssTypes).markStoneCuttable().addExtraTag(BlockusBlockTags.SHINGLES).setFenceCraftingIngredient(Items.FLINT).setRecipeGroup(blockShape -> "shingles_" + blockShape.asString()).build();
     }
 
     for (var patternWoolTypes : BlockusBlockCollections.PATTERNED_WOOLS) {
