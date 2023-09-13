@@ -148,9 +148,13 @@ project(':runtest') {
     }
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
-        implementation project(path: ':with_blockus', configuration: "namedElements")
-        modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
-        modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
+//        implementation project(path: ':with_blockus', configuration: "namedElements")
+        if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
+            modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
+        }
+        if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
+            modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
+        }
     }
 
     [tasks.remapJar, tasks.remapSourcesJar, tasks.build].each {
@@ -233,7 +237,7 @@ githubRelease {
     owner "SolidBlock-cn"
     repo "extshape"
     tagName "v$project.mod_version"
-    targetCommitish "1.20.1"
+    targetCommitish "1.20.2"
     body changelogContent
     draft true
     prerelease false

@@ -34,7 +34,8 @@ public final class RecipeConflict {
   public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, Consumer<Supplier<Text>> messageConsumer) {
     final CraftingInventory craftingInventory = new CraftingInventory(new CraftingScreenHandler(0, player.getInventory()), 3, 3);
     int numberOfConflicts = 0;
-    for (Recipe<?> recipe : recipeManager.values()) {
+    for (RecipeEntry<?> recipeEntry : recipeManager.values()) {
+      final Recipe<?> recipe = recipeEntry.value();
       try {
         if (recipe instanceof ShapedRecipe shapedRecipe && recipe.getClass() == ShapedRecipe.class) {
           final DefaultedList<Ingredient> ingredients = shapedRecipe.getIngredients();
@@ -60,16 +61,16 @@ public final class RecipeConflict {
         } else {
           continue;
         }
-        final List<CraftingRecipe> allMatches = recipeManager.getAllMatches(RecipeType.CRAFTING, craftingInventory, world);
-        final long numberOfMatches = allMatches.stream().filter(r -> !r.getIngredients().isEmpty()).count();
+        final List<RecipeEntry<CraftingRecipe>> allMatches = recipeManager.getAllMatches(RecipeType.CRAFTING, craftingInventory, world);
+        final long numberOfMatches = allMatches.stream().filter(r -> !r.value().getIngredients().isEmpty()).count();
         // 有些特殊合成表的材料是空的，在统计匹配次数时，应当予以忽略。
         if (numberOfMatches == 0) {
           for (int i = 0; i < 9; i++) {
             LOGGER.info(String.valueOf(craftingInventory.getStack(i)));
           }
-          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.unknown", recipe.getId().toString()).formatted(Formatting.RED));
+          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.unknown", recipeEntry.id().toString()).formatted(Formatting.RED));
         } else if (numberOfMatches > 1) {
-          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.detected", Texts.join(allMatches, craftingRecipe -> Text.literal(craftingRecipe.getId().toString()))).formatted(Formatting.RED));
+          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.detected", Texts.join(allMatches, craftingRecipe -> Text.literal(recipeEntry.id().toString()))).formatted(Formatting.RED));
           ++numberOfConflicts;
 
         }
