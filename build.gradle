@@ -200,9 +200,10 @@ curseforge {
         releaseType = release_type
         mainArtifact remapJar
 
-        for (final String v in (project.supported_minecraft_versions.split(','))) {
-            addGameVersion v
-        }
+        /*for (final String v in (project.supported_minecraft_versions.split(','))) {
+            addGameVersion v todo complete since released
+        }*/
+        addGameVersion '1.20.2-Snapshot'
         addGameVersion 'Fabric'
 
         relations {
