@@ -290,4 +290,9 @@ public class ExtShapeOptionsScreen extends Screen {
     }
     return null;
   }
+
+  @Override
+  public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+    renderBackgroundTexture(context);
+  }
 }
