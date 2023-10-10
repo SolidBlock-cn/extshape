@@ -76,6 +76,9 @@ public final class BlockusBlockBiMaps {
       if (concreteTypes.slab != null) {
         BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteTypes.block, concreteTypes.slab);
       }
+      if (concreteTypes.wall != null) {
+        BlockBiMaps.setBlockOf(BlockShape.WALL, concreteTypes.block, concreteTypes.wall);
+      }
     });
 
     BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_PRESSURE_PLATE);
