@@ -44,6 +44,9 @@ Blocks added by this mod inherit most features of their base blocks:
 - Blocks base on **pumpkin, melon, moss block, shroomlight, nether wart block and warped wart block** can be composted.
 - Blocks based on **packed ice and sculk block** drop only mined with items with Silk Touch enchantment.
 - Blocks based on **clay block, snow block, melon block**, etc., drop their corresponding items when mined, such as clay ball, snow ball (only when shoveled) and melon slice. Number of items dropped by slabs, quarter pieces, vertical slabs, vertical slabs are based on that of base blocks divided by 2 or 4, and double slabs drop the double. Some items dropped may be affected by Fortune enchantment, and blocks themselves are dropped when mined with tools with Silk Touch.
+- About the interaction between blocks and pistons: for blocks that cannot be pushed by piston, such as obsidian, bedrock, the buttons and pressure plates can also not be pushed by piston, while buttons and pressure plates for other blocks will be directly destroyed.
+- About note block: To be consistent with vanilla, the note block instrument of button blocks are always harp, while others are same as their base blocks.
+- Buttons will not be displayed as colors in maps.
 
 ### Crafting and smelting
 

@@ -3,6 +3,7 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
+import com.brand.blockus.content.types.ConcreteTypes;
 import com.brand.blockus.content.types.PatternWoolTypes;
 import com.brand.blockus.data.family.BlockusBlockFamilies;
 import net.minecraft.block.Block;
@@ -19,56 +20,59 @@ public final class BlockusBlockBiMaps {
   }
 
   static void importFromBlockus() {
-    try {
-      final Stream<BlockFamily> families = BlockusBlockFamilies.getFamilies();
-      families.forEach(blockFamily -> {
-        Block baseBlock = blockFamily.getBaseBlock();
-        // ignore netherite block because it belongs to vanilla
-        if (baseBlock == Blocks.NETHERITE_BLOCK) return;
-        Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
-        for (BlockShape shape : BlockShape.values()) {
-          if (shape.vanillaVariant == null) continue;
-          Block variant = variants.get(shape.vanillaVariant);
-          if (variant != null) {
-            BlockBiMaps.setBlockOf(shape, baseBlock, variant);
-            BlockBiMaps.BASE_BLOCKS.add(baseBlock);
-          }
+    final Stream<BlockFamily> families = BlockusBlockFamilies.getFamilies();
+    families.forEach(blockFamily -> {
+      Block baseBlock = blockFamily.getBaseBlock();
+      // ignore netherite block because it belongs to vanilla
+      if (baseBlock == Blocks.NETHERITE_BLOCK) return;
+      Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
+      for (BlockShape shape : BlockShape.values()) {
+        if (shape.vanillaVariant == null) continue;
+        Block variant = variants.get(shape.vanillaVariant);
+        if (variant != null) {
+          BlockBiMaps.setBlockOf(shape, baseBlock, variant);
+          BlockBiMaps.BASE_BLOCKS.add(baseBlock);
         }
-      });
-    } catch (Throwable throwable) {
-      ExtShapeBlockus.LOGGER.error("Cannot load BlockFamilies from Blockus mod. This may cause Extended Block Shapes mod to create duplicate block instances.", throwable);
-    }
-    try {
-      BSSWTypes.values().forEach(bsswTypes -> {
-        if (bsswTypes.stairs != null) {
-          BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswTypes.block, bsswTypes.stairs);
-        }
-        if (bsswTypes.slab != null) {
-          BlockBiMaps.setBlockOf(BlockShape.SLAB, bsswTypes.block, bsswTypes.slab);
-        }
-        if (bsswTypes.wall != null) {
-          BlockBiMaps.setBlockOf(BlockShape.WALL, bsswTypes.block, bsswTypes.wall);
-        }
-      });
-      BSSTypes.values().forEach(bssTypes -> {
-        if (bssTypes.stairs != null) {
-          BlockBiMaps.setBlockOf(BlockShape.STAIRS, bssTypes.block, bssTypes.stairs);
-        }
-        if (bssTypes.slab != null) {
-          BlockBiMaps.setBlockOf(BlockShape.SLAB, bssTypes.block, bssTypes.slab);
-        }
-      });
-      PatternWoolTypes.values().forEach(patternWoolTypes -> {
-        if (patternWoolTypes.stairs != null) {
-          BlockBiMaps.setBlockOf(BlockShape.STAIRS, patternWoolTypes.block, patternWoolTypes.stairs);
-        }
-        if (patternWoolTypes.slab != null) {
-          BlockBiMaps.setBlockOf(BlockShape.SLAB, patternWoolTypes.block, patternWoolTypes.slab);
-        }
-      });
-    } catch (Throwable throwable) {
-      ExtShapeBlockus.LOGGER.error("Cannot load BSSWTypes and BSSTypes from Blockus mod. This may cause Extended Block Shapes mod to create duplicate block instances.", throwable);
-    }
+      }
+    });
+    BSSWTypes.values().forEach(bsswTypes -> {
+      if (bsswTypes.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswTypes.block, bsswTypes.stairs);
+      }
+      if (bsswTypes.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, bsswTypes.block, bsswTypes.slab);
+      }
+      if (bsswTypes.wall != null) {
+        BlockBiMaps.setBlockOf(BlockShape.WALL, bsswTypes.block, bsswTypes.wall);
+      }
+    });
+    BSSTypes.values().forEach(bssTypes -> {
+      if (bssTypes.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, bssTypes.block, bssTypes.stairs);
+      }
+      if (bssTypes.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, bssTypes.block, bssTypes.slab);
+      }
+    });
+    PatternWoolTypes.values().forEach(patternWoolTypes -> {
+      if (patternWoolTypes.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, patternWoolTypes.block, patternWoolTypes.stairs);
+      }
+      if (patternWoolTypes.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, patternWoolTypes.block, patternWoolTypes.slab);
+      }
+    });
+    ConcreteTypes.values().forEach(concreteTypes -> {
+      if (concreteTypes.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteTypes.block, concreteTypes.stairs);
+      }
+      if (concreteTypes.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteTypes.block, concreteTypes.slab);
+      }
+      if (concreteTypes.wall != null) {
+        BlockBiMaps.setBlockOf(BlockShape.WALL, concreteTypes.block, concreteTypes.wall);
+      }
+    });
 
     BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.LIMESTONE.block, BlockusBlocks.LIMESTONE_PRESSURE_PLATE);
     BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.MARBLE.block, BlockusBlocks.MARBLE_PRESSURE_PLATE);
