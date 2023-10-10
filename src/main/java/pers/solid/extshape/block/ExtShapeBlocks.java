@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
@@ -389,7 +388,6 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.DRAGON_IMMUNE)
         .setButtonSettings(ButtonSettings.HARD)
         .setPressurePlateActivationRule(ActivationRule.MOBS)
-        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pistonBehavior(PistonBehavior.BLOCK))
         .build();
 
     // 钻石块。
@@ -709,7 +707,6 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.DRAGON_IMMUNE)
         .setButtonSettings(ButtonSettings.HARD)
         .setPressurePlateActivationRule(ActivationRule.MOBS)
-        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pistonBehavior(PistonBehavior.BLOCK))
         .build();
 
     // 黑石及其变种。
