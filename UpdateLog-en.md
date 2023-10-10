@@ -1,5 +1,9 @@
 # Update log
 
+### 2.0.4
+
+- For Blockus mod: fixed the issue of missing shapes for concrete blocks.
+
 ### 2.0.3
 
 - Fixed the issue that some blocks lack tags such as `minecraft:mineable/pickaxe`.

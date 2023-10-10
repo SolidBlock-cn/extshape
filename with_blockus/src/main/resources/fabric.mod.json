@@ -26,10 +26,10 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": "1.20.x",
+    "minecraft": "1.20.2",
     "brrp_v1": "*",
-    "extshape": ">=${version}",
-    "blockus": ">=2.7.6"
+    "extshape": ">=2.0.3",
+    "blockus": ">=2.7.7"
   },
   "custom": {
     "modmenu": {

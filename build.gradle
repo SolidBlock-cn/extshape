@@ -148,7 +148,7 @@ project(':runtest') {
     }
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
-//        implementation project(path: ':with_blockus', configuration: "namedElements")
+        implementation project(path: ':with_blockus', configuration: "namedElements")
         if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
             modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
         }
@@ -200,10 +200,9 @@ curseforge {
         releaseType = release_type
         mainArtifact remapJar
 
-        /*for (final String v in (project.supported_minecraft_versions.split(','))) {
-            addGameVersion v todo complete since released
-        }*/
-        addGameVersion '1.20.2-Snapshot'
+        for (final String v in (project.supported_minecraft_versions.split(','))) {
+            addGameVersion v
+        }
         addGameVersion 'Fabric'
 
         relations {
