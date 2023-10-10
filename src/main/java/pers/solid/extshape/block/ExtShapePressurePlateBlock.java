@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.client.Models;
@@ -56,6 +57,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     return new TranslatableText("block.extshape.?_pressure_plate", this.getNamePrefix());
   }
 
+  @Override
+  public PistonBehavior getPistonBehavior(BlockState state) {
+    return baseBlock.getHardness() == -1 || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN || baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : super.getPistonBehavior(state);
+  }
 
   @Environment(EnvType.CLIENT)
   @Override

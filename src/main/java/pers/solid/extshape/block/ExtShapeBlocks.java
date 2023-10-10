@@ -3,9 +3,9 @@ package pers.solid.extshape.block;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.block.SlabBlock;
@@ -218,7 +218,7 @@ public final class ExtShapeBlocks {
           ExtShapeBlockInterface.STONECUTTABLE_BLOCKS.add(block);
           return block;
         })
-        .setBlockSettings(FabricBlockSettings.copyOf(PETRIFIED_OAK_SLAB))
+        .setBlockSettings(AbstractBlock.Settings.copy(PETRIFIED_OAK_SLAB))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "petrified_oak_planks"))
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .group(ItemGroup.BUILDING_BLOCKS).build();
@@ -324,7 +324,8 @@ public final class ExtShapeBlocks {
         .setFenceCraftingIngredient(Items.STONE)
         .addExtraTag(BlockTags.DRAGON_IMMUNE)
         .setButtonType(ButtonType.HARD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .setPressurePlateActivationRule(ActivationRule.MOBS)
+        .build();
 
     // 钻石块。
     FACTORY.createAllShapes(DIAMOND_BLOCK)
@@ -519,7 +520,7 @@ public final class ExtShapeBlocks {
     // 平滑石头比较特殊，完整方块和台阶不同。
     SMOOTH_STONE_DOUBLE_SLAB = FACTORY.modify(new BlockBuilder())
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone"), new Identifier(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone_slab_side"), new Identifier(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone")))
-        .setBlockSettings(FabricBlockSettings.copyOf(SMOOTH_STONE))
+        .setBlockSettings(AbstractBlock.Settings.copy(SMOOTH_STONE))
         .setIdentifier(new Identifier(ExtShape.MOD_ID, "smooth_stone_slab_double"))
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .group(ItemGroup.BUILDING_BLOCKS).build();
@@ -561,7 +562,7 @@ public final class ExtShapeBlocks {
     for (final Block block : BlockCollections.GLAZED_TERRACOTTA) {
       ExtShapeVariantBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(block);
       final SlabBlock slabBlock = FACTORY.modify(new SlabBuilder(block))
-          .setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, FabricBlockSettings.copyOf(builder.baseBlock))).setPrimaryTagToAddTo(ExtShapeTags.GLAZED_TERRACOTTA_SLABS)
+          .setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, AbstractBlock.Settings.copy(builder.baseBlock))).setPrimaryTagToAddTo(ExtShapeTags.GLAZED_TERRACOTTA_SLABS)
           .build();
       RecipeGroupRegistry.setRecipeGroup(slabBlock, "glazed_terracotta_slab");
     }
@@ -630,7 +631,8 @@ public final class ExtShapeBlocks {
         .setFenceCraftingIngredient(Items.STONE)
         .addExtraTag(BlockTags.DRAGON_IMMUNE)
         .setButtonType(ButtonType.HARD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .setPressurePlateActivationRule(ActivationRule.MOBS)
+        .build();
 
     // 黑石及其变种。
     FACTORY.createConstructionOnly(BLACKSTONE)

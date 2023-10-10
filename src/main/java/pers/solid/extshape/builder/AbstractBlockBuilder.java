@@ -3,7 +3,6 @@ package pers.solid.extshape.builder;
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -119,7 +118,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   }
 
   protected AbstractBlockBuilder(Block baseBlock, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
-    this(baseBlock, FabricBlockSettings.copyOf(baseBlock), instanceSupplier);
+    this(baseBlock, AbstractBlock.Settings.copy(baseBlock), instanceSupplier);
   }
 
   /**
