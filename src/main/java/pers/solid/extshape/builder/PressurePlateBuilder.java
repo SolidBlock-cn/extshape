@@ -19,13 +19,17 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
   public PressurePlateBuilder(@NotNull PressurePlateBlock.ActivationRule type, Block baseBlock, @NotNull BlockSetType blockSetType) {
     super(baseBlock, AbstractBlock.Settings.copy(baseBlock)
         .noCollision()
-        .strength(baseBlock.getHardness() / 4f)
+        .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
         .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, ((PressurePlateBuilder) builder).type, builder.blockSettings, ((PressurePlateBuilder) builder).blockSetType));
     this.shape = BlockShape.PRESSURE_PLATE;
     this.type = type;
     this.blockSetType = blockSetType;
     final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
     primaryTagToAddTo = soundGroup == BlockSoundGroup.STONE ? BlockTags.STONE_PRESSURE_PLATES : (soundGroup == BlockSoundGroup.WOOD || soundGroup == BlockSoundGroup.BAMBOO_WOOD || soundGroup == BlockSoundGroup.NETHER_WOOD || soundGroup == BlockSoundGroup.CHERRY_WOOD) ? BlockTags.WOODEN_PRESSURE_PLATES : BlockTags.PRESSURE_PLATES;
+  }
+
+  private static float computeStrength(float baseHardness) {
+    return baseHardness == -1 ? -1 : baseHardness / 4f;
   }
 
   @Override
