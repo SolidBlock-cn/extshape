@@ -4,7 +4,8 @@
 
 - Modified the piston behavior of blocks to match base blocks. Pressure plates and buttons of unmovable blocks are unmovable, and other pressure plates and buttons will be destroyed by piston.
 - Modified the note block instrument to match vanilla. The note block instrument of blocks (except button) is same to the base block, but the note block instrument is always harp (the default instrument).
-- For Blockus mod: fixed the issue of missing shapes for concrete blocks.
+- To match the vanilla behavior, buttons will not display colors in map.
+- For Blockus mod: fixed the issue of missing stairs, slabs and walls for concrete blocks.
 
 ### 2.0.3
 
