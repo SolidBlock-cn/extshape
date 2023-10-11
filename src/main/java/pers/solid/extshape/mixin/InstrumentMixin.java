@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.block.ExtShapeVariantBlockInterface;
+import pers.solid.extshape.builder.BlockShape;
 
 @Mixin(Instrument.class)
 public abstract class InstrumentMixin {
@@ -20,7 +21,7 @@ public abstract class InstrumentMixin {
     final Block block = state.getBlock();
     if (block instanceof ExtShapeVariantBlockInterface variantBlockInterface && ExtShapeBlocks.getBlocks().contains(block)) {
       final Block baseBlock = variantBlockInterface.getBaseBlock();
-      if (baseBlock == null) {
+      if (baseBlock == null || variantBlockInterface.getBlockShape() == BlockShape.BUTTON) {
       } else if (baseBlock == Blocks.CLAY) {
         cir.setReturnValue(Instrument.FLUTE);
       } else if (baseBlock == Blocks.GOLD_BLOCK) {
