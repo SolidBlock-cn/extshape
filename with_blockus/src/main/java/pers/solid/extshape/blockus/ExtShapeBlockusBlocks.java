@@ -7,6 +7,7 @@ import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.WoodTypes;
 import com.brand.blockus.utils.tags.BlockusBlockTags;
+import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -362,7 +363,7 @@ public final class ExtShapeBlockusBlocks {
       create(bssTypes).markStoneCuttable().addExtraTag(BlockusBlockTags.SHINGLES).setCommonFenceSettings(Items.FLINT).setRecipeGroup(blockShape -> "shingles_" + blockShape.asString()).build();
     }
 
-    for (var patternWoolTypes : BlockusBlockCollections.PATTERNED_WOOLS) {
+    for (var patternWoolTypes : Iterables.concat(BlockusBlockCollections.PATTERNED_WOOLS, BlockusBlockCollections.GINHAM_WOOLS)) {
       FACTORY.createConstructionOnly(patternWoolTypes.block)
           .addExtraTag(FabricMineableTags.SHEARS_MINEABLE)
           .addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS)
