@@ -1,5 +1,9 @@
 # Update log
 
+### 2.0.5
+
+- Fixed the issue of incompatibility with Blockus.
+
 ### 2.0.4
 
 - Modified the piston behavior of blocks to match base blocks. Pressure plates and buttons of unmovable blocks are unmovable, and other pressure plates and buttons will be destroyed by piston.

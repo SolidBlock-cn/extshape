@@ -4,7 +4,7 @@ import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.ConcreteTypes;
-import com.brand.blockus.content.types.PatternWoolTypes;
+import com.brand.blockus.content.types.WoolTypes;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 
@@ -107,7 +107,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.RED_SHINGLES,
       BlockusBlocks.BLACK_SHINGLES
   );
-  public static final ImmutableList<PatternWoolTypes> PATTERNED_WOOLS = ImmutableList.of(
+  public static final ImmutableList<WoolTypes> PATTERNED_WOOLS = ImmutableList.of(
       BlockusBlocks.WHITE_PATTERNED_WOOL,
       BlockusBlocks.ORANGE_PATTERNED_WOOL,
       BlockusBlocks.MAGENTA_PATTERNED_WOOL,
@@ -124,6 +124,24 @@ public final class BlockusBlockCollections {
       BlockusBlocks.GREEN_PATTERNED_WOOL,
       BlockusBlocks.RED_PATTERNED_WOOL,
       BlockusBlocks.BLACK_PATTERNED_WOOL
+  );
+  public static final ImmutableList<WoolTypes> GINHAM_WOOLS = ImmutableList.of(
+      BlockusBlocks.WHITE_GINGHAM_WOOL,
+      BlockusBlocks.ORANGE_GINGHAM_WOOL,
+      BlockusBlocks.MAGENTA_GINGHAM_WOOL,
+      BlockusBlocks.LIGHT_BLUE_GINGHAM_WOOL,
+      BlockusBlocks.YELLOW_GINGHAM_WOOL,
+      BlockusBlocks.LIME_GINGHAM_WOOL,
+      BlockusBlocks.PINK_GINGHAM_WOOL,
+      BlockusBlocks.GRAY_GINGHAM_WOOL,
+      BlockusBlocks.LIGHT_GRAY_GINGHAM_WOOL,
+      BlockusBlocks.CYAN_GINGHAM_WOOL,
+      BlockusBlocks.PURPLE_GINGHAM_WOOL,
+      BlockusBlocks.BLUE_GINGHAM_WOOL,
+      BlockusBlocks.BROWN_GINGHAM_WOOL,
+      BlockusBlocks.GREEN_GINGHAM_WOOL,
+      BlockusBlocks.RED_GINGHAM_WOOL,
+      BlockusBlocks.BLACK_GINGHAM_WOOL
   );
   public static final ImmutableList<Block> COLORED_TILES = ImmutableList.of(
       BlockusBlocks.WHITE_COLORED_TILES,

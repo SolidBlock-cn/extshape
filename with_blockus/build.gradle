@@ -66,16 +66,16 @@ modrinth {
 githubRelease {
     def getenv = System.getenv("GITHUB_TOKEN")
     println "GitHub 令牌: $getenv"
-    if (getenv) token getenv
-    owner "SolidBlock-cn"
-    repo "extshape"
-    tagName "v$project.mod_version"
-    targetCommitish "1.20.2"
-    draft true
-    prerelease false
+    if (getenv) token = getenv
+    owner = "SolidBlock-cn"
+    repo = "extshape"
+    tagName = "v$project.mod_version"
+    targetCommitish = "1.20.2"
+    draft = true
+    prerelease = false
     releaseAssets remapJar, remapSourcesJar
-    allowUploadToExisting true
-    apiEndpoint "https://api.github.com"
+    allowUploadToExisting = true
+    apiEndpoint = "https://api.github.com"
 }
 
 publish {

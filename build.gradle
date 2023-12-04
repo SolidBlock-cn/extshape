@@ -1,14 +1,13 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
 plugins {
-    id 'fabric-loom' version '1.3-SNAPSHOT'
+    id 'fabric-loom' version '1.4-SNAPSHOT'
     id 'maven-publish'
-    id 'io.github.juuxel.loom-vineflower' version '1.11.0'
 
     // 用于模组发布
     id "com.modrinth.minotaur" version "2.+"
     id 'com.matthewprenger.cursegradle' version '1.4.0'
-    id "com.github.breadmoirai.github-release" version "2.4.1"
+    id "com.github.breadmoirai.github-release" version "2.5.2"
 }
 
 archivesBaseName = project.archives_base_name + "-fabric"
@@ -18,7 +17,6 @@ group = project.maven_group
 allprojects {
     apply plugin: 'fabric-loom'
     apply plugin: 'maven-publish'
-    apply plugin: 'io.github.juuxel.loom-vineflower'
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 
@@ -233,17 +231,17 @@ modrinth {
 githubRelease {
     def getenv = System.getenv("GITHUB_TOKEN")
     println "GitHub 令牌: $getenv"
-    if (getenv) token getenv
-    owner "SolidBlock-cn"
-    repo "extshape"
-    tagName "v$project.mod_version"
-    targetCommitish "1.20.2"
-    body changelogContent
-    draft true
-    prerelease false
+    if (getenv) token = getenv
+    owner = "SolidBlock-cn"
+    repo = "extshape"
+    tagName = "v$project.mod_version"
+    targetCommitish = "1.20.2"
+    body = changelogContent
+    draft = true
+    prerelease = false
     releaseAssets remapJar, remapSourcesJar
-    allowUploadToExisting true
-    apiEndpoint "https://api.github.com"
+    allowUploadToExisting = true
+    apiEndpoint = "https://api.github.com"
 }
 
 publish {
