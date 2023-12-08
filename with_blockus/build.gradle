@@ -74,8 +74,8 @@ githubRelease {
     draft = true
     prerelease = false
     releaseAssets remapJar, remapSourcesJar
-    allowUploadToExisting true
-    apiEndpoint "https://api.github.com"
+    allowUploadToExisting = true
+    apiEndpoint = "https://api.github.com"
 }
 
 publish {
