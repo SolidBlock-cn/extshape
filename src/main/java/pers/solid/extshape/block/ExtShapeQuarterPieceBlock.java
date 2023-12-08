@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -22,6 +23,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
@@ -29,6 +31,7 @@ import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 
 public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtShapeVariantBlockInterface {
+  public static final MapCodec<ExtShapeQuarterPieceBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeQuarterPieceBlock::new);
   public final Block baseBlock;
 
   public ExtShapeQuarterPieceBlock(@NotNull Block baseBlock, Settings settings) {
@@ -83,6 +86,10 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
     return BlockShape.QUARTER_PIECE;
   }
 
+  @Override
+  protected MapCodec<? extends ExtShapeQuarterPieceBlock> getCodec() {
+    return CODEC;
+  }
 
   public static class WithExtension extends ExtShapeQuarterPieceBlock {
     private final BlockExtension extension;

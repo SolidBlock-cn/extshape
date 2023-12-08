@@ -1,11 +1,9 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.client.VariantsBlockStateSupplier;
@@ -20,9 +18,10 @@ import org.jetbrains.annotations.UnknownNullability;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+  public static final MapCodec<ExtShapeHorizontalFacingPressurePlateBlock> CODEC = createCodec(ExtShapeHorizontalFacingPressurePlateBlock::new);
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, ActivationRule type, Settings settings, @NotNull BlockSetType blockSetType) {
-    super(baseBlock, type, settings, blockSetType);
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType) {
+    super(baseBlock, settings, blockSetType);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
   }
 
@@ -54,5 +53,11 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   @Override
   public @UnknownNullability BlockStateSupplier getBlockStates() {
     return ((VariantsBlockStateSupplier) super.getBlockStates()).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public MapCodec<PressurePlateBlock> getCodec() {
+    return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
   }
 }

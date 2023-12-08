@@ -13,16 +13,14 @@ import pers.solid.extshape.block.ExtShapePressurePlateBlock;
 
 public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBlock> {
 
-  protected final PressurePlateBlock.ActivationRule type;
   protected final BlockSetType blockSetType;
 
-  public PressurePlateBuilder(@NotNull PressurePlateBlock.ActivationRule type, Block baseBlock, @NotNull BlockSetType blockSetType) {
+  public PressurePlateBuilder(Block baseBlock, @NotNull BlockSetType blockSetType) {
     super(baseBlock, AbstractBlock.Settings.copy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
-        .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, ((PressurePlateBuilder) builder).type, builder.blockSettings, ((PressurePlateBuilder) builder).blockSetType));
+        .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).blockSetType));
     this.shape = BlockShape.PRESSURE_PLATE;
-    this.type = type;
     this.blockSetType = blockSetType;
     final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
     primaryTagToAddTo = soundGroup == BlockSoundGroup.STONE ? BlockTags.STONE_PRESSURE_PLATES : (soundGroup == BlockSoundGroup.WOOD || soundGroup == BlockSoundGroup.BAMBOO_WOOD || soundGroup == BlockSoundGroup.NETHER_WOOD || soundGroup == BlockSoundGroup.CHERRY_WOOD) ? BlockTags.WOODEN_PRESSURE_PLATES : BlockTags.PRESSURE_PLATES;
@@ -39,6 +37,6 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
 
   @Override
   public AbstractBlockBuilder<PressurePlateBlock> withExtension(BlockExtension blockExtension) {
-    return setInstanceSupplier(builder -> new ExtShapePressurePlateBlock.WithExtension(builder.baseBlock, ((PressurePlateBuilder) builder).type, builder.blockSettings, ((PressurePlateBuilder) builder).blockSetType, blockExtension));
+    return setInstanceSupplier(builder -> new ExtShapePressurePlateBlock.WithExtension(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).blockSetType, blockExtension));
   }
 }

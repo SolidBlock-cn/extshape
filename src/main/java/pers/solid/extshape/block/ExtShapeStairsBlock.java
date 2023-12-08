@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
@@ -16,10 +17,12 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.generator.BRRPStairsBlock;
 import pers.solid.extshape.builder.BlockShape;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
+  public static final MapCodec<ExtShapeStairsBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeStairsBlock::new);
 
   public ExtShapeStairsBlock(Block baseBlock, Settings settings) {
     super(baseBlock, settings);
@@ -44,6 +47,11 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.STAIRS;
+  }
+
+  @Override
+  public MapCodec<? extends ExtShapeStairsBlock> getCodec() {
+    return CODEC;
   }
 
   public static class WithExtension extends ExtShapeStairsBlock {

@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -16,6 +17,7 @@ import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 
 public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
+  public static final MapCodec<ExtShapePillarUvLockedSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapePillarUvLockedSlabBlock::new);
   public ExtShapePillarUvLockedSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
   }
@@ -50,5 +52,10 @@ public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
       pack.addModel(blockModelId.brrp_suffixed("_" + axis.asString()), blockModelUvLocked.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_uv_locked_" + axis.asString())));
       pack.addModel(topModelId.brrp_suffixed("_" + axis.asString()), blockModelUvLocked.clone().parent(new Identifier(ExtShape.MOD_ID, "block/slab_column_uv_locked_" + axis.asString() + "_top")));
     }
+  }
+
+  @Override
+  public MapCodec<? extends ExtShapePillarUvLockedSlabBlock> getCodec() {
+    return CODEC;
   }
 }

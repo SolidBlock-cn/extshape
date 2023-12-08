@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.fluid.FluidState;
@@ -31,10 +32,16 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
   protected static final VoxelShape SOUTH_TOP_SHAPE = Block.createCuboidShape(0, 8, 8, 16, 16, 16);
   protected static final VoxelShape EAST_TOP_SHAPE = Block.createCuboidShape(8, 8, 0, 16, 16, 16);
   protected static final VoxelShape WEST_TOP_SHAPE = Block.createCuboidShape(0, 8, 0, 8, 16, 16);
+  public static final MapCodec<QuarterPieceBlock> CODEC = createCodec(QuarterPieceBlock::new);
 
   public QuarterPieceBlock(Settings settings) {
     super(settings);
     setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(HALF, BlockHalf.BOTTOM));
+  }
+
+  @Override
+  protected MapCodec<? extends QuarterPieceBlock> getCodec() {
+    return CODEC;
   }
 
   @Override

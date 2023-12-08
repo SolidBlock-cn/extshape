@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -31,6 +32,7 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
   public static final EnumProperty<HorizontalCornerDirection> FACING = EnumProperty.of("facing",
       HorizontalCornerDirection.class);
+  public static final MapCodec<VerticalQuarterPieceBlock> CODEC = createCodec(VerticalQuarterPieceBlock::new);
 
   static {
     for (HorizontalCornerDirection dir : HorizontalCornerDirection.values()) {
@@ -102,5 +104,10 @@ public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
       world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
     }
     return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+  }
+
+  @Override
+  protected MapCodec<? extends VerticalQuarterPieceBlock> getCodec() {
+    return CODEC;
   }
 }

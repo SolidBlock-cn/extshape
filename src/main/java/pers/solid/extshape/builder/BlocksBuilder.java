@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
-import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -77,11 +76,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     return this;
   }
 
-  public BlocksBuilder setPressurePlateActivationRule(PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
-    this.pressurePlateActivationRule = pressurePlateActivationRule;
-    return this;
-  }
-
   public BlocksBuilder setBlockSetType(BlockSetType blockSetType) {
     this.blockSetType = blockSetType;
     return this;
@@ -89,7 +83,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
 
   protected @Nullable FenceSettings fenceSettings;
   protected @Nullable ButtonSettings buttonSettings;
-  protected @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
   /**
    * 在执行 {@link #build()} 之前会为每个值执行。
    */
@@ -106,7 +99,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     this.fenceSettings = FenceSettings.DEFAULT;
     this.buttonSettings = ButtonSettings.STONE;
     this.blockSetType = BlockSetType.STONE;
-    this.pressurePlateActivationRule = PressurePlateBlock.ActivationRule.MOBS;
   }
 
   /**
@@ -138,7 +130,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       if (blockShape == BlockShape.SLAB) {
         ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new CircularPavingSlabBlock(builder.baseBlock, builder.blockSettings);
       } else if (blockShape == BlockShape.PRESSURE_PLATE) {
-        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, pressurePlateActivationRule, builder.blockSettings, blockSetType);
+        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, builder.blockSettings, blockSetType);
       }
     });
   }
@@ -269,14 +261,11 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
 
   /**
    * 设置需要构建压力板，并指定压力板类型。
-   *
-   * @param type 压力板类型。
    */
   @CanIgnoreReturnValue
-  @Contract(value = "_, _ -> this", mutates = "this")
-  public BlocksBuilder withPressurePlate(@NotNull PressurePlateBlock.ActivationRule type, @NotNull BlockSetType blockSetType) {
+  @Contract(value = "_ -> this", mutates = "this")
+  public BlocksBuilder withPressurePlate(@NotNull BlockSetType blockSetType) {
     with(BlockShape.PRESSURE_PLATE);
-    this.pressurePlateActivationRule = type;
     this.blockSetType = blockSetType;
     return this;
   }
@@ -433,7 +422,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       case 7 -> fenceSettings == null ? null : new FenceGateBuilder(baseBlock, fenceSettings);
       case 8 -> new WallBuilder(baseBlock);
       case 9 -> buttonSettings != null ? new ButtonBuilder(buttonSettings, baseBlock) : null;
-      case 10 -> pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock, blockSetType) : null;
+      case 10 -> blockSetType != null ? new PressurePlateBuilder(baseBlock, blockSetType) : null;
       default -> throw new IllegalArgumentException("The Shape object " + shape.asString() + " is not supported, which may be provided by other mod. You may extend BlocksBuilder class and define your own 'createBlockBuilderFor' with support for your Shape object.");
     };
     if (builder != null) {

@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -30,6 +31,7 @@ public class VerticalStairsBlock extends Block implements Waterloggable {
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
   public static final EnumProperty<HorizontalCornerDirection> FACING = VerticalQuarterPieceBlock.FACING;
   public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new EnumMap<>(HorizontalCornerDirection.class);
+  public static final MapCodec<VerticalStairsBlock> CODEC = createCodec(VerticalStairsBlock::new);
 
   static {
     VerticalQuarterPieceBlock.VOXELS.forEach((horizontalCornerDirection, voxelShape) -> VOXELS.put(horizontalCornerDirection.getOpposite(), VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), voxelShape, BooleanBiFunction.ONLY_FIRST)));
@@ -95,5 +97,10 @@ public class VerticalStairsBlock extends Block implements Waterloggable {
       world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
     }
     return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+  }
+
+  @Override
+  protected MapCodec<? extends VerticalStairsBlock> getCodec() {
+    return CODEC;
   }
 }

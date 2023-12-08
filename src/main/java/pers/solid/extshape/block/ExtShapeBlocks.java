@@ -7,7 +7,6 @@ import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.*;
-import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -103,7 +102,6 @@ public final class ExtShapeBlocks {
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
           .setCommonFenceSettings(Items.FLINT)
           .setButtonSettings(ButtonSettings.STONE)
-          .setPressurePlateActivationRule(ActivationRule.MOBS)
           .build();
     }
 
@@ -119,21 +117,22 @@ public final class ExtShapeBlocks {
             blockBuilder.addExtraTag(BlockTags.DEAD_BUSH_MAY_PLACE_ON);
           }
         })
-        .setButtonSettings(ButtonSettings.soft(BlockSetType.STONE))
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .setButtonSettings(ButtonSettings.DIRT)
+        .build();
     FACTORY.createAllShapes(COARSE_DIRT)
         .addExtraTag(BlockTags.SHOVEL_MINEABLE)
         .addExtraTag(addWallToUnmineableTag)
         .setCommonFenceSettings(Items.STICK)
         .setButtonSettings(null)
-        .setPressurePlateActivationRule(null).build();
+        .without(BlockShape.PRESSURE_PLATE)
+        .build();
 
     // 圆石。
     FACTORY.createAllShapes(COBBLESTONE)
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.FLINT)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 原木、木头、菌柄、菌核及其去皮变种。
     // 下面两个标签均带有 axe_mineable
@@ -152,7 +151,6 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(BAMBOO_BLOCK)
         .setFenceSettings(bambooFenceSettings)
         .setButtonSettings(ButtonSettings.BAMBOO)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
         .setPillarUvLocked()
         .addPreBuildConsumer((blockShape4, builder3) -> builder3.blockSettings.mapColor(MapColor.DARK_GREEN)) // FabricBlockSettings.copyOf 现在会复制基础方块的 requiredFlags，不再需要手动指定
         .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG)
@@ -170,7 +168,6 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(STRIPPED_BAMBOO_BLOCK)
         .setFenceSettings(bambooFenceSettings)
         .setButtonSettings(ButtonSettings.BAMBOO)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
         .setPillarUvLocked()
         .addPreBuildConsumer((blockShape2, builder2) -> builder2.blockSettings.mapColor(MapColor.YELLOW))
         .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG)
@@ -205,7 +202,6 @@ public final class ExtShapeBlocks {
       FACTORY.createAllShapes(block)
           .setFenceSettings(new FenceSettings(Items.STICK, woodTypes.next()))
           .setButtonSettings(woodenButtonSettings.next())
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
           .setPillar()
           .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG)
           .addPostBuildConsumer(woodFlammable)
@@ -216,7 +212,6 @@ public final class ExtShapeBlocks {
       FACTORY.createAllShapes(block)
           .setFenceSettings(new FenceSettings(Items.STICK, woodTypes.next()))
           .setButtonSettings(woodenButtonSettings.next())
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
           .setPillar()
           .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG)
           .addPostBuildConsumer(woodFlammable)
@@ -234,13 +229,13 @@ public final class ExtShapeBlocks {
       FACTORY.createAllShapes(block)
           .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
           .setButtonSettings(buttonSettings)
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "wood_" + blockShape.asString()).build();
+          .setPillar().setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "wood_" + blockShape.asString()).build();
     }
     for (final Block block : BlockCollections.STRIPPED_HYPHAES) {
       FACTORY.createAllShapes(block)
           .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
           .setButtonSettings(netherWoodButtonSettings.next())
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString()).build();
+          .setPillar().setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString()).build();
     }
 
     // 木板。
@@ -249,7 +244,6 @@ public final class ExtShapeBlocks {
         FACTORY.createAllShapes(block)
             .setFenceSettings(bambooFenceSettings)
             .setButtonSettings(ButtonSettings.BAMBOO)
-            .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG)
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
@@ -258,7 +252,6 @@ public final class ExtShapeBlocks {
         FACTORY.createAllShapes(block)
             .setFenceSettings(null)
             .setButtonSettings(ButtonSettings.wood(block == WARPED_PLANKS ? BlockSetType.WARPED : BlockSetType.CRIMSON))
-            .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG)
             .addExtraTag(ItemTags.NON_FLAMMABLE_WOOD)
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
@@ -267,7 +260,6 @@ public final class ExtShapeBlocks {
         FACTORY.createAllShapes(block)
             .setFenceSettings(null)
             .setButtonSettings(woodenButtonSettings.next())
-            .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
             .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG)
             .addPreBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
@@ -296,7 +288,6 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.WITHER_IMMUNE)
         .setCommonFenceSettings(Items.STICK)
         .setButtonSettings(ButtonSettings.HARD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS)
         .addPreBuildConsumer((blockShape1, builder1) -> ((AbstractBlockSettingsAccessor) builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state1, world1, pos1, type) -> false)).setLootTableId(null))
         .build();
 
@@ -306,7 +297,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .addExtraTag(BlockTags.NEEDS_STONE_TOOL)
         .setCommonFenceSettings(Items.LAPIS_LAZULI)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 砂岩、红砂岩及其切制、錾制、平滑变种。其中，只有平滑砂岩有栅栏、压力板和按钮。
     for (final Block block : BlockCollections.SANDSTONES) {
@@ -320,7 +311,7 @@ public final class ExtShapeBlocks {
           .markStoneCuttable()
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
           .withFences(FenceSettings.common(Items.STICK))
-          .withPressurePlate(ActivationRule.MOBS, BlockSetType.STONE)
+          .withPressurePlate(BlockSetType.STONE)
           .withButton(ButtonSettings.STONE).build();
     }
 
@@ -330,7 +321,6 @@ public final class ExtShapeBlocks {
       FACTORY.createAllShapes(block)
           .setCommonFenceSettings(Items.STRING)
           .setButtonSettings(ButtonSettings.SOFT)
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING)
           .setPrimaryTagForShape(BlockShape.STAIRS, ExtShapeTags.WOOLEN_STAIRS)
           .setPrimaryTagForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.WOOLEN_VERTICAL_STAIRS)
           .setPrimaryTagForShape(BlockShape.SLAB, ExtShapeTags.WOOLEN_SLABS)
@@ -356,7 +346,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(ItemTags.PIGLIN_LOVED)
         .addExtraTag(BlockTags.GUARDED_BY_PIGLINS)
         .setButtonSettings(ButtonSettings.stone(BlockSetType.GOLD))
-        .setPressurePlateActivationRule(null).build();
+        .without(BlockShape.PRESSURE_PLATE).build();
     // 铁块。
     FACTORY.createAllShapes(IRON_BLOCK)
         .markStoneCuttable()
@@ -364,7 +354,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.NEEDS_STONE_TOOL)
         .setCommonFenceSettings(Items.IRON_INGOT)
         .setButtonSettings(ButtonSettings.stone(BlockSetType.IRON))
-        .setPressurePlateActivationRule(null).build();
+        .without(BlockShape.PRESSURE_PLATE).build();
 
     // 砖栅栏和栅栏门。
     FACTORY.createConstructionOnly(BRICKS)
@@ -378,7 +368,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.STICK)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 黑曜石。
     FACTORY.createAllShapes(OBSIDIAN)
@@ -388,7 +378,6 @@ public final class ExtShapeBlocks {
         .setCommonFenceSettings(Items.STONE)
         .addExtraTag(BlockTags.DRAGON_IMMUNE)
         .setButtonSettings(ButtonSettings.HARD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS)
         .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pistonBehavior(PistonBehavior.BLOCK))
         .build();
 
@@ -399,7 +388,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.NEEDS_IRON_TOOL)
         .setCommonFenceSettings(Items.DIAMOND)
         .setButtonSettings(ButtonSettings.HARD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 紫水晶块。
     FACTORY.createAllShapes(AMETHYST_BLOCK)
@@ -408,7 +397,7 @@ public final class ExtShapeBlocks {
         .setCommonFenceSettings(Items.AMETHYST_SHARD)
         .withExtension(BlockExtension.AMETHYST)
         .setFenceSettings(FenceSettings.AMETHYST)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).withoutRedstone().build();
+        .withoutRedstone().build();
 
     // 冰，由于技术原因，暂不产生。
 
@@ -419,7 +408,7 @@ public final class ExtShapeBlocks {
         .setCommonFenceSettings(Items.SNOW)
         .addExtraTag(ExtShapeTags.SNOW)
         .setButtonSettings(ButtonSettings.SOFT)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .build();
 
     // 黏土块。
     FACTORY.createAllShapes(CLAY)
@@ -429,7 +418,7 @@ public final class ExtShapeBlocks {
         .setButtonSettings(ButtonSettings.SOFT)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.SMALL_DRIPLEAF_PLACEABLE : null)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.ENDERMAN_HOLDABLE : null)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .build();
 
     // 南瓜。
     FACTORY.createAllShapes(PUMPKIN)
@@ -439,7 +428,7 @@ public final class ExtShapeBlocks {
         .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.ENDERMAN_HOLDABLE : null)
         .compostingChance(0.65f)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .build();
 
     // 下界岩。
     FACTORY.createAllShapes(NETHERRACK)
@@ -447,14 +436,14 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.NETHER_BRICK)
         .addExtraTag(BlockTags.INFINIBURN_OVERWORLD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 荧石可以发光。
     FACTORY.createAllShapes(GLOWSTONE)
         .addExtraTag(addWallToUnmineableTag)
         .setCommonFenceSettings(Items.GLOWSTONE_DUST)
         .setButtonSettings(ButtonSettings.SOFT)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .build();
 
     // 石砖、苔石砖。
     for (final Block block : new Block[]{STONE_BRICKS, MOSSY_STONE_BRICKS, CHISELED_STONE_BRICKS}) {
@@ -472,7 +461,7 @@ public final class ExtShapeBlocks {
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
           .setCommonFenceSettings(Items.MUD)
           .setButtonSettings(ButtonSettings.STONE)
-          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+          .build();
     }
 
     // 西瓜。
@@ -483,14 +472,14 @@ public final class ExtShapeBlocks {
         .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.ENDERMAN_HOLDABLE : null)
         .compostingChance(0.65f)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .build();
 
     // 下界砖块的栅栏门、按钮和压力板。
     FACTORY.createAllShapes(NETHER_BRICKS)
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.NETHER_BRICK)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).withoutRedstone().build();
+        .withoutRedstone().build();
 
     // 末地石、末地石砖。
     FACTORY.createAllShapes(END_STONE)
@@ -498,7 +487,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.END_STONE_BRICKS)
         .addExtraTag(BlockTags.DRAGON_IMMUNE)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 绿宝石块。
     FACTORY.createAllShapes(EMERALD_BLOCK)
@@ -506,7 +495,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .addExtraTag(BlockTags.NEEDS_IRON_TOOL)
         .setCommonFenceSettings(Items.EMERALD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 石英、石英砖、平滑石英块、錾制石英块均有按钮和压力板。
     for (final Block block : new Block[]{QUARTZ_BLOCK, CHISELED_QUARTZ_BLOCK, QUARTZ_BRICKS, SMOOTH_QUARTZ}) {
@@ -515,7 +504,7 @@ public final class ExtShapeBlocks {
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
           .setCommonFenceSettings(Items.QUARTZ)
           .setButtonSettings(ButtonSettings.STONE)
-          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+          .build();
     }
 
     // 红色下界砖。
@@ -523,13 +512,12 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.NETHER_BRICK)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 陶瓦和彩色陶瓦。
     FACTORY.createAllShapes(TERRACOTTA)
         .markStoneCuttable()  // 下面这些标签已带有 pickaxe_mineable
         .setCommonFenceSettings(Items.CLAY)
-        .setPressurePlateActivationRule(ActivationRule.MOBS)
         .setPrimaryTagForShape(BlockShape.STAIRS, ExtShapeTags.TERRACOTTA_STAIRS)
         .setPrimaryTagForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.TERRACOTTA_VERTICAL_STAIRS)
         .setPrimaryTagForShape(BlockShape.SLAB, ExtShapeTags.TERRACOTTA_SLABS)
@@ -549,7 +537,6 @@ public final class ExtShapeBlocks {
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
           .setCommonFenceSettings(Items.CLAY)
           .setButtonSettings(ButtonSettings.STONE)
-          .setPressurePlateActivationRule(ActivationRule.MOBS)
           .setPrimaryTagForShape(BlockShape.STAIRS, ExtShapeTags.STAINED_TERRACOTTA_STAIRS)
           .setPrimaryTagForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.STAINED_TERRACOTTA_VERTICAL_STAIRS)
           .setPrimaryTagForShape(BlockShape.SLAB, ExtShapeTags.STAINED_TERRACOTTA_SLABS)
@@ -571,7 +558,6 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.COAL)
-        .setPressurePlateActivationRule(ActivationRule.MOBS)
         .fuelTime(16000)
         .build();
 
@@ -580,7 +566,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.ICE)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 海晶石、海晶石砖、暗海晶石。
     for (final Block block : new Block[]{PRISMARINE, PRISMARINE_BRICKS, DARK_PRISMARINE}) {
@@ -589,7 +575,7 @@ public final class ExtShapeBlocks {
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
           .setCommonFenceSettings(Items.PRISMARINE_SHARD)
           .setButtonSettings(ButtonSettings.STONE)
-          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+          .build();
     }
 
     // 海晶灯。
@@ -606,7 +592,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.FLINT)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).withoutConstructionShapes().build();
+        .withoutConstructionShapes().build();
 
     BASE_BLOCKS.add(SMOOTH_STONE_DOUBLE_SLAB);
     ExtShapeVariantBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(SMOOTH_STONE_DOUBLE_SLAB);
@@ -617,7 +603,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.SHULKER_SHELL)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 下界疣块、诡异疣块。
     FACTORY.createAllShapes(NETHER_WART_BLOCK)
@@ -625,15 +611,13 @@ public final class ExtShapeBlocks {
         .addExtraTag(addWallToUnmineableTag)
         .compostingChance(0.85f)
         .setCommonFenceSettings(Items.NETHER_WART)
-        .setButtonSettings(null)
-        .setPressurePlateActivationRule(null).withoutRedstone().build();
+        .withoutRedstone().build();
     FACTORY.createAllShapes(WARPED_WART_BLOCK)
         .addExtraTag(BlockTags.HOE_MINEABLE)
         .addExtraTag(addWallToUnmineableTag)
         .compostingChance(0.85f)
         .setCommonFenceSettings(Items.NETHER_WART)
-        .setButtonSettings(null)
-        .setPressurePlateActivationRule(null).withoutRedstone().build();
+        .withoutRedstone().build();
 
     // 带釉陶瓦只注册台阶。
     for (final Block block : BlockCollections.GLAZED_TERRACOTTA) {
@@ -650,7 +634,6 @@ public final class ExtShapeBlocks {
           .markStoneCuttable() // 下面这些标签已带有 pickaxe_mineable
           .setCommonFenceSettings(Items.GRAVEL)
           .setButtonSettings(ButtonSettings.STONE)
-          .setPressurePlateActivationRule(ActivationRule.MOBS)
           .setPrimaryTagForShape(BlockShape.STAIRS, ExtShapeTags.CONCRETE_STAIRS)
           .setPrimaryTagForShape(BlockShape.VERTICAL_STAIRS, ExtShapeTags.CONCRETE_VERTICAL_STAIRS)
           .setPrimaryTagForShape(BlockShape.SLAB, ExtShapeTags.CONCRETE_SLABS)
@@ -673,14 +656,14 @@ public final class ExtShapeBlocks {
         .setCommonFenceSettings(Items.GLOWSTONE_DUST)
         .setButtonSettings(ButtonSettings.SOFT)
         .compostingChance(0.65f)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .build();
 
     // 蜜脾块。
     FACTORY.createAllShapes(HONEYCOMB_BLOCK)
         .addExtraTag(addWallToUnmineableTag)
         .setCommonFenceSettings(Items.HONEYCOMB)
         .setButtonSettings(ButtonSettings.SOFT)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .build();
 
     // 下界合金块。
     FACTORY.createAllShapes(NETHERITE_BLOCK)
@@ -689,7 +672,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.NEEDS_DIAMOND_TOOL)
         .setCommonFenceSettings(Items.NETHERITE_INGOT)
         .setButtonSettings(ButtonSettings.HARD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 远古残骸。
     FACTORY.createAllShapes(ANCIENT_DEBRIS)
@@ -698,7 +681,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.NEEDS_DIAMOND_TOOL)
         .setCommonFenceSettings(Items.NETHERITE_SCRAP)
         .setButtonSettings(ButtonSettings.HARD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 哭泣的黑曜石。
     FACTORY.createAllShapes(CRYING_OBSIDIAN)
@@ -708,7 +691,6 @@ public final class ExtShapeBlocks {
         .setCommonFenceSettings(Items.STONE)
         .addExtraTag(BlockTags.DRAGON_IMMUNE)
         .setButtonSettings(ButtonSettings.HARD)
-        .setPressurePlateActivationRule(ActivationRule.MOBS)
         .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pistonBehavior(PistonBehavior.BLOCK))
         .build();
 
@@ -734,12 +716,12 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.FLINT)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
     FACTORY.createAllShapes(CALCITE)
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.FLINT)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 幽匿块。
     FACTORY.createAllShapes(SCULK)
@@ -798,7 +780,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.POINTED_DRIPSTONE)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
     FACTORY.createAllShapes(MOSS_BLOCK)
         .addExtraTag(BlockTags.HOE_MINEABLE)
         .addExtraTag(addWallToUnmineableTag)
@@ -806,21 +788,21 @@ public final class ExtShapeBlocks {
         .compostingChance(0.65f)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.SMALL_DRIPLEAF_PLACEABLE : null)
         .setButtonSettings(ButtonSettings.SOFT)
-        .setPressurePlateActivationRule(ActivationRule.EVERYTHING).build();
+        .build();
 
     // 深板岩。
     FACTORY.createAllShapes(DEEPSLATE)
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .markStoneCuttable()
         .setCommonFenceSettings(Items.FLINT)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).setPillar().build();
+        .setPillar().build();
     for (final Block block : new Block[]{COBBLED_DEEPSLATE, POLISHED_DEEPSLATE, DEEPSLATE_TILES, DEEPSLATE_BRICKS, CHISELED_DEEPSLATE}) {
       FACTORY.createAllShapes(block)
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
           .markStoneCuttable()
           .setCommonFenceSettings(Items.FLINT)
           .setButtonSettings(ButtonSettings.STONE)
-          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+          .build();
     }
 
     // 玄武岩及其变种。
@@ -828,17 +810,17 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.FLINT)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).setPillar().build();
+        .setPillar().build();
     FACTORY.createAllShapes(POLISHED_BASALT)
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.FLINT)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).setPillar().build();
+        .setPillar().build();
     FACTORY.createAllShapes(SMOOTH_BASALT)
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .setCommonFenceSettings(Items.FLINT)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 粗铁、粗铜、粗金。
     FACTORY.createAllShapes(RAW_IRON_BLOCK)
@@ -846,13 +828,13 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .addExtraTag(BlockTags.NEEDS_STONE_TOOL)
         .setCommonFenceSettings(Items.RAW_IRON)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
     FACTORY.createAllShapes(RAW_COPPER_BLOCK)
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .addExtraTag(BlockTags.NEEDS_STONE_TOOL)
         .setCommonFenceSettings(Items.RAW_COPPER)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
     FACTORY.createAllShapes(RAW_GOLD_BLOCK)
         .markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
@@ -860,7 +842,7 @@ public final class ExtShapeBlocks {
         .setCommonFenceSettings(Items.RAW_GOLD)
         .addExtraTag(ItemTags.PIGLIN_LOVED)
         .addExtraTag(BlockTags.GUARDED_BY_PIGLINS)
-        .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+        .build();
 
     // 蛙明灯。
     for (Block block : ArrayUtils.toArray(OCHRE_FROGLIGHT, VERDANT_FROGLIGHT, PEARLESCENT_FROGLIGHT)) {
@@ -868,7 +850,7 @@ public final class ExtShapeBlocks {
           .addExtraTag(addWallToUnmineableTag)
           .setCommonFenceSettings(Items.SLIME_BALL)
           .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
-          .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().build();
+          .setPillar().build();
     }
 
     ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());

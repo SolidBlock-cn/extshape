@@ -1,6 +1,7 @@
 package pers.solid.extshape.block;
 
 import com.google.gson.JsonPrimitive;
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -23,6 +24,7 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
 
 public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
+  public static final MapCodec<GlazedTerracottaSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), GlazedTerracottaSlabBlock::new);
   public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
   public GlazedTerracottaSlabBlock(@NotNull Block baseBlock, Settings settings) {
@@ -81,5 +83,10 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
     final Identifier id = getBlockModelId();
     pack.addModel(id, model);
     pack.addModel(id.brrp_suffixed("_top"), model.withParent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")));
+  }
+
+  @Override
+  public MapCodec<? extends GlazedTerracottaSlabBlock> getCodec() {
+    return CODEC;
   }
 }

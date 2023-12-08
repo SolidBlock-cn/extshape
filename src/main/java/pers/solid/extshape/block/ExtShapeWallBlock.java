@@ -1,7 +1,9 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.WallBlock;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
@@ -17,12 +19,16 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.generator.BRRPWallBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantBlockInterface {
+  @SuppressWarnings("unchecked")
+  public static final MapCodec<WallBlock> CODEC = (MapCodec<WallBlock>) (MapCodec<?>) BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeWallBlock::new);
+
   public ExtShapeWallBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
   }
@@ -48,6 +54,10 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
     return BlockShape.WALL;
   }
 
+  @Override
+  public MapCodec<WallBlock> getCodec() {
+    return CODEC;
+  }
 
   public static class WithExtension extends ExtShapeWallBlock {
     private final BlockExtension extension;

@@ -19,9 +19,10 @@ public record ButtonSettings(BlockSetType blockSetType, int time, boolean wooden
     return new ButtonSettings(blockSetType, 5, false);
   }
 
-  public static final ButtonSettings PSUDO_WOODEN = wood(BlockSetType.STONE);
+  public static final ButtonSettings PSUDO_WOODEN = wood(ExtShapeBlockTypes.SOFT);
   public static final ButtonSettings STONE = stone(BlockSetType.STONE);
   public static final ButtonSettings HARD = hard(BlockSetType.STONE);
-  public static final ButtonSettings SOFT = soft(BlockSetType.STONE);
+  public static final ButtonSettings SOFT = soft(ExtShapeBlockTypes.SOFT);
   public static final ButtonSettings BAMBOO = wood(BlockSetType.BAMBOO);
+  public static final ButtonSettings DIRT = soft(ExtShapeBlockTypes.DIRT_BLOCK_SET_TYPE);
 }

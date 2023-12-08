@@ -1,6 +1,7 @@
 package pers.solid.extshape.block;
 
 import com.google.gson.JsonPrimitive;
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -15,12 +16,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
+  public static final MapCodec<ExtShapePillarVerticalSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapePillarVerticalSlabBlock::new);
   public static final EnumProperty<Direction.Axis> AXIS = PillarBlock.AXIS;
 
   public ExtShapePillarVerticalSlabBlock(@NotNull Block baseBlock, Settings settings) {
@@ -85,6 +88,11 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
   @Override
   public BlockState rotate(BlockState state, BlockRotation rotation) {
     return PillarBlock.changeRotation(super.rotate(state, rotation), rotation);
+  }
+
+  @Override
+  protected MapCodec<? extends ExtShapePillarVerticalSlabBlock> getCodec() {
+    return CODEC;
   }
 }
 

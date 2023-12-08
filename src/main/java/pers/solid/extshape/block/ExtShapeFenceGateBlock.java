@@ -1,13 +1,17 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.WoodType;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -21,10 +25,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.generator.BRRPFenceGateBlock;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.mixin.FenceGateAccessor;
 import pers.solid.extshape.util.FenceSettings;
 
 public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtShapeVariantBlockInterface {
-
+  public static final MapCodec<ExtShapeFenceGateBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BRRPFenceGateBlock::getBaseBlock), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), createSettingsCodec()).apply(instance, (block, item, woodType, settings1) -> new ExtShapeFenceGateBlock(block, new FenceSettings(item, woodType), settings1)));
   private final Item secondIngredient;
 
   public ExtShapeFenceGateBlock(Block baseBlock, FenceSettings fenceSettings, Settings settings) {
@@ -55,6 +60,11 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     return BlockShape.FENCE_GATE;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public MapCodec<FenceGateBlock> getCodec() {
+    return (MapCodec<FenceGateBlock>) (MapCodec<?>) CODEC;
+  }
 
   public static class WithExtension extends ExtShapeFenceGateBlock {
     private final BlockExtension extension;

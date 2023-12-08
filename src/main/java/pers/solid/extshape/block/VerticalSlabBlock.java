@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -25,10 +26,16 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
   protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0, 0, 8, 16, 16, 16);
   protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8, 0, 0, 16, 16, 16);
   protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0, 0, 0, 8, 16, 16);
+  public static final MapCodec<VerticalSlabBlock> CODEC = createCodec(VerticalSlabBlock::new);
 
   public VerticalSlabBlock(Settings settings) {
     super(settings);
     setDefaultState(getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
+  }
+
+  @Override
+  protected MapCodec<? extends VerticalSlabBlock> getCodec() {
+    return CODEC;
   }
 
 

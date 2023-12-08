@@ -1,5 +1,8 @@
 package pers.solid.extshape.block;
 
+import com.mojang.datafixers.util.Function3;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
@@ -35,10 +38,16 @@ import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
 
+  protected static <B extends ExtShapePressurePlateBlock> MapCodec<B> createCodec(Function3<Block, Settings, BlockSetType, B> function) {
+    return RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.blockSetType)).apply(instance, function));
+  }
+
+  public static final MapCodec<ExtShapePressurePlateBlock> CODEC = createCodec(ExtShapePressurePlateBlock::new);
+
   public final Block baseBlock;
 
-  public ExtShapePressurePlateBlock(Block baseBlock, ActivationRule type, Settings settings, @NotNull BlockSetType blockSetType) {
-    super(type, settings, blockSetType);
+  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType) {
+    super(blockSetType, settings);
     this.baseBlock = baseBlock;
   }
 
@@ -124,12 +133,17 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     return BlockShape.PRESSURE_PLATE;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public MapCodec<PressurePlateBlock> getCodec() {
+    return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
+  }
 
   public static class WithExtension extends ExtShapePressurePlateBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, ActivationRule type, Settings settings, @NotNull BlockSetType blockSetType, BlockExtension extension) {
-      super(baseBlock, type, settings, blockSetType);
+    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, BlockExtension extension) {
+      super(baseBlock, settings, blockSetType);
       this.extension = extension;
     }
 

@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -20,6 +21,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
@@ -27,6 +29,7 @@ import pers.solid.extshape.builder.BlockShape;
 
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
+  public static final MapCodec<ExtShapeVerticalSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalSlabBlock::new);
 
   public ExtShapeVerticalSlabBlock(Block baseBlock, Settings settings) {
     super(settings);
@@ -67,6 +70,10 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
     return BlockShape.VERTICAL_SLAB;
   }
 
+  @Override
+  protected MapCodec<? extends ExtShapeVerticalSlabBlock> getCodec() {
+    return CODEC;
+  }
 
   public static class WithExtension extends ExtShapeVerticalSlabBlock {
     private final BlockExtension extension;

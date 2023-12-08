@@ -1,7 +1,10 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FenceBlock;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -9,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -22,6 +26,7 @@ import pers.solid.brrp.v1.generator.BRRPFenceBlock;
 import pers.solid.extshape.builder.BlockShape;
 
 public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
+  public static final MapCodec<ExtShapeFenceBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BRRPFenceBlock::getBaseBlock), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient), createSettingsCodec()).apply(instance, ExtShapeFenceBlock::new));
 
   /**
    * 合成栅栏方块需要使用的第二个材料。
@@ -59,6 +64,11 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
     return BlockShape.FENCE;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public MapCodec<FenceBlock> getCodec() {
+    return (MapCodec<FenceBlock>) (MapCodec<?>) CODEC;
+  }
 
   public static class WithExtension extends ExtShapeFenceBlock {
     private final BlockExtension extension;
