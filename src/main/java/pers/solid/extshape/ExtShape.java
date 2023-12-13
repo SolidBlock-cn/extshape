@@ -58,6 +58,7 @@ public class ExtShape {
     MinecraftForge.EVENT_BUS.addListener(ExtShape::registerCommand);
     FMLJavaModLoadingContext.get().getModEventBus().addListener(ExtShape::register);
     DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ExtShape::registerConfig);
+    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> MinecraftForge.EVENT_BUS.addListener(ExtShapeClient::registerCommand));
   }
 
   @OnlyIn(Dist.CLIENT)
