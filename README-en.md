@@ -4,13 +4,13 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [this file](BlockList.md).
 
-At present this mod supports Minecraft Java Edition 1.19.4-1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API and BRRP. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
+At present this mod supports Minecraft Java Edition 1.20.4-1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API and BRRP. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
 
 **Notice: The mod requires BRRP (Better Runtime Resource Pack) to run.**
 
-If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blocks](#Blocks), to add inter-mod support for Blockus.
+If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blockus](#Blockus), to add inter-mod support for Blockus.
 
-[Click here](UpdateLog-en.md) for previous update logs. Welcome to join Tencent QQ group **587928350** or KaiHeiLa channel invitation code **KlFS0n** to experience the latest update of this mod.
+[Click here](UpdateLog-en.md) for previous update logs. Welcome to join Tencent QQ group **587928350** to experience the latest update of this mod.
 
 ## Features
 
@@ -41,6 +41,9 @@ Blocks added by this mod inherit most features of their base blocks:
 - Blocks base on **pumpkin, melon, moss block, shroomlight, nether wart block and warped wart block** can be composted.
 - Blocks based on **packed ice and sculk block** drop only mined with items with Silk Touch enchantment.
 - Blocks based on **clay block, snow block, melon block**, etc., drop their corresponding items when mined, such as clay ball, snow ball (only when shoveled) and melon slice. Number of items dropped by slabs, quarter pieces, vertical slabs, vertical slabs are based on that of base blocks divided by 2 or 4, and double slabs drop the double. Some items dropped may be affected by Fortune enchantment, and blocks themselves are dropped when mined with tools with Silk Touch.
+- About the interaction between blocks and pistons: for blocks that cannot be pushed by piston, such as obsidian, bedrock, the buttons and pressure plates can also not be pushed by piston, while buttons and pressure plates for other blocks will be directly destroyed.
+- About note block: To be consistent with vanilla, the note block instrument of button blocks are always harp, while others are same as their base blocks.
+- Buttons will not be displayed as colors in maps.
 
 ### Crafting and smelting
 
