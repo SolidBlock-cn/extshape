@@ -1,10 +1,13 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
 plugins {
-    id 'dev.architectury.loom' version '1.3-SNAPSHOT'
+    id 'dev.architectury.loom' version '1.4-SNAPSHOT'
     id 'maven-publish'
-    id 'io.github.juuxel.loom-vineflower' version '1.11.0'
+
+    // 用于模组发布
     id "com.modrinth.minotaur" version "2.+"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id "com.github.breadmoirai.github-release" version "2.5.2"
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -20,13 +23,6 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
-
-    /*maven {
-        url 'https://maven.aliyun.com/nexus/content/groups/public'
-    }
-    maven {
-        url 'https://repository.hanbings.io/proxy'
-    }*/
 
     // 合理排序模组依赖的 Cloth Config
     maven { url "https://maven.shedaniel.me/" }
@@ -138,16 +134,94 @@ publishing {
     }
 }
 
+ext {
+    release_type = mod_version.contains('beta') ? 'beta' : 'release' as String
+}
+
+
+/**
+ * 从 UpdateLog-en.md 中提取更新日志
+ */
+String getUpdateLog(String modVersion = project.mod_version) {
+    StringBuilder builder = new StringBuilder()
+    boolean start = false
+    file('UpdateLog-en.md').eachLine {
+        if (it.matches("^###\\s*" + modVersion + '$')) {
+            start = true
+        } else if (it.startsWith("###")) {
+            start = false
+        } else if (start) {
+            builder.append it
+            builder.append '\n'
+        }
+        return
+    }
+    return builder.toString().trim()
+}
+
+// 模组发布部分
+
+println "当前版本（${project.mod_version}）更新记录："
+final String changelogContent = getUpdateLog(project.mod_version.replaceAll('-.+?\$', ""))
+println changelogContent
+
+curseforge {
+    def getenv = System.getenv("CURSEFORGE_TOKEN")
+    println("CurseForge 令牌: $getenv")
+    if (getenv) apiKey = getenv
+    project {
+        id = '514125'  // extended block shapes
+        changelog = changelogContent
+        changelogType = 'markdown'
+        releaseType = release_type
+        mainArtifact remapJar
+
+        for (final String v in (project.supported_minecraft_versions.split(','))) {
+            addGameVersion v
+        }
+        addGameVersion 'Fabric'
+
+        relations {
+            requiredDependency 'fabric-api'
+            requiredDependency 'better-runtime-resource-pack'
+        }
+    }
+
+    options {
+        forgeGradleIntegration = false
+    }
+}
 
 modrinth {
     projectId = 'tb7kCxSW'
     String platform = project.properties.getOrDefault 'loom.platform', 'forge'
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
-    versionType = 'release'
+    versionType = release_type
     uploadFile = remapJar
-    gameVersions = (project.supported_minecraft_versions as String).split(',') as List<String>
+    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
-    var list = [new ModDependency('JnrDtPAE', 'required')]
-    if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
-    dependencies = list
+    var dependenciesList = [new ModDependency('JnrDtPAE', 'required')] // brrp
+    if (platform == 'fabric') dependenciesList.add new ModDependency('P7dR8mSH', 'required') // Fabric API
+    dependencies = dependenciesList
+    changelog = changelogContent
+}
+
+githubRelease {
+    def getenv = System.getenv("GITHUB_TOKEN")
+    println "GitHub 令牌: $getenv"
+    if (getenv) token = getenv
+    owner = "SolidBlock-cn"
+    repo = "extshape"
+    tagName = "v$project.mod_version"
+    targetCommitish = "1.19.4"
+    body = changelogContent
+    draft = true
+    prerelease = false
+    releaseAssets remapJar, remapSourcesJar
+    allowUploadToExisting = true
+    apiEndpoint = "https://api.github.com"
+}
+
+publish {
+    dependsOn tasks.curseforge, tasks.modrinth, tasks.githubRelease
 }
