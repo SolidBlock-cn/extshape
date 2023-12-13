@@ -5,15 +5,15 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterClientCommandsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import pers.solid.extshape.config.ExtShapeOptionsScreen;
 
 @OnlyIn(Dist.CLIENT)
-@Mod("extshape")
-@Mod.EventBusSubscriber(Dist.CLIENT)
-public class ExtShapeClient {
-  @SubscribeEvent
+public final class ExtShapeClient {
+
+  private ExtShapeClient() {
+    throw new UnsupportedOperationException("You are not allowed to instantiate this class");
+  }
+
   public static void registerCommand(RegisterClientCommandsEvent event) {
     event.getDispatcher().register(CommandManager.literal("extshape:config").executes(context -> {
       final MinecraftClient client = MinecraftClient.getInstance();
