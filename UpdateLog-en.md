@@ -1,5 +1,38 @@
 # Update log
 
+### 2.0.7
+
+- Fixed the issue that when some mods are installed crashes happen because of inventories.
+
+### 2.0.5
+
+- Fixed the issue of incompatibility with Blockus.
+
+### 2.0.4
+
+- Modified the piston behavior of blocks to match base blocks. Pressure plates and buttons of unmovable blocks are unmovable, and other pressure plates and buttons will be destroyed by piston.
+- Modified the note block instrument to match vanilla. The note block instrument of blocks (except button) is same to the base block, but the note block instrument is always harp (the default instrument).
+- To match the vanilla behavior, buttons will not display colors in map.
+- For Blockus mod: fixed the issue of missing stairs, slabs and walls for concrete blocks.
+
+### 2.0.3
+
+- Fixed the issue that some blocks lack tags such as `minecraft:mineable/pickaxe`.
+- Fixed the issue that walls of non-`mineable/pickaxe` blocks are pickaxe-mineable.
+- Fixed the correct recipes of slabs and stairs of pattered wools in Blockus mod.
+- Fixed the issue that some blocks of pattered wools in Blockus are not shears-mineable.
+- Fixed the issue that herringbone cherry planks blocks cannot be charred into relevant charred planks blocks.
+- Fixed the identifying of mining tools of blocks during data generation.
+- For versions 1.20 and above, ore blocks can now be crafted into Blockus ore brick blocks.
+
+### 2.0.2
+
+- Adapt to new version Blockus mod.
+- Fixed the issue that vertical stairs have the incorrect tag `extshape:vertical_slabs` instead
+  of `extshape:vertical_stairs`.
+- Adjusted the way item groups are modified.
+- Modified the loot table of variants of Stars Block and Nether Star Block in Blockus mod.
+
 ### 2.0.0
 - Adapted to new version of Better Runtime Resource Packs.
 - Fixed the issue that some bedrock blocks occupy the empty loot table.
