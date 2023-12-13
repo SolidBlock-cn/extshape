@@ -125,7 +125,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.RED_PATTERNED_WOOL,
       BlockusBlocks.BLACK_PATTERNED_WOOL
   );
-  public static final ImmutableList<WoolTypes> GINHAM_WOOLS = ImmutableList.of(
+  public static final ImmutableList<WoolTypes> GINGHAM_WOOLS = ImmutableList.of(
       BlockusBlocks.WHITE_GINGHAM_WOOL,
       BlockusBlocks.ORANGE_GINGHAM_WOOL,
       BlockusBlocks.MAGENTA_GINGHAM_WOOL,
