@@ -89,7 +89,7 @@ public final class BlockBiMaps {
   public static void setBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock, @NotNull Block block) {
     final BiMap<Block, Block> biMap = of(shape);
     if (biMap.containsKey(baseBlock)) {
-      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape, baseBlock, biMap.get(baseBlock), block);
+      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape.asString(), baseBlock, biMap.get(baseBlock), block);
     }
     biMap.put(baseBlock, block);
     BASE_BLOCKS.add(baseBlock);

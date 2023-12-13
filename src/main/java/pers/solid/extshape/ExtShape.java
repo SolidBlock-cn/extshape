@@ -69,7 +69,7 @@ public class ExtShape {
     event.register(ForgeRegistries.Keys.BLOCKS, helper -> {
       ExtShapeBlocks.init();
       ExtShapeItemGroup.init();
-      ExtShapeTags.refillTags();
+      ExtShapeTags.init();
 
       // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
       VanillaItemGroup.registerForMod();

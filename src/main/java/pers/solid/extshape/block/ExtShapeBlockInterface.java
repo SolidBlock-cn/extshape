@@ -1,9 +1,9 @@
 package pers.solid.extshape.block;
 
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
-import net.minecraft.data.client.Model;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
@@ -28,17 +28,20 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
-import pers.solid.brrp.v1.model.ModelJsonBuilder;
-import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mixin.AbstractBlockAccessor;
 import pers.solid.extshape.rrp.RecipeGroupRegistry;
 
 /**
  * 该模组中的绝大多数方块共用的接口。
  */
 public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBlock {
+  /**
+   * 所有可以被切石的方块，包含其他模组中的。其他模组不应该对此集合进行任何与本模组无关的修改。
+   */
+  ObjectSet<Block> STONECUTTABLE_BASE_BLOCKS = new ObjectOpenHashSet<>();
+  ObjectSet<Block> STONECUTTABLE_BLOCKS = new ObjectOpenHashSet<>();
+
   /**
    * 方块所在的合成配方的组。
    *
@@ -66,17 +69,12 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator, IForgeBl
    * @return 方块能否被切石机切石。
    */
   static boolean isStoneCut(Block baseBlock) {
-    return baseBlock != null && (((AbstractBlockAccessor) baseBlock).getMaterial() == Material.STONE || ((AbstractBlockAccessor) baseBlock).getMaterial() == Material.METAL);
+    return baseBlock != null && STONECUTTABLE_BASE_BLOCKS.contains(baseBlock);
   }
 
   @Override
   default boolean shouldWriteStonecuttingRecipe() {
-    return isStoneCut(getBaseBlock());
-  }
-
-  @OnlyIn(Dist.CLIENT)
-  default ModelJsonBuilder simpleModel(Model parent) {
-    return ModelUtils.createModelWithVariants(this, parent);
+    return (this instanceof Block && STONECUTTABLE_BLOCKS.contains(this)) || isStoneCut(getBaseBlock());
   }
 
   /**
