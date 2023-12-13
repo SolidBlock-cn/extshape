@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.client.Models;
@@ -53,6 +54,11 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     return Text.translatable("block.extshape.?_pressure_plate", this.getNamePrefix());
   }
 
+  @Override
+  public PistonBehavior getPistonBehavior(BlockState state) {
+    return baseBlock.getHardness() == -1 || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN || baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : super.getPistonBehavior(state);
+  }
+
 
   @OnlyIn(Dist.CLIENT)
   @Override
@@ -88,8 +94,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       final Identifier woolId = ForgeRegistries.BLOCKS.getKey(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = ForgeRegistries.ITEMS.getValue(carpetId);
-      final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(carpet).criterion("has_carpet", RecipeProvider.conditionsFromItem(carpet));
-      return recipe;
+      return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(carpet).criterion("has_carpet", RecipeProvider.conditionsFromItem(carpet));
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
       return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(Blocks.MOSS_CARPET)
           .criterion("has_carpet", RecipeProvider.conditionsFromItem(Blocks.MOSS_CARPET));

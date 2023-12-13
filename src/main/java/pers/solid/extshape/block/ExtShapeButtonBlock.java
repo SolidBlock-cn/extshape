@@ -2,6 +2,7 @@ package pers.solid.extshape.block;
 
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.*;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.client.Models;
@@ -81,6 +82,12 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   @Override
   public MutableText getName() {
     return Text.translatable("block.extshape.?_button", this.getNamePrefix());
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  public PistonBehavior getPistonBehavior(BlockState state) {
+    return baseBlock.getHardness() == -1 || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN || baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : super.getPistonBehavior(state);
   }
 
   @Override

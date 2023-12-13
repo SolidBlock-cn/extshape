@@ -10,7 +10,7 @@ public class VerticalStairsBuilder extends AbstractBlockBuilder<VerticalStairsBl
   public VerticalStairsBuilder(Block baseBlock) {
     super(baseBlock, builder -> new ExtShapeVerticalStairsBlock(baseBlock, builder.blockSettings));
     this.shape = BlockShape.VERTICAL_STAIRS;
-    primaryTagToAddTo = ExtShapeTags.VERTICAL_SLABS;
+    primaryTagToAddTo = ExtShapeTags.VERTICAL_STAIRS;
   }
 
   @Override
