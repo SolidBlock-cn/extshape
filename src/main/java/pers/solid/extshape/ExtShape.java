@@ -79,7 +79,7 @@ public class ExtShape {
     event.register(ForgeRegistries.Keys.BLOCKS, helper -> {
       ExtShapeBlocks.init();
       ExtShapeItemGroup.init();
-      ExtShapeTags.refillTags();
+      ExtShapeTags.init();
 
       registerStrippableBlocks();
 

@@ -29,7 +29,7 @@ public class TranslatableTextContentMixin {
   @Shadow
   private List<StringVisitable> translations;
 
-  @Inject(method = "updateTranslations", at = @At(value = "INVOKE", target = "Ljava/util/Objects;requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
+  @Inject(method = "updateTranslations", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/TranslatableTextContent;forEachPart(Ljava/lang/String;Ljava/util/function/Consumer;)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
   public void modify(CallbackInfo ci, Language language, String string, ImmutableList.Builder<StringVisitable> builder) {
     if (key.equals(AttributiveBlockNameManager.ATTRIBUTIVE_KEY)) {
       final String newKey = (String) args[0];
