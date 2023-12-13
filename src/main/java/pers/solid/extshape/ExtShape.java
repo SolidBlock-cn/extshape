@@ -67,6 +67,7 @@ public class ExtShape {
     }
     FMLJavaModLoadingContext.get().getModEventBus().addListener(ExtShape::initializeBridge);
     DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ExtShape::registerConfig);
+    DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> MinecraftForge.EVENT_BUS.addListener(ExtShapeClient::registerCommand));
   }
 
   @OnlyIn(Dist.CLIENT)
