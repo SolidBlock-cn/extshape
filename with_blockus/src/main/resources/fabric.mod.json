@@ -28,8 +28,8 @@
     "fabric": "*",
     "minecraft": "1.20.2",
     "brrp_v1": "*",
-    "extshape": ">=${version}",
-    "blockus": ">=2.7.7"
+    "extshape": [">=2.0.4", "${version}"],
+    "blockus": ">=2.7.9"
   },
   "custom": {
     "modmenu": {
