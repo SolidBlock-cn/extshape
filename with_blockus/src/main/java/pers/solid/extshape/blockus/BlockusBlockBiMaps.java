@@ -4,7 +4,7 @@ import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.ConcreteTypes;
-import com.brand.blockus.content.types.PatternWoolTypes;
+import com.brand.blockus.content.types.WoolTypes;
 import com.brand.blockus.data.family.BlockusWoodFamilies;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -61,12 +61,12 @@ public final class BlockusBlockBiMaps {
         BlockBiMaps.setBlockOf(BlockShape.SLAB, bssTypes.block, bssTypes.slab);
       }
     });
-    PatternWoolTypes.values().forEach(patternWoolTypes -> {
-      if (patternWoolTypes.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, patternWoolTypes.block, patternWoolTypes.stairs);
+    WoolTypes.values().forEach(woolTypes -> {
+      if (woolTypes.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woolTypes.block, woolTypes.stairs);
       }
-      if (patternWoolTypes.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, patternWoolTypes.block, patternWoolTypes.slab);
+      if (woolTypes.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, woolTypes.block, woolTypes.slab);
       }
     });
     ConcreteTypes.values().forEach(concreteTypes -> {

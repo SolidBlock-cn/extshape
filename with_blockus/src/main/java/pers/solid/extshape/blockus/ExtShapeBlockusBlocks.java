@@ -7,6 +7,7 @@ import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.WoodTypes;
 import com.brand.blockus.utils.tags.BlockusBlockTags;
+import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -101,6 +102,7 @@ public final class ExtShapeBlockusBlocks {
 
     buildStoneBlocksWithButton(create(BlockusBlocks.POLISHED_TUFF).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
+    buildStoneBlocksWithoutButton(create(BlockusBlocks.MOSSY_TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.CHISELED_TUFF).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.HERRINGBONE_TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.TUFF_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.TUFF_BLOCKS));
@@ -362,8 +364,8 @@ public final class ExtShapeBlockusBlocks {
       create(bssTypes).markStoneCuttable().addExtraTag(BlockusBlockTags.SHINGLES).setCommonFenceSettings(Items.FLINT).setRecipeGroup(blockShape -> "shingles_" + blockShape.asString()).build();
     }
 
-    for (var patternWoolTypes : BlockusBlockCollections.PATTERNED_WOOLS) {
-      FACTORY.createConstructionOnly(patternWoolTypes.block)
+    for (var woolTypes : Iterables.concat(BlockusBlockCollections.PATTERNED_WOOLS, BlockusBlockCollections.GINGHAM_WOOLS)) {
+      FACTORY.createConstructionOnly(woolTypes.block)
           .addExtraTag(FabricMineableTags.SHEARS_MINEABLE)
           .addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS)
           .without(BlockShape.STAIRS, BlockShape.SLAB)
