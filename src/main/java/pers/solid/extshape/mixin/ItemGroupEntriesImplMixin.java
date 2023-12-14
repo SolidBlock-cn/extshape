@@ -49,8 +49,11 @@ public abstract class ItemGroupEntriesImplMixin {
     if (ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups && allowTransitive) {
       allowTransitive = false;
       // 为了避免递归添加物品，故添加一个布尔值进行控制。下面的 postAdd 同理。
-      for (Item item : VanillaItemGroup.getAppendingRule(Registries.ITEM_GROUP.getKey(this.group).orElseThrow()).get(stack.getItem())) {
-        add(new ItemStack(item), visibility);
+      final Optional<RegistryKey<ItemGroup>> itemGroupKey = Registries.ITEM_GROUP.getKey(this.group);
+      if (itemGroupKey.isPresent()) {
+        for (Item item : VanillaItemGroup.getAppendingRule(itemGroupKey.get()).get(stack.getItem())) {
+          add(new ItemStack(item), visibility);
+        }
       }
       allowTransitive = true;
     }
