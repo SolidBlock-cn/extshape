@@ -3,39 +3,44 @@ import com.modrinth.minotaur.dependencies.ModDependency
 apply plugin: 'com.matthewprenger.cursegradle'
 apply plugin: "com.github.breadmoirai.github-release"
 apply plugin: "com.modrinth.minotaur"
-archivesBaseName = rootProject.archives_base_name_blockus + "-fabric"
-version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
-group = rootProject.maven_group
-repositories {
-    // CurseMaven，用于加载其他模组
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
+/**
+ * 从 UpdateLog-en.md 中提取更新日志
+ */
+String getUpdateLog(String modVersion = project.mod_version) {
+    StringBuilder builder = new StringBuilder()
+    boolean start = false
+    rootProject.file('UpdateLog-en.md').eachLine {
+        if (it.matches("^###\\s*" + modVersion + '$')) {
+            start = true
+        } else if (it.startsWith("###")) {
+            start = false
+        } else if (start) {
+            builder.append it
+            builder.append '\n'
         }
+        return
     }
-}
-dependencies {
-    // Blockus 模组
-    modApi("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}") {
-        exclude module: "fabric-loader"
-    }
-    modCompileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
-    modApi "curse.maven:blockus-312289:${project.blockus_version}"
-    implementation project(path: ':common', configuration: "namedElements")
+    return builder.toString().trim()
 }
 
+// 模组发布部分
+
+println "当前版本（${project.mod_version}）更新记录："
+final String changelogContent = getUpdateLog(project.mod_version.replaceAll('-.+?\$', ""))
+println changelogContent
 
 curseforge {
     def getenv = System.getenv("CURSEFORGE_TOKEN")
     println("CurseForge 令牌: $getenv")
     if (getenv) apiKey = getenv
     project {
-        id = '841655'  // extended block shapes blockus
+        id = '514125'  // extended block shapes
+        changelog = changelogContent
+        changelogType = 'markdown'
         releaseType = release_type
         mainArtifact remapJar
 
-        for (final String v in (rootProject.supported_minecraft_versions.split(','))) {
+        for (final String v in (project.supported_minecraft_versions.split(','))) {
             addGameVersion v
         }
         addGameVersion 'Fabric'
@@ -43,7 +48,6 @@ curseforge {
         relations {
             requiredDependency 'fabric-api'
             requiredDependency 'better-runtime-resource-pack'
-            requiredDependency 'blockus'
         }
     }
 
@@ -51,18 +55,21 @@ curseforge {
         forgeGradleIntegration = false
     }
 }
+
 modrinth {
-    projectId = 'qAQHIBF8'
+    projectId = 'tb7kCxSW'
     String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
     versionType = release_type
     uploadFile = remapJar
     gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
-    var list = [new ModDependency('JnrDtPAE', 'required'), new ModDependency('tb7kCxSW', 'required'), new ModDependency('zFiY2Go0', 'required')]
-    if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
-    dependencies = list
+    var dependenciesList = [new ModDependency('JnrDtPAE', 'required')] // brrp
+    if (platform == 'fabric') dependenciesList.add new ModDependency('P7dR8mSH', 'required') // Fabric API
+    dependencies = dependenciesList
+    changelog = changelogContent
 }
+
 githubRelease {
     def getenv = System.getenv("GITHUB_TOKEN")
     println "GitHub 令牌: $getenv"
@@ -71,6 +78,7 @@ githubRelease {
     repo = "extshape"
     tagName = "v$project.mod_version"
     targetCommitish = "1.20.4"
+    body = changelogContent
     draft = true
     prerelease = false
     releaseAssets remapJar, remapSourcesJar
