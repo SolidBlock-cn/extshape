@@ -11,4 +11,4 @@ pluginManagement {
     }
 }
 
-include 'common', 'with_blockus'
+include 'with_blockus', 'runtest'
