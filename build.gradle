@@ -1,5 +1,3 @@
-import com.modrinth.minotaur.dependencies.ModDependency
-
 plugins {
     id 'fabric-loom' version '1.4-SNAPSHOT'
     id 'maven-publish'
@@ -16,40 +14,33 @@ group = project.maven_group
 
 allprojects {
     apply plugin: 'fabric-loom'
-    apply plugin: 'maven-publish'
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+    dependencies {
+        minecraft "com.mojang:minecraft:${project.minecraft_version}"
+        mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    }
 
-    repositories {
-        // Add repositories to retrieve artifacts from in here.
-        // You should only use this when depending on other mods because
-        // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-        // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-        // for more information about repositories.
+    loom {
+        runs {
+            client {
+                programArg "-username=Solid"
+            }
+        }
 
-        // Mod Menu 模组
-        maven { url 'https://maven.terraformersmc.com/releases/' }
-        // Cloth Config、Roughly Enough Items
-        maven { url "https://maven.shedaniel.me/" }
-        /*
-        这个是存储在 GitHub 上的 BRRP 模组
-        maven {
-            url 'https://github.com/SolidBlock-cn/mvn-repo/main'
-        }*/
-        // 合理排序和 BRRP 模组。这两个模组均存储于本地的 maven 仓库。
-        mavenLocal()
+        runConfigs.configureEach {
+            it.configName = "Minecraft Fabric ${it.name.capitalize()}"
+            runDir = project.relativePath(project(':').file('run')).toString()
+        }
     }
 
     dependencies {
-        // To change the versions see the gradle.properties file
-        minecraft "com.mojang:minecraft:${project.minecraft_version}"
-        mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
         modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
         // Fabric API
         modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
         // ModMenu 模组
-        modImplementation ("com.terraformersmc:modmenu:${project.modmenu_version}")
+        modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
         // 下面两个模组均存储于本地的 maven 仓库。
 
@@ -60,6 +51,23 @@ allprojects {
         // 由于新版的 Loom 没有 @CanIgnoreReturnValue 等注解，故在这里手动添加。
         modImplementation "com.google.errorprone:error_prone_annotations:+"
     }
+
+    repositories {
+        // Mod Menu 模组
+        maven { url 'https://maven.terraformersmc.com/releases/' }
+        /*
+        这个是存储在 GitHub 上的 BRRP 模组
+        maven {
+            url 'https://github.com/SolidBlock-cn/mvn-repo/main'
+        }*/
+        // 合理排序和 BRRP 模组。这两个模组均存储于本地的 maven 仓库。
+        mavenLocal()
+    }
+}
+
+subprojects {
+    apply plugin: 'fabric-loom'
+    apply plugin: 'maven-publish'
 
     processResources {
         inputs.property "version", project.mod_version
@@ -108,142 +116,32 @@ allprojects {
             // retrieving dependencies.
         }
     }
-
-    loom {
-        runs {
-            client {
-                programArg "-username=Solid"
-            }
-        }
-
-        runConfigs.configureEach {
-            it.configName = "Minecraft Fabric ${it.name.capitalize()}"
-            ideConfigGenerated = project == project(':runtest')
-
-            runDir = project.relativePath(project(':').file('run')).toString()
-        }
-    }
 }
 
 ext {
     release_type = mod_version.contains('beta') ? 'beta' : 'release' as String
 }
 
-subprojects {
-    dependencies {
-    }
-}
-
-project(':runtest') {
-    repositories {
-        // Mods on CurseForge
-        maven {
-            url "https://cursemaven.com"
-            content {
-                includeGroup "curse.maven"
-            }
+repositories {
+    // Mods on CurseForge
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
         }
     }
-    dependencies {
-        implementation project(path: ':', configuration: "namedElements")
-        implementation project(path: ':with_blockus', configuration: "namedElements")
-        if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
-            modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
-        }
-        if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
-            modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
-        }
-    }
-
-    [tasks.remapJar, tasks.remapSourcesJar, tasks.build].each {
-        it.enabled = false
-    }
+    // Cloth Config、Roughly Enough Items
+    maven { url "https://maven.shedaniel.me/" }
 }
 
-
-/**
- * 从 UpdateLog-en.md 中提取更新日志
- */
-String getUpdateLog(String modVersion = project.mod_version) {
-    StringBuilder builder = new StringBuilder()
-    boolean start = false
-    file('UpdateLog-en.md').eachLine {
-        if (it.matches("^###\\s*" + modVersion + '$')) {
-            start = true
-        } else if (it.startsWith("###")) {
-            start = false
-        } else if (start) {
-            builder.append it
-            builder.append '\n'
-        }
-        return
+dependencies {
+    if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
+        modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
     }
-    return builder.toString().trim()
-}
-
-// 模组发布部分
-
-println "当前版本（${project.mod_version}）更新记录："
-final String changelogContent = getUpdateLog(project.mod_version.replaceAll('-.+?\$', ""))
-println changelogContent
-
-curseforge {
-    def getenv = System.getenv("CURSEFORGE_TOKEN")
-    println("CurseForge 令牌: $getenv")
-    if (getenv) apiKey = getenv
-    project {
-        id = '514125'  // extended block shapes
-        changelog = changelogContent
-        changelogType = 'markdown'
-        releaseType = release_type
-        mainArtifact remapJar
-
-        for (final String v in (project.supported_minecraft_versions.split(','))) {
-            addGameVersion v
-        }
-        addGameVersion 'Fabric'
-
-        relations {
-            requiredDependency 'fabric-api'
-            requiredDependency 'better-runtime-resource-pack'
-        }
+    if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
+        modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
     }
-
-    options {
-        forgeGradleIntegration = false
+    subprojects.each {
+        implementation project(path: it.path, configuration: "namedElements")
     }
-}
-
-modrinth {
-    projectId = 'tb7kCxSW'
-    String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
-    versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
-    versionType = release_type
-    uploadFile = remapJar
-    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
-    loaders = [platform]
-    var dependenciesList = [new ModDependency('JnrDtPAE', 'required')] // brrp
-    if (platform == 'fabric') dependenciesList.add new ModDependency('P7dR8mSH', 'required') // Fabric API
-    dependencies = dependenciesList
-    changelog = changelogContent
-}
-
-githubRelease {
-    def getenv = System.getenv("GITHUB_TOKEN")
-    println "GitHub 令牌: $getenv"
-    if (getenv) token = getenv
-    owner = "SolidBlock-cn"
-    repo = "extshape"
-    tagName = "v$project.mod_version"
-    targetCommitish = "1.20.4"
-    body = changelogContent
-    draft = true
-    prerelease = false
-    releaseAssets remapJar, remapSourcesJar
-    allowUploadToExisting = true
-    apiEndpoint = "https://api.github.com"
-}
-
-publish {
-    dependsOn tasks.curseforge, tasks.modrinth, tasks.githubRelease
 }
