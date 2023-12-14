@@ -247,16 +247,3 @@ githubRelease {
 publish {
     dependsOn tasks.curseforge, tasks.modrinth, tasks.githubRelease
 }
-
-[tasks.curseforge, tasks.modrinth, tasks.githubRelease].each { task ->
-    task.doFirst {
-        subprojects {
-            def disabledTask = project.tasks.getByName(task.name)
-            println disabledTask
-            if (disabledTask != null) {
-                disabledTask.enabled = false
-                println "Disabling task $disabledTask for $project"
-            }
-        }
-    }
-}
