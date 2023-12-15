@@ -1,9 +1,11 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
-apply plugin: 'com.matthewprenger.cursegradle'
+apply plugin: 'net.darkhax.curseforgegradle'
 apply plugin: "com.github.breadmoirai.github-release"
 apply plugin: "com.modrinth.minotaur"
-archivesBaseName = rootProject.archives_base_name_blockus + "-fabric"
+base {
+    archivesName = rootProject.archives_base_name_blockus + "-fabric"
+}
 version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
 group = rootProject.maven_group
 repositories {
@@ -25,31 +27,21 @@ dependencies {
     implementation project(path: ':', configuration: "namedElements")
 }
 
+tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    doFirst {
+        def getenv = System.getenv("CURSEFORGE_TOKEN")
+        println("CurseForge 令牌: $getenv")
+        if (getenv) apiToken = getenv
+    }
+    def mainFile = upload('841655', remapJar)
+    mainFile.changelog = ''
+    mainFile.releaseType = release_type
 
-curseforge {
-    def getenv = System.getenv("CURSEFORGE_TOKEN")
-    println("CurseForge 令牌: $getenv")
-    if (getenv) apiKey = getenv
-    project {
-        id = '841655'  // extended block shapes blockus
-        releaseType = release_type
-        mainArtifact remapJar
-
-        for (final String v in (rootProject.supported_minecraft_versions.split(','))) {
-            addGameVersion v
-        }
-        addGameVersion 'Fabric'
-
-        relations {
-            requiredDependency 'fabric-api'
-            requiredDependency 'better-runtime-resource-pack'
-            requiredDependency 'blockus'
-        }
+    for (final String v in (rootProject.supported_minecraft_versions.split(','))) {
+        mainFile.addGameVersion v
     }
 
-    options {
-        forgeGradleIntegration = false
-    }
+    mainFile.addRelations 'requiredDependency', 'fabric-api', 'better-runtime-resource-pack', 'blockus'
 }
 modrinth {
     projectId = 'qAQHIBF8'
@@ -65,8 +57,10 @@ modrinth {
 }
 githubRelease {
     def getenv = System.getenv("GITHUB_TOKEN")
-    println "GitHub 令牌: $getenv"
     if (getenv) token = getenv
+    tasks.githubRelease.doFirst {
+        println "GitHub 令牌: $getenv"
+    }
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
