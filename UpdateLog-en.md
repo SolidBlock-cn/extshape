@@ -1,5 +1,9 @@
 # Update log
 
+### 2.0.9
+
+- Fixed the issue that plank blocks are not flammable.
+
 ### 2.0.8
 
 - Again, fixed the issue that when some mods are installed crashes happen because of inventories.
@@ -38,6 +42,7 @@
 - Modified the loot table of variants of Stars Block and Nether Star Block in Blockus mod.
 
 ### 2.0.0
+
 - Adapted to new version of Better Runtime Resource Packs.
 - Fixed the issue that some bedrock blocks occupy the empty loot table.
 - The permission level of `/extshape:check-conflict` has been adjusted to 4.
