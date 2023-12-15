@@ -1,5 +1,9 @@
 # Update log
 
+### 2.0.8
+
+- Again, fixed the issue that when some mods are installed crashes happen because of inventories.
+
 ### 2.0.7
 
 - Fixed the issue that when some mods are installed crashes happen because of inventories.
