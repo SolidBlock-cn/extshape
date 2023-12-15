@@ -6,19 +6,19 @@ plugins {
 
     // 用于模组发布
     id "com.modrinth.minotaur" version "2.+"
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id 'net.darkhax.curseforgegradle' version '1.1.+'
     id "com.github.breadmoirai.github-release" version "2.5.2"
 }
 
-archivesBaseName = project.archives_base_name + "-fabric"
+base {
+    archivesName = project.archives_base_name + "-fabric"
+}
 version = project.mod_version + '-mc' + project.minecraft_version
 group = project.maven_group
 
 allprojects {
     apply plugin: 'fabric-loom'
     apply plugin: 'maven-publish'
-    sourceCompatibility = JavaVersion.VERSION_16
-    targetCompatibility = JavaVersion.VERSION_16
 
     repositories {
         // Add repositories to retrieve artifacts from in here.
@@ -68,7 +68,7 @@ allprojects {
         inputs.property "version", project.mod_version
 
         filesMatching("fabric.mod.json") {
-            expand "version": project.mod_version
+            expand "version": /*project.mod_version*/ version
         }
     }
 
@@ -80,10 +80,13 @@ allprojects {
         it.options.encoding = "UTF-8"
 
         // Minecraft 1.17 (21w19a) upwards uses Java 16.
-    it.options.release = 16
+        it.options.release = 16
     }
 
     java {
+        sourceCompatibility = JavaVersion.VERSION_16
+        targetCompatibility = JavaVersion.VERSION_16
+
         // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
         // if it is present.
         // If you remove this line, sources will not be generated.
@@ -92,7 +95,7 @@ allprojects {
 
     jar {
         from("LICENSE") {
-            rename { "${it}_${project.archivesBaseName}" }
+            rename { "${it}_${project.base.archivesName}" }
         }
     }
 
@@ -155,11 +158,53 @@ project(':runtest') {
     }
     }
 
-    remapJar {
-        enabled = false
+
+/**
+ * 从 UpdateLog-en.md 中提取更新日志
+ */
+String getUpdateLog(String modVersion = project.mod_version) {
+    StringBuilder builder = new StringBuilder()
+    boolean start = false
+    file('UpdateLog-en.md').eachLine {
+        if (it.matches("^###\\s*" + modVersion + '$')) {
+            start = true
+        } else if (it.startsWith("###")) {
+            start = false
+        } else if (start) {
+            builder.append it
+            builder.append '\n'
+        }
+        return
     }
+    return builder.toString().trim()
 }
 
+// 模组发布部分
+
+println "当前版本（${project.mod_version}）更新记录："
+final String changelogContent = getUpdateLog(project.mod_version.replaceAll('-.+?\$', ""))
+println changelogContent
+
+tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    doFirst {
+        def getenv = System.getenv("CURSEFORGE_TOKEN")
+        println("CurseForge 令牌: $getenv")
+        if (getenv) apiToken = getenv
+    }
+    def mainFile = upload('514125', remapJar)
+    mainFile.changelog = changelogContent
+    mainFile.changelogType = 'markdown'
+    mainFile.releaseType = release_type
+
+    for (final String v in (project.supported_minecraft_versions.split(','))) {
+        mainFile.addGameVersion v
+    }
+
+    mainFile.addRelations 'requiredDependency', 'fabric-api', 'better-runtime-resource-pack'
+
+    // The sources JAR
+    def sourcesFile = mainFile.withAdditionalFile(sourcesJar)
+}
 
 modrinth {
     projectId = 'tb7kCxSW'
@@ -177,8 +222,10 @@ modrinth {
 
 githubRelease {
     def getenv = System.getenv("GITHUB_TOKEN")
-    println "GitHub 令牌: $getenv"
     if (getenv) token = getenv
+    tasks.githubRelease.doFirst {
+        println "GitHub 令牌: $getenv"
+    }
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
@@ -193,4 +240,15 @@ githubRelease {
 
 publish {
     dependsOn tasks.curseforge, tasks.modrinth, tasks.githubRelease
+}
+
+gradle.taskGraph.whenReady { TaskExecutionGraph graph ->
+    if ([rootProject.tasks.curseforge, rootProject.tasks.modrinth, rootProject.tasks.githubRelease, rootProject.tasks.publish].any { graph.hasTask(it) }) {
+        subprojects {
+            project.tasks.each { Task subTask ->
+                subTask.enabled = rootProject.tasks.any { it.dependsOn.contains(subTask) }
+            }
+            println "Disabling tasks for subproject $project"
+        }
+    }
 }
