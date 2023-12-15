@@ -191,7 +191,8 @@ public class CrossShapeDataGeneration {
       for (final Block uncutBaseBlock : uncutBaseBlocks) {
         final String path = ForgeRegistries.BLOCKS.getKey(uncutBaseBlock).getPath();
         final Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
-        if (!(output instanceof BlockResourceGenerator) || !((BlockResourceGenerator) output).shouldWriteStonecuttingRecipe()) continue;
+        if (!(output instanceof BlockResourceGenerator) || !((BlockResourceGenerator) output).shouldWriteStonecuttingRecipe())
+          continue;
         SingleItemRecipeJsonBuilder recipe = ((BlockResourceGenerator) output).getStonecuttingRecipe();
         if (recipe != null) {
           final Identifier secondaryId = BRRPUtils.getRecipeId(output).brrp_suffixed("_from_" + path + "_stonecutting");

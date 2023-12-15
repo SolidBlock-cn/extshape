@@ -2,10 +2,6 @@ package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.ComposterBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SlabBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.tag.TagKey;
@@ -414,8 +410,10 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       case 7 -> fenceSettings == null ? null : new FenceGateBuilder(baseBlock, fenceSettings);
       case 8 -> new WallBuilder(baseBlock);
       case 9 -> buttonSettings != null ? new ButtonBuilder(buttonSettings, baseBlock) : null;
-      case 10 -> pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock, blockSetType) : null;
-      default -> throw new IllegalArgumentException("The Shape object " + shape.asString() + " is not supported, which may be provided by other mod. You may extend BlocksBuilder class and define your own 'createBlockBuilderFor' with support for your Shape object.");
+      case 10 ->
+          pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock, blockSetType) : null;
+      default ->
+          throw new IllegalArgumentException("The Shape object " + shape.asString() + " is not supported, which may be provided by other mod. You may extend BlocksBuilder class and define your own 'createBlockBuilderFor' with support for your Shape object.");
     };
     if (builder != null) {
       builder.defaultNamespace = this.defaultNamespace;

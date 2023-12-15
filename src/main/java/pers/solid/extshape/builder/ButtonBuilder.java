@@ -5,8 +5,8 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
-import pers.solid.extshape.util.ButtonSettings;
 import pers.solid.extshape.mixin.AbstractBlockSettingsAccessor;
+import pers.solid.extshape.util.ButtonSettings;
 
 public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
 

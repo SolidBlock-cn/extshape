@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterators;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -32,7 +31,6 @@ import pers.solid.extshape.util.ButtonSettings;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.Iterator;
-
 import java.util.function.Function;
 
 import static net.minecraft.block.Blocks.*;
@@ -775,9 +773,7 @@ public final class ExtShapeBlocks {
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
           .addExtraTag(BlockTags.NEEDS_STONE_TOOL)
           .setCommonFenceSettings(Items.COPPER_INGOT)
-          .setButtonType(ButtonType.STONE)
-          .setRecipeGroup(blockShape -> "waxed_oxidized_cut_copper_")
-          .setPressurePlateActivationRule(ActivationRule.MOBS).build();
+          .setRecipeGroup(blockShape -> "waxed_oxidized_cut_copper_").build();
     }
 
     // 滴水石、苔藓。
@@ -854,7 +850,7 @@ public final class ExtShapeBlocks {
       FACTORY.createAllShapes(block)
           .addExtraTag(addWallToUnmineableTag)
           .setCommonFenceSettings(Items.SLIME_BALL)
-        .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
+          .setButtonSettings(ButtonSettings.PSUDO_WOODEN)
           .setPressurePlateActivationRule(ActivationRule.EVERYTHING).setPillar().build();
     }
 
