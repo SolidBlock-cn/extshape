@@ -2,29 +2,33 @@ package pers.solid.extshape.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureKey;
-import net.minecraft.data.server.recipe.*;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
@@ -32,15 +36,22 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
 
   public final Block baseBlock;
+  protected final int tickRate;
 
-  public ExtShapePressurePlateBlock(Block baseBlock, ActivationRule type, Settings settings) {
-    super(type, settings, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON);
+  public ExtShapePressurePlateBlock(Block baseBlock, ActivationRule activationRule, Settings settings, SoundEvent depressSound, SoundEvent pressSound, int tickRate) {
+    super(activationRule, settings, depressSound, pressSound);
     this.baseBlock = baseBlock;
+    this.tickRate = tickRate;
+  }
+
+  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+    this(baseBlock, activationSettings.activationRule(), settings, activationSettings.sounds().depressSound(), activationSettings.sounds().pressSound(), activationSettings.plateTime());
   }
 
   @Override
@@ -53,6 +64,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     return Text.translatable("block.extshape.?_pressure_plate", this.getNamePrefix());
   }
 
+  @Override
+  public PistonBehavior getPistonBehavior(BlockState state) {
+    return baseBlock.getHardness() == -1 || baseBlock == Blocks.OBSIDIAN || baseBlock == Blocks.CRYING_OBSIDIAN || baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : super.getPistonBehavior(state);
+  }
 
   @Environment(EnvType.CLIENT)
   @Override
@@ -72,7 +87,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
         .addTexture("texture", getTextureId(TextureKey.TEXTURE));
   }
 
-
   @Override
   @Environment(EnvType.CLIENT)
   public void writeBlockModel(RuntimeResourcePack pack) {
@@ -81,22 +95,30 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     ModelUtils.writeModelsWithVariants(pack, blockModelId, blockModel, Models.PRESSURE_PLATE_UP, Models.PRESSURE_PLATE_DOWN);
   }
 
-
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = Registries.ITEM.get(carpetId);
-      return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(carpet).criterion("has_carpet", RecipeProvider.conditionsFromItem(carpet));
+      // 一个羊毛压力板由 3 个地毯合成。
+      return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
+          .pattern("###")
+          .input('#', carpet)
+          .criterionFromItem(this)
+          .group(getRecipeGroup());
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(Blocks.MOSS_CARPET)
-          .criterion("has_carpet", RecipeProvider.conditionsFromItem(Blocks.MOSS_CARPET));
+      // 一个苔藓压力板由 3 个覆地苔藓合成。
+      return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
+          .pattern("###")
+          .input('#', Items.MOSS_CARPET)
+          .criterionFromItem(Items.MOSS_CARPET)
+          .group(getRecipeGroup());
     } else {
       return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
           .pattern("##")
           .input('#', baseBlock)
-          .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+          .criterionFromItem(baseBlock)
           .group(getRecipeGroup());
     }
   }
@@ -126,11 +148,24 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
 
+  @Override
+  public int getTickRate() {
+    return tickRate;
+  }
+
+  @Override
+  public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    super.onStateReplaced(state, world, pos, newState, moved);
+    if (getRedstoneOutput(state) > 0 && newState.getBlock() instanceof ExtShapePressurePlateBlock && getRedstoneOutput(newState) > 0) {
+      world.scheduleBlockTick(pos.toImmutable(), newState.getBlock(), getTickRate());
+    }
+  }
+
   public static class WithExtension extends ExtShapePressurePlateBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, ActivationRule type, Settings settings, BlockExtension extension) {
-      super(baseBlock, type, settings);
+    public WithExtension(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, BlockExtension extension) {
+      super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
 
@@ -152,6 +187,31 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
       super.onSteppedOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
+  }
+
+  public static class WithOxidation extends ExtShapePressurePlateBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+
+    public WithOxidation(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings, activationSettings);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
     }
   }
 }

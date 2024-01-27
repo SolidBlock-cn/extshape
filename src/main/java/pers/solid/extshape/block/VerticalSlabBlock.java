@@ -16,7 +16,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
 /**
- * 垂直台阶方块类。
+ * 竖直台阶。
  */
 public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterloggable {
   public static final DirectionProperty HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
@@ -78,5 +78,4 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
   public FluidState getFluidState(BlockState state) {
     return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
   }
-
 }

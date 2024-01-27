@@ -11,7 +11,7 @@ public class FenceBuilder extends AbstractBlockBuilder<FenceBlock> {
   public final Item secondIngredient;
 
   public FenceBuilder(Block baseBlock, Item secondIngredient) {
-    super(baseBlock, builder -> new ExtShapeFenceBlock(baseBlock, ((FenceBuilder) builder).secondIngredient, builder.blockSettings));
+    super(baseBlock, builder -> new ExtShapeFenceBlock(builder.baseBlock, ((FenceBuilder) builder).secondIngredient, builder.blockSettings));
     this.secondIngredient = secondIngredient;
     this.shape = BlockShape.FENCE;
     primaryTagToAddTo = BlockTags.FENCES;
