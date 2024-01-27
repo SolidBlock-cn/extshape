@@ -8,6 +8,7 @@
 - (For 1.20.4) Added blocks of various shapes for tuff variants. Meanwhile, considering tuff stairs, tuff slab and tuff walls are experimental features, they are not regarded as formal content.
 - Catching up to updates of Blockus mod, added various shapes for mossy planks.
 - Adjusted the crafting ingredient of fences and fence gates of some blocks.
+- Adjusted sounds of some fence gates, pressure plates and button blocks, as well as the trigger behavior.
 
 ### 2.0.9
 

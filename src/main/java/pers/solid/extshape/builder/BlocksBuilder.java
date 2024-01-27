@@ -20,6 +20,7 @@ import pers.solid.extshape.rrp.RecipeGroupRegistry;
 import pers.solid.extshape.tag.TagPreparations;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
+import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.*;
@@ -68,8 +69,8 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     return this;
   }
 
-  public BlocksBuilder setCommonFenceSettings(Item secondIngredient) {
-    return this.setFenceSettings(FenceSettings.common(secondIngredient));
+  public BlocksBuilder setStoneFenceSettings(Item secondIngredient) {
+    return this.setFenceSettings(new FenceSettings(secondIngredient, ExtShapeBlockTypes.STONE_WOOD_TYPE));
   }
 
   public BlocksBuilder setActivationSettings(ActivationSettings activationSettings) {

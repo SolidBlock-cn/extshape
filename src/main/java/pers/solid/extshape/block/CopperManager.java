@@ -21,6 +21,8 @@ import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
+import pers.solid.extshape.util.ExtShapeBlockTypes;
+import pers.solid.extshape.util.FenceSettings;
 
 import java.util.List;
 
@@ -70,7 +72,7 @@ public final class CopperManager {
     builder.markStoneCuttable()
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .addExtraTag(BlockTags.NEEDS_STONE_TOOL)
-        .setCommonFenceSettings(Items.COPPER_INGOT)
+        .setFenceSettings(new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE))
         .build();
     return builder;
   }
