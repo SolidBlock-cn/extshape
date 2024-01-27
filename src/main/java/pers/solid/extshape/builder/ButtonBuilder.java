@@ -6,18 +6,21 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
-import pers.solid.extshape.util.ButtonSettings;
+import pers.solid.extshape.util.ActivationSettings;
 
 public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
 
-  public ButtonBuilder(@NotNull ButtonSettings buttonSettings, Block baseBlock) {
+  public final ActivationSettings activationSettings;
+
+  public ButtonBuilder(Block baseBlock, @NotNull ActivationSettings activationSettings) {
     super(baseBlock, Util.make(AbstractBlock.Settings.copy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
-        .mapColor(MapColor.CLEAR), settings -> ((AbstractBlockSettingsAccessor) settings).setMaterial(Material.DECORATION)), builder -> new ExtShapeButtonBlock(baseBlock, buttonSettings, builder.blockSettings));
+        .mapColor(MapColor.CLEAR), settings -> ((AbstractBlockSettingsAccessor) settings).setMaterial(Material.DECORATION)), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, activationSettings));
     this.shape = BlockShape.BUTTON;
     final Material material = baseBlock.getDefaultState().getMaterial();
     primaryTagToAddTo = material == Material.WOOD || material == Material.NETHER_WOOD ? BlockTags.WOODEN_BUTTONS : BlockTags.BUTTONS;
+    this.activationSettings = activationSettings;
   }
 
   private static float computeStrength(float baseHardness) {

@@ -2,6 +2,7 @@ package pers.solid.extshape.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.block.WoodType;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
@@ -13,8 +14,8 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.generator.BRRPFenceGateBlock;
@@ -25,10 +26,13 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
 
   private final Item secondIngredient;
 
-  public ExtShapeFenceGateBlock(Block baseBlock, FenceSettings fenceSettings, Settings settings) {
-    super(baseBlock, settings, ObjectUtils.getIfNull(fenceSettings.woodType(), () -> WoodType.OAK));
-    // 未来可能需要设置更加复杂的 WoodType，包括考虑其声音，而不是简单地设置其橡木的 WoodType。
-    this.secondIngredient = fenceSettings.secondIngredient();
+  public ExtShapeFenceGateBlock(Block baseBlock, Settings settings, @NotNull WoodType woodType, Item secondIngredient) {
+    super(baseBlock, settings, woodType);
+    this.secondIngredient = secondIngredient;
+  }
+
+  public ExtShapeFenceGateBlock(Block baseBlock, Settings settings, FenceSettings fenceSettings) {
+    this(baseBlock, settings, fenceSettings.woodType(), fenceSettings.secondIngredient());
   }
 
   @Override
@@ -57,8 +61,8 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
   public static class WithExtension extends ExtShapeFenceGateBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, FenceSettings fenceSettings, Settings settings, BlockExtension extension) {
-      super(baseBlock, fenceSettings, settings);
+    public WithExtension(Block baseBlock, Settings settings, FenceSettings fenceSettings, BlockExtension extension) {
+      super(baseBlock, settings, fenceSettings);
       this.extension = extension;
     }
 
@@ -80,6 +84,31 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
       super.onSteppedOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
+  }
+
+  public static class WithOxidation extends ExtShapeFenceGateBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+
+    public WithOxidation(Block baseBlock, Settings settings, FenceSettings fenceSettings, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings, fenceSettings);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
     }
   }
 }

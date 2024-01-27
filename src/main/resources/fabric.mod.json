@@ -27,13 +27,15 @@
     ]
   },
   "mixins": [
-    "extshape.mixin.json"
+    "extshape.mixin.json",
+    "extshape-fabric.mixin.json"
   ],
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
     "minecraft": "1.19.4",
     "java": ">=17",
+    "mixinextras": "*",
     "brrp_v1": "*"
   },
   "suggests": {

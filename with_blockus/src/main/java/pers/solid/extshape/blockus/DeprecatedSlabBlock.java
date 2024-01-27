@@ -31,6 +31,7 @@ public class DeprecatedSlabBlock extends ExtShapeSlabBlock {
     super(baseBlock, settings);
     this.recommended = recommended;
   }
+
   @Override
   public MutableText getName() {
     return super.getName().formatted(Formatting.STRIKETHROUGH);

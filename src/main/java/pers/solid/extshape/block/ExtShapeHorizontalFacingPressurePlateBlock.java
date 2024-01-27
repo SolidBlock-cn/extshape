@@ -3,7 +3,6 @@ package pers.solid.extshape.block;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -17,12 +16,13 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, ActivationRule type, Settings settings, @NotNull BlockSetType blockSetType) {
-    super(baseBlock, type, settings, blockSetType);
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+    super(baseBlock, settings, activationSettings);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
   }
 

@@ -80,6 +80,18 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     }
   }
 
+  @Environment(EnvType.CLIENT)
+  @Override
+  default void writeAssets(RuntimeResourcePack pack) {
+    final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
+    final String path = blockModelId.getPath();
+    writeBlockStates(pack);
+    if (!(path.contains("waxed_") && path.contains("copper"))) {
+      writeBlockModel(pack);
+    }
+    writeItemModel(pack);
+  }
+
   default SingleItemRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount) {
     final Block baseBlock = getBaseBlock();
     if (baseBlock == null) {

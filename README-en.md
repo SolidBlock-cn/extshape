@@ -10,7 +10,7 @@ At present this mod supports Minecraft Java Edition 1.20.4-1.16.5. Please instal
 
 If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blockus](#Blockus), to add inter-mod support for Blockus.
 
-[Click here](UpdateLog-en.md) for previous update logs. Welcome to join Tencent QQ group **587928350** to experience the latest update of this mod.
+See [update log](UpdateLog-en.md) for previous update logs. Welcome to join Tencent QQ group **587928350** to experience the latest update of this mod.
 
 ## Features
 
@@ -20,8 +20,23 @@ This mod provides amounts of variants of many blocks. For example, wool has wool
 
 The hardness, mining tools and mining time of all stairs, slabs, fences and walls are equal to their base blocks, which is the same behaviour of vanilla, instead of related to their volume. For example, a plank slab and a plank block will take the same time to mine.
 
-In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of their basic blocks. All pressure plates and buttons added in this mod have the same hardness as 1/4 of their base blocks. This mod simply extends buttons: soft buttons (wool buttons, snow buttons) trigger 60 ticks (3 seconds); hard buttons (obsidian buttons, bedrock buttons) trigger 5 ticks (1/4 second). Like in vanilla Minecraft, all buttons and pressure plates have no collision box.
+In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of their basic blocks. All pressure plates and buttons added in this mod have the same hardness as 1/4 of their base blocks. This mod simply extends buttons: soft buttons (wool buttons, snow buttons) trigger 60 ticks (3 seconds); hard buttons (obsidian buttons, bedrock buttons) trigger 5 ticks (1/4 second). For the actual activation time, see the table below. Like in vanilla Minecraft, all buttons and pressure plates have no collision box.
 
+| Base blocks                                   | Button activation time | Pressure plate activation time |
+|-----------------------------------------------|------------------------|--------------------------------|
+| stone blocks                                  | 20                     | 20                             |
+| wooden or bamboo blocks                       | 30                     | 20                             |
+| soft blocks (dirt/moss etc.)                  | 60                     | 60                             |
+| hard blocks (obsidian/netherite/bedrock etc.) | 5                      | 5                              |
+| wool                                          | 50                     | 50                             |
+| ore                                           | 15                     | 10                             |
+| melon, pumpkin                                | 50                     | 40                             |
+| quartz                                        | 25                     | 25                             |
+| tuff, calcite                                 | 40                     | 30                             |
+| unoxidized copper                             | 10                     | 10                             |
+| exposed copper                                | 40                     | 40                             |
+| weathered copper                              | 70                     | 70                             |
+| oxidized copper                               | 100                    | 100                            |
 This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs.
 
 Blocks added by this mod inherit most features of their base blocks:
@@ -44,6 +59,7 @@ Blocks added by this mod inherit most features of their base blocks:
 - About the interaction between blocks and pistons: for blocks that cannot be pushed by piston, such as obsidian, bedrock, the buttons and pressure plates can also not be pushed by piston, while buttons and pressure plates for other blocks will be directly destroyed.
 - About note block: To be consistent with vanilla, the note block instrument of button blocks are always harp, while others are same as their base blocks.
 - Buttons will not be displayed as colors in maps.
+- **Copper** blocks, like vanilla copper blocks, can be oxidized, and be de-oxidized by using axes or being hit by lighting bolt. They can also be waxed and de-waxed. Oxidation of waxed copper does not change.
 
 ### Crafting and smelting
 
@@ -69,15 +85,17 @@ Stone-cutting recipe of some blocks are as follows:
 - 1×vertical stairs → 3×vertical quarter pieces
 - 1×vertical slab → 2×quarter pieces / 2×vertical quarter pieces
 
-Since 1.5.1, items in this mod are recursively stonecuttable. For example, an unpolished andesite can be cut into a polished andesite vertical slab.
+In stonecutters, one base blocks can be cut into various shapes for cut base blocks. For instance, a stone can be cut into stone bricks, and stone bricks can be cut into 2 vertical stone brick slabs, while one stone can also be cut directly into 2 vertical stone brick slabs. However, blocks of various shapes cannot be cut into their corresponding shapes of cut base blocks.
 
-Ingredients of fences and fence gates, aside from base blocks, resemble their vanilla recipes. For the crafting of stone fences and fence gates, flint is used alongside base blocks. Similarly, string is used for wool fences and fence gates, and sticks for sandstone and its variants.
+The second crafting ingredient for crafting fences and fences (apart from base blocks_ is dependent to its base block. See details in [block list](BlockList.md).
 
-To avoid recipe conflicts, some blocks are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be converted 1:1 from their corresponding carpets. Snow slabs can not be crafted directly from snow, either; instead, craft a snow (layer) with three snow blocks, and then craft the slab with the snow. You can test potential recipe conflicts via `/extshape:check-conflict` command.
+To avoid recipe conflicts, some blocks are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be crafted one from three wool carpets or moss carpets. Snow slabs can not be crafted directly from snow, either; instead, craft a snow (layer) with three snow blocks, and then craft the slab with the snow. You can test potential recipe conflicts via `/extshape:check-conflict` command.
 
 All recipes can be unlocked when obtaining any of the base block. To put explicitly, each recipe has a corresponding advancement, and as soon as the player obtains the base block or unlocks the recipe, the advancement is triggered and relative recipe is unlocked.
 
 You can configure to cancel avoiding recipes that conflict. For instance, if you disable "prevent wooden wall recipes", wooden walls can be crafted like other wall blocks, which conflict with the recipe of wooden trapdoors. It's advised to modify these settings on condition that you have installed mods that can solve recipe conflict. You can access the mod configuration screen via Mod Menu (of Fabric) or Forge, or typing command `/extshape:config` in game.
+
+All unwaxed copper blocks can be crafted with honeycomb into corresponding waxed blocks.
 
 ### Creative Inventory
 

@@ -9,6 +9,7 @@
     "AxeItemMixin",
     "BlockAccessor",
     "BlockFamiliesAccessor",
+    "ButtonBlockAccessor",
     "DisplayContextMixin",
     "InstrumentMixin",
     "ItemGroupEntriesImplMixin",
@@ -21,7 +22,6 @@
     "TranslatableTextContentMixin"
   ],
   "client": [
-    "CreativeInventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

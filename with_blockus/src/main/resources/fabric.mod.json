@@ -28,7 +28,7 @@
     "fabric": "*",
     "minecraft": "1.19.4",
     "brrp_v1": "*",
-    "extshape": ">=${version}",
+    "extshape": [">=2.1.0", "${version}"],
     "blockus": ">=2.6.7"
   },
   "custom": {
