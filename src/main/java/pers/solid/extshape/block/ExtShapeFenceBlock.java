@@ -2,6 +2,7 @@ package pers.solid.extshape.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.data.server.RecipeProvider;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -18,6 +19,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.generator.BRRPFenceBlock;
 import pers.solid.extshape.builder.BlockShape;
+
+import java.util.Random;
 
 public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
 
@@ -85,6 +88,31 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
       super.onSteppedOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
+  }
+
+  public static class WithOxidation extends ExtShapeFenceBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+
+    public WithOxidation(Block baseBlock, Item secondIngredient, Settings settings, OxidationLevel oxidationLevel) {
+      super(baseBlock, secondIngredient, settings);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
     }
   }
 }

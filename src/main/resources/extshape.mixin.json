@@ -6,10 +6,11 @@
   "mixins": [
     "AbstractBlockAccessor",
     "AbstractBlockStateAccessor",
+    "AbstractButtonBlockAccessor",
+    "AbstractButtonBlockMixin",
     "AxeItemMixin",
     "BlockAccessor",
     "BlockFamiliesAccessor",
-    "ButtonMixin",
     "InstrumentMixin",
     "ItemGroupAccessor",
     "MiningToolItemMixin",

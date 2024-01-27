@@ -27,8 +27,8 @@ public final class BlockusBlockBiMaps {
       for (BlockShape shape : BlockShape.values()) {
         if (shape.vanillaVariant == null) continue;
         Block variant = variants.get(shape.vanillaVariant);
-          if (variant != null && !BlockBiMaps.of(shape).containsKey(baseBlock)) {
-            // 避免 Blockus 创建的原版方块的一些形状与本模组中的发生冲突
+        if (variant != null && !BlockBiMaps.of(shape).containsKey(baseBlock)) {
+          // 避免 Blockus 创建的原版方块的一些形状与本模组中的发生冲突
           BlockBiMaps.setBlockOf(shape, baseBlock, variant);
           BlockBiMaps.BASE_BLOCKS.add(baseBlock);
         }

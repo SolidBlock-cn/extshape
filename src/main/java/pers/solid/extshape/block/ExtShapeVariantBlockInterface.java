@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.TranslatableText;
 import org.jetbrains.annotations.ApiStatus;
 import pers.solid.extshape.util.AttributiveBlockNameManager;
 
@@ -36,7 +36,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
 
   default MutableText getNamePrefix() {
     final Block baseBlock = this.getBaseBlock();
-    if (baseBlock == null) return new TranslatableText("block.extshape.prefix.unknown");
+    if (baseBlock == null) return new LiteralText("");
     return AttributiveBlockNameManager.getAttributiveBlockName(baseBlock.getName());
   }
 }

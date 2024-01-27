@@ -110,5 +110,4 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
   public BlockState rotate(BlockState state, BlockRotation rotation) {
     return PillarBlock.changeRotation(super.rotate(state, rotation), rotation);
   }
-
 }

@@ -42,7 +42,7 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 
 import java.util.Collection;
-import java.util.List;
+
 /**
  * @see ExtShapeRRP
  */
@@ -133,8 +133,6 @@ public final class ExtShapeBlockusRRP {
     generateBlockusBlockData(pack);
     generateBlockusCrossShapeData(pack);
     generateTags(pack);
-    generatePlankCookingRecipe(pack);
-    generateWoodCharringRecipes(pack, ImmutableList.of(BlockusBlocks.HERRINGBONE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BIRCH_PLANKS, BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS, BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS, BlockusBlocks.HERRINGBONE_ACACIA_PLANKS, BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS, BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS, BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS), BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
     generateStainedStoneBricksRecipe(pack);
     generateShingleDyeingRecipes(pack);
     generatePaperCookingRecipes(pack);
@@ -191,6 +189,9 @@ public final class ExtShapeBlockusRRP {
     }
   }
 
+  /**
+   * 为一系列木质方块的各个形状生成由这些方块烧炼成烧焦的木板的各个形状的配方。由于在 Blockus 模组中只支持对木板、木马赛克烧焦，故模组亦不再允许对木头和木马赛克的各个形状烧焦。
+   */
   private static void generateWoodCharringRecipes(RuntimeResourcePack pack, Collection<Block> charrablePlanks, Block charredBaseBlock) {
     for (BlockShape blockShape : BlockShape.values()) {
       final Block charredOutput = BlockBiMaps.getBlockOf(blockShape, charredBaseBlock);
@@ -205,23 +206,10 @@ public final class ExtShapeBlockusRRP {
     }
   }
 
-  private static void generatePlankCookingRecipe(RuntimeResourcePack pack) {
-    final List<Block> planksThatBurn = ImmutableList.of(Blocks.OAK_PLANKS, Blocks.SPRUCE_PLANKS, Blocks.BIRCH_PLANKS, Blocks.JUNGLE_PLANKS, Blocks.ACACIA_PLANKS, Blocks.DARK_OAK_PLANKS, BlockusBlocks.BAMBOO.planks, BlockusBlocks.WHITE_OAK.planks, BlockusBlocks.LEGACY_PLANKS);
-    for (BlockShape blockShape : BlockShape.values()) {
-      final Block charredOutput = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.CHARRED.planks);
-      if (charredOutput != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(charredOutput)) {
-        final ItemConvertible[] ingredients = planksThatBurn.stream().map(block -> BlockBiMaps.getBlockOf(blockShape, block)).filter(Predicates.notNull()).toArray(ItemConvertible[]::new);
-        final CookingRecipeJsonBuilder cookingRecipe = CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ingredients), charredOutput, 0.1F * blockShape.logicalCompleteness, ((int) (200 * blockShape.logicalCompleteness))).criterion("has_planks", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create().items(ingredients).build()));
-        cookingRecipe.offerTo(recipeJsonProvider -> {
-          pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
-          pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((CookingRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
-        }, BRRPUtils.getRecipeId(charredOutput).brrp_suffixed("_from_smelting"));
-      }
-    }
-  }
-
   private static void generateBlockusCrossShapeData(RuntimeResourcePack pack) {
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
+      // 由于糖方块是已弃用的方块，故忽略。
+      if (baseBlock == BlockusBlocks.SUGAR_BLOCK) continue;
       new BlockusCrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, pack).generateCrossShapeData();
     }
   }
@@ -245,8 +233,8 @@ public final class ExtShapeBlockusRRP {
   private static void generateBlockusBlockData(RuntimeResourcePack pack) {
     for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
       if (!(block instanceof BlockResourceGenerator generator)) continue;
-      generator.writeRecipes(pack);
       final Block baseBlock = generator.getBaseBlock();
+      if (baseBlock != BlockusBlocks.SUGAR_BLOCK) generator.writeRecipes(pack);
       final UnusualLootTables.LootTableFunction lootTableFunction = BlockusUnusualLootTables.INSTANCE.get(baseBlock);
       if (lootTableFunction != null) {
         pack.addLootTable(generator.getLootTableId(), lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block));

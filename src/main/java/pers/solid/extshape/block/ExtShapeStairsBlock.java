@@ -2,6 +2,7 @@ package pers.solid.extshape.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
@@ -16,6 +17,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.generator.BRRPStairsBlock;
 import pers.solid.extshape.builder.BlockShape;
+
+import java.util.Random;
 
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
 
@@ -35,8 +38,11 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
+    if (NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock)) {
+      return null;
+    }
     final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
-    return craftingRecipe == null || NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? null : craftingRecipe.group(getRecipeGroup());
+    return craftingRecipe == null ? null : craftingRecipe.group(getRecipeGroup());
   }
 
   @Override
@@ -70,6 +76,33 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
       super.onSteppedOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
+  }
+
+  /**
+   * @see net.minecraft.block.OxidizableStairsBlock
+   */
+  public static class WithOxidation extends ExtShapeStairsBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+
+    public WithOxidation(Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
     }
   }
 }

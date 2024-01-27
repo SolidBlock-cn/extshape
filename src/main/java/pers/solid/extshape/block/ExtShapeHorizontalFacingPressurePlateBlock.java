@@ -14,13 +14,15 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, ActivationRule type, Settings settings) {
-    super(baseBlock, type, settings);
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+    super(baseBlock, settings, activationSettings);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
   }
 

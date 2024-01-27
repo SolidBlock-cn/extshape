@@ -3,10 +3,7 @@ package pers.solid.extshape.block;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.AbstractButtonBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
@@ -20,7 +17,6 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
@@ -36,9 +32,12 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.mixin.AbstractButtonBlockAccessor;
+import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Collection;
+import java.util.Random;
 
 public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShapeVariantBlockInterface {
   /**
@@ -47,13 +46,16 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
    * @see pers.solid.extshape.config.ExtShapeConfig#avoidSomeButtonRecipes
    */
   public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK).addAll(BlockCollections.LOGS).addAll(BlockCollections.WOODS).addAll(BlockCollections.HYPHAES).addAll(BlockCollections.STEMS).addAll(BlockCollections.STRIPPED_LOGS).addAll(BlockCollections.STRIPPED_WOODS).addAll(BlockCollections.STRIPPED_HYPHAES).addAll(BlockCollections.STRIPPED_STEMS).build();
-  public final ButtonType type;
   public final Block baseBlock;
+  protected final SoundEvent clickOffSound, clickOnSound;
+  public final int pressTicks;
 
-  public ExtShapeButtonBlock(Block baseBlock, @NotNull ButtonType type, Settings settings) {
-    super(type == ButtonType.WOODEN, settings);
+  public ExtShapeButtonBlock(Block baseBlock, Settings blockSettings, @NotNull ActivationSettings activationSettings) {
+    super(activationSettings.buttonActivatedByProjectile(), blockSettings);
     this.baseBlock = baseBlock;
-    this.type = type;
+    this.clickOffSound = activationSettings.sounds().clickOffSound();
+    this.clickOnSound = activationSettings.sounds().clickOnSound();
+    this.pressTicks = activationSettings.buttonTime();
   }
 
   @Override
@@ -63,9 +65,7 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
 
   @Override
   protected SoundEvent getClickSound(boolean powered) {
-    if (this.type == ButtonType.WOODEN)
-      return powered ? SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON : SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF;
-    else return powered ? SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON : SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF;
+    return powered ? clickOnSound : clickOffSound;
   }
 
   @Override
@@ -128,18 +128,19 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
     return BlockShape.BUTTON;
   }
 
-  public enum ButtonType {
-    WOODEN,
-    STONE,
-    HARD,
-    SOFT
+  @Override
+  public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    super.onStateReplaced(state, world, pos, newState, moved);
+    if (state.get(POWERED) && newState.getBlock() instanceof ExtShapeButtonBlock && newState.get(POWERED)) {
+      world.createAndScheduleBlockTick(pos.toImmutable(), newState.getBlock(), ((AbstractButtonBlockAccessor) this).invokeGetPressTicks());
+    }
   }
 
   public static class WithExtension extends ExtShapeButtonBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, ButtonType buttonType, Settings settings, BlockExtension extension) {
-      super(baseBlock, buttonType, settings);
+    public WithExtension(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
+      super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
 
@@ -161,6 +162,31 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
       super.onSteppedOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
+  }
+
+  public static class WithOxidation extends ExtShapeButtonBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+
+    public WithOxidation(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings, activationSettings);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
     }
   }
 }

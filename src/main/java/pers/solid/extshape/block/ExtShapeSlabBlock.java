@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.server.RecipeProvider;
@@ -30,6 +31,8 @@ import pers.solid.brrp.v1.generator.BRRPSlabBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 
+import java.util.Random;
+
 public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantBlockInterface {
   public ExtShapeSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
@@ -54,8 +57,11 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
+    if (NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock)) {
+      return null;
+    }
     final CraftingRecipeJsonBuilder craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK && ExtShapeConfig.CURRENT_CONFIG.specialSnowSlabCrafting) ? ShapelessRecipeJsonBuilder.create(this).input(Ingredient.ofItems(Blocks.SNOW)).criterion("has_snow", RecipeProvider.conditionsFromItem(Blocks.SNOW)) : super.getCraftingRecipe();
-    return craftingRecipe != null && !NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? craftingRecipe.group(getRecipeGroup()) : null;
+    return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 
   @Override
@@ -95,6 +101,34 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
       super.onSteppedOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
+    }
+  }
+
+  /**
+   * @see net.minecraft.block.OxidizableSlabBlock
+   */
+  public static class WithOxidation extends ExtShapeSlabBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
     }
   }
 }

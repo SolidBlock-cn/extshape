@@ -80,6 +80,7 @@ public class VanillaTextures {
     TextureRegistry.registerSuffixed(Blocks.BASALT, TextureKey.END, "_top");
     TextureRegistry.registerSuffixed(Blocks.POLISHED_BASALT, TextureKey.ALL, "_side");
     TextureRegistry.registerSuffixed(Blocks.POLISHED_BASALT, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.BLACKSTONE, TextureKey.END, "_top");
     TextureRegistry.registerSuffixed(Blocks.DEEPSLATE, TextureKey.END, "_top");
   }
 }
