@@ -26,6 +26,11 @@ public final class ExtShapeBlockTypes {
       .soundGroup(BlockSoundGroup.GRAVEL)
       .pressurePlateActivationRule(BlockSetType.ActivationRule.EVERYTHING)
       .register(new Identifier(ExtShape.MOD_ID, "dirt"));
+  public static final BlockSetType WOOL = BlockSetTypeBuilder.copyOf(SOFT)
+      .soundGroup(BlockSoundGroup.WOOL)
+      .register(new Identifier(ExtShape.MOD_ID, "wool"));
+  public static final BlockSetType QUARTZ = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
+      .register(new Identifier(ExtShape.MOD_ID, "quartz"));
 
   private ExtShapeBlockTypes() {}
 }

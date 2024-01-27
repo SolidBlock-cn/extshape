@@ -1,6 +1,7 @@
 package pers.solid.extshape.block;
 
-import com.mojang.datafixers.util.Function3;
+import com.mojang.datafixers.util.Function4;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
@@ -24,6 +25,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -38,17 +40,19 @@ import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
 
-  protected static <B extends ExtShapePressurePlateBlock> MapCodec<B> createCodec(Function3<Block, Settings, BlockSetType, B> function) {
-    return RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.blockSetType)).apply(instance, function));
+  protected static <B extends ExtShapePressurePlateBlock> MapCodec<B> createCodec(Function4<Block, Settings, BlockSetType, Integer, B> function) {
+    return RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.blockSetType), tickRateField()).apply(instance, function));
   }
 
   public static final MapCodec<ExtShapePressurePlateBlock> CODEC = createCodec(ExtShapePressurePlateBlock::new);
 
   public final Block baseBlock;
+  protected final int tickRate;
 
-  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType) {
+  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {
     super(blockSetType, settings);
     this.baseBlock = baseBlock;
+    this.tickRate = tickRate;
   }
 
   @Override
@@ -80,7 +84,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
         .addTexture("texture", getTextureId(TextureKey.TEXTURE));
   }
 
-
   @Override
   @Environment(EnvType.CLIENT)
   public void writeBlockModel(RuntimeResourcePack pack) {
@@ -88,7 +91,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     final ModelJsonBuilder blockModel = getBlockModel();
     ModelUtils.writeModelsWithVariants(pack, blockModelId, blockModel, Models.PRESSURE_PLATE_UP, Models.PRESSURE_PLATE_DOWN);
   }
-
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
@@ -139,11 +141,24 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
   }
 
+  @Override
+  public int getTickRate() {
+    return tickRate;
+  }
+
+  @Override
+  public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    super.onStateReplaced(state, world, pos, newState, moved);
+    if (getRedstoneOutput(state) > 0 && newState.getBlock() instanceof ExtShapePressurePlateBlock && getRedstoneOutput(newState) > 0) {
+      world.scheduleBlockTick(pos.toImmutable(), newState.getBlock(), getTickRate());
+    }
+  }
+
   public static class WithExtension extends ExtShapePressurePlateBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, BlockExtension extension) {
-      super(baseBlock, settings, blockSetType);
+    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, BlockExtension extension, int tickRate) {
+      super(baseBlock, settings, blockSetType, tickRate);
       this.extension = extension;
     }
 
@@ -176,5 +191,42 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
       return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction);
     }
+  }
+
+  public static class WithOxidation extends ExtShapePressurePlateBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.blockSetType), tickRateField(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
+
+    public WithOxidation(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings, blockSetType, tickRate);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public MapCodec<PressurePlateBlock> getCodec() {
+      return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
+    }
+  }
+
+  @NotNull
+  private static <B extends ExtShapePressurePlateBlock> RecordCodecBuilder<B, Integer> tickRateField() {
+    return Codec.INT.fieldOf("tick_rate").forGetter(b -> b.tickRate);
   }
 }

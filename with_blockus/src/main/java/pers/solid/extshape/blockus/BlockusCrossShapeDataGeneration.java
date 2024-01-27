@@ -2,10 +2,11 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.ConcreteTypes;
-import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMultimap;
+import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
@@ -15,7 +16,7 @@ import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * @see pers.solid.extshape.rrp.VanillaStonecutting
@@ -35,12 +36,12 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   }
 
   @Override
-  protected @NotNull ImmutableCollection<Block> getUncutBaseBlocks() {
-    return INSTANCE.get(baseBlock);
+  protected @NotNull Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
+    return INSTANCE.get(baseBlock).stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList());
   }
 
   /**
-   * @see com.brand.blockus.data.providers.BlockusRecipeProvider#generate(Consumer)
+   * @see com.brand.blockus.data.providers.BlockusRecipeProvider#generate(RecipeExporter)
    */
   private static void registerBlockusStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
     for (ConcreteTypes concreteType : ConcreteTypes.values()) {

@@ -2,10 +2,7 @@ package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.WoodType;
+import net.minecraft.block.*;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -18,6 +15,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.ObjectUtils;
@@ -104,6 +102,38 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
       return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction);
+    }
+  }
+
+  public static class WithOxidation extends ExtShapeFenceGateBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BRRPFenceGateBlock::getBaseBlock), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceGateBlock::getSecondIngredient), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), createSettingsCodec(), CopperManager.weatheringStateField()).apply(instance, (block, item, woodType, settings1, oxidationLevel1) -> new WithOxidation(block, new FenceSettings(item, woodType), settings1, oxidationLevel1)));
+
+    public WithOxidation(Block baseBlock, FenceSettings fenceSettings, Settings settings, OxidationLevel oxidationLevel) {
+      super(baseBlock, fenceSettings, settings);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public MapCodec<FenceGateBlock> getCodec() {
+      return (MapCodec<FenceGateBlock>) (MapCodec<?>) CODEC;
     }
   }
 }

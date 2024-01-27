@@ -13,6 +13,7 @@ import pers.solid.brrp.v1.RRPEventHelper;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeTags;
@@ -96,6 +97,7 @@ public final class ExtShapeRRP {
     for (Block baseBlock : ExtShapeBlocks.getBaseBlocks()) {
       new CrossShapeDataGeneration(baseBlock, ExtShape.MOD_ID, pack).generateCrossShapeData();
     }
+    CopperManager.generateWaxRecipes(PACK);
 
     // 添加方块标签。
     ExtShapeTags.TAG_PREPARATIONS.write(PACK);

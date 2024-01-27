@@ -25,6 +25,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -37,8 +38,8 @@ import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mixin.ButtonBlockAccessor;
+import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
-import pers.solid.extshape.util.ButtonSettings;
 
 import java.util.Collection;
 
@@ -58,8 +59,8 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     this.baseBlock = baseBlock;
   }
 
-  public ExtShapeButtonBlock(Block baseBlock, ButtonSettings buttonSettings, AbstractBlock.Settings blockSettings) {
-    super(buttonSettings.blockSetType(), buttonSettings.time(), blockSettings);
+  public ExtShapeButtonBlock(Block baseBlock, ActivationSettings activationSettings, AbstractBlock.Settings blockSettings) {
+    super(activationSettings.blockSetType(), activationSettings.buttonTime(), blockSettings);
     this.baseBlock = baseBlock;
   }
 
@@ -128,6 +129,14 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     return BlockShape.BUTTON;
   }
 
+  @Override
+  public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    super.onStateReplaced(state, world, pos, newState, moved);
+    if (state.get(POWERED) && newState.getBlock() instanceof ExtShapeButtonBlock && newState.get(POWERED)) {
+      world.scheduleBlockTick(pos.toImmutable(), newState.getBlock(), ((ButtonBlockAccessor) this).getPressTicks());
+    }
+  }
+
   public static class WithExtension extends ExtShapeButtonBlock {
     private final BlockExtension extension;
 
@@ -164,6 +173,38 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
       return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction);
+    }
+  }
+
+  public static class WithOxidation extends ExtShapeButtonBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BlockResourceGenerator::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getBlockSetType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getPressTicks()), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
+
+    public WithOxidation(Block baseBlock, Settings settings, BlockSetType blockSetType, int i, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings, blockSetType, i);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public MapCodec<ButtonBlock> getCodec() {
+      return (MapCodec<ButtonBlock>) (MapCodec<?>) CODEC;
     }
   }
 }

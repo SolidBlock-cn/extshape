@@ -70,7 +70,7 @@ public final class RecipeConflict {
           }
           messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.unknown", recipeEntry.id().toString()).formatted(Formatting.RED));
         } else if (numberOfMatches > 1) {
-          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.detected", Texts.join(allMatches, craftingRecipe -> Text.literal(recipeEntry.id().toString()))).formatted(Formatting.RED));
+          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.detected", Texts.join(allMatches, craftingRecipe -> Text.literal(craftingRecipe.id().toString()))).formatted(Formatting.RED));
           ++numberOfConflicts;
 
         }

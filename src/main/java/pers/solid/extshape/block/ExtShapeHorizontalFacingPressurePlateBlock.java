@@ -20,8 +20,8 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
   public static final MapCodec<ExtShapeHorizontalFacingPressurePlateBlock> CODEC = createCodec(ExtShapeHorizontalFacingPressurePlateBlock::new);
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType) {
-    super(baseBlock, settings, blockSetType);
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {
+    super(baseBlock, settings, blockSetType, tickRate);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
   }
 

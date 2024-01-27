@@ -43,7 +43,7 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
 import pers.solid.extshape.builder.BlocksBuilderFactory;
 import pers.solid.extshape.tag.ExtShapeTags;
-import pers.solid.extshape.util.ButtonSettings;
+import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.List;
@@ -208,10 +208,10 @@ public final class ExtShapeBlockusBlocks {
     // because of issues related to tint index and render layers, water bricks do not have extended shapes
     buildStoneBlocksWithButton(create(BlockusBlocks.SNOW_BRICKS).addExtraTag(BlockusBlockTags.SNOW_BRICKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.ICE_BRICKS).addExtraTag(BlockusBlockTags.ICE_BRICKS));
-    buildStoneBlocksWithoutButton(create(BlockusBlocks.OBSIDIAN_BRICKS).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonSettings(ButtonSettings.HARD));
-    buildStoneBlocksWithoutButton(create(BlockusBlocks.SMALL_OBSIDIAN_BRICKS).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonSettings(ButtonSettings.HARD));
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonSettings(ButtonSettings.HARD));
-    buildStoneBlocksWithButton(create(BlockusBlocks.GLOWING_OBSIDIAN).addExtraTag(BlockusBlockTags.OBSIDIAN).setButtonSettings(ButtonSettings.HARD));
+    buildStoneBlocksWithoutButton(create(BlockusBlocks.OBSIDIAN_BRICKS).addExtraTag(BlockusBlockTags.OBSIDIAN).setActivationSettings(ActivationSettings.HARD));
+    buildStoneBlocksWithoutButton(create(BlockusBlocks.SMALL_OBSIDIAN_BRICKS).addExtraTag(BlockusBlockTags.OBSIDIAN).setActivationSettings(ActivationSettings.HARD));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.OBSIDIAN).setActivationSettings(ActivationSettings.HARD));
+    buildStoneBlocksWithButton(create(BlockusBlocks.GLOWING_OBSIDIAN).addExtraTag(BlockusBlockTags.OBSIDIAN).setActivationSettings(ActivationSettings.HARD));
 
     buildStoneBlocksWithButton(create(BlockusBlocks.POLISHED_NETHERRACK).addExtraTag(BlockusBlockTags.NETHERRACK_BLOCKS));
     buildStoneBlocksWithoutButton(create(BlockusBlocks.NETHERRACK_BRICKS).addExtraTag(BlockusBlockTags.NETHERRACK_BLOCKS));
@@ -296,15 +296,15 @@ public final class ExtShapeBlockusBlocks {
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
     FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
     FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).addExtraTag(ofBlockAndItem(ExtShapeTags.LOG_BLOCKS)).setPillar().addPostBuildConsumer(logFlammable).build();
-    FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK))
+    FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar().addPostBuildConsumer(logFlammable).build();
-    FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).setPillar().addPostBuildConsumer(logFlammable).build();
+    FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_LOG_TAG).setActivationSettings(ActivationSettings.wood(BlockSetType.OAK)).setPillar().addPostBuildConsumer(logFlammable).build();
 
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20);
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFuel = (blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape.logicalCompleteness * 300));
-    create(BlockusBlocks.WHITE_OAK).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
-    create(BlockusBlocks.RAW_BAMBOO).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setButtonSettings(ButtonSettings.BAMBOO).setCommonFenceSettings(Items.BAMBOO).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
-    create(BlockusBlocks.CHARRED).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setButtonSettings(ButtonSettings.wood(BlockSetType.OAK)).build();
+    create(BlockusBlocks.WHITE_OAK).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setActivationSettings(ActivationSettings.wood(BlockSetType.OAK)).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
+    create(BlockusBlocks.RAW_BAMBOO).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).setActivationSettings(ActivationSettings.BAMBOO).setCommonFenceSettings(Items.BAMBOO).addPostBuildConsumer(plankFlammable).addPostBuildConsumer(plankFuel).build();
+    create(BlockusBlocks.CHARRED).setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG).addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).setActivationSettings(ActivationSettings.wood(BlockSetType.OAK)).build();
 
     for (var bssTypes : BlockusBlockCollections.WOODEN_MOSAICS) {
       final boolean isNonFlammable = BlockusBlocks.WARPED_MOSAIC == bssTypes || BlockusBlocks.CRIMSON_MOSAIC == bssTypes || BlockusBlocks.CHARRED_MOSAIC == bssTypes;
@@ -313,6 +313,28 @@ public final class ExtShapeBlockusBlocks {
         builder.addExtraTag(ItemTags.NON_FLAMMABLE_WOOD).build();
       } else {
         builder.addPostBuildConsumer(plankFlammable).build();
+      }
+    }
+    for (var bssTypes : BlockusBlockCollections.MOSSY_PLANKS) {
+      final boolean isNonFlammable = BlockusBlocks.MOSSY_WARPED_PLANKS == bssTypes || BlockusBlocks.MOSSY_CRIMSON_PLANKS == bssTypes || BlockusBlocks.MOSSY_CHARRED_PLANKS == bssTypes;
+      if (isNonFlammable) {
+        FACTORY.createConstructionOnly(bssTypes.block)
+            .without(BlockShape.STAIRS, BlockShape.SLAB)
+            .with(BlockShape.WALL)
+            .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG)
+            .addExtraTag(ItemTags.NON_FLAMMABLE_WOOD)
+            .addExtraTag(BlockusBlockTags.ALL_MOSSY_PLANKS)
+            .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.asString())
+            .build();
+      } else {
+        FACTORY.createConstructionOnly(bssTypes.block)
+            .without(BlockShape.STAIRS, BlockShape.SLAB)
+            .with(BlockShape.WALL)
+            .setPrimaryTagForShape(ExtShapeTags.SHAPE_TO_WOODEN_TAG)
+            .addPostBuildConsumer(plankFlammable)
+            .addExtraTag(BlockusBlockTags.ALL_MOSSY_PLANKS)
+            .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.asString())
+            .build();
       }
     }
     for (var block : BlockusBlockCollections.HERRINGBONE_PLANKS) {

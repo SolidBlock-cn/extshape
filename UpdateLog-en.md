@@ -1,5 +1,14 @@
 # Update log
 
+### 2.1.0
+
+- Added blocks of various shapes for unwaxed copper blocks (waxed blocks already exist in previous versions). Now these blocks can be normally waxed and de-waxed. Unnwaxed block can be oxidized or restored.
+- Fixed the issue that activated pressure plates or buttons cannot release normally after changing blocks (such as wood pressure plates or buttons being stripped).
+- Adjusted the activation time for some pressure plate blocks, instead of all 20 ticks.
+- (For 1.20.4) Added blocks of various shapes for tuff variants. Meanwhile, considering tuff stairs, tuff slab and tuff walls are experimental features, they are not regarded as formal content.
+- Catching up to updates of Blockus mod, added various shapes for mossy planks.
+- Adjusted the crafting ingredient of fences and fence gates of some blocks.
+
 ### 2.0.9
 
 - Fixed the issue that plank blocks are not flammable.
