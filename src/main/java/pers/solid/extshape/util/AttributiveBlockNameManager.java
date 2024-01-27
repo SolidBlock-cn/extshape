@@ -15,7 +15,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AttributiveBlockNameManager {
+/**
+ * <p>此类包含处理方块名称使之作为修饰性的名称的实用方法，这个修饰性的名称需要用的方块的命名。例如，“铁块”对应的台阶应该是“铁台阶”而非“铁块台阶”，“stone bricks”对应的栅栏是“stone brick fences”而非“stone bricks fences”，因此需要使用到此类中的方法来对方块名称进行处理。
+ * <p>目前，在处理名称的过程中，会对所有的英文规则进行替换，此外，中文、文言文以及日语也有专门的替换规则。
+ */
+public final class AttributiveBlockNameManager {
   public static final Pattern END_WITH_BLOCK = Pattern.compile("\\b Block$");
   public static final Pattern END_WITH_BRICKS = Pattern.compile("\\b Bricks$");
   public static final Pattern END_WITH_TILES = Pattern.compile("\\b Tiles$");
@@ -54,6 +58,9 @@ public class AttributiveBlockNameManager {
       .put(Pattern.compile("板材$"), StringUtils.EMPTY)
       .build();
   public static final String ATTRIBUTIVE_KEY = "extshape.special.attributive";
+
+  private AttributiveBlockNameManager() {
+  }
 
   @Contract("_, _, !null -> !null")
   public static @Nullable String replace(@NotNull String from, @NotNull Map<? extends Pattern, ? extends String> replacement, @Nullable String defaultValue) {

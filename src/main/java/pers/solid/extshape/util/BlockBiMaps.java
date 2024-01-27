@@ -57,7 +57,8 @@ public final class BlockBiMaps {
           }
         }
         if (variant != null) {
-          of(shape).put(baseBlock, variant);
+          // 考虑到凝灰岩基础方块没有功能标签，但是凝灰岩变种方块有功能标签，故在此进行修改，以使用本模组中的凝灰岩楼梯和凝灰岩台阶
+          setBlockOf(shape, baseBlock, variant);
           BASE_BLOCKS.add(baseBlock);
         }
       }
@@ -82,10 +83,17 @@ public final class BlockBiMaps {
    * @return 变种方块。
    */
   @Nullable
-  public static Block getBlockOf(@NotNull BlockShape shape, Block baseBlock) {
+  public static Block getBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock) {
     return of(shape).get(baseBlock);
   }
 
+  /**
+   * 设置指定基础方块的指定形状的方块。如果遇到重复，则会产生警告。
+   *
+   * @param shape     形状。
+   * @param baseBlock 基础方块。
+   * @param block     需要被设置的方块，该方块不是基础方块。
+   */
   public static void setBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock, @NotNull Block block) {
     final BiMap<Block, Block> biMap = of(shape);
     if (biMap.containsKey(baseBlock)) {

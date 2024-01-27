@@ -13,13 +13,12 @@ import org.jetbrains.annotations.Contract;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.tag.IdentifiedTagBuilder;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * <p>此类用于记录一个模组需要的方块和物品标签的内容，从而在后续进行数据生成。你可以通过此类的各种 {@code put} 方法来添加，也可以在构建方块对象时，通过 {@link pers.solid.extshape.builder.AbstractBlockBuilder#addExtraTag(TagKey)} 等方式添加。
- * <p>这些标签在添加之后，并不会直接被游戏识别。因此，此类只是在记录，你可以通过 {@link #write(RuntimeResourcePack)} 方法将其写入到运行时资源包中。在写入完成后，如果不再需要使用此对象的内容，可以调用 {@link #clear()} 方法来释放内存。
+ * <p>这些标签在添加之后，并不会直接被游戏识别。因此，此类只是在记录，你可以通过 {@link #write(RuntimeResourcePack)} 方法将其写入到运行时资源包中。
  */
 public class TagPreparations {
   private final Multimap<TagKey<Block>, Object> blockTags = LinkedHashMultimap.create();
@@ -51,48 +50,6 @@ public class TagPreparations {
     throw new IllegalArgumentException("Only block or item tags are accepted");
   }
 
-  @SuppressWarnings("unchecked")
-  @Contract(mutates = "this")
-  @CanIgnoreReturnValue
-  public boolean putAll(TagKey<?> tagKey, Iterable<?> objects) {
-    if (tagKey.registry() == RegistryKeys.BLOCK) {
-      return blockTags.putAll((TagKey<Block>) tagKey, objects);
-    } else if (tagKey.registry() == RegistryKeys.ITEM) {
-      return itemTags.putAll((TagKey<Item>) tagKey, objects);
-    }
-    throw new IllegalArgumentException("Only blocks and items are accepted.");
-  }
-
-  @Contract(mutates = "this")
-  @CanIgnoreReturnValue
-  public boolean putAll(TagKey<Block> tagKey, Block... blocks) {
-    return blockTags.put(tagKey, Arrays.asList(blocks));
-  }
-
-  @Contract(mutates = "this")
-  @CanIgnoreReturnValue
-  public boolean putAll(TagKey<Item> tagKey, Item... items) {
-    return itemTags.put(tagKey, Arrays.asList(items));
-  }
-
-  @SuppressWarnings("unchecked")
-  @Contract(mutates = "this")
-  @CanIgnoreReturnValue
-  public boolean putAllTags(TagKey<?> tagKey, Iterable<TagKey<?>> tagKeys) {
-    if (tagKey.registry() == RegistryKeys.BLOCK) {
-      return blockTags.putAll((TagKey<Block>) tagKey, tagKeys);
-    } else if (tagKey.registry() == RegistryKeys.ITEM) {
-      return itemTags.putAll((TagKey<Item>) tagKey, tagKeys);
-    }
-    throw new IllegalArgumentException("Only block or item tags are accepted.");
-  }
-
-  @Contract(mutates = "this")
-  @CanIgnoreReturnValue
-  public boolean putAllTags(TagKey<?> tagKey, TagKey<?>... tagKeys) {
-    return putAll(tagKey, Arrays.asList(tagKeys));
-  }
-
   @Contract(mutates = "this")
   public void setBlockTagWithItem(TagKey<Block> blockTagKey, TagKey<Item> itemTagKey) {
     blockTagsToItemTags.put(blockTagKey, itemTagKey);
@@ -106,11 +63,6 @@ public class TagPreparations {
   @Contract(mutates = "this")
   public void forceSetBlockTagWithItem(TagKey<Block> blockTagKey) {
     blockTagsToItemTags.put(blockTagKey, TagKey.of(RegistryKeys.ITEM, blockTagKey.id()));
-  }
-
-  @Contract(mutates = "this")
-  public void setBlockTagWithoutItem(TagKey<Block> tagKey) {
-    blockTagsToItemTags.remove(tagKey);
   }
 
   /**
@@ -159,13 +111,4 @@ public class TagPreparations {
     });
   }
 
-  /**
-   * 清除本对象中记录的所有内容。
-   */
-  @Contract(mutates = "this")
-  public void clear() {
-    blockTags.clear();
-    itemTags.clear();
-    blockTagsToItemTags.clear();
-  }
 }

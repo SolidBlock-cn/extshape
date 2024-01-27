@@ -27,6 +27,21 @@ public final class BlockusBlockCollections {
       BlockusBlocks.CRIMSON_MOSAIC,
       BlockusBlocks.CHARRED_MOSAIC
   );
+  public static final ImmutableList<BSSTypes> MOSSY_PLANKS = ImmutableList.of(
+      BlockusBlocks.MOSSY_OAK_PLANKS,
+      BlockusBlocks.MOSSY_SPRUCE_PLANKS,
+      BlockusBlocks.MOSSY_BIRCH_PLANKS,
+      BlockusBlocks.MOSSY_JUNGLE_PLANKS,
+      BlockusBlocks.MOSSY_ACACIA_PLANKS,
+      BlockusBlocks.MOSSY_DARK_OAK_PLANKS,
+      BlockusBlocks.MOSSY_CHERRY_PLANKS,
+      BlockusBlocks.MOSSY_MANGROVE_PLANKS,
+      BlockusBlocks.MOSSY_BAMBOO_PLANKS,
+      BlockusBlocks.MOSSY_RAW_BAMBOO_PLANKS,
+      BlockusBlocks.MOSSY_WHITE_OAK_PLANKS,
+      BlockusBlocks.MOSSY_WARPED_PLANKS,
+      BlockusBlocks.MOSSY_CRIMSON_PLANKS,
+      BlockusBlocks.MOSSY_CHARRED_PLANKS);
   public static final ImmutableList<Block> HERRINGBONE_PLANKS = ImmutableList.of(
       BlockusBlocks.HERRINGBONE_OAK_PLANKS,
       BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS,

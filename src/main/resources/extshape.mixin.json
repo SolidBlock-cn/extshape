@@ -9,6 +9,7 @@
     "AxeItemMixin",
     "BlockAccessor",
     "BlockFamiliesAccessor",
+    "ButtonBlockAccessor",
     "DisplayContextMixin",
     "ItemGroupEntriesImplMixin",
     "ItemGroupsMixin",

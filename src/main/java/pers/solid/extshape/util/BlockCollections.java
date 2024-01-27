@@ -7,6 +7,9 @@ import org.jetbrains.annotations.Unmodifiable;
 
 import static net.minecraft.block.Blocks.*;
 
+/**
+ * 此类收到了一些常用的方块集合。
+ */
 public final class BlockCollections {
   public static final ImmutableList<Block> LOGS = ImmutableList.of(
       OAK_LOG,
@@ -78,18 +81,6 @@ public final class BlockCollections {
       BAMBOO_MOSAIC,
       CRIMSON_PLANKS,
       WARPED_PLANKS
-  );
-  public static final @Unmodifiable ImmutableSet<Block> OVERWORLD_PLANKS = ImmutableSet.of(
-      OAK_PLANKS,
-      SPRUCE_PLANKS,
-      BIRCH_PLANKS,
-      JUNGLE_PLANKS,
-      ACACIA_PLANKS,
-      CHERRY_PLANKS,
-      DARK_OAK_PLANKS,
-      MANGROVE_PLANKS,
-      BAMBOO_PLANKS,
-      BAMBOO_MOSAIC
   );
   public static final @Unmodifiable ImmutableList<Block> STONE_VARIANTS = ImmutableList.of(
       GRANITE,

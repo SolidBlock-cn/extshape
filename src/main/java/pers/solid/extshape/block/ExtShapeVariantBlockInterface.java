@@ -36,7 +36,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
 
   default MutableText getNamePrefix() {
     final Block baseBlock = this.getBaseBlock();
-    if (baseBlock == null) return Text.translatable("block.extshape.prefix.unknown");
+    if (baseBlock == null) return Text.empty();
     return AttributiveBlockNameManager.getAttributiveBlockName(baseBlock.getName());
   }
 }

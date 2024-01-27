@@ -4,8 +4,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -19,8 +17,9 @@ import pers.solid.extshape.block.*;
 import pers.solid.extshape.mixin.AbstractBlockStateAccessor;
 import pers.solid.extshape.rrp.RecipeGroupRegistry;
 import pers.solid.extshape.tag.TagPreparations;
+import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
-import pers.solid.extshape.util.ButtonSettings;
+import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.*;
@@ -65,31 +64,17 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     return this;
   }
 
-  public BlocksBuilder setCommonFenceSettings(Item secondIngredient) {
-    return this.setFenceSettings(FenceSettings.common(secondIngredient));
+  public BlocksBuilder setStoneFenceSettings(Item secondIngredient) {
+    return this.setFenceSettings(new FenceSettings(secondIngredient, ExtShapeBlockTypes.STONE_WOOD_TYPE));
   }
 
-  public BlocksBuilder setButtonSettings(ButtonSettings buttonSettings) {
-    this.buttonSettings = buttonSettings;
-    if (buttonSettings != null && buttonSettings.blockSetType() != null) {
-      this.blockSetType = buttonSettings.blockSetType();
-    }
-    return this;
-  }
-
-  public BlocksBuilder setPressurePlateActivationRule(PressurePlateBlock.ActivationRule pressurePlateActivationRule) {
-    this.pressurePlateActivationRule = pressurePlateActivationRule;
-    return this;
-  }
-
-  public BlocksBuilder setBlockSetType(BlockSetType blockSetType) {
-    this.blockSetType = blockSetType;
+  public BlocksBuilder setActivationSettings(ActivationSettings activationSettings) {
+    this.activationSettings = activationSettings;
     return this;
   }
 
   protected @Nullable FenceSettings fenceSettings;
-  protected @Nullable ButtonSettings buttonSettings;
-  protected @Nullable PressurePlateBlock.ActivationRule pressurePlateActivationRule;
+  protected @Nullable ActivationSettings activationSettings;
   /**
    * 在执行 {@link #build()} 之前会为每个值执行。
    */
@@ -98,15 +83,12 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 在执行 {@link #build()} 之后会为每个值执行。
    */
   protected @Nullable BiConsumer<BlockShape, AbstractBlockBuilder<?>> postBuildConsumer;
-  protected BlockSetType blockSetType;
 
   public BlocksBuilder(@NotNull Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
     this.baseBlock = baseBlock;
     this.shapesToBuild = shapesToBuild;
     this.fenceSettings = FenceSettings.DEFAULT;
-    this.buttonSettings = ButtonSettings.STONE;
-    this.blockSetType = BlockSetType.STONE;
-    this.pressurePlateActivationRule = PressurePlateBlock.ActivationRule.MOBS;
+    this.activationSettings = ActivationSettings.STONE;
   }
 
   /**
@@ -138,7 +120,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       if (blockShape == BlockShape.SLAB) {
         ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new CircularPavingSlabBlock(builder.baseBlock, builder.blockSettings);
       } else if (blockShape == BlockShape.PRESSURE_PLATE) {
-        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, pressurePlateActivationRule, builder.blockSettings, blockSetType);
+        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, builder.blockSettings, Objects.requireNonNull(activationSettings, "activationSettings"));
       }
     });
   }
@@ -261,23 +243,20 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder withButton(@NotNull ButtonSettings type) {
+  public BlocksBuilder withButton(@NotNull ActivationSettings type) {
     with(BlockShape.BUTTON);
-    this.buttonSettings = type;
+    this.activationSettings = type;
     return this;
   }
 
   /**
    * 设置需要构建压力板，并指定压力板类型。
-   *
-   * @param type 压力板类型。
    */
   @CanIgnoreReturnValue
-  @Contract(value = "_, _ -> this", mutates = "this")
-  public BlocksBuilder withPressurePlate(@NotNull PressurePlateBlock.ActivationRule type, @NotNull BlockSetType blockSetType) {
+  @Contract(value = "_ -> this", mutates = "this")
+  public BlocksBuilder withPressurePlate(@NotNull ActivationSettings activationSettings) {
     with(BlockShape.PRESSURE_PLATE);
-    this.pressurePlateActivationRule = type;
-    this.blockSetType = blockSetType;
+    this.activationSettings = activationSettings;
     return this;
   }
 
@@ -429,20 +408,18 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       case 3 -> new VerticalStairsBuilder(baseBlock);
       case 4 -> new QuarterPieceBuilder(baseBlock);
       case 5 -> new VerticalQuarterPieceBuilder(baseBlock);
-      case 6 -> fenceSettings == null ? null : new FenceBuilder(baseBlock, fenceSettings.secondIngredient());
-      case 7 -> fenceSettings == null ? null : new FenceGateBuilder(baseBlock, fenceSettings);
+      case 6 -> new FenceBuilder(baseBlock, Objects.requireNonNull(fenceSettings, "fenceSettings").secondIngredient());
+      case 7 -> new FenceGateBuilder(baseBlock, fenceSettings);
       case 8 -> new WallBuilder(baseBlock);
-      case 9 -> buttonSettings != null ? new ButtonBuilder(buttonSettings, baseBlock) : null;
-      case 10 -> pressurePlateActivationRule != null ? new PressurePlateBuilder(pressurePlateActivationRule, baseBlock, blockSetType) : null;
+      case 9 -> new ButtonBuilder(baseBlock, Objects.requireNonNull(activationSettings, "activationSettings"));
+      case 10 -> new PressurePlateBuilder(baseBlock, Objects.requireNonNull(activationSettings, "activationSettings"));
       default -> throw new IllegalArgumentException("The Shape object " + shape.asString() + " is not supported, which may be provided by other mod. You may extend BlocksBuilder class and define your own 'createBlockBuilderFor' with support for your Shape object.");
     };
-    if (builder != null) {
-      builder.defaultNamespace = this.defaultNamespace;
-      builder.instanceCollection = this.instanceCollection;
-      builder.tagPreparations = this.tagPreparations;
-      if (primaryTagForShape != null) {
-        builder.primaryTagToAddTo = primaryTagForShape.get(shape);
-      }
+    builder.defaultNamespace = this.defaultNamespace;
+    builder.instanceCollection = this.instanceCollection;
+    builder.tagPreparations = this.tagPreparations;
+    if (primaryTagForShape != null) {
+      builder.primaryTagToAddTo = primaryTagForShape.get(shape);
     }
     return builder;
   }
