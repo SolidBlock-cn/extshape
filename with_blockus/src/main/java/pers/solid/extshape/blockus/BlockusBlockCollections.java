@@ -12,9 +12,6 @@ import net.minecraft.block.Block;
  * @see pers.solid.extshape.util.BlockCollections
  */
 public final class BlockusBlockCollections {
-  private BlockusBlockCollections() {
-  }
-
   public static final ImmutableList<Block> HERRINGBONE_PLANKS = ImmutableList.of(
       BlockusBlocks.HERRINGBONE_OAK_PLANKS,
       BlockusBlocks.HERRINGBONE_SPRUCE_PLANKS,
@@ -152,4 +149,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.RED_GLAZED_TERRACOTTA_PILLAR,
       BlockusBlocks.BLACK_GLAZED_TERRACOTTA_PILLAR
   );
+
+  private BlockusBlockCollections() {
+  }
 }

@@ -8,17 +8,18 @@ import net.minecraft.tag.BlockTags;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
+import pers.solid.extshape.util.ActivationSettings;
 
 public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBlock> {
 
-  protected final PressurePlateBlock.ActivationRule type;
+  public final ActivationSettings activationSettings;
 
-  public PressurePlateBuilder(@NotNull PressurePlateBlock.ActivationRule type, Block baseBlock) {
+  public PressurePlateBuilder(Block baseBlock, @NotNull ActivationSettings activationSettings) {
     super(baseBlock, AbstractBlock.Settings.copy(baseBlock)
         .noCollision()
-        .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance())), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, ((PressurePlateBuilder) builder).type, builder.blockSettings));
+        .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance())), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings));
+    this.activationSettings = activationSettings;
     this.shape = BlockShape.PRESSURE_PLATE;
-    this.type = type;
     final Material material = baseBlock.getDefaultState().getMaterial();
     primaryTagToAddTo = material == Material.STONE ? BlockTags.STONE_PRESSURE_PLATES : material == Material.WOOD || material == Material.NETHER_WOOD ? BlockTags.WOODEN_PRESSURE_PLATES : BlockTags.PRESSURE_PLATES;
   }
@@ -34,6 +35,6 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
 
   @Override
   public AbstractBlockBuilder<PressurePlateBlock> withExtension(BlockExtension blockExtension) {
-    return setInstanceSupplier(builder -> new ExtShapePressurePlateBlock.WithExtension(builder.baseBlock, ((PressurePlateBuilder) builder).type, builder.blockSettings, blockExtension));
+    return setInstanceSupplier(builder -> new ExtShapePressurePlateBlock.WithExtension(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings, blockExtension));
   }
 }

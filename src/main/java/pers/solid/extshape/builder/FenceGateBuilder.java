@@ -2,20 +2,20 @@ package pers.solid.extshape.builder;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.FenceGateBlock;
-import net.minecraft.item.Item;
 import net.minecraft.tag.BlockTags;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeFenceGateBlock;
+import pers.solid.extshape.util.FenceSettings;
 
 public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
 
-  public final Item secondIngredient;
+  public final FenceSettings fenceSettings;
 
-  public FenceGateBuilder(Block baseBlock, Item secondIngredient) {
-    super(baseBlock, builder -> new ExtShapeFenceGateBlock(baseBlock, ((FenceGateBuilder) builder).secondIngredient, builder.blockSettings));
+  public FenceGateBuilder(Block baseBlock, FenceSettings fenceSettings) {
+    super(baseBlock, builder -> new ExtShapeFenceGateBlock(builder.baseBlock, builder.blockSettings, fenceSettings));
     this.shape = BlockShape.FENCE_GATE;
-    this.secondIngredient = secondIngredient;
-    this.primaryTagToAddTo = BlockTags.FENCE_GATES;
+    this.fenceSettings = fenceSettings;
+    primaryTagToAddTo = BlockTags.FENCE_GATES;
   }
 
   @Override
@@ -25,6 +25,6 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
 
   @Override
   public AbstractBlockBuilder<FenceGateBlock> withExtension(BlockExtension blockExtension) {
-    return setInstanceSupplier(builder -> new ExtShapeFenceGateBlock.WithExtension(baseBlock, secondIngredient, builder.blockSettings, blockExtension));
+    return setInstanceSupplier(builder -> new ExtShapeFenceGateBlock.WithExtension(baseBlock, builder.blockSettings, fenceSettings, blockExtension));
   }
 }
