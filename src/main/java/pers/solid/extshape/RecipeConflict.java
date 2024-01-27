@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * 本类用来检测合成表冲突的。因为扩展方块形状模组的合成表总是会存在冲突，因此加入此类来进行检测。
+ * 包含检测合成表冲突的一些实用方法。因为扩展方块形状模组的合成表总是会存在冲突，用于检测合成表冲突的方法均置于此类。
  */
 @ApiStatus.AvailableSince("1.5.2")
 public final class RecipeConflict {
@@ -84,6 +84,9 @@ public final class RecipeConflict {
     return numberOfConflicts;
   }
 
+  /**
+   * 注册用于检测合成表冲突的命令 {@code /extshape:check-conflict}。此命令只有由服主执行，执行时可能会花费一段时间。
+   */
   public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
     dispatcher.register(CommandManager.literal("extshape:check-conflict")
         .requires(source -> source.hasPermissionLevel(4))

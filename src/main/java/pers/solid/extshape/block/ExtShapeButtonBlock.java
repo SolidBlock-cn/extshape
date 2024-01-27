@@ -21,8 +21,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 import org.jetbrains.annotations.Unmodifiable;
@@ -31,8 +33,9 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.mixin.ButtonBlockAccessor;
+import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
-import pers.solid.extshape.util.ButtonSettings;
 
 import java.util.Collection;
 
@@ -45,13 +48,8 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   public static final @Unmodifiable Collection<Block> REFUSE_RECIPES = ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK, Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).addAll(BlockCollections.LOGS).addAll(BlockCollections.WOODS).addAll(BlockCollections.HYPHAES).addAll(BlockCollections.STEMS).addAll(BlockCollections.STRIPPED_LOGS).addAll(BlockCollections.STRIPPED_WOODS).addAll(BlockCollections.STRIPPED_HYPHAES).addAll(BlockCollections.STRIPPED_STEMS).build();
   public final Block baseBlock;
 
-  public ExtShapeButtonBlock(Block baseBlock, Settings settings, BlockSetType blockSetType, int i, boolean bl) {
-    super(settings, blockSetType, i, bl);
-    this.baseBlock = baseBlock;
-  }
-
-  public ExtShapeButtonBlock(Block baseBlock, ButtonSettings buttonSettings, AbstractBlock.Settings blockSettings) {
-    super(blockSettings, buttonSettings.blockSetType(), buttonSettings.time(), buttonSettings.wooden());
+  public ExtShapeButtonBlock(Block baseBlock, Settings blockSettings, @NotNull ActivationSettings activationSettings) {
+    super(blockSettings, activationSettings.blockSetType(), activationSettings.buttonTime(), activationSettings.buttonActivatedByProjectile());
     this.baseBlock = baseBlock;
   }
 
@@ -114,11 +112,19 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     return BlockShape.BUTTON;
   }
 
+  @Override
+  public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    super.onStateReplaced(state, world, pos, newState, moved);
+    if (state.get(POWERED) && newState.getBlock() instanceof ExtShapeButtonBlock && newState.get(POWERED)) {
+      world.scheduleBlockTick(pos.toImmutable(), newState.getBlock(), ((ButtonBlockAccessor) this).getPressTicks());
+    }
+  }
+
   public static class WithExtension extends ExtShapeButtonBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockSetType blockSetType, int i, boolean bl, BlockExtension extension) {
-      super(baseBlock, settings, blockSetType, i, bl);
+    public WithExtension(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
+      super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
 
@@ -150,6 +156,31 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
       return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction);
+    }
+  }
+
+  public static class WithOxidation extends ExtShapeButtonBlock implements Oxidizable {
+    private final OxidationLevel oxidationLevel;
+
+    public WithOxidation(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings, activationSettings);
+      this.oxidationLevel = oxidationLevel;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+      this.tickDegradation(state, world, pos, random);
+    }
+
+    @Override
+    public boolean hasRandomTicks(BlockState state) {
+      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    }
+
+    @Override
+    public OxidationLevel getDegradationLevel() {
+      return oxidationLevel;
     }
   }
 }

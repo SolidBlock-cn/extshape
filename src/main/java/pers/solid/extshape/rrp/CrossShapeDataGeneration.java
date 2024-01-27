@@ -1,6 +1,8 @@
 package pers.solid.extshape.rrp;
 
 import com.google.common.collect.ImmutableCollection;
+import com.google.common.collect.Iterables;
+import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -22,13 +24,18 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.SingleItemRecipeJsonBuilderAccessor;
 import pers.solid.extshape.util.BlockBiMaps;
 
-import java.util.Collection;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 
 public class CrossShapeDataGeneration {
   public final Block baseBlock;
   public final @Nullable String defaultNamespace;
   public final RuntimeResourcePack pack;
+  /**
+   * 是否启用同种形状之间的方块切石功能，例如将非切制的楼梯切成已切制的横条。如果未启用，则只能将非切制的楼梯切成非切制的横条，但是基础方块仍不在此限。将此设置为 {@code false} 是为了与原版的行为相匹配。
+   */
+  public final boolean enableCuttingShape = false;
 
   public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RuntimeResourcePack pack) {
     this.baseBlock = baseBlock;
@@ -82,8 +89,8 @@ public class CrossShapeDataGeneration {
     return RecipeGroupRegistry.getRecipeGroup(result);
   }
 
-  public void cutStairsToQuarterPiece(final @NotNull Block stairs, final @NotNull Block quarterPiece, @Nullable String suffix) {
-    generateSimpleStonecuttingRecipe(stairs, quarterPiece, 3, suffix == null ? "_from_stairs_stonecutting" : suffix, "has_stairs");
+  public void cutStairsToQuarterPiece(final @NotNull Block stairs, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
+    generateSimpleStonecuttingRecipe(stairs, quarterPiece, 3 * scale, suffix == null ? "_from_stairs_stonecutting" : suffix, "has_stairs");
   }
 
   public void craftSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix) {
@@ -97,8 +104,8 @@ public class CrossShapeDataGeneration {
     pack.addRecipeAndAdvancement(recipeId, recipe);
   }
 
-  public void cutSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix) {
-    generateSimpleStonecuttingRecipe(slab, quarterPiece, 2, suffix == null ? "_from_slab_stonecutting" : suffix, "has_slab");
+  public void cutSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
+    generateSimpleStonecuttingRecipe(slab, quarterPiece, 2 * scale, suffix == null ? "_from_slab_stonecutting" : suffix, "has_slab");
   }
 
   public void craftVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix) {
@@ -112,8 +119,8 @@ public class CrossShapeDataGeneration {
     pack.addRecipeAndAdvancement(recipeId, recipe);
   }
 
-  public void cutVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix) {
-    generateSimpleStonecuttingRecipe(verticalSlab, quarterPiece, 2, suffix == null ? "_from_vertical_slab_stonecutting" : suffix, "has_vertical_slab");
+  public void cutVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
+    generateSimpleStonecuttingRecipe(verticalSlab, quarterPiece, 2 * scale, suffix == null ? "_from_vertical_slab_stonecutting" : suffix, "has_vertical_slab");
   }
 
   public void craftVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
@@ -127,12 +134,12 @@ public class CrossShapeDataGeneration {
     pack.addRecipeAndAdvancement(recipeId, recipe);
   }
 
-  public void cutVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
-    generateSimpleStonecuttingRecipe(verticalSlab, verticalQuarterPiece, 2, suffix == null ? "_from_vertical_slab_stonecutting" : suffix, "has_vertical_slab");
+  public void cutVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix, int scale) {
+    generateSimpleStonecuttingRecipe(verticalSlab, verticalQuarterPiece, 2 * scale, suffix == null ? "_from_vertical_slab_stonecutting" : suffix, "has_vertical_slab");
   }
 
-  public void cutVerticalStairsToVerticalQuarterPiece(final @NotNull Block verticalStairs, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
-    generateSimpleStonecuttingRecipe(verticalStairs, verticalQuarterPiece, 3, suffix == null ? "_from_vertical_stairs_stonecutting" : suffix, "has_vertical_stairs");
+  public void cutVerticalStairsToVerticalQuarterPiece(final @NotNull Block verticalStairs, final @NotNull Block verticalQuarterPiece, @Nullable String suffix, int scale) {
+    generateSimpleStonecuttingRecipe(verticalStairs, verticalQuarterPiece, 3 * scale, suffix == null ? "_from_vertical_stairs_stonecutting" : suffix, "has_vertical_stairs");
   }
 
   protected void generateSimpleStonecuttingRecipe(
@@ -155,7 +162,7 @@ public class CrossShapeDataGeneration {
   }
 
   public void generateCrossShapeData() {
-    final Collection<Block> uncutBaseBlocks = getUncutBaseBlocks();
+    final @NotNull Iterable<ObjectIntPair<Block>> uncutBaseBlocks = getUncutBaseBlocks();
 
     // 台阶与垂直台阶之间的配方。
     final @Nullable Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, baseBlock);
@@ -181,14 +188,13 @@ public class CrossShapeDataGeneration {
       verticalQuarterPieceToQuarterPiece(verticalQuarterPiece, quarterPiece);
     }
 
-
     // 该方块是否允许被切石
     final boolean shouldStoneCut = shouldStoneCut(baseBlock);
 
     // 跨方块切石
     for (final BlockShape blockShape : BlockShape.values()) {
-      // block 是切石前的基础方块。
-      for (final Block uncutBaseBlock : uncutBaseBlocks) {
+      for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
+        final Block uncutBaseBlock = uncutBaseBlockInfo.left();
         final String path = Registries.BLOCK.getId(uncutBaseBlock).getPath();
         final Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
         if (!(output instanceof BlockResourceGenerator) || !((BlockResourceGenerator) output).shouldWriteStonecuttingRecipe()) continue;
@@ -200,7 +206,7 @@ public class CrossShapeDataGeneration {
               Ingredient.ofItems(uncutBaseBlock),
               accessor.getCategory(),
               accessor.getOutput(),
-              accessor.getCount()
+              accessor.getCount() * uncutBaseBlockInfo.rightInt()
           ).criterion("has_" + path, RecipeProvider.conditionsFromItem(uncutBaseBlock));
           pack.addRecipeAndAdvancement(secondaryId, secondaryRecipe);
         }
@@ -210,12 +216,13 @@ public class CrossShapeDataGeneration {
     if (quarterPiece != null) {
       // 1x楼梯 -> 3x横条
       if (stairs != null && shouldStoneCut) {
-        cutStairsToQuarterPiece(stairs, quarterPiece, null);
-        for (final Block uncutBaseBlock : uncutBaseBlocks) {
+        cutStairsToQuarterPiece(stairs, quarterPiece, null, 1);
+        if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
+          final Block uncutBaseBlock = uncutBaseBlockInfo.left();
           final Block uncutStairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, uncutBaseBlock);
           if (uncutStairs == null) continue;
           final String name0 = Registries.BLOCK.getId(uncutStairs).getPath();
-          cutStairsToQuarterPiece(uncutStairs, quarterPiece, "_from_" + name0 + "_stonecutting");
+          cutStairsToQuarterPiece(uncutStairs, quarterPiece, "_from_" + name0 + "_stonecutting", uncutBaseBlockInfo.rightInt());
         }
       }
 
@@ -223,12 +230,13 @@ public class CrossShapeDataGeneration {
       if (slab != null) {
         craftSlabToQuarterPiece(slab, quarterPiece, null);
         if (shouldStoneCut) {
-          cutSlabToQuarterPiece(slab, quarterPiece, null);
-          for (final Block uncutBaseBlock : uncutBaseBlocks) {
+          cutSlabToQuarterPiece(slab, quarterPiece, null, 1);
+          if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
+            final Block uncutBaseBlock = uncutBaseBlockInfo.left();
             final Block uncutSlab = BlockBiMaps.getBlockOf(BlockShape.SLAB, uncutBaseBlock);
             if (uncutSlab == null) continue;
             final String name0 = Registries.BLOCK.getId(uncutSlab).getPath();
-            cutSlabToQuarterPiece(uncutSlab, quarterPiece, "_from_" + name0 + "_stonecutting");
+            cutSlabToQuarterPiece(uncutSlab, quarterPiece, "_from_" + name0 + "_stonecutting", uncutBaseBlockInfo.rightInt());
           }
         }
       }
@@ -237,11 +245,12 @@ public class CrossShapeDataGeneration {
       if (verticalSlab != null) {
         craftVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null);
         if (shouldStoneCut) {
-          cutVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null);
-          for (final Block uncutBaseBlock : uncutBaseBlocks) {
+          cutVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null, 1);
+          if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
+            final Block uncutBaseBlock = uncutBaseBlockInfo.left();
             final Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
             if (uncutVerticalSlab == null) continue;
-            cutVerticalSlabToQuarterPiece(uncutVerticalSlab, quarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalSlab).getPath() + "_stonecutting");
+            cutVerticalSlabToQuarterPiece(uncutVerticalSlab, quarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalSlab).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
           }
         }
       }
@@ -252,29 +261,33 @@ public class CrossShapeDataGeneration {
       if (verticalSlab != null) {
         craftVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null);
         if (shouldStoneCut) {
-          cutVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null);
-          for (final Block uncutBaseBlock : uncutBaseBlocks) {
+          cutVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null, 1);
+          if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
+            final Block uncutBaseBlock = uncutBaseBlockInfo.left();
             final Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
             if (uncutVerticalSlab == null) return;
-            cutVerticalSlabToVerticalQuarterPiece(uncutVerticalSlab, verticalQuarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalSlab).getPath() + "_stonecutting");
+            cutVerticalSlabToVerticalQuarterPiece(uncutVerticalSlab, verticalQuarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalSlab).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
           }
         }
       }
 
       // 1x纵楼梯 -> 3x纵条
       if (verticalStairs != null && shouldStoneCut) {
-        cutVerticalStairsToVerticalQuarterPiece(verticalStairs, verticalQuarterPiece, null);
-        for (final Block uncutBaseBlock : uncutBaseBlocks) {
+        cutVerticalStairsToVerticalQuarterPiece(verticalStairs, verticalQuarterPiece, null, 1);
+        if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
+          final Block uncutBaseBlock = uncutBaseBlockInfo.left();
           final Block uncutVerticalStairs = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, uncutBaseBlock);
           if (uncutVerticalStairs == null) continue;
-          cutVerticalStairsToVerticalQuarterPiece(uncutVerticalStairs, verticalQuarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalStairs).getPath() + "_stonecutting");
+          cutVerticalStairsToVerticalQuarterPiece(uncutVerticalStairs, verticalQuarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalStairs).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
         }
       }
     }
   }
 
   @NotNull
-  protected ImmutableCollection<Block> getUncutBaseBlocks() {
-    return VanillaStonecutting.INSTANCE.get(baseBlock);
+  protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
+    final ImmutableCollection<Block> blocks = VanillaStonecutting.INSTANCE.get(baseBlock);
+    final ImmutableCollection<ObjectIntPair<Block>> weightedBlocks = VanillaStonecutting.INSTANCE_WITH_WEIGHT.get(baseBlock);
+    return Iterables.concat(blocks.isEmpty() ? Collections.emptyList() : blocks.stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList()), weightedBlocks);
   }
 }
