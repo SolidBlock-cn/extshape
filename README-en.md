@@ -89,7 +89,7 @@ In stonecutters, one base blocks can be cut into various shapes for cut base blo
 
 The second crafting ingredient for crafting fences and fences (apart from base blocks_ is dependent to its base block. See details in [block list](BlockList.md).
 
-To avoid recipe conflicts, some blocks are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be converted 1:1 from their corresponding carpets. Snow slabs can not be crafted directly from snow, either; instead, craft a snow (layer) with three snow blocks, and then craft the slab with the snow. You can test potential recipe conflicts via `/extshape:check-conflict` command.
+To avoid recipe conflicts, some blocks are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be crafted one from three wool carpets or moss carpets. Snow slabs can not be crafted directly from snow, either; instead, craft a snow (layer) with three snow blocks, and then craft the slab with the snow. You can test potential recipe conflicts via `/extshape:check-conflict` command.
 
 All recipes can be unlocked when obtaining any of the base block. To put explicitly, each recipe has a corresponding advancement, and as soon as the player obtains the base block or unlocks the recipe, the advancement is triggered and relative recipe is unlocked.
 

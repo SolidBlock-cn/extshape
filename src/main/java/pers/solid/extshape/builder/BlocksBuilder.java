@@ -4,7 +4,6 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -59,10 +58,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   protected final List<@NotNull TagKey<? extends ItemConvertible>> extraTags = new ArrayList<>();
   protected TagPreparations tagPreparations;
-  /**
-   * 压力板的激活时长。
-   */
-  private int plateTickRate;
 
   public BlocksBuilder setFenceSettings(FenceSettings fenceSettings) {
     this.fenceSettings = fenceSettings;
@@ -75,14 +70,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
 
   public BlocksBuilder setActivationSettings(ActivationSettings activationSettings) {
     this.activationSettings = activationSettings;
-    if (activationSettings != null && activationSettings.blockSetType() != null) {
-      this.blockSetType = activationSettings.blockSetType();
-    }
-    return this;
-  }
-
-  public BlocksBuilder setBlockSetType(BlockSetType blockSetType) {
-    this.blockSetType = blockSetType;
     return this;
   }
 
@@ -96,14 +83,12 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 在执行 {@link #build()} 之后会为每个值执行。
    */
   protected @Nullable BiConsumer<BlockShape, AbstractBlockBuilder<?>> postBuildConsumer;
-  protected BlockSetType blockSetType;
 
   public BlocksBuilder(@NotNull Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
     this.baseBlock = baseBlock;
     this.shapesToBuild = shapesToBuild;
     this.fenceSettings = FenceSettings.DEFAULT;
     this.activationSettings = ActivationSettings.STONE;
-    this.blockSetType = BlockSetType.STONE;
   }
 
   /**
@@ -135,7 +120,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       if (blockShape == BlockShape.SLAB) {
         ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new CircularPavingSlabBlock(builder.baseBlock, builder.blockSettings);
       } else if (blockShape == BlockShape.PRESSURE_PLATE) {
-        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, builder.blockSettings, blockSetType, plateTickRate);
+        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, builder.blockSettings, Objects.requireNonNull(activationSettings, "activationSettings").blockSetType(), activationSettings.plateTime());
       }
     });
   }
@@ -269,9 +254,9 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder withPressurePlate(@NotNull BlockSetType blockSetType) {
+  public BlocksBuilder withPressurePlate(@NotNull ActivationSettings activationSettings) {
     with(BlockShape.PRESSURE_PLATE);
-    this.blockSetType = blockSetType;
+    this.activationSettings = activationSettings;
     return this;
   }
 

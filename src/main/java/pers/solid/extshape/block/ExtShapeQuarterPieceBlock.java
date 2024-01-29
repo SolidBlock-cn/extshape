@@ -69,6 +69,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
     return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID, "block/quarter_piece")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void writeBlockModel(RuntimeResourcePack pack) {
     final Identifier blockModelId = getBlockModelId();

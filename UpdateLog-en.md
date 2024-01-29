@@ -9,6 +9,13 @@
 - Catching up to updates of Blockus mod, added various shapes for mossy planks.
 - Adjusted the crafting ingredient of fences and fence gates of some blocks.
 - Adjusted sounds of some fence gates, pressure plates and button blocks, as well as the trigger behavior.
+- Adjusted the crafting recipes to crafting with 3 wool carpets or moss carpets.
+- Added fences, fence gates and pressure plates for patterned wool and gingham wool (but not buttons). A pressure plate is crafting from 3 carpets.
+- No longer allows charring planks and wooden mosaic in various shapes.
+- Made blocks of sugar blocks invisible in creative inventory and removed crafting recipe, because sugar block is a falling block, however the variants in various shapes do not implement this feature.
+- Added button and pressure plate for stone bricks, mossy stone bricks, bricks block, nether wart and warped wart.
+- Fixed the issue that the texture of blocks of blackstone on top and bottom side is incorrect.
+- Adjusted the second crafting ingredient of fences and fence gates (including those whose base block is from Blockus mod).
 
 ### 2.0.9
 

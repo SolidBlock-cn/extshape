@@ -31,13 +31,13 @@ public final class ExtShapeBlockTypes {
       .pressurePlateActivationRule(BlockSetType.ActivationRule.EVERYTHING)
       .register(new Identifier(ExtShape.MOD_ID, "soft"));
 
-  public static final BlockSetType GRAVEL_BLOCK_SET_TYOE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
+  public static final BlockSetType GRAVEL_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
       .soundGroup(BlockSoundGroup.GRAVEL)
       .pressurePlateActivationRule(BlockSetType.ActivationRule.EVERYTHING)
       .register(new Identifier(ExtShape.MOD_ID, "gravel"));
   public static final WoodType GRAVEL_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .soundGroup(BlockSoundGroup.GRAVEL)
-      .register(new Identifier(ExtShape.MOD_ID, "gravel"), GRAVEL_BLOCK_SET_TYOE);
+      .register(new Identifier(ExtShape.MOD_ID, "gravel"), GRAVEL_BLOCK_SET_TYPE);
 
   public static final BlockSetType WOOL_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(SOFT_BLOCK_SET_TYPE)
       .soundGroup(BlockSoundGroup.WOOL)

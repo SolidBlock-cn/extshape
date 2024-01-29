@@ -1,10 +1,8 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Degradable;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
@@ -44,8 +42,11 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
+    if (NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock)) {
+      return null;
+    }
     final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
-    return craftingRecipe == null || NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock) ? null : craftingRecipe.group(getRecipeGroup());
+    return craftingRecipe == null ? null : craftingRecipe.group(getRecipeGroup());
   }
 
   @Override
@@ -104,7 +105,6 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
    */
   public static class WithOxidation extends ExtShapeStairsBlock implements Oxidizable {
     private final OxidationLevel oxidationLevel;
-    private static final RecordCodecBuilder<WithOxidation, OxidationLevel> weatheringState = OxidationLevel.CODEC.fieldOf("weathering_state").forGetter(Degradable::getDegradationLevel);
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
 
     public WithOxidation(Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {

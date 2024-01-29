@@ -11,11 +11,15 @@ import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureKey;
-import net.minecraft.data.server.recipe.*;
+import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
@@ -98,15 +102,24 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = Registries.ITEM.get(carpetId);
-      return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(carpet).criterion("has_carpet", RecipeProvider.conditionsFromItem(carpet));
+      // 一个羊毛压力板由 3 个地毯合成。
+      return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
+          .pattern("###")
+          .input('#', carpet)
+          .criterionFromItem(this)
+          .group(getRecipeGroup());
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(Blocks.MOSS_CARPET)
-          .criterion("has_carpet", RecipeProvider.conditionsFromItem(Blocks.MOSS_CARPET));
+      // 一个苔藓压力板由 3 个覆地苔藓合成。
+      return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
+          .pattern("###")
+          .input('#', Items.MOSS_CARPET)
+          .criterionFromItem(Items.MOSS_CARPET)
+          .group(getRecipeGroup());
     } else {
       return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
           .pattern("##")
           .input('#', baseBlock)
-          .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+          .criterionFromItem(baseBlock)
           .group(getRecipeGroup());
     }
   }
