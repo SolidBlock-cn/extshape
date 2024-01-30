@@ -1,7 +1,7 @@
 package pers.solid.extshape;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.fabric.api.event.Event;
@@ -46,12 +46,12 @@ public final class VanillaItemGroup {
 
   @ApiStatus.Internal
   public static Multimap<Item, Item> getAppendingRule(RegistryKey<ItemGroup> group) {
-    return APPENDING_RULES.computeIfAbsent(group, itemGroup -> LinkedHashMultimap.create());
+    return APPENDING_RULES.computeIfAbsent(group, itemGroup -> ArrayListMultimap.create());
   }
 
   @ApiStatus.Internal
   public static Multimap<Item, Item> getPrependingRule(RegistryKey<ItemGroup> group) {
-    return PREPENDING_RULES.computeIfAbsent(group, itemGroup -> LinkedHashMultimap.create());
+    return PREPENDING_RULES.computeIfAbsent(group, itemGroup -> ArrayListMultimap.create());
   }
 
   @ApiStatus.Internal
