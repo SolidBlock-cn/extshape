@@ -1,7 +1,7 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
 plugins {
-    id 'fabric-loom' version '1.4-SNAPSHOT'
+    id 'fabric-loom' version '1.5-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
@@ -151,7 +151,7 @@ project(':runtest') {
         implementation project(path: ':', configuration: "namedElements")
         implementation project(path: ':with_blockus', configuration: "namedElements")
         if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
-        modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
+            modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
         }
         if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
             modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
@@ -217,7 +217,7 @@ modrinth {
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
     versionType = release_type
     uploadFile = remapJar
-    gameVersions = (project.supported_minecraft_versions as String).split(',') as List<String>
+    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
     var dependenciesList = [new ModDependency('JnrDtPAE', 'required')] // brrp
     if (platform == 'fabric') dependenciesList.add new ModDependency('P7dR8mSH', 'required') // Fabric API
@@ -234,7 +234,7 @@ githubRelease {
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "1.20.1"
+    targetCommitish = "1.20.4"
     body = changelogContent
     draft = true
     prerelease = false

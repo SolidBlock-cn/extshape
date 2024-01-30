@@ -51,7 +51,7 @@ modrinth {
     uploadFile = remapJar
     gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
-    var list = [new ModDependency('JnrDtPAE', 'required'), new ModDependency('tb7kCxSW', 'required')]
+    var list = [new ModDependency('JnrDtPAE', 'required'), new ModDependency('tb7kCxSW', 'required'), new ModDependency('zFiY2Go0', 'required')]
     if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
     dependencies = list
 }
@@ -64,12 +64,12 @@ githubRelease {
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "1.20.1"
+    targetCommitish = "1.20.4"
     draft = true
     prerelease = false
     releaseAssets remapJar, remapSourcesJar
-    allowUploadToExisting true
-    apiEndpoint "https://api.github.com"
+    allowUploadToExisting = true
+    apiEndpoint = "https://api.github.com"
 }
 
 publish {
