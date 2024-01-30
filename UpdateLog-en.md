@@ -16,6 +16,7 @@
 - Added button and pressure plate for stone bricks, mossy stone bricks, bricks block, nether wart and warped wart.
 - Fixed the issue that the texture of blocks of blackstone on top and bottom side is incorrect.
 - Adjusted the second crafting ingredient of fences and fence gates (including those whose base block is from Blockus mod).
+- Improved the compatibility with Sinytra Connector (but the part of Extended Block Shapes Blockus is not compatible yet).
 
 ### 2.0.9
 
