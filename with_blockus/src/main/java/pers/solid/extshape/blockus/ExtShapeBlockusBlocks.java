@@ -402,7 +402,7 @@ public final class ExtShapeBlockusBlocks {
           .without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.BUTTON)
           .addPreBuildConsumer((blockShape, blockBuilder) -> {
             if (blockShape == BlockShape.PRESSURE_PLATE) {
-              ((PressurePlateBuilder) blockBuilder).setInstanceSupplier(x -> new WoolPressurePlate(x.baseBlock, x.blockSettings, ((PressurePlateBuilder) x).activationSettings.blockSetType(), ((PressurePlateBuilder) x).activationSettings.plateTime(), woolTypes.carpet));
+              ((PressurePlateBuilder) blockBuilder).setInstanceSupplier(x -> new WoolPressurePlate(x.baseBlock, x.blockSettings, ((PressurePlateBuilder) x).activationSettings, woolTypes.carpet));
             }
           })
           .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60)).addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness)))
@@ -492,14 +492,6 @@ public final class ExtShapeBlockusBlocks {
 
   private static BlocksBuilder create(WoodTypes woodTypes) {
     return create(woodTypes.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
-  }
-
-  private static void buildStoneBlocksWithButton(BlocksBuilder blocksBuilder) {
-    blocksBuilder.setFenceSettings(FenceSettings.STONE).build();
-  }
-
-  private static void buildStoneBlocksWithoutButton(BlocksBuilder blocksBuilder) {
-    blocksBuilder.setFenceSettings(FenceSettings.STONE).without(BlockShape.BUTTON).build();
   }
 
   private static void buildCircularPavingBlock(BlocksBuilder blocksBuilder) {

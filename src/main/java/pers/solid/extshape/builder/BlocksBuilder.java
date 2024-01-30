@@ -120,7 +120,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       if (blockShape == BlockShape.SLAB) {
         ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new CircularPavingSlabBlock(builder.baseBlock, builder.blockSettings);
       } else if (blockShape == BlockShape.PRESSURE_PLATE) {
-        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, builder.blockSettings, Objects.requireNonNull(activationSettings, "activationSettings").blockSetType(), activationSettings.plateTime());
+        ((PressurePlateBuilder) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapeHorizontalFacingPressurePlateBlock(builder.baseBlock, builder.blockSettings, Objects.requireNonNull(activationSettings, "activationSettings"));
       }
     });
   }

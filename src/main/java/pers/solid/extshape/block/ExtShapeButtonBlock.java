@@ -28,6 +28,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 import org.jetbrains.annotations.Unmodifiable;
@@ -54,12 +55,12 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
 
   public final Block baseBlock;
 
-  public ExtShapeButtonBlock(Block baseBlock, Settings settings, BlockSetType blockSetType, int i) {
-    super(blockSetType, i, settings);
+  public ExtShapeButtonBlock(Block baseBlock, Settings settings, BlockSetType blockSetType, int pressTicks) {
+    super(blockSetType, pressTicks, settings);
     this.baseBlock = baseBlock;
   }
 
-  public ExtShapeButtonBlock(Block baseBlock, ActivationSettings activationSettings, AbstractBlock.Settings blockSettings) {
+  public ExtShapeButtonBlock(Block baseBlock, Settings blockSettings, @NotNull ActivationSettings activationSettings) {
     super(activationSettings.blockSetType(), activationSettings.buttonTime(), blockSettings);
     this.baseBlock = baseBlock;
   }
@@ -140,8 +141,8 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   public static class WithExtension extends ExtShapeButtonBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockSetType blockSetType, int i, BlockExtension extension) {
-      super(baseBlock, settings, blockSetType, i);
+    public WithExtension(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
+      super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
 
@@ -180,9 +181,13 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     private final OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BlockResourceGenerator::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getBlockSetType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getPressTicks()), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(Block baseBlock, Settings settings, BlockSetType blockSetType, int i, OxidationLevel oxidationLevel) {
-      super(baseBlock, settings, blockSetType, i);
+    public WithOxidation(Block baseBlock, Settings settings, BlockSetType blockSetType, int pressTicks, OxidationLevel oxidationLevel) {
+      super(baseBlock, settings, blockSetType, pressTicks);
       this.oxidationLevel = oxidationLevel;
+    }
+
+    public WithOxidation(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
+      this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.buttonTime(), oxidationLevel);
     }
 
     @SuppressWarnings("deprecation")

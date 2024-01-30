@@ -34,7 +34,7 @@ public final class ExtShapeBlockusItemGroup {
   private static final ImmutableSet<Block> SPECIAL_SORTED_RAINBOW_BLOCKS = Streams.concat(
       BlockusBlockCollections.TINTED_SHINGLES.stream().map(t -> t.block),
       BlockusBlockCollections.STAINED_STONE_BRICKS.stream().map(bsswTypes -> bsswTypes.block),
-      Stream.of( BlockusBlocks.SHINGLES).map(bssTypes -> bssTypes.block)).collect(ImmutableSet.toImmutableSet());
+      Stream.of(BlockusBlocks.SHINGLES).map(bssTypes -> bssTypes.block)).collect(ImmutableSet.toImmutableSet());
 
   public static void addVanillaGroupRules(Collection<BlockShape> shapes) {
     final Multimap<Item, Item> buildingAppendingRule = VanillaItemGroup.getAppendingRule(BlockusItemGroups.BLOCKUS_BUILDING_BLOCKS);

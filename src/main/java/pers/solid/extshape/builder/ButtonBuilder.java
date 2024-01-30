@@ -22,7 +22,7 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
         .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
         .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY)
         .instrument(Instrument.HARP)
-        .mapColor(MapColor.CLEAR), builder -> new ExtShapeButtonBlock(builder.baseBlock, activationSettings, builder.blockSettings));
+        .mapColor(MapColor.CLEAR), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, activationSettings));
     this.shape = BlockShape.BUTTON;
     final BlockSoundGroup soundGroup = baseBlock.getSoundGroup(baseBlock.getDefaultState());
     primaryTagToAddTo = soundGroup == BlockSoundGroup.WOOD || soundGroup == BlockSoundGroup.NETHER_WOOD || soundGroup == BlockSoundGroup.BAMBOO_WOOD || soundGroup == BlockSoundGroup.CHERRY_WOOD ? BlockTags.WOODEN_BUTTONS : BlockTags.BUTTONS;

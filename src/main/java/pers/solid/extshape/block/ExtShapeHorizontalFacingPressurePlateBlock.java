@@ -15,6 +15,7 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
@@ -23,6 +24,10 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {
     super(baseBlock, settings, blockSetType, tickRate);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
+  }
+
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+    this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime());
   }
 
   @Override

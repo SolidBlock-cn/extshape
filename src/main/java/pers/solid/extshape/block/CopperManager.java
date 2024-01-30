@@ -58,11 +58,11 @@ public final class CopperManager {
         } else if (oneBuilder instanceof FenceBuilder s) {
           s.setInstanceSupplier(x -> new ExtShapeFenceBlock.WithOxidation(x.baseBlock, s.secondIngredient, x.blockSettings, oxidationLevel));
         } else if (oneBuilder instanceof FenceGateBuilder s) {
-          s.setInstanceSupplier(x -> new ExtShapeFenceGateBlock.WithOxidation(x.baseBlock, s.fenceSettings, x.blockSettings, oxidationLevel));
+          s.setInstanceSupplier(x -> new ExtShapeFenceGateBlock.WithOxidation(x.baseBlock, x.blockSettings, s.fenceSettings, oxidationLevel));
         } else if (oneBuilder instanceof PressurePlateBuilder s) {
-          s.setInstanceSupplier(x -> new ExtShapePressurePlateBlock.WithOxidation(x.baseBlock, x.blockSettings, s.activationSettings.blockSetType(), s.activationSettings.plateTime(), oxidationLevel));
+          s.setInstanceSupplier(x -> new ExtShapePressurePlateBlock.WithOxidation(x.baseBlock, x.blockSettings, s.activationSettings, oxidationLevel));
         } else if (oneBuilder instanceof ButtonBuilder s) {
-          s.setInstanceSupplier(x -> new ExtShapeButtonBlock.WithOxidation(x.baseBlock, x.blockSettings, s.activationSettings.blockSetType(), s.activationSettings.buttonTime(), oxidationLevel));
+          s.setInstanceSupplier(x -> new ExtShapeButtonBlock.WithOxidation(x.baseBlock, x.blockSettings, s.activationSettings, oxidationLevel));
         } else if (oneBuilder instanceof WallBuilder s) {
           s.setInstanceSupplier(x -> new ExtShapeWallBlock.WithOxidation(x.baseBlock, x.blockSettings, oxidationLevel));
         }

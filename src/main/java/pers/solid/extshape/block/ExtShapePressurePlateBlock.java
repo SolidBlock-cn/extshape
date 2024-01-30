@@ -40,6 +40,7 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
@@ -57,6 +58,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     super(blockSetType, settings);
     this.baseBlock = baseBlock;
     this.tickRate = tickRate;
+  }
+
+  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+    this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime());
   }
 
   @Override
@@ -170,8 +175,8 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   public static class WithExtension extends ExtShapePressurePlateBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, BlockExtension extension, int tickRate) {
-      super(baseBlock, settings, blockSetType, tickRate);
+    public WithExtension(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, BlockExtension extension) {
+      super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
 
@@ -213,6 +218,10 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     public WithOxidation(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate, OxidationLevel oxidationLevel) {
       super(baseBlock, settings, blockSetType, tickRate);
       this.oxidationLevel = oxidationLevel;
+    }
+
+    public WithOxidation(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
+      this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime(), oxidationLevel);
     }
 
     @SuppressWarnings("deprecation")

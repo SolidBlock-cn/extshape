@@ -12,7 +12,7 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
   public final FenceSettings fenceSettings;
 
   public FenceGateBuilder(Block baseBlock, FenceSettings fenceSettings) {
-    super(baseBlock, builder -> new ExtShapeFenceGateBlock(builder.baseBlock, fenceSettings, builder.blockSettings));
+    super(baseBlock, builder -> new ExtShapeFenceGateBlock(builder.baseBlock, builder.blockSettings, fenceSettings));
     this.shape = BlockShape.FENCE_GATE;
     this.fenceSettings = fenceSettings;
     primaryTagToAddTo = BlockTags.FENCE_GATES;
@@ -25,6 +25,6 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
 
   @Override
   public AbstractBlockBuilder<FenceGateBlock> withExtension(BlockExtension blockExtension) {
-    return setInstanceSupplier(builder -> new ExtShapeFenceGateBlock.WithExtension(baseBlock, fenceSettings, builder.blockSettings, blockExtension));
+    return setInstanceSupplier(builder -> new ExtShapeFenceGateBlock.WithExtension(baseBlock, builder.blockSettings, fenceSettings, blockExtension));
   }
 }

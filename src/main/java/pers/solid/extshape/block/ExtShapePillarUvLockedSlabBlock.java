@@ -18,6 +18,7 @@ import pers.solid.extshape.ExtShape;
 
 public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
   public static final MapCodec<ExtShapePillarUvLockedSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapePillarUvLockedSlabBlock::new);
+
   public ExtShapePillarUvLockedSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
   }

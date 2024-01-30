@@ -270,5 +270,6 @@ public final class ExtShapeBlockTypes {
       .soundGroup(BlockSoundGroup.COPPER)
       .build(new Identifier(ExtShape.MOD_ID, "copper"), BlockSetType.COPPER);
 
-  private ExtShapeBlockTypes() {}
+  private ExtShapeBlockTypes() {
+  }
 }

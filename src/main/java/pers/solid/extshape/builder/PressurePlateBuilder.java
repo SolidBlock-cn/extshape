@@ -19,7 +19,7 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
     super(baseBlock, AbstractBlock.Settings.copy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
-        .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings.blockSetType(), ((PressurePlateBuilder) builder).activationSettings.plateTime()));
+        .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings));
     this.activationSettings = activationSettings;
     this.shape = BlockShape.PRESSURE_PLATE;
     final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
@@ -37,6 +37,6 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
 
   @Override
   public AbstractBlockBuilder<PressurePlateBlock> withExtension(BlockExtension blockExtension) {
-    return setInstanceSupplier(builder -> new ExtShapePressurePlateBlock.WithExtension(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings.blockSetType(), blockExtension, ((PressurePlateBuilder) builder).activationSettings.plateTime()));
+    return setInstanceSupplier(builder -> new ExtShapePressurePlateBlock.WithExtension(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings, blockExtension));
   }
 }
