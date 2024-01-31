@@ -6,6 +6,8 @@ import net.minecraft.block.Oxidizable;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.CopperManager;
 
 import java.util.Arrays;
@@ -23,11 +25,11 @@ public record ActivationSettings(int buttonTime, int plateTime, boolean buttonAc
   }
 
   public static ActivationSettings soft(Sounds sounds) {
-    return new ActivationSettings(60, 60, true, PressurePlateBlock.ActivationRule.EVERYTHING, sounds);
+    return new ActivationSettings(50, 40, true, PressurePlateBlock.ActivationRule.EVERYTHING, sounds);
   }
 
   public static ActivationSettings softerStone(Sounds sounds) {
-    return new ActivationSettings(40, 30, false, PressurePlateBlock.ActivationRule.MOBS, sounds);
+    return new ActivationSettings(25, 20, false, PressurePlateBlock.ActivationRule.MOBS, sounds);
   }
 
   public static ActivationSettings wood(Sounds sounds) {
@@ -47,29 +49,47 @@ public record ActivationSettings(int buttonTime, int plateTime, boolean buttonAc
   }));
   public static final ActivationSettings HARD = hard(Sounds.STONE);
   public static final ActivationSettings SOFT = soft(Sounds.STONE);
-  public static final ActivationSettings WOOL = new ActivationSettings(50, 50, true, PressurePlateBlock.ActivationRule.EVERYTHING, new Sounds(SoundEvents.BLOCK_WOOL_HIT));
+  public static final ActivationSettings WOOL = new ActivationSettings(50, 40, true, PressurePlateBlock.ActivationRule.EVERYTHING, Sounds.of("wool"));
+  public static final ActivationSettings SNOW = new ActivationSettings(55, 55, true, PressurePlateBlock.ActivationRule.EVERYTHING, Sounds.of("snow"));
+  public static final ActivationSettings MOSS = new ActivationSettings(60, 60, true, PressurePlateBlock.ActivationRule.EVERYTHING, Sounds.of("moss"));
   public static final ActivationSettings GRAVEL = soft(Sounds.STONE);
   public static final ActivationSettings ORE_BLOCK = new ActivationSettings(15, 10, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.STONE);
   public static final ActivationSettings GOLD = new ActivationSettings(15, 10, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.METAL);
   public static final ActivationSettings IRON = new ActivationSettings(15, 10, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.METAL);
-  public static final ActivationSettings CROPS = new ActivationSettings(50, 40, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.METAL);
-  public static final ActivationSettings QUARTZ = new ActivationSettings(25, 25, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.STONE);
-  public static final ActivationSettings BASALT = STONE;
+  public static final ActivationSettings CROPS = new ActivationSettings(35, 25, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.METAL);
+  public static final ActivationSettings QUARTZ = new ActivationSettings(25, 20, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.STONE);
+  public static final ActivationSettings BASALT = new ActivationSettings(15, 15, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.STONE);
   public static final ActivationSettings DRIPSTONE = STONE;
   public static final ActivationSettings TUFF = softerStone(Sounds.STONE);
-  public static final ActivationSettings DEEPSLATE = STONE;
-  public static final ActivationSettings DEEPSLATE_BRICKS = STONE;
-  public static final ActivationSettings NETHERRACK = STONE;
-  public static final ActivationSettings WART = soft(new Sounds(SoundEvents.BLOCK_WART_BLOCK_HIT));
+  public static final ActivationSettings DEEPSLATE = new ActivationSettings(10, 10, false, PressurePlateBlock.ActivationRule.MOBS, Sounds.STONE);
+  public static final ActivationSettings DEEPSLATE_BRICKS = DEEPSLATE;
+  public static final ActivationSettings NETHERRACK = softerStone(Sounds.STONE);
+  public static final ActivationSettings GLOWSTONE = new ActivationSettings(30, 30, true, PressurePlateBlock.ActivationRule.EVERYTHING, Sounds.WOOD);
+  public static final ActivationSettings WART = new ActivationSettings(45, 45, true, PressurePlateBlock.ActivationRule.EVERYTHING, Sounds.of("wart"));
 
   public record Sounds(SoundEvent clickOffSound, SoundEvent clickOnSound, SoundEvent depressSound, SoundEvent pressSound) {
+    private static SoundEvent sound(String name) {
+      return new SoundEvent(new Identifier(ExtShape.MOD_ID, name));
+    }
+
+    public Sounds(String clickOffSound, String clickOnSound, String depressSound, String pressSound) {
+      this(sound(clickOffSound), sound(clickOnSound), sound(depressSound), sound(pressSound));
+    }
+
+    public static Sounds of(String name) {
+      return new Sounds(
+          "block." + name + "_button.click_on",
+          "block." + name + "_button.click_off",
+          "block." + name + "_pressure_plate.click_on",
+          "block." + name + "_pressure_plate.click_off"
+      );
+    }
+
     public static final Sounds STONE = new Sounds(SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON);
     public static final Sounds WOOD = new Sounds(SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_OFF, SoundEvents.BLOCK_WOODEN_BUTTON_CLICK_ON, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON);
     public static final Sounds NETHER_WOOD = WOOD;
     public static final Sounds METAL = new Sounds(SoundEvents.BLOCK_STONE_BUTTON_CLICK_OFF, SoundEvents.BLOCK_STONE_BUTTON_CLICK_ON, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON);
-
-    public Sounds(SoundEvent constSound) {
-      this(constSound, constSound, constSound, constSound);
-    }
+    public static final Sounds SCULK = of("sculk");
+    public static final Sounds SLIME = of("slime");
   }
 }

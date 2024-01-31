@@ -7,11 +7,11 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
@@ -367,7 +367,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .addExtraTag(BlockTags.NEEDS_IRON_TOOL)
         .setFenceSettings(new FenceSettings(Items.DIAMOND))
-        .setActivationSettings(ActivationSettings.hard(ActivationSettings.Sounds.METAL))
+        .setActivationSettings(new ActivationSettings(15, 10, false, PressurePlateBlock.ActivationRule.MOBS, ActivationSettings.Sounds.STONE))
         .build();
 
     // 紫水晶块。
@@ -387,7 +387,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(addWallToUnmineableTag)
         .addExtraTag(ExtShapeTags.SNOW)
         .setFenceSettings(FenceSettings.SNOW)
-        .setActivationSettings(ActivationSettings.soft(new ActivationSettings.Sounds(SoundEvents.BLOCK_SNOW_HIT)))
+        .setActivationSettings(ActivationSettings.SNOW)
         .build();
 
     // 黏土块。
@@ -423,7 +423,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(GLOWSTONE)
         .addExtraTag(addWallToUnmineableTag)
         .setFenceSettings(new FenceSettings(Items.GLOWSTONE_DUST))
-        .setActivationSettings(ActivationSettings.SOFT)
+        .setActivationSettings(ActivationSettings.GLOWSTONE)
         .build();
 
     // 石砖、苔石砖、雕纹石砖。
@@ -491,6 +491,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .addExtraTag(BlockTags.NEEDS_IRON_TOOL)
         .setFenceSettings(new FenceSettings(Items.EMERALD))
+        .setActivationSettings(ActivationSettings.ORE_BLOCK)
         .build();
 
     // 石英、石英砖、平滑石英块、錾制石英块均有按钮和压力板。
@@ -744,8 +745,8 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(SCULK)
         .addExtraTag(BlockTags.HOE_MINEABLE)
         .addExtraTag(addWallToUnmineableTag)
-        .setFenceSettings(new FenceSettings(Items.SCULK_VEIN, SoundEvents.BLOCK_SCULK_HIT))
-        .setActivationSettings(ActivationSettings.wood(new ActivationSettings.Sounds(SoundEvents.BLOCK_SCULK_HIT)))
+        .setFenceSettings(new FenceSettings(Items.SCULK_VEIN, ExtShape.MOD_ID, "sculk"))
+        .setActivationSettings(ActivationSettings.wood(ActivationSettings.Sounds.SCULK))
         .withExtension(BlockExtension.builder().setStacksDroppedCallback((state, world, pos, stack, dropExperience) -> ((BlockAccessor) state.getBlock()).callDropExperienceWhenMined(world, pos, stack, ConstantIntProvider.create(1))).build())
         .build();
 
@@ -763,9 +764,9 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.HOE_MINEABLE)
         .addExtraTag(addWallToUnmineableTag)
         .addExtraTag(shape -> shape.isConstruction ? BlockTags.SMALL_DRIPLEAF_PLACEABLE : null)
-        .setFenceSettings(new FenceSettings(Items.MOSS_CARPET, SoundEvents.BLOCK_MOSS_HIT))
+        .setFenceSettings(new FenceSettings(Items.MOSS_CARPET, ExtShape.MOD_ID, "moss"))
         .compostingChance(0.65f)
-        .setActivationSettings(ActivationSettings.soft(new ActivationSettings.Sounds(SoundEvents.BLOCK_MOSS_HIT)))
+        .setActivationSettings(ActivationSettings.MOSS)
         .build();
 
     // 深板岩。

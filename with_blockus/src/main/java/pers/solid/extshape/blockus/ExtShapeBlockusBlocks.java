@@ -30,7 +30,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenTexts;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
@@ -41,6 +40,7 @@ import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
@@ -387,8 +387,8 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.SUGAR_BLOCK).setStoneFenceSettings(Items.SUGAR).addExtraTag(BlockTags.SHOVEL_MINEABLE).addExtraTag(addWallToUnmineableTag).build();
     create(BlockusBlocks.ENDER_BLOCK).markStoneCuttable().setStoneFenceSettings(Items.ENDER_PEARL).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_STONE_TOOL).build();
 
-    create(BlockusBlocks.ROTTEN_FLESH_BLOCK).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.SLIME_BLOCK_SET_TYPE)).setFenceSettings(new FenceSettings(Items.ROTTEN_FLESH, ExtShapeBlockTypes.SLIME_WOOD_TYPE)).build();
-    create(BlockusBlocks.MEMBRANE_BLOCK).setFenceSettings(new FenceSettings(Items.PHANTOM_MEMBRANE, ExtShapeBlockTypes.SLIME_WOOD_TYPE)).setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.SLIME_BLOCK_SET_TYPE)).addExtraTag(addWallToUnmineableTag).build();
+    create(BlockusBlocks.ROTTEN_FLESH_BLOCK).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).setActivationSettings(ActivationSettings.soft(ActivationSettings.Sounds.SLIME)).setFenceSettings(new FenceSettings(Items.ROTTEN_FLESH, ExtShape.MOD_ID, "slime")).build();
+    create(BlockusBlocks.MEMBRANE_BLOCK).setFenceSettings(new FenceSettings(Items.PHANTOM_MEMBRANE, ExtShape.MOD_ID, "slime")).setActivationSettings(ActivationSettings.soft(ActivationSettings.Sounds.SLIME)).addExtraTag(addWallToUnmineableTag).build();
     FACTORY.createAllShapes(BlockusBlocks.NETHER_STAR_BLOCK).markStoneCuttable().withoutRedstone().setStoneFenceSettings(Items.NETHER_STAR).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_IRON_TOOL).addExtraTag(BlockTags.DRAGON_IMMUNE).withExtension(BlockExtension.builder().setSteppedOnCallback((world, pos, state, entity) -> {
       if (entity.getType() == EntityType.PLAYER) {
         ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 4, true, false, false));
