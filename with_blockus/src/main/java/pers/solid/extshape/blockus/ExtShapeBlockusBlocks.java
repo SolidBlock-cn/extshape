@@ -344,8 +344,8 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.SUGAR_BLOCK).setStoneFenceSettings(Items.SUGAR).addExtraTag(BlockTags.SHOVEL_MINEABLE).addExtraTag(addWallToUnmineableTag).build();
     create(BlockusBlocks.ENDER_BLOCK).markStoneCuttable().setStoneFenceSettings(Items.ENDER_PEARL).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_STONE_TOOL).build();
 
-    create(BlockusBlocks.ROTTEN_FLESH_BLOCK).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).setActivationSettings(ActivationSettings.soft(new ActivationSettings.Sounds(SoundEvents.BLOCK_SLIME_BLOCK_HIT))).setFenceSettings(new FenceSettings(Items.ROTTEN_FLESH, SoundEvents.BLOCK_SLIME_BLOCK_HIT)).build();
-    create(BlockusBlocks.MEMBRANE_BLOCK).setFenceSettings(new FenceSettings(Items.PHANTOM_MEMBRANE, SoundEvents.BLOCK_SLIME_BLOCK_HIT)).setActivationSettings(ActivationSettings.soft(new ActivationSettings.Sounds(SoundEvents.BLOCK_SLIME_BLOCK_HIT))).addExtraTag(addWallToUnmineableTag).build();
+    create(BlockusBlocks.ROTTEN_FLESH_BLOCK).addExtraTag(BlockTags.HOE_MINEABLE).addExtraTag(addWallToUnmineableTag).setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.SLIME_BLOCK_SET_TYPE)).setFenceSettings(new FenceSettings(Items.ROTTEN_FLESH, ExtShapeBlockTypes.SLIME_WOOD_TYPE)).build();
+    create(BlockusBlocks.MEMBRANE_BLOCK).setFenceSettings(new FenceSettings(Items.PHANTOM_MEMBRANE, ExtShapeBlockTypes.SLIME_WOOD_TYPE)).setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.SLIME_BLOCK_SET_TYPE)).addExtraTag(addWallToUnmineableTag).build();
     FACTORY.createAllShapes(BlockusBlocks.NETHER_STAR_BLOCK).markStoneCuttable().withoutRedstone().setStoneFenceSettings(Items.NETHER_STAR).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_IRON_TOOL).addExtraTag(BlockTags.DRAGON_IMMUNE).withExtension(BlockExtension.builder().setSteppedOnCallback((world, pos, state, entity) -> {
       if (entity.getType() == EntityType.PLAYER) {
         ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 4, true, false, false));
