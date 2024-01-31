@@ -44,6 +44,7 @@ If you do not understand Chinese, you may refer to the [document in English](REA
 | 氧化的铜           | 100    | 100     |
 | 荧石             | 30     | 30      |
 | 下界庞、诡异庞        | 45     | 45      |
+| 紫水晶            | 35     | 25      |
 
 另外此模组还添加了“双层平滑石台阶”方块和“石化橡木木板”方块，分别可以合成平滑石台阶和石化橡木台阶（原版的平滑石块也可以合成平滑石台阶）。
 

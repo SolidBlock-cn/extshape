@@ -9,6 +9,7 @@ import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.NotNull;
+import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.util.ActivationSettings;
 
@@ -22,7 +23,7 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
         .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
         .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY)
         .instrument(Instrument.HARP)
-        .mapColor(MapColor.CLEAR), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, activationSettings));
+        .mapColor(MapColor.CLEAR), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, ((ButtonBuilder) builder).activationSettings));
     this.shape = BlockShape.BUTTON;
     final BlockSoundGroup soundGroup = baseBlock.getSoundGroup(baseBlock.getDefaultState());
     primaryTagToAddTo = soundGroup == BlockSoundGroup.WOOD || soundGroup == BlockSoundGroup.NETHER_WOOD || soundGroup == BlockSoundGroup.BAMBOO_WOOD || soundGroup == BlockSoundGroup.CHERRY_WOOD ? BlockTags.WOODEN_BUTTONS : BlockTags.BUTTONS;
@@ -36,5 +37,10 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
   @Override
   protected String getSuffix() {
     return "_button";
+  }
+
+  @Override
+  public AbstractBlockBuilder<ButtonBlock> withExtension(BlockExtension blockExtension) {
+    return setInstanceSupplier(builder -> new ExtShapeButtonBlock.WithExtension(builder.baseBlock, builder.blockSettings, ((ButtonBuilder) builder).activationSettings, blockExtension));
   }
 }
