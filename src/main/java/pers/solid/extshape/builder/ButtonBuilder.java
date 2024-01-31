@@ -5,6 +5,7 @@ import net.minecraft.block.*;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.NotNull;
+import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.util.ActivationSettings;
 
@@ -16,7 +17,7 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
     super(baseBlock, Util.make(AbstractBlock.Settings.copy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
-        .mapColor(MapColor.CLEAR), settings -> ((AbstractBlockSettingsAccessor) settings).setMaterial(Material.DECORATION)), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, activationSettings));
+        .mapColor(MapColor.CLEAR), settings -> ((AbstractBlockSettingsAccessor) settings).setMaterial(Material.DECORATION)), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, ((ButtonBuilder) builder).activationSettings));
     this.shape = BlockShape.BUTTON;
     final Material material = baseBlock.getDefaultState().getMaterial();
     primaryTagToAddTo = material == Material.WOOD || material == Material.NETHER_WOOD ? BlockTags.WOODEN_BUTTONS : BlockTags.BUTTONS;
@@ -30,5 +31,10 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
   @Override
   protected String getSuffix() {
     return "_button";
+  }
+
+  @Override
+  public AbstractBlockBuilder<ButtonBlock> withExtension(BlockExtension blockExtension) {
+    return setInstanceSupplier(builder -> new ExtShapeButtonBlock.WithExtension(builder.baseBlock, builder.blockSettings, ((ButtonBuilder) builder).activationSettings, blockExtension));
   }
 }
