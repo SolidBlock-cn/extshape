@@ -62,16 +62,16 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
 
   @FunctionalInterface
   public interface EmitsRedstonePower {
-    EmitsRedstonePower EMPTY = state -> false;
+    EmitsRedstonePower EMPTY = (state, original) -> original;
 
-    boolean emitsRedstonePower(BlockState state);
+    boolean emitsRedstonePower(BlockState state, boolean original);
   }
 
   @FunctionalInterface
   public interface WeakRedstonePower {
-    WeakRedstonePower EMPTY = (state, world, pos, direction) -> 0;
+    WeakRedstonePower EMPTY = (state, world, pos, direction, original) -> original;
 
-    int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction);
+    int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction, int original);
   }
 
   public static class Builder {

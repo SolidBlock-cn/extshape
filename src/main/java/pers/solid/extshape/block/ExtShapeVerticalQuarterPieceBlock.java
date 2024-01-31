@@ -108,13 +108,13 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
     @SuppressWarnings("deprecation")
     @Override
     public boolean emitsRedstonePower(BlockState state) {
-      return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state);
+      return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.emitsRedstonePower(state));
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction);
+      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getWeakRedstonePower(state, world, pos, direction));
     }
   }
 
