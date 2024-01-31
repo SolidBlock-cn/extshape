@@ -6,6 +6,8 @@
 - Fixed the issue that Extended Block Shapes Blockus cannot run correctly due to compilation issue.
 - Fixed the issue that pressure plates with special features (such as sculk pressure plate) cannot work normally.
 - Adjusted again the activation time of some pressure plates and buttons.
+- Adjusted some loot tables. Now blocks who drop other items, no matter when dropping other items, or dropping themselves under the effect of Silk Touch enchantment, when the block is a double slab, the dropped stacks are doubled.
+- Fixed the issue that sculk buttons do not drop experience upon harvested.
 
 ### 2.1.0
 
