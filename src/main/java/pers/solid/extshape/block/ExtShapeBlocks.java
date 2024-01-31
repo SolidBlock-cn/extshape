@@ -764,7 +764,13 @@ public final class ExtShapeBlocks {
         .addExtraTag(addWallToUnmineableTag)
         .setFenceSettings(new FenceSettings(Items.SCULK_VEIN, ExtShape.MOD_ID, "sculk"))
         .setActivationSettings(ActivationSettings.wood(ActivationSettings.Sounds.SCULK))
-        .withExtension(BlockExtension.builder().setStacksDroppedCallback((state, world, pos, stack, dropExperience) -> ((BlockAccessor) state.getBlock()).callDropExperienceWhenMined(world, pos, stack, ConstantIntProvider.create(1))).build())
+        .addPreBuildConsumer((blockShape, x) -> x.withExtension(BlockExtension.builder().setStacksDroppedCallback((state, world, pos, stack, dropExperience) -> {
+          if (dropExperience) {
+            final float logicalCompleteness = blockShape.logicalCompleteness(state);
+            if (logicalCompleteness == 1 || world.getRandom().nextFloat() < logicalCompleteness)
+              ((BlockAccessor) state.getBlock()).callDropExperienceWhenMined(world, pos, stack, ConstantIntProvider.create(1));
+          }
+        }).build()))
         .build();
 
     // 铜块。
