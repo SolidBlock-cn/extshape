@@ -5,11 +5,15 @@ import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.WoodType;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.ExtShape;
 
 public final class ExtShapeBlockTypes {
+  private static SoundEvent of(String name) {
+    return SoundEvent.of(new Identifier(ExtShape.MOD_ID, name));
+  }
+
   public static final WoodType STONE_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .soundGroup(BlockSoundGroup.STONE)
       .build(new Identifier(ExtShape.MOD_ID, "stone"), BlockSetType.STONE);
@@ -18,9 +22,8 @@ public final class ExtShapeBlockTypes {
       .soundGroup(BlockSoundGroup.AMETHYST_BLOCK)
       .build(new Identifier(ExtShape.MOD_ID, "amethyst"));
   public static final WoodType AMETHYST_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
-      .fenceGateOpenSound(SoundEvents.BLOCK_AMETHYST_BLOCK_HIT)
-      .fenceGateCloseSound(SoundEvents.BLOCK_AMETHYST_BLOCK_HIT)
-      .hangingSignSoundGroup(BlockSoundGroup.AMETHYST_BLOCK)
+      .fenceGateOpenSound(of("block.amethyst_fence_gate.open"))
+      .fenceGateCloseSound(of("block.amethyst_fence_gate.close"))
       .soundGroup(BlockSoundGroup.AMETHYST_BLOCK)
       .build(new Identifier(ExtShape.MOD_ID, "amethyst"), AMETHYST_BLOCK_SET_TYPE);
 
@@ -37,15 +40,15 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType WOOL_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(SOFT_BLOCK_SET_TYPE)
       .soundGroup(BlockSoundGroup.WOOL)
-      .buttonClickOnSound(SoundEvents.BLOCK_WOOL_HIT)
-      .buttonClickOffSound(SoundEvents.BLOCK_WOOL_HIT)
-      .pressurePlateClickOnSound(SoundEvents.BLOCK_WOOL_HIT)
-      .pressurePlateClickOffSound(SoundEvents.BLOCK_WOOL_HIT)
+      .buttonClickOnSound(of("block.wool_button.click_on"))
+      .buttonClickOffSound(of("block.wool_button.click_off"))
+      .pressurePlateClickOnSound(of("block.wool_pressure_plate.click_on"))
+      .pressurePlateClickOffSound(of("block.wool_pressure_plate.click_off"))
       .build(new Identifier(ExtShape.MOD_ID, "wool"));
   public static final WoodType WOOL_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .soundGroup(BlockSoundGroup.WOOL)
-      .fenceGateOpenSound(SoundEvents.BLOCK_WOOL_HIT)
-      .fenceGateCloseSound(SoundEvents.BLOCK_WOOL_HIT)
+      .fenceGateOpenSound(of("block.wool_fence_gate.open"))
+      .fenceGateCloseSound(of("block.wool_fence_gate.close"))
       .build(new Identifier(ExtShape.MOD_ID, "wool"), WOOL_BLOCK_SET_TYPE);
 
   public static final BlockSetType QUARTZ_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
@@ -76,15 +79,15 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType SNOW_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(SOFT_BLOCK_SET_TYPE)
       .soundGroup(BlockSoundGroup.SNOW)
-      .buttonClickOnSound(SoundEvents.BLOCK_SNOW_HIT)
-      .buttonClickOffSound(SoundEvents.BLOCK_SNOW_HIT)
-      .pressurePlateClickOnSound(SoundEvents.BLOCK_SNOW_HIT)
-      .pressurePlateClickOffSound(SoundEvents.BLOCK_SNOW_HIT)
+      .buttonClickOnSound(of("block.snow_button.click_on"))
+      .buttonClickOffSound(of("block.snow_button.click_off"))
+      .pressurePlateClickOnSound(of("block.snow_pressure_plate.click_on"))
+      .pressurePlateClickOffSound(of("block.snow_pressure_plate.click_off"))
       .build(new Identifier(ExtShape.MOD_ID, "snow"));
   public static final WoodType SNOW_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .soundGroup(BlockSoundGroup.SNOW)
-      .fenceGateOpenSound(SoundEvents.BLOCK_SNOW_HIT)
-      .fenceGateCloseSound(SoundEvents.BLOCK_SNOW_HIT)
+      .fenceGateOpenSound(of("block.snow_fence_gate.open"))
+      .fenceGateCloseSound(of("block.snow_fence_gate.close"))
       .build(new Identifier(ExtShape.MOD_ID, "snow"), SNOW_BLOCK_SET_TYPE);
 
   public static final BlockSetType NETHERRACK_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
@@ -124,15 +127,15 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType WART_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(SOFT_BLOCK_SET_TYPE)
       .soundGroup(BlockSoundGroup.WART_BLOCK)
-      .buttonClickOnSound(SoundEvents.BLOCK_WART_BLOCK_HIT)
-      .buttonClickOffSound(SoundEvents.BLOCK_WART_BLOCK_HIT)
-      .pressurePlateClickOnSound(SoundEvents.BLOCK_WART_BLOCK_HIT)
-      .pressurePlateClickOffSound(SoundEvents.BLOCK_WART_BLOCK_HIT)
+      .buttonClickOnSound(of("block.wart_button.click_on"))
+      .buttonClickOffSound(of("block.wart_button.click_off"))
+      .pressurePlateClickOnSound(of("block.wart_pressure_plate.click_on"))
+      .pressurePlateClickOffSound(of("block.wart_pressure_plate.click_off"))
       .build(new Identifier(ExtShape.MOD_ID, "wart_block"));
   public static final WoodType WART_BLOCK_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .soundGroup(BlockSoundGroup.WART_BLOCK)
-      .fenceGateOpenSound(SoundEvents.BLOCK_WART_BLOCK_HIT)
-      .fenceGateCloseSound(SoundEvents.BLOCK_WART_BLOCK_HIT)
+      .fenceGateOpenSound(of("block.wart_fence_gate.open"))
+      .fenceGateCloseSound(of("block.wart_fence_gate.close"))
       .build(new Identifier(ExtShape.MOD_ID, "wart_block"), WART_BLOCK_SET_TYPE);
 
   public static final BlockSetType SHROMLIGHT_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
@@ -178,15 +181,15 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType SCULK_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(SOFT_BLOCK_SET_TYPE)
       .soundGroup(BlockSoundGroup.SCULK)
-      .buttonClickOnSound(SoundEvents.BLOCK_SCULK_HIT)
-      .buttonClickOffSound(SoundEvents.BLOCK_SCULK_HIT)
-      .pressurePlateClickOnSound(SoundEvents.BLOCK_SCULK_HIT)
-      .pressurePlateClickOffSound(SoundEvents.BLOCK_SCULK_HIT)
+      .buttonClickOnSound(of("block.sculk_button.click_on"))
+      .buttonClickOffSound(of("block.sculk_button.click_off"))
+      .pressurePlateClickOnSound(of("block.sculk_pressure_plate.click_on"))
+      .pressurePlateClickOffSound(of("block.sculk_pressure_plate.click_off"))
       .build(new Identifier(ExtShape.MOD_ID, "sculk"));
   public static final WoodType SCULK_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .soundGroup(BlockSoundGroup.SCULK)
-      .fenceGateOpenSound(SoundEvents.BLOCK_SCULK_HIT)
-      .fenceGateCloseSound(SoundEvents.BLOCK_SCULK_HIT)
+      .fenceGateOpenSound(of("block.sculk_fence_gate.open"))
+      .fenceGateCloseSound(of("block.sculk_fence_gate.close"))
       .build(new Identifier(ExtShape.MOD_ID, "sculk"), SCULK_BLOCK_SET_TYPE);
 
   public static final BlockSetType DRIPSTONE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
@@ -198,16 +201,29 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType MOSS_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(SOFT_BLOCK_SET_TYPE)
       .soundGroup(BlockSoundGroup.MOSS_BLOCK)
-      .buttonClickOnSound(SoundEvents.BLOCK_MOSS_HIT)
-      .buttonClickOffSound(SoundEvents.BLOCK_MOSS_HIT)
-      .pressurePlateClickOnSound(SoundEvents.BLOCK_MOSS_HIT)
-      .pressurePlateClickOffSound(SoundEvents.BLOCK_MOSS_HIT)
+      .buttonClickOnSound(of("block.moss_button.click_on"))
+      .buttonClickOffSound(of("block.moss_button.click_off"))
+      .pressurePlateClickOnSound(of("block.moss_pressure_plate.click_on"))
+      .pressurePlateClickOffSound(of("block.moss_pressure_plate.click_off"))
       .build(new Identifier(ExtShape.MOD_ID, "moss_block"));
   public static final WoodType MOSS_BLOCK_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .soundGroup(BlockSoundGroup.MOSS_BLOCK)
-      .fenceGateOpenSound(SoundEvents.BLOCK_MOSS_HIT)
-      .fenceGateCloseSound(SoundEvents.BLOCK_MOSS_HIT)
+      .fenceGateOpenSound(of("block.moss_fence_gate.open"))
+      .fenceGateCloseSound(of("block.moss_fence_gate.close"))
       .build(new Identifier(ExtShape.MOD_ID, "moss_block"), MOSS_BLOCK_SET_TYPE);
+
+  public static final BlockSetType SLIME_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(SOFT_BLOCK_SET_TYPE)
+      .soundGroup(BlockSoundGroup.SLIME)
+      .buttonClickOnSound(of("block.slime_button.click_on"))
+      .buttonClickOffSound(of("block.slime_button.click_off"))
+      .pressurePlateClickOnSound(of("block.slime_pressure_plate.click_on"))
+      .pressurePlateClickOffSound(of("block.slime_pressure_plate.click_off"))
+      .build(new Identifier(ExtShape.MOD_ID, "slime"));
+  public static final WoodType SLIME_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
+      .soundGroup(BlockSoundGroup.SLIME)
+      .fenceGateOpenSound(of("block.slime_fence_gate.open"))
+      .fenceGateCloseSound(of("block.slime_fence_gate.close"))
+      .build(new Identifier(ExtShape.MOD_ID, "slime"), SLIME_BLOCK_SET_TYPE);
 
   public static final BlockSetType DEEPSLATE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .soundGroup(BlockSoundGroup.DEEPSLATE)
