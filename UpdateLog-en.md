@@ -5,6 +5,7 @@
 - Fixed the incorrect subtitle of sound.
 - Fixed the issue that Extended Block Shapes Blockus cannot run correctly due to compilation issue.
 - Fixed the issue that pressure plates with special features (such as sculk pressure plate) cannot work normally.
+- Adjusted again the activation time of some pressure plates and buttons.
 
 ### 2.1.0
 
