@@ -44,6 +44,7 @@ In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of 
 | oxidized copper                         | 100                    | 100                   |
 | glowstone                               | 30                     | 30                    |
 | nether wart, warped wart                | 45                     | 45                    |
+| amethyst                                | 35                     | 25                    |
 
 This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs.
 
