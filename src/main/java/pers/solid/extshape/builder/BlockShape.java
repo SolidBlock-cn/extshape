@@ -5,7 +5,9 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.gson.*;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.data.family.BlockFamily;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -126,6 +128,14 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
   @Override
   public int compareTo(@NotNull BlockShape o) {
     return id - o.id;
+  }
+
+  public float logicalCompleteness(@NotNull BlockState blockState) {
+    if (this == SLAB && blockState.contains(Properties.SLAB_TYPE) && blockState.get(Properties.SLAB_TYPE) == SlabType.DOUBLE) {
+      return 1;
+    } else {
+      return logicalCompleteness;
+    }
   }
 
   public enum Serializer implements JsonSerializer<BlockShape>, JsonDeserializer<BlockShape> {
