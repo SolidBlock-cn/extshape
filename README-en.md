@@ -22,21 +22,29 @@ The hardness, mining tools and mining time of all stairs, slabs, fences and wall
 
 In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of their basic blocks. All pressure plates and buttons added in this mod have the same hardness as 1/4 of their base blocks. This mod simply extends buttons: soft buttons (wool buttons, snow buttons) trigger 60 ticks (3 seconds); hard buttons (obsidian buttons, bedrock buttons) trigger 5 ticks (1/4 second). For the actual activation time, see the table below. Like in vanilla Minecraft, all buttons and pressure plates have no collision box.
 
-| Base blocks                                   | Button activation time | Pressure plate activation time |
-|-----------------------------------------------|------------------------|--------------------------------|
-| stone blocks                                  | 20                     | 20                             |
-| wooden or bamboo blocks                       | 30                     | 20                             |
-| soft blocks (dirt/moss etc.)                  | 60                     | 60                             |
-| hard blocks (obsidian/netherite/bedrock etc.) | 5                      | 5                              |
-| wool                                          | 50                     | 50                             |
-| ore                                           | 15                     | 10                             |
-| melon, pumpkin                                | 50                     | 40                             |
-| quartz                                        | 25                     | 25                             |
-| tuff, calcite                                 | 40                     | 30                             |
-| unoxidized copper                             | 10                     | 10                             |
-| exposed copper                                | 40                     | 40                             |
-| weathered copper                              | 70                     | 70                             |
-| oxidized copper                               | 100                    | 100                            |
+| base block                              | button activation time | plate activation time |
+|-----------------------------------------|------------------------|-----------------------|
+| stone blocks                            | 20                     | 20                    |
+| wooden and bamboo                       | 30                     | 20                    |
+| other soft blocks                       | 50                     | 40                    |
+| hard blocks (obsidian, netherite, etc.) | 5                      | 5                     |
+| wool                                    | 50                     | 40                    |
+| snow                                    | 55                     | 55                    |
+| moss                                    | 60                     | 60                    |
+| dirt, clay                              | 45                     | 45                    |
+| ore blocks                              | 15                     | 10                    |
+| melon, pumpkin                          | 35                     | 25                    |
+| quartz                                  | 25                     | 25                    |
+| basalt                                  | 15                     | 15                    |
+| tuff, calcite, netherrack               | 25                     | 20                    |
+| deepslate (including bricks)            | 10                     | 10                    |
+| unoxidized copper                       | 10                     | 10                    |
+| exposed copper                          | 40                     | 40                    |
+| weathered copper                        | 70                     | 70                    |
+| oxidized copper                         | 100                    | 100                   |
+| glowstone                               | 30                     | 30                    |
+| nether wart, warped wart                | 45                     | 45                    |
+
 This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs.
 
 Blocks added by this mod inherit most features of their base blocks:
