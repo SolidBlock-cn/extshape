@@ -1,5 +1,10 @@
 # Update log
 
+### 2.1.1
+
+- Fixed the incorrect subtitle of sound.
+- Fixed the issue that Extended Block Shapes Blockus cannot run correctly due to compilation issue.
+
 ### 2.1.0
 
 - Added blocks of various shapes for unwaxed copper blocks (waxed blocks already exist in previous versions). Now these blocks can be normally waxed and de-waxed. Unnwaxed block can be oxidized or restored.
