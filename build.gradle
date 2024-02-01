@@ -1,7 +1,7 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
 plugins {
-    id 'fabric-loom' version '1.4-SNAPSHOT'
+    id 'fabric-loom' version '1.5-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
@@ -29,12 +29,12 @@ allprojects {
 
         // Mod Menu 模组
         maven { url 'https://maven.terraformersmc.com/releases/' }
-        // 合理排序模组依赖的 Cloth Config
+        // Cloth Config、Roughly Enough Items
         maven { url "https://maven.shedaniel.me/" }
         /*
         这个是存储在 GitHub 上的 BRRP 模组
         maven {
-            url 'https://raw.nuaa.cf/SolidBlock-cn/mvn-repo/main'
+            url 'https://github.com/SolidBlock-cn/mvn-repo/main'
         }*/
         // 合理排序和 BRRP 模组。这两个模组均存储于本地的 maven 仓库。
         mavenLocal()
@@ -95,7 +95,7 @@ allprojects {
 
     jar {
         from("LICENSE") {
-            rename { "${it}_${project.base.archivesName}" }
+            rename { "${it}_${base.archivesName.get()}" }
         }
     }
 
@@ -136,6 +136,10 @@ allprojects {
     }
 }
 
+ext {
+    release_type = mod_version.contains('beta') ? 'beta' : 'release' as String
+}
+
 subprojects {
     dependencies {
     }
@@ -156,7 +160,7 @@ project(':runtest') {
     [tasks.remapJar, tasks.remapSourcesJar, tasks.build].each {
         it.enabled = false
     }
-    }
+}
 
 
 /**
@@ -210,9 +214,9 @@ modrinth {
     projectId = 'tb7kCxSW'
     String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
-    versionType = 'release'
+    versionType = release_type
     uploadFile = remapJar
-    gameVersions = (project.supported_minecraft_versions as String).split(',') as List<String>
+    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
     var dependenciesList = [new ModDependency('JnrDtPAE', 'required')] // brrp
     if (platform == 'fabric') dependenciesList.add new ModDependency('P7dR8mSH', 'required') // Fabric API
@@ -229,7 +233,7 @@ githubRelease {
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "1.20.1"
+    targetCommitish = "1.20.4"
     body = changelogContent
     draft = true
     prerelease = false
