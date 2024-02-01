@@ -144,7 +144,7 @@ public final class UnusualLootTables {
     return (baseBlock, shape, block) -> {
       final LeafEntry.Builder<?> entryBuilder = entryBuilderConstCount(drop, fullCount, shape, block);
       if (shape == BlockShape.SLAB) {
-        return LootTable.builder().pool(LootPool.builder().with(ItemEntry.builder(block).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2)).conditionally(BlockStatePropertyLootCondition.builder(block).properties(EXACT_MATCH_DOUBLE_SLAB))).conditionally(VanillaBlockLootTableGenerator.WITH_SILK_TOUCH).alternatively(entryBuilder)));
+        return LootTable.builder().pool(LootPool.builder().with(ItemEntry.builder(block).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2)).conditionally(BlockStatePropertyLootCondition.builder(block).properties(EXACT_MATCH_DOUBLE_SLAB))).conditionally(WITH_SILK_TOUCH).alternatively(entryBuilder)));
       } else {
         return BlockLootTableGenerator.dropsWithSilkTouch(block, BlockLootTableGenerator.applyExplosionDecay(block, entryBuilder));
       }
