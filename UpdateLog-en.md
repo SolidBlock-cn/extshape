@@ -1,5 +1,11 @@
 # Update log
 
+### 2.1.2
+
+- Optimized the logic of item display in creative inventory and items are displayed faster.
+- Fixed a crash error related to creative inventory along with Sinytra Connector.
+- Improved some language files.
+
 ### 2.1.1
 
 - Fixed the incorrect subtitle of sound.
