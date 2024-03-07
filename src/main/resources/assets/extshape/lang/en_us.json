@@ -20,7 +20,7 @@
   "itemGroup.extshape.other_blocks": "\u00a79Extended Block Shape:\u00a7r Other Blocks",
 
   "modmenu.descriptionTranslation.extshape": "This mod adds more shapes for many vanilla blocks, including shapes that do not exist in vanilla Minecraft, like vertical slabs, vertical stairs or quarter pieces. Most of the blocks have vanilla behaviours, like what their base block behaves. For example, bedrock stairs and slabs are explosion-immune and wither-immune like bedrock, and wool fences and fence gates are flammable and can be sheared.\nWith this mod you can make more fascinating buildings, and your survival can be also more interesting.",
-  "modmenu.summaryTranslation.extshape": "More shapes for many vanilla blocks, which behave like in vanilla.",
+  "modmenu.summaryTranslation.extshape": "More shapes for many vanilla blocks",
 
   "options.extshape.title": "Configuration of Extended Block Shapes Mod",
   "options.extshape.addToVanillaGroups": "Add to vanilla groups",
