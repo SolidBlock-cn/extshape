@@ -55,9 +55,15 @@ public abstract class ItemGroupEntriesImplMixin {
   }
 
   @Unique
-  private final Multimap<Item, Item> prependingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? Registries.ITEM_GROUP.getKey(this.group).map(VanillaItemGroup::getPrependingRule).orElse(null) : null;
+  private Multimap<Item, Item> prependingRule;
   @Unique
-  private final Multimap<Item, Item> appendingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? Registries.ITEM_GROUP.getKey(this.group).map(VanillaItemGroup::getAppendingRule).orElse(null) : null;
+  private Multimap<Item, Item> appendingRule;
+
+  @Inject(method = "<init>", at = @At("TAIL"))
+  public void preInit(ItemGroup group, FeatureSet enabledFeatures, CallbackInfo ci) {
+    prependingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? Registries.ITEM_GROUP.getKey(this.group).map(VanillaItemGroup::getPrependingRule).orElse(null) : null;
+    appendingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? Registries.ITEM_GROUP.getKey(this.group).map(VanillaItemGroup::getAppendingRule).orElse(null) : null;
+  }
 
   @Inject(method = "add", at = @At("HEAD"))
   public void preAdd(ItemStack stack, ItemGroup.StackVisibility visibility, CallbackInfo ci) {
