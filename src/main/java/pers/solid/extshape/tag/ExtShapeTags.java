@@ -187,7 +187,6 @@ public final class ExtShapeTags {
   /**
    * 类似于 {@link BlockTags#SNOW}，但是不同的是，该方块标签中，{@link net.minecraft.block.SnowyBlock#isSnow(BlockState)} 对于该标签的方块必须有底部的完整碰撞箱才会让方块显示为雪。
    */
-  @SuppressWarnings("JavadocReference")
   public static final TagKey<Block> SNOW = ofBlockOnly("snow");
 
   private ExtShapeTags() {
