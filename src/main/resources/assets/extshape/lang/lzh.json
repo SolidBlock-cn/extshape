@@ -19,8 +19,8 @@
   "itemGroup.extshape.stone_blocks": "\u00a79塊形之擴：\u00a7r石",
   "itemGroup.extshape.other_blocks": "\u00a79塊形之擴：\u00a7r餘",
 
-  "modmenu.descriptionTranslation.extshape": "增益眾形於原塊，含形之藝赍未含者，如立版、立階、條。數塊咸大類本原礦藝之形，類其基礎。如例之，基石階版抵炸藥之攻、凋靈之擊。羊毛之檻扉，或灼或鉸。君因於創法製絕細之築，亦增生法之樂也。",
-  "modmenu.summaryTranslation.extshape": "增益眾形於原塊，亦類其之行。",
+  "modmenu.descriptionTranslation.extshape": "增益眾形於原塊，含形之藝赍未含者，如立版、立階、條。數塊咸大類本原礦藝之形，類其基礎。如例之，基石階版抵炸藥之攻、凋靈之擊。羊毛之檻扉，或灼或鉸。\n君因於創法製絕細之築，亦增生法之樂也。",
+  "modmenu.summaryTranslation.extshape": "增益眾形於原塊",
 
   "options.extshape.title": "塊形之擴改囊配製",
   "options.extshape.addToVanillaGroups": "咸入本設",

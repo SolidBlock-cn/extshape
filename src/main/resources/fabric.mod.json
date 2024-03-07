@@ -27,8 +27,7 @@
     ]
   },
   "mixins": [
-    "extshape.mixin.json",
-    "extshape-fabric.mixin.json"
+    "extshape.mixin.json"
   ],
   "depends": {
     "fabricloader": "*",
