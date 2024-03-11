@@ -25,7 +25,7 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
         .instrument(Instrument.HARP)
         .mapColor(MapColor.CLEAR), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, ((ButtonBuilder) builder).activationSettings));
     this.shape = BlockShape.BUTTON;
-    final BlockSoundGroup soundGroup = baseBlock.getSoundGroup(baseBlock.getDefaultState());
+    final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
     primaryTagToAddTo = soundGroup == BlockSoundGroup.WOOD || soundGroup == BlockSoundGroup.NETHER_WOOD || soundGroup == BlockSoundGroup.BAMBOO_WOOD || soundGroup == BlockSoundGroup.CHERRY_WOOD ? BlockTags.WOODEN_BUTTONS : BlockTags.BUTTONS;
     this.activationSettings = activationSettings;
   }

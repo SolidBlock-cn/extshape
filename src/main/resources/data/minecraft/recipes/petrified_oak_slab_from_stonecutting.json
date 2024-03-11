@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "extshape:petrified_oak_planks"
   },
-  "result": "minecraft:petrified_oak_slab",
-  "count": 2
+  "result": {
+    "id": "minecraft:petrified_oak_slab",
+    "count": 2
+  }
 }

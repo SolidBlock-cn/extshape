@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "extshape:smooth_stone_slab_double"
   },
-  "result": "minecraft:smooth_stone_slab",
-  "count": 2
+  "result": {
+    "id": "minecraft:smooth_stone_slab",
+    "count": 2
+  }
 }

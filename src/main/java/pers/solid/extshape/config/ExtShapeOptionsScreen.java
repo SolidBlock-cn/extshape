@@ -10,7 +10,6 @@ import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.OptionListWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
@@ -152,7 +151,7 @@ public class ExtShapeOptionsScreen extends Screen {
   @Override
   protected void init() {
     // 里面的内容不需要被选中，所以只是drawable。
-    addDrawable(new OptionListWidget(this.client, this.width, this.height, 32, /*this.height - 32, */25));
+//    addDrawable(new OptionListWidget(this.client, this.width, this.height, null)); // todo check
 
     addToVanillaGroupsButton.setX(width / 2 - 205);
     addDrawableChild(addToVanillaGroupsButton);
@@ -289,10 +288,5 @@ public class ExtShapeOptionsScreen extends Screen {
       }
     }
     return null;
-  }
-
-  @Override
-  public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-    renderBackgroundTexture(context);
   }
 }

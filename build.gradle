@@ -129,7 +129,7 @@ allprojects {
 }
 
 ext {
-    release_type = mod_version.contains('beta') ? 'beta' : 'release' as String
+    release_type = mod_version.contains('alpha') ? 'alpha' : mod_version.contains('beta') ? 'beta' : 'release' as String
 }
 
 subprojects {
@@ -149,7 +149,7 @@ project(':runtest') {
     }
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
-        implementation project(path: ':with_blockus', configuration: "namedElements")
+//        implementation project(path: ':with_blockus', configuration: "namedElements")
         if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
             modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
         }

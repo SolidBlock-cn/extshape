@@ -2,7 +2,6 @@ package pers.solid.extshape.builder;
 
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -110,7 +109,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     this.blockSettings = settings;
     this.buildItem = true;
     this.shouldAddToBlockBiMap = true;
-    this.itemSettings = new FabricItemSettings();
+    this.itemSettings = new Item.Settings();
     if (baseBlock != null && baseBlock.asItem() != null) {
       if (baseBlock.asItem().isFireproof()) itemSettings.fireproof();
     }
