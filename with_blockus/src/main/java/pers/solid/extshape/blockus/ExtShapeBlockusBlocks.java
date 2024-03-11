@@ -10,8 +10,6 @@ import com.brand.blockus.utils.tags.BlockusBlockTags;
 import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -23,6 +21,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -396,7 +395,7 @@ public final class ExtShapeBlockusBlocks {
 
     for (var woolTypes : Iterables.concat(BlockusBlockCollections.PATTERNED_WOOLS, BlockusBlockCollections.GINGHAM_WOOLS)) {
       FACTORY.createAllShapes(woolTypes.block)
-          .addExtraTag(FabricMineableTags.SHEARS_MINEABLE)
+          .addExtraTag(ExtShapeTags.WOOLEN_BLOCKS)
           .addExtraTag(BlockusBlockTags.ALL_PATTERNED_WOOLS)
           .addExtraTag(addWallToUnmineableTag)
           .without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.BUTTON)
@@ -436,12 +435,12 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.MEMBRANE_BLOCK).setFenceSettings(new FenceSettings(Items.PHANTOM_MEMBRANE, ExtShapeBlockTypes.SLIME_WOOD_TYPE)).setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.SLIME_BLOCK_SET_TYPE)).addExtraTag(addWallToUnmineableTag).build();
     FACTORY.createAllShapes(BlockusBlocks.NETHER_STAR_BLOCK).markStoneCuttable().withoutRedstone().setStoneFenceSettings(Items.NETHER_STAR).addExtraTag(BlockTags.PICKAXE_MINEABLE).addExtraTag(BlockTags.NEEDS_IRON_TOOL).addExtraTag(BlockTags.DRAGON_IMMUNE).withExtension(BlockExtension.builder().setSteppedOnCallback((world, pos, state, entity) -> {
       if (entity.getType() == EntityType.PLAYER) {
-        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 4, true, false, false));
-        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 100, 3, true, false, true));
-        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4, true, false, true));
+        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 3, true, false, false));
+        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 900, 3, true, false, true));
+        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 80, 2, true, false, true));
       }
     }).build()).addPreBuildConsumer((blockShape, builder) -> {
-      builder.setItemSettings(new FabricItemSettings().rarity(Rarity.RARE));
+      builder.setItemSettings(new Item.Settings().rarity(Rarity.RARE));
       builder.setItemInstanceSupplier(builder0 -> new ExtShapeBlockItem(builder0.instance, builder0.itemSettings.rarity(Rarity.UNCOMMON)) {
         @Override
         public boolean hasGlint(ItemStack stack) {
@@ -449,12 +448,11 @@ public final class ExtShapeBlockusBlocks {
         }
 
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+        public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
           super.appendTooltip(stack, world, tooltip, context);
           this.getBlock().appendTooltip(stack, world, tooltip, context);
           tooltip.add(ScreenTexts.EMPTY);
-          Text e = Blockus.STEPPED_ON_TEXT;
-          tooltip.add(e);
+          tooltip.add(Blockus.STEPPED_ON_TEXT);
           tooltip.add(ScreenTexts.space().append(StatusEffects.REGENERATION.getName()).append(" IV").formatted(Formatting.BLUE));
           tooltip.add(ScreenTexts.space().append(StatusEffects.ABSORPTION.getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
           tooltip.add(ScreenTexts.space().append(StatusEffects.STRENGTH.getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
