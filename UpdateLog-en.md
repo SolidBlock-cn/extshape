@@ -1,5 +1,9 @@
 # Update log
 
+### 2.1.3
+
+- Adjusted the sorting of some items in the Creative inventory. Some items that already exist in Building Blocks will not be displayed in Natural.
+
 ### 2.1.2
 
 - Optimized the logic of item display in creative inventory and items are displayed faster.
