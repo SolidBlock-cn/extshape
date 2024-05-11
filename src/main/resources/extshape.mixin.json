@@ -14,9 +14,10 @@
     "FenceGateAccessor",
     "ItemGroupEntriesImplMixin",
     "ItemGroupsMixin",
-    "MiningToolItemMixin",
+    "ShearsItemMixin",
     "SingleItemRecipeJsonBuilderAccessor",
     "SnowyBlockMixin",
+    "ToolMaterialMixin",
     "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"
   ],

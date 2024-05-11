@@ -81,14 +81,12 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
     }
 
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
       super.onStacksDropped(state, world, pos, stack, dropExperience);
       extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
       super.onProjectileHit(world, state, hit, projectile);
@@ -101,13 +99,11 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean emitsRedstonePower(BlockState state) {
       return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.emitsRedstonePower(state));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
       return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getWeakRedstonePower(state, world, pos, direction));
@@ -123,7 +119,6 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
       this.oxidationLevel = oxidationLevel;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
       this.tickDegradation(state, world, pos, random);

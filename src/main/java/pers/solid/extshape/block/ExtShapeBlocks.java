@@ -303,7 +303,7 @@ public final class ExtShapeBlocks {
         .addExtraTag(BlockTags.WITHER_IMMUNE)
         .setFenceSettings(FenceSettings.STONE)
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape1, builder1) -> ((AbstractBlockSettingsAccessor) builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state1, world1, pos1, type) -> false)).setLootTableId(null))
+        .addPreBuildConsumer((blockShape1, builder1) -> ((AbstractBlockSettingsAccessor) builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state1, world1, pos1, type) -> false)).setLootTableKey(null))
         .build();
 
     // 青金石块。

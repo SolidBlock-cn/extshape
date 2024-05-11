@@ -28,13 +28,17 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.predicate.NumberRange;
 import net.minecraft.predicate.StatePredicate;
 import net.minecraft.predicate.item.EnchantmentPredicate;
+import net.minecraft.predicate.item.EnchantmentsPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
+import net.minecraft.predicate.item.ItemSubPredicateTypes;
 import net.minecraft.state.property.Properties;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.*;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.builder.BlockShape;
+
+import java.util.List;
 
 /**
  * <p>本类记录了用于本模组的不掉落方块本身的基础方块的战利品表。
@@ -48,7 +52,7 @@ public final class UnusualLootTables {
   @Unmodifiable
   @ApiStatus.Internal
   static final ImmutableMap<Block, @NotNull LootTableFunction> INSTANCE;
-  public static final LootCondition.Builder WITH_SILK_TOUCH = MatchToolLootCondition.builder(ItemPredicate.Builder.create().enchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))));
+  public static final LootCondition.Builder WITH_SILK_TOUCH = MatchToolLootCondition.builder(ItemPredicate.Builder.create().subPredicate(ItemSubPredicateTypes.ENCHANTMENTS, EnchantmentsPredicate.enchantments(List.of(new EnchantmentPredicate(Enchantments.SILK_TOUCH, NumberRange.IntRange.atLeast(1))))));
   public static final StatePredicate.Builder EXACT_MATCH_DOUBLE_SLAB = StatePredicate.Builder.create().exactMatch(Properties.SLAB_TYPE, SlabType.DOUBLE);
   /**
    * 只有带有精准采集附魔时才会掉落的方块。

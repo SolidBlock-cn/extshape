@@ -42,13 +42,11 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
     return placementState != null ? placementState.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()) : null;
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public BlockState rotate(BlockState state, BlockRotation rotation) {
     return state.with(FACING, rotation.rotate(state.get(FACING)));
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public BlockState mirror(BlockState state, BlockMirror mirror) {
     return state.rotate(mirror.getRotation(state.get(FACING)));

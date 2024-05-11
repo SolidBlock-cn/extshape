@@ -107,7 +107,6 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
     return placementState != null ? placementState.with(AXIS, ctx.getSide().getAxis()) : null;
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   public BlockState rotate(BlockState state, BlockRotation rotation) {
     return PillarBlock.changeRotation(super.rotate(state, rotation), rotation);

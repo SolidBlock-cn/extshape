@@ -3,6 +3,8 @@
 ### 2.1.3
 
 - Adjusted the sorting of some items in the Creative inventory. Some items that already exist in Building Blocks will not be displayed in Natural.
+- Fixed the incorrect textures.
+- While avoiding wooden wall recipes, recipes for copper wall and waxed copper walls are also avoided, to avoid conflict with the new version copper trapdoor.
 
 ### 2.1.2
 

@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -111,7 +112,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     this.shouldAddToBlockBiMap = true;
     this.itemSettings = new Item.Settings();
     if (baseBlock != null && baseBlock.asItem() != null) {
-      if (baseBlock.asItem().isFireproof()) itemSettings.fireproof();
+      if (baseBlock.asItem().getComponents().contains(DataComponentTypes.FIRE_RESISTANT)) itemSettings.fireproof();
     }
     this.instanceSupplier = instanceSupplier;
   }

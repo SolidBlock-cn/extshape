@@ -43,7 +43,14 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
-    return craftingRecipe == null || (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes && BlockCollections.PLANKS.contains(baseBlock)) ? null : craftingRecipe.group(getRecipeGroup());
+    if (craftingRecipe == null) {
+      return null;
+    } else if (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes) {
+      if (BlockCollections.PLANKS.contains(baseBlock) || CopperManager.COPPER_BLOCKS.contains(baseBlock) || CopperManager.WAXED_COPPER_BLOCKS.contains(baseBlock)) {
+        return null;
+      }
+    }
+    return craftingRecipe.group(getRecipeGroup());
   }
 
   @Override
@@ -69,14 +76,12 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
       this.extension = extension;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
       super.onStacksDropped(state, world, pos, stack, dropExperience);
       extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
       super.onProjectileHit(world, state, hit, projectile);
@@ -89,13 +94,11 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public boolean emitsRedstonePower(BlockState state) {
       return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.emitsRedstonePower(state));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
       return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getWeakRedstonePower(state, world, pos, direction));
@@ -111,7 +114,6 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
       this.oxidationLevel = oxidationLevel;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
       this.tickDegradation(state, world, pos, random);

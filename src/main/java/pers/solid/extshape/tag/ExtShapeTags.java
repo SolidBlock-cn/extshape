@@ -2,7 +2,6 @@ package pers.solid.extshape.tag;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
-import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
@@ -16,6 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 
+import java.util.List;
+
 /**
  * 本模组提供的方块和物品标签。这些标签不应该被其他的模组使用。
  */
@@ -28,9 +29,9 @@ public final class ExtShapeTags {
   @ApiStatus.AvailableSince("0.1.5")
   public static final TagKey<Block> PICKAXE_UNMINEABLE = ofBlockOnly("pickaxe_unmineable");
   /**
-   * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，会被剪刀剪掉，并被加入到 {@link BlockTags#OCCLUDES_VIBRATION_SIGNALS} 中（仅限 1.17 以上版本）。
+   * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，会被剪刀剪掉。由于 1.20.5 版本以后没有 {@code fabric:shears_mineable} 标签，因此由 {@link pers.solid.extshape.mixin.ShearsItemMixin#addMineableTag(List)} 实现。
    */
-  public static final TagKey<Block> WOOLEN_BLOCKS = ofBlockAndItem("woolen_blocks", FabricMineableTags.SHEARS_MINEABLE, DAMPENS_VIBRATIONS, BlockTags.OCCLUDES_VIBRATION_SIGNALS);
+  public static final TagKey<Block> WOOLEN_BLOCKS = ofBlockAndItem("woolen_blocks", DAMPENS_VIBRATIONS, BlockTags.OCCLUDES_VIBRATION_SIGNALS);
   /**
    * 所有的木质方块，包括下界木，不含原版方块。
    */
@@ -187,7 +188,6 @@ public final class ExtShapeTags {
   /**
    * 类似于 {@link BlockTags#SNOW}，但是不同的是，该方块标签中，{@link net.minecraft.block.SnowyBlock#isSnow(BlockState)} 对于该标签的方块必须有底部的完整碰撞箱才会让方块显示为雪。
    */
-  @SuppressWarnings("JavadocReference")
   public static final TagKey<Block> SNOW = ofBlockOnly("snow");
 
   private ExtShapeTags() {

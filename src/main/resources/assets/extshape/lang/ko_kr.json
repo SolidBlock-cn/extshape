@@ -28,8 +28,6 @@
   "options.extshape.shapesInSpecificGroups": "특정 그룹의 모양",
   "options.extshape.shapesInSpecificGroups.description": "모드의 특정 아이템 그룹에 어떤 모양을 추가할까요? (공백으로 구분합니다.)",
   "options.extshape.reset": "초기화",
-  "options.extshape.preventWoodenWallRecipes": "나무 담장 제작법 금지",
-  "options.extshape.preventWoodenWallRecipes.tooltip": "나무 다락문 제작법과의 충돌을 피하기 위해 나무 담장의 제작법을 금지합니다. 활성화하면 나무 담장을 만들 수 없습니다. 제작법 충돌을 해결하는 모드를 설치한 경우 이 설정을 비활성화할 수 있습니다.",
   "options.extshape.avoidSomeButtonRecipes": "일부 버튼 제작법 금지",
   "options.extshape.avoidSomeButtonRecipes.tooltip": "다른 아이템의 제작법과 충돌을 피하기 위해 버튼 제작법을 금지합니다. 예를 들어, 다이아몬드 블록으로 다이아몬드 버튼을 만드는 제작법은 다이아몬드 블록을 9개의 다이아몬드로 나누는 제작법과 충돌합니다. 활성화하면 해당 버튼을 제작할 수 없으므로 다른 아이템의 제작할 수 있습니다. 제작법 충돌을 해결하는 모드를 설치한 경우 이 설정을 비활성화 할 수 있습니다.",
   "options.extshape.specialSnowSlabCrafting": "특수한 눈 반 블록 제작법",
