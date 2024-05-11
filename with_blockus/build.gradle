@@ -9,11 +9,15 @@ base {
 version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
 group = rootProject.maven_group
 repositories {
-    // CurseMaven，用于加载其他模组
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
         }
     }
 }
@@ -23,7 +27,7 @@ dependencies {
         exclude module: "fabric-loader"
     }
     modCompileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
-    modApi "curse.maven:blockus-312289:${project.blockus_version}"
+    modApi "maven.modrinth:blockus:${project.blockus_version}"
     implementation project(path: ':', configuration: "namedElements")
 }
 

@@ -150,7 +150,7 @@ project(':runtest') {
     }
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
-//        implementation project(path: ':with_blockus', configuration: "namedElements")
+        implementation project(path: ':with_blockus', configuration: "namedElements")
         if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
             modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
         }
