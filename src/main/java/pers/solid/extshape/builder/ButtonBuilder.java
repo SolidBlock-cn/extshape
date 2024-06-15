@@ -4,7 +4,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.MapColor;
-import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
@@ -22,7 +22,7 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
         .noCollision()
         .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
         .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY)
-        .instrument(Instrument.HARP)
+        .instrument(NoteBlockInstrument.HARP)
         .mapColor(MapColor.CLEAR), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, ((ButtonBuilder) builder).activationSettings));
     this.shape = BlockShape.BUTTON;
     final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();

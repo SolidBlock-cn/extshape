@@ -151,7 +151,6 @@ public class ExtShapeOptionsScreen extends Screen {
   @Override
   protected void init() {
     // 里面的内容不需要被选中，所以只是drawable。
-//    addDrawable(new OptionListWidget(this.client, this.width, this.height, null)); // todo check
 
     addToVanillaGroupsButton.setX(width / 2 - 205);
     addDrawableChild(addToVanillaGroupsButton);

@@ -5,7 +5,6 @@ import com.google.common.collect.HashBiMap;
 import net.minecraft.block.Block;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
-import net.minecraft.resource.featuretoggle.FeatureFlags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
@@ -57,7 +56,7 @@ public final class BlockBiMaps {
             variant = variants.get(BlockFamily.Variant.CUSTOM_FENCE_GATE);
           }
         }
-        if (variant != null && !(variant.getRequiredFeatures().contains(FeatureFlags.UPDATE_1_21) && !baseBlock.getRequiredFeatures().contains(FeatureFlags.UPDATE_1_21))) {
+        if (variant != null) { // todo how to handle tuff blocks
           // 考虑到凝灰岩基础方块没有功能标签，但是凝灰岩变种方块有功能标签，故在此进行修改，以使用本模组中的凝灰岩楼梯和凝灰岩台阶
           setBlockOf(shape, baseBlock, variant);
           BASE_BLOCKS.add(baseBlock);

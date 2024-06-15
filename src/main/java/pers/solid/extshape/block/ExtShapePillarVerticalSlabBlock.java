@@ -57,15 +57,15 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
     final boolean isLog = BlockCollections.LOGS.contains(baseBlock) || BlockCollections.STRIPPED_LOGS.contains(baseBlock);
     final ModelJsonBuilder blockModel = getBlockModel();
     if (isLog) {
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal")));
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal_top")));
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_unordered"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal_unordered")));
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_unordered_top"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal_unordered_top")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal_top")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_unordered"), blockModel.withParent(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal_unordered")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_unordered_top"), blockModel.withParent(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab_column_horizontal_unordered_top")));
     } else {
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column")));
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column_top")));
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_unordered"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column_unordered")));
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_unordered_top"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/vertical_slab_column_unordered_top")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab_column")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab_column_top")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_unordered"), blockModel.withParent(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab_column_unordered")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_unordered_top"), blockModel.withParent(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab_column_unordered_top")));
     }
   }
 

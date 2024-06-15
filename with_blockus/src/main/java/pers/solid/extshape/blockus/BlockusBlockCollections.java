@@ -1,7 +1,6 @@
 package pers.solid.extshape.blockus;
 
 import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.ConcreteTypes;
 import com.brand.blockus.content.types.WoolTypes;
@@ -12,7 +11,7 @@ import net.minecraft.block.Block;
  * @see pers.solid.extshape.util.BlockCollections
  */
 public final class BlockusBlockCollections {
-  public static final ImmutableList<BSSTypes> WOODEN_MOSAICS = ImmutableList.of(
+  public static final ImmutableList<BSSWTypes> WOODEN_MOSAICS = ImmutableList.of(
       BlockusBlocks.OAK_MOSAIC,
       BlockusBlocks.SPRUCE_MOSAIC,
       BlockusBlocks.BIRCH_MOSAIC,
@@ -27,7 +26,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.CRIMSON_MOSAIC,
       BlockusBlocks.CHARRED_MOSAIC
   );
-  public static final ImmutableList<BSSTypes> MOSSY_PLANKS = ImmutableList.of(
+  public static final ImmutableList<BSSWTypes> MOSSY_PLANKS = ImmutableList.of(
       BlockusBlocks.MOSSY_OAK_PLANKS,
       BlockusBlocks.MOSSY_SPRUCE_PLANKS,
       BlockusBlocks.MOSSY_BIRCH_PLANKS,
@@ -104,7 +103,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.MAGENTA_CONCRETE_BRICKS,
       BlockusBlocks.PINK_CONCRETE_BRICKS
   );
-  public static final ImmutableList<BSSTypes> TINTED_SHINGLES = ImmutableList.of(
+  public static final ImmutableList<BSSWTypes> TINTED_SHINGLES = ImmutableList.of(
       BlockusBlocks.WHITE_SHINGLES,
       BlockusBlocks.ORANGE_SHINGLES,
       BlockusBlocks.MAGENTA_SHINGLES,

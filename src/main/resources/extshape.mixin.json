@@ -15,8 +15,8 @@
     "ItemGroupEntriesImplMixin",
     "ItemGroupsMixin",
     "ShearsItemMixin",
-    "SingleItemRecipeJsonBuilderAccessor",
     "SnowyBlockMixin",
+    "StonecuttingRecipeJsonBuilderAccessor",
     "ToolMaterialMixin",
     "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"

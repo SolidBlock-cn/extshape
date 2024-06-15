@@ -162,7 +162,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   public static Identifier convertIdentifier(@NotNull Identifier identifier, @Nullable String namespace, @NotNull String suffix) {
     String path = identifier.getPath();
     String basePath = getPathPrefixOf(path);
-    return new Identifier(namespace == null ? identifier.getNamespace() : namespace, basePath + suffix);
+    return Identifier.of(namespace == null ? identifier.getNamespace() : namespace, basePath + suffix);
   }
 
 

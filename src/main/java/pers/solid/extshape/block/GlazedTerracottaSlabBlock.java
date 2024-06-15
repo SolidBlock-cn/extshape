@@ -73,7 +73,7 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
   @Environment(EnvType.CLIENT)
   @Override
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return super.getBlockModel().parent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
+    return super.getBlockModel().parent(Identifier.of(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
   }
 
   @Environment(EnvType.CLIENT)
@@ -82,7 +82,7 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
     final ModelJsonBuilder model = getBlockModel();
     final Identifier id = getBlockModelId();
     pack.addModel(id, model);
-    pack.addModel(id.brrp_suffixed("_top"), model.withParent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")));
+    pack.addModel(id.brrp_suffixed("_top"), model.withParent(Identifier.of(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")));
   }
 
   @Override

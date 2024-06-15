@@ -284,12 +284,12 @@ public final class ExtShapeBlocks {
     // 石化橡木木板。
     PETRIFIED_OAK_PLANKS = FACTORY.modify(new BlockBuilder())
         .setInstanceSupplier(builder -> {
-          final BRRPCubeBlock block = BRRPCubeBlock.cubeAll(builder.blockSettings, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/oak_planks"));
+          final BRRPCubeBlock block = BRRPCubeBlock.cubeAll(builder.blockSettings, Identifier.of(Identifier.DEFAULT_NAMESPACE, "block/oak_planks"));
           ExtShapeBlockInterface.STONECUTTABLE_BLOCKS.add(block);
           return block;
         })
         .setBlockSettings(AbstractBlock.Settings.copy(PETRIFIED_OAK_SLAB))
-        .setIdentifier(new Identifier(ExtShape.MOD_ID, "petrified_oak_planks"))
+        .setIdentifier(Identifier.of(ExtShape.MOD_ID, "petrified_oak_planks"))
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .build();
 
@@ -622,9 +622,9 @@ public final class ExtShapeBlocks {
 
     // 平滑石头比较特殊，完整方块和台阶不同。
     SMOOTH_STONE_DOUBLE_SLAB = FACTORY.modify(new BlockBuilder())
-        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone"), new Identifier(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone_slab_side"), new Identifier(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone")))
+        .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, Identifier.of(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone"), Identifier.of(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone_slab_side"), Identifier.of(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone")))
         .setBlockSettings(AbstractBlock.Settings.copy(SMOOTH_STONE))
-        .setIdentifier(new Identifier(ExtShape.MOD_ID, "smooth_stone_slab_double"))
+        .setIdentifier(Identifier.of(ExtShape.MOD_ID, "smooth_stone_slab_double"))
         .addExtraTag(BlockTags.PICKAXE_MINEABLE).build();
 
     FACTORY.createAllShapes(SMOOTH_STONE)

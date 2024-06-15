@@ -7,7 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
-import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -46,7 +46,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
    * @return 方块的切石配方。用于切石机。
    */
   @Override
-  default @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
+  default @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
     return null;
   }
 
@@ -74,7 +74,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
     final String path = blockModelId.getPath();
     if (path.contains("waxed_") && path.contains("copper")) {
-      return new Identifier(blockModelId.getNamespace(), path.replace("waxed_", ""));
+      return Identifier.of(blockModelId.getNamespace(), path.replace("waxed_", ""));
     } else {
       return blockModelId;
     }
@@ -92,12 +92,12 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     writeItemModel(pack);
   }
 
-  default SingleItemRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount) {
+  default StonecuttingRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount) {
     final Block baseBlock = getBaseBlock();
     if (baseBlock == null) {
       return null;
     } else {
-      return SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
+      return StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
     }
   }
 
@@ -125,7 +125,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
    */
   @ApiStatus.AvailableSince("1.5.1")
   default void writeStonecuttingRecipe(RuntimeResourcePack pack) {
-    final @Nullable SingleItemRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe();
+    final @Nullable StonecuttingRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe();
     if (stonecuttingRecipe != null) {
       final Identifier stonecuttingRecipeId = getStonecuttingRecipeId();
       pack.addRecipeAndAdvancement(stonecuttingRecipeId, stonecuttingRecipe);

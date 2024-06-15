@@ -254,7 +254,7 @@ This update is for version only 1.17 and above.
 
 - Improved logging system.
 - Fixed the issue of incompatibility with OptiFine.
-    - Issue details: When OptiFine is on, operations like `new Identifier("#minecraft:banners")` do not throw
+    - Issue details: When OptiFine is on, operations like `Identifier.of("#minecraft:banners")` do not throw
       `InvalidIdentiferException`, causing code abnormal behavior.
 
 ### 1.2.1

@@ -254,7 +254,7 @@
 
 - 改善了日志系统。
 - 修复了与 OptiFine 不兼容的问题。
-    - 问题详情：在启用了 OptiFine 的情况下，类似于 `new Identifier("#minecraft:banners")` 这样的操作不会抛出
+    - 问题详情：在启用了 OptiFine 的情况下，类似于 `Identifier.of("#minecraft:banners")` 这样的操作不会抛出
       `InvalidIdentifierException`，导致代码无法正确运行。
 
 ### 1.2.1

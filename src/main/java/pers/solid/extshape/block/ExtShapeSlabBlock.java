@@ -12,7 +12,7 @@ import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -54,7 +54,7 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
     // 对于上蜡的铜，其自身的方块模型以及对应完整方块的模型均为未上蜡的方块模型，故在此处做出调整。
     Identifier baseId = baseBlock == null ? null : BRRPUtils.getBlockModelId(baseBlock);
     if (baseId != null && baseId.getPath().contains("waxed_") && baseId.getPath().contains("copper")) {
-      baseId = new Identifier(baseId.getNamespace(), baseId.getPath().replace("waxed_", ""));
+      baseId = Identifier.of(baseId.getNamespace(), baseId.getPath().replace("waxed_", ""));
     }
     return BlockStateModelGenerator.createSlabBlockState(this, id, id.brrp_suffixed("_top"), baseBlock != null ? baseId : id.brrp_suffixed("_double"));
   }
@@ -69,7 +69,7 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
   }
 
   @Override
-  public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
+  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
     return baseBlock == null ? null : simpleStoneCuttingRecipe(2);
   }
 

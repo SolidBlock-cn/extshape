@@ -3,7 +3,6 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.Blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.BlockusItems;
-import com.brand.blockus.content.types.BSSTypes;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.WoodTypes;
 import com.brand.blockus.utils.tags.BlockusBlockTags;
@@ -16,7 +15,6 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.WoodType;
-import net.minecraft.client.item.TooltipType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -25,6 +23,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
@@ -99,10 +98,9 @@ public final class ExtShapeBlockusBlocks {
         .setFenceSettings(FenceSettings.DRIPSTONE)
         .setActivationSettings(ActivationSettings.DRIPSTONE).build();
 
-    create(BlockusBlocks.POLISHED_TUFF).addExtraTag(BlockusBlockTags.TUFF_BLOCKS).setFenceSettings(FenceSettings.TUFF).setActivationSettings(ActivationSettings.TUFF).build();
-    create(BlockusBlocks.TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS).setFenceSettings(FenceSettings.TUFF).setActivationSettings(ActivationSettings.TUFF).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.MOSSY_TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS).setFenceSettings(FenceSettings.TUFF).setActivationSettings(ActivationSettings.TUFF).without(BlockShape.BUTTON).build();
-    create(BlockusBlocks.CHISELED_TUFF).addExtraTag(BlockusBlockTags.TUFF_BLOCKS).setFenceSettings(FenceSettings.TUFF).setActivationSettings(ActivationSettings.TUFF).without(BlockShape.BUTTON).build();
+    create(BlockusBlocks.CRACKED_TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS).setFenceSettings(FenceSettings.TUFF).setActivationSettings(ActivationSettings.TUFF).without(BlockShape.BUTTON).build();
+    create(BlockusBlocks.CARVED_TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS).setFenceSettings(FenceSettings.TUFF).setActivationSettings(ActivationSettings.TUFF).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.HERRINGBONE_TUFF_BRICKS).addExtraTag(BlockusBlockTags.TUFF_BLOCKS).setFenceSettings(FenceSettings.TUFF).setActivationSettings(ActivationSettings.TUFF).without(BlockShape.BUTTON).build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.TUFF_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.TUFF_BLOCKS).setFenceSettings(FenceSettings.TUFF).setActivationSettings(ActivationSettings.TUFF));
 
@@ -477,13 +475,6 @@ public final class ExtShapeBlockusBlocks {
     if (bsswTypes.stairs != null) blocksBuilder.without(BlockShape.STAIRS);
     if (bsswTypes.slab != null) blocksBuilder.without(BlockShape.SLAB);
     if (bsswTypes.wall != null) blocksBuilder.without(BlockShape.WALL);
-    return blocksBuilder;
-  }
-
-  private static BlocksBuilder create(BSSTypes bssTypes) {
-    final BlocksBuilder blocksBuilder = create(bssTypes.block);
-    if (bssTypes.stairs != null) blocksBuilder.without(BlockShape.STAIRS);
-    if (bssTypes.slab != null) blocksBuilder.without(BlockShape.SLAB);
     return blocksBuilder;
   }
 

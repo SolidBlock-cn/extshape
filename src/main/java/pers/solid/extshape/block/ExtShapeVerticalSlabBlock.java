@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.client.*;
-import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -55,11 +55,11 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   @Environment(EnvType.CLIENT)
   @Override
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID, "block/vertical_slab")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
+    return ModelJsonBuilder.create(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
   @Override
-  public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
+  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(2);
   }
 

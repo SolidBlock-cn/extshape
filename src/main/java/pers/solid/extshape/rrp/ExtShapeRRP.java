@@ -30,7 +30,7 @@ public final class ExtShapeRRP {
   /**
    * 适用于整个模组的运行时资源包，服务端和客户端都会运行。
    */
-  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(new Identifier(ExtShape.MOD_ID, "pack"));
+  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(Identifier.of(ExtShape.MOD_ID, "pack"));
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeRRP.class);
 
@@ -82,11 +82,13 @@ public final class ExtShapeRRP {
     LOGGER.info("Generating server data for Extended Block Shapes mod!");
 
     // 为方块添加数据。
+    final var instance = new UnusualLootTables(pack.getRegistryLookup()).createInstance();
     for (Block block : ExtShapeBlocks.getBlocks()) {
       if (!(block instanceof BlockResourceGenerator generator)) continue;
       generator.writeRecipes(pack);
       final Block baseBlock = generator.getBaseBlock();
-      final UnusualLootTables.LootTableFunction lootTableFunction = UnusualLootTables.INSTANCE.get(baseBlock);
+      if (baseBlock == null) continue;
+      final UnusualLootTables.LootTableFunction lootTableFunction = instance.get(baseBlock);
       if (lootTableFunction != null) {
         pack.addLootTable(generator.getLootTableId(), lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block));
       } else {

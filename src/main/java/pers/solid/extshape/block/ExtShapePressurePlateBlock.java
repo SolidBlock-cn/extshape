@@ -14,7 +14,7 @@ import net.minecraft.data.client.TextureKey;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
@@ -105,7 +105,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
-      final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
+      final Identifier carpetId = Identifier.of(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = Registries.ITEM.get(carpetId);
       // 一个羊毛压力板由 3 个地毯合成。
       return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
@@ -136,14 +136,14 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     // 反向合成配方。
     if (BlockCollections.WOOLS.contains(baseBlock)) {
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
-      final Identifier carpetId = new Identifier(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
+      final Identifier carpetId = Identifier.of(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = Registries.ITEM.get(carpetId);
-      final SingleItemRecipeJsonBuilder recipe = SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), carpet).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
-      final Identifier recipeId = new Identifier(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
+      final StonecuttingRecipeJsonBuilder recipe = StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), carpet).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
+      final Identifier recipeId = Identifier.of(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
       pack.addRecipeAndAdvancement(recipeId, recipe);
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      final SingleItemRecipeJsonBuilder recipe = SingleItemRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), Blocks.MOSS_CARPET).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
-      final Identifier recipeId = new Identifier(ExtShape.MOD_ID, "moss_carpet_from_pressure_plate");
+      final StonecuttingRecipeJsonBuilder recipe = StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), Blocks.MOSS_CARPET).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
+      final Identifier recipeId = Identifier.of(ExtShape.MOD_ID, "moss_carpet_from_pressure_plate");
       pack.addRecipeAndAdvancement(recipeId, recipe);
     }
   }

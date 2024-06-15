@@ -26,7 +26,7 @@ import java.util.stream.Stream;
  */
 public final class ExtShapeBlockusItemGroup {
 
-  private static final Identifier ADD_EXTRA_ITEMS = new Identifier(ExtShapeBlockus.NAMESPACE, "add_extra_items");
+  private static final Identifier ADD_EXTRA_ITEMS = Identifier.of(ExtShapeBlockus.NAMESPACE, "add_extra_items");
 
   private ExtShapeBlockusItemGroup() {
   }

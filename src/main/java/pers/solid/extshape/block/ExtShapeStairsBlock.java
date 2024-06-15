@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -36,7 +36,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   }
 
   @Override
-  public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
+  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(1);
   }
 

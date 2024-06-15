@@ -170,7 +170,7 @@ public final class CopperManager {
             .input(Items.HONEYCOMB)
             .group(RecipeProvider.getItemPath(waxed))
             .criterion(RecipeProvider.hasItem(unwaxed), RecipeProvider.conditionsFromItem(unwaxed));
-        pack.addRecipeAndAdvancement(new Identifier(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeProvider.convertBetween(waxed, Items.HONEYCOMB)), recipe);
+        pack.addRecipeAndAdvancement(Identifier.of(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeProvider.convertBetween(waxed, Items.HONEYCOMB)), recipe);
       }
     }
   }

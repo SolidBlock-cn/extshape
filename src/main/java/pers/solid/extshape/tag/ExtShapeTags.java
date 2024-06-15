@@ -197,7 +197,7 @@ public final class ExtShapeTags {
   }
 
   private static TagKey<Block> ofBlockOnly(@NotNull String path) {
-    return TagKey.of(RegistryKeys.BLOCK, new Identifier(ExtShape.MOD_ID, path));
+    return TagKey.of(RegistryKeys.BLOCK, Identifier.of(ExtShape.MOD_ID, path));
   }
 
   private static TagKey<Block> ofBlockAndItem(@NotNull String path) {

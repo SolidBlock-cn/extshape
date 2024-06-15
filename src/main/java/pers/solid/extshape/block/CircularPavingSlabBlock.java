@@ -57,7 +57,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   @Environment(EnvType.CLIENT)
   @Override
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return super.getBlockModel().withParent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
+    return super.getBlockModel().withParent(Identifier.of(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
   }
 
   @Environment(EnvType.CLIENT)
@@ -66,7 +66,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
     final ModelJsonBuilder model = getBlockModel();
     final Identifier id = getBlockModelId();
     pack.addModel(id, model);
-    pack.addModel(id.brrp_suffixed("_top"), model.withParent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")));
+    pack.addModel(id.brrp_suffixed("_top"), model.withParent(Identifier.of(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")));
   }
 
   @Environment(EnvType.CLIENT)
@@ -76,7 +76,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
     final BlockStateVariantMap.SingleProperty<SlabType> variants = BlockStateVariantMap.create(TYPE);
     Identifier baseId = baseBlock == null ? null : BRRPUtils.getBlockModelId(baseBlock);
     if (baseId != null && baseId.getPath().contains("waxed_") && baseId.getPath().contains("copper")) {
-      baseId = new Identifier(baseId.getNamespace(), baseId.getPath().replace("waxed_", ""));
+      baseId = Identifier.of(baseId.getNamespace(), baseId.getPath().replace("waxed_", ""));
     }
     final BlockStateVariantMap variants2 = BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates();
     variants.register(SlabType.BOTTOM, BlockStateVariant.create().put(VariantSettings.MODEL, id));
