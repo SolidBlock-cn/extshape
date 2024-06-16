@@ -6,6 +6,7 @@
 - Added sounds added by this mod into the registry.
 - Added colored blocks to corresponding tags in Fabric Conventional Tags in Fabric API.
 - Since 1.21, removed tuff stairs, tuff slab and tuff wall, as those blocks are formally added in Minecraft. If you open worlds created in former versions in 1.21, the mod will utilize DataFixer to convert in-mod tuff stairs (`extshape:tuff_stairs`), tuff slab (`extshape:tuff_slab`) and tuff wall (`extshape:tuff_wall`) into vanilla ones (`minecraft:tuff_stairs`, `minecraft:tuff_slab` and`tuff_wall`). Items also have the same conversion.
+- Fixed the issue that texture of vertical slabs rotate along with blocks.
 
 ### 2.1.3
 

@@ -6,6 +6,7 @@
 - 将模组增加的声音加入注册表。
 - 将彩色方块加入 Fabric API 中的 Fabric Conventional Tags 中的对应标签。
 - 自 1.21 开始，模组移除了凝灰岩楼梯、凝灰岩台阶和凝灰岩墙，因为这些方块已经正式加入 Minecraft 中。如果在 1.21 中打开此前的版本的世界，模组会通过 DataFixer，将原先模组中的凝灰岩楼梯（`extshape:tuff_stairs`）、凝灰岩台阶（`extshape:tuff_slab`）和凝灰岩墙（`extshape:tuff_wall`）转化为原版中的对应方块（`minecraft:tuff_stairs`、`minecraft:tuff_slab` 和 `tuff_wall`），对应物品也会转换。
+- 修复竖直台阶的纹理会随方块旋转的问题。
 
 ### 2.1.3
 
