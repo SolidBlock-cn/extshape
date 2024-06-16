@@ -4,6 +4,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.WoodType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -11,7 +13,9 @@ import pers.solid.extshape.ExtShape;
 
 public final class ExtShapeBlockTypes {
   private static SoundEvent of(String name) {
-    return SoundEvent.of(new Identifier(ExtShape.MOD_ID, name));
+    final Identifier id = new Identifier(ExtShape.MOD_ID, name);
+    final SoundEvent soundEvent = SoundEvent.of(id);
+    return Registry.register(Registries.SOUND_EVENT, id, soundEvent);
   }
 
   public static final WoodType STONE_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)

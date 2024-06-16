@@ -17,6 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
@@ -333,6 +334,9 @@ public final class ExtShapeBlocks {
           .build();
     }
 
+    // 用于将所有染色方块加入对应颜色的标签中。
+    final Iterator<TagKey<Block>> dyedTags = Iterators.cycle(BlockCollections.DYED_TAGS);
+
     // 羊毛。
     for (final Block block : BlockCollections.WOOLS) {
       // 下面这些标签均属于 woolen_blocks
@@ -352,6 +356,7 @@ public final class ExtShapeBlocks {
           .setPrimaryTagForShape(BlockShape.WALL, ExtShapeTags.WOOLEN_WALLS)
           .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 50))
           .setRecipeGroup(blockShape -> "wool_" + blockShape.asString())
+          .addExtraTag(dyedTags.next())
           .build();
     }
 
@@ -567,6 +572,7 @@ public final class ExtShapeBlocks {
         .setPrimaryTagForShape(BlockShape.WALL, ExtShapeTags.TERRACOTTA_WALLS)
         .setPrimaryTagForShape(BlockShape.BUTTON, ExtShapeTags.TERRACOTTA_BUTTONS)
         .setPrimaryTagForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.TERRACOTTA_PRESSURE_PLATES)
+        .addExtraTag(dyedTags.next())
         .addExtraTag(blockShape -> blockShape.isConstruction ? BlockTags.DEAD_BUSH_MAY_PLACE_ON : null)
         .build();
     for (final Block block : BlockCollections.STAINED_TERRACOTTA) {
@@ -586,6 +592,7 @@ public final class ExtShapeBlocks {
           .setPrimaryTagForShape(BlockShape.WALL, ExtShapeTags.STAINED_TERRACOTTA_WALLS)
           .setPrimaryTagForShape(BlockShape.BUTTON, ExtShapeTags.STAINED_TERRACOTTA_BUTTONS)
           .setPrimaryTagForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.STAINED_TERRACOTTA_PRESSURE_PLATES)
+          .addExtraTag(dyedTags.next())
           .addExtraTag(blockShape -> blockShape.isConstruction ? BlockTags.DEAD_BUSH_MAY_PLACE_ON : null)
           .setRecipeGroup(blockShape -> "stained_terracotta_" + blockShape.asString())
           .build();
@@ -667,6 +674,7 @@ public final class ExtShapeBlocks {
       final SlabBlock slabBlock = FACTORY.modify(new SlabBuilder(block))
           .setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, AbstractBlock.Settings.copy(builder.baseBlock)))
           .setPrimaryTagToAddTo(ExtShapeTags.GLAZED_TERRACOTTA_SLABS)
+          .addExtraTag(dyedTags.next())
           .build();
       RecipeGroupRegistry.setRecipeGroup(slabBlock, "glazed_terracotta_slab");
     }
@@ -689,6 +697,7 @@ public final class ExtShapeBlocks {
           .setPrimaryTagForShape(BlockShape.BUTTON, ExtShapeTags.CONCRETE_BUTTONS)
           .setPrimaryTagForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.CONCRETE_PRESSURE_PLATES)
           .setRecipeGroup(blockShape -> "concrete_" + blockShape.asString())
+          .addExtraTag(dyedTags.next())
           .build();
     }
 
@@ -933,6 +942,8 @@ public final class ExtShapeBlocks {
           .setPillar()
           .build();
     }
+
+    Validate.validState(dyedTags.next() == BlockCollections.DYED_TAGS.get(0), "BlockCollections.DYED_TAGS is not correctly iterated");
 
     ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());
   }
