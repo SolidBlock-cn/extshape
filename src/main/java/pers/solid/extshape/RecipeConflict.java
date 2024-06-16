@@ -1,5 +1,6 @@
 package pers.solid.extshape;
 
+import com.google.common.collect.Iterables;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,6 +16,7 @@ import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * 包含检测合成表冲突的一些实用方法。因为扩展方块形状模组的合成表总是会存在冲突，用于检测合成表冲突的方法均置于此类。
@@ -46,10 +49,10 @@ public final class RecipeConflict {
           }).toList());
         } else if (recipe instanceof ShapelessRecipe shapelessRecipe && recipe.getClass() == ShapelessRecipe.class) {
           final DefaultedList<Ingredient> ingredients = shapelessRecipe.getIngredients();
-          craftingRecipeInput = CraftingRecipeInput.create(3, 3, ingredients.stream().map(ingredient -> {
+          craftingRecipeInput = CraftingRecipeInput.create(3, 3, Stream.concat(ingredients.stream().map(ingredient -> {
             final ItemStack[] matchingStacks = ingredient.getMatchingStacks();
             return matchingStacks.length == 0 ? ItemStack.EMPTY : matchingStacks[0];
-          }).toList());
+          }), Streams.of(Iterables.cycle(ItemStack.EMPTY)).limit(9 - ingredients.size())).toList());
         } else {
           continue;
         }
