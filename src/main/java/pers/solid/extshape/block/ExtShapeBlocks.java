@@ -334,7 +334,11 @@ public final class ExtShapeBlocks {
           .build();
     }
 
-    // 用于将所有染色方块加入对应颜色的标签中。
+    // 将染色方块标签（如 #c:dyed/red）与物品标签对应起来。
+    for (int i = 0; i < BlockCollections.DYED_TAGS.size(); i++) {
+      FACTORY.tagPreparations.setBlockTagWithItem(BlockCollections.DYED_TAGS.get(i), BlockCollections.DYED_ITEM_TAGS.get(i));
+    }
+    // 用于将所有染色方块加入对应颜色的标签中，此 iterator 可以多次循环。。
     final Iterator<TagKey<Block>> dyedTags = Iterators.cycle(BlockCollections.DYED_TAGS);
 
     // 羊毛。
@@ -572,7 +576,6 @@ public final class ExtShapeBlocks {
         .setPrimaryTagForShape(BlockShape.WALL, ExtShapeTags.TERRACOTTA_WALLS)
         .setPrimaryTagForShape(BlockShape.BUTTON, ExtShapeTags.TERRACOTTA_BUTTONS)
         .setPrimaryTagForShape(BlockShape.PRESSURE_PLATE, ExtShapeTags.TERRACOTTA_PRESSURE_PLATES)
-        .addExtraTag(dyedTags.next())
         .addExtraTag(blockShape -> blockShape.isConstruction ? BlockTags.DEAD_BUSH_MAY_PLACE_ON : null)
         .build();
     for (final Block block : BlockCollections.STAINED_TERRACOTTA) {

@@ -3,7 +3,9 @@ package pers.solid.extshape.util;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.registry.tag.TagKey;
 import org.jetbrains.annotations.Unmodifiable;
 
@@ -188,6 +190,24 @@ public final class BlockCollections {
       ConventionalBlockTags.GREEN_DYED,
       ConventionalBlockTags.RED_DYED,
       ConventionalBlockTags.BLACK_DYED
+  );
+  public static final @Unmodifiable ImmutableList<TagKey<Item>> DYED_ITEM_TAGS = ImmutableList.of(
+      ConventionalItemTags.WHITE_DYED,
+      ConventionalItemTags.ORANGE_DYED,
+      ConventionalItemTags.MAGENTA_DYED,
+      ConventionalItemTags.LIGHT_BLUE_DYED,
+      ConventionalItemTags.YELLOW_DYED,
+      ConventionalItemTags.LIME_DYED,
+      ConventionalItemTags.PINK_DYED,
+      ConventionalItemTags.GRAY_DYED,
+      ConventionalItemTags.LIGHT_GRAY_DYED,
+      ConventionalItemTags.CYAN_DYED,
+      ConventionalItemTags.PURPLE_DYED,
+      ConventionalItemTags.BLUE_DYED,
+      ConventionalItemTags.BROWN_DYED,
+      ConventionalItemTags.GREEN_DYED,
+      ConventionalItemTags.RED_DYED,
+      ConventionalItemTags.BLACK_DYED
   );
 
   private BlockCollections() {
