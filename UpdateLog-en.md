@@ -9,6 +9,10 @@
 - Fixed the issue that loot tables are incorrect for some blocks like snow and clay.
 - Other code optimization.
 
+### 2.1.5
+
+- Fixed the severe issue of not able to run with 1.20.5 and 1.20.6.
+
 ### 2.1.4
 
 - Updated to 1.21.
