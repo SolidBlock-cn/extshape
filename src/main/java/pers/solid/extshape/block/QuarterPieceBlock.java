@@ -17,6 +17,9 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 
+/**
+ * 横条方块是指只占 1/4 的体积（其中只有 1/2 的高度）的方块。
+ */
 public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterloggable {
   public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -34,7 +37,10 @@ public class QuarterPieceBlock extends HorizontalFacingBlock implements Waterlog
 
   public QuarterPieceBlock(Settings settings) {
     super(settings);
-    setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false).with(HALF, BlockHalf.BOTTOM));
+    setDefaultState(getDefaultState()
+        .with(FACING, Direction.NORTH)
+        .with(WATERLOGGED, false)
+        .with(HALF, BlockHalf.BOTTOM));
   }
 
   @Override

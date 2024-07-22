@@ -22,18 +22,39 @@ import pers.solid.extshape.util.FenceSettings;
 
 import java.util.List;
 
+/**
+ * 处理铜的生锈、除蜡、涂蜡的一些类。
+ */
 public final class CopperManager {
   private final BlocksBuilderFactory blocksBuilderFactory;
+  /**
+   * 不同氧化等级的铜方块。
+   */
   public static final ImmutableList<Block> COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK, Blocks.EXPOSED_COPPER, Blocks.WEATHERED_COPPER, Blocks.OXIDIZED_COPPER);
+  /**
+   * 不同氧化等级的切制铜方块。
+   */
   public static final ImmutableList<Block> CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER, Blocks.EXPOSED_CUT_COPPER, Blocks.WEATHERED_CUT_COPPER, Blocks.OXIDIZED_CUT_COPPER);
+  /**
+   * 不同氧化等级的涂蜡铜方块。
+   */
   public static final ImmutableList<Block> WAXED_COPPER_BLOCKS = ImmutableList.of(Blocks.WAXED_COPPER_BLOCK, Blocks.WAXED_EXPOSED_COPPER, Blocks.WAXED_WEATHERED_COPPER, Blocks.WAXED_OXIDIZED_COPPER);
+  /**
+   * 不同氧化等级的涂蜡切制铜方块。
+   */
   public static final ImmutableList<Block> WAXED_CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.WAXED_CUT_COPPER, Blocks.WAXED_EXPOSED_CUT_COPPER, Blocks.WAXED_WEATHERED_CUT_COPPER, Blocks.WAXED_OXIDIZED_CUT_COPPER);
+  /**
+   * 依次排列的不同的氧化等级。
+   */
   public static final ImmutableList<Oxidizable.OxidationLevel> OXIDATION_LEVELS = ImmutableList.of(Oxidizable.OxidationLevel.UNAFFECTED, Oxidizable.OxidationLevel.EXPOSED, Oxidizable.OxidationLevel.WEATHERED, Oxidizable.OxidationLevel.OXIDIZED);
 
   public CopperManager(BlocksBuilderFactory blocksBuilderFactory) {
     this.blocksBuilderFactory = blocksBuilderFactory;
   }
 
+  /**
+   * 为一个特定氧化等级以及涂蜡情况的铜方块注册 {@code BlocksBuilder}。
+   */
   public BlocksBuilder registerCopperBlock(Block copperBase, @NotNull Oxidizable.OxidationLevel oxidationLevel, boolean waxed) {
     final BlocksBuilder builder = blocksBuilderFactory.createAllShapes(copperBase).setActivationSettings(ActivationSettings.COPPER.get(oxidationLevel));
 
@@ -115,6 +136,13 @@ public final class CopperManager {
     registerExtendedWax(COPPER_BLOCKS, WAXED_COPPER_BLOCKS);
     registerExtendedWax(CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS);
   }
+
+  /**
+   * 不同氧化等级的铜的激活时长（用于按钮及压力板）。
+   *
+   * @param oxidationLevel 氧化等级。
+   * @return 方块激活持续的刻数。
+   */
 
   public static int getActivationRate(@NotNull Oxidizable.OxidationLevel oxidationLevel) {
     return switch (oxidationLevel) {
