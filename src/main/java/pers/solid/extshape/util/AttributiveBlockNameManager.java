@@ -112,9 +112,7 @@ public final class AttributiveBlockNameManager {
 
     if (code.startsWith("jpn")) {
       if (result != null) {
-        if (result.endsWith("歪ん")) {
-          result += "だ";
-        } else if (!result.endsWith("歪んだ")) {
+        if (!result.endsWith("歪んだ")) {
           result += "の";
         }
       }

@@ -20,6 +20,9 @@ import pers.solid.extshape.builder.BlockShape;
  * 本模组提供的方块和物品标签。这些标签不应该被其他的模组使用。
  */
 public final class ExtShapeTags {
+  /**
+   * 本模组需要准备的一些标签。
+   */
   public static final TagPreparations TAG_PREPARATIONS = new TagPreparations();
   /**
    * 这个标签主要是考虑到，{@link BlockTags#PICKAXE_MINEABLE} 加入了所有的墙，但事实上墙并不一定是可以使用镐来开采的，因此这里设置了一个专门的标签，如果某个方块属于 {@code minecraft:mineable/pickaxe} 但同时属于 {@code extshape:pickaxe_unmineable}，则认为镐子不能开采这个方块。

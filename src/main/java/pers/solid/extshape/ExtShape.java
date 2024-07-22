@@ -40,6 +40,9 @@ import java.util.stream.IntStream;
  * @author SolidBlock
  */
 public class ExtShape implements ModInitializer {
+  /**
+   * 本模组的 id，同时也是所有物品的命名空间。
+   */
   public static final String MOD_ID = "extshape";
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
 

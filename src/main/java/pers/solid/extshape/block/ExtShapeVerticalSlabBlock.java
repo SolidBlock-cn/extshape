@@ -27,10 +27,13 @@ import pers.solid.extshape.builder.BlockShape;
 
 import java.util.Random;
 
+/**
+ * 本模组中的竖直台阶方块。
+ */
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
   public final Block baseBlock;
 
-  public ExtShapeVerticalSlabBlock(Block baseBlock, Settings settings) {
+  public ExtShapeVerticalSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
@@ -44,7 +47,10 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   @Override
   public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier identifier = getBlockModelId();
-    return VariantsBlockStateSupplier.create(this, new BlockStateVariant().put(VariantSettings.MODEL, identifier)).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
+    return VariantsBlockStateSupplier.create(this, new BlockStateVariant()
+        .put(VariantSettings.MODEL, identifier)
+
+    ).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
   }
 
 
@@ -60,7 +66,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   @Override
-  public Block getBaseBlock() {
+  public @NotNull Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -71,9 +77,9 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
 
   public static class WithExtension extends ExtShapeVerticalSlabBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -101,9 +107,9 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   public static class WithOxidation extends ExtShapeVerticalSlabBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

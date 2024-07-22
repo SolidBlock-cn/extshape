@@ -30,16 +30,19 @@ import pers.solid.extshape.util.HorizontalCornerDirection;
 
 import java.util.Random;
 
+/**
+ * 本模组中的竖直楼梯方块。
+ */
 public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
-  public final Block baseBlock;
+  public final @NotNull Block baseBlock;
 
-  public ExtShapeVerticalStairsBlock(Block baseBlock, Settings settings) {
+  public ExtShapeVerticalStairsBlock(@NotNull Block baseBlock, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public Block getBaseBlock() {
+  public @NotNull Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -52,7 +55,10 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   @Environment(EnvType.CLIENT)
   public @UnknownNullability BlockStateSupplier getBlockStates() {
     final Identifier identifier = getBlockModelId();
-    return VariantsBlockStateSupplier.create(this, new BlockStateVariant().put(VariantSettings.MODEL, identifier).put(VariantSettings.UVLOCK, true)).coordinate(BlockStateVariantMap.create(FACING)
+    return VariantsBlockStateSupplier.create(this, new BlockStateVariant()
+        .put(VariantSettings.MODEL, identifier)
+        .put(VariantSettings.UVLOCK, true)
+    ).coordinate(BlockStateVariantMap.create(FACING)
         .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R0))
         .register(HorizontalCornerDirection.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
         .register(HorizontalCornerDirection.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
@@ -87,9 +93,9 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
 
   public static class WithExtension extends ExtShapeVerticalStairsBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -116,9 +122,9 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   }
 
   public static class WithOxidation extends ExtShapeVerticalStairsBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

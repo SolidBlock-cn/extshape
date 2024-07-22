@@ -29,8 +29,11 @@ import pers.solid.extshape.builder.BlockShape;
 
 import java.util.Random;
 
+/**
+ * 本模组中的横条方块。
+ */
 public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtShapeVariantBlockInterface {
-  public final Block baseBlock;
+  public final @NotNull Block baseBlock;
 
   public ExtShapeQuarterPieceBlock(@NotNull Block baseBlock, Settings settings) {
     super(settings);
@@ -38,7 +41,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
   }
 
   @Override
-  public Block getBaseBlock() {
+  public @NotNull Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -87,9 +90,9 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
 
 
   public static class WithExtension extends ExtShapeQuarterPieceBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -116,9 +119,9 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
   }
 
   public static class WithOxidation extends ExtShapeQuarterPieceBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }
