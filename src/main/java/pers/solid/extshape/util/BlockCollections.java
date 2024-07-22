@@ -25,8 +25,7 @@ public final class BlockCollections {
       STRIPPED_BIRCH_LOG,
       STRIPPED_JUNGLE_LOG,
       STRIPPED_ACACIA_LOG,
-      STRIPPED_DARK_OAK_LOG,
-      STRIPPED_OAK_LOG
+      STRIPPED_DARK_OAK_LOG
   );
   public static final ImmutableList<Block> WOODS = ImmutableList.of(
       OAK_WOOD,
