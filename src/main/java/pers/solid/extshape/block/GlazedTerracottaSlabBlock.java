@@ -23,13 +23,15 @@ import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
 
+/**
+ * 带釉陶瓦台阶方块。
+ */
 public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
   public static final MapCodec<GlazedTerracottaSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), GlazedTerracottaSlabBlock::new);
   public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
   public GlazedTerracottaSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
-    // 注意这里不使用 stateManager.getDefaultState，因为 super 中设置了 WATERLOGGED = false。
     setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
   }
 

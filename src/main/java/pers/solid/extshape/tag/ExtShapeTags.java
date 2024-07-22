@@ -21,6 +21,9 @@ import java.util.List;
  * 本模组提供的方块和物品标签。这些标签不应该被其他的模组使用。
  */
 public final class ExtShapeTags {
+  /**
+   * 本模组需要准备的一些标签。
+   */
   public static final TagPreparations TAG_PREPARATIONS = new TagPreparations();
   public static final TagKey<Block> DAMPENS_VIBRATIONS = ofBlockAndItem(BlockTags.DAMPENS_VIBRATIONS, ItemTags.DAMPENS_VIBRATIONS);
   /**

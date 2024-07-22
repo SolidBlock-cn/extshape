@@ -56,8 +56,7 @@ public final class BlockBiMaps {
             variant = variants.get(BlockFamily.Variant.CUSTOM_FENCE_GATE);
           }
         }
-        if (variant != null) { // todo how to handle tuff blocks
-          // 考虑到凝灰岩基础方块没有功能标签，但是凝灰岩变种方块有功能标签，故在此进行修改，以使用本模组中的凝灰岩楼梯和凝灰岩台阶
+        if (variant != null) {
           setBlockOf(shape, baseBlock, variant);
           BASE_BLOCKS.add(baseBlock);
         }

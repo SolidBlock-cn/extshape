@@ -14,6 +14,7 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
@@ -24,6 +25,15 @@ import pers.solid.extshape.rrp.RecipeGroupRegistry;
  * 该模组中的绝大多数方块共用的接口。
  */
 public interface ExtShapeBlockInterface extends BlockResourceGenerator {
+  /**
+   * 方块的基础方块。由于 codec 不支持 null，因此本模组（包括在加入方块 codec 之前的版本）不允许 null 的基础方块。
+   *
+   * @return 方块的基础方块。
+   */
+  @Override
+  @NotNull
+  Block getBaseBlock();
+
   /**
    * 所有可以被切石的方块，包含其他模组中的。其他模组不应该对此集合进行任何与本模组无关的修改。
    */
@@ -66,15 +76,15 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
   }
 
   /**
-   * 考虑到上蜡的方块使用的模型均为未上蜡的方块的模型，故在此做出调整。
+   * 方块的模型 id，考虑到上蜡的方块使用的模型均为未上蜡的方块的模型，故在此做出调整。
    */
   @Environment(EnvType.CLIENT)
   @Override
   default Identifier getBlockModelId() {
     final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
     final String path = blockModelId.getPath();
-    if (path.contains("waxed_") && path.contains("copper")) {
-      return Identifier.of(blockModelId.getNamespace(), path.replace("waxed_", ""));
+    if (path.contains("/waxed_") && path.contains("copper")) {
+      return blockModelId.withPath(path.replace("/waxed_", "/"));
     } else {
       return blockModelId;
     }
@@ -83,10 +93,11 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
   @Environment(EnvType.CLIENT)
   @Override
   default void writeAssets(RuntimeResourcePack pack) {
+    // 可能含有 waxed_ 开头的模型 id（注意调用的是 super 不是 this），如果发现有 waxed_ 开头，就不生成模型。
     final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
     final String path = blockModelId.getPath();
     writeBlockStates(pack);
-    if (!(path.contains("waxed_") && path.contains("copper"))) {
+    if (!(path.contains("/waxed_") && path.contains("copper"))) {
       writeBlockModel(pack);
     }
     writeItemModel(pack);

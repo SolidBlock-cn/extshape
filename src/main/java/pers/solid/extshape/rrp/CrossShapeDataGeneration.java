@@ -28,16 +28,22 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 
+/**
+ * 处理同一方块不同形状的数据生成的类。只涉及基本的几种形状，且不涉及方块与基础方块之间的转化。
+ */
 public class CrossShapeDataGeneration {
-  public final Block baseBlock;
+  /**
+   * 基础方块。
+   */
+  public final @NotNull Block baseBlock;
   public final @Nullable String defaultNamespace;
-  public final RuntimeResourcePack pack;
+  public final @NotNull RuntimeResourcePack pack;
   /**
    * 是否启用同种形状之间的方块切石功能，例如将非切制的楼梯切成已切制的横条。如果未启用，则只能将非切制的楼梯切成非切制的横条，但是基础方块仍不在此限。将此设置为 {@code false} 是为了与原版的行为相匹配。
    */
   public final boolean enableCuttingShape = false;
 
-  public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RuntimeResourcePack pack) {
+  public CrossShapeDataGeneration(@NotNull Block baseBlock, @Nullable String defaultNamespace, @NotNull RuntimeResourcePack pack) {
     this.baseBlock = baseBlock;
     this.defaultNamespace = defaultNamespace;
     this.pack = pack;
@@ -79,14 +85,9 @@ public class CrossShapeDataGeneration {
   protected void writeBlockRotationRecipe(final @NotNull Block from, final @NotNull Block to, @Nullable String suffix, String criterionName) {
     final Identifier recipeId = recipeIdOf(to, suffix);
     final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(getRecipeCategory(), to).input(Ingredient.ofItems(from));
-    final String recipeGroup = getRecipeGroup(to);
+    final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(to);
     recipe.group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_rotation").criterion(criterionName, RecipeProvider.conditionsFromItem(from));
     pack.addRecipeAndAdvancement(recipeId, recipe);
-  }
-
-  @NotNull
-  protected static String getRecipeGroup(@NotNull Block result) {
-    return RecipeGroupRegistry.getRecipeGroup(result);
   }
 
   public void cutStairsToQuarterPiece(final @NotNull Block stairs, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
@@ -95,7 +96,7 @@ public class CrossShapeDataGeneration {
 
   public void craftSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(quarterPiece, suffix == null ? "_from_slab" : suffix);
-    final String recipeGroup = getRecipeGroup(quarterPiece);
+    final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(quarterPiece);
     final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), quarterPiece, 6)
         .pattern("###")
         .input('#', slab)
@@ -110,7 +111,7 @@ public class CrossShapeDataGeneration {
 
   public void craftVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(quarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
-    final String recipeGroup = getRecipeGroup(quarterPiece);
+    final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(quarterPiece);
     final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), quarterPiece, 6)
         .pattern("###")
         .input('#', verticalSlab)
@@ -125,7 +126,7 @@ public class CrossShapeDataGeneration {
 
   public void craftVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(verticalQuarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
-    final String recipeGroup = getRecipeGroup(verticalQuarterPiece);
+    final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(verticalQuarterPiece);
     final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), verticalQuarterPiece)
         .pattern("#").pattern("#").pattern("#")
         .input('#', verticalSlab)
@@ -157,10 +158,6 @@ public class CrossShapeDataGeneration {
     pack.addRecipeAndAdvancement(recipeId, recipe);
   }
 
-  protected boolean shouldStoneCut(final @NotNull Block baseBlock) {
-    return ExtShapeBlockInterface.isStoneCut(baseBlock);
-  }
-
   public void generateCrossShapeData() {
     final @NotNull Iterable<ObjectIntPair<Block>> uncutBaseBlocks = getUncutBaseBlocks();
 
@@ -189,7 +186,7 @@ public class CrossShapeDataGeneration {
     }
 
     // 该方块是否允许被切石
-    final boolean shouldStoneCut = shouldStoneCut(baseBlock);
+    final boolean shouldStoneCut = ExtShapeBlockInterface.isStoneCut(baseBlock);
 
     // 跨方块切石
     for (final BlockShape blockShape : BlockShape.values()) {
