@@ -10,7 +10,9 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.tag.TagKey;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlocks;
@@ -45,6 +47,17 @@ public class ExtShape implements ModInitializer {
    */
   public static final String MOD_ID = "extshape";
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
+
+  private static final Identifier defaultId = new Identifier(MOD_ID, "default");
+
+  /**
+   * 创建一个以模型命名 id 为命名空间的 id。
+   */
+  public static Identifier id(@NotNull String path) {
+    // 使用 withPath 是为了避免不必要地对 namespace 进行 validate。
+    return defaultId.withPath(path);
+  }
+
 
   @Override
   public void onInitialize() {

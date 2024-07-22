@@ -50,7 +50,7 @@ import java.util.Collection;
  */
 public final class ExtShapeBlockusRRP {
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeBlockusRRP.class);
-  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(new Identifier(ExtShapeBlockus.NAMESPACE, "pack"));
+  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(ExtShapeBlockus.id("pack"));
 
   private ExtShapeBlockusRRP() {
   }
@@ -168,7 +168,7 @@ public final class ExtShapeBlockusRRP {
         recipe.offerTo(recipeJsonProvider -> {
           pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
           pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((ShapedRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
-        }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
+        }, ExtShapeBlockus.id(RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
       }
     }
   }
@@ -187,7 +187,7 @@ public final class ExtShapeBlockusRRP {
         recipe.offerTo(recipeJsonProvider -> {
           pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
           pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((ShapedRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
-        }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
+        }, ExtShapeBlockus.id(RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
       }
     }
   }
@@ -204,7 +204,7 @@ public final class ExtShapeBlockusRRP {
         cookingRecipe.offerTo(recipeJsonProvider -> {
           pack.addRecipe(recipeJsonProvider.getRecipeId(), recipeJsonProvider);
           pack.addAdvancement(recipeJsonProvider.getAdvancementId(), ((CookingRecipeJsonProviderAccessor) recipeJsonProvider).getAdvancementBuilder());
-        }, new Identifier(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(charredOutput) + "_from_smelting"));
+        }, ExtShapeBlockus.id(RecipeProvider.getItemPath(charredOutput) + "_from_smelting"));
       }
     }
   }

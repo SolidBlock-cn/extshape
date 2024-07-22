@@ -11,6 +11,7 @@ import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
@@ -200,7 +201,7 @@ public final class ExtShapeTags {
   }
 
   private static TagKey<Block> ofBlockOnly(@NotNull String path) {
-    return TagKey.of(Registry.BLOCK_KEY, new Identifier(ExtShape.MOD_ID, path));
+    return TagKey.of(Registry.BLOCK_KEY, ExtShape.id(path));
   }
 
   private static TagKey<Block> ofBlockAndItem(@NotNull String path) {
