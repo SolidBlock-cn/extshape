@@ -63,8 +63,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.POLISHED_DRIPSTONE.block, Blocks.DRIPSTONE_BLOCK);
     putMultipleWithMid(builder, BlockusBlocks.DRIPSTONE_BRICKS.block, Blocks.DRIPSTONE_BLOCK, BlockusBlocks.POLISHED_DRIPSTONE.block, BlockusBlocks.CHISELED_DRIPSTONE, BlockusBlocks.DRIPSTONE_PILLAR);
 
-//    builder.put(BlockusBlocks.POLISHED_TUFF.block, Blocks.TUFF);
-//    putMultipleWithMid(builder, BlockusBlocks.TUFF_BRICKS.block, Blocks.TUFF, BlockusBlocks.POLISHED_TUFF.block, BlockusBlocks.CHISELED_TUFF, BlockusBlocks.TUFF_PILLAR, BlockusBlocks.HERRINGBONE_TUFF_BRICKS, BlockusBlocks.TUFF_CIRCULAR_PAVING);
+    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.CARVED_TUFF_BRICKS, BlockusBlocks.TUFF_PILLAR, BlockusBlocks.HERRINGBONE_TUFF_BRICKS, BlockusBlocks.TUFF_CIRCULAR_PAVING), Blocks.TUFF, Blocks.POLISHED_TUFF, Blocks.TUFF_BRICKS);
 
     builder.put(BlockusBlocks.POLISHED_AMETHYST.block, Blocks.AMETHYST_BLOCK);
     putMultipleWithMid(builder, BlockusBlocks.AMETHYST_BRICKS.block, Blocks.AMETHYST_BLOCK, BlockusBlocks.POLISHED_AMETHYST.block, BlockusBlocks.CHISELED_AMETHYST, BlockusBlocks.AMETHYST_PILLAR);
