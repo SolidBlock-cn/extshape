@@ -94,6 +94,7 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
 
   /**
    * 方块是否产生红石信号，例如红石块会始终产生红石信号。
+   *
    * @see AbstractBlock#emitsRedstonePower
    */
   @FunctionalInterface
@@ -119,6 +120,7 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
 
     /**
      * 方块是否产生弱红石信号。
+     *
      * @return 方块的弱红石信号等级。
      */
     int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction, int original);
