@@ -49,7 +49,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
     final Identifier identifier = getBlockModelId();
     return VariantsBlockStateSupplier.create(this, new BlockStateVariant()
         .put(VariantSettings.MODEL, identifier)
-
+        .put(VariantSettings.UVLOCK, true)
     ).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
   }
 
