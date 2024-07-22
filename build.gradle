@@ -1,7 +1,7 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
@@ -65,7 +65,7 @@ allprojects {
         inputs.property "version", project.mod_version
 
         filesMatching("fabric.mod.json") {
-            expand "version": /*project.mod_version*/ version
+            expand "version": project.mod_version
         }
     }
 
