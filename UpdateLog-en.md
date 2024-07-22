@@ -7,6 +7,7 @@
 - Tweaked some translations: "quarter piece" is translated to <span lang=ja>四半ブロック</span> in Japanese, <span lang=lzh>橫條</span> in Legacy Chinese.
 - Corrected the wrong tag name `mishanguc:concrete_fence_walls`, `mishanguc:terracotta_fence_walls` and `mishanguc:stained_terracotta_fence_walls` into `mishanguc:concrete_walls`, `mishanguc:terracotta_walls` and `mishanguc:stained_terracotta_walls`.
 - Fixed the issue that loot tables are incorrect for some blocks like snow and clay.
+- Fixed the issue that stripping blocks related to mangrove turn them into oak.
 - Other code optimization.
 
 ### 2.1.5
