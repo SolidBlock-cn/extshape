@@ -290,7 +290,7 @@ public final class ExtShapeBlocks {
           return block;
         })
         .setBlockSettings(AbstractBlock.Settings.copy(PETRIFIED_OAK_SLAB))
-        .setIdentifier(Identifier.of(ExtShape.MOD_ID, "petrified_oak_planks"))
+        .setIdentifier(ExtShape.id("petrified_oak_planks"))
         .addExtraTag(BlockTags.PICKAXE_MINEABLE)
         .build();
 
@@ -634,7 +634,7 @@ public final class ExtShapeBlocks {
     SMOOTH_STONE_DOUBLE_SLAB = FACTORY.modify(new BlockBuilder())
         .setInstanceSupplier(builder -> BRRPCubeBlock.cubeBottomTop(builder.blockSettings, Identifier.of(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone"), Identifier.of(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone_slab_side"), Identifier.of(Identifier.DEFAULT_NAMESPACE, "block/smooth_stone")))
         .setBlockSettings(AbstractBlock.Settings.copy(SMOOTH_STONE))
-        .setIdentifier(Identifier.of(ExtShape.MOD_ID, "smooth_stone_slab_double"))
+        .setIdentifier(ExtShape.id("smooth_stone_slab_double"))
         .addExtraTag(BlockTags.PICKAXE_MINEABLE).build();
 
     FACTORY.createAllShapes(SMOOTH_STONE)

@@ -47,7 +47,7 @@ import java.util.function.Supplier;
  */
 public final class ExtShapeBlockusRRP {
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeBlockusRRP.class);
-  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(Identifier.of(ExtShapeBlockus.NAMESPACE, "pack"));
+  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(ExtShapeBlockus.id("pack"));
 
   private ExtShapeBlockusRRP() {
   }
@@ -160,7 +160,7 @@ public final class ExtShapeBlockusRRP {
             .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
             .group("shingles_" + blockShape.asString() + "_from_dyeing")
             .criterion(RecipeProvider.hasItem(BlockusBlocks.SHINGLES.block), RecipeProvider.conditionsFromItem(BlockusBlocks.SHINGLES.block));
-        recipe.offerTo(pack.getRecipeExporter(), Identifier.of(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
+        recipe.offerTo(pack.getRecipeExporter(), ExtShapeBlockus.id(RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
       }
     }
   }
@@ -176,7 +176,7 @@ public final class ExtShapeBlockusRRP {
             .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
             .group("stained_stone_brick_" + blockShape.asString() + "_from_dyeing")
             .criterion(RecipeProvider.hasItem(Blocks.STONE_BRICKS), RecipeProvider.conditionsFromItem(Blocks.STONE_BRICKS));
-        recipe.offerTo(pack.getRecipeExporter(), Identifier.of(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
+        recipe.offerTo(pack.getRecipeExporter(), ExtShapeBlockus.id(RecipeProvider.getItemPath(dyed) + "_from_dyeing"));
       }
     }
   }
@@ -190,7 +190,7 @@ public final class ExtShapeBlockusRRP {
       if (charredOutput != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(charredOutput)) {
         final ItemConvertible[] ingredients = charrablePlanks.stream().map(block -> BlockBiMaps.getBlockOf(blockShape, block)).filter(Predicates.notNull()).toArray(ItemConvertible[]::new);
         final CookingRecipeJsonBuilder cookingRecipe = CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ingredients), blockShape.getRecipeCategory(), charredOutput, 0.1F * blockShape.logicalCompleteness, (int) (200 * blockShape.logicalCompleteness)).criterion("has_planks", RecipeProvider.conditionsFromItemPredicates(ItemPredicate.Builder.create().items(ingredients).build()));
-        cookingRecipe.offerTo(pack.getRecipeExporter(), Identifier.of(ExtShapeBlockus.NAMESPACE, RecipeProvider.getItemPath(charredOutput) + "_from_smelting"));
+        cookingRecipe.offerTo(pack.getRecipeExporter(), ExtShapeBlockus.id(RecipeProvider.getItemPath(charredOutput) + "_from_smelting"));
       }
     }
   }

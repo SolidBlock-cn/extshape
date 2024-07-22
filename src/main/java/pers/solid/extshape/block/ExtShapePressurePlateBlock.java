@@ -142,11 +142,11 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       final Identifier carpetId = Identifier.of(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = Registries.ITEM.get(carpetId);
       final StonecuttingRecipeJsonBuilder recipe = StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), carpet).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
-      final Identifier recipeId = Identifier.of(ExtShape.MOD_ID, carpetId.getPath() + "_from_pressure_plate");
+      final Identifier recipeId = ExtShape.id(carpetId.getPath() + "_from_pressure_plate");
       pack.addRecipeAndAdvancement(recipeId, recipe);
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
       final StonecuttingRecipeJsonBuilder recipe = StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), Blocks.MOSS_CARPET).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
-      final Identifier recipeId = Identifier.of(ExtShape.MOD_ID, "moss_carpet_from_pressure_plate");
+      final Identifier recipeId = ExtShape.id("moss_carpet_from_pressure_plate");
       pack.addRecipeAndAdvancement(recipeId, recipe);
     }
   }

@@ -69,7 +69,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
   @Environment(EnvType.CLIENT)
   @Override
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return ModelJsonBuilder.create(Identifier.of(ExtShape.MOD_ID, "block/quarter_piece")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
+    return ModelJsonBuilder.create(ExtShape.id("block/quarter_piece")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
   @Environment(EnvType.CLIENT)
@@ -78,7 +78,7 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
     final Identifier blockModelId = getBlockModelId();
     final ModelJsonBuilder blockModel = getBlockModel();
     pack.addModel(blockModelId, blockModel);
-    pack.addModel(blockModelId.brrp_suffixed("_top"), blockModel.parent(Identifier.of(ExtShape.MOD_ID, "block/quarter_piece_top")));
+    pack.addModel(blockModelId.brrp_suffixed("_top"), blockModel.parent(ExtShape.id("block/quarter_piece_top")));
   }
 
 

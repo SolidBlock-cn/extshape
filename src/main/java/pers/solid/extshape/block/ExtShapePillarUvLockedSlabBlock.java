@@ -50,8 +50,8 @@ public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
 
     final ModelJsonBuilder blockModelUvLocked = getBlockModel().clone().setTextures(ModelUtils.getTextureMap(this, TextureKey.SIDE, TextureKey.END));
     for (Direction.Axis axis : Direction.Axis.values()) {
-      pack.addModel(blockModelId.brrp_suffixed("_" + axis.asString()), blockModelUvLocked.clone().parent(Identifier.of(ExtShape.MOD_ID, "block/slab_column_uv_locked_" + axis.asString())));
-      pack.addModel(topModelId.brrp_suffixed("_" + axis.asString()), blockModelUvLocked.clone().parent(Identifier.of(ExtShape.MOD_ID, "block/slab_column_uv_locked_" + axis.asString() + "_top")));
+      pack.addModel(blockModelId.brrp_suffixed("_" + axis.asString()), blockModelUvLocked.clone().parent(ExtShape.id("block/slab_column_uv_locked_" + axis.asString())));
+      pack.addModel(topModelId.brrp_suffixed("_" + axis.asString()), blockModelUvLocked.clone().parent(ExtShape.id("block/slab_column_uv_locked_" + axis.asString() + "_top")));
     }
   }
 

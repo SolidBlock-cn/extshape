@@ -61,7 +61,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   @Environment(EnvType.CLIENT)
   @Override
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return ModelJsonBuilder.create(Identifier.of(ExtShape.MOD_ID, "block/vertical_slab")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
+    return ModelJsonBuilder.create(ExtShape.id("block/vertical_slab")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
   @Override
