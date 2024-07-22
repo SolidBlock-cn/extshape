@@ -5,6 +5,8 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemConvertible;
@@ -315,10 +317,23 @@ public final class ExtShapeBlocks {
         .build();
 
     // 砂岩、红砂岩及其切制、錾制、平滑变种。其中，只有平滑砂岩有栅栏、压力板和按钮。
-    for (final Block block : BlockCollections.SANDSTONES) {
+    FACTORY.tagPreparations.setBlockTagWithItem(ConventionalBlockTags.UNCOLORED_SANDSTONE_STAIRS, ConventionalItemTags.UNCOLORED_SANDSTONE_STAIRS);
+    FACTORY.tagPreparations.setBlockTagWithItem(ConventionalBlockTags.UNCOLORED_SANDSTONE_SLABS, ConventionalItemTags.UNCOLORED_SANDSTONE_SLABS);
+    FACTORY.tagPreparations.setBlockTagWithItem(ConventionalBlockTags.RED_SANDSTONE_STAIRS, ConventionalItemTags.RED_SANDSTONE_STAIRS);
+    FACTORY.tagPreparations.setBlockTagWithItem(ConventionalBlockTags.RED_SANDSTONE_SLABS, ConventionalItemTags.RED_SANDSTONE_SLABS);
+    for (final Block block : BlockCollections.UNCOLORED_SANDSTONES) {
       FACTORY.createConstructionOnly(block)
           .markStoneCuttable()
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
+          .addExtraTag(blockShape -> blockShape == BlockShape.STAIRS ? ConventionalBlockTags.UNCOLORED_SANDSTONE_STAIRS : blockShape == BlockShape.SLAB ? ConventionalBlockTags.UNCOLORED_SANDSTONE_SLABS : null)
+          .with(BlockShape.WALL)
+          .build();
+    }
+    for (final Block block : BlockCollections.RED_SANDSTONES) {
+      FACTORY.createConstructionOnly(block)
+          .markStoneCuttable()
+          .addExtraTag(BlockTags.PICKAXE_MINEABLE)
+          .addExtraTag(blockShape -> blockShape == BlockShape.STAIRS ? ConventionalBlockTags.RED_SANDSTONE_STAIRS : blockShape == BlockShape.SLAB ? ConventionalBlockTags.RED_SANDSTONE_SLABS : null)
           .with(BlockShape.WALL)
           .build();
     }
