@@ -1,7 +1,10 @@
 package pers.solid.extshape.block;
 
+import com.google.common.collect.ImmutableCollection;
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
@@ -17,13 +20,44 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.generator.BRRPStairsBlock;
 import pers.solid.extshape.builder.BlockShape;
 
+/**
+ * 本模组中的楼梯方块。受原版限制，基础方块（{@link #baseBlock}）不能为 {@code null}。
+ */
 public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
+  /**
+   * 此集合内的所有方块不能合成楼梯和台阶。此举是为了避免合成表冲突。
+   *
+   * @since 1.5.2
+   * @since 2.2.0 由 {@link ExtShapeVariantBlockInterface} 移到这里。
+   */
+  @ApiStatus.AvailableSince("1.5.2")
+  private static final ImmutableCollection<Block> NOT_TO_CRAFT_STAIRS_OR_SLABS = ImmutableSet.of(
+      Blocks.CHISELED_SANDSTONE,
+      Blocks.CHISELED_RED_SANDSTONE,
+      Blocks.CHISELED_QUARTZ_BLOCK,
+      Blocks.CUT_SANDSTONE,
+      Blocks.CUT_RED_SANDSTONE
+  );
 
-  public ExtShapeStairsBlock(Block baseBlock, Settings settings) {
+  /**
+   * 基础方块是否不应该创建楼梯和台阶的配方。
+   *
+   * @param baseBlock 基础方块。
+   * @return 若为 {@code true}，则该方块的楼梯和台阶（如有）不会生成配方。
+   */
+  @Contract(pure = true)
+  public static boolean shouldNotCraftStairsOrSlabs(Block baseBlock) {
+    return NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock);
+  }
+
+  public ExtShapeStairsBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
   }
 
@@ -39,7 +73,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    if (NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock)) {
+    if (shouldNotCraftStairsOrSlabs(baseBlock)) {
       return null;
     }
     final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
@@ -52,7 +86,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   }
 
   public static class WithExtension extends ExtShapeStairsBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
     public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
       super(baseBlock, settings);
@@ -96,9 +130,9 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
    * @see net.minecraft.block.OxidizableStairsBlock
    */
   public static class WithOxidation extends ExtShapeStairsBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
 
-    public WithOxidation(Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

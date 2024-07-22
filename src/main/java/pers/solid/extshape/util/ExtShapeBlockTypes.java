@@ -11,6 +11,9 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.ExtShape;
 
+/**
+ * 本模组中会使用到的一些 {@code BlockSetType} 和 {@code WoodType}，用于完整地实现一些栅栏门、按钮等方块的功能。
+ */
 public final class ExtShapeBlockTypes {
   private static SoundEvent of(String name) {
     final Identifier id = new Identifier(ExtShape.MOD_ID, name);

@@ -24,9 +24,18 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockCollections;
 
+/**
+ * 本模组中的墙方块。
+ */
 public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantBlockInterface {
   public ExtShapeWallBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
+  }
+
+  @Override
+  public @NotNull Block getBaseBlock() {
+    assert baseBlock != null;
+    return baseBlock;
   }
 
   @Override
@@ -52,9 +61,9 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
 
 
   public static class WithExtension extends ExtShapeWallBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -93,9 +102,9 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
   }
 
   public static class WithOxidation extends ExtShapeWallBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

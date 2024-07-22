@@ -24,17 +24,29 @@ import pers.solid.brrp.v1.generator.BRRPFenceGateBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.FenceSettings;
 
+/**
+ * 本模组中的栅栏门方块。
+ */
 public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtShapeVariantBlockInterface {
 
+  /**
+   * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
+   */
   private final Item secondIngredient;
 
-  public ExtShapeFenceGateBlock(Block baseBlock, Settings settings, @NotNull WoodType woodType, Item secondIngredient) {
+  public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Settings settings, @NotNull WoodType woodType, @Nullable Item secondIngredient) {
     super(baseBlock, settings, woodType);
     this.secondIngredient = secondIngredient;
   }
 
-  public ExtShapeFenceGateBlock(Block baseBlock, Settings settings, FenceSettings fenceSettings) {
+  public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Settings settings, @NotNull FenceSettings fenceSettings) {
     this(baseBlock, settings, fenceSettings.woodType(), fenceSettings.secondIngredient());
+  }
+
+  @Override
+  public @NotNull Block getBaseBlock() {
+    assert baseBlock != null;
+    return baseBlock;
   }
 
   @Override
@@ -42,9 +54,8 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     return Text.translatable("block.extshape.?_fence_gate", this.getNamePrefix());
   }
 
-  @NotNull
   @Override
-  public Item getSecondIngredient() {
+  public @Nullable Item getSecondIngredient() {
     return secondIngredient;
   }
 
@@ -61,9 +72,9 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
 
 
   public static class WithExtension extends ExtShapeFenceGateBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, FenceSettings fenceSettings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull FenceSettings fenceSettings, @NotNull BlockExtension extension) {
       super(baseBlock, settings, fenceSettings);
       this.extension = extension;
     }
@@ -102,9 +113,9 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
   }
 
   public static class WithOxidation extends ExtShapeFenceGateBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
 
-    public WithOxidation(Block baseBlock, Settings settings, FenceSettings fenceSettings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull FenceSettings fenceSettings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings, fenceSettings);
       this.oxidationLevel = oxidationLevel;
     }
