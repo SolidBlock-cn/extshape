@@ -57,6 +57,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   @Environment(EnvType.CLIENT)
   @Override
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
+    // Blockus 模组中的环纹方块使用带釉陶瓦模型，故此处使用带釉陶瓦台阶模型。
     return super.getBlockModel().withParent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
   }
 
@@ -75,8 +76,13 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
     final Identifier id = getBlockModelId();
     final BlockStateVariantMap.SingleProperty<SlabType> variants = BlockStateVariantMap.create(TYPE);
     Identifier baseId = baseBlock == null ? null : BRRPUtils.getBlockModelId(baseBlock);
-    if (baseId != null && baseId.getPath().contains("waxed_") && baseId.getPath().contains("copper")) {
-      baseId = new Identifier(baseId.getNamespace(), baseId.getPath().replace("waxed_", ""));
+    if (baseId != null) {
+      final String basePath = baseId.getPath();
+
+      // 基础方块为涂蜡铜方块时，使用未涂蜡铜的模型。
+      if (basePath.contains("/waxed_") && basePath.contains("copper")) {
+        baseId = baseId.withPath(basePath.replace("/waxed_", "/"));
+      }
     }
     final BlockStateVariantMap variants2 = BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates();
     variants.register(SlabType.BOTTOM, BlockStateVariant.create().put(VariantSettings.MODEL, id));
