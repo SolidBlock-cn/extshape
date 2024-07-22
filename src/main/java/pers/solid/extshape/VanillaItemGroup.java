@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -19,10 +20,7 @@ import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 import pers.solid.extshape.util.EntryVariantAppender;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 本类用于将物品添加到原版物品组。
@@ -77,6 +75,8 @@ public final class VanillaItemGroup {
     apBuilding.put(Items.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem());
     new EntryVariantAppender(ItemGroups.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA)), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);
     new EntryVariantAppender(ItemGroups.COLORED_BLOCKS, shapes, Iterables.concat(BlockCollections.WOOLS, Collections.singleton(Blocks.TERRACOTTA), BlockCollections.STAINED_TERRACOTTA, BlockCollections.CONCRETES, BlockCollections.GLAZED_TERRACOTTA), ExtShapeBlocks.getBlocks()::contains).appendItems(getAppendingRule(ItemGroups.COLORED_BLOCKS));
-    new EntryVariantAppender(ItemGroups.NATURAL, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.LOGS.contains(block) || BlockCollections.STEMS.contains(block))), ExtShapeBlocks.getBlocks()::contains).appendItems(getAppendingRule(ItemGroups.NATURAL));
+    // natural 物品组应该排除变种的方块（这些方块已出现在了建筑方块物品组中）。
+    final Set<Block> excludedInNatural = Set.of(Blocks.DEEPSLATE, Blocks.CALCITE, Blocks.TUFF, Blocks.NETHERRACK, Blocks.BASALT, Blocks.SMOOTH_BASALT, Blocks.END_STONE, Blocks.AMETHYST_BLOCK);
+    new EntryVariantAppender(ItemGroups.NATURAL, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.LOGS.contains(block) || BlockCollections.STEMS.contains(block) || excludedInNatural.contains(block))), ExtShapeBlocks.getBlocks()::contains).appendItems(getAppendingRule(ItemGroups.NATURAL));
   }
 }

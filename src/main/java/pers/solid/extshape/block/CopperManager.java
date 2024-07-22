@@ -1,6 +1,7 @@
 package pers.solid.extshape.block;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.Block;
@@ -22,6 +23,7 @@ import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * 处理铜的生锈、除蜡、涂蜡的一些类。
@@ -155,25 +157,26 @@ public final class CopperManager {
   }
 
   public static void generateWaxRecipes(RuntimeResourcePack pack) {
-    generateWaxRecipes(pack, COPPER_BLOCKS, WAXED_COPPER_BLOCKS);
-    generateWaxRecipes(pack, CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS);
+    Predicate<Block> predicate = Predicates.in(ExtShapeBlocks.getBlocks());
+    generateWaxRecipes(pack, COPPER_BLOCKS, WAXED_COPPER_BLOCKS, predicate);
+    generateWaxRecipes(pack, CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS, predicate);
   }
 
-  private static void generateWaxRecipes(RuntimeResourcePack pack, List<Block> unwaxedBlocks, List<Block> waxedBlocks) {
+  private static void generateWaxRecipes(RuntimeResourcePack pack, List<Block> unwaxedBlocks, List<Block> waxedBlocks, Predicate<Block> blockPredicate) {
     Preconditions.checkArgument(unwaxedBlocks.size() == waxedBlocks.size(), "unwaxedBlocks and waxedBlocks must be of same size!");
 
     for (int i = 0; i < unwaxedBlocks.size(); i++) {
       final Block unwaxedBaseBlock = unwaxedBlocks.get(i);
       final Block waxedBaseBlock = waxedBlocks.get(i);
-      generateWaxRecipesForShapes(pack, unwaxedBaseBlock, waxedBaseBlock);
+      generateWaxRecipesForShapes(pack, unwaxedBaseBlock, waxedBaseBlock, blockPredicate);
     }
   }
 
-  private static void generateWaxRecipesForShapes(RuntimeResourcePack pack, Block unwaxedBaseBlock, Block waxedBaseBlock) {
+  private static void generateWaxRecipesForShapes(RuntimeResourcePack pack, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
     for (BlockShape shape : BlockShape.values()) {
       final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
       final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
-      if (unwaxed != null && waxed != null) {
+      if (unwaxed != null && waxed != null && blockPredicate.test(waxed)) {
         final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, waxed)
             .input(unwaxed)
             .input(Items.HONEYCOMB)

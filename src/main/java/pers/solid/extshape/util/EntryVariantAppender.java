@@ -24,6 +24,7 @@ import java.util.function.Predicate;
 public record EntryVariantAppender(ItemGroup itemGroup, Iterable<BlockShape> shapes, Iterable<Block> baseBlocks, Predicate<Block> blockPredicate) {
   public static final Multimap<Block, Block> ADJACENT_BASE_BLOCKS = ImmutableSetMultimap.<Block, Block>builder()
       .put(Blocks.BAMBOO_PLANKS, Blocks.BAMBOO_MOSAIC)
+      .put(Blocks.BLACKSTONE, Blocks.GILDED_BLACKSTONE)
       .build();
 
   public void appendItems(Multimap<Item, Item> appendingRule) {
