@@ -83,7 +83,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
     final String path = blockModelId.getPath();
     if (path.contains("/waxed_") && path.contains("copper")) {
-      return blockModelId.withPath(path.replace("/waxed_", "/"));
+      return new Identifier(blockModelId.getNamespace(), path.replace("/waxed_", "/"));
     } else {
       return blockModelId;
     }

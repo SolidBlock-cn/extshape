@@ -83,7 +83,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
 
       // 基础方块为涂蜡铜方块时，使用未涂蜡铜的模型。
       if (basePath.contains("/waxed_") && basePath.contains("copper")) {
-        baseId = baseId.withPath(basePath.replace("/waxed_", "/"));
+        baseId = new Identifier(baseId.getNamespace(), basePath.replace("/waxed_", "/"));
       }
     }
     final BlockStateVariantMap variants2 = BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates();
