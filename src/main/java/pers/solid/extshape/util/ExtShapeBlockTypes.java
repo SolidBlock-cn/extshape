@@ -4,11 +4,16 @@ import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.WoodType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.ExtShape;
 
+/**
+ * 本模组中会使用到的一些 {@code BlockSetType} 和 {@code WoodType}，用于完整地实现一些栅栏门、按钮等方块的功能。
+ */
 public final class ExtShapeBlockTypes {
   private static SoundEvent of(String name) {
     return SoundEvent.of(new Identifier(ExtShape.MOD_ID, name));
