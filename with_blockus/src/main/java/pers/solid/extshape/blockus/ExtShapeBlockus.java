@@ -15,10 +15,8 @@ public class ExtShapeBlockus implements ModInitializer {
   public static final String NAMESPACE = "extshape_blockus";
   public static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes for Blockus");
 
-  private static final Identifier defaultId = new Identifier(NAMESPACE, "default");
-
   public static Identifier id(@NotNull String path) {
-    return defaultId.withPath(path);
+    return new Identifier(NAMESPACE, path);
   }
 
   @Override

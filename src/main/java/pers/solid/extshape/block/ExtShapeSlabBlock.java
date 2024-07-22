@@ -63,7 +63,7 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
 
       // 基础方块为涂蜡铜方块时，使用未涂蜡铜的模型。
       if (basePath.contains("/waxed_") && basePath.contains("copper")) {
-        baseId = baseId.withPath(basePath.replace("/waxed_", "/"));
+        baseId = new Identifier(baseId.getNamespace(), basePath.replace("/waxed_", "/"));
       }
     }
     return BlockStateModelGenerator.createSlabBlockState(this, id, id.brrp_suffixed("_top"), baseBlock != null ? baseId : id.brrp_suffixed("_double"));

@@ -61,6 +61,8 @@ public class ExtShapeButtonBlock extends AbstractButtonBlock implements ExtShape
   }
 
   public final @NotNull Block baseBlock;
+  protected final SoundEvent clickOffSound, clickOnSound;
+  public final int pressTicks;
 
   public ExtShapeButtonBlock(@NotNull Block baseBlock, Settings blockSettings, @NotNull ActivationSettings activationSettings) {
     super(activationSettings.buttonActivatedByProjectile(), blockSettings);
