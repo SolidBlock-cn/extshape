@@ -25,12 +25,17 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * 包含检测合成表冲突的一些实用方法。因为扩展方块形状模组的合成表总是会存在冲突，用于检测合成表冲突的方法均置于此类。
+ * 检测合成表冲突的一些实用方法。因为扩展方块形状模组的合成表很容易出现冲突，因此用于检测合成表冲突的方法均置于此类。
  */
 @ApiStatus.AvailableSince("1.5.2")
 public final class RecipeConflict {
   private static final Logger LOGGER = LoggerFactory.getLogger(RecipeConflict.class);
 
+  /**
+   * 检测合成表中的冲突。
+   *
+   * @return 冲突的个数。
+   */
   public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, Consumer<Supplier<Text>> messageConsumer) {
     final CraftingInventory craftingInventory = new CraftingInventory(new CraftingScreenHandler(0, player.getInventory()), 3, 3);
     int numberOfConflicts = 0;
