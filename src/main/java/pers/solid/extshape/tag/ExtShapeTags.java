@@ -9,7 +9,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
@@ -200,7 +199,7 @@ public final class ExtShapeTags {
   }
 
   private static TagKey<Block> ofBlockOnly(@NotNull String path) {
-    return TagKey.of(RegistryKeys.BLOCK, new Identifier(ExtShape.MOD_ID, path));
+    return TagKey.of(RegistryKeys.BLOCK, ExtShape.id(path));
   }
 
   private static TagKey<Block> ofBlockAndItem(@NotNull String path) {

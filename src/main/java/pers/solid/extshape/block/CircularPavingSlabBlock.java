@@ -58,7 +58,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   @Override
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
     // Blockus 模组中的环纹方块使用带釉陶瓦模型，故此处使用带釉陶瓦台阶模型。
-    return super.getBlockModel().withParent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab"));
+    return super.getBlockModel().withParent(ExtShape.id("block/glazed_terracotta_slab"));
   }
 
   @Environment(EnvType.CLIENT)
@@ -67,7 +67,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
     final ModelJsonBuilder model = getBlockModel();
     final Identifier id = getBlockModelId();
     pack.addModel(id, model);
-    pack.addModel(id.brrp_suffixed("_top"), model.withParent(new Identifier(ExtShape.MOD_ID, "block/glazed_terracotta_slab_top")));
+    pack.addModel(id.brrp_suffixed("_top"), model.withParent(ExtShape.id("block/glazed_terracotta_slab_top")));
   }
 
   @Environment(EnvType.CLIENT)

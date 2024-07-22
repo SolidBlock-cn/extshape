@@ -69,7 +69,7 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   @Override
   @Environment(EnvType.CLIENT)
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID, "block/vertical_quarter_piece")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
+    return ModelJsonBuilder.create(ExtShape.id("block/vertical_quarter_piece")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
 

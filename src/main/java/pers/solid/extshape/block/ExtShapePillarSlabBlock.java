@@ -83,11 +83,11 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
     final boolean hasHorizontalColumn = BASE_BLOCKS_WITH_HORIZONTAL_COLUMN.contains(baseBlock);
     final ModelJsonBuilder blockModel = getBlockModel();
     if (hasHorizontalColumn) {
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/slab_column_horizontal")));
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/slab_column_horizontal_top")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(ExtShape.id("block/slab_column_horizontal")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(ExtShape.id("block/slab_column_horizontal_top")));
     } else {
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/slab_column")));
-      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(new Identifier(ExtShape.MOD_ID, "block/slab_column_top")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal"), blockModel.withParent(ExtShape.id("block/slab_column")));
+      pack.addModel(getBlockModelId().brrp_suffixed("_horizontal_top"), blockModel.withParent(ExtShape.id("block/slab_column_top")));
     }
   }
 
