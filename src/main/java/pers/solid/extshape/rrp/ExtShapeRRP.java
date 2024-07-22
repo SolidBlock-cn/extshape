@@ -5,7 +5,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.resource.ResourceType;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +29,7 @@ public final class ExtShapeRRP {
   /**
    * 适用于整个模组的运行时资源包，服务端和客户端都会运行。
    */
-  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(new Identifier(ExtShape.MOD_ID, "pack"));
+  public static final RuntimeResourcePack PACK = RuntimeResourcePack.create(ExtShape.id("pack"));
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeRRP.class);
 
