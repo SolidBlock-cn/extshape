@@ -7,6 +7,7 @@
 - 微调了部分翻译，“横条”的日语翻译调整为<span lang=ja>四半ブロック</span>，文言文翻译调整为<span lang=lzh>橫條</span>。
 - 将错误的标签名称 `mishanguc:concrete_fence_walls`、`mishanguc:terracotta_fence_walls` 和 `mishanguc:stained_terracotta_fence_walls` 修正为 `mishanguc:concrete_walls`、`mishanguc:terracotta_walls` 和 `mishanguc:stained_terracotta_walls`。
 - 修复在新版本中，雪和粘土等方块的战利品表错误的问题。
+- 修复将红树木相关方块去皮后会变成橡木的问题。
 - 其他代码优化。
 
 ### 2.1.5
