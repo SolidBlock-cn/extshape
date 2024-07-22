@@ -7,22 +7,25 @@ import net.minecraft.data.client.TextureKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
 import pers.solid.brrp.v1.generator.TextureRegistry;
-import pers.solid.extshape.block.ExtShapeBlocks;
 
 @Environment(EnvType.CLIENT)
 @ApiStatus.Internal
 public class VanillaTextures {
   @Environment(EnvType.CLIENT)
   public static void registerTextures() {
-    TextureRegistry.register(Blocks.SMOOTH_QUARTZ, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/quartz_block_bottom"));
-    TextureRegistry.register(Blocks.SMOOTH_RED_SANDSTONE, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/red_sandstone_top"));
-    TextureRegistry.register(Blocks.SMOOTH_SANDSTONE, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/sandstone_top"));
-    TextureRegistry.register(Blocks.SNOW_BLOCK, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/snow"));
-    TextureRegistry.register(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB, new Identifier(Identifier.DEFAULT_NAMESPACE, "smooth_stone"));
+    TextureRegistry.register(Blocks.QUARTZ_BLOCK, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/quartz_block_top"));
     TextureRegistry.register(Blocks.QUARTZ_BLOCK, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/quartz_block_side"));
-    TextureRegistry.register(Blocks.ANCIENT_DEBRIS, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/ancient_debris_side"));
-    TextureRegistry.register(Blocks.MELON, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/melon_side"));
-    TextureRegistry.register(Blocks.PUMPKIN, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/pumpkin_side"));
+    TextureRegistry.register(Blocks.SMOOTH_QUARTZ, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/quartz_block_bottom"));
+    TextureRegistry.registerSuffixed(Blocks.CHISELED_QUARTZ_BLOCK, TextureKey.END, "_top");
+
+    TextureRegistry.register(Blocks.SNOW_BLOCK, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/snow"));
+    TextureRegistry.registerSuffixed(Blocks.ANCIENT_DEBRIS, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.ANCIENT_DEBRIS, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.MELON, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.MELON, TextureKey.END, "_top");
+    TextureRegistry.registerSuffixed(Blocks.PUMPKIN, TextureKey.ALL, "_side");
+    TextureRegistry.registerSuffixed(Blocks.PUMPKIN, TextureKey.END, "_top");
+
     TextureRegistry.register(Blocks.WAXED_COPPER_BLOCK, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/copper_block"));
     TextureRegistry.register(Blocks.WAXED_EXPOSED_COPPER, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/exposed_copper"));
     TextureRegistry.register(Blocks.WAXED_OXIDIZED_COPPER, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/oxidized_copper"));
@@ -34,15 +37,16 @@ public class VanillaTextures {
 
     TextureRegistry.register(Blocks.SANDSTONE, TextureKey.TOP, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/sandstone_top"));
     TextureRegistry.register(Blocks.SANDSTONE, TextureKey.BOTTOM, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/sandstone_bottom"));
+    TextureRegistry.register(Blocks.CHISELED_SANDSTONE, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/sandstone_top"));
+    TextureRegistry.register(Blocks.CUT_SANDSTONE, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/sandstone_top"));
+    TextureRegistry.register(Blocks.SMOOTH_SANDSTONE, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/sandstone_top"));
+
     TextureRegistry.register(Blocks.RED_SANDSTONE, TextureKey.TOP, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/red_sandstone_top"));
     TextureRegistry.register(Blocks.RED_SANDSTONE, TextureKey.BOTTOM, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/red_sandstone_bottom"));
-    TextureRegistry.register(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB, new Identifier(Identifier.DEFAULT_NAMESPACE, "smooth_stone_slab_side"));
-    TextureRegistry.register(Blocks.QUARTZ_BLOCK, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/quartz_block_top"));
-    TextureRegistry.register(Blocks.ANCIENT_DEBRIS, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/ancient_debris_top"));
-    TextureRegistry.register(Blocks.MELON, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/melon_top"));
-    TextureRegistry.register(Blocks.PUMPKIN, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/pumpkin_top"));
+    TextureRegistry.register(Blocks.CHISELED_RED_SANDSTONE, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/red_sandstone_top"));
+    TextureRegistry.register(Blocks.CUT_RED_SANDSTONE, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/red_sandstone_top"));
+    TextureRegistry.register(Blocks.SMOOTH_RED_SANDSTONE, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/red_sandstone_top"));
 
-    // 原木系列
     TextureRegistry.register(Blocks.OAK_LOG, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/oak_log_top"));
     TextureRegistry.register(Blocks.SPRUCE_LOG, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/spruce_log_top"));
     TextureRegistry.register(Blocks.BIRCH_LOG, TextureKey.END, new Identifier(Identifier.DEFAULT_NAMESPACE, "block/birch_log_top"));
