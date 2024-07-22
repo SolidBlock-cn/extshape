@@ -84,11 +84,13 @@ public final class BlockCollections {
       POLISHED_ANDESITE
   );
   public static final @Unmodifiable ImmutableList<Block> STONES = new ImmutableList.Builder<Block>().add(STONE).addAll(STONE_VARIANTS).build();
-  public static final @Unmodifiable ImmutableSet<Block> SANDSTONES = ImmutableSet.of(
+  public static final @Unmodifiable ImmutableSet<Block> UNCOLORED_SANDSTONES = ImmutableSet.of(
       SANDSTONE,
       CUT_SANDSTONE,
       CHISELED_SANDSTONE,
-      SMOOTH_SANDSTONE,
+      SMOOTH_SANDSTONE
+  );
+  public static final @Unmodifiable ImmutableSet<Block> RED_SANDSTONES = ImmutableSet.of(
       RED_SANDSTONE,
       CUT_RED_SANDSTONE,
       CHISELED_RED_SANDSTONE,
