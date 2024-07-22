@@ -70,7 +70,7 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   @Override
   @Environment(EnvType.CLIENT)
   public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return ModelJsonBuilder.create(new Identifier(ExtShape.MOD_ID, "block/vertical_stairs")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
+    return ModelJsonBuilder.create(ExtShape.id("block/vertical_stairs")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
   /**

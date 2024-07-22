@@ -3,6 +3,8 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.content.BlockusBlocks;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.ExtShape;
@@ -12,6 +14,12 @@ import pers.solid.extshape.util.BlockBiMaps;
 public class ExtShapeBlockus implements ModInitializer {
   public static final String NAMESPACE = "extshape_blockus";
   public static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes for Blockus");
+
+  private static final Identifier defaultId = new Identifier(NAMESPACE, "default");
+
+  public static Identifier id(@NotNull String path) {
+    return defaultId.withPath(path);
+  }
 
   @Override
   public void onInitialize() {
