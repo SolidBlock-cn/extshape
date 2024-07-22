@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -24,17 +25,16 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 public class VerticalStairsBlock extends Block implements Waterloggable {
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
   public static final EnumProperty<HorizontalCornerDirection> FACING = VerticalQuarterPieceBlock.FACING;
-  public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new EnumMap<>(HorizontalCornerDirection.class);
+  public static final ImmutableMap<HorizontalCornerDirection, VoxelShape> VOXELS;
   public static final MapCodec<VerticalStairsBlock> CODEC = createCodec(VerticalStairsBlock::new);
 
   static {
-    VerticalQuarterPieceBlock.VOXELS.forEach((horizontalCornerDirection, voxelShape) -> VOXELS.put(horizontalCornerDirection.getOpposite(), VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), voxelShape, BooleanBiFunction.ONLY_FIRST)));
+    ImmutableMap.Builder<HorizontalCornerDirection, VoxelShape> builder = new ImmutableMap.Builder<>();
+    VerticalQuarterPieceBlock.VOXELS.forEach((horizontalCornerDirection, voxelShape) -> builder.put(horizontalCornerDirection.getOpposite(), VoxelShapes.combineAndSimplify(VoxelShapes.fullCube(), voxelShape, BooleanBiFunction.ONLY_FIRST)));
+    VOXELS = builder.build();
   }
 
   public VerticalStairsBlock(Settings settings) {

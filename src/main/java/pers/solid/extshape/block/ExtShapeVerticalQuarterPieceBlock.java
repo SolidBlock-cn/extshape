@@ -31,18 +31,21 @@ import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
+/**
+ * 本模组中的纵条方块。
+ */
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeVerticalQuarterPieceBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalQuarterPieceBlock::new);
 
-  public final Block baseBlock;
+  public final @NotNull Block baseBlock;
 
-  public ExtShapeVerticalQuarterPieceBlock(Block baseBlock, Settings settings) {
+  public ExtShapeVerticalQuarterPieceBlock(@NotNull Block baseBlock, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public Block getBaseBlock() {
+  public @NotNull Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -86,9 +89,9 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   }
 
   public static class WithExtension extends ExtShapeVerticalQuarterPieceBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -127,10 +130,10 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   }
 
   public static class WithOxidation extends ExtShapeVerticalQuarterPieceBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

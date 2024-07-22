@@ -35,11 +35,20 @@ import pers.solid.brrp.v1.generator.BRRPSlabBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 
+/**
+ * 本模组中的台阶方块。
+ */
 public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeSlabBlock::new);
 
   public ExtShapeSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);
+  }
+
+  @Override
+  public @NotNull Block getBaseBlock() {
+    assert baseBlock != null;
+    return baseBlock;
   }
 
   @Override
@@ -53,15 +62,20 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
     final Identifier id = getBlockModelId();
     // 对于上蜡的铜，其自身的方块模型以及对应完整方块的模型均为未上蜡的方块模型，故在此处做出调整。
     Identifier baseId = baseBlock == null ? null : BRRPUtils.getBlockModelId(baseBlock);
-    if (baseId != null && baseId.getPath().contains("waxed_") && baseId.getPath().contains("copper")) {
-      baseId = new Identifier(baseId.getNamespace(), baseId.getPath().replace("waxed_", ""));
+    if (baseId != null) {
+      final String basePath = baseId.getPath();
+
+      // 基础方块为涂蜡铜方块时，使用未涂蜡铜的模型。
+      if (basePath.contains("/waxed_") && basePath.contains("copper")) {
+        baseId = baseId.withPath(basePath.replace("/waxed_", "/"));
+      }
     }
     return BlockStateModelGenerator.createSlabBlockState(this, id, id.brrp_suffixed("_top"), baseBlock != null ? baseId : id.brrp_suffixed("_double"));
   }
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    if (NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock)) {
+    if (ExtShapeStairsBlock.shouldNotCraftStairsOrSlabs(baseBlock)) {
       return null;
     }
     final CraftingRecipeJsonBuilder craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK && ExtShapeConfig.CURRENT_CONFIG.specialSnowSlabCrafting) ? ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(Ingredient.ofItems(Blocks.SNOW)).criterion("has_snow", RecipeProvider.conditionsFromItem(Blocks.SNOW)) : super.getCraftingRecipe();
@@ -84,9 +98,9 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
   }
 
   public static class WithExtension extends ExtShapeSlabBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -128,10 +142,10 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
    * @see net.minecraft.block.OxidizableSlabBlock
    */
   public static class WithOxidation extends ExtShapeSlabBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

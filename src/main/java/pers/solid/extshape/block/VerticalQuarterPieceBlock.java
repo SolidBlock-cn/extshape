@@ -1,5 +1,6 @@
 package pers.solid.extshape.block;
 
+import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -24,24 +25,24 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
-import java.util.EnumMap;
+import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * 纵条方块，只占 1/4 体积的方块。
+ */
 public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
-  public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = new EnumMap<>(HorizontalCornerDirection.class);
+  public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = Maps.toMap(Arrays.asList(HorizontalCornerDirection.values()), dir -> {
+    Vec3i vec = dir.getVector();
+    return (VoxelShapes.cuboid(Math.min(vec.getX() + 1, 1) * 0.5, 0,
+        Math.min(vec.getZ() + 1, 1) * 0.5, Math.max(vec.getX() + 1, 1) * 0.5, 1,
+        Math.max(vec.getZ() + 1, 1) * 0.5));
+
+  });
   public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
   public static final EnumProperty<HorizontalCornerDirection> FACING = EnumProperty.of("facing",
       HorizontalCornerDirection.class);
   public static final MapCodec<VerticalQuarterPieceBlock> CODEC = createCodec(VerticalQuarterPieceBlock::new);
-
-  static {
-    for (HorizontalCornerDirection dir : HorizontalCornerDirection.values()) {
-      Vec3i vec = dir.getVector();
-      VOXELS.put(dir, VoxelShapes.cuboid(Math.min(vec.getX() + 1, 1) * 0.5, 0,
-          Math.min(vec.getZ() + 1, 1) * 0.5, Math.max(vec.getX() + 1, 1) * 0.5, 1,
-          Math.max(vec.getZ() + 1, 1) * 0.5));
-    }
-  }
 
   public VerticalQuarterPieceBlock(Settings settings) {
     super(settings);

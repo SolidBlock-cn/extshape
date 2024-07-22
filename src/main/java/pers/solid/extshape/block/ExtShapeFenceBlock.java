@@ -23,21 +23,31 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.generator.BRRPFenceBlock;
 import pers.solid.extshape.builder.BlockShape;
 
+/**
+ * 本模组中的栅栏方块。
+ */
 public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeFenceBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BRRPFenceBlock::getBaseBlock), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient), createSettingsCodec()).apply(instance, ExtShapeFenceBlock::new));
 
   /**
    * 合成栅栏方块需要使用的第二个材料。
    */
-  private final Item secondIngredient;
+  private final @Nullable Item secondIngredient;
 
-  public ExtShapeFenceBlock(Block baseBlock, Item secondIngredient, Settings settings) {
+  public ExtShapeFenceBlock(@NotNull Block baseBlock, @Nullable Item secondIngredient, Settings settings) {
     super(baseBlock, settings);
     this.secondIngredient = secondIngredient;
+  }
+
+  @Override
+  public @NotNull Block getBaseBlock() {
+    assert baseBlock != null;
+    return baseBlock;
   }
 
   @Override
@@ -47,7 +57,7 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    return baseBlock == null ? null : ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 2)
+    return (baseBlock == null || secondIngredient == null) ? null : ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 2)
         .pattern("W#W").pattern("W#W")
         .group(getRecipeGroup())
         .input('W', baseBlock)
@@ -73,9 +83,9 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
   }
 
   public static class WithExtension extends ExtShapeFenceBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Item secondIngredient, Settings settings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, @Nullable Item secondIngredient, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, secondIngredient, settings);
       this.extension = extension;
     }
@@ -115,10 +125,10 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
   }
 
   public static class WithOxidation extends ExtShapeFenceBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BRRPFenceBlock::getBaseBlock), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceBlock::getSecondIngredient), createSettingsCodec(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(Block baseBlock, Item secondIngredient, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, @Nullable Item secondIngredient, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, secondIngredient, settings);
       this.oxidationLevel = oxidationLevel;
     }

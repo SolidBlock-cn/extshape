@@ -43,6 +43,9 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
 
+/**
+ * 本模组中的压力板方块，方块的激活时长和激活类型可能是自定义的。
+ */
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
 
   protected static <B extends ExtShapePressurePlateBlock> MapCodec<B> createCodec(Function4<Block, Settings, BlockSetType, Integer, B> function) {
@@ -54,18 +57,18 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   public final Block baseBlock;
   protected final int tickRate;
 
-  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {
+  public ExtShapePressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {
     super(blockSetType, settings);
     this.baseBlock = baseBlock;
     this.tickRate = tickRate;
   }
 
-  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapePressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
     this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime());
   }
 
   @Override
-  public Block getBaseBlock() {
+  public @NotNull Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -173,9 +176,9 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   public static class WithExtension extends ExtShapePressurePlateBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
       super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
@@ -212,15 +215,15 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   public static class WithOxidation extends ExtShapePressurePlateBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.blockSetType), tickRateField(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings, blockSetType, tickRate);
       this.oxidationLevel = oxidationLevel;
     }
 
-    public WithOxidation(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
       this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime(), oxidationLevel);
     }
 
