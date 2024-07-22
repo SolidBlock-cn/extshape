@@ -272,7 +272,14 @@ public final class ExtShapeBlocks {
         .build();
 
     // 砂岩、红砂岩及其切制、錾制、平滑变种。其中，只有平滑砂岩有栅栏、压力板和按钮。
-    for (final Block block : BlockCollections.SANDSTONES) {
+    for (final Block block : BlockCollections.UNCOLORED_SANDSTONES) {
+      FACTORY.createConstructionOnly(block)
+          .markStoneCuttable()
+          .addExtraTag(BlockTags.PICKAXE_MINEABLE)
+          .with(BlockShape.WALL)
+          .build();
+    }
+    for (final Block block : BlockCollections.RED_SANDSTONES) {
       FACTORY.createConstructionOnly(block)
           .markStoneCuttable()
           .addExtraTag(BlockTags.PICKAXE_MINEABLE)
