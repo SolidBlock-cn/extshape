@@ -89,9 +89,9 @@ public final class ExtShapeBlockusRRP {
 
   @Environment(EnvType.CLIENT)
   private static void registerTextures() {
-    TextureRegistry.register(BlockusBlocks.ROUGH_BASALT.block, Identifier.of("block/basalt_top"));
-    TextureRegistry.register(BlockusBlocks.ROUGH_SANDSTONE.block, Identifier.of("block/sandstone_bottom"));
-    TextureRegistry.register(BlockusBlocks.ROUGH_RED_SANDSTONE.block, Identifier.of("block/red_sandstone_bottom"));
+    TextureRegistry.register(BlockusBlocks.ROUGH_BASALT.block, Identifier.ofVanilla("block/basalt_top"));
+    TextureRegistry.register(BlockusBlocks.ROUGH_SANDSTONE.block, Identifier.ofVanilla("block/sandstone_bottom"));
+    TextureRegistry.register(BlockusBlocks.ROUGH_RED_SANDSTONE.block, Identifier.ofVanilla("block/red_sandstone_bottom"));
     TextureRegistry.register(BlockusBlocks.ROUGH_SOUL_SANDSTONE.block, Identifier.of(Blockus.MOD_ID, "block/soul_sandstone_bottom"));
 
     TextureRegistry.registerSuffixed(BlockusBlocks.STRIPPED_WHITE_OAK_LOG, TextureKey.END, "_top");
