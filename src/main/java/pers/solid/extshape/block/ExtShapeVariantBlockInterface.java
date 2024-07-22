@@ -1,8 +1,6 @@
 package pers.solid.extshape.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.util.AttributiveBlockNameManager;
