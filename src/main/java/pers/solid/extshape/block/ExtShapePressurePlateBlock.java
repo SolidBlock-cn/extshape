@@ -41,6 +41,9 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
 
+/**
+ * 本模组中的压力板方块，方块的激活时长和激活类型可能是自定义的。
+ */
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
 
   public final Block baseBlock;
@@ -48,7 +51,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   private final SoundEvent pressSound;
   protected final int tickRate;
 
-  public ExtShapePressurePlateBlock(Block baseBlock, ActivationRule activationRule, Settings settings, SoundEvent depressSound, SoundEvent pressSound, int tickRate) {
+  public ExtShapePressurePlateBlock(@NotNull Block baseBlock, ActivationRule activationRule, Settings settings, SoundEvent depressSound, SoundEvent pressSound, int tickRate) {
     super(activationRule, settings);
     this.baseBlock = baseBlock;
     this.depressSound = depressSound;
@@ -56,12 +59,12 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     this.tickRate = tickRate;
   }
 
-  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapePressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
     this(baseBlock, activationSettings.activationRule(), settings, activationSettings.sounds().depressSound(), activationSettings.sounds().pressSound(), activationSettings.plateTime());
   }
 
   @Override
-  public Block getBaseBlock() {
+  public @NotNull Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -176,9 +179,9 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   public static class WithExtension extends ExtShapePressurePlateBlock {
-    private final BlockExtension extension;
+    private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
       super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
@@ -205,9 +208,9 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   public static class WithOxidation extends ExtShapePressurePlateBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
+    private final @NotNull OxidationLevel oxidationLevel;
 
-    public WithOxidation(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings, activationSettings);
       this.oxidationLevel = oxidationLevel;
     }

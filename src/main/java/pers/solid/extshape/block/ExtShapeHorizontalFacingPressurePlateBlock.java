@@ -21,7 +21,7 @@ import pers.solid.extshape.util.ActivationSettings;
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
     super(baseBlock, settings, activationSettings);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
   }
