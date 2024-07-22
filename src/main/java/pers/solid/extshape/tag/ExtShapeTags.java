@@ -45,33 +45,33 @@ public final class ExtShapeTags {
 
   /* 楼梯 */
   public static final TagKey<Block> STAIRS = ofBlockAndItem(BlockTags.STAIRS, ItemTags.STAIRS);
+  public static final TagKey<Block> WOODEN_STAIRS = ofBlockAndItem(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
+  public static final TagKey<Block> LOG_STAIRS = ofBlockAndItem("log_stairs", WOODEN_STAIRS, LOG_BLOCKS);
   public static final TagKey<Block> WOOLEN_STAIRS = ofBlockAndItem("woolen_stairs", WOOLEN_BLOCKS, STAIRS);
   public static final TagKey<Block> CONCRETE_STAIRS = ofBlockAndItem("concrete_stairs", STAIRS, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> TERRACOTTA_STAIRS = ofBlockAndItem("terracotta_stairs", STAIRS, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> STAINED_TERRACOTTA_STAIRS = ofBlockAndItem("stained_terracotta_stairs", TERRACOTTA_STAIRS);
-  public static final TagKey<Block> WOODEN_STAIRS = ofBlockAndItem(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
-  public static final TagKey<Block> LOG_STAIRS = ofBlockAndItem("log_stairs", WOODEN_STAIRS, LOG_BLOCKS);
 
 
   /* 台阶 */
   public static final TagKey<Block> SLABS = ofBlockAndItem(BlockTags.SLABS, ItemTags.SLABS);
+  public static final TagKey<Block> WOODEN_SLABS = ofBlockAndItem(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
+  public static final TagKey<Block> LOG_SLABS = ofBlockAndItem("log_slabs", WOODEN_SLABS, LOG_BLOCKS);
   public static final TagKey<Block> WOOLEN_SLABS = ofBlockAndItem("woolen_slabs", WOOLEN_BLOCKS, SLABS);
   public static final TagKey<Block> CONCRETE_SLABS = ofBlockAndItem("concrete_slabs", SLABS, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> TERRACOTTA_SLABS = ofBlockAndItem("terracotta_slabs", SLABS, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> STAINED_TERRACOTTA_SLABS = ofBlockAndItem("stained_terracotta_slabs", TERRACOTTA_SLABS);
   public static final TagKey<Block> GLAZED_TERRACOTTA_SLABS = ofBlockAndItem("glazed_terracotta_slabs", SLABS);
-  public static final TagKey<Block> WOODEN_SLABS = ofBlockAndItem(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
-  public static final TagKey<Block> LOG_SLABS = ofBlockAndItem("log_slabs", WOODEN_SLABS, LOG_BLOCKS);
 
 
   /* 栅栏 */
   public static final TagKey<Block> FENCES = ofBlockAndItem(BlockTags.FENCES, ItemTags.FENCES);
+  public static final TagKey<Block> WOODEN_FENCES = ofBlockAndItem(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
+  public static final TagKey<Block> LOG_FENCES = ofBlockAndItem("log_fences", LOG_BLOCKS, WOODEN_FENCES);
   public static final TagKey<Block> WOOLEN_FENCES = ofBlockAndItem("woolen_fences", WOOLEN_BLOCKS, FENCES);
   public static final TagKey<Block> CONCRETE_FENCES = ofBlockAndItem("concrete_fences", FENCES, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> TERRACOTTA_FENCES = ofBlockAndItem("terracotta_fences", FENCES, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> STAINED_TERRACOTTA_FENCES = ofBlockAndItem("stained_terracotta_fences", TERRACOTTA_FENCES);
-  public static final TagKey<Block> WOODEN_FENCES = ofBlockAndItem(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
-  public static final TagKey<Block> LOG_FENCES = ofBlockAndItem("log_fences", LOG_BLOCKS, WOODEN_FENCES);
 
 
   /* 栅栏门 */
@@ -90,29 +90,29 @@ public final class ExtShapeTags {
   public static final TagKey<Block> LOG_WALLS = ofBlockAndItem("log_walls", WOODEN_WALLS, LOG_BLOCKS, PICKAXE_UNMINEABLE);
   @ApiStatus.AvailableSince("1.5.0")
   public static final TagKey<Block> WOOLEN_WALLS = ofBlockAndItem("woolen_walls", WALLS, WOOLEN_BLOCKS, PICKAXE_UNMINEABLE);
-  public static final TagKey<Block> CONCRETE_WALLS = ofBlockAndItem("concrete_fence_walls", WALLS, BlockTags.PICKAXE_MINEABLE);
-  public static final TagKey<Block> TERRACOTTA_WALLS = ofBlockAndItem("terracotta_fence_walls", WALLS, BlockTags.PICKAXE_MINEABLE);
-  public static final TagKey<Block> STAINED_TERRACOTTA_WALLS = ofBlockAndItem("stained_terracotta_fence_walls", TERRACOTTA_WALLS);
+  public static final TagKey<Block> CONCRETE_WALLS = ofBlockAndItem("concrete_walls", WALLS, BlockTags.PICKAXE_MINEABLE);
+  public static final TagKey<Block> TERRACOTTA_WALLS = ofBlockAndItem("terracotta_walls", WALLS, BlockTags.PICKAXE_MINEABLE);
+  public static final TagKey<Block> STAINED_TERRACOTTA_WALLS = ofBlockAndItem("stained_terracotta_walls", TERRACOTTA_WALLS);
 
 
   /* 按钮 */
   public static final TagKey<Block> BUTTONS = ofBlockAndItem(BlockTags.BUTTONS, ItemTags.BUTTONS);
+  public static final TagKey<Block> WOODEN_BUTTONS = ofBlockAndItem(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
+  public static final TagKey<Block> LOG_BUTTONS = ofBlockAndItem("log_buttons", LOG_BLOCKS, WOODEN_BUTTONS);
   public static final TagKey<Block> WOOLEN_BUTTONS = ofBlockAndItem("woolen_buttons", WOOLEN_BLOCKS, BUTTONS);
   public static final TagKey<Block> CONCRETE_BUTTONS = ofBlockAndItem("concrete_buttons", BUTTONS, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> TERRACOTTA_BUTTONS = ofBlockAndItem("terracotta_buttons", BUTTONS, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> STAINED_TERRACOTTA_BUTTONS = ofBlockAndItem("stained_terracotta_buttons", TERRACOTTA_BUTTONS);
-  public static final TagKey<Block> WOODEN_BUTTONS = ofBlockAndItem(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
-  public static final TagKey<Block> LOG_BUTTONS = ofBlockAndItem("log_buttons", LOG_BLOCKS, WOODEN_BUTTONS);
 
 
   /* 压力板 */
   public static final TagKey<Block> PRESSURE_PLATES = BlockTags.PRESSURE_PLATES;  // ItemTags.PRESSURE_PLATES不存在
+  public static final TagKey<Block> WOODEN_PRESSURE_PLATES = ofBlockAndItem(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
+  public static final TagKey<Block> LOG_PRESSURE_PLATES = ofBlockAndItem("log_pressure_plates", WOODEN_PRESSURE_PLATES, LOG_BLOCKS);
   public static final TagKey<Block> WOOLEN_PRESSURE_PLATES = ofBlockAndItem("woolen_pressure_plates", PRESSURE_PLATES, WOOLEN_BLOCKS);
   public static final TagKey<Block> CONCRETE_PRESSURE_PLATES = ofBlockAndItem("concrete_pressure_plates", PRESSURE_PLATES, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> TERRACOTTA_PRESSURE_PLATES = ofBlockAndItem("terracotta_pressure_plates", PRESSURE_PLATES, BlockTags.PICKAXE_MINEABLE);
   public static final TagKey<Block> STAINED_TERRACOTTA_PRESSURE_PLATES = ofBlockAndItem("stained_terracotta_pressure_plates", TERRACOTTA_PRESSURE_PLATES);
-  public static final TagKey<Block> WOODEN_PRESSURE_PLATES = ofBlockAndItem(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
-  public static final TagKey<Block> LOG_PRESSURE_PLATES = ofBlockAndItem("log_pressure_plates", WOODEN_PRESSURE_PLATES, LOG_BLOCKS);
 
 
   /* 竖直台阶 */
