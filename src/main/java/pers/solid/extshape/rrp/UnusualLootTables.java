@@ -164,7 +164,7 @@ public class UnusualLootTables {
                 .with(ItemEntry.builder(block)
                     .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2))
                         .conditionally(BlockStatePropertyLootCondition.builder(block).properties(EXACT_MATCH_DOUBLE_SLAB)))
-//                    .conditionally(VanillaBlockLootTableGenerator.WITH_SILK_TOUCH)
+                    .conditionally(withSilkTouch)
                     .alternatively(entryBuilder)));
       } else {
         return blockLootTableGenerator.dropsWithSilkTouch(block, blockLootTableGenerator.applyExplosionDecay(block, entryBuilder));
@@ -256,8 +256,16 @@ public class UnusualLootTables {
   public LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(@NotNull Block drop, boolean isSlab) {
     final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop);
     if (isSlab) {
-      itemEntryBuilder.apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2)).conditionally(BlockStatePropertyLootCondition.builder(drop).properties(EXACT_MATCH_DOUBLE_SLAB)));
+      itemEntryBuilder.apply(
+          SetCountLootFunction.builder(ConstantLootNumberProvider.create(2))
+              .conditionally(BlockStatePropertyLootCondition.builder(drop)
+                  .properties(EXACT_MATCH_DOUBLE_SLAB))
+      );
     }
-    return LootTable.builder().pool(LootPool.builder().conditionally(withSilkTouch).rolls(ConstantLootNumberProvider.create(1.0F)).with(itemEntryBuilder));
+    return LootTable.builder()
+        .pool(LootPool.builder()
+            .conditionally(withSilkTouch)
+            .rolls(ConstantLootNumberProvider.create(1.0F))
+            .with(itemEntryBuilder));
   }
 }
