@@ -51,7 +51,7 @@ public final class VanillaStonecutting {
     builder.put(Blocks.QUARTZ_BRICKS, Blocks.QUARTZ_BLOCK);
     builder.put(Blocks.CHISELED_STONE_BRICKS, Blocks.STONE_BRICKS);
     builder.put(Blocks.CHISELED_NETHER_BRICKS, Blocks.NETHER_BRICKS);
-    builder.put(Blocks.POLISHED_BLACKSTONE, Blocks.ANDESITE);
+    builder.put(Blocks.POLISHED_ANDESITE, Blocks.ANDESITE);
     builder.put(Blocks.POLISHED_BASALT, Blocks.BASALT);
     builder.put(Blocks.POLISHED_GRANITE, Blocks.GRANITE);
     builder.put(Blocks.POLISHED_DIORITE, Blocks.DIORITE);
