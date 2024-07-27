@@ -1,5 +1,9 @@
 # Update log
 
+### 2.2.1
+
+- Fixed the issue that andesite is cut into blackstone in a stonecutter.
+
 ### 2.2.0
 
 - Fixed the issue of lack of stonecutting related to tuff.
