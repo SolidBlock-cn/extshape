@@ -2,7 +2,6 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.Blockus;
 import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.BlockusItems;
 import com.brand.blockus.content.types.BSSWTypes;
 import com.brand.blockus.content.types.WoodTypes;
 import com.brand.blockus.utils.tags.BlockusBlockTags;
@@ -272,9 +271,9 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.CUT_SOUL_SANDSTONE).setStoneFenceSettings(Items.SOUL_SAND).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.CHISELED_SOUL_SANDSTONE).setStoneFenceSettings(Items.SOUL_SAND).without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).build();
 
-    create(BlockusBlocks.RAINBOW_BLOCK).addExtraTag(BlockusBlockTags.RAINBOW_BLOCKS).setStoneFenceSettings(BlockusItems.RAINBOW_PETAL).setPillar().build();
-    create(BlockusBlocks.RAINBOW_BRICKS).addExtraTag(BlockusBlockTags.RAINBOW_BLOCKS).setStoneFenceSettings(BlockusItems.RAINBOW_PETAL).build();
-    create(BlockusBlocks.RAINBOW_GLOWSTONE).setFenceSettings(new FenceSettings(BlockusItems.RAINBOW_PETAL, ExtShapeBlockTypes.GLOWSTONE_WOOD_TYPE)).setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.GLOWSTONE_BLOCK_SET_TYPE)).build();
+    create(BlockusBlocks.RAINBOW_BLOCK).addExtraTag(BlockusBlockTags.RAINBOW_BLOCKS).setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem()).setPillar().build();
+    create(BlockusBlocks.RAINBOW_BRICKS).addExtraTag(BlockusBlockTags.RAINBOW_BLOCKS).setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem()).build();
+    create(BlockusBlocks.RAINBOW_GLOWSTONE).setFenceSettings(new FenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem(), ExtShapeBlockTypes.GLOWSTONE_WOOD_TYPE)).setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.GLOWSTONE_BLOCK_SET_TYPE)).build();
     create(BlockusBlocks.HONEYCOMB_BRICKS).addExtraTag(BlockusBlockTags.HONEYCOMB_BLOCKS).setStoneFenceSettings(Items.HONEYCOMB).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.PURPUR_BRICKS).addExtraTag(BlockusBlockTags.PURPUR_BLOCKS).setStoneFenceSettings(Items.PURPUR_BLOCK).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.SMALL_PURPUR_BRICKS).addExtraTag(BlockusBlockTags.PURPUR_BLOCKS).setStoneFenceSettings(Items.PURPUR_BLOCK).without(BlockShape.BUTTON).build();

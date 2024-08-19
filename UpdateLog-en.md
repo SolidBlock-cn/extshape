@@ -1,5 +1,11 @@
 # Update log
 
+### 2.2.2
+
+- Fit for new BRRP API.
+- Fit Blocks 2.9.2。
+- Following Blockus 2.9.2 changes, canceled rainbow glowstone dropping rainbow petals.
+
 ### 2.2.1
 
 - Fixed the issue that andesite is cut into blackstone in a stonecutter.

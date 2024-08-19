@@ -1,17 +1,14 @@
 package pers.solid.extshape.blockus;
 
 import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.BlockusItems;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.LimitCountLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +35,7 @@ public class BlockusUnusualLootTables extends UnusualLootTables {
     builder.put(BlockusBlocks.ICE_BRICKS, dropsDoubleWithSilkTouchOrNone);
     builder.put(BlockusBlocks.RAINBOW_GLOWSTONE, (baseBlock, shape, block) -> {
       final float shapeVolume = UnusualLootTables.shapeVolume(shape);
-      final LootTable.Builder lootTableBuilder = dropsDoubleSlabWithSilkTouch(block, blockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
+      return dropsDoubleSlabWithSilkTouch(block, blockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2 * shapeVolume, 4 * shapeVolume)))
               .apply(fortuneFunction)
               .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4))))),
@@ -46,15 +43,6 @@ public class BlockusUnusualLootTables extends UnusualLootTables {
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2, 4)))
               .apply(fortuneFunction)
               .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 4))) : null);
-      UnusualLootTables.addDropsDoubleSlabPool(lootTableBuilder, block, withSilkTouch, blockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(BlockusItems.RAINBOW_PETAL))
-              .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1)))
-              .apply(fortuneFunction)
-              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4)))),
-          shape == BlockShape.SLAB ? blockLootTableGenerator.applyExplosionDecay(block, ItemEntry.builder(BlockusItems.RAINBOW_PETAL))
-              .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(1)))
-              .apply(fortuneFunction)
-              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 4))) : null);
-      return lootTableBuilder;
     });
     builder.put(BlockusBlocks.BURNT_PAPER_BLOCK, dropsWithSilkTouchOrConst(Items.GUNPOWDER, 2));
     builder.put(BlockusBlocks.NETHER_STAR_BLOCK, (baseBlock, shape, block) -> {

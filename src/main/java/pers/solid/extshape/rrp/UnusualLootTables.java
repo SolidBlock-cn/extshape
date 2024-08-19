@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
+import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemConvertible;
@@ -34,18 +34,19 @@ import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.*;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
+import pers.solid.brrp.v1.impl.BRRPBlockLootTableGenerator;
 import pers.solid.extshape.builder.BlockShape;
 
 /**
  * <p>本类记录了用于本模组的不掉落方块本身的基础方块的战利品表。
- * <p>注册在 {@link #createInstance()} 中的方块，在通过 {@link ExtShapeRRP#generateServerData(RuntimeResourcePack)} 生成战利品表时，不会使用 {@link BlockResourceGenerator#getLootTable()}，而是直接使用这里面注册了的战利品表函数。
+ * <p>注册在 {@link #createInstance()} 中的方块，在通过 {@link ExtShapeRRP#generateServerData(RuntimeResourcePack)} 生成战利品表时，不会使用 {@link BlockResourceGenerator#getLootTable(BlockLootTableGenerator)}，而是直接使用这里面注册了的战利品表函数。
  *
  * @author SolidBlock
  * @since 1.5.1
  */
 @ApiStatus.AvailableSince("1.5.1")
 public class UnusualLootTables {
-  protected final VanillaBlockLootTableGenerator blockLootTableGenerator;
+  protected final BlockLootTableGenerator blockLootTableGenerator;
   protected final RegistryWrapper.WrapperLookup registryLookup;
 
   protected final LootCondition.Builder withSilkTouch;
@@ -55,10 +56,10 @@ public class UnusualLootTables {
   public static final StatePredicate.Builder EXACT_MATCH_DOUBLE_SLAB = StatePredicate.Builder.create().exactMatch(Properties.SLAB_TYPE, SlabType.DOUBLE);
 
   public UnusualLootTables(RegistryWrapper.WrapperLookup registryLookup) {
-    this(new VanillaBlockLootTableGenerator(registryLookup), registryLookup);
+    this(new BRRPBlockLootTableGenerator(registryLookup), registryLookup);
   }
 
-  public UnusualLootTables(VanillaBlockLootTableGenerator blockLootTableGenerator, RegistryWrapper.WrapperLookup registryLookup) {
+  public UnusualLootTables(BlockLootTableGenerator blockLootTableGenerator, RegistryWrapper.WrapperLookup registryLookup) {
     this.blockLootTableGenerator = blockLootTableGenerator;
     this.registryLookup = registryLookup;
     this.withSilkTouch = blockLootTableGenerator.createSilkTouchCondition();
