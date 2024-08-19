@@ -35,7 +35,7 @@
     "minecraft": ">=1.20.5 <=1.20.6",
     "java": ">=21",
     "mixinextras": "*",
-    "brrp_v1": "*"
+    "brrp_v1": ">=1.0.4"
   },
   "suggests": {
     "blockus": "*"

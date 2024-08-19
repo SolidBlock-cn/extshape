@@ -1,5 +1,11 @@
 # Update log
 
+### 2.2.2
+
+- Fit for new BRRP API.
+- Fit Blocks 2.9.2。
+- Following Blockus 2.9.2 changes, canceled rainbow glowstone dropping rainbow petals.
+
 ### 2.2.1
 
 - Fixed the issue that andesite is cut into blackstone in a stonecutter.
@@ -280,7 +286,7 @@ This update is for version only 1.17 and above.
 
 - Improved logging system.
 - Fixed the issue of incompatibility with OptiFine.
-    - Issue details: When OptiFine is on, operations like `new Identifier("#minecraft:banners")` do not throw
+  - Issue details: When OptiFine is on, operations like `new Identifier("#minecraft:banners")` do not throw
       `InvalidIdentiferException`, causing code abnormal behavior.
 
 ### 1.2.1

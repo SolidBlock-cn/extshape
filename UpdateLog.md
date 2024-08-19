@@ -1,5 +1,11 @@
 # 更新日志
 
+### 2.2.2
+
+- 适应新的 BRRP API。
+- 适应 Blocks 2.9.2。
+- 跟随 Blockus 2.9.2 的更改，取消彩虹荧石方块掉落彩虹花簇。
+
 ### 2.2.1
 
 - 修复安山岩在切石机中切石成黑石的问题。
@@ -280,7 +286,7 @@
 
 - 改善了日志系统。
 - 修复了与 OptiFine 不兼容的问题。
-    - 问题详情：在启用了 OptiFine 的情况下，类似于 `new Identifier("#minecraft:banners")` 这样的操作不会抛出
+  - 问题详情：在启用了 OptiFine 的情况下，类似于 `new Identifier("#minecraft:banners")` 这样的操作不会抛出
       `InvalidIdentifierException`，导致代码无法正确运行。
 
 ### 1.2.1
