@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.mixin.BlockFamiliesAccessor;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -101,23 +100,5 @@ public final class BlockBiMaps {
     }
     biMap.put(baseBlock, block);
     BASE_BLOCKS.add(baseBlock);
-  }
-
-  /**
-   * 将本模组的方块的映射添加到原版的 {@link BlockFamilies} 中。通常不需要使用。
-   *
-   * @see pers.solid.extshape.config.ExtShapeConfig#registerBlockFamilies
-   */
-  public static void completeBlockFamilies() {
-    final Map<Block, BlockFamily> baseBlocksToFamilies = BlockFamiliesAccessor.getBaseBlocksToFamilies();
-    for (Block baseBlock : BASE_BLOCKS) {
-      final BlockFamily blockFamily = baseBlocksToFamilies.computeIfAbsent(baseBlock, x -> new BlockFamily.Builder(baseBlock).build());
-      final Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
-      SHAPE_TO_BI_MAP.forEach((shape, map) -> {
-        if (map.containsKey(baseBlock) && shape.vanillaVariant != null) {
-          variants.put(shape.vanillaVariant, map.get(baseBlock));
-        }
-      });
-    }
   }
 }

@@ -9,6 +9,8 @@
     "AxeItemMixin",
     "BlockAccessor",
     "BlockFamiliesAccessor",
+    "BlockStateModelGeneratorAccessor",
+    "BlockTexturePoolAccessor",
     "ButtonBlockAccessor",
     "DisplayContextMixin",
     "ItemGroupEntriesImplMixin",
@@ -16,6 +18,7 @@
     "MiningToolItemMixin",
     "SingleItemRecipeJsonBuilderAccessor",
     "SnowyBlockMixin",
+    "TextureMapAccessor",
     "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"
   ],

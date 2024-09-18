@@ -4,7 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.block.WoodType;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
@@ -20,14 +23,13 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.generator.BRRPFenceGateBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.FenceSettings;
 
 /**
  * 本模组中的栅栏门方块。
  */
-public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtShapeVariantBlockInterface {
+public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVariantBlockInterface {
 
   /**
    * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
@@ -35,7 +37,8 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
   private final Item secondIngredient;
 
   public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Settings settings, @NotNull WoodType woodType, @Nullable Item secondIngredient) {
-    super(baseBlock, settings, woodType);
+    super(woodType, settings);
+    this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
   }
 
@@ -45,7 +48,6 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
 
   @Override
   public @NotNull Block getBaseBlock() {
-    assert baseBlock != null;
     return baseBlock;
   }
 
@@ -54,14 +56,18 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     return Text.translatable("block.extshape.?_fence_gate", this.getNamePrefix());
   }
 
-  @Override
   public @Nullable Item getSecondIngredient() {
     return secondIngredient;
   }
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
+    final ShapedRecipeJsonBuilder craftingRecipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 3)
+        .input('W', baseBlock)
+        .input('#', secondIngredient)
+        .pattern("#W#")
+        .pattern("#W#")
+        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock));
     return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 
@@ -70,6 +76,10 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     return BlockShape.FENCE_GATE;
   }
 
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).fenceGate(this);
+  }
 
   public static class WithExtension extends ExtShapeFenceGateBlock {
     private final @NotNull BlockExtension extension;

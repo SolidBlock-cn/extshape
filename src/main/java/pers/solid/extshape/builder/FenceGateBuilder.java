@@ -2,7 +2,6 @@ package pers.solid.extshape.builder;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.FenceGateBlock;
-import net.minecraft.registry.tag.BlockTags;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeFenceGateBlock;
 import pers.solid.extshape.util.FenceSettings;
@@ -15,7 +14,6 @@ public class FenceGateBuilder extends AbstractBlockBuilder<FenceGateBlock> {
     super(baseBlock, builder -> new ExtShapeFenceGateBlock(builder.baseBlock, builder.blockSettings, fenceSettings));
     this.shape = BlockShape.FENCE_GATE;
     this.fenceSettings = fenceSettings;
-    primaryTagToAddTo = BlockTags.FENCE_GATES;
   }
 
   @Override

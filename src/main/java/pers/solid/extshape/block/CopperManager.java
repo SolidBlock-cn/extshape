@@ -1,21 +1,20 @@
 package pers.solid.extshape.block;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -27,9 +26,11 @@ import java.util.function.Predicate;
 
 /**
  * 处理铜的生锈、除蜡、涂蜡的一些类。
+ *
+ * @param unwaxed 未涂蜡的铜块，氧化程度从低到高的列表
+ * @param waxed   涂蜡的铜块，氧化程度从低到高的列表，需要与未涂蜡的铜块对应
  */
-public final class CopperManager {
-  private final BlocksBuilderFactory blocksBuilderFactory;
+public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
    * 不同氧化等级的铜方块。
    */
@@ -51,14 +52,13 @@ public final class CopperManager {
    */
   public static final ImmutableList<Oxidizable.OxidationLevel> OXIDATION_LEVELS = ImmutableList.of(Oxidizable.OxidationLevel.UNAFFECTED, Oxidizable.OxidationLevel.EXPOSED, Oxidizable.OxidationLevel.WEATHERED, Oxidizable.OxidationLevel.OXIDIZED);
 
-  public CopperManager(BlocksBuilderFactory blocksBuilderFactory) {
-    this.blocksBuilderFactory = blocksBuilderFactory;
-  }
+  public static final CopperManager COPPER = new CopperManager(COPPER_BLOCKS, WAXED_COPPER_BLOCKS);
+  public static final CopperManager CUT_COPPER = new CopperManager(CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS);
 
   /**
    * 为一个特定氧化等级以及涂蜡情况的铜方块注册 {@code BlocksBuilder}。
    */
-  public BlocksBuilder registerCopperBlock(Block copperBase, @NotNull Oxidizable.OxidationLevel oxidationLevel, boolean waxed) {
+  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, @NotNull Oxidizable.OxidationLevel oxidationLevel, boolean waxed) {
     final BlocksBuilder builder = blocksBuilderFactory.createAllShapes(copperBase).setActivationSettings(ActivationSettings.COPPER.get(oxidationLevel));
 
     if (!waxed) {
@@ -90,17 +90,15 @@ public final class CopperManager {
     }
 
     builder.markStoneCuttable()
-        .addExtraTag(BlockTags.PICKAXE_MINEABLE)
-        .addExtraTag(BlockTags.NEEDS_STONE_TOOL)
         .setFenceSettings(new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE))
         .build();
     return builder;
   }
 
-  public void registerWithMultipleOxidizationLevel(List<Block> coppers, boolean waxed) {
+  public static void registerWithMultipleOxidizationLevel(BlocksBuilderFactory blocksBuilderFactory, List<Block> coppers, boolean waxed) {
     final BlocksBuilder[] blocksBuilders = new BlocksBuilder[coppers.size()];
     for (int i = 0; i < coppers.size(); i++) {
-      final BlocksBuilder blocksBuilder = registerCopperBlock(coppers.get(i), OXIDATION_LEVELS.get(i), waxed);
+      final BlocksBuilder blocksBuilder = registerCopperBlock(blocksBuilderFactory, coppers.get(i), OXIDATION_LEVELS.get(i), waxed);
       blocksBuilders[i] = blocksBuilder;
       if (i > 0 && !waxed) {
         final BlocksBuilder previous = blocksBuilders[i - 1];
@@ -116,7 +114,7 @@ public final class CopperManager {
     }
   }
 
-  public void registerExtendedWax(List<Block> unwaxedBases, List<Block> waxedBases) {
+  public static void registerExtendedWax(BlocksBuilderFactory blocksBuilderFactory, List<Block> unwaxedBases, List<Block> waxedBases) {
     Preconditions.checkArgument(unwaxedBases.size() == waxedBases.size(), "unwaxedBases and waxedBases should be of same size!");
     for (int i = 0; i < unwaxedBases.size(); i++) {
       final Block unwaxedBase = unwaxedBases.get(i);
@@ -131,13 +129,10 @@ public final class CopperManager {
     }
   }
 
-  void registerBlocks() {
-    registerWithMultipleOxidizationLevel(COPPER_BLOCKS, false);
-    registerWithMultipleOxidizationLevel(CUT_COPPER_BLOCKS, false);
-    registerWithMultipleOxidizationLevel(WAXED_COPPER_BLOCKS, true);
-    registerWithMultipleOxidizationLevel(WAXED_CUT_COPPER_BLOCKS, true);
-    registerExtendedWax(COPPER_BLOCKS, WAXED_COPPER_BLOCKS);
-    registerExtendedWax(CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS);
+  public void registerBlocks(BlocksBuilderFactory blocksBuilderFactory) {
+    registerWithMultipleOxidizationLevel(blocksBuilderFactory, unwaxed, false);
+    registerWithMultipleOxidizationLevel(blocksBuilderFactory, waxed, true);
+    registerExtendedWax(blocksBuilderFactory, unwaxed, waxed);
   }
 
   /**
@@ -156,23 +151,17 @@ public final class CopperManager {
     };
   }
 
-  public static void generateWaxRecipes(RuntimeResourcePack pack) {
-    Predicate<Block> predicate = Predicates.in(ExtShapeBlocks.getBlocks());
-    generateWaxRecipes(pack, COPPER_BLOCKS, WAXED_COPPER_BLOCKS, predicate);
-    generateWaxRecipes(pack, CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS, predicate);
-  }
+  public void generateWaxRecipes(RecipeExporter exporter, Predicate<Block> blockPredicate) {
+    Preconditions.checkArgument(unwaxed.size() == waxed.size(), "unwaxedBlocks and waxedBlocks must be of same size!");
 
-  private static void generateWaxRecipes(RuntimeResourcePack pack, List<Block> unwaxedBlocks, List<Block> waxedBlocks, Predicate<Block> blockPredicate) {
-    Preconditions.checkArgument(unwaxedBlocks.size() == waxedBlocks.size(), "unwaxedBlocks and waxedBlocks must be of same size!");
-
-    for (int i = 0; i < unwaxedBlocks.size(); i++) {
-      final Block unwaxedBaseBlock = unwaxedBlocks.get(i);
-      final Block waxedBaseBlock = waxedBlocks.get(i);
-      generateWaxRecipesForShapes(pack, unwaxedBaseBlock, waxedBaseBlock, blockPredicate);
+    for (int i = 0; i < unwaxed.size(); i++) {
+      final Block unwaxedBaseBlock = unwaxed.get(i);
+      final Block waxedBaseBlock = waxed.get(i);
+      generateWaxRecipesForShapes(exporter, unwaxedBaseBlock, waxedBaseBlock, blockPredicate);
     }
   }
 
-  private static void generateWaxRecipesForShapes(RuntimeResourcePack pack, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
+  private static void generateWaxRecipesForShapes(RecipeExporter exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
     for (BlockShape shape : BlockShape.values()) {
       final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
       final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
@@ -182,7 +171,7 @@ public final class CopperManager {
             .input(Items.HONEYCOMB)
             .group(RecipeProvider.getItemPath(waxed))
             .criterion(RecipeProvider.hasItem(unwaxed), RecipeProvider.conditionsFromItem(unwaxed));
-        pack.addRecipeAndAdvancement(new Identifier(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeProvider.convertBetween(waxed, Items.HONEYCOMB)), recipe);
+        recipe.offerTo(exporter, new Identifier(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeProvider.convertBetween(waxed, Items.HONEYCOMB)));
       }
     }
   }
