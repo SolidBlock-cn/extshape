@@ -1,10 +1,10 @@
 package pers.solid.extshape.blockus;
 
 import com.brand.blockus.Blockus;
-import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.types.BSSWTypes;
-import com.brand.blockus.content.types.WoodTypes;
-import com.brand.blockus.utils.tags.BlockusBlockTags;
+import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.content.bundles.BSSWBundle;
+import com.brand.blockus.registry.content.bundles.WoodBundle;
+import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
@@ -469,7 +469,7 @@ public final class ExtShapeBlockusBlocks {
     return FACTORY.createAllShapes(baseBlock);
   }
 
-  private static BlocksBuilder create(BSSWTypes bsswTypes) {
+  private static BlocksBuilder create(BSSWBundle bsswTypes) {
     final BlocksBuilder blocksBuilder = create(bsswTypes.block);
     if (bsswTypes.stairs != null) blocksBuilder.without(BlockShape.STAIRS);
     if (bsswTypes.slab != null) blocksBuilder.without(BlockShape.SLAB);
@@ -477,7 +477,7 @@ public final class ExtShapeBlockusBlocks {
     return blocksBuilder;
   }
 
-  private static BlocksBuilder create(WoodTypes woodTypes) {
+  private static BlocksBuilder create(WoodBundle woodTypes) {
     return create(woodTypes.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
   }
 

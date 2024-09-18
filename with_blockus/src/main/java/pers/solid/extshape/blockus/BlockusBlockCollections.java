@@ -1,9 +1,9 @@
 package pers.solid.extshape.blockus;
 
-import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.types.BSSWTypes;
-import com.brand.blockus.content.types.ConcreteTypes;
-import com.brand.blockus.content.types.WoolTypes;
+import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.content.bundles.BSSWBundle;
+import com.brand.blockus.registry.content.bundles.ConcreteBundle;
+import com.brand.blockus.registry.content.bundles.WoolBundle;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 
@@ -11,7 +11,7 @@ import net.minecraft.block.Block;
  * @see pers.solid.extshape.util.BlockCollections
  */
 public final class BlockusBlockCollections {
-  public static final ImmutableList<BSSWTypes> WOODEN_MOSAICS = ImmutableList.of(
+  public static final ImmutableList<BSSWBundle> WOODEN_MOSAICS = ImmutableList.of(
       BlockusBlocks.OAK_MOSAIC,
       BlockusBlocks.SPRUCE_MOSAIC,
       BlockusBlocks.BIRCH_MOSAIC,
@@ -26,7 +26,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.CRIMSON_MOSAIC,
       BlockusBlocks.CHARRED_MOSAIC
   );
-  public static final ImmutableList<BSSWTypes> MOSSY_PLANKS = ImmutableList.of(
+  public static final ImmutableList<BSSWBundle> MOSSY_PLANKS = ImmutableList.of(
       BlockusBlocks.MOSSY_OAK_PLANKS,
       BlockusBlocks.MOSSY_SPRUCE_PLANKS,
       BlockusBlocks.MOSSY_BIRCH_PLANKS,
@@ -68,7 +68,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.WARPED_SMALL_STEMS,
       BlockusBlocks.CRIMSON_SMALL_STEMS,
       BlockusBlocks.WHITE_OAK_SMALL_LOGS);
-  public static final ImmutableList<BSSWTypes> STAINED_STONE_BRICKS = ImmutableList.of(
+  public static final ImmutableList<BSSWBundle> STAINED_STONE_BRICKS = ImmutableList.of(
       BlockusBlocks.WHITE_STONE_BRICKS,
       BlockusBlocks.ORANGE_STONE_BRICKS,
       BlockusBlocks.MAGENTA_STONE_BRICKS,
@@ -85,7 +85,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.RED_STONE_BRICKS,
       BlockusBlocks.BLACK_STONE_BRICKS
   );
-  public static final ImmutableList<ConcreteTypes> CONCRETE_BRICKS = ImmutableList.of(
+  public static final ImmutableList<ConcreteBundle> CONCRETE_BRICKS = ImmutableList.of(
       BlockusBlocks.WHITE_CONCRETE_BRICKS,
       BlockusBlocks.LIGHT_GRAY_CONCRETE_BRICKS,
       BlockusBlocks.GRAY_CONCRETE_BRICKS,
@@ -103,7 +103,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.MAGENTA_CONCRETE_BRICKS,
       BlockusBlocks.PINK_CONCRETE_BRICKS
   );
-  public static final ImmutableList<BSSWTypes> TINTED_SHINGLES = ImmutableList.of(
+  public static final ImmutableList<BSSWBundle> TINTED_SHINGLES = ImmutableList.of(
       BlockusBlocks.WHITE_SHINGLES,
       BlockusBlocks.ORANGE_SHINGLES,
       BlockusBlocks.MAGENTA_SHINGLES,
@@ -121,7 +121,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.RED_SHINGLES,
       BlockusBlocks.BLACK_SHINGLES
   );
-  public static final ImmutableList<WoolTypes> PATTERNED_WOOLS = ImmutableList.of(
+  public static final ImmutableList<WoolBundle> PATTERNED_WOOLS = ImmutableList.of(
       BlockusBlocks.WHITE_PATTERNED_WOOL,
       BlockusBlocks.ORANGE_PATTERNED_WOOL,
       BlockusBlocks.MAGENTA_PATTERNED_WOOL,
@@ -139,7 +139,7 @@ public final class BlockusBlockCollections {
       BlockusBlocks.RED_PATTERNED_WOOL,
       BlockusBlocks.BLACK_PATTERNED_WOOL
   );
-  public static final ImmutableList<WoolTypes> GINGHAM_WOOLS = ImmutableList.of(
+  public static final ImmutableList<WoolBundle> GINGHAM_WOOLS = ImmutableList.of(
       BlockusBlocks.WHITE_GINGHAM_WOOL,
       BlockusBlocks.ORANGE_GINGHAM_WOOL,
       BlockusBlocks.MAGENTA_GINGHAM_WOOL,

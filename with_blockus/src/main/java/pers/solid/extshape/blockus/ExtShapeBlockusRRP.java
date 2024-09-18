@@ -1,10 +1,10 @@
 package pers.solid.extshape.blockus;
 
 import com.brand.blockus.Blockus;
-import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.data.providers.BlockusRecipeProvider;
-import com.brand.blockus.utils.tags.BlockusBlockTags;
-import com.brand.blockus.utils.tags.BlockusItemTags;
+import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
+import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.tag.BlockusBlockTags;
+import com.brand.blockus.registry.tag.BlockusItemTags;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
@@ -223,7 +223,7 @@ public final class ExtShapeBlockusRRP {
   }
 
   private static void generateBlockusBlockData(RuntimeResourcePack pack) {
-    final var instance = new BlockusUnusualLootTables(pack.getRegistryLookup()).createInstance();
+    final var instance = new BlockusUnusualLootTables().createInstance();
     for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
       if (!(block instanceof BlockResourceGenerator generator)) continue;
       final Block baseBlock = generator.getBaseBlock();
@@ -231,7 +231,7 @@ public final class ExtShapeBlockusRRP {
       if (baseBlock != BlockusBlocks.SUGAR_BLOCK) generator.writeRecipes(pack);
       final UnusualLootTables.LootTableFunction lootTableFunction = instance.get(baseBlock);
       if (lootTableFunction != null) {
-        pack.addLootTable(generator.getLootTableId(), lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block));
+        pack.addLootTable(generator.getLootTableId(), registryLookup -> lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block, registryLookup).build());
       } else {
         generator.writeLootTable(pack);
       }

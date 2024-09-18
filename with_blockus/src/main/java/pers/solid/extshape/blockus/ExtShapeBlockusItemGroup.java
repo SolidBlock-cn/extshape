@@ -1,7 +1,7 @@
 package pers.solid.extshape.blockus;
 
-import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.itemgroups.BlockusItemGroups;
+import com.brand.blockus.registry.content.BlockusBlocks;
 import com.google.common.collect.*;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;

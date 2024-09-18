@@ -81,7 +81,7 @@ public final class ExtShapeRRP {
     LOGGER.info("Generating server data for Extended Block Shapes mod!");
 
     // 为方块添加数据。
-    final var instance = new UnusualLootTables(pack.getRegistryLookup()).createInstance();
+    final var instance = new UnusualLootTables().createInstance();
     for (Block block : ExtShapeBlocks.getBlocks()) {
       if (!(block instanceof BlockResourceGenerator generator)) continue;
       generator.writeRecipes(pack);
@@ -89,7 +89,7 @@ public final class ExtShapeRRP {
       if (baseBlock == null) continue;
       final UnusualLootTables.LootTableFunction lootTableFunction = instance.get(baseBlock);
       if (lootTableFunction != null) {
-        pack.addLootTable(generator.getLootTableId(), lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block));
+        pack.addLootTable(generator.getLootTableId(), lookup -> lootTableFunction.apply(baseBlock, BlockShape.getShapeOf(block), block, lookup).build());
       } else {
         generator.writeLootTable(pack);
       }

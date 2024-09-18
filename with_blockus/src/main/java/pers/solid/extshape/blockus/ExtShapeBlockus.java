@@ -1,6 +1,6 @@
 package pers.solid.extshape.blockus;
 
-import com.brand.blockus.content.BlockusBlocks;
+import com.brand.blockus.registry.content.BlockusBlocks;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;

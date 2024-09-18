@@ -1,10 +1,11 @@
 package pers.solid.extshape.blockus;
 
-import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.types.BSSWTypes;
-import com.brand.blockus.content.types.ConcreteTypes;
-import com.brand.blockus.content.types.WoolTypes;
-import com.brand.blockus.data.family.BlockusWoodFamilies;
+import com.brand.blockus.datagen.family.BlockusFamilies;
+import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.content.bundles.BSSWBundle;
+import com.brand.blockus.registry.content.bundles.ConcreteBundle;
+import com.brand.blockus.registry.content.bundles.WoodBundle;
+import com.brand.blockus.registry.content.bundles.WoolBundle;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.family.BlockFamily;
@@ -19,7 +20,7 @@ public final class BlockusBlockBiMaps {
   }
 
   static void importFromBlockus() {
-    final Stream<BlockFamily> families = BlockusWoodFamilies.getFamilies();
+    final Stream<BlockFamily> families = BlockusFamilies.getFamilies();
     families.forEach(blockFamily -> {
       Block baseBlock = blockFamily.getBaseBlock();
       // ignore netherite block because it belongs to vanilla
@@ -41,7 +42,7 @@ public final class BlockusBlockBiMaps {
         }
       }
     });
-    BSSWTypes.values().forEach(bsswTypes -> {
+    BSSWBundle.values().forEach(bsswTypes -> {
       if (bsswTypes.stairs != null) {
         BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswTypes.block, bsswTypes.stairs);
       }
@@ -52,7 +53,27 @@ public final class BlockusBlockBiMaps {
         BlockBiMaps.setBlockOf(BlockShape.WALL, bsswTypes.block, bsswTypes.wall);
       }
     });
-    WoolTypes.values().forEach(woolTypes -> {
+    WoodBundle.values().forEach(woodBundle -> {
+      if (woodBundle.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woodBundle.planks, woodBundle.stairs);
+      }
+      if (woodBundle.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, woodBundle.planks, woodBundle.slab);
+      }
+      if (woodBundle.fence != null) {
+        BlockBiMaps.setBlockOf(BlockShape.FENCE, woodBundle.planks, woodBundle.fence);
+      }
+      if (woodBundle.fence_gate != null) {
+        BlockBiMaps.setBlockOf(BlockShape.FENCE_GATE, woodBundle.planks, woodBundle.fence_gate);
+      }
+      if (woodBundle.button != null) {
+        BlockBiMaps.setBlockOf(BlockShape.BUTTON, woodBundle.planks, woodBundle.button);
+      }
+      if (woodBundle.pressure_plate != null) {
+        BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, woodBundle.planks, woodBundle.pressure_plate);
+      }
+    });
+    WoolBundle.values().forEach(woolTypes -> {
       if (woolTypes.stairs != null) {
         BlockBiMaps.setBlockOf(BlockShape.STAIRS, woolTypes.block, woolTypes.stairs);
       }
@@ -60,7 +81,7 @@ public final class BlockusBlockBiMaps {
         BlockBiMaps.setBlockOf(BlockShape.SLAB, woolTypes.block, woolTypes.slab);
       }
     });
-    ConcreteTypes.values().forEach(concreteTypes -> {
+    ConcreteBundle.values().forEach(concreteTypes -> {
       if (concreteTypes.stairs != null) {
         BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteTypes.block, concreteTypes.stairs);
       }

@@ -29,7 +29,7 @@
     "minecraft": "1.21.x",
     "brrp_v1": "*",
     "extshape": [">=2.1.4", "${version}"],
-    "blockus": ">=2.9.2"
+    "blockus": ">=2.9.4"
   },
   "custom": {
     "modmenu": {

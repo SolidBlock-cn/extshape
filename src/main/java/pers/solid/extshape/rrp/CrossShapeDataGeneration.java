@@ -127,7 +127,7 @@ public class CrossShapeDataGeneration {
   public void craftVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(verticalQuarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(verticalQuarterPiece);
-    final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), verticalQuarterPiece)
+    final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), verticalQuarterPiece, 6)
         .pattern("#").pattern("#").pattern("#")
         .input('#', verticalSlab)
         .group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_vertical_slab")
