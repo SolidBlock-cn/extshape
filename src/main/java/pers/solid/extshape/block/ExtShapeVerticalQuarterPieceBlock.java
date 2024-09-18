@@ -1,12 +1,10 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
-import net.minecraft.data.client.*;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -14,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -23,19 +20,15 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnknownNullability;
-import pers.solid.brrp.v1.BRRPUtils;
-import pers.solid.brrp.v1.model.ModelJsonBuilder;
-import pers.solid.brrp.v1.model.ModelUtils;
-import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.util.HorizontalCornerDirection;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的纵条方块。
  */
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeVerticalQuarterPieceBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalQuarterPieceBlock::new);
+  public static final MapCodec<ExtShapeVerticalQuarterPieceBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalQuarterPieceBlock::new);
 
   public final @NotNull Block baseBlock;
 
@@ -54,25 +47,6 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
     return Text.translatable("block.extshape.?_vertical_quarter_piece", this.getNamePrefix());
   }
 
-  @Environment(EnvType.CLIENT)
-  @Override
-  public @UnknownNullability BlockStateSupplier getBlockStates() {
-    final Identifier identifier = getBlockModelId();
-    return VariantsBlockStateSupplier.create(this, BlockStateVariant.create().put(VariantSettings.MODEL, identifier).put(VariantSettings.UVLOCK, true)).coordinate(BlockStateVariantMap.create(FACING)
-        .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R0))
-        .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
-        .register(HorizontalCornerDirection.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
-        .register(HorizontalCornerDirection.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270)));
-  }
-
-
-  @Override
-  @Environment(EnvType.CLIENT)
-  public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return ModelJsonBuilder.create(ExtShape.id("block/vertical_quarter_piece")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
-  }
-
-
   @Override
   public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
     return simpleStoneCuttingRecipe(4);
@@ -81,6 +55,11 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.VERTICAL_QUARTER_PIECE;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerVerticalQuarterPiece(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
   }
 
   @Override
