@@ -32,26 +32,11 @@
   "options.extshape.shapesInSpecificGroups": "Shapes in specific group",
   "options.extshape.shapesInSpecificGroups.description": "Add which shapes to the mod's specific item groups? (Separated with space.)",
   "options.extshape.reset": "Reset",
-  "options.extshape.preventWoodenWallRecipes": "Prevent wooden wall recipes",
-  "options.extshape.preventWoodenWallRecipes.tooltip": "Prevent the crafting recipes of wooden walls, in order to avoid the conflict with wooden trapdoors. When ON, you cannot craft wooden walls. If you installed mods that solve recipe conflict, you can turn this option OFF.",
-  "options.extshape.avoidSomeButtonRecipes": "Avoid some button recipes",
-  "options.extshape.avoidSomeButtonRecipes.tooltip": "Avoid the crafting recipes of some buttons, in order to avoid the conflict with other items. For instance, the recipe of diamond button from a diamond block conflicts with breaking a diamond block down to 9 diamond items. When ON, you cannot craft those buttons, so that the crafting of other items are ensured. If you installed mods that solve recipe conflict, you can turn this option OFF.",
-  "options.extshape.specialSnowSlabCrafting": "Special snow slab crafting",
-  "options.extshape.specialSnowSlabCrafting.tooltip": "When ON, snow slab is crafted from a snow layer block, instead of three snow blocks. This is intended to avoid the conflict with the recipe of snow layer. If you have installed mods that solve recipe conflict, you can turn this option OFF.",
 
   "options.extshape.default": "Default: %s",
   "options.extshape.confirm": "Are you sure?",
   "options.extshape.confirm.noGroups": "Your both '%s' and '%s' are set '%s', which means in Creative Mode you may not directly obtain items in this mod in your Creative inventory. Are you sure to continue?",
   "options.extshape.confirm.redo": "I reconsider",
-  "options.extshape.registerBlockFamilies": "Register BlockFamilies",
-  "options.extshape.registerBlockFamilies.description": "Usually not recommended to open. If enabled, when initializing Minecraft, the relations of the block in this mod to Minecraft's vanilla blocks will be registered in BlockFamilies. The BlockFamilies registry may be identified by some mods, but may cause potential instability. You usually do not need to enable it.",
-  "options.extshape.requires_restart": "Takes effect after restarting game.",
-
-  "options.extshape.reasonable-sorting": "Reasonable Sorting mod config",
-  "options.extshape.reasonable-sorting.description": "If you installed Reasonable Sorting mod, you can define how block items are sorted according to their shape, including shapes provided this mod. It may not affect blocks provided by other mods.\n\nYou can also access the mod config screen of Reasonable Sorting by selecting the mod in the mod menu.\n\nIf there is no response on clicking this button, it's likely that you have not installed Reasonable Sorting mod or the version is too low.",
-  "options.extshape.dataChanged": "Server data changed. Regenerated server data?",
-  "options.extshape.dataChanged.details": "The mod uses runtime resource pack, which is generated on the initialization of Minecraft. You have modified options related to data generation, which may take affect by regenerating server data of this mod. You should also type \u00a77/reload\u00a7r command if the server (including the integrated server of single-player mode) is currently running.",
-  "options.dataChanged.finish": "The server data of runtime resource pack is re-generated. If you're in single player mode or you're the server owner, please execute %s to apply recipe change. Note that in multiplayer mode only the configuration of server host is valid.",
 
   "message.extshape.recipe_conflict.start": "Starting recipe conflict check, which may take a while.",
   "message.extshape.recipe_conflict.detected": "Recipe conflict detected: %s",
@@ -63,5 +48,7 @@
 
   "modmenu.nameTranslation.extshape": "Extended Block Shapes",
 
-  "options.extshape.addToVanillaGroups.blockus": "Please note: to find the extended shapes of blocks in Blockus mod in the creative inventory, you have to enable \"Add To Vanilla Groups\". The blocks only display in item groups of Blockus. There are no specific groups for extended shapes of blocks in Blockus mod."
+  "options.extshape.addToVanillaGroups.blockus": "Please note: to find the extended shapes of blocks in Blockus mod in the creative inventory, you have to enable \"Add To Vanilla Groups\". The blocks only display in item groups of Blockus. There are no specific groups for extended shapes of blocks in Blockus mod.",
+
+  "resourcePack.extshape.recipe_tweak.name": "Recipe Tweak (to fix recipe conflict between the mod and vanilla)"
 }

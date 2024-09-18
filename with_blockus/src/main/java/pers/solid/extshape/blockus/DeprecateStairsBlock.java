@@ -3,7 +3,6 @@ package pers.solid.extshape.blockus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
@@ -18,7 +17,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.extshape.block.ExtShapeStairsBlock;
 
 import java.util.List;
@@ -41,11 +39,6 @@ public class DeprecateStairsBlock extends ExtShapeStairsBlock {
   public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
     super.appendTooltip(stack, world, tooltip, options);
     tooltip.add(Text.translatable("block.extshape_blockus.deprecated").formatted(Formatting.YELLOW));
-  }
-
-  @Override
-  public void writeRecipes(RuntimeResourcePack pack) {
-    pack.addRecipeAndAdvancement(getRecipeId().withSuffixedPath("_deprecation"), ShapelessRecipeJsonBuilder.create(getRecipeCategory(), recommended).input(this).criterionFromItem(this));
   }
 
   @Override

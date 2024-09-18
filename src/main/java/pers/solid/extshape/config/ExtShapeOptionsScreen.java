@@ -16,8 +16,8 @@ import net.minecraft.client.option.SimpleOption;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeItemGroup;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.rrp.ExtShapeRRP;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -90,50 +89,6 @@ public class ExtShapeOptionsScreen extends Screen {
       }
   ).createWidget(gameOptions, width / 2 + 5, 36, 200);
 
-
-  private final ClickableWidget registerBlockFamiliesButton = SimpleOption.ofBoolean(
-      "options.extshape.registerBlockFamilies",
-      SimpleOption.constantTooltip(
-          Text.translatable("options.extshape.registerBlockFamilies.description")
-              .append("\n\n")
-              .append(Text.translatable("options.extshape.requires_restart"))
-              .append("\n\n")
-              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.registerBlockFamilies)).formatted(Formatting.GRAY))),
-      newConfig.registerBlockFamilies,
-      value -> newConfig.registerBlockFamilies = value
-  ).createWidget(gameOptions, width / 2 - 205, 151, 200);
-
-
-  private final ClickableWidget preventWoodenWallRecipesButton = SimpleOption.ofBoolean(
-      "options.extshape.preventWoodenWallRecipes",
-      SimpleOption.constantTooltip(
-          Text.translatable("options.extshape.preventWoodenWallRecipes.tooltip")
-              .append("\n\n")
-              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.preventWoodenWallRecipes)).formatted(Formatting.GRAY))),
-      newConfig.preventWoodenWallRecipes,
-      value -> newConfig.preventWoodenWallRecipes = value
-  ).createWidget(gameOptions, width / 2 + 5, 151, 200);
-
-  private final ClickableWidget avoidSomeButtonRecipesButton = SimpleOption.ofBoolean(
-      "options.extshape.avoidSomeButtonRecipes",
-      SimpleOption.constantTooltip(
-          Text.translatable("options.extshape.avoidSomeButtonRecipes.tooltip")
-              .append("\n\n")
-              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.avoidSomeButtonRecipes)).formatted(Formatting.GRAY))),
-      newConfig.avoidSomeButtonRecipes,
-      value -> newConfig.avoidSomeButtonRecipes = value
-  ).createWidget(gameOptions, width / 2 - 205, 171, 200);
-
-  private final ClickableWidget specialPressurePlateRecipesButton = SimpleOption.ofBoolean(
-      "options.extshape.specialSnowSlabCrafting",
-      SimpleOption.constantTooltip(
-          Text.translatable("options.extshape.specialSnowSlabCrafting.tooltip")
-              .append("\n\n")
-              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.specialSnowSlabCrafting)).formatted(Formatting.GRAY))),
-      newConfig.specialSnowSlabCrafting,
-      value -> newConfig.specialSnowSlabCrafting = value
-  ).createWidget(gameOptions, width / 2 + 5, 171, 200);
-
   // 完成按钮
   private final ButtonWidget finishButton = new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).position(this.width / 2 - 100, this.height - 27).size(200, 20).build();
 
@@ -159,15 +114,6 @@ public class ExtShapeOptionsScreen extends Screen {
     addDrawableChild(shapesInSpecificGroupsTextField);
     resetShapesInSpecificGroupsButton.setX(width / 2 + 155);
     addDrawableChild(resetShapesInSpecificGroupsButton);
-    registerBlockFamiliesButton.setX(width / 2 - 205);
-    addDrawableChild(registerBlockFamiliesButton);
-
-    preventWoodenWallRecipesButton.setX(width / 2 + 5);
-    addDrawableChild(preventWoodenWallRecipesButton);
-    avoidSomeButtonRecipesButton.setX(width / 2 - 205);
-    addDrawableChild(avoidSomeButtonRecipesButton);
-    specialPressurePlateRecipesButton.setX(width / 2 + 5);
-    addDrawableChild(specialPressurePlateRecipesButton);
 
     finishButton.setPosition(width / 2 - 100, height - 27);
     addDrawableChild(finishButton);
@@ -211,7 +157,6 @@ public class ExtShapeOptionsScreen extends Screen {
   }
 
   private boolean suppressedGroupsWarning = false;
-  private boolean suppressedDataWarning = false;
 
   @Override
   public void close() {
@@ -234,25 +179,6 @@ public class ExtShapeOptionsScreen extends Screen {
           Text.translatable("options.extshape.confirm.noGroups", Text.translatable("options.extshape.addToVanillaGroups").formatted(Formatting.GRAY), Text.translatable("options.extshape.showSpecificGroups").formatted(Formatting.GRAY), ScreenTexts.OFF),
           ScreenTexts.YES,
           Text.translatable("options.extshape.confirm.redo")
-      ));
-      return;
-    }
-    if (!suppressedDataWarning && (newConfig.preventWoodenWallRecipes != oldConfig.preventWoodenWallRecipes
-        || newConfig.avoidSomeButtonRecipes != oldConfig.avoidSomeButtonRecipes || newConfig.specialSnowSlabCrafting != oldConfig.specialSnowSlabCrafting)) {
-      client.setScreen(new ConfirmScreen(
-          t -> {
-            suppressedDataWarning = true;
-            close();
-            if (t) {
-              ExtShapeRRP.PACK.clearResources(ResourceType.SERVER_DATA);
-              ExtShapeRRP.generateServerData(ExtShapeRRP.PACK);
-              client.inGameHud.getChatHud().addMessage(
-                  Text.translatable("options.dataChanged.finish",
-                      Text.literal("/reload").styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reload"))).formatted(Formatting.GRAY)));
-            }
-          },
-          Text.translatable("options.extshape.dataChanged"),
-          Text.translatable("options.extshape.dataChanged.details")
       ));
       return;
     }

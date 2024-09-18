@@ -4,13 +4,11 @@ import net.minecraft.block.Block;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeVerticalStairsBlock;
 import pers.solid.extshape.block.VerticalStairsBlock;
-import pers.solid.extshape.tag.ExtShapeTags;
 
 public class VerticalStairsBuilder extends AbstractBlockBuilder<VerticalStairsBlock> {
   public VerticalStairsBuilder(Block baseBlock) {
     super(baseBlock, builder -> new ExtShapeVerticalStairsBlock(builder.baseBlock, builder.blockSettings));
     this.shape = BlockShape.VERTICAL_STAIRS;
-    primaryTagToAddTo = ExtShapeTags.VERTICAL_STAIRS;
   }
 
   @Override
