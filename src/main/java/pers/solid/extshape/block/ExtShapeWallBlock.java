@@ -3,11 +3,15 @@ package pers.solid.extshape.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
+import net.minecraft.block.WallBlock;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -19,22 +23,22 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.generator.BRRPWallBlock;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.util.BlockCollections;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的墙方块。
  */
-public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantBlockInterface {
+public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlockInterface {
+  public final @NotNull Block baseBlock;
+
   public ExtShapeWallBlock(@NotNull Block baseBlock, Settings settings) {
-    super(baseBlock, settings);
+    super(settings);
+    this.baseBlock = baseBlock;
   }
 
   @Override
   public @NotNull Block getBaseBlock() {
-    assert baseBlock != null;
     return baseBlock;
   }
 
@@ -45,8 +49,9 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
-    return craftingRecipe == null || (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes && BlockCollections.PLANKS.contains(baseBlock)) ? null : craftingRecipe.group(getRecipeGroup());
+    return RecipeProvider.getWallRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock))
+        .group(getRecipeGroup())
+        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock));
   }
 
   @Override
@@ -59,6 +64,10 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
     return BlockShape.WALL;
   }
 
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).wall(this);
+  }
 
   public static class WithExtension extends ExtShapeWallBlock {
     private final @NotNull BlockExtension extension;

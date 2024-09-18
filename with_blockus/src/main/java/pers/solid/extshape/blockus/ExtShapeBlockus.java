@@ -1,6 +1,6 @@
 package pers.solid.extshape.blockus;
 
-import com.brand.blockus.content.BlockusBlocks;
+import com.brand.blockus.registry.content.BlockusBlocks;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
@@ -26,7 +26,6 @@ public class ExtShapeBlockus implements ModInitializer {
     if (FabricLoader.getInstance().isModLoaded("blockus")) {
       LOGGER.info("Blockus mod loaded. Extended Block Shapes mod is trying to apply it.");
       ExtShapeBlockusBlocks.init();
-      ExtShapeBlockusRRP.registerRRP();
       ExtShapeBlockusItemGroup.registerEvent();
       registerStrippableBlocks();
     }

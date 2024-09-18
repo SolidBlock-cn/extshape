@@ -4,7 +4,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
@@ -23,7 +22,6 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
     this.activationSettings = activationSettings;
     this.shape = BlockShape.PRESSURE_PLATE;
     final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
-    primaryTagToAddTo = soundGroup == BlockSoundGroup.STONE ? BlockTags.STONE_PRESSURE_PLATES : (soundGroup == BlockSoundGroup.WOOD || soundGroup == BlockSoundGroup.BAMBOO_WOOD || soundGroup == BlockSoundGroup.NETHER_WOOD || soundGroup == BlockSoundGroup.CHERRY_WOOD) ? BlockTags.WOODEN_PRESSURE_PLATES : BlockTags.PRESSURE_PLATES;
   }
 
   private static float computeStrength(float baseHardness) {

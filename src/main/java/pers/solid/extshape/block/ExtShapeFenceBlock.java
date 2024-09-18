@@ -2,7 +2,9 @@ package pers.solid.extshape.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FenceBlock;
 import net.minecraft.block.Oxidizable;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -21,27 +23,28 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.generator.BRRPFenceBlock;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的栅栏方块。
  */
-public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
+public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlockInterface {
 
+  public final @NotNull Block baseBlock;
   /**
    * 合成栅栏方块需要使用的第二个材料。
    */
   private final @Nullable Item secondIngredient;
 
   public ExtShapeFenceBlock(@NotNull Block baseBlock, @Nullable Item secondIngredient, Settings settings) {
-    super(baseBlock, settings);
+    super(settings);
+    this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
   }
 
   @Override
   public @NotNull Block getBaseBlock() {
-    assert baseBlock != null;
     return baseBlock;
   }
 
@@ -52,7 +55,7 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    return (baseBlock == null || secondIngredient == null) ? null : ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 2)
+    return secondIngredient == null ? null : ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 2)
         .pattern("W#W").pattern("W#W")
         .group(getRecipeGroup())
         .input('W', baseBlock)
@@ -61,7 +64,6 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
   }
 
   @Nullable
-  @Override
   public Item getSecondIngredient() {
     return secondIngredient;
   }
@@ -71,6 +73,10 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
     return BlockShape.FENCE;
   }
 
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).fence(this);
+  }
 
   public static class WithExtension extends ExtShapeFenceBlock {
     private final @NotNull BlockExtension extension;

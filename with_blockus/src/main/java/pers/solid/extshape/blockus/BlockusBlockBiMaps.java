@@ -1,11 +1,10 @@
 package pers.solid.extshape.blockus;
 
-import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.types.BSSTypes;
-import com.brand.blockus.content.types.BSSWTypes;
-import com.brand.blockus.content.types.ConcreteTypes;
-import com.brand.blockus.content.types.WoolTypes;
-import com.brand.blockus.data.family.BlockusWoodFamilies;
+import com.brand.blockus.datagen.family.BlockusFamilies;
+import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.content.bundles.BSSWBundle;
+import com.brand.blockus.registry.content.bundles.ConcreteBundle;
+import com.brand.blockus.registry.content.bundles.WoolBundle;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.family.BlockFamily;
@@ -20,7 +19,7 @@ public final class BlockusBlockBiMaps {
   }
 
   static void importFromBlockus() {
-    final Stream<BlockFamily> families = BlockusWoodFamilies.getFamilies();
+    final Stream<BlockFamily> families = BlockusFamilies.getFamilies();
     families.forEach(blockFamily -> {
       Block baseBlock = blockFamily.getBaseBlock();
       // ignore netherite block because it belongs to vanilla
@@ -42,42 +41,34 @@ public final class BlockusBlockBiMaps {
         }
       }
     });
-    BSSWTypes.values().forEach(bsswTypes -> {
-      if (bsswTypes.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswTypes.block, bsswTypes.stairs);
+    BSSWBundle.values().forEach(bsswBundle -> {
+      if (bsswBundle.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswBundle.block, bsswBundle.stairs);
       }
-      if (bsswTypes.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, bsswTypes.block, bsswTypes.slab);
+      if (bsswBundle.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, bsswBundle.block, bsswBundle.slab);
       }
-      if (bsswTypes.wall != null) {
-        BlockBiMaps.setBlockOf(BlockShape.WALL, bsswTypes.block, bsswTypes.wall);
-      }
-    });
-    BSSTypes.values().forEach(bssTypes -> {
-      if (bssTypes.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, bssTypes.block, bssTypes.stairs);
-      }
-      if (bssTypes.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, bssTypes.block, bssTypes.slab);
+      if (bsswBundle.wall != null) {
+        BlockBiMaps.setBlockOf(BlockShape.WALL, bsswBundle.block, bsswBundle.wall);
       }
     });
-    WoolTypes.values().forEach(woolTypes -> {
-      if (woolTypes.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woolTypes.block, woolTypes.stairs);
+    WoolBundle.values().forEach(woolBundle -> {
+      if (woolBundle.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woolBundle.block, woolBundle.stairs);
       }
-      if (woolTypes.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, woolTypes.block, woolTypes.slab);
+      if (woolBundle.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, woolBundle.block, woolBundle.slab);
       }
     });
-    ConcreteTypes.values().forEach(concreteTypes -> {
-      if (concreteTypes.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteTypes.block, concreteTypes.stairs);
+    ConcreteBundle.values().forEach(concreteBundle -> {
+      if (concreteBundle.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteBundle.block, concreteBundle.stairs);
       }
-      if (concreteTypes.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteTypes.block, concreteTypes.slab);
+      if (concreteBundle.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteBundle.block, concreteBundle.slab);
       }
-      if (concreteTypes.wall != null) {
-        BlockBiMaps.setBlockOf(BlockShape.WALL, concreteTypes.block, concreteTypes.wall);
+      if (concreteBundle.wall != null) {
+        BlockBiMaps.setBlockOf(BlockShape.WALL, concreteBundle.block, concreteBundle.wall);
       }
     });
 

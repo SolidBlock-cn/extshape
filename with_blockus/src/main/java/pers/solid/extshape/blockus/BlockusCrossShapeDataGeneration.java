@@ -1,16 +1,18 @@
 package pers.solid.extshape.blockus;
 
-import com.brand.blockus.content.BlockusBlocks;
-import com.brand.blockus.content.types.ConcreteTypes;
+import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
+import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.google.common.collect.ImmutableMultimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
-import pers.solid.extshape.rrp.CrossShapeDataGeneration;
+import pers.solid.extshape.data.CrossShapeDataGeneration;
+import pers.solid.extshape.data.VanillaStonecutting;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;
@@ -19,7 +21,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
- * @see pers.solid.extshape.rrp.VanillaStonecutting
+ * @see VanillaStonecutting
  */
 public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
@@ -31,8 +33,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     INSTANCE = builder.build();
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RuntimeResourcePack pack) {
-    super(baseBlock, defaultNamespace, pack);
+  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, Consumer<RecipeJsonProvider> exporter) {
+    super(baseBlock, defaultNamespace, exporter);
   }
 
   @Override
@@ -41,13 +43,13 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   }
 
   /**
-   * @see com.brand.blockus.data.providers.BlockusRecipeProvider#generate(Consumer)
+   * @see BlockusRecipeProvider#generate(Consumer)
    */
   private static void registerBlockusStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
-    for (ConcreteTypes concreteType : ConcreteTypes.values()) {
-      builder.put(concreteType.block, concreteType.base);
-      builder.put(concreteType.chiseled, concreteType.base);
-      builder.put(concreteType.pillar, concreteType.base);
+    for (ConcreteBundle concreteBundle : ConcreteBundle.values()) {
+      builder.put(concreteBundle.block, concreteBundle.base);
+      builder.put(concreteBundle.chiseled, concreteBundle.base);
+      builder.put(concreteBundle.pillar, concreteBundle.base);
     }
     builder.put(BlockusBlocks.MUD_BRICK_PILLAR, Blocks.MUD_BRICKS);
     builder.put(BlockusBlocks.CHISELED_MUD_BRICKS, Blocks.MUD_BRICKS);
@@ -109,10 +111,10 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.POLISHED_NETHERRACK.block, Blocks.NETHERRACK);
     putMultipleWithMid(builder, BlockusBlocks.NETHERRACK_BRICKS.block, Blocks.NETHERRACK, BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.NETHERRACK_CIRCULAR_PAVING);
 
-    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_NETHER_BRICKS, BlockusBlocks.NETHER_BRICK_PILLAR, BlockusBlocks.HERRINGBONE_NETHER_BRICKS), Blocks.NETHER_BRICKS);
-    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_RED_NETHER_BRICKS, BlockusBlocks.RED_NETHER_BRICK_PILLAR, BlockusBlocks.HERRINGBONE_RED_NETHER_BRICKS), Blocks.RED_NETHER_BRICKS);
-    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_CHARRED_NETHER_BRICKS, BlockusBlocks.CHARRED_NETHER_BRICK_PILLAR, BlockusBlocks.HERRINGBONE_CHARRED_NETHER_BRICKS), BlockusBlocks.CHARRED_NETHER_BRICKS.block);
-    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_TEAL_NETHER_BRICKS, BlockusBlocks.TEAL_NETHER_BRICK_PILLAR, BlockusBlocks.HERRINGBONE_TEAL_NETHER_BRICKS), BlockusBlocks.TEAL_NETHER_BRICKS.block);
+    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_NETHER_BRICKS.block, BlockusBlocks.NETHER_BRICK_PILLAR, BlockusBlocks.HERRINGBONE_NETHER_BRICKS), Blocks.NETHER_BRICKS);
+    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_RED_NETHER_BRICKS.block, BlockusBlocks.RED_NETHER_BRICK_PILLAR, BlockusBlocks.HERRINGBONE_RED_NETHER_BRICKS), Blocks.RED_NETHER_BRICKS);
+    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_CHARRED_NETHER_BRICKS.block, BlockusBlocks.CHARRED_NETHER_BRICK_PILLAR, BlockusBlocks.HERRINGBONE_CHARRED_NETHER_BRICKS), BlockusBlocks.CHARRED_NETHER_BRICKS.block);
+    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_TEAL_NETHER_BRICKS.block, BlockusBlocks.TEAL_NETHER_BRICK_PILLAR, BlockusBlocks.HERRINGBONE_TEAL_NETHER_BRICKS), BlockusBlocks.TEAL_NETHER_BRICKS.block);
 
     builder.put(BlockusBlocks.OBSIDIAN_BRICKS.block, Blocks.OBSIDIAN);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SMALL_OBSIDIAN_BRICKS.block, BlockusBlocks.OBSIDIAN_PILLAR, BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING), Blocks.OBSIDIAN, BlockusBlocks.OBSIDIAN_BRICKS.block);
