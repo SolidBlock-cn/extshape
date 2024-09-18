@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.tag.TagPreparations;
 
 import java.util.Collection;
 import java.util.SortedSet;
@@ -32,11 +31,6 @@ public class BlocksBuilderFactory {
    */
   public @Nullable Collection<Block> baseBlockCollection;
 
-  /**
-   * 将构建产生的所有方块和物品标签到记录到这个对象中。注意，你需要自行利用此对象进行数据生成。
-   */
-  public TagPreparations tagPreparations;
-
   public BlocksBuilderFactory() {
   }
 
@@ -48,7 +42,6 @@ public class BlocksBuilderFactory {
     final BlocksBuilder blocksBuilder = createInternal(baseBlock, shapesToBuild);
     blocksBuilder.defaultNamespace = defaultNamespace;
     blocksBuilder.instanceCollection = instanceCollection;
-    blocksBuilder.tagPreparations = tagPreparations;
     if (baseBlockCollection != null) {
       baseBlockCollection.add(baseBlock);
     }
@@ -88,7 +81,6 @@ public class BlocksBuilderFactory {
   public <T extends AbstractBlockBuilder<?>> T modify(T blockBuilder) {
     blockBuilder.defaultNamespace = defaultNamespace;
     blockBuilder.instanceCollection = instanceCollection;
-    blockBuilder.tagPreparations = tagPreparations;
     return blockBuilder;
   }
 }

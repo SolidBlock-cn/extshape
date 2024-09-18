@@ -2,6 +2,7 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.content.types.ConcreteTypes;
+import com.brand.blockus.data.providers.BlockusRecipeProvider;
 import com.google.common.collect.ImmutableMultimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
@@ -10,8 +11,8 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
-import pers.solid.extshape.rrp.CrossShapeDataGeneration;
+import pers.solid.extshape.data.CrossShapeDataGeneration;
+import pers.solid.extshape.data.VanillaStonecutting;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;
@@ -19,7 +20,7 @@ import java.util.Iterator;
 import java.util.stream.Collectors;
 
 /**
- * @see pers.solid.extshape.rrp.VanillaStonecutting
+ * @see VanillaStonecutting
  */
 public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
@@ -31,8 +32,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     INSTANCE = builder.build();
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RuntimeResourcePack pack) {
-    super(baseBlock, defaultNamespace, pack);
+  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeExporter exporter) {
+    super(baseBlock, defaultNamespace, exporter);
   }
 
   @Override
@@ -41,7 +42,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   }
 
   /**
-   * @see com.brand.blockus.data.providers.BlockusRecipeProvider#generate(RecipeExporter)
+   * @see BlockusRecipeProvider#generate(RecipeExporter)
    */
   private static void registerBlockusStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
     for (ConcreteTypes concreteType : ConcreteTypes.values()) {

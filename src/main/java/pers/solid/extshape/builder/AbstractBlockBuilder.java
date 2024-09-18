@@ -1,28 +1,22 @@
 package pers.solid.extshape.builder;
 
-import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.*;
 import org.spongepowered.include.com.google.common.collect.ImmutableMap;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
-import pers.solid.extshape.tag.TagPreparations;
 import pers.solid.extshape.util.BlockBiMaps;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -39,17 +33,9 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    */
   public final Block baseBlock;
   /**
-   * 创建对象后，将方块和物品所拥有的标签记录到这个 {@link TagPreparations} 对象中，以后直接对这个对象进行数据生成。
-   */
-  protected TagPreparations tagPreparations;
-  /**
    * 是否为该方块构建物品。
    */
   public final boolean buildItem;
-  /**
-   * 创建实例并构建后，将自身添加到这些标签中。
-   */
-  protected final List<@NotNull TagKey<? extends ItemConvertible>> extraTags = new ArrayList<>();
   public AbstractBlock.Settings blockSettings;
   /**
    * 构建之后将构建后的方块添加到这个集合中，方便以后进行集中的管理。这个一般是在 {@link BlocksBuilderFactory} 中设置的，然后间接传递到这个参数来。
@@ -59,10 +45,6 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    * 计算方块注册时使用的 id 时使用的默认命名空间。如果为 {@code null}，则直接使用基础方块的 id。如果使用 {@link #setIdentifier(Identifier)} 设置好了 id，那么不会使用 {@code defaultNamespace} 来计算 id。
    */
   protected @Nullable String defaultNamespace;
-  /**
-   * 创建对象后需要将这个方块添加到的主要标签，如 {@code slabs}、{@code extshape:vertical_slabs} 等。
-   */
-  protected @Nullable TagKey<? extends ItemConvertible> primaryTagToAddTo = null;
   /**
    * 需要创建的方块的方块形状，主要用于在创建之后注册 {@link BlockBiMaps}。
    */
@@ -226,36 +208,12 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   protected abstract String getSuffix();
 
   /**
-   * 设置方块所拥有的主要方块标签，注册后就将此方块添加到此标签中。
-   *
-   * @param tag 方块标签。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> setPrimaryTagToAddTo(TagKey<? extends ItemConvertible> tag) {
-    this.primaryTagToAddTo = tag;
-    return this;
-  }
-
-  /**
    * 添加到 {@link BlockBiMaps} 中。如果该对象的 {@link #shape} 为 {@code null}，则不执行操作。
    */
   protected void addToBlockBiMap() {
     if (shape != null) {
       BlockBiMaps.setBlockOf(shape, baseBlock, instance);
     }
-  }
-
-  /**
-   * 添加一个标签，当方块创建完成后就将其添加到这个标签中。
-   *
-   * @param tag 方块构建后，需要添加到的标签。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> addExtraTag(@NotNull TagKey<? extends ItemConvertible> tag) {
-    this.extraTags.add(tag);
-    return this;
   }
 
   /**
@@ -327,11 +285,6 @@ public abstract class AbstractBlockBuilder<T extends Block> {
       instanceCollection.add(instance);
     }
 
-    if (this.primaryTagToAddTo != null) {
-      Preconditions.checkNotNull(tagPreparations, "tagPreparations, which must be specified if you need to use it for data generation!");
-      tagPreparations.put(primaryTagToAddTo, instance);
-    }
-    this.extraTags.forEach(tag -> tagPreparations.put(tag, instance));
     if (this.shouldAddToBlockBiMap) this.addToBlockBiMap();
     return this.instance;
   }

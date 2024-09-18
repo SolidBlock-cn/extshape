@@ -9,6 +9,8 @@
     "AxeItemMixin",
     "BlockAccessor",
     "BlockFamiliesAccessor",
+    "BlockStateModelGeneratorAccessor",
+    "BlockTexturePoolAccessor",
     "ButtonBlockAccessor",
     "DisplayContextMixin",
     "FenceGateAccessor",
@@ -17,6 +19,7 @@
     "ShearsItemMixin",
     "SingleItemRecipeJsonBuilderAccessor",
     "SnowyBlockMixin",
+    "TextureMapAccessor",
     "ToolMaterialMixin",
     "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"

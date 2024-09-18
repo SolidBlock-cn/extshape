@@ -1,17 +1,13 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.Oxidizable;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -20,7 +16,6 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -29,25 +24,23 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnknownNullability;
-import pers.solid.brrp.v1.BRRPUtils;
-import pers.solid.brrp.v1.generator.BRRPSlabBlock;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的台阶方块。
  */
-public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeSlabBlock::new);
+public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlockInterface {
+  public static final MapCodec<ExtShapeSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeSlabBlock::new);
+  public final @NotNull Block baseBlock;
 
   public ExtShapeSlabBlock(@NotNull Block baseBlock, Settings settings) {
-    super(baseBlock, settings);
+    super(settings);
+    this.baseBlock = baseBlock;
   }
 
   @Override
   public @NotNull Block getBaseBlock() {
-    assert baseBlock != null;
     return baseBlock;
   }
 
@@ -56,40 +49,27 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
     return Text.translatable("block.extshape.?_slab", this.getNamePrefix());
   }
 
-  @Environment(EnvType.CLIENT)
-  @Override
-  public @UnknownNullability BlockStateSupplier getBlockStates() {
-    final Identifier id = getBlockModelId();
-    // 对于上蜡的铜，其自身的方块模型以及对应完整方块的模型均为未上蜡的方块模型，故在此处做出调整。
-    Identifier baseId = baseBlock == null ? null : BRRPUtils.getBlockModelId(baseBlock);
-    if (baseId != null) {
-      final String basePath = baseId.getPath();
-
-      // 基础方块为涂蜡铜方块时，使用未涂蜡铜的模型。
-      if (basePath.contains("/waxed_") && basePath.contains("copper")) {
-        baseId = baseId.withPath(basePath.replace("/waxed_", "/"));
-      }
-    }
-    return BlockStateModelGenerator.createSlabBlockState(this, id, id.brrp_suffixed("_top"), baseBlock != null ? baseId : id.brrp_suffixed("_double"));
-  }
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    if (ExtShapeStairsBlock.shouldNotCraftStairsOrSlabs(baseBlock)) {
-      return null;
-    }
-    final CraftingRecipeJsonBuilder craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK && ExtShapeConfig.CURRENT_CONFIG.specialSnowSlabCrafting) ? ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(Ingredient.ofItems(Blocks.SNOW)).criterion("has_snow", RecipeProvider.conditionsFromItem(Blocks.SNOW)) : super.getCraftingRecipe();
-    return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
+    return RecipeProvider.createSlabRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock))
+        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+        .group(getRecipeGroup());
   }
 
   @Override
   public @Nullable SingleItemRecipeJsonBuilder getStonecuttingRecipe() {
-    return baseBlock == null ? null : simpleStoneCuttingRecipe(2);
+    return simpleStoneCuttingRecipe(2);
   }
 
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.SLAB;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).slab(this);
   }
 
   @Override

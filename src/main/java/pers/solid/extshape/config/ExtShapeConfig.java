@@ -7,9 +7,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pers.solid.extshape.block.ExtShapeSlabBlock;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.util.BlockBiMaps;
 
 import java.io.File;
 import java.io.FileReader;
@@ -57,9 +55,6 @@ public class ExtShapeConfig implements Cloneable {
       CURRENT_CONFIG = new ExtShapeConfig();
       CURRENT_CONFIG.tryWriteFile(CONFIG_FILE);
     }
-    if (CURRENT_CONFIG.registerBlockFamilies) {
-      BlockBiMaps.completeBlockFamilies();
-    }
   }
 
   /**
@@ -80,27 +75,6 @@ public class ExtShapeConfig implements Cloneable {
    * 需要添加到专用物品组中的方块形状的列表。不应该含有重复元素。
    */
   public Collection<BlockShape> shapesInSpecificGroups = shapesToAddToVanilla;
-  /**
-   * 是否将本模组的物品关系注册到 Minecraft 原版的 {@link net.minecraft.data.family.BlockFamilies} 中。<span style=color:maroon>仅支持 Minecraft 1.17 以上版本。</span>
-   */
-  public boolean registerBlockFamilies = false;
-  /**
-   * 是否避免部分按钮的配方，以解决配方冲突的问题。默认为开启。如果安装了能修复合成配方冲突的问题的模组，则可以关闭。
-   *
-   * @see pers.solid.extshape.block.ExtShapeButtonBlock#REFUSE_RECIPES
-   */
-  public boolean avoidSomeButtonRecipes = true;
-
-  /**
-   * 是否避免木墙的合成配方，以解决与木质活板门的配方冲突问题。默认为开启。如果安装了能修复合成配方冲突的问题的模组，则可以关闭。
-   */
-  public boolean preventWoodenWallRecipes = true;
-  /**
-   * 是否为雪台阶方块应用特殊合成配方，以解决与雪的配方冲突问题。
-   *
-   * @see ExtShapeSlabBlock#getCraftingRecipe()
-   */
-  public boolean specialSnowSlabCrafting = true;
 
   /**
    * 从配置文件中读取并保存配置文件。如果捕获到异常，将会在控制台中输出。读取到的文件中，所有其他的 NBT 标签都被保留。
@@ -140,11 +114,11 @@ public class ExtShapeConfig implements Cloneable {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof ExtShapeConfig that)) return false;
-    return addToVanillaGroups == that.addToVanillaGroups && showSpecificGroups == that.showSpecificGroups && registerBlockFamilies == that.registerBlockFamilies && avoidSomeButtonRecipes == that.avoidSomeButtonRecipes && preventWoodenWallRecipes == that.preventWoodenWallRecipes && specialSnowSlabCrafting == that.specialSnowSlabCrafting && Objects.equals(shapesToAddToVanilla, that.shapesToAddToVanilla) && Objects.equals(shapesInSpecificGroups, that.shapesInSpecificGroups);
+    return addToVanillaGroups == that.addToVanillaGroups && showSpecificGroups == that.showSpecificGroups && Objects.equals(shapesToAddToVanilla, that.shapesToAddToVanilla) && Objects.equals(shapesInSpecificGroups, that.shapesInSpecificGroups);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addToVanillaGroups, shapesToAddToVanilla, showSpecificGroups, shapesInSpecificGroups, registerBlockFamilies, avoidSomeButtonRecipes, preventWoodenWallRecipes, specialSnowSlabCrafting);
+    return Objects.hash(addToVanillaGroups, shapesToAddToVanilla, showSpecificGroups, shapesInSpecificGroups);
   }
 }

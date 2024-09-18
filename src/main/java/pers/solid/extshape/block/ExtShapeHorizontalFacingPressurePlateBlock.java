@@ -1,20 +1,19 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.BlockStateSupplier;
+import net.minecraft.data.client.Models;
 import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
@@ -52,15 +51,16 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
     return state.rotate(mirror.getRotation(state.get(FACING)));
   }
 
-  @Environment(EnvType.CLIENT)
-  @Override
-  public @UnknownNullability BlockStateSupplier getBlockStates() {
-    return ((VariantsBlockStateSupplier) super.getBlockStates()).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
-  }
-
   @SuppressWarnings("unchecked")
   @Override
   public MapCodec<PressurePlateBlock> getCodec() {
     return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    final Identifier upModelId = Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector);
+    final Identifier downModelId = Models.PRESSURE_PLATE_DOWN.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector);
+    blockStateModelGenerator.blockStateCollector.accept(((VariantsBlockStateSupplier) BlockStateModelGenerator.createPressurePlateBlockState(this, upModelId, downModelId)).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates()));
   }
 }

@@ -1,5 +1,22 @@
 # Update log
 
+### 3.0.0
+
+- The mod no longer depends on Better Runtime Resource Pack (BRRP) mod.
+- Fixed the issues that logs may lack `#buttons` tag.
+- Fixed the issue that some wooden fence gates lack `#fence_gates` tag.
+- Buttons of pumpkin and melon will no longer have `#wooden_buttons` tag.
+- Pressure plates of pumpkin and melon will no longer have `#wooden_pressure_plates` tag.
+- Fixed the issue that `#pressure_plates` lack its corresponding item tag.
+- Removed the feature in the configuration screen to avoid some specific recipes, and added a built-in datapack to avoid recipe conflicts, which is enabled by default and can be disabled through command `/datapack disbale ...`.
+- The command `/extshape:check-conflict` added a new parameter to filter namespaces.
+  - Tests recipe conflicts of all namespaces if not specified.
+  - Tests recipe conflicts between the specified namespace and vanilla if only specified one.
+  - Tests the specified namespaces if specified multiple ones.
+- Removed the BlockFamilies feature which lacks practical usage.
+- Fixed the issue that various shapes of white oak wood, white oak log, herringbone planks, small log blocks of Blockus cannot be burnt in the furnace.
+- Totally removed various shapes for sugar blocks, as it is a falling block and does not meet the criterion of creating various shapes.
+
 ### 2.2.2
 
 - Fit for new BRRP API.

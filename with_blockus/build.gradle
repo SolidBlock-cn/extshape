@@ -1,5 +1,6 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
+apply plugin: 'maven-publish'
 apply plugin: 'net.darkhax.curseforgegradle'
 apply plugin: "com.github.breadmoirai.github-release"
 apply plugin: "com.modrinth.minotaur"
@@ -8,6 +9,7 @@ base {
 }
 version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
 group = rootProject.maven_group
+
 repositories {
     exclusiveContent {
         forRepository {
@@ -45,7 +47,7 @@ tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge)
         mainFile.addGameVersion v
     }
 
-    mainFile.addRelations 'requiredDependency', 'fabric-api', 'better-runtime-resource-pack', 'blockus'
+    mainFile.addRelations 'requiredDependency', 'fabric-api', 'blockus'
 }
 modrinth {
     projectId = 'qAQHIBF8'
@@ -55,7 +57,7 @@ modrinth {
     uploadFile = remapJar
     gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
-    var list = [new ModDependency('JnrDtPAE', 'required'), new ModDependency('tb7kCxSW', 'required'), new ModDependency('zFiY2Go0', 'required')]
+    var list = [new ModDependency('tb7kCxSW', 'required'), new ModDependency('zFiY2Go0', 'required')]
     if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
     dependencies = list
 }
@@ -78,4 +80,10 @@ githubRelease {
 
 publish {
     dependsOn tasks.curseforge, tasks.modrinth, tasks.githubRelease
+}
+
+fabricApi {
+    configureDataGeneration() {
+        it.modId = "extshape_blockus"
+    }
 }

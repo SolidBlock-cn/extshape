@@ -24,6 +24,9 @@
     ],
     "modmenu": [
       "pers.solid.extshape.config.ExtShapeModMenu"
+    ],
+    "fabric-datagen": [
+      "pers.solid.extshape.data.ExtShapeDataGenerator"
     ]
   },
   "mixins": [
@@ -34,8 +37,7 @@
     "fabric": "*",
     "minecraft": ">=1.20.5 <=1.20.6",
     "java": ">=21",
-    "mixinextras": "*",
-    "brrp_v1": ">=1.0.4"
+    "mixinextras": "*"
   },
   "suggests": {
     "blockus": "*"
