@@ -30,8 +30,7 @@
     "fabricloader": "*",
     "fabric": "*",
     "minecraft": "1.21.x",
-    "brrp_v1": "*",
-    "extshape": [">=2.1.4", "${version}"],
+    "extshape": ">=2.1.4",
     "blockus": ">=2.9.4"
   },
   "custom": {

@@ -31,12 +31,8 @@ allprojects {
         maven { url 'https://maven.terraformersmc.com/releases/' }
         // Cloth Config、Roughly Enough Items
         maven { url "https://maven.shedaniel.me/" }
-        /*
-        这个是存储在 GitHub 上的 BRRP 模组
-        maven {
-            url 'https://github.com/SolidBlock-cn/mvn-repo/main'
-        }*/
-        // 合理排序和 BRRP 模组。这两个模组均存储于本地的 maven 仓库。
+
+        // 合理模组（仅限 1.19.2 之前）。这两个模组均存储于本地的 maven 仓库。
         mavenLocal()
     }
 
@@ -52,10 +48,6 @@ allprojects {
         modImplementation ("com.terraformersmc:modmenu:${project.modmenu_version}")
 
         // 下面两个模组均存储于本地的 maven 仓库。
-
-        // BRRP 模组
-        def brrp_mc_version = project.properties.getOrDefault "brrp_mc_version", project.minecraft_version
-        modImplementation "pers.solid:brrp-fabric:${project.brrp_version}-${brrp_mc_version}"
 
         // 由于新版的 Loom 没有 @CanIgnoreReturnValue 等注解，故在这里手动添加。
         modImplementation "com.google.errorprone:error_prone_annotations:+"
@@ -206,7 +198,7 @@ tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge)
         mainFile.addGameVersion v
     }
 
-    mainFile.addRelations 'requiredDependency', 'fabric-api', 'better-runtime-resource-pack'
+    mainFile.addRelations 'requiredDependency', 'fabric-api'
 
     // The sources JAR
     def sourcesFile = mainFile.withAdditionalFile(sourcesJar)
@@ -220,7 +212,7 @@ modrinth {
     uploadFile = remapJar
     gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
-    var dependenciesList = [new ModDependency('JnrDtPAE', 'required')] // brrp
+    var dependenciesList = []
     if (platform == 'fabric') dependenciesList.add new ModDependency('P7dR8mSH', 'required') // Fabric API
     dependencies = dependenciesList
     changelog = changelogContent

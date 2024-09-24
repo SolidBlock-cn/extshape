@@ -1,12 +1,10 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
-import net.minecraft.data.client.*;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
@@ -15,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -24,22 +21,16 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnknownNullability;
-import pers.solid.brrp.v1.BRRPUtils;
-import pers.solid.brrp.v1.model.ModelJsonBuilder;
-import pers.solid.brrp.v1.model.ModelUtils;
-import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
-import pers.solid.extshape.util.HorizontalCornerDirection;
 
 /**
  * 本模组中的竖直楼梯方块。
  */
 public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeVerticalStairsBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalStairsBlock::new);
+  public static final MapCodec<ExtShapeVerticalStairsBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalStairsBlock::new);
 
   public final @NotNull Block baseBlock;
 
@@ -56,27 +47,6 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   @Override
   public MutableText getName() {
     return Text.translatable("block.extshape.?_vertical_stairs", this.getNamePrefix());
-  }
-
-  @Override
-  @Environment(EnvType.CLIENT)
-  public @UnknownNullability BlockStateSupplier getBlockStates() {
-    final Identifier identifier = getBlockModelId();
-    return VariantsBlockStateSupplier.create(this, new BlockStateVariant()
-        .put(VariantSettings.MODEL, identifier)
-        .put(VariantSettings.UVLOCK, true)
-    ).coordinate(BlockStateVariantMap.create(FACING)
-        .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R0))
-        .register(HorizontalCornerDirection.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
-        .register(HorizontalCornerDirection.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
-        .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270)));
-  }
-
-
-  @Override
-  @Environment(EnvType.CLIENT)
-  public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return ModelJsonBuilder.create(ExtShape.id("block/vertical_stairs")).setTextures(ModelUtils.getTextureMap(this, TextureKey.TOP, TextureKey.SIDE, TextureKey.BOTTOM));
   }
 
   /**

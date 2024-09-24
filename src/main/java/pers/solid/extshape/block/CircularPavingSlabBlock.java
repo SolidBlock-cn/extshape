@@ -1,25 +1,17 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.data.client.*;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.UnknownNullability;
-import pers.solid.brrp.v1.BRRPUtils;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
-import pers.solid.brrp.v1.model.ModelJsonBuilder;
-import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 
@@ -54,43 +46,6 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   @Override
   public BlockState mirror(BlockState state, BlockMirror mirror) {
     return state.rotate(mirror.getRotation(state.get(FACING)));
-  }
-
-  @Environment(EnvType.CLIENT)
-  @Override
-  public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    // Blockus 模组中的环纹方块使用带釉陶瓦模型，故此处使用带釉陶瓦台阶模型。
-    return super.getBlockModel().withParent(ExtShape.id("block/glazed_terracotta_slab"));
-  }
-
-  @Environment(EnvType.CLIENT)
-  @Override
-  public void writeBlockModel(RuntimeResourcePack pack) {
-    final ModelJsonBuilder model = getBlockModel();
-    final Identifier id = getBlockModelId();
-    pack.addModel(id, model);
-    pack.addModel(id.brrp_suffixed("_top"), model.withParent(ExtShape.id("block/glazed_terracotta_slab_top")));
-  }
-
-  @Environment(EnvType.CLIENT)
-  @Override
-  public @UnknownNullability BlockStateSupplier getBlockStates() {
-    final Identifier id = getBlockModelId();
-    final BlockStateVariantMap.SingleProperty<SlabType> variants = BlockStateVariantMap.create(TYPE);
-    Identifier baseId = baseBlock == null ? null : BRRPUtils.getBlockModelId(baseBlock);
-    if (baseId != null) {
-      final String basePath = baseId.getPath();
-
-      // 基础方块为涂蜡铜方块时，使用未涂蜡铜的模型。
-      if (basePath.contains("/waxed_") && basePath.contains("copper")) {
-        baseId = baseId.withPath(basePath.replace("/waxed_", "/"));
-      }
-    }
-    final BlockStateVariantMap variants2 = BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates();
-    variants.register(SlabType.BOTTOM, BlockStateVariant.create().put(VariantSettings.MODEL, id));
-    variants.register(SlabType.TOP, BlockStateVariant.create().put(VariantSettings.MODEL, id.brrp_suffixed("_top")));
-    variants.register(SlabType.DOUBLE, BlockStateVariant.create().put(VariantSettings.MODEL, baseBlock != null ? baseId : id.brrp_suffixed("_double")));
-    return VariantsBlockStateSupplier.create(this).coordinate(variants).coordinate(variants2);
   }
 
   @Override

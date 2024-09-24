@@ -37,8 +37,7 @@
     "fabric": "*",
     "minecraft": "1.21.x",
     "java": ">=21",
-    "mixinextras": "*",
-    "brrp_v1": ">=1.1.0"
+    "mixinextras": "*"
   },
   "suggests": {
     "blockus": "*"

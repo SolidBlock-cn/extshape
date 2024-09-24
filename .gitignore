@@ -35,4 +35,4 @@ run/
 
 # Data Generator
 
-src/main/generated
+generated/

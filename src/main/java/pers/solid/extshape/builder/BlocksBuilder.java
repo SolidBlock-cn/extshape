@@ -6,8 +6,6 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Contract;
@@ -16,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.*;
 import pers.solid.extshape.mixin.AbstractBlockStateAccessor;
 import pers.solid.extshape.rrp.RecipeGroupRegistry;
-import pers.solid.extshape.tag.TagPreparations;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.ExtShapeBlockTypes;
@@ -42,10 +39,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   protected @Nullable Collection<Block> instanceCollection;
 
   /**
-   * 为指定形状的 {@link AbstractBlockBuilder} 调用 {@link AbstractBlockBuilder#setPrimaryTagToAddTo}。
-   */
-  private @Nullable Map<@NotNull BlockShape, @Nullable TagKey<Block>> primaryTagForShape = null;
-  /**
    * 该基础方块需要构建哪些形状的变种。可以通过 {@link #with} 和 {@link #without} 进行增减。
    */
   protected final SortedSet<BlockShape> shapesToBuild;
@@ -53,11 +46,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 基础方块。对于 BlocksBuilder 而言，基础方块不能是 {@code null}。
    */
   public final @NotNull Block baseBlock;
-  /**
-   * 构建器需要构建的所有对象都需要添加到的标签的列表。也就是说，构建的时候，这里面的标签会添加此构建器构建的所有方块。
-   */
-  protected final List<@NotNull TagKey<? extends ItemConvertible>> extraTags = new ArrayList<>();
-  protected TagPreparations tagPreparations;
 
   public BlocksBuilder setFenceSettings(FenceSettings fenceSettings) {
     this.fenceSettings = fenceSettings;
@@ -261,60 +249,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   }
 
   /**
-   * 设置指定形状的方块的默认方块标签。
-   *
-   * @param shape 形状。
-   * @param tag   默认方块标签。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "_, _, -> this", mutates = "this")
-  public BlocksBuilder setPrimaryTagForShape(@Nullable BlockShape shape, @Nullable TagKey<Block> tag) {
-    if (shape == null || tag == null) return this;
-    if (primaryTagForShape == null) {
-      primaryTagForShape = new HashMap<>();
-    }
-    primaryTagForShape.put(shape, tag);
-    return this;
-  }
-
-  /**
-   * 设置各个形状的方块需要添加的方块标签。会覆盖已有的值。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "_, -> this", mutates = "this")
-  public BlocksBuilder setPrimaryTagForShape(Map<BlockShape, TagKey<Block>> map) {
-    primaryTagForShape = map;
-    return this;
-  }
-
-  /**
-   * 将构造后的所有方块都放入同一个标签中。
-   *
-   * @param tag 构造后所有的方块都需要放入的标签。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder addExtraTag(@NotNull TagKey<? extends ItemConvertible> tag) {
-    this.extraTags.add(tag);
-    return this;
-  }
-
-  /**
-   * 将构造后的所有方块添加到依照函数指定的标签中。
-   *
-   * @param function 根据形状来判断需要将方块添加到的标签。该函数将在构造前执行。
-   */
-  @CanIgnoreReturnValue
-  @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder addExtraTag(Function<BlockShape, @Nullable TagKey<? extends ItemConvertible>> function) {
-    return addPreBuildConsumer((blockShape, builder) -> {
-      final TagKey<? extends ItemConvertible> tag = function.apply(blockShape);
-      if (tag != null) builder.addExtraTag(tag);
-    });
-  }
-
-  /**
-   * 添加一个将会在构建各方块对象前执行的 consumer。注意，此时方块还没有被创建，也没有被注册，可以执行 {@link AbstractBlockBuilder#setBlockSettings}、{@link AbstractBlockBuilder#addExtraTag} 等需要在之前创建对象之间执行的操作。
+   * 添加一个将会在构建各方块对象前执行的 consumer。注意，此时方块还没有被创建，也没有被注册，可以执行 {@link AbstractBlockBuilder#setBlockSettings} 等需要在之前创建对象之间执行的操作。
    */
   @CanIgnoreReturnValue
   @Contract(value = "_-> this", mutates = "this")
@@ -377,10 +312,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     }
 
     final Collection<AbstractBlockBuilder<? extends Block>> values = this.values();
-    // 设置需要将构建后的方块都添加到指定的标签中。
-    for (AbstractBlockBuilder<? extends Block> builder : values) {
-      builder.extraTags.addAll(extraTags);
-    }
     if (preBuildConsumer != null) {
       forEach(preBuildConsumer);
     }
@@ -417,10 +348,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     };
     builder.defaultNamespace = this.defaultNamespace;
     builder.instanceCollection = this.instanceCollection;
-    builder.tagPreparations = this.tagPreparations;
-    if (primaryTagForShape != null) {
-      builder.primaryTagToAddTo = primaryTagForShape.get(shape);
-    }
     return builder;
   }
 

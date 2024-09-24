@@ -4,23 +4,16 @@ import com.mojang.datafixers.util.Function4;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.BlockStateSupplier;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureKey;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
@@ -34,11 +27,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnknownNullability;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
-import pers.solid.brrp.v1.model.ModelJsonBuilder;
-import pers.solid.brrp.v1.model.ModelUtils;
-import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.ActivationSettings;
@@ -78,33 +66,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     return Text.translatable("block.extshape.?_pressure_plate", this.getNamePrefix());
   }
 
-
-  @Environment(EnvType.CLIENT)
-  @Override
-  public @UnknownNullability BlockStateSupplier getBlockStates() {
-    final Identifier blockModelId = getBlockModelId();
-    return BlockStateModelGenerator.createPressurePlateBlockState(
-        this,
-        blockModelId,
-        blockModelId.brrp_suffixed("_down")
-    );
-  }
-
-  @Environment(EnvType.CLIENT)
-  @Override
-  public @UnknownNullability ModelJsonBuilder getBlockModel() {
-    return ModelJsonBuilder.create(Models.PRESSURE_PLATE_UP)
-        .addTexture("texture", getTextureId(TextureKey.TEXTURE));
-  }
-
-  @Override
-  @Environment(EnvType.CLIENT)
-  public void writeBlockModel(RuntimeResourcePack pack) {
-    final Identifier blockModelId = getBlockModelId();
-    final ModelJsonBuilder blockModel = getBlockModel();
-    ModelUtils.writeModelsWithVariants(pack, blockModelId, blockModel, Models.PRESSURE_PLATE_UP, Models.PRESSURE_PLATE_DOWN);
-  }
-
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     if (BlockCollections.WOOLS.contains(baseBlock)) {
@@ -115,40 +76,21 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
           .pattern("###")
           .input('#', carpet)
-          .criterionFromItem(this)
+          .criterion(RecipeProvider.hasItem(this), RecipeProvider.conditionsFromItem(this))
           .group(getRecipeGroup());
     } else if (baseBlock == Blocks.MOSS_BLOCK) {
       // 一个苔藓压力板由 3 个覆地苔藓合成。
       return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
           .pattern("###")
           .input('#', Items.MOSS_CARPET)
-          .criterionFromItem(Items.MOSS_CARPET)
+          .criterion(RecipeProvider.hasItem(Items.MOSS_CARPET), RecipeProvider.conditionsFromItem(Items.MOSS_CARPET))
           .group(getRecipeGroup());
     } else {
       return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
           .pattern("##")
           .input('#', baseBlock)
-          .criterionFromItem(baseBlock)
+          .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
           .group(getRecipeGroup());
-    }
-  }
-
-  @Override
-  public void writeRecipes(RuntimeResourcePack pack) {
-    ExtShapeVariantBlockInterface.super.writeRecipes(pack);
-
-    // 反向合成配方。
-    if (BlockCollections.WOOLS.contains(baseBlock)) {
-      final Identifier woolId = Registries.BLOCK.getId(baseBlock);
-      final Identifier carpetId = Identifier.of(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
-      final Item carpet = Registries.ITEM.get(carpetId);
-      final StonecuttingRecipeJsonBuilder recipe = StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), carpet).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
-      final Identifier recipeId = ExtShape.id(carpetId.getPath() + "_from_pressure_plate");
-      pack.addRecipeAndAdvancement(recipeId, recipe);
-    } else if (baseBlock == Blocks.MOSS_BLOCK) {
-      final StonecuttingRecipeJsonBuilder recipe = StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(this), getRecipeCategory(), Blocks.MOSS_CARPET).criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(this));
-      final Identifier recipeId = ExtShape.id("moss_carpet_from_pressure_plate");
-      pack.addRecipeAndAdvancement(recipeId, recipe);
     }
   }
 

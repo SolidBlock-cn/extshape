@@ -3,16 +3,15 @@ package pers.solid.extshape.block;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Oxidizable;
+import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -26,16 +25,14 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.BRRPUtils;
-import pers.solid.brrp.v1.generator.BRRPStairsBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的楼梯方块。受原版限制，基础方块（{@link #baseBlock}）不能为 {@code null}。
  */
-public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeStairsBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeStairsBlock::new);
+public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantBlockInterface {
+  public static final MapCodec<ExtShapeStairsBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeStairsBlock::new);
   /**
    * 此集合内的所有方块不能合成楼梯和台阶。此举是为了避免合成表冲突。
    *
@@ -50,6 +47,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
       Blocks.CUT_SANDSTONE,
       Blocks.CUT_RED_SANDSTONE
   );
+  public final @NotNull Block baseBlock;
 
   /**
    * 基础方块是否不应该创建楼梯和台阶的配方。
@@ -63,7 +61,8 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   }
 
   public ExtShapeStairsBlock(@NotNull Block baseBlock, Settings settings) {
-    super(baseBlock, settings);
+    super(baseBlock.getDefaultState(), settings);
+    this.baseBlock = baseBlock;
   }
 
   @Override
@@ -81,7 +80,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
     if (shouldNotCraftStairsOrSlabs(baseBlock)) {
       return null;
     }
-    final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
+    final CraftingRecipeJsonBuilder craftingRecipe = RecipeProvider.createStairsRecipe(this, Ingredient.ofItems(baseBlock)); // recipeCategory 一定量 building_blocks，所以没有问题
     return craftingRecipe == null ? null : craftingRecipe.group(getRecipeGroup());
   }
 
@@ -98,6 +97,11 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   @Override
   public MapCodec<? extends ExtShapeStairsBlock> getCodec() {
     return CODEC;
+  }
+
+  @Override
+  public @NotNull Block getBaseBlock() {
+    return baseBlock;
   }
 
   public static class WithExtension extends ExtShapeStairsBlock {

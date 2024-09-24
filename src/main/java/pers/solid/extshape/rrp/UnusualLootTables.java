@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.data.client.BlockStateVariantMap;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
@@ -32,29 +31,19 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.state.property.Properties;
 import org.jetbrains.annotations.*;
-import pers.solid.brrp.v1.generator.BlockResourceGenerator;
-import pers.solid.brrp.v1.impl.BRRPBlockLootTableGenerator;
 import pers.solid.extshape.builder.BlockShape;
-
-import java.util.Map;
-import java.util.WeakHashMap;
 
 /**
  * <p>本类记录了用于本模组的不掉落方块本身的基础方块的战利品表。
- * <p>注册在 {@link #createInstance()} 中的方块，在生成战利品表时，不会使用 {@link BlockResourceGenerator#getLootTable(BlockLootTableGenerator)}，而是直接使用这里面注册了的战利品表函数。
+ * <p>注册在 {@link #createInstance()} 中的方块，在生成战利品表时，直接使用这里面注册了的战利品表函数。
  *
  * @author SolidBlock
  * @since 1.5.1
  */
 @ApiStatus.AvailableSince("1.5.1")
 public class UnusualLootTables {
-  protected final LootTableFunction dropsDoubleWithSilkTouchOrNone = (baseBlock, shape, block, lookup) -> dropsDoubleSlabWithSilkTouchOrNone(block, shape == BlockShape.SLAB, lookup);
+  protected final LootTableFunction dropsDoubleWithSilkTouchOrNone = (baseBlock, shape, block, lookup, generator) -> dropsDoubleSlabWithSilkTouchOrNone(block, shape == BlockShape.SLAB, generator);
   public static final StatePredicate.Builder EXACT_MATCH_DOUBLE_SLAB = StatePredicate.Builder.create().exactMatch(Properties.SLAB_TYPE, SlabType.DOUBLE);
-  protected static final Map<RegistryWrapper.WrapperLookup, BRRPBlockLootTableGenerator> GENERATOR_MAP = new WeakHashMap<>();
-
-  protected BRRPBlockLootTableGenerator generatorOf(RegistryWrapper.WrapperLookup registryLookup) {
-    return GENERATOR_MAP.computeIfAbsent(registryLookup, BRRPBlockLootTableGenerator::new);
-  }
 
   protected RegistryEntry<Enchantment> fortune(RegistryWrapper.WrapperLookup registryLookup) {
     return registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE);
@@ -82,49 +71,49 @@ public class UnusualLootTables {
   private void registerUnusualLootTables(ImmutableMap.Builder<Block, LootTableFunction> builder) {
     builder.put(Blocks.CLAY, dropsWithSilkTouchOrConst(Items.CLAY_BALL, 4));
     builder.put(Blocks.SNOW_BLOCK, dropsWithSilkTouchOrConst(Items.SNOWBALL, 4));
-    builder.put(Blocks.GLOWSTONE, (baseBlock, shape, block, lookup) -> {
+    builder.put(Blocks.GLOWSTONE, (baseBlock, shape, block, lookup, generator) -> {
       final float shapeVolume = shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
+      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2 * shapeVolume, 4 * shapeVolume)))
               .apply(fortuneFunction(lookup))
               .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4))))),
-          shape == BlockShape.SLAB ? generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
+          shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2, 4)))
               .apply(fortuneFunction(lookup))
-              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 4)))) : null, lookup);
+              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 4)))) : null, generator);
     });
-    builder.put(Blocks.MELON, (baseBlock, shape, block, lookup) -> {
+    builder.put(Blocks.MELON, (baseBlock, shape, block, lookup, generator) -> {
       final float shapeVolume = shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.MELON_SLICE)
+      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, ItemEntry.builder(Items.MELON_SLICE)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(shapeVolume * 2, shapeVolume * 4)))
               .apply(fortuneFunction(lookup))
               .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4))))),
-          shape == BlockShape.SLAB ? generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.MELON_SLICE)
+          shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, ItemEntry.builder(Items.MELON_SLICE)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2, 4)))
               .apply(fortuneFunction(lookup))
-              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 4)))) : null, lookup);
+              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 4)))) : null, generator);
     });
-    builder.put(Blocks.SEA_LANTERN, (baseBlock, shape, block, lookup) -> {
+    builder.put(Blocks.SEA_LANTERN, (baseBlock, shape, block, lookup, generator) -> {
       final float shapeVolume = shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.PRISMARINE_CRYSTALS)
+      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, ItemEntry.builder(Items.PRISMARINE_CRYSTALS)
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2 * shapeVolume, 3 * shapeVolume)))
           .apply(fortuneFunction(lookup))
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (5 * shapeVolume))))
-      ), shape == BlockShape.SLAB ? generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.PRISMARINE_CRYSTALS)
+      ), shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, ItemEntry.builder(Items.PRISMARINE_CRYSTALS)
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2, 3)))
           .apply(fortuneFunction(lookup))
           .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 5)))
-      ) : null, lookup);
+      ) : null, generator);
     });
-    builder.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block, lookup) -> {
+    builder.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block, lookup, generator) -> {
       final float shapeVolume = shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generatorOf(lookup).addSurvivesExplosionCondition(block, ItemEntry.builder(Items.GOLD_NUGGET)
+      return dropsDoubleSlabWithSilkTouch(block, generator.addSurvivesExplosionCondition(block, ItemEntry.builder(Items.GOLD_NUGGET)
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(shapeVolume * 2, shapeVolume * 5)))
           .conditionally(TableBonusLootCondition.builder(fortune(lookup), 0.1F, 0.14285715F, 0.25F, 1.0F))
-          .alternatively(ItemEntry.builder(block))), shape == BlockShape.SLAB ? generatorOf(lookup).addSurvivesExplosionCondition(block, ItemEntry.builder(Items.GOLD_NUGGET)
+          .alternatively(ItemEntry.builder(block))), shape == BlockShape.SLAB ? generator.addSurvivesExplosionCondition(block, ItemEntry.builder(Items.GOLD_NUGGET)
           .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2, 5)))
           .conditionally(TableBonusLootCondition.builder(fortune(lookup), 0.1F, 0.14285715F, 0.25F, 1.0F))
-          .alternatively(ItemEntry.builder(block).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2))))) : null, lookup);
+          .alternatively(ItemEntry.builder(block).apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2))))) : null, generator);
     });
     builder.put(Blocks.ICE, dropsDoubleWithSilkTouchOrNone);
     builder.put(Blocks.BLUE_ICE, dropsDoubleWithSilkTouchOrNone);
@@ -132,9 +121,9 @@ public class UnusualLootTables {
     builder.put(Blocks.SCULK, dropsDoubleWithSilkTouchOrNone);
   }
 
-  public interface LootTableFunction extends BlockStateVariantMap.QuadFunction<Block, BlockShape, Block, RegistryWrapper.WrapperLookup, LootTable.Builder> {
-    @Override
-    LootTable.Builder apply(Block baseBlock, BlockShape shape, Block block, RegistryWrapper.WrapperLookup registryLookup);
+  @FunctionalInterface
+  public interface LootTableFunction {
+    LootTable.Builder apply(Block baseBlock, BlockShape shape, Block block, RegistryWrapper.WrapperLookup lookup, BlockLootTableGenerator generator);
   }
 
   /**
@@ -157,7 +146,7 @@ public class UnusualLootTables {
    * @param fullCount 没有精准采集时，掉落的物品对应完整方块大小时的数量。
    */
   public LootTableFunction dropsWithSilkTouchOrConst(@NotNull ItemConvertible drop, float fullCount) {
-    return (baseBlock, shape, block, lookup) -> {
+    return (baseBlock, shape, block, lookup, generator) -> {
       final LeafEntry.Builder<?> entryBuilder = entryBuilderConstCount(drop, fullCount, shape, block);
       if (shape == BlockShape.SLAB) {
         return LootTable.builder()
@@ -165,10 +154,10 @@ public class UnusualLootTables {
                 .with(ItemEntry.builder(block)
                     .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2))
                         .conditionally(BlockStatePropertyLootCondition.builder(block).properties(EXACT_MATCH_DOUBLE_SLAB)))
-                    .conditionally(generatorOf(lookup).createSilkTouchCondition())
+                    .conditionally(generator.createSilkTouchCondition())
                     .alternatively(entryBuilder)));
       } else {
-        return generatorOf(lookup).dropsWithSilkTouch(block, generatorOf(lookup).applyExplosionDecay(block, entryBuilder));
+        return generator.dropsWithSilkTouch(block, generator.applyExplosionDecay(block, entryBuilder));
       }
     };
   }
@@ -241,8 +230,8 @@ public class UnusualLootTables {
    * @param childWhenDoubleSlab 没有精准采集，且为双层台阶时，需要使用的战利品表池。当方块本身就不是台阶时，此参数应为 {@code null}。
    * @return 战利品表。
    */
-  public LootTable.Builder dropsDoubleSlabWithSilkTouch(@NotNull Block drop, @NotNull LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab, RegistryWrapper.WrapperLookup lookup) {
-    return dropsDoubleSlab(drop, generatorOf(lookup).createSilkTouchCondition(), child, childWhenDoubleSlab);
+  public LootTable.Builder dropsDoubleSlabWithSilkTouch(@NotNull Block drop, @NotNull LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab, BlockLootTableGenerator generator) {
+    return dropsDoubleSlab(drop, generator.createSilkTouchCondition(), child, childWhenDoubleSlab);
   }
 
 
@@ -254,7 +243,7 @@ public class UnusualLootTables {
    * @return 战利品表。
    * @see net.minecraft.data.server.loottable.BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)
    */
-  public LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(@NotNull Block drop, boolean isSlab, RegistryWrapper.WrapperLookup lookup) {
+  public LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(@NotNull Block drop, boolean isSlab, BlockLootTableGenerator generator) {
     final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop);
     if (isSlab) {
       itemEntryBuilder.apply(
@@ -265,7 +254,7 @@ public class UnusualLootTables {
     }
     return LootTable.builder()
         .pool(LootPool.builder()
-            .conditionally(generatorOf(lookup).createSilkTouchCondition())
+            .conditionally(generator.createSilkTouchCondition())
             .rolls(ConstantLootNumberProvider.create(1.0F))
             .with(itemEntryBuilder));
   }

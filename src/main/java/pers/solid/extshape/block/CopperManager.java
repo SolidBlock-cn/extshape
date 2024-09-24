@@ -15,10 +15,8 @@ import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
-import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -93,8 +91,6 @@ public final class CopperManager {
     }
 
     builder.markStoneCuttable()
-        .addExtraTag(BlockTags.PICKAXE_MINEABLE)
-        .addExtraTag(BlockTags.NEEDS_STONE_TOOL)
         .setFenceSettings(new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE))
         .build();
     return builder;
@@ -143,9 +139,9 @@ public final class CopperManager {
     registerExtendedWax(CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS);
   }
 
-  public static <B extends Block & BlockResourceGenerator & Oxidizable> MapCodec<B> createCodec(RecordCodecBuilder<B, AbstractBlock.Settings> settingsCodec, Function3<Block, AbstractBlock.Settings, Oxidizable.OxidationLevel, B> function) {
+  public static <B extends Block & ExtShapeBlockInterface & Oxidizable> MapCodec<B> createCodec(RecordCodecBuilder<B, AbstractBlock.Settings> settingsCodec, Function3<Block, AbstractBlock.Settings, Oxidizable.OxidationLevel, B> function) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(
-        Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BlockResourceGenerator::getBaseBlock),
+        Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock),
         settingsCodec,
         weatheringStateField()
     ).apply(instance, function));

@@ -1,11 +1,8 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.BlockStateSupplier;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.item.ItemPlacementContext;
@@ -16,7 +13,6 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.UnknownNullability;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.ActivationSettings;
 
@@ -53,12 +49,6 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   @Override
   public BlockState mirror(BlockState state, BlockMirror mirror) {
     return state.rotate(mirror.getRotation(state.get(FACING)));
-  }
-
-  @Environment(EnvType.CLIENT)
-  @Override
-  public @UnknownNullability BlockStateSupplier getBlockStates() {
-    return ((VariantsBlockStateSupplier) super.getBlockStates()).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
   }
 
   @SuppressWarnings("unchecked")

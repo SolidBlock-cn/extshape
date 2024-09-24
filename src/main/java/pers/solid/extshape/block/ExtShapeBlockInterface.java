@@ -1,9 +1,10 @@
 package pers.solid.extshape.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
@@ -15,27 +16,25 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.LootTable;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.ApiStatus;
+import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
-import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.rrp.RecipeGroupRegistry;
 
+import java.util.function.BiFunction;
+
 /**
  * 该模组中的绝大多数方块共用的接口。
  */
-public interface ExtShapeBlockInterface extends BlockResourceGenerator {
+public interface ExtShapeBlockInterface {
   /**
    * 方块的基础方块。由于 codec 不支持 null，因此本模组（包括在加入方块 codec 之前的版本）不允许 null 的基础方块。
    *
    * @return 方块的基础方块。
    */
-  @Override
   @NotNull
   Block getBaseBlock();
 
@@ -60,7 +59,6 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
    *
    * @return 方块的切石配方。用于切石机。
    */
-  @Override
   default @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
     return null;
   }
@@ -75,101 +73,21 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     return baseBlock != null && STONECUTTABLE_BASE_BLOCKS.contains(baseBlock);
   }
 
-  @Override
   default LootTable.Builder getLootTable(BlockLootTableGenerator blockLootTableGenerator) {
-    return BlockResourceGenerator.super.getLootTable(blockLootTableGenerator);
+    return blockLootTableGenerator.drops((ItemConvertible) this);
   }
 
-  @Override
-  @NotNull
-  default Identifier getStonecuttingRecipeId() {
-    return BlockResourceGenerator.super.getStonecuttingRecipeId();
-  }
-
-  @Override
   default CraftingRecipeJsonBuilder getCraftingRecipe() {
-    return BlockResourceGenerator.super.getCraftingRecipe();
+    return null;
   }
 
-  @Override
   default boolean shouldWriteStonecuttingRecipe() {
     return (this instanceof Block && STONECUTTABLE_BLOCKS.contains(this)) || isStoneCut(getBaseBlock());
-  }
-
-  /**
-   * 方块的模型 id，考虑到上蜡的方块使用的模型均为未上蜡的方块的模型，故在此做出调整。
-   */
-  @Environment(EnvType.CLIENT)
-  @Override
-  default Identifier getBlockModelId() {
-    final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
-    final String path = blockModelId.getPath();
-    if (path.contains("/waxed_") && path.contains("copper")) {
-      return blockModelId.withPath(path.replace("/waxed_", "/"));
-    } else {
-      return blockModelId;
-    }
-  }
-
-  @Environment(EnvType.CLIENT)
-  @Override
-  default void writeAssets(RuntimeResourcePack pack) {
-    // 可能含有 waxed_ 开头的模型 id（注意调用的是 super 不是 this），如果发现有 waxed_ 开头，就不生成模型。
-    final Identifier blockModelId = BlockResourceGenerator.super.getBlockModelId();
-    final String path = blockModelId.getPath();
-    writeBlockStates(pack);
-    if (!(path.contains("/waxed_") && path.contains("copper"))) {
-      writeBlockModel(pack);
-    }
-    writeItemModel(pack);
   }
 
   default StonecuttingRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount) {
     final Block baseBlock = getBaseBlock();
     return StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
-  }
-
-  /**
-   * <p>为该方块写入合成配方。</p>
-   *
-   * @param pack 运行时资源包。
-   * @see pers.solid.brrp.v1.generator.ItemResourceGenerator#writeRecipes(RuntimeResourcePack)
-   * @since 1.5.1
-   */
-  @ApiStatus.AvailableSince("1.5.1")
-  default void writeCraftingRecipe(RuntimeResourcePack pack) {
-    final @Nullable CraftingRecipeJsonBuilder craftingRecipe = getCraftingRecipe();
-    if (craftingRecipe != null) {
-      final Identifier recipeId = getRecipeId();
-      pack.addRecipeAndAdvancement(recipeId, craftingRecipe);
-    }
-  }
-
-  /**
-   * 为该方块写入切石配方。该方法并不会检查方块是否可切石，因此你可能需要先调用 {@link #shouldWriteStonecuttingRecipe()}。
-   *
-   * @param pack 运行时资源包。
-   * @since 1.5.1
-   */
-  @ApiStatus.AvailableSince("1.5.1")
-  default void writeStonecuttingRecipe(RuntimeResourcePack pack) {
-    final @Nullable StonecuttingRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe();
-    if (stonecuttingRecipe != null) {
-      final Identifier stonecuttingRecipeId = getStonecuttingRecipeId();
-      pack.addRecipeAndAdvancement(stonecuttingRecipeId, stonecuttingRecipe);
-    }
-  }
-
-  /**
-   * @since 1.5.1 覆盖了原先的方法，以便于更好地控制流程。
-   */
-  @ApiStatus.AvailableSince("1.5.1")
-  @Override
-  default void writeRecipes(RuntimeResourcePack pack) {
-    writeCraftingRecipe(pack);
-    if (shouldWriteStonecuttingRecipe()) {
-      writeStonecuttingRecipe(pack);
-    }
   }
 
   /**
@@ -183,7 +101,6 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     return null;
   }
 
-  @Override
   default @Nullable RecipeCategory getRecipeCategory() {
     final BlockShape blockShape = getBlockShape();
     if (blockShape.isConstruction) {
@@ -207,8 +124,12 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
     if (shouldWriteStonecuttingRecipe()) {
       final StonecuttingRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe();
       if (stonecuttingRecipe != null) {
-        stonecuttingRecipe.offerTo(exporter, getStonecuttingRecipeId());
+        stonecuttingRecipe.offerTo(exporter, Registries.ITEM.getId(stonecuttingRecipe.getOutputItem()).withSuffixedPath("_from_stonecutting"));
       }
     }
+  }
+
+  static <B extends Block & ExtShapeBlockInterface> MapCodec<B> createCodecWithBaseBlock(RecordCodecBuilder<B, AbstractBlock.Settings> settings, BiFunction<Block, AbstractBlock.Settings, B> function) {
+    return RecordCodecBuilder.mapCodec(i -> i.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), settings).apply(i, function));
   }
 }

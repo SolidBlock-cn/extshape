@@ -163,7 +163,7 @@ public final class ExtShapeBlockStateModelGenerator {
     final Identifier topModelId = Models.SLAB_TOP.upload(block, textureMap, blockStateModelGenerator.modelCollector);
     final Identifier fullModelId = ModelIds.getBlockModelId(baseBlock);
     final boolean isLog = BlockCollections.LOGS.contains(baseBlock) || BlockCollections.STRIPPED_LOGS.contains(baseBlock);
-    final Identifier fullHorizontalModelId = isLog ? fullModelId.brrp_suffixed("_horizontal") : fullModelId;
+    final Identifier fullHorizontalModelId = isLog ? fullModelId.withSuffixedPath("_horizontal") : fullModelId;
     final Identifier bottomHorizontalModelId, topHorizontalModelId;
     if (hasHorizontalColumn) {
       bottomHorizontalModelId = ExtShapeModels.SLAB_COLUMN_HORIZONTAL.upload(block, textureMap, blockStateModelGenerator.modelCollector);

@@ -5,10 +5,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
@@ -21,7 +23,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.generator.BRRPFenceGateBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.mixin.FenceGateAccessor;
@@ -30,15 +31,17 @@ import pers.solid.extshape.util.FenceSettings;
 /**
  * 本模组中的栅栏门方块。
  */
-public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeFenceGateBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BRRPFenceGateBlock::getBaseBlock), createSettingsCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient)).apply(instance, ExtShapeFenceGateBlock::new));
+public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVariantBlockInterface {
+  public static final MapCodec<ExtShapeFenceGateBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), createSettingsCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient)).apply(instance, ExtShapeFenceGateBlock::new));
+  public final @NotNull Block baseBlock;
   /**
    * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
    */
   private final Item secondIngredient;
 
   public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Settings settings, @NotNull WoodType woodType, @Nullable Item secondIngredient) {
-    super(baseBlock, settings, woodType);
+    super(woodType, settings);
+    this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
   }
 
@@ -48,7 +51,6 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
 
   @Override
   public @NotNull Block getBaseBlock() {
-    assert baseBlock != null;
     return baseBlock;
   }
 
@@ -57,14 +59,17 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
     return Text.translatable("block.extshape.?_fence_gate", this.getNamePrefix());
   }
 
-  @Override
   public @Nullable Item getSecondIngredient() {
     return secondIngredient;
   }
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
+    final ShapedRecipeJsonBuilder craftingRecipe = ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, this, 3)
+        .input('W', baseBlock)
+        .input('#', secondIngredient)
+        .pattern("W#W")
+        .pattern("W#W");
     return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 
@@ -123,7 +128,7 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
 
   public static class WithOxidation extends ExtShapeFenceGateBlock implements Oxidizable {
     private final @NotNull OxidationLevel oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(BRRPFenceGateBlock::getBaseBlock), createSettingsCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceGateBlock::getSecondIngredient), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
+    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), createSettingsCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceGateBlock::getSecondIngredient), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
     public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull WoodType woodType, @Nullable Item secondIngredient, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings, woodType, secondIngredient);

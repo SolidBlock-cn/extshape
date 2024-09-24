@@ -13,8 +13,6 @@ import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.BRRPUtils;
-import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.StonecuttingRecipeJsonBuilderAccessor;
@@ -50,7 +48,7 @@ public class CrossShapeDataGeneration {
   }
 
   public Identifier recipeIdOf(ItemConvertible item, String suffix) {
-    final Identifier identifier = BRRPUtils.getRecipeId(item);
+    final Identifier identifier = CraftingRecipeJsonBuilder.getItemId(item);
     return Identifier.of(defaultNamespace == null ? identifier.getNamespace() : defaultNamespace, suffix == null ? identifier.getPath() : identifier.getPath() + suffix);
   }
 
@@ -190,10 +188,10 @@ public class CrossShapeDataGeneration {
         final Block uncutBaseBlock = uncutBaseBlockInfo.left();
         final String path = Registries.BLOCK.getId(uncutBaseBlock).getPath();
         final Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
-        if (!(output instanceof BlockResourceGenerator) || !((BlockResourceGenerator) output).shouldWriteStonecuttingRecipe()) continue;
-        StonecuttingRecipeJsonBuilder recipe = ((BlockResourceGenerator) output).getStonecuttingRecipe();
+        if (!(output instanceof ExtShapeBlockInterface) || !((ExtShapeBlockInterface) output).shouldWriteStonecuttingRecipe()) continue;
+        StonecuttingRecipeJsonBuilder recipe = ((ExtShapeBlockInterface) output).getStonecuttingRecipe();
         if (recipe != null) {
-          final Identifier secondaryId = BRRPUtils.getRecipeId(output).brrp_suffixed("_from_" + path + "_stonecutting");
+          final Identifier secondaryId = CraftingRecipeJsonBuilder.getItemId(output).withSuffixedPath("_from_" + path + "_stonecutting");
           StonecuttingRecipeJsonBuilderAccessor accessor = (StonecuttingRecipeJsonBuilderAccessor) recipe;
           final StonecuttingRecipeJsonBuilder secondaryRecipe = StonecuttingRecipeJsonBuilder.createStonecutting(
               Ingredient.ofItems(uncutBaseBlock),

@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
@@ -32,12 +33,10 @@ import java.util.stream.Stream;
  * <p>欢迎使用扩展方块形状模组。本模组为许多方块提供了各个形状的变种，包括原版不存在的形状。
  * <p>本模组中的所有方块是在 {@link ExtShapeBlocks} 中创建的，创建的同时将其注册，并创建和注册对应的方块物品。本模组还提供了一定的配置功能，参见 {@link ExtShapeConfig}。
  * <p>本模组还有一个内置的方块映射管理系统，由 {@link BlockBiMaps} 提供。方块映射是指的方块与方块之间的关系。本模组的方块被创建时，就会自动加入映射中。此外，原版的方块映射也会加入。可以利用 {@link BlockBiMaps#getBlockOf} 来获取特定方块的特定形状的变种。
- * <p>本模组的方块和物品所使用的资源，包括客户端资源和服务器数据，绝大多数都是在运行时生成的，并不会保存为本地文件，这是依赖的 Better Runtime Resource Pack（BRRP）模组。
  * <hr>
  * <p>Welcome to use Extended Block Shapes mod, which provides various variants in different shapes of many blocks, including shapes that do not exist in vanilla Minecraft.
  * <p>Blocks of this mod are created in {@link ExtShapeBlocks}; while created, they are also registered, and so as their corresponding block items. This mod also provides a simple configuration. See {@link ExtShapeConfig}.
  * <p>This mod contains an internal block mapping management, provided by {@link BlockBiMaps}。Block mapping means the relations between blocks. Block in this mod are added instantly to the mappings upon created. Besides, vanilla block mappings are also added. You may get the specified variant of a specified block by {@link BlockBiMaps#getBlockOf}.
- * <p>Resources used by this mod, including client assets and server data, are generated on runtime, without saving local files, which relies on Better Runtime Resource Pack (BRRP) mod.
  *
  * @author SolidBlock
  */
@@ -139,6 +138,6 @@ public class ExtShape implements ModInitializer {
     map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
     map.put(ExtShapeTags.WOOLEN_WALLS, 100);
 
-    map.forEach((blockTagKey, integer) -> FuelRegistry.INSTANCE.add(ExtShapeTags.TAG_PREPARATIONS.getItemTagOf(blockTagKey), integer));
+    map.forEach((blockTagKey, integer) -> FuelRegistry.INSTANCE.add(TagKey.of(RegistryKeys.ITEM, blockTagKey.id()), integer));
   }
 }

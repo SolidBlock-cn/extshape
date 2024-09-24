@@ -7,10 +7,12 @@ import net.minecraft.block.Oxidizable;
 import net.minecraft.block.WallBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -22,8 +24,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.BRRPUtils;
-import pers.solid.brrp.v1.generator.BRRPWallBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -32,17 +32,18 @@ import pers.solid.extshape.util.BlockCollections;
 /**
  * 本模组中的墙方块。
  */
-public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantBlockInterface {
+public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlockInterface {
   @SuppressWarnings("unchecked")
-  public static final MapCodec<WallBlock> CODEC = (MapCodec<WallBlock>) (MapCodec<?>) BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeWallBlock::new);
+  public static final MapCodec<WallBlock> CODEC = (MapCodec<WallBlock>) (MapCodec<?>) ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeWallBlock::new);
+  public final @NotNull Block baseBlock;
 
   public ExtShapeWallBlock(@NotNull Block baseBlock, Settings settings) {
-    super(baseBlock, settings);
+    super(settings);
+    this.baseBlock = baseBlock;
   }
 
   @Override
   public @NotNull Block getBaseBlock() {
-    assert baseBlock != null;
     return baseBlock;
   }
 
@@ -53,7 +54,7 @@ public class ExtShapeWallBlock extends BRRPWallBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    final CraftingRecipeJsonBuilder craftingRecipe = super.getCraftingRecipe();
+    final CraftingRecipeJsonBuilder craftingRecipe = RecipeProvider.getWallRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock));
     if (craftingRecipe == null) {
       return null;
     } else if (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes) {

@@ -9,11 +9,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.util.Identifier;
-import pers.solid.brrp.v1.mixin.TextureMapAccessor;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.mixin.BlockStateModelGeneratorAccessor;
 import pers.solid.extshape.mixin.BlockTexturePoolAccessor;
+import pers.solid.extshape.mixin.TextureMapAccessor;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;

@@ -32,28 +32,28 @@ public class BlockusUnusualLootTables extends UnusualLootTables {
 
   private void registerUnusualLootTables(ImmutableMap.Builder<Block, UnusualLootTables.LootTableFunction> builder) {
     builder.put(BlockusBlocks.ICE_BRICKS, dropsDoubleWithSilkTouchOrNone);
-    builder.put(BlockusBlocks.RAINBOW_GLOWSTONE, (baseBlock, shape, block, lookup) -> {
+    builder.put(BlockusBlocks.RAINBOW_GLOWSTONE, (baseBlock, shape, block, lookup, generator) -> {
       final float shapeVolume = UnusualLootTables.shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
+      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, ItemEntry.builder(Items.GLOWSTONE_DUST)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2 * shapeVolume, 4 * shapeVolume)))
               .apply(fortuneFunction(lookup))
               .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) shapeVolume, (int) (shapeVolume * 4))))),
           shape == BlockShape.SLAB ? ItemEntry.builder(Items.GLOWSTONE_DUST)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2, 4)))
               .apply(fortuneFunction(lookup))
-              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 4))) : null, lookup);
+              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(1, 4))) : null, generator);
     });
     builder.put(BlockusBlocks.BURNT_PAPER_BLOCK, dropsWithSilkTouchOrConst(Items.GUNPOWDER, 2));
-    builder.put(BlockusBlocks.NETHER_STAR_BLOCK, (baseBlock, shape, block, lookup) -> {
+    builder.put(BlockusBlocks.NETHER_STAR_BLOCK, (baseBlock, shape, block, lookup, generator) -> {
       final float shapeVolume = UnusualLootTables.shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.NETHER_STAR)
+      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, ItemEntry.builder(Items.NETHER_STAR)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(8.0F * shapeVolume, 9.0F * shapeVolume)))
               .apply(ApplyBonusLootFunction.uniformBonusCount(fortune(lookup), 2))
               .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create((int) (8 * shapeVolume), (int) (9 * shapeVolume))))),
-          shape == BlockShape.SLAB ? generatorOf(lookup).applyExplosionDecay(block, ItemEntry.builder(Items.NETHER_STAR)
+          shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, ItemEntry.builder(Items.NETHER_STAR)
               .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(8, 9)))
               .apply(ApplyBonusLootFunction.uniformBonusCount(fortune(lookup), 2))
-              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(8, 9)))) : null, lookup);
+              .apply(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(8, 9)))) : null, generator);
     });
   }
 }

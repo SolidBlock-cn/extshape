@@ -6,7 +6,6 @@ import net.minecraft.block.ButtonBlock;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
@@ -26,7 +25,6 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
         .mapColor(MapColor.CLEAR), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, ((ButtonBuilder) builder).activationSettings));
     this.shape = BlockShape.BUTTON;
     final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
-    primaryTagToAddTo = soundGroup == BlockSoundGroup.WOOD || soundGroup == BlockSoundGroup.NETHER_WOOD || soundGroup == BlockSoundGroup.BAMBOO_WOOD || soundGroup == BlockSoundGroup.CHERRY_WOOD ? BlockTags.WOODEN_BUTTONS : BlockTags.BUTTONS;
     this.activationSettings = activationSettings;
   }
 
