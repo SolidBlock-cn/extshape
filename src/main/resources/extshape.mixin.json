@@ -9,6 +9,8 @@
     "AxeItemMixin",
     "BlockAccessor",
     "BlockFamiliesAccessor",
+    "BlockStateModelGeneratorAccessor",
+    "BlockTexturePoolAccessor",
     "ButtonBlockAccessor",
     "DisplayContextMixin",
     "FenceGateAccessor",

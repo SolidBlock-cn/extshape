@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.Oxidizable;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.generator.BRRPFenceBlock;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的栅栏方块。
@@ -74,6 +76,11 @@ public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVarian
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.FENCE;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).fence(this);
   }
 
   @SuppressWarnings("unchecked")

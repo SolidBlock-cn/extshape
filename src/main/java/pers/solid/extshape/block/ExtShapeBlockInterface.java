@@ -5,10 +5,14 @@ import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.loot.LootTable;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
@@ -19,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.rrp.RecipeGroupRegistry;
 
 /**
@@ -71,6 +76,22 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
   }
 
   @Override
+  default LootTable.Builder getLootTable(BlockLootTableGenerator blockLootTableGenerator) {
+    return BlockResourceGenerator.super.getLootTable(blockLootTableGenerator);
+  }
+
+  @Override
+  @NotNull
+  default Identifier getStonecuttingRecipeId() {
+    return BlockResourceGenerator.super.getStonecuttingRecipeId();
+  }
+
+  @Override
+  default CraftingRecipeJsonBuilder getCraftingRecipe() {
+    return BlockResourceGenerator.super.getCraftingRecipe();
+  }
+
+  @Override
   default boolean shouldWriteStonecuttingRecipe() {
     return (this instanceof Block && STONECUTTABLE_BLOCKS.contains(this)) || isStoneCut(getBaseBlock());
   }
@@ -105,11 +126,7 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
 
   default StonecuttingRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount) {
     final Block baseBlock = getBaseBlock();
-    if (baseBlock == null) {
-      return null;
-    } else {
-      return StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
-    }
+    return StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
   }
 
   /**
@@ -177,6 +194,21 @@ public interface ExtShapeBlockInterface extends BlockResourceGenerator {
       return RecipeCategory.REDSTONE;
     } else {
       return null;
+    }
+  }
+
+  void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator);
+
+  default void registerRecipes(RecipeExporter exporter) {
+    final CraftingRecipeJsonBuilder craftingRecipe = getCraftingRecipe();
+    if (craftingRecipe != null) {
+      craftingRecipe.offerTo(exporter);
+    }
+    if (shouldWriteStonecuttingRecipe()) {
+      final StonecuttingRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe();
+      if (stonecuttingRecipe != null) {
+        stonecuttingRecipe.offerTo(exporter, getStonecuttingRecipeId());
+      }
     }
   }
 }

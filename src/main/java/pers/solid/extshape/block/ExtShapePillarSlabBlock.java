@@ -10,10 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.enums.SlabType;
-import net.minecraft.data.client.BlockStateSupplier;
-import net.minecraft.data.client.BlockStateVariant;
-import net.minecraft.data.client.BlockStateVariantMap;
-import net.minecraft.data.client.VariantsBlockStateSupplier;
+import net.minecraft.data.client.*;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -26,6 +23,8 @@ import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;
@@ -115,5 +114,10 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
   @Override
   public MapCodec<? extends ExtShapePillarSlabBlock> getCodec() {
     return CODEC;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerPillarSlab(this, baseBlock, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator, BASE_BLOCKS_WITH_HORIZONTAL_COLUMN.contains(baseBlock));
   }
 }

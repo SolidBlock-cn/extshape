@@ -9,6 +9,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
@@ -17,7 +18,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
@@ -171,23 +171,23 @@ public final class CopperManager {
     };
   }
 
-  public static void generateWaxRecipes(RuntimeResourcePack pack) {
+  public static void generateWaxRecipes(RecipeExporter exporter) {
     Predicate<Block> predicate = Predicates.in(ExtShapeBlocks.getBlocks());
-    generateWaxRecipes(pack, COPPER_BLOCKS, WAXED_COPPER_BLOCKS, predicate);
-    generateWaxRecipes(pack, CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS, predicate);
+    generateWaxRecipes(exporter, COPPER_BLOCKS, WAXED_COPPER_BLOCKS, predicate);
+    generateWaxRecipes(exporter, CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS, predicate);
   }
 
-  private static void generateWaxRecipes(RuntimeResourcePack pack, List<Block> unwaxedBlocks, List<Block> waxedBlocks, Predicate<Block> blockPredicate) {
+  private static void generateWaxRecipes(RecipeExporter exporter, List<Block> unwaxedBlocks, List<Block> waxedBlocks, Predicate<Block> blockPredicate) {
     Preconditions.checkArgument(unwaxedBlocks.size() == waxedBlocks.size(), "unwaxedBlocks and waxedBlocks must be of same size!");
 
     for (int i = 0; i < unwaxedBlocks.size(); i++) {
       final Block unwaxedBaseBlock = unwaxedBlocks.get(i);
       final Block waxedBaseBlock = waxedBlocks.get(i);
-      generateWaxRecipesForShapes(pack, unwaxedBaseBlock, waxedBaseBlock, blockPredicate);
+      generateWaxRecipesForShapes(exporter, unwaxedBaseBlock, waxedBaseBlock, blockPredicate);
     }
   }
 
-  private static void generateWaxRecipesForShapes(RuntimeResourcePack pack, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
+  private static void generateWaxRecipesForShapes(RecipeExporter exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
     for (BlockShape shape : BlockShape.values()) {
       final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
       final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
@@ -197,7 +197,7 @@ public final class CopperManager {
             .input(Items.HONEYCOMB)
             .group(RecipeProvider.getItemPath(waxed))
             .criterion(RecipeProvider.hasItem(unwaxed), RecipeProvider.conditionsFromItem(unwaxed));
-        pack.addRecipeAndAdvancement(Identifier.of(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeProvider.convertBetween(waxed, Items.HONEYCOMB)), recipe);
+        recipe.offerTo(exporter, Identifier.of(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeProvider.convertBetween(waxed, Items.HONEYCOMB)));
       }
     }
   }

@@ -34,6 +34,7 @@ import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.generator.BRRPSlabBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的台阶方块。
@@ -90,6 +91,11 @@ public class ExtShapeSlabBlock extends BRRPSlabBlock implements ExtShapeVariantB
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.SLAB;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).slab(this);
   }
 
   @Override

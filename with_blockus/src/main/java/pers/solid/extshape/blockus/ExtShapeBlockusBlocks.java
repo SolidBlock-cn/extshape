@@ -8,6 +8,7 @@ import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
+import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -32,6 +33,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
@@ -48,18 +50,26 @@ import java.util.function.Function;
 import static pers.solid.extshape.blockus.ExtShapeBlockusTags.ofBlockAndItem;
 
 public final class ExtShapeBlockusBlocks {
-  static final ObjectSet<Block> BLOCKUS_BLOCKS = new ObjectLinkedOpenHashSet<>();
-  static final ObjectSet<Block> BLOCKUS_BASE_BLOCKS = new ObjectLinkedOpenHashSet<>();
+
+  public static final @UnmodifiableView ObjectSet<Block> BLOCKUS_BLOCKS;
+  public static final @UnmodifiableView ObjectSet<Block> BLOCKUS_BASE_BLOCKS;
+
   private static final BlocksBuilderFactory FACTORY = Util.make(new BlocksBuilderFactory(), blocksBuilderFactory -> {
     blocksBuilderFactory.defaultNamespace = ExtShapeBlockus.NAMESPACE;
-    blocksBuilderFactory.instanceCollection = BLOCKUS_BLOCKS;
-    blocksBuilderFactory.baseBlockCollection = BLOCKUS_BASE_BLOCKS;
     blocksBuilderFactory.tagPreparations = ExtShapeBlockusTags.TAG_PREPARATIONS;
   });
 
   private static boolean markStoneCuttableWhenCreating = false;
 
   static {
+    final ObjectSet<Block> blocks = new ObjectLinkedOpenHashSet<>();
+    final ObjectSet<Block> baseBlocks = new ObjectLinkedOpenHashSet<>();
+    BLOCKUS_BLOCKS = ObjectSets.unmodifiable(blocks);
+    BLOCKUS_BASE_BLOCKS = ObjectSets.unmodifiable(baseBlocks);
+
+    FACTORY.instanceCollection = blocks;
+    FACTORY.baseBlockCollection = baseBlocks;
+
     BlockusBlockBiMaps.importFromBlockus();
     markStoneCuttableWhenCreating = true;
     create(BlockusBlocks.STONE_TILES).addExtraTag(BlockusBlockTags.STONE_BLOCKS).setFenceSettings(FenceSettings.STONE).without(BlockShape.BUTTON).build();
@@ -211,6 +221,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.SNOW_BRICKS).addExtraTag(BlockusBlockTags.SNOW_BRICKS).setFenceSettings(FenceSettings.STONE).build();
 
     create(BlockusBlocks.ICE_BRICKS).setActivationSettings(ActivationSettings.stone(ExtShapeBlockusBlockTypes.ICE_BLOCK_SET_TYPE)).setFenceSettings(new FenceSettings(Items.ICE, ExtShapeBlockusBlockTypes.ICE_WOOD_TYPE)).addExtraTag(BlockusBlockTags.ICE_BRICKS).without(BlockShape.BUTTON).build();
+
     create(BlockusBlocks.OBSIDIAN_BRICKS).addExtraTag(BlockusBlockTags.OBSIDIAN).setActivationSettings(ActivationSettings.HARD).setFenceSettings(FenceSettings.STONE).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.SMALL_OBSIDIAN_BRICKS).addExtraTag(BlockusBlockTags.OBSIDIAN).setActivationSettings(ActivationSettings.HARD).setFenceSettings(FenceSettings.STONE).without(BlockShape.BUTTON).build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING).markStoneCuttable().addExtraTag(BlockusBlockTags.OBSIDIAN).setActivationSettings(ActivationSettings.HARD));
@@ -244,7 +255,6 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.CHISELED_PRISMARINE).addExtraTag(BlockusBlockTags.PRISMARINE_BLOCKS).setStoneFenceSettings(Items.PRISMARINE_SHARD).without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).build();
     buildCircularPavingBlock(create(BlockusBlocks.PRISMARINE_CIRCULAR_PAVING).addExtraTag(BlockusBlockTags.PRISMARINE_BLOCKS));
     create(BlockusBlocks.CHISELED_DARK_PRISMARINE).addExtraTag(BlockusBlockTags.PRISMARINE_BLOCKS).setStoneFenceSettings(Items.PRISMARINE_SHARD).without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).build();
-
     create(BlockusBlocks.PRISMARINE_TILES).addExtraTag(BlockusBlockTags.PRISMARINE_BLOCKS).setStoneFenceSettings(Items.PRISMARINE_SHARD).without(BlockShape.BUTTON).build();
 
     create(BlockusBlocks.LARGE_BRICKS).addExtraTag(BlockusBlockTags.BRICKS_BLOCKS).setStoneFenceSettings(Items.BRICK).without(BlockShape.BUTTON).build();
@@ -266,7 +276,6 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.ROUGH_SOUL_SANDSTONE).addExtraTag(BlockusBlockTags.SOUL_SANDSTONE).setStoneFenceSettings(Items.SOUL_SAND).build();
     create(BlockusBlocks.SOUL_SANDSTONE_BRICKS).addExtraTag(BlockusBlockTags.SOUL_SANDSTONE).setStoneFenceSettings(Items.SOUL_SAND).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS).addExtraTag(BlockusBlockTags.SOUL_SANDSTONE).setStoneFenceSettings(Items.SOUL_SAND).without(BlockShape.BUTTON).build();
-
     create(BlockusBlocks.SMOOTH_SOUL_SANDSTONE).setStoneFenceSettings(Items.SOUL_SAND).build();
     create(BlockusBlocks.CUT_SOUL_SANDSTONE).setStoneFenceSettings(Items.SOUL_SAND).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.CHISELED_SOUL_SANDSTONE).setStoneFenceSettings(Items.SOUL_SAND).without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE).build();
@@ -274,7 +283,9 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.RAINBOW_BLOCK).addExtraTag(BlockusBlockTags.RAINBOW_BLOCKS).setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem()).setPillar().build();
     create(BlockusBlocks.RAINBOW_BRICKS).addExtraTag(BlockusBlockTags.RAINBOW_BLOCKS).setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem()).build();
     create(BlockusBlocks.RAINBOW_GLOWSTONE).setFenceSettings(new FenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem(), ExtShapeBlockTypes.GLOWSTONE_WOOD_TYPE)).setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.GLOWSTONE_BLOCK_SET_TYPE)).build();
+
     create(BlockusBlocks.HONEYCOMB_BRICKS).addExtraTag(BlockusBlockTags.HONEYCOMB_BLOCKS).setStoneFenceSettings(Items.HONEYCOMB).without(BlockShape.BUTTON).build();
+
     create(BlockusBlocks.PURPUR_BRICKS).addExtraTag(BlockusBlockTags.PURPUR_BLOCKS).setStoneFenceSettings(Items.PURPUR_BLOCK).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.SMALL_PURPUR_BRICKS).addExtraTag(BlockusBlockTags.PURPUR_BLOCKS).setStoneFenceSettings(Items.PURPUR_BLOCK).without(BlockShape.BUTTON).build();
     create(BlockusBlocks.POLISHED_PURPUR).addExtraTag(BlockusBlockTags.PURPUR_BLOCKS).setStoneFenceSettings(Items.PURPUR_BLOCK).build();

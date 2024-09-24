@@ -40,6 +40,7 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
 
@@ -154,6 +155,11 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.PRESSURE_PLATE;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).pressurePlate(this);
   }
 
   @SuppressWarnings("unchecked")

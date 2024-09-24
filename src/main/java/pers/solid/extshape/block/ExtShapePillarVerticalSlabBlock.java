@@ -20,6 +20,8 @@ import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
@@ -93,6 +95,11 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
   @Override
   protected MapCodec<? extends ExtShapePillarVerticalSlabBlock> getCodec() {
     return CODEC;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerPillarVerticalSlab(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator, BlockCollections.LOGS.contains(baseBlock) || BlockCollections.STRIPPED_LOGS.contains(baseBlock));
   }
 }
 

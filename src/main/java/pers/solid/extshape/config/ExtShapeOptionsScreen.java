@@ -15,7 +15,6 @@ import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
-import net.minecraft.resource.ResourceType;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
@@ -23,7 +22,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import org.apache.commons.lang3.StringUtils;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.rrp.ExtShapeRRP;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -249,8 +247,6 @@ public class ExtShapeOptionsScreen extends Screen {
             suppressedDataWarning = true;
             close();
             if (t) {
-              ExtShapeRRP.PACK.clearResources(ResourceType.SERVER_DATA);
-              ExtShapeRRP.generateServerData(ExtShapeRRP.PACK);
               client.inGameHud.getChatHud().addMessage(
                   Text.translatable("options.dataChanged.finish",
                       Text.literal("/reload").styled(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/reload"))).formatted(Formatting.GRAY)));

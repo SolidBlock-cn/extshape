@@ -11,7 +11,6 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.extshape.rrp.CrossShapeDataGeneration;
 import pers.solid.extshape.util.BlockCollections;
 
@@ -32,8 +31,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     INSTANCE = builder.build();
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RuntimeResourcePack pack) {
-    super(baseBlock, defaultNamespace, pack);
+  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeExporter exporter) {
+    super(baseBlock, defaultNamespace, exporter);
   }
 
   @Override

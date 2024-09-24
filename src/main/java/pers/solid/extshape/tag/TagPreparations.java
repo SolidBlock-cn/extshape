@@ -4,13 +4,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import org.jetbrains.annotations.Contract;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.tag.IdentifiedTagBuilder;
 
 import java.util.HashMap;
@@ -18,12 +18,12 @@ import java.util.Map;
 
 /**
  * <p>此类用于记录一个模组需要的方块和物品标签的内容，从而在后续进行数据生成。你可以通过此类的各种 {@code put} 方法来添加，也可以在构建方块对象时，通过 {@link pers.solid.extshape.builder.AbstractBlockBuilder#addExtraTag(TagKey)} 等方式添加。
- * <p>这些标签在添加之后，并不会直接被游戏识别。因此，此类只是在记录，你可以通过 {@link #write(RuntimeResourcePack)} 方法将其写入到运行时资源包中。
+ * <p>这些标签在添加之后，并不会直接被游戏识别。
  */
 public class TagPreparations {
-  private final Multimap<TagKey<Block>, Object> blockTags = LinkedHashMultimap.create();
-  private final Multimap<TagKey<Item>, Object> itemTags = LinkedHashMultimap.create();
-  private final Map<TagKey<Block>, TagKey<Item>> blockTagsToItemTags = new HashMap<>();
+  public final Multimap<TagKey<Block>, Object> blockTags = LinkedHashMultimap.create();
+  public final Multimap<TagKey<Item>, Object> itemTags = LinkedHashMultimap.create();
+  public final Map<TagKey<Block>, TagKey<Item>> blockTagsToItemTags = new HashMap<>();
 
   @SuppressWarnings("unchecked")
   @Contract(mutates = "this")
@@ -69,7 +69,7 @@ public class TagPreparations {
    * 将本对象记录的所有标签写入到运行时资源包中。
    */
   @Contract(mutates = "param1")
-  public void write(RuntimeResourcePack pack) {
+  public void write(FabricTagProvider.BlockTagProvider blockTagProvider, FabricTagProvider.ItemTagProvider itemTagProvider) {
     blockTags.asMap().forEach((tagKey, objects) -> {
       if (objects.isEmpty()) return;
       final IdentifiedTagBuilder<Block> identifiedTag = IdentifiedTagBuilder.createBlock(tagKey);
@@ -80,7 +80,7 @@ public class TagPreparations {
           identifiedTag.addTag(tagKey1.id());
         }
       }
-      pack.addTag(identifiedTag);
+//      pack.addTag(identifiedTag);
       if (blockTagsToItemTags.containsKey(tagKey)) {
         final TagKey<Item> itemTag = blockTagsToItemTags.get(tagKey);
         final IdentifiedTagBuilder<Item> itemIdentifiedTag = IdentifiedTagBuilder.createItem(itemTag);
@@ -94,7 +94,7 @@ public class TagPreparations {
             itemIdentifiedTag.addTag(tagKey1.id());
           }
         }
-        pack.addTag(itemIdentifiedTag);
+//        pack.addTag(itemIdentifiedTag);
       }
     });
     itemTags.asMap().forEach((tagKey, objects) -> {
@@ -107,7 +107,7 @@ public class TagPreparations {
           identifiedTag.addTag(tagKey1.id());
         }
       }
-      pack.addTag(identifiedTag);
+//      pack.addTag(identifiedTag);
     });
   }
 

@@ -20,6 +20,8 @@ import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
@@ -89,5 +91,10 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
     variants.register(SlabType.TOP, BlockStateVariant.create().put(VariantSettings.MODEL, id.brrp_suffixed("_top")));
     variants.register(SlabType.DOUBLE, BlockStateVariant.create().put(VariantSettings.MODEL, baseBlock != null ? baseId : id.brrp_suffixed("_double")));
     return VariantsBlockStateSupplier.create(this).coordinate(variants).coordinate(variants2);
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerCircularPavingSlab(this, baseBlock, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
   }
 }

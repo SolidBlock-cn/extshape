@@ -1,5 +1,14 @@
 # 更新日志
 
+### 2.3.0
+
+- 模组不再依赖 Better Runtime Resource Pack（更好的运行时资源包）模组。
+- 修复的原木按钮没有 `#buttons` 标签的问题。
+- 修复一些木质的栅栏门没有 `#fence_gates` 标签的问题。
+- 南瓜和西瓜的按钮不再拥有 `#wooden_buttons` 标签。
+- 南瓜和西瓜的压力板不再拥有 `#wooden_pressure_plates` 标签。
+- 修复 `#pressure_plates` 没有对应物品标签的问题。
+
 ### 2.2.2
 
 - 适应新的 BRRP API。

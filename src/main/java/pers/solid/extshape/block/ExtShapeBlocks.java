@@ -22,7 +22,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BRRPCubeBlock;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.*;
@@ -58,16 +57,30 @@ public final class ExtShapeBlocks {
   }
 
   /**
-   * 存储本模组生成的方块的基础方块（包含原版方块）。该集合的内容是在 {@link BlocksBuilderFactory} 中添加的，其他模组使用的基础方块不应该添加到这个集合中。{@link pers.solid.extshape.rrp.ExtShapeRRP#generateServerData(RuntimeResourcePack)} 会使用这个集合，因为它不应该为使用了本模组接口的其他模组生成数据。
+   * 检测特定方块是否为本模组中的方块。
+   */
+  public static boolean contains(Block block) {
+    return BLOCKS.contains(block);
+  }
+
+  /**
+   * 存储本模组生成的方块的基础方块（包含原版方块）。该集合的内容是在 {@link BlocksBuilderFactory} 中添加的，其他模组使用的基础方块不应该添加到这个集合中。
    */
   private static final ObjectSet<Block> BASE_BLOCKS = new ObjectLinkedOpenHashSet<>();
-
   /**
    * 获取本模组使用的所有基础方块（含原版方块），返回的集合是不可变集合。
    */
   public static @UnmodifiableView ObjectSet<Block> getBaseBlocks() {
     return ObjectSets.unmodifiable(BASE_BLOCKS);
   }
+
+  /**
+   * 检测特定方块是否为本模组的基本方块。
+   */
+  public static boolean containsBaseBlock(Block baseBlock) {
+    return BASE_BLOCKS.contains(baseBlock);
+  }
+
 
   /**
    * 用于生成本模组的方块。由于仅限本模组，故不对外公开。
@@ -353,7 +366,7 @@ public final class ExtShapeBlocks {
     for (int i = 0; i < BlockCollections.DYED_TAGS.size(); i++) {
       FACTORY.tagPreparations.setBlockTagWithItem(BlockCollections.DYED_TAGS.get(i), BlockCollections.DYED_ITEM_TAGS.get(i));
     }
-    // 用于将所有染色方块加入对应颜色的标签中，此 iterator 可以多次循环。。
+    // 用于将所有染色方块加入对应颜色的标签中，此 iterator 可以多次循环。
     final Iterator<TagKey<Block>> dyedTags = Iterators.cycle(BlockCollections.DYED_TAGS);
 
     // 羊毛。
@@ -660,7 +673,7 @@ public final class ExtShapeBlocks {
         .build();
 
     BASE_BLOCKS.add(SMOOTH_STONE_DOUBLE_SLAB);
-    ExtShapeVariantBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(SMOOTH_STONE_DOUBLE_SLAB);
+    ExtShapeBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(SMOOTH_STONE_DOUBLE_SLAB);
     BlockBiMaps.setBlockOf(BlockShape.SLAB, SMOOTH_STONE_DOUBLE_SLAB, SMOOTH_STONE_SLAB);
 
     // 紫珀块。
@@ -688,7 +701,8 @@ public final class ExtShapeBlocks {
 
     // 带釉陶瓦只注册台阶。
     for (final Block block : BlockCollections.GLAZED_TERRACOTTA) {
-      ExtShapeVariantBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(block);
+      BASE_BLOCKS.add(block);
+      ExtShapeBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(block);
       final SlabBlock slabBlock = FACTORY.modify(new SlabBuilder(block))
           .setInstanceSupplier(builder -> new GlazedTerracottaSlabBlock(builder.baseBlock, AbstractBlock.Settings.copy(builder.baseBlock)))
           .setPrimaryTagToAddTo(ExtShapeTags.GLAZED_TERRACOTTA_SLABS)

@@ -31,6 +31,8 @@ import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
 /**
@@ -94,6 +96,11 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.VERTICAL_STAIRS;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerVerticalStairs(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
   }
 
   @Override

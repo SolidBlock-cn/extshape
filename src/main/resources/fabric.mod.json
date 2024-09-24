@@ -24,6 +24,9 @@
     ],
     "modmenu": [
       "pers.solid.extshape.config.ExtShapeModMenu"
+    ],
+    "fabric-datagen": [
+      "pers.solid.extshape.data.ExtShapeDataGenerator"
     ]
   },
   "mixins": [

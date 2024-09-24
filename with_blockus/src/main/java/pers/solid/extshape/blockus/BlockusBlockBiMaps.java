@@ -4,7 +4,6 @@ import com.brand.blockus.datagen.family.BlockusFamilies;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
-import com.brand.blockus.registry.content.bundles.WoodBundle;
 import com.brand.blockus.registry.content.bundles.WoolBundle;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -51,26 +50,6 @@ public final class BlockusBlockBiMaps {
       }
       if (bsswTypes.wall != null) {
         BlockBiMaps.setBlockOf(BlockShape.WALL, bsswTypes.block, bsswTypes.wall);
-      }
-    });
-    WoodBundle.values().forEach(woodBundle -> {
-      if (woodBundle.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woodBundle.planks, woodBundle.stairs);
-      }
-      if (woodBundle.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, woodBundle.planks, woodBundle.slab);
-      }
-      if (woodBundle.fence != null) {
-        BlockBiMaps.setBlockOf(BlockShape.FENCE, woodBundle.planks, woodBundle.fence);
-      }
-      if (woodBundle.fence_gate != null) {
-        BlockBiMaps.setBlockOf(BlockShape.FENCE_GATE, woodBundle.planks, woodBundle.fence_gate);
-      }
-      if (woodBundle.button != null) {
-        BlockBiMaps.setBlockOf(BlockShape.BUTTON, woodBundle.planks, woodBundle.button);
-      }
-      if (woodBundle.pressure_plate != null) {
-        BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, woodBundle.planks, woodBundle.pressure_plate);
       }
     });
     WoolBundle.values().forEach(woolTypes -> {

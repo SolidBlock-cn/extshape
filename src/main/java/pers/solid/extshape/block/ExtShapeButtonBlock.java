@@ -36,6 +36,7 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.mixin.ButtonBlockAccessor;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockCollections;
@@ -142,6 +143,11 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.BUTTON;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).button(this);
   }
 
   @Override

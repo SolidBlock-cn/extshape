@@ -31,6 +31,8 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的横条方块。
@@ -90,6 +92,11 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.QUARTER_PIECE;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerQuarterPiece(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
   }
 
   @Override

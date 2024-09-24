@@ -15,6 +15,8 @@ import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
   public static final MapCodec<ExtShapePillarUvLockedSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapePillarUvLockedSlabBlock::new);
@@ -58,5 +60,10 @@ public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
   @Override
   public MapCodec<? extends ExtShapePillarUvLockedSlabBlock> getCodec() {
     return CODEC;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerPillarUvLockedSlab(this, baseBlock, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
   }
 }

@@ -22,6 +22,8 @@ import pers.solid.brrp.v1.BRRPUtils;
 import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.extshape.ExtShape;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 带釉陶瓦台阶方块。
@@ -90,5 +92,10 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
   @Override
   public MapCodec<? extends GlazedTerracottaSlabBlock> getCodec() {
     return CODEC;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerGlazedTerracottaSlab(this, baseBlock, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
   }
 }

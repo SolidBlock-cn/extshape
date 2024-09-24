@@ -6,15 +6,18 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
+import net.minecraft.data.client.Models;
 import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
@@ -62,5 +65,12 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   @Override
   public MapCodec<PressurePlateBlock> getCodec() {
     return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    final Identifier upModelId = Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector);
+    final Identifier downModelId = Models.PRESSURE_PLATE_DOWN.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector);
+    blockStateModelGenerator.blockStateCollector.accept(((VariantsBlockStateSupplier) BlockStateModelGenerator.createPressurePlateBlockState(this, upModelId, downModelId)).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates()));
   }
 }

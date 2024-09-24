@@ -29,13 +29,15 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder;
 import pers.solid.brrp.v1.model.ModelUtils;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
  * 本模组中的竖直台阶方块。
  */
 public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtShapeVariantBlockInterface {
-  public final Block baseBlock;
   public static final MapCodec<ExtShapeVerticalSlabBlock> CODEC = BRRPUtils.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalSlabBlock::new);
+  public final Block baseBlock;
 
   public ExtShapeVerticalSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(settings);
@@ -77,6 +79,11 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.VERTICAL_SLAB;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    ExtShapeBlockStateModelGenerator.registerVerticalSlab(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
   }
 
   @Override
@@ -123,8 +130,8 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   public static class WithOxidation extends ExtShapeVerticalSlabBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
+    private final @NotNull OxidationLevel oxidationLevel;
 
     public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);

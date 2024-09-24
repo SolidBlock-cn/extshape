@@ -3,6 +3,7 @@ package pers.solid.extshape.block;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
+import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -22,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.brrp.v1.generator.BRRPFenceGateBlock;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.mixin.FenceGateAccessor;
 import pers.solid.extshape.util.FenceSettings;
 
@@ -69,6 +71,11 @@ public class ExtShapeFenceGateBlock extends BRRPFenceGateBlock implements ExtSha
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.FENCE_GATE;
+  }
+
+  @Override
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+    modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).fenceGate(this);
   }
 
   @SuppressWarnings("unchecked")

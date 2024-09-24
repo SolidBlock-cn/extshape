@@ -32,7 +32,6 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.state.property.Properties;
 import org.jetbrains.annotations.*;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
 import pers.solid.brrp.v1.generator.BlockResourceGenerator;
 import pers.solid.brrp.v1.impl.BRRPBlockLootTableGenerator;
 import pers.solid.extshape.builder.BlockShape;
@@ -42,7 +41,7 @@ import java.util.WeakHashMap;
 
 /**
  * <p>本类记录了用于本模组的不掉落方块本身的基础方块的战利品表。
- * <p>注册在 {@link #createInstance()} 中的方块，在通过 {@link ExtShapeRRP#generateServerData(RuntimeResourcePack)} 生成战利品表时，不会使用 {@link BlockResourceGenerator#getLootTable(BlockLootTableGenerator)}，而是直接使用这里面注册了的战利品表函数。
+ * <p>注册在 {@link #createInstance()} 中的方块，在生成战利品表时，不会使用 {@link BlockResourceGenerator#getLootTable(BlockLootTableGenerator)}，而是直接使用这里面注册了的战利品表函数。
  *
  * @author SolidBlock
  * @since 1.5.1

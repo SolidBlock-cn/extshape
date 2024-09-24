@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.rrp.ExtShapeRRP;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
@@ -72,7 +71,7 @@ public class ExtShape implements ModInitializer {
     registerStrippableBlocks();
     registerFuels();
 
-    ExtShapeRRP.registerRRP();
+//    ExtShapeRRP.registerRRP();
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
 
     FabricLoader.getInstance().getEntrypoints("extshape:post_initialize", ModInitializer.class).forEach(ModInitializer::onInitialize);

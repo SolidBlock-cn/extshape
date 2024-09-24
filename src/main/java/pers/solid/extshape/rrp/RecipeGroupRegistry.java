@@ -20,7 +20,7 @@ public final class RecipeGroupRegistry {
     return INSTANCE.getOrDefault(itemConvertible.asItem(), StringUtils.EMPTY);
   }
 
-  public static String setRecipeGroup(@NotNull ItemConvertible itemConvertible, @NotNull String recipeGroup) {
-    return INSTANCE.put(itemConvertible.asItem(), recipeGroup);
+  public static void setRecipeGroup(@NotNull ItemConvertible itemConvertible, @NotNull String recipeGroup) {
+    INSTANCE.put(itemConvertible.asItem(), recipeGroup);
   }
 }

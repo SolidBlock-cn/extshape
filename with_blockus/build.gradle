@@ -1,5 +1,6 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 
+apply plugin: 'maven-publish'
 apply plugin: 'net.darkhax.curseforgegradle'
 apply plugin: "com.github.breadmoirai.github-release"
 apply plugin: "com.modrinth.minotaur"
@@ -8,6 +9,7 @@ base {
 }
 version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
 group = rootProject.maven_group
+
 repositories {
     exclusiveContent {
         forRepository {
@@ -78,4 +80,10 @@ githubRelease {
 
 publish {
     dependsOn tasks.curseforge, tasks.modrinth, tasks.githubRelease
+}
+
+fabricApi {
+    configureDataGeneration() {
+        it.modId = "extshape_blockus"
+    }
 }

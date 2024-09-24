@@ -122,7 +122,7 @@ allprojects {
 
         runConfigs.configureEach {
             it.configName = "Minecraft Fabric ${it.name.capitalize()}"
-            ideConfigGenerated = project == project(':runtest')
+            ideConfigGenerated = true
 
             runDir = project.relativePath(project(':').file('run')).toString()
         }
@@ -256,5 +256,11 @@ gradle.taskGraph.whenReady { TaskExecutionGraph graph ->
             }
             println "Disabling tasks for subproject $project"
         }
+    }
+}
+
+fabricApi {
+    configureDataGeneration() {
+        it.modId = "extshape"
     }
 }

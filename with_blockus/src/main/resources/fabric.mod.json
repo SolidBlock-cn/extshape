@@ -18,6 +18,9 @@
   "entrypoints": {
     "extshape:post_initialize": [
       "pers.solid.extshape.blockus.ExtShapeBlockus"
+    ],
+    "fabric-datagen": [
+      "pers.solid.extshape.blockus.data.ExtShapeBlockusDataGenerator"
     ]
   },
   "mixins": [
