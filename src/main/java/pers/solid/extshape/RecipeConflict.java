@@ -2,7 +2,11 @@ package pers.solid.extshape;
 
 import com.google.common.collect.Iterables;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
@@ -14,16 +18,22 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
@@ -38,9 +48,14 @@ public final class RecipeConflict {
    *
    * @return 冲突的个数。
    */
-  public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, Consumer<Supplier<Text>> messageConsumer) {
+  public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, @Nullable Predicate<Identifier> filter, Consumer<Supplier<Text>> messageConsumer) {
     int numberOfConflicts = 0;
     for (RecipeEntry<?> recipeEntry : recipeManager.values()) {
+      if (filter != null) {
+        if (!filter.test(recipeEntry.id())) {
+          continue;
+        }
+      }
       final CraftingRecipeInput craftingRecipeInput;
       final Recipe<?> recipe = recipeEntry.value();
       try {
@@ -62,7 +77,7 @@ public final class RecipeConflict {
           continue;
         }
         final List<RecipeEntry<CraftingRecipe>> allMatches = recipeManager.getAllMatches(RecipeType.CRAFTING, craftingRecipeInput, world);
-        final long numberOfMatches = allMatches.stream().filter(r -> !r.value().getIngredients().isEmpty()).count();
+        final long numberOfMatches = allMatches.stream().filter(entry -> filter == null || filter.test(entry.id())).filter(r -> !r.value().getIngredients().isEmpty()).count();
         // 有些特殊合成表的材料是空的，在统计匹配次数时，应当予以忽略。
         if (numberOfMatches == 0) {
           for (int i = 0; i < 9; i++) {
@@ -91,13 +106,39 @@ public final class RecipeConflict {
   public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
     dispatcher.register(CommandManager.literal("extshape:check-conflict")
         .requires(source -> source.hasPermissionLevel(4))
-        .executes(context -> {
-          final ServerCommandSource source = context.getSource();
-          source.sendFeedback(() -> Text.translatable("message.extshape.recipe_conflict.start"), true);
-          final ServerWorld world = source.getWorld();
-          final ServerPlayerEntity player = source.getPlayerOrThrow();
-          return checkConflict(world.getRecipeManager(), world, player, text -> source.sendFeedback(text, true));
-        }));
+        .executes(context -> executeCheckConflict(context, null))
+        .then(CommandManager.argument("namespace", StringArgumentType.greedyString())
+            .suggests((context, builder) -> {
+              final Matcher matcher = SPLIT_PATTERN.matcher(builder.getRemaining());
+              int offset = 0;
+              while (matcher.find()) {
+                offset = matcher.end();
+              }
+              return CommandSource.suggestMatching(context.getSource().getRecipeIds().map(Identifier::getNamespace).distinct(), builder.createOffset(builder.getStart() + offset));
+            })
+            .executes(context -> executeCheckConflict(context, StringArgumentType.getString(context, "namespace")))));
+  }
+
+  private static final Pattern SPLIT_PATTERN = Pattern.compile("\\s+");
+
+  private static int executeCheckConflict(CommandContext<ServerCommandSource> context, @Nullable String namespace) throws CommandSyntaxException {
+    final ServerCommandSource source = context.getSource();
+    source.sendFeedback(() -> Text.translatable("message.extshape.recipe_conflict.start"), true);
+    final ServerWorld world = source.getWorld();
+    final ServerPlayerEntity player = source.getPlayerOrThrow();
+    final Predicate<Identifier> predicate;
+    if (namespace == null) {
+      predicate = null;
+    } else {
+      final String[] split = SPLIT_PATTERN.split(namespace);
+      if (split.length == 1) {
+        final String s = split[0];
+        predicate = identifier -> Identifier.DEFAULT_NAMESPACE.equals(identifier.getNamespace()) || s.equals(identifier.getNamespace());
+      } else {
+        predicate = identifier -> ArrayUtils.contains(split, identifier.getNamespace());
+      }
+    }
+    return checkConflict(world.getRecipeManager(), world, player, predicate, text -> source.sendFeedback(text, true));
   }
 
 }

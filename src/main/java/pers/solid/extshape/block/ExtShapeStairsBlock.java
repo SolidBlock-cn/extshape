@@ -1,9 +1,10 @@
 package pers.solid.extshape.block;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Oxidizable;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
@@ -21,8 +22,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -33,32 +32,8 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  */
 public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeStairsBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeStairsBlock::new);
-  /**
-   * 此集合内的所有方块不能合成楼梯和台阶。此举是为了避免合成表冲突。
-   *
-   * @since 1.5.2
-   * @since 2.2.0 由 {@link ExtShapeVariantBlockInterface} 移到这里。
-   */
-  @ApiStatus.AvailableSince("1.5.2")
-  private static final ImmutableCollection<Block> NOT_TO_CRAFT_STAIRS_OR_SLABS = ImmutableSet.of(
-      Blocks.CHISELED_SANDSTONE,
-      Blocks.CHISELED_RED_SANDSTONE,
-      Blocks.CHISELED_QUARTZ_BLOCK,
-      Blocks.CUT_SANDSTONE,
-      Blocks.CUT_RED_SANDSTONE
-  );
-  public final @NotNull Block baseBlock;
 
-  /**
-   * 基础方块是否不应该创建楼梯和台阶的配方。
-   *
-   * @param baseBlock 基础方块。
-   * @return 若为 {@code true}，则该方块的楼梯和台阶（如有）不会生成配方。
-   */
-  @Contract(pure = true)
-  public static boolean shouldNotCraftStairsOrSlabs(Block baseBlock) {
-    return NOT_TO_CRAFT_STAIRS_OR_SLABS.contains(baseBlock);
-  }
+  public final @NotNull Block baseBlock;
 
   public ExtShapeStairsBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock.getDefaultState(), settings);
@@ -77,11 +52,10 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    if (shouldNotCraftStairsOrSlabs(baseBlock)) {
-      return null;
-    }
-    final CraftingRecipeJsonBuilder craftingRecipe = RecipeProvider.createStairsRecipe(this, Ingredient.ofItems(baseBlock)); // recipeCategory 一定量 building_blocks，所以没有问题
-    return craftingRecipe == null ? null : craftingRecipe.group(getRecipeGroup());
+    // recipeCategory 一定量 building_blocks，所以没有问题
+    return RecipeProvider.createStairsRecipe(this, Ingredient.ofItems(baseBlock))
+        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+        .group(getRecipeGroup());
   }
 
   @Override

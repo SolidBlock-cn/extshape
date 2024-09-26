@@ -59,7 +59,7 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    return (baseBlock == null || secondIngredient == null) ? null : ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 2)
+    return secondIngredient == null ? null : ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 2)
         .pattern("W#W").pattern("W#W")
         .group(getRecipeGroup())
         .input('W', baseBlock)

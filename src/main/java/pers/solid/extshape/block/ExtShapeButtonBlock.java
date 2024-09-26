@@ -1,7 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.google.common.base.Suppliers;
-import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -23,42 +21,17 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.mixin.ButtonBlockAccessor;
 import pers.solid.extshape.util.ActivationSettings;
-import pers.solid.extshape.util.BlockCollections;
-
-import java.util.Collection;
-import java.util.function.Supplier;
 
 /**
  * 本模组中的按钮方块。按钮的激活时长可能会是特制的。
  */
 public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantBlockInterface {
-  /**
-   * 该集合内的方块将不会生成按钮配方，以解决合成配方的冲突。
-   *
-   * @see pers.solid.extshape.config.ExtShapeConfig#avoidSomeButtonRecipes
-   */
-  private static final Supplier<@Unmodifiable Collection<Block>> REFUSE_RECIPES = Suppliers.memoize(() -> ImmutableSet.<Block>builder().add(Blocks.EMERALD_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.COAL_BLOCK, Blocks.LAPIS_BLOCK, Blocks.NETHERITE_BLOCK, Blocks.PUMPKIN, Blocks.COPPER_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.RAW_COPPER_BLOCK, Blocks.RAW_IRON_BLOCK, Blocks.WAXED_COPPER_BLOCK, Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK).addAll(BlockCollections.LOGS).addAll(BlockCollections.WOODS).addAll(BlockCollections.HYPHAES).addAll(BlockCollections.STEMS).addAll(BlockCollections.STRIPPED_LOGS).addAll(BlockCollections.STRIPPED_WOODS).addAll(BlockCollections.STRIPPED_HYPHAES).addAll(BlockCollections.STRIPPED_STEMS).build());
-
-  /**
-   * 该基础方块的方块是否应该避免生成按钮配方，以避免合成表冲突。
-   *
-   * @param baseBlock 基础方块。
-   * @return 如果为 {@code true}，则表示该基础方块的按钮不应该有合成配方。
-   */
-  @Contract(pure = true)
-  public static boolean shouldRefuseRecipe(@NotNull Block baseBlock) {
-    return REFUSE_RECIPES.get().contains(baseBlock);
-  }
-
   public static final MapCodec<ExtShapeButtonBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getBlockSetType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getPressTicks())).apply(instance, ExtShapeButtonBlock::new));
 
   public final @NotNull Block baseBlock;
@@ -85,10 +58,6 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    final Block baseBlock = getBaseBlock();
-    if (shouldRefuseRecipe(baseBlock) && ExtShapeConfig.CURRENT_CONFIG.avoidSomeButtonRecipes) {
-      return null;
-    }
     return ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this)
         .input(baseBlock)
         .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))

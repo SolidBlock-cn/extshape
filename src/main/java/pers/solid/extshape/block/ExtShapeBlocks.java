@@ -663,7 +663,8 @@ public final class ExtShapeBlocks {
         .build();
 
     // 铜块。
-    new CopperManager(FACTORY).registerBlocks();
+    CopperManager.COPPER.registerBlocks(FACTORY);
+    CopperManager.CUT_COPPER.registerBlocks(FACTORY);
 
     // 滴水石、苔藓。
     FACTORY.createAllShapes(DRIPSTONE_BLOCK)

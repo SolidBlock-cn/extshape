@@ -1,11 +1,13 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Oxidizable;
+import net.minecraft.block.SlabBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -23,7 +25,6 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 
 /**
@@ -51,16 +52,14 @@ public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlock
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    if (ExtShapeStairsBlock.shouldNotCraftStairsOrSlabs(baseBlock)) {
-      return null;
-    }
-    final CraftingRecipeJsonBuilder craftingRecipe = (baseBlock == Blocks.SNOW_BLOCK && ExtShapeConfig.CURRENT_CONFIG.specialSnowSlabCrafting) ? ShapelessRecipeJsonBuilder.create(getRecipeCategory(), this).input(Ingredient.ofItems(Blocks.SNOW)).criterion("has_snow", RecipeProvider.conditionsFromItem(Blocks.SNOW)) : RecipeProvider.createSlabRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock));
-    return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
+    return RecipeProvider.createSlabRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock))
+        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+        .group(getRecipeGroup());
   }
 
   @Override
   public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
-    return baseBlock == null ? null : simpleStoneCuttingRecipe(2);
+    return simpleStoneCuttingRecipe(2);
   }
 
   @Override

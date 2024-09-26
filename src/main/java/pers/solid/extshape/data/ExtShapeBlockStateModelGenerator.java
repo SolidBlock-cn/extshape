@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.data.client.*;
-import net.minecraft.item.HoneycombItem;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import pers.solid.extshape.block.*;
@@ -239,8 +239,9 @@ public final class ExtShapeBlockStateModelGenerator {
    * 对于普通方块，正常生成并获取其模型。对于特殊的涂蜡的方块，由于此时不需要生成涂蜡方块模型，只需要使用未涂蜡模型的 id 即可。
    */
   private static Identifier getUnwaxedModelId(Model model, Block block, TextureMap textures, BiConsumer<Identifier, Supplier<JsonElement>> modelCollector) {
-    if (HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get().containsKey(block)) {
-      return model.getBlockSubModelId(HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get().get(block));
+    final Identifier id = Registries.BLOCK.getId(block);
+    if (id.getPath().startsWith("waxed_")) {
+      return model.getBlockSubModelId(Registries.BLOCK.getOrEmpty(id.withPath(s -> s.replace("waxed_", ""))).orElseThrow());
     }
     return model.upload(block, textures, modelCollector);
   }

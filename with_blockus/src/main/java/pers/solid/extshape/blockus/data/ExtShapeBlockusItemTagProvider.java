@@ -29,6 +29,8 @@ public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
     }
 
     this.copy(BlockusBlockTags.ALL_PATTERNED_WOOLS, BlockusItemTags.ALL_PATTERNED_WOOLS);
+    copyWithSameId(ExtShapeTags.LOG_BLOCKS);
+    copyWithSameId(ExtShapeTags.WOOLEN_BLOCKS);
 
     addForShapes(ItemTags.NON_FLAMMABLE_WOOD,
         BlockusBlocks.CHARRED.planks,

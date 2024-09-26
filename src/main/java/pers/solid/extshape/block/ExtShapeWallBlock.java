@@ -25,9 +25,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.data.ExtShapeModelProvider;
-import pers.solid.extshape.util.BlockCollections;
 
 /**
  * 本模组中的墙方块。
@@ -54,15 +52,9 @@ public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlock
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    final CraftingRecipeJsonBuilder craftingRecipe = RecipeProvider.getWallRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock));
-    if (craftingRecipe == null) {
-      return null;
-    } else if (ExtShapeConfig.CURRENT_CONFIG.preventWoodenWallRecipes) {
-      if (BlockCollections.PLANKS.contains(baseBlock) || CopperManager.COPPER_BLOCKS.contains(baseBlock) || CopperManager.WAXED_COPPER_BLOCKS.contains(baseBlock)) {
-        return null;
-      }
-    }
-    return craftingRecipe.group(getRecipeGroup());
+    return RecipeProvider.getWallRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock))
+        .group(getRecipeGroup())
+        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock));
   }
 
   @Override

@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -68,8 +69,9 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
     final ShapedRecipeJsonBuilder craftingRecipe = ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, this, 3)
         .input('W', baseBlock)
         .input('#', secondIngredient)
-        .pattern("W#W")
-        .pattern("W#W");
+        .pattern("#W#")
+        .pattern("#W#")
+        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock));
     return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 

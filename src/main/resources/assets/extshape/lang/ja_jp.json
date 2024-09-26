@@ -15,6 +15,7 @@
   "block.extshape.?_wall": "%s塀",
 
   "tag.block.extshape.pickaxe_unmineable": "ツルハシで採掘出来ない",
+  "tag.block.extshape.snow": "雪",
 
   "tag.block.extshape.woolen_blocks": "羊毛のブロック",
   "tag.block.extshape.wooden_blocks": "木のブロック",
@@ -174,7 +175,5 @@
   "tag.item.extshape.woolen_vertical_quarter_pieces": "垂直羊毛の四半ブロック",
   "tag.item.extshape.concrete_vertical_quarter_pieces": "垂直コンクリートの四半ブロック",
   "tag.item.extshape.terracotta_vertical_quarter_pieces": "垂直テラコッタの四半ブロック",
-  "tag.item.extshape.stained_terracotta_vertical_quarter_pieces": "垂直色付きテラコッタの四半ブロック",
-
-  "tags.block.extshape.snow": "雪"
+  "tag.item.extshape.stained_terracotta_vertical_quarter_pieces": "垂直色付きテラコッタの四半ブロック"
 }
