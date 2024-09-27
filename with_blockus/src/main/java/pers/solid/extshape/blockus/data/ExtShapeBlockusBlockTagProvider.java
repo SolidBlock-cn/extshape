@@ -12,10 +12,14 @@ import net.minecraft.registry.tag.BlockTags;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
 import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockBiMaps;
 
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
   public ExtShapeBlockusBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
@@ -29,11 +33,18 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
       if (BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS.contains(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS);
+      } else if (BlockusBlockCollections.SMALL_LOGS.contains(baseBlock)) {
+        addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_LOG_TAG);
+      } else if (BlockusBlockCollections.HERRINGBONE_PLANKS.contains(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks || baseBlock == BlockusBlocks.CHARRED.planks) {
+        addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_WOODEN_TAG);
       } else {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_TAG);
       }
     }
-    ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS.forEach((blockShape, tag) -> getOrCreateTagBuilder(ExtShapeTags.SHAPE_TO_TAG.get(blockShape)).addTag(tag));
+    ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS.forEach((blockShape, tag) -> {
+      getOrCreateTagBuilder(ExtShapeTags.SHAPE_TO_TAG.get(blockShape)).addTag(tag);
+      getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).addTag(tag);
+    });
 
     // endregion
 
@@ -56,12 +67,16 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.ENDER_BLOCK,
         BlockusBlocks.NETHER_STAR_BLOCK
     );
-    addForShapes(BlockTags.SHOVEL_MINEABLE, BlockusBlocks.SUGAR_BLOCK);
     addForShapes(BlockTags.HOE_MINEABLE,
         BlockusBlocks.CHORUS_BLOCK,
         BlockusBlocks.THATCH.block,
         BlockusBlocks.ROTTEN_FLESH_BLOCK);
-
+    getOrCreateTagBuilder(ExtShapeTags.PICKAXE_UNMINEABLE)
+        .add(Stream.of(
+            BlockusBlocks.CHORUS_BLOCK,
+            BlockusBlocks.THATCH.block,
+            BlockusBlocks.ROTTEN_FLESH_BLOCK
+        ).map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block)).map(Objects::requireNonNull).toArray(Block[]::new));
     addForShapes(BlockTags.NEEDS_STONE_TOOL,
         BlockusBlocks.ENDER_BLOCK,
         BlockusBlocks.IRON_BRICKS.block,

@@ -22,8 +22,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -34,7 +32,6 @@ import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.builder.*;
-import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
@@ -685,25 +682,28 @@ public final class ExtShapeBlockusBlocks {
     markStoneCuttableWhenCreating = false;
 
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
-    TagKey.of(RegistryKeys.ITEM, ExtShapeTags.LOG_BLOCKS.id());
+    final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFuel = (blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape.logicalCompleteness * 300));
     FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG)
         .setPillar()
         .addPostBuildConsumer(logFlammable)
+        .addPostBuildConsumer(logFuel)
         .build();
-    TagKey.of(RegistryKeys.ITEM, ExtShapeTags.LOG_BLOCKS.id());
     FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG)
         .setPillar()
         .addPostBuildConsumer(logFlammable)
+        .addPostBuildConsumer(logFuel)
         .build();
     FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar()
         .addPostBuildConsumer(logFlammable)
+        .addPostBuildConsumer(logFuel)
         .build();
     FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar()
         .addPostBuildConsumer(logFlammable)
+        .addPostBuildConsumer(logFuel)
         .build();
 
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20);
@@ -749,6 +749,7 @@ public final class ExtShapeBlockusBlocks {
             .without(BlockShape.STAIRS, BlockShape.SLAB)
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
+            .addPostBuildConsumer(plankFuel)
             .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.asString())
             .build();
       }
@@ -764,6 +765,7 @@ public final class ExtShapeBlockusBlocks {
         FACTORY.createConstructionOnly(block)
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
+            .addPostBuildConsumer(plankFuel)
             .setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString())
             .build();
       }
@@ -778,6 +780,7 @@ public final class ExtShapeBlockusBlocks {
         FACTORY.createConstructionOnly(block)
             .setPillar()
             .addPostBuildConsumer(logFlammable)
+            .addPostBuildConsumer(logFuel)
             .setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString())
             .build();
       }
@@ -939,9 +942,9 @@ public final class ExtShapeBlockusBlocks {
         .setStoneFenceSettings(Items.CHARCOAL)
         .addPostBuildConsumer((blockShape1, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape1.logicalCompleteness * 16000)))
         .build();
-    create(BlockusBlocks.SUGAR_BLOCK)
-        .setStoneFenceSettings(Items.SUGAR)
-        .build();
+
+    // sugar 没有，因为是下落方块，不符合条件。
+
     create(BlockusBlocks.ENDER_BLOCK)
         .markStoneCuttable()
         .setStoneFenceSettings(Items.ENDER_PEARL)

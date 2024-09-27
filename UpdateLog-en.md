@@ -14,6 +14,8 @@
   - Tests recipe conflicts between the specified namespace and vanilla if only specified one.
   - Tests the specified namespaces if specified multiple ones.
 - Removed the BlockFamilies feature which lacks practical usage.
+- Fixed the issue that various shapes of white oak wood, white oak log, herringbone planks, small log blocks of Blockus cannot be burnt in the furnace.
+- Totally removed various shapes for sugar blocks, as it is a falling block and does not meet the criterion of creating various shapes.
 
 ### 2.2.2
 

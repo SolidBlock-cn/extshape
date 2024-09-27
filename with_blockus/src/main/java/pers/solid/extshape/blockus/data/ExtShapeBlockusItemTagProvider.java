@@ -36,7 +36,14 @@ public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
         BlockusBlocks.CHARRED.planks,
         BlockusBlocks.HERRINGBONE_CRIMSON_PLANKS,
         BlockusBlocks.HERRINGBONE_WARPED_PLANKS,
-        BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
+        BlockusBlocks.HERRINGBONE_CHARRED_PLANKS,
+        BlockusBlocks.CRIMSON_MOSAIC.block,
+        BlockusBlocks.WARPED_MOSAIC.block,
+        BlockusBlocks.CHARRED_MOSAIC.block,
+        BlockusBlocks.MOSSY_CRIMSON_PLANKS.block,
+        BlockusBlocks.MOSSY_WARPED_PLANKS.block,
+        BlockusBlocks.MOSSY_CHARRED_PLANKS.block
+    );
     addForShapes(ItemTags.PIGLIN_LOVED, BlockusBlocks.GOLD_PLATING.block, BlockusBlocks.GOLD_BRICKS.block);
   }
 }

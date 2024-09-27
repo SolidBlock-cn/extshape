@@ -70,7 +70,7 @@ public class ExtShapeTweakRecipeProvider extends FabricRecipeProvider {
           .group(mossPressurePlate.getRecipeGroup())
           .offerTo(exporter);
       final Identifier reverseRecipeId = ExtShape.id("moss_carpet_from_pressure_plate");
-      ShapelessRecipeJsonBuilder.create(mossPressurePlate.getRecipeCategory(), Blocks.MOSS_CARPET)
+      ShapelessRecipeJsonBuilder.create(mossPressurePlate.getRecipeCategory(), Blocks.MOSS_CARPET, 3)
           .input(Ingredient.ofItems(mossPressurePlate))
           .criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(mossPressurePlate))
           .offerTo(exporter, reverseRecipeId);

@@ -81,7 +81,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     }
     getOrCreateTagBuilder(ExtShapeTags.WOODEN_BLOCKS)
         .addTag(ExtShapeTags.LOG_BLOCKS);
-    for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOOLEN_TAG.values()) {
+    for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOODEN_TAG.values()) {
       getOrCreateTagBuilder(ExtShapeTags.WOODEN_BLOCKS).addTag(tag);
     }
 
@@ -90,6 +90,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     // mineable 部分
 
     getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(
+        ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
     addForShapes(BlockTags.PICKAXE_MINEABLE, Iterables.concat(
