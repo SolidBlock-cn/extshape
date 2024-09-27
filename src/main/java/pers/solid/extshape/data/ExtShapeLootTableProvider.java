@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.rrp.UnusualLootTables;
 
 import java.util.concurrent.CompletableFuture;
 

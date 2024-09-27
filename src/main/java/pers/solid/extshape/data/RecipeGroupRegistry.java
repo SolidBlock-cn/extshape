@@ -1,4 +1,4 @@
-package pers.solid.extshape.rrp;
+package pers.solid.extshape.data;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;

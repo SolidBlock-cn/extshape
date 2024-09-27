@@ -74,7 +74,6 @@ public class ExtShape implements ModInitializer {
     registerStrippableBlocks();
     registerFuels();
 
-//    ExtShapeRRP.registerRRP();
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
 
     FabricLoader.getInstance().getEntrypoints("extshape:post_initialize", ModInitializer.class).forEach(ModInitializer::onInitialize);

@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
-import pers.solid.extshape.rrp.RecipeGroupRegistry;
+import pers.solid.extshape.data.RecipeGroupRegistry;
 
 import java.util.function.BiFunction;
 

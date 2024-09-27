@@ -15,8 +15,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.*;
+import pers.solid.extshape.data.RecipeGroupRegistry;
 import pers.solid.extshape.mixin.BlockAccessor;
-import pers.solid.extshape.rrp.RecipeGroupRegistry;
 import pers.solid.extshape.util.*;
 
 import java.util.Iterator;

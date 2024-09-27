@@ -11,7 +11,6 @@ import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.rrp.CrossShapeDataGeneration;
 
 import java.util.concurrent.CompletableFuture;
 

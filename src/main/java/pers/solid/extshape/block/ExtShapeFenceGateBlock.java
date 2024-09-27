@@ -11,7 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
@@ -66,7 +65,7 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
 
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    final ShapedRecipeJsonBuilder craftingRecipe = ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, this, 3)
+    final ShapedRecipeJsonBuilder craftingRecipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 3)
         .input('W', baseBlock)
         .input('#', secondIngredient)
         .pattern("#W#")

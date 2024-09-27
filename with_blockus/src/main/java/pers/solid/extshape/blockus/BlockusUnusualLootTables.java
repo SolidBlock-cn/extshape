@@ -13,10 +13,10 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.rrp.UnusualLootTables;
+import pers.solid.extshape.data.UnusualLootTables;
 
 /**
- * @see pers.solid.extshape.rrp.UnusualLootTables
+ * @see UnusualLootTables
  */
 public class BlockusUnusualLootTables extends UnusualLootTables {
   @Unmodifiable

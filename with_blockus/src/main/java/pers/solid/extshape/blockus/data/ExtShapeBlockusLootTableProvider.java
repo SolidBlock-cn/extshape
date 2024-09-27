@@ -10,7 +10,7 @@ import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.BlockusUnusualLootTables;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.builder.BlockShape;
-import pers.solid.extshape.rrp.UnusualLootTables;
+import pers.solid.extshape.data.UnusualLootTables;
 
 import java.util.concurrent.CompletableFuture;
 

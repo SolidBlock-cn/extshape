@@ -1,4 +1,4 @@
-package pers.solid.extshape.rrp;
+package pers.solid.extshape.data;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;

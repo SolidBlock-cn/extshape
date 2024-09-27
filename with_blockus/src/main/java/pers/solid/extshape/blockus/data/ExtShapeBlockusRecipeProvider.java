@@ -9,7 +9,7 @@ import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.BlockusCrossShapeDataGeneration;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
-import pers.solid.extshape.rrp.CrossShapeDataGeneration;
+import pers.solid.extshape.data.CrossShapeDataGeneration;
 
 import java.util.concurrent.CompletableFuture;
 

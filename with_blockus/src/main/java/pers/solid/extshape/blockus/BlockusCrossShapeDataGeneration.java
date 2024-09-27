@@ -11,7 +11,8 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
-import pers.solid.extshape.rrp.CrossShapeDataGeneration;
+import pers.solid.extshape.data.CrossShapeDataGeneration;
+import pers.solid.extshape.data.VanillaStonecutting;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;
@@ -19,7 +20,7 @@ import java.util.Iterator;
 import java.util.stream.Collectors;
 
 /**
- * @see pers.solid.extshape.rrp.VanillaStonecutting
+ * @see VanillaStonecutting
  */
 public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
