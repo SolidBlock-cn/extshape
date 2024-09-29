@@ -19,15 +19,12 @@ import pers.solid.extshape.data.UnusualLootTables;
  * @see UnusualLootTables
  */
 public class BlockusUnusualLootTables extends UnusualLootTables {
+
   @Unmodifiable
   public final ImmutableMap<Block, UnusualLootTables.@NotNull LootTableFunction> createInstance() {
     final ImmutableMap.Builder<Block, UnusualLootTables.LootTableFunction> builder = new ImmutableMap.Builder<>();
     registerUnusualLootTables(builder);
     return builder.build();
-  }
-
-  public BlockusUnusualLootTables() {
-    super();
   }
 
   private void registerUnusualLootTables(ImmutableMap.Builder<Block, UnusualLootTables.LootTableFunction> builder) {

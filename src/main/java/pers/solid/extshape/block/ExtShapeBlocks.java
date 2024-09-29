@@ -55,6 +55,7 @@ public final class ExtShapeBlocks {
    * 存储本模组生成的方块的基础方块（包含原版方块）。该集合的内容是在 {@link BlocksBuilderFactory} 中添加的，其他模组使用的基础方块不应该添加到这个集合中。
    */
   private static final ObjectSet<Block> BASE_BLOCKS = new ObjectLinkedOpenHashSet<>();
+
   /**
    * 获取本模组使用的所有基础方块（含原版方块），返回的集合是不可变集合。
    */

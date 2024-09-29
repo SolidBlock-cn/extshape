@@ -328,7 +328,9 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     addForShapes(ExtShapeTags.LOG_BLOCKS,
         BlockusBlocks.WHITE_OAK_LOG,
-        BlockusBlocks.STRIPPED_WHITE_OAK_LOG
+        BlockusBlocks.STRIPPED_WHITE_OAK_LOG,
+        BlockusBlocks.WHITE_OAK_WOOD,
+        BlockusBlocks.STRIPPED_WHITE_OAK_WOOD
     );
 
     for (BSSWBundle bundle : BlockusBlockCollections.MOSSY_PLANKS) {

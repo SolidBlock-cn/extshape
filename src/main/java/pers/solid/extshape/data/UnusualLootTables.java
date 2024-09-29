@@ -42,8 +42,80 @@ import pers.solid.extshape.builder.BlockShape;
  */
 @ApiStatus.AvailableSince("1.5.1")
 public class UnusualLootTables {
-  protected final LootTableFunction dropsDoubleWithSilkTouchOrNone = (baseBlock, shape, block, lookup, generator) -> dropsDoubleSlabWithSilkTouchOrNone(block, shape == BlockShape.SLAB, generator);
   public static final StatePredicate.Builder EXACT_MATCH_DOUBLE_SLAB = StatePredicate.Builder.create().exactMatch(Properties.SLAB_TYPE, SlabType.DOUBLE);
+  protected final LootTableFunction dropsDoubleWithSilkTouchOrNone = (baseBlock, shape, block, lookup, generator) -> dropsDoubleSlabWithSilkTouchOrNone(block, shape == BlockShape.SLAB, generator);
+
+  /**
+   * 对应形状估算的体积，用于与基础方块的掉落数相乘。
+   */
+  @Contract(pure = true)
+  public static float shapeVolume(@NotNull BlockShape shape) {
+    return shape.isConstruction ? shape.logicalCompleteness : 1;
+  }
+
+  public static ConstantLootNumberProvider shapeVolumeConstantProvider(@NotNull BlockShape shape, float count) {
+    return ConstantLootNumberProvider.create(shapeVolume(shape) * count);
+  }
+
+  /**
+   * 构建一个战利品表项，并指定固定掉落数量，且当该方块形状为台阶时，掉落原先两倍数量的物品。
+   *
+   * @param drop      需要掉落的物品。
+   * @param fullCount 掉落的物品对应完整方块大小时的数量。
+   * @param shape     方块所属的形状。参见 {@link BlockShape#getShapeOf(Block)}。
+   * @param block     方块自身。
+   * @return 战利品表项。
+   */
+  private static LeafEntry.Builder<?> entryBuilderConstCount(@NotNull ItemConvertible drop, float fullCount, @NotNull BlockShape shape, @NotNull Block block) {
+    final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop)
+        // 根据该方块的形状确定数量。
+        .apply(SetCountLootFunction.builder(shapeVolumeConstantProvider(shape, fullCount)));
+    if (shape == BlockShape.SLAB) {
+      itemEntryBuilder
+          .apply(SetCountLootFunction.builder(shapeVolumeConstantProvider(shape, fullCount * 2))
+              .conditionally(BlockStatePropertyLootCondition.builder(block)
+                  .properties(EXACT_MATCH_DOUBLE_SLAB)));
+    }
+    return itemEntryBuilder;
+  }
+
+  /**
+   * 对于双层台阶，需要掉落两倍，其他则一致。
+   *
+   * @param drop                符合 {@code conditionsBuilder} 的条件时，需要掉落的方块。
+   * @param conditionBuilder    掉落该方块的条件。
+   * @param child               不符合条件，且不为双层台阶时，需要使用的战利品表池。
+   * @param childWhenDoubleSlab 不符合条件，且为双层台阶时，需要使用的战利品表池。当方块本身就不是台阶时，此参数应为 {@code null}。
+   * @return 战利品表。
+   */
+  public static LootTable.Builder dropsDoubleSlab(@NotNull Block drop, @NotNull LootCondition.Builder conditionBuilder, @NotNull LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
+    return addDropsDoubleSlabPool(LootTable.builder(), drop, conditionBuilder, child, childWhenDoubleSlab);
+  }
+
+  public static LootTable.Builder addDropsDoubleSlabPool(@NotNull LootTable.Builder builder, @NotNull Block drop, LootCondition.@NotNull Builder conditionBuilder, LootPoolEntry.@NotNull Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
+    if (childWhenDoubleSlab == null) {
+      builder
+          .pool(LootPool.builder()
+              .rolls(ConstantLootNumberProvider.create(1.0F))
+              .with(AlternativeEntry.builder(
+                  ItemEntry.builder(drop)
+                      .conditionally(conditionBuilder),
+                  child)));
+    } else {
+      builder
+          .pool(LootPool.builder()
+              .rolls(ConstantLootNumberProvider.create(1.0F))
+              .with(AlternativeEntry.builder(
+                  ItemEntry.builder(drop)
+                      .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2))
+                          .conditionally(BlockStatePropertyLootCondition.builder(drop).properties(EXACT_MATCH_DOUBLE_SLAB)))
+                      .conditionally(conditionBuilder),
+                  childWhenDoubleSlab
+                      .conditionally(BlockStatePropertyLootCondition.builder(drop).properties(EXACT_MATCH_DOUBLE_SLAB)),
+                  child)));
+    }
+    return builder;
+  }
 
   protected RegistryEntry<Enchantment> fortune(RegistryWrapper.WrapperLookup registryLookup) {
     return registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE);
@@ -51,9 +123,6 @@ public class UnusualLootTables {
 
   protected ConditionalLootFunction.Builder<?> fortuneFunction(RegistryWrapper.WrapperLookup registryLookup) {
     return ApplyBonusLootFunction.uniformBonusCount(fortune(registryLookup));
-  }
-
-  public UnusualLootTables() {
   }
 
   @Unmodifiable
@@ -121,24 +190,6 @@ public class UnusualLootTables {
     builder.put(Blocks.SCULK, dropsDoubleWithSilkTouchOrNone);
   }
 
-  @FunctionalInterface
-  public interface LootTableFunction {
-    LootTable.Builder apply(Block baseBlock, BlockShape shape, Block block, RegistryWrapper.WrapperLookup lookup, BlockLootTableGenerator generator);
-  }
-
-  /**
-   * 对应形状估算的体积，用于与基础方块的掉落数相乘。
-   */
-  @Contract(pure = true)
-  public static float shapeVolume(@NotNull BlockShape shape) {
-    return shape.isConstruction ? shape.logicalCompleteness : 1;
-  }
-
-
-  public static ConstantLootNumberProvider shapeVolumeConstantProvider(@NotNull BlockShape shape, float count) {
-    return ConstantLootNumberProvider.create(shapeVolume(shape) * count);
-  }
-
   /**
    * 当工具没有精准采集时，掉落固定数量的物品，其中物品数量由 {@code fullCount * volume} 决定。当工具有精准采集时，掉落方块本身，其中，当方块为双台阶时，掉落两个台阶。
    *
@@ -163,66 +214,6 @@ public class UnusualLootTables {
   }
 
   /**
-   * 构建一个战利品表项，并指定固定掉落数量，且当该方块形状为台阶时，掉落原先两倍数量的物品。
-   *
-   * @param drop      需要掉落的物品。
-   * @param fullCount 掉落的物品对应完整方块大小时的数量。
-   * @param shape     方块所属的形状。参见 {@link BlockShape#getShapeOf(Block)}。
-   * @param block     方块自身。
-   * @return 战利品表项。
-   */
-  private static LeafEntry.Builder<?> entryBuilderConstCount(@NotNull ItemConvertible drop, float fullCount, @NotNull BlockShape shape, @NotNull Block block) {
-    final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop)
-        // 根据该方块的形状确定数量。
-        .apply(SetCountLootFunction.builder(shapeVolumeConstantProvider(shape, fullCount)));
-    if (shape == BlockShape.SLAB) {
-      itemEntryBuilder
-          .apply(SetCountLootFunction.builder(shapeVolumeConstantProvider(shape, fullCount * 2))
-              .conditionally(BlockStatePropertyLootCondition.builder(block)
-                  .properties(EXACT_MATCH_DOUBLE_SLAB)));
-    }
-    return itemEntryBuilder;
-  }
-
-  /**
-   * 对于双层台阶，需要掉落两倍，其他则一致。
-   *
-   * @param drop                符合 {@code conditionsBuilder} 的条件时，需要掉落的方块。
-   * @param conditionBuilder    掉落该方块的条件。
-   * @param child               不符合条件，且不为双层台阶时，需要使用的战利品表池。
-   * @param childWhenDoubleSlab 不符合条件，且为双层台阶时，需要使用的战利品表池。当方块本身就不是台阶时，此参数应为 {@code null}。
-   * @return 战利品表。
-   */
-  public static LootTable.Builder dropsDoubleSlab(@NotNull Block drop, @NotNull LootCondition.Builder conditionBuilder, @NotNull LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
-    return addDropsDoubleSlabPool(LootTable.builder(), drop, conditionBuilder, child, childWhenDoubleSlab);
-  }
-
-  public static LootTable.Builder addDropsDoubleSlabPool(@NotNull LootTable.Builder builder, @NotNull Block drop, LootCondition.@NotNull Builder conditionBuilder, LootPoolEntry.@NotNull Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
-    if (childWhenDoubleSlab == null) {
-      builder
-          .pool(LootPool.builder()
-              .rolls(ConstantLootNumberProvider.create(1.0F))
-              .with(AlternativeEntry.builder(
-                  ItemEntry.builder(drop)
-                      .conditionally(conditionBuilder),
-                  child)));
-    } else {
-      builder
-          .pool(LootPool.builder()
-              .rolls(ConstantLootNumberProvider.create(1.0F))
-              .with(AlternativeEntry.builder(
-                  ItemEntry.builder(drop)
-                      .apply(SetCountLootFunction.builder(ConstantLootNumberProvider.create(2))
-                          .conditionally(BlockStatePropertyLootCondition.builder(drop).properties(EXACT_MATCH_DOUBLE_SLAB)))
-                      .conditionally(conditionBuilder),
-                  childWhenDoubleSlab
-                      .conditionally(BlockStatePropertyLootCondition.builder(drop).properties(EXACT_MATCH_DOUBLE_SLAB)),
-                  child)));
-    }
-    return builder;
-  }
-
-  /**
    * 类似于 {@link net.minecraft.data.server.loottable.BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)}，但是若方块为双层台阶，则掉落两倍。
    *
    * @param drop                使用精准采集时掉落的方块。
@@ -233,7 +224,6 @@ public class UnusualLootTables {
   public LootTable.Builder dropsDoubleSlabWithSilkTouch(@NotNull Block drop, @NotNull LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab, BlockLootTableGenerator generator) {
     return dropsDoubleSlab(drop, generator.createSilkTouchCondition(), child, childWhenDoubleSlab);
   }
-
 
   /**
    * 只有当拥有精准采集附魔时，才会掉落方块，而且如果方块为双层台阶，则掉落两倍。
@@ -257,5 +247,11 @@ public class UnusualLootTables {
             .conditionally(generator.createSilkTouchCondition())
             .rolls(ConstantLootNumberProvider.create(1.0F))
             .with(itemEntryBuilder));
+  }
+
+
+  @FunctionalInterface
+  public interface LootTableFunction {
+    LootTable.Builder apply(Block baseBlock, BlockShape shape, Block block, RegistryWrapper.WrapperLookup lookup, BlockLootTableGenerator generator);
   }
 }

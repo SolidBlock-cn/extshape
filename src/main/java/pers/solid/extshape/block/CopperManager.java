@@ -27,8 +27,9 @@ import java.util.function.Predicate;
 
 /**
  * 处理铜的生锈、除蜡、涂蜡的一些类。
+ *
  * @param unwaxed 未涂蜡的铜块，氧化程度从低到高的列表
- * @param waxed 涂蜡的铜块，氧化程度从低到高的列表，需要与未涂蜡的铜块对应
+ * @param waxed   涂蜡的铜块，氧化程度从低到高的列表，需要与未涂蜡的铜块对应
  */
 public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
