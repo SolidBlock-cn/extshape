@@ -1,10 +1,7 @@
 package pers.solid.extshape.data;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
+import com.google.common.collect.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
@@ -93,10 +90,15 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
-    addForShapes(BlockTags.PICKAXE_MINEABLE, Iterables.concat(
+    final Iterable<Block> stoneMineableBaseBlocks;
+    addForShapes(BlockTags.PICKAXE_MINEABLE, stoneMineableBaseBlocks = Iterables.concat(
         BlockCollections.STONES,
         BlockCollections.UNCOLORED_SANDSTONES,
         BlockCollections.RED_SANDSTONES,
+        CopperManager.COPPER_BLOCKS,
+        CopperManager.CUT_COPPER_BLOCKS,
+        CopperManager.WAXED_COPPER_BLOCKS,
+        CopperManager.WAXED_CUT_COPPER_BLOCKS,
         Arrays.asList(
             Blocks.COBBLED_DEEPSLATE,
             Blocks.LAPIS_BLOCK,
@@ -158,7 +160,6 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
             Blocks.RAW_GOLD_BLOCK
         )
     ));
-    addForShapes(BlockTags.PICKAXE_MINEABLE, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
 
     // 所有的混凝土和陶瓦加入 pickaxe_mineable
     for (TagKey<Block> tag : Iterables.concat(ExtShapeTags.SHAPE_TO_CONCRETE_TAG.values(), ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.values())) {
@@ -168,48 +169,65 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
         .addTag(ExtShapeTags.WOODEN_BLOCKS);
 
-    addForShapes(BlockTags.AXE_MINEABLE,
+    final Block[] axeMineableBaseBlocks = {
         Blocks.PUMPKIN,
         Blocks.MELON
-    );
+    };
 
-    addForShapes(BlockTags.SHOVEL_MINEABLE,
+    addForShapes(BlockTags.AXE_MINEABLE, axeMineableBaseBlocks);
+
+    final Block[] shovelMineableBaseBlocks = {
         Blocks.DIRT,
         Blocks.COARSE_DIRT,
         Blocks.SNOW_BLOCK,
         Blocks.CLAY
-    );
+    };
+    addForShapes(BlockTags.SHOVEL_MINEABLE, shovelMineableBaseBlocks);
 
-    addForShapes(BlockTags.HOE_MINEABLE,
+    final Block[] hoeMineableBaseBlocks = {
         Blocks.NETHER_WART_BLOCK,
         Blocks.WARPED_WART_BLOCK,
         Blocks.SHROOMLIGHT,
         Blocks.SCULK,
         Blocks.MOSS_BLOCK
-    );
+    };
+    addForShapes(BlockTags.HOE_MINEABLE,
+        hoeMineableBaseBlocks);
 
     getOrCreateTagBuilder(ExtShapeTags.PICKAXE_UNMINEABLE)
         .addTag(ExtShapeTags.WOODEN_WALLS)
         .addTag(ExtShapeTags.LOG_WALLS)
         .addTag(ExtShapeTags.WOOLEN_WALLS)
-        .add(Stream.of(
-            Blocks.DIRT,
-            Blocks.COARSE_DIRT,
-            Blocks.SNOW_BLOCK,
-            Blocks.CLAY,
-            Blocks.PUMPKIN,
-            Blocks.GLOWSTONE,
-            Blocks.MELON,
-            Blocks.NETHER_WART_BLOCK,
-            Blocks.WARPED_WART_BLOCK,
-            Blocks.SHROOMLIGHT,
-            Blocks.HONEYCOMB_BLOCK,
-            Blocks.SCULK,
-            Blocks.MOSS_BLOCK,
-            Blocks.OCHRE_FROGLIGHT,
-            Blocks.VERDANT_FROGLIGHT,
-            Blocks.PEARLESCENT_FROGLIGHT
-        ).map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block)).map(Objects::requireNonNull).toArray(Block[]::new));
+        .add(Streams.concat(
+                Arrays.stream(axeMineableBaseBlocks),
+                Arrays.stream(shovelMineableBaseBlocks),
+                Arrays.stream(hoeMineableBaseBlocks),
+                Stream.of(
+                    Blocks.HONEYCOMB_BLOCK,
+                    Blocks.OCHRE_FROGLIGHT,
+                    Blocks.VERDANT_FROGLIGHT,
+                    Blocks.PEARLESCENT_FROGLIGHT
+                ))
+            .map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block))
+            .filter(Objects::nonNull)
+            .toArray(Block[]::new));
+    getOrCreateTagBuilder(ExtShapeTags.AXE_UNMINEABLE)
+        .addTag(ExtShapeTags.CONCRETE_FENCE_GATES)
+        .addTag(ExtShapeTags.TERRACOTTA_FENCE_GATES)
+        .addTag(ExtShapeTags.WOOLEN_FENCE_GATES)
+        .add(Streams.concat(
+                Streams.stream(stoneMineableBaseBlocks),
+                Arrays.stream(shovelMineableBaseBlocks),
+                Arrays.stream(hoeMineableBaseBlocks), Stream.of(
+                    Blocks.HONEYCOMB_BLOCK,
+                    Blocks.OCHRE_FROGLIGHT,
+                    Blocks.VERDANT_FROGLIGHT,
+                    Blocks.PEARLESCENT_FROGLIGHT
+                )
+            )
+            .map(block -> BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, block))
+            .filter(Objects::nonNull)
+            .toArray(Block[]::new));
 
     addForShapes(BlockTags.NEEDS_STONE_TOOL,
         Blocks.LAPIS_BLOCK,

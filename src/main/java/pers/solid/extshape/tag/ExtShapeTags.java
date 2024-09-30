@@ -17,12 +17,16 @@ import java.util.List;
  * 本模组提供的方块和物品标签。这些标签不应该被其他的模组使用。
  */
 public final class ExtShapeTags {
-  public static final TagKey<Block> DAMPENS_VIBRATIONS = BlockTags.DAMPENS_VIBRATIONS;
   /**
    * 这个标签主要是考虑到，{@link BlockTags#PICKAXE_MINEABLE} 加入了所有的墙，但事实上墙并不一定是可以使用镐来开采的，因此这里设置了一个专门的标签，如果某个方块属于 {@code minecraft:mineable/pickaxe} 但同时属于 {@code extshape:pickaxe_unmineable}，则认为镐子不能开采这个方块。
    */
   @ApiStatus.AvailableSince("0.1.5")
   public static final TagKey<Block> PICKAXE_UNMINEABLE = of("pickaxe_unmineable");
+  /**
+   * 由于原版的 {@link BlockTags#AXE_MINEABLE} 加入了所有的墙，所以这里设置了专门的标签，如果方块属于 {@code minecraft:mineable/axe} 但同时属于 {@code extshape:axe_unmineable}，则认为斧不能开采这个方块。
+   */
+  @ApiStatus.AvailableSince("3.0.0")
+  public static final TagKey<Block> AXE_UNMINEABLE = of("axe_unmineable");
   /**
    * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，会被剪刀剪掉。由于 1.20.5 版本以后没有 {@code fabric:shears_mineable} 标签，因此由 {@link pers.solid.extshape.mixin.ShearsItemMixin#addMineableTag(List)} 实现。
    */

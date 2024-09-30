@@ -133,7 +133,6 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.CHISELED_DRIPSTONE)
         .without(BlockShape.BUTTON)
         .setFenceSettings(FenceSettings.DRIPSTONE)
-
         .setActivationSettings(ActivationSettings.DRIPSTONE)
         .build();
 
@@ -601,7 +600,8 @@ public final class ExtShapeBlockusBlocks {
         .build();
 
     create(BlockusBlocks.RAINBOW_BLOCK)
-        .setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem()).setPillar()
+        .setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem())
+        .setPillar()
         .build();
     create(BlockusBlocks.RAINBOW_BRICKS)
         .setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem())
@@ -838,7 +838,8 @@ public final class ExtShapeBlockusBlocks {
     markStoneCuttableWhenCreating = false;
 
     create(BlockusBlocks.CHORUS_BLOCK)
-        .setStoneFenceSettings(Items.CHORUS_PLANT).setPillar()
+        .setStoneFenceSettings(Items.CHORUS_PLANT)
+        .setPillar()
         .build();
 
     for (var bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
