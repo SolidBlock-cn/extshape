@@ -12,7 +12,6 @@ import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.builder.BlockShape;
 
 public class ExtShapeRecipeProvider extends FabricRecipeProvider {
   public ExtShapeRecipeProvider(FabricDataOutput output) {
@@ -23,9 +22,6 @@ public class ExtShapeRecipeProvider extends FabricRecipeProvider {
   public void generate(RecipeExporter exporter) {
     for (Block block : ExtShapeBlocks.getBlocks()) {
       if (block instanceof ExtShapeBlockInterface i) {
-        if (i.getBaseBlock() == Blocks.TUFF && (i.getBlockShape() == BlockShape.STAIRS || i.getBlockShape() == BlockShape.SLAB || i.getBlockShape() == BlockShape.WALL)) {
-          continue;
-        }
         i.registerRecipes(exporter);
       }
     }
