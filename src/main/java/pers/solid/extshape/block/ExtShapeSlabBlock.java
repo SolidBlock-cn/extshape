@@ -1,8 +1,5 @@
 package pers.solid.extshape.block;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
@@ -33,6 +30,8 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  * 本模组中的台阶方块。
  */
 public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlockInterface {
+  public final @NotNull Block baseBlock;
+
   public ExtShapeSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;

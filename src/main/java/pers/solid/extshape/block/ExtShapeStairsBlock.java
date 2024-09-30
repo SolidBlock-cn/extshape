@@ -1,7 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
@@ -25,7 +23,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.generator.BRRPStairsBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 

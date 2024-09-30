@@ -16,6 +16,7 @@
     "ItemGroupEntriesImplMixin",
     "ItemGroupsMixin",
     "MiningToolItemMixin",
+    "ModelAccessor",
     "SingleItemRecipeJsonBuilderAccessor",
     "SnowyBlockMixin",
     "TextureMapAccessor",

@@ -2,6 +2,7 @@ package pers.solid.extshape.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FenceBlock;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
@@ -28,7 +29,7 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 /**
  * 本模组中的栅栏方块。
  */
-public class ExtShapeFenceBlock extends BRRPFenceBlock implements ExtShapeVariantBlockInterface {
+public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlockInterface {
 
   public final @NotNull Block baseBlock;
   /**

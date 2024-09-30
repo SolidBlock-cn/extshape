@@ -10,6 +10,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import pers.solid.extshape.block.*;
+import pers.solid.extshape.mixin.ModelAccessor;
 import pers.solid.extshape.util.BlockCollections;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
@@ -71,8 +72,8 @@ public final class ExtShapeBlockStateModelGenerator {
   public static BlockStateSupplier createPillarUvLockedSlabBlockState(Block block, Identifier fullModelId) {
     final BlockStateVariantMap.DoubleProperty<SlabType, Direction.Axis> variants = BlockStateVariantMap.create(ExtShapePillarUvLockedSlabBlock.TYPE, ExtShapePillarUvLockedSlabBlock.AXIS);
     for (Direction.Axis axis : Direction.Axis.values()) {
-      variants.register(SlabType.BOTTOM, axis, BlockStateVariant.create().put(VariantSettings.MODEL, ExtShapeModels.SLAB_COLUMN_UV_LOCKED.get(axis).getBlockSubModelId(block)));
-      variants.register(SlabType.TOP, axis, BlockStateVariant.create().put(VariantSettings.MODEL, ExtShapeModels.SLAB_COLUMN_UV_LOCKED_TOP.get(axis).getBlockSubModelId(block)));
+      variants.register(SlabType.BOTTOM, axis, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(block, ((ModelAccessor) ExtShapeModels.SLAB_COLUMN_UV_LOCKED.get(axis)).getVariant().orElse(""))));
+      variants.register(SlabType.TOP, axis, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(block, ((ModelAccessor) ExtShapeModels.SLAB_COLUMN_UV_LOCKED_TOP.get(axis)).getVariant().orElse(""))));
       variants.register(SlabType.DOUBLE, axis, BlockStateVariant.create().put(VariantSettings.MODEL, fullModelId.withSuffixedPath("_" + axis.asString())));
     }
     return VariantsBlockStateSupplier.create(block).coordinate(variants);
@@ -241,7 +242,7 @@ public final class ExtShapeBlockStateModelGenerator {
   private static Identifier getUnwaxedModelId(Model model, Block block, TextureMap textures, BiConsumer<Identifier, Supplier<JsonElement>> modelCollector) {
     final Identifier id = Registries.BLOCK.getId(block);
     if (id.getPath().startsWith("waxed_")) {
-      return model.getBlockSubModelId(Registries.BLOCK.getOrEmpty(id.withPath(s -> s.replace("waxed_", ""))).orElseThrow());
+      return ModelIds.getBlockSubModelId(Registries.BLOCK.getOrEmpty(id.withPath(s -> s.replace("waxed_", ""))).orElseThrow(), ((ModelAccessor) model).getVariant().orElse(""));
     }
     return model.upload(block, textures, modelCollector);
   }

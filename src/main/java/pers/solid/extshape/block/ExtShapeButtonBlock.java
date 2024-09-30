@@ -1,10 +1,9 @@
 package pers.solid.extshape.block;
 
-import com.google.common.base.Suppliers;
-import com.google.common.collect.ImmutableSet;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ButtonBlock;
+import net.minecraft.block.Oxidizable;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
@@ -21,10 +20,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.*;
-import pers.solid.brrp.v1.api.RuntimeResourcePack;
-import pers.solid.brrp.v1.model.ModelJsonBuilder;
-import pers.solid.brrp.v1.model.ModelUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -36,8 +31,6 @@ import pers.solid.extshape.util.ActivationSettings;
  * 本模组中的按钮方块。按钮的激活时长可能会是特制的。
  */
 public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeButtonBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getBlockSetType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getPressTicks())).apply(instance, ExtShapeButtonBlock::new));
-
   public final @NotNull Block baseBlock;
 
   public ExtShapeButtonBlock(@NotNull Block baseBlock, Settings blockSettings, @NotNull ActivationSettings activationSettings) {

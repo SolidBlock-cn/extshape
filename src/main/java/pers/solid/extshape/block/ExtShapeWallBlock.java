@@ -23,7 +23,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.brrp.v1.generator.BRRPWallBlock;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 

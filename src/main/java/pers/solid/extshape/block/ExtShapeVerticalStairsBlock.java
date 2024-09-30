@@ -1,8 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
@@ -23,10 +20,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnknownNullability;
-import pers.solid.brrp.v1.model.ModelJsonBuilder;
-import pers.solid.brrp.v1.model.ModelUtils;
-import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;

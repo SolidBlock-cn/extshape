@@ -2,9 +2,6 @@ package pers.solid.extshape.block;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

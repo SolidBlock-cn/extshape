@@ -1,9 +1,6 @@
 package pers.solid.extshape.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.block.WoodType;
+import net.minecraft.block.*;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
@@ -24,6 +21,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.FenceSettings;
 
 /**
@@ -31,13 +29,14 @@ import pers.solid.extshape.util.FenceSettings;
  */
 public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVariantBlockInterface {
 
+  public final @NotNull Block baseBlock;
   /**
    * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
    */
   private final Item secondIngredient;
 
   public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Settings settings, @NotNull WoodType woodType, @Nullable Item secondIngredient) {
-    super(woodType, settings);
+    super(settings, woodType);
     this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
   }

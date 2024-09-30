@@ -12,7 +12,6 @@ import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.*;
