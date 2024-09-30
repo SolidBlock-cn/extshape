@@ -336,6 +336,10 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     for (BSSTypes bundle : BlockusBlockCollections.MOSSY_PLANKS) {
       addForShapes(BlockusBlockTags.ALL_MOSSY_PLANKS, bundle.block);
+      final Block wall = BlockBiMaps.getBlockOf(BlockShape.WALL, bundle.block);
+      if (wall != null) {
+        getOrCreateTagBuilder(ExtShapeTags.PICKAXE_UNMINEABLE).add(wall);
+      }
     }
 
     addForShapes(BlockusBlockTags.CHOCOLATE_BLOCKS,
