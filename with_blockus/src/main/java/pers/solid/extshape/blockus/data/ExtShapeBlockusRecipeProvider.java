@@ -14,7 +14,6 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
-import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
 import pers.solid.extshape.blockus.BlockusCrossShapeDataGeneration;
@@ -40,7 +39,7 @@ public class ExtShapeBlockusRecipeProvider extends FabricRecipeProvider {
     }
 
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
-      final CrossShapeDataGeneration crossShapeDataGeneration = new BlockusCrossShapeDataGeneration(baseBlock, ExtShape.MOD_ID, exporter);
+      final CrossShapeDataGeneration crossShapeDataGeneration = new BlockusCrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, exporter);
       crossShapeDataGeneration.generateCrossShapeData();
     }
 
