@@ -52,7 +52,8 @@
 
   "options.extshape.addToVanillaGroups.blockus": "請注意：如要在創造模式中找到 Blockus 模組中的擴展形狀的方塊，你需要啟用「添加至原版物品組」。這些方塊只會顯示在 Blockus 的物品組中。Blockus 方塊的擴展形狀的方塊沒有專用物品組。",
 
-  "resourcePack.extshape.recipe_tweak.name": "配方調整（修復模組與原版之間的配方衝突）",
+  "resourcePack.extshape.recipe_tweak.name": "配方調整",
+  "resourcePack.extshape.recipe_tweak.description": "調整擴展方塊形狀模組的一些合成配方以修復與原版合成配方之間的衝突。如果安裝了能解決合成配方衝突的模組，可以禁用此資料包。",
 
   "tag.block.extshape.pickaxe_unmineable": "鎬不可挖掘",
   "tag.block.extshape.snow": "雪",
@@ -216,5 +217,4 @@
   "tag.item.extshape.concrete_vertical_quarter_pieces": "混凝土縱條",
   "tag.item.extshape.terracotta_vertical_quarter_pieces": "陶土縱條",
   "tag.item.extshape.stained_terracotta_vertical_quarter_pieces": "染色陶土縱條"
-
 }
