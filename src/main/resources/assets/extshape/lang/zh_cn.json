@@ -50,5 +50,6 @@
 
   "options.extshape.addToVanillaGroups.blockus": "请注意：如要在创造模式物品栏中找到Blockus模组中的扩展形状的方块，你需要启用“添加至原版物品组”。这些方块只会显示在Blockus的物品组中。Blockus方块的扩展形状的方块没有专用物品组。",
 
-  "resourcePack.extshape.recipe_tweak.name": "配方调整（修复模组与原版之间的配方冲突）"
+  "resourcePack.extshape.recipe_tweak.name": "配方调整（扩展方块形状）",
+  "resourcePack.extshape.recipe_tweak.description": "调整扩展方块形状模组的一些合成配方以修复与原版合成配方之间的冲突。如果安装了能解决合成配方冲突的模组，可以禁用此数据包。"
 }
