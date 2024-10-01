@@ -1,13 +1,52 @@
 {
   "variants": {
-    "type=bottom": {
-      "model": "extshape:block/orange_glazed_terracotta_slab"
+    "facing=east,type=bottom": {
+      "model": "extshape:block/orange_glazed_terracotta_slab",
+      "y": 270
     },
-    "type=double": {
-      "model": "minecraft:block/orange_glazed_terracotta"
+    "facing=east,type=double": {
+      "model": "minecraft:block/orange_glazed_terracotta",
+      "y": 270
     },
-    "type=top": {
-      "model": "extshape:block/orange_glazed_terracotta_slab_top"
+    "facing=east,type=top": {
+      "model": "extshape:block/orange_glazed_terracotta_slab_top",
+      "y": 270
+    },
+    "facing=north,type=bottom": {
+      "model": "extshape:block/orange_glazed_terracotta_slab",
+      "y": 180
+    },
+    "facing=north,type=double": {
+      "model": "minecraft:block/orange_glazed_terracotta",
+      "y": 180
+    },
+    "facing=north,type=top": {
+      "model": "extshape:block/orange_glazed_terracotta_slab_top",
+      "y": 180
+    },
+    "facing=south,type=bottom": {
+      "model": "extshape:block/orange_glazed_terracotta_slab",
+      "y": 0
+    },
+    "facing=south,type=double": {
+      "model": "minecraft:block/orange_glazed_terracotta",
+      "y": 0
+    },
+    "facing=south,type=top": {
+      "model": "extshape:block/orange_glazed_terracotta_slab_top",
+      "y": 0
+    },
+    "facing=west,type=bottom": {
+      "model": "extshape:block/orange_glazed_terracotta_slab",
+      "y": 90
+    },
+    "facing=west,type=double": {
+      "model": "minecraft:block/orange_glazed_terracotta",
+      "y": 90
+    },
+    "facing=west,type=top": {
+      "model": "extshape:block/orange_glazed_terracotta_slab_top",
+      "y": 90
     }
   }
 }
