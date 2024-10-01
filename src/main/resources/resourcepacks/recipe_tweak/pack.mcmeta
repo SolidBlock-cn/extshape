@@ -1,0 +1,9 @@
+{
+  "pack": {
+    "description": {
+      "translate": "resourcePack.extshape.recipe_tweak.description"
+    },
+    "pack_format": 16,
+    "supported_formats": [1, 999]
+  }
+}
