@@ -50,5 +50,6 @@
 
   "modmenu.nameTranslation.extshape": "塊形之擴",
 
-  "resourcePack.extshape.recipe_tweak.name": "修方（直方之撞）"
+  "resourcePack.extshape.recipe_tweak.name": "修方（塊形之擴）",
+  "resourcePack.extshape.recipe_tweak.description": "修是資囊之制方，以直預置之撞。直制方之撞之既載者，此錄囊可棄也。"
 }
