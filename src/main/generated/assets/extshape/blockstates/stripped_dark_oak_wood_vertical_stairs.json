@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "facing=north_east": {
+      "model": "extshape:block/stripped_dark_oak_wood_vertical_stairs",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north_west": {
+      "model": "extshape:block/stripped_dark_oak_wood_vertical_stairs",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south_east": {
+      "model": "extshape:block/stripped_dark_oak_wood_vertical_stairs",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=south_west": {
+      "model": "extshape:block/stripped_dark_oak_wood_vertical_stairs",
+      "uvlock": true,
+      "y": 0
+    }
+  }
+}

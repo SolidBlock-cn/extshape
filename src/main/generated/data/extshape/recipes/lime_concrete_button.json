@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "concrete_button",
+  "ingredients": [
+    {
+      "item": "minecraft:lime_concrete"
+    }
+  ],
+  "result": {
+    "item": "extshape:lime_concrete_button"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "extshape:block/slab_column_top",
+  "textures": {
+    "end": "minecraft:block/stripped_warped_stem",
+    "side": "minecraft:block/stripped_warped_stem"
+  }
+}

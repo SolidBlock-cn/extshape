@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:ender_block"
+  },
+  "result": "extshape_blockus:ender_slab"
+}

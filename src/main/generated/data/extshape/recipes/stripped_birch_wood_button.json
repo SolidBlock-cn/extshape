@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "stripped_wood_button",
+  "ingredients": [
+    {
+      "item": "minecraft:stripped_birch_wood"
+    }
+  ],
+  "result": {
+    "item": "extshape:stripped_birch_wood_button"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "minecraft:prismarine_stairs"
+  },
+  "result": "extshape:prismarine_quarter_piece"
+}

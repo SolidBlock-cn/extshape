@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:small_magma_bricks"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:small_magma_brick_button"
+  }
+}

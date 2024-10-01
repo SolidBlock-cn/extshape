@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shingles_vertical_slab_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:cyan_dye"
+    },
+    "X": {
+      "item": "extshape_blockus:shingles_vertical_slab"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "item": "extshape_blockus:cyan_shingles_vertical_slab"
+  },
+  "show_notification": true
+}

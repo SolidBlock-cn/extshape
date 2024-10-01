@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:prismarine_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:prismarine_vertical_stairs"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:tuff_circular_paving_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tuff_circular_paving": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:tuff_circular_paving"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_tuff_circular_paving",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:tuff_circular_paving_slab"
+    ]
+  },
+  "sends_telemetry_event": false
+}

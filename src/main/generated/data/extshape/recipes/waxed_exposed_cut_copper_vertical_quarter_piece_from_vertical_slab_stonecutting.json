@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:waxed_exposed_cut_copper_vertical_slab"
+  },
+  "result": "extshape:waxed_exposed_cut_copper_vertical_quarter_piece"
+}

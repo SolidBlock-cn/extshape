@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:coarse_dirt_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:coarse_dirt_vertical_quarter_piece"
+  }
+}

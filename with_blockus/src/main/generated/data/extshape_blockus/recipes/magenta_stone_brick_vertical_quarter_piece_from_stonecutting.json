@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:magenta_stone_bricks"
+  },
+  "result": "extshape_blockus:magenta_stone_brick_vertical_quarter_piece"
+}

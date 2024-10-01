@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:obsidian_bricks"
+  },
+  "result": "extshape_blockus:obsidian_brick_vertical_quarter_piece"
+}

@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:log_walls",
+    "extshape:bamboo_block_wall",
+    "extshape:stripped_bamboo_block_wall",
+    "extshape:oak_wall",
+    "extshape:spruce_wall",
+    "extshape:birch_wall",
+    "extshape:jungle_wall",
+    "extshape:acacia_wall",
+    "extshape:cherry_wall",
+    "extshape:dark_oak_wall",
+    "extshape:mangrove_wall",
+    "extshape:bamboo_wall",
+    "extshape:bamboo_mosaic_wall",
+    "extshape:crimson_wall",
+    "extshape:warped_wall"
+  ]
+}

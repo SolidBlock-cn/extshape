@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:charred_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:charred_vertical_stairs"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "extshape:block/slab_column",
+  "textures": {
+    "end": "blockus:block/spruce_small_logs_top",
+    "side": "blockus:block/spruce_small_logs"
+  }
+}

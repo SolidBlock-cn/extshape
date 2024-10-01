@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:emerald_block"
+    }
+  ],
+  "result": {
+    "item": "extshape:emerald_button"
+  }
+}

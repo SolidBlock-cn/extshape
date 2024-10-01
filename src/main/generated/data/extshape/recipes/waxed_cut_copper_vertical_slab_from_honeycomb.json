@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_cut_copper_vertical_slab",
+  "ingredients": [
+    {
+      "item": "extshape:cut_copper_vertical_slab"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "extshape:waxed_cut_copper_vertical_slab"
+  }
+}

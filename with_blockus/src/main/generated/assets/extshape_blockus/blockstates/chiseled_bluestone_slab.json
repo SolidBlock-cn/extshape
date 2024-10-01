@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/chiseled_bluestone_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/chiseled_bluestone"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/chiseled_bluestone_slab_top"
+    }
+  }
+}

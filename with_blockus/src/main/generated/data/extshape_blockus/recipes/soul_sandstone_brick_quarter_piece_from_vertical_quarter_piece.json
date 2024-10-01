@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:soul_sandstone_brick_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:soul_sandstone_brick_quarter_piece"
+  }
+}

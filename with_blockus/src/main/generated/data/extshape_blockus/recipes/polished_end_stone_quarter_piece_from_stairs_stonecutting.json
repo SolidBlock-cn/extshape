@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "blockus:polished_end_stone_stairs"
+  },
+  "result": "extshape_blockus:polished_end_stone_quarter_piece"
+}

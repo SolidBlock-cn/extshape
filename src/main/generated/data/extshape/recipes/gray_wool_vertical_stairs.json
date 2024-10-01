@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:gray_wool_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:gray_wool_vertical_stairs"
+  }
+}

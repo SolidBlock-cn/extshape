@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool_vertical_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:pink_wool_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:pink_wool_vertical_quarter_piece"
+  }
+}

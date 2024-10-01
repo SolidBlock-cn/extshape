@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:diamond_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:diamond_vertical_slab"
+  }
+}

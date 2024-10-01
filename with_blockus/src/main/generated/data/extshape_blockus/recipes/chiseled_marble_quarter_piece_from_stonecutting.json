@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:chiseled_marble"
+  },
+  "result": "extshape_blockus:chiseled_marble_quarter_piece"
+}

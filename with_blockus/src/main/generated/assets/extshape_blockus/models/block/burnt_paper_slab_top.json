@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "blockus:block/burnt_paper_block",
+    "side": "blockus:block/burnt_paper_block",
+    "top": "blockus:block/burnt_paper_block"
+  }
+}

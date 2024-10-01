@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:snow_stairs",
+    "extshape:snow_slab",
+    "extshape:snow_vertical_slab",
+    "extshape:snow_vertical_stairs",
+    "extshape:snow_quarter_piece",
+    "extshape:snow_vertical_quarter_piece",
+    "extshape:snow_fence",
+    "extshape:snow_fence_gate",
+    "extshape:snow_wall",
+    "extshape:snow_button",
+    "extshape:snow_pressure_plate"
+  ]
+}

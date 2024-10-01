@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wool_wall",
+  "key": {
+    "#": {
+      "item": "minecraft:light_gray_wool"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:light_gray_wool_wall"
+  },
+  "show_notification": true
+}

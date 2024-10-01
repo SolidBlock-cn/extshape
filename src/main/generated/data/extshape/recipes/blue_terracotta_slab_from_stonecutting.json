@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:blue_terracotta"
+  },
+  "result": "extshape:blue_terracotta_slab"
+}

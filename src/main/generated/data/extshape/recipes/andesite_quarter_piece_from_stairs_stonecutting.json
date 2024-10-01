@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "minecraft:andesite_stairs"
+  },
+  "result": "extshape:andesite_quarter_piece"
+}

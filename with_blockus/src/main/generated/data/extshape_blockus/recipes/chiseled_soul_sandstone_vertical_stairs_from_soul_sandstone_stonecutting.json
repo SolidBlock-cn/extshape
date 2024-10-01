@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:soul_sandstone"
+  },
+  "result": "extshape_blockus:chiseled_soul_sandstone_vertical_stairs"
+}

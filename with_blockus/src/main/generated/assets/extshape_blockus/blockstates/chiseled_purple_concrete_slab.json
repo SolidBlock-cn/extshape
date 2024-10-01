@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/chiseled_purple_concrete_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/chiseled_purple_concrete"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/chiseled_purple_concrete_slab_top"
+    }
+  }
+}

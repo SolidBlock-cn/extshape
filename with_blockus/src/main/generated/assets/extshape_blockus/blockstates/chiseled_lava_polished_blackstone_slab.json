@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/chiseled_lava_polished_blackstone_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/chiseled_lava_polished_blackstone"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/chiseled_lava_polished_blackstone_slab_top"
+    }
+  }
+}

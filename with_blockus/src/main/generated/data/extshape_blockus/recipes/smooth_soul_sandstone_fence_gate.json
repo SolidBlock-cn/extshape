@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:soul_sand"
+    },
+    "W": {
+      "item": "blockus:smooth_soul_sandstone"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extshape_blockus:smooth_soul_sandstone_fence_gate"
+  },
+  "show_notification": true
+}

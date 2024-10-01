@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "blockus:sculk_brick_stairs"
+  },
+  "result": "extshape_blockus:sculk_brick_quarter_piece"
+}

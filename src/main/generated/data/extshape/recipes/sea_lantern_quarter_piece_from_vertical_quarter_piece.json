@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:sea_lantern_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:sea_lantern_quarter_piece"
+  }
+}

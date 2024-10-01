@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:viridite_tile_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_viridite_tiles": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:viridite_tiles"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_viridite_tiles",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:viridite_tile_pressure_plate"
+    ]
+  },
+  "sends_telemetry_event": false
+}

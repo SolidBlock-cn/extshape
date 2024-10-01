@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "mossy_wooden_wall",
+  "key": {
+    "#": {
+      "item": "blockus:mossy_birch_planks"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:mossy_birch_wall"
+  },
+  "show_notification": true
+}

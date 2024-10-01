@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "concrete_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "extshape:cyan_concrete_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:cyan_concrete_quarter_piece"
+  },
+  "show_notification": true
+}

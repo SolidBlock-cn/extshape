@@ -1,0 +1,42 @@
+{
+  "variants": {
+    "facing=east,half=bottom": {
+      "model": "extshape_blockus:block/mossy_cherry_quarter_piece",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,half=top": {
+      "model": "extshape_blockus:block/mossy_cherry_quarter_piece_top",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom": {
+      "model": "extshape_blockus:block/mossy_cherry_quarter_piece",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,half=top": {
+      "model": "extshape_blockus:block/mossy_cherry_quarter_piece_top",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,half=bottom": {
+      "model": "extshape_blockus:block/mossy_cherry_quarter_piece",
+      "uvlock": true
+    },
+    "facing=south,half=top": {
+      "model": "extshape_blockus:block/mossy_cherry_quarter_piece_top",
+      "uvlock": true
+    },
+    "facing=west,half=bottom": {
+      "model": "extshape_blockus:block/mossy_cherry_quarter_piece",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,half=top": {
+      "model": "extshape_blockus:block/mossy_cherry_quarter_piece_top",
+      "uvlock": true,
+      "y": 90
+    }
+  }
+}

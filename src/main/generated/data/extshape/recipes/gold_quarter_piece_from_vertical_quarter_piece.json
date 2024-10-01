@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:gold_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:gold_quarter_piece"
+  }
+}

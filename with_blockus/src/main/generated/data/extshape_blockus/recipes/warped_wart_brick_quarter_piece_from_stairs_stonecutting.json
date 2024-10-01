@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "blockus:warped_wart_brick_stairs"
+  },
+  "result": "extshape_blockus:warped_wart_brick_quarter_piece"
+}

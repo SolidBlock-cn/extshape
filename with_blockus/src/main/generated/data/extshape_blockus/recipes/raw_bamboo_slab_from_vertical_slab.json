@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:raw_bamboo_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "blockus:raw_bamboo_slab"
+  }
+}

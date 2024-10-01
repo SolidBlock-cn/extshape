@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_mosaic_wall",
+  "key": {
+    "#": {
+      "item": "blockus:crimson_mosaic"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:crimson_mosaic_wall"
+  },
+  "show_notification": true
+}

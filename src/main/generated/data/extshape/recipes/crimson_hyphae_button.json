@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wood_button",
+  "ingredients": [
+    {
+      "item": "minecraft:crimson_hyphae"
+    }
+  ],
+  "result": {
+    "item": "extshape:crimson_hyphae_button"
+  }
+}

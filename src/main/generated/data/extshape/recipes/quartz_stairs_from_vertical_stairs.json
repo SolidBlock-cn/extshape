@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:quartz_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "minecraft:quartz_stairs"
+  }
+}

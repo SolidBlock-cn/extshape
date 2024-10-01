@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:log_buttons",
+    "extshape:bamboo_block_button",
+    "extshape:stripped_bamboo_block_button",
+    "extshape:bamboo_mosaic_button"
+  ]
+}

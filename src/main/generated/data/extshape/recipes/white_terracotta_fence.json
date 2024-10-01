@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:clay"
+    },
+    "W": {
+      "item": "minecraft:white_terracotta"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape:white_terracotta_fence"
+  },
+  "show_notification": true
+}

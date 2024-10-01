@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:black_shingles"
+  },
+  "result": "extshape_blockus:black_shingles_vertical_stairs"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:polished_viridite"
+  },
+  "result": "extshape_blockus:viridite_squares_vertical_quarter_piece"
+}

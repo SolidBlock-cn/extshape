@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:lava_polished_blackstone_bricks"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:lava_polished_blackstone_brick_button"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:jungle_mosaic_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:jungle_mosaic_stairs"
+  }
+}

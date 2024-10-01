@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:dripstone_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:dripstone_slab"
+  }
+}

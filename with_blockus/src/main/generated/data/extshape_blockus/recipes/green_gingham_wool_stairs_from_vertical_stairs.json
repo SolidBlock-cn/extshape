@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:green_gingham_wool_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:green_gingham_wool_stairs"
+  }
+}

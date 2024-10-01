@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:diorite"
+  },
+  "result": "extshape_blockus:chiseled_diorite_brick_slab"
+}

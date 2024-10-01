@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "W": {
+      "item": "minecraft:prismarine"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extshape:prismarine_fence_gate"
+  },
+  "show_notification": true
+}

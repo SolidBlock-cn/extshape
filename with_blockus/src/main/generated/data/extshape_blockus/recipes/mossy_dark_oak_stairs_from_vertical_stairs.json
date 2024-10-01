@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:mossy_dark_oak_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:mossy_dark_oak_stairs"
+  }
+}

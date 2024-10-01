@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:stars_block"
+  },
+  "result": "extshape_blockus:stars_wall"
+}

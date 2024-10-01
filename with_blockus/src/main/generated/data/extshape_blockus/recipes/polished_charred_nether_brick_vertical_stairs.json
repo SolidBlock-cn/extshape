@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:polished_charred_nether_brick_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:polished_charred_nether_brick_vertical_stairs"
+  }
+}

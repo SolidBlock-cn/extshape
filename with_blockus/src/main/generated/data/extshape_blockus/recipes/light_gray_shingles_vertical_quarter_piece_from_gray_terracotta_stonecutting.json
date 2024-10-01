@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:gray_terracotta"
+  },
+  "result": "extshape_blockus:light_gray_shingles_vertical_quarter_piece"
+}

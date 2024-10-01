@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:end_stone_bricks"
+    },
+    "W": {
+      "item": "blockus:herringbone_end_stone_bricks"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape_blockus:herringbone_end_stone_brick_fence"
+  },
+  "show_notification": true
+}

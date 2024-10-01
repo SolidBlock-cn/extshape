@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:lava_polished_blackstone_brick_vertical_slab",
+    "extshape_blockus:lava_polished_blackstone_brick_vertical_stairs",
+    "extshape_blockus:lava_polished_blackstone_brick_quarter_piece",
+    "extshape_blockus:lava_polished_blackstone_brick_vertical_quarter_piece",
+    "extshape_blockus:lava_polished_blackstone_brick_fence",
+    "extshape_blockus:lava_polished_blackstone_brick_fence_gate",
+    "extshape_blockus:lava_polished_blackstone_brick_button",
+    "extshape_blockus:lava_polished_blackstone_brick_pressure_plate",
+    "extshape_blockus:chiseled_lava_polished_blackstone_stairs",
+    "extshape_blockus:chiseled_lava_polished_blackstone_slab",
+    "extshape_blockus:chiseled_lava_polished_blackstone_vertical_slab",
+    "extshape_blockus:chiseled_lava_polished_blackstone_vertical_stairs",
+    "extshape_blockus:chiseled_lava_polished_blackstone_quarter_piece",
+    "extshape_blockus:chiseled_lava_polished_blackstone_vertical_quarter_piece",
+    "extshape_blockus:chiseled_lava_polished_blackstone_fence",
+    "extshape_blockus:chiseled_lava_polished_blackstone_fence_gate",
+    "extshape_blockus:chiseled_lava_polished_blackstone_wall",
+    "extshape_blockus:chiseled_lava_polished_blackstone_pressure_plate"
+  ]
+}

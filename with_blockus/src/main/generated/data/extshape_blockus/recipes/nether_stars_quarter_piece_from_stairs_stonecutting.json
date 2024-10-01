@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape_blockus:nether_stars_stairs"
+  },
+  "result": "extshape_blockus:nether_stars_quarter_piece"
+}

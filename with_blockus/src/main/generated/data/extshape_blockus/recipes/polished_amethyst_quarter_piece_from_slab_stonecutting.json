@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:polished_amethyst_slab"
+  },
+  "result": "extshape_blockus:polished_amethyst_quarter_piece"
+}

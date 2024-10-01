@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:nether_wart"
+    },
+    "W": {
+      "item": "minecraft:nether_wart_block"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extshape:nether_wart_fence_gate"
+  },
+  "show_notification": true
+}

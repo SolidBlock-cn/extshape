@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stripped_wood_stairs",
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_birch_wood"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "extshape:stripped_birch_wood_stairs"
+  },
+  "show_notification": true
+}

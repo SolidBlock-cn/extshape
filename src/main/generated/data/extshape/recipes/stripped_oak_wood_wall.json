@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stripped_wood_wall",
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_oak_wood"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:stripped_oak_wood_wall"
+  },
+  "show_notification": true
+}

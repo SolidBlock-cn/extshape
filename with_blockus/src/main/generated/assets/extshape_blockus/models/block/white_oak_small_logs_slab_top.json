@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "blockus:block/white_oak_small_logs_top",
+    "side": "blockus:block/white_oak_small_logs",
+    "top": "blockus:block/white_oak_small_logs_top"
+  }
+}

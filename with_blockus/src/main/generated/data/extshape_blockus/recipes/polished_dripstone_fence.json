@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:pointed_dripstone"
+    },
+    "W": {
+      "item": "blockus:polished_dripstone"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape_blockus:polished_dripstone_fence"
+  },
+  "show_notification": true
+}

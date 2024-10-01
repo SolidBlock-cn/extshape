@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:marble_tiles"
+  },
+  "result": "extshape_blockus:marble_tile_vertical_stairs"
+}

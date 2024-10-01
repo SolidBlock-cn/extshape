@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:lava_polished_blackstone_brick_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:lava_polished_blackstone_brick_stairs"
+  }
+}

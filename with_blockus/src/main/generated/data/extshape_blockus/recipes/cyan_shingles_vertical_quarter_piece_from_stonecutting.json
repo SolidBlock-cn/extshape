@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:cyan_shingles"
+  },
+  "result": "extshape_blockus:cyan_shingles_vertical_quarter_piece"
+}

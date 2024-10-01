@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wooden_vertical_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:cherry_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:cherry_vertical_quarter_piece"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:mossy_tuff_brick_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "blockus:mossy_tuff_brick_slab"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:yellow_terracotta"
+    }
+  ],
+  "result": {
+    "item": "extshape:yellow_terracotta_button"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wool_button",
+  "ingredients": [
+    {
+      "item": "minecraft:pink_wool"
+    }
+  ],
+  "result": {
+    "item": "extshape:pink_wool_button"
+  }
+}

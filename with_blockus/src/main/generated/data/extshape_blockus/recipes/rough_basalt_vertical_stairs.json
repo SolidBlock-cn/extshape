@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:rough_basalt_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:rough_basalt_vertical_stairs"
+  }
+}

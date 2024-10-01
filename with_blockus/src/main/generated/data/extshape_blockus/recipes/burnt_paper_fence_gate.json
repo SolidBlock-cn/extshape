@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:gunpowder"
+    },
+    "W": {
+      "item": "blockus:burnt_paper_block"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extshape_blockus:burnt_paper_fence_gate"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:mossy_cobblestone_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "minecraft:mossy_cobblestone_stairs"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:packed_mud_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:packed_mud_vertical_slab"
+  }
+}

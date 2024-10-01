@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chiseled_lava_polished_blackstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:chiseled_lava_polished_blackstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:chiseled_lava_polished_blackstone_fence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chiseled_lava_polished_blackstone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:chiseled_lava_polished_blackstone_fence"
+    ]
+  },
+  "sends_telemetry_event": false
+}

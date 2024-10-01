@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:chiseled_amethyst_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:chiseled_amethyst_stairs"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:soaked_bricks"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:soaked_brick_button"
+  }
+}

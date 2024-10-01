@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "shingles_wall",
+  "key": {
+    "#": {
+      "item": "blockus:black_shingles"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:black_shingles_wall"
+  },
+  "show_notification": true
+}

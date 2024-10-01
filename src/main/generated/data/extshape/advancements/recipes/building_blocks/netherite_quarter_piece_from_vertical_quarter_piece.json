@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:netherite_quarter_piece_from_vertical_quarter_piece"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vertical_quarter_piece": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape:netherite_vertical_quarter_piece"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_vertical_quarter_piece",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:netherite_quarter_piece_from_vertical_quarter_piece"
+    ]
+  },
+  "sends_telemetry_event": false
+}

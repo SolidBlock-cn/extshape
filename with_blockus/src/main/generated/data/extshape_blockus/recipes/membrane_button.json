@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:membrane_block"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:membrane_button"
+  }
+}

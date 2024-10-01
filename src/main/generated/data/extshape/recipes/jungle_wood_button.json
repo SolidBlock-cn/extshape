@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wood_button",
+  "ingredients": [
+    {
+      "item": "minecraft:jungle_wood"
+    }
+  ],
+  "result": {
+    "item": "extshape:jungle_wood_button"
+  }
+}

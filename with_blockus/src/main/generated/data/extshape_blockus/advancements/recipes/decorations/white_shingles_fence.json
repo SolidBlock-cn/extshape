@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:white_shingles_fence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_shingles": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:white_shingles"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_shingles",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:white_shingles_fence"
+    ]
+  },
+  "sends_telemetry_event": false
+}

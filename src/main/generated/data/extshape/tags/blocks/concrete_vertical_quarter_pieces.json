@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:white_concrete_vertical_quarter_piece",
+    "extshape:orange_concrete_vertical_quarter_piece",
+    "extshape:magenta_concrete_vertical_quarter_piece",
+    "extshape:light_blue_concrete_vertical_quarter_piece",
+    "extshape:yellow_concrete_vertical_quarter_piece",
+    "extshape:lime_concrete_vertical_quarter_piece",
+    "extshape:pink_concrete_vertical_quarter_piece",
+    "extshape:gray_concrete_vertical_quarter_piece",
+    "extshape:light_gray_concrete_vertical_quarter_piece",
+    "extshape:cyan_concrete_vertical_quarter_piece",
+    "extshape:purple_concrete_vertical_quarter_piece",
+    "extshape:blue_concrete_vertical_quarter_piece",
+    "extshape:brown_concrete_vertical_quarter_piece",
+    "extshape:green_concrete_vertical_quarter_piece",
+    "extshape:red_concrete_vertical_quarter_piece",
+    "extshape:black_concrete_vertical_quarter_piece"
+  ]
+}

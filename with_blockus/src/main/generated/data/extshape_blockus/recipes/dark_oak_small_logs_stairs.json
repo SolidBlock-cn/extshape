@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_logs_stairs",
+  "key": {
+    "#": {
+      "item": "blockus:dark_oak_small_logs"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "extshape_blockus:dark_oak_small_logs_stairs"
+  },
+  "show_notification": true
+}

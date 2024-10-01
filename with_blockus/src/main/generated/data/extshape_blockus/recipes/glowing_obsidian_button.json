@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:glowing_obsidian"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:glowing_obsidian_button"
+  }
+}

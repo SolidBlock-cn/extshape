@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:chiseled_dark_prismarine"
+  },
+  "result": "extshape_blockus:chiseled_dark_prismarine_quarter_piece"
+}

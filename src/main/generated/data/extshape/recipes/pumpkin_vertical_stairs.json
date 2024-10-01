@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:pumpkin_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:pumpkin_vertical_stairs"
+  }
+}

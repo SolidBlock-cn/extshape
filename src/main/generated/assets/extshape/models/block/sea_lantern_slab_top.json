@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "minecraft:block/sea_lantern",
+    "side": "minecraft:block/sea_lantern",
+    "top": "minecraft:block/sea_lantern"
+  }
+}

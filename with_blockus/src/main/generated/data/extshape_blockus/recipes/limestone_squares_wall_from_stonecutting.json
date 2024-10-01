@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:limestone_squares"
+  },
+  "result": "extshape_blockus:limestone_squares_wall"
+}

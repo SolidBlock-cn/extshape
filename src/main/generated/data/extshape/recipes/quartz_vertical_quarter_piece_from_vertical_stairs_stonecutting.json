@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape:quartz_vertical_stairs"
+  },
+  "result": "extshape:quartz_vertical_quarter_piece"
+}

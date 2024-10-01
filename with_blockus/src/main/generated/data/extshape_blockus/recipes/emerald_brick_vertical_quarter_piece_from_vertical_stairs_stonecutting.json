@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape_blockus:emerald_brick_vertical_stairs"
+  },
+  "result": "extshape_blockus:emerald_brick_vertical_quarter_piece"
+}

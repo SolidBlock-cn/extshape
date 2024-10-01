@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "group": "concrete_brick_quarter_piece",
+  "ingredient": {
+    "item": "blockus:yellow_concrete_brick_stairs"
+  },
+  "result": "extshape_blockus:yellow_concrete_brick_quarter_piece"
+}
