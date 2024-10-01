@@ -35,4 +35,4 @@ run/
 
 # Data Generator
 
-generated/
+.cache
