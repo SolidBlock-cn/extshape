@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "concrete_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:magenta_concrete_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:magenta_concrete_vertical_slab"
+  }
+}

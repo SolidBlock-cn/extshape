@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:limestone_squares_quarter_piece_from_vertical_quarter_piece"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vertical_quarter_piece": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape_blockus:limestone_squares_vertical_quarter_piece"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_vertical_quarter_piece",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:limestone_squares_quarter_piece_from_vertical_quarter_piece"
+    ]
+  }
+}

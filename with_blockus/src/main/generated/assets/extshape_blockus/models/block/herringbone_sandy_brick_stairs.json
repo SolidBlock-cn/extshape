@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "blockus:block/herringbone_sandy_bricks",
+    "side": "blockus:block/herringbone_sandy_bricks",
+    "top": "blockus:block/herringbone_sandy_bricks"
+  }
+}

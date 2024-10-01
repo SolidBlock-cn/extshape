@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape:lapis_stairs"
+  },
+  "result": "extshape:lapis_quarter_piece"
+}

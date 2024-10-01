@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/emerald_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/emerald_block"
+    },
+    "type=top": {
+      "model": "extshape:block/emerald_slab_top"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/vertical_quarter_piece",
+  "textures": {
+    "bottom": "blockus:block/chiseled_purple_concrete",
+    "side": "blockus:block/chiseled_purple_concrete",
+    "top": "blockus:block/chiseled_purple_concrete"
+  }
+}

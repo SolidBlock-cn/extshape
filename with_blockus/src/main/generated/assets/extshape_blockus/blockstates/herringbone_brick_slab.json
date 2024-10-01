@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/herringbone_brick_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/herringbone_bricks"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/herringbone_brick_slab_top"
+    }
+  }
+}

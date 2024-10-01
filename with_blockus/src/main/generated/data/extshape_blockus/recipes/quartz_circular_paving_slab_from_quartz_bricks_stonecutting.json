@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:quartz_bricks"
+  },
+  "result": "extshape_blockus:quartz_circular_paving_slab"
+}

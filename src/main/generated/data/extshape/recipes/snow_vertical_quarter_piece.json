@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:snow_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:snow_vertical_quarter_piece"
+  }
+}

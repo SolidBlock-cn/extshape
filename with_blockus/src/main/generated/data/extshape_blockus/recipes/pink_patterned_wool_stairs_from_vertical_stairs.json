@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:pink_patterned_wool_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:pink_patterned_wool_stairs"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:smooth_quartz_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:smooth_quartz_vertical_quarter_piece"
+  }
+}

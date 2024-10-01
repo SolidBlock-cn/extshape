@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/herringbone_bamboo_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/herringbone_bamboo_planks"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/herringbone_bamboo_slab_top"
+    }
+  }
+}

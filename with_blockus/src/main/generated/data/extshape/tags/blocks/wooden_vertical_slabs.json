@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:white_oak_vertical_slab",
+    "extshape_blockus:charred_vertical_slab",
+    "extshape_blockus:herringbone_oak_vertical_slab",
+    "extshape_blockus:herringbone_spruce_vertical_slab",
+    "extshape_blockus:herringbone_birch_vertical_slab",
+    "extshape_blockus:herringbone_jungle_vertical_slab",
+    "extshape_blockus:herringbone_acacia_vertical_slab",
+    "extshape_blockus:herringbone_dark_oak_vertical_slab",
+    "extshape_blockus:herringbone_mangrove_vertical_slab",
+    "extshape_blockus:herringbone_bamboo_vertical_slab",
+    "extshape_blockus:herringbone_white_oak_vertical_slab",
+    "extshape_blockus:herringbone_warped_vertical_slab",
+    "extshape_blockus:herringbone_crimson_vertical_slab",
+    "extshape_blockus:herringbone_charred_vertical_slab"
+  ]
+}

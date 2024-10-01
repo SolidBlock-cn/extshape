@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "chiseled_concrete_brick_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:chiseled_white_concrete_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:chiseled_white_concrete_vertical_stairs"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:charred_nether_bricks"
+  },
+  "result": "extshape_blockus:charred_nether_brick_vertical_slab"
+}

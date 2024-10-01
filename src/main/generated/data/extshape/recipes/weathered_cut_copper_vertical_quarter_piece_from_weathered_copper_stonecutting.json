@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 16,
+  "ingredient": {
+    "item": "minecraft:weathered_copper"
+  },
+  "result": "extshape:weathered_cut_copper_vertical_quarter_piece"
+}

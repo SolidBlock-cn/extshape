@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:basalt"
+  },
+  "result": "extshape_blockus:polished_basalt_circular_paving_quarter_piece"
+}

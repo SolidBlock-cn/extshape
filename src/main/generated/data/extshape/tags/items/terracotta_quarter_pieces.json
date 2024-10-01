@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:stained_terracotta_quarter_pieces",
+    "extshape:terracotta_quarter_piece"
+  ]
+}

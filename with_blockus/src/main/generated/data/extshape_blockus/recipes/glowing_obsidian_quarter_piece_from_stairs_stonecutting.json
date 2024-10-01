@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape_blockus:glowing_obsidian_stairs"
+  },
+  "result": "extshape_blockus:glowing_obsidian_quarter_piece"
+}

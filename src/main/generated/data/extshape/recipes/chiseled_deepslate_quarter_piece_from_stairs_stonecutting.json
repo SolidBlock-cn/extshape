@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape:chiseled_deepslate_stairs"
+  },
+  "result": "extshape:chiseled_deepslate_quarter_piece"
+}

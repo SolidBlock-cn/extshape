@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape_blockus:prismarine_circular_paving_stairs"
+  },
+  "result": "extshape_blockus:prismarine_circular_paving_quarter_piece"
+}

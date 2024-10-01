@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:snow"
+    }
+  ],
+  "result": {
+    "item": "extshape:snow_slab"
+  }
+}

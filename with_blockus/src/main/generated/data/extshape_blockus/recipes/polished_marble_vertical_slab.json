@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:polished_marble_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:polished_marble_vertical_slab"
+  }
+}

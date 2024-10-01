@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "minecraft:block/chiseled_polished_blackstone",
+    "side": "minecraft:block/chiseled_polished_blackstone",
+    "top": "minecraft:block/chiseled_polished_blackstone"
+  }
+}

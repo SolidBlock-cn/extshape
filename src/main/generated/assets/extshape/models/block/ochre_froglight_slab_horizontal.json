@@ -1,0 +1,7 @@
+{
+  "parent": "extshape:block/slab_column_horizontal",
+  "textures": {
+    "end": "minecraft:block/ochre_froglight_top",
+    "side": "minecraft:block/ochre_froglight_side"
+  }
+}

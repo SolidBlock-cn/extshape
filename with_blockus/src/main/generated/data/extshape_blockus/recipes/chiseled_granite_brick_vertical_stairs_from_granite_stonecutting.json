@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:granite"
+  },
+  "result": "extshape_blockus:chiseled_granite_brick_vertical_stairs"
+}

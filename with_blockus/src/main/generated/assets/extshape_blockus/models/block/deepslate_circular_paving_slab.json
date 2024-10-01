@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/glazed_terracotta_slab",
+  "textures": {
+    "bottom": "blockus:block/deepslate_circular_paving",
+    "side": "blockus:block/deepslate_circular_paving",
+    "top": "blockus:block/deepslate_circular_paving"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:pearlescent_froglight_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:pearlescent_froglight_quarter_piece"
+  }
+}

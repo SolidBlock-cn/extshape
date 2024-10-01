@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "concrete_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:blue_concrete_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:blue_concrete_vertical_stairs"
+  }
+}

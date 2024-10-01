@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape:yellow_terracotta_stairs"
+  },
+  "result": "extshape:yellow_terracotta_quarter_piece"
+}

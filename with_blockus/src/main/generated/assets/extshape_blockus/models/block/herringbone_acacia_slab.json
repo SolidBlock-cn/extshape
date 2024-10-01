@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "blockus:block/herringbone_acacia_planks",
+    "side": "blockus:block/herringbone_acacia_planks",
+    "top": "blockus:block/herringbone_acacia_planks"
+  }
+}

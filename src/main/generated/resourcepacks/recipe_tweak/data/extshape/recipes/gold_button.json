@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "tag": "c:gold_ingots"
+    }
+  ],
+  "result": {
+    "item": "extshape:gold_button"
+  }
+}

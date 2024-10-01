@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "concrete_brick_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "blockus:magenta_concrete_brick_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:magenta_concrete_brick_quarter_piece"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:stripped_white_oak_wood"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:stripped_white_oak_wood_button"
+  }
+}

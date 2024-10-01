@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:dirt_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:dirt_vertical_stairs"
+  }
+}

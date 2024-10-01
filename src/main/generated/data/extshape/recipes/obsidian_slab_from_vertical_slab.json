@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:obsidian_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:obsidian_slab"
+  }
+}

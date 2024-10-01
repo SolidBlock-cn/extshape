@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "axis=x,type=bottom": {
+      "model": "extshape:block/oak_log_slab_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,type=double": {
+      "model": "minecraft:block/oak_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,type=top": {
+      "model": "extshape:block/oak_log_slab_horizontal_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,type=bottom": {
+      "model": "extshape:block/oak_log_slab"
+    },
+    "axis=y,type=double": {
+      "model": "minecraft:block/oak_log"
+    },
+    "axis=y,type=top": {
+      "model": "extshape:block/oak_log_slab_top"
+    },
+    "axis=z,type=bottom": {
+      "model": "extshape:block/oak_log_slab_horizontal",
+      "x": 90
+    },
+    "axis=z,type=double": {
+      "model": "minecraft:block/oak_log_horizontal",
+      "x": 90
+    },
+    "axis=z,type=top": {
+      "model": "extshape:block/oak_log_slab_horizontal_top",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:gray_shingles"
+  },
+  "result": "extshape_blockus:gray_shingles_wall"
+}

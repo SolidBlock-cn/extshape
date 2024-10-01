@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wood_wall",
+  "key": {
+    "#": {
+      "item": "minecraft:birch_wood"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:birch_wood_wall"
+  },
+  "show_notification": true
+}

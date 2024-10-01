@@ -1,0 +1,7 @@
+{
+  "parent": "extshape:block/slab_column_top",
+  "textures": {
+    "end": "minecraft:block/crimson_stem_top",
+    "side": "minecraft:block/crimson_stem"
+  }
+}

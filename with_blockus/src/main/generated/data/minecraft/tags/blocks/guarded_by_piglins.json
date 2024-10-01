@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:gold_plating_vertical_slab",
+    "extshape_blockus:gold_plating_vertical_stairs",
+    "extshape_blockus:gold_plating_quarter_piece",
+    "extshape_blockus:gold_plating_vertical_quarter_piece",
+    "extshape_blockus:gold_plating_wall",
+    "extshape_blockus:gold_plating_pressure_plate"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "blockus:block/rainbow_block",
+    "side": "blockus:block/rainbow_block",
+    "top": "blockus:block/rainbow_block"
+  }
+}

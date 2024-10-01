@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:gold_slab"
+  },
+  "result": "extshape:gold_quarter_piece"
+}

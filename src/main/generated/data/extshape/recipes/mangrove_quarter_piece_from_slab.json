@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wooden_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:mangrove_quarter_piece"
+  },
+  "show_notification": true
+}

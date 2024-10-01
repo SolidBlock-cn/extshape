@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:charred_vertical_slab",
+    "extshape_blockus:charred_vertical_stairs",
+    "extshape_blockus:charred_quarter_piece",
+    "extshape_blockus:charred_vertical_quarter_piece",
+    "extshape_blockus:charred_wall",
+    "extshape_blockus:herringbone_crimson_stairs",
+    "extshape_blockus:herringbone_crimson_slab",
+    "extshape_blockus:herringbone_crimson_vertical_slab",
+    "extshape_blockus:herringbone_crimson_vertical_stairs",
+    "extshape_blockus:herringbone_crimson_quarter_piece",
+    "extshape_blockus:herringbone_crimson_vertical_quarter_piece",
+    "extshape_blockus:herringbone_crimson_wall",
+    "extshape_blockus:herringbone_warped_stairs",
+    "extshape_blockus:herringbone_warped_slab",
+    "extshape_blockus:herringbone_warped_vertical_slab",
+    "extshape_blockus:herringbone_warped_vertical_stairs",
+    "extshape_blockus:herringbone_warped_quarter_piece",
+    "extshape_blockus:herringbone_warped_vertical_quarter_piece",
+    "extshape_blockus:herringbone_warped_wall",
+    "extshape_blockus:herringbone_charred_stairs",
+    "extshape_blockus:herringbone_charred_slab",
+    "extshape_blockus:herringbone_charred_vertical_slab",
+    "extshape_blockus:herringbone_charred_vertical_stairs",
+    "extshape_blockus:herringbone_charred_quarter_piece",
+    "extshape_blockus:herringbone_charred_vertical_quarter_piece",
+    "extshape_blockus:herringbone_charred_wall"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:white_terracotta_slab",
+    "extshape:orange_terracotta_slab",
+    "extshape:magenta_terracotta_slab",
+    "extshape:light_blue_terracotta_slab",
+    "extshape:yellow_terracotta_slab",
+    "extshape:lime_terracotta_slab",
+    "extshape:pink_terracotta_slab",
+    "extshape:gray_terracotta_slab",
+    "extshape:light_gray_terracotta_slab",
+    "extshape:cyan_terracotta_slab",
+    "extshape:purple_terracotta_slab",
+    "extshape:blue_terracotta_slab",
+    "extshape:brown_terracotta_slab",
+    "extshape:green_terracotta_slab",
+    "extshape:red_terracotta_slab",
+    "extshape:black_terracotta_slab"
+  ]
+}

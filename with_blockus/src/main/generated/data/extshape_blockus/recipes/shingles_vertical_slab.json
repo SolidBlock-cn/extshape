@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:shingles_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:shingles_vertical_slab"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape:chiseled_nether_brick_stairs"
+  },
+  "result": "extshape:chiseled_nether_brick_quarter_piece"
+}

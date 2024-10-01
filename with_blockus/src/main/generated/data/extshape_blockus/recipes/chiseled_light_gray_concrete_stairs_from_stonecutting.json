@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:chiseled_light_gray_concrete"
+  },
+  "result": "extshape_blockus:chiseled_light_gray_concrete_stairs"
+}

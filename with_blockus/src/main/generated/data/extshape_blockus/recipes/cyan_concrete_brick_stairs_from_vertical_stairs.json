@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:cyan_concrete_brick_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:cyan_concrete_brick_stairs"
+  }
+}

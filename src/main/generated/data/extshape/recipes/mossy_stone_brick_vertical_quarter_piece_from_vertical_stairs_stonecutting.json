@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape:mossy_stone_brick_vertical_stairs"
+  },
+  "result": "extshape:mossy_stone_brick_vertical_quarter_piece"
+}

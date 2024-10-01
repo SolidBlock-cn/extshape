@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "group": "chiseled_concrete_brick_quarter_piece",
+  "ingredient": {
+    "item": "extshape_blockus:chiseled_yellow_concrete_stairs"
+  },
+  "result": "extshape_blockus:chiseled_yellow_concrete_quarter_piece"
+}

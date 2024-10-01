@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:basalt_quarter_piece_from_vertical_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vertical_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape:basalt_vertical_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_vertical_slab",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:basalt_quarter_piece_from_vertical_slab"
+    ]
+  }
+}

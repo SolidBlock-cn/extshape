@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:polished_granite_vertical_slab"
+  },
+  "result": "extshape:polished_granite_quarter_piece"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:marble_squares_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:marble_squares_quarter_piece"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:ancient_debris_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:ancient_debris_vertical_quarter_piece"
+  }
+}

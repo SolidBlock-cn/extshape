@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:red_sandstone_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:red_sandstone_vertical_stairs"
+  }
+}

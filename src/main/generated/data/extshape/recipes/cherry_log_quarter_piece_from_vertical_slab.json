@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "log_quarter_piece_from_vertical_slab",
+  "key": {
+    "#": {
+      "item": "extshape:cherry_log_vertical_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:cherry_log_quarter_piece"
+  },
+  "show_notification": true
+}

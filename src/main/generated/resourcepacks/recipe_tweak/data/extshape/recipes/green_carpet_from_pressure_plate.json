@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wool_from_pressure_plate",
+  "ingredients": [
+    {
+      "item": "extshape:green_wool_pressure_plate"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "minecraft:green_carpet"
+  }
+}

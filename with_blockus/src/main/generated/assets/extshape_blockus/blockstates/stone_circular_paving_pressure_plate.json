@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,powered=false": {
+      "model": "extshape_blockus:block/stone_circular_paving_pressure_plate",
+      "y": 270
+    },
+    "facing=east,powered=true": {
+      "model": "extshape_blockus:block/stone_circular_paving_pressure_plate_down",
+      "y": 270
+    },
+    "facing=north,powered=false": {
+      "model": "extshape_blockus:block/stone_circular_paving_pressure_plate",
+      "y": 180
+    },
+    "facing=north,powered=true": {
+      "model": "extshape_blockus:block/stone_circular_paving_pressure_plate_down",
+      "y": 180
+    },
+    "facing=south,powered=false": {
+      "model": "extshape_blockus:block/stone_circular_paving_pressure_plate"
+    },
+    "facing=south,powered=true": {
+      "model": "extshape_blockus:block/stone_circular_paving_pressure_plate_down"
+    },
+    "facing=west,powered=false": {
+      "model": "extshape_blockus:block/stone_circular_paving_pressure_plate",
+      "y": 90
+    },
+    "facing=west,powered=true": {
+      "model": "extshape_blockus:block/stone_circular_paving_pressure_plate_down",
+      "y": 90
+    }
+  }
+}

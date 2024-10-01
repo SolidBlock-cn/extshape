@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:polished_limestone"
+  },
+  "result": "extshape_blockus:small_limestone_brick_vertical_quarter_piece"
+}

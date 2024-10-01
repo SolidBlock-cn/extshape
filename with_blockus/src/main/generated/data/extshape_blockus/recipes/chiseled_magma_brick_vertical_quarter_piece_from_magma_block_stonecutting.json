@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:magma_block"
+  },
+  "result": "extshape_blockus:chiseled_magma_brick_vertical_quarter_piece"
+}

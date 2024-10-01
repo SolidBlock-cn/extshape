@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "blockus:dripstone_brick_stairs"
+  },
+  "result": "extshape_blockus:dripstone_brick_quarter_piece"
+}

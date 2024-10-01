@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "glazed_terracotta_pillar_stairs",
+  "key": {
+    "#": {
+      "item": "blockus:brown_glazed_terracotta_pillar"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "extshape_blockus:brown_glazed_terracotta_pillar_stairs"
+  },
+  "show_notification": true
+}

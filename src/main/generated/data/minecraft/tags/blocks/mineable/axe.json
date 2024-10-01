@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:wooden_blocks",
+    "extshape:pumpkin_stairs",
+    "extshape:pumpkin_slab",
+    "extshape:pumpkin_vertical_slab",
+    "extshape:pumpkin_vertical_stairs",
+    "extshape:pumpkin_quarter_piece",
+    "extshape:pumpkin_vertical_quarter_piece",
+    "extshape:pumpkin_fence",
+    "extshape:pumpkin_fence_gate",
+    "extshape:pumpkin_wall",
+    "extshape:pumpkin_button",
+    "extshape:pumpkin_pressure_plate",
+    "extshape:melon_stairs",
+    "extshape:melon_slab",
+    "extshape:melon_vertical_slab",
+    "extshape:melon_vertical_stairs",
+    "extshape:melon_quarter_piece",
+    "extshape:melon_vertical_quarter_piece",
+    "extshape:melon_fence",
+    "extshape:melon_fence_gate",
+    "extshape:melon_wall",
+    "extshape:melon_button",
+    "extshape:melon_pressure_plate"
+  ]
+}

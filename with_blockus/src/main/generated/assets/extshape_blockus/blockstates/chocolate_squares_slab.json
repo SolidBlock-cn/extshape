@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/chocolate_squares_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/chocolate_squares"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/chocolate_squares_slab_top"
+    }
+  }
+}

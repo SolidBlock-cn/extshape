@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:raw_copper_block"
+    }
+  ],
+  "result": {
+    "item": "extshape:raw_copper_button"
+  }
+}

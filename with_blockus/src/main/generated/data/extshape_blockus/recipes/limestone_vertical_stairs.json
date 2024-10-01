@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:limestone_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:limestone_vertical_stairs"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:light_gray_shingles"
+  },
+  "result": "extshape_blockus:light_gray_shingles_vertical_slab"
+}
