@@ -48,5 +48,7 @@
   "message.extshape.recipe_conflict.finish.single": "驗畢，%s撞尋",
   "message.extshape.recipe_conflict.finish.plural": "驗畢，%s撞尋",
 
-  "modmenu.nameTranslation.extshape": "塊形之擴"
+  "modmenu.nameTranslation.extshape": "塊形之擴",
+
+  "resourcePack.extshape.recipe_tweak.name": "修方（直方之撞）"
 }
