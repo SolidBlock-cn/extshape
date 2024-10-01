@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:shingles_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:shingles_vertical_stairs"
+  }
+}

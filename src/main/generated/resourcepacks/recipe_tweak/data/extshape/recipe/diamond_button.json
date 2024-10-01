@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond_block"
+    },
+    {
+      "tag": "c:gems/diamond"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:diamond_button"
+  }
+}

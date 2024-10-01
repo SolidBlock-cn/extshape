@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:sculk_vein"
+    },
+    "W": {
+      "item": "blockus:polished_sculk"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "id": "extshape_blockus:polished_sculk_fence_gate"
+  }
+}

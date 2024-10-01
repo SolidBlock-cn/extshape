@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "herringbone_wooden_vertical_quarter_piece_from_vertical_slab",
+  "key": {
+    "#": {
+      "item": "extshape_blockus:herringbone_mangrove_vertical_slab"
+    }
+  },
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:herringbone_mangrove_vertical_quarter_piece"
+  }
+}

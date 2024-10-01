@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:melon_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:melon_vertical_stairs"
+  }
+}

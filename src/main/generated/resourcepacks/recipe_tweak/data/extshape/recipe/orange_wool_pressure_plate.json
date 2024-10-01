@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wool_pressure_plate",
+  "key": {
+    "#": {
+      "item": "minecraft:orange_carpet"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:orange_wool_pressure_plate"
+  }
+}

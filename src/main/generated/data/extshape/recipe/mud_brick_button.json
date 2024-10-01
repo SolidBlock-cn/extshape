@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:mud_bricks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:mud_brick_button"
+  }
+}

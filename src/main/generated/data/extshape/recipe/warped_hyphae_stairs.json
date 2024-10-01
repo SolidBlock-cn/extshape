@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wood_stairs",
+  "key": {
+    "#": {
+      "item": "minecraft:warped_hyphae"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "extshape:warped_hyphae_stairs"
+  }
+}

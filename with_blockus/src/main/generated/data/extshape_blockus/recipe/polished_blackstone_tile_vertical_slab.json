@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:polished_blackstone_tile_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:polished_blackstone_tile_vertical_slab"
+  }
+}

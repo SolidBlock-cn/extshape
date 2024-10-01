@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "patterned_wool_fence",
+  "key": {
+    "#": {
+      "item": "minecraft:string"
+    },
+    "W": {
+      "item": "blockus:lime_patterned_wool"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:lime_patterned_wool_fence"
+  }
+}

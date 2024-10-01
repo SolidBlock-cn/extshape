@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "axis=x,facing=east": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab_horizontal_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,facing=north": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab_horizontal_unordered_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,facing=south": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab_horizontal_unordered",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,facing=west": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,facing=east": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab",
+      "uvlock": true,
+      "y": 270
+    },
+    "axis=y,facing=north": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab",
+      "uvlock": true,
+      "y": 180
+    },
+    "axis=y,facing=south": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab",
+      "uvlock": true,
+      "y": 0
+    },
+    "axis=y,facing=west": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=z,facing=east": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab_horizontal_unordered_top",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,facing=north": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab_horizontal_top",
+      "x": 90,
+      "y": 0
+    },
+    "axis=z,facing=south": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab_horizontal",
+      "x": 90,
+      "y": 0
+    },
+    "axis=z,facing=west": {
+      "model": "extshape_blockus:block/birch_small_logs_vertical_slab_horizontal_unordered",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

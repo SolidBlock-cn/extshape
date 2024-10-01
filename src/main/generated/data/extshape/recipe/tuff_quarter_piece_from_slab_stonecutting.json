@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:tuff_slab"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape:tuff_quarter_piece"
+  }
+}

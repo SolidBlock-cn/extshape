@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:chocolate_bricks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:chocolate_brick_button"
+  }
+}

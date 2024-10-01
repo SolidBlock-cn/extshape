@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wood_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:warped_hyphae_vertical_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:warped_hyphae_stairs"
+  }
+}

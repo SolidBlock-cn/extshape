@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "patterned_wool_wall",
+  "key": {
+    "#": {
+      "item": "blockus:blue_gingham_wool"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:blue_gingham_wool_wall"
+  }
+}

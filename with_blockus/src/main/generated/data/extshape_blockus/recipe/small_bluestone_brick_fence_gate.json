@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:flint"
+    },
+    "W": {
+      "item": "blockus:small_bluestone_bricks"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "id": "extshape_blockus:small_bluestone_brick_fence_gate"
+  }
+}

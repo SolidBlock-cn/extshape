@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "shingles_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:purple_shingles_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:purple_shingles_quarter_piece"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:red_wool_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:red_wool_vertical_slab"
+  }
+}

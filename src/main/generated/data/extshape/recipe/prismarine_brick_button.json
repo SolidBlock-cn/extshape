@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:prismarine_bricks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:prismarine_brick_button"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "values": [
+    "extshape:white_concrete_fence",
+    "extshape:orange_concrete_fence",
+    "extshape:magenta_concrete_fence",
+    "extshape:light_blue_concrete_fence",
+    "extshape:yellow_concrete_fence",
+    "extshape:lime_concrete_fence",
+    "extshape:pink_concrete_fence",
+    "extshape:gray_concrete_fence",
+    "extshape:light_gray_concrete_fence",
+    "extshape:cyan_concrete_fence",
+    "extshape:purple_concrete_fence",
+    "extshape:blue_concrete_fence",
+    "extshape:brown_concrete_fence",
+    "extshape:green_concrete_fence",
+    "extshape:red_concrete_fence",
+    "extshape:black_concrete_fence"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:exposed_copper"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:exposed_copper_button"
+  }
+}

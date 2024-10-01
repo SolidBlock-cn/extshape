@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:purple_gingham_wool_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "blockus:purple_gingham_wool_slab"
+  }
+}

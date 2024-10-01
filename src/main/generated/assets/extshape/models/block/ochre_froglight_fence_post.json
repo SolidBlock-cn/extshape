@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "minecraft:block/ochre_froglight_side"
+  }
+}

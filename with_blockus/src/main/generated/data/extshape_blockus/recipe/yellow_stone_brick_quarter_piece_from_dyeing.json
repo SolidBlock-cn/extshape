@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stained_stone_brick_quarter_piece_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:yellow_dye"
+    },
+    "X": {
+      "item": "extshape:stone_brick_quarter_piece"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "id": "extshape_blockus:yellow_stone_brick_quarter_piece"
+  }
+}

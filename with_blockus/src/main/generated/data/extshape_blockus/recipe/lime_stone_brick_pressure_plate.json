@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "stained_stone_brick_pressure_plate",
+  "key": {
+    "#": {
+      "item": "blockus:lime_stone_bricks"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:lime_stone_brick_pressure_plate"
+  }
+}

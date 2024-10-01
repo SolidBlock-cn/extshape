@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:prismarine_circular_paving"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:prismarine_circular_paving_vertical_slab"
+  }
+}

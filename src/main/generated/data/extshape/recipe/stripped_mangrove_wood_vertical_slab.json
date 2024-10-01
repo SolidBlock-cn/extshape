@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "stripped_wood_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:stripped_mangrove_wood_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:stripped_mangrove_wood_vertical_slab"
+  }
+}

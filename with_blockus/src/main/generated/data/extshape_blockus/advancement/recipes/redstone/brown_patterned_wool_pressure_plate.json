@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brown_patterned_carpet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:brown_patterned_carpet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:brown_patterned_wool_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_brown_patterned_carpet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:brown_patterned_wool_pressure_plate"
+    ]
+  }
+}

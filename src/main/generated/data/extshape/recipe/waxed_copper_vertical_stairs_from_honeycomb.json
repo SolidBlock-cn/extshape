@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_copper_vertical_stairs",
+  "ingredients": [
+    {
+      "item": "extshape:copper_vertical_stairs"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:waxed_copper_vertical_stairs"
+  }
+}

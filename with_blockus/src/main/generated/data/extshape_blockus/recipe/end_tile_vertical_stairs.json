@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:end_tile_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:end_tile_vertical_stairs"
+  }
+}

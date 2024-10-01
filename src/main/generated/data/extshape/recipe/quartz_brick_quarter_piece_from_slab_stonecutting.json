@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "extshape:quartz_brick_slab"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape:quartz_brick_quarter_piece"
+  }
+}

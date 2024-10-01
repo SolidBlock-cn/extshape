@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "concrete_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:green_concrete_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:green_concrete_slab"
+  }
+}

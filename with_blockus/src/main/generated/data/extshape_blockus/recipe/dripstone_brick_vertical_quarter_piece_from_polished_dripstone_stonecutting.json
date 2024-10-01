@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:polished_dripstone"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:dripstone_brick_vertical_quarter_piece"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:blackstone"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape:blackstone_quarter_piece"
+  }
+}

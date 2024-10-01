@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:white_terracotta_stairs_from_vertical_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vertical_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extshape:white_terracotta_vertical_stairs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_vertical_stairs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:white_terracotta_stairs_from_vertical_stairs"
+    ]
+  }
+}

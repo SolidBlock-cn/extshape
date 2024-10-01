@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wood_button",
+  "ingredients": [
+    {
+      "item": "minecraft:warped_hyphae"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:warped_hyphae_button"
+  }
+}

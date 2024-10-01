@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:light_gray_concrete_brick_stairs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:light_gray_concrete_brick_quarter_piece_from_stairs_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stairs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:light_gray_concrete_brick_quarter_piece_from_stairs_stonecutting"
+    ]
+  }
+}

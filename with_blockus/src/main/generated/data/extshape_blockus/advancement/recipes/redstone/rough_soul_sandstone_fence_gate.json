@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rough_soul_sandstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:rough_soul_sandstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:rough_soul_sandstone_fence_gate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rough_soul_sandstone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:rough_soul_sandstone_fence_gate"
+    ]
+  }
+}

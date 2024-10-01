@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/bluestone_squares_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/bluestone_squares"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/bluestone_squares_slab_top"
+    }
+  }
+}

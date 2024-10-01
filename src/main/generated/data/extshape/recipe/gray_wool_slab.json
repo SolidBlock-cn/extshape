@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wool_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:gray_wool"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:gray_wool_slab"
+  }
+}

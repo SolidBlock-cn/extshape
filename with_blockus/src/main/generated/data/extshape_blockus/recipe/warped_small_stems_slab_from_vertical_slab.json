@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "small_logs_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:warped_small_stems_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:warped_small_stems_slab"
+  }
+}

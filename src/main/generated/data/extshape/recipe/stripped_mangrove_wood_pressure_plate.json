@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "stripped_wood_pressure_plate",
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_mangrove_wood"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:stripped_mangrove_wood_pressure_plate"
+  }
+}

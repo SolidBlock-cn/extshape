@@ -1,0 +1,28 @@
+{
+  "values": [
+    "extshape:dirt_stairs",
+    "extshape:dirt_slab",
+    "extshape:dirt_vertical_slab",
+    "extshape:dirt_vertical_stairs",
+    "extshape:dirt_quarter_piece",
+    "extshape:dirt_vertical_quarter_piece",
+    "extshape:pumpkin_stairs",
+    "extshape:pumpkin_slab",
+    "extshape:pumpkin_vertical_slab",
+    "extshape:pumpkin_vertical_stairs",
+    "extshape:pumpkin_quarter_piece",
+    "extshape:pumpkin_vertical_quarter_piece",
+    "extshape:melon_stairs",
+    "extshape:melon_slab",
+    "extshape:melon_vertical_slab",
+    "extshape:melon_vertical_stairs",
+    "extshape:melon_quarter_piece",
+    "extshape:melon_vertical_quarter_piece",
+    "extshape:clay_stairs",
+    "extshape:clay_slab",
+    "extshape:clay_vertical_slab",
+    "extshape:clay_vertical_stairs",
+    "extshape:clay_quarter_piece",
+    "extshape:clay_vertical_quarter_piece"
+  ]
+}

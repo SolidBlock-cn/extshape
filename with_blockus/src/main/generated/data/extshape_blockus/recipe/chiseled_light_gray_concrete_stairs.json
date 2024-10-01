@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chiseled_concrete_brick_stairs",
+  "key": {
+    "#": {
+      "item": "blockus:chiseled_light_gray_concrete"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:chiseled_light_gray_concrete_stairs"
+  }
+}

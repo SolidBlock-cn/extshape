@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "minecraft:block/shroomlight",
+    "side": "minecraft:block/shroomlight",
+    "top": "minecraft:block/shroomlight"
+  }
+}

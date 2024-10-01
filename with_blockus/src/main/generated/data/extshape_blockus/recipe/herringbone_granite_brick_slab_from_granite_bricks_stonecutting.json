@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:granite_bricks"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:herringbone_granite_brick_slab"
+  }
+}

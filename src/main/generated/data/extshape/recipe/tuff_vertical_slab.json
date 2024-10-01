@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:tuff_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:tuff_vertical_slab"
+  }
+}

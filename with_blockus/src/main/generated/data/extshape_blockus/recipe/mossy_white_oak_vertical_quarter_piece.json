@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "mossy_wooden_vertical_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:mossy_white_oak_quarter_piece"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:mossy_white_oak_vertical_quarter_piece"
+  }
+}

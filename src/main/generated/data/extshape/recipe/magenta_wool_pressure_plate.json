@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wool_pressure_plate",
+  "key": {
+    "#": {
+      "item": "minecraft:magenta_wool"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:magenta_wool_pressure_plate"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "minecraft:bamboo_mosaic"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:bamboo_mosaic_button"
+  }
+}

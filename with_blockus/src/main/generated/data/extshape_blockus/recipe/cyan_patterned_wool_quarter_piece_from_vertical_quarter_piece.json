@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "patterned_wool_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:cyan_patterned_wool_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:cyan_patterned_wool_quarter_piece"
+  }
+}

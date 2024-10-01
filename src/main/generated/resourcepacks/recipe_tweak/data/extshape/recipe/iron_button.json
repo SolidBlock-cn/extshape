@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_block"
+    },
+    {
+      "tag": "c:ingots/iron"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:iron_button"
+  }
+}

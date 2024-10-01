@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:emerald_brick_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:emerald_brick_vertical_slab"
+  }
+}

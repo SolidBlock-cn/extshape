@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_soul_sandstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:soul_sandstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:soul_sandstone_brick_vertical_quarter_piece_from_soul_sandstone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_soul_sandstone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:soul_sandstone_brick_vertical_quarter_piece_from_soul_sandstone_stonecutting"
+    ]
+  }
+}

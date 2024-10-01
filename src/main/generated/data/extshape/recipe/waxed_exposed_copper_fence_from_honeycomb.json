@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_exposed_copper_fence",
+  "ingredients": [
+    {
+      "item": "extshape:exposed_copper_fence"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:waxed_exposed_copper_fence"
+  }
+}

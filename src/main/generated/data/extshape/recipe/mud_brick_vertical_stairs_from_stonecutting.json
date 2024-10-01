@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:mud_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape:mud_brick_vertical_stairs"
+  }
+}

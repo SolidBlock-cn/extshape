@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:chiseled_prismarine"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:chiseled_prismarine_vertical_stairs"
+  }
+}

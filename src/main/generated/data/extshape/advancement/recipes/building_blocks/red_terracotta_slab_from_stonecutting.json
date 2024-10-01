@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_base_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:red_terracotta"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:red_terracotta_slab_from_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_base_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:red_terracotta_slab_from_stonecutting"
+    ]
+  }
+}

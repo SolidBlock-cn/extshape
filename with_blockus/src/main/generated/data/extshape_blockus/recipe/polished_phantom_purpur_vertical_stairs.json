@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:polished_phantom_purpur_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:polished_phantom_purpur_vertical_stairs"
+  }
+}

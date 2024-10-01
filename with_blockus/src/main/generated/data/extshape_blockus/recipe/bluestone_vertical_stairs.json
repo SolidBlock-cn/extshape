@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:bluestone_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:bluestone_vertical_stairs"
+  }
+}

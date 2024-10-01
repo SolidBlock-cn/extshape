@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:dark_prismarine"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:dark_prismarine_button"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "mossy_wooden_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "blockus:mossy_warped_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:mossy_warped_vertical_stairs"
+  }
+}

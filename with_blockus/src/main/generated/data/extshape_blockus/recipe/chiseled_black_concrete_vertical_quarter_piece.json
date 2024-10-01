@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "chiseled_concrete_brick_vertical_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:chiseled_black_concrete_quarter_piece"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:chiseled_black_concrete_vertical_quarter_piece"
+  }
+}

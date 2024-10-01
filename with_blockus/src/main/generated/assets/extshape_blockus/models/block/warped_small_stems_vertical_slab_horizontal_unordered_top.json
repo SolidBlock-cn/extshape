@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/vertical_slab_column_unordered_top",
+  "textures": {
+    "bottom": "blockus:block/warped_small_stems_top",
+    "side": "blockus:block/warped_small_stems",
+    "top": "blockus:block/warped_small_stems_top"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:coal_block"
+    },
+    {
+      "item": "minecraft:coal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:coal_button"
+  }
+}

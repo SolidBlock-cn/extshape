@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wooden_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "minecraft:acacia_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:acacia_vertical_slab"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "values": [
+    "extshape_blockus:white_oak_quarter_piece",
+    "extshape_blockus:charred_quarter_piece",
+    "extshape_blockus:herringbone_oak_quarter_piece",
+    "extshape_blockus:herringbone_spruce_quarter_piece",
+    "extshape_blockus:herringbone_birch_quarter_piece",
+    "extshape_blockus:herringbone_jungle_quarter_piece",
+    "extshape_blockus:herringbone_acacia_quarter_piece",
+    "extshape_blockus:herringbone_dark_oak_quarter_piece",
+    "extshape_blockus:herringbone_cherry_quarter_piece",
+    "extshape_blockus:herringbone_mangrove_quarter_piece",
+    "extshape_blockus:herringbone_bamboo_quarter_piece",
+    "extshape_blockus:herringbone_raw_bamboo_quarter_piece",
+    "extshape_blockus:herringbone_white_oak_quarter_piece",
+    "extshape_blockus:herringbone_warped_quarter_piece",
+    "extshape_blockus:herringbone_crimson_quarter_piece",
+    "extshape_blockus:herringbone_charred_quarter_piece"
+  ]
+}

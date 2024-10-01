@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "glazed_terracotta_pillar_wall",
+  "key": {
+    "#": {
+      "item": "blockus:orange_glazed_terracotta_pillar"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:orange_glazed_terracotta_pillar_wall"
+  }
+}

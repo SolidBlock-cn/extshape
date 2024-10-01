@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:bamboo_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:bamboo_block_button"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/burnt_paper_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/burnt_paper_block"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/burnt_paper_slab_top"
+    }
+  }
+}

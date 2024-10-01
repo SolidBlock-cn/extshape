@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "glazed_terracotta_pillar_slab",
+  "key": {
+    "#": {
+      "item": "blockus:pink_glazed_terracotta_pillar"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:pink_glazed_terracotta_pillar_slab"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "shingles_fence",
+  "key": {
+    "#": {
+      "item": "minecraft:flint"
+    },
+    "W": {
+      "item": "blockus:black_shingles"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:black_shingles_fence"
+  }
+}

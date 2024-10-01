@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wood_pressure_plate",
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_hyphae"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:crimson_hyphae_pressure_plate"
+  }
+}

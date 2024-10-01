@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "blockus:block/chiseled_white_concrete",
+    "side": "blockus:block/chiseled_white_concrete",
+    "top": "blockus:block/chiseled_white_concrete"
+  }
+}

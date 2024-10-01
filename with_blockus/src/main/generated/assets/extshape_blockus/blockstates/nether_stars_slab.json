@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/nether_stars_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/nether_stars_block"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/nether_stars_slab_top"
+    }
+  }
+}

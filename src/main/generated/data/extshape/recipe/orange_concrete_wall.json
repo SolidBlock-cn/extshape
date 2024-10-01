@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "concrete_wall",
+  "key": {
+    "#": {
+      "item": "minecraft:orange_concrete"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:orange_concrete_wall"
+  }
+}

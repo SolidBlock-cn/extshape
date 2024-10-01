@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "patterned_wool_wall",
+  "key": {
+    "#": {
+      "item": "blockus:green_patterned_wool"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:green_patterned_wool_wall"
+  }
+}

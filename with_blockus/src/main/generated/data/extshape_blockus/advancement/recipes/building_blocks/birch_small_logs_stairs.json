@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_birch_small_logs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:birch_small_logs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:birch_small_logs_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_birch_small_logs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:birch_small_logs_stairs"
+    ]
+  }
+}

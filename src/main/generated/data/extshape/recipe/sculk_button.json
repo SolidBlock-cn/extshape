@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:sculk"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:sculk_button"
+  }
+}

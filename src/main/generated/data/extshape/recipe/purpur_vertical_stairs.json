@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:purpur_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:purpur_vertical_stairs"
+  }
+}

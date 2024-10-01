@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "stripped_wood_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:stripped_crimson_hyphae_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:stripped_crimson_hyphae_slab"
+  }
+}

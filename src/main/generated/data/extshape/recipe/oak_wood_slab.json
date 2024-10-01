@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wood_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:oak_wood"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:oak_wood_slab"
+  }
+}

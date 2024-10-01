@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "mossy_wooden_wall",
+  "key": {
+    "#": {
+      "item": "blockus:mossy_raw_bamboo_planks"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:mossy_raw_bamboo_wall"
+  }
+}

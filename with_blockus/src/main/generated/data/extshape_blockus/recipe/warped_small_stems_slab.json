@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_logs_slab",
+  "key": {
+    "#": {
+      "item": "blockus:warped_small_stems"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:warped_small_stems_slab"
+  }
+}

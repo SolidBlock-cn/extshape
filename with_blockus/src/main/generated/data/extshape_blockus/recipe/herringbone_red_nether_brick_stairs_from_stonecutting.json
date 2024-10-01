@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:herringbone_red_nether_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:herringbone_red_nether_brick_stairs"
+  }
+}

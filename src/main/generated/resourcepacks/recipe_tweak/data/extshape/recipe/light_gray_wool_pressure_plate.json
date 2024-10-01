@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wool_pressure_plate",
+  "key": {
+    "#": {
+      "item": "minecraft:light_gray_carpet"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:light_gray_wool_pressure_plate"
+  }
+}

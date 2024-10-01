@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "log_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_stem"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:crimson_stem_slab"
+  }
+}

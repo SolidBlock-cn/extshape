@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:waxed_exposed_copper"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:waxed_exposed_copper_button"
+  }
+}

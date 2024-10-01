@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/vertical_slab",
+  "textures": {
+    "bottom": "blockus:block/carved_tuff_bricks",
+    "side": "blockus:block/carved_tuff_bricks",
+    "top": "blockus:block/carved_tuff_bricks"
+  }
+}

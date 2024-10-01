@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:verdant_froglight_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:verdant_froglight_vertical_stairs"
+  }
+}

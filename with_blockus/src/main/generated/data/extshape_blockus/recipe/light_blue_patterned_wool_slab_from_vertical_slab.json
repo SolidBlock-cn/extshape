@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:light_blue_patterned_wool_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "blockus:light_blue_patterned_wool_slab"
+  }
+}

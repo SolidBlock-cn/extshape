@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:gilded_blackstone_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:gilded_blackstone_vertical_slab"
+  }
+}

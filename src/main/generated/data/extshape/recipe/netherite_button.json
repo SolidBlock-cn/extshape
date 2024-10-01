@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:netherite_button"
+  }
+}

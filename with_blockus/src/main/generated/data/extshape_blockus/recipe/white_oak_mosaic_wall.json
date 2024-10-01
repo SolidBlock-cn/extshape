@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_mosaic_wall",
+  "key": {
+    "#": {
+      "item": "blockus:white_oak_mosaic"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:white_oak_mosaic_wall"
+  }
+}

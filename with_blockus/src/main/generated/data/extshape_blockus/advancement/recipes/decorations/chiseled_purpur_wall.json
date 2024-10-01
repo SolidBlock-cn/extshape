@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chiseled_purpur": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:chiseled_purpur"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:chiseled_purpur_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chiseled_purpur"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:chiseled_purpur_wall"
+    ]
+  }
+}

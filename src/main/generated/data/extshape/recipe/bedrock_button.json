@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:bedrock"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:bedrock_button"
+  }
+}

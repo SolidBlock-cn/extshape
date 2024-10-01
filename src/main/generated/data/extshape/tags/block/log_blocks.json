@@ -1,0 +1,15 @@
+{
+  "values": [
+    "#extshape:log_stairs",
+    "#extshape:log_slabs",
+    "#extshape:log_vertical_slabs",
+    "#extshape:log_vertical_stairs",
+    "#extshape:log_quarter_pieces",
+    "#extshape:log_vertical_quarter_pieces",
+    "#extshape:log_fences",
+    "#extshape:log_fence_gates",
+    "#extshape:log_walls",
+    "#extshape:log_buttons",
+    "#extshape:log_pressure_plates"
+  ]
+}

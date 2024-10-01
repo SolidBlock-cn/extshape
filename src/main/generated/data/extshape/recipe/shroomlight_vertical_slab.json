@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:shroomlight_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:shroomlight_vertical_slab"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wool_button",
+  "ingredients": [
+    {
+      "item": "minecraft:white_wool"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:white_wool_button"
+  }
+}

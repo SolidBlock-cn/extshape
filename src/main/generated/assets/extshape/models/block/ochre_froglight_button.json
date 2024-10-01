@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "minecraft:block/ochre_froglight_side"
+  }
+}

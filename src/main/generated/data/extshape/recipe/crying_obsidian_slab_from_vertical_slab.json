@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:crying_obsidian_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:crying_obsidian_slab"
+  }
+}

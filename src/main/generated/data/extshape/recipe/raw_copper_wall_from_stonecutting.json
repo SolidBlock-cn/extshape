@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:raw_copper_block"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape:raw_copper_wall"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "blockus:block/carved_tuff_bricks"
+  }
+}

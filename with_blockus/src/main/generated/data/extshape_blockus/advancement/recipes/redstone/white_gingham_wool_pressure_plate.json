@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:white_gingham_wool_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_gingham_carpet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:white_gingham_carpet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_white_gingham_carpet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:white_gingham_wool_pressure_plate"
+    ]
+  }
+}

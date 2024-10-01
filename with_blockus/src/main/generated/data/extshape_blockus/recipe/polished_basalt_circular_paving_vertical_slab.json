@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:polished_basalt_circular_paving_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:polished_basalt_circular_paving_vertical_slab"
+  }
+}

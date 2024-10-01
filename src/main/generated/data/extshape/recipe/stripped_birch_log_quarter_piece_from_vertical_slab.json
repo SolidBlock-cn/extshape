@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stripped_log_quarter_piece_from_vertical_slab",
+  "key": {
+    "#": {
+      "item": "extshape:stripped_birch_log_vertical_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:stripped_birch_log_quarter_piece"
+  }
+}

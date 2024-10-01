@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "extshape:smooth_sandstone_vertical_stairs"
+  },
+  "result": {
+    "count": 3,
+    "id": "extshape:smooth_sandstone_vertical_quarter_piece"
+  }
+}

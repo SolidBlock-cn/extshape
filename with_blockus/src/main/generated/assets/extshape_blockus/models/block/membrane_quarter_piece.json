@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/quarter_piece",
+  "textures": {
+    "bottom": "blockus:block/membrane_block",
+    "side": "blockus:block/membrane_block",
+    "top": "blockus:block/membrane_block"
+  }
+}

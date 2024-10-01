@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:lime_concrete"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape:lime_concrete_vertical_quarter_piece"
+  }
+}

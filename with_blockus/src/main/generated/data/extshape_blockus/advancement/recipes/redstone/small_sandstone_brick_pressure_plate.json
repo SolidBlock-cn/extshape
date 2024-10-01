@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_small_sandstone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:small_sandstone_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:small_sandstone_brick_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_small_sandstone_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:small_sandstone_brick_pressure_plate"
+    ]
+  }
+}

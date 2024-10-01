@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:blue_terracotta"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:blue_shingles_vertical_stairs"
+  }
+}

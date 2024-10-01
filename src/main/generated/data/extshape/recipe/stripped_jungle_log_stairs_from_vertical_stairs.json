@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "stripped_log_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:stripped_jungle_log_vertical_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:stripped_jungle_log_stairs"
+  }
+}

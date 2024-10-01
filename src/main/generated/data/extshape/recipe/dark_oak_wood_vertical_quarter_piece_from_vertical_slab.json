@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wood_vertical_quarter_piece_from_vertical_slab",
+  "key": {
+    "#": {
+      "item": "extshape:dark_oak_wood_vertical_slab"
+    }
+  },
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:dark_oak_wood_vertical_quarter_piece"
+  }
+}

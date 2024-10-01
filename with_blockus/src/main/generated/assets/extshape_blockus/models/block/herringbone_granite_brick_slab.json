@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "blockus:block/herringbone_granite_bricks",
+    "side": "blockus:block/herringbone_granite_bricks",
+    "top": "blockus:block/herringbone_granite_bricks"
+  }
+}

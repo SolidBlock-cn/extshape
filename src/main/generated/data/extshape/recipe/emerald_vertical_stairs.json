@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:emerald_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:emerald_vertical_stairs"
+  }
+}

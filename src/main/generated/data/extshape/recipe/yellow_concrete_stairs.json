@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "concrete_stairs",
+  "key": {
+    "#": {
+      "item": "minecraft:yellow_concrete"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "extshape:yellow_concrete_stairs"
+  }
+}
