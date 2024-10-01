@@ -4,7 +4,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.sound.BlockSoundGroup;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
@@ -21,7 +20,6 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
         .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings));
     this.activationSettings = activationSettings;
     this.shape = BlockShape.PRESSURE_PLATE;
-    final BlockSoundGroup soundGroup = baseBlock.getDefaultState().getSoundGroup();
   }
 
   private static float computeStrength(float baseHardness) {

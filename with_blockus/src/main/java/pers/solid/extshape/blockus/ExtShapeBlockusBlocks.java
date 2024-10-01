@@ -134,11 +134,14 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.CHISELED_DRIPSTONE)
         .without(BlockShape.BUTTON)
-        .setFenceSettings(FenceSettings.DRIPSTONE);
+        .setFenceSettings(FenceSettings.DRIPSTONE)
+        .setActivationSettings(ActivationSettings.DRIPSTONE)
+        .build();
 
     create(BlockusBlocks.POLISHED_TUFF)
         .setFenceSettings(FenceSettings.TUFF)
-        .setActivationSettings(ActivationSettings.TUFF).build();
+        .setActivationSettings(ActivationSettings.TUFF)
+        .build();
     create(BlockusBlocks.TUFF_BRICKS)
         .setFenceSettings(FenceSettings.TUFF)
         .setActivationSettings(ActivationSettings.TUFF)
@@ -623,7 +626,8 @@ public final class ExtShapeBlockusBlocks {
         .build();
 
     create(BlockusBlocks.RAINBOW_BLOCK)
-        .setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem()).setPillar()
+        .setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem())
+        .setPillar()
         .build();
     create(BlockusBlocks.RAINBOW_BRICKS)
         .setStoneFenceSettings(BlockusBlocks.RAINBOW_PETALS.asItem())
@@ -860,7 +864,8 @@ public final class ExtShapeBlockusBlocks {
     markStoneCuttableWhenCreating = false;
 
     create(BlockusBlocks.CHORUS_BLOCK)
-        .setStoneFenceSettings(Items.CHORUS_PLANT).setPillar()
+        .setStoneFenceSettings(Items.CHORUS_PLANT)
+        .setPillar()
         .build();
 
     for (var bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
@@ -1002,14 +1007,14 @@ public final class ExtShapeBlockusBlocks {
             }
 
             @Override
-        public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-          super.appendTooltip(stack, world, tooltip, context);
-          this.getBlock().appendTooltip(stack, world, tooltip, context);
+            public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+              super.appendTooltip(stack, world, tooltip, context);
+              this.getBlock().appendTooltip(stack, world, tooltip, context);
               tooltip.add(ScreenTexts.EMPTY);
               tooltip.add(Blockus.STEPPED_ON_TEXT);
-          tooltip.add(ScreenTexts.space().append(StatusEffects.REGENERATION.getName()).append(" IV").formatted(Formatting.BLUE));
-          tooltip.add(ScreenTexts.space().append(StatusEffects.ABSORPTION.getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
-          tooltip.add(ScreenTexts.space().append(StatusEffects.STRENGTH.getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
+              tooltip.add(ScreenTexts.space().append(StatusEffects.REGENERATION.getName()).append(" IV").formatted(Formatting.BLUE));
+              tooltip.add(ScreenTexts.space().append(StatusEffects.ABSORPTION.getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
+              tooltip.add(ScreenTexts.space().append(StatusEffects.STRENGTH.getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
             }
           });
         })
