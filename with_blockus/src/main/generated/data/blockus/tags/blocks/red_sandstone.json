@@ -1,0 +1,27 @@
+{
+  "values": [
+    "extshape_blockus:rough_red_sandstone_vertical_slab",
+    "extshape_blockus:rough_red_sandstone_vertical_stairs",
+    "extshape_blockus:rough_red_sandstone_quarter_piece",
+    "extshape_blockus:rough_red_sandstone_vertical_quarter_piece",
+    "extshape_blockus:rough_red_sandstone_fence",
+    "extshape_blockus:rough_red_sandstone_fence_gate",
+    "extshape_blockus:rough_red_sandstone_wall",
+    "extshape_blockus:rough_red_sandstone_button",
+    "extshape_blockus:rough_red_sandstone_pressure_plate",
+    "extshape_blockus:red_sandstone_brick_vertical_slab",
+    "extshape_blockus:red_sandstone_brick_vertical_stairs",
+    "extshape_blockus:red_sandstone_brick_quarter_piece",
+    "extshape_blockus:red_sandstone_brick_vertical_quarter_piece",
+    "extshape_blockus:red_sandstone_brick_fence",
+    "extshape_blockus:red_sandstone_brick_fence_gate",
+    "extshape_blockus:red_sandstone_brick_pressure_plate",
+    "extshape_blockus:small_red_sandstone_brick_vertical_slab",
+    "extshape_blockus:small_red_sandstone_brick_vertical_stairs",
+    "extshape_blockus:small_red_sandstone_brick_quarter_piece",
+    "extshape_blockus:small_red_sandstone_brick_vertical_quarter_piece",
+    "extshape_blockus:small_red_sandstone_brick_fence",
+    "extshape_blockus:small_red_sandstone_brick_fence_gate",
+    "extshape_blockus:small_red_sandstone_brick_pressure_plate"
+  ]
+}

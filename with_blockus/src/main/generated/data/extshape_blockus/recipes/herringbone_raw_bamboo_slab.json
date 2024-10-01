@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "herringbone_wooden_slab",
+  "key": {
+    "#": {
+      "item": "blockus:herringbone_raw_bamboo_planks"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:herringbone_raw_bamboo_slab"
+  }
+}

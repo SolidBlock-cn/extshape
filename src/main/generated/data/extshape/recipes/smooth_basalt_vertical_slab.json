@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:smooth_basalt_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:smooth_basalt_vertical_slab"
+  }
+}

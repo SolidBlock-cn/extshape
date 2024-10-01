@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wood_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:cherry_wood_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:cherry_wood_slab"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "values": [
+    "extshape:clay_stairs",
+    "extshape:clay_slab",
+    "extshape:clay_vertical_slab",
+    "extshape:clay_vertical_stairs",
+    "extshape:clay_quarter_piece",
+    "extshape:clay_vertical_quarter_piece",
+    "extshape:moss_stairs",
+    "extshape:moss_slab",
+    "extshape:moss_vertical_slab",
+    "extshape:moss_vertical_stairs",
+    "extshape:moss_quarter_piece",
+    "extshape:moss_vertical_quarter_piece"
+  ]
+}

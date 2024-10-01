@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:clay_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:clay_slab"
+  }
+}

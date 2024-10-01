@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:white_concrete_brick_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "blockus:white_concrete_brick_slab"
+  }
+}

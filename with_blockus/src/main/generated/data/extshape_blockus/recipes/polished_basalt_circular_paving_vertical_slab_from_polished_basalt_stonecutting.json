@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:polished_basalt"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:polished_basalt_circular_paving_vertical_slab"
+  }
+}

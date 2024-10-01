@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:herringbone_diorite_bricks"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:herringbone_diorite_brick_slab"
+  }
+}

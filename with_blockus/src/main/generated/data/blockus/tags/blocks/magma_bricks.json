@@ -1,0 +1,28 @@
+{
+  "values": [
+    "extshape_blockus:magma_brick_vertical_slab",
+    "extshape_blockus:magma_brick_vertical_stairs",
+    "extshape_blockus:magma_brick_quarter_piece",
+    "extshape_blockus:magma_brick_vertical_quarter_piece",
+    "extshape_blockus:magma_brick_fence",
+    "extshape_blockus:magma_brick_fence_gate",
+    "extshape_blockus:magma_brick_button",
+    "extshape_blockus:magma_brick_pressure_plate",
+    "extshape_blockus:small_magma_brick_vertical_slab",
+    "extshape_blockus:small_magma_brick_vertical_stairs",
+    "extshape_blockus:small_magma_brick_quarter_piece",
+    "extshape_blockus:small_magma_brick_vertical_quarter_piece",
+    "extshape_blockus:small_magma_brick_fence",
+    "extshape_blockus:small_magma_brick_fence_gate",
+    "extshape_blockus:small_magma_brick_button",
+    "extshape_blockus:small_magma_brick_pressure_plate",
+    "extshape_blockus:chiseled_magma_brick_stairs",
+    "extshape_blockus:chiseled_magma_brick_slab",
+    "extshape_blockus:chiseled_magma_brick_vertical_slab",
+    "extshape_blockus:chiseled_magma_brick_vertical_stairs",
+    "extshape_blockus:chiseled_magma_brick_quarter_piece",
+    "extshape_blockus:chiseled_magma_brick_vertical_quarter_piece",
+    "extshape_blockus:chiseled_magma_brick_wall",
+    "extshape_blockus:chiseled_magma_brick_pressure_plate"
+  ]
+}

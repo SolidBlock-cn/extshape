@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "shingles_button",
+  "ingredients": [
+    {
+      "item": "blockus:light_blue_shingles"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:light_blue_shingles_button"
+  }
+}

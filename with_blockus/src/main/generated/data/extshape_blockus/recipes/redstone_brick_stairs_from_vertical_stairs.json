@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:redstone_brick_vertical_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "blockus:redstone_brick_stairs"
+  }
+}

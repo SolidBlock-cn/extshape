@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:phantom_purpur_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:phantom_purpur_button"
+  }
+}

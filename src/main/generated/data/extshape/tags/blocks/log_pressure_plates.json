@@ -1,0 +1,24 @@
+{
+  "values": [
+    "extshape:oak_wood_pressure_plate",
+    "extshape:spruce_wood_pressure_plate",
+    "extshape:birch_wood_pressure_plate",
+    "extshape:jungle_wood_pressure_plate",
+    "extshape:acacia_wood_pressure_plate",
+    "extshape:cherry_wood_pressure_plate",
+    "extshape:dark_oak_wood_pressure_plate",
+    "extshape:mangrove_wood_pressure_plate",
+    "extshape:stripped_oak_wood_pressure_plate",
+    "extshape:stripped_spruce_wood_pressure_plate",
+    "extshape:stripped_birch_wood_pressure_plate",
+    "extshape:stripped_jungle_wood_pressure_plate",
+    "extshape:stripped_acacia_wood_pressure_plate",
+    "extshape:stripped_cherry_wood_pressure_plate",
+    "extshape:stripped_dark_oak_wood_pressure_plate",
+    "extshape:stripped_mangrove_wood_pressure_plate",
+    "extshape:warped_hyphae_pressure_plate",
+    "extshape:crimson_hyphae_pressure_plate",
+    "extshape:stripped_warped_hyphae_pressure_plate",
+    "extshape:stripped_crimson_hyphae_pressure_plate"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:mossy_stone_bricks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:mossy_stone_brick_button"
+  }
+}

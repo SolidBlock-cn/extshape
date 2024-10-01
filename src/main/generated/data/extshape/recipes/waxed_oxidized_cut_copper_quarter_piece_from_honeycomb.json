@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_oxidized_cut_copper_quarter_piece",
+  "ingredients": [
+    {
+      "item": "extshape:oxidized_cut_copper_quarter_piece"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:waxed_oxidized_cut_copper_quarter_piece"
+  }
+}

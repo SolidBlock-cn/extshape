@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_logs_slab",
+  "key": {
+    "#": {
+      "item": "blockus:acacia_small_logs"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:acacia_small_logs_slab"
+  }
+}

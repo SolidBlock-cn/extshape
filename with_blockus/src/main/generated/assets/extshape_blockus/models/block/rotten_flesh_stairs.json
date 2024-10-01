@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "blockus:block/rotten_flesh_block",
+    "side": "blockus:block/rotten_flesh_block",
+    "top": "blockus:block/rotten_flesh_block"
+  }
+}

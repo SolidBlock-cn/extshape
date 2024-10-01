@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:bedrock_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:bedrock_vertical_stairs"
+  }
+}

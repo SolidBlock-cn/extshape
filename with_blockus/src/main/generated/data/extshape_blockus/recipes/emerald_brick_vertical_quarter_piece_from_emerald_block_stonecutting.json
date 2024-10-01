@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:emerald_block"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:emerald_brick_vertical_quarter_piece"
+  }
+}

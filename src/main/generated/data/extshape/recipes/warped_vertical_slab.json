@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wooden_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "minecraft:warped_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:warped_vertical_slab"
+  }
+}

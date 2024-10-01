@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "group": "glazed_terracotta_pillar_quarter_piece",
+  "ingredient": {
+    "item": "extshape_blockus:gray_glazed_terracotta_pillar_stairs"
+  },
+  "result": {
+    "count": 3,
+    "id": "extshape_blockus:gray_glazed_terracotta_pillar_quarter_piece"
+  }
+}

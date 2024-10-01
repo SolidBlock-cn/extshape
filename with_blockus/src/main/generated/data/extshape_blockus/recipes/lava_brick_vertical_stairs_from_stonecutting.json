@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:lava_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:lava_brick_vertical_stairs"
+  }
+}

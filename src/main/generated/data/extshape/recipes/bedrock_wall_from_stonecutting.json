@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:bedrock"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape:bedrock_wall"
+  }
+}

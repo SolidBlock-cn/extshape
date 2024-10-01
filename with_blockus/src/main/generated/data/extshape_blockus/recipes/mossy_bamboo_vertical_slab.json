@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "mossy_wooden_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "blockus:mossy_bamboo_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:mossy_bamboo_vertical_slab"
+  }
+}

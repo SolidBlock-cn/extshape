@@ -1,0 +1,20 @@
+{
+  "values": [
+    "extshape:white_concrete_pressure_plate",
+    "extshape:orange_concrete_pressure_plate",
+    "extshape:magenta_concrete_pressure_plate",
+    "extshape:light_blue_concrete_pressure_plate",
+    "extshape:yellow_concrete_pressure_plate",
+    "extshape:lime_concrete_pressure_plate",
+    "extshape:pink_concrete_pressure_plate",
+    "extshape:gray_concrete_pressure_plate",
+    "extshape:light_gray_concrete_pressure_plate",
+    "extshape:cyan_concrete_pressure_plate",
+    "extshape:purple_concrete_pressure_plate",
+    "extshape:blue_concrete_pressure_plate",
+    "extshape:brown_concrete_pressure_plate",
+    "extshape:green_concrete_pressure_plate",
+    "extshape:red_concrete_pressure_plate",
+    "extshape:black_concrete_pressure_plate"
+  ]
+}

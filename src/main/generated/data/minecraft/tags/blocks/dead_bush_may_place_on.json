@@ -1,0 +1,16 @@
+{
+  "values": [
+    "extshape:dirt_stairs",
+    "extshape:dirt_slab",
+    "extshape:dirt_vertical_slab",
+    "extshape:dirt_vertical_stairs",
+    "extshape:dirt_quarter_piece",
+    "extshape:dirt_vertical_quarter_piece",
+    "#extshape:terracotta_stairs",
+    "#extshape:terracotta_slabs",
+    "#extshape:terracotta_vertical_slabs",
+    "#extshape:terracotta_vertical_stairs",
+    "#extshape:terracotta_quarter_pieces",
+    "#extshape:terracotta_vertical_quarter_pieces"
+  ]
+}

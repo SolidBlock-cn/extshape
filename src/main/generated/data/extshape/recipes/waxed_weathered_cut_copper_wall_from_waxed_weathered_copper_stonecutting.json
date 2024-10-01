@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:waxed_weathered_copper"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape:waxed_weathered_cut_copper_wall"
+  }
+}

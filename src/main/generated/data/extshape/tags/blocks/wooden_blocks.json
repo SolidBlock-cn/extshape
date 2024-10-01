@@ -1,0 +1,15 @@
+{
+  "values": [
+    "#extshape:log_blocks",
+    "#minecraft:wooden_stairs",
+    "#minecraft:wooden_slabs",
+    "#extshape:wooden_vertical_slabs",
+    "#extshape:wooden_vertical_stairs",
+    "#extshape:wooden_quarter_pieces",
+    "#extshape:wooden_vertical_quarter_pieces",
+    "#minecraft:wooden_fences",
+    "#extshape:wooden_walls",
+    "#minecraft:wooden_buttons",
+    "#minecraft:wooden_pressure_plates"
+  ]
+}

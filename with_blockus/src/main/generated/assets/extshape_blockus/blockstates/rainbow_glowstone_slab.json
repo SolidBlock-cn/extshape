@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/rainbow_glowstone_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/rainbow_glowstone"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/rainbow_glowstone_slab_top"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "values": [
+    "extshape:oak_wood_fence_gate",
+    "extshape:spruce_wood_fence_gate",
+    "extshape:birch_wood_fence_gate",
+    "extshape:jungle_wood_fence_gate",
+    "extshape:acacia_wood_fence_gate",
+    "extshape:cherry_wood_fence_gate",
+    "extshape:dark_oak_wood_fence_gate",
+    "extshape:mangrove_wood_fence_gate",
+    "extshape:stripped_oak_wood_fence_gate",
+    "extshape:stripped_spruce_wood_fence_gate",
+    "extshape:stripped_birch_wood_fence_gate",
+    "extshape:stripped_jungle_wood_fence_gate",
+    "extshape:stripped_acacia_wood_fence_gate",
+    "extshape:stripped_cherry_wood_fence_gate",
+    "extshape:stripped_dark_oak_wood_fence_gate",
+    "extshape:stripped_mangrove_wood_fence_gate",
+    "extshape:warped_hyphae_fence_gate",
+    "extshape:crimson_hyphae_fence_gate",
+    "extshape:stripped_warped_hyphae_fence_gate",
+    "extshape:stripped_crimson_hyphae_fence_gate"
+  ]
+}

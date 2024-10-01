@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:red_sandstone_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:red_sandstone_vertical_slab"
+  }
+}

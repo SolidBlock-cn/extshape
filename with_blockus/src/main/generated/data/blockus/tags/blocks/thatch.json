@@ -1,0 +1,13 @@
+{
+  "values": [
+    "extshape_blockus:thatch_vertical_slab",
+    "extshape_blockus:thatch_vertical_stairs",
+    "extshape_blockus:thatch_quarter_piece",
+    "extshape_blockus:thatch_vertical_quarter_piece",
+    "extshape_blockus:thatch_fence",
+    "extshape_blockus:thatch_fence_gate",
+    "extshape_blockus:thatch_wall",
+    "extshape_blockus:thatch_button",
+    "extshape_blockus:thatch_pressure_plate"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wool_from_pressure_plate",
+  "ingredients": [
+    {
+      "item": "extshape:cyan_wool_pressure_plate"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "minecraft:cyan_carpet"
+  }
+}

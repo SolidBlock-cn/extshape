@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/chiseled_polished_blackstone_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/chiseled_polished_blackstone"
+    },
+    "type=top": {
+      "model": "extshape:block/chiseled_polished_blackstone_slab_top"
+    }
+  }
+}

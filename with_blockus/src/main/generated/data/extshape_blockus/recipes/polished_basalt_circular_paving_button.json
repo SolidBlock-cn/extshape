@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:polished_basalt_circular_paving"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:polished_basalt_circular_paving_button"
+  }
+}

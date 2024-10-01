@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:smooth_basalt"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:smooth_basalt_button"
+  }
+}

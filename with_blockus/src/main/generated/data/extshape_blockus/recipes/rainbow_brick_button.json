@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:rainbow_bricks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:rainbow_brick_button"
+  }
+}

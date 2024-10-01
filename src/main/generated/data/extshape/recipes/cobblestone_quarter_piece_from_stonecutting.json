@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:cobblestone"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape:cobblestone_quarter_piece"
+  }
+}

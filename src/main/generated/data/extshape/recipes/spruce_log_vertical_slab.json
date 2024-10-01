@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "log_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:spruce_log_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:spruce_log_vertical_slab"
+  }
+}

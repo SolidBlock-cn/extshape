@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "stained_stone_brick_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "blockus:green_stone_brick_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:green_stone_brick_vertical_stairs"
+  }
+}

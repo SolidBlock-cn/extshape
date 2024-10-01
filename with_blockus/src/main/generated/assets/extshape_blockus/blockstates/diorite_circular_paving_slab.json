@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=east,type=bottom": {
+      "model": "extshape_blockus:block/diorite_circular_paving_slab",
+      "y": 270
+    },
+    "facing=east,type=double": {
+      "model": "blockus:block/diorite_circular_paving",
+      "y": 270
+    },
+    "facing=east,type=top": {
+      "model": "extshape_blockus:block/diorite_circular_paving_slab_top",
+      "y": 270
+    },
+    "facing=north,type=bottom": {
+      "model": "extshape_blockus:block/diorite_circular_paving_slab",
+      "y": 180
+    },
+    "facing=north,type=double": {
+      "model": "blockus:block/diorite_circular_paving",
+      "y": 180
+    },
+    "facing=north,type=top": {
+      "model": "extshape_blockus:block/diorite_circular_paving_slab_top",
+      "y": 180
+    },
+    "facing=south,type=bottom": {
+      "model": "extshape_blockus:block/diorite_circular_paving_slab"
+    },
+    "facing=south,type=double": {
+      "model": "blockus:block/diorite_circular_paving"
+    },
+    "facing=south,type=top": {
+      "model": "extshape_blockus:block/diorite_circular_paving_slab_top"
+    },
+    "facing=west,type=bottom": {
+      "model": "extshape_blockus:block/diorite_circular_paving_slab",
+      "y": 90
+    },
+    "facing=west,type=double": {
+      "model": "blockus:block/diorite_circular_paving",
+      "y": 90
+    },
+    "facing=west,type=top": {
+      "model": "extshape_blockus:block/diorite_circular_paving_slab_top",
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:bluestone_tile_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:bluestone_tile_vertical_slab"
+  }
+}

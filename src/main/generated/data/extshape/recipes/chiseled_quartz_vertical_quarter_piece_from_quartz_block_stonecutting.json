@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:quartz_block"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape:chiseled_quartz_vertical_quarter_piece"
+  }
+}

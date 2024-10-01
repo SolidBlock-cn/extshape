@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:weathered_cut_copper"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:weathered_cut_copper_button"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/quarter_piece",
+  "textures": {
+    "bottom": "blockus:block/herringbone_cherry_planks",
+    "side": "blockus:block/herringbone_cherry_planks",
+    "top": "blockus:block/herringbone_cherry_planks"
+  }
+}

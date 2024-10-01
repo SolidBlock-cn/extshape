@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:lapis_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:lapis_vertical_slab"
+  }
+}

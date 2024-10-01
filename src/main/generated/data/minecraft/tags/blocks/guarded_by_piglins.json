@@ -1,0 +1,31 @@
+{
+  "values": [
+    "extshape:gold_stairs",
+    "extshape:gold_slab",
+    "extshape:gold_vertical_slab",
+    "extshape:gold_vertical_stairs",
+    "extshape:gold_quarter_piece",
+    "extshape:gold_vertical_quarter_piece",
+    "extshape:gold_fence",
+    "extshape:gold_fence_gate",
+    "extshape:gold_wall",
+    "extshape:gold_button",
+    "extshape:gilded_blackstone_stairs",
+    "extshape:gilded_blackstone_slab",
+    "extshape:gilded_blackstone_vertical_slab",
+    "extshape:gilded_blackstone_vertical_stairs",
+    "extshape:gilded_blackstone_quarter_piece",
+    "extshape:gilded_blackstone_vertical_quarter_piece",
+    "extshape:raw_gold_stairs",
+    "extshape:raw_gold_slab",
+    "extshape:raw_gold_vertical_slab",
+    "extshape:raw_gold_vertical_stairs",
+    "extshape:raw_gold_quarter_piece",
+    "extshape:raw_gold_vertical_quarter_piece",
+    "extshape:raw_gold_fence",
+    "extshape:raw_gold_fence_gate",
+    "extshape:raw_gold_wall",
+    "extshape:raw_gold_button",
+    "extshape:raw_gold_pressure_plate"
+  ]
+}

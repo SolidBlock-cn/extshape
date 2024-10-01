@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/glazed_terracotta_slab_top",
+  "textures": {
+    "bottom": "blockus:block/tuff_circular_paving",
+    "side": "blockus:block/tuff_circular_paving",
+    "top": "blockus:block/tuff_circular_paving"
+  }
+}

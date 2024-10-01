@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chiseled_concrete_brick_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "extshape_blockus:chiseled_light_gray_concrete_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:chiseled_light_gray_concrete_quarter_piece"
+  }
+}

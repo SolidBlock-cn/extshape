@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:phantom_purpur_block"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:phantom_purpur_vertical_quarter_piece"
+  }
+}

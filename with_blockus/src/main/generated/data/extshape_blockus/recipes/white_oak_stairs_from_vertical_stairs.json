@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:white_oak_vertical_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "blockus:white_oak_stairs"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:end_stone_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:end_stone_vertical_slab"
+  }
+}

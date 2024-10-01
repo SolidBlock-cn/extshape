@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wooden_mosaic_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "blockus:raw_bamboo_mosaic_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:raw_bamboo_mosaic_vertical_slab"
+  }
+}

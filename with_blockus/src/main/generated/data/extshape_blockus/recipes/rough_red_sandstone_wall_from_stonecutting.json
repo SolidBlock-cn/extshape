@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:rough_red_sandstone"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:rough_red_sandstone_wall"
+  }
+}

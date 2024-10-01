@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/stars_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/stars_block"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/stars_slab_top"
+    }
+  }
+}

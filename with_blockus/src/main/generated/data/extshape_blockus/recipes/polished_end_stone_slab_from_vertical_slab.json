@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:polished_end_stone_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "blockus:polished_end_stone_slab"
+  }
+}

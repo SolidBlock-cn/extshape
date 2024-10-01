@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#extshape:log_pressure_plates",
+    "extshape:bamboo_block_pressure_plate",
+    "extshape:stripped_bamboo_block_pressure_plate",
+    "extshape:bamboo_mosaic_pressure_plate"
+  ]
+}

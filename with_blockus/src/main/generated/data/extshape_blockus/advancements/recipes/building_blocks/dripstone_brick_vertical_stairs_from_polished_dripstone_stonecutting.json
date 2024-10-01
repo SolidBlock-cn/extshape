@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_polished_dripstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:polished_dripstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:dripstone_brick_vertical_stairs_from_polished_dripstone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_polished_dripstone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:dripstone_brick_vertical_stairs_from_polished_dripstone_stonecutting"
+    ]
+  }
+}

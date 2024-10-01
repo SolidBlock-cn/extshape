@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:chiseled_purpur_quarter_piece"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:chiseled_purpur_vertical_quarter_piece"
+  }
+}

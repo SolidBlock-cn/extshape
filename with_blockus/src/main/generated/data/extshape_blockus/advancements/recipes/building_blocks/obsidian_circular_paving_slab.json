@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_obsidian_circular_paving": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:obsidian_circular_paving"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:obsidian_circular_paving_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_obsidian_circular_paving"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:obsidian_circular_paving_slab"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "values": [
+    "extshape_blockus:diorite_brick_vertical_slab",
+    "extshape_blockus:diorite_brick_vertical_stairs",
+    "extshape_blockus:diorite_brick_quarter_piece",
+    "extshape_blockus:diorite_brick_vertical_quarter_piece",
+    "extshape_blockus:diorite_brick_fence",
+    "extshape_blockus:diorite_brick_fence_gate",
+    "extshape_blockus:diorite_brick_pressure_plate",
+    "extshape_blockus:chiseled_diorite_brick_stairs",
+    "extshape_blockus:chiseled_diorite_brick_slab",
+    "extshape_blockus:chiseled_diorite_brick_vertical_slab",
+    "extshape_blockus:chiseled_diorite_brick_vertical_stairs",
+    "extshape_blockus:chiseled_diorite_brick_quarter_piece",
+    "extshape_blockus:chiseled_diorite_brick_vertical_quarter_piece",
+    "extshape_blockus:chiseled_diorite_brick_fence",
+    "extshape_blockus:chiseled_diorite_brick_fence_gate",
+    "extshape_blockus:chiseled_diorite_brick_wall",
+    "extshape_blockus:chiseled_diorite_brick_pressure_plate",
+    "extshape_blockus:herringbone_diorite_brick_stairs",
+    "extshape_blockus:herringbone_diorite_brick_slab",
+    "extshape_blockus:herringbone_diorite_brick_vertical_slab",
+    "extshape_blockus:herringbone_diorite_brick_vertical_stairs",
+    "extshape_blockus:herringbone_diorite_brick_quarter_piece",
+    "extshape_blockus:herringbone_diorite_brick_vertical_quarter_piece",
+    "extshape_blockus:herringbone_diorite_brick_fence",
+    "extshape_blockus:herringbone_diorite_brick_fence_gate",
+    "extshape_blockus:herringbone_diorite_brick_wall",
+    "extshape_blockus:herringbone_diorite_brick_pressure_plate",
+    "extshape_blockus:diorite_circular_paving_slab",
+    "extshape_blockus:diorite_circular_paving_pressure_plate"
+  ]
+}

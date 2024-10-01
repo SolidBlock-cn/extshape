@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shingles_pressure_plate_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:magenta_dye"
+    },
+    "X": {
+      "item": "extshape_blockus:shingles_pressure_plate"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "id": "extshape_blockus:magenta_shingles_pressure_plate"
+  }
+}

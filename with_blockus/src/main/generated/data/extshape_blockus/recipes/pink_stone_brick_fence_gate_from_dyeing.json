@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stained_stone_brick_fence_gate_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:pink_dye"
+    },
+    "X": {
+      "item": "extshape:stone_brick_fence_gate"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "id": "extshape_blockus:pink_stone_brick_fence_gate"
+  }
+}

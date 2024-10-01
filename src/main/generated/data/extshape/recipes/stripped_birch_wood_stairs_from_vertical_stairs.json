@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "stripped_wood_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:stripped_birch_wood_vertical_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:stripped_birch_wood_stairs"
+  }
+}

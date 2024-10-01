@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:marble"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:marble_vertical_slab"
+  }
+}

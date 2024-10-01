@@ -1,0 +1,19 @@
+{
+  "values": [
+    "#extshape:log_quarter_pieces",
+    "extshape:bamboo_block_quarter_piece",
+    "extshape:stripped_bamboo_block_quarter_piece",
+    "extshape:oak_quarter_piece",
+    "extshape:spruce_quarter_piece",
+    "extshape:birch_quarter_piece",
+    "extshape:jungle_quarter_piece",
+    "extshape:acacia_quarter_piece",
+    "extshape:cherry_quarter_piece",
+    "extshape:dark_oak_quarter_piece",
+    "extshape:mangrove_quarter_piece",
+    "extshape:bamboo_quarter_piece",
+    "extshape:bamboo_mosaic_quarter_piece",
+    "extshape:crimson_quarter_piece",
+    "extshape:warped_quarter_piece"
+  ]
+}

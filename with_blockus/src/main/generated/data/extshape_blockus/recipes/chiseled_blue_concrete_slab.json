@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chiseled_concrete_brick_slab",
+  "key": {
+    "#": {
+      "item": "blockus:chiseled_blue_concrete"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:chiseled_blue_concrete_slab"
+  }
+}

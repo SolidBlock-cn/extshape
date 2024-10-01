@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:charcoal_block"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:charcoal_wall"
+  }
+}

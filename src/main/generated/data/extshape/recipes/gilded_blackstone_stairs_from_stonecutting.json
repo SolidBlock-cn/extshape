@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:gilded_blackstone"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape:gilded_blackstone_stairs"
+  }
+}

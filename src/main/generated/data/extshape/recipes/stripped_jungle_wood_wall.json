@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stripped_wood_wall",
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_jungle_wood"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:stripped_jungle_wood_wall"
+  }
+}

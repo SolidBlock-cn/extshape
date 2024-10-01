@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "glazed_terracotta_pillar_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "extshape_blockus:light_blue_glazed_terracotta_pillar_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:light_blue_glazed_terracotta_pillar_quarter_piece"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "herringbone_wooden_wall",
+  "key": {
+    "#": {
+      "item": "blockus:herringbone_cherry_planks"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:herringbone_cherry_wall"
+  }
+}

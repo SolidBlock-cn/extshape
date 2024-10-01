@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "extshape_blockus:stone_tile_vertical_slab"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:stone_tile_quarter_piece"
+  }
+}

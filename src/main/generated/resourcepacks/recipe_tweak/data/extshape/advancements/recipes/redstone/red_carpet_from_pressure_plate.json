@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pressure_plate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extshape:red_wool_pressure_plate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:red_carpet_from_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pressure_plate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:red_carpet_from_pressure_plate"
+    ]
+  }
+}

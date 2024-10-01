@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:rough_basalt_slab"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:rough_basalt_quarter_piece"
+  }
+}

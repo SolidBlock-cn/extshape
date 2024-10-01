@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:polished_nether_bricks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:polished_nether_brick_button"
+  }
+}

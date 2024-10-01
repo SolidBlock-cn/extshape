@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:cobbled_deepslate_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:cobbled_deepslate_vertical_stairs"
+  }
+}

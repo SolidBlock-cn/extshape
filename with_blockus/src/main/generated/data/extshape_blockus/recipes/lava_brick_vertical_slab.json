@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:lava_brick_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:lava_brick_vertical_slab"
+  }
+}

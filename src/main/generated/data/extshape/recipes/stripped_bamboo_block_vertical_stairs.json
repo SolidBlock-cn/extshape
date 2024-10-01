@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:stripped_bamboo_block_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:stripped_bamboo_block_vertical_stairs"
+  }
+}

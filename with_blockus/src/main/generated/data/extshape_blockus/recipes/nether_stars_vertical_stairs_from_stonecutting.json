@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:nether_stars_block"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:nether_stars_vertical_stairs"
+  }
+}

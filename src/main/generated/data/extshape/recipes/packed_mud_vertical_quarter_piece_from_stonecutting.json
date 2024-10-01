@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:packed_mud"
+  },
+  "result": {
+    "count": 4,
+    "id": "extshape:packed_mud_vertical_quarter_piece"
+  }
+}

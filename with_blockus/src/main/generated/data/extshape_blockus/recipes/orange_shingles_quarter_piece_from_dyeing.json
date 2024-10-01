@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shingles_quarter_piece_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:orange_dye"
+    },
+    "X": {
+      "item": "extshape_blockus:shingles_quarter_piece"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "id": "extshape_blockus:orange_shingles_quarter_piece"
+  }
+}

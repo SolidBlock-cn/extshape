@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:mossy_raw_bamboo_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "blockus:mossy_raw_bamboo_slab"
+  }
+}

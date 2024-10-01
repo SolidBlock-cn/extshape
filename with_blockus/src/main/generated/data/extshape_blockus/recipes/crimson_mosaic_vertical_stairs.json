@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wooden_mosaic_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "blockus:crimson_mosaic_stairs"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:crimson_mosaic_vertical_stairs"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wood_button",
+  "ingredients": [
+    {
+      "item": "minecraft:spruce_wood"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:spruce_wood_button"
+  }
+}

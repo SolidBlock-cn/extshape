@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wood_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:warped_hyphae_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:warped_hyphae_quarter_piece"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:iron_brick_slab"
+  },
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:iron_brick_quarter_piece"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:brick_stairs"
+  },
+  "result": {
+    "count": 3,
+    "id": "extshape:brick_quarter_piece"
+  }
+}

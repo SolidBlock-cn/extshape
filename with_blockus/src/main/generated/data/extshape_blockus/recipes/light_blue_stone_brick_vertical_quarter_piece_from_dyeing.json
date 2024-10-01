@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stained_stone_brick_vertical_quarter_piece_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:light_blue_dye"
+    },
+    "X": {
+      "item": "extshape:stone_brick_vertical_quarter_piece"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "id": "extshape_blockus:light_blue_stone_brick_vertical_quarter_piece"
+  }
+}

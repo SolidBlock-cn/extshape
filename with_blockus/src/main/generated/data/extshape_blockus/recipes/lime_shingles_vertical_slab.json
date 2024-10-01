@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "shingles_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "blockus:lime_shingles_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:lime_shingles_vertical_slab"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "glazed_terracotta_pillar_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:blue_glazed_terracotta_pillar_vertical_slab"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:blue_glazed_terracotta_pillar_slab"
+  }
+}

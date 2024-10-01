@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stained_stone_brick_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "blockus:light_blue_stone_brick_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:light_blue_stone_brick_quarter_piece"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:phantom_purpur_block"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:phantom_purpur_squares_wall"
+  }
+}

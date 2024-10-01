@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "blockus:polished_basalt_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:polished_basalt_circular_paving_wall"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/glowing_obsidian_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/glowing_obsidian"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/glowing_obsidian_slab_top"
+    }
+  }
+}

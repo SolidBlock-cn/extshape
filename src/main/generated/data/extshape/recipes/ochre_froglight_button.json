@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:ochre_froglight"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:ochre_froglight_button"
+  }
+}
