@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:crimson_mosaic_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "blockus:crimson_mosaic_slab"
+  }
+}

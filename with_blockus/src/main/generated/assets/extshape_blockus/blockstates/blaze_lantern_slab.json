@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/blaze_lantern_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/blaze_lantern"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/blaze_lantern_slab_top"
+    }
+  }
+}

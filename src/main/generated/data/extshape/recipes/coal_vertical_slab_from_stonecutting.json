@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:coal_block"
+  },
+  "result": "extshape:coal_vertical_slab"
+}

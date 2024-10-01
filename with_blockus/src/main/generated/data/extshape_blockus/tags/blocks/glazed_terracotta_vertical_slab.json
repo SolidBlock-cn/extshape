@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:white_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:orange_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:magenta_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:light_blue_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:yellow_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:lime_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:pink_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:gray_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:light_gray_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:cyan_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:purple_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:blue_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:brown_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:green_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:red_glazed_terracotta_pillar_vertical_slab",
+    "extshape_blockus:black_glazed_terracotta_pillar_vertical_slab"
+  ]
+}

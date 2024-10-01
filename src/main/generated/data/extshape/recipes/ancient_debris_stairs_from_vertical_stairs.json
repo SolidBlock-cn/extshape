@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:ancient_debris_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:ancient_debris_stairs"
+  }
+}

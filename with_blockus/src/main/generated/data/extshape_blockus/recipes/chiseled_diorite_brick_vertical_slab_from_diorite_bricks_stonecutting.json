@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:diorite_bricks"
+  },
+  "result": "extshape_blockus:chiseled_diorite_brick_vertical_slab"
+}

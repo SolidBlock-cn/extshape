@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape_blockus:herringbone_granite_brick_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:herringbone_granite_brick_vertical_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:herringbone_granite_brick_vertical_slab"
+    ]
+  },
+  "sends_telemetry_event": false
+}

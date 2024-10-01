@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:red_nether_brick_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "minecraft:red_nether_brick_stairs"
+  }
+}

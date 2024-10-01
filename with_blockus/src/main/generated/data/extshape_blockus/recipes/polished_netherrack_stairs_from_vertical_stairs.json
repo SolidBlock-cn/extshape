@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:polished_netherrack_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:polished_netherrack_stairs"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:lapis_brick_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:lapis_brick_stairs"
+  }
+}

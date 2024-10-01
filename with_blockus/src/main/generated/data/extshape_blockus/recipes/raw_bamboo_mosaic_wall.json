@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_mosaic_wall",
+  "key": {
+    "#": {
+      "item": "blockus:raw_bamboo_mosaic"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:raw_bamboo_mosaic_wall"
+  },
+  "show_notification": true
+}

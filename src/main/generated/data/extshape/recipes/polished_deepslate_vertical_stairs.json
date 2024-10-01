@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:polished_deepslate_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:polished_deepslate_vertical_stairs"
+  }
+}

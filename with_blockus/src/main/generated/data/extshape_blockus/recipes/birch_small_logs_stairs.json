@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_logs_stairs",
+  "key": {
+    "#": {
+      "item": "blockus:birch_small_logs"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "extshape_blockus:birch_small_logs_stairs"
+  },
+  "show_notification": true
+}

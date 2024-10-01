@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:pearlescent_froglight"
+    }
+  ],
+  "result": {
+    "item": "extshape:pearlescent_froglight_button"
+  }
+}

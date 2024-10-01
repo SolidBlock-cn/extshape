@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:white_concrete_vertical_stairs",
+    "extshape:orange_concrete_vertical_stairs",
+    "extshape:magenta_concrete_vertical_stairs",
+    "extshape:light_blue_concrete_vertical_stairs",
+    "extshape:yellow_concrete_vertical_stairs",
+    "extshape:lime_concrete_vertical_stairs",
+    "extshape:pink_concrete_vertical_stairs",
+    "extshape:gray_concrete_vertical_stairs",
+    "extshape:light_gray_concrete_vertical_stairs",
+    "extshape:cyan_concrete_vertical_stairs",
+    "extshape:purple_concrete_vertical_stairs",
+    "extshape:blue_concrete_vertical_stairs",
+    "extshape:brown_concrete_vertical_stairs",
+    "extshape:green_concrete_vertical_stairs",
+    "extshape:red_concrete_vertical_stairs",
+    "extshape:black_concrete_vertical_stairs"
+  ]
+}

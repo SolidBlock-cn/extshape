@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_andesite_circular_paving": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:andesite_circular_paving"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:andesite_circular_paving_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_andesite_circular_paving"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:andesite_circular_paving_slab"
+    ]
+  },
+  "sends_telemetry_event": false
+}

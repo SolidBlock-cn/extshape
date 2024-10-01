@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:diamond_brick_slab"
+  },
+  "result": "extshape_blockus:diamond_brick_quarter_piece"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:prismarine_brick_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:prismarine_brick_quarter_piece"
+  }
+}

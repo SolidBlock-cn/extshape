@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_herringbone_stone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:herringbone_stone_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:herringbone_stone_brick_fence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_herringbone_stone_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:herringbone_stone_brick_fence"
+    ]
+  },
+  "sends_telemetry_event": false
+}

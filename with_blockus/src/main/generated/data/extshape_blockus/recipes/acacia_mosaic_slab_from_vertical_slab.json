@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:acacia_mosaic_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "blockus:acacia_mosaic_slab"
+  }
+}

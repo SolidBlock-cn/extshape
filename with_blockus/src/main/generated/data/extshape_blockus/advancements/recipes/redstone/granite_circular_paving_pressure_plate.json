@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_granite_circular_paving": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:granite_circular_paving"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:granite_circular_paving_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_granite_circular_paving"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:granite_circular_paving_pressure_plate"
+    ]
+  },
+  "sends_telemetry_event": false
+}

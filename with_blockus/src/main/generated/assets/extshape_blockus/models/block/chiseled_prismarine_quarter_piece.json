@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/quarter_piece",
+  "textures": {
+    "bottom": "blockus:block/chiseled_prismarine",
+    "side": "blockus:block/chiseled_prismarine",
+    "top": "blockus:block/chiseled_prismarine"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:white_terracotta_vertical_stairs",
+    "extshape:orange_terracotta_vertical_stairs",
+    "extshape:magenta_terracotta_vertical_stairs",
+    "extshape:light_blue_terracotta_vertical_stairs",
+    "extshape:yellow_terracotta_vertical_stairs",
+    "extshape:lime_terracotta_vertical_stairs",
+    "extshape:pink_terracotta_vertical_stairs",
+    "extshape:gray_terracotta_vertical_stairs",
+    "extshape:light_gray_terracotta_vertical_stairs",
+    "extshape:cyan_terracotta_vertical_stairs",
+    "extshape:purple_terracotta_vertical_stairs",
+    "extshape:blue_terracotta_vertical_stairs",
+    "extshape:brown_terracotta_vertical_stairs",
+    "extshape:green_terracotta_vertical_stairs",
+    "extshape:red_terracotta_vertical_stairs",
+    "extshape:black_terracotta_vertical_stairs"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:sandy_bricks"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:sandy_brick_button"
+  }
+}

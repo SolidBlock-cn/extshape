@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:chocolate_squares"
+  },
+  "result": "extshape_blockus:chocolate_squares_vertical_quarter_piece"
+}

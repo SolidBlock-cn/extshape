@@ -1,0 +1,7 @@
+{
+  "parent": "extshape:block/slab_column_uv_locked_z_top",
+  "textures": {
+    "end": "minecraft:block/bamboo_block_top",
+    "side": "minecraft:block/bamboo_block"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:mangrove_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "minecraft:mangrove_stairs"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape:light_gray_wool_stairs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:light_gray_wool_vertical_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stairs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:light_gray_wool_vertical_stairs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:red_sand"
+    },
+    "W": {
+      "item": "blockus:small_red_sandstone_bricks"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape_blockus:small_red_sandstone_brick_fence"
+  },
+  "show_notification": true
+}

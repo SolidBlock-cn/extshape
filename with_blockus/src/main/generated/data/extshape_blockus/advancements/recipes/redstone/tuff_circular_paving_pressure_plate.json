@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:tuff_circular_paving_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tuff_circular_paving": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:tuff_circular_paving"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tuff_circular_paving"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:tuff_circular_paving_pressure_plate"
+    ]
+  },
+  "sends_telemetry_event": false
+}

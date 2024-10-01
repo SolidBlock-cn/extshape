@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape_blockus:herringbone_sandy_brick_slab"
+  },
+  "result": "extshape_blockus:herringbone_sandy_brick_quarter_piece"
+}

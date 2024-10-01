@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:bedrock_stairs",
+    "extshape:bedrock_slab",
+    "extshape:bedrock_vertical_slab",
+    "extshape:bedrock_vertical_stairs",
+    "extshape:bedrock_quarter_piece",
+    "extshape:bedrock_vertical_quarter_piece",
+    "extshape:bedrock_fence",
+    "extshape:bedrock_fence_gate",
+    "extshape:bedrock_wall",
+    "extshape:bedrock_button",
+    "extshape:bedrock_pressure_plate"
+  ]
+}

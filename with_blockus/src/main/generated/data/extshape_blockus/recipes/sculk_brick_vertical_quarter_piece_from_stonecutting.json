@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:sculk_bricks"
+  },
+  "result": "extshape_blockus:sculk_brick_vertical_quarter_piece"
+}

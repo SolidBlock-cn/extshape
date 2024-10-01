@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:exposed_copper"
+    },
+    "*": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    " * ",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:exposed_copper_wall"
+  },
+  "show_notification": true
+}

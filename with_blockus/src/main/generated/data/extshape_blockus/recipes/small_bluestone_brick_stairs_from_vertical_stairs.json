@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:small_bluestone_brick_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:small_bluestone_brick_stairs"
+  }
+}

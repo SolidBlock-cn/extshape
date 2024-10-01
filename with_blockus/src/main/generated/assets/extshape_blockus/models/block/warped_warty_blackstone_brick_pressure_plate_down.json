@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pressure_plate_down",
+  "textures": {
+    "texture": "blockus:block/warped_warty_blackstone_bricks"
+  }
+}

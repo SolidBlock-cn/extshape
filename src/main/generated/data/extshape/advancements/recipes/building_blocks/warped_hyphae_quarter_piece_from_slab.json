@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape:warped_hyphae_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:warped_hyphae_quarter_piece_from_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_slab"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:warped_hyphae_quarter_piece_from_slab"
+    ]
+  },
+  "sends_telemetry_event": false
+}

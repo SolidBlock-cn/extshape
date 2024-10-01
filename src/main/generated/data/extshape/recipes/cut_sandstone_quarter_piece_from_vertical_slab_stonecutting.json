@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:cut_sandstone_vertical_slab"
+  },
+  "result": "extshape:cut_sandstone_quarter_piece"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "glazed_terracotta_pillar_wall",
+  "key": {
+    "#": {
+      "item": "blockus:light_blue_glazed_terracotta_pillar"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:light_blue_glazed_terracotta_pillar_wall"
+  },
+  "show_notification": true
+}

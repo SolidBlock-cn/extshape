@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:chiseled_quartz_block"
+    }
+  ],
+  "result": {
+    "item": "extshape:chiseled_quartz_button"
+  }
+}

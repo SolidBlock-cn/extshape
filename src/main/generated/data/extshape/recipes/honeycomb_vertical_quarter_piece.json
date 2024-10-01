@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:honeycomb_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:honeycomb_vertical_quarter_piece"
+  }
+}

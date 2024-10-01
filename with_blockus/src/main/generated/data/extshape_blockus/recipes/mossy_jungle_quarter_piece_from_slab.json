@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "mossy_wooden_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "blockus:mossy_jungle_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:mossy_jungle_quarter_piece"
+  },
+  "show_notification": true
+}

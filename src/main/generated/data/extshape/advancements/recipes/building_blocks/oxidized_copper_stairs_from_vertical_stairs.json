@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:oxidized_copper_stairs_from_vertical_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vertical_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape:oxidized_copper_vertical_stairs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_vertical_stairs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:oxidized_copper_stairs_from_vertical_stairs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

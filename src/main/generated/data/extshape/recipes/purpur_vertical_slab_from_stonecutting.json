@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:purpur_block"
+  },
+  "result": "extshape:purpur_vertical_slab"
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "log_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:birch_log_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:birch_log_vertical_slab"
+  }
+}

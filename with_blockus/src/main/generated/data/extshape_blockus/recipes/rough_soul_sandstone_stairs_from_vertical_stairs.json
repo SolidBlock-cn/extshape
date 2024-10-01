@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:rough_soul_sandstone_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:rough_soul_sandstone_stairs"
+  }
+}

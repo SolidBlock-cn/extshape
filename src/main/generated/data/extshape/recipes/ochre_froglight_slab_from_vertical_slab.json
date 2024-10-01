@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:ochre_froglight_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:ochre_froglight_slab"
+  }
+}

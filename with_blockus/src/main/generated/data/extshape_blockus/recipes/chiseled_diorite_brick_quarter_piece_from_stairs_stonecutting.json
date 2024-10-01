@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape_blockus:chiseled_diorite_brick_stairs"
+  },
+  "result": "extshape_blockus:chiseled_diorite_brick_quarter_piece"
+}

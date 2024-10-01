@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:lava_bricks"
+  },
+  "result": "extshape_blockus:chiseled_lava_brick_stairs"
+}

@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:oak_wood_button",
+    "extshape:spruce_wood_button",
+    "extshape:birch_wood_button",
+    "extshape:jungle_wood_button",
+    "extshape:acacia_wood_button",
+    "extshape:cherry_wood_button",
+    "extshape:dark_oak_wood_button",
+    "extshape:mangrove_wood_button",
+    "extshape:stripped_oak_wood_button",
+    "extshape:stripped_spruce_wood_button",
+    "extshape:stripped_birch_wood_button",
+    "extshape:stripped_jungle_wood_button",
+    "extshape:stripped_acacia_wood_button",
+    "extshape:stripped_cherry_wood_button",
+    "extshape:stripped_dark_oak_wood_button",
+    "extshape:stripped_mangrove_wood_button",
+    "extshape:warped_hyphae_button",
+    "extshape:crimson_hyphae_button",
+    "extshape:stripped_warped_hyphae_button",
+    "extshape:stripped_crimson_hyphae_button"
+  ]
+}

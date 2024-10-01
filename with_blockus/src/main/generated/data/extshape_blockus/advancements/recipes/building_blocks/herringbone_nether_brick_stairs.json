@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_herringbone_nether_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:herringbone_nether_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:herringbone_nether_brick_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_herringbone_nether_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:herringbone_nether_brick_stairs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

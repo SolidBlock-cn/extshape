@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:glowing_obsidian_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:glowing_obsidian_vertical_stairs"
+  }
+}

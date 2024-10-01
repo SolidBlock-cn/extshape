@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:small_viridite_brick_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:small_viridite_brick_vertical_slab"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/chiseled_prismarine_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/chiseled_prismarine"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/chiseled_prismarine_slab_top"
+    }
+  }
+}

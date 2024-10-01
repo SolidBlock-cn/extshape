@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:obsidian_brick_vertical_slab",
+    "extshape_blockus:obsidian_brick_vertical_stairs",
+    "extshape_blockus:obsidian_brick_quarter_piece",
+    "extshape_blockus:obsidian_brick_vertical_quarter_piece",
+    "extshape_blockus:obsidian_brick_fence",
+    "extshape_blockus:obsidian_brick_fence_gate",
+    "extshape_blockus:obsidian_brick_pressure_plate",
+    "extshape_blockus:small_obsidian_brick_vertical_slab",
+    "extshape_blockus:small_obsidian_brick_vertical_stairs",
+    "extshape_blockus:small_obsidian_brick_quarter_piece",
+    "extshape_blockus:small_obsidian_brick_vertical_quarter_piece",
+    "extshape_blockus:small_obsidian_brick_fence",
+    "extshape_blockus:small_obsidian_brick_fence_gate",
+    "extshape_blockus:small_obsidian_brick_pressure_plate",
+    "extshape_blockus:obsidian_circular_paving_slab",
+    "extshape_blockus:obsidian_circular_paving_pressure_plate",
+    "extshape_blockus:glowing_obsidian_stairs",
+    "extshape_blockus:glowing_obsidian_slab",
+    "extshape_blockus:glowing_obsidian_vertical_slab",
+    "extshape_blockus:glowing_obsidian_vertical_stairs",
+    "extshape_blockus:glowing_obsidian_quarter_piece",
+    "extshape_blockus:glowing_obsidian_vertical_quarter_piece",
+    "extshape_blockus:glowing_obsidian_fence",
+    "extshape_blockus:glowing_obsidian_fence_gate",
+    "extshape_blockus:glowing_obsidian_wall",
+    "extshape_blockus:glowing_obsidian_button",
+    "extshape_blockus:glowing_obsidian_pressure_plate"
+  ]
+}

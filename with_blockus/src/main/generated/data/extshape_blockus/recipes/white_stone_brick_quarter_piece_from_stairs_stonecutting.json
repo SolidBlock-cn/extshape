@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "group": "stained_stone_brick_quarter_piece",
+  "ingredient": {
+    "item": "blockus:white_stone_brick_stairs"
+  },
+  "result": "extshape_blockus:white_stone_brick_quarter_piece"
+}

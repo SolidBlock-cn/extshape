@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:white_concrete_button"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_concrete": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:white_concrete"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_white_concrete"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:white_concrete_button"
+    ]
+  },
+  "sends_telemetry_event": false
+}

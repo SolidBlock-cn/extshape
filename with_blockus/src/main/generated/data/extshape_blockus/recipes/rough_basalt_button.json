@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:rough_basalt"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:rough_basalt_button"
+  }
+}

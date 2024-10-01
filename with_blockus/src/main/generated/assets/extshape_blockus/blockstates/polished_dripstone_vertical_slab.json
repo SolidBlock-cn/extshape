@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "extshape_blockus:block/polished_dripstone_vertical_slab",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north": {
+      "model": "extshape_blockus:block/polished_dripstone_vertical_slab",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south": {
+      "model": "extshape_blockus:block/polished_dripstone_vertical_slab",
+      "uvlock": true
+    },
+    "facing=west": {
+      "model": "extshape_blockus:block/polished_dripstone_vertical_slab",
+      "uvlock": true,
+      "y": 90
+    }
+  }
+}

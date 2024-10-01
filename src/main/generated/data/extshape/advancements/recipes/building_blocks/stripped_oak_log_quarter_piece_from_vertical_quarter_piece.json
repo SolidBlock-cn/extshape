@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:stripped_oak_log_quarter_piece_from_vertical_quarter_piece"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vertical_quarter_piece": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape:stripped_oak_log_vertical_quarter_piece"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_vertical_quarter_piece"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:stripped_oak_log_quarter_piece_from_vertical_quarter_piece"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:stone_tile_vertical_slab",
+    "extshape_blockus:stone_tile_vertical_stairs",
+    "extshape_blockus:stone_tile_quarter_piece",
+    "extshape_blockus:stone_tile_vertical_quarter_piece",
+    "extshape_blockus:stone_tile_fence",
+    "extshape_blockus:stone_tile_fence_gate",
+    "extshape_blockus:stone_tile_pressure_plate",
+    "extshape_blockus:herringbone_stone_brick_stairs",
+    "extshape_blockus:herringbone_stone_brick_slab",
+    "extshape_blockus:herringbone_stone_brick_vertical_slab",
+    "extshape_blockus:herringbone_stone_brick_vertical_stairs",
+    "extshape_blockus:herringbone_stone_brick_quarter_piece",
+    "extshape_blockus:herringbone_stone_brick_vertical_quarter_piece",
+    "extshape_blockus:herringbone_stone_brick_fence",
+    "extshape_blockus:herringbone_stone_brick_fence_gate",
+    "extshape_blockus:herringbone_stone_brick_wall",
+    "extshape_blockus:herringbone_stone_brick_pressure_plate",
+    "extshape_blockus:stone_circular_paving_slab",
+    "extshape_blockus:stone_circular_paving_pressure_plate"
+  ]
+}

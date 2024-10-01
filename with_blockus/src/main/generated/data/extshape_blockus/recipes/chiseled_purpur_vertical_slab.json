@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:chiseled_purpur_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:chiseled_purpur_vertical_slab"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "shingles_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "blockus:blue_shingles_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:blue_shingles_vertical_stairs"
+  }
+}

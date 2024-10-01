@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "patterned_wool_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "blockus:lime_gingham_wool_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:lime_gingham_wool_quarter_piece"
+  },
+  "show_notification": true
+}

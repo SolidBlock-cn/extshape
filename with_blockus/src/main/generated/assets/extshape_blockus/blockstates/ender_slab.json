@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/ender_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/ender_block"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/ender_slab_top"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:amethyst_block"
+  },
+  "result": "extshape:amethyst_quarter_piece"
+}

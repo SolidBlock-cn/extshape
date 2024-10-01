@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:limestone_circular_paving"
+  },
+  "result": "extshape_blockus:limestone_circular_paving_slab"
+}

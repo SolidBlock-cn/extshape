@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:diamond_block"
+  },
+  "result": "extshape:diamond_vertical_slab"
+}

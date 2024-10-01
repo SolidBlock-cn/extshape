@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_copper_quarter_piece",
+  "ingredients": [
+    {
+      "item": "extshape:copper_quarter_piece"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "extshape:waxed_copper_quarter_piece"
+  }
+}

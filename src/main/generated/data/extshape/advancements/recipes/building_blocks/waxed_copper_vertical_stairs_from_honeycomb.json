@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_copper_vertical_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "extshape:copper_vertical_stairs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape:waxed_copper_vertical_stairs_from_honeycomb"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_copper_vertical_stairs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape:waxed_copper_vertical_stairs_from_honeycomb"
+    ]
+  },
+  "sends_telemetry_event": false
+}

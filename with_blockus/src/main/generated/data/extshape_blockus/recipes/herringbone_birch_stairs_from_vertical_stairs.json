@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "herringbone_wooden_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:herringbone_birch_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:herringbone_birch_stairs"
+  }
+}

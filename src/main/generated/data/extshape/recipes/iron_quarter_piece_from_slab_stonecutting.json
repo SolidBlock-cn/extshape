@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:iron_slab"
+  },
+  "result": "extshape:iron_quarter_piece"
+}

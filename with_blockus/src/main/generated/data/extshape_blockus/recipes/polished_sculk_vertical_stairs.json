@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:polished_sculk_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:polished_sculk_vertical_stairs"
+  }
+}

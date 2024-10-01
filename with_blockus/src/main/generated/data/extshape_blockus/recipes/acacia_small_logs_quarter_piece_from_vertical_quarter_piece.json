@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "small_logs_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:acacia_small_logs_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:acacia_small_logs_quarter_piece"
+  }
+}

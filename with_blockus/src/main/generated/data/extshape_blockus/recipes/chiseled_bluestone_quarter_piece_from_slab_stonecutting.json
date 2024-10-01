@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape_blockus:chiseled_bluestone_slab"
+  },
+  "result": "extshape_blockus:chiseled_bluestone_quarter_piece"
+}

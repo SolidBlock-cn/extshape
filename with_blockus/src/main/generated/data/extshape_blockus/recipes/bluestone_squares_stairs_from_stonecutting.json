@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:bluestone_squares"
+  },
+  "result": "extshape_blockus:bluestone_squares_stairs"
+}

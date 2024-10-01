@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:cherry_mosaic_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:cherry_mosaic_stairs"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:emerald_block"
+  },
+  "result": "extshape:emerald_vertical_slab"
+}

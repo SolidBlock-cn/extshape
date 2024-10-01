@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "log_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:spruce_log_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:spruce_log_stairs"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wood_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:crimson_hyphae_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:crimson_hyphae_vertical_slab"
+  }
+}

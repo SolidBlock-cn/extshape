@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:herringbone_teal_nether_brick_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:herringbone_teal_nether_brick_stairs"
+  }
+}

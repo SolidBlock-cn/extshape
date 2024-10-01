@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:warped_wart_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:warped_wart_quarter_piece"
+  }
+}

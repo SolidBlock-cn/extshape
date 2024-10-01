@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape_blockus:polished_netherrack_vertical_slab"
+  },
+  "result": "extshape_blockus:polished_netherrack_quarter_piece"
+}

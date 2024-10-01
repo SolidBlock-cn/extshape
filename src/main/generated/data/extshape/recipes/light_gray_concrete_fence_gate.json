@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "concrete_fence_gate",
+  "key": {
+    "#": {
+      "item": "minecraft:clay"
+    },
+    "W": {
+      "item": "minecraft:light_gray_concrete"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extshape:light_gray_concrete_fence_gate"
+  },
+  "show_notification": true
+}

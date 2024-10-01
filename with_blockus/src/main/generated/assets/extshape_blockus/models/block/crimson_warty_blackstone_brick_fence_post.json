@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "blockus:block/crimson_warty_blackstone_bricks"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:cyan_glazed_terracotta"
+  },
+  "result": "extshape_blockus:cyan_glazed_terracotta_pillar_quarter_piece"
+}

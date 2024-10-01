@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:andesite"
+  },
+  "result": "extshape:andesite_vertical_slab"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:stone_bricks"
+  },
+  "result": "extshape_blockus:stone_tile_vertical_slab"
+}

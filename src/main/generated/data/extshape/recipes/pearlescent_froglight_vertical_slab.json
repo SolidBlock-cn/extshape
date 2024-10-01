@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:pearlescent_froglight_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:pearlescent_froglight_vertical_slab"
+  }
+}

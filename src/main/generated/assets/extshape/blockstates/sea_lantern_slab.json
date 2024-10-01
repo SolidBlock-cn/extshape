@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/sea_lantern_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/sea_lantern"
+    },
+    "type=top": {
+      "model": "extshape:block/sea_lantern_slab_top"
+    }
+  }
+}

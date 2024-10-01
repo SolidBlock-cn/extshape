@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wooden_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "minecraft:cherry_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:cherry_vertical_stairs"
+  }
+}

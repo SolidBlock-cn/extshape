@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape:packed_ice_stairs"
+  },
+  "result": "extshape:packed_ice_quarter_piece"
+}

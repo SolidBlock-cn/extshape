@@ -1,0 +1,8 @@
+{
+  "parent": "extshape:block/vertical_slab",
+  "textures": {
+    "bottom": "blockus:block/diamond_bricks",
+    "side": "blockus:block/diamond_bricks",
+    "top": "blockus:block/diamond_bricks"
+  }
+}

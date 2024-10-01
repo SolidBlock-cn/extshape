@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:light_gray_terracotta_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:light_gray_terracotta_stairs"
+  }
+}
