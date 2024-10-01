@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "concrete_pressure_plate",
+  "key": {
+    "#": {
+      "item": "minecraft:blue_concrete"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "extshape:blue_concrete_pressure_plate"
+  }
+}

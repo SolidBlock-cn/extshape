@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:cobblestone_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:cobblestone_vertical_quarter_piece"
+  }
+}

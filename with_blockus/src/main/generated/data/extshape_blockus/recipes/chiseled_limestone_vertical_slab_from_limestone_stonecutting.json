@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:limestone"
+  },
+  "result": "extshape_blockus:chiseled_limestone_vertical_slab"
+}

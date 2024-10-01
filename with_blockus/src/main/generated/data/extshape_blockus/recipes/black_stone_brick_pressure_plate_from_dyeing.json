@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stained_stone_brick_pressure_plate_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:black_dye"
+    },
+    "X": {
+      "item": "extshape:stone_brick_pressure_plate"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "item": "extshape_blockus:black_stone_brick_pressure_plate"
+  }
+}

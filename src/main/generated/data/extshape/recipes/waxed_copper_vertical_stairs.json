@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:waxed_copper_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:waxed_copper_vertical_stairs"
+  }
+}

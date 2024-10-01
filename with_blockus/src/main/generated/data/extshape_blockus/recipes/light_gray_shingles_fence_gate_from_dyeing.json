@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shingles_fence_gate_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:light_gray_dye"
+    },
+    "X": {
+      "item": "extshape_blockus:shingles_fence_gate"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "item": "extshape_blockus:light_gray_shingles_fence_gate"
+  }
+}

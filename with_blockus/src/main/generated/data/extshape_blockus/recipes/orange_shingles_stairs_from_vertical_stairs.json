@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:orange_shingles_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:orange_shingles_stairs"
+  }
+}

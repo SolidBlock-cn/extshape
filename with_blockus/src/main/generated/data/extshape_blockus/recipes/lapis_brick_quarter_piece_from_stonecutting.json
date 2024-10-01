@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:lapis_bricks"
+  },
+  "result": "extshape_blockus:lapis_brick_quarter_piece"
+}

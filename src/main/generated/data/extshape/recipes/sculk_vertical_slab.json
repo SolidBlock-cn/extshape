@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:sculk_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:sculk_vertical_slab"
+  }
+}

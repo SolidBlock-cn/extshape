@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:smooth_basalt"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "extshape:smooth_basalt_pressure_plate"
+  }
+}

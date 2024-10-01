@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "blockus:rainbow_glowstone"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "extshape_blockus:rainbow_glowstone_pressure_plate"
+  }
+}

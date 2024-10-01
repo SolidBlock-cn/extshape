@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:acacia_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "minecraft:acacia_stairs"
+  }
+}

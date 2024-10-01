@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:wooden_walls",
+    "#extshape:log_walls",
+    "#extshape:woolen_walls",
+    "extshape:pumpkin_wall",
+    "extshape:melon_wall",
+    "extshape:dirt_wall",
+    "extshape:coarse_dirt_wall",
+    "extshape:snow_wall",
+    "extshape:clay_wall",
+    "extshape:nether_wart_wall",
+    "extshape:warped_wart_wall",
+    "extshape:shroomlight_wall",
+    "extshape:sculk_wall",
+    "extshape:moss_wall",
+    "extshape:honeycomb_wall",
+    "extshape:ochre_froglight_wall",
+    "extshape:verdant_froglight_wall",
+    "extshape:pearlescent_froglight_wall"
+  ]
+}

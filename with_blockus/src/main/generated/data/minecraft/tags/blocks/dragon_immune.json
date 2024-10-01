@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:nether_stars_stairs",
+    "extshape_blockus:nether_stars_slab",
+    "extshape_blockus:nether_stars_vertical_slab",
+    "extshape_blockus:nether_stars_vertical_stairs",
+    "extshape_blockus:nether_stars_quarter_piece",
+    "extshape_blockus:nether_stars_vertical_quarter_piece",
+    "extshape_blockus:nether_stars_fence",
+    "extshape_blockus:nether_stars_fence_gate",
+    "extshape_blockus:nether_stars_wall"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/chiseled_tuff_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/chiseled_tuff"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/chiseled_tuff_slab_top"
+    }
+  }
+}

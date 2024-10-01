@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "W": {
+      "item": "minecraft:glowstone"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extshape:glowstone_fence_gate"
+  }
+}

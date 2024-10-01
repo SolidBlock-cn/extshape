@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "glazed_terracotta_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:gray_glazed_terracotta"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:gray_glazed_terracotta_slab"
+  }
+}

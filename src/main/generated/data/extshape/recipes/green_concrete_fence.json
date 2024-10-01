@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "concrete_fence",
+  "key": {
+    "#": {
+      "item": "minecraft:clay"
+    },
+    "W": {
+      "item": "minecraft:green_concrete"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape:green_concrete_fence"
+  }
+}

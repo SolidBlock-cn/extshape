@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:copper_vertical_slab"
+  },
+  "result": "extshape:copper_quarter_piece"
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "extshape:block/slab_column_top",
+  "textures": {
+    "end": "blockus:block/rainbow_block",
+    "side": "blockus:block/rainbow_block"
+  }
+}

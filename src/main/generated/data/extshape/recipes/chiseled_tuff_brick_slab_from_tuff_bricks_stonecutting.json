@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:tuff_bricks"
+  },
+  "result": "extshape:chiseled_tuff_brick_slab"
+}

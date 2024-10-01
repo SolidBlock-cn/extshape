@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:white_terracotta_quarter_piece",
+    "extshape:orange_terracotta_quarter_piece",
+    "extshape:magenta_terracotta_quarter_piece",
+    "extshape:light_blue_terracotta_quarter_piece",
+    "extshape:yellow_terracotta_quarter_piece",
+    "extshape:lime_terracotta_quarter_piece",
+    "extshape:pink_terracotta_quarter_piece",
+    "extshape:gray_terracotta_quarter_piece",
+    "extshape:light_gray_terracotta_quarter_piece",
+    "extshape:cyan_terracotta_quarter_piece",
+    "extshape:purple_terracotta_quarter_piece",
+    "extshape:blue_terracotta_quarter_piece",
+    "extshape:brown_terracotta_quarter_piece",
+    "extshape:green_terracotta_quarter_piece",
+    "extshape:red_terracotta_quarter_piece",
+    "extshape:black_terracotta_quarter_piece"
+  ]
+}

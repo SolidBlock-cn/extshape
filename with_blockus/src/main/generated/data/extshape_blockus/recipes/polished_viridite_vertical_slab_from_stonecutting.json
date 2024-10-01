@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:polished_viridite"
+  },
+  "result": "extshape_blockus:polished_viridite_vertical_slab"
+}

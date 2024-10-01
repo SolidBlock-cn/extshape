@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "chiseled_concrete_brick_quarter_piece_from_vertical_slab",
+  "key": {
+    "#": {
+      "item": "extshape_blockus:chiseled_green_concrete_vertical_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:chiseled_green_concrete_quarter_piece"
+  }
+}

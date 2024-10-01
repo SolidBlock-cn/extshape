@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shingles_fence_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:pink_dye"
+    },
+    "X": {
+      "item": "extshape_blockus:shingles_fence"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "item": "extshape_blockus:pink_shingles_fence"
+  }
+}

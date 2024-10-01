@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stripped_wood_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:stripped_warped_hyphae"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:stripped_warped_hyphae_slab"
+  }
+}

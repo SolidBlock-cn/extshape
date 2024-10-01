@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:rotten_flesh_block"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:rotten_flesh_button"
+  }
+}

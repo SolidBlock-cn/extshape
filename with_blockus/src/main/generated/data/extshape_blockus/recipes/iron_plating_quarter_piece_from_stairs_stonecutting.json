@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "blockus:iron_plating_stairs"
+  },
+  "result": "extshape_blockus:iron_plating_quarter_piece"
+}

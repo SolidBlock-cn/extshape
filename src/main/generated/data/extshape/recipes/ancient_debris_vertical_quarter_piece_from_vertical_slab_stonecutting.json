@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:ancient_debris_vertical_slab"
+  },
+  "result": "extshape:ancient_debris_vertical_quarter_piece"
+}

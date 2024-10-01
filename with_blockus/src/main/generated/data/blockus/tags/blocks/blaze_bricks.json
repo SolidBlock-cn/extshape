@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:blaze_brick_vertical_slab",
+    "extshape_blockus:blaze_brick_vertical_stairs",
+    "extshape_blockus:blaze_brick_quarter_piece",
+    "extshape_blockus:blaze_brick_vertical_quarter_piece",
+    "extshape_blockus:blaze_brick_fence",
+    "extshape_blockus:blaze_brick_fence_gate",
+    "extshape_blockus:blaze_brick_button",
+    "extshape_blockus:blaze_brick_pressure_plate",
+    "extshape_blockus:blaze_lantern_stairs",
+    "extshape_blockus:blaze_lantern_slab",
+    "extshape_blockus:blaze_lantern_vertical_slab",
+    "extshape_blockus:blaze_lantern_vertical_stairs",
+    "extshape_blockus:blaze_lantern_quarter_piece",
+    "extshape_blockus:blaze_lantern_vertical_quarter_piece",
+    "extshape_blockus:blaze_lantern_fence",
+    "extshape_blockus:blaze_lantern_fence_gate",
+    "extshape_blockus:blaze_lantern_wall",
+    "extshape_blockus:blaze_lantern_button",
+    "extshape_blockus:blaze_lantern_pressure_plate"
+  ]
+}

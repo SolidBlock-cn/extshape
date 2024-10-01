@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/chiseled_magma_brick_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/chiseled_magma_bricks"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/chiseled_magma_brick_slab_top"
+    }
+  }
+}

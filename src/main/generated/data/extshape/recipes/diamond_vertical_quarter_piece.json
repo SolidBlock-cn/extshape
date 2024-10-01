@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:diamond_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:diamond_vertical_quarter_piece"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:soul_sandstone"
+  },
+  "result": "extshape_blockus:soul_sandstone_quarter_piece"
+}

@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:oak_wood_fence",
+    "extshape:spruce_wood_fence",
+    "extshape:birch_wood_fence",
+    "extshape:jungle_wood_fence",
+    "extshape:acacia_wood_fence",
+    "extshape:cherry_wood_fence",
+    "extshape:dark_oak_wood_fence",
+    "extshape:mangrove_wood_fence",
+    "extshape:stripped_oak_wood_fence",
+    "extshape:stripped_spruce_wood_fence",
+    "extshape:stripped_birch_wood_fence",
+    "extshape:stripped_jungle_wood_fence",
+    "extshape:stripped_acacia_wood_fence",
+    "extshape:stripped_cherry_wood_fence",
+    "extshape:stripped_dark_oak_wood_fence",
+    "extshape:stripped_mangrove_wood_fence",
+    "extshape:warped_hyphae_fence",
+    "extshape:crimson_hyphae_fence",
+    "extshape:stripped_warped_hyphae_fence",
+    "extshape:stripped_crimson_hyphae_fence"
+  ]
+}

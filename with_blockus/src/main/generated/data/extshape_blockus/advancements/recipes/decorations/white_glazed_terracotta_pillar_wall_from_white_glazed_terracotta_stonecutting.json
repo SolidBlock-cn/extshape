@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:white_glazed_terracotta_pillar_wall_from_white_glazed_terracotta_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_glazed_terracotta": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:white_glazed_terracotta"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_white_glazed_terracotta"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:white_glazed_terracotta_pillar_wall_from_white_glazed_terracotta_stonecutting"
+    ]
+  }
+}

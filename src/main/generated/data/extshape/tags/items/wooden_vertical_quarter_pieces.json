@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:log_vertical_quarter_pieces",
+    "extshape:bamboo_block_vertical_quarter_piece",
+    "extshape:stripped_bamboo_block_vertical_quarter_piece",
+    "extshape:oak_vertical_quarter_piece",
+    "extshape:spruce_vertical_quarter_piece",
+    "extshape:birch_vertical_quarter_piece",
+    "extshape:jungle_vertical_quarter_piece",
+    "extshape:acacia_vertical_quarter_piece",
+    "extshape:cherry_vertical_quarter_piece",
+    "extshape:dark_oak_vertical_quarter_piece",
+    "extshape:mangrove_vertical_quarter_piece",
+    "extshape:bamboo_vertical_quarter_piece",
+    "extshape:bamboo_mosaic_vertical_quarter_piece",
+    "extshape:crimson_vertical_quarter_piece",
+    "extshape:warped_vertical_quarter_piece"
+  ]
+}

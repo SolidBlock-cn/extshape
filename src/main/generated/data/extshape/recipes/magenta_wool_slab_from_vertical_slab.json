@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wool_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:magenta_wool_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:magenta_wool_slab"
+  }
+}

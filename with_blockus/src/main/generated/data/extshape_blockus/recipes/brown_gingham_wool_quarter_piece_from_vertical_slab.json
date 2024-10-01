@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "patterned_wool_quarter_piece_from_vertical_slab",
+  "key": {
+    "#": {
+      "item": "extshape_blockus:brown_gingham_wool_vertical_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:brown_gingham_wool_quarter_piece"
+  }
+}

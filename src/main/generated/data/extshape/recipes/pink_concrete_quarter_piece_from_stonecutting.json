@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:pink_concrete"
+  },
+  "result": "extshape:pink_concrete_quarter_piece"
+}

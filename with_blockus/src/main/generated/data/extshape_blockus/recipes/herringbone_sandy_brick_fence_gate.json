@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:brick"
+    },
+    "W": {
+      "item": "blockus:herringbone_sandy_bricks"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extshape_blockus:herringbone_sandy_brick_fence_gate"
+  }
+}

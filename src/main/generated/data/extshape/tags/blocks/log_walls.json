@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "extshape:oak_wood_wall",
+    "extshape:spruce_wood_wall",
+    "extshape:birch_wood_wall",
+    "extshape:jungle_wood_wall",
+    "extshape:acacia_wood_wall",
+    "extshape:cherry_wood_wall",
+    "extshape:dark_oak_wood_wall",
+    "extshape:mangrove_wood_wall",
+    "extshape:stripped_oak_wood_wall",
+    "extshape:stripped_spruce_wood_wall",
+    "extshape:stripped_birch_wood_wall",
+    "extshape:stripped_jungle_wood_wall",
+    "extshape:stripped_acacia_wood_wall",
+    "extshape:stripped_cherry_wood_wall",
+    "extshape:stripped_dark_oak_wood_wall",
+    "extshape:stripped_mangrove_wood_wall",
+    "extshape:warped_hyphae_wall",
+    "extshape:crimson_hyphae_wall",
+    "extshape:stripped_warped_hyphae_wall",
+    "extshape:stripped_crimson_hyphae_wall"
+  ]
+}

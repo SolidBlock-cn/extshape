@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "blockus:chiseled_purpur"
+  },
+  "result": "extshape_blockus:chiseled_purpur_vertical_stairs"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "log_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:oak_log"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:oak_log_slab"
+  }
+}

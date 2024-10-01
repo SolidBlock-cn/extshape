@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "axis=x,type=bottom": {
+      "model": "extshape:block/cherry_log_slab_x"
+    },
+    "axis=x,type=double": {
+      "model": "minecraft:block/cherry_log_x"
+    },
+    "axis=x,type=top": {
+      "model": "extshape:block/cherry_log_slab_x_top"
+    },
+    "axis=y,type=bottom": {
+      "model": "extshape:block/cherry_log_slab_y"
+    },
+    "axis=y,type=double": {
+      "model": "minecraft:block/cherry_log_y"
+    },
+    "axis=y,type=top": {
+      "model": "extshape:block/cherry_log_slab_y_top"
+    },
+    "axis=z,type=bottom": {
+      "model": "extshape:block/cherry_log_slab_z"
+    },
+    "axis=z,type=double": {
+      "model": "minecraft:block/cherry_log_z"
+    },
+    "axis=z,type=top": {
+      "model": "extshape:block/cherry_log_slab_z_top"
+    }
+  }
+}

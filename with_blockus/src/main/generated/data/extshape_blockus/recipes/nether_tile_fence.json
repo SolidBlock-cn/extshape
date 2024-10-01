@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:nether_brick"
+    },
+    "W": {
+      "item": "blockus:nether_tiles"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape_blockus:nether_tile_fence"
+  }
+}

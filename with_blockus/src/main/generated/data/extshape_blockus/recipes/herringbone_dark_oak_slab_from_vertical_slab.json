@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "herringbone_wooden_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:herringbone_dark_oak_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:herringbone_dark_oak_slab"
+  }
+}

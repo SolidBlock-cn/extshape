@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "blockus:block/chiseled_green_concrete",
+    "side": "blockus:block/chiseled_green_concrete",
+    "top": "blockus:block/chiseled_green_concrete"
+  }
+}

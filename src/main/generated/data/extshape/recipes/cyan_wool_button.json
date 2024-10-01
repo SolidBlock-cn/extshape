@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wool_button",
+  "ingredients": [
+    {
+      "item": "minecraft:cyan_wool"
+    }
+  ],
+  "result": {
+    "item": "extshape:cyan_wool_button"
+  }
+}

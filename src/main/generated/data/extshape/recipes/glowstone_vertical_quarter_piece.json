@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:glowstone_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:glowstone_vertical_quarter_piece"
+  }
+}

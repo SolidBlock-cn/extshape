@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_mosaic_wall",
+  "key": {
+    "#": {
+      "item": "blockus:acacia_mosaic"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:acacia_mosaic_wall"
+  }
+}

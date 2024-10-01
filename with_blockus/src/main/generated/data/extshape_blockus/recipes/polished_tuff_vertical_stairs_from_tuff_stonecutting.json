@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:tuff"
+  },
+  "result": "extshape_blockus:polished_tuff_vertical_stairs"
+}

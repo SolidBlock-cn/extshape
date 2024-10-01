@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/chiseled_light_gray_concrete_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/chiseled_light_gray_concrete"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/chiseled_light_gray_concrete_slab_top"
+    }
+  }
+}

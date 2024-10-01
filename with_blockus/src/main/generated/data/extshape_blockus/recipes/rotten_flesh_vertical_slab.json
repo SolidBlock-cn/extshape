@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:rotten_flesh_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:rotten_flesh_vertical_slab"
+  }
+}

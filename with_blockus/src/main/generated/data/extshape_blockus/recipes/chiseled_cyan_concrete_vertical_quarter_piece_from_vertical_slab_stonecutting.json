@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "group": "chiseled_concrete_brick_vertical_quarter_piece",
+  "ingredient": {
+    "item": "extshape_blockus:chiseled_cyan_concrete_vertical_slab"
+  },
+  "result": "extshape_blockus:chiseled_cyan_concrete_vertical_quarter_piece"
+}

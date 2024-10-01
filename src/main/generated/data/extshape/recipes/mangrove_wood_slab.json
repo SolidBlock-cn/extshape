@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wood_slab",
+  "key": {
+    "#": {
+      "item": "minecraft:mangrove_wood"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:mangrove_wood_slab"
+  }
+}

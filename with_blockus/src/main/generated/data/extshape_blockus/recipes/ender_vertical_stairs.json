@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:ender_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:ender_vertical_stairs"
+  }
+}

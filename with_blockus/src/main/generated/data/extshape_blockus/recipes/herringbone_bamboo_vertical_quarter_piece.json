@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "herringbone_wooden_vertical_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:herringbone_bamboo_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:herringbone_bamboo_vertical_quarter_piece"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:viridite_brick_vertical_quarter_piece_from_viridite_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_viridite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:viridite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_viridite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:viridite_brick_vertical_quarter_piece_from_viridite_stonecutting"
+    ]
+  }
+}

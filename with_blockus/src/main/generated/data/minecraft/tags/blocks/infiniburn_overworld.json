@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:charcoal_stairs",
+    "extshape_blockus:charcoal_slab",
+    "extshape_blockus:charcoal_vertical_slab",
+    "extshape_blockus:charcoal_vertical_stairs",
+    "extshape_blockus:charcoal_quarter_piece",
+    "extshape_blockus:charcoal_vertical_quarter_piece",
+    "extshape_blockus:charcoal_fence",
+    "extshape_blockus:charcoal_fence_gate",
+    "extshape_blockus:charcoal_wall",
+    "extshape_blockus:charcoal_button",
+    "extshape_blockus:charcoal_pressure_plate"
+  ]
+}

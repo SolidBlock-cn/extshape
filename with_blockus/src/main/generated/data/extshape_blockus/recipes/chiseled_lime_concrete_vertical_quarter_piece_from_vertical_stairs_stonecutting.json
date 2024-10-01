@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "group": "chiseled_concrete_brick_vertical_quarter_piece",
+  "ingredient": {
+    "item": "extshape_blockus:chiseled_lime_concrete_vertical_stairs"
+  },
+  "result": "extshape_blockus:chiseled_lime_concrete_vertical_quarter_piece"
+}

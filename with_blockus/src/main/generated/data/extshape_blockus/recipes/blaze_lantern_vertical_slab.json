@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:blaze_lantern_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:blaze_lantern_vertical_slab"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:chiseled_green_concrete"
+  },
+  "result": "extshape_blockus:chiseled_green_concrete_vertical_slab"
+}

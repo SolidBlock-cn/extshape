@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "group": "shingles_quarter_piece",
+  "ingredient": {
+    "item": "extshape_blockus:black_shingles_vertical_slab"
+  },
+  "result": "extshape_blockus:black_shingles_quarter_piece"
+}

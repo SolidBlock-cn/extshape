@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:chiseled_quartz_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape:chiseled_quartz_vertical_slab"
+  }
+}

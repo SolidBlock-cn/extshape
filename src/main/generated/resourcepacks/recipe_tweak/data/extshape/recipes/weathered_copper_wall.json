@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:weathered_copper"
+    },
+    "*": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    " * ",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:weathered_copper_wall"
+  }
+}

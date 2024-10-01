@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wool_pressure_plate",
+  "key": {
+    "#": {
+      "item": "minecraft:cyan_carpet"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "item": "extshape:cyan_wool_pressure_plate"
+  }
+}

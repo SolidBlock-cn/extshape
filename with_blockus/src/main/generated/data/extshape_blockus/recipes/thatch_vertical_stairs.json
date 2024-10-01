@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "blockus:thatch_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:thatch_vertical_stairs"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:end_stone_brick_vertical_slab"
+  },
+  "result": "extshape:end_stone_brick_vertical_quarter_piece"
+}

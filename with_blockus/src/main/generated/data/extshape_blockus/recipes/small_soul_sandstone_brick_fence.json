@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:soul_sand"
+    },
+    "W": {
+      "item": "blockus:small_soul_sandstone_bricks"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape_blockus:small_soul_sandstone_brick_fence"
+  }
+}

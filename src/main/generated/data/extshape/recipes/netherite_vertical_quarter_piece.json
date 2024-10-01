@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:netherite_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:netherite_vertical_quarter_piece"
+  }
+}

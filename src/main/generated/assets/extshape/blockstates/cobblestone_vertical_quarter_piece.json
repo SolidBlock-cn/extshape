@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "facing=north_east": {
+      "model": "extshape:block/cobblestone_vertical_quarter_piece",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north_west": {
+      "model": "extshape:block/cobblestone_vertical_quarter_piece",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south_east": {
+      "model": "extshape:block/cobblestone_vertical_quarter_piece",
+      "uvlock": true,
+      "y": 0
+    },
+    "facing=south_west": {
+      "model": "extshape:block/cobblestone_vertical_quarter_piece",
+      "uvlock": true,
+      "y": 90
+    }
+  }
+}

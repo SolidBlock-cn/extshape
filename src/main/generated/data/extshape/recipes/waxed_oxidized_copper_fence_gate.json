@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:copper_ingot"
+    },
+    "W": {
+      "item": "minecraft:waxed_oxidized_copper"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "extshape:waxed_oxidized_copper_fence_gate"
+  }
+}

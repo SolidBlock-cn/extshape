@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape_blockus:bluestone_tile_vertical_stairs"
+  },
+  "result": "extshape_blockus:bluestone_tile_vertical_quarter_piece"
+}

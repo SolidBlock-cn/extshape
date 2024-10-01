@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "blockus:block/stripped_white_oak_log"
+  }
+}

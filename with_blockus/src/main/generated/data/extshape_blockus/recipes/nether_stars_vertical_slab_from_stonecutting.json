@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:nether_stars_block"
+  },
+  "result": "extshape_blockus:nether_stars_vertical_slab"
+}

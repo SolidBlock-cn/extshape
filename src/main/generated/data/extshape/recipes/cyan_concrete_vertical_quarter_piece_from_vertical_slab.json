@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "concrete_vertical_quarter_piece_from_vertical_slab",
+  "key": {
+    "#": {
+      "item": "extshape:cyan_concrete_vertical_slab"
+    }
+  },
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:cyan_concrete_vertical_quarter_piece"
+  }
+}

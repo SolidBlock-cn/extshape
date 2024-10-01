@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "blockus:rainbow_petal"
+    },
+    "W": {
+      "item": "blockus:rainbow_bricks"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape_blockus:rainbow_brick_fence"
+  }
+}

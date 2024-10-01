@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:blaze_lantern"
+  },
+  "result": "extshape_blockus:blaze_lantern_slab"
+}

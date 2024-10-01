@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wood_vertical_stairs_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:acacia_wood_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:acacia_wood_vertical_stairs"
+  }
+}

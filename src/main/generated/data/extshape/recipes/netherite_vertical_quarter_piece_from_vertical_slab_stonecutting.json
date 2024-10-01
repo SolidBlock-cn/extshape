@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "extshape:netherite_vertical_slab"
+  },
+  "result": "extshape:netherite_vertical_quarter_piece"
+}

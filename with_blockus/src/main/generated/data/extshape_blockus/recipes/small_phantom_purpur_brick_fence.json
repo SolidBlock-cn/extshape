@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "W": {
+      "item": "blockus:small_phantom_purpur_bricks"
+    }
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extshape_blockus:small_phantom_purpur_brick_fence"
+  }
+}

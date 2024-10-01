@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_logs_vertical_quarter_piece_from_vertical_slab",
+  "key": {
+    "#": {
+      "item": "extshape_blockus:jungle_small_logs_vertical_slab"
+    }
+  },
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:jungle_small_logs_vertical_quarter_piece"
+  }
+}

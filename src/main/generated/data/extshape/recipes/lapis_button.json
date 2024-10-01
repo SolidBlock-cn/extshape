@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_block"
+    }
+  ],
+  "result": {
+    "item": "extshape:lapis_button"
+  }
+}

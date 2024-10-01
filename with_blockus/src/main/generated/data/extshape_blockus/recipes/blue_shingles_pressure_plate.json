@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "shingles_pressure_plate",
+  "key": {
+    "#": {
+      "item": "blockus:blue_shingles"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "extshape_blockus:blue_shingles_pressure_plate"
+  }
+}

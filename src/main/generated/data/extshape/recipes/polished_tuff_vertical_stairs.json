@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:polished_tuff_stairs"
+    }
+  ],
+  "result": {
+    "item": "extshape:polished_tuff_vertical_stairs"
+  }
+}

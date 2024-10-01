@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:warped_warty_blackstone_bricks"
+  },
+  "result": "extshape_blockus:warped_warty_blackstone_brick_vertical_slab"
+}

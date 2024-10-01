@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "minecraft:tuff_bricks"
+    }
+  ],
+  "result": {
+    "item": "extshape:tuff_brick_button"
+  }
+}

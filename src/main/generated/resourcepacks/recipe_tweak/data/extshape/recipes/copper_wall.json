@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:copper_block"
+    },
+    "*": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    " * ",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:copper_wall"
+  }
+}

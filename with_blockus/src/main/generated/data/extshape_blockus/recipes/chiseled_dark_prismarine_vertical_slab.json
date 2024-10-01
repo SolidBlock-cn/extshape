@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:chiseled_dark_prismarine_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:chiseled_dark_prismarine_vertical_slab"
+  }
+}

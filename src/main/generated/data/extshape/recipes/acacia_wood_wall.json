@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wood_wall",
+  "key": {
+    "#": {
+      "item": "minecraft:acacia_wood"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape:acacia_wood_wall"
+  }
+}

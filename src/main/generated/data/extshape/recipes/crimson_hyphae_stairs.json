@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wood_stairs",
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_hyphae"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "extshape:crimson_hyphae_stairs"
+  }
+}

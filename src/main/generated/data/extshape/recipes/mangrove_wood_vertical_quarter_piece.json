@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wood_vertical_quarter_piece_from_rotation",
+  "ingredients": [
+    {
+      "item": "extshape:mangrove_wood_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:mangrove_wood_vertical_quarter_piece"
+  }
+}

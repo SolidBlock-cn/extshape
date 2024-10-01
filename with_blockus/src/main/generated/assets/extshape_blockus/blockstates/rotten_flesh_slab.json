@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape_blockus:block/rotten_flesh_slab"
+    },
+    "type=double": {
+      "model": "blockus:block/rotten_flesh_block"
+    },
+    "type=top": {
+      "model": "extshape_blockus:block/rotten_flesh_slab_top"
+    }
+  }
+}

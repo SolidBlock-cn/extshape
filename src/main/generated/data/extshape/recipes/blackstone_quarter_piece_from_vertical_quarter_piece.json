@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape:blackstone_vertical_quarter_piece"
+    }
+  ],
+  "result": {
+    "item": "extshape:blackstone_quarter_piece"
+  }
+}

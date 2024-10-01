@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:ender_stairs",
+    "extshape_blockus:ender_slab",
+    "extshape_blockus:ender_vertical_slab",
+    "extshape_blockus:ender_vertical_stairs",
+    "extshape_blockus:ender_quarter_piece",
+    "extshape_blockus:ender_vertical_quarter_piece",
+    "extshape_blockus:ender_fence",
+    "extshape_blockus:ender_fence_gate",
+    "extshape_blockus:ender_wall",
+    "extshape_blockus:ender_button",
+    "extshape_blockus:ender_pressure_plate",
+    "extshape_blockus:iron_brick_vertical_slab",
+    "extshape_blockus:iron_brick_vertical_stairs",
+    "extshape_blockus:iron_brick_quarter_piece",
+    "extshape_blockus:iron_brick_vertical_quarter_piece",
+    "extshape_blockus:lapis_brick_vertical_slab",
+    "extshape_blockus:lapis_brick_vertical_stairs",
+    "extshape_blockus:lapis_brick_quarter_piece",
+    "extshape_blockus:lapis_brick_vertical_quarter_piece"
+  ]
+}

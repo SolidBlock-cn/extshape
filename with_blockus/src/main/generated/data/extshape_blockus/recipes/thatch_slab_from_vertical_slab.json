@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:thatch_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "blockus:thatch_slab"
+  }
+}

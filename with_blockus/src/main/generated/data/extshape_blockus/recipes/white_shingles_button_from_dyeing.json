@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shingles_button_from_dyeing",
+  "key": {
+    "#": {
+      "item": "minecraft:white_dye"
+    },
+    "X": {
+      "item": "extshape_blockus:shingles_button"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "count": 8,
+    "item": "extshape_blockus:white_shingles_button"
+  }
+}

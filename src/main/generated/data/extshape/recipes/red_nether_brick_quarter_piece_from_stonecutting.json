@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:red_nether_bricks"
+  },
+  "result": "extshape:red_nether_brick_quarter_piece"
+}

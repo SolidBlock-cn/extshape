@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_smooth_soul_sandstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "blockus:smooth_soul_sandstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:smooth_soul_sandstone_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_smooth_soul_sandstone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:smooth_soul_sandstone_pressure_plate"
+    ]
+  }
+}

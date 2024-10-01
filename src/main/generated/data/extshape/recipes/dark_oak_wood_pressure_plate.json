@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wood_pressure_plate",
+  "key": {
+    "#": {
+      "item": "minecraft:dark_oak_wood"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "extshape:dark_oak_wood_pressure_plate"
+  }
+}

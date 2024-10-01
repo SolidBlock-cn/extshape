@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "extshape_blockus:iron_brick_vertical_slab",
+    "extshape_blockus:iron_brick_vertical_stairs",
+    "extshape_blockus:iron_brick_quarter_piece",
+    "extshape_blockus:iron_brick_vertical_quarter_piece",
+    "extshape_blockus:gold_brick_vertical_slab",
+    "extshape_blockus:gold_brick_vertical_stairs",
+    "extshape_blockus:gold_brick_quarter_piece",
+    "extshape_blockus:gold_brick_vertical_quarter_piece",
+    "extshape_blockus:emerald_brick_vertical_slab",
+    "extshape_blockus:emerald_brick_vertical_stairs",
+    "extshape_blockus:emerald_brick_quarter_piece",
+    "extshape_blockus:emerald_brick_vertical_quarter_piece",
+    "extshape_blockus:diamond_brick_vertical_slab",
+    "extshape_blockus:diamond_brick_vertical_stairs",
+    "extshape_blockus:diamond_brick_quarter_piece",
+    "extshape_blockus:diamond_brick_vertical_quarter_piece",
+    "extshape_blockus:netherite_brick_vertical_slab",
+    "extshape_blockus:netherite_brick_vertical_stairs",
+    "extshape_blockus:netherite_brick_quarter_piece",
+    "extshape_blockus:netherite_brick_vertical_quarter_piece"
+  ]
+}

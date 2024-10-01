@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:burnt_paper_block"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:burnt_paper_button"
+  }
+}

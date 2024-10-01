@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:end_stone"
+  },
+  "result": "extshape_blockus:chiseled_end_stone_brick_vertical_stairs"
+}

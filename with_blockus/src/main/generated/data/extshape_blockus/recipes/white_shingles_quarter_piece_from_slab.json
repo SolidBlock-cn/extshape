@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "shingles_quarter_piece_from_slab",
+  "key": {
+    "#": {
+      "item": "blockus:white_shingles_slab"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "extshape_blockus:white_shingles_quarter_piece"
+  }
+}

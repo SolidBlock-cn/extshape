@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "axis=x,type=bottom": {
+      "model": "extshape:block/warped_hyphae_slab_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,type=double": {
+      "model": "minecraft:block/warped_hyphae",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,type=top": {
+      "model": "extshape:block/warped_hyphae_slab_horizontal_top",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,type=bottom": {
+      "model": "extshape:block/warped_hyphae_slab"
+    },
+    "axis=y,type=double": {
+      "model": "minecraft:block/warped_hyphae"
+    },
+    "axis=y,type=top": {
+      "model": "extshape:block/warped_hyphae_slab_top"
+    },
+    "axis=z,type=bottom": {
+      "model": "extshape:block/warped_hyphae_slab_horizontal",
+      "x": 90
+    },
+    "axis=z,type=double": {
+      "model": "minecraft:block/warped_hyphae",
+      "x": 90
+    },
+    "axis=z,type=top": {
+      "model": "extshape:block/warped_hyphae_slab_horizontal_top",
+      "x": 90
+    }
+  }
+}

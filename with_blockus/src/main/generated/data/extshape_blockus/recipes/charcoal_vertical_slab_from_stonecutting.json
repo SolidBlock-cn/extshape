@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:charcoal_block"
+  },
+  "result": "extshape_blockus:charcoal_vertical_slab"
+}

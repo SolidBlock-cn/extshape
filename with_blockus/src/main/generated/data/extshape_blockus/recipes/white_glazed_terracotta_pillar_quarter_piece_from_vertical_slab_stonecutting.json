@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "group": "glazed_terracotta_pillar_quarter_piece",
+  "ingredient": {
+    "item": "extshape_blockus:white_glazed_terracotta_pillar_vertical_slab"
+  },
+  "result": "extshape_blockus:white_glazed_terracotta_pillar_quarter_piece"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "stained_stone_brick_pressure_plate",
+  "key": {
+    "#": {
+      "item": "blockus:gray_stone_bricks"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "extshape_blockus:gray_stone_brick_pressure_plate"
+  }
+}

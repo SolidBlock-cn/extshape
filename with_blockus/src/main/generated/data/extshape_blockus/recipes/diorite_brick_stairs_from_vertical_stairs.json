@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:diorite_brick_vertical_stairs"
+    }
+  ],
+  "result": {
+    "item": "blockus:diorite_brick_stairs"
+  }
+}

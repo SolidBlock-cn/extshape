@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:yellow_terracotta"
+  },
+  "result": "extshape_blockus:yellow_shingles_vertical_stairs"
+}

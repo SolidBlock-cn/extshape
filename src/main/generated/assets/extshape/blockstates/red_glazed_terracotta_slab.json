@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "facing=east,type=bottom": {
+      "model": "extshape:block/red_glazed_terracotta_slab",
+      "y": 270
+    },
+    "facing=east,type=double": {
+      "model": "minecraft:block/red_glazed_terracotta",
+      "y": 270
+    },
+    "facing=east,type=top": {
+      "model": "extshape:block/red_glazed_terracotta_slab_top",
+      "y": 270
+    },
+    "facing=north,type=bottom": {
+      "model": "extshape:block/red_glazed_terracotta_slab",
+      "y": 180
+    },
+    "facing=north,type=double": {
+      "model": "minecraft:block/red_glazed_terracotta",
+      "y": 180
+    },
+    "facing=north,type=top": {
+      "model": "extshape:block/red_glazed_terracotta_slab_top",
+      "y": 180
+    },
+    "facing=south,type=bottom": {
+      "model": "extshape:block/red_glazed_terracotta_slab",
+      "y": 0
+    },
+    "facing=south,type=double": {
+      "model": "minecraft:block/red_glazed_terracotta",
+      "y": 0
+    },
+    "facing=south,type=top": {
+      "model": "extshape:block/red_glazed_terracotta_slab_top",
+      "y": 0
+    },
+    "facing=west,type=bottom": {
+      "model": "extshape:block/red_glazed_terracotta_slab",
+      "y": 90
+    },
+    "facing=west,type=double": {
+      "model": "minecraft:block/red_glazed_terracotta",
+      "y": 90
+    },
+    "facing=west,type=top": {
+      "model": "extshape:block/red_glazed_terracotta_slab_top",
+      "y": 90
+    }
+  }
+}

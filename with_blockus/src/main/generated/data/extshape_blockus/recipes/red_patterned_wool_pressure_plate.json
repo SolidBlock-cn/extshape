@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "patterned_wool_pressure_plate",
+  "key": {
+    "#": {
+      "item": "blockus:red_patterned_carpet"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "item": "extshape_blockus:red_patterned_wool_pressure_plate"
+  }
+}

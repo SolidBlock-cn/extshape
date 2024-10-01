@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:prismarine_circular_paving"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:prismarine_circular_paving_button"
+  }
+}

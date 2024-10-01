@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "patterned_wool_vertical_slab_from_rotation",
+  "ingredients": [
+    {
+      "item": "blockus:lime_patterned_wool_slab"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:lime_patterned_wool_vertical_slab"
+  }
+}

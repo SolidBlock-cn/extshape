@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "extshape:diorite_vertical_stairs"
+  },
+  "result": "extshape:diorite_vertical_quarter_piece"
+}

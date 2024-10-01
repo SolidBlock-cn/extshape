@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#extshape:woolen_stairs",
+    "#extshape:woolen_slabs",
+    "#extshape:woolen_vertical_slabs",
+    "#extshape:woolen_vertical_stairs",
+    "#extshape:woolen_quarter_pieces",
+    "#extshape:woolen_vertical_quarter_pieces",
+    "#extshape:woolen_fences",
+    "#extshape:woolen_fence_gates",
+    "#extshape:woolen_walls",
+    "#extshape:woolen_buttons",
+    "#extshape:woolen_pressure_plates"
+  ]
+}
