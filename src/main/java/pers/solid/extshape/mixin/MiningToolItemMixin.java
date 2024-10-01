@@ -3,6 +3,7 @@ package pers.solid.extshape.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.registry.tag.BlockTags;
@@ -19,6 +20,12 @@ public abstract class MiningToolItemMixin {
   @SuppressWarnings("ConstantConditions")
   @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"), method = "getMiningSpeedMultiplier")
   public boolean getMiningSpeedMultiplierInjected(boolean original, @Local(argsOnly = true) BlockState state) {
-    return original && !(((MiningToolItem) (Object) this) instanceof PickaxeItem && state.isIn(ExtShapeTags.PICKAXE_UNMINEABLE));
+    if (((MiningToolItem) (Object) this) instanceof PickaxeItem && state.isIn(ExtShapeTags.PICKAXE_UNMINEABLE)) {
+      return false;
+    } else if (((MiningToolItem) (Object) this) instanceof AxeItem && state.isIn(ExtShapeTags.AXE_UNMINEABLE)) {
+      return false;
+    } else {
+      return original;
+    }
   }
 }

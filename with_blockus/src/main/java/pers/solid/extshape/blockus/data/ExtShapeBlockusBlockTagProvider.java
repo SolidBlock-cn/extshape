@@ -4,6 +4,7 @@ import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.tags.BlockusBlockTags;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryWrapper;
@@ -16,6 +17,7 @@ import pers.solid.extshape.data.ExtShapeBlockTagProvider;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
@@ -49,7 +51,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     // region mineable 方块标签
 
-    addForShapes(BlockTags.PICKAXE_MINEABLE,
+    final Block[] pickaxeMineableBaseBlocks = {
         BlockusBlocks.CHISELED_MUD_BRICKS,
         BlockusBlocks.CRIMSON_WART_BRICKS.block,
         BlockusBlocks.WARPED_WART_BRICKS.block,
@@ -58,17 +60,30 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.CHARCOAL_BLOCK,
         BlockusBlocks.ENDER_BLOCK,
         BlockusBlocks.NETHER_STAR_BLOCK
-    );
-    addForShapes(BlockTags.HOE_MINEABLE,
+    };
+    addForShapes(BlockTags.PICKAXE_MINEABLE, pickaxeMineableBaseBlocks);
+
+    final Block[] hoeMineableBaseBlocks = {
         BlockusBlocks.CHORUS_BLOCK,
         BlockusBlocks.THATCH.block,
-        BlockusBlocks.ROTTEN_FLESH_BLOCK);
+        BlockusBlocks.ROTTEN_FLESH_BLOCK
+    };
+    addForShapes(BlockTags.HOE_MINEABLE, hoeMineableBaseBlocks);
+
     getOrCreateTagBuilder(ExtShapeTags.PICKAXE_UNMINEABLE)
-        .add(Stream.of(
-            BlockusBlocks.CHORUS_BLOCK,
-            BlockusBlocks.THATCH.block,
-            BlockusBlocks.ROTTEN_FLESH_BLOCK
-        ).map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block)).map(Objects::requireNonNull).toArray(Block[]::new));
+        .add(Stream.of(hoeMineableBaseBlocks)
+            .map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block))
+            .filter(Objects::nonNull)
+            .toArray(Block[]::new));
+    getOrCreateTagBuilder(ExtShapeTags.AXE_UNMINEABLE)
+        .add(Streams.concat(
+                Arrays.stream(pickaxeMineableBaseBlocks),
+                Arrays.stream(hoeMineableBaseBlocks)
+            )
+            .map(block -> BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, block))
+            .filter(Objects::nonNull)
+            .toArray(Block[]::new));
+
     addForShapes(BlockTags.NEEDS_STONE_TOOL,
         BlockusBlocks.ENDER_BLOCK
     );
