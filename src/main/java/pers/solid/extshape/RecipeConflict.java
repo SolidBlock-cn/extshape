@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -130,7 +129,7 @@ public final class RecipeConflict {
 
   private static int executeCheckConflict(CommandContext<ServerCommandSource> context, @Nullable String namespace) throws CommandSyntaxException {
     final ServerCommandSource source = context.getSource();
-          source.sendFeedback(Text.translatable("message.extshape.recipe_conflict.start"), true);
+    source.sendFeedback(Text.translatable("message.extshape.recipe_conflict.start"), true);
     final ServerWorld world = source.getWorld();
     final ServerPlayerEntity player = source.getPlayerOrThrow();
     final Predicate<Identifier> predicate;

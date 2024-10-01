@@ -1,5 +1,4 @@
 {
   "modmenu.nameTranslation.extshape_blockus": "扩展方块形状 - Blockus",
-  "modmenu.descriptionTranslation.extshape_blockus": "为Blockus模组添加扩展方块形状！",
-  "block.extshape_blockus.deprecated": "已弃用的方块。请通过合成将其替换为有相同名称的另一个方块。"
+  "modmenu.descriptionTranslation.extshape_blockus": "为Blockus模组添加扩展方块形状！"
 }

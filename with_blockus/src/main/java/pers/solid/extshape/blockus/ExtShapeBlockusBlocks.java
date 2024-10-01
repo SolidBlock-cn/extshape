@@ -136,11 +136,14 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.CHISELED_DRIPSTONE)
         .without(BlockShape.BUTTON)
-        .setFenceSettings(FenceSettings.DRIPSTONE);
+        .setFenceSettings(FenceSettings.DRIPSTONE)
+        .setActivationSettings(ActivationSettings.DRIPSTONE)
+        .build();
 
     create(BlockusBlocks.POLISHED_TUFF)
         .setFenceSettings(FenceSettings.TUFF)
-        .setActivationSettings(ActivationSettings.TUFF).build();
+        .setActivationSettings(ActivationSettings.TUFF)
+        .build();
     create(BlockusBlocks.TUFF_BRICKS)
         .setFenceSettings(FenceSettings.TUFF)
         .setActivationSettings(ActivationSettings.TUFF)
@@ -211,20 +214,12 @@ public final class ExtShapeBlockusBlocks {
         .withExtension(BlockExtension.AMETHYST)
         .setFenceSettings(FenceSettings.AMETHYST)
         .build();
-    Util.make(FACTORY.createEmpty(BlockusBlocks.POLISHED_AMETHYST.block).with(BlockShape.STAIRS, BlockShape.SLAB), blocksBuilder1 -> {
-      blocksBuilder1.put(BlockShape.STAIRS, FACTORY.modify(new StairsBuilder(blocksBuilder1.baseBlock).setInstanceSupplier(builder2 -> new DeprecateStairsBlock(builder2.baseBlock, builder2.blockSettings, BlockusBlocks.POLISHED_AMETHYST.stairs))));
-      blocksBuilder1.put(BlockShape.SLAB, FACTORY.modify(new SlabBuilder(blocksBuilder1.baseBlock).setInstanceSupplier(builder2 -> new DeprecatedSlabBlock(builder2.baseBlock, builder2.blockSettings, BlockusBlocks.POLISHED_AMETHYST.slab))));
-    }).addPreBuildConsumer((blockShape6, builder2) -> builder2.shouldAddToBlockBiMap = false).build();
     create(BlockusBlocks.AMETHYST_BRICKS)
         .withoutRedstone()
         .withExtension(BlockExtension.AMETHYST)
         .setFenceSettings(FenceSettings.AMETHYST)
         .without(BlockShape.BUTTON)
         .build();
-    Util.make(FACTORY.createEmpty(BlockusBlocks.AMETHYST_BRICKS.block).with(BlockShape.STAIRS, BlockShape.SLAB), blocksBuilder -> {
-      blocksBuilder.put(BlockShape.STAIRS, FACTORY.modify(new StairsBuilder(blocksBuilder.baseBlock).setInstanceSupplier(builder1 -> new DeprecateStairsBlock(builder1.baseBlock, builder1.blockSettings, BlockusBlocks.AMETHYST_BRICKS.stairs))));
-      blocksBuilder.put(BlockShape.SLAB, FACTORY.modify(new SlabBuilder(blocksBuilder.baseBlock).setInstanceSupplier(builder1 -> new DeprecatedSlabBlock(builder1.baseBlock, builder1.blockSettings, BlockusBlocks.AMETHYST_BRICKS.slab))));
-    }).addPreBuildConsumer((blockShape5, builder1) -> builder1.shouldAddToBlockBiMap = false).build();
     FACTORY.createAllShapes(BlockusBlocks.CHISELED_AMETHYST)
         .markStoneCuttable()
         .withoutRedstone()
@@ -619,7 +614,8 @@ public final class ExtShapeBlockusBlocks {
         .build();
 
     create(BlockusBlocks.RAINBOW_BLOCK)
-        .setStoneFenceSettings(BlockusItems.RAINBOW_PETAL).setPillar()
+        .setStoneFenceSettings(BlockusItems.RAINBOW_PETAL)
+        .setPillar()
         .build();
     create(BlockusBlocks.RAINBOW_BRICKS)
         .setStoneFenceSettings(BlockusItems.RAINBOW_PETAL)
@@ -790,7 +786,8 @@ public final class ExtShapeBlockusBlocks {
     markStoneCuttableWhenCreating = false;
 
     create(BlockusBlocks.CHORUS_BLOCK)
-        .setStoneFenceSettings(Items.CHORUS_PLANT).setPillar()
+        .setStoneFenceSettings(Items.CHORUS_PLANT)
+        .setPillar()
         .build();
 
     for (var bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
@@ -917,9 +914,9 @@ public final class ExtShapeBlockusBlocks {
         .withExtension(BlockExtension.builder()
             .setSteppedOnCallback((world, pos, state, entity) -> {
               if (entity.getType() == EntityType.PLAYER) {
-        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 4, true, false, false));
-        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 100, 3, true, false, true));
-        ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4, true, false, true));
+                ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 4, true, false, false));
+                ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 100, 3, true, false, true));
+                ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 4, true, false, true));
               }
             })
             .build())
@@ -932,14 +929,14 @@ public final class ExtShapeBlockusBlocks {
             }
 
             @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-          super.appendTooltip(stack, world, tooltip, context);
-          this.getBlock().appendTooltip(stack, world, tooltip, context);
+            public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+              super.appendTooltip(stack, world, tooltip, context);
+              this.getBlock().appendTooltip(stack, world, tooltip, context);
               tooltip.add(ScreenTexts.EMPTY);
               tooltip.add(Blockus.STEPPED_ON_TEXT);
-          tooltip.add(ScreenTexts.space().append(StatusEffects.REGENERATION.getName()).append(" IV").formatted(Formatting.BLUE));
-          tooltip.add(ScreenTexts.space().append(StatusEffects.ABSORPTION.getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
-          tooltip.add(ScreenTexts.space().append(StatusEffects.STRENGTH.getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
+              tooltip.add(ScreenTexts.space().append(StatusEffects.REGENERATION.getName()).append(" IV").formatted(Formatting.BLUE));
+              tooltip.add(ScreenTexts.space().append(StatusEffects.ABSORPTION.getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
+              tooltip.add(ScreenTexts.space().append(StatusEffects.STRENGTH.getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
             }
           });
         })
