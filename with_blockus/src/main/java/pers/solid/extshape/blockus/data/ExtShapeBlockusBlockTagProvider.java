@@ -349,6 +349,14 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.STRIPPED_WHITE_OAK_WOOD
     );
 
+    for (BSSTypes bundle : BlockusBlockCollections.WOODEN_MOSAICS) {
+      addForShapes(BlockusBlockTags.ALL_WOODEN_MOSAICS, bundle.block);
+      final Block wall = BlockBiMaps.getBlockOf(BlockShape.WALL, bundle.block);
+      if (wall != null) {
+        getOrCreateTagBuilder(ExtShapeTags.PICKAXE_UNMINEABLE).add(wall);
+      }
+    }
+
     for (BSSTypes bundle : BlockusBlockCollections.MOSSY_PLANKS) {
       addForShapes(BlockusBlockTags.ALL_MOSSY_PLANKS, bundle.block);
       final Block wall = BlockBiMaps.getBlockOf(BlockShape.WALL, bundle.block);
