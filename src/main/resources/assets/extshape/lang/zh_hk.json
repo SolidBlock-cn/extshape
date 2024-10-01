@@ -50,5 +50,7 @@
 
   "modmenu.nameTranslation.extshape": "擴展方塊形狀",
 
-  "options.extshape.addToVanillaGroups.blockus": "請注意：如要喺創造模式中尋到 Blockus 模組中嘅擴展形狀嘅方塊，你需要啟用「添加至原版物品組」。呢啲方塊只會顯示喺 Blockus 嘅物品組中。Blockus 方塊嘅擴展形狀嘅方塊冇專用物品組。"
+  "options.extshape.addToVanillaGroups.blockus": "請注意：如要喺創造模式中尋到 Blockus 模組中嘅擴展形狀嘅方塊，你需要啟用「添加至原版物品組」。呢啲方塊只會顯示喺 Blockus 嘅物品組中。Blockus 方塊嘅擴展形狀嘅方塊冇專用物品組。",
+
+  "resourcePack.extshape.recipe_tweak.name": "配方調整（修復模組與原版之間嘅配方衝突）"
 }
