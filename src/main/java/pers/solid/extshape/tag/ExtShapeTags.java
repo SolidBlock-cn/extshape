@@ -16,16 +16,6 @@ import pers.solid.extshape.builder.BlockShape;
  */
 public final class ExtShapeTags {
   /**
-   * 这个标签主要是考虑到，{@link BlockTags#PICKAXE_MINEABLE} 加入了所有的墙，但事实上墙并不一定是可以使用镐来开采的，因此这里设置了一个专门的标签，如果某个方块属于 {@code minecraft:mineable/pickaxe} 但同时属于 {@code extshape:pickaxe_unmineable}，则认为镐子不能开采这个方块。
-   */
-  @ApiStatus.AvailableSince("0.1.5")
-  public static final TagKey<Block> PICKAXE_UNMINEABLE = of("pickaxe_unmineable");
-  /**
-   * 由于原版的 {@link BlockTags#AXE_MINEABLE} 加入了所有的墙，所以这里设置了专门的标签，如果方块属于 {@code minecraft:mineable/axe} 但同时属于 {@code extshape:axe_unmineable}，则认为斧不能开采这个方块。
-   */
-  @ApiStatus.AvailableSince("3.0.0")
-  public static final TagKey<Block> AXE_UNMINEABLE = of("axe_unmineable");
-  /**
    * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，会被剪刀剪掉，并被加入到 {@link BlockTags#OCCLUDES_VIBRATION_SIGNALS} 中（仅限 1.17 以上版本）。
    */
   public static final TagKey<Block> WOOLEN_BLOCKS = of("woolen_blocks");
