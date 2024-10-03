@@ -2,6 +2,8 @@
 
 This document is also [provided in English](README-en.md).
 
+> 自 3.0.0 版本开始，不再需要安装[更好的运行时资源包（BRRP）](https://github.com/SolidBlock-cn/BRRP/)模组。
+
 本模组为许多的原版方块添加了其楼梯、台阶、栅栏、栅栏门、按钮和压力板，以及原版不具有的竖直台阶、竖直楼梯、横条、纵条。具体内容列表请参考[方块列表](BlockList.md)。
 
 模组目前支持 Minecraft Java 版 1.21.1-1.16.5，请根据你的游戏版本安装对应的模组，并需要 Fabric API 才能运行。此外，对于 Fabric，通常还需要 Mod Menu（非必须）以打开模组配置界面。
