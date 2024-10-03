@@ -20,7 +20,7 @@
     "SingleItemRecipeJsonBuilderAccessor",
     "SnowyBlockMixin",
     "TextureMapAccessor",
-    "ToolMaterialMixin",
+    "ToolComponentMixin",
     "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"
   ],
