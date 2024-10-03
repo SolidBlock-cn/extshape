@@ -4,7 +4,6 @@ import com.brand.blockus.content.BlockusBlocks;
 import com.brand.blockus.tags.BlockusBlockTags;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Streams;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.registry.RegistryWrapper;
@@ -12,15 +11,10 @@ import net.minecraft.registry.tag.BlockTags;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
-import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
 import pers.solid.extshape.tag.ExtShapeTags;
-import pers.solid.extshape.util.BlockBiMaps;
 
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Stream;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
   public ExtShapeBlockusBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
@@ -51,7 +45,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     // region mineable 方块标签
 
-    final Block[] pickaxeMineableBaseBlocks = {
+    addForShapes(BlockTags.PICKAXE_MINEABLE,
         BlockusBlocks.CHISELED_MUD_BRICKS,
         BlockusBlocks.CRIMSON_WART_BRICKS.block,
         BlockusBlocks.WARPED_WART_BRICKS.block,
@@ -59,30 +53,12 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.END_TILES.block,
         BlockusBlocks.CHARCOAL_BLOCK,
         BlockusBlocks.ENDER_BLOCK,
-        BlockusBlocks.NETHER_STAR_BLOCK
-    };
-    addForShapes(BlockTags.PICKAXE_MINEABLE, pickaxeMineableBaseBlocks);
+        BlockusBlocks.NETHER_STAR_BLOCK);
 
-    final Block[] hoeMineableBaseBlocks = {
+    addForShapes(BlockTags.HOE_MINEABLE,
         BlockusBlocks.CHORUS_BLOCK,
         BlockusBlocks.THATCH.block,
-        BlockusBlocks.ROTTEN_FLESH_BLOCK
-    };
-    addForShapes(BlockTags.HOE_MINEABLE, hoeMineableBaseBlocks);
-
-    getOrCreateTagBuilder(ExtShapeTags.PICKAXE_UNMINEABLE)
-        .add(Stream.of(hoeMineableBaseBlocks)
-            .map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block))
-            .filter(Objects::nonNull)
-            .toArray(Block[]::new));
-    getOrCreateTagBuilder(ExtShapeTags.AXE_UNMINEABLE)
-        .add(Streams.concat(
-                Arrays.stream(pickaxeMineableBaseBlocks),
-                Arrays.stream(hoeMineableBaseBlocks)
-            )
-            .map(block -> BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, block))
-            .filter(Objects::nonNull)
-            .toArray(Block[]::new));
+        BlockusBlocks.ROTTEN_FLESH_BLOCK);
 
     addForShapes(BlockTags.NEEDS_STONE_TOOL,
         BlockusBlocks.ENDER_BLOCK
@@ -91,7 +67,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.NETHER_STAR_BLOCK
     );
 //    addForShapes(BlockTags.NEEDS_DIAMOND_TOOL);
-
 
     // endregion mineable 方块标签
 

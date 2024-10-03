@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Streams;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
@@ -169,65 +168,22 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
         .addTag(ExtShapeTags.WOODEN_BLOCKS);
 
-    final Block[] axeMineableBaseBlocks = {
+    addForShapes(BlockTags.AXE_MINEABLE,
         Blocks.PUMPKIN,
-        Blocks.MELON
-    };
+        Blocks.MELON);
 
-    addForShapes(BlockTags.AXE_MINEABLE, axeMineableBaseBlocks);
-
-    final Block[] shovelMineableBaseBlocks = {
+    addForShapes(BlockTags.SHOVEL_MINEABLE,
         Blocks.DIRT,
         Blocks.COARSE_DIRT,
         Blocks.SNOW_BLOCK,
-        Blocks.CLAY
-    };
-    addForShapes(BlockTags.SHOVEL_MINEABLE, shovelMineableBaseBlocks);
+        Blocks.CLAY);
 
-    final Block[] hoeMineableBaseBlocks = {
+    addForShapes(BlockTags.HOE_MINEABLE,
         Blocks.NETHER_WART_BLOCK,
         Blocks.WARPED_WART_BLOCK,
         Blocks.SHROOMLIGHT,
         Blocks.SCULK,
-        Blocks.MOSS_BLOCK
-    };
-    addForShapes(BlockTags.HOE_MINEABLE,
-        hoeMineableBaseBlocks);
-
-    getOrCreateTagBuilder(ExtShapeTags.PICKAXE_UNMINEABLE)
-        .addTag(ExtShapeTags.WOODEN_WALLS)
-        .addTag(ExtShapeTags.LOG_WALLS)
-        .addTag(ExtShapeTags.WOOLEN_WALLS)
-        .add(Streams.concat(
-                Arrays.stream(axeMineableBaseBlocks),
-                Arrays.stream(shovelMineableBaseBlocks),
-                Arrays.stream(hoeMineableBaseBlocks),
-                Stream.of(
-                    Blocks.HONEYCOMB_BLOCK,
-                    Blocks.OCHRE_FROGLIGHT,
-                    Blocks.VERDANT_FROGLIGHT,
-                    Blocks.PEARLESCENT_FROGLIGHT
-                ))
-            .map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block))
-            .filter(Objects::nonNull)
-            .toArray(Block[]::new));
-    getOrCreateTagBuilder(ExtShapeTags.AXE_UNMINEABLE)
-        .addTag(ExtShapeTags.CONCRETE_FENCE_GATES)
-        .addTag(ExtShapeTags.TERRACOTTA_FENCE_GATES)
-        .addTag(ExtShapeTags.WOOLEN_FENCE_GATES)
-        .add(Streams.concat(
-                Streams.stream(stoneMineableBaseBlocks),
-                Arrays.stream(shovelMineableBaseBlocks),
-                Arrays.stream(hoeMineableBaseBlocks), Stream.of(
-                    Blocks.HONEYCOMB_BLOCK,
-                    Blocks.OCHRE_FROGLIGHT,
-                    Blocks.VERDANT_FROGLIGHT,
-                    Blocks.PEARLESCENT_FROGLIGHT
-                )
-            )
-            .map(block -> BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, block))
-            .filter(Objects::nonNull)
-            .toArray(Block[]::new));
+        Blocks.MOSS_BLOCK);
 
     addForShapes(BlockTags.NEEDS_STONE_TOOL,
         Blocks.LAPIS_BLOCK,

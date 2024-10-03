@@ -16,7 +16,8 @@
 - Removed the BlockFamilies feature which lacks practical usage.
 - Fixed the issue that various shapes of white oak wood, white oak log, herringbone planks, small log blocks of Blockus cannot be burnt in the furnace.
 - Totally removed various shapes for sugar blocks, as it is a falling block and does not meet the criterion of creating various shapes.
-- Added block tag `extshape:axe_unmineable` and fixed the issue that some fence gate blocks can be mined with axes.
+- Fixed the issue that some fence gate blocks can be mined with axes.
+- Removed block tag `extshape:pickaxe_unmineable` and modified the implementation of block mining.
 
 ### 2.2.2
 
