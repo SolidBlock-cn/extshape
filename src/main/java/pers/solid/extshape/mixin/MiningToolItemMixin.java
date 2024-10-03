@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Slice;
 import pers.solid.extshape.block.ExtShapeFenceGateBlock;
 import pers.solid.extshape.block.ExtShapeWallBlock;
 
@@ -26,7 +27,7 @@ public abstract class MiningToolItemMixin {
    * 原版将所有的墙都加入了 {@code minecraft:mineable/pickaxe} 标签，将所有的栅栏门都加入了 {@code minecraft:mineable/axe} 标签，因此这里作出修改，本模组的墙和栅栏方块需要考虑其基础方块才能够高效采集。
    */
   @SuppressWarnings("ConstantConditions")
-  @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"), method = "getMiningSpeedMultiplier")
+  @ModifyExpressionValue(method = {"getMiningSpeedMultiplier", "isSuitableFor"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"), slice = @Slice(from = @At(value = "FIELD", target = "Lnet/minecraft/item/MiningToolItem;effectiveBlocks:Lnet/minecraft/registry/tag/TagKey;")))
   public boolean getMiningSpeedMultiplierInjected(boolean original, @Local(argsOnly = true) BlockState state) {
     if (((MiningToolItem) (Object) this) instanceof PickaxeItem) {
       if (state.getBlock() instanceof ExtShapeWallBlock wall) {
