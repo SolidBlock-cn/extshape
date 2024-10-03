@@ -1,10 +1,10 @@
 # Extended Block Shapes Mod
 
-如果看不懂英文，可以阅读[中文版文档](README.md)。
+本文档有[中文版](README.md)。
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [Block List](BlockList.md).
 
-At present this mod supports Minecraft Java Edition 1.21-1.16.5. Please install the relevant mod according to your MC version, and it **requires Fabric API and BRRP (Better Runtime Resource Pack) to run**. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
+At present this mod supports Minecraft Java Edition 1.21.1-1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
 
 If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blockus](#Blockus), to add inter-mod support for Blockus.
 
@@ -94,23 +94,42 @@ Stone-cutting recipe of some blocks are as follows:
 
 In stonecutters, one base blocks can be cut into various shapes for cut base blocks. For instance, a stone can be cut into stone bricks, and stone bricks can be cut into 2 vertical stone brick slabs, while one stone can also be cut directly into 2 vertical stone brick slabs. However, blocks of various shapes cannot be cut into their corresponding shapes of cut base blocks.
 
-The second crafting ingredient for crafting fences and fences (apart from base blocks_ is dependent to its base block. See details in [block list](BlockList.md).
+The second crafting ingredient for crafting fences and fences (apart from base blocks) is dependent to its base block. See details in [block list](BlockList.md).
 
-To avoid recipe conflicts, some blocks are not craftable. For example, iron blocks can be crafted to iron ingots only, instead of iron buttons; pumpkins can be crafted to pumpkin seeds only, instead of pumpkin buttons. Besides, wool pressure plates and moss pressure plates are not craftable, but can be crafted one from three wool carpets or moss carpets. Snow slabs can not be crafted directly from snow, either; instead, craft a snow (layer) with three snow blocks, and then craft the slab with the snow. You can test potential recipe conflicts via `/extshape:check-conflict` command.
+### Built-in data pack fixing recipe conflicts
 
-All recipes can be unlocked when obtaining any of the base block. To put explicitly, each recipe has a corresponding advancement, and as soon as the player obtains the base block or unlocks the recipe, the advancement is triggered and relative recipe is unlocked.
+Some recipes may conflict with vanilla. To avoid the conflicts, there is a built-in data pack in this mod to avoid recipe conflicts, which is enabled by default. When the data pack is enabled, the following crafting will change:
 
-You can configure to cancel avoiding recipes that conflict. For instance, if you disable "prevent wooden wall recipes", wooden walls can be crafted like other wall blocks, which conflict with the recipe of wooden trapdoors. It's advised to modify these settings on condition that you have installed mods that can solve recipe conflict. You can access the mod configuration screen via Mod Menu (of Fabric) or Forge, or typing command `/extshape:config` in game.
+- Wool pressure plates are not crafted from 2 blocks of wool, but 3 carpets crafts into 1 wool pressure plate, and 1 wool pressure plate also crafts into 3 carpets.
+- Moss pressure plates are not crafted from 2 moss blocks, but 1 moss carpet crafts into 1 moss pressure plate, and 1 moss pressure plate also crafts into 2 moss carpets.
+- Snow slabs are not crafted from 2 snow blocks, but 1 snow (layer).
+- Stairs and slabs of vanilla sandstone, red sandstone and quartz must be crafted from base blocks, instead of variants of the base blocks.
+- Buttons of block of iron, block of gold, block of diamond, block of coal, block of lapis, pumpkin, block of netherite, raw gold block, raw copper block and raw iron block, are crafted from 1 base block and 1 iron ingot, gold ingot, diamond, coal, lapis lazuli, pumpkin seeds, netherite ingot, raw gold, raw copper or raw iron.
+- Buttons of bamboo block, stripped bamboo block, copper block (including all oxidization levels, not including cut copper), waxed copper (including all oxidization levels, not including waxed cut copper), various logs, wood, stem, hyphae and those stripped variants, are crafted from 1 base block and 1 redstone dust.
+- Walls of planks are crafted from 6 planks and 1 stick.
+- Copper walls and waxed copper walls (including all oxidization level) are crafted from 6 base blocks and 1 copper ingot.
 
 All unwaxed copper blocks can be crafted with honeycomb into corresponding waxed blocks.
 
+#### The command to manually test recipe conflicts
+
+The command `/extshape:check-conflict` can be used to test conflicts in crafting recipes, which may cause the server lag several seconds or minutes. The command can be used only by the server owner, not ordinary players or command blocks.
+
+The syntax the command supports:
+
+- `/extshape:conflict`: Test all conflicts between crafting recipes.
+- `/extshape:conflict <命名空间>`: Test conflicts between crafting recipes of the specified namespace and the vanilla namespace.
+- `/extshape:conflict <命名空间> ...`(multiple namespaces are separated by space): Test conflicts of crafting recipes of the specified multiple namespaces.
+
 ### Creative Inventory
 
-In versions above 1.19.3, items in these mod will by default be added to vanilla item groups. If you do not want to add items into vanilla item groups, instead add four specific groups to place blocks in various shapes in the order of their base blocks, you may go to the config screen of the mod (which can be accessed through the mod menu of Mod Menu mod), and disable "Add to vanilla groups" and enable "Show specific groups".
+In versions above 1.19.3, items in these mod will by default be added to vanilla item groups.
 
 In versions 1.19.2 and before, if you enabled "Add to vanilla groups", mods will be directly appended after all existing blocks, which may make item groups appear messy. You may install Reasonable Sorting mod to sort the content. (Reasonable Sorting mod does not support versions above 1.19.3, and it is also not needed.)
 
-You may also configure the shapes to be added into groups. For example, if you enable "add to vanilla groups", and set "shapes added to vanilla groups" to `stairs slab`, then only stairs and slabs in this mod are added into vanilla groups (not affecting vanilla existing items). For 1.19.3, the shapes are added in order (but cannot be duplicate). For example, if you write `slab stairs`, stairs will be added after the slabs (vanilla stairs and slabs will not be affected).
+You may also configure the shapes to be added into groups. You can enter the mod config screen through the mod menu of Mod Menu mod. If you did not install Mod Menu mod, you can also access the config screen of the mod through typing `/extshape:config` in game.
+
+For example, if you enable "add to vanilla groups", and set "shapes added to vanilla groups" to `stairs slab`, then only stairs and slabs in this mod are added into vanilla groups (not affecting vanilla existing items). For 1.19.3, the shapes are added in order (but cannot be duplicate). For example, if you write `slab stairs`, stairs will be added after the slabs (vanilla stairs and slabs will not be affected).
 
 ## Inter-mod support
 
