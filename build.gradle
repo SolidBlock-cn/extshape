@@ -150,8 +150,9 @@ project(':runtest') {
         }
     }
 
-    [tasks.remapJar, tasks.remapSourcesJar, tasks.build].each {
-        it.enabled = false
+    [tasks.remapJar, tasks.remapSourcesJar, tasks.build, tasks.publish].each {
+        it.dependsOn rootProject.tasks.named(it.name)
+        it.dependsOn project(':with_blockus').tasks.named(it.name)
     }
 }
 
