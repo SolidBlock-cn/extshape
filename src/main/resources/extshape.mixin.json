@@ -21,7 +21,7 @@
     "SnowyBlockMixin",
     "StonecuttingRecipeJsonBuilderAccessor",
     "TextureMapAccessor",
-    "ToolMaterialMixin",
+    "ToolComponentMixin",
     "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"
   ],
