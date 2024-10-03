@@ -55,7 +55,6 @@
   "resourcePack.extshape.recipe_tweak.name": "配方調整",
   "resourcePack.extshape.recipe_tweak.description": "調整擴展方塊形狀模組的一些合成配方以修復與原版合成配方之間的衝突。如果安裝了能解決合成配方衝突的模組，可以禁用此資料包。",
 
-  "tag.block.extshape.pickaxe_unmineable": "鎬不可挖掘",
   "tag.block.extshape.snow": "雪",
 
   "tag.block.extshape.woolen_blocks": "羊毛方塊",
