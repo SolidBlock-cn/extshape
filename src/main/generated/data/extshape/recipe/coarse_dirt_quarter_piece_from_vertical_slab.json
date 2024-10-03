@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:coarse_dirt_vertical_slab"
-    }
+    "#": "extshape:coarse_dirt_vertical_slab"
   },
   "pattern": [
     "###"

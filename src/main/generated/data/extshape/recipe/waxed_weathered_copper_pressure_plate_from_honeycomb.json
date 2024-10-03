@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_weathered_copper_pressure_plate",
   "ingredients": [
-    {
-      "item": "extshape:weathered_copper_pressure_plate"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:weathered_copper_pressure_plate",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

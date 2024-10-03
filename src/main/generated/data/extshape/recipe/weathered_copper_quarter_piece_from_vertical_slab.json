@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:weathered_copper_vertical_slab"
-    }
+    "#": "extshape:weathered_copper_vertical_slab"
   },
   "pattern": [
     "###"

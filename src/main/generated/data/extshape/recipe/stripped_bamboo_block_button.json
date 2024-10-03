@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:stripped_bamboo_block"
-    }
+    "minecraft:stripped_bamboo_block"
   ],
   "result": {
     "count": 1,

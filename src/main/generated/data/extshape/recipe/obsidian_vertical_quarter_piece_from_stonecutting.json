@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:obsidian"
-  },
+  "ingredient": "minecraft:obsidian",
   "result": {
     "count": 4,
     "id": "extshape:obsidian_vertical_quarter_piece"

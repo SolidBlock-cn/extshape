@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "extshape:packed_ice_slab"
-  },
+  "ingredient": "extshape:packed_ice_slab",
   "result": {
     "count": 2,
     "id": "extshape:packed_ice_quarter_piece"

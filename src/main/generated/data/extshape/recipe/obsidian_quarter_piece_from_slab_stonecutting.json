@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "extshape:obsidian_slab"
-  },
+  "ingredient": "extshape:obsidian_slab",
   "result": {
     "count": 2,
     "id": "extshape:obsidian_quarter_piece"

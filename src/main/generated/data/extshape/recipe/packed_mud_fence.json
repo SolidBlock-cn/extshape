@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:mud"
-    },
-    "W": {
-      "item": "minecraft:packed_mud"
-    }
+    "#": "minecraft:mud",
+    "W": "minecraft:packed_mud"
   },
   "pattern": [
     "W#W",

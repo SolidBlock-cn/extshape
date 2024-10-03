@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "log_quarter_piece_from_slab",
+  "key": {
+    "#": "extshape:pale_oak_log_slab"
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:pale_oak_log_quarter_piece"
+  }
+}

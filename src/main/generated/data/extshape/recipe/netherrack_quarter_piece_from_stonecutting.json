@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:netherrack"
-  },
+  "ingredient": "minecraft:netherrack",
   "result": {
     "count": 4,
     "id": "extshape:netherrack_quarter_piece"

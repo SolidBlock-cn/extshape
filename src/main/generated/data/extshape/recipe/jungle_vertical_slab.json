@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "minecraft:jungle_slab"
-    }
+    "minecraft:jungle_slab"
   ],
   "result": {
     "count": 1,

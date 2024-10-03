@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:mossy_cobblestone_vertical_slab"
-    }
+    "#": "extshape:mossy_cobblestone_vertical_slab"
   },
   "pattern": [
     "#",

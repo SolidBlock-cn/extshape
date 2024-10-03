@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_exposed_copper_stairs",
   "ingredients": [
-    {
-      "item": "extshape:exposed_copper_stairs"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:exposed_copper_stairs",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

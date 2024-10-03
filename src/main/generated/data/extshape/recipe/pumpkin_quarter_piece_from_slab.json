@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:pumpkin_slab"
-    }
+    "#": "extshape:pumpkin_slab"
   },
   "pattern": [
     "###"

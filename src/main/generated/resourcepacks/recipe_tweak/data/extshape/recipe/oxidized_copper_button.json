@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:oxidized_copper"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:oxidized_copper",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

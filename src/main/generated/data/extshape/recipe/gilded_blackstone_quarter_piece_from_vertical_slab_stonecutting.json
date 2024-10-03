@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "extshape:gilded_blackstone_vertical_slab"
-  },
+  "ingredient": "extshape:gilded_blackstone_vertical_slab",
   "result": {
     "count": 2,
     "id": "extshape:gilded_blackstone_quarter_piece"

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "extshape:stripped_crimson_stem_slab"
-    }
+    "#": "extshape:stripped_crimson_stem_slab"
   },
   "pattern": [
     "###"

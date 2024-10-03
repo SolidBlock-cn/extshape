@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wool_wall",
   "key": {
-    "#": {
-      "item": "minecraft:gray_wool"
-    }
+    "#": "minecraft:gray_wool"
   },
   "pattern": [
     "###",

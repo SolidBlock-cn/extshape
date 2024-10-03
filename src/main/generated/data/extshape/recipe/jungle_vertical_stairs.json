@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "minecraft:jungle_stairs"
-    }
+    "minecraft:jungle_stairs"
   ],
   "result": {
     "count": 1,

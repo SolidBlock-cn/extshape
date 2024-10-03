@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:iron_quarter_piece"
-    }
+    "extshape:iron_quarter_piece"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:crying_obsidian_vertical_slab"
-    }
+    "#": "extshape:crying_obsidian_vertical_slab"
   },
   "pattern": [
     "###"

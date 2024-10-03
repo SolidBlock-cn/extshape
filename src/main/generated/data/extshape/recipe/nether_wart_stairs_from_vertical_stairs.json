@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:nether_wart_vertical_stairs"
-    }
+    "extshape:nether_wart_vertical_stairs"
   ],
   "result": {
     "count": 1,

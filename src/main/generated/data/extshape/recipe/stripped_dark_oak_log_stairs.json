@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_dark_oak_log"
-    }
+    "#": "minecraft:stripped_dark_oak_log"
   },
   "pattern": [
     "#  ",

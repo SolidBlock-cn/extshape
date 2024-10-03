@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wood_pressure_plate",
   "key": {
-    "#": {
-      "item": "minecraft:dark_oak_wood"
-    }
+    "#": "minecraft:dark_oak_wood"
   },
   "pattern": [
     "##"

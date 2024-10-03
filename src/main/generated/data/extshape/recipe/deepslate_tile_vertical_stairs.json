@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:deepslate_tile_stairs"
-    }
+    "minecraft:deepslate_tile_stairs"
   ],
   "result": {
     "count": 1,

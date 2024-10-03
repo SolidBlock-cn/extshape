@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:polished_deepslate"
-  },
+  "ingredient": "minecraft:polished_deepslate",
   "result": {
     "count": 4,
     "id": "extshape:deepslate_brick_quarter_piece"

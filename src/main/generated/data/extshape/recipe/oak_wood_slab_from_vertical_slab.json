@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:oak_wood_vertical_slab"
-    }
+    "extshape:oak_wood_vertical_slab"
   ],
   "result": {
     "count": 1,

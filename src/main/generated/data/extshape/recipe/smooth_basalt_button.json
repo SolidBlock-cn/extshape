@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:smooth_basalt"
-    }
+    "minecraft:smooth_basalt"
   ],
   "result": {
     "count": 1,

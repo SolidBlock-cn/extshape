@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wood_pressure_plate",
   "key": {
-    "#": {
-      "item": "minecraft:acacia_wood"
-    }
+    "#": "minecraft:acacia_wood"
   },
   "pattern": [
     "##"

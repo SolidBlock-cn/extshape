@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:mossy_cobblestone_vertical_slab"
-    }
+    "extshape:mossy_cobblestone_vertical_slab"
   ],
   "result": {
     "count": 1,

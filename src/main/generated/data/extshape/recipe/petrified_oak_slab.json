@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:petrified_oak_planks"
-    }
+    "#": "extshape:petrified_oak_planks"
   },
   "pattern": [
     "###"

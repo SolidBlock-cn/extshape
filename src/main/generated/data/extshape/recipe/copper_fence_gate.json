@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:copper_ingot"
-    },
-    "W": {
-      "item": "minecraft:copper_block"
-    }
+    "#": "minecraft:copper_ingot",
+    "W": "minecraft:copper_block"
   },
   "pattern": [
     "#W#",

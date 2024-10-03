@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_slab",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_jungle_log"
-    }
+    "#": "minecraft:stripped_jungle_log"
   },
   "pattern": [
     "###"

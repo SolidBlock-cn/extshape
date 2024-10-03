@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:gold_vertical_slab"
-    }
+    "#": "extshape:gold_vertical_slab"
   },
   "pattern": [
     "#",

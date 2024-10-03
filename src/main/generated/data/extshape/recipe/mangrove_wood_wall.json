@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wood_wall",
   "key": {
-    "#": {
-      "item": "minecraft:mangrove_wood"
-    }
+    "#": "minecraft:mangrove_wood"
   },
   "pattern": [
     "###",

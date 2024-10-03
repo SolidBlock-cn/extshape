@@ -8,8 +8,7 @@ import net.minecraft.block.FenceBlock;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeProvider;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
@@ -58,13 +57,13 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   }
 
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    return secondIngredient == null ? null : ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 2)
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
+    return secondIngredient == null ? null : recipeGenerator.createShaped(getRecipeCategory(), this, 2)
         .pattern("W#W").pattern("W#W")
         .group(getRecipeGroup())
         .input('W', baseBlock)
         .input('#', getSecondIngredient())
-        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock));
+        .criterion(RecipeGenerator.hasItem(baseBlock), recipeGenerator.conditionsFromItem(baseBlock));
   }
 
   @Nullable

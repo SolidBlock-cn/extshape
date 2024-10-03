@@ -3,9 +3,7 @@
   "category": "building",
   "group": "concrete_vertical_quarter_piece_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:magenta_concrete_quarter_piece"
-    }
+    "extshape:magenta_concrete_quarter_piece"
   ],
   "result": {
     "count": 1,

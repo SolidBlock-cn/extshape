@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:glowstone_dust"
-    },
-    "W": {
-      "item": "minecraft:glowstone"
-    }
+    "#": "minecraft:glowstone_dust",
+    "W": "minecraft:glowstone"
   },
   "pattern": [
     "W#W",

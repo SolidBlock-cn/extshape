@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "stripped_log_quarter_piece_from_rotation",
+  "ingredients": [
+    "extshape:stripped_pale_oak_log_vertical_quarter_piece"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:stripped_pale_oak_log_quarter_piece"
+  }
+}

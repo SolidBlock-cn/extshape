@@ -241,7 +241,7 @@ public final class ExtShapeBlockStateModelGenerator {
   private static Identifier getUnwaxedModelId(Model model, Block block, TextureMap textures, BiConsumer<Identifier, Supplier<JsonElement>> modelCollector) {
     final Identifier id = Registries.BLOCK.getId(block);
     if (id.getPath().startsWith("waxed_")) {
-      return model.getBlockSubModelId(Registries.BLOCK.getOrEmpty(id.withPath(s -> s.replace("waxed_", ""))).orElseThrow());
+      return model.getBlockSubModelId(Registries.BLOCK.getOptionalValue(id.withPath(s -> s.replace("waxed_", ""))).orElseThrow());
     }
     return model.upload(block, textures, modelCollector);
   }

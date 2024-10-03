@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:coal_stairs"
-    }
+    "extshape:coal_stairs"
   ],
   "result": {
     "count": 1,

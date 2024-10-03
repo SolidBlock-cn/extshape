@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "minecraft:polished_andesite"
-    }
+    "#": "minecraft:flint",
+    "W": "minecraft:polished_andesite"
   },
   "pattern": [
     "W#W",

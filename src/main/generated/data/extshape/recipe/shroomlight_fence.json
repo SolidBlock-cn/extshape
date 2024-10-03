@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:glowstone_dust"
-    },
-    "W": {
-      "item": "minecraft:shroomlight"
-    }
+    "#": "minecraft:glowstone_dust",
+    "W": "minecraft:shroomlight"
   },
   "pattern": [
     "W#W",

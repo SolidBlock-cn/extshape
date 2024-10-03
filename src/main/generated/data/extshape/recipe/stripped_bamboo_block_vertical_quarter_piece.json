@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:stripped_bamboo_block_quarter_piece"
-    }
+    "extshape:stripped_bamboo_block_quarter_piece"
   ],
   "result": {
     "count": 1,

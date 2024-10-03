@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stripped_wood_fence",
+  "key": {
+    "#": "minecraft:stick",
+    "W": "minecraft:stripped_pale_oak_wood"
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "id": "extshape:stripped_pale_oak_wood_fence"
+  }
+}

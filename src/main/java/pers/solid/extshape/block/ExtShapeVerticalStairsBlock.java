@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -53,14 +54,14 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
    * 注意：跨方块类型的合成表由 {@link BlocksBuilder} 定义。
    */
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
     return null;
   }
 
 
   @Override
-  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1);
+  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerator) {
+    return simpleStoneCuttingRecipe(1, recipeGenerator);
   }
 
   @Override

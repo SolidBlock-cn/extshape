@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:crimson_hyphae"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:crimson_hyphae",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

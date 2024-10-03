@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "stripped_wood_fence_gate",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:stripped_warped_hyphae"
-    }
+    "#": "minecraft:stick",
+    "W": "minecraft:stripped_warped_hyphae"
   },
   "pattern": [
     "#W#",

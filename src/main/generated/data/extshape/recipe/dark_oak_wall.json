@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wooden_wall",
   "key": {
-    "#": {
-      "item": "minecraft:dark_oak_planks"
-    }
+    "#": "minecraft:dark_oak_planks"
   },
   "pattern": [
     "###",

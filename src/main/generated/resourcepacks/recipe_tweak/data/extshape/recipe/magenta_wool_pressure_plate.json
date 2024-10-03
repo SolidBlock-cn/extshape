@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wool_pressure_plate",
   "key": {
-    "#": {
-      "item": "minecraft:magenta_carpet"
-    }
+    "#": "minecraft:magenta_carpet"
   },
   "pattern": [
     "###"

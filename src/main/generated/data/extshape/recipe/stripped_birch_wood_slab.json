@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_wood_slab",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_birch_wood"
-    }
+    "#": "minecraft:stripped_birch_wood"
   },
   "pattern": [
     "###"

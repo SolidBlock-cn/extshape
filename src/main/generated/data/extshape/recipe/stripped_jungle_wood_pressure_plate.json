@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "stripped_wood_pressure_plate",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_jungle_wood"
-    }
+    "#": "minecraft:stripped_jungle_wood"
   },
   "pattern": [
     "##"

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:emerald_slab"
-    }
+    "extshape:emerald_slab"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:obsidian"
-    }
+    "minecraft:obsidian"
   ],
   "result": {
     "count": 1,

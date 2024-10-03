@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:weathered_copper"
-    },
-    "*": {
-      "item": "minecraft:copper_ingot"
-    }
+    "#": "minecraft:weathered_copper",
+    "*": "minecraft:copper_ingot"
   },
   "pattern": [
     " * ",

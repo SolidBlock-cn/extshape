@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:packed_ice_quarter_piece"
-    }
+    "extshape:packed_ice_quarter_piece"
   ],
   "result": {
     "count": 1,

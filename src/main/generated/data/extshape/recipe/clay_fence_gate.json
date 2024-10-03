@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:clay_ball"
-    },
-    "W": {
-      "item": "minecraft:clay"
-    }
+    "#": "minecraft:clay_ball",
+    "W": "minecraft:clay"
   },
   "pattern": [
     "#W#",

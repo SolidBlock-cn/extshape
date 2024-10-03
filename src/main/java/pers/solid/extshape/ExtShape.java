@@ -6,14 +6,16 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.ApiStatus;
@@ -111,7 +113,7 @@ public class ExtShape implements ModInitializer {
    * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。部分是直接由其标签决定的，例如木制、竹制的楼梯、台阶，原版的标签即定义了可作为燃料。
    *
    * @see ExtShapeBlocks
-   * @see net.minecraft.block.entity.AbstractFurnaceBlockEntity#createFuelTimeMap()
+   * @see net.minecraft.item.FuelRegistry#createDefault(RegistryWrapper.WrapperLookup, FeatureSet)
    */
   @ApiStatus.AvailableSince("1.5.0")
   private static void registerFuels() {
@@ -141,6 +143,6 @@ public class ExtShape implements ModInitializer {
     map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
     map.put(ExtShapeTags.WOOLEN_WALLS, 100);
 
-    map.forEach((blockTagKey, integer) -> FuelRegistry.INSTANCE.add(TagKey.of(RegistryKeys.ITEM, blockTagKey.id()), integer));
+    FuelRegistryEvents.BUILD.register((builder, context) -> map.forEach((blockTagKey, integer) -> builder.add(TagKey.of(RegistryKeys.ITEM, blockTagKey.id()), integer)));
   }
 }

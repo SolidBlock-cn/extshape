@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_quarter_piece_from_vertical_slab",
   "key": {
-    "#": {
-      "item": "extshape:bamboo_mosaic_vertical_slab"
-    }
+    "#": "extshape:bamboo_mosaic_vertical_slab"
   },
   "pattern": [
     "###"

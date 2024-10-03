@@ -10,13 +10,15 @@ import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.LootTable;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,7 +61,7 @@ public interface ExtShapeBlockInterface {
    *
    * @return 方块的切石配方。用于切石机。
    */
-  default @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
+  default @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerator) {
     return null;
   }
 
@@ -77,7 +79,7 @@ public interface ExtShapeBlockInterface {
     return blockLootTableGenerator.drops((ItemConvertible) this);
   }
 
-  default CraftingRecipeJsonBuilder getCraftingRecipe() {
+  default CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
     return null;
   }
 
@@ -85,9 +87,9 @@ public interface ExtShapeBlockInterface {
     return (this instanceof Block && STONECUTTABLE_BLOCKS.contains(this)) || isStoneCut(getBaseBlock());
   }
 
-  default StonecuttingRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount) {
+  default StonecuttingRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount, RecipeGenerator recipeGenerator) {
     final Block baseBlock = getBaseBlock();
-    return StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", RecipeProvider.conditionsFromItem(baseBlock));
+    return StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", recipeGenerator.conditionsFromItem(baseBlock));
   }
 
   /**
@@ -116,15 +118,15 @@ public interface ExtShapeBlockInterface {
 
   void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator);
 
-  default void registerRecipes(RecipeExporter exporter) {
-    final CraftingRecipeJsonBuilder craftingRecipe = getCraftingRecipe();
+  default void registerRecipes(RecipeGenerator recipeGenerator, RecipeExporter exporter) {
+    final CraftingRecipeJsonBuilder craftingRecipe = getCraftingRecipe(recipeGenerator);
     if (craftingRecipe != null) {
       craftingRecipe.offerTo(exporter);
     }
     if (shouldWriteStonecuttingRecipe()) {
-      final StonecuttingRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe();
+      final StonecuttingRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe(recipeGenerator);
       if (stonecuttingRecipe != null) {
-        stonecuttingRecipe.offerTo(exporter, Registries.ITEM.getId(stonecuttingRecipe.getOutputItem()).withSuffixedPath("_from_stonecutting"));
+        stonecuttingRecipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Registries.ITEM.getId(stonecuttingRecipe.getOutputItem()).withSuffixedPath("_from_stonecutting")));
       }
     }
   }

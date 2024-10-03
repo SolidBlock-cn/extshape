@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "minecraft:lapis_block"
-    }
+    "#": "minecraft:lapis_block"
   },
   "pattern": [
     "#  ",

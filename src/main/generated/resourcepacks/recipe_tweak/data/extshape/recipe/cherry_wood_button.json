@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:cherry_wood"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:cherry_wood",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:quartz_brick_vertical_slab"
-    }
+    "#": "extshape:quartz_brick_vertical_slab"
   },
   "pattern": [
     "#",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:emerald_vertical_slab"
-    }
+    "extshape:emerald_vertical_slab"
   ],
   "result": {
     "count": 1,

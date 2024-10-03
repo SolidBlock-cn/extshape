@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:prismarine_bricks"
-    }
+    "minecraft:prismarine_bricks"
   ],
   "result": {
     "count": 1,

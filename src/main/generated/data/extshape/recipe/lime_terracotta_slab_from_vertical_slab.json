@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:lime_terracotta_vertical_slab"
-    }
+    "extshape:lime_terracotta_vertical_slab"
   ],
   "result": {
     "count": 1,

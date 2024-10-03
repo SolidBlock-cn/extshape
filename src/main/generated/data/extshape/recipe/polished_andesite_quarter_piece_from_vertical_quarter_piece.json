@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:polished_andesite_vertical_quarter_piece"
-    }
+    "extshape:polished_andesite_vertical_quarter_piece"
   ],
   "result": {
     "count": 1,

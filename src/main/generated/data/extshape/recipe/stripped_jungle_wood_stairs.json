@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_wood_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_jungle_wood"
-    }
+    "#": "minecraft:stripped_jungle_wood"
   },
   "pattern": [
     "#  ",

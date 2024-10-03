@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wool_fence_gate",
   "key": {
-    "#": {
-      "item": "minecraft:string"
-    },
-    "W": {
-      "item": "minecraft:white_wool"
-    }
+    "#": "minecraft:string",
+    "W": "minecraft:white_wool"
   },
   "pattern": [
     "#W#",

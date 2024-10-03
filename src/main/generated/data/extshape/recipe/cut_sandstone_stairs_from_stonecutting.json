@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:cut_sandstone"
-  },
+  "ingredient": "minecraft:cut_sandstone",
   "result": {
     "count": 1,
     "id": "extshape:cut_sandstone_stairs"

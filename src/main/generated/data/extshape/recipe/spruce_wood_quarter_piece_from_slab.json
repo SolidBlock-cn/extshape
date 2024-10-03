@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "extshape:spruce_wood_slab"
-    }
+    "#": "extshape:spruce_wood_slab"
   },
   "pattern": [
     "###"

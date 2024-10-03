@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "minecraft:cherry_slab"
-    }
+    "#": "minecraft:cherry_slab"
   },
   "pattern": [
     "###"

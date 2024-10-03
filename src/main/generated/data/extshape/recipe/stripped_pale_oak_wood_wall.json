@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stripped_wood_wall",
+  "key": {
+    "#": "minecraft:stripped_pale_oak_wood"
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:stripped_pale_oak_wood_wall"
+  }
+}

@@ -8,7 +8,6 @@
     "AbstractBlockStateAccessor",
     "AxeItemMixin",
     "BlockAccessor",
-    "BlockFamiliesAccessor",
     "BlockStateModelGeneratorAccessor",
     "BlockTexturePoolAccessor",
     "ButtonBlockAccessor",

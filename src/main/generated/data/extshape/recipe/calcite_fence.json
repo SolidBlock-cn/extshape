@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "minecraft:calcite"
-    }
+    "#": "minecraft:flint",
+    "W": "minecraft:calcite"
   },
   "pattern": [
     "W#W",

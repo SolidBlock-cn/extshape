@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:slime_ball"
-    },
-    "W": {
-      "item": "minecraft:verdant_froglight"
-    }
+    "#": "minecraft:slime_ball",
+    "W": "minecraft:verdant_froglight"
   },
   "pattern": [
     "#W#",

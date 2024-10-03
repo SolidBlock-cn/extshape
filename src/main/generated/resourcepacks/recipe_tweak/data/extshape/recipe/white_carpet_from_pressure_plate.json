@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wool_from_pressure_plate",
   "ingredients": [
-    {
-      "item": "extshape:white_wool_pressure_plate"
-    }
+    "extshape:white_wool_pressure_plate"
   ],
   "result": {
     "count": 3,

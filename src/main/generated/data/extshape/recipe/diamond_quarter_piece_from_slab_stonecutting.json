@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "extshape:diamond_slab"
-  },
+  "ingredient": "extshape:diamond_slab",
   "result": {
     "count": 2,
     "id": "extshape:diamond_quarter_piece"

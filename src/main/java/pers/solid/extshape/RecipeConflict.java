@@ -1,6 +1,5 @@
 package pers.solid.extshape;
 
-import com.google.common.collect.Iterables;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -8,33 +7,28 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.CraftingRecipeInput;
+import net.minecraft.recipe.RecipeManager;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 /**
  * 检测合成表冲突的一些实用方法。因为扩展方块形状模组的合成表很容易出现冲突，因此用于检测合成表冲突的方法均置于此类。
@@ -49,7 +43,7 @@ public final class RecipeConflict {
    * @return 冲突的个数。
    */
   public static int checkConflict(RecipeManager recipeManager, World world, PlayerEntity player, @Nullable Predicate<Identifier> filter, Consumer<Supplier<Text>> messageConsumer) {
-    int numberOfConflicts = 0;
+    int numberOfConflicts = 0;/*
     for (RecipeEntry<?> recipeEntry : recipeManager.values()) {
       if (filter != null) {
         if (!filter.test(recipeEntry.id())) {
@@ -97,7 +91,9 @@ public final class RecipeConflict {
     }
     int finalNumberOfConflicts = numberOfConflicts;
     messageConsumer.accept(() -> Text.translatable(finalNumberOfConflicts == 0 ? "message.extshape.recipe_conflict.finish.none" : finalNumberOfConflicts == 1 ? "message.extshape.recipe_conflict.finish.single" : "message.extshape.recipe_conflict.finish.plural", Integer.toString(finalNumberOfConflicts)));
-    return numberOfConflicts;
+    return numberOfConflicts;*/
+    messageConsumer.accept(() -> Text.literal("<not implemented>").formatted(Formatting.RED));
+    return 0;
   }
 
   /**
@@ -114,7 +110,7 @@ public final class RecipeConflict {
               while (matcher.find()) {
                 offset = matcher.end();
               }
-              return CommandSource.suggestMatching(context.getSource().getRecipeIds().map(Identifier::getNamespace).distinct(), builder.createOffset(builder.getStart() + offset));
+              return CommandSource.suggestMatching(context.getSource().getRegistryManager().getOrThrow(RegistryKeys.RECIPE).streamKeys().map(RegistryKey::getValue).map(Identifier::getNamespace).distinct(), builder.createOffset(builder.getStart() + offset));
             })
             .executes(context -> executeCheckConflict(context, StringArgumentType.getString(context, "namespace")))));
   }

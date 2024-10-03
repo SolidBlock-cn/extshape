@@ -3,9 +3,7 @@
   "category": "building",
   "group": "concrete_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:brown_concrete_vertical_slab"
-    }
+    "extshape:brown_concrete_vertical_slab"
   ],
   "result": {
     "count": 1,

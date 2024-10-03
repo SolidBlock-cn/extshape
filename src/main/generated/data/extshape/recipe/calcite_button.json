@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:calcite"
-    }
+    "minecraft:calcite"
   ],
   "result": {
     "count": 1,

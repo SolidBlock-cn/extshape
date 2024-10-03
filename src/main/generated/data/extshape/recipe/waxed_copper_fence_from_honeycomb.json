@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_copper_fence",
   "ingredients": [
-    {
-      "item": "extshape:copper_fence"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:copper_fence",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

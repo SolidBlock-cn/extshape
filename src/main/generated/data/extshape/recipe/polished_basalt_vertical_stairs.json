@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:polished_basalt_stairs"
-    }
+    "extshape:polished_basalt_stairs"
   ],
   "result": {
     "count": 1,

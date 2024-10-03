@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "minecraft:blackstone_slab"
-    }
+    "#": "minecraft:blackstone_slab"
   },
   "pattern": [
     "###"

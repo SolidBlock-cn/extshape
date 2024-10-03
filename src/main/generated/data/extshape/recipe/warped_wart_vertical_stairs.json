@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:warped_wart_stairs"
-    }
+    "extshape:warped_wart_stairs"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:purple_terracotta_slab"
-    }
+    "extshape:purple_terracotta_slab"
   ],
   "result": {
     "count": 1,

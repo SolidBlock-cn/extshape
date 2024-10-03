@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:sandstone_stairs"
-    }
+    "minecraft:sandstone_stairs"
   ],
   "result": {
     "count": 1,

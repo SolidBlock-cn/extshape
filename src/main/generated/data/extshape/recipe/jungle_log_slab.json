@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_slab",
   "key": {
-    "#": {
-      "item": "minecraft:jungle_log"
-    }
+    "#": "minecraft:jungle_log"
   },
   "pattern": [
     "###"

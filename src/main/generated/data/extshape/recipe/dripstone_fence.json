@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:pointed_dripstone"
-    },
-    "W": {
-      "item": "minecraft:dripstone_block"
-    }
+    "#": "minecraft:pointed_dripstone",
+    "W": "minecraft:dripstone_block"
   },
   "pattern": [
     "W#W",

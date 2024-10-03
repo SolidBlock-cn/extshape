@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wool_button",
   "ingredients": [
-    {
-      "item": "minecraft:cyan_wool"
-    }
+    "minecraft:cyan_wool"
   ],
   "result": {
     "count": 1,

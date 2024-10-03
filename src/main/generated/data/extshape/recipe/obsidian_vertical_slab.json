@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:obsidian_slab"
-    }
+    "extshape:obsidian_slab"
   ],
   "result": {
     "count": 1,

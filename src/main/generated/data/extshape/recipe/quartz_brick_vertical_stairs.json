@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:quartz_brick_stairs"
-    }
+    "extshape:quartz_brick_stairs"
   ],
   "result": {
     "count": 1,

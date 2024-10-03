@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:amethyst_block"
-  },
+  "ingredient": "minecraft:amethyst_block",
   "result": {
     "count": 1,
     "id": "extshape:amethyst_vertical_stairs"

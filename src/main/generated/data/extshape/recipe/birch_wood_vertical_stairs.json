@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:birch_wood_stairs"
-    }
+    "extshape:birch_wood_stairs"
   ],
   "result": {
     "count": 1,

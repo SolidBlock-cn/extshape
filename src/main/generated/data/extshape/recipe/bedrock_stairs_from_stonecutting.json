@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:bedrock"
-  },
+  "ingredient": "minecraft:bedrock",
   "result": {
     "count": 1,
     "id": "extshape:bedrock_stairs"

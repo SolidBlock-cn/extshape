@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wood_button",
+  "ingredients": [
+    "minecraft:pale_oak_wood"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:pale_oak_wood_button"
+  }
+}

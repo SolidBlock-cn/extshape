@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:yellow_concrete"
-  },
+  "ingredient": "minecraft:yellow_concrete",
   "result": {
     "count": 4,
     "id": "extshape:yellow_concrete_quarter_piece"

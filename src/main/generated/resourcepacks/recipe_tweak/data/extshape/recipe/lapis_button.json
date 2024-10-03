@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:lapis_block"
-    },
-    {
-      "tag": "c:gems/lapis"
-    }
+    "minecraft:lapis_block",
+    "#c:gems/lapis"
   ],
   "result": {
     "count": 1,

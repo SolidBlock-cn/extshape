@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:tuff_bricks"
-  },
+  "ingredient": "minecraft:tuff_bricks",
   "result": {
     "count": 1,
     "id": "extshape:tuff_brick_vertical_stairs"

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wool_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "extshape:cyan_wool_slab"
-    }
+    "#": "extshape:cyan_wool_slab"
   },
   "pattern": [
     "###"

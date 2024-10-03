@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:smooth_quartz"
-    }
+    "minecraft:smooth_quartz"
   ],
   "result": {
     "count": 1,

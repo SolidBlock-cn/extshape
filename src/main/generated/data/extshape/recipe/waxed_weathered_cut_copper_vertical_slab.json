@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:waxed_weathered_cut_copper_slab"
-    }
+    "minecraft:waxed_weathered_cut_copper_slab"
   ],
   "result": {
     "count": 1,

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:coarse_dirt"
-    }
+    "#": "minecraft:stick",
+    "W": "minecraft:coarse_dirt"
   },
   "pattern": [
     "#W#",

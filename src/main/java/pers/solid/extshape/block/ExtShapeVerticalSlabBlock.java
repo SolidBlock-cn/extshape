@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -42,8 +43,8 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   @Override
-  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(2);
+  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerator) {
+    return simpleStoneCuttingRecipe(2, recipeGenerator);
   }
 
   @Override

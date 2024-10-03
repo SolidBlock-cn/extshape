@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:netherite_scrap"
-    },
-    "W": {
-      "item": "minecraft:ancient_debris"
-    }
+    "#": "minecraft:netherite_scrap",
+    "W": "minecraft:ancient_debris"
   },
   "pattern": [
     "W#W",

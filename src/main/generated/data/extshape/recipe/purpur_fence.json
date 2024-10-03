@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:shulker_shell"
-    },
-    "W": {
-      "item": "minecraft:purpur_block"
-    }
+    "#": "minecraft:shulker_shell",
+    "W": "minecraft:purpur_block"
   },
   "pattern": [
     "W#W",

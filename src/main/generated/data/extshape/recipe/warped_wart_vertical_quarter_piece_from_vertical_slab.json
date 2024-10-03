@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:warped_wart_vertical_slab"
-    }
+    "#": "extshape:warped_wart_vertical_slab"
   },
   "pattern": [
     "#",

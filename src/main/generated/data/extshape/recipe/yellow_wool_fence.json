@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wool_fence",
   "key": {
-    "#": {
-      "item": "minecraft:string"
-    },
-    "W": {
-      "item": "minecraft:yellow_wool"
-    }
+    "#": "minecraft:string",
+    "W": "minecraft:yellow_wool"
   },
   "pattern": [
     "W#W",

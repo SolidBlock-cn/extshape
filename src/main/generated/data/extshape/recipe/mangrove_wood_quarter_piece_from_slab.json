@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "extshape:mangrove_wood_slab"
-    }
+    "#": "extshape:mangrove_wood_slab"
   },
   "pattern": [
     "###"

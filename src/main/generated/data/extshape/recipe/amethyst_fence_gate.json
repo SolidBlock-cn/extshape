@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:amethyst_shard"
-    },
-    "W": {
-      "item": "minecraft:amethyst_block"
-    }
+    "#": "minecraft:amethyst_shard",
+    "W": "minecraft:amethyst_block"
   },
   "pattern": [
     "#W#",

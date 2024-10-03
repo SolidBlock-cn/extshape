@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:pumpkin"
-    },
-    {
-      "item": "minecraft:pumpkin_seeds"
-    }
+    "minecraft:pumpkin",
+    "minecraft:pumpkin_seeds"
   ],
   "result": {
     "count": 1,

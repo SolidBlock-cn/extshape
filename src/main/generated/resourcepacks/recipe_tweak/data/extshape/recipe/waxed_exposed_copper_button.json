@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:waxed_exposed_copper"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:waxed_exposed_copper",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

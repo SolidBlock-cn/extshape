@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:chiseled_tuff_brick_stairs"
-    }
+    "extshape:chiseled_tuff_brick_stairs"
   ],
   "result": {
     "count": 1,

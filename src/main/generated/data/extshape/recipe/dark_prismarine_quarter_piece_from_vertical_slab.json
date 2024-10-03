@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:dark_prismarine_vertical_slab"
-    }
+    "#": "extshape:dark_prismarine_vertical_slab"
   },
   "pattern": [
     "###"

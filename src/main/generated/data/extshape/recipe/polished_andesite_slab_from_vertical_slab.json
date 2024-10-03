@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:polished_andesite_vertical_slab"
-    }
+    "extshape:polished_andesite_vertical_slab"
   ],
   "result": {
     "count": 1,

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:cherry_wood"
-    }
+    "#": "minecraft:cherry_wood"
   },
   "pattern": [
     "#  ",

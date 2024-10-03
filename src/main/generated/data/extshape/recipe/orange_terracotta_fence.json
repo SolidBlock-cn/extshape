@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:clay"
-    },
-    "W": {
-      "item": "minecraft:orange_terracotta"
-    }
+    "#": "minecraft:clay",
+    "W": "minecraft:orange_terracotta"
   },
   "pattern": [
     "W#W",

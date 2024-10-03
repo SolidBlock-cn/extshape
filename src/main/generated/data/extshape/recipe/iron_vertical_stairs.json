@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:iron_stairs"
-    }
+    "extshape:iron_stairs"
   ],
   "result": {
     "count": 1,

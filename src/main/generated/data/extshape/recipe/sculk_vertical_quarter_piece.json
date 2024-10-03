@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:sculk_quarter_piece"
-    }
+    "extshape:sculk_quarter_piece"
   ],
   "result": {
     "count": 1,

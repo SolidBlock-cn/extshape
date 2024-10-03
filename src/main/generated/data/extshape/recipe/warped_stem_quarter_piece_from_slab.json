@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "extshape:warped_stem_slab"
-    }
+    "#": "extshape:warped_stem_slab"
   },
   "pattern": [
     "###"

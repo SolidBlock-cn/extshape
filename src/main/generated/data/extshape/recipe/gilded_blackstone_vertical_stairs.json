@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:gilded_blackstone_stairs"
-    }
+    "extshape:gilded_blackstone_stairs"
   ],
   "result": {
     "count": 1,

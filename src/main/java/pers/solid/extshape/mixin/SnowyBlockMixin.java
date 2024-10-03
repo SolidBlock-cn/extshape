@@ -8,7 +8,6 @@ import net.minecraft.block.SnowyBlock;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -29,7 +28,7 @@ public class SnowyBlockMixin extends Block {
   }
 
   @ModifyExpressionValue(method = "getStateForNeighborUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/SnowyBlock;isSnow(Lnet/minecraft/block/BlockState;)Z"))
-  private boolean getStateForNeighborUpdate_snow(boolean original, @Local(argsOnly = true, ordinal = 1) BlockState neighborState, @Local(argsOnly = true) WorldAccess world, @Local(argsOnly = true, ordinal = 1) BlockPos neighborPos) {
+  private boolean getStateForNeighborUpdate_snow(boolean original, @Local(argsOnly = true, ordinal = 1) BlockState neighborState, @Local(argsOnly = true) WorldView world, @Local(argsOnly = true, ordinal = 1) BlockPos neighborPos) {
     return original || isSnow2(neighborState, world, neighborPos);
   }
 

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "minecraft:gilded_blackstone"
-    }
+    "#": "minecraft:gilded_blackstone"
   },
   "pattern": [
     "#  ",

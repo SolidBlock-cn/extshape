@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "stripped_wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:stripped_warped_hyphae"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:stripped_warped_hyphae",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

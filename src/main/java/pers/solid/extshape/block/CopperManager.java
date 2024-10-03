@@ -9,11 +9,13 @@ import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.block.*;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.*;
@@ -164,27 +166,27 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
     };
   }
 
-  public void generateWaxRecipes(RecipeExporter exporter, Predicate<Block> blockPredicate) {
+  public void generateWaxRecipes(RecipeGenerator recipeGenerator, RecipeExporter exporter, Predicate<Block> blockPredicate) {
     Preconditions.checkArgument(unwaxed.size() == waxed.size(), "unwaxedBlocks and waxedBlocks must be of same size!");
 
     for (int i = 0; i < unwaxed.size(); i++) {
       final Block unwaxedBaseBlock = unwaxed.get(i);
       final Block waxedBaseBlock = waxed.get(i);
-      generateWaxRecipesForShapes(exporter, unwaxedBaseBlock, waxedBaseBlock, blockPredicate);
+      generateWaxRecipesForShapes(recipeGenerator, exporter, unwaxedBaseBlock, waxedBaseBlock, blockPredicate);
     }
   }
 
-  private static void generateWaxRecipesForShapes(RecipeExporter exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
+  private static void generateWaxRecipesForShapes(RecipeGenerator recipeGenerator, RecipeExporter exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
     for (BlockShape shape : BlockShape.values()) {
       final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
       final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
       if (unwaxed != null && waxed != null && blockPredicate.test(waxed)) {
-        final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, waxed)
+        final ShapelessRecipeJsonBuilder recipe = recipeGenerator.createShapeless(RecipeCategory.BUILDING_BLOCKS, waxed)
             .input(unwaxed)
             .input(Items.HONEYCOMB)
-            .group(RecipeProvider.getItemPath(waxed))
-            .criterion(RecipeProvider.hasItem(unwaxed), RecipeProvider.conditionsFromItem(unwaxed));
-        recipe.offerTo(exporter, Identifier.of(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeProvider.convertBetween(waxed, Items.HONEYCOMB)));
+            .group(RecipeGenerator.getItemPath(waxed))
+            .criterion(RecipeGenerator.hasItem(unwaxed), recipeGenerator.conditionsFromItem(unwaxed));
+        recipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeGenerator.convertBetween(waxed, Items.HONEYCOMB))));
       }
     }
   }

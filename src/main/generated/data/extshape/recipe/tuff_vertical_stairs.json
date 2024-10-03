@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:tuff_stairs"
-    }
+    "minecraft:tuff_stairs"
   ],
   "result": {
     "count": 1,

@@ -118,7 +118,7 @@ public class UnusualLootTables {
   }
 
   protected RegistryEntry<Enchantment> fortune(RegistryWrapper.WrapperLookup registryLookup) {
-    return registryLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE);
+    return registryLookup.getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE);
   }
 
   protected ConditionalLootFunction.Builder<?> fortuneFunction(RegistryWrapper.WrapperLookup registryLookup) {

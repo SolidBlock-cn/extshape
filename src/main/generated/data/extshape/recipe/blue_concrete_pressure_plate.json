@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "concrete_pressure_plate",
   "key": {
-    "#": {
-      "item": "minecraft:blue_concrete"
-    }
+    "#": "minecraft:blue_concrete"
   },
   "pattern": [
     "##"

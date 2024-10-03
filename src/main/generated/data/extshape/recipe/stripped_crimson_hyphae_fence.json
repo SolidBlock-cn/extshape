@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "stripped_wood_fence",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:stripped_crimson_hyphae"
-    }
+    "#": "minecraft:stick",
+    "W": "minecraft:stripped_crimson_hyphae"
   },
   "pattern": [
     "W#W",

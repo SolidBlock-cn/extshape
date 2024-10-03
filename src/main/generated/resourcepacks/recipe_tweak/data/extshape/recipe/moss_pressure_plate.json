@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:moss_carpet"
-    }
+    "#": "minecraft:moss_carpet"
   },
   "pattern": [
     "###"

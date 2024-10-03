@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "minecraft:mangrove_slab"
-    }
+    "#": "minecraft:mangrove_slab"
   },
   "pattern": [
     "###"

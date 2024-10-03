@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "stripped_wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:stripped_jungle_wood"
-    }
+    "minecraft:stripped_jungle_wood"
   ],
   "result": {
     "count": 1,

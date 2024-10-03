@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:coal"
-    },
-    "W": {
-      "item": "minecraft:coal_block"
-    }
+    "#": "minecraft:coal",
+    "W": "minecraft:coal_block"
   },
   "pattern": [
     "#W#",

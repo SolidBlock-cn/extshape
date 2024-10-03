@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:nether_wart_slab"
-    }
+    "#": "extshape:nether_wart_slab"
   },
   "pattern": [
     "###"

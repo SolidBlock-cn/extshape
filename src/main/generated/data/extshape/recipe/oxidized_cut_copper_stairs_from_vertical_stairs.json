@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:oxidized_cut_copper_vertical_stairs"
-    }
+    "extshape:oxidized_cut_copper_vertical_stairs"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:diamond_slab"
-    }
+    "#": "extshape:diamond_slab"
   },
   "pattern": [
     "###"

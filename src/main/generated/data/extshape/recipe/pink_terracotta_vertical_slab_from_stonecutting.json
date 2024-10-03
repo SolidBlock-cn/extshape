@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:pink_terracotta"
-  },
+  "ingredient": "minecraft:pink_terracotta",
   "result": {
     "count": 2,
     "id": "extshape:pink_terracotta_vertical_slab"

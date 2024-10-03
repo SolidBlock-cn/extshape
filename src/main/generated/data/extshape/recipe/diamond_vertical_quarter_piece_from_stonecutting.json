@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:diamond_block"
-  },
+  "ingredient": "minecraft:diamond_block",
   "result": {
     "count": 4,
     "id": "extshape:diamond_vertical_quarter_piece"

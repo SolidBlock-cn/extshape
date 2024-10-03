@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_exposed_cut_copper_button",
   "ingredients": [
-    {
-      "item": "extshape:exposed_cut_copper_button"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:exposed_cut_copper_button",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

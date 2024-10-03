@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "stripped_wood_wall",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_mangrove_wood"
-    }
+    "#": "minecraft:stripped_mangrove_wood"
   },
   "pattern": [
     "###",

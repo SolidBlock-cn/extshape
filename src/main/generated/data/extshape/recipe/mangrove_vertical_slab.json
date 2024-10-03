@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "minecraft:mangrove_slab"
-    }
+    "minecraft:mangrove_slab"
   ],
   "result": {
     "count": 1,

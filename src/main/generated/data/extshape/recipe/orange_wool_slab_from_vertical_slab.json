@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wool_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:orange_wool_vertical_slab"
-    }
+    "extshape:orange_wool_vertical_slab"
   ],
   "result": {
     "count": 1,

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:netherite_ingot"
-    },
-    "W": {
-      "item": "minecraft:netherite_block"
-    }
+    "#": "minecraft:netherite_ingot",
+    "W": "minecraft:netherite_block"
   },
   "pattern": [
     "W#W",

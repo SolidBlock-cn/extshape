@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:stripped_bamboo_block_slab"
-    }
+    "#": "extshape:stripped_bamboo_block_slab"
   },
   "pattern": [
     "###"

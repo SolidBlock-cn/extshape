@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:raw_gold_quarter_piece"
-    }
+    "extshape:raw_gold_quarter_piece"
   ],
   "result": {
     "count": 1,

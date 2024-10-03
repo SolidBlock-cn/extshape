@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:melon_slab"
-    }
+    "#": "extshape:melon_slab"
   },
   "pattern": [
     "###"

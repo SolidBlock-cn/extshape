@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:waxed_exposed_cut_copper_stairs"
-  },
+  "ingredient": "minecraft:waxed_exposed_cut_copper_stairs",
   "result": {
     "count": 3,
     "id": "extshape:waxed_exposed_cut_copper_quarter_piece"

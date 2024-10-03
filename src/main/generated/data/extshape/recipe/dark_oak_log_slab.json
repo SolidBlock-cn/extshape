@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_slab",
   "key": {
-    "#": {
-      "item": "minecraft:dark_oak_log"
-    }
+    "#": "minecraft:dark_oak_log"
   },
   "pattern": [
     "###"

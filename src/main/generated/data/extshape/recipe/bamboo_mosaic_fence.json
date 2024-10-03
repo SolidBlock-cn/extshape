@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wooden_fence",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:bamboo_mosaic"
-    }
+    "#": "minecraft:stick",
+    "W": "minecraft:bamboo_mosaic"
   },
   "pattern": [
     "W#W",

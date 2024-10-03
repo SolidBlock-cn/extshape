@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:prismarine_slab"
-    }
+    "minecraft:prismarine_slab"
   ],
   "result": {
     "count": 1,

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:acacia_wood"
-    }
+    "#": "minecraft:acacia_wood"
   },
   "pattern": [
     "#  ",

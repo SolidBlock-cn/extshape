@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "stripped_wood_slab",
+  "key": {
+    "#": "minecraft:stripped_pale_oak_wood"
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:stripped_pale_oak_wood_slab"
+  }
+}

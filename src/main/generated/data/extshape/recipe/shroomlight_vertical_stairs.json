@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:shroomlight_stairs"
-    }
+    "extshape:shroomlight_stairs"
   ],
   "result": {
     "count": 1,

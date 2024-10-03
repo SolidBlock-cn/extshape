@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:nether_wart_block"
-    }
+    "#": "minecraft:nether_wart_block"
   },
   "pattern": [
     "###",

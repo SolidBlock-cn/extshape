@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:green_concrete"
-  },
+  "ingredient": "minecraft:green_concrete",
   "result": {
     "count": 1,
     "id": "extshape:green_concrete_vertical_stairs"

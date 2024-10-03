@@ -7,7 +7,7 @@ import net.minecraft.block.Oxidizable;
 import net.minecraft.block.WallBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -51,15 +51,15 @@ public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlock
   }
 
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    return RecipeProvider.getWallRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock))
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
+    return recipeGenerator.getWallRecipe(getRecipeCategory(), this, Ingredient.ofItems(baseBlock))
         .group(getRecipeGroup())
-        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock));
+        .criterion(RecipeGenerator.hasItem(baseBlock), recipeGenerator.conditionsFromItem(baseBlock));
   }
 
   @Override
-  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1);
+  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerator) {
+    return simpleStoneCuttingRecipe(1, recipeGenerator);
   }
 
   @Override

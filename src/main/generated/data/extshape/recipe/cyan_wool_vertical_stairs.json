@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wool_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:cyan_wool_stairs"
-    }
+    "extshape:cyan_wool_stairs"
   ],
   "result": {
     "count": 1,

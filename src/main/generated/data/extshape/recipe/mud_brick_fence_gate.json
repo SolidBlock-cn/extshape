@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:mud"
-    },
-    "W": {
-      "item": "minecraft:mud_bricks"
-    }
+    "#": "minecraft:mud",
+    "W": "minecraft:mud_bricks"
   },
   "pattern": [
     "#W#",

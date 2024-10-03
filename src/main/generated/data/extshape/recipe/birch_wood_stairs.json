@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:birch_wood"
-    }
+    "#": "minecraft:birch_wood"
   },
   "pattern": [
     "#  ",

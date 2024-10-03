@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_slab",
   "key": {
-    "#": {
-      "item": "minecraft:cherry_log"
-    }
+    "#": "minecraft:cherry_log"
   },
   "pattern": [
     "###"

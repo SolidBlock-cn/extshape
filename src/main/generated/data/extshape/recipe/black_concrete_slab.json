@@ -3,9 +3,7 @@
   "category": "building",
   "group": "concrete_slab",
   "key": {
-    "#": {
-      "item": "minecraft:black_concrete"
-    }
+    "#": "minecraft:black_concrete"
   },
   "pattern": [
     "###"

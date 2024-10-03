@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "concrete_fence",
   "key": {
-    "#": {
-      "item": "minecraft:clay"
-    },
-    "W": {
-      "item": "minecraft:orange_concrete"
-    }
+    "#": "minecraft:clay",
+    "W": "minecraft:orange_concrete"
   },
   "pattern": [
     "W#W",

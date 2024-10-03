@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:raw_copper_slab"
-    }
+    "extshape:raw_copper_slab"
   ],
   "result": {
     "count": 1,

@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:mangrove_wood"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:mangrove_wood",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

@@ -7,7 +7,7 @@ import net.minecraft.block.enums.SlabType;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
@@ -16,7 +16,7 @@ import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 
 public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
-  public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+  public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING;
 
   public CircularPavingSlabBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock, settings);

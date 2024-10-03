@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:tuff"
-  },
+  "ingredient": "minecraft:tuff",
   "result": {
     "count": 4,
     "id": "extshape:tuff_brick_vertical_quarter_piece"

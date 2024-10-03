@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "minecraft:tuff_bricks"
-    }
+    "#": "minecraft:flint",
+    "W": "minecraft:tuff_bricks"
   },
   "pattern": [
     "W#W",

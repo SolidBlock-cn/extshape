@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:lime_concrete"
-  },
+  "ingredient": "minecraft:lime_concrete",
   "result": {
     "count": 1,
     "id": "extshape:lime_concrete_stairs"

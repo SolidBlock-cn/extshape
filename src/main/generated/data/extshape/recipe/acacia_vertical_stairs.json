@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "minecraft:acacia_stairs"
-    }
+    "minecraft:acacia_stairs"
   ],
   "result": {
     "count": 1,

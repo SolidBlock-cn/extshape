@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:stripped_birch_log_vertical_slab"
-    }
+    "extshape:stripped_birch_log_vertical_slab"
   ],
   "result": {
     "count": 1,

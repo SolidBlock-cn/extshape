@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:mangrove_wood"
-    }
+    "#": "minecraft:mangrove_wood"
   },
   "pattern": [
     "#  ",

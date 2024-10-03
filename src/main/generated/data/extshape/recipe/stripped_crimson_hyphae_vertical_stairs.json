@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_wood_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:stripped_crimson_hyphae_stairs"
-    }
+    "extshape:stripped_crimson_hyphae_stairs"
   ],
   "result": {
     "count": 1,

@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_oxidized_cut_copper_vertical_slab",
   "ingredients": [
-    {
-      "item": "extshape:oxidized_cut_copper_vertical_slab"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:oxidized_cut_copper_vertical_slab",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

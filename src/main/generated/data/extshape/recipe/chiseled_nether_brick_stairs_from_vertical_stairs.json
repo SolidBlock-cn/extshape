@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:chiseled_nether_brick_vertical_stairs"
-    }
+    "extshape:chiseled_nether_brick_vertical_stairs"
   ],
   "result": {
     "count": 1,

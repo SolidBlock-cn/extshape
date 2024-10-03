@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:calcite_slab"
-    }
+    "#": "extshape:calcite_slab"
   },
   "pattern": [
     "###"

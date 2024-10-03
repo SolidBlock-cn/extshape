@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:crimson_hyphae_slab"
-    }
+    "extshape:crimson_hyphae_slab"
   ],
   "result": {
     "count": 1,

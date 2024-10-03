@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:end_stone_vertical_slab"
-    }
+    "#": "extshape:end_stone_vertical_slab"
   },
   "pattern": [
     "###"

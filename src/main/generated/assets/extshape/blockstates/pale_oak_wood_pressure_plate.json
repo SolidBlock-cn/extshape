@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "extshape:block/pale_oak_wood_pressure_plate"
+    },
+    "powered=true": {
+      "model": "extshape:block/pale_oak_wood_pressure_plate_down"
+    }
+  }
+}

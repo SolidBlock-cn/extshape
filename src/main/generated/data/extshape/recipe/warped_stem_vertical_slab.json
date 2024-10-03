@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:warped_stem_slab"
-    }
+    "extshape:warped_stem_slab"
   ],
   "result": {
     "count": 1,

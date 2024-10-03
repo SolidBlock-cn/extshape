@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:sandstone_quarter_piece"
-    }
+    "extshape:sandstone_quarter_piece"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:diorite_stairs"
-    }
+    "minecraft:diorite_stairs"
   ],
   "result": {
     "count": 1,

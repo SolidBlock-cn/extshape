@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "stripped_wood_pressure_plate",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_warped_hyphae"
-    }
+    "#": "minecraft:stripped_warped_hyphae"
   },
   "pattern": [
     "##"

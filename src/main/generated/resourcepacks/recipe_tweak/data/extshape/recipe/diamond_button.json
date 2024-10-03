@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:diamond_block"
-    },
-    {
-      "tag": "c:gems/diamond"
-    }
+    "minecraft:diamond_block",
+    "#c:gems/diamond"
   ],
   "result": {
     "count": 1,

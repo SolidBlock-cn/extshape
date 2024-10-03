@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:oak_log"
-    }
+    "#": "minecraft:oak_log"
   },
   "pattern": [
     "#  ",

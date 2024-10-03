@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_copper_quarter_piece",
   "ingredients": [
-    {
-      "item": "extshape:copper_quarter_piece"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:copper_quarter_piece",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

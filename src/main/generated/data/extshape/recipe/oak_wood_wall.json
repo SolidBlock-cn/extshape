@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wood_wall",
   "key": {
-    "#": {
-      "item": "minecraft:oak_wood"
-    }
+    "#": "minecraft:oak_wood"
   },
   "pattern": [
     "###",

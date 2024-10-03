@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:exposed_copper"
-    }
+    "minecraft:exposed_copper"
   ],
   "result": {
     "count": 1,

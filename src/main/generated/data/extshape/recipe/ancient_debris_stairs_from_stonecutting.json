@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:ancient_debris"
-  },
+  "ingredient": "minecraft:ancient_debris",
   "result": {
     "count": 1,
     "id": "extshape:ancient_debris_stairs"

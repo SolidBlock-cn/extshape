@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:blackstone_stairs"
-  },
+  "ingredient": "minecraft:blackstone_stairs",
   "result": {
     "count": 3,
     "id": "extshape:blackstone_quarter_piece"

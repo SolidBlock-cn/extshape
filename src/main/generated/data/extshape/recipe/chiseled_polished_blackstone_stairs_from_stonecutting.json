@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:chiseled_polished_blackstone"
-  },
+  "ingredient": "minecraft:chiseled_polished_blackstone",
   "result": {
     "count": 1,
     "id": "extshape:chiseled_polished_blackstone_stairs"

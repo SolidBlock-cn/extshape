@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:granite_stairs"
-    }
+    "minecraft:granite_stairs"
   ],
   "result": {
     "count": 1,

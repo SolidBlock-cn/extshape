@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:calcite_slab"
-    }
+    "extshape:calcite_slab"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:chiseled_tuff_vertical_slab"
-    }
+    "#": "extshape:chiseled_tuff_vertical_slab"
   },
   "pattern": [
     "###"

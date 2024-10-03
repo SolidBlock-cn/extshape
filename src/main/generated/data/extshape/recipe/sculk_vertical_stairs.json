@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:sculk_stairs"
-    }
+    "extshape:sculk_stairs"
   ],
   "result": {
     "count": 1,

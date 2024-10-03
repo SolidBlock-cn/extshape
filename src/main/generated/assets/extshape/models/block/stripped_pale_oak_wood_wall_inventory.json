@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "minecraft:block/stripped_pale_oak_log"
+  }
+}

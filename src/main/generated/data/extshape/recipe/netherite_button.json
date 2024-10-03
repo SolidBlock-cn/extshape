@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:netherite_block"
-    }
+    "minecraft:netherite_block"
   ],
   "result": {
     "count": 1,

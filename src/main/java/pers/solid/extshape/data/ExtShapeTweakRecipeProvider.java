@@ -3,20 +3,18 @@ package pers.solid.extshape.data;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.mojang.datafixers.util.Pair;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.RecipeProvider;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.ExtShape;
@@ -26,18 +24,18 @@ import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * 一些特殊的资源包，用于修复本模组中的配方与原版配方冲突的问题。
  */
-public class ExtShapeTweakRecipeProvider extends FabricRecipeProvider {
-  public ExtShapeTweakRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-    super(output, registriesFuture);
+public class ExtShapeTweakRecipeProvider extends RecipeGenerator {
+
+  protected ExtShapeTweakRecipeProvider(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+    super(registries, exporter);
   }
 
   @Override
-  public void generate(RecipeExporter exporter) {
+  public void generate() {
     // 羊毛的特殊合成配方：羊毛压力板 ↔ 3个地毯
     for (Block baseBlock : BlockCollections.WOOLS) {
       final ExtShapePressurePlateBlock pressurePlate = (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, baseBlock);
@@ -45,43 +43,43 @@ public class ExtShapeTweakRecipeProvider extends FabricRecipeProvider {
       final Identifier woolId = Registries.BLOCK.getId(baseBlock);
       final Identifier carpetId = Identifier.of(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = Registries.ITEM.get(carpetId);
-      ShapedRecipeJsonBuilder.create(pressurePlate.getRecipeCategory(), pressurePlate)
+      createShaped(pressurePlate.getRecipeCategory(), pressurePlate)
           .pattern("###")
           .input('#', carpet)
-          .criterion(RecipeProvider.hasItem(carpet), RecipeProvider.conditionsFromItem(carpet))
+          .criterion(hasItem(carpet), conditionsFromItem(carpet))
           .group(pressurePlate.getRecipeGroup())
           .offerTo(exporter);
       final Identifier reverseRecipeId = ExtShape.id(carpetId.getPath() + "_from_pressure_plate");
-      ShapelessRecipeJsonBuilder.create(pressurePlate.getRecipeCategory(), carpet, 3)
+      createShapeless(pressurePlate.getRecipeCategory(), carpet, 3)
           .input(Ingredient.ofItems(pressurePlate))
-          .criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(pressurePlate))
+          .criterion("has_pressure_plate", conditionsFromItem(pressurePlate))
           .group("wool_from_pressure_plate")
-          .offerTo(exporter, reverseRecipeId);
+          .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, reverseRecipeId));
     }
 
     // 苔藓的特殊合成配方：覆地苔藓 ↔ 苔藓压力板
     {
       final ExtShapePressurePlateBlock mossPressurePlate = (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, Blocks.MOSS_BLOCK);
       Preconditions.checkNotNull(mossPressurePlate, "moss pressure plate block");
-      ShapedRecipeJsonBuilder.create(mossPressurePlate.getRecipeCategory(), mossPressurePlate)
+      createShaped(mossPressurePlate.getRecipeCategory(), mossPressurePlate)
           .pattern("###")
           .input('#', Items.MOSS_CARPET)
-          .criterion(RecipeProvider.hasItem(Items.MOSS_CARPET), RecipeProvider.conditionsFromItem(Items.MOSS_CARPET))
+          .criterion(hasItem(Items.MOSS_CARPET), conditionsFromItem(Items.MOSS_CARPET))
           .group(mossPressurePlate.getRecipeGroup())
           .offerTo(exporter);
       final Identifier reverseRecipeId = ExtShape.id("moss_carpet_from_pressure_plate");
-      ShapelessRecipeJsonBuilder.create(mossPressurePlate.getRecipeCategory(), Blocks.MOSS_CARPET, 3)
+      createShapeless(mossPressurePlate.getRecipeCategory(), Blocks.MOSS_CARPET, 3)
           .input(Ingredient.ofItems(mossPressurePlate))
-          .criterion("has_pressure_plate", RecipeProvider.conditionsFromItem(mossPressurePlate))
-          .offerTo(exporter, reverseRecipeId);
+          .criterion("has_pressure_plate", conditionsFromItem(mossPressurePlate))
+          .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, reverseRecipeId));
     }
 
     // 特殊的雪台阶配方
     final ExtShapeSlabBlock snowSlab = (ExtShapeSlabBlock) BlockBiMaps.getBlockOf(BlockShape.SLAB, Blocks.SNOW_BLOCK);
     Preconditions.checkNotNull(snowSlab, "snow slab");
-    ShapelessRecipeJsonBuilder.create(snowSlab.getRecipeCategory(), snowSlab)
+    createShapeless(snowSlab.getRecipeCategory(), snowSlab)
         .input(Ingredient.ofItems(Blocks.SNOW))
-        .criterion("has_snow", RecipeProvider.conditionsFromItem(Blocks.SNOW))
+        .criterion("has_snow", conditionsFromItem(Blocks.SNOW))
         .group(snowSlab.getRecipeGroup())
         .offerTo(exporter);
 
@@ -107,14 +105,14 @@ public class ExtShapeTweakRecipeProvider extends FabricRecipeProvider {
 
     // 特殊的按钮合成配方
     Iterable<Pair<Block, Ingredient>> baseAndResource = List.of(
-        Pair.of(Blocks.EMERALD_BLOCK, Ingredient.fromTag(ConventionalItemTags.EMERALD_GEMS)),
-        Pair.of(Blocks.IRON_BLOCK, Ingredient.fromTag(ConventionalItemTags.IRON_INGOTS)),
-        Pair.of(Blocks.GOLD_BLOCK, Ingredient.fromTag(ConventionalItemTags.GOLD_INGOTS)),
-        Pair.of(Blocks.DIAMOND_BLOCK, Ingredient.fromTag(ConventionalItemTags.DIAMOND_GEMS)),
+        Pair.of(Blocks.EMERALD_BLOCK, ingredientFromTag(ConventionalItemTags.EMERALD_GEMS)),
+        Pair.of(Blocks.IRON_BLOCK, ingredientFromTag(ConventionalItemTags.IRON_INGOTS)),
+        Pair.of(Blocks.GOLD_BLOCK, ingredientFromTag(ConventionalItemTags.GOLD_INGOTS)),
+        Pair.of(Blocks.DIAMOND_BLOCK, ingredientFromTag(ConventionalItemTags.DIAMOND_GEMS)),
         Pair.of(Blocks.COAL_BLOCK, Ingredient.ofItems(Items.COAL)),
-        Pair.of(Blocks.LAPIS_BLOCK, Ingredient.fromTag(ConventionalItemTags.LAPIS_GEMS)),
+        Pair.of(Blocks.LAPIS_BLOCK, ingredientFromTag(ConventionalItemTags.LAPIS_GEMS)),
         Pair.of(Blocks.PUMPKIN, Ingredient.ofItems(Items.PUMPKIN_SEEDS)),
-        Pair.of(Blocks.NETHERITE_BLOCK, Ingredient.fromTag(ConventionalItemTags.NETHERITE_INGOTS)),
+        Pair.of(Blocks.NETHERITE_BLOCK, ingredientFromTag(ConventionalItemTags.NETHERITE_INGOTS)),
         Pair.of(Blocks.RAW_GOLD_BLOCK, Ingredient.ofItems(Items.RAW_GOLD)),
         Pair.of(Blocks.RAW_COPPER_BLOCK, Ingredient.ofItems(Items.RAW_COPPER)),
         Pair.of(Blocks.RAW_IRON_BLOCK, Ingredient.ofItems(Items.RAW_IRON)),
@@ -136,10 +134,10 @@ public class ExtShapeTweakRecipeProvider extends FabricRecipeProvider {
       final ExtShapeButtonBlock button = (ExtShapeButtonBlock) BlockBiMaps.getBlockOf(BlockShape.BUTTON, baseBlock);
       if (button == null) continue;
 
-      ShapelessRecipeJsonBuilder.create(button.getRecipeCategory(), button)
+      createShapeless(button.getRecipeCategory(), button)
           .input(baseBlock)
           .input(pair.getSecond())
-          .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+          .criterion(hasItem(baseBlock), conditionsFromItem(baseBlock))
           .group(button.getRecipeGroup())
           .offerTo(exporter);
     }
@@ -149,34 +147,29 @@ public class ExtShapeTweakRecipeProvider extends FabricRecipeProvider {
       final ExtShapeWallBlock wall = (ExtShapeWallBlock) BlockBiMaps.getBlockOf(BlockShape.WALL, baseBlock);
       Preconditions.checkNotNull(wall, "wall of %s", baseBlock);
 
-      ShapedRecipeJsonBuilder.create(wall.getRecipeCategory(), wall, 6)
+      createShaped(wall.getRecipeCategory(), wall, 6)
           .pattern(" * ")
           .pattern("###")
           .pattern("###")
           .input('*', Items.STICK)
           .input('#', baseBlock)
           .group(wall.getRecipeGroup())
-          .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+          .criterion(hasItem(baseBlock), conditionsFromItem(baseBlock))
           .offerTo(exporter);
     }
     for (Block baseBlock : Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS)) {
       final ExtShapeWallBlock wall = (ExtShapeWallBlock) BlockBiMaps.getBlockOf(BlockShape.WALL, baseBlock);
       Preconditions.checkNotNull(wall, "wall of %s", baseBlock);
 
-      ShapedRecipeJsonBuilder.create(wall.getRecipeCategory(), wall, 6)
+      createShaped(wall.getRecipeCategory(), wall, 6)
           .pattern(" * ")
           .pattern("###")
           .pattern("###")
           .input('*', Items.COPPER_INGOT)
           .input('#', baseBlock)
           .group(wall.getRecipeGroup())
-          .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+          .criterion(hasItem(baseBlock), conditionsFromItem(baseBlock))
           .offerTo(exporter);
     }
-  }
-
-  @Override
-  protected Identifier getRecipeIdentifier(Identifier identifier) {
-    return identifier;
   }
 }

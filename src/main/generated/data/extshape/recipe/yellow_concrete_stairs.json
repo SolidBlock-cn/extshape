@@ -3,9 +3,7 @@
   "category": "building",
   "group": "concrete_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:yellow_concrete"
-    }
+    "#": "minecraft:yellow_concrete"
   },
   "pattern": [
     "#  ",

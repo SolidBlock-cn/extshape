@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "stripped_wood_fence_gate",
+  "key": {
+    "#": "minecraft:stick",
+    "W": "minecraft:stripped_pale_oak_wood"
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "id": "extshape:stripped_pale_oak_wood_fence_gate"
+  }
+}

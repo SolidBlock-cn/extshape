@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wood_wall",
   "key": {
-    "#": {
-      "item": "minecraft:jungle_wood"
-    }
+    "#": "minecraft:jungle_wood"
   },
   "pattern": [
     "###",

@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wool_pressure_plate",
   "key": {
-    "#": {
-      "item": "minecraft:light_blue_wool"
-    }
+    "#": "minecraft:light_blue_wool"
   },
   "pattern": [
     "##"

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:crying_obsidian_stairs"
-    }
+    "extshape:crying_obsidian_stairs"
   ],
   "result": {
     "count": 1,

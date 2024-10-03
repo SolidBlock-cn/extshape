@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:blue_concrete"
-  },
+  "ingredient": "minecraft:blue_concrete",
   "result": {
     "count": 1,
     "id": "extshape:blue_concrete_wall"

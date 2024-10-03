@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wood_fence",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:oak_wood"
-    }
+    "#": "minecraft:stick",
+    "W": "minecraft:oak_wood"
   },
   "pattern": [
     "W#W",

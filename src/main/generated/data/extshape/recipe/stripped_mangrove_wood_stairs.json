@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_wood_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_mangrove_wood"
-    }
+    "#": "minecraft:stripped_mangrove_wood"
   },
   "pattern": [
     "#  ",

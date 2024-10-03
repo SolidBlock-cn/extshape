@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "stripped_wood_wall",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_oak_wood"
-    }
+    "#": "minecraft:stripped_oak_wood"
   },
   "pattern": [
     "###",

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_wood_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:stripped_birch_wood_slab"
-    }
+    "extshape:stripped_birch_wood_slab"
   ],
   "result": {
     "count": 1,

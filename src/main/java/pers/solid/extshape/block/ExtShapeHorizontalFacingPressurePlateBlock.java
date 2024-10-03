@@ -7,7 +7,7 @@ import net.minecraft.data.client.Models;
 import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
@@ -17,7 +17,7 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
-  public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+  public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING;
   public static final MapCodec<ExtShapeHorizontalFacingPressurePlateBlock> CODEC = createCodec(ExtShapeHorizontalFacingPressurePlateBlock::new);
 
   public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {

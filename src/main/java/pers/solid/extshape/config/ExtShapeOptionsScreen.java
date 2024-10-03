@@ -61,7 +61,7 @@ public class ExtShapeOptionsScreen extends Screen {
   private final ClickableWidget addToVanillaGroupsButton = SimpleOption.ofBoolean(
       "options.extshape.addToVanillaGroups",
       SimpleOption.constantTooltip(
-          Text.translatable("options.extshape.addToVanillaGroups.tooltip", Registries.ITEM_GROUP.getOrThrow(ItemGroups.BUILDING_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.COLORED_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.NATURAL).getDisplayName())
+          Text.translatable("options.extshape.addToVanillaGroups.tooltip", Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.BUILDING_BLOCKS).getDisplayStacks(), Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.COLORED_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.NATURAL).getDisplayName())
               .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Text.literal("\n\n").append(Text.translatable("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : Text.empty())
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))

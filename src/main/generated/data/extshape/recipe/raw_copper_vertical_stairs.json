@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:raw_copper_stairs"
-    }
+    "extshape:raw_copper_stairs"
   ],
   "result": {
     "count": 1,

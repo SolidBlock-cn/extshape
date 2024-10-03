@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:chiseled_nether_bricks"
-  },
+  "ingredient": "minecraft:chiseled_nether_bricks",
   "result": {
     "count": 2,
     "id": "extshape:chiseled_nether_brick_vertical_slab"

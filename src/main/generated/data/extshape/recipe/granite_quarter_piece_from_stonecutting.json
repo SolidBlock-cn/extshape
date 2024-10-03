@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:granite"
-  },
+  "ingredient": "minecraft:granite",
   "result": {
     "count": 4,
     "id": "extshape:granite_quarter_piece"

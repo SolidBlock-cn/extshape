@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_vertical_quarter_piece_from_vertical_slab",
   "key": {
-    "#": {
-      "item": "extshape:spruce_wood_vertical_slab"
-    }
+    "#": "extshape:spruce_wood_vertical_slab"
   },
   "pattern": [
     "#",

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "concrete_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "extshape:pink_concrete_slab"
-    }
+    "#": "extshape:pink_concrete_slab"
   },
   "pattern": [
     "###"

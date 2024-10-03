@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:raw_gold"
-    },
-    "W": {
-      "item": "minecraft:raw_gold_block"
-    }
+    "#": "minecraft:raw_gold",
+    "W": "minecraft:raw_gold_block"
   },
   "pattern": [
     "#W#",

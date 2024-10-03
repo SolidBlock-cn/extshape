@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "extshape:packed_mud_stairs"
-  },
+  "ingredient": "extshape:packed_mud_stairs",
   "result": {
     "count": 3,
     "id": "extshape:packed_mud_quarter_piece"

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:gilded_blackstone_vertical_slab"
-    }
+    "#": "extshape:gilded_blackstone_vertical_slab"
   },
   "pattern": [
     "#",

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_quarter_piece_from_vertical_slab",
   "key": {
-    "#": {
-      "item": "extshape:dark_oak_log_vertical_slab"
-    }
+    "#": "extshape:dark_oak_log_vertical_slab"
   },
   "pattern": [
     "###"

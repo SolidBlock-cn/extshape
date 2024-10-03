@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_cut_copper_vertical_stairs",
   "ingredients": [
-    {
-      "item": "extshape:cut_copper_vertical_stairs"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:cut_copper_vertical_stairs",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

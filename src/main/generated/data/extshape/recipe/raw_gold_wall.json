@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:raw_gold_block"
-    }
+    "#": "minecraft:raw_gold_block"
   },
   "pattern": [
     "###",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:chiseled_polished_blackstone_stairs"
-    }
+    "extshape:chiseled_polished_blackstone_stairs"
   ],
   "result": {
     "count": 1,

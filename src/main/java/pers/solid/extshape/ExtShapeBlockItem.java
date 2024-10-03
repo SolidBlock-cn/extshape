@@ -14,12 +14,8 @@ public class ExtShapeBlockItem extends BlockItem {
   }
 
   @Override
-  public Text getName() {
-    return this.getBlock().getName();
-  }
-
-  @Override
   public Text getName(ItemStack stack) {
+    // todo accept item_name component
     return getBlock().getName();
   }
 }

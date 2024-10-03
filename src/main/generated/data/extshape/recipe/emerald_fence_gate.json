@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:emerald"
-    },
-    "W": {
-      "item": "minecraft:emerald_block"
-    }
+    "#": "minecraft:emerald",
+    "W": "minecraft:emerald_block"
   },
   "pattern": [
     "#W#",

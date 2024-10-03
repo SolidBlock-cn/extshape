@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:snow"
-    },
-    "W": {
-      "item": "minecraft:snow_block"
-    }
+    "#": "minecraft:snow",
+    "W": "minecraft:snow_block"
   },
   "pattern": [
     "#W#",

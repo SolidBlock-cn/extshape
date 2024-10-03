@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "minecraft:cobbled_deepslate"
-    }
+    "#": "minecraft:flint",
+    "W": "minecraft:cobbled_deepslate"
   },
   "pattern": [
     "W#W",

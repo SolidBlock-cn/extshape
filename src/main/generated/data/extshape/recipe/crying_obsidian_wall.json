@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:crying_obsidian"
-    }
+    "#": "minecraft:crying_obsidian"
   },
   "pattern": [
     "###",

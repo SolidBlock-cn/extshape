@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:exposed_copper_slab"
-    }
+    "#": "extshape:exposed_copper_slab"
   },
   "pattern": [
     "###"

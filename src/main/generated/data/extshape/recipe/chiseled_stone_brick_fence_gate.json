@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "minecraft:chiseled_stone_bricks"
-    }
+    "#": "minecraft:flint",
+    "W": "minecraft:chiseled_stone_bricks"
   },
   "pattern": [
     "#W#",

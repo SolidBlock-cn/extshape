@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:exposed_copper"
-    },
-    "*": {
-      "item": "minecraft:copper_ingot"
-    }
+    "#": "minecraft:exposed_copper",
+    "*": "minecraft:copper_ingot"
   },
   "pattern": [
     " * ",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "minecraft:magenta_terracotta"
-    }
+    "#": "minecraft:magenta_terracotta"
   },
   "pattern": [
     "###"

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:smooth_quartz_stairs"
-    }
+    "minecraft:smooth_quartz_stairs"
   ],
   "result": {
     "count": 1,

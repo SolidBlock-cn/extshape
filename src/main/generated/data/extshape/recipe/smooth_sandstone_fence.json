@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:smooth_sandstone"
-    }
+    "#": "minecraft:stick",
+    "W": "minecraft:smooth_sandstone"
   },
   "pattern": [
     "W#W",

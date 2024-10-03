@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_acacia_log"
-    }
+    "#": "minecraft:stripped_acacia_log"
   },
   "pattern": [
     "#  ",

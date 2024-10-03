@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:cherry_wood"
-    }
+    "minecraft:cherry_wood"
   ],
   "result": {
     "count": 1,

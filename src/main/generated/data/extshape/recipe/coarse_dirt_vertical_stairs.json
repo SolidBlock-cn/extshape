@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:coarse_dirt_stairs"
-    }
+    "extshape:coarse_dirt_stairs"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:bamboo_block_slab"
-    }
+    "extshape:bamboo_block_slab"
   ],
   "result": {
     "count": 1,

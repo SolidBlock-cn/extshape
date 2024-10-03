@@ -1,9 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "group": "concrete_quarter_piece",
-  "ingredient": {
-    "item": "extshape:black_concrete_stairs"
-  },
+  "ingredient": "extshape:black_concrete_stairs",
   "result": {
     "count": 3,
     "id": "extshape:black_concrete_quarter_piece"

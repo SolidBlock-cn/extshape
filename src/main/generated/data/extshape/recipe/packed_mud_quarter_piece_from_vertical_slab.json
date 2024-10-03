@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:packed_mud_vertical_slab"
-    }
+    "#": "extshape:packed_mud_vertical_slab"
   },
   "pattern": [
     "###"

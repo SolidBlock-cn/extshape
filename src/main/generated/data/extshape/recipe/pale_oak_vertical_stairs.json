@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wooden_vertical_stairs_from_rotation",
+  "ingredients": [
+    "minecraft:pale_oak_stairs"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:pale_oak_vertical_stairs"
+  }
+}

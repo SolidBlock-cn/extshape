@@ -8,6 +8,9 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.*;
@@ -94,7 +97,10 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     this.shouldAddToBlockBiMap = true;
     this.itemSettings = new Item.Settings();
     if (baseBlock != null && baseBlock.asItem() != null) {
-      if (baseBlock.asItem().getComponents().contains(DataComponentTypes.FIRE_RESISTANT)) itemSettings.fireproof();
+      final var component = baseBlock.asItem().getComponents().get(DataComponentTypes.DAMAGE_RESISTANT);
+      if (component != null && DamageTypeTags.IS_FIRE.equals(component.types())) {
+        itemSettings.fireproof();
+      }
     }
     this.instanceSupplier = instanceSupplier;
   }
@@ -253,6 +259,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    * 立即使用当前的 {@link #instanceSupplier} 生成方块实例。
    */
   protected void createInstance() {
+    blockSettings.registryKey(RegistryKey.of(RegistryKeys.BLOCK, getBlockId()));
     this.instance = this.instanceSupplier.apply(this);
   }
 
@@ -260,6 +267,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    * 立即使用当前的 {@link #itemInstanceSupplier} 生成物品实例。
    */
   protected void createItemInstance() {
+    itemSettings.registryKey(RegistryKey.of(RegistryKeys.ITEM, getBlockId()));
     this.itemInstance = itemInstanceSupplier.apply(this);
   }
 

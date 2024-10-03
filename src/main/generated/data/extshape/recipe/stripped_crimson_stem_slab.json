@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_slab",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_crimson_stem"
-    }
+    "#": "minecraft:stripped_crimson_stem"
   },
   "pattern": [
     "###"

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "minecraft:polished_andesite_stairs"
-    }
+    "minecraft:polished_andesite_stairs"
   ],
   "result": {
     "count": 1,

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "stripped_wood_fence",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:stripped_spruce_wood"
-    }
+    "#": "minecraft:stick",
+    "W": "minecraft:stripped_spruce_wood"
   },
   "pattern": [
     "W#W",

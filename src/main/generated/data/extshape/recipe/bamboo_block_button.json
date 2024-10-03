@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:bamboo_block"
-    }
+    "minecraft:bamboo_block"
   ],
   "result": {
     "count": 1,

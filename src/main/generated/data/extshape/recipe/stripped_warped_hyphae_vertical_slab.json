@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_wood_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:stripped_warped_hyphae_slab"
-    }
+    "extshape:stripped_warped_hyphae_slab"
   ],
   "result": {
     "count": 1,

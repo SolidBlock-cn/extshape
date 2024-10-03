@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:sea_lantern_quarter_piece"
-    }
+    "extshape:sea_lantern_quarter_piece"
   ],
   "result": {
     "count": 1,

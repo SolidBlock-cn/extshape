@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:tuff_brick_quarter_piece"
-    }
+    "extshape:tuff_brick_quarter_piece"
   ],
   "result": {
     "count": 1,

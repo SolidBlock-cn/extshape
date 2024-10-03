@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:waxed_weathered_copper"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:waxed_weathered_copper",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

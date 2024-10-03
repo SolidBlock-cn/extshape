@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:emerald_block"
-    },
-    {
-      "tag": "c:gems/emerald"
-    }
+    "minecraft:emerald_block",
+    "#c:gems/emerald"
   ],
   "result": {
     "count": 1,

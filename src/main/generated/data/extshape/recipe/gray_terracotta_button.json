@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:gray_terracotta"
-    }
+    "minecraft:gray_terracotta"
   ],
   "result": {
     "count": 1,

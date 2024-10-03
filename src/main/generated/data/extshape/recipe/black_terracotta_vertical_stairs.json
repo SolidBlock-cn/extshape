@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:black_terracotta_stairs"
-    }
+    "extshape:black_terracotta_stairs"
   ],
   "result": {
     "count": 1,

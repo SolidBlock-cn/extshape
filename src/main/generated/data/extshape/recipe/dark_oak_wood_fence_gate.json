@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wood_fence_gate",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "minecraft:dark_oak_wood"
-    }
+    "#": "minecraft:stick",
+    "W": "minecraft:dark_oak_wood"
   },
   "pattern": [
     "#W#",

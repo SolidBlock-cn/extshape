@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:terracotta"
-  },
+  "ingredient": "minecraft:terracotta",
   "result": {
     "count": 4,
     "id": "extshape:terracotta_vertical_quarter_piece"

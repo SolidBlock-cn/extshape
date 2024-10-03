@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:andesite"
-  },
+  "ingredient": "minecraft:andesite",
   "result": {
     "count": 4,
     "id": "extshape:polished_andesite_vertical_quarter_piece"

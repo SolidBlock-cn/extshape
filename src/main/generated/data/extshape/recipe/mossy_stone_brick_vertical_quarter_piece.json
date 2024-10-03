@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:mossy_stone_brick_quarter_piece"
-    }
+    "extshape:mossy_stone_brick_quarter_piece"
   ],
   "result": {
     "count": 1,

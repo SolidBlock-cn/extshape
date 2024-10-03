@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:chiseled_stone_brick_slab"
-    }
+    "#": "extshape:chiseled_stone_brick_slab"
   },
   "pattern": [
     "###"

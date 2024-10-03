@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "concrete_fence_gate",
   "key": {
-    "#": {
-      "item": "minecraft:clay"
-    },
-    "W": {
-      "item": "minecraft:green_concrete"
-    }
+    "#": "minecraft:clay",
+    "W": "minecraft:green_concrete"
   },
   "pattern": [
     "#W#",

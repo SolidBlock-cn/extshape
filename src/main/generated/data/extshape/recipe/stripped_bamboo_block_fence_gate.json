@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:bamboo"
-    },
-    "W": {
-      "item": "minecraft:stripped_bamboo_block"
-    }
+    "#": "minecraft:bamboo",
+    "W": "minecraft:stripped_bamboo_block"
   },
   "pattern": [
     "#W#",

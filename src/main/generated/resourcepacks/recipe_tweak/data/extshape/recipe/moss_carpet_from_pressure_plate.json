@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "extshape:moss_pressure_plate"
-    }
+    "extshape:moss_pressure_plate"
   ],
   "result": {
     "count": 3,

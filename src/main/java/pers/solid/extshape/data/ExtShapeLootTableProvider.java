@@ -22,12 +22,15 @@ public class ExtShapeLootTableProvider extends FabricBlockLootTableProvider {
   public void generate() {
     final ImmutableMap<Block, UnusualLootTables.@NotNull LootTableFunction> instance = new UnusualLootTables().createInstance();
     for (Block block : ExtShapeBlocks.getBlocks()) {
+      if (block.getLootTableKey().isEmpty()) {
+        continue;
+      }
       if (block instanceof ExtShapeBlockInterface i) {
         final LootTable.Builder lootTable;
         final Block baseBlock = i.getBaseBlock();
         final UnusualLootTables.LootTableFunction unusual = instance.get(baseBlock);
         if (unusual != null) {
-          lootTable = unusual.apply(baseBlock, BlockShape.getShapeOf(block), block, registryLookup, this);
+          lootTable = unusual.apply(baseBlock, BlockShape.getShapeOf(block), block, registries, this);
         } else {
           lootTable = i.getLootTable(this);
         }

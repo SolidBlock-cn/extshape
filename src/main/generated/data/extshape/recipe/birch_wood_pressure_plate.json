@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wood_pressure_plate",
   "key": {
-    "#": {
-      "item": "minecraft:birch_wood"
-    }
+    "#": "minecraft:birch_wood"
   },
   "pattern": [
     "##"

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:chiseled_deepslate"
-    }
+    "minecraft:chiseled_deepslate"
   ],
   "result": {
     "count": 1,

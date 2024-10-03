@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_quarter_piece_from_vertical_slab",
   "key": {
-    "#": {
-      "item": "extshape:stripped_mangrove_log_vertical_slab"
-    }
+    "#": "extshape:stripped_mangrove_log_vertical_slab"
   },
   "pattern": [
     "###"

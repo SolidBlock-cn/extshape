@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:nether_wart_block"
-    }
+    "minecraft:nether_wart_block"
   ],
   "result": {
     "count": 1,

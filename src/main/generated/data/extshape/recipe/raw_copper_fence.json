@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:raw_copper"
-    },
-    "W": {
-      "item": "minecraft:raw_copper_block"
-    }
+    "#": "minecraft:raw_copper",
+    "W": "minecraft:raw_copper_block"
   },
   "pattern": [
     "W#W",

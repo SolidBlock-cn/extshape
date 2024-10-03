@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "minecraft:bamboo_slab"
-    }
+    "minecraft:bamboo_slab"
   ],
   "result": {
     "count": 1,

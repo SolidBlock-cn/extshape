@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:warped_hyphae"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:warped_hyphae",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wood_wall",
   "key": {
-    "#": {
-      "item": "minecraft:crimson_hyphae"
-    }
+    "#": "minecraft:crimson_hyphae"
   },
   "pattern": [
     "###",

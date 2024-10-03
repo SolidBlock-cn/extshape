@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_vertical_quarter_piece_from_vertical_slab",
   "key": {
-    "#": {
-      "item": "extshape:warped_hyphae_vertical_slab"
-    }
+    "#": "extshape:warped_hyphae_vertical_slab"
   },
   "pattern": [
     "#",

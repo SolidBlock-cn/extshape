@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:spruce_log"
-    }
+    "#": "minecraft:spruce_log"
   },
   "pattern": [
     "#  ",

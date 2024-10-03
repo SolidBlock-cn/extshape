@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:green_terracotta_slab"
-    }
+    "#": "extshape:green_terracotta_slab"
   },
   "pattern": [
     "###"

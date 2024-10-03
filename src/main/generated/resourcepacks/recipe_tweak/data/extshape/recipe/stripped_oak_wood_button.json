@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "stripped_wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:stripped_oak_wood"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:stripped_oak_wood",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

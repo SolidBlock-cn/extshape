@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:crimson_stem_vertical_stairs"
-    }
+    "extshape:crimson_stem_vertical_stairs"
   ],
   "result": {
     "count": 1,

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wooden_wall",
   "key": {
-    "#": {
-      "item": "minecraft:bamboo_mosaic"
-    },
-    "*": {
-      "item": "minecraft:stick"
-    }
+    "#": "minecraft:bamboo_mosaic",
+    "*": "minecraft:stick"
   },
   "pattern": [
     " * ",

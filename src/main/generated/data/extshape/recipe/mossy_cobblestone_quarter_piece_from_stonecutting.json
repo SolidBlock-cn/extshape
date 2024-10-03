@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:mossy_cobblestone"
-  },
+  "ingredient": "minecraft:mossy_cobblestone",
   "result": {
     "count": 4,
     "id": "extshape:mossy_cobblestone_quarter_piece"

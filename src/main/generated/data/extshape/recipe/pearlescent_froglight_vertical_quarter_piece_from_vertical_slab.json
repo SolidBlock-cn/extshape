@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape:pearlescent_froglight_vertical_slab"
-    }
+    "#": "extshape:pearlescent_froglight_vertical_slab"
   },
   "pattern": [
     "#",

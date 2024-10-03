@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:terracotta_quarter_piece"
-    }
+    "extshape:terracotta_quarter_piece"
   ],
   "result": {
     "count": 1,

@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_copper_wall",
   "ingredients": [
-    {
-      "item": "extshape:copper_wall"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:copper_wall",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

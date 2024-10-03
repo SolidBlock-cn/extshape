@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_cherry_log"
-    }
+    "#": "minecraft:stripped_cherry_log"
   },
   "pattern": [
     "#  ",

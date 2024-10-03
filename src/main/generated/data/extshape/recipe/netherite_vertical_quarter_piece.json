@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:netherite_quarter_piece"
-    }
+    "extshape:netherite_quarter_piece"
   ],
   "result": {
     "count": 1,

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "glazed_terracotta_slab",
   "key": {
-    "#": {
-      "item": "minecraft:yellow_glazed_terracotta"
-    }
+    "#": "minecraft:yellow_glazed_terracotta"
   },
   "pattern": [
     "###"

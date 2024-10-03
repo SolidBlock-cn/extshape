@@ -3,9 +3,7 @@
   "category": "building",
   "group": "log_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:mangrove_log_vertical_slab"
-    }
+    "extshape:mangrove_log_vertical_slab"
   ],
   "result": {
     "count": 1,

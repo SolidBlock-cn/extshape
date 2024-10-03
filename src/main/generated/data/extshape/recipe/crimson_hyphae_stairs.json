@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:crimson_hyphae"
-    }
+    "#": "minecraft:crimson_hyphae"
   },
   "pattern": [
     "#  ",

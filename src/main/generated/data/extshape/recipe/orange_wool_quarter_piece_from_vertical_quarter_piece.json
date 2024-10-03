@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wool_quarter_piece_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:orange_wool_vertical_quarter_piece"
-    }
+    "extshape:orange_wool_vertical_quarter_piece"
   ],
   "result": {
     "count": 1,

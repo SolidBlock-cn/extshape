@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "minecraft:sea_lantern"
-    }
+    "#": "minecraft:sea_lantern"
   },
   "pattern": [
     "#  ",

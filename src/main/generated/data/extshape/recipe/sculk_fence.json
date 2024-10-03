@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:sculk_vein"
-    },
-    "W": {
-      "item": "minecraft:sculk"
-    }
+    "#": "minecraft:sculk_vein",
+    "W": "minecraft:sculk"
   },
   "pattern": [
     "W#W",

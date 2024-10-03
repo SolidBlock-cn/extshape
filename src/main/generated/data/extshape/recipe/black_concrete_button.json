@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "concrete_button",
   "ingredients": [
-    {
-      "item": "minecraft:black_concrete"
-    }
+    "minecraft:black_concrete"
   ],
   "result": {
     "count": 1,

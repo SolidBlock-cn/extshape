@@ -3,12 +3,8 @@
   "category": "building",
   "group": "waxed_oxidized_copper_slab",
   "ingredients": [
-    {
-      "item": "extshape:oxidized_copper_slab"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "extshape:oxidized_copper_slab",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

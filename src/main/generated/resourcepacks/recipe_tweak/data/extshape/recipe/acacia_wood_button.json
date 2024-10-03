@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "wood_button",
   "ingredients": [
-    {
-      "item": "minecraft:acacia_wood"
-    },
-    {
-      "item": "minecraft:redstone"
-    }
+    "minecraft:acacia_wood",
+    "minecraft:redstone"
   ],
   "result": {
     "count": 1,

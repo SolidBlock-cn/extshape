@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wood_slab",
   "key": {
-    "#": {
-      "item": "minecraft:warped_hyphae"
-    }
+    "#": "minecraft:warped_hyphae"
   },
   "pattern": [
     "###"

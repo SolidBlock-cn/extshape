@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "concrete_wall",
   "key": {
-    "#": {
-      "item": "minecraft:yellow_concrete"
-    }
+    "#": "minecraft:yellow_concrete"
   },
   "pattern": [
     "###",

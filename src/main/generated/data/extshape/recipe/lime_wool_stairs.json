@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wool_stairs",
   "key": {
-    "#": {
-      "item": "minecraft:lime_wool"
-    }
+    "#": "minecraft:lime_wool"
   },
   "pattern": [
     "#  ",

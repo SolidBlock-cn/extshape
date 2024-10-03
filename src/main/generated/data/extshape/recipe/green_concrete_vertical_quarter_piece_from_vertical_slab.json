@@ -3,9 +3,7 @@
   "category": "building",
   "group": "concrete_vertical_quarter_piece_from_vertical_slab",
   "key": {
-    "#": {
-      "item": "extshape:green_concrete_vertical_slab"
-    }
+    "#": "extshape:green_concrete_vertical_slab"
   },
   "pattern": [
     "#",

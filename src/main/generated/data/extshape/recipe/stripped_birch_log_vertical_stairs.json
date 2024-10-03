@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_log_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape:stripped_birch_log_stairs"
-    }
+    "extshape:stripped_birch_log_stairs"
   ],
   "result": {
     "count": 1,

@@ -7,7 +7,7 @@ import net.minecraft.block.Oxidizable;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -46,15 +46,15 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
   }
 
   @Override
-  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe() {
-    return simpleStoneCuttingRecipe(1);
+  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerator) {
+    return simpleStoneCuttingRecipe(1, recipeGenerator);
   }
 
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
     // recipeCategory 一定量 building_blocks，所以没有问题
-    return RecipeProvider.createStairsRecipe(this, Ingredient.ofItems(baseBlock))
-        .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock))
+    return recipeGenerator.createStairsRecipe(this, Ingredient.ofItems(baseBlock))
+        .criterion(RecipeGenerator.hasItem(baseBlock), recipeGenerator.conditionsFromItem(baseBlock))
         .group(getRecipeGroup());
   }
 

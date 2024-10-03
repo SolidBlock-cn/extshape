@@ -23,7 +23,8 @@ public final class BlockCollections {
       ACACIA_LOG,
       CHERRY_LOG,
       DARK_OAK_LOG,
-      MANGROVE_LOG
+      MANGROVE_LOG,
+      PALE_OAK_LOG
   );
   public static final ImmutableList<Block> STRIPPED_LOGS = ImmutableList.of(
       STRIPPED_OAK_LOG,
@@ -33,7 +34,8 @@ public final class BlockCollections {
       STRIPPED_ACACIA_LOG,
       STRIPPED_CHERRY_LOG,
       STRIPPED_DARK_OAK_LOG,
-      STRIPPED_MANGROVE_LOG
+      STRIPPED_MANGROVE_LOG,
+      STRIPPED_PALE_OAK_LOG
   );
   public static final ImmutableList<Block> WOODS = ImmutableList.of(
       OAK_WOOD,
@@ -43,7 +45,8 @@ public final class BlockCollections {
       ACACIA_WOOD,
       CHERRY_WOOD,
       DARK_OAK_WOOD,
-      MANGROVE_WOOD
+      MANGROVE_WOOD,
+      PALE_OAK_WOOD
   );
   public static final ImmutableList<Block> STRIPPED_WOODS = ImmutableList.of(
       STRIPPED_OAK_WOOD,
@@ -53,7 +56,8 @@ public final class BlockCollections {
       STRIPPED_ACACIA_WOOD,
       STRIPPED_CHERRY_WOOD,
       STRIPPED_DARK_OAK_WOOD,
-      STRIPPED_MANGROVE_WOOD
+      STRIPPED_MANGROVE_WOOD,
+      STRIPPED_PALE_OAK_WOOD
   );
   public static final ImmutableList<Block> STEMS = ImmutableList.of(
       WARPED_STEM,
@@ -83,7 +87,8 @@ public final class BlockCollections {
       BAMBOO_PLANKS,
       BAMBOO_MOSAIC,
       CRIMSON_PLANKS,
-      WARPED_PLANKS
+      WARPED_PLANKS,
+      PALE_OAK_PLANKS
   );
   public static final @Unmodifiable ImmutableList<Block> STONE_VARIANTS = ImmutableList.of(
       GRANITE,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape:packed_mud_stairs"
-    }
+    "extshape:packed_mud_stairs"
   ],
   "result": {
     "count": 1,

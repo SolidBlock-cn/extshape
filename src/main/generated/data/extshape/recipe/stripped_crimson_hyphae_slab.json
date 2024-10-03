@@ -3,9 +3,7 @@
   "category": "building",
   "group": "stripped_wood_slab",
   "key": {
-    "#": {
-      "item": "minecraft:stripped_crimson_hyphae"
-    }
+    "#": "minecraft:stripped_crimson_hyphae"
   },
   "pattern": [
     "###"

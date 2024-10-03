@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "minecraft:weathered_copper"
-    }
+    "minecraft:weathered_copper"
   ],
   "result": {
     "count": 1,

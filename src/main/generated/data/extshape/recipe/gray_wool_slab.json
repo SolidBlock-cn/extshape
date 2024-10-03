@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wool_slab",
   "key": {
-    "#": {
-      "item": "minecraft:gray_wool"
-    }
+    "#": "minecraft:gray_wool"
   },
   "pattern": [
     "###"

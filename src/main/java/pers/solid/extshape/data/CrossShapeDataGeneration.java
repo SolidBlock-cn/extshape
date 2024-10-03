@@ -9,6 +9,8 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -31,15 +33,17 @@ public class CrossShapeDataGeneration {
    */
   public final @NotNull Block baseBlock;
   public final @Nullable String defaultNamespace;
+  private final RecipeGenerator recipeGenerator;
   public final @NotNull RecipeExporter exporter;
   /**
    * 是否启用同种形状之间的方块切石功能，例如将非切制的楼梯切成已切制的横条。如果未启用，则只能将非切制的楼梯切成非切制的横条，但是基础方块仍不在此限。将此设置为 {@code false} 是为了与原版的行为相匹配。
    */
   public final boolean enableCuttingShape = false;
 
-  public CrossShapeDataGeneration(@NotNull Block baseBlock, @Nullable String defaultNamespace, @NotNull RecipeExporter exporter) {
+  public CrossShapeDataGeneration(@NotNull Block baseBlock, @Nullable String defaultNamespace, @NotNull RecipeGenerator recipeGenerator, @NotNull RecipeExporter exporter) {
     this.baseBlock = baseBlock;
     this.defaultNamespace = defaultNamespace;
+    this.recipeGenerator = recipeGenerator;
     this.exporter = exporter;
   }
 
@@ -78,10 +82,10 @@ public class CrossShapeDataGeneration {
 
   protected void writeBlockRotationRecipe(final @NotNull Block from, final @NotNull Block to, @Nullable String suffix, String criterionName) {
     final Identifier recipeId = recipeIdOf(to, suffix);
-    final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(getRecipeCategory(), to).input(Ingredient.ofItems(from));
+    final ShapelessRecipeJsonBuilder recipe = recipeGenerator.createShapeless(getRecipeCategory(), to).input(Ingredient.ofItems(from));
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(to);
-    recipe.group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_rotation").criterion(criterionName, RecipeProvider.conditionsFromItem(from));
-    recipe.offerTo(exporter, recipeId);
+    recipe.group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_rotation").criterion(criterionName, recipeGenerator.conditionsFromItem(from));
+    recipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, recipeId));
   }
 
   public void cutStairsToQuarterPiece(final @NotNull Block stairs, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
@@ -91,12 +95,12 @@ public class CrossShapeDataGeneration {
   public void craftSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(quarterPiece, suffix == null ? "_from_slab" : suffix);
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(quarterPiece);
-    final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), quarterPiece, 6)
+    final ShapedRecipeJsonBuilder recipe = recipeGenerator.createShaped(getRecipeCategory(), quarterPiece, 6)
         .pattern("###")
         .input('#', slab)
         .group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_slab")
-        .criterion("has_slab", RecipeProvider.conditionsFromItem(slab));
-    recipe.offerTo(exporter, recipeId);
+        .criterion("has_slab", recipeGenerator.conditionsFromItem(slab));
+    recipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, recipeId));
   }
 
   public void cutSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
@@ -106,12 +110,12 @@ public class CrossShapeDataGeneration {
   public void craftVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(quarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(quarterPiece);
-    final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), quarterPiece, 6)
+    final ShapedRecipeJsonBuilder recipe = recipeGenerator.createShaped(getRecipeCategory(), quarterPiece, 6)
         .pattern("###")
         .input('#', verticalSlab)
         .group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_vertical_slab")
-        .criterion("has_vertical_slab", RecipeProvider.conditionsFromItem(verticalSlab));
-    recipe.offerTo(exporter, recipeId);
+        .criterion("has_vertical_slab", recipeGenerator.conditionsFromItem(verticalSlab));
+    recipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, recipeId));
   }
 
   public void cutVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
@@ -121,12 +125,12 @@ public class CrossShapeDataGeneration {
   public void craftVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(verticalQuarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(verticalQuarterPiece);
-    final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), verticalQuarterPiece, 6)
+    final ShapedRecipeJsonBuilder recipe = recipeGenerator.createShaped(getRecipeCategory(), verticalQuarterPiece, 6)
         .pattern("#").pattern("#").pattern("#")
         .input('#', verticalSlab)
         .group(StringUtils.isEmpty(recipeGroup) ? recipeGroup : recipeGroup + "_from_vertical_slab")
-        .criterion("has_vertical_slab", RecipeProvider.conditionsFromItem(verticalSlab));
-    recipe.offerTo(exporter, recipeId);
+        .criterion("has_vertical_slab", recipeGenerator.conditionsFromItem(verticalSlab));
+    recipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, recipeId));
   }
 
   public void cutVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix, int scale) {
@@ -148,8 +152,8 @@ public class CrossShapeDataGeneration {
     final Identifier recipeId = recipeIdOf(result, suffix);
     final StonecuttingRecipeJsonBuilder recipe = StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(ingredient), getRecipeCategory(), result, count)
         .group(RecipeGroupRegistry.getRecipeGroup(result))
-        .criterion(criterionName, RecipeProvider.conditionsFromItem(ingredient));
-    recipe.offerTo(exporter, recipeId);
+        .criterion(criterionName, recipeGenerator.conditionsFromItem(ingredient));
+    recipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, recipeId));
   }
 
   public void generateCrossShapeData() {
@@ -189,7 +193,7 @@ public class CrossShapeDataGeneration {
         final String path = Registries.BLOCK.getId(uncutBaseBlock).getPath();
         final Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
         if (!(output instanceof ExtShapeBlockInterface) || !((ExtShapeBlockInterface) output).shouldWriteStonecuttingRecipe()) continue;
-        StonecuttingRecipeJsonBuilder recipe = ((ExtShapeBlockInterface) output).getStonecuttingRecipe();
+        StonecuttingRecipeJsonBuilder recipe = ((ExtShapeBlockInterface) output).getStonecuttingRecipe(recipeGenerator);
         if (recipe != null) {
           final Identifier secondaryId = CraftingRecipeJsonBuilder.getItemId(output).withSuffixedPath("_from_" + path + "_stonecutting");
           StonecuttingRecipeJsonBuilderAccessor accessor = (StonecuttingRecipeJsonBuilderAccessor) recipe;
@@ -198,8 +202,8 @@ public class CrossShapeDataGeneration {
               accessor.getCategory(),
               accessor.getOutput(),
               accessor.getCount() * uncutBaseBlockInfo.rightInt()
-          ).criterion("has_" + path, RecipeProvider.conditionsFromItem(uncutBaseBlock));
-          secondaryRecipe.offerTo(exporter, secondaryId);
+          ).criterion("has_" + path, recipeGenerator.conditionsFromItem(uncutBaseBlock));
+          secondaryRecipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, secondaryId));
         }
       }
     }

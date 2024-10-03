@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "concrete_wall",
   "key": {
-    "#": {
-      "item": "minecraft:light_blue_concrete"
-    }
+    "#": "minecraft:light_blue_concrete"
   },
   "pattern": [
     "###",
