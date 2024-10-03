@@ -2,6 +2,8 @@
 
 本文档有[中文版](README.md)。
 
+> Since 3.0.0, [Better Runtime Resource Pack](https://github.com/SolidBlock-cn/BRRP/) mod is **no longer required**.
+
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [Block List](BlockList.md).
 
 At present this mod supports Minecraft Java Edition 1.21.1-1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
@@ -118,8 +120,8 @@ The command `/extshape:check-conflict` can be used to test conflicts in crafting
 The syntax the command supports:
 
 - `/extshape:conflict`: Test all conflicts between crafting recipes.
-- `/extshape:conflict <命名空间>`: Test conflicts between crafting recipes of the specified namespace and the vanilla namespace.
-- `/extshape:conflict <命名空间> ...`(multiple namespaces are separated by space): Test conflicts of crafting recipes of the specified multiple namespaces.
+- `/extshape:conflict <namespace>`: Test conflicts between crafting recipes of the specified namespace and the vanilla namespace.
+- `/extshape:conflict <namespace> ...`(multiple namespaces are separated by space): Test conflicts of crafting recipes of the specified multiple namespaces.
 
 ### Creative Inventory
 
