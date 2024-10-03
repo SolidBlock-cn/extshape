@@ -55,7 +55,6 @@
   "resourcePack.extshape.recipe_tweak.name": "Recipe Tweak (Extended Block Shapes)",
   "resourcePack.extshape.recipe_tweak.description": "Tweaks some crafting recipes of Extended Block Shapes mod to avoid conflict with vanilla crafting recipes. If you installed mods that solve conflicts between crafting recipes, you can disable this data pack.",
 
-  "tag.block.extshape.pickaxe_unmineable": "Pickaxe unmineable",
   "tag.block.extshape.snow": "Snow",
 
   "tag.block.extshape.woolen_blocks": "Woolen Blocks",
