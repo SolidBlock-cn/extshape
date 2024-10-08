@@ -102,10 +102,9 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         CopperManager.WAXED_COPPER_BLOCKS,
         CopperManager.WAXED_CUT_COPPER_BLOCKS,
         Arrays.asList(
+            Blocks.COBBLESTONE,
             Blocks.COBBLED_DEEPSLATE,
             Blocks.LAPIS_BLOCK,
-            Blocks.SMOOTH_SANDSTONE,
-            Blocks.SMOOTH_RED_SANDSTONE,
             Blocks.GOLD_BLOCK,
             Blocks.IRON_BLOCK,
             Blocks.BRICKS,
