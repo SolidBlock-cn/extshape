@@ -1,5 +1,10 @@
 # Update log
 
+### 3.0.1
+
+- Fixed the issue that cobblestone blocks cannot be mined with pickaxe.
+- Fixed the issue of duplicate smooth sandstone blocks in block tag `mineable/pickaxe`.
+
 ### 3.0.0
 
 - The mod no longer depends on Better Runtime Resource Pack (BRRP) mod.
