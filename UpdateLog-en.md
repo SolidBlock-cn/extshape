@@ -1,5 +1,9 @@
 # Update log
 
+### 3.0.2
+
+- Fixed the issue that slab loot tables are incorrect. (#65)
+
 ### 3.0.1
 
 - Fixed the issue that cobblestone blocks cannot be mined with pickaxe.

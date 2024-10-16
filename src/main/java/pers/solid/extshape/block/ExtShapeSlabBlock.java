@@ -6,12 +6,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootTable;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
@@ -65,6 +67,11 @@ public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlock
   @Override
   public BlockShape getBlockShape() {
     return BlockShape.SLAB;
+  }
+
+  @Override
+  public LootTable.Builder getLootTable(BlockLootTableGenerator blockLootTableGenerator) {
+    return blockLootTableGenerator.slabDrops(this);
   }
 
   @Override
