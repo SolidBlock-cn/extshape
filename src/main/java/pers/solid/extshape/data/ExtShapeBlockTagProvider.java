@@ -91,8 +91,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
-    final Iterable<Block> stoneMineableBaseBlocks;
-    addForShapes(BlockTags.PICKAXE_MINEABLE, stoneMineableBaseBlocks = Iterables.concat(
+    addForShapes(BlockTags.PICKAXE_MINEABLE, Iterables.concat(
         BlockCollections.STONES,
         BlockCollections.UNCOLORED_SANDSTONES,
         BlockCollections.RED_SANDSTONES,
@@ -163,6 +162,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     for (TagKey<Block> tag : Iterables.concat(ExtShapeTags.SHAPE_TO_CONCRETE_TAG.values(), ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.values())) {
       getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).addTag(tag);
     }
+    getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
 
     getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
         .addTag(ExtShapeTags.WOODEN_BLOCKS);
