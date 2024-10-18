@@ -779,6 +779,7 @@
     "#extshape:terracotta_fence_gates",
     "#extshape:terracotta_walls",
     "#extshape:terracotta_buttons",
-    "#extshape:terracotta_pressure_plates"
+    "#extshape:terracotta_pressure_plates",
+    "#extshape:glazed_terracotta_slabs"
   ]
 }
