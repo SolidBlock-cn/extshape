@@ -1,5 +1,9 @@
 # Update log
 
+### 3.0.3
+
+- Fixed the issue that glazed terracotta slabs cannot be harvested with pickaxes.
+
 ### 3.0.2
 
 - Fixed the issue that slab loot tables are incorrect. (#65)
