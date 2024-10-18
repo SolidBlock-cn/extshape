@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "extshape",
-  "version": "${version}",
+  "version": "3.0.3",
   "icon": "assets/extshape/icon-fabric.png",
   "name": "Extended Block Shapes",
   "description": "More blocks in more shapes!",
