@@ -24,10 +24,10 @@
 
   "options.extshape.title": "Configuration of Extended Block Shapes Mod",
   "options.extshape.addToVanillaGroups": "Add to vanilla groups",
-  "options.extshape.addToVanillaGroups.tooltip": "If enabled, blocks of this mod will directly display in Minecraft's vanilla item groups, such as %s, %s and %s. The blocks are appended after their base blocks so you can quickly find blocks of a same base block in different shapes. By default, all shapes will be added in the vanilla item group. You may specify which shapes to be added in vanilla groups in the text box below.",
+  "options.extshape.addToVanillaGroups.tooltip": "If enabled, blocks of this mod will directly display in Minecraft's vanilla item groups, such as %s, %s and %s. The blocks are appended after their base blocks so you can quickly find blocks of the same base block in different shapes. By default, all shapes will be added in the vanilla item group. You may specify which shapes to be added in vanilla groups in the text box below.",
   "options.extshape.addToVanillaGroups.warning_for_1.20": "In this version, this option does not support turning off. Please find the items in vanilla item groups.",
   "options.extshape.showSpecificGroups": "Show specific groups",
-  "options.extshape.showSpecificGroups.tooltip": "Add four specific item groups to display blocks that have different shapes (including vanilla and mod) in a fancy order. They are sorted by their base blocks, and blocks based on a same block are displayed together.",
+  "options.extshape.showSpecificGroups.tooltip": "Add four specific item groups to display blocks that have different shapes (including vanilla and mod) in a fancy order. They are sorted by their base blocks, and blocks based on the same block are displayed together.",
   "options.extshape.showSpecificGroups.warning_for_1.20": "In this version, configurable specific groups are not supported. Please find the items in vanilla item groups.",
   "options.extshape.shapesToAddToVanilla": "Shapes to add to vanilla",
   "options.extshape.shapesToAddToVanilla.description": "Add which shapes to vanilla item groups? (Separated with space.)",
@@ -44,16 +44,16 @@
   "message.extshape.recipe_conflict.detected": "Recipe conflict detected: %s",
   "message.extshape.recipe_conflict.unknown": "Unknown situation of recipe detected: %s",
   "message.extshape.recipe_conflict.exception": "Exceptions were found when detecting recipe conflict",
-  "message.extshape.recipe_conflict.finish.none": "Finished checking. In total no recipe conflicts have been found.",
-  "message.extshape.recipe_conflict.finish.single": "Finished checking. In total %s recipe conflict has been found.",
-  "message.extshape.recipe_conflict.finish.plural": "Finished checking. In total %s recipe conflicts have been found.",
+  "message.extshape.recipe_conflict.finish.none": "Finished checking. In total, no recipe conflicts have been found.",
+  "message.extshape.recipe_conflict.finish.single": "Finished checking. In total, %s recipe conflict has been found.",
+  "message.extshape.recipe_conflict.finish.plural": "Finished checking. In total, %s recipe conflicts have been found.",
 
   "modmenu.nameTranslation.extshape": "Extended Block Shapes",
 
   "options.extshape.addToVanillaGroups.blockus": "Please note: to find the extended shapes of blocks in Blockus mod in the creative inventory, you have to enable \"Add To Vanilla Groups\". The blocks only display in item groups of Blockus. There are no specific groups for extended shapes of blocks in Blockus mod.",
 
   "resourcePack.extshape.recipe_tweak.name": "Recipe Tweak (Extended Block Shapes)",
-  "resourcePack.extshape.recipe_tweak.description": "Tweaks some crafting recipes of Extended Block Shapes mod to avoid conflict with vanilla crafting recipes. If you installed mods that solve conflicts between crafting recipes, you can disable this data pack.",
+  "resourcePack.extshape.recipe_tweak.description": "Tweaks some crafting recipes of Extended Block Shapes mod to avoid conflict with vanilla crafting recipes. If you have installed mods that solve conflicts between crafting recipes, you can disable this data pack.",
 
   "tag.block.extshape.snow": "Snow",
 
