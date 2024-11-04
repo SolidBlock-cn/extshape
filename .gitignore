@@ -32,7 +32,3 @@ bin/
 
 run/
 /remappedSrc/
-
-# Data Generator
-
-.cache
