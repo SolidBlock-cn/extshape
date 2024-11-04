@@ -1,5 +1,9 @@
 # Update log
 
+### 3.0.4
+
+- Fixed the issue that blocks of stone bricks, mossy stone bricks and chiseled stone bricks cannot be harvested with pickaxes.
+
 ### 3.0.3
 
 - Fixed the issue that glazed terracotta slabs cannot be harvested with pickaxes.
@@ -62,7 +66,7 @@
 - Added sounds added by this mod into the registry.
 - Added colored blocks to corresponding tags in Fabric Conventional Tags in Fabric API.
 - Since 1.21, removed tuff stairs, tuff slab and tuff wall, as those blocks are formally added in Minecraft. If you open worlds created in former versions in 1.21, the mod will utilize DataFixer to convert in-mod tuff stairs (`extshape:tuff_stairs`), tuff slab (`extshape:tuff_slab`) and tuff wall (`extshape:tuff_wall`) into vanilla ones (`minecraft:tuff_stairs`, `minecraft:tuff_slab` and`tuff_wall`). Items also have the same conversion.
-- Fixed the issue that texture of vertical slabs rotate along with blocks.
+- Fixed the issue that the texture of vertical slabs rotates along with blocks.
 
 ### 2.1.3
 
@@ -95,9 +99,9 @@
 - Adjusted the crafting ingredient of fences and fence gates of some blocks.
 - Adjusted sounds of some fence gates, pressure plates and button blocks, as well as the trigger behavior.
 - Adjusted the crafting recipes to crafting with 3 wool carpets or moss carpets.
-- Added fences, fence gates and pressure plates for patterned wool and gingham wool (but not buttons). A pressure plate is crafting from 3 carpets.
+- Added fences, fence gates and pressure plates for patterned wool and gingham wool (but not buttons). A pressure plate is crafted from 3 carpets.
 - No longer allows charring planks and wooden mosaic in various shapes.
-- Made blocks of sugar blocks invisible in creative inventory and removed crafting recipe, because sugar block is a falling block, however the variants in various shapes do not implement this feature.
+- Made blocks of sugar blocks invisible in creative inventory and removed crafting recipe, because sugar block is a falling block, however, the variants in various shapes do not implement this feature.
 - Added button and pressure plate for stone bricks, mossy stone bricks, bricks block, nether wart and warped wart.
 - Fixed the issue that the texture of blocks of blackstone on top and bottom side is incorrect.
 - Adjusted the second crafting ingredient of fences and fence gates (including those whose base block is from Blockus mod).
@@ -109,11 +113,11 @@
 
 ### 2.0.8
 
-- Again, fixed the issue that when some mods are installed crashes happen because of inventories.
+- Again, fixed the issue that when some mods are installed, crashes happen because of inventories.
 
 ### 2.0.7
 
-- Fixed the issue that when some mods are installed crashes happen because of inventories.
+- Fixed the issue that when some mods are installed, crashes happen because of inventories.
 
 ### 2.0.5
 
@@ -122,8 +126,8 @@
 ### 2.0.4
 
 - Modified the piston behavior of blocks to match base blocks. Pressure plates and buttons of unmovable blocks are unmovable, and other pressure plates and buttons will be destroyed by piston.
-- Modified the note block instrument to match vanilla. The note block instrument of blocks (except button) is same to the base block, but the note block instrument is always harp (the default instrument).
-- To match the vanilla behavior, buttons will not display colors in map.
+- Modified the note block instrument to match vanilla. The note block instrument of blocks (except button) is the same as the base block, but the note block instrument is always harp (the default instrument).
+- To match the vanilla behavior, buttons will not display colors in a map.
 - For Blockus mod: fixed the issue of missing stairs, slabs and walls for concrete blocks.
 
 ### 2.0.3
@@ -146,7 +150,7 @@
 
 ### 2.0.0
 
-- Adapted to new version of Better Runtime Resource Packs.
+- Adapted to the new version of Better Runtime Resource Packs.
 - Fixed the issue that some bedrock blocks occupy the empty loot table.
 - The permission level of `/extshape:check-conflict` has been adjusted to 4.
 - Fixed the issue that Blockus white oaks cannot be stripped with axe.
@@ -221,8 +225,8 @@
 ### 1.5.2
 
 - Optimized the configuration screen of the mod.
-- Chiseled sandstone, chiseled red sandstone, chiseled quartz, cut sandstone, cut red sandstone cannot be used to craft stairs and slab, in order to avoid conflict with vanilla crafting recipe.
-- Wooden walls are no longer allowed to craft, to avoid conflict with vanilla crafting recipe.
+- Chiseled sandstone, chiseled red sandstone, chiseled quartz, cut sandstone, cut red sandstone cannot be used to craft stairs and slabs, in order to avoid conflict with the vanilla crafting recipe.
+- Wooden walls are no longer allowed to craft, to avoid conflict with the vanilla crafting recipe.
 - Fixed the recipe conflict of fence and fence gate of snow block and clay block to walls.
 - Added `/extshape:check-conflict` command to test conflict between recipes.
 - (Only 1.19) Added `dampens_vibrations` tag, with the same content as `occludes_vibration_signals`.
@@ -240,11 +244,11 @@
 
 ### 1.5.0
 
-The update does not seem obvious, but code is changed from head to toe, actually. Mod is tested repetitively to ensure the stability, and published only rounds of debugs and modifications. This version is developed at the same time with BRRP, so the developing process can find out BRRP-related issues as well.
+The update does not seem obvious, but code is changed from head to toe, actually. Mod is tested repetitively to ensure stability, and published only rounds of debugs and modifications. This version is developed at the same time with BRRP, so the developing process can find out BRRP-related issues as well.
 
 - Since this version, the mod relies on BRRP (Better Runtime Resource Pack). As BRRP nests ARRP, it's not required to install ARRP anymore.
 - Optimized code massively, and unnecessary codes are removed.
-- Blocks base on pumpkin, melon, moss, shroomlight, nether wart block, warped wart block can be composted.
+- Blocks based on pumpkin, melon, moss, shroomlight, nether wart block, warped wart block can be composted.
 - Re-added nether wart walls and crimson wart walls, and added walls made from wool and moss.
 - Added more tags:
     - Now more blocks based on gold block and raw gold block are loved by piglins (item tag `#piglin_loved`).
@@ -259,22 +263,22 @@ The update does not seem obvious, but code is changed from head to toe, actually
 - Added blocks in other all shapes for waxed copper blocks of all oxidation level and raw ore blocks.
 - Fixed the conflict in the recipe of moss pressure plate and moss carpet. Like wool blocks, a moss pressure plate is now crafted from a moss carpet.
 - The license is widened to LGPL 3.0 to fix copyright incompatibility with Minecraft.
-- As there is no conflicts in recipes, melon buttons can be crafted with a melon block now.
+- As there are no conflicts in recipes, melon buttons can be crafted with a melon block now.
 - Metal blocks (such as netherite blocks and ancient debris) can be stonecut now.
 - Adjusted arrangement of items in Creative Mode item groups.
 
 ### 1.4.0
 
-- Replaced traditional resource packs and data packs with ARRP (Advanced Runtime Resource Pack). File size of the mod has been largely reduced, but since this version, the mod depends on ARRP to run. Make sure you have ARRP mod installed.
+- Replaced traditional resource packs and data packs with ARRP (Advanced Runtime Resource Pack). The file size of the mod has been largely reduced, but since this version, the mod depends on ARRP to run. Make sure you have ARRP mod installed.
 - Fixed the conflict in recipes of melon buttons and pumpkin buttons. Recipes of the two are removed.
-- Fixed the issue that pressure plates uses the same model whether pressed down.
+- Fixed the issue that pressure plates use the same model whether pressed down.
 - Fixed the issue that water logged in blocks does not flow when there is a block update.
 
 ### 1.3.1
 
 - <span style="color:red">Removed nether wart wall and warped wart wall.</span>
 - Added more blocks, main buttons.
-- Fixed the issue that, in constructor of BlocksBuilder with <code>null</code> parameters, objects are created unexpectedly, which may cause some buttons and pressure plates to crash.
+- Fixed the issue that, in the constructor of BlocksBuilder with <code>null</code> parameters, objects are created unexpectedly, which may cause some buttons and pressure plates to crash.
 - Fixed the potential recipe conflict of block of iron, gold, diamond, emerald and lapis. <b>These blocks still exist, but can no longer be crafted.</b>
 - Slightly adjusted item groups.
 - Fixed the issue that some stone blocks cannot be cut in stone-cutters.
@@ -310,8 +314,8 @@ This update is for version only 1.17 and above.
 
 - Starting backwards compatibility (will release later qwq).
 - Fixed the issue that you cannot craft a smooth stone slab with double stone slabs block in this mod.
-- Fixed the issue that some blocks have no vertical slabs, and that errors are thrown when loading data-packs.
-- Fixed the issue that codes in Mineable class are run. Codes in some other block tags will also be run only in data generation process, instead of in an ordinary game environment.
+- Fixed the issue that some blocks have no vertical slabs, and errors are thrown when loading data-packs.
+- Fixed the issue that codes in Mineable class are run. Codes in some other block tags will also be run only in the data generation process, instead of in an ordinary game environment.
 - Referring to vanilla Minecraft, added some block tags, and added item tags.
 
 ### 1.2.2
@@ -323,8 +327,8 @@ This update is for version only 1.17 and above.
 
 ### 1.2.1
 
-- Fixed the issue that ButtonMixin is only run on client side.
-- Now ExtShapeTag class extends AbstractCollection, instead of merely implements Iterable interface.
+- Fixed the issue that ButtonMixin is only run on the client side.
+- Now ExtShapeTag class extends AbstractCollection, instead of merely implementing Iterable interface.
 - Removed some code not used anymore.
 - Fixed the issue that vertical quarter pieces and vertical stairs are not waterlogged when placed in water. (Note:
   Fence gates, buttons and pressure plates are not water-loggable because of vanilla Minecraft code, which is not modifiable by the mod.)
@@ -334,7 +338,7 @@ This update is for version only 1.17 and above.
 
 - Deleted extra item groups. Vanilla item groups are used instead. Besides, there are 4 other item groups in order to contain blocks (including vanilla) in sort of base blocks.
     - The issue that items are not sorted correctly in recipe groups is also fixed because of this change.
-- BlockMappings use more effective BiMap instead of ordinary Map any longer. Values of BiMap is unique, so it's more effective to get an inverse map.
+- BlockMappings use more effective BiMap instead of ordinary Map any longer. Values in BiMap are unique, so it's more effective to get an inverse map.
 - Added JavaDoc.
 - Referring to vanilla convention, English names of blocks in this mod are capitalised now.
 - Fixed naming error of quarter piece, vertical quarter piece and vertical stairs blocks in English.
@@ -344,7 +348,7 @@ This update is for version only 1.17 and above.
 
 - Added vertical stairs, quarter pieces and vertical quarter pieces. Quarter pieces and vertical quarter pieces can be crafted 1:2 from slabs/vertical slabs in crafting tables, and some of those can be crafted 1:4 from full blocks or 1:2 from slabs/vertical slabs in stone cutters.
 - Removed some blocks.
-- Added variant blocks for clay and end stone etc.
+- Added variant blocks for clay and end stone, etc.
 - Removed pressure plates and buttons for some blocks. Therefore, some conflicts between recipes have been fixed meanwhile.
 - Adjusted display form of vertical slabs in inventories.
 - Added language support for Traditional Chinese Taiwan, Traditional Chinese Hong Kong and Classical Chinese Language.
@@ -370,6 +374,6 @@ This update is for version only 1.17 and above.
 Updated on Apr. 5th 2021
 
 - Added stairs, slabs, fences, fence gates, pressure plates for multiple mods.
-- In this version only simplified Chinese (zh_cn) and English (en) are supported.
+- In this version, only simplified Chinese (zh_cn) and English (en) are supported.
 - Before this release, a data generation system was used similar to vanilla Minecraft, which has been deprecated, replaced with a new data generation system. But the deprecated one still remains in the code.
 - The issue exists in this version: In recipe books, recipes added by this mod are not correctly classified.
