@@ -293,6 +293,20 @@ public final class ExtShapeBlockTypes {
       .soundGroup(BlockSoundGroup.COPPER)
       .build(ExtShape.id("copper"), BlockSetType.COPPER);
 
+  public static final BlockSetType RESIN_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
+      .soundGroup(BlockSoundGroup.RESIN)
+      .register(ExtShape.id("resin"));
+  public static final WoodType RESIN_BLOCK_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
+      .soundGroup(BlockSoundGroup.RESIN)
+      .register(ExtShape.id("resin"), RESIN_BLOCK_SET_TYPE);
+
+  public static final BlockSetType RESIN_BRICKS_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
+      .soundGroup(BlockSoundGroup.RESIN_BRICKS)
+      .register(ExtShape.id("resin_bricks"));
+  public static final WoodType RESIN_BRICKS_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
+      .soundGroup(BlockSoundGroup.RESIN_BRICKS)
+      .register(ExtShape.id("resin_bricks"), RESIN_BLOCK_SET_TYPE);
+
   private ExtShapeBlockTypes() {
   }
 }

@@ -26,4 +26,6 @@ public record FenceSettings(Item secondIngredient, WoodType woodType) {
   public static final FenceSettings DEEPSLATE = new FenceSettings(Items.FLINT, ExtShapeBlockTypes.DEEPSLATE_WOOD_TYPE);
   public static final FenceSettings DEEPSLATE_BRICKS = new FenceSettings(Items.FLINT, ExtShapeBlockTypes.DEEPSLATE_BRICKS_WOOD_TYPE);
   public static final FenceSettings NETHERRACK = new FenceSettings(Items.NETHER_BRICK, ExtShapeBlockTypes.NETHERRACK_WOOD_TYPE);
+  public static final FenceSettings RESIN_BLOCK = new FenceSettings(Items.RESIN_CLUMP, ExtShapeBlockTypes.RESIN_BLOCK_WOOD_TYPE);
+  public static final FenceSettings RESIN_BRICKS = new FenceSettings(Items.RESIN_CLUMP, ExtShapeBlockTypes.RESIN_BRICKS_WOOD_TYPE);
 }

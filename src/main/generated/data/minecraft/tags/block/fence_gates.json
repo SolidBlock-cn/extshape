@@ -39,6 +39,8 @@
     "extshape:packed_mud_fence_gate",
     "extshape:mud_brick_fence_gate",
     "extshape:melon_fence_gate",
+    "extshape:resin_fence_gate",
+    "extshape:resin_brick_fence_gate",
     "extshape:nether_brick_fence_gate",
     "extshape:end_stone_fence_gate",
     "extshape:end_stone_brick_fence_gate",

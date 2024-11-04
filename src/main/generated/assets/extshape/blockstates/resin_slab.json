@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/resin_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/resin_block"
+    },
+    "type=top": {
+      "model": "extshape:block/resin_slab_top"
+    }
+  }
+}

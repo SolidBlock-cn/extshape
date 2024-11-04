@@ -114,6 +114,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
             Blocks.CHISELED_STONE_BRICKS,
             Blocks.PACKED_MUD,
             Blocks.MUD_BRICKS,
+            Blocks.RESIN_BRICKS,
+            Blocks.CHISELED_RESIN_BRICKS,
             Blocks.NETHER_BRICKS,
             Blocks.END_STONE,
             Blocks.END_STONE_BRICKS,

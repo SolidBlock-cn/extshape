@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "extshape:resin_vertical_quarter_piece"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:resin_quarter_piece"
+  }
+}

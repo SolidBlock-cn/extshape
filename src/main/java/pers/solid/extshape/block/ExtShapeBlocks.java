@@ -425,6 +425,24 @@ public final class ExtShapeBlocks {
         .compostingChance(0.65f)
         .build();
 
+    // 树脂的各种方块
+    FACTORY.createAllShapes(RESIN_BLOCK)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.RESIN_BLOCK)
+        .setActivationSettings(ActivationSettings.STONE)
+        .build();
+    FACTORY.createAllShapes(RESIN_BRICKS)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.RESIN_BRICKS)
+        .setActivationSettings(ActivationSettings.STONE)
+        .withoutRedstone()
+        .build();
+    FACTORY.createConstructionOnly(CHISELED_RESIN_BRICKS)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.RESIN_BRICKS)
+        .setActivationSettings(ActivationSettings.STONE)
+        .build();
+
     // 下界砖块的栅栏门、按钮和压力板。
     FACTORY.createAllShapes(NETHER_BRICKS)
         .markStoneCuttable()

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "minecraft:resin_block",
+    "#c:clumps/resin"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape:resin_button"
+  }
+}

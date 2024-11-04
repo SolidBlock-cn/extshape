@@ -117,7 +117,8 @@ public class ExtShapeTweakRecipeProvider extends RecipeGenerator {
         Pair.of(Blocks.RAW_COPPER_BLOCK, Ingredient.ofItems(Items.RAW_COPPER)),
         Pair.of(Blocks.RAW_IRON_BLOCK, Ingredient.ofItems(Items.RAW_IRON)),
         Pair.of(Blocks.BAMBOO_BLOCK, Ingredient.ofItems(Items.REDSTONE)),
-        Pair.of(Blocks.STRIPPED_BAMBOO_BLOCK, Ingredient.ofItems(Items.REDSTONE))
+        Pair.of(Blocks.STRIPPED_BAMBOO_BLOCK, Ingredient.ofItems(Items.REDSTONE)),
+        Pair.of(Blocks.RESIN_BLOCK, ingredientFromTag(ConventionalItemTags.RESIN_CLUMPS))
     );
     baseAndResource = Iterables.concat(baseAndResource, Iterables.transform(Iterables.concat(CopperManager.COPPER_BLOCKS,
         CopperManager.WAXED_COPPER_BLOCKS,
