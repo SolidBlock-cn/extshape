@@ -3,6 +3,7 @@
 ### 3.0.4
 
 - Fixed the issue that blocks of stone bricks, mossy stone bricks and chiseled stone bricks cannot be harvested with pickaxes.
+- Slightly changed the grammar in the text.
 
 ### 3.0.3
 
