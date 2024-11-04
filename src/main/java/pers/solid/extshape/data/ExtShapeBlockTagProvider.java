@@ -3,6 +3,7 @@ package pers.solid.extshape.data;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -100,9 +101,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         CopperManager.CUT_COPPER_BLOCKS,
         CopperManager.WAXED_COPPER_BLOCKS,
         CopperManager.WAXED_CUT_COPPER_BLOCKS,
-        Arrays.asList(
+        ImmutableSet.of(
             Blocks.COBBLESTONE,
-            Blocks.COBBLED_DEEPSLATE,
             Blocks.LAPIS_BLOCK,
             Blocks.GOLD_BLOCK,
             Blocks.IRON_BLOCK,
@@ -112,6 +112,9 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
             Blocks.DIAMOND_BLOCK,
             Blocks.AMETHYST_BLOCK,
             Blocks.NETHERRACK,
+            Blocks.STONE_BRICKS,
+            Blocks.MOSSY_STONE_BRICKS,
+            Blocks.CHISELED_STONE_BRICKS,
             Blocks.PACKED_MUD,
             Blocks.MUD_BRICKS,
             Blocks.NETHER_BRICKS,
