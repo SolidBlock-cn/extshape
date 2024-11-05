@@ -4,6 +4,14 @@
 
 - Fixed the issue that blocks of stone bricks, mossy stone bricks and chiseled stone bricks cannot be harvested with pickaxes.
 - Slightly changed the grammar in the text.
+- Since the snapshot of 1.21.4, blocks in the mod will be made the following changes:
+  - Delete various shapes of logs, stripped logs, stems, stripped stems.
+  - Delete various shapes of chiseled stone bricks, chiseled polished blackstone, chiseled nether bricks, chiseled tuff, chiseled tuff bricks, chiseled deepslate.
+  - Delete buttons, fences, fence gates of quartz block, chiseled quartz block, chiseled quartz bricks; deleted pressure plates of quartz block.
+  - Delete all extended shapes of chiseled sandstone and chiseled red sandstone.
+  - Deleted walls of sandstone, cut sandstone, red santstone, cut red sandstone. Only walls of smooth stone and smooth sandstone retain.
+  - Deleted all extended shapes of polished basalt.
+  - The changes above do not affect versions before 1.21.3. When upgrading worlds from versions before 1.21.3 to 1.21.4, the blocks above will be replaced with existing blocks via DataFixer.
 
 ### 3.0.3
 
