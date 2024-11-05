@@ -437,15 +437,25 @@ public final class ExtShapeBlocks {
         .build();
 
     // 石英、石英砖、平滑石英块、錾制石英块均有按钮和压力板。
-    for (final Block block : new Block[]{QUARTZ_BLOCK, QUARTZ_BRICKS, SMOOTH_QUARTZ}) {
-      FACTORY.createAllShapes(block)
-          .markStoneCuttable()
-          .setFenceSettings(FenceSettings.QUARTZ)
-          .setActivationSettings(ActivationSettings.QUARTZ)
-          .build();
-    }
+    FACTORY.createConstructionOnly(QUARTZ_BLOCK)
+        .with(BlockShape.WALL)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.QUARTZ)
+        .setActivationSettings(ActivationSettings.QUARTZ)
+        .build();
     FACTORY.createConstructionOnly(CHISELED_QUARTZ_BLOCK)
         .with(BlockShape.WALL, BlockShape.PRESSURE_PLATE)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.QUARTZ)
+        .setActivationSettings(ActivationSettings.QUARTZ)
+        .build();
+    FACTORY.createConstructionOnly(QUARTZ_BRICKS)
+        .with(BlockShape.WALL, BlockShape.PRESSURE_PLATE)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.QUARTZ)
+        .setActivationSettings(ActivationSettings.QUARTZ)
+        .build();
+    FACTORY.createAllShapes(SMOOTH_QUARTZ)
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.QUARTZ)
         .setActivationSettings(ActivationSettings.QUARTZ)

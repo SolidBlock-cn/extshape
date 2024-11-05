@@ -73,9 +73,16 @@ public abstract class SchemasMixin {
       idMapBuilder.put("extshape:chiseled_red_sandstone_" + shape.asString(), "extshape:red_sandstone_" + shape.asString());
     }
 
-    idMapBuilder.put("extshape:chiseled_quartz_button", "extshape:quartz_button");
-    idMapBuilder.put("extshape:chiseled_quartz_fence", "extshape:quartz_fence");
-    idMapBuilder.put("extshape:chiseled_quartz_fence_gate", "extshape:quartz_fence_gate");
+    idMapBuilder.put("extshape:chiseled_quartz_button", "extshape:smooth_quartz_button");
+    idMapBuilder.put("extshape:chiseled_quartz_fence", "extshape:smooth_quartz_fence");
+    idMapBuilder.put("extshape:chiseled_quartz_fence_gate", "extshape:smooth_quartz_fence_gate");
+    idMapBuilder.put("extshape:quartz_brick_button", "extshape:smooth_quartz_button");
+    idMapBuilder.put("extshape:quartz_brick_fence", "extshape:smooth_quartz_fence");
+    idMapBuilder.put("extshape:quartz_brick_fence_gate", "extshape:smooth_quartz_fence_gate");
+    idMapBuilder.put("extshape:quartz_button", "extshape:smooth_quartz_button");
+    idMapBuilder.put("extshape:quartz_fence", "extshape:smooth_quartz_fence");
+    idMapBuilder.put("extshape:quartz_fence_gate", "extshape:smooth_quartz_fence_gate");
+    idMapBuilder.put("extshape:quartz_pressure_plate", "extshape:smooth_quartz_pressure_plate");
 
     for (BlockShape shape : constructionShapes) {
       final boolean vanilla = shape == BlockShape.SLAB || shape == BlockShape.STAIRS;
