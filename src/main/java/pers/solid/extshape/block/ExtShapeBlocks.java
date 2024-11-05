@@ -122,14 +122,7 @@ public final class ExtShapeBlocks {
     // 下面两个标签均带有 axe_mineable
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> woodFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
 
-    // 原木和竹子。
-    for (final Block block : BlockCollections.LOGS) {
-      FACTORY.createConstructionOnly(block)
-          .setPillar(block == CHERRY_LOG)
-          .addPostBuildConsumer(woodFlammable)
-          .setRecipeGroup(blockShape -> "log_" + blockShape.asString())
-          .build();
-    }
+    // 竹子。
     FACTORY.createAllShapes(BAMBOO_BLOCK)
         .setFenceSettings(FenceSettings.BAMBOO_BLOCK)
         .setActivationSettings(ActivationSettings.BAMBOO)
@@ -137,14 +130,7 @@ public final class ExtShapeBlocks {
         .addPreBuildConsumer((blockShape4, builder3) -> builder3.blockSettings.mapColor(MapColor.DARK_GREEN))
         .addPostBuildConsumer(woodFlammable)
         .build();
-    // 去皮的原木和竹子。
-    for (final Block block : BlockCollections.STRIPPED_LOGS) {
-      FACTORY.createConstructionOnly(block)
-          .setPillar(block == STRIPPED_CHERRY_LOG)
-          .addPostBuildConsumer(woodFlammable)
-          .setRecipeGroup(blockShape -> "stripped_log_" + blockShape.asString())
-          .build();
-    }
+    // 去皮的竹子。
     FACTORY.createAllShapes(STRIPPED_BAMBOO_BLOCK)
         .setFenceSettings(FenceSettings.BAMBOO_BLOCK)
         .setActivationSettings(ActivationSettings.BAMBOO)
@@ -193,18 +179,6 @@ public final class ExtShapeBlocks {
           .setPillar()
           .addPostBuildConsumer(woodFlammable)
           .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString())
-          .build();
-    }
-    for (final Block block : BlockCollections.STEMS) {
-      FACTORY.createConstructionOnly(block)
-          .setPillar()
-          .setRecipeGroup(blockShape -> "log_" + blockShape.asString())
-          .build();
-    }
-    for (final Block block : BlockCollections.STRIPPED_STEMS) {
-      FACTORY.createConstructionOnly(block)
-          .setPillar()
-          .setRecipeGroup(blockShape -> "stripped_log_" + blockShape.asString())
           .build();
     }
     for (final Block block : BlockCollections.HYPHAES) {
@@ -283,13 +257,11 @@ public final class ExtShapeBlocks {
     for (final Block block : BlockCollections.UNCOLORED_SANDSTONES) {
       FACTORY.createConstructionOnly(block)
           .markStoneCuttable()
-          .with(BlockShape.WALL)
           .build();
     }
     for (final Block block : BlockCollections.RED_SANDSTONES) {
       FACTORY.createConstructionOnly(block)
           .markStoneCuttable()
-          .with(BlockShape.WALL)
           .build();
     }
     for (final Block block : new Block[]{SMOOTH_SANDSTONE, SMOOTH_RED_SANDSTONE}) {
@@ -298,6 +270,7 @@ public final class ExtShapeBlocks {
           .withFences(new FenceSettings(Items.STICK, ExtShapeBlockTypes.STONE_WOOD_TYPE))
           .withPressurePlate(ActivationSettings.STONE)
           .withButton(ActivationSettings.STONE)
+          .with(BlockShape.WALL)
           .build();
     }
 
@@ -398,7 +371,7 @@ public final class ExtShapeBlocks {
         .build();
 
     // 石砖、苔石砖、雕纹石砖。
-    for (final Block block : new Block[]{STONE_BRICKS, MOSSY_STONE_BRICKS, CHISELED_STONE_BRICKS}) {
+    for (final Block block : new Block[]{STONE_BRICKS, MOSSY_STONE_BRICKS}) {
       FACTORY.createAllShapes(block)
           .markStoneCuttable()
           .setFenceSettings(FenceSettings.STONE)
@@ -427,17 +400,10 @@ public final class ExtShapeBlocks {
 
     // 树脂的各种方块
     FACTORY.createAllShapes(RESIN_BLOCK)
-        .markStoneCuttable()
         .setFenceSettings(FenceSettings.RESIN_BLOCK)
         .setActivationSettings(ActivationSettings.STONE)
         .build();
     FACTORY.createAllShapes(RESIN_BRICKS)
-        .markStoneCuttable()
-        .setFenceSettings(FenceSettings.RESIN_BRICKS)
-        .setActivationSettings(ActivationSettings.STONE)
-        .withoutRedstone()
-        .build();
-    FACTORY.createConstructionOnly(CHISELED_RESIN_BRICKS)
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.RESIN_BRICKS)
         .setActivationSettings(ActivationSettings.STONE)
@@ -471,13 +437,19 @@ public final class ExtShapeBlocks {
         .build();
 
     // 石英、石英砖、平滑石英块、錾制石英块均有按钮和压力板。
-    for (final Block block : new Block[]{QUARTZ_BLOCK, CHISELED_QUARTZ_BLOCK, QUARTZ_BRICKS, SMOOTH_QUARTZ}) {
+    for (final Block block : new Block[]{QUARTZ_BLOCK, QUARTZ_BRICKS, SMOOTH_QUARTZ}) {
       FACTORY.createAllShapes(block)
           .markStoneCuttable()
           .setFenceSettings(FenceSettings.QUARTZ)
           .setActivationSettings(ActivationSettings.QUARTZ)
           .build();
     }
+    FACTORY.createConstructionOnly(CHISELED_QUARTZ_BLOCK)
+        .with(BlockShape.WALL, BlockShape.PRESSURE_PLATE)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.QUARTZ)
+        .setActivationSettings(ActivationSettings.QUARTZ)
+        .build();
 
     // 红色下界砖。
     FACTORY.createAllShapes(RED_NETHER_BRICKS)
@@ -623,14 +595,7 @@ public final class ExtShapeBlocks {
     FACTORY.createConstructionOnly(POLISHED_BLACKSTONE_BRICKS)
         .markStoneCuttable()
         .build();
-    FACTORY.createConstructionOnly(CHISELED_POLISHED_BLACKSTONE)
-        .markStoneCuttable()
-        .build();
     FACTORY.createConstructionOnly(GILDED_BLACKSTONE)
-        .markStoneCuttable()
-        .build();
-
-    FACTORY.createConstructionOnly(CHISELED_NETHER_BRICKS)
         .markStoneCuttable()
         .build();
 
@@ -645,17 +610,7 @@ public final class ExtShapeBlocks {
         .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.POLISHED_TUFF_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.softerStone(ExtShapeBlockTypes.POLISHED_TUFF_BLOCK_SET_TYPE))
         .build();
-    FACTORY.createAllShapes(CHISELED_TUFF)
-        .markStoneCuttable()
-        .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.TUFF_WOOD_TYPE))
-        .setActivationSettings(ActivationSettings.softerStone(ExtShapeBlockTypes.TUFF_BLOCK_SET_TYPE))
-        .build();
     FACTORY.createAllShapes(TUFF_BRICKS)
-        .markStoneCuttable()
-        .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.TUFF_BRICKS_WOOD_TYPE))
-        .setActivationSettings(ActivationSettings.softerStone(ExtShapeBlockTypes.TUFF_BRICKS_BLOCK_SET_TYPE))
-        .build();
-    FACTORY.createAllShapes(CHISELED_TUFF_BRICKS)
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.TUFF_BRICKS_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.softerStone(ExtShapeBlockTypes.TUFF_BRICKS_BLOCK_SET_TYPE))
@@ -723,20 +678,9 @@ public final class ExtShapeBlocks {
         .setFenceSettings(FenceSettings.DEEPSLATE_BRICKS)
         .setActivationSettings(ActivationSettings.DEEPSLATE_BRICKS)
         .build();
-    FACTORY.createAllShapes(CHISELED_DEEPSLATE)
-        .markStoneCuttable()
-        .setFenceSettings(FenceSettings.DEEPSLATE_BRICKS)
-        .setActivationSettings(ActivationSettings.DEEPSLATE_BRICKS)
-        .build();
 
     // 玄武岩及其变种。
     FACTORY.createAllShapes(BASALT)
-        .markStoneCuttable()
-        .setFenceSettings(FenceSettings.BASALT)
-        .setActivationSettings(ActivationSettings.BASALT)
-        .setPillar()
-        .build();
-    FACTORY.createAllShapes(POLISHED_BASALT)
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.BASALT)
         .setActivationSettings(ActivationSettings.BASALT)

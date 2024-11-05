@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:chiseled_resin_bricks",
-  "result": {
-    "count": 4,
-    "id": "extshape:chiseled_resin_brick_vertical_quarter_piece"
-  }
-}

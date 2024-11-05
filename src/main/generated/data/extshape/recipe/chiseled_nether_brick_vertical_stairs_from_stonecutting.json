@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:chiseled_nether_bricks",
-  "result": {
-    "count": 1,
-    "id": "extshape:chiseled_nether_brick_vertical_stairs"
-  }
-}

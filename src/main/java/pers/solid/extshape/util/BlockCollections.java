@@ -102,13 +102,13 @@ public final class BlockCollections {
   public static final @Unmodifiable ImmutableSet<Block> UNCOLORED_SANDSTONES = ImmutableSet.of(
       SANDSTONE,
       CUT_SANDSTONE,
-      CHISELED_SANDSTONE,
+//      CHISELED_SANDSTONE,
       SMOOTH_SANDSTONE
   );
   public static final @Unmodifiable ImmutableSet<Block> RED_SANDSTONES = ImmutableSet.of(
       RED_SANDSTONE,
       CUT_RED_SANDSTONE,
-      CHISELED_RED_SANDSTONE,
+//      CHISELED_RED_SANDSTONE,
       SMOOTH_RED_SANDSTONE
   );
   public static final @Unmodifiable ImmutableSet<Block> WOOLS = ImmutableSet.of(WHITE_WOOL,

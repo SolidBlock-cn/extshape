@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:resin_block",
-  "result": {
-    "count": 1,
-    "id": "extshape:resin_stairs"
-  }
-}

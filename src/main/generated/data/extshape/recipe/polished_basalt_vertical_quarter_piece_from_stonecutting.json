@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:polished_basalt",
-  "result": {
-    "count": 4,
-    "id": "extshape:polished_basalt_vertical_quarter_piece"
-  }
-}

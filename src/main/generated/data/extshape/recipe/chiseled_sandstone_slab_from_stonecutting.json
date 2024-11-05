@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:chiseled_sandstone",
-  "result": {
-    "count": 2,
-    "id": "extshape:chiseled_sandstone_slab"
-  }
-}

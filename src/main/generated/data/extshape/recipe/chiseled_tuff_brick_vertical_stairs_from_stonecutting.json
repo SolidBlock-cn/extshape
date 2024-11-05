@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:chiseled_tuff_bricks",
-  "result": {
-    "count": 1,
-    "id": "extshape:chiseled_tuff_brick_vertical_stairs"
-  }
-}

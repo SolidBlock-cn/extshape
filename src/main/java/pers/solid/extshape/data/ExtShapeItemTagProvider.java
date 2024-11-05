@@ -60,8 +60,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
       copy(BlockCollections.DYED_TAGS.get(i), BlockCollections.DYED_ITEM_TAGS.get(i));
     }
 
-    addForShapes(ItemTags.NON_FLAMMABLE_WOOD, Iterables.concat(BlockCollections.STEMS,
-        BlockCollections.STRIPPED_STEMS,
+    addForShapes(ItemTags.NON_FLAMMABLE_WOOD, Iterables.concat(
         BlockCollections.HYPHAES,
         BlockCollections.STRIPPED_HYPHAES,
         Arrays.asList(Blocks.CRIMSON_PLANKS, Blocks.WARPED_PLANKS)

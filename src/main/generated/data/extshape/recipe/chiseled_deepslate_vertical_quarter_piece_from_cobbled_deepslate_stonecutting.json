@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:cobbled_deepslate",
-  "result": {
-    "count": 4,
-    "id": "extshape:chiseled_deepslate_vertical_quarter_piece"
-  }
-}

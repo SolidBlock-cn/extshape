@@ -1,8 +1,0 @@
-{
-  "parent": "extshape:block/vertical_slab_column_horizontal",
-  "textures": {
-    "bottom": "minecraft:block/pale_oak_log_top",
-    "side": "minecraft:block/pale_oak_log",
-    "top": "minecraft:block/pale_oak_log_top"
-  }
-}
