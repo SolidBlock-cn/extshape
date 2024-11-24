@@ -2,7 +2,7 @@
 
 ### 3.0.5
 
-- Fixed the issue that in versions 1.21.3 and above, pale moss is not added. Meanwhile added into block tag `hoe_mineable` and the special recipes in `recipe_tweak`.
+- Fixed the issue that in versions 1.21.3 and above, pale moss is not added. Meanwhile, added into block tag `hoe_mineable` and the special recipes in `recipe_tweak`.
 - Fixed the issue that some recipes do not correctly substitute vanilla recipes in the `recipe_tweak` datapack.
 - Fixed some incorrect sounds of some resin blocks in 1.21.4.
 
@@ -15,7 +15,7 @@
   - Delete various shapes of chiseled stone bricks, chiseled polished blackstone, chiseled nether bricks, chiseled tuff, chiseled tuff bricks, chiseled deepslate.
   - Delete buttons, fences, fence gates of quartz block, chiseled quartz block, chiseled quartz bricks; deleted pressure plates of quartz block.
   - Delete all extended shapes of chiseled sandstone and chiseled red sandstone.
-  - Deleted walls of sandstone, cut sandstone, red santstone, cut red sandstone. Only walls of smooth stone and smooth sandstone retain.
+  - Deleted walls of sandstone, cut sandstone, red sandstone, cut red sandstone. Only walls of smooth stone and smooth sandstone retain.
   - Deleted all extended shapes of polished basalt.
   - The changes above do not affect versions before 1.21.3. When upgrading worlds from versions before 1.21.3 to 1.21.4, the blocks above will be replaced with existing blocks via DataFixer.
 
