@@ -7,7 +7,6 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.CommandSource;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.*;
 import net.minecraft.recipe.input.CraftingRecipeInput;
@@ -51,7 +50,7 @@ public final class RecipeConflict {
    *
    * @return 冲突的个数。
    */
-  public static int checkConflict(ServerRecipeManager recipeManager, World world, PlayerEntity player, @Nullable Predicate<Identifier> filter, Consumer<Supplier<Text>> messageConsumer) {
+  public static int checkConflict(ServerRecipeManager recipeManager, World world, @Nullable Predicate<Identifier> filter, Consumer<Supplier<Text>> messageConsumer) {
     int numberOfConflicts = 0;
     for (RecipeEntry<?> recipeEntry : recipeManager.values()) {
       if (filter != null) {
@@ -148,7 +147,7 @@ public final class RecipeConflict {
         predicate = identifier -> ArrayUtils.contains(split, identifier.getNamespace());
       }
     }
-    return checkConflict(world.getRecipeManager(), world, player, predicate, text -> source.sendFeedback(text, true));
+    return checkConflict(world.getRecipeManager(), world, predicate, text -> source.sendFeedback(text, true));
   }
 
 }

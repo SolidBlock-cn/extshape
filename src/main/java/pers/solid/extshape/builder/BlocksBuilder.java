@@ -285,9 +285,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   @CanIgnoreReturnValue
   @Contract(value = "_-> this")
   public BlocksBuilder fuelTime(final int baseFuelTime) {
-    return addPostBuildConsumer((blockShape, builder) -> FuelRegistryEvents.BUILD.register((builder1, context) -> {
-      builder1.add(builder.itemInstance, (int) (blockShape.logicalCompleteness * baseFuelTime));
-    }));
+    return addPostBuildConsumer((blockShape, builder) -> FuelRegistryEvents.BUILD.register((builder1, context) -> builder1.add(builder.itemInstance, (int) (blockShape.logicalCompleteness * baseFuelTime))));
   }
 
   @CanIgnoreReturnValue

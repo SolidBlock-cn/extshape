@@ -11,14 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 
-import java.util.List;
-
 /**
  * 本模组提供的方块和物品标签。这些标签不应该被其他的模组使用。
  */
 public final class ExtShapeTags {
   /**
-   * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，会被剪刀剪掉。由于 1.20.5 版本以后没有 {@code fabric:shears_mineable} 标签，因此由 {@link pers.solid.extshape.mixin.ShearsItemMixin#addMineableTag(List)} 实现。
+   * 所有羊毛衍生方块（不含羊毛本身）。这些方块会被注册可燃，会被剪刀剪掉。由于 1.20.5 版本以后没有 {@code fabric:shears_mineable} 标签，因此由 {@link pers.solid.extshape.mixin.ShearsItemMixin#addMineableTag} 实现。
    */
   public static final TagKey<Block> WOOLEN_BLOCKS = of("woolen_blocks");
   /**
