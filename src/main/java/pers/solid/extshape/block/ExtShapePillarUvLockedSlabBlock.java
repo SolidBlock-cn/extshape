@@ -2,7 +2,7 @@ package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.client.data.BlockStateModelGenerator;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;

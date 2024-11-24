@@ -54,6 +54,17 @@
     "extshape:moss_fence_gate",
     "extshape:moss_wall",
     "extshape:moss_button",
-    "extshape:moss_pressure_plate"
+    "extshape:moss_pressure_plate",
+    "extshape:pale_moss_stairs",
+    "extshape:pale_moss_slab",
+    "extshape:pale_moss_vertical_slab",
+    "extshape:pale_moss_vertical_stairs",
+    "extshape:pale_moss_quarter_piece",
+    "extshape:pale_moss_vertical_quarter_piece",
+    "extshape:pale_moss_fence",
+    "extshape:pale_moss_fence_gate",
+    "extshape:pale_moss_wall",
+    "extshape:pale_moss_button",
+    "extshape:pale_moss_pressure_plate"
   ]
 }

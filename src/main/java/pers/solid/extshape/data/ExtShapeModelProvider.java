@@ -2,11 +2,13 @@ package pers.solid.extshape.data;
 
 import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.client.*;
+import net.minecraft.client.data.*;
 import net.minecraft.item.HoneycombItem;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
@@ -21,6 +23,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+@Environment(EnvType.CLIENT)
 public class ExtShapeModelProvider extends FabricModelProvider {
   protected final Map<Block, TextureMap> textureMaps = new HashMap<>();
   protected final Map<Block, BlockStateModelGenerator.BlockTexturePool> poolMap = new HashMap<>();

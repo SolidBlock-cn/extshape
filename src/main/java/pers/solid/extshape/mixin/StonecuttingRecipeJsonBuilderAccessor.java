@@ -1,6 +1,6 @@
 package pers.solid.extshape.mixin;
 
-import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
+import net.minecraft.data.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.recipe.book.RecipeCategory;
 import org.spongepowered.asm.mixin.Mixin;

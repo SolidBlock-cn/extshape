@@ -1,9 +1,9 @@
 package pers.solid.extshape.data;
 
 import com.google.common.base.Preconditions;
-import net.minecraft.data.client.Model;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureKey;
+import net.minecraft.client.data.Model;
+import net.minecraft.client.data.Models;
+import net.minecraft.client.data.TextureKey;
 import net.minecraft.util.math.Direction;
 import pers.solid.extshape.ExtShape;
 

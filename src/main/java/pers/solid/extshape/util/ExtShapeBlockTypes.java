@@ -305,7 +305,7 @@ public final class ExtShapeBlockTypes {
       .register(ExtShape.id("resin_bricks"));
   public static final WoodType RESIN_BRICKS_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .soundGroup(BlockSoundGroup.RESIN_BRICKS)
-      .register(ExtShape.id("resin_bricks"), RESIN_BLOCK_SET_TYPE);
+      .register(ExtShape.id("resin_bricks"), RESIN_BRICKS_SET_TYPE);
 
   private ExtShapeBlockTypes() {
   }

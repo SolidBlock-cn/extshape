@@ -60,4 +60,6 @@ public record ActivationSettings(BlockSetType blockSetType, int buttonTime, int 
   public static final ActivationSettings NETHERRACK = softerStone(ExtShapeBlockTypes.NETHERRACK_BLOCK_SET_TYPE);
   public static final ActivationSettings GLOWSTONE = new ActivationSettings(ExtShapeBlockTypes.GLOWSTONE_BLOCK_SET_TYPE, 30, 30);
   public static final ActivationSettings WART = new ActivationSettings(ExtShapeBlockTypes.WART_BLOCK_SET_TYPE, 45, 45);
+  public static final ActivationSettings RESIN = softerStone(ExtShapeBlockTypes.RESIN_BLOCK_SET_TYPE);
+  public static final ActivationSettings RESIN_BRICKS = stone(ExtShapeBlockTypes.RESIN_BRICKS_SET_TYPE);
 }

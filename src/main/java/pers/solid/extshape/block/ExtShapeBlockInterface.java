@@ -6,12 +6,12 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.server.loottable.BlockLootTableGenerator;
-import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.RecipeGenerator;
-import net.minecraft.data.server.recipe.StonecuttingRecipeJsonBuilder;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.data.loottable.BlockLootTableGenerator;
+import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
+import net.minecraft.data.recipe.RecipeExporter;
+import net.minecraft.data.recipe.RecipeGenerator;
+import net.minecraft.data.recipe.StonecuttingRecipeJsonBuilder;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.LootTable;
 import net.minecraft.recipe.Ingredient;
@@ -50,7 +50,7 @@ public interface ExtShapeBlockInterface {
    * 方块所在的合成配方的组。
    *
    * @return 方块合成配方中的 {@code group} 字段。
-   * @see net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder#group(String)
+   * @see net.minecraft.data.recipe.CraftingRecipeJsonBuilder#group(String)
    */
   default String getRecipeGroup() {
     return RecipeGroupRegistry.getRecipeGroup((ItemConvertible) this);
@@ -61,7 +61,7 @@ public interface ExtShapeBlockInterface {
    *
    * @return 方块的切石配方。用于切石机。
    */
-  default @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerator) {
+  default @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerato) {
     return null;
   }
 

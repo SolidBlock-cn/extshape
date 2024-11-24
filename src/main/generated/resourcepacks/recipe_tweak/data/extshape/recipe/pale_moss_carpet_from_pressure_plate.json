@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "extshape:pale_moss_pressure_plate"
+  ],
+  "result": {
+    "count": 3,
+    "id": "minecraft:pale_moss_carpet"
+  }
+}
