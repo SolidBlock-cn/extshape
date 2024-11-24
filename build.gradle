@@ -196,7 +196,7 @@ tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge)
 //    for (final String v in (project.supported_minecraft_versions.split(','))) {
 //        mainFile.addGameVersion v
 //    }
-    mainFile.addGameVersion '1.21.4-Snapshot'
+    mainFile.addGameVersion '1.21.4-snapshot'
 
     mainFile.addRelations 'requiredDependency', 'fabric-api'
 
