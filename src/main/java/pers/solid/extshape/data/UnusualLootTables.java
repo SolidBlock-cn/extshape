@@ -214,7 +214,7 @@ public class UnusualLootTables {
   }
 
   /**
-   * 类似于 {@link net.minecraft.data.server.loottable.BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)}，但是若方块为双层台阶，则掉落两倍。
+   * 类似于 {@link BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)}，但是若方块为双层台阶，则掉落两倍。
    *
    * @param drop                使用精准采集时掉落的方块。
    * @param child               没有精准采集，且不为双层台阶时，需要使用的战利品表池。
@@ -231,7 +231,7 @@ public class UnusualLootTables {
    * @param drop   需要掉落的方块。
    * @param isSlab 该方块是否为台阶。
    * @return 战利品表。
-   * @see net.minecraft.data.server.loottable.BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)
+   * @see BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)
    */
   public LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(@NotNull Block drop, boolean isSlab, BlockLootTableGenerator generator) {
     final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop);
