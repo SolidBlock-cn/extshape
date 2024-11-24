@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "blockus:polished_limestone"
-    }
+    "blockus:polished_limestone"
   ],
   "result": {
     "count": 1,

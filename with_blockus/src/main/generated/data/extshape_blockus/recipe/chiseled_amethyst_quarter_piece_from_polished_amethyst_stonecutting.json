@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:polished_amethyst"
-  },
+  "ingredient": "blockus:polished_amethyst",
   "result": {
     "count": 4,
     "id": "extshape_blockus:chiseled_amethyst_quarter_piece"

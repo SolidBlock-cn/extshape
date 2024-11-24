@@ -3,9 +3,7 @@
   "category": "building",
   "group": "patterned_wool_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "blockus:white_patterned_wool_slab"
-    }
+    "blockus:white_patterned_wool_slab"
   ],
   "result": {
     "count": 1,

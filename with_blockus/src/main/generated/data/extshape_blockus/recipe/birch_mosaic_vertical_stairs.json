@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_mosaic_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "blockus:birch_mosaic_stairs"
-    }
+    "blockus:birch_mosaic_stairs"
   ],
   "result": {
     "count": 1,

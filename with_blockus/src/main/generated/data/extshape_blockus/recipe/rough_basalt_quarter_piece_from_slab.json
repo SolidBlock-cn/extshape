@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:rough_basalt_slab"
-    }
+    "#": "blockus:rough_basalt_slab"
   },
   "pattern": [
     "###"

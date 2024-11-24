@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:quartz"
-    },
-    "W": {
-      "item": "blockus:quartz_tiles"
-    }
+    "#": "minecraft:quartz",
+    "W": "blockus:quartz_tiles"
   },
   "pattern": [
     "#W#",

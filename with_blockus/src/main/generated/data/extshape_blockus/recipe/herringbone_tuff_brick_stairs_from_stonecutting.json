@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:herringbone_tuff_bricks"
-  },
+  "ingredient": "blockus:herringbone_tuff_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:herringbone_tuff_brick_stairs"

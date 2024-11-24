@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_mosaic_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "blockus:cherry_mosaic_slab"
-    }
+    "blockus:cherry_mosaic_slab"
   ],
   "result": {
     "count": 1,

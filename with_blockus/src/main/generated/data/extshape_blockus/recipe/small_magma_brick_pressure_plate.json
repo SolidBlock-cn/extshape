@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:small_magma_bricks"
-    }
+    "#": "blockus:small_magma_bricks"
   },
   "pattern": [
     "##"

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "glazed_terracotta_pillar_slab",
   "key": {
-    "#": {
-      "item": "blockus:orange_glazed_terracotta_pillar"
-    }
+    "#": "blockus:orange_glazed_terracotta_pillar"
   },
   "pattern": [
     "###"

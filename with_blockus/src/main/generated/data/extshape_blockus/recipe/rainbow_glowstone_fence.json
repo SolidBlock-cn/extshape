@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "blockus:rainbow_petal"
-    },
-    "W": {
-      "item": "blockus:rainbow_glowstone"
-    }
+    "#": "blockus:rainbow_petal",
+    "W": "blockus:rainbow_glowstone"
   },
   "pattern": [
     "W#W",

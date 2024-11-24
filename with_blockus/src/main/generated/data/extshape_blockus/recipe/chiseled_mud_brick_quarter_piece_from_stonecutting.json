@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:chiseled_mud_bricks"
-  },
+  "ingredient": "blockus:chiseled_mud_bricks",
   "result": {
     "count": 4,
     "id": "extshape_blockus:chiseled_mud_brick_quarter_piece"

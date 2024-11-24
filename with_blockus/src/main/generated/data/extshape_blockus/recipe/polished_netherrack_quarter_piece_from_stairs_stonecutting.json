@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:polished_netherrack_stairs"
-  },
+  "ingredient": "blockus:polished_netherrack_stairs",
   "result": {
     "count": 3,
     "id": "extshape_blockus:polished_netherrack_quarter_piece"

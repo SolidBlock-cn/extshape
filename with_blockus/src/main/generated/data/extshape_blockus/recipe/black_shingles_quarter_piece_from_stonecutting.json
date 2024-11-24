@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:black_shingles"
-  },
+  "ingredient": "blockus:black_shingles",
   "result": {
     "count": 4,
     "id": "extshape_blockus:black_shingles_quarter_piece"

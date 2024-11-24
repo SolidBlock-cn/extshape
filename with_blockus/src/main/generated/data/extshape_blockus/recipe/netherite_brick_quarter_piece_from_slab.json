@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:netherite_brick_slab"
-    }
+    "#": "blockus:netherite_brick_slab"
   },
   "pattern": [
     "###"

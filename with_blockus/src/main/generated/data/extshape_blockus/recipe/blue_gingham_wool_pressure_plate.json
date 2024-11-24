@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "patterned_wool_pressure_plate",
   "key": {
-    "#": {
-      "item": "blockus:blue_gingham_carpet"
-    }
+    "#": "blockus:blue_gingham_carpet"
   },
   "pattern": [
     "###"

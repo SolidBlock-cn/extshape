@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:lava_polished_blackstone_brick_slab"
-    }
+    "blockus:lava_polished_blackstone_brick_slab"
   ],
   "result": {
     "count": 1,

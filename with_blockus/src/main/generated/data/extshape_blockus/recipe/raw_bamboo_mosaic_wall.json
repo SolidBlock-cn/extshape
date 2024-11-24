@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wooden_mosaic_wall",
   "key": {
-    "#": {
-      "item": "blockus:raw_bamboo_mosaic"
-    }
+    "#": "blockus:raw_bamboo_mosaic"
   },
   "pattern": [
     "###",

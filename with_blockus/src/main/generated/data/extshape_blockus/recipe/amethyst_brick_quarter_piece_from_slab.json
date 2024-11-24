@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:amethyst_brick_slab"
-    }
+    "#": "blockus:amethyst_brick_slab"
   },
   "pattern": [
     "###"

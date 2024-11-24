@@ -3,12 +3,8 @@
   "category": "building",
   "group": "stained_stone_brick_pressure_plate_from_dyeing",
   "key": {
-    "#": {
-      "item": "minecraft:pink_dye"
-    },
-    "X": {
-      "item": "extshape:stone_brick_pressure_plate"
-    }
+    "#": "minecraft:pink_dye",
+    "X": "extshape:stone_brick_pressure_plate"
   },
   "pattern": [
     "XXX",

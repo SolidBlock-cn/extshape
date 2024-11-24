@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape_blockus:bluestone_squares_slab"
-    }
+    "extshape_blockus:bluestone_squares_slab"
   ],
   "result": {
     "count": 1,

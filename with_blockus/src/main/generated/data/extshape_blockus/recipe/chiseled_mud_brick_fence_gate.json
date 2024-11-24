@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:mud"
-    },
-    "W": {
-      "item": "blockus:chiseled_mud_bricks"
-    }
+    "#": "minecraft:mud",
+    "W": "blockus:chiseled_mud_bricks"
   },
   "pattern": [
     "#W#",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape_blockus:mossy_mangrove_vertical_slab"
-    }
+    "extshape_blockus:mossy_mangrove_vertical_slab"
   ],
   "result": {
     "count": 1,

@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "shingles_fence",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:green_shingles"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:green_shingles"
   },
   "pattern": [
     "W#W",

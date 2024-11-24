@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape_blockus:ender_vertical_slab"
-    }
+    "extshape_blockus:ender_vertical_slab"
   ],
   "result": {
     "count": 1,

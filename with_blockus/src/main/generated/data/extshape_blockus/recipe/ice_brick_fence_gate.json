@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:ice"
-    },
-    "W": {
-      "item": "blockus:ice_bricks"
-    }
+    "#": "minecraft:ice",
+    "W": "blockus:ice_bricks"
   },
   "pattern": [
     "#W#",

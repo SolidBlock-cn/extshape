@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:amethyst_shard"
-    },
-    "W": {
-      "item": "blockus:amethyst_bricks"
-    }
+    "#": "minecraft:amethyst_shard",
+    "W": "blockus:amethyst_bricks"
   },
   "pattern": [
     "W#W",

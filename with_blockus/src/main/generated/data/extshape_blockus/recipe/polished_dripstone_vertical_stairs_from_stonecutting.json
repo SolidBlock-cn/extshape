@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:polished_dripstone"
-  },
+  "ingredient": "blockus:polished_dripstone",
   "result": {
     "count": 1,
     "id": "extshape_blockus:polished_dripstone_vertical_stairs"

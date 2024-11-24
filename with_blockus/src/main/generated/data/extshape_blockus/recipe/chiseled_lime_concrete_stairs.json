@@ -3,9 +3,7 @@
   "category": "building",
   "group": "chiseled_concrete_brick_stairs",
   "key": {
-    "#": {
-      "item": "blockus:chiseled_lime_concrete"
-    }
+    "#": "blockus:chiseled_lime_concrete"
   },
   "pattern": [
     "#  ",

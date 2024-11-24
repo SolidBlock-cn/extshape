@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:diorite_brick_slab"
-    }
+    "#": "blockus:diorite_brick_slab"
   },
   "pattern": [
     "###"

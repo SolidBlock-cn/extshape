@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:charcoal"
-    },
-    "W": {
-      "item": "blockus:charcoal_block"
-    }
+    "#": "minecraft:charcoal",
+    "W": "blockus:charcoal_block"
   },
   "pattern": [
     "#W#",

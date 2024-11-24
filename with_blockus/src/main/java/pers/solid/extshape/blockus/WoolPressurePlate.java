@@ -2,8 +2,7 @@ package pers.solid.extshape.blockus;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeProvider;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
@@ -21,11 +20,11 @@ public class WoolPressurePlate extends ExtShapePressurePlateBlock {
   }
 
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
+    return recipeGenerator.createShaped(getRecipeCategory(), this)
         .pattern("###")
         .input('#', carpet)
-        .criterion(RecipeProvider.hasItem(carpet), RecipeProvider.conditionsFromItem(carpet))
+        .criterion(RecipeGenerator.hasItem(carpet), recipeGenerator.conditionsFromItem(carpet))
         .group(getRecipeGroup());
   }
 }

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:brick"
-    },
-    "W": {
-      "item": "blockus:herringbone_soaked_bricks"
-    }
+    "#": "minecraft:brick",
+    "W": "blockus:herringbone_soaked_bricks"
   },
   "pattern": [
     "W#W",

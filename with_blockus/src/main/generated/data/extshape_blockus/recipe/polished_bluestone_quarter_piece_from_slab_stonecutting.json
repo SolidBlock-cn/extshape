@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:polished_bluestone_slab"
-  },
+  "ingredient": "blockus:polished_bluestone_slab",
   "result": {
     "count": 2,
     "id": "extshape_blockus:polished_bluestone_quarter_piece"

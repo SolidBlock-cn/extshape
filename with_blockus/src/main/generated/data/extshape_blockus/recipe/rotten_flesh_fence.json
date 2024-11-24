@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:rotten_flesh"
-    },
-    "W": {
-      "item": "blockus:rotten_flesh_block"
-    }
+    "#": "minecraft:rotten_flesh",
+    "W": "blockus:rotten_flesh_block"
   },
   "pattern": [
     "W#W",

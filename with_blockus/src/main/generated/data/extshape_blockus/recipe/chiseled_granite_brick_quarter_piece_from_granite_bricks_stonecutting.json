@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:granite_bricks"
-  },
+  "ingredient": "blockus:granite_bricks",
   "result": {
     "count": 4,
     "id": "extshape_blockus:chiseled_granite_brick_quarter_piece"

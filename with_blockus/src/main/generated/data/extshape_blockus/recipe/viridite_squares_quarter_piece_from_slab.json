@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape_blockus:viridite_squares_slab"
-    }
+    "#": "extshape_blockus:viridite_squares_slab"
   },
   "pattern": [
     "###"

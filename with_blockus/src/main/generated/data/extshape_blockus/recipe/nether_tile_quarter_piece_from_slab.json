@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:nether_tile_slab"
-    }
+    "#": "blockus:nether_tile_slab"
   },
   "pattern": [
     "###"

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:pink_stone_bricks"
-  },
+  "ingredient": "blockus:pink_stone_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:pink_stone_brick_vertical_stairs"

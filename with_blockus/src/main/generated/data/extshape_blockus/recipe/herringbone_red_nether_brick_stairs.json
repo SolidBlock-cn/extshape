@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:herringbone_red_nether_bricks"
-    }
+    "#": "blockus:herringbone_red_nether_bricks"
   },
   "pattern": [
     "#  ",

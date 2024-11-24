@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:chiseled_diorite_bricks"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:chiseled_diorite_bricks"
   },
   "pattern": [
     "W#W",

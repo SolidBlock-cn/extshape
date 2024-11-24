@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:ender_pearl"
-    },
-    "W": {
-      "item": "blockus:ender_block"
-    }
+    "#": "minecraft:ender_pearl",
+    "W": "blockus:ender_block"
   },
   "pattern": [
     "#W#",

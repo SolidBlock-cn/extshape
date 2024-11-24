@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "blockus:rough_soul_sandstone"
-    }
+    "blockus:rough_soul_sandstone"
   ],
   "result": {
     "count": 1,

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "shingles_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "blockus:light_blue_shingles_stairs"
-    }
+    "blockus:light_blue_shingles_stairs"
   ],
   "result": {
     "count": 1,

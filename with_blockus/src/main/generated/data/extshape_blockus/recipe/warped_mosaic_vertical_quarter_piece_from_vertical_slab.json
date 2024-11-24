@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_mosaic_vertical_quarter_piece_from_vertical_slab",
   "key": {
-    "#": {
-      "item": "extshape_blockus:warped_mosaic_vertical_slab"
-    }
+    "#": "extshape_blockus:warped_mosaic_vertical_slab"
   },
   "pattern": [
     "#",

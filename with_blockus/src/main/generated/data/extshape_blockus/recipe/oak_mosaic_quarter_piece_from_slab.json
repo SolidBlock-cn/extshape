@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_mosaic_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "blockus:oak_mosaic_slab"
-    }
+    "#": "blockus:oak_mosaic_slab"
   },
   "pattern": [
     "###"

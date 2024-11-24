@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wooden_mosaic_wall",
   "key": {
-    "#": {
-      "item": "blockus:mangrove_mosaic"
-    }
+    "#": "blockus:mangrove_mosaic"
   },
   "pattern": [
     "###",

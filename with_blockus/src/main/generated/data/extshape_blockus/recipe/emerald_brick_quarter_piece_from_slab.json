@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:emerald_brick_slab"
-    }
+    "#": "blockus:emerald_brick_slab"
   },
   "pattern": [
     "###"

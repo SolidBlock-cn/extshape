@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:thatch_stairs"
-    }
+    "blockus:thatch_stairs"
   ],
   "result": {
     "count": 1,

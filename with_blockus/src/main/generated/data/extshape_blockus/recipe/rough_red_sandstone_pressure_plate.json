@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:rough_red_sandstone"
-    }
+    "#": "blockus:rough_red_sandstone"
   },
   "pattern": [
     "##"

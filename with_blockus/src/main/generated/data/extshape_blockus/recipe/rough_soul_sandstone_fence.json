@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:soul_sand"
-    },
-    "W": {
-      "item": "blockus:rough_soul_sandstone"
-    }
+    "#": "minecraft:soul_sand",
+    "W": "blockus:rough_soul_sandstone"
   },
   "pattern": [
     "W#W",

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "glazed_terracotta_pillar_stairs",
   "key": {
-    "#": {
-      "item": "blockus:blue_glazed_terracotta_pillar"
-    }
+    "#": "blockus:blue_glazed_terracotta_pillar"
   },
   "pattern": [
     "#  ",

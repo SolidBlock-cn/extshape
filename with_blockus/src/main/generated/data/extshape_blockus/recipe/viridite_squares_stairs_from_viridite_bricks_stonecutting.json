@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:viridite_bricks"
-  },
+  "ingredient": "blockus:viridite_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:viridite_squares_stairs"

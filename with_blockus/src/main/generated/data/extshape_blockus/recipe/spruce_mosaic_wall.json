@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wooden_mosaic_wall",
   "key": {
-    "#": {
-      "item": "blockus:spruce_mosaic"
-    }
+    "#": "blockus:spruce_mosaic"
   },
   "pattern": [
     "###",

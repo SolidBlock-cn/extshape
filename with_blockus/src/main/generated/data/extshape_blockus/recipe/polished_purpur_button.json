@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "blockus:polished_purpur"
-    }
+    "blockus:polished_purpur"
   ],
   "result": {
     "count": 1,

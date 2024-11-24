@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:chocolate_stairs"
-    }
+    "blockus:chocolate_stairs"
   ],
   "result": {
     "count": 1,

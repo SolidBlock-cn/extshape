@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:rough_basalt"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:rough_basalt"
   },
   "pattern": [
     "W#W",

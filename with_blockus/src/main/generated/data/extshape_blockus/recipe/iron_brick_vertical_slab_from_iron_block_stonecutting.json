@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:iron_block"
-  },
+  "ingredient": "minecraft:iron_block",
   "result": {
     "count": 2,
     "id": "extshape_blockus:iron_brick_vertical_slab"

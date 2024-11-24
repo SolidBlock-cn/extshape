@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:herringbone_stone_bricks"
-  },
+  "ingredient": "blockus:herringbone_stone_bricks",
   "result": {
     "count": 2,
     "id": "extshape_blockus:herringbone_stone_brick_vertical_slab"

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:charred_slab"
-    }
+    "#": "blockus:charred_slab"
   },
   "pattern": [
     "###"

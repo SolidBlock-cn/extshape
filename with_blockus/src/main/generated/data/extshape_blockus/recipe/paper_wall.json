@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "blockus:paper_block"
-    }
+    "#": "blockus:paper_block"
   },
   "pattern": [
     "###",

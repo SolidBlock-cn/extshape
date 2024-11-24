@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:purpur_bricks"
-    }
+    "#": "blockus:purpur_bricks"
   },
   "pattern": [
     "##"

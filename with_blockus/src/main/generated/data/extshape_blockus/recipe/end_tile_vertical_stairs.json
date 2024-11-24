@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:end_tile_stairs"
-    }
+    "blockus:end_tile_stairs"
   ],
   "result": {
     "count": 1,

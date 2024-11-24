@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:mud"
-    },
-    "W": {
-      "item": "blockus:chiseled_mud_bricks"
-    }
+    "#": "minecraft:mud",
+    "W": "blockus:chiseled_mud_bricks"
   },
   "pattern": [
     "W#W",

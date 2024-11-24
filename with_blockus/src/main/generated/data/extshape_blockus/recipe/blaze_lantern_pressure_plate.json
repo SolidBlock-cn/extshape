@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:blaze_lantern"
-    }
+    "#": "blockus:blaze_lantern"
   },
   "pattern": [
     "##"

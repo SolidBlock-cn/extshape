@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:sculk_vein"
-    },
-    "W": {
-      "item": "blockus:sculk_bricks"
-    }
+    "#": "minecraft:sculk_vein",
+    "W": "blockus:sculk_bricks"
   },
   "pattern": [
     "#W#",

@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
@@ -32,8 +33,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     INSTANCE = builder.build();
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeExporter exporter) {
-    super(baseBlock, defaultNamespace, exporter);
+  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeGenerator recipeGenerator, @NotNull RecipeExporter exporter) {
+    super(baseBlock, defaultNamespace, recipeGenerator, exporter);
   }
 
   @Override
@@ -42,7 +43,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   }
 
   /**
-   * @see BlockusRecipeProvider#generate(RecipeExporter)
+   * @see BlockusRecipeProvider#getRecipeGenerator
    */
   private static void registerBlockusStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
     for (ConcreteBundle concreteType : ConcreteBundle.values()) {

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "mossy_wooden_vertical_stairs_from_rotation",
   "ingredients": [
-    {
-      "item": "blockus:mossy_oak_stairs"
-    }
+    "blockus:mossy_oak_stairs"
   ],
   "result": {
     "count": 1,

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:emerald_bricks"
-  },
+  "ingredient": "blockus:emerald_bricks",
   "result": {
     "count": 4,
     "id": "extshape_blockus:emerald_brick_quarter_piece"

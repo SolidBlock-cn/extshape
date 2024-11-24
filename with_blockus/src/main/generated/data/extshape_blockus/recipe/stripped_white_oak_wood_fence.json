@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "blockus:stripped_white_oak_wood"
-    }
+    "#": "minecraft:stick",
+    "W": "blockus:stripped_white_oak_wood"
   },
   "pattern": [
     "W#W",

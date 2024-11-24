@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:blue_glazed_terracotta_pillar"
-  },
+  "ingredient": "blockus:blue_glazed_terracotta_pillar",
   "result": {
     "count": 1,
     "id": "extshape_blockus:blue_glazed_terracotta_pillar_stairs"

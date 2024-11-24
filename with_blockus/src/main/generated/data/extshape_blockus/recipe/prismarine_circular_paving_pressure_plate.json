@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:prismarine_circular_paving"
-    }
+    "#": "blockus:prismarine_circular_paving"
   },
   "pattern": [
     "##"

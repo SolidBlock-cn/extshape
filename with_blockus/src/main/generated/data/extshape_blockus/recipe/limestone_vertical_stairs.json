@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:limestone_stairs"
-    }
+    "blockus:limestone_stairs"
   ],
   "result": {
     "count": 1,

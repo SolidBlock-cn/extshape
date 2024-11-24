@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:nether_tiles"
-    }
+    "#": "blockus:nether_tiles"
   },
   "pattern": [
     "##"

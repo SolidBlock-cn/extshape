@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:rough_soul_sandstone_slab"
-    }
+    "blockus:rough_soul_sandstone_slab"
   ],
   "result": {
     "count": 1,

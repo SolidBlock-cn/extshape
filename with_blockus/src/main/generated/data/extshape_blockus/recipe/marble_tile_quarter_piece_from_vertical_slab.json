@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape_blockus:marble_tile_vertical_slab"
-    }
+    "#": "extshape_blockus:marble_tile_vertical_slab"
   },
   "pattern": [
     "###"

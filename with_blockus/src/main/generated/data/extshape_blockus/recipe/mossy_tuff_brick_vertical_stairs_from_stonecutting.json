@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:mossy_tuff_bricks"
-  },
+  "ingredient": "blockus:mossy_tuff_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:mossy_tuff_brick_vertical_stairs"

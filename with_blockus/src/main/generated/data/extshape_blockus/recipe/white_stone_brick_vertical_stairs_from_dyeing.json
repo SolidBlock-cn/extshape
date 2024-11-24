@@ -3,12 +3,8 @@
   "category": "building",
   "group": "stained_stone_brick_vertical_stairs_from_dyeing",
   "key": {
-    "#": {
-      "item": "minecraft:white_dye"
-    },
-    "X": {
-      "item": "extshape:stone_brick_vertical_stairs"
-    }
+    "#": "minecraft:white_dye",
+    "X": "extshape:stone_brick_vertical_stairs"
   },
   "pattern": [
     "XXX",

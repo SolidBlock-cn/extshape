@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:shingles_slab"
-    }
+    "#": "blockus:shingles_slab"
   },
   "pattern": [
     "###"

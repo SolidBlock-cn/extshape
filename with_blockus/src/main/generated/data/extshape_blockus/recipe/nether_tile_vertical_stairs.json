@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:nether_tile_stairs"
-    }
+    "blockus:nether_tile_stairs"
   ],
   "result": {
     "count": 1,

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "blockus:prismarine_circular_paving"
-    }
+    "#": "minecraft:stick",
+    "W": "blockus:prismarine_circular_paving"
   },
   "pattern": [
     "W#W",

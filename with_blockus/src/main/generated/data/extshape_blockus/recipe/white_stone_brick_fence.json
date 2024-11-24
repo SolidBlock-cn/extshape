@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "stained_stone_brick_fence",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:white_stone_bricks"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:white_stone_bricks"
   },
   "pattern": [
     "W#W",

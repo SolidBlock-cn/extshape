@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "blockus:small_magma_bricks"
-    }
+    "blockus:small_magma_bricks"
   ],
   "result": {
     "count": 1,

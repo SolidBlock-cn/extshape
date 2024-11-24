@@ -3,9 +3,7 @@
   "category": "building",
   "group": "small_logs_stairs",
   "key": {
-    "#": {
-      "item": "blockus:warped_small_stems"
-    }
+    "#": "blockus:warped_small_stems"
   },
   "pattern": [
     "#  ",

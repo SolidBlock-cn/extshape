@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:magma_brick_stairs"
-    }
+    "blockus:magma_brick_stairs"
   ],
   "result": {
     "count": 1,

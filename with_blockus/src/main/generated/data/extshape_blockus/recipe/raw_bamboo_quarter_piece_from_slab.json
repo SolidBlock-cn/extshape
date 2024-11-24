@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:raw_bamboo_slab"
-    }
+    "#": "blockus:raw_bamboo_slab"
   },
   "pattern": [
     "###"

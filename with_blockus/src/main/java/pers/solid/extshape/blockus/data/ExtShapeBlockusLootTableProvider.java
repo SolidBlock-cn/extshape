@@ -28,7 +28,7 @@ public class ExtShapeBlockusLootTableProvider extends FabricBlockLootTableProvid
         final Block baseBlock = i.getBaseBlock();
         final UnusualLootTables.LootTableFunction unusual = instance.get(baseBlock);
         if (unusual != null) {
-          lootTable = unusual.apply(baseBlock, BlockShape.getShapeOf(block), block, registryLookup, this);
+          lootTable = unusual.apply(baseBlock, BlockShape.getShapeOf(block), block, registries, this);
         } else {
           lootTable = i.getLootTable(this);
         }

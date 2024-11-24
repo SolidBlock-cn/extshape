@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:crimson_wart_bricks"
-    }
+    "#": "blockus:crimson_wart_bricks"
   },
   "pattern": [
     "##"

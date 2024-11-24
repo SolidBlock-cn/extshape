@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:polished_end_stone_slab"
-    }
+    "#": "blockus:polished_end_stone_slab"
   },
   "pattern": [
     "###"

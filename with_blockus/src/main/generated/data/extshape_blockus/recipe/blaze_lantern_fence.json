@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:blaze_rod"
-    },
-    "W": {
-      "item": "blockus:blaze_lantern"
-    }
+    "#": "minecraft:blaze_rod",
+    "W": "blockus:blaze_lantern"
   },
   "pattern": [
     "W#W",

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:limestone_bricks"
-  },
+  "ingredient": "blockus:limestone_bricks",
   "result": {
     "count": 4,
     "id": "extshape_blockus:small_limestone_brick_quarter_piece"

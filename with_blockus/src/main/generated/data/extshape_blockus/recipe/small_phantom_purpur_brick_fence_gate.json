@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:phantom_membrane"
-    },
-    "W": {
-      "item": "blockus:small_phantom_purpur_bricks"
-    }
+    "#": "minecraft:phantom_membrane",
+    "W": "blockus:small_phantom_purpur_bricks"
   },
   "pattern": [
     "#W#",

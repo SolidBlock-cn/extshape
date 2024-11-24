@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:honeycomb_bricks"
-    }
+    "#": "blockus:honeycomb_bricks"
   },
   "pattern": [
     "##"

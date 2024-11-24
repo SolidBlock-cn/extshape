@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:nether_brick"
-    },
-    "W": {
-      "item": "blockus:polished_netherrack"
-    }
+    "#": "minecraft:nether_brick",
+    "W": "blockus:polished_netherrack"
   },
   "pattern": [
     "W#W",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:polished_blackstone_tiles"
-    }
+    "#": "blockus:polished_blackstone_tiles"
   },
   "pattern": [
     "##"

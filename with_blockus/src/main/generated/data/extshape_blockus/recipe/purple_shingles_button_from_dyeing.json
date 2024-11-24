@@ -3,12 +3,8 @@
   "category": "building",
   "group": "shingles_button_from_dyeing",
   "key": {
-    "#": {
-      "item": "minecraft:purple_dye"
-    },
-    "X": {
-      "item": "extshape_blockus:shingles_button"
-    }
+    "#": "minecraft:purple_dye",
+    "X": "extshape_blockus:shingles_button"
   },
   "pattern": [
     "XXX",

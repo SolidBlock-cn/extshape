@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:netherrack_bricks"
-  },
+  "ingredient": "blockus:netherrack_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:netherrack_brick_vertical_stairs"

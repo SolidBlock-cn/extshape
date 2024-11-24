@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape_blockus:chiseled_phantom_purpur_stairs"
-    }
+    "extshape_blockus:chiseled_phantom_purpur_stairs"
   ],
   "result": {
     "count": 1,

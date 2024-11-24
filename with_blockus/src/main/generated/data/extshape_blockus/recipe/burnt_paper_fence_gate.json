@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:gunpowder"
-    },
-    "W": {
-      "item": "blockus:burnt_paper_block"
-    }
+    "#": "minecraft:gunpowder",
+    "W": "blockus:burnt_paper_block"
   },
   "pattern": [
     "#W#",

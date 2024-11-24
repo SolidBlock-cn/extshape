@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "blockus:prismarine_circular_paving"
-    }
+    "blockus:prismarine_circular_paving"
   ],
   "result": {
     "count": 1,

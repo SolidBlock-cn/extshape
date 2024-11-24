@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "herringbone_wooden_wall",
   "key": {
-    "#": {
-      "item": "blockus:herringbone_warped_planks"
-    }
+    "#": "blockus:herringbone_warped_planks"
   },
   "pattern": [
     "###",

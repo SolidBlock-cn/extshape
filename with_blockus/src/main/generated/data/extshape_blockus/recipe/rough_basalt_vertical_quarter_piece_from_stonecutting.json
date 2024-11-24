@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:rough_basalt"
-  },
+  "ingredient": "blockus:rough_basalt",
   "result": {
     "count": 4,
     "id": "extshape_blockus:rough_basalt_vertical_quarter_piece"

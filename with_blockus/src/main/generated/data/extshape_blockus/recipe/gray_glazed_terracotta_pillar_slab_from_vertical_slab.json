@@ -3,9 +3,7 @@
   "category": "building",
   "group": "glazed_terracotta_pillar_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape_blockus:gray_glazed_terracotta_pillar_vertical_slab"
-    }
+    "extshape_blockus:gray_glazed_terracotta_pillar_vertical_slab"
   ],
   "result": {
     "count": 1,

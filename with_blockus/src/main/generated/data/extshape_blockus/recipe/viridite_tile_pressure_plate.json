@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:viridite_tiles"
-    }
+    "#": "blockus:viridite_tiles"
   },
   "pattern": [
     "##"

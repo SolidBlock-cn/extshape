@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:soul_sand"
-    },
-    "W": {
-      "item": "blockus:small_soul_sandstone_bricks"
-    }
+    "#": "minecraft:soul_sand",
+    "W": "blockus:small_soul_sandstone_bricks"
   },
   "pattern": [
     "#W#",

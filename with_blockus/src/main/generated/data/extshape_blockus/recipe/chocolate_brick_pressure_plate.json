@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:chocolate_bricks"
-    }
+    "#": "blockus:chocolate_bricks"
   },
   "pattern": [
     "##"

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:burnt_paper_block"
-    }
+    "#": "blockus:burnt_paper_block"
   },
   "pattern": [
     "#  ",

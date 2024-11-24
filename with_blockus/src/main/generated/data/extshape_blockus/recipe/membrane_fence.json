@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:phantom_membrane"
-    },
-    "W": {
-      "item": "blockus:membrane_block"
-    }
+    "#": "minecraft:phantom_membrane",
+    "W": "blockus:membrane_block"
   },
   "pattern": [
     "W#W",

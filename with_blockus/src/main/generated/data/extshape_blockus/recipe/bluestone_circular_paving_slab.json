@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:bluestone_circular_paving"
-    }
+    "#": "blockus:bluestone_circular_paving"
   },
   "pattern": [
     "###"

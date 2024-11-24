@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:marble_circular_paving"
-    }
+    "#": "blockus:marble_circular_paving"
   },
   "pattern": [
     "###"

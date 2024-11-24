@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:bluestone_slab"
-    }
+    "blockus:bluestone_slab"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:rainbow_brick_slab"
-    }
+    "#": "blockus:rainbow_brick_slab"
   },
   "pattern": [
     "###"

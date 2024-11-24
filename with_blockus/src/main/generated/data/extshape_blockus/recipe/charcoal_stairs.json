@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:charcoal_block"
-    }
+    "#": "blockus:charcoal_block"
   },
   "pattern": [
     "#  ",
