@@ -39,6 +39,11 @@ public class ExtShapeDataGenerator implements DataGeneratorEntrypoint {
       protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registryLookup, RecipeExporter exporter) {
         return new ExtShapeTweakRecipeProvider(registryLookup, exporter);
       }
+
+      @Override
+      protected Identifier getRecipeIdentifier(Identifier identifier) {
+        return identifier;
+      }
     });
   }
 }
