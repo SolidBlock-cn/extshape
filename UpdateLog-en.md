@@ -1,5 +1,11 @@
 # Update log
 
+### 3.0.5
+
+- Fixed the issue that in versions 1.21.3 and above, pale moss is not added. Meanwhile added into block tag `hoe_mineable` and the special recipes in `recipe_tweak`.
+- Fixed the issue that some recipes do not correctly substitute vanilla recipes in the `recipe_tweak` datapack.
+- Fixed some incorrect sounds of some resin blocks in 1.21.4.
+
 ### 3.0.4
 
 - Fixed the issue that blocks of stone bricks, mossy stone bricks and chiseled stone bricks cannot be harvested with pickaxes.
@@ -188,9 +194,9 @@
 ### 1.7.3
 
 - Adjusted the code structure and improved extension behaviour.
-    - Added `BlocksBuilderFactory` class, to allow different mods to add their blocks. Also, made sure `ExtShapeBlocks.BLOCKS` and `ExtShapeBlocks.BASE_BLOCKS` contains only blocks in this mod.
-    - Added `TagPreparationFactory` class, to allow different mods to add tags with classes of this mod, and reduce conflicts to existing content.
-    - Split the code about generating data between different block shapes to `CrossShapeDataGeneration` and improved the readability.
+  - Added `BlocksBuilderFactory` class, to allow different mods to add their blocks. Also, made sure `ExtShapeBlocks.BLOCKS` and `ExtShapeBlocks.BASE_BLOCKS` contains only blocks in this mod.
+  - Added `TagPreparationFactory` class, to allow different mods to add tags with classes of this mod, and reduce conflicts to existing content.
+  - Split the code about generating data between different block shapes to `CrossShapeDataGeneration` and improved the readability.
 - Fixed the issue that the direction of the default block state of glazed terracotta slab is not successfully set.
 - Now `#extshape:log_blocks` belongs to block tag `#extshape:wooden_blocks`.
 - Optimized the logic of adding items in 1.19.3 to be more efficient.
@@ -200,8 +206,8 @@
 
 - Added the name of translations in some languages.
 - For 1.19.3, added extended shapes for bamboo block, stripped bamboo block, bamboo planks, and bamboo mosaic, which require Update 1.20 datapack.
-    - The blocks are flammable and can be used as fuels.
-    - In order to avoid recipe conflict, bamboo blocks and stripped bamboo blocks cannot be crafted into buttons.
+  - The blocks are flammable and can be used as fuels.
+  - In order to avoid recipe conflict, bamboo blocks and stripped bamboo blocks cannot be crafted into buttons.
 - In block tags, log and wood blocks belong to wooden blocks now. Wood fences and bamboo fences are considered as wooden fences and can be connected with vanilla wooden plank fences.
 - For 1.19.3, no longer interact with Reasonable Sorting mod.
 - For 1.19.3, as not supported yet, disabled "Display Specific Groups" button.
@@ -260,12 +266,12 @@ The update does not seem obvious, but code is changed from head to toe, actually
 - Blocks based on pumpkin, melon, moss, shroomlight, nether wart block, warped wart block can be composted.
 - Re-added nether wart walls and crimson wart walls, and added walls made from wool and moss.
 - Added more tags:
-    - Now more blocks based on gold block and raw gold block are loved by piglins (item tag `#piglin_loved`).
-    - If the whole top face of a grass block is covered by a snow stairs or snow slab, the grass block will display snowy (block tag `#extshape:snow`).
-    - Mining blocks based on gold block, raw gold block and gilded blackstone irritates piglins (block tag `#piglin_guarded`).
-    - Dripleaves can be placed on blocks of moss and clay (block tag `#small_dripleaf_placeable_on`).
-    - Wool blocks, like vanilla wools, can be sheared quickly (block tag `#fabric:mineable/shears`).
-    - Re-added walls of non-stone blocks, which cannot be harvested quickly by pickaxes. Although `#minecraft:mineable/pickaxes` directly contains `#minecraft:walls`, this mod lets blocks of `#extshape:pickaxe_unmineable` no possible to be harvested quickly by pickaxes.
+  - Now more blocks based on gold block and raw gold block are loved by piglins (item tag `#piglin_loved`).
+  - If the whole top face of a grass block is covered by a snow stairs or snow slab, the grass block will display snowy (block tag `#extshape:snow`).
+  - Mining blocks based on gold block, raw gold block and gilded blackstone irritates piglins (block tag `#piglin_guarded`).
+  - Dripleaves can be placed on blocks of moss and clay (block tag `#small_dripleaf_placeable_on`).
+  - Wool blocks, like vanilla wools, can be sheared quickly (block tag `#fabric:mineable/shears`).
+  - Re-added walls of non-stone blocks, which cannot be harvested quickly by pickaxes. Although `#minecraft:mineable/pickaxes` directly contains `#minecraft:walls`, this mod lets blocks of `#extshape:pickaxe_unmineable` no possible to be harvested quickly by pickaxes.
 - Added a corresponding unlocking advancement for recipes. When obtaining some ingredients, the advancement is triggered and the recipe is unlocked.
 - Added configuration screen, to config whether to add items into vanilla item groups, and whether to add extra item groups for this block. Besides, the mod adds the feature of manually re-generate and dump runtime resource packs.
 - Fixed some issues in language files, and refined some wording.
@@ -313,7 +319,7 @@ This update is for version only 1.17 and above.
 
 - Fixed the issue of missing rendering at the bottom of vertical stairs blocks.
 - For 1.16 versions: Removed unnecessary tags and fixed mining level issue.
-    - Note: For 1.16 versions, language files for future versions are still stored.
+  - Note: For 1.16 versions, language files for future versions are still stored.
 
 ### 1.2.4
 
@@ -331,8 +337,8 @@ This update is for version only 1.17 and above.
 
 - Improved logging system.
 - Fixed the issue of incompatibility with OptiFine.
-    - Issue details: When OptiFine is on, operations like `new Identifier("#minecraft:banners")` do not throw
-      `InvalidIdentiferException`, causing code abnormal behavior.
+  - Issue details: When OptiFine is on, operations like `new Identifier("#minecraft:banners")` do not throw
+    `InvalidIdentiferException`, causing code abnormal behavior.
 
 ### 1.2.1
 
@@ -346,7 +352,7 @@ This update is for version only 1.17 and above.
 ### 1.2.0
 
 - Deleted extra item groups. Vanilla item groups are used instead. Besides, there are 4 other item groups in order to contain blocks (including vanilla) in sort of base blocks.
-    - The issue that items are not sorted correctly in recipe groups is also fixed because of this change.
+  - The issue that items are not sorted correctly in recipe groups is also fixed because of this change.
 - BlockMappings use more effective BiMap instead of ordinary Map any longer. Values in BiMap are unique, so it's more effective to get an inverse map.
 - Added JavaDoc.
 - Referring to vanilla convention, English names of blocks in this mod are capitalised now.
@@ -362,9 +368,9 @@ This update is for version only 1.17 and above.
 - Adjusted display form of vertical slabs in inventories.
 - Added language support for Traditional Chinese Taiwan, Traditional Chinese Hong Kong and Classical Chinese Language.
 - Issues currently existing in this version:
-    - In vanilla, some blocks, such as packed ice, glowstone, snow block, cannot drop themselves when mined in survival mode without Silk Touch. However, their variant blocks are not affected.
-    - The bottom half of slab and quarter piece of packed ice and bottom-half packed ice stairs are not slippery.
-    - In recipe books, recipes added by this mod are not correctly classified.
+  - In vanilla, some blocks, such as packed ice, glowstone, snow block, cannot drop themselves when mined in survival mode without Silk Touch. However, their variant blocks are not affected.
+  - The bottom half of slab and quarter piece of packed ice and bottom-half packed ice stairs are not slippery.
+  - In recipe books, recipes added by this mod are not correctly classified.
 
 ### 1.1.0-snapshot [Snapshot version]
 

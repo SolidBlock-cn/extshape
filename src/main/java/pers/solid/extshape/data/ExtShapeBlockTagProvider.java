@@ -186,7 +186,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.WARPED_WART_BLOCK,
         Blocks.SHROOMLIGHT,
         Blocks.SCULK,
-        Blocks.MOSS_BLOCK);
+        Blocks.MOSS_BLOCK,
+        Blocks.PALE_MOSS_BLOCK);
 
     addForShapes(BlockTags.NEEDS_STONE_TOOL,
         Blocks.LAPIS_BLOCK,
