@@ -136,7 +136,7 @@ public class UnusualLootTables {
   /**
    * 参照原版的战利品表生成器，生成对应变种的特殊战利品表。如果没有指定，则按照默认战利品表生成。特别需要注意：双台阶的战利品表掉落数量应该为两倍。
    *
-   * @see net.minecraft.data.server.loottable.BlockLootTableGenerator#accept
+   * @see BlockLootTableGenerator#accept
    */
   private static void registerUnusualLootTables(ImmutableMap.Builder<Block, LootTableFunction> builder) {
     builder.put(Blocks.CLAY, dropsWithSilkTouchOrConst(Items.CLAY_BALL, 4));

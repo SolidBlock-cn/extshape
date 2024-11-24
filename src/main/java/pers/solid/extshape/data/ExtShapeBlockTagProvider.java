@@ -1,11 +1,7 @@
 package pers.solid.extshape.data;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
+import com.google.common.collect.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
@@ -189,7 +185,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.WARPED_WART_BLOCK,
         Blocks.SHROOMLIGHT,
         Blocks.SCULK,
-        Blocks.MOSS_BLOCK);
+        Blocks.MOSS_BLOCK,
+        Blocks.PALE_MOSS_BLOCK);
 
     addForShapes(BlockTags.NEEDS_STONE_TOOL,
         Blocks.LAPIS_BLOCK,
