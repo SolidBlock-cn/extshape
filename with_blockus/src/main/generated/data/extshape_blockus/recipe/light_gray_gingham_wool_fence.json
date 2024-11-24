@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "patterned_wool_fence",
   "key": {
-    "#": {
-      "item": "minecraft:string"
-    },
-    "W": {
-      "item": "blockus:light_gray_gingham_wool"
-    }
+    "#": "minecraft:string",
+    "W": "blockus:light_gray_gingham_wool"
   },
   "pattern": [
     "W#W",

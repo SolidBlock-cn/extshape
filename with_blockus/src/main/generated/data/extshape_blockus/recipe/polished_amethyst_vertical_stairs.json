@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:polished_amethyst_stairs"
-    }
+    "blockus:polished_amethyst_stairs"
   ],
   "result": {
     "count": 1,

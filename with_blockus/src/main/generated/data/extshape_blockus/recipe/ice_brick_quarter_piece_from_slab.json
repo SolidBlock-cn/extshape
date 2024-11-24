@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape_blockus:ice_brick_slab"
-    }
+    "#": "extshape_blockus:ice_brick_slab"
   },
   "pattern": [
     "###"

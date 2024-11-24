@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "stained_stone_brick_pressure_plate",
   "key": {
-    "#": {
-      "item": "blockus:magenta_stone_bricks"
-    }
+    "#": "blockus:magenta_stone_bricks"
   },
   "pattern": [
     "##"

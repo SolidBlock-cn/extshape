@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:brick"
-    },
-    "W": {
-      "item": "blockus:soaked_bricks"
-    }
+    "#": "minecraft:brick",
+    "W": "blockus:soaked_bricks"
   },
   "pattern": [
     "#W#",

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "small_logs_slab",
   "key": {
-    "#": {
-      "item": "blockus:jungle_small_logs"
-    }
+    "#": "blockus:jungle_small_logs"
   },
   "pattern": [
     "###"

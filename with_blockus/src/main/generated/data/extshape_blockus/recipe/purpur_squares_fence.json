@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:purpur_block"
-    },
-    "W": {
-      "item": "blockus:purpur_squares"
-    }
+    "#": "minecraft:purpur_block",
+    "W": "blockus:purpur_squares"
   },
   "pattern": [
     "W#W",

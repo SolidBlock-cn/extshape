@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:chiseled_andesite_bricks"
-    }
+    "#": "blockus:chiseled_andesite_bricks"
   },
   "pattern": [
     "###"

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:wheat"
-    },
-    "W": {
-      "item": "blockus:thatch"
-    }
+    "#": "minecraft:wheat",
+    "W": "blockus:thatch"
   },
   "pattern": [
     "W#W",

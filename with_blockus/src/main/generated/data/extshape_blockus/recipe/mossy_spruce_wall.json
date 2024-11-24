@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "mossy_wooden_wall",
   "key": {
-    "#": {
-      "item": "blockus:mossy_spruce_planks"
-    }
+    "#": "blockus:mossy_spruce_planks"
   },
   "pattern": [
     "###",

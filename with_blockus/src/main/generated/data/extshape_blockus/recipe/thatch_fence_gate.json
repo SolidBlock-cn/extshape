@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "minecraft:wheat"
-    },
-    "W": {
-      "item": "blockus:thatch"
-    }
+    "#": "minecraft:wheat",
+    "W": "blockus:thatch"
   },
   "pattern": [
     "#W#",

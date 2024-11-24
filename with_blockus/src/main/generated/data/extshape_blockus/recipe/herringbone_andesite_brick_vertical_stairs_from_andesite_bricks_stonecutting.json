@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:andesite_bricks"
-  },
+  "ingredient": "blockus:andesite_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:herringbone_andesite_brick_vertical_stairs"

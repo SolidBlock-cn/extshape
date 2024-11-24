@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:sculk_vein"
-    },
-    "W": {
-      "item": "blockus:chiseled_sculk_bricks"
-    }
+    "#": "minecraft:sculk_vein",
+    "W": "blockus:chiseled_sculk_bricks"
   },
   "pattern": [
     "W#W",

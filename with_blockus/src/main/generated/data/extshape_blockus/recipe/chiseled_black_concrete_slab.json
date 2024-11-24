@@ -3,9 +3,7 @@
   "category": "building",
   "group": "chiseled_concrete_brick_slab",
   "key": {
-    "#": {
-      "item": "blockus:chiseled_black_concrete"
-    }
+    "#": "blockus:chiseled_black_concrete"
   },
   "pattern": [
     "###"

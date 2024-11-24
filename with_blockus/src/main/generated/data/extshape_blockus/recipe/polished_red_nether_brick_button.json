@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "blockus:polished_red_nether_bricks"
-    }
+    "blockus:polished_red_nether_bricks"
   ],
   "result": {
     "count": 1,

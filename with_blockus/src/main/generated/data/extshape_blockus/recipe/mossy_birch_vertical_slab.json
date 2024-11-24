@@ -3,9 +3,7 @@
   "category": "building",
   "group": "mossy_wooden_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "blockus:mossy_birch_slab"
-    }
+    "blockus:mossy_birch_slab"
   ],
   "result": {
     "count": 1,

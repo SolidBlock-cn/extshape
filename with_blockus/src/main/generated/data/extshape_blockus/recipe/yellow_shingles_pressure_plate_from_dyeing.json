@@ -3,12 +3,8 @@
   "category": "building",
   "group": "shingles_pressure_plate_from_dyeing",
   "key": {
-    "#": {
-      "item": "minecraft:yellow_dye"
-    },
-    "X": {
-      "item": "extshape_blockus:shingles_pressure_plate"
-    }
+    "#": "minecraft:yellow_dye",
+    "X": "extshape_blockus:shingles_pressure_plate"
   },
   "pattern": [
     "XXX",

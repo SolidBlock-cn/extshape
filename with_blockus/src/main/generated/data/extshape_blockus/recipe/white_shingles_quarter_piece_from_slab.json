@@ -3,9 +3,7 @@
   "category": "building",
   "group": "shingles_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "blockus:white_shingles_slab"
-    }
+    "#": "blockus:white_shingles_slab"
   },
   "pattern": [
     "###"

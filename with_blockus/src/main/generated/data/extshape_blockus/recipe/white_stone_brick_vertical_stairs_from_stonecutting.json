@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:white_stone_bricks"
-  },
+  "ingredient": "blockus:white_stone_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:white_stone_brick_vertical_stairs"

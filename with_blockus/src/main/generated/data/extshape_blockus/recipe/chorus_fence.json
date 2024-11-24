@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:chorus_plant"
-    },
-    "W": {
-      "item": "blockus:chorus_block"
-    }
+    "#": "minecraft:chorus_plant",
+    "W": "blockus:chorus_block"
   },
   "pattern": [
     "W#W",

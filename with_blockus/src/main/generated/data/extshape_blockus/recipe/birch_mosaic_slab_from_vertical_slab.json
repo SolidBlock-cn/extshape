@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape_blockus:birch_mosaic_vertical_slab"
-    }
+    "extshape_blockus:birch_mosaic_vertical_slab"
   ],
   "result": {
     "count": 1,

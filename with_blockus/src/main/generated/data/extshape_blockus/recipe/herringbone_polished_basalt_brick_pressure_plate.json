@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:herringbone_polished_basalt_bricks"
-    }
+    "#": "blockus:herringbone_polished_basalt_bricks"
   },
   "pattern": [
     "##"

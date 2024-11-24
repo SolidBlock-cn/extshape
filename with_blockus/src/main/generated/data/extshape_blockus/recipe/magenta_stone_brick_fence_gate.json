@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "stained_stone_brick_fence_gate",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:magenta_stone_bricks"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:magenta_stone_bricks"
   },
   "pattern": [
     "#W#",

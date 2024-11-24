@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:lava_bricks"
-    }
+    "#": "blockus:lava_bricks"
   },
   "pattern": [
     "##"

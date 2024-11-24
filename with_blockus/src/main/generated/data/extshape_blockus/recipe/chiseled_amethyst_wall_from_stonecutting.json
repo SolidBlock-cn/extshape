@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:chiseled_amethyst"
-  },
+  "ingredient": "blockus:chiseled_amethyst",
   "result": {
     "count": 1,
     "id": "extshape_blockus:chiseled_amethyst_wall"

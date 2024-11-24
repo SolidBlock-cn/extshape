@@ -45,7 +45,7 @@ allprojects {
         // Fabric API
         modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
         // ModMenu 模组
-//        modImplementation ("com.terraformersmc:modmenu:${project.modmenu_version}")
+        modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
         // 下面两个模组均存储于本地的 maven 仓库。
 
@@ -128,7 +128,7 @@ subprojects {
     dependencies {
     }
 }
-/*
+
 project(':runtest') {
     repositories {
         // Mods on CurseForge
@@ -141,7 +141,7 @@ project(':runtest') {
     }
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
-//        implementation project(path: ':with_blockus', configuration: "namedElements")
+        implementation project(path: ':with_blockus', configuration: "namedElements")
         if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
             modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
         }
@@ -153,7 +153,7 @@ project(':runtest') {
     [tasks.remapJar, tasks.remapSourcesJar, tasks.build].each {
         it.enabled = false
     }
-}*/
+}
 
 
 /**

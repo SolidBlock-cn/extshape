@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:rough_basalt_slab"
-    }
+    "blockus:rough_basalt_slab"
   ],
   "result": {
     "count": 1,

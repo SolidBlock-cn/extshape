@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:paper"
-    },
-    "W": {
-      "item": "blockus:paper_block"
-    }
+    "#": "minecraft:paper",
+    "W": "blockus:paper_block"
   },
   "pattern": [
     "W#W",

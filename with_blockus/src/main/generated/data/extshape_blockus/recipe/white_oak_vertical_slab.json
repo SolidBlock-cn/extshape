@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:white_oak_slab"
-    }
+    "blockus:white_oak_slab"
   ],
   "result": {
     "count": 1,

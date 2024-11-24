@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:rough_sandstone"
-  },
+  "ingredient": "blockus:rough_sandstone",
   "result": {
     "count": 1,
     "id": "extshape_blockus:rough_sandstone_vertical_stairs"

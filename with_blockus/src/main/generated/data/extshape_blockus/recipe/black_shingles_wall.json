@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "shingles_wall",
   "key": {
-    "#": {
-      "item": "blockus:black_shingles"
-    }
+    "#": "blockus:black_shingles"
   },
   "pattern": [
     "###",

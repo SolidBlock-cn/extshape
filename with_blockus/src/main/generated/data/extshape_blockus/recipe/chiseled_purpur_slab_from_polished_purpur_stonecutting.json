@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:polished_purpur"
-  },
+  "ingredient": "blockus:polished_purpur",
   "result": {
     "count": 2,
     "id": "extshape_blockus:chiseled_purpur_slab"

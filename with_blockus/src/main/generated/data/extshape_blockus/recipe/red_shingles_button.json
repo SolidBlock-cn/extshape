@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "shingles_button",
   "ingredients": [
-    {
-      "item": "blockus:red_shingles"
-    }
+    "blockus:red_shingles"
   ],
   "result": {
     "count": 1,

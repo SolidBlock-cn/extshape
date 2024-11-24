@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:dripstone_brick_slab"
-    }
+    "#": "blockus:dripstone_brick_slab"
   },
   "pattern": [
     "###"

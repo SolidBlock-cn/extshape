@@ -3,12 +3,8 @@
   "category": "building",
   "group": "stained_stone_brick_quarter_piece_from_dyeing",
   "key": {
-    "#": {
-      "item": "minecraft:black_dye"
-    },
-    "X": {
-      "item": "extshape:stone_brick_quarter_piece"
-    }
+    "#": "minecraft:black_dye",
+    "X": "extshape:stone_brick_quarter_piece"
   },
   "pattern": [
     "XXX",

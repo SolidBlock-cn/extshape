@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "blockus:chiseled_bluestone"
-    }
+    "#": "blockus:chiseled_bluestone"
   },
   "pattern": [
     "###",

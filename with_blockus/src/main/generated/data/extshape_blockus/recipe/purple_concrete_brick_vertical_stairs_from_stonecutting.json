@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:purple_concrete_bricks"
-  },
+  "ingredient": "blockus:purple_concrete_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:purple_concrete_brick_vertical_stairs"

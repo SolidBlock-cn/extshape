@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:chiseled_yellow_concrete"
-  },
+  "ingredient": "blockus:chiseled_yellow_concrete",
   "result": {
     "count": 2,
     "id": "extshape_blockus:chiseled_yellow_concrete_slab"

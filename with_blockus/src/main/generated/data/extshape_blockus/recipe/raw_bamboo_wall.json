@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "blockus:raw_bamboo_planks"
-    }
+    "#": "blockus:raw_bamboo_planks"
   },
   "pattern": [
     "###",

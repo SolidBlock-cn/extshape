@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape_blockus:chiseled_amethyst_slab"
-    }
+    "extshape_blockus:chiseled_amethyst_slab"
   ],
   "result": {
     "count": 1,

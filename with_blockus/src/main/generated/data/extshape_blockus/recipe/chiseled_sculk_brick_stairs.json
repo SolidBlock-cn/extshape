@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:chiseled_sculk_bricks"
-    }
+    "#": "blockus:chiseled_sculk_bricks"
   },
   "pattern": [
     "#  ",

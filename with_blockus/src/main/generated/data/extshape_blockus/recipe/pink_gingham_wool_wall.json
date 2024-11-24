@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "patterned_wool_wall",
   "key": {
-    "#": {
-      "item": "blockus:pink_gingham_wool"
-    }
+    "#": "blockus:pink_gingham_wool"
   },
   "pattern": [
     "###",

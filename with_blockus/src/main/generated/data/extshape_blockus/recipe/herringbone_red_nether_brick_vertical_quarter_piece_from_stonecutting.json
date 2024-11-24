@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:herringbone_red_nether_bricks"
-  },
+  "ingredient": "blockus:herringbone_red_nether_bricks",
   "result": {
     "count": 4,
     "id": "extshape_blockus:herringbone_red_nether_brick_vertical_quarter_piece"

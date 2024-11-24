@@ -15,7 +15,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.Texts;
@@ -134,7 +133,6 @@ public final class RecipeConflict {
     final ServerCommandSource source = context.getSource();
     source.sendFeedback(() -> Text.translatable("message.extshape.recipe_conflict.start"), true);
     final ServerWorld world = source.getWorld();
-    final ServerPlayerEntity player = source.getPlayerOrThrow();
     final Predicate<Identifier> predicate;
     if (namespace == null) {
       predicate = null;

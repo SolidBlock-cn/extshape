@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:quartz_tile_stairs"
-    }
+    "blockus:quartz_tile_stairs"
   ],
   "result": {
     "count": 1,

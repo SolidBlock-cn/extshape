@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:chiseled_viridite"
-  },
+  "ingredient": "blockus:chiseled_viridite",
   "result": {
     "count": 1,
     "id": "extshape_blockus:chiseled_viridite_vertical_stairs"

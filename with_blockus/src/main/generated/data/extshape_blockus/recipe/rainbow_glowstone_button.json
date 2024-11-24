@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "blockus:rainbow_glowstone"
-    }
+    "blockus:rainbow_glowstone"
   ],
   "result": {
     "count": 1,

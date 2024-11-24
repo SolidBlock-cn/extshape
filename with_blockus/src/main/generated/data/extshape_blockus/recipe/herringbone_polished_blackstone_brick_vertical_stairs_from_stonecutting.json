@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:herringbone_polished_blackstone_bricks"
-  },
+  "ingredient": "blockus:herringbone_polished_blackstone_bricks",
   "result": {
     "count": 1,
     "id": "extshape_blockus:herringbone_polished_blackstone_brick_vertical_stairs"

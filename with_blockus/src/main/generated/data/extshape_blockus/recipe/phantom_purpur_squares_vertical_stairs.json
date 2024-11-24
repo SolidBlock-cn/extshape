@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "extshape_blockus:phantom_purpur_squares_stairs"
-    }
+    "extshape_blockus:phantom_purpur_squares_stairs"
   ],
   "result": {
     "count": 1,

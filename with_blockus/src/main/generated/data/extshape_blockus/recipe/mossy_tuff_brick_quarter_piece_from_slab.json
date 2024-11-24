@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:mossy_tuff_brick_slab"
-    }
+    "#": "blockus:mossy_tuff_brick_slab"
   },
   "pattern": [
     "###"

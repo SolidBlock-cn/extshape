@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:small_end_stone_bricks"
-    }
+    "#": "blockus:small_end_stone_bricks"
   },
   "pattern": [
     "##"

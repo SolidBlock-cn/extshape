@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:small_bluestone_bricks"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:small_bluestone_bricks"
   },
   "pattern": [
     "W#W",

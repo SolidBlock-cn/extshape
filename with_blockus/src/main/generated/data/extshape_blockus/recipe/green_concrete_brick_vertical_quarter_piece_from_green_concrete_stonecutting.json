@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:green_concrete"
-  },
+  "ingredient": "minecraft:green_concrete",
   "result": {
     "count": 4,
     "id": "extshape_blockus:green_concrete_brick_vertical_quarter_piece"

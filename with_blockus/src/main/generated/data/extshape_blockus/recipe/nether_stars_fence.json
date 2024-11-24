@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:nether_star"
-    },
-    "W": {
-      "item": "blockus:nether_stars_block"
-    }
+    "#": "minecraft:nether_star",
+    "W": "blockus:nether_stars_block"
   },
   "pattern": [
     "W#W",

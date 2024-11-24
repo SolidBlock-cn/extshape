@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "wooden_mosaic_wall",
   "key": {
-    "#": {
-      "item": "blockus:birch_mosaic"
-    }
+    "#": "blockus:birch_mosaic"
   },
   "pattern": [
     "###",

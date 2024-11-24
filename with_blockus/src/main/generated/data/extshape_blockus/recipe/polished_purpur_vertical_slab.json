@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:polished_purpur_slab"
-    }
+    "blockus:polished_purpur_slab"
   ],
   "result": {
     "count": 1,

@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "glazed_terracotta_pillar_wall",
   "key": {
-    "#": {
-      "item": "blockus:purple_glazed_terracotta_pillar"
-    }
+    "#": "blockus:purple_glazed_terracotta_pillar"
   },
   "pattern": [
     "###",

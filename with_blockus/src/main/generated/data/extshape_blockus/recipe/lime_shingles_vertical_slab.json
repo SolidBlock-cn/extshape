@@ -3,9 +3,7 @@
   "category": "building",
   "group": "shingles_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "blockus:lime_shingles_slab"
-    }
+    "blockus:lime_shingles_slab"
   ],
   "result": {
     "count": 1,

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:nether_tiles"
-  },
+  "ingredient": "blockus:nether_tiles",
   "result": {
     "count": 4,
     "id": "extshape_blockus:nether_tile_vertical_quarter_piece"

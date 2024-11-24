@@ -3,9 +3,7 @@
   "category": "building",
   "group": "mossy_wooden_quarter_piece_from_slab",
   "key": {
-    "#": {
-      "item": "blockus:mossy_jungle_slab"
-    }
+    "#": "blockus:mossy_jungle_slab"
   },
   "pattern": [
     "###"

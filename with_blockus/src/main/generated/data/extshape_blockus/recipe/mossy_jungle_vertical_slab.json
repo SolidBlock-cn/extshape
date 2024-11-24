@@ -3,9 +3,7 @@
   "category": "building",
   "group": "mossy_wooden_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "blockus:mossy_jungle_slab"
-    }
+    "blockus:mossy_jungle_slab"
   ],
   "result": {
     "count": 1,

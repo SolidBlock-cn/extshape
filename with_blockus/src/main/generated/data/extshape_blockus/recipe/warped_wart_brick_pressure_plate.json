@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:warped_wart_bricks"
-    }
+    "#": "blockus:warped_wart_bricks"
   },
   "pattern": [
     "##"

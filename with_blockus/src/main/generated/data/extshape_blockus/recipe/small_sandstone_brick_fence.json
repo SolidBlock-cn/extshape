@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:sand"
-    },
-    "W": {
-      "item": "blockus:small_sandstone_bricks"
-    }
+    "#": "minecraft:sand",
+    "W": "blockus:small_sandstone_bricks"
   },
   "pattern": [
     "W#W",

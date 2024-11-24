@@ -3,12 +3,8 @@
   "category": "building",
   "group": "shingles_vertical_stairs_from_dyeing",
   "key": {
-    "#": {
-      "item": "minecraft:black_dye"
-    },
-    "X": {
-      "item": "extshape_blockus:shingles_vertical_stairs"
-    }
+    "#": "minecraft:black_dye",
+    "X": "extshape_blockus:shingles_vertical_stairs"
   },
   "pattern": [
     "XXX",

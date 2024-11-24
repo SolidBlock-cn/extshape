@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:end_stone_bricks"
-    },
-    "W": {
-      "item": "blockus:small_end_stone_bricks"
-    }
+    "#": "minecraft:end_stone_bricks",
+    "W": "blockus:small_end_stone_bricks"
   },
   "pattern": [
     "W#W",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:limestone_tile_slab"
-    }
+    "#": "blockus:limestone_tile_slab"
   },
   "pattern": [
     "###"

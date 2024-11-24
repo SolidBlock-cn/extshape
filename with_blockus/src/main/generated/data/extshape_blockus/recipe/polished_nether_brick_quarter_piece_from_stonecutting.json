@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:polished_nether_bricks"
-  },
+  "ingredient": "blockus:polished_nether_bricks",
   "result": {
     "count": 4,
     "id": "extshape_blockus:polished_nether_brick_quarter_piece"

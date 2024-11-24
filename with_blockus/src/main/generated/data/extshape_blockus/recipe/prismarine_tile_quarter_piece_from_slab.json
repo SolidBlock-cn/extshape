@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:prismarine_tile_slab"
-    }
+    "#": "blockus:prismarine_tile_slab"
   },
   "pattern": [
     "###"

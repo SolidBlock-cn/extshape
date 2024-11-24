@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:lapis_brick_slab"
-    }
+    "blockus:lapis_brick_slab"
   ],
   "result": {
     "count": 1,

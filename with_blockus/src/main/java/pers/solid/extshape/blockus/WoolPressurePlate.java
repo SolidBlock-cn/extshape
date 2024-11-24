@@ -21,11 +21,11 @@ public class WoolPressurePlate extends ExtShapePressurePlateBlock {
   }
 
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
-    return ShapedRecipeJsonBuilder.create(getRecipeCategory(), this)
+  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
+    return recipeGenerator.createShaped(getRecipeCategory(), this)
         .pattern("###")
         .input('#', carpet)
-        .criterion(RecipeProvider.hasItem(carpet), RecipeProvider.conditionsFromItem(carpet))
+        .criterion(RecipeGenerator.hasItem(carpet), recipeGenerator.conditionsFromItem(carpet))
         .group(getRecipeGroup());
   }
 }

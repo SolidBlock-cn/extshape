@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:chocolate_brick_slab"
-    }
+    "#": "blockus:chocolate_brick_slab"
   },
   "pattern": [
     "###"

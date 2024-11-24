@@ -10,7 +10,6 @@ import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.WoodType;
@@ -682,42 +681,40 @@ public final class ExtShapeBlockusBlocks {
     markStoneCuttableWhenCreating = false;
 
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
-    final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFuel = (blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape.logicalCompleteness * 300));
     FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG)
         .setPillar()
         .addPostBuildConsumer(logFlammable)
-        .addPostBuildConsumer(logFuel)
+        .fuelTime(300)
         .build();
     FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG)
         .setPillar()
         .addPostBuildConsumer(logFlammable)
-        .addPostBuildConsumer(logFuel)
+        .fuelTime(300)
         .build();
     FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar()
         .addPostBuildConsumer(logFlammable)
-        .addPostBuildConsumer(logFuel)
+        .fuelTime(300)
         .build();
     FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar()
         .addPostBuildConsumer(logFlammable)
-        .addPostBuildConsumer(logFuel)
+        .fuelTime(300)
         .build();
 
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20);
-    final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFuel = (blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape.logicalCompleteness * 300));
     create(BlockusBlocks.WHITE_OAK)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .addPostBuildConsumer(plankFlammable)
-        .addPostBuildConsumer(plankFuel)
+        .fuelTime(300)
         .build();
     create(BlockusBlocks.RAW_BAMBOO)
         .setActivationSettings(ActivationSettings.BAMBOO)
         .setFenceSettings(new FenceSettings(Items.BAMBOO, WoodType.BAMBOO))
         .addPostBuildConsumer(plankFlammable)
-        .addPostBuildConsumer(plankFuel)
+        .fuelTime(300)
         .build();
     create(BlockusBlocks.CHARRED)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
@@ -749,7 +746,7 @@ public final class ExtShapeBlockusBlocks {
             .without(BlockShape.STAIRS, BlockShape.SLAB)
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
-            .addPostBuildConsumer(plankFuel)
+            .fuelTime(300)
             .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.asString())
             .build();
       }
@@ -765,7 +762,7 @@ public final class ExtShapeBlockusBlocks {
         FACTORY.createConstructionOnly(block)
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
-            .addPostBuildConsumer(plankFuel)
+            .fuelTime(300)
             .setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString())
             .build();
       }
@@ -780,7 +777,7 @@ public final class ExtShapeBlockusBlocks {
         FACTORY.createConstructionOnly(block)
             .setPillar()
             .addPostBuildConsumer(logFlammable)
-            .addPostBuildConsumer(logFuel)
+            .fuelTime(300)
             .setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString())
             .build();
       }
@@ -891,7 +888,7 @@ public final class ExtShapeBlockusBlocks {
             }
           })
           .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60))
-          .addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness)))
+          .fuelTime(100)
           .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString())
           .setActivationSettings(ActivationSettings.WOOL)
           .setFenceSettings(FenceSettings.WOOL)
@@ -914,10 +911,8 @@ public final class ExtShapeBlockusBlocks {
         .setFenceSettings(new FenceSettings(Items.WHEAT, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
         .build();
     create(BlockusBlocks.PAPER_BLOCK)
-        .addPostBuildConsumer((blockShape3, blockBuilder2) -> {
-          FlammableBlockRegistry.getDefaultInstance().add(blockBuilder2.instance, 30, 60);
-          FuelRegistry.INSTANCE.add(blockBuilder2.instance, (int) (blockShape3.logicalCompleteness * 100));
-        })
+        .addPostBuildConsumer((blockShape3, blockBuilder2) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder2.instance, 30, 60))
+        .fuelTime(100)
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.PAPER, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
         .build();
@@ -941,7 +936,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.CHARCOAL_BLOCK)
         .markStoneCuttable()
         .setStoneFenceSettings(Items.CHARCOAL)
-        .addPostBuildConsumer((blockShape1, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (blockShape1.logicalCompleteness * 16000)))
+        .fuelTime(16000)
         .build();
 
     // sugar 没有，因为是下落方块，不符合条件。

@@ -3,9 +3,7 @@
   "category": "building",
   "group": "small_logs_stairs",
   "key": {
-    "#": {
-      "item": "blockus:jungle_small_logs"
-    }
+    "#": "blockus:jungle_small_logs"
   },
   "pattern": [
     "#  ",

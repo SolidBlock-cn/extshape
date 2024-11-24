@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:polished_marble_slab"
-    }
+    "blockus:polished_marble_slab"
   ],
   "result": {
     "count": 1,

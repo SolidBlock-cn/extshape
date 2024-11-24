@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:lava_bricks"
-  },
+  "ingredient": "blockus:lava_bricks",
   "result": {
     "count": 4,
     "id": "extshape_blockus:lava_brick_quarter_piece"

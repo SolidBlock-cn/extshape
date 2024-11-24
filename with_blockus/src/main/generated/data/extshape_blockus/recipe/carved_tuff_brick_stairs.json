@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "blockus:carved_tuff_bricks"
-    }
+    "#": "blockus:carved_tuff_bricks"
   },
   "pattern": [
     "#  ",

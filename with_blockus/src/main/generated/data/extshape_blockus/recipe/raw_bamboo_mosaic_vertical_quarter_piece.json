@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_mosaic_vertical_quarter_piece_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape_blockus:raw_bamboo_mosaic_quarter_piece"
-    }
+    "extshape_blockus:raw_bamboo_mosaic_quarter_piece"
   ],
   "result": {
     "count": 1,

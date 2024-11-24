@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:shingles_stairs"
-    }
+    "blockus:shingles_stairs"
   ],
   "result": {
     "count": 1,

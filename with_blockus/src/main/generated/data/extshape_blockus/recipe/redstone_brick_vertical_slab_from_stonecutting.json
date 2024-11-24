@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:redstone_bricks"
-  },
+  "ingredient": "blockus:redstone_bricks",
   "result": {
     "count": 2,
     "id": "extshape_blockus:redstone_brick_vertical_slab"

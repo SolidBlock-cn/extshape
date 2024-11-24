@@ -3,9 +3,7 @@
   "category": "building",
   "group": "small_logs_vertical_slab_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape_blockus:crimson_small_stems_slab"
-    }
+    "extshape_blockus:crimson_small_stems_slab"
   ],
   "result": {
     "count": 1,

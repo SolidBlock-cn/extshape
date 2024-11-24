@@ -3,9 +3,7 @@
   "category": "building",
   "group": "glazed_terracotta_pillar_vertical_quarter_piece_from_rotation",
   "ingredients": [
-    {
-      "item": "extshape_blockus:pink_glazed_terracotta_pillar_quarter_piece"
-    }
+    "extshape_blockus:pink_glazed_terracotta_pillar_quarter_piece"
   ],
   "result": {
     "count": 1,

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:white_oak_stairs"
-    }
+    "blockus:white_oak_stairs"
   ],
   "result": {
     "count": 1,

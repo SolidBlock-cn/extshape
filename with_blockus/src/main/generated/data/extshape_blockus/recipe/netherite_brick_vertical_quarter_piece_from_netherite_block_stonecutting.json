@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:netherite_block"
-  },
+  "ingredient": "minecraft:netherite_block",
   "result": {
     "count": 4,
     "id": "extshape_blockus:netherite_brick_vertical_quarter_piece"

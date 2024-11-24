@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "blockus:shingles"
-    }
+    "blockus:shingles"
   ],
   "result": {
     "count": 1,

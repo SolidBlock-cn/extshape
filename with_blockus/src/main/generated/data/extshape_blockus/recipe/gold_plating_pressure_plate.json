@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:gold_plating"
-    }
+    "#": "blockus:gold_plating"
   },
   "pattern": [
     "##"

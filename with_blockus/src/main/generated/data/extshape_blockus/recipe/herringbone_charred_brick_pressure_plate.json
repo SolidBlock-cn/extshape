@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:herringbone_charred_bricks"
-    }
+    "#": "blockus:herringbone_charred_bricks"
   },
   "pattern": [
     "##"

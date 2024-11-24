@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:chocolate_bricks"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:chocolate_bricks"
   },
   "pattern": [
     "W#W",

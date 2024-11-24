@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:gold_plating_stairs"
-    }
+    "blockus:gold_plating_stairs"
   ],
   "result": {
     "count": 1,

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:warped_warty_blackstone_bricks"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:warped_warty_blackstone_bricks"
   },
   "pattern": [
     "W#W",

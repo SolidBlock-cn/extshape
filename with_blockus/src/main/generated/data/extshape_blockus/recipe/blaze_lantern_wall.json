@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "blockus:blaze_lantern"
-    }
+    "#": "blockus:blaze_lantern"
   },
   "pattern": [
     "###",

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:rainbow_glowstone"
-  },
+  "ingredient": "blockus:rainbow_glowstone",
   "result": {
     "count": 4,
     "id": "extshape_blockus:rainbow_glowstone_quarter_piece"

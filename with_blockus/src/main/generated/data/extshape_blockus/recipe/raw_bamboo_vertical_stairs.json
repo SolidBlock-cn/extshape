@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:raw_bamboo_stairs"
-    }
+    "blockus:raw_bamboo_stairs"
   ],
   "result": {
     "count": 1,

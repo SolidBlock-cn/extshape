@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "blockus:charred_planks"
-    }
+    "#": "blockus:charred_planks"
   },
   "pattern": [
     "###",

@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:snow_brick_slab"
-  },
+  "ingredient": "blockus:snow_brick_slab",
   "result": {
     "count": 2,
     "id": "extshape_blockus:snow_brick_quarter_piece"

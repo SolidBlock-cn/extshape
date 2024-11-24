@@ -3,12 +3,8 @@
   "category": "building",
   "group": "shingles_fence_from_dyeing",
   "key": {
-    "#": {
-      "item": "minecraft:green_dye"
-    },
-    "X": {
-      "item": "extshape_blockus:shingles_fence"
-    }
+    "#": "minecraft:green_dye",
+    "X": "extshape_blockus:shingles_fence"
   },
   "pattern": [
     "XXX",

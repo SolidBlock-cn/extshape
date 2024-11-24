@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:honeycomb_brick_slab"
-    }
+    "blockus:honeycomb_brick_slab"
   ],
   "result": {
     "count": 1,

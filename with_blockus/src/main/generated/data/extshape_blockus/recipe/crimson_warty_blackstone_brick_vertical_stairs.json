@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:crimson_warty_blackstone_brick_stairs"
-    }
+    "blockus:crimson_warty_blackstone_brick_stairs"
   ],
   "result": {
     "count": 1,

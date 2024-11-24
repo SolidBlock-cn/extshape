@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    {
-      "item": "blockus:quartz_tile_slab"
-    }
+    "blockus:quartz_tile_slab"
   ],
   "result": {
     "count": 1,

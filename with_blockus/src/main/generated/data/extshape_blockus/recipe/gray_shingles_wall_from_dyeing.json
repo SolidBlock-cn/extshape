@@ -3,12 +3,8 @@
   "category": "building",
   "group": "shingles_wall_from_dyeing",
   "key": {
-    "#": {
-      "item": "minecraft:gray_dye"
-    },
-    "X": {
-      "item": "extshape_blockus:shingles_wall"
-    }
+    "#": "minecraft:gray_dye",
+    "X": "extshape_blockus:shingles_wall"
   },
   "pattern": [
     "XXX",

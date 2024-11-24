@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:cracked_tuff_bricks"
-    }
+    "#": "blockus:cracked_tuff_bricks"
   },
   "pattern": [
     "##"

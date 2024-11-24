@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "shingles_fence_gate",
   "key": {
-    "#": {
-      "item": "minecraft:flint"
-    },
-    "W": {
-      "item": "blockus:red_shingles"
-    }
+    "#": "minecraft:flint",
+    "W": "blockus:red_shingles"
   },
   "pattern": [
     "#W#",

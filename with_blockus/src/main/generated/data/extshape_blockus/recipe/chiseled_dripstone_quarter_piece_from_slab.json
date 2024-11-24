@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "extshape_blockus:chiseled_dripstone_slab"
-    }
+    "#": "extshape_blockus:chiseled_dripstone_slab"
   },
   "pattern": [
     "###"

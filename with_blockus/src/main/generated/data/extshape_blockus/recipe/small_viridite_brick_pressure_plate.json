@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "blockus:small_viridite_bricks"
-    }
+    "#": "blockus:small_viridite_bricks"
   },
   "pattern": [
     "##"

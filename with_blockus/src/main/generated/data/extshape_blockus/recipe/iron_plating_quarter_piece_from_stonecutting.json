@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:iron_plating"
-  },
+  "ingredient": "blockus:iron_plating",
   "result": {
     "count": 4,
     "id": "extshape_blockus:iron_plating_quarter_piece"

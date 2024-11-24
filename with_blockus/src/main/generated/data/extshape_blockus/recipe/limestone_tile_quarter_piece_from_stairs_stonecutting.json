@@ -1,8 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "blockus:limestone_tile_stairs"
-  },
+  "ingredient": "blockus:limestone_tile_stairs",
   "result": {
     "count": 3,
     "id": "extshape_blockus:limestone_tile_quarter_piece"

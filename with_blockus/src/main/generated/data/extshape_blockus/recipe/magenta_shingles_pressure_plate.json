@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "shingles_pressure_plate",
   "key": {
-    "#": {
-      "item": "blockus:magenta_shingles"
-    }
+    "#": "blockus:magenta_shingles"
   },
   "pattern": [
     "##"
