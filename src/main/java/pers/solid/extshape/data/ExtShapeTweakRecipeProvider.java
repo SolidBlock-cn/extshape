@@ -58,19 +58,23 @@ public class ExtShapeTweakRecipeProvider extends RecipeGenerator {
     }
 
     // 苔藓的特殊合成配方：覆地苔藓 ↔ 苔藓压力板
-    {
-      final ExtShapePressurePlateBlock mossPressurePlate = (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, Blocks.MOSS_BLOCK);
-      Preconditions.checkNotNull(mossPressurePlate, "moss pressure plate block");
-      createShaped(mossPressurePlate.getRecipeCategory(), mossPressurePlate)
+    final var carpetAndPlate = List.of(
+        Pair.of(Blocks.MOSS_CARPET, (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, Blocks.MOSS_BLOCK)),
+        Pair.of(Blocks.PALE_MOSS_CARPET, (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, Blocks.PALE_MOSS_BLOCK))
+    );
+    for (var pair : carpetAndPlate) {
+      var carpet = pair.getFirst();
+      var pressurePlate = Preconditions.checkNotNull(pair.getSecond(), "pressure plate of %s", carpet);
+      createShaped(pressurePlate.getRecipeCategory(), pressurePlate)
           .pattern("###")
-          .input('#', Items.MOSS_CARPET)
-          .criterion(hasItem(Items.MOSS_CARPET), conditionsFromItem(Items.MOSS_CARPET))
-          .group(mossPressurePlate.getRecipeGroup())
+          .input('#', carpet)
+          .criterion(hasItem(carpet), conditionsFromItem(carpet))
+          .group(pressurePlate.getRecipeGroup())
           .offerTo(exporter);
-      final Identifier reverseRecipeId = ExtShape.id("moss_carpet_from_pressure_plate");
-      createShapeless(mossPressurePlate.getRecipeCategory(), Blocks.MOSS_CARPET, 3)
-          .input(Ingredient.ofItems(mossPressurePlate))
-          .criterion("has_pressure_plate", conditionsFromItem(mossPressurePlate))
+      final Identifier reverseRecipeId = ExtShape.id(Registries.ITEM.getId(carpet.asItem()).getPath() + "_from_pressure_plate");
+      createShapeless(pressurePlate.getRecipeCategory(), carpet, 3)
+          .input(Ingredient.ofItems(pressurePlate))
+          .criterion("has_pressure_plate", conditionsFromItem(pressurePlate))
           .offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, reverseRecipeId));
     }
 
