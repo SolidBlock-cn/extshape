@@ -8,8 +8,6 @@
     "AbstractBlockStateAccessor",
     "AxeItemMixin",
     "BlockAccessor",
-    "BlockStateModelGeneratorAccessor",
-    "BlockTexturePoolAccessor",
     "ButtonBlockAccessor",
     "DisplayContextMixin",
     "FenceGateAccessor",
@@ -21,12 +19,14 @@
     "ShearsItemMixin",
     "SnowyBlockMixin",
     "StonecuttingRecipeJsonBuilderAccessor",
-    "TextureMapAccessor",
-    "ToolComponentMixin",
     "TranslatableTextContentAccessor",
     "TranslatableTextContentMixin"
   ],
   "client": [
+    "BlockStateModelGeneratorAccessor",
+    "BlockTexturePoolAccessor",
+    "TextureMapAccessor",
+    "ToolComponentMixin"
   ],
   "injectors": {
     "defaultRequire": 1

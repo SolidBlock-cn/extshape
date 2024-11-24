@@ -3,7 +3,7 @@ package pers.solid.extshape.block;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;

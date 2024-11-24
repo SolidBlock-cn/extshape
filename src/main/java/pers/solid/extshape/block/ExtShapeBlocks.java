@@ -401,12 +401,12 @@ public final class ExtShapeBlocks {
     // 树脂的各种方块
     FACTORY.createAllShapes(RESIN_BLOCK)
         .setFenceSettings(FenceSettings.RESIN_BLOCK)
-        .setActivationSettings(ActivationSettings.STONE)
+        .setActivationSettings(ActivationSettings.RESIN)
         .build();
     FACTORY.createAllShapes(RESIN_BRICKS)
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.RESIN_BRICKS)
-        .setActivationSettings(ActivationSettings.STONE)
+        .setActivationSettings(ActivationSettings.RESIN_BRICKS)
         .build();
 
     // 下界砖块的栅栏门、按钮和压力板。
@@ -649,7 +649,7 @@ public final class ExtShapeBlocks {
     CopperManager.COPPER.registerBlocks(FACTORY);
     CopperManager.CUT_COPPER.registerBlocks(FACTORY);
 
-    // 滴水石、苔藓。
+    // 滴水石、苔藓、苍白苔藓。
     FACTORY.createAllShapes(DRIPSTONE_BLOCK)
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.DRIPSTONE)

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extshape:block/pale_moss_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/pale_moss_block"
+    },
+    "type=top": {
+      "model": "extshape:block/pale_moss_slab_top"
+    }
+  }
+}
