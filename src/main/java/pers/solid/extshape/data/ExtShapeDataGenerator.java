@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 import pers.solid.extshape.ExtShape;
 
 public class ExtShapeDataGenerator implements DataGeneratorEntrypoint {
@@ -38,6 +39,11 @@ public class ExtShapeDataGenerator implements DataGeneratorEntrypoint {
       @Override
       protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registryLookup, RecipeExporter exporter) {
         return new ExtShapeTweakRecipeProvider(registryLookup, exporter);
+      }
+
+      @Override
+      protected Identifier getRecipeIdentifier(Identifier identifier) {
+        return identifier;
       }
     });
   }

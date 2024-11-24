@@ -677,6 +677,12 @@ public final class ExtShapeBlocks {
         .compostingChance(0.65f)
         .setActivationSettings(ActivationSettings.MOSS)
         .build();
+    FACTORY.createAllShapes(PALE_MOSS_BLOCK)
+        .setFenceSettings(new FenceSettings(Items.PALE_MOSS_CARPET, ExtShapeBlockTypes.MOSS_BLOCK_WOOD_TYPE))
+        .compostingChance(0.65f)
+        .setActivationSettings(ActivationSettings.MOSS)
+        .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(abstractBlockBuilder.instance, 5, 100))
+        .build();
 
     // 深板岩。
     FACTORY.createAllShapes(DEEPSLATE)
