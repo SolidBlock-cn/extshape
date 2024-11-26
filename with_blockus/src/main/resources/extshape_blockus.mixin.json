@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "pers.solid.extshape.blockus.mixin",
   "mixins": [
+    "BlockusSchemasMixin"
   ],
   "injectors": {
     "defaultRequire": 1

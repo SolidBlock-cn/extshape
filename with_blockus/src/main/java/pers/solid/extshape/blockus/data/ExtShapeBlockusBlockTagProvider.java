@@ -47,7 +47,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     // region mineable 方块标签
 
     addForShapes(BlockTags.PICKAXE_MINEABLE,
-        BlockusBlocks.CHISELED_MUD_BRICKS,
         BlockusBlocks.CRIMSON_WART_BRICKS.block,
         BlockusBlocks.WARPED_WART_BRICKS.block,
         BlockusBlocks.NETHER_TILES.block,
@@ -92,33 +91,29 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     addForShapes(BlockusBlockTags.ANDESITE_BLOCKS,
         BlockusBlocks.ANDESITE_BRICKS.block,
-        BlockusBlocks.CHISELED_ANDESITE_BRICKS,
         BlockusBlocks.HERRINGBONE_ANDESITE_BRICKS,
         BlockusBlocks.ANDESITE_CIRCULAR_PAVING
     );
 
     addForShapes(BlockusBlockTags.DIORITE_BLOCKS,
         BlockusBlocks.DIORITE_BRICKS.block,
-        BlockusBlocks.CHISELED_DIORITE_BRICKS,
         BlockusBlocks.HERRINGBONE_DIORITE_BRICKS,
         BlockusBlocks.DIORITE_CIRCULAR_PAVING
     );
 
     addForShapes(BlockusBlockTags.GRANITE_BLOCKS,
         BlockusBlocks.GRANITE_BRICKS.block,
-        BlockusBlocks.CHISELED_GRANITE_BRICKS,
         BlockusBlocks.HERRINGBONE_GRANITE_BRICKS,
         BlockusBlocks.GRANITE_CIRCULAR_PAVING);
 
     addForShapes(BlockusBlockTags.DRIPSTONE_BLOCKS,
         BlockusBlocks.POLISHED_DRIPSTONE.block,
         BlockusBlocks.DRIPSTONE_BRICKS.block,
-        BlockusBlocks.CHISELED_DRIPSTONE);
+        BlockusBlocks.MOSSY_DRIPSTONE_BRICKS.block);
 
     addForShapes(BlockusBlockTags.TUFF_BLOCKS,
         BlockusBlocks.MOSSY_TUFF_BRICKS.block,
-        BlockusBlocks.CRACKED_TUFF_BRICKS,
-        BlockusBlocks.CARVED_TUFF_BRICKS,
+        BlockusBlocks.TUFF_TILES.block,
         BlockusBlocks.HERRINGBONE_TUFF_BRICKS,
         BlockusBlocks.TUFF_CIRCULAR_PAVING);
 
@@ -129,13 +124,11 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     addForShapes(BlockusBlockTags.SCULK_BLOCKS,
         BlockusBlocks.POLISHED_SCULK.block,
-        BlockusBlocks.SCULK_BRICKS.block,
-        BlockusBlocks.CHISELED_SCULK_BRICKS);
+        BlockusBlocks.SCULK_BRICKS.block);
 
     addForShapes(BlockusBlockTags.AMETHYST_BLOCKS,
         BlockusBlocks.POLISHED_AMETHYST.block,
-        BlockusBlocks.AMETHYST_BRICKS.block,
-        BlockusBlocks.CHISELED_AMETHYST);
+        BlockusBlocks.AMETHYST_BRICKS.block);
 
     addForShapes(BlockusBlockTags.BLACKSTONE_BLOCKS,
         BlockusBlocks.POLISHED_BLACKSTONE_TILES.block,
@@ -158,7 +151,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.LIMESTONE_BRICKS.block,
         BlockusBlocks.SMALL_LIMESTONE_BRICKS.block,
         BlockusBlocks.LIMESTONE_TILES.block,
-        BlockusBlocks.CHISELED_LIMESTONE,
         BlockusBlocks.LIMESTONE_SQUARES,
         BlockusBlocks.LIMESTONE_CIRCULAR_PAVING
     );
@@ -169,7 +161,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.MARBLE_BRICKS.block,
         BlockusBlocks.SMALL_MARBLE_BRICKS.block,
         BlockusBlocks.MARBLE_TILES.block,
-        BlockusBlocks.CHISELED_MARBLE,
         BlockusBlocks.MARBLE_SQUARES,
         BlockusBlocks.MARBLE_CIRCULAR_PAVING
     );
@@ -180,7 +171,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.BLUESTONE_BRICKS.block,
         BlockusBlocks.SMALL_BLUESTONE_BRICKS.block,
         BlockusBlocks.BLUESTONE_TILES.block,
-        BlockusBlocks.CHISELED_BLUESTONE,
         BlockusBlocks.BLUESTONE_SQUARES,
         BlockusBlocks.BLUESTONE_CIRCULAR_PAVING
     );
@@ -191,18 +181,15 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.VIRIDITE_BRICKS.block,
         BlockusBlocks.SMALL_VIRIDITE_BRICKS.block,
         BlockusBlocks.VIRIDITE_TILES.block,
-        BlockusBlocks.CHISELED_VIRIDITE,
         BlockusBlocks.VIRIDITE_SQUARES,
         BlockusBlocks.VIRIDITE_CIRCULAR_PAVING
     );
 
     addForShapes(BlockusBlockTags.LAVA_BRICKS,
-        BlockusBlocks.LAVA_BRICKS.block,
-        BlockusBlocks.CHISELED_LAVA_BRICKS
+        BlockusBlocks.LAVA_BRICKS.block
     );
     addForShapes(BlockusBlockTags.LAVA_POLISHED_BLACKSTONE_BRICKS,
-        BlockusBlocks.LAVA_POLISHED_BLACKSTONE_BRICKS.block,
-        BlockusBlocks.CHISELED_LAVA_POLISHED_BLACKSTONE
+        BlockusBlocks.LAVA_POLISHED_BLACKSTONE_BRICKS.block
     );
 
     addForShapes(BlockusBlockTags.SNOW_BRICKS, BlockusBlocks.SNOW_BRICKS.block);
@@ -227,8 +214,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     addForShapes(BlockusBlockTags.MAGMA_BRICKS,
         BlockusBlocks.MAGMA_BRICKS.block,
-        BlockusBlocks.SMALL_MAGMA_BRICKS.block,
-        BlockusBlocks.CHISELED_MAGMA_BRICKS
+        BlockusBlocks.SMALL_MAGMA_BRICKS.block
     );
 
     addForShapes(BlockusBlockTags.BLAZE_BRICKS,
@@ -242,15 +228,14 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.HERRINGBONE_RED_NETHER_BRICKS,
         BlockusBlocks.CHARRED_NETHER_BRICKS.block,
         BlockusBlocks.POLISHED_CHARRED_NETHER_BRICKS.block,
+        BlockusBlocks.HERRINGBONE_CHARRED_NETHER_BRICKS,
         BlockusBlocks.TEAL_NETHER_BRICKS.block,
         BlockusBlocks.POLISHED_TEAL_NETHER_BRICKS.block,
         BlockusBlocks.HERRINGBONE_TEAL_NETHER_BRICKS
     );
 
     addForShapes(BlockusBlockTags.PRISMARINE_BLOCKS,
-        BlockusBlocks.CHISELED_PRISMARINE,
         BlockusBlocks.PRISMARINE_CIRCULAR_PAVING,
-        BlockusBlocks.CHISELED_DARK_PRISMARINE,
         BlockusBlocks.PRISMARINE_TILES.block
     );
 
@@ -282,8 +267,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.SOUL_SANDSTONE_BRICKS.block,
         BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS.block,
         BlockusBlocks.SMOOTH_SOUL_SANDSTONE.block,
-        BlockusBlocks.CUT_SOUL_SANDSTONE,
-        BlockusBlocks.CHISELED_SOUL_SANDSTONE
+        BlockusBlocks.CUT_SOUL_SANDSTONE
     );
 
     addForShapes(BlockusBlockTags.RAINBOW_BLOCKS,
@@ -296,7 +280,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.PURPUR_BRICKS.block,
         BlockusBlocks.SMALL_PURPUR_BRICKS.block,
         BlockusBlocks.POLISHED_PURPUR.block,
-        BlockusBlocks.CHISELED_PURPUR,
         BlockusBlocks.PURPUR_SQUARES
     );
 
@@ -305,20 +288,16 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.SMALL_PHANTOM_PURPUR_BRICKS.block,
         BlockusBlocks.PHANTOM_PURPUR_BLOCK.block,
         BlockusBlocks.POLISHED_PHANTOM_PURPUR.block,
-        BlockusBlocks.CHISELED_PHANTOM_PURPUR,
         BlockusBlocks.PHANTOM_PURPUR_SQUARES
     );
 
     addForShapes(BlockusBlockTags.END_STONE_BLOCKS,
         BlockusBlocks.POLISHED_END_STONE.block,
         BlockusBlocks.SMALL_END_STONE_BRICKS.block,
-        BlockusBlocks.CHISELED_END_STONE_BRICKS,
         BlockusBlocks.HERRINGBONE_END_STONE_BRICKS
     );
 
     addForShapes(ExtShapeTags.LOG_BLOCKS,
-        BlockusBlocks.WHITE_OAK_LOG,
-        BlockusBlocks.STRIPPED_WHITE_OAK_LOG,
         BlockusBlocks.WHITE_OAK_WOOD,
         BlockusBlocks.STRIPPED_WHITE_OAK_WOOD
     );
@@ -349,7 +328,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     addForShapes(BlockusBlockTags.STAINED_STONE_BRICKS, Iterables.transform(BlockusBlockCollections.STAINED_STONE_BRICKS, input -> input.block));
 
     addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlockCollections.CONCRETE_BRICKS, input -> input.block));
-    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlockCollections.CONCRETE_BRICKS, input -> input.chiseled));
+//    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlockCollections.CONCRETE_BRICKS, input -> input.chiseled));
 
     addForShapes(BlockusBlockTags.SHINGLES, BlockusBlocks.SHINGLES.block);
     addForShapes(BlockusBlockTags.SHINGLES, Iterables.transform(BlockusBlockCollections.TINTED_SHINGLES, input -> input.block));

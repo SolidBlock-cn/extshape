@@ -84,5 +84,8 @@ public final class BlockusBlockBiMaps {
     BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.VIRIDITE.block, BlockusBlocks.VIRIDITE_BUTTON);
     BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.POLISHED_NETHERRACK.block, BlockusBlocks.POLISHED_NETHERRACK_BUTTON);
     BlockBiMaps.setBlockOf(BlockShape.BUTTON, BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.POLISHED_END_STONE_BUTTON);
+
+    BlockBiMaps.setBlockOf(BlockShape.SLAB, BlockusBlocks.CUT_SOUL_SANDSTONE, BlockusBlocks.CUT_SOUL_SANDSTONE_SLAB);
+    BlockBiMaps.setBlockOf(BlockShape.WALL, BlockusBlocks.ICE_BRICKS, BlockusBlocks.ICE_BRICK_WALL);
   }
 }

@@ -60,78 +60,64 @@ public final class ExtShapeBlockusBlocks {
     markStoneCuttableWhenCreating = true;
     create(BlockusBlocks.STONE_TILES)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.HERRINGBONE_STONE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.STONE_CIRCULAR_PAVING)
         .markStoneCuttable());
 
     create(BlockusBlocks.ANDESITE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .build();
-    create(BlockusBlocks.CHISELED_ANDESITE_BRICKS)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.HERRINGBONE_ANDESITE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.ANDESITE_CIRCULAR_PAVING)
         .markStoneCuttable());
 
     create(BlockusBlocks.DIORITE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
-        .build();
-    create(BlockusBlocks.CHISELED_DIORITE_BRICKS)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.HERRINGBONE_DIORITE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.DIORITE_CIRCULAR_PAVING)
         .markStoneCuttable());
 
     create(BlockusBlocks.GRANITE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
-        .build();
-    create(BlockusBlocks.CHISELED_GRANITE_BRICKS)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.HERRINGBONE_GRANITE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.GRANITE_CIRCULAR_PAVING)
         .markStoneCuttable());
 
-    create(BlockusBlocks.CHISELED_MUD_BRICKS)
-        .without(BlockShape.BUTTON)
-        .setStoneFenceSettings(Items.MUD)
-        .build();
+//    create(BlockusBlocks.CHISELED_MUD_BRICKS)
+//        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+//        .setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.PACKED_MUD_BLOCK_SET_TYPE))
+//        .setStoneFenceSettings(Items.MUD)
+//        .build();
 
     create(BlockusBlocks.POLISHED_DRIPSTONE)
         .setFenceSettings(FenceSettings.DRIPSTONE)
-
         .setActivationSettings(ActivationSettings.DRIPSTONE)
         .build();
     create(BlockusBlocks.DRIPSTONE_BRICKS)
-        .without(BlockShape.BUTTON)
-        .setFenceSettings(FenceSettings.DRIPSTONE)
-
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .setActivationSettings(ActivationSettings.DRIPSTONE)
         .build();
-    create(BlockusBlocks.CHISELED_DRIPSTONE)
-        .without(BlockShape.BUTTON)
-        .setFenceSettings(FenceSettings.DRIPSTONE)
+    create(BlockusBlocks.MOSSY_DRIPSTONE_BRICKS)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .setActivationSettings(ActivationSettings.DRIPSTONE)
         .build();
 
@@ -140,20 +126,15 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.TUFF)
         .without(BlockShape.BUTTON)
         .build();
-    create(BlockusBlocks.CRACKED_TUFF_BRICKS)
+    create(BlockusBlocks.TUFF_TILES)
         .setFenceSettings(FenceSettings.TUFF)
         .setActivationSettings(ActivationSettings.TUFF)
-        .without(BlockShape.BUTTON)
-        .build();
-    create(BlockusBlocks.CARVED_TUFF_BRICKS)
-        .setFenceSettings(FenceSettings.TUFF)
-        .setActivationSettings(ActivationSettings.TUFF)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.HERRINGBONE_TUFF_BRICKS)
         .setFenceSettings(FenceSettings.TUFF)
         .setActivationSettings(ActivationSettings.TUFF)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.TUFF_CIRCULAR_PAVING)
         .markStoneCuttable()
@@ -168,7 +149,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS)
         .setFenceSettings(FenceSettings.DEEPSLATE_BRICKS)
         .setActivationSettings(ActivationSettings.DEEPSLATE_BRICKS)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING)
         .markStoneCuttable()
@@ -180,12 +161,7 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.DEEPSLATE_BRICKS)
         .build();
     create(BlockusBlocks.SCULK_BRICKS)
-        .without(BlockShape.BUTTON)
-        .setFenceSettings(new FenceSettings(Items.SCULK_VEIN, ExtShapeBlockTypes.DEEPSLATE_BRICKS_WOOD_TYPE))
-        .setActivationSettings(ActivationSettings.DEEPSLATE_BRICKS)
-        .build();
-    create(BlockusBlocks.CHISELED_SCULK_BRICKS)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .setFenceSettings(new FenceSettings(Items.SCULK_VEIN, ExtShapeBlockTypes.DEEPSLATE_BRICKS_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.DEEPSLATE_BRICKS)
         .build();
@@ -199,20 +175,14 @@ public final class ExtShapeBlockusBlocks {
         .withoutRedstone()
         .withExtension(BlockExtension.AMETHYST)
         .setFenceSettings(FenceSettings.AMETHYST)
-        .without(BlockShape.BUTTON)
-        .build();
-    FACTORY.createAllShapes(BlockusBlocks.CHISELED_AMETHYST)
-        .markStoneCuttable()
-        .withoutRedstone()
-        .withExtension(BlockExtension.AMETHYST)
-        .setFenceSettings(FenceSettings.AMETHYST)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
 
     final ActivationSettings blackstoneActivationSettings = ActivationSettings.stone(BlockSetType.POLISHED_BLACKSTONE);
     create(BlockusBlocks.POLISHED_BLACKSTONE_TILES)
         .setActivationSettings(blackstoneActivationSettings)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.CRIMSON_WARTY_BLACKSTONE_BRICKS)
         .setActivationSettings(blackstoneActivationSettings)
@@ -227,7 +197,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.HERRINGBONE_POLISHED_BLACKSTONE_BRICKS)
         .setActivationSettings(blackstoneActivationSettings)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.POLISHED_BLACKSTONE_CIRCULAR_PAVING)
         .markStoneCuttable()
@@ -241,25 +211,23 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.POLISHED_BASALT_BRICKS)
         .setFenceSettings(FenceSettings.BASALT)
         .setActivationSettings(ActivationSettings.BASALT)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.HERRINGBONE_POLISHED_BASALT_BRICKS)
         .setFenceSettings(FenceSettings.BASALT)
         .setActivationSettings(ActivationSettings.BASALT)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
-    buildCircularPavingBlock(create(BlockusBlocks.POLISHED_BASALT_CIRCULAR_PAVING)
-        .setFenceSettings(FenceSettings.BASALT)
-        .setActivationSettings(ActivationSettings.BASALT));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.POLISHED_BASALT_CIRCULAR_PAVING));
 
     create(BlockusBlocks.CRIMSON_WART_BRICKS)
         .setFenceSettings(new FenceSettings(Items.NETHER_WART, ExtShapeBlockTypes.NETHER_BRICKS_WOOD_TYPE))
-        .setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.NETHER_BRICKS_BLOCK_SET_TYPE))
+        .setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.NETHER_BRICKS_BLOCK_SET_TYPE))
         .without(BlockShape.BUTTON)
         .build();
     create(BlockusBlocks.WARPED_WART_BRICKS)
         .setFenceSettings(new FenceSettings(Items.NETHER_WART, ExtShapeBlockTypes.NETHER_BRICKS_WOOD_TYPE))
-        .setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.NETHER_BRICKS_BLOCK_SET_TYPE))
+        .setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.NETHER_BRICKS_BLOCK_SET_TYPE))
         .without(BlockShape.BUTTON)
         .build();
 
@@ -271,7 +239,7 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.LIMESTONE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_LIMESTONE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
@@ -279,15 +247,15 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.LIMESTONE_TILES)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
-    create(BlockusBlocks.CHISELED_LIMESTONE)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
-        .build();
+//    create(BlockusBlocks.CHISELED_LIMESTONE)
+//        .setFenceSettings(FenceSettings.STONE)
+//        .without(BlockShape.BUTTON)
+//        .build();
     create(BlockusBlocks.LIMESTONE_SQUARES)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.LIMESTONE_CIRCULAR_PAVING)
         .markStoneCuttable());
@@ -300,7 +268,7 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.MARBLE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_MARBLE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
@@ -308,15 +276,11 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.MARBLE_TILES)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
-        .build();
-    create(BlockusBlocks.CHISELED_MARBLE)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.MARBLE_SQUARES)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.MARBLE_CIRCULAR_PAVING)
         .markStoneCuttable());
@@ -328,8 +292,7 @@ public final class ExtShapeBlockusBlocks {
         .setFenceSettings(FenceSettings.STONE)
         .build();
     create(BlockusBlocks.BLUESTONE_BRICKS)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_BLUESTONE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
@@ -339,13 +302,9 @@ public final class ExtShapeBlockusBlocks {
         .setFenceSettings(FenceSettings.STONE)
         .without(BlockShape.BUTTON)
         .build();
-    create(BlockusBlocks.CHISELED_BLUESTONE)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
-        .build();
     create(BlockusBlocks.BLUESTONE_SQUARES)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.BLUESTONE_CIRCULAR_PAVING)
         .markStoneCuttable());
@@ -358,7 +317,7 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.VIRIDITE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_VIRIDITE_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
@@ -366,15 +325,11 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.VIRIDITE_TILES)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
-        .build();
-    create(BlockusBlocks.CHISELED_VIRIDITE)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.VIRIDITE_SQUARES)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.VIRIDITE_CIRCULAR_PAVING)
         .markStoneCuttable());
@@ -382,18 +337,9 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.LAVA_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
         .build();
-    create(BlockusBlocks.CHISELED_LAVA_BRICKS)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
-        .build();
     create(BlockusBlocks.LAVA_POLISHED_BLACKSTONE_BRICKS)
         .setActivationSettings(ActivationSettings.stone(BlockSetType.POLISHED_BLACKSTONE))
         .setFenceSettings(FenceSettings.STONE)
-        .build();
-    create(BlockusBlocks.CHISELED_LAVA_POLISHED_BLACKSTONE)
-        .setActivationSettings(ActivationSettings.stone(BlockSetType.POLISHED_BLACKSTONE))
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
         .build();
 
     // because of issues related to tint index and render layers, water bricks do not have extended shapes
@@ -404,13 +350,13 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.ICE_BRICKS)
         .setActivationSettings(ActivationSettings.stone(ExtShapeBlockusBlockTypes.ICE_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.ICE, ExtShapeBlockusBlockTypes.ICE_WOOD_TYPE))
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.WALL) // 墙在原模组中有
         .build();
 
     create(BlockusBlocks.OBSIDIAN_BRICKS)
         .setActivationSettings(ActivationSettings.HARD)
         .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_OBSIDIAN_BRICKS)
         .setActivationSettings(ActivationSettings.HARD)
@@ -432,7 +378,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.NETHERRACK_BRICKS)
         .setFenceSettings(FenceSettings.NETHERRACK)
         .setActivationSettings(ActivationSettings.NETHERRACK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.NETHERRACK_CIRCULAR_PAVING)
         .markStoneCuttable()
@@ -441,7 +387,7 @@ public final class ExtShapeBlockusBlocks {
 
     create(BlockusBlocks.QUARTZ_TILES)
         .setFenceSettings(FenceSettings.QUARTZ)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.QUARTZ_CIRCULAR_PAVING)
         .markStoneCuttable()
@@ -449,14 +395,10 @@ public final class ExtShapeBlockusBlocks {
 
     create(BlockusBlocks.MAGMA_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_MAGMA_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
-        .build();
-    create(BlockusBlocks.CHISELED_MAGMA_BRICKS)
-        .without(BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .setFenceSettings(FenceSettings.STONE)
-        .without(BlockShape.BUTTON)
         .build();
 
     create(BlockusBlocks.BLAZE_BRICKS)
@@ -474,11 +416,11 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.HERRINGBONE_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.HERRINGBONE_RED_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.NETHER_TILES)
         .setStoneFenceSettings(Items.NETHER_BRICK)
@@ -486,34 +428,26 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.CHARRED_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
-        .without(BlockShape.BUTTON)
         .build();
     create(BlockusBlocks.POLISHED_CHARRED_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
-        .without(BlockShape.BUTTON)
+        .build();
+    create(BlockusBlocks.HERRINGBONE_CHARRED_NETHER_BRICKS)
+        .setStoneFenceSettings(Items.NETHER_BRICK)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.TEAL_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
-        .without(BlockShape.BUTTON)
         .build();
     create(BlockusBlocks.POLISHED_TEAL_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
-        .without(BlockShape.BUTTON)
         .build();
     create(BlockusBlocks.HERRINGBONE_TEAL_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
 
-    create(BlockusBlocks.CHISELED_PRISMARINE)
-        .setStoneFenceSettings(Items.PRISMARINE_SHARD)
-        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .build();
-    buildCircularPavingBlock(create(BlockusBlocks.PRISMARINE_CIRCULAR_PAVING));
-    create(BlockusBlocks.CHISELED_DARK_PRISMARINE)
-        .setStoneFenceSettings(Items.PRISMARINE_SHARD)
-        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .build();
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.PRISMARINE_CIRCULAR_PAVING));
     create(BlockusBlocks.PRISMARINE_TILES)
         .setStoneFenceSettings(Items.PRISMARINE_SHARD)
         .without(BlockShape.BUTTON)
@@ -521,32 +455,32 @@ public final class ExtShapeBlockusBlocks {
 
     create(BlockusBlocks.LARGE_BRICKS)
         .setStoneFenceSettings(Items.BRICK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.HERRINGBONE_BRICKS)
         .setStoneFenceSettings(Items.BRICK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SOAKED_BRICKS)
         .setStoneFenceSettings(Items.BRICK)
         .build();
     create(BlockusBlocks.HERRINGBONE_SOAKED_BRICKS)
         .setStoneFenceSettings(Items.BRICK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.CHARRED_BRICKS)
         .setStoneFenceSettings(Items.BRICK)
         .build();
     create(BlockusBlocks.HERRINGBONE_CHARRED_BRICKS)
         .setStoneFenceSettings(Items.BRICK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SANDY_BRICKS)
         .setStoneFenceSettings(Items.BRICK)
         .build();
     create(BlockusBlocks.HERRINGBONE_SANDY_BRICKS)
         .setStoneFenceSettings(Items.BRICK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
 
     create(BlockusBlocks.ROUGH_SANDSTONE)
@@ -554,7 +488,7 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.SANDSTONE_BRICKS)
         .setStoneFenceSettings(Items.SAND)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_SANDSTONE_BRICKS)
         .setStoneFenceSettings(Items.SAND)
@@ -565,7 +499,7 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.RED_SANDSTONE_BRICKS)
         .setStoneFenceSettings(Items.RED_SAND)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_RED_SANDSTONE_BRICKS)
         .setStoneFenceSettings(Items.RED_SAND)
@@ -580,7 +514,7 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.SOUL_SANDSTONE_BRICKS)
         .setStoneFenceSettings(Items.SOUL_SAND)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS)
         .setStoneFenceSettings(Items.SOUL_SAND)
@@ -589,13 +523,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.SMOOTH_SOUL_SANDSTONE)
         .setStoneFenceSettings(Items.SOUL_SAND)
         .build();
-    create(BlockusBlocks.CUT_SOUL_SANDSTONE)
-        .setStoneFenceSettings(Items.SOUL_SAND)
-        .without(BlockShape.BUTTON)
-        .build();
-    create(BlockusBlocks.CHISELED_SOUL_SANDSTONE)
-        .setStoneFenceSettings(Items.SOUL_SAND)
-        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+    FACTORY.createConstructionOnly(BlockusBlocks.CUT_SOUL_SANDSTONE)
         .build();
 
     create(BlockusBlocks.RAINBOW_BLOCK)
@@ -617,7 +545,7 @@ public final class ExtShapeBlockusBlocks {
 
     create(BlockusBlocks.PURPUR_BRICKS)
         .setStoneFenceSettings(Items.PURPUR_BLOCK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_PURPUR_BRICKS)
         .setStoneFenceSettings(Items.PURPUR_BLOCK)
@@ -626,18 +554,14 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.POLISHED_PURPUR)
         .setStoneFenceSettings(Items.PURPUR_BLOCK)
         .build();
-    create(BlockusBlocks.CHISELED_PURPUR)
-        .setStoneFenceSettings(Items.PURPUR_BLOCK)
-        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .build();
     create(BlockusBlocks.PURPUR_SQUARES)
         .setStoneFenceSettings(Items.PURPUR_BLOCK)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
 
     create(BlockusBlocks.PHANTOM_PURPUR_BRICKS)
         .setStoneFenceSettings(Items.PHANTOM_MEMBRANE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.SMALL_PHANTOM_PURPUR_BRICKS)
         .setStoneFenceSettings(Items.PHANTOM_MEMBRANE)
@@ -649,13 +573,9 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.POLISHED_PHANTOM_PURPUR)
         .setStoneFenceSettings(Items.PHANTOM_MEMBRANE)
         .build();
-    create(BlockusBlocks.CHISELED_PHANTOM_PURPUR)
-        .setStoneFenceSettings(Items.PHANTOM_MEMBRANE)
-        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .build();
     create(BlockusBlocks.PHANTOM_PURPUR_SQUARES)
         .setStoneFenceSettings(Items.PHANTOM_MEMBRANE)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
 
     create(BlockusBlocks.POLISHED_END_STONE)
@@ -665,13 +585,9 @@ public final class ExtShapeBlockusBlocks {
         .setStoneFenceSettings(Items.END_STONE_BRICKS)
         .without(BlockShape.BUTTON)
         .build();
-    create(BlockusBlocks.CHISELED_END_STONE_BRICKS)
-        .setStoneFenceSettings(Items.END_STONE_BRICKS)
-        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .build();
     create(BlockusBlocks.HERRINGBONE_END_STONE_BRICKS)
         .setStoneFenceSettings(Items.END_STONE_BRICKS)
-        .without(BlockShape.BUTTON)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
     create(BlockusBlocks.END_TILES)
         .setStoneFenceSettings(Items.END_STONE_BRICKS)
@@ -681,16 +597,16 @@ public final class ExtShapeBlockusBlocks {
     markStoneCuttableWhenCreating = false;
 
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
-    FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG)
-        .setPillar()
-        .addPostBuildConsumer(logFlammable)
-        .fuelTime(300)
-        .build();
-    FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG)
-        .setPillar()
-        .addPostBuildConsumer(logFlammable)
-        .fuelTime(300)
-        .build();
+//    FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG)
+//        .setPillar()
+//        .addPostBuildConsumer(logFlammable)
+//        .fuelTime(300)
+//        .build();
+//    FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG)
+//        .setPillar()
+//        .addPostBuildConsumer(logFlammable)
+//        .fuelTime(300)
+//        .build();
     FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar()
@@ -853,13 +769,6 @@ public final class ExtShapeBlockusBlocks {
           .markStoneCuttable()
           .without(BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL)
           .setRecipeGroup(blockShape1 -> "concrete_brick_" + blockShape1.asString())
-          .setActivationSettings(ActivationSettings.STONE)
-          .setFenceSettings(FenceSettings.STONE)
-          .build();
-      FACTORY.createConstructionOnly(concreteTypes.chiseled)
-          .markStoneCuttable()
-          .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
-          .setRecipeGroup(blockShape -> "chiseled_concrete_brick_" + blockShape.asString())
           .setActivationSettings(ActivationSettings.STONE)
           .setFenceSettings(FenceSettings.STONE)
           .build();
