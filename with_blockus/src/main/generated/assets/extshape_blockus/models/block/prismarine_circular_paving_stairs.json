@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "blockus:block/prismarine_circular_paving",
-    "side": "blockus:block/prismarine_circular_paving",
-    "top": "blockus:block/prismarine_circular_paving"
-  }
-}

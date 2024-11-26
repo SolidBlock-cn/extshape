@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:blue_concrete",
-  "result": {
-    "count": 1,
-    "id": "extshape_blockus:chiseled_blue_concrete_vertical_stairs"
-  }
-}

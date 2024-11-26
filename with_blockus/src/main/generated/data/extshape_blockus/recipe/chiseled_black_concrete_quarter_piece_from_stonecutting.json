@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:chiseled_black_concrete",
-  "result": {
-    "count": 4,
-    "id": "extshape_blockus:chiseled_black_concrete_quarter_piece"
-  }
-}

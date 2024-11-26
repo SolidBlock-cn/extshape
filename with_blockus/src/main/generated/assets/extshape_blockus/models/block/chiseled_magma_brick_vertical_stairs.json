@@ -1,8 +1,0 @@
-{
-  "parent": "extshape:block/vertical_stairs",
-  "textures": {
-    "bottom": "blockus:block/chiseled_magma_bricks",
-    "side": "blockus:block/chiseled_magma_bricks",
-    "top": "blockus:block/chiseled_magma_bricks"
-  }
-}

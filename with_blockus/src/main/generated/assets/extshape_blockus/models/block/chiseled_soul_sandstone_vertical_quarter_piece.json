@@ -1,8 +1,0 @@
-{
-  "parent": "extshape:block/vertical_quarter_piece",
-  "textures": {
-    "bottom": "blockus:block/chiseled_soul_sandstone",
-    "side": "blockus:block/chiseled_soul_sandstone",
-    "top": "blockus:block/chiseled_soul_sandstone"
-  }
-}

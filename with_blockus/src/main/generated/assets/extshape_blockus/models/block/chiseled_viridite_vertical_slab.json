@@ -1,8 +1,0 @@
-{
-  "parent": "extshape:block/vertical_slab",
-  "textures": {
-    "bottom": "blockus:block/chiseled_viridite",
-    "side": "blockus:block/chiseled_viridite",
-    "top": "blockus:block/chiseled_viridite"
-  }
-}

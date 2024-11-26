@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "extshape_blockus:cracked_tuff_brick_vertical_slab",
-  "result": {
-    "count": 2,
-    "id": "extshape_blockus:cracked_tuff_brick_quarter_piece"
-  }
-}

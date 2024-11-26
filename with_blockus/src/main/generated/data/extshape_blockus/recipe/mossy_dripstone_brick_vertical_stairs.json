@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "blockus:mossy_dripstone_brick_stairs"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:mossy_dripstone_brick_vertical_stairs"
+  }
+}

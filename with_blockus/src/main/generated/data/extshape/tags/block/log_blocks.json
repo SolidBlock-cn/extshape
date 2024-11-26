@@ -1,17 +1,5 @@
 {
   "values": [
-    "extshape_blockus:white_oak_log_stairs",
-    "extshape_blockus:white_oak_log_slab",
-    "extshape_blockus:white_oak_log_vertical_slab",
-    "extshape_blockus:white_oak_log_vertical_stairs",
-    "extshape_blockus:white_oak_log_quarter_piece",
-    "extshape_blockus:white_oak_log_vertical_quarter_piece",
-    "extshape_blockus:stripped_white_oak_log_stairs",
-    "extshape_blockus:stripped_white_oak_log_slab",
-    "extshape_blockus:stripped_white_oak_log_vertical_slab",
-    "extshape_blockus:stripped_white_oak_log_vertical_stairs",
-    "extshape_blockus:stripped_white_oak_log_quarter_piece",
-    "extshape_blockus:stripped_white_oak_log_vertical_quarter_piece",
     "extshape_blockus:white_oak_wood_stairs",
     "extshape_blockus:white_oak_wood_slab",
     "extshape_blockus:white_oak_wood_vertical_slab",

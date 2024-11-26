@@ -1,8 +1,0 @@
-{
-  "parent": "extshape:block/quarter_piece_top",
-  "textures": {
-    "bottom": "blockus:block/prismarine_circular_paving",
-    "side": "blockus:block/prismarine_circular_paving",
-    "top": "blockus:block/prismarine_circular_paving"
-  }
-}

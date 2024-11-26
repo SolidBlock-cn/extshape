@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:dark_prismarine",
-  "result": {
-    "count": 1,
-    "id": "extshape_blockus:chiseled_dark_prismarine_stairs"
-  }
-}

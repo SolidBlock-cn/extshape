@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "extshape_blockus:cut_soul_sandstone_vertical_slab",
-  "result": {
-    "count": 2,
-    "id": "extshape_blockus:cut_soul_sandstone_vertical_quarter_piece"
-  }
-}
