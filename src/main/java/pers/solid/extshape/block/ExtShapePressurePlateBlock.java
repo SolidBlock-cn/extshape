@@ -4,6 +4,8 @@ import com.mojang.datafixers.util.Function4;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
@@ -75,6 +77,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     return BlockShape.PRESSURE_PLATE;
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).pressurePlate(this);

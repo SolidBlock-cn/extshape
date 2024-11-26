@@ -1,6 +1,8 @@
 package pers.solid.extshape.data;
 
 import com.google.gson.JsonPrimitive;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
@@ -17,6 +19,7 @@ import java.util.function.BiConsumer;
 import static net.minecraft.client.data.VariantSettings.*;
 
 
+@Environment(EnvType.CLIENT)
 public final class ExtShapeBlockStateModelGenerator {
   // region create models
 

@@ -1,6 +1,8 @@
 package pers.solid.extshape.data;
 
 import com.google.common.base.Preconditions;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.data.Model;
 import net.minecraft.client.data.Models;
 import net.minecraft.client.data.TextureKey;
@@ -13,6 +15,7 @@ import java.util.Optional;
 /**
  * @see Models
  */
+@Environment(EnvType.CLIENT)
 public final class ExtShapeModels {
   private static Model block(String parent, TextureKey... requiredTextureKeys) {
     return new Model(Optional.of(ExtShape.id("block/" + parent)), Optional.empty(), requiredTextureKeys);

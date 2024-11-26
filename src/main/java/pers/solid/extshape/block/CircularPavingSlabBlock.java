@@ -1,5 +1,7 @@
 package pers.solid.extshape.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -48,6 +50,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
     return state.rotate(mirror.getRotation(state.get(FACING)));
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
     ExtShapeBlockStateModelGenerator.registerCircularPavingSlab(this, baseBlock, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);

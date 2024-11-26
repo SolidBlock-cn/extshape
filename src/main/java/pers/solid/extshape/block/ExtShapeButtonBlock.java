@@ -3,6 +3,8 @@ package pers.solid.extshape.block;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
@@ -74,6 +76,7 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
     return BlockShape.BUTTON;
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).button(this);

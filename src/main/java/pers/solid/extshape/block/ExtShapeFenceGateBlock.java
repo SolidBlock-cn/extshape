@@ -2,6 +2,8 @@ package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
@@ -79,6 +81,7 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
     return BlockShape.FENCE_GATE;
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).fenceGate(this);

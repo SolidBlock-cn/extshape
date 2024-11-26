@@ -1,6 +1,8 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.Models;
@@ -57,6 +59,7 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
     return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
     final Identifier upModelId = Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector);

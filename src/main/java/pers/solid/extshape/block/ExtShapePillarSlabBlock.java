@@ -3,6 +3,8 @@ package pers.solid.extshape.block;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.mojang.serialization.MapCodec;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -64,6 +66,7 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
     return CODEC;
   }
 
+  @Environment(EnvType.CLIENT)
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
     ExtShapeBlockStateModelGenerator.registerPillarSlab(this, baseBlock, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator, BASE_BLOCKS_WITH_HORIZONTAL_COLUMN.contains(baseBlock));

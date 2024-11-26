@@ -1,6 +1,7 @@
 package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.component.DataComponentTypes;
@@ -13,6 +14,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.*;
 import org.spongepowered.include.com.google.common.collect.ImmutableMap;
 import pers.solid.extshape.ExtShapeBlockItem;
@@ -279,7 +281,12 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   public T build() {
     if (this.instance == null) this.createInstance();
     if (this.registerBlock) {
-      Registry.register(Registries.BLOCK, this.getBlockId(), instance);
+      final Identifier blockId = this.getBlockId();
+      if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        final Identifier vanillaId = Identifier.ofVanilla(blockId.getPath());
+        Validate.validState(!Registries.BLOCK.containsId(vanillaId), "The block with id cannot be registered because there is a same block whose id is %s!", blockId, vanillaId);
+      }
+      Registry.register(Registries.BLOCK, blockId, instance);
     }
     if (buildItem) {
       createItemInstance();

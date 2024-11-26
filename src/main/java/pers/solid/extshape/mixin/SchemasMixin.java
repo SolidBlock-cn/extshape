@@ -6,9 +6,11 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.DataFixerBuilder;
 import com.mojang.datafixers.schemas.Schema;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.datafixer.Schemas;
 import net.minecraft.datafixer.fix.BlockNameFix;
 import net.minecraft.datafixer.fix.ItemNameFix;
+import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Contract;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +18,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 
 import java.util.List;
@@ -69,8 +72,9 @@ public abstract class SchemasMixin {
     idMapBuilder.put("extshape:chiseled_red_sandstone_wall", "minecraft:sandstone_wall");
 
     for (BlockShape shape : constructionShapes) {
-      idMapBuilder.put("extshape:chiseled_sandstone_" + shape.asString(), "extshape:sandstone_" + shape.asString());
-      idMapBuilder.put("extshape:chiseled_red_sandstone_" + shape.asString(), "extshape:red_sandstone_" + shape.asString());
+      final boolean vanilla = shape == BlockShape.SLAB || shape == BlockShape.STAIRS || shape == BlockShape.WALL;
+      idMapBuilder.put("extshape:chiseled_sandstone_" + shape.asString(), (vanilla ? "minecraft:" : "extshape:") + "sandstone_" + shape.asString());
+      idMapBuilder.put("extshape:chiseled_red_sandstone_" + shape.asString(), (vanilla ? "minecraft:" : "extshape:") + "red_sandstone_" + shape.asString());
     }
 
     idMapBuilder.put("extshape:chiseled_quartz_button", "extshape:smooth_quartz_button");
@@ -99,8 +103,18 @@ public abstract class SchemasMixin {
       idMapBuilder.put("extshape:polished_basalt_" + shape.asString(), "extshape:basalt_" + shape.asString());
     }
 
-    final UnaryOperator<String> unaryOperator2 = replacing(idMapBuilder.build());
-    builder.addFixer(BlockNameFix.create(schema4173, "Renamed some removed blocks of Extended Block Shapes mod", unaryOperator2));
-    builder.addFixer(ItemNameFix.create(schema4173, "Renamed some removed items of Extended Block Shapes mod", unaryOperator2));
+    final ImmutableMap<String, String> idMap = idMapBuilder.build();
+    if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+      idMap.forEach((k, v) -> {
+        Validate.validState(!k.contains("__"));
+        Validate.validState(!v.contains("__"));
+        Validate.validState(k.contains(":"));
+        Validate.validState(v.contains(":"));
+      });
+      ExtShape.idMapToVerify = idMap;
+    }
+    final UnaryOperator<String> unaryOperator2 = replacing(idMap);
+    builder.addFixer(BlockNameFix.create(schema4173, "Rename some removed blocks of Extended Block Shapes mod", unaryOperator2));
+    builder.addFixer(ItemNameFix.create(schema4173, "Rename some removed items of Extended Block Shapes mod", unaryOperator2));
   }
 }
