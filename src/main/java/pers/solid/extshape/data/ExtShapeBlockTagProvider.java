@@ -73,6 +73,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
           builder.addTag(typeShapeTag);
         }
       }
+      getOrCreateTagBuilder(BlockTags.SLABS).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
     }
 
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOOLEN_TAG.values()) {
@@ -190,8 +191,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.WARPED_WART_BLOCK,
         Blocks.SHROOMLIGHT,
         Blocks.SCULK,
-        Blocks.MOSS_BLOCK,
-        Blocks.PALE_MOSS_BLOCK);
+        Blocks.MOSS_BLOCK);
 
     addForShapes(BlockTags.NEEDS_STONE_TOOL,
         Blocks.LAPIS_BLOCK,
