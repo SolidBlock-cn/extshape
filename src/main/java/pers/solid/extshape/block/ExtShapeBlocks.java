@@ -596,14 +596,18 @@ public final class ExtShapeBlocks {
         .build();
 
     // 黑石及其变种。
-    FACTORY.createConstructionOnly(BLACKSTONE)
+    FACTORY.createAllShapes(BLACKSTONE)
         .markStoneCuttable()
+        .setFenceSettings(FenceSettings.STONE)
         .build();
-    FACTORY.createConstructionOnly(POLISHED_BLACKSTONE)
+    FACTORY.createAllShapes(POLISHED_BLACKSTONE)
         .markStoneCuttable()
+        .setFenceSettings(FenceSettings.STONE)
         .build();
-    FACTORY.createConstructionOnly(POLISHED_BLACKSTONE_BRICKS)
+    FACTORY.createAllShapes(POLISHED_BLACKSTONE_BRICKS)
         .markStoneCuttable()
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.BUTTON)
         .build();
     FACTORY.createConstructionOnly(CHISELED_POLISHED_BLACKSTONE)
         .markStoneCuttable()

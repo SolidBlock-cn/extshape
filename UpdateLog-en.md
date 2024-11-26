@@ -5,19 +5,114 @@
 - Fixed the issue that in versions 1.21.3 and above, pale moss is not added. Meanwhile, added into block tag `hoe_mineable` and the special recipes in `recipe_tweak`.
 - Fixed the issue that some recipes do not correctly substitute vanilla recipes in the `recipe_tweak` datapack.
 - Fixed some incorrect sounds of some resin blocks in 1.21.4.
+- Since version 1.21.3, added the fence, fence gate, pressure plate and button for blackstone; added fence, fence gate and pressure plate for polished blackstone (the button is vanilla block), and the pressure plate of polished blackstone bricks.
+
+#### The Blockus part of 3.0.5
+
+- Since version 1.21.3, the following blocks in Blockus will be changed:
+    - Removed _fences and fence gates_ of the following blocks:
+        - stone tiles (replaced with stone)
+        - herringbone stone bricks (replaced with stone bricks)
+        - andesite bricks (replaced with andesite)
+        - herringbone andesite bricks (replaced with andesite)
+        - diorite bricks (replaced with diorite)
+        - herringbone diorite bricks (replaced with diorite)
+        - granite bricks (replaced with granite)
+        - herringbone granite bricks (replaced with granite)
+        - dripstone bricks (replaced with dripstone)
+        - herringbone tuff bricks (replaced with tuff bricks)
+        - herringbone deepslate bricks (replaced with deepslate bricks)
+        - sculk bricks (replaced with polished sculk)
+        - amethyst bricks (replaced with polished amethyst)
+        - polished blackstone tiles (replaced with polished blackstone)
+        - herringbone polished blackstone bricks (replaced with polished blackstone bricks)
+        - polished basalt bricks (replaced with polished blackstone)
+        - herringbone polished basalt bricks (replaced with polished basalt)
+        - limestone bricks (replaced with small limestone bricks)
+        - limestone tiles (replaced with limestone)
+        - limestone squares (replaced with limestone)
+        - marble bricks (replaced with small marble bricks)
+        - marble tiles (replaced with marble)
+        - marble squares (replaced with marble)
+        - bluestone bricks (replaced with bluestone)
+        - bluestone squares (replaced with bluestone)
+        - viridite bricks (replaced with viridite)
+        - viridite tiles (replaced with viridite)
+        - viridite squares (replaced with viridite)
+        - obsidian bricks (replaced with small obsidian bricks)
+        - netherrack bricks (replaced with polished netehrrack)
+        - quartz tiles (replaced with smooth quartz)
+        - magma bricks (replaced with small magma bricks; buttons are removed and replaced too)
+        - herringbone nether bricks (replaced with nether bricks)
+        - herringbone red nether bricks (replaced with red nether bricks)
+        - herringbone teal nether bricks (replaced with teal nether bricks)
+        - large bricks (replaced with bricks)
+        - herringbone bricks (replaced with bricks)
+        - herringbone soaked bricks (replaced with soaked bricks)
+        - herringbone charred bricks (replaced with charred bricks)
+        - herringbone sandy bricks (replaced with sandy bricks)
+        - sandstone bricks (replaced with small sandstone bricks)
+        - red sandstone bricks (replaced with small red sandstone bricks)
+        - soul sandstone bricks (replaced with small soul sandstone bricks)
+        - chorus bricks (replaced with small chorus bricks)
+        - chorus squares (replaced with polished chorus block)
+        - phantom chorus bricks (replaced with small phantom chorus bricks)
+        - phantom chorus squares (replaced with polished phantom chorus block)
+        - herringbone end stone bricks (replaced with small end stone bricks)
+    - Removed _all shapes_ of the following blocks:
+        - chiseled andesite (replaced with andesite)
+        - chiseled diorite (replaced with diorite)
+        - chiseled granite (replaced with granite)
+        - chiseled mud bricks (replaced with mud bricks)
+        - chiseled dripstone (replaced with dripstone)
+        - cracked tuff bricks (replaced with tuff bricks)
+        - carved tuff bricks (replaced with tuff bricks)
+        - chiseled sculk bricks (replaced with sculk bricks)
+        - chiseled amethyst (replaced with polished amethyst)
+        - chiseled limestone (replaced with limestone)
+        - chiseled marble (replaced with marble)
+        - chiseled bluestone (replaced with bluestone)
+        - chiseled viridite (replaced with viridite)
+        - chiseled lava bricks (replaced with lava bricks)
+        - chiseled lava polished blackstone (replaced with lava polished blackstone)
+        - chiseled magma bricks (replaced with small magma bricks)
+        - chiseled prismarine (replaced with prismarine)
+        - chiseled dark prismarine (replaced with dark prismarine)
+        - chiseled soul sandstone (replaced with smooth soul sandstone)
+        - chiseled chorus block (replaced with polished chorus block)
+        - chiseled phantom chorus block (replaced with polished phantom chorus block)
+        - white oak log (replaced with white oak wood)
+        - stripped white oak log (replaced with stripped white oak wood)
+        - chiseled concrete bricks (replaced with concrete bricks)
+    - Added the following blocks:
+        - mossy dripstone (excluding button, fence, fence gate)
+        - tuff tiles (excluding button, fence, fence gate)
+        - charred nether brick button (charred nether bricks will have blocks of all shapes)
+        - polished charred nether brick button (polished nether bricks will have blocks of all shapes)
+        - herringbone charred nether bricks (excluding button, fence, fence gate)
+        - teal nether brick button (teal nether bricks will have blocks of all shapes)
+        - polished teal nether brick button (polished teal nether bricks will have blocks of all shapes)
+    - Of the following blocks, as they belong to circular paving blocks, _only slabs and pressure plates_ will be obtained, and blocks in other shapes will be removed and replaced:
+        - polished basalt circular paving (replaced with polished basalt)
+        - prismarine circular paving (replaced with prismarine)
+    - Removed the following blocks:
+        - ice brick wall (which exists in Blockus mod)
+        - various shapes of cut soul sand stone except construction shapes (replaced with smooth soul sandstone)
+        - slab of cut soul sandstone (which exists in Blockus mod)
+- The activation times of crimson wart brick and warped wart brick pressure plate will be adjusted from 2 seconds to 1 second.
 
 ### 3.0.4
 
 - Fixed the issue that blocks of stone bricks, mossy stone bricks and chiseled stone bricks cannot be harvested with pickaxes.
 - Slightly changed the grammar in the text.
 - Since the snapshot of 1.21.4, blocks in the mod will be made the following changes:
-  - Delete various shapes of logs, stripped logs, stems, stripped stems.
-  - Delete various shapes of chiseled stone bricks, chiseled polished blackstone, chiseled nether bricks, chiseled tuff, chiseled tuff bricks, chiseled deepslate.
-  - Delete buttons, fences, fence gates of quartz block, chiseled quartz block, chiseled quartz bricks; deleted pressure plates of quartz block.
-  - Delete all extended shapes of chiseled sandstone and chiseled red sandstone.
-  - Deleted walls of sandstone, cut sandstone, red sandstone, cut red sandstone. Only walls of smooth stone and smooth sandstone retain.
-  - Deleted all extended shapes of polished basalt.
-  - The changes above do not affect versions before 1.21.3. When upgrading worlds from versions before 1.21.3 to 1.21.4, the blocks above will be replaced with existing blocks via DataFixer.
+    - Delete various shapes of logs, stripped logs, stems, stripped stems.
+    - Delete various shapes of chiseled stone bricks, chiseled polished blackstone, chiseled nether bricks, chiseled tuff, chiseled tuff bricks, chiseled deepslate.
+    - Delete buttons, fences, fence gates of quartz block, chiseled quartz block, chiseled quartz bricks; deleted pressure plates of quartz block.
+    - Delete all extended shapes of chiseled sandstone and chiseled red sandstone.
+    - Deleted walls of sandstone, cut sandstone, red sandstone, cut red sandstone. Only walls of smooth stone and smooth sandstone retain.
+    - Deleted all extended shapes of polished basalt.
+    - The changes above do not affect versions before 1.21.3. When upgrading worlds from versions before 1.21.3 to 1.21.4, the blocks above will be replaced with existing blocks via DataFixer.
 
 ### 3.0.3
 
@@ -42,9 +137,9 @@
 - Fixed the issue that `#pressure_plates` lack its corresponding item tag.
 - Removed the feature in the configuration screen to avoid some specific recipes, and added a built-in datapack to avoid recipe conflicts, which is enabled by default and can be disabled through command `/datapack disbale ...`.
 - The command `/extshape:check-conflict` added a new parameter to filter namespaces.
-  - Tests recipe conflicts of all namespaces if not specified.
-  - Tests recipe conflicts between the specified namespace and vanilla if only specified one.
-  - Tests the specified namespaces if specified multiple ones.
+    - Tests recipe conflicts of all namespaces if not specified.
+    - Tests recipe conflicts between the specified namespace and vanilla if only specified one.
+    - Tests the specified namespaces if specified multiple ones.
 - Removed the BlockFamilies feature which lacks practical usage.
 - Fixed the issue that various shapes of white oak wood, white oak log, herringbone planks, small log blocks of Blockus cannot be burnt in the furnace.
 - Totally removed various shapes for sugar blocks, as it is a falling block and does not meet the criterion of creating various shapes.
@@ -194,9 +289,9 @@
 ### 1.7.3
 
 - Adjusted the code structure and improved extension behaviour.
-  - Added `BlocksBuilderFactory` class, to allow different mods to add their blocks. Also, made sure `ExtShapeBlocks.BLOCKS` and `ExtShapeBlocks.BASE_BLOCKS` contains only blocks in this mod.
-  - Added `TagPreparationFactory` class, to allow different mods to add tags with classes of this mod, and reduce conflicts to existing content.
-  - Split the code about generating data between different block shapes to `CrossShapeDataGeneration` and improved the readability.
+    - Added `BlocksBuilderFactory` class, to allow different mods to add their blocks. Also, made sure `ExtShapeBlocks.BLOCKS` and `ExtShapeBlocks.BASE_BLOCKS` contains only blocks in this mod.
+    - Added `TagPreparationFactory` class, to allow different mods to add tags with classes of this mod, and reduce conflicts to existing content.
+    - Split the code about generating data between different block shapes to `CrossShapeDataGeneration` and improved the readability.
 - Fixed the issue that the direction of the default block state of glazed terracotta slab is not successfully set.
 - Now `#extshape:log_blocks` belongs to block tag `#extshape:wooden_blocks`.
 - Optimized the logic of adding items in 1.19.3 to be more efficient.
@@ -206,8 +301,8 @@
 
 - Added the name of translations in some languages.
 - For 1.19.3, added extended shapes for bamboo block, stripped bamboo block, bamboo planks, and bamboo mosaic, which require Update 1.20 datapack.
-  - The blocks are flammable and can be used as fuels.
-  - In order to avoid recipe conflict, bamboo blocks and stripped bamboo blocks cannot be crafted into buttons.
+    - The blocks are flammable and can be used as fuels.
+    - In order to avoid recipe conflict, bamboo blocks and stripped bamboo blocks cannot be crafted into buttons.
 - In block tags, log and wood blocks belong to wooden blocks now. Wood fences and bamboo fences are considered as wooden fences and can be connected with vanilla wooden plank fences.
 - For 1.19.3, no longer interact with Reasonable Sorting mod.
 - For 1.19.3, as not supported yet, disabled "Display Specific Groups" button.
@@ -266,12 +361,12 @@ The update does not seem obvious, but code is changed from head to toe, actually
 - Blocks based on pumpkin, melon, moss, shroomlight, nether wart block, warped wart block can be composted.
 - Re-added nether wart walls and crimson wart walls, and added walls made from wool and moss.
 - Added more tags:
-  - Now more blocks based on gold block and raw gold block are loved by piglins (item tag `#piglin_loved`).
-  - If the whole top face of a grass block is covered by a snow stairs or snow slab, the grass block will display snowy (block tag `#extshape:snow`).
-  - Mining blocks based on gold block, raw gold block and gilded blackstone irritates piglins (block tag `#piglin_guarded`).
-  - Dripleaves can be placed on blocks of moss and clay (block tag `#small_dripleaf_placeable_on`).
-  - Wool blocks, like vanilla wools, can be sheared quickly (block tag `#fabric:mineable/shears`).
-  - Re-added walls of non-stone blocks, which cannot be harvested quickly by pickaxes. Although `#minecraft:mineable/pickaxes` directly contains `#minecraft:walls`, this mod lets blocks of `#extshape:pickaxe_unmineable` no possible to be harvested quickly by pickaxes.
+    - Now more blocks based on gold block and raw gold block are loved by piglins (item tag `#piglin_loved`).
+    - If the whole top face of a grass block is covered by a snow stairs or snow slab, the grass block will display snowy (block tag `#extshape:snow`).
+    - Mining blocks based on gold block, raw gold block and gilded blackstone irritates piglins (block tag `#piglin_guarded`).
+    - Dripleaves can be placed on blocks of moss and clay (block tag `#small_dripleaf_placeable_on`).
+    - Wool blocks, like vanilla wools, can be sheared quickly (block tag `#fabric:mineable/shears`).
+    - Re-added walls of non-stone blocks, which cannot be harvested quickly by pickaxes. Although `#minecraft:mineable/pickaxes` directly contains `#minecraft:walls`, this mod lets blocks of `#extshape:pickaxe_unmineable` no possible to be harvested quickly by pickaxes.
 - Added a corresponding unlocking advancement for recipes. When obtaining some ingredients, the advancement is triggered and the recipe is unlocked.
 - Added configuration screen, to config whether to add items into vanilla item groups, and whether to add extra item groups for this block. Besides, the mod adds the feature of manually re-generate and dump runtime resource packs.
 - Fixed some issues in language files, and refined some wording.
@@ -319,7 +414,7 @@ This update is for version only 1.17 and above.
 
 - Fixed the issue of missing rendering at the bottom of vertical stairs blocks.
 - For 1.16 versions: Removed unnecessary tags and fixed mining level issue.
-  - Note: For 1.16 versions, language files for future versions are still stored.
+    - Note: For 1.16 versions, language files for future versions are still stored.
 
 ### 1.2.4
 
@@ -337,8 +432,8 @@ This update is for version only 1.17 and above.
 
 - Improved logging system.
 - Fixed the issue of incompatibility with OptiFine.
-  - Issue details: When OptiFine is on, operations like `new Identifier("#minecraft:banners")` do not throw
-    `InvalidIdentiferException`, causing code abnormal behavior.
+    - Issue details: When OptiFine is on, operations like `new Identifier("#minecraft:banners")` do not throw
+      `InvalidIdentiferException`, causing code abnormal behavior.
 
 ### 1.2.1
 
@@ -352,7 +447,7 @@ This update is for version only 1.17 and above.
 ### 1.2.0
 
 - Deleted extra item groups. Vanilla item groups are used instead. Besides, there are 4 other item groups in order to contain blocks (including vanilla) in sort of base blocks.
-  - The issue that items are not sorted correctly in recipe groups is also fixed because of this change.
+    - The issue that items are not sorted correctly in recipe groups is also fixed because of this change.
 - BlockMappings use more effective BiMap instead of ordinary Map any longer. Values in BiMap are unique, so it's more effective to get an inverse map.
 - Added JavaDoc.
 - Referring to vanilla convention, English names of blocks in this mod are capitalised now.
@@ -368,9 +463,9 @@ This update is for version only 1.17 and above.
 - Adjusted display form of vertical slabs in inventories.
 - Added language support for Traditional Chinese Taiwan, Traditional Chinese Hong Kong and Classical Chinese Language.
 - Issues currently existing in this version:
-  - In vanilla, some blocks, such as packed ice, glowstone, snow block, cannot drop themselves when mined in survival mode without Silk Touch. However, their variant blocks are not affected.
-  - The bottom half of slab and quarter piece of packed ice and bottom-half packed ice stairs are not slippery.
-  - In recipe books, recipes added by this mod are not correctly classified.
+    - In vanilla, some blocks, such as packed ice, glowstone, snow block, cannot drop themselves when mined in survival mode without Silk Touch. However, their variant blocks are not affected.
+    - The bottom half of slab and quarter piece of packed ice and bottom-half packed ice stairs are not slippery.
+    - In recipe books, recipes added by this mod are not correctly classified.
 
 ### 1.1.0-snapshot [Snapshot version]
 
