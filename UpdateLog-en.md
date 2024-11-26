@@ -6,6 +6,7 @@
 - Fixed the issue that some recipes do not correctly substitute vanilla recipes in the `recipe_tweak` datapack.
 - Fixed some incorrect sounds of some resin blocks in 1.21.4.
 - Since version 1.21.3, added the fence, fence gate, pressure plate and button for blackstone; added fence, fence gate and pressure plate for polished blackstone (the button is vanilla block), and the pressure plate of polished blackstone bricks.
+- Fixed the issue that the block/item tag for glazed terracotta slabs (`#extshape:glazed_terracotta_slabs`) is not contained in block/item tag `#minecraft:slab`.
 
 #### The Blockus part of 3.0.5
 

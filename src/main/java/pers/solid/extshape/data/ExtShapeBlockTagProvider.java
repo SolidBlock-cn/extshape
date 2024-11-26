@@ -71,6 +71,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
           builder.addTag(typeShapeTag);
         }
       }
+      getOrCreateTagBuilder(BlockTags.SLABS).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
     }
 
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOOLEN_TAG.values()) {
