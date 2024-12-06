@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.Items;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import org.apache.commons.lang3.ArrayUtils;
@@ -19,6 +21,7 @@ import pers.solid.extshape.mixin.BlockAccessor;
 import pers.solid.extshape.util.*;
 
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 import static net.minecraft.block.Blocks.*;
@@ -269,7 +272,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.STONE)
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape1, builder1) -> builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state1, world1, pos1, type) -> false))
+        .addPreBuildConsumer((blockShape1, builder1) -> builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning(Blocks::never).lootTable(Optional.of(RegistryKey.of(RegistryKeys.LOOT_TABLE, builder1.getBlockId().withPrefixedPath("blocks/")))).pistonBehavior(PistonBehavior.BLOCK))
         .build();
 
     // 青金石块。
