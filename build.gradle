@@ -195,10 +195,9 @@ tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.changelogType = 'markdown'
     mainFile.releaseType = release_type
 
-//    for (final String v in (project.supported_minecraft_versions.split(','))) {
-//        mainFile.addGameVersion v
-//    }
-    mainFile.addGameVersion '1.21.4-snapshot'
+    for (final String v in (project.supported_minecraft_versions.split(','))) {
+        mainFile.addGameVersion v
+    }
 
     mainFile.addRelations 'requiredDependency', 'fabric-api'
 
