@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "extshape:snow_button"
+          "name": "extshape:bedrock_vertical_stairs"
         }
       ],
       "rolls": 1.0

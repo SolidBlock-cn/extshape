@@ -1,5 +1,14 @@
 # Update log
 
+### 3.0.6
+
+- Since version 1.21.4, following vanilla update, all buttons and pressure plates can be harvested by hand with dropping themselves.
+    - Buttons and pressure plates for glowstone and clay block also drop themselves. Versions below 1.21.3 are not affected.
+    - Buttons and pressure plates of bedrock cannot be harvested in Survival Mode, but when losing support blocks, will drop normally.
+    - Except for bedrock, the hardness and resistance of buttons and pressures, if higher than 0.5 in previous versions, will be all adjusted to 0.5. Versions below 1.21.3 are not affected.
+- Fixed the issue that buttons and pressure plates of bedrock may not drop when losing support blocks.
+- Fixed the issue that buttons and pressure plates of bedrock may be destroyed when pushed by a piston.
+
 ### 3.0.5
 
 - Fixed the issue that in versions 1.21.3 and above, pale moss is not added. Meanwhile, added into block tag `hoe_mineable` and the special recipes in `recipe_tweak`.

@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.ButtonBlock;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.loot.LootTable;
 import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +31,7 @@ public class ExtShapeLootTableProvider extends FabricBlockLootTableProvider {
         final LootTable.Builder lootTable;
         final Block baseBlock = i.getBaseBlock();
         final UnusualLootTables.LootTableFunction unusual = instance.get(baseBlock);
-        if (unusual != null) {
+        if (unusual != null && !(block instanceof ButtonBlock) && !(block instanceof PressurePlateBlock)) {
           lootTable = unusual.apply(baseBlock, BlockShape.getShapeOf(block), block, registries, this);
         } else {
           lootTable = i.getLootTable(this);
