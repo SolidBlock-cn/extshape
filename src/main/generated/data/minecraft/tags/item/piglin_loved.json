@@ -20,6 +20,12 @@
     "extshape:raw_gold_fence_gate",
     "extshape:raw_gold_wall",
     "extshape:raw_gold_button",
-    "extshape:raw_gold_pressure_plate"
+    "extshape:raw_gold_pressure_plate",
+    "extshape:gilded_blackstone_stairs",
+    "extshape:gilded_blackstone_slab",
+    "extshape:gilded_blackstone_vertical_slab",
+    "extshape:gilded_blackstone_vertical_stairs",
+    "extshape:gilded_blackstone_quarter_piece",
+    "extshape:gilded_blackstone_vertical_quarter_piece"
   ]
 }

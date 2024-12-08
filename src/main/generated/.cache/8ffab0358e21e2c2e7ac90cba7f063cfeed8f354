@@ -105,7 +105,7 @@ b0cdf8245402e06ee011cc4d5bbad6b42aa4bc44 data/minecraft/tags/block/needs_iron_to
 a09c0575fd9ae51623637bd859b6b03c03fa5b4e data/minecraft/tags/block/needs_stone_tool.json
 1e34d90e78825a9fbd9df7f9fe8b7a847e4fb213 data/minecraft/tags/block/occludes_vibration_signals.json
 86079d5be403c8bf23f2467766752b0e0472150e data/minecraft/tags/block/pressure_plates.json
-2392ac95ed04313797245f7cc1c03631264e6ae5 data/minecraft/tags/block/slabs.json
+2c821922578ae1f71599dcc6d9e5219aeed7172c data/minecraft/tags/block/slabs.json
 edf907fd6518eebb2b8bda3d7ff608825dea64a4 data/minecraft/tags/block/small_dripleaf_placeable.json
 2d4d3705a7352a2779c1426c734f956b510d0103 data/minecraft/tags/block/stairs.json
 e60abc135b826e2a4d9fd05b2b8aaead1ca8fed8 data/minecraft/tags/block/stone_pressure_plates.json
