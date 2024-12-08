@@ -1,4 +1,4 @@
-// 1.21.3	2024-12-08T23:19:44.2833473	Extended Block Shapes/Tags for minecraft:item
+// 1.21.3	2024-12-09T00:42:28.9160863	Extended Block Shapes/Tags for minecraft:item
 301512ac5975f13cbbdf2c9c30c950cd8e27f8ee data\extshape\tags\item\concrete_walls.json
 19ab2adf50ce3ac43ca944ce54afe1ee3f357859 data\extshape\tags\item\woolen_fence_gates.json
 f0fc4f996fb7d3f06cbd95380a7faa721748da6c data\c\tags\item\dyed\light_blue.json
@@ -43,7 +43,7 @@ c2630a02452130dfa038094d1e0277a1e8144bef data\extshape\tags\item\woolen_vertical
 3b2480de8d03825d47581ed0681fb3eb3c5deb0a data\c\tags\item\dyed\white.json
 da6f3c7929bd0088e94248b36c7cee3490d7056b data\extshape\tags\item\log_vertical_stairs.json
 970b199302d8321479ef2d7f65d616b59844e789 data\c\tags\item\dyed\gray.json
-4069c73aea787873f50528bde0f7830cc1772ecd data\minecraft\tags\item\slabs.json
+99eea11882b3fb9f25cb9822489fe48466440760 data\minecraft\tags\item\slabs.json
 b059825f53df2889d5a5126844e1af6ba4abca5b data\minecraft\tags\item\piglin_loved.json
 420e0fef026b9e1304889bd7e5c7755d3380e959 data\extshape\tags\item\concrete_quarter_pieces.json
 ba4b0f51e940e28a8eeb3d3b3924287e7fa68f44 data\extshape\tags\item\terracotta_fences.json
