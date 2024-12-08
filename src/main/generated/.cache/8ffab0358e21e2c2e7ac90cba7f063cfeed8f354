@@ -1,4 +1,4 @@
-// 1.21.3	2024-11-26T14:34:35.2259709	Extended Block Shapes/Tags for minecraft:block
+// 1.21.3	2024-12-08T23:19:44.15047	Extended Block Shapes/Tags for minecraft:block
 2caab958182349dd762c36fe8ae5601e3c3b78de data\extshape\tags\block\woolen_stairs.json
 1d3073a3a62913ccde3424878d52e9403e930554 data\minecraft\tags\block\bamboo_plantable_on.json
 84b3ef460c41de6ca66122b84607d062b3c55146 data\extshape\tags\block\terracotta_vertical_stairs.json
@@ -21,8 +21,8 @@ f26fb08728a0f1b9fd4f940679aa701cfffae8a2 data\minecraft\tags\block\guarded_by_pi
 1df44e4d219bcfb94dc6d28cad81ff8808998a99 data\extshape\tags\block\stained_terracotta_vertical_quarter_pieces.json
 3694e4240223129109f29d9e7fb9fa0e30892556 data\extshape\tags\block\concrete_fence_gates.json
 935a954ecba189f90b9fbac7efdfe98b9d5beb18 data\c\tags\block\dyed\yellow.json
-a09c0575fd9ae51623637bd859b6b03c03fa5b4e data\minecraft\tags\block\needs_stone_tool.json
 6a4b7f567422639c419eef8026a37ca98509cd25 data\minecraft\tags\block\needs_diamond_tool.json
+a09c0575fd9ae51623637bd859b6b03c03fa5b4e data\minecraft\tags\block\needs_stone_tool.json
 b8949184fa7fec1b0648ac3aa6371734c696b44b data\extshape\tags\block\stained_terracotta_quarter_pieces.json
 529417530e3d243d92247845e4949d63303b54d4 data\extshape\tags\block\terracotta_quarter_pieces.json
 cb3b0e3178a37184fbb36cfe325d1b7705a26faa data\extshape\tags\block\woolen_vertical_stairs.json
