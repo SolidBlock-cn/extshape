@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.Items;
@@ -269,7 +270,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.STONE)
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape1, builder1) -> builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning(Blocks::never))
+        .addPreBuildConsumer((blockShape1, builder1) -> ((AbstractBlockSettingsAccessor) builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning((state1, world1, pos1, type) -> false)).setLootTableKey(null))
         .build();
 
     // 青金石块。
