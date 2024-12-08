@@ -8,6 +8,8 @@
     - Except for bedrock, the hardness and resistance of buttons and pressures, if higher than 0.5 in previous versions, will be all adjusted to 0.5. Versions below 1.21.3 are not affected.
 - Fixed the issue that buttons and pressure plates of bedrock may not drop when losing support blocks.
 - Fixed the issue that buttons and pressure plates of bedrock may be destroyed when pushed by a piston.
+- Fixed the issue that items of blocks of gilded blackstone do not have the item tag `#minecraft:piglin_loved`.
+- Fixed the issue of mod pathfinding caused by vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces. (Issue #37)
 
 ### 3.0.5
 
