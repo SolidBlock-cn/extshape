@@ -4,7 +4,7 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [Block List](BlockList.md).
 
-At present, this mod supports Minecraft Java Edition 1.21.3–1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
+At present, this mod supports Minecraft Java Edition 1.21.4–1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
 
 If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blockus](#Blockus), to add inter-mod support for Blockus.
 
@@ -56,7 +56,7 @@ Blocks added by this mod inherit most features of their base blocks:
 - **Bedrock** blocks are infiniburn in the end. They are not harvestable in Survival Mode. However, bedrock buttons and pressure plates may drop when they lose the blocks they relie on.
 - **Endstone, obsidian and crying obsidian** blocks are immune to ender dragons.
 - **Netherite** blocks and **ancient debris** blocks, when dropped as items, resist fire and lava.
-- **Gold and raw gold** blocks can be admired by piglins.
+- Blocks of **Gold blocks, raw gold and gilded blackstone** can be admired by piglins.
 - Breaking **gold blocks, raw gold blocks and gilded blackstone** blocks irritates piglins.
 - A **snow** stairs or snow slab, when placed on a grass block, if it just covers the whole top of the grass block, makes it snowy, just like covered by a snow block or snow.
 - Small dripleaves and large dripleaves can be placed on blocks based on **moss blocks and clay** (only building blocks).
