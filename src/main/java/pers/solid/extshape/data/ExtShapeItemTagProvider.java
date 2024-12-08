@@ -62,7 +62,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
         BlockCollections.STRIPPED_HYPHAES,
         Arrays.asList(Blocks.CRIMSON_PLANKS, Blocks.WARPED_PLANKS)
     ));
-    addForShapes(ItemTags.PIGLIN_LOVED, Blocks.GOLD_BLOCK, Blocks.RAW_GOLD_BLOCK);
+    addForShapes(ItemTags.PIGLIN_LOVED, Blocks.GOLD_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.GILDED_BLACKSTONE);
   }
 
   protected void copyWithSameId(TagKey<Block> blockTag) {
