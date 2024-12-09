@@ -1,4 +1,4 @@
-// 1.20.4	2024-11-04T20:13:14.0703378	Extended Block Shapes/Tags for minecraft:block
+// 1.20.4	2024-12-09T08:48:56.945063	Extended Block Shapes/Tags for minecraft:block
 c089a6d3107272b60a465aaf4ab85c343cd4c08a data\extshape\tags\blocks\log_slabs.json
 6721d29d7b14f314183ea64c8bc126f9492db5de data\extshape\tags\blocks\wooden_blocks.json
 679fc202479500e8a9507fc04968df901fac0e74 data\extshape\tags\blocks\woolen_quarter_pieces.json
@@ -33,7 +33,7 @@ c7f19ff7ac025d46ae0ea74d61615fcda04b1efb data\extshape\tags\blocks\log_pressure_
 d55b017e1216efb4ffdcaa07b4e705794cc5be4a data\extshape\tags\blocks\woolen_pressure_plates.json
 49e1564c0358cc9dbb2f9eb53d24ad762e2e34f7 data\extshape\tags\blocks\stained_terracotta_vertical_quarter_pieces.json
 0329e517651f560d26d66237647060ca799ba67c data\extshape\tags\blocks\log_walls.json
-b202db3113d3c3bf40c60151046d0cb01d4cae19 data\minecraft\tags\blocks\slabs.json
+d7d0172d257e04e67ecfc5c79b1e0d0966d69162 data\minecraft\tags\blocks\slabs.json
 3355dbdecf5cf7231e058b6382685f1df2d7d823 data\extshape\tags\blocks\concrete_fence_gates.json
 6137711f4a23eb7d80f5437daaf5015f6e8393a2 data\extshape\tags\blocks\stained_terracotta_quarter_pieces.json
 99eb12f8290db1dd3d9ea501a6ea1e7c10fc339f data\minecraft\tags\blocks\needs_stone_tool.json
@@ -71,10 +71,10 @@ b77bd47804a6061e1100ba40efe820dd75089fd8 data\extshape\tags\blocks\stained_terra
 9ba61efda2f4ec845e15ab6f341de72f1a9a568f data\extshape\tags\blocks\snow.json
 09832aa220d42434e04caa297820dd9976d510b7 data\minecraft\tags\blocks\fences.json
 c6dec54200326e7f28fd4756c600c90035fb9030 data\minecraft\tags\blocks\stairs.json
-a2637ea8ca23e4841f39452fba271dd886584514 data\extshape\tags\blocks\woolen_buttons.json
-758043e989ddc2d1b1585c5cf5773ca0cd120906 data\extshape\tags\blocks\log_vertical_stairs.json
-d9d590907adf248b1f2879ce7c7429d1be123b7b data\extshape\tags\blocks\terracotta_quarter_pieces.json
 2dd1fbb9e05c8abe03a8052ee5dacfe5f77ab380 data\extshape\tags\blocks\terracotta_vertical_stairs.json
+d9d590907adf248b1f2879ce7c7429d1be123b7b data\extshape\tags\blocks\terracotta_quarter_pieces.json
+758043e989ddc2d1b1585c5cf5773ca0cd120906 data\extshape\tags\blocks\log_vertical_stairs.json
+a2637ea8ca23e4841f39452fba271dd886584514 data\extshape\tags\blocks\woolen_buttons.json
 3beac1cb6e2c0989da1f9fd39a435d0ed1412aa2 data\extshape\tags\blocks\vertical_slabs.json
 c14c5d4e71c616d62ac0bac8ed0b3c01c6dea1d3 data\fabric\tags\blocks\mineable\shears.json
 c828d3b844f31f685268b21a7327511917a21845 data\minecraft\tags\blocks\pressure_plates.json
@@ -101,5 +101,5 @@ ac55a2a079965c2303c1c9766f55671b4ed737f5 data\extshape\tags\blocks\stained_terra
 f75a5ce14944a6e5b4646bea739169ad4b030c17 data\extshape\tags\blocks\log_buttons.json
 502dbc385b089f5cb9290639b97e6abf6062f171 data\extshape\tags\blocks\concrete_fences.json
 b64c8bb0a6c30e21350f9b3d02109e3523696c0c data\extshape\tags\blocks\concrete_pressure_plates.json
-091d1c7cdc56a98d15624e12954f0987ad52e9fa data\extshape\tags\blocks\terracotta_fences.json
 e9f1549c5bcfd86a7c54535f6fb22f1966f56e63 data\extshape\tags\blocks\quarter_pieces.json
+091d1c7cdc56a98d15624e12954f0987ad52e9fa data\extshape\tags\blocks\terracotta_fences.json
