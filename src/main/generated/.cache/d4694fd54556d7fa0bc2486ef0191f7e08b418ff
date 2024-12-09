@@ -1,4 +1,4 @@
-// 1.19.4	2024-11-04T19:48:57.7669477	Extended Block Shapes/Tags for minecraft:item
+// 1.19.4	2024-12-09T10:21:35.9638778	Extended Block Shapes/Tags for minecraft:item
 bd48a90729592c1e184eb915af29e5efe6299a00 data\extshape\tags\items\stained_terracotta_fence_gates.json
 c301c5cabd69cdb4de1cc2f652bedfb774a8e76b data\extshape\tags\items\woolen_vertical_slabs.json
 043a1f978e3779758bdfb8854ea89eb0237fb2b6 data\extshape\tags\items\terracotta_fence_gates.json
@@ -78,11 +78,11 @@ cb6cb9af6484531ccd2f35fff9fec83496640a62 data\extshape\tags\items\woolen_vertica
 c7f19ff7ac025d46ae0ea74d61615fcda04b1efb data\extshape\tags\items\log_pressure_plates.json
 8e01e71c7f525062d5586a9c8c57db0067952dad data\extshape\tags\items\vertical_slabs.json
 645695c5f66ef37668b406a0b8a94950f1e39be7 data\extshape\tags\items\vertical_quarter_pieces.json
-08fb590e24aa2d0a850ea4d0ce30845826bcf47e data\minecraft\tags\items\slabs.json
+883a00208cd4440b9a44a8b097d9c6f2f444ad5c data\minecraft\tags\items\slabs.json
 c862a525e4f909362cedc6041e06d960e7d3326f data\extshape\tags\items\woolen_fences.json
 ce3abcb43884727b4c1eab82e59eba2bcd4ba54d data\extshape\tags\items\woolen_stairs.json
 0329e517651f560d26d66237647060ca799ba67c data\extshape\tags\items\log_walls.json
 03b2eae66bee291d7bd562e050fdeeb12ea99c0a data\extshape\tags\items\terracotta_slabs.json
-b908abefd849667b1f398c3c9bae31a7198e3133 data\minecraft\tags\items\piglin_loved.json
+541e5ca6cf68d047f99ca0dfb75f22d6ef3d4b82 data\minecraft\tags\items\piglin_loved.json
 a2637ea8ca23e4841f39452fba271dd886584514 data\extshape\tags\items\woolen_buttons.json
 295c5dce2fe3d3c6a23f10af36e98e06e991d5bd data\extshape\tags\items\wooden_vertical_stairs.json
