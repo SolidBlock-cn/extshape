@@ -85,5 +85,6 @@ publish {
 fabricApi {
     configureDataGeneration() {
         it.modId = "extshape_blockus"
+        client = true
     }
 }

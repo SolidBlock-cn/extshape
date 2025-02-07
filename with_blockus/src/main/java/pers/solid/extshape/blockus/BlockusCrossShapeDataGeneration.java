@@ -8,7 +8,7 @@ import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.RecipeGenerator;
+import net.minecraft.data.recipe.RecipeGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;

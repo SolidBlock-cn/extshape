@@ -2,8 +2,7 @@ package pers.solid.extshape.blockus;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeProvider;
-import net.minecraft.data.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.recipe.RecipeGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;

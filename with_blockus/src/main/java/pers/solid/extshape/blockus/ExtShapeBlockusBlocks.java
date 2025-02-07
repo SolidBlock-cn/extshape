@@ -483,6 +483,16 @@ public final class ExtShapeBlockusBlocks {
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
 
+    create(BlockusBlocks.LARGE_RESIN_BRICKS)
+        .setStoneFenceSettings(Items.RESIN_CLUMP)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
+
+    create(BlockusBlocks.HERRINGBONE_RESIN_BRICKS)
+        .setStoneFenceSettings(Items.RESIN_CLUMP)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
+
     create(BlockusBlocks.ROUGH_SANDSTONE)
         .setStoneFenceSettings(Items.SAND)
         .build();

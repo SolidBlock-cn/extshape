@@ -18,12 +18,13 @@ public final class BlockusBlockCollections {
       BlockusBlocks.JUNGLE_MOSAIC,
       BlockusBlocks.ACACIA_MOSAIC,
       BlockusBlocks.DARK_OAK_MOSAIC,
-      BlockusBlocks.CHERRY_MOSAIC,
       BlockusBlocks.MANGROVE_MOSAIC,
+      BlockusBlocks.CHERRY_MOSAIC,
+      BlockusBlocks.PALE_OAK_MOSAIC,
       BlockusBlocks.RAW_BAMBOO_MOSAIC,
       BlockusBlocks.WHITE_OAK_MOSAIC,
-      BlockusBlocks.WARPED_MOSAIC,
       BlockusBlocks.CRIMSON_MOSAIC,
+      BlockusBlocks.WARPED_MOSAIC,
       BlockusBlocks.CHARRED_MOSAIC
   );
   public static final ImmutableList<BSSWBundle> MOSSY_PLANKS = ImmutableList.of(
@@ -33,13 +34,14 @@ public final class BlockusBlockCollections {
       BlockusBlocks.MOSSY_JUNGLE_PLANKS,
       BlockusBlocks.MOSSY_ACACIA_PLANKS,
       BlockusBlocks.MOSSY_DARK_OAK_PLANKS,
-      BlockusBlocks.MOSSY_CHERRY_PLANKS,
       BlockusBlocks.MOSSY_MANGROVE_PLANKS,
+      BlockusBlocks.MOSSY_CHERRY_PLANKS,
+      BlockusBlocks.MOSSY_PALE_OAK_PLANKS,
       BlockusBlocks.MOSSY_BAMBOO_PLANKS,
       BlockusBlocks.MOSSY_RAW_BAMBOO_PLANKS,
       BlockusBlocks.MOSSY_WHITE_OAK_PLANKS,
-      BlockusBlocks.MOSSY_WARPED_PLANKS,
       BlockusBlocks.MOSSY_CRIMSON_PLANKS,
+      BlockusBlocks.MOSSY_WARPED_PLANKS,
       BlockusBlocks.MOSSY_CHARRED_PLANKS);
   public static final ImmutableList<Block> HERRINGBONE_PLANKS = ImmutableList.of(
       BlockusBlocks.HERRINGBONE_OAK_PLANKS,
@@ -48,13 +50,14 @@ public final class BlockusBlockCollections {
       BlockusBlocks.HERRINGBONE_JUNGLE_PLANKS,
       BlockusBlocks.HERRINGBONE_ACACIA_PLANKS,
       BlockusBlocks.HERRINGBONE_DARK_OAK_PLANKS,
-      BlockusBlocks.HERRINGBONE_CHERRY_PLANKS,
       BlockusBlocks.HERRINGBONE_MANGROVE_PLANKS,
+      BlockusBlocks.HERRINGBONE_CHERRY_PLANKS,
+      BlockusBlocks.HERRINGBONE_PALE_OAK_PLANKS,
       BlockusBlocks.HERRINGBONE_BAMBOO_PLANKS,
       BlockusBlocks.HERRINGBONE_RAW_BAMBOO_PLANKS,
       BlockusBlocks.HERRINGBONE_WHITE_OAK_PLANKS,
-      BlockusBlocks.HERRINGBONE_WARPED_PLANKS,
       BlockusBlocks.HERRINGBONE_CRIMSON_PLANKS,
+      BlockusBlocks.HERRINGBONE_WARPED_PLANKS,
       BlockusBlocks.HERRINGBONE_CHARRED_PLANKS);
   public static final ImmutableList<Block> SMALL_LOGS = ImmutableList.of(
       BlockusBlocks.OAK_SMALL_LOGS,
@@ -63,11 +66,11 @@ public final class BlockusBlockCollections {
       BlockusBlocks.JUNGLE_SMALL_LOGS,
       BlockusBlocks.ACACIA_SMALL_LOGS,
       BlockusBlocks.DARK_OAK_SMALL_LOGS,
-      BlockusBlocks.CHERRY_SMALL_LOGS,
       BlockusBlocks.MANGROVE_SMALL_LOGS,
-      BlockusBlocks.WARPED_SMALL_STEMS,
-      BlockusBlocks.CRIMSON_SMALL_STEMS,
-      BlockusBlocks.WHITE_OAK_SMALL_LOGS);
+      BlockusBlocks.CHERRY_SMALL_LOGS,
+      BlockusBlocks.PALE_OAK_SMALL_LOGS,
+      BlockusBlocks.WHITE_OAK_SMALL_LOGS,
+      BlockusBlocks.CRIMSON_SMALL_STEMS);
   public static final ImmutableList<BSSWBundle> STAINED_STONE_BRICKS = ImmutableList.of(
       BlockusBlocks.WHITE_STONE_BRICKS,
       BlockusBlocks.ORANGE_STONE_BRICKS,

@@ -2,20 +2,20 @@ package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
-import com.google.common.collect.ImmutableList;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.data.TextureKey;
-import net.minecraft.data.TextureMap;
+import net.minecraft.client.data.TextureKey;
+import net.minecraft.client.data.TextureMap;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 
-import java.util.function.Supplier;
-
+@Environment(EnvType.CLIENT)
 public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
 
   public ExtShapeBlockusModelProvider(FabricDataOutput output) {
