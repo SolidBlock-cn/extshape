@@ -70,7 +70,8 @@ public final class BlockusBlockCollections {
       BlockusBlocks.CHERRY_SMALL_LOGS,
       BlockusBlocks.PALE_OAK_SMALL_LOGS,
       BlockusBlocks.WHITE_OAK_SMALL_LOGS,
-      BlockusBlocks.CRIMSON_SMALL_STEMS);
+      BlockusBlocks.CRIMSON_SMALL_STEMS,
+      BlockusBlocks.WARPED_SMALL_STEMS);
   public static final ImmutableList<BSSWBundle> STAINED_STONE_BRICKS = ImmutableList.of(
       BlockusBlocks.WHITE_STONE_BRICKS,
       BlockusBlocks.ORANGE_STONE_BRICKS,
