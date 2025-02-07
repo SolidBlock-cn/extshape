@@ -52,19 +52,7 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
       registerSuffixed(block, TextureKey.END, "_top");
     }
 
-    for (final Supplier<Block> supplier : ImmutableList.<Supplier<Block>>of(
-        () -> BlockusBlocks.OAK_SMALL_LOGS,
-        () -> BlockusBlocks.SPRUCE_SMALL_LOGS,
-        () -> BlockusBlocks.BIRCH_SMALL_LOGS,
-        () -> BlockusBlocks.JUNGLE_SMALL_LOGS,
-        () -> BlockusBlocks.ACACIA_SMALL_LOGS,
-        () -> BlockusBlocks.DARK_OAK_SMALL_LOGS,
-        () -> BlockusBlocks.MANGROVE_SMALL_LOGS,
-        () -> BlockusBlocks.WARPED_SMALL_STEMS,
-        () -> BlockusBlocks.CRIMSON_SMALL_STEMS,
-        () -> BlockusBlocks.WHITE_OAK_SMALL_LOGS
-    )) {
-      Block block = supplier.get();
+    for (final Block block : BlockusBlockCollections.SMALL_LOGS) {
       registerSuffixed(block, TextureKey.END, "_top");
     }
   }
