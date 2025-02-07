@@ -14,7 +14,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
@@ -34,6 +33,11 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
    * 各类型方块的标签，不包括染色陶瓦的，因为染色陶瓦的标签已经被添加到了陶瓦的标签中。
    */
   public static final ImmutableList<ImmutableMap<BlockShape, TagKey<Block>>> TYPE_SHAPE_TAGS = ImmutableList.of(ExtShapeTags.SHAPE_TO_WOODEN_TAG, ExtShapeTags.SHAPE_TO_LOG_TAG, ExtShapeTags.SHAPE_TO_WOOLEN_TAG, ExtShapeTags.SHAPE_TO_CONCRETE_TAG, ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG);
+
+  /**
+   * 此集内的方块会被加入 {#code stone_pressure_plates} 和 {@code stone_buttons}。
+   */
+  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ImmutableSet.of(Blocks.STONE, Blocks.SMOOTH_STONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.GILDED_BLACKSTONE);
 
   public ExtShapeBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
     super(output, registriesFuture);
@@ -351,8 +355,12 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
       TagKey<Block> tag = tags.containsKey(shape) ? tags.get(shape) : ExtShapeTags.SHAPE_TO_TAG.get(shape);
 
       // 对石质压力板的特殊处理
-      if (BlockTags.PRESSURE_PLATES.equals(tag) && baseBlock.getDefaultState().getSoundGroup() == BlockSoundGroup.STONE) {
-        tag = BlockTags.STONE_PRESSURE_PLATES;
+      if (STONE_BASE_BLOCKS.contains(baseBlock)) {
+        if (BlockTags.PRESSURE_PLATES.equals(tag)) {
+          tag = BlockTags.STONE_PRESSURE_PLATES;
+        } else if (BlockTags.BUTTONS.equals(tag)) {
+          tag = BlockTags.STONE_BUTTONS;
+        }
       }
 
       Preconditions.checkNotNull(tag, "tag of shape %s", shape);
