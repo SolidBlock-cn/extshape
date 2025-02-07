@@ -8,5 +8,5 @@ import net.minecraft.registry.tag.TagKey;
 import pers.solid.extshape.builder.BlockShape;
 
 public final class ExtShapeBlockusTags {
-  public static final ImmutableMap<BlockShape, TagKey<Block>> GLAZED_TERRACOTTA_PILLAR_TAGS = BlockShape.values().stream().filter(blockShape -> blockShape.isConstruction).collect(ImmutableMap.toImmutableMap(Functions.identity(), blockShape -> TagKey.of(RegistryKeys.BLOCK, ExtShapeBlockus.id("glazed_terracotta_" + blockShape.asString()))));
+  public static final ImmutableMap<BlockShape, TagKey<Block>> GLAZED_TERRACOTTA_PILLAR_TAGS = BlockShape.values().stream().filter(blockShape -> blockShape.isConstruction).collect(ImmutableMap.toImmutableMap(Functions.identity(), blockShape -> TagKey.of(RegistryKeys.BLOCK, ExtShapeBlockus.id("glazed_terracotta_pillar_" + blockShape.asString()))));
 }
