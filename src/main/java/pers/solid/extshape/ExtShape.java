@@ -4,22 +4,31 @@ import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.resource.featuretoggle.FeatureSet;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
@@ -28,6 +37,7 @@ import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -77,6 +87,39 @@ public class ExtShape implements ModInitializer {
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
 
     FabricLoader.getInstance().getEntrypoints("extshape:post_initialize", ModInitializer.class).forEach(ModInitializer::onInitialize);
+
+    if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+      validateIdMap();
+      ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+        LOGGER.info("Verifying Extended Block Shapes mod content");
+        validateTags(server);
+      });
+    }
+  }
+
+  private static void validateTags(MinecraftServer server) {
+    final ObjectSet<Block> blocks = ExtShapeBlocks.getBlocks();
+    for (Block block : blocks) {
+      if (block instanceof ExtShapeBlockInterface i) {
+        final Block baseBlock = i.getBaseBlock();
+        final Registry<Block> blockRegistry = server.getRegistryManager().get(RegistryKeys.BLOCK);
+        final RegistryEntry<Block> blockEntry = blockRegistry.getEntry(block);
+        final RegistryEntry<Block> baseBlockEntry = blockRegistry.getEntry(baseBlock);
+
+        for (TagKey<Block> tag : List.of(BlockTags.AXE_MINEABLE, BlockTags.HOE_MINEABLE, BlockTags.PICKAXE_MINEABLE, BlockTags.SHOVEL_MINEABLE)) {
+          final boolean blockInTag = blockEntry.isIn(tag);
+          final boolean baseBlockInTag = baseBlockEntry.isIn(tag);
+          if (tag == BlockTags.AXE_MINEABLE && blockEntry.isIn(BlockTags.FENCE_GATES)) continue;
+          if (tag == BlockTags.PICKAXE_MINEABLE && blockEntry.isIn(BlockTags.WALLS)) continue;
+          Validate.validState(blockInTag == baseBlockInTag, "Mineable tags for %s does not match! The block %s in the tag: %s, but the base block %s in the tag: %s", tag, block, blockInTag, baseBlock, baseBlockInTag);
+        }
+        ExtShapeTags.SHAPE_TO_TAG.forEach((blockShape, blockTagKey) -> {
+          final boolean blockInShape = blockShape.test(block);
+          final boolean blockInTag = blockEntry.isIn(blockTagKey);
+          Validate.validState(blockInShape == blockInTag, "Tag check for %s does not match! The block %s in the shape: %s, but the block in the shape tag: %s", blockTagKey, block, blockInShape, blockInTag);
+        });
+      }
+    }
   }
 
   /**
