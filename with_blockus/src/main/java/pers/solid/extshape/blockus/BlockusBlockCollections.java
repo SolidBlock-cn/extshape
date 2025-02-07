@@ -63,8 +63,8 @@ public final class BlockusBlockCollections {
       BlockusBlocks.JUNGLE_SMALL_LOGS,
       BlockusBlocks.ACACIA_SMALL_LOGS,
       BlockusBlocks.DARK_OAK_SMALL_LOGS,
-      BlockusBlocks.CHERRY_SMALL_LOGS,
       BlockusBlocks.MANGROVE_SMALL_LOGS,
+      BlockusBlocks.CHERRY_SMALL_LOGS,
       BlockusBlocks.WARPED_SMALL_STEMS,
       BlockusBlocks.CRIMSON_SMALL_STEMS,
       BlockusBlocks.WHITE_OAK_SMALL_LOGS);
