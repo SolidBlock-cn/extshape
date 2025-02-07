@@ -1,8 +1,11 @@
 package pers.solid.extshape.blockus;
 
+import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.Validate;
@@ -41,6 +44,7 @@ public class ExtShapeBlockus implements ModInitializer {
       registerStrippableBlocks();
 
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        validateBlockIds();
         validateReplacingIds();
       }
     }
@@ -57,6 +61,26 @@ public class ExtShapeBlockus implements ModInitializer {
       var block4 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_WOOD);
       if (block3 != null && block4 != null) {
         ExtShape.EXTENDED_STRIPPABLE_BLOCKS.put(block3, block4);
+      }
+    }
+  }
+
+  /**
+   * 检查本模组内的方块的 id 有无与 Blockus 模组中的重复的。
+   */
+  private static void validateBlockIds() {
+    Validate.notEmpty(ExtShapeBlockusBlocks.BLOCKUS_BLOCKS);
+
+    for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
+      final Identifier blockId = Registries.BLOCK.getId(block);
+      final Identifier blockusId = Identifier.of(Blockus.MOD_ID, blockId.getPath());
+      if (Registries.BLOCK.containsId(blockusId)) {
+        final Block blockusBlock = Registries.BLOCK.get(blockusId);
+        if (blockusBlock == BlockusBlocks.PAPER_WALL) {
+          // 纸墙不属于墙方块，予以豁免。
+          continue;
+        }
+        throw new IllegalStateException("Block with id " + blockId + " is registered in the mod, but block " + blockusId + " already exists in Blockus mod!");
       }
     }
   }
