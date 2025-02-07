@@ -1,5 +1,13 @@
 # Update log
 
+### 3.1.0
+
+- Adjusted the inclusion rule of block tags `#stone_buttons` and `#stone_pressure_plates` to limit to some stone blocks.
+- Fixed the wrong issue of some blocks in Blockus mod.
+- Followed up to updates of Blockus, added Blockus blocks related to pale oaks, resin.
+- Fixed the wrong tag name of some terracotta pillar blocks in Blockus, and added relevant tag translation.
+- Fixed the issue that some block variants are still added even if the variants already exist.
+
 ### 3.0.6
 
 - Since version 1.21.4, following vanilla update, all buttons and pressure plates can be harvested by hand with dropping themselves.
