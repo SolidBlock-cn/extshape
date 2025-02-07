@@ -1,8 +1,0 @@
-{
-  "parent": "extshape:block/vertical_quarter_piece",
-  "textures": {
-    "bottom": "blockus:block/chiseled_limestone",
-    "side": "blockus:block/chiseled_limestone",
-    "top": "blockus:block/chiseled_limestone"
-  }
-}

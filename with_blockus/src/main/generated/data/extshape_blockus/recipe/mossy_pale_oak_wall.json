@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "mossy_wooden_wall",
+  "key": {
+    "#": "blockus:mossy_pale_oak_planks"
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:mossy_pale_oak_wall"
+  }
+}

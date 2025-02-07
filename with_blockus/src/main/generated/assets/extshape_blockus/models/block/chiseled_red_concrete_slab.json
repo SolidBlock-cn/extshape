@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "blockus:block/chiseled_red_concrete",
-    "side": "blockus:block/chiseled_red_concrete",
-    "top": "blockus:block/chiseled_red_concrete"
-  }
-}

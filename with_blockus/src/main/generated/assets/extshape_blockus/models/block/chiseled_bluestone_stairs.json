@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "blockus:block/chiseled_bluestone",
-    "side": "blockus:block/chiseled_bluestone",
-    "top": "blockus:block/chiseled_bluestone"
-  }
-}

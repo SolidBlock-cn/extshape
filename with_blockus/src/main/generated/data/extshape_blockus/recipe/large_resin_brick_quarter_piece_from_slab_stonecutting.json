@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:large_resin_brick_slab",
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:large_resin_brick_quarter_piece"
+  }
+}

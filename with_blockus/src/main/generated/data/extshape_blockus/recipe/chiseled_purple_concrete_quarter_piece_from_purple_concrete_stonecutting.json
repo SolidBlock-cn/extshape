@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:purple_concrete",
-  "result": {
-    "count": 4,
-    "id": "extshape_blockus:chiseled_purple_concrete_quarter_piece"
-  }
-}

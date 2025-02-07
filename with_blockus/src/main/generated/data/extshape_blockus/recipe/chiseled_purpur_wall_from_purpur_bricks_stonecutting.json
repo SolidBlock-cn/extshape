@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:purpur_bricks",
-  "result": {
-    "count": 1,
-    "id": "extshape_blockus:chiseled_purpur_wall"
-  }
-}

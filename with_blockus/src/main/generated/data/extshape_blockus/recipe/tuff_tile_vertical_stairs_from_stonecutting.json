@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:tuff_tiles",
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:tuff_tile_vertical_stairs"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "blockus:block/chiseled_amethyst",
-    "side": "blockus:block/chiseled_amethyst",
-    "top": "blockus:block/chiseled_amethyst"
-  }
-}

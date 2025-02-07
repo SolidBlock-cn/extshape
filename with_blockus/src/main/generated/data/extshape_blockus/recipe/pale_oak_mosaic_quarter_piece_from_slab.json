@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wooden_mosaic_quarter_piece_from_slab",
+  "key": {
+    "#": "blockus:pale_oak_mosaic_slab"
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:pale_oak_mosaic_quarter_piece"
+  }
+}

@@ -87,13 +87,13 @@ f48a7d9e8d292f57b6021fced6f7ce086ff09868 data/extshape/tags/item/woolen_vertical
 c2630a02452130dfa038094d1e0277a1e8144bef data/extshape/tags/item/woolen_vertical_slabs.json
 cb3b0e3178a37184fbb36cfe325d1b7705a26faa data/extshape/tags/item/woolen_vertical_stairs.json
 bae2ffad52f51c8f7008861399a0a0b817bc3c39 data/extshape/tags/item/woolen_walls.json
-8cc53b35a5bdc3ebfb46376512efc308dc0d0455 data/minecraft/tags/item/buttons.json
+f0415e70a8f7d5f9eccf0f0598eb25d39a69fa68 data/minecraft/tags/item/buttons.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/item/dampens_vibrations.json
 8145f70351925073cb4f20c7000be382b8e07ab1 data/minecraft/tags/item/fence_gates.json
 a00fe50c2467044c74da11dd4483cdee41293f62 data/minecraft/tags/item/fences.json
 9c0c5c20f86ef2e7c39a3fe4810f7f27a7748162 data/minecraft/tags/item/non_flammable_wood.json
 b059825f53df2889d5a5126844e1af6ba4abca5b data/minecraft/tags/item/piglin_loved.json
-86079d5be403c8bf23f2467766752b0e0472150e data/minecraft/tags/item/pressure_plates.json
+580273ae8d25e29f8dd94a60c3ed2cacf3ee80ff data/minecraft/tags/item/pressure_plates.json
 2c821922578ae1f71599dcc6d9e5219aeed7172c data/minecraft/tags/item/slabs.json
 2d4d3705a7352a2779c1426c734f956b510d0103 data/minecraft/tags/item/stairs.json
 48cdfa93aed0419459ad56afc060e27123b9c9c8 data/minecraft/tags/item/walls.json

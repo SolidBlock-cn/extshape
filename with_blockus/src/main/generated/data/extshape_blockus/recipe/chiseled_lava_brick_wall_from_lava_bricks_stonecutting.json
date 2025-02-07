@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:lava_bricks",
-  "result": {
-    "count": 1,
-    "id": "extshape_blockus:chiseled_lava_brick_wall"
-  }
-}

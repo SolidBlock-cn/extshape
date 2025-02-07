@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "herringbone_wooden_stairs",
+  "key": {
+    "#": "blockus:herringbone_pale_oak_planks"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:herringbone_pale_oak_stairs"
+  }
+}

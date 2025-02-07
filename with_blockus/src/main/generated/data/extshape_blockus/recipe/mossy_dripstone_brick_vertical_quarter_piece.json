@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "extshape_blockus:mossy_dripstone_brick_quarter_piece"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:mossy_dripstone_brick_vertical_quarter_piece"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:amethyst_block",
-  "result": {
-    "count": 1,
-    "id": "extshape_blockus:chiseled_amethyst_stairs"
-  }
-}
