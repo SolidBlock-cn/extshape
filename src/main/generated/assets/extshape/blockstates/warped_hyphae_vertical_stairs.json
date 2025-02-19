@@ -17,8 +17,7 @@
     },
     "facing=south_west": {
       "model": "extshape:block/warped_hyphae_vertical_stairs",
-      "uvlock": true,
-      "y": 0
+      "uvlock": true
     }
   }
 }

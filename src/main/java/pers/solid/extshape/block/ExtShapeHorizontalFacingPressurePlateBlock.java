@@ -6,16 +6,17 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.Models;
-import net.minecraft.client.data.VariantsBlockStateSupplier;
+import net.minecraft.client.data.VariantsBlockModelDefinitionCreator;
+import net.minecraft.client.render.model.json.WeightedUnbakedModel;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.data.ExtShapeModelProvider;
+import pers.solid.extshape.mixin.BlockStateModelGeneratorAccessor;
 import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
@@ -62,8 +63,8 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   @Environment(EnvType.CLIENT)
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
-    final Identifier upModelId = Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector);
-    final Identifier downModelId = Models.PRESSURE_PLATE_DOWN.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector);
-    blockStateModelGenerator.blockStateCollector.accept(((VariantsBlockStateSupplier) BlockStateModelGenerator.createPressurePlateBlockState(this, upModelId, downModelId)).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates()));
+    final WeightedUnbakedModel upModel = BlockStateModelGenerator.createModel(Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
+    final WeightedUnbakedModel downModel = BlockStateModelGenerator.createModel(Models.PRESSURE_PLATE_DOWN.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
+    blockStateModelGenerator.blockStateCollector.accept(((VariantsBlockModelDefinitionCreator) BlockStateModelGenerator.createPressurePlateBlockState(this, upModel, downModel)).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS()));
   }
 }

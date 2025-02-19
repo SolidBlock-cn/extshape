@@ -25,16 +25,13 @@
       "y": 180
     },
     "facing=south,type=bottom": {
-      "model": "extshape:block/light_gray_glazed_terracotta_slab",
-      "y": 0
+      "model": "extshape:block/light_gray_glazed_terracotta_slab"
     },
     "facing=south,type=double": {
-      "model": "minecraft:block/light_gray_glazed_terracotta",
-      "y": 0
+      "model": "minecraft:block/light_gray_glazed_terracotta"
     },
     "facing=south,type=top": {
-      "model": "extshape:block/light_gray_glazed_terracotta_slab_top",
-      "y": 0
+      "model": "extshape:block/light_gray_glazed_terracotta_slab_top"
     },
     "facing=west,type=bottom": {
       "model": "extshape:block/light_gray_glazed_terracotta_slab",

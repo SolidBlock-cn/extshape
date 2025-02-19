@@ -12,8 +12,7 @@
     },
     "facing=south_east": {
       "model": "extshape:block/deepslate_vertical_quarter_piece",
-      "uvlock": true,
-      "y": 0
+      "uvlock": true
     },
     "facing=south_west": {
       "model": "extshape:block/deepslate_vertical_quarter_piece",

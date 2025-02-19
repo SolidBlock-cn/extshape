@@ -237,10 +237,10 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
     addForConstructionShapes(BlockTags.ENDERMAN_HOLDABLE, Blocks.DIRT, Blocks.PUMPKIN, Blocks.MELON);
     addForConstructionShapes(BlockTags.BAMBOO_PLANTABLE_ON, Blocks.DIRT);
-    addForConstructionShapes(BlockTags.DEAD_BUSH_MAY_PLACE_ON, Blocks.DIRT);
+    addForConstructionShapes(BlockTags.DRY_VEGETATION_MAY_PLACE_ON, Blocks.DIRT);
     ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.forEach((shape, tag) -> {
       if (shape.isConstruction) {
-        getOrCreateTagBuilder(BlockTags.DEAD_BUSH_MAY_PLACE_ON).addTag(tag);
+        getOrCreateTagBuilder(BlockTags.DRY_VEGETATION_MAY_PLACE_ON).addTag(tag);
       }
     });
 

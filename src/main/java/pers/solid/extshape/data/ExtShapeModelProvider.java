@@ -76,7 +76,7 @@ public class ExtShapeModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerStateWithModelReference(block, Blocks.OAK_PLANKS);
         blockStateModelGenerator.registerParentedItemModel(block, ModelIds.getBlockModelId(Blocks.OAK_PLANKS));
       } else if (block == ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
-        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, ModelIds.getBlockSubModelId(Blocks.SMOOTH_STONE_SLAB, "_double")));
+        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, BlockStateModelGenerator.createModel(ModelIds.getBlockSubModelId(Blocks.SMOOTH_STONE_SLAB, "_double"))));
         blockStateModelGenerator.registerParentedItemModel(block, ModelIds.getBlockSubModelId(Blocks.SMOOTH_STONE_SLAB, "_double"));
       } else {
         throw new IllegalStateException("Not provided model for block: " + block);
@@ -84,11 +84,11 @@ public class ExtShapeModelProvider extends FabricModelProvider {
     }
   }
 
-  public TextureMap getTextureMap(Block baseBlock, BlockStateModelGenerator blockStateModelGenerator) {
+  public TextureMap getTextureMap(Block baseBlock, BlockStateModelGenerator blockStateModelGenerator) { // todo 此参数从 1.21.5 开始不需要了？
     if (textureMaps.containsKey(baseBlock)) {
       return textureMaps.get(baseBlock);
     }
-    final Map<Block, TexturedModel> texturedModels = ((BlockStateModelGeneratorAccessor) blockStateModelGenerator).getTexturedModels();
+    final Map<Block, TexturedModel> texturedModels = BlockStateModelGeneratorAccessor.getTEXTURED_MODELS();
     final TexturedModel texturedModel = texturedModels.containsKey(baseBlock) ? texturedModels.get(baseBlock) : TexturedModel.CUBE_ALL.get(baseBlock);
     final TextureMap textures = texturedModel.getTextures();
     final Map<TextureKey, Identifier> entries = ((TextureMapAccessor) textures).getEntries();
@@ -104,7 +104,7 @@ public class ExtShapeModelProvider extends FabricModelProvider {
     }
     return poolMap.computeIfAbsent(baseBlock, block -> {
       final BlockStateModelGenerator.BlockTexturePool blockTexturePool = blockStateModelGenerator.new BlockTexturePool(getTextureMap(block, blockStateModelGenerator));
-      ((BlockTexturePoolAccessor) blockTexturePool).setBaseModelId(ModelIds.getBlockModelId(block));
+      ((BlockTexturePoolAccessor) blockTexturePool).setBaseModelId(BlockStateModelGenerator.createModelVariant(ModelIds.getBlockModelId(block)));
       final TextureMap textures = getTextureMap(block, blockStateModelGenerator);
       try {
         textures.getTexture(TextureKey.ALL);

@@ -1,4 +1,4 @@
-// 1.21.4	-999999999-01-01T00:00:00	Extended Block Shapes/Tags for minecraft:block
+// 25w07a	-999999999-01-01T00:00:00	Extended Block Shapes/Tags for minecraft:block
 fc865218decef456a6ebe14c3f4619d1eb8b12b8 data/c/tags/block/dyed/black.json
 edf1c3003ad7e7092ee621214d99993a6c3efbe8 data/c/tags/block/dyed/blue.json
 84e16523b64431ba06d7c8311c0dd6b4be856157 data/c/tags/block/dyed/brown.json
@@ -88,8 +88,8 @@ cb3b0e3178a37184fbb36cfe325d1b7705a26faa data/extshape/tags/block/woolen_vertica
 bae2ffad52f51c8f7008861399a0a0b817bc3c39 data/extshape/tags/block/woolen_walls.json
 1d3073a3a62913ccde3424878d52e9403e930554 data/minecraft/tags/block/bamboo_plantable_on.json
 f0415e70a8f7d5f9eccf0f0598eb25d39a69fa68 data/minecraft/tags/block/buttons.json
-5f71fd9b86ae1833f434a041907b33611585105e data/minecraft/tags/block/dead_bush_may_place_on.json
 6bfdc5a0c0054861cbc293ebfb5985bc5b55896d data/minecraft/tags/block/dragon_immune.json
+5f71fd9b86ae1833f434a041907b33611585105e data/minecraft/tags/block/dry_vegetation_may_place_on.json
 8d5ee92efde0e75a269ae5b1db7d364b8788eb37 data/minecraft/tags/block/enderman_holdable.json
 8145f70351925073cb4f20c7000be382b8e07ab1 data/minecraft/tags/block/fence_gates.json
 a00fe50c2467044c74da11dd4483cdee41293f62 data/minecraft/tags/block/fences.json

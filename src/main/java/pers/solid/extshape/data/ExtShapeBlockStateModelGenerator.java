@@ -1,143 +1,134 @@
 package pers.solid.extshape.data;
 
-import com.google.gson.JsonPrimitive;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.client.data.*;
+import net.minecraft.client.render.model.json.ModelVariantOperator;
+import net.minecraft.client.render.model.json.WeightedUnbakedModel;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.AxisRotation;
 import net.minecraft.util.math.Direction;
 import pers.solid.extshape.block.*;
+import pers.solid.extshape.mixin.BlockStateModelGeneratorAccessor;
 import pers.solid.extshape.util.BlockCollections;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
 import java.util.function.BiConsumer;
-
-import static net.minecraft.client.data.VariantSettings.*;
 
 
 @Environment(EnvType.CLIENT)
 public final class ExtShapeBlockStateModelGenerator {
   // region create models
 
-  public static BlockStateSupplier createCircularPavingSlabBlockState(Block block, Identifier bottomModelId, Identifier topModelId, Identifier fullModelId) {
-    final BlockStateVariantMap.SingleProperty<SlabType> variants = BlockStateVariantMap.create(CircularPavingSlabBlock.TYPE);
-    final BlockStateVariantMap variants2 = BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates();
-    variants.register(SlabType.BOTTOM, BlockStateVariant.create().put(MODEL, bottomModelId));
-    variants.register(SlabType.TOP, BlockStateVariant.create().put(MODEL, topModelId));
-    variants.register(SlabType.DOUBLE, BlockStateVariant.create().put(MODEL, fullModelId));
-    return VariantsBlockStateSupplier.create(block).coordinate(variants).coordinate(variants2);
+  public static BlockModelDefinitionCreator createCircularPavingSlabBlockState(Block block, Identifier bottomModelId, Identifier topModelId, Identifier fullModelId) {
+    final BlockStateVariantMap.SingleProperty<WeightedUnbakedModel, SlabType> variants = BlockStateVariantMap.models(CircularPavingSlabBlock.TYPE);
+    final BlockStateVariantMap<ModelVariantOperator> variants2 = BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS();
+    variants.register(SlabType.BOTTOM, BlockStateModelGenerator.createModel(bottomModelId));
+    variants.register(SlabType.TOP, BlockStateModelGenerator.createModel(topModelId));
+    variants.register(SlabType.DOUBLE, BlockStateModelGenerator.createModel(fullModelId));
+    return VariantsBlockModelDefinitionCreator.of(block).with(variants).coordinate(variants2);
   }
 
-  public static BlockStateSupplier createGlazedTerracottaSlabBlockState(Block block, Identifier bottomModelId, Identifier topModelId, Identifier fullModelId) {
-    final VariantsBlockStateSupplier state = VariantsBlockStateSupplier.create(block);
-    final VariantSetting<Integer> variantSetting = new VariantSetting<>("y", JsonPrimitive::new);
-    final BlockStateVariantMap.DoubleProperty<SlabType, Direction> map = BlockStateVariantMap.create(GlazedTerracottaSlabBlock.TYPE, GlazedTerracottaSlabBlock.FACING);
-    for (Direction direction : Direction.Type.HORIZONTAL) {
-      final int rotation = (int) direction.getPositiveHorizontalDegrees();
-      map.register(SlabType.BOTTOM, direction, BlockStateVariant.create().put(MODEL, bottomModelId).put(variantSetting, rotation));
-      map.register(SlabType.TOP, direction, BlockStateVariant.create().put(MODEL, topModelId).put(variantSetting, rotation));
-      map.register(SlabType.DOUBLE, direction, BlockStateVariant.create().put(MODEL, fullModelId).put(variantSetting, rotation));
-    }
-    return state.coordinate(map);
+  public static BlockModelDefinitionCreator createGlazedTerracottaSlabBlockState(Block block, Identifier bottomModelId, Identifier topModelId, Identifier fullModelId) {
+    final VariantsBlockModelDefinitionCreator.Empty state = VariantsBlockModelDefinitionCreator.of(block);
+    final BlockStateVariantMap.SingleProperty<WeightedUnbakedModel, SlabType> map = BlockStateVariantMap.models(GlazedTerracottaSlabBlock.TYPE);
+    // todo try optimize this??? and also check the default rotation
+    map.register(SlabType.BOTTOM, BlockStateModelGenerator.createModel(bottomModelId));
+    map.register(SlabType.TOP, BlockStateModelGenerator.createModel(topModelId));
+    map.register(SlabType.DOUBLE, BlockStateModelGenerator.createModel(fullModelId));
+    return state.with(map).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
   }
 
   /**
    * @see BlockStateModelGenerator#createSlabBlockState
    */
-  public static BlockStateSupplier createPillarSlabBlockState(Block block, Identifier bottomModelId, Identifier topModelId, Identifier fullModelId, Identifier bottomHorizontalModelId, Identifier topHorizontalModelId, Identifier fullHorizontalModelId) {
-    final BlockStateVariantMap.DoubleProperty<SlabType, Direction.Axis> variants = BlockStateVariantMap.create(ExtShapePillarSlabBlock.TYPE, ExtShapePillarSlabBlock.AXIS);
+  public static BlockModelDefinitionCreator createPillarSlabBlockState(Block block, Identifier bottomModelId, Identifier topModelId, Identifier fullModelId, Identifier bottomHorizontalModelId, Identifier topHorizontalModelId, Identifier fullHorizontalModelId) {
+    final BlockStateVariantMap.DoubleProperty<WeightedUnbakedModel, SlabType, Direction.Axis> variants = BlockStateVariantMap.models(ExtShapePillarSlabBlock.TYPE, ExtShapePillarSlabBlock.AXIS);
     // axis = y
-    variants.register(SlabType.DOUBLE, Direction.Axis.Y, BlockStateVariant.create().put(MODEL, fullModelId));
-    variants.register(SlabType.TOP, Direction.Axis.Y, BlockStateVariant.create().put(MODEL, topModelId));
-    variants.register(SlabType.BOTTOM, Direction.Axis.Y, BlockStateVariant.create().put(MODEL, bottomModelId));
+    variants.register(SlabType.DOUBLE, Direction.Axis.Y, BlockStateModelGenerator.createModel(fullModelId));
+    variants.register(SlabType.TOP, Direction.Axis.Y, BlockStateModelGenerator.createModel(topModelId));
+    variants.register(SlabType.BOTTOM, Direction.Axis.Y, BlockStateModelGenerator.createModel(bottomModelId));
     // axis = x
-    variants.register(SlabType.DOUBLE, Direction.Axis.X, BlockStateVariant.create().put(MODEL, fullHorizontalModelId).put(X, VariantSettings.Rotation.R90).put(Y, Rotation.R90));
-    variants.register(SlabType.BOTTOM, Direction.Axis.X, BlockStateVariant.create().put(MODEL, bottomHorizontalModelId).put(X, Rotation.R90).put(Y, Rotation.R90));
-    variants.register(SlabType.TOP, Direction.Axis.X, BlockStateVariant.create().put(MODEL, topHorizontalModelId).put(X, Rotation.R90).put(Y, Rotation.R90));
+    variants.register(SlabType.DOUBLE, Direction.Axis.X, BlockStateModelGenerator.createModel(fullHorizontalModelId).apply(BlockStateModelGenerator.ROTATE_X_90).apply(BlockStateModelGenerator.ROTATE_Y_90));
+    variants.register(SlabType.BOTTOM, Direction.Axis.X, BlockStateModelGenerator.createModel(bottomHorizontalModelId).apply(BlockStateModelGenerator.ROTATE_X_90).apply(BlockStateModelGenerator.ROTATE_Y_90));
+    variants.register(SlabType.TOP, Direction.Axis.X, BlockStateModelGenerator.createModel(topHorizontalModelId).apply(BlockStateModelGenerator.ROTATE_X_90).apply(BlockStateModelGenerator.ROTATE_Y_90));
     // axis = z
-    variants.register(SlabType.DOUBLE, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, fullHorizontalModelId).put(X, Rotation.R90));
-    variants.register(SlabType.BOTTOM, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, bottomHorizontalModelId).put(X, Rotation.R90));
-    variants.register(SlabType.TOP, Direction.Axis.Z, BlockStateVariant.create().put(MODEL, topHorizontalModelId).put(X, Rotation.R90));
+    variants.register(SlabType.DOUBLE, Direction.Axis.Z, BlockStateModelGenerator.createModel(fullHorizontalModelId).apply(BlockStateModelGenerator.ROTATE_X_90));
+    variants.register(SlabType.BOTTOM, Direction.Axis.Z, BlockStateModelGenerator.createModel(bottomHorizontalModelId).apply(BlockStateModelGenerator.ROTATE_X_90));
+    variants.register(SlabType.TOP, Direction.Axis.Z, BlockStateModelGenerator.createModel(topHorizontalModelId).apply(BlockStateModelGenerator.ROTATE_X_90));
 
-    return VariantsBlockStateSupplier.create(block).coordinate(variants);
+    return VariantsBlockModelDefinitionCreator.of(block).with(variants);
   }
 
   /**
    * @see BlockStateModelGenerator#createSlabBlockState
    * @see BlockStateModelGenerator#createUvLockedColumnBlockState
    */
-  public static BlockStateSupplier createPillarUvLockedSlabBlockState(Block block, Identifier fullModelId) {
-    final BlockStateVariantMap.DoubleProperty<SlabType, Direction.Axis> variants = BlockStateVariantMap.create(ExtShapePillarUvLockedSlabBlock.TYPE, ExtShapePillarUvLockedSlabBlock.AXIS);
+  public static BlockModelDefinitionCreator createPillarUvLockedSlabBlockState(Block block, Identifier fullModelId) {
+    final BlockStateVariantMap.DoubleProperty<WeightedUnbakedModel, SlabType, Direction.Axis> variants = BlockStateVariantMap.models(ExtShapePillarUvLockedSlabBlock.TYPE, ExtShapePillarUvLockedSlabBlock.AXIS);
     for (Direction.Axis axis : Direction.Axis.values()) {
-      variants.register(SlabType.BOTTOM, axis, BlockStateVariant.create().put(MODEL, ExtShapeModels.SLAB_COLUMN_UV_LOCKED.get(axis).getBlockSubModelId(block)));
-      variants.register(SlabType.TOP, axis, BlockStateVariant.create().put(MODEL, ExtShapeModels.SLAB_COLUMN_UV_LOCKED_TOP.get(axis).getBlockSubModelId(block)));
-      variants.register(SlabType.DOUBLE, axis, BlockStateVariant.create().put(MODEL, fullModelId.withSuffixedPath("_" + axis.asString())));
+      variants.register(SlabType.BOTTOM, axis, BlockStateModelGenerator.createModel(ExtShapeModels.SLAB_COLUMN_UV_LOCKED.get(axis).getBlockSubModelId(block)));
+      variants.register(SlabType.TOP, axis, BlockStateModelGenerator.createModel(ExtShapeModels.SLAB_COLUMN_UV_LOCKED_TOP.get(axis).getBlockSubModelId(block)));
+      variants.register(SlabType.DOUBLE, axis, BlockStateModelGenerator.createModel(fullModelId.withSuffixedPath("_" + axis.asString())));
     }
-    return VariantsBlockStateSupplier.create(block).coordinate(variants);
+    return VariantsBlockModelDefinitionCreator.of(block).with(variants);
   }
 
-  public static BlockStateSupplier createPillarVerticalSlabBlockState(Block block, Identifier modelId, Identifier horizontalModelId, Identifier horizontalUnorderedModelId, Identifier horizontalTopModelId, Identifier horizontalUnorderedTopModelId) {
-    final BlockStateVariantMap.DoubleProperty<Direction.Axis, Direction> variants = BlockStateVariantMap.create(ExtShapePillarVerticalSlabBlock.AXIS, ExtShapePillarVerticalSlabBlock.FACING);
-    final VariantSetting<Integer> yRotation = new VariantSetting<>("y", JsonPrimitive::new);
+  public static VariantsBlockModelDefinitionCreator createPillarVerticalSlabBlockState(Block block, Identifier modelId, Identifier horizontalModelId, Identifier horizontalUnorderedModelId, Identifier horizontalTopModelId, Identifier horizontalUnorderedTopModelId) {
+    final BlockStateVariantMap.DoubleProperty<WeightedUnbakedModel, Direction.Axis, Direction> variants = BlockStateVariantMap.models(ExtShapePillarVerticalSlabBlock.AXIS, ExtShapePillarVerticalSlabBlock.FACING);
 
     for (Direction facing : Direction.Type.HORIZONTAL) {
       final int rotation = (int) facing.getPositiveHorizontalDegrees();
-      variants.register(Direction.Axis.Y, facing, new BlockStateVariant()
-          .put(MODEL, modelId)
-          .put(yRotation, rotation)
-          .put(VariantSettings.UVLOCK, true));
+      variants.register(Direction.Axis.Y, facing, BlockStateModelGenerator.createModel(modelId)
+          .apply(ModelVariantOperator.ROTATION_Y.withValue(AxisRotation.fromDegrees(rotation)))
+          .apply(BlockStateModelGenerator.UV_LOCK));
       final boolean usesTopModel = facing == Direction.NORTH || facing == Direction.EAST;
-      variants.register(facing.getAxis(), facing, new BlockStateVariant()
-          .put(MODEL, usesTopModel ? horizontalTopModelId : horizontalModelId)
-          .put(yRotation, usesTopModel ? rotation - 180 : rotation)
-          .put(X, VariantSettings.Rotation.R90));
-      variants.register(facing.rotateYClockwise().getAxis(), facing, new BlockStateVariant()
-          .put(MODEL, usesTopModel ? horizontalUnorderedTopModelId : horizontalUnorderedModelId)
-          .put(yRotation, usesTopModel ? rotation - 90 : rotation + 90)
-          .put(X, VariantSettings.Rotation.R90));
+      variants.register(facing.getAxis(), facing, BlockStateModelGenerator.createModel(usesTopModel ? horizontalTopModelId : horizontalModelId)
+          .apply(ModelVariantOperator.ROTATION_Y.withValue(AxisRotation.fromDegrees(usesTopModel ? rotation - 180 : rotation)))
+          .apply(BlockStateModelGenerator.ROTATE_X_90));
+      variants.register(facing.rotateYClockwise().getAxis(), facing, BlockStateModelGenerator.createModel(usesTopModel ? horizontalUnorderedTopModelId : horizontalUnorderedModelId)
+          .apply(ModelVariantOperator.ROTATION_Y.withValue(AxisRotation.fromDegrees(usesTopModel ? rotation - 90 : rotation + 90)))
+          .apply(BlockStateModelGenerator.ROTATE_X_90));
     }
-    return VariantsBlockStateSupplier.create(block).coordinate(variants);
+    return VariantsBlockModelDefinitionCreator.of(block).with(variants);
   }
 
-  public static BlockStateSupplier createQuarterPieceBlockState(Block block, Identifier bottomModelId, Identifier topModelId) {
-    return VariantsBlockStateSupplier.create(block).coordinate(
-        BlockStateVariantMap.create(QuarterPieceBlock.HALF)
-            .register(BlockHalf.TOP, BlockStateVariant.create().put(MODEL, topModelId).put(VariantSettings.UVLOCK, true))
-            .register(BlockHalf.BOTTOM, BlockStateVariant.create().put(MODEL, bottomModelId).put(VariantSettings.UVLOCK, true))
-    ).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
+  public static VariantsBlockModelDefinitionCreator createQuarterPieceBlockState(Block block, Identifier bottomModelId, Identifier topModelId) {
+    return VariantsBlockModelDefinitionCreator.of(block).with(
+        BlockStateVariantMap.models(QuarterPieceBlock.HALF)
+            .register(BlockHalf.TOP, BlockStateModelGenerator.createModel(topModelId).apply(BlockStateModelGenerator.UV_LOCK))
+            .register(BlockHalf.BOTTOM, BlockStateModelGenerator.createModel(bottomModelId).apply(BlockStateModelGenerator.UV_LOCK))
+    ).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
   }
 
-  public static BlockStateSupplier createVerticalQuarterPieceBlockState(Block block, Identifier modelId) {
-    return VariantsBlockStateSupplier.create(block, BlockStateVariant.create()
-            .put(MODEL, modelId)
-            .put(VariantSettings.UVLOCK, true))
-        .coordinate(BlockStateVariantMap.create(VerticalQuarterPieceBlock.FACING)
-            .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R0))
-            .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
-            .register(HorizontalCornerDirection.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
-            .register(HorizontalCornerDirection.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270)));
+  public static VariantsBlockModelDefinitionCreator createVerticalQuarterPieceBlockState(Block block, Identifier modelId) {
+    return VariantsBlockModelDefinitionCreator.of(block, BlockStateModelGenerator.createModel(modelId)
+            .apply(BlockStateModelGenerator.UV_LOCK))
+        .coordinate(BlockStateVariantMap.operations(VerticalQuarterPieceBlock.FACING)
+            .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateModelGenerator.NO_OP)
+            .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateModelGenerator.ROTATE_Y_90)
+            .register(HorizontalCornerDirection.NORTH_WEST, BlockStateModelGenerator.ROTATE_Y_180)
+            .register(HorizontalCornerDirection.NORTH_EAST, BlockStateModelGenerator.ROTATE_Y_270));
   }
 
-  public static BlockStateSupplier createVerticalSlabBlockState(Block block, Identifier modelId) {
-    return VariantsBlockStateSupplier.create(block, new BlockStateVariant()
-        .put(MODEL, modelId)
-        .put(VariantSettings.UVLOCK, true)
-    ).coordinate(BlockStateModelGenerator.createSouthDefaultHorizontalRotationStates());
+  public static VariantsBlockModelDefinitionCreator createVerticalSlabBlockState(Block block, Identifier modelId) {
+    return VariantsBlockModelDefinitionCreator.of(block, BlockStateModelGenerator.createModel(modelId)
+        .apply(BlockStateModelGenerator.UV_LOCK)
+    ).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
   }
 
-  public static BlockStateSupplier createVerticalStairsBlockState(Block block, Identifier modelId) {
-    return VariantsBlockStateSupplier.create(block, new BlockStateVariant()
-        .put(MODEL, modelId)
-        .put(VariantSettings.UVLOCK, true)
-    ).coordinate(BlockStateVariantMap.create(ExtShapeVerticalStairsBlock.FACING)
-        .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R0))
-        .register(HorizontalCornerDirection.NORTH_WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
-        .register(HorizontalCornerDirection.NORTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
-        .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270)));
+  public static VariantsBlockModelDefinitionCreator createVerticalStairsBlockState(Block block, Identifier modelId) {
+    return VariantsBlockModelDefinitionCreator.of(block, BlockStateModelGenerator.createModel(modelId)
+        .apply(BlockStateModelGenerator.UV_LOCK)
+    ).coordinate(BlockStateVariantMap.operations(ExtShapeVerticalStairsBlock.FACING)
+        .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateModelGenerator.NO_OP)
+        .register(HorizontalCornerDirection.NORTH_WEST, BlockStateModelGenerator.ROTATE_Y_90)
+        .register(HorizontalCornerDirection.NORTH_EAST, BlockStateModelGenerator.ROTATE_Y_180)
+        .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateModelGenerator.ROTATE_Y_270));
   }
 
   // endregion create models

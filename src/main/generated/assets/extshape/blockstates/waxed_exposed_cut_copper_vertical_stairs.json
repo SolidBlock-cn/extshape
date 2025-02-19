@@ -17,8 +17,7 @@
     },
     "facing=south_west": {
       "model": "extshape:block/exposed_cut_copper_vertical_stairs",
-      "uvlock": true,
-      "y": 0
+      "uvlock": true
     }
   }
 }

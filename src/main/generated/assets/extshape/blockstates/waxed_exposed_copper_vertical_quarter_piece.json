@@ -12,8 +12,7 @@
     },
     "facing=south_east": {
       "model": "extshape:block/exposed_copper_vertical_quarter_piece",
-      "uvlock": true,
-      "y": 0
+      "uvlock": true
     },
     "facing=south_west": {
       "model": "extshape:block/exposed_copper_vertical_quarter_piece",
