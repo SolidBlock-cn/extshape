@@ -24,7 +24,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.mixin.ButtonBlockAccessor;
@@ -87,11 +86,8 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   @Override
   protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
     super.onStateReplaced(state, world, pos, moved);
-    final BlockState newState = world.getBlockState(pos);
-    // todo 检查此处 getBlockState 得到的是否为新的
-    ExtShape.LOGGER.error("Wrong! new state == old state! new state = {}, old state = {}", newState, state);
-    if (state.get(POWERED) && newState.getBlock() instanceof ExtShapeButtonBlock && newState.get(POWERED)) {
-      world.scheduleBlockTick(pos.toImmutable(), newState.getBlock(), ((ButtonBlockAccessor) this).getPressTicks());
+    if (state.get(POWERED) && state.getBlock() instanceof ExtShapeButtonBlock && state.get(POWERED)) {
+      world.scheduleBlockTick(pos.toImmutable(), state.getBlock(), ((ButtonBlockAccessor) this).getPressTicks());
     }
   }
 

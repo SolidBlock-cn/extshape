@@ -84,7 +84,7 @@ public class ExtShapeModelProvider extends FabricModelProvider {
     }
   }
 
-  public TextureMap getTextureMap(Block baseBlock, BlockStateModelGenerator blockStateModelGenerator) { // todo 此参数从 1.21.5 开始不需要了？
+  public TextureMap getTextureMap(Block baseBlock, BlockStateModelGenerator blockStateModelGenerator) {
     if (textureMaps.containsKey(baseBlock)) {
       return textureMaps.get(baseBlock);
     }

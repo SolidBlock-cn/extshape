@@ -36,7 +36,6 @@ public final class ExtShapeBlockStateModelGenerator {
   public static BlockModelDefinitionCreator createGlazedTerracottaSlabBlockState(Block block, Identifier bottomModelId, Identifier topModelId, Identifier fullModelId) {
     final VariantsBlockModelDefinitionCreator.Empty state = VariantsBlockModelDefinitionCreator.of(block);
     final BlockStateVariantMap.SingleProperty<WeightedUnbakedModel, SlabType> map = BlockStateVariantMap.models(GlazedTerracottaSlabBlock.TYPE);
-    // todo try optimize this??? and also check the default rotation
     map.register(SlabType.BOTTOM, BlockStateModelGenerator.createModel(bottomModelId));
     map.register(SlabType.TOP, BlockStateModelGenerator.createModel(topModelId));
     map.register(SlabType.DOUBLE, BlockStateModelGenerator.createModel(fullModelId));

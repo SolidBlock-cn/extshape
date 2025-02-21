@@ -97,10 +97,8 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   @Override
   protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
     super.onStateReplaced(state, world, pos, moved);
-    final BlockState newState = world.getBlockState(pos);
-    // todo 检查此处 getBlockState 得到的是否为新的
-    if (getRedstoneOutput(state) > 0 && newState.getBlock() instanceof ExtShapePressurePlateBlock && getRedstoneOutput(newState) > 0) {
-      world.scheduleBlockTick(pos.toImmutable(), newState.getBlock(), getTickRate());
+    if (getRedstoneOutput(state) > 0 && state.getBlock() instanceof ExtShapePressurePlateBlock && getRedstoneOutput(state) > 0) {
+      world.scheduleBlockTick(pos.toImmutable(), state.getBlock(), getTickRate());
     }
   }
 
