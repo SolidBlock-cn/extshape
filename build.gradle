@@ -1,7 +1,8 @@
 import com.modrinth.minotaur.dependencies.ModDependency
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id 'fabric-loom' version '1.9-SNAPSHOT'
+    id 'fabric-loom' version '1.10-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
@@ -189,7 +190,7 @@ println "当前版本（${project.mod_version}）更新记录："
 final String changelogContent = getUpdateLog(project.mod_version.replaceAll('-.+?\$', ""))
 println changelogContent
 
-tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
         def getenv = System.getenv("CURSEFORGE_TOKEN")
         println("CurseForge 令牌: $getenv")
@@ -200,14 +201,14 @@ tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.changelogType = 'markdown'
     mainFile.releaseType = release_type
 
-    for (final String v in (project.supported_minecraft_versions.split(','))) {
+    for (final String v in ((project.supported_minecraft_versions as String).split(','))) {
         mainFile.addGameVersion v
     }
 
     mainFile.addRelations 'requiredDependency', 'fabric-api'
 
     // The sources JAR
-    def sourcesFile = mainFile.withAdditionalFile(sourcesJar)
+    mainFile.withAdditionalFile(sourcesJar)
 }
 
 modrinth {
@@ -216,7 +217,7 @@ modrinth {
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
     versionType = release_type
     uploadFile = remapJar
-    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
+    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version as String) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
     var dependenciesList = []
     if (platform == 'fabric') dependenciesList.add new ModDependency('P7dR8mSH', 'required') // Fabric API
