@@ -132,10 +132,15 @@ subprojects {
 project(':runtest') {
     repositories {
         // Mods on CurseForge
-        maven {
-            url "https://cursemaven.com"
-            content {
-                includeGroup "curse.maven"
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = "Modrinth"
+                    url = "https://api.modrinth.com/maven"
+                }
+            }
+            filter {
+                includeGroup "maven.modrinth"
             }
         }
     }
@@ -143,7 +148,7 @@ project(':runtest') {
         implementation project(path: ':', configuration: "namedElements")
         implementation project(path: ':with_blockus', configuration: "namedElements")
         if (project.hasProperty('imblocker_version') && !project.imblocker_version.isEmpty()) {
-            modRuntimeOnly "curse.maven:imblockerfabric-399225:$project.imblocker_version"
+            modRuntimeOnly "maven.modrinth:imblocker-original:$project.imblocker_version"
         }
         if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
             modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
