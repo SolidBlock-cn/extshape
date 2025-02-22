@@ -1,4 +1,5 @@
 import com.modrinth.minotaur.dependencies.ModDependency
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 apply plugin: 'maven-publish'
 apply plugin: 'net.darkhax.curseforgegradle'
@@ -22,7 +23,7 @@ dependencies {
     implementation project(path: ':', configuration: "namedElements")
 }
 
-tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
         def getenv = System.getenv("CURSEFORGE_TOKEN")
         println("CurseForge 令牌: $getenv")
@@ -32,7 +33,7 @@ tasks.register('curseforge', net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.changelog = ''
     mainFile.releaseType = release_type
 
-    for (final String v in (rootProject.supported_minecraft_versions.split(','))) {
+    for (final String v in ((rootProject.supported_minecraft_versions as String).split(','))) {
         mainFile.addGameVersion v
     }
 
@@ -44,7 +45,7 @@ modrinth {
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
     versionType = release_type
     uploadFile = remapJar
-    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version) : (project.supported_minecraft_versions as String).split(',') as List<String>
+    gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version as String) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
     var list = [new ModDependency('tb7kCxSW', 'required'), new ModDependency('zFiY2Go0', 'required')]
     if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
