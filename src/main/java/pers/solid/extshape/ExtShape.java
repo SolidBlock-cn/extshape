@@ -100,6 +100,9 @@ public class ExtShape implements ModInitializer {
   private static void validateTags(MinecraftServer server) {
     final ObjectSet<Block> blocks = ExtShapeBlocks.getBlocks();
     for (Block block : blocks) {
+      if (!block.isEnabled(server.getOverworld().getEnabledFeatures())) {
+        continue;
+      }
       if (block instanceof ExtShapeBlockInterface i) {
         final Block baseBlock = i.getBaseBlock();
         final Registry<Block> blockRegistry = server.getRegistryManager().get(RegistryKeys.BLOCK);
