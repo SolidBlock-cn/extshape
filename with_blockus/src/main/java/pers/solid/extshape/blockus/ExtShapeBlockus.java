@@ -106,7 +106,7 @@ public class ExtShapeBlockus implements ModInitializer {
       }
     });
     if (!exceptions.isEmpty()) {
-      throw exceptions.getLast();
+      throw exceptions.get(exceptions.size() - 1);
     }
   }
 }
