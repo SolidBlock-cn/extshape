@@ -14,12 +14,12 @@ import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -36,6 +36,7 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ import java.util.stream.Stream;
  * <hr>
  * <p>Welcome to use Extended Block Shapes mod, which provides various variants in different shapes of many blocks, including shapes that do not exist in vanilla Minecraft.
  * <p>Blocks of this mod are created in {@link ExtShapeBlocks}; while created, they are also registered, and so as their corresponding block items. This mod also provides a simple configuration. See {@link ExtShapeConfig}.
- * <p>This mod contains an internal block mapping management, provided by {@link BlockBiMaps}。Block mapping means the relations between blocks. Block in this mod are added instantly to the mappings upon created. Besides, vanilla block mappings are also added. You may get the specified variant of a specified block by {@link BlockBiMaps#getBlockOf}.
+ * <p>This mod contains an internal block mapping management, provided by {@link BlockBiMaps}。Block mapping means the relations between blocks. Blocks in this mod are added instantly to the mappings upon created. Besides, vanilla block mappings are also added. You may get the specified variant of a specified block by {@link BlockBiMaps#getBlockOf}.
  *
  * @author SolidBlock
  */
@@ -61,6 +62,11 @@ public class ExtShape implements ModInitializer {
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
 
   private static final Identifier defaultId = Identifier.of(MOD_ID, "default");
+
+  /**
+   * 该字段仅在开发环境中使用，在加载 DataFixer 时赋值，并在完成注册表后检查。
+   */
+  public static Map<String, String> idMapToVerify = null;
 
   /**
    * 创建一个以模型命名 id 为命名空间的 id。
@@ -188,5 +194,31 @@ public class ExtShape implements ModInitializer {
     map.put(ExtShapeTags.WOOLEN_WALLS, 100);
 
     map.forEach((blockTagKey, integer) -> FuelRegistry.INSTANCE.add(TagKey.of(RegistryKeys.ITEM, blockTagKey.id()), integer));
+  }
+
+  private static void validateIdMap() {
+    if (idMapToVerify == null) return;
+    final List<RuntimeException> exceptions = new ArrayList<>();
+    idMapToVerify.forEach((k, v) -> {
+      final Identifier key = Identifier.of(k);
+      try {
+        Validate.validState(!Registries.BLOCK.containsId(key), "The id %s is to be replaced, but still exists in the block registry!", key);
+        Validate.validState(!Registries.ITEM.containsId(key), "The id %s is to be replaced, but still exists in the item registry!", key);
+      } catch (RuntimeException e) {
+        exceptions.add(e);
+      }
+      final Identifier value = Identifier.of(v);
+      try {
+        Validate.validState(Registries.BLOCK.containsId(value), "The id %s is to be replace with, but does not exist in the block registry!", value);
+        Validate.validState(Registries.ITEM.containsId(value), "The id %s is to be replace with, but does not exist in the item registry!", value);
+      } catch (RuntimeException e) {
+        exceptions.add(e);
+      }
+    });
+    if (!exceptions.isEmpty()) {
+      final IllegalStateException exception = new IllegalStateException("Found invalid data fixers in Extended Block Shapes mod!");
+      exceptions.forEach(exception::addSuppressed);
+      throw exception;
+    }
   }
 }
