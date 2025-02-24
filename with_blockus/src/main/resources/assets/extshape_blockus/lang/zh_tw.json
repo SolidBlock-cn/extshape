@@ -1,18 +1,4 @@
 {
   "modmenu.nameTranslation.extshape_blockus": "擴展方塊形狀 - Blockus",
-  "modmenu.descriptionTranslation.extshape_blockus": "為 Blockus 模組添加擴展方塊形狀！",
-
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_quarter_piece": "釉陶柱橫條",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_vertical_slab": "豎直釉陶柱半磚",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_slab": "釉陶柱半磚",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_vertical_stairs": "豎直釉陶柱階梯",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_vertical_quarter_piece": "釉陶柱縱條",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_stairs": "釉陶柱階梯",
-
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_quarter_piece": "釉陶柱橫條",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_vertical_slab": "豎直釉陶柱半磚",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_slab": "釉陶柱半磚",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_vertical_stairs": "豎直釉陶柱階梯",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_vertical_quarter_piece": "釉陶柱縱條",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_stairs": "釉陶柱階梯"
+  "modmenu.descriptionTranslation.extshape_blockus": "為 Blockus 模組添加擴展方塊形狀！"
 }
