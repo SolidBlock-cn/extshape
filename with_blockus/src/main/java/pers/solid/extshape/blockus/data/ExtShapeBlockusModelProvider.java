@@ -2,7 +2,6 @@ package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.Blockus;
 import com.brand.blockus.content.BlockusBlocks;
-import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -13,8 +12,6 @@ import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.data.ExtShapeModelProvider;
-
-import java.util.function.Supplier;
 
 public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
 
