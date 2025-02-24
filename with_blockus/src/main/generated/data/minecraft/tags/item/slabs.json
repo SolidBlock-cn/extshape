@@ -56,7 +56,6 @@
     "extshape_blockus:herringbone_soaked_brick_slab",
     "extshape_blockus:herringbone_charred_brick_slab",
     "extshape_blockus:herringbone_sandy_brick_slab",
-    "extshape_blockus:cut_soul_sandstone_slab",
     "extshape_blockus:chiseled_soul_sandstone_slab",
     "extshape_blockus:rainbow_slab",
     "extshape_blockus:rainbow_glowstone_slab",
@@ -96,6 +95,6 @@
     "extshape_blockus:membrane_slab",
     "extshape_blockus:nether_stars_slab",
     "extshape_blockus:stars_slab",
-    "#extshape_blockus:glazed_terracotta_slab"
+    "#extshape_blockus:glazed_terracotta_pillar_slab"
   ]
 }
