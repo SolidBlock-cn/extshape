@@ -1,18 +1,4 @@
 {
   "modmenu.nameTranslation.extshape_blockus": "Extended Block Shapes - Blockus",
-  "modmenu.descriptionTranslation.extshape_blockus": "Adds Extended Block Shapes for Blockus mod!",
-
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_quarter_piece": "Glazed Terracotta Pillar Quarter Piece",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_vertical_slab": "Glazed Terracotta Pillar Vertical Slab",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_slab": "Glazed Terracotta Pillar Slab",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_vertical_stairs": "Glazed Terracotta Pillar Vertical Stairs",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_vertical_quarter_piece": "Glazed Terracotta Pillar Vertical Quarter Piece",
-  "tag.block.extshape_blockus.glazed_terracotta_pillar_stairs": "Glazed Terracotta Pillar Stairs",
-
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_quarter_piece": "Glazed Terracotta Pillar Quarter Piece",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_vertical_slab": "Glazed Terracotta Pillar Vertical Slab",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_slab": "Glazed Terracotta Pillar Slab",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_vertical_stairs": "Glazed Terracotta Pillar Vertical Stairs",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_vertical_quarter_piece": "Glazed Terracotta Pillar Vertical Quarter Piece",
-  "tag.item.extshape_blockus.glazed_terracotta_pillar_stairs": "Glazed Terracotta Pillar Stairs"
+  "modmenu.descriptionTranslation.extshape_blockus": "Adds Extended Block Shapes for Blockus mod!"
 }
