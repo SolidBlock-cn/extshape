@@ -2,7 +2,7 @@
   "type": "minecraft:stonecutting",
   "count": 2,
   "ingredient": {
-    "item": "extshape_blockus:cut_soul_sandstone_slab"
+    "item": "blockus:cut_soul_sandstone_slab"
   },
   "result": "extshape_blockus:cut_soul_sandstone_quarter_piece"
 }
