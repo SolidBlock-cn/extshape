@@ -76,7 +76,7 @@ public class ExtShapeModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerStateWithModelReference(block, Blocks.OAK_PLANKS);
         blockStateModelGenerator.registerParentedItemModel(block, ModelIds.getBlockModelId(Blocks.OAK_PLANKS));
       } else if (block == ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB) {
-        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, BlockStateModelGenerator.createModel(ModelIds.getBlockSubModelId(Blocks.SMOOTH_STONE_SLAB, "_double"))));
+        blockStateModelGenerator.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, BlockStateModelGenerator.createWeightedVariant(ModelIds.getBlockSubModelId(Blocks.SMOOTH_STONE_SLAB, "_double"))));
         blockStateModelGenerator.registerParentedItemModel(block, ModelIds.getBlockSubModelId(Blocks.SMOOTH_STONE_SLAB, "_double"));
       } else {
         throw new IllegalStateException("Not provided model for block: " + block);

@@ -7,7 +7,7 @@ import net.minecraft.block.*;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.Models;
 import net.minecraft.client.data.VariantsBlockModelDefinitionCreator;
-import net.minecraft.client.render.model.json.WeightedUnbakedModel;
+import net.minecraft.client.render.model.json.WeightedVariant;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
@@ -63,8 +63,8 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   @Environment(EnvType.CLIENT)
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
-    final WeightedUnbakedModel upModel = BlockStateModelGenerator.createModel(Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
-    final WeightedUnbakedModel downModel = BlockStateModelGenerator.createModel(Models.PRESSURE_PLATE_DOWN.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
+    final WeightedVariant upModel = BlockStateModelGenerator.createWeightedVariant(Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
+    final WeightedVariant downModel = BlockStateModelGenerator.createWeightedVariant(Models.PRESSURE_PLATE_DOWN.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
     blockStateModelGenerator.blockStateCollector.accept(((VariantsBlockModelDefinitionCreator) BlockStateModelGenerator.createPressurePlateBlockState(this, upModel, downModel)).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS()));
   }
 }
