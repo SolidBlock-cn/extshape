@@ -77,6 +77,7 @@ public final class ExtShapeBlockStateModelGenerator {
     return VariantsBlockModelDefinitionCreator.of(block).with(variants);
   }
 
+  @SuppressWarnings("deprecation")
   public static VariantsBlockModelDefinitionCreator createPillarVerticalSlabBlockState(Block block, Identifier modelId, Identifier horizontalModelId, Identifier horizontalUnorderedModelId, Identifier horizontalTopModelId, Identifier horizontalUnorderedTopModelId) {
     final BlockStateVariantMap.DoubleProperty<WeightedVariant, Direction.Axis, Direction> variants = BlockStateVariantMap.models(ExtShapePillarVerticalSlabBlock.AXIS, ExtShapePillarVerticalSlabBlock.FACING);
 
