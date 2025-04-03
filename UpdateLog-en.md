@@ -3,6 +3,7 @@
 ### 3.1.1
 
 - Fixed the incompatibility with Sinytra Connector.
+- Mod updated to 1.21.8. For updated contents, please refer to the update log for 3.1.0 and earlier versions.
 
 ### 3.1.0
 
