@@ -1,5 +1,9 @@
 # 更新日志
 
+### 3.1.1
+
+- 修复与 Sinytra Connector 不兼容的问题。
+
 ### 3.1.0
 
 - 调整 `#stone_buttons` 和 `#stone_pressure_plates` 方块标签的赋予规则，仅限部分石质方块。
