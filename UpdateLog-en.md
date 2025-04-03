@@ -1,5 +1,10 @@
 # Update log
 
+### 3.1.1
+
+- Fixed the incompatibility with Sinytra Connector.
+- Mod updated to 1.21.8. For updated contents, please refer to the update log for 3.1.0 and earlier versions.
+
 ### 3.1.0
 
 - Adjusted the inclusion rule of block tags `#stone_buttons` and `#stone_pressure_plates` to limit to some stone blocks.
