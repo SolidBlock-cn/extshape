@@ -36,8 +36,7 @@
     "fabricloader": "*",
     "fabric": "*",
     "minecraft": "~1.21.5",
-    "java": ">=21",
-    "mixinextras": "*"
+    "java": ">=21"
   },
   "suggests": {
     "blockus": "*"

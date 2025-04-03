@@ -25,9 +25,9 @@ dependencies {
 
 tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
-        def getenv = System.getenv("CURSEFORGE_TOKEN")
-        println("CurseForge 令牌: $getenv")
-        if (getenv) apiToken = getenv
+        def curseForgeToken = System.getenv("CURSEFORGE_TOKEN")
+        println("CurseForge 令牌: ${screenToken(curseForgeToken)}")
+        if (curseForgeToken) apiToken = curseForgeToken
     }
     def mainFile = upload('841655', remapJar)
     mainFile.changelog = ''
@@ -52,15 +52,15 @@ modrinth {
     dependencies = list
 }
 githubRelease {
-    def getenv = System.getenv("GITHUB_TOKEN")
-    if (getenv) token = getenv
+    def githubToken = System.getenv("GITHUB_TOKEN")
+    if (githubToken) token = githubToken
     tasks.githubRelease.doFirst {
-        println "GitHub 令牌: $getenv"
+        println "GitHub 令牌: ${screenToken(githubToken)}"
     }
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "1.20.4"
+    targetCommitish = "1.21.8"
     draft = true
     prerelease = false
     releaseAssets remapJar, remapSourcesJar
