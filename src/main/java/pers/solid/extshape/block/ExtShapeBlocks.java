@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.Items;
@@ -16,6 +15,7 @@ import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.data.RecipeGroupRegistry;
+import pers.solid.extshape.mixin.AbstractBlockSettingsAccessor;
 import pers.solid.extshape.mixin.BlockAccessor;
 import pers.solid.extshape.util.*;
 
