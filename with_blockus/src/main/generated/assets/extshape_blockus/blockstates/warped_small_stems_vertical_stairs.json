@@ -17,8 +17,7 @@
     },
     "facing=south_west": {
       "model": "extshape_blockus:block/warped_small_stems_vertical_stairs",
-      "uvlock": true,
-      "y": 0
+      "uvlock": true
     }
   }
 }

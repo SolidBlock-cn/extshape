@@ -12,8 +12,7 @@
     },
     "facing=south_east": {
       "model": "extshape_blockus:block/red_concrete_brick_vertical_quarter_piece",
-      "uvlock": true,
-      "y": 0
+      "uvlock": true
     },
     "facing=south_west": {
       "model": "extshape_blockus:block/red_concrete_brick_vertical_quarter_piece",

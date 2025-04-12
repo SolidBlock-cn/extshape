@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.WoodType;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -35,8 +36,8 @@ import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
 
-import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public final class ExtShapeBlockusBlocks {
 
@@ -101,12 +102,6 @@ public final class ExtShapeBlockusBlocks {
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.GRANITE_CIRCULAR_PAVING)
         .markStoneCuttable());
-
-//    create(BlockusBlocks.CHISELED_MUD_BRICKS)
-//        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
-//        .setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.PACKED_MUD_BLOCK_SET_TYPE))
-//        .setStoneFenceSettings(Items.MUD)
-//        .build();
 
     create(BlockusBlocks.POLISHED_DRIPSTONE)
         .setFenceSettings(FenceSettings.DRIPSTONE)
@@ -249,10 +244,6 @@ public final class ExtShapeBlockusBlocks {
         .setFenceSettings(FenceSettings.STONE)
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
-//    create(BlockusBlocks.CHISELED_LIMESTONE)
-//        .setFenceSettings(FenceSettings.STONE)
-//        .without(BlockShape.BUTTON)
-//        .build();
     create(BlockusBlocks.LIMESTONE_SQUARES)
         .setFenceSettings(FenceSettings.STONE)
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
@@ -607,16 +598,6 @@ public final class ExtShapeBlockusBlocks {
     markStoneCuttableWhenCreating = false;
 
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> logFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
-//    FACTORY.createConstructionOnly(BlockusBlocks.WHITE_OAK_LOG)
-//        .setPillar()
-//        .addPostBuildConsumer(logFlammable)
-//        .fuelTime(300)
-//        .build();
-//    FACTORY.createConstructionOnly(BlockusBlocks.STRIPPED_WHITE_OAK_LOG)
-//        .setPillar()
-//        .addPostBuildConsumer(logFlammable)
-//        .fuelTime(300)
-//        .build();
     FACTORY.createAllShapes(BlockusBlocks.WHITE_OAK_WOOD)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar()
@@ -893,15 +874,15 @@ public final class ExtShapeBlockusBlocks {
               return true;
             }
 
+            @SuppressWarnings("deprecation")
             @Override
-            public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-              super.appendTooltip(stack, context, tooltip, type);
-              this.getBlock().appendTooltip(stack, context, tooltip, type);
-              tooltip.add(ScreenTexts.EMPTY);
-              tooltip.add(Blockus.STEPPED_ON_TEXT);
-              tooltip.add(ScreenTexts.space().append(StatusEffects.REGENERATION.value().getName()).append(" IV").formatted(Formatting.BLUE));
-              tooltip.add(ScreenTexts.space().append(StatusEffects.ABSORPTION.value().getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
-              tooltip.add(ScreenTexts.space().append(StatusEffects.STRENGTH.value().getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
+            public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+              super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+              textConsumer.accept(ScreenTexts.EMPTY);
+              textConsumer.accept(Blockus.STEPPED_ON_TEXT);
+              textConsumer.accept(ScreenTexts.space().append(StatusEffects.REGENERATION.value().getName()).append(" IV").formatted(Formatting.BLUE));
+              textConsumer.accept(ScreenTexts.space().append(StatusEffects.ABSORPTION.value().getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
+              textConsumer.accept(ScreenTexts.space().append(StatusEffects.STRENGTH.value().getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
             }
           });
         })

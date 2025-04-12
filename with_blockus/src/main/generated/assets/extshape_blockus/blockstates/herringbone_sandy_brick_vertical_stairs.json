@@ -17,8 +17,7 @@
     },
     "facing=south_west": {
       "model": "extshape_blockus:block/herringbone_sandy_brick_vertical_stairs",
-      "uvlock": true,
-      "y": 0
+      "uvlock": true
     }
   }
 }

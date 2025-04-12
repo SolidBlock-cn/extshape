@@ -145,13 +145,13 @@ subprojects {
     dependencies {
     }
 }
-/*
+
 project(':runtest') {
     repositories {
     }
     dependencies {
         implementation project(path: ':', configuration: "namedElements")
-//        implementation project(path: ':with_blockus', configuration: "namedElements")
+        implementation project(path: ':with_blockus', configuration: "namedElements")
         if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
             modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
         }
@@ -161,7 +161,6 @@ project(':runtest') {
         it.enabled = false
     }
 }
-*/
 
 
 /**
