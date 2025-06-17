@@ -74,7 +74,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
   protected void addForShapes(TagKey<Item> tag, Block baseBlock) {
     checkValidBaseBlock(baseBlock);
-    final var builder = getOrCreateTagBuilder(tag);
+    final var builder = valueLookupBuilder(tag);
     for (BlockShape shape : BlockShape.values()) {
       final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (isValidBlock(block)) {
@@ -88,7 +88,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
   }
 
   protected void addForShapes(TagKey<Item> tag, Iterable<Block> baseBlocks) {
-    final var builder = getOrCreateTagBuilder(tag);
+    final var builder = valueLookupBuilder(tag);
     for (Block baseBlock : baseBlocks) {
       checkValidBaseBlock(baseBlock);
       for (BlockShape shape : BlockShape.values()) {

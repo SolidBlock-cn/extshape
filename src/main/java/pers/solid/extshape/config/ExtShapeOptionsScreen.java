@@ -125,9 +125,9 @@ public class ExtShapeOptionsScreen extends Screen {
   @Override
   public void render(DrawContext context, int mouseX, int mouseY, float delta) {
     super.render(context, mouseX, mouseY, delta);
-    context.drawCenteredTextWithShadow(this.textRenderer, this.title.asOrderedText(), this.width / 2, 16, 0xffffff);
-    context.drawTextWithShadow(textRenderer, Text.translatable("options.extshape.shapesToAddToVanilla.description"), width / 2 - 205, 61, 0xffffff);
-    context.drawTextWithShadow(textRenderer, Text.translatable("options.extshape.shapesInSpecificGroups.description"), width / 2 - 205, 106, 0xffffff);
+    context.drawCenteredTextWithShadow(this.textRenderer, this.title.asOrderedText(), this.width / 2, 16, 0xffffffff);
+    context.drawTextWithShadow(textRenderer, Text.translatable("options.extshape.shapesToAddToVanilla.description"), width / 2 - 205, 61, 0xffffffff);
+    context.drawTextWithShadow(textRenderer, Text.translatable("options.extshape.shapesInSpecificGroups.description"), width / 2 - 205, 106, 0xffffffff);
   }
 
   public void save() {

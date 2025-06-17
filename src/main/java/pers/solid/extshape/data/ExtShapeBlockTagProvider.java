@@ -46,29 +46,29 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
     // region 基础形状部分
 
-    getOrCreateTagBuilder(BlockTags.OCCLUDES_VIBRATION_SIGNALS).addTag(ExtShapeTags.WOOLEN_BLOCKS);
+    valueLookupBuilder(BlockTags.OCCLUDES_VIBRATION_SIGNALS).addTag(ExtShapeTags.WOOLEN_BLOCKS);
 
     // 将原木的所有标签加入 log_blocks
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_LOG_TAG.values()) {
-      getOrCreateTagBuilder(ExtShapeTags.LOG_BLOCKS).addTag(tag);
+      valueLookupBuilder(ExtShapeTags.LOG_BLOCKS).addTag(tag);
     }
 
     // 将各类染色陶瓦标签添加到非染色陶瓦标签
     ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.forEach((blockShape, tag) -> {
       final TagKey<Block> stained = ExtShapeTags.SHAPE_TO_STAINED_TERRACOTTA_TAG.get(blockShape);
       Objects.requireNonNull(stained);
-      getOrCreateTagBuilder(tag).addTag(stained);
+      valueLookupBuilder(tag).addTag(stained);
     });
 
     // 将各类具体形状的标签加入形状的总标签，但是 log 的标签加入对应的 wooden 标签
     for (Map.Entry<BlockShape, TagKey<Block>> entry : ExtShapeTags.SHAPE_TO_TAG.entrySet()) {
       final BlockShape shape = entry.getKey();
       final TagKey<Block> shapeTag = entry.getValue();
-      final var builder = getOrCreateTagBuilder(shapeTag);
+      final var builder = valueLookupBuilder(shapeTag);
       for (ImmutableMap<BlockShape, TagKey<Block>> map : TYPE_SHAPE_TAGS) {
         final TagKey<Block> typeShapeTag = map.get(shape);
         if (typeShapeTag != null && ExtShapeTags.SHAPE_TO_WOODEN_TAG.containsKey(shape) && map == ExtShapeTags.SHAPE_TO_LOG_TAG) {
-          getOrCreateTagBuilder(ExtShapeTags.SHAPE_TO_WOODEN_TAG.get(shape)).addTag(typeShapeTag);
+          valueLookupBuilder(ExtShapeTags.SHAPE_TO_WOODEN_TAG.get(shape)).addTag(typeShapeTag);
           continue;
         }
         if (typeShapeTag != null && !typeShapeTag.id().getNamespace().equals(Identifier.DEFAULT_NAMESPACE)) {
@@ -76,22 +76,22 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         }
       }
     }
-    getOrCreateTagBuilder(BlockTags.SLABS).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
+    valueLookupBuilder(BlockTags.SLABS).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
 
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOOLEN_TAG.values()) {
-      getOrCreateTagBuilder(ExtShapeTags.WOOLEN_BLOCKS).addTag(tag);
+      valueLookupBuilder(ExtShapeTags.WOOLEN_BLOCKS).addTag(tag);
     }
-    getOrCreateTagBuilder(ExtShapeTags.WOODEN_BLOCKS)
+    valueLookupBuilder(ExtShapeTags.WOODEN_BLOCKS)
         .addTag(ExtShapeTags.LOG_BLOCKS);
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOODEN_TAG.values()) {
-      getOrCreateTagBuilder(ExtShapeTags.WOODEN_BLOCKS).addTag(tag);
+      valueLookupBuilder(ExtShapeTags.WOODEN_BLOCKS).addTag(tag);
     }
 
     // 基础形状部分
 
     // mineable 部分
 
-    getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(
+    valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).add(
         ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
@@ -162,11 +162,11 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
     // 所有的混凝土和陶瓦加入 pickaxe_mineable
     for (TagKey<Block> tag : Iterables.concat(ExtShapeTags.SHAPE_TO_CONCRETE_TAG.values(), ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.values())) {
-      getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).addTag(tag);
+      valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).addTag(tag);
     }
-    getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
+    valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
 
-    getOrCreateTagBuilder(BlockTags.AXE_MINEABLE)
+    valueLookupBuilder(BlockTags.AXE_MINEABLE)
         .addTag(ExtShapeTags.WOODEN_BLOCKS);
 
     addForShapes(BlockTags.AXE_MINEABLE,
@@ -240,7 +240,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     addForConstructionShapes(BlockTags.DRY_VEGETATION_MAY_PLACE_ON, Blocks.DIRT);
     ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.forEach((shape, tag) -> {
       if (shape.isConstruction) {
-        getOrCreateTagBuilder(BlockTags.DRY_VEGETATION_MAY_PLACE_ON).addTag(tag);
+        valueLookupBuilder(BlockTags.DRY_VEGETATION_MAY_PLACE_ON).addTag(tag);
       }
     });
 
@@ -250,21 +250,21 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     for (Block block : BlockCollections.UNCOLORED_SANDSTONES) {
       final Block stairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, block);
       if (isValidBlock(stairs)) {
-        getOrCreateTagBuilder(ConventionalBlockTags.UNCOLORED_SANDSTONE_STAIRS).add(stairs);
+        valueLookupBuilder(ConventionalBlockTags.UNCOLORED_SANDSTONE_STAIRS).add(stairs);
       }
       final Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, block);
       if (isValidBlock(slab)) {
-        getOrCreateTagBuilder(ConventionalBlockTags.UNCOLORED_SANDSTONE_SLABS).add(slab);
+        valueLookupBuilder(ConventionalBlockTags.UNCOLORED_SANDSTONE_SLABS).add(slab);
       }
     }
     for (Block block : BlockCollections.RED_SANDSTONES) {
       final Block stairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, block);
       if (isValidBlock(stairs)) {
-        getOrCreateTagBuilder(ConventionalBlockTags.RED_SANDSTONE_STAIRS).add(stairs);
+        valueLookupBuilder(ConventionalBlockTags.RED_SANDSTONE_STAIRS).add(stairs);
       }
       final Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, block);
       if (isValidBlock(slab)) {
-        getOrCreateTagBuilder(ConventionalBlockTags.RED_SANDSTONE_SLABS).add(slab);
+        valueLookupBuilder(ConventionalBlockTags.RED_SANDSTONE_SLABS).add(slab);
       }
     }
 
@@ -297,7 +297,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
   protected void addForShapes(TagKey<Block> tag, Block baseBlock) {
     checkValidBaseBlock(baseBlock);
-    final var builder = getOrCreateTagBuilder(tag);
+    final var builder = valueLookupBuilder(tag);
     for (BlockShape shape : BlockShape.values()) {
       final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (isValidBlock(block)) {
@@ -311,7 +311,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
   }
 
   protected void addForShapes(TagKey<Block> tag, Iterable<Block> baseBlocks) {
-    final var builder = getOrCreateTagBuilder(tag);
+    final var builder = valueLookupBuilder(tag);
     for (Block baseBlock : baseBlocks) {
       checkValidBaseBlock(baseBlock);
       for (BlockShape shape : BlockShape.values()) {
@@ -325,7 +325,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
   protected void addForConstructionShapes(TagKey<Block> tag, Block baseBlock) {
     checkValidBaseBlock(baseBlock);
-    final var builder = getOrCreateTagBuilder(tag);
+    final var builder = valueLookupBuilder(tag);
     for (BlockShape shape : BlockShape.values()) {
       if (shape.isConstruction) {
         final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
@@ -341,7 +341,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
   }
 
   protected void addForConstructionShapes(TagKey<Block> tag, Iterable<Block> baseBlocks) {
-    final var builder = getOrCreateTagBuilder(tag);
+    final var builder = valueLookupBuilder(tag);
     for (Block baseBlock : baseBlocks) {
       checkValidBaseBlock(baseBlock);
       for (BlockShape shape : BlockShape.values()) {
@@ -372,7 +372,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
       Preconditions.checkNotNull(tag, "tag of shape %s", shape);
       final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (isValidBlock(block)) {
-        getOrCreateTagBuilder(tag).add(block);
+        valueLookupBuilder(tag).add(block);
       }
     }
   }

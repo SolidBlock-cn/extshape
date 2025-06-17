@@ -145,6 +145,7 @@ subprojects {
     dependencies {
     }
 }
+/*
 
 project(':runtest') {
     repositories {
@@ -162,6 +163,7 @@ project(':runtest') {
     }
 }
 
+*/
 
 /**
  * 从 UpdateLog-en.md 中提取更新日志
@@ -200,9 +202,10 @@ tasks.register('curseforge', TaskPublishCurseForge) {
     mainFile.changelogType = 'markdown'
     mainFile.releaseType = release_type
 
-    for (final String v in ((project.supported_minecraft_versions as String).split(','))) {
-        mainFile.addGameVersion v
-    }
+    mainFile.addGameVersion '1.21.6-snapshot' // 直到 CurseForge 官方支持 1.21.6 的选项
+//    for (final String v in ((project.supported_minecraft_versions as String).split(','))) {
+//        mainFile.addGameVersion v
+//    }
 
     mainFile.addRelations 'requiredDependency', 'fabric-api'
 
@@ -233,7 +236,7 @@ githubRelease {
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "1.21.5"
+    targetCommitish = "1.21.6"
     body = changelogContent
     draft = true
     prerelease = false
