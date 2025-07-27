@@ -3,6 +3,7 @@ package pers.solid.extshape.blockus.data;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.brand.blockus.registry.tag.BlockusItemTags;
+import com.brand.blockus.utils.helper.WoodMaps;
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
@@ -16,6 +17,7 @@ import pers.solid.extshape.data.ExtShapeItemTagProvider;
 import pers.solid.extshape.tag.ExtShapeTags;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
   public ExtShapeBlockusItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
@@ -33,17 +35,9 @@ public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
     copyWithSameId(ExtShapeTags.WOOLEN_BLOCKS);
 
     addForShapes(ItemTags.NON_FLAMMABLE_WOOD,
-        BlockusBlocks.CHARRED.planks,
-        BlockusBlocks.HERRINGBONE_CRIMSON_PLANKS,
-        BlockusBlocks.HERRINGBONE_WARPED_PLANKS,
-        BlockusBlocks.HERRINGBONE_CHARRED_PLANKS,
-        BlockusBlocks.CRIMSON_MOSAIC.block,
-        BlockusBlocks.WARPED_MOSAIC.block,
-        BlockusBlocks.CHARRED_MOSAIC.block,
-        BlockusBlocks.MOSSY_CRIMSON_PLANKS.block,
-        BlockusBlocks.MOSSY_WARPED_PLANKS.block,
-        BlockusBlocks.MOSSY_CHARRED_PLANKS.block
+        BlockusBlocks.CHARRED.planks()
     );
-    addForShapes(ItemTags.PIGLIN_LOVED, BlockusBlocks.GOLD_PLATING.block, BlockusBlocks.GOLD_BRICKS.block);
+    addForShapes(ItemTags.NON_FLAMMABLE_WOOD, () -> Stream.of(WoodMaps.CRIMSON, WoodMaps.WARPED, WoodMaps.CHARRED).map(WoodMaps::getId).flatMap(string -> Stream.of(BlockusBlocks.HERRINGBONE_PLANKS.get(string), BlockusBlocks.WOODEN_MOSAIC.get(string).block(), BlockusBlocks.MOSSY_PLANKS.get(string).block())).iterator());
+    addForShapes(ItemTags.PIGLIN_LOVED, BlockusBlocks.GOLD_PLATING.block(), BlockusBlocks.GOLD_BRICKS.block());
   }
 }
