@@ -2,7 +2,7 @@ import com.modrinth.minotaur.dependencies.ModDependency
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id 'fabric-loom' version '1.10-SNAPSHOT'
+    id 'fabric-loom' version '1.11-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
@@ -145,7 +145,6 @@ subprojects {
     dependencies {
     }
 }
-/*
 
 project(':runtest') {
     repositories {
@@ -163,7 +162,6 @@ project(':runtest') {
     }
 }
 
-*/
 
 /**
  * 从 UpdateLog-en.md 中提取更新日志
@@ -202,10 +200,9 @@ tasks.register('curseforge', TaskPublishCurseForge) {
     mainFile.changelogType = 'markdown'
     mainFile.releaseType = release_type
 
-    mainFile.addGameVersion '1.21.6-snapshot' // 直到 CurseForge 官方支持 1.21.6 的选项
-//    for (final String v in ((project.supported_minecraft_versions as String).split(','))) {
-//        mainFile.addGameVersion v
-//    }
+    for (final String v in ((project.supported_minecraft_versions as String).split(','))) {
+        mainFile.addGameVersion v
+    }
 
     mainFile.addRelations 'requiredDependency', 'fabric-api'
 
