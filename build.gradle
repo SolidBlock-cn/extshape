@@ -2,7 +2,7 @@ import com.modrinth.minotaur.dependencies.ModDependency
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
 plugins {
-    id 'fabric-loom' version '1.10-SNAPSHOT'
+    id 'fabric-loom' version '1.11-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
