@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:cyan_terracotta",
-  "result": {
-    "count": 1,
-    "id": "extshape_blockus:cyan_shingles_wall"
-  }
-}

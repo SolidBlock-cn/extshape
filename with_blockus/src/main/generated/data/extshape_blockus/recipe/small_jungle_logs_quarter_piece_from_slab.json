@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_logs_quarter_piece_from_slab",
+  "key": {
+    "#": "extshape_blockus:small_jungle_logs_slab"
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:small_jungle_logs_quarter_piece"
+  }
+}

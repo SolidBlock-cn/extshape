@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:white_terracotta",
-  "result": {
-    "count": 4,
-    "id": "extshape_blockus:white_shingles_quarter_piece"
-  }
-}

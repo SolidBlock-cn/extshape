@@ -1,16 +1,16 @@
 {
   "values": [
-    "extshape_blockus:oak_small_logs_stairs",
-    "extshape_blockus:spruce_small_logs_stairs",
-    "extshape_blockus:birch_small_logs_stairs",
-    "extshape_blockus:jungle_small_logs_stairs",
-    "extshape_blockus:acacia_small_logs_stairs",
-    "extshape_blockus:dark_oak_small_logs_stairs",
-    "extshape_blockus:mangrove_small_logs_stairs",
-    "extshape_blockus:cherry_small_logs_stairs",
-    "extshape_blockus:pale_oak_small_logs_stairs",
-    "extshape_blockus:white_oak_small_logs_stairs",
-    "extshape_blockus:crimson_small_stems_stairs",
-    "extshape_blockus:warped_small_stems_stairs"
+    "extshape_blockus:small_white_oak_logs_stairs",
+    "extshape_blockus:small_mangrove_logs_stairs",
+    "extshape_blockus:small_oak_logs_stairs",
+    "extshape_blockus:small_dark_oak_logs_stairs",
+    "extshape_blockus:small_crimson_stems_stairs",
+    "extshape_blockus:small_jungle_logs_stairs",
+    "extshape_blockus:small_cherry_logs_stairs",
+    "extshape_blockus:small_acacia_logs_stairs",
+    "extshape_blockus:small_spruce_logs_stairs",
+    "extshape_blockus:small_birch_logs_stairs",
+    "extshape_blockus:small_warped_stems_stairs",
+    "extshape_blockus:small_pale_oak_logs_stairs"
   ]
 }

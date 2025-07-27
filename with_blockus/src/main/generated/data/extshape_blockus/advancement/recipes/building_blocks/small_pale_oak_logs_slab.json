@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_small_pale_oak_logs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "blockus:small_pale_oak_logs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extshape_blockus:small_pale_oak_logs_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_small_pale_oak_logs"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extshape_blockus:small_pale_oak_logs_slab"
+    ]
+  }
+}
