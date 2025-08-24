@@ -1,6 +1,8 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
+import java.util.regex.Pattern
+
 plugins {
     id 'fabric-loom' version '1.11-SNAPSHOT'
     id 'maven-publish'
@@ -183,9 +185,11 @@ String getUpdateLog(String modVersion = project.mod_version) {
     return builder.toString().trim()
 }
 
-static String screenToken(String token = null) {
-    if (token == null) return null
-    return token.replaceAll("^(.+?)(.{0,6})\$", (String s, String a, String b) -> a.replaceAll(".", "*") + b)
+ext {
+    pattern1 = Pattern.compile("^(.+?)(.{0,6})\$")
+    pattern2 = Pattern.compile(".")
+
+    screenToken = (String token) -> token.replaceAll("^(.+?)(.{0,6})\$", (String s, String a, String b) -> a.replaceAll(".", "*") + b)
 }
 
 // 模组发布部分
@@ -238,7 +242,7 @@ githubRelease {
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "1.21.6"
+    targetCommitish = "1.21.8"
     body = changelogContent
     draft = true
     prerelease = false
