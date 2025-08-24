@@ -29,7 +29,7 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.21.6 <=1.21.8",
+    "minecraft": ">=1.21.9-0",
     "extshape": [">=3.0.0-0", "${version}"],
     "blockus": ">=2.13.1"
   },
