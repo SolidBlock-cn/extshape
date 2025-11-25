@@ -114,7 +114,7 @@ public final class RecipeConflict {
    */
   public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
     dispatcher.register(CommandManager.literal("extshape:check-conflict")
-        .requires(source -> source.hasPermissionLevel(4))
+        .requires(CommandManager.requirePermissionLevel(CommandManager.OWNERS_CHECK))
         .executes(context -> executeCheckConflict(context, null))
         .then(CommandManager.argument("namespace", StringArgumentType.greedyString())
             .suggests((context, builder) -> {
