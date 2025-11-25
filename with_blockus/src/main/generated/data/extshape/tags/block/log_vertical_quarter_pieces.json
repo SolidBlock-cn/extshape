@@ -1,16 +1,16 @@
 {
   "values": [
     "extshape_blockus:small_white_oak_logs_vertical_quarter_piece",
-    "extshape_blockus:small_mangrove_logs_vertical_quarter_piece",
-    "extshape_blockus:small_oak_logs_vertical_quarter_piece",
-    "extshape_blockus:small_dark_oak_logs_vertical_quarter_piece",
-    "extshape_blockus:small_crimson_stems_vertical_quarter_piece",
-    "extshape_blockus:small_jungle_logs_vertical_quarter_piece",
-    "extshape_blockus:small_cherry_logs_vertical_quarter_piece",
-    "extshape_blockus:small_acacia_logs_vertical_quarter_piece",
-    "extshape_blockus:small_spruce_logs_vertical_quarter_piece",
-    "extshape_blockus:small_birch_logs_vertical_quarter_piece",
+    "extshape_blockus:small_pale_oak_logs_vertical_quarter_piece",
     "extshape_blockus:small_warped_stems_vertical_quarter_piece",
-    "extshape_blockus:small_pale_oak_logs_vertical_quarter_piece"
+    "extshape_blockus:small_birch_logs_vertical_quarter_piece",
+    "extshape_blockus:small_spruce_logs_vertical_quarter_piece",
+    "extshape_blockus:small_acacia_logs_vertical_quarter_piece",
+    "extshape_blockus:small_cherry_logs_vertical_quarter_piece",
+    "extshape_blockus:small_jungle_logs_vertical_quarter_piece",
+    "extshape_blockus:small_crimson_stems_vertical_quarter_piece",
+    "extshape_blockus:small_dark_oak_logs_vertical_quarter_piece",
+    "extshape_blockus:small_oak_logs_vertical_quarter_piece",
+    "extshape_blockus:small_mangrove_logs_vertical_quarter_piece"
   ]
 }

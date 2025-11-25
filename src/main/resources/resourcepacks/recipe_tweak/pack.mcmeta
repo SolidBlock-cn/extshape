@@ -3,7 +3,9 @@
     "description": {
       "translate": "resourcePack.extshape.recipe_tweak.description"
     },
-    "pack_format": 16,
-    "supported_formats": [1, 999]
+    "pack_format": 15,
+    "supported_formats": [1, 81],
+    "min_format": 1,
+    "max_format": 9999
   }
 }
