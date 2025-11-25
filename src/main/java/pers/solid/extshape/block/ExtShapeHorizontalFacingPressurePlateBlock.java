@@ -65,6 +65,6 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
     final WeightedVariant upModel = BlockStateModelGenerator.createWeightedVariant(Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
     final WeightedVariant downModel = BlockStateModelGenerator.createWeightedVariant(Models.PRESSURE_PLATE_DOWN.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
-    blockStateModelGenerator.blockStateCollector.accept(((VariantsBlockModelDefinitionCreator) BlockStateModelGenerator.createPressurePlateBlockState(this, upModel, downModel)).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS()));
+    blockStateModelGenerator.blockStateCollector.accept(((VariantsBlockModelDefinitionCreator) BlockStateModelGenerator.createPressurePlateBlockState(this, upModel, downModel)).apply(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS()));
   }
 }

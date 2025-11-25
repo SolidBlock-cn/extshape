@@ -30,7 +30,7 @@ public final class ExtShapeBlockStateModelGenerator {
     variants.register(SlabType.BOTTOM, BlockStateModelGenerator.createWeightedVariant(bottomModelId));
     variants.register(SlabType.TOP, BlockStateModelGenerator.createWeightedVariant(topModelId));
     variants.register(SlabType.DOUBLE, BlockStateModelGenerator.createWeightedVariant(fullModelId));
-    return VariantsBlockModelDefinitionCreator.of(block).with(variants).coordinate(variants2);
+    return VariantsBlockModelDefinitionCreator.of(block).with(variants).apply(variants2);
   }
 
   public static BlockModelDefinitionCreator createGlazedTerracottaSlabBlockState(Block block, Identifier bottomModelId, Identifier topModelId, Identifier fullModelId) {
@@ -39,7 +39,7 @@ public final class ExtShapeBlockStateModelGenerator {
     map.register(SlabType.BOTTOM, BlockStateModelGenerator.createWeightedVariant(bottomModelId));
     map.register(SlabType.TOP, BlockStateModelGenerator.createWeightedVariant(topModelId));
     map.register(SlabType.DOUBLE, BlockStateModelGenerator.createWeightedVariant(fullModelId));
-    return state.with(map).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
+    return state.with(map).apply(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
   }
 
   /**
@@ -102,13 +102,13 @@ public final class ExtShapeBlockStateModelGenerator {
         BlockStateVariantMap.models(QuarterPieceBlock.HALF)
             .register(BlockHalf.TOP, BlockStateModelGenerator.createWeightedVariant(topModelId).apply(BlockStateModelGenerator.UV_LOCK))
             .register(BlockHalf.BOTTOM, BlockStateModelGenerator.createWeightedVariant(bottomModelId).apply(BlockStateModelGenerator.UV_LOCK))
-    ).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
+    ).apply(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
   }
 
   public static VariantsBlockModelDefinitionCreator createVerticalQuarterPieceBlockState(Block block, Identifier modelId) {
     return VariantsBlockModelDefinitionCreator.of(block, BlockStateModelGenerator.createWeightedVariant(modelId)
             .apply(BlockStateModelGenerator.UV_LOCK))
-        .coordinate(BlockStateVariantMap.operations(VerticalQuarterPieceBlock.FACING)
+        .apply(BlockStateVariantMap.operations(VerticalQuarterPieceBlock.FACING)
             .register(HorizontalCornerDirection.SOUTH_EAST, BlockStateModelGenerator.NO_OP)
             .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateModelGenerator.ROTATE_Y_90)
             .register(HorizontalCornerDirection.NORTH_WEST, BlockStateModelGenerator.ROTATE_Y_180)
@@ -118,13 +118,13 @@ public final class ExtShapeBlockStateModelGenerator {
   public static VariantsBlockModelDefinitionCreator createVerticalSlabBlockState(Block block, Identifier modelId) {
     return VariantsBlockModelDefinitionCreator.of(block, BlockStateModelGenerator.createWeightedVariant(modelId)
         .apply(BlockStateModelGenerator.UV_LOCK)
-    ).coordinate(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
+    ).apply(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS());
   }
 
   public static VariantsBlockModelDefinitionCreator createVerticalStairsBlockState(Block block, Identifier modelId) {
     return VariantsBlockModelDefinitionCreator.of(block, BlockStateModelGenerator.createWeightedVariant(modelId)
         .apply(BlockStateModelGenerator.UV_LOCK)
-    ).coordinate(BlockStateVariantMap.operations(ExtShapeVerticalStairsBlock.FACING)
+    ).apply(BlockStateVariantMap.operations(ExtShapeVerticalStairsBlock.FACING)
         .register(HorizontalCornerDirection.SOUTH_WEST, BlockStateModelGenerator.NO_OP)
         .register(HorizontalCornerDirection.NORTH_WEST, BlockStateModelGenerator.ROTATE_Y_90)
         .register(HorizontalCornerDirection.NORTH_EAST, BlockStateModelGenerator.ROTATE_Y_180)
