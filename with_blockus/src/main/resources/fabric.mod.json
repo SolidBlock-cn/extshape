@@ -29,9 +29,12 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.21.9-0",
+    "minecraft": ">=1.21.9 <=1.21.10",
     "extshape": [">=3.0.0-0", "${version}"],
     "blockus": ">=2.13.1"
+  },
+  "recommends": {
+    "minecraft": "1.21.10"
   },
   "custom": {
     "modmenu": {
