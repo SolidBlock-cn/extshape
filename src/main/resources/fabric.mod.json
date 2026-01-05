@@ -35,11 +35,11 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": ">=1.21.9 <=1.21.10",
+    "minecraft": "1.21.11",
     "java": ">=21"
   },
   "recommends": {
-    "minecraft": "1.21.10"
+    "minecraft": "1.21.11"
   },
   "suggests": {
     "blockus": "*"

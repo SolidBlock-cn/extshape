@@ -11,6 +11,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -21,6 +23,8 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.Text;
@@ -87,7 +91,7 @@ public class ExtShape implements ModInitializer {
 
     // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
     VanillaItemGroup.registerForMod();
-    ResourceManagerHelper.registerBuiltinResourcePack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Text.translatable("resourcePack.extshape.recipe_tweak.name"), ResourcePackActivationType.DEFAULT_ENABLED);
+    ResourceLoader.registerBuiltinPack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Text.translatable("resourcePack.extshape.recipe_tweak.name"), PackActivationType.DEFAULT_ENABLED);
 
     registerStrippableBlocks();
     registerFuels();
