@@ -1,5 +1,9 @@
 # Update log
 
+### 3.1.2
+
+- Fixed the issue that the bottom side of bottom slabs and the top side of the top slabs do not emit light when blocked by solid blocks on the four horizontal sides (issue #78).
+
 ### 3.1.1
 
 - Fixed the incompatibility with Sinytra Connector.
