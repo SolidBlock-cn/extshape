@@ -7,6 +7,7 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.CopperManager;
 
@@ -69,7 +70,12 @@ public record ActivationSettings(int buttonTime, int plateTime, boolean buttonAc
 
   public record Sounds(SoundEvent clickOffSound, SoundEvent clickOnSound, SoundEvent depressSound, SoundEvent pressSound) {
     private static SoundEvent sound(String name) {
-      return new SoundEvent(new Identifier(ExtShape.MOD_ID, name));
+      final Identifier soundId = new Identifier(ExtShape.MOD_ID, name);
+      if (!Registry.SOUND_EVENT.containsId(soundId)) {
+        return Registry.register(Registry.SOUND_EVENT, soundId, new SoundEvent(soundId));
+      } else {
+        return Registry.SOUND_EVENT.get(soundId);
+      }
     }
 
     public Sounds(String clickOffSound, String clickOnSound, String depressSound, String pressSound) {
