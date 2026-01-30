@@ -1,8 +1,10 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
+import java.util.regex.Pattern
+
 plugins {
-    id 'fabric-loom' version '1.10-SNAPSHOT'
+    id 'fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
@@ -183,6 +185,13 @@ String getUpdateLog(String modVersion = project.mod_version) {
     return builder.toString().trim()
 }
 
+ext {
+    pattern1 = Pattern.compile("^(.+?)(.{0,6})\$")
+    pattern2 = Pattern.compile(".")
+
+    screenToken = (String token) -> token.replaceAll("^(.+?)(.{0,6})\$", (String s, String a, String b) -> a.replaceAll(".", "*") + b)
+}
+
 // 模组发布部分
 
 println "当前版本（${project.mod_version}）更新记录："
@@ -191,9 +200,9 @@ println changelogContent
 
 tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
-        def getenv = System.getenv("CURSEFORGE_TOKEN")
-        println("CurseForge 令牌: $getenv")
-        if (getenv) apiToken = getenv
+        def curseforgeToken = System.getenv("CURSEFORGE_TOKEN")
+        println("CurseForge 令牌: ${screenToken(curseforgeToken)}")
+        if (curseforgeToken) apiToken = curseforgeToken
     }
     def mainFile = upload('514125', remapJar)
     mainFile.changelog = changelogContent
@@ -225,10 +234,10 @@ modrinth {
 }
 
 githubRelease {
-    def getenv = System.getenv("GITHUB_TOKEN")
-    if (getenv) token = getenv
+    def githubToken = System.getenv("GITHUB_TOKEN")
+    if (githubToken) token = githubToken
     tasks.githubRelease.doFirst {
-        println "GitHub 令牌: $getenv"
+        println "GitHub 令牌: ${screenToken(githubToken)}"
     }
     owner = "SolidBlock-cn"
     repo = "extshape"
@@ -260,5 +269,6 @@ gradle.taskGraph.whenReady { TaskExecutionGraph graph ->
 fabricApi {
     configureDataGeneration() {
         it.modId = "extshape"
+        client = true
     }
 }

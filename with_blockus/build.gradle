@@ -25,9 +25,9 @@ dependencies {
 
 tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
-        def getenv = System.getenv("CURSEFORGE_TOKEN")
-        println("CurseForge 令牌: $getenv")
-        if (getenv) apiToken = getenv
+        def curseForgeToken = System.getenv("CURSEFORGE_TOKEN")
+        println("CurseForge 令牌: ${screenToken(curseForgeToken)}")
+        if (curseForgeToken) apiToken = curseForgeToken
     }
     def mainFile = upload('841655', remapJar)
     mainFile.changelog = ''

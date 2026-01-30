@@ -2,9 +2,11 @@
 
 本文档有[中文版](README.md)。
 
+> Since 3.0.0, [Better Runtime Resource Pack](https://github.com/SolidBlock-cn/BRRP/) mod is **no longer required**.
+
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [Block List](BlockList.md).
 
-At present, this mod supports Minecraft Java Edition 1.21.4–1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
+At present, this mod supports Minecraft Java Edition 1.21.11–1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
 
 If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blockus](#Blockus), to add inter-mod support for Blockus.
 
