@@ -4,6 +4,8 @@ import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -70,7 +72,12 @@ public record ActivationSettings(int buttonTime, int plateTime, boolean buttonAc
 
   public record Sounds(SoundEvent clickOffSound, SoundEvent clickOnSound, SoundEvent depressSound, SoundEvent pressSound) {
     private static SoundEvent sound(String name) {
-      return SoundEvent.of(new Identifier(ExtShape.MOD_ID, name));
+      final Identifier soundId = new Identifier(ExtShape.MOD_ID, name);
+      if (!Registries.SOUND_EVENT.containsId(soundId)) {
+        return Registry.register(Registries.SOUND_EVENT, soundId, SoundEvent.of(soundId));
+      } else {
+        return Registries.SOUND_EVENT.get(soundId);
+      }
     }
 
     public Sounds(String clickOffSound, String clickOnSound, String depressSound, String pressSound) {
