@@ -86,7 +86,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   public static class WithExtension extends ExtShapeStairsBlock {
     private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
+    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -118,7 +118,7 @@ public class ExtShapeStairsBlock extends BRRPStairsBlock implements ExtShapeVari
   public static class WithOxidation extends ExtShapeStairsBlock implements Oxidizable {
     private final @NotNull OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }
