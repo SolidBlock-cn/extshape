@@ -1,8 +1,8 @@
 package pers.solid.extshape.builder;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceBlock;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeFenceBlock;
 

@@ -2,9 +2,9 @@ package pers.solid.extshape.util;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import net.minecraft.block.Block;
-import net.minecraft.data.family.BlockFamilies;
-import net.minecraft.data.family.BlockFamily;
+import net.minecraft.data.BlockFamilies;
+import net.minecraft.data.BlockFamily;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
@@ -41,7 +41,7 @@ public final class BlockBiMaps {
    * 从原版的 {@link BlockFamilies} 导入数据至 BlockMappings 中。
    */
   private static void importFromVanilla() {
-    Stream<BlockFamily> vanillaBlockFamilies = BlockFamilies.getFamilies();
+    Stream<BlockFamily> vanillaBlockFamilies = BlockFamilies.getAllFamilies();
     vanillaBlockFamilies.forEach(blockFamily -> {
       Block baseBlock = blockFamily.getBaseBlock();
       Map<BlockFamily.Variant, Block> variants = blockFamily.getVariants();
@@ -95,7 +95,7 @@ public final class BlockBiMaps {
   public static void setBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock, @NotNull Block block) {
     final BiMap<Block, Block> biMap = of(shape);
     if (biMap.containsKey(baseBlock)) {
-      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape.asString(), baseBlock, biMap.get(baseBlock), block);
+      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape.getSerializedName(), baseBlock, biMap.get(baseBlock), block);
     }
     biMap.put(baseBlock, block);
     BASE_BLOCKS.add(baseBlock);

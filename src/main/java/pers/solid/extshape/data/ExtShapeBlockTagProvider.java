@@ -5,12 +5,12 @@ import com.google.common.collect.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.Validate;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
@@ -37,12 +37,12 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
    */
   public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ImmutableSet.of(Blocks.STONE, Blocks.SMOOTH_STONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.GILDED_BLACKSTONE);
 
-  public ExtShapeBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+  public ExtShapeBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
   }
 
   @Override
-  protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+  protected void addTags(HolderLookup.Provider wrapperLookup) {
 
     // region 基础形状部分
 
@@ -71,7 +71,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
           valueLookupBuilder(ExtShapeTags.SHAPE_TO_WOODEN_TAG.get(shape)).addTag(typeShapeTag);
           continue;
         }
-        if (typeShapeTag != null && !typeShapeTag.id().getNamespace().equals(Identifier.DEFAULT_NAMESPACE)) {
+        if (typeShapeTag != null && !typeShapeTag.location().getNamespace().equals(Identifier.DEFAULT_NAMESPACE)) {
           builder.addTag(typeShapeTag);
         }
       }
@@ -91,11 +91,11 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
     // mineable 部分
 
-    valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).add(
+    valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(
         ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
-    addForShapes(BlockTags.PICKAXE_MINEABLE, Iterables.concat(
+    addForShapes(BlockTags.MINEABLE_WITH_PICKAXE, Iterables.concat(
         BlockCollections.STONES,
         BlockCollections.UNCOLORED_SANDSTONES,
         BlockCollections.RED_SANDSTONES,
@@ -162,24 +162,24 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
     // 所有的混凝土和陶瓦加入 pickaxe_mineable
     for (TagKey<Block> tag : Iterables.concat(ExtShapeTags.SHAPE_TO_CONCRETE_TAG.values(), ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.values())) {
-      valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).addTag(tag);
+      valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(tag);
     }
-    valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
+    valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
 
-    valueLookupBuilder(BlockTags.AXE_MINEABLE)
+    valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
         .addTag(ExtShapeTags.WOODEN_BLOCKS);
 
-    addForShapes(BlockTags.AXE_MINEABLE,
+    addForShapes(BlockTags.MINEABLE_WITH_AXE,
         Blocks.PUMPKIN,
         Blocks.MELON);
 
-    addForShapes(BlockTags.SHOVEL_MINEABLE,
+    addForShapes(BlockTags.MINEABLE_WITH_SHOVEL,
         Blocks.DIRT,
         Blocks.COARSE_DIRT,
         Blocks.SNOW_BLOCK,
         Blocks.CLAY);
 
-    addForShapes(BlockTags.HOE_MINEABLE,
+    addForShapes(BlockTags.MINEABLE_WITH_HOE,
         Blocks.NETHER_WART_BLOCK,
         Blocks.WARPED_WART_BLOCK,
         Blocks.SHROOMLIGHT,

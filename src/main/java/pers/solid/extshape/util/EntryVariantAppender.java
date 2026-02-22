@@ -2,11 +2,11 @@ package pers.solid.extshape.util;
 
 import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
@@ -22,7 +22,7 @@ import java.util.function.Predicate;
  * @param baseBlocks     需要添加指定的这些基础方块。
  * @param blockPredicate 判断方块是否是需要被添加的（返回 true），还是已在物品栏中存在、需要作为锚点的（返回 false）。
  */
-public record EntryVariantAppender(RegistryKey<ItemGroup> itemGroup, Iterable<BlockShape> shapes, Iterable<Block> baseBlocks, Predicate<Block> blockPredicate) {
+public record EntryVariantAppender(ResourceKey<CreativeModeTab> itemGroup, Iterable<BlockShape> shapes, Iterable<Block> baseBlocks, Predicate<Block> blockPredicate) {
   public static final Multimap<Block, Block> ADJACENT_BASE_BLOCKS = ImmutableSetMultimap.<Block, Block>builder()
       .put(Blocks.BAMBOO_PLANKS, Blocks.BAMBOO_MOSAIC)
       .put(Blocks.BLACKSTONE, Blocks.GILDED_BLACKSTONE)
@@ -57,6 +57,6 @@ public record EntryVariantAppender(RegistryKey<ItemGroup> itemGroup, Iterable<Bl
       }
     }
     final double afterTime = System.currentTimeMillis();
-    ExtShape.LOGGER.info("Time spent on adding items to group {}: {}", itemGroup.getValue(), (afterTime - prevTime) / 1000d);
+    ExtShape.LOGGER.info("Time spent on adding items to group {}: {}", itemGroup.identifier(), (afterTime - prevTime) / 1000d);
   }
 }

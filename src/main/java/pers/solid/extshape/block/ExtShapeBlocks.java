@@ -5,13 +5,19 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.minecraft.block.*;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShape;
@@ -24,7 +30,7 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-import static net.minecraft.block.Blocks.*;
+import static net.minecraft.world.level.block.Blocks.*;
 
 /**
  * <p>扩展方块形状模组所有的方块都是在此类定义的。类初始化时，就会实例化所有的方块对象。其中，{@linkplain  #PETRIFIED_OAK_PLANKS 石化橡木木板}和{@linkplain #SMOOTH_STONE_DOUBLE_SLAB 双层石台阶}直接以字段的形式储存，其他方块则需要通过 {@link BlockBiMaps#getBlockOf} 间接访问。
@@ -130,7 +136,7 @@ public final class ExtShapeBlocks {
         .setFenceSettings(FenceSettings.BAMBOO_BLOCK)
         .setActivationSettings(ActivationSettings.BAMBOO)
         .setPillarUvLocked()
-        .addPreBuildConsumer((blockShape4, builder3) -> builder3.blockSettings.mapColor(MapColor.DARK_GREEN))
+        .addPreBuildConsumer((blockShape4, builder3) -> builder3.blockSettings.mapColor(MapColor.PLANT))
         .addPostBuildConsumer(woodFlammable)
         .build();
     // 去皮的竹子。
@@ -138,7 +144,7 @@ public final class ExtShapeBlocks {
         .setFenceSettings(FenceSettings.BAMBOO_BLOCK)
         .setActivationSettings(ActivationSettings.BAMBOO)
         .setPillarUvLocked()
-        .addPreBuildConsumer((blockShape2, builder2) -> builder2.blockSettings.mapColor(MapColor.YELLOW))
+        .addPreBuildConsumer((blockShape2, builder2) -> builder2.blockSettings.mapColor(MapColor.COLOR_YELLOW))
         .addPostBuildConsumer(woodFlammable)
         .build();
 
@@ -172,7 +178,7 @@ public final class ExtShapeBlocks {
           .setActivationSettings(woodenButtonSettings.next())
           .setPillar()
           .addPostBuildConsumer(woodFlammable)
-          .setRecipeGroup(blockShape -> "wood_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "wood_" + blockShape.getSerializedName())
           .build();
     }
     for (final Block block : BlockCollections.STRIPPED_WOODS) {
@@ -181,7 +187,7 @@ public final class ExtShapeBlocks {
           .setActivationSettings(woodenButtonSettings.next())
           .setPillar()
           .addPostBuildConsumer(woodFlammable)
-          .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.getSerializedName())
           .build();
     }
     for (final Block block : BlockCollections.HYPHAES) {
@@ -190,7 +196,7 @@ public final class ExtShapeBlocks {
           .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
           .setActivationSettings(activationSettings)
           .setPillar()
-          .setRecipeGroup(blockShape -> "wood_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "wood_" + blockShape.getSerializedName())
           .build();
     }
     for (final Block block : BlockCollections.STRIPPED_HYPHAES) {
@@ -198,7 +204,7 @@ public final class ExtShapeBlocks {
           .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
           .setActivationSettings(netherWoodButtonSettings.next())
           .setPillar()
-          .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.getSerializedName())
           .build();
     }
 
@@ -209,20 +215,20 @@ public final class ExtShapeBlocks {
             .setFenceSettings(FenceSettings.BAMBOO_PLANKS)
             .setActivationSettings(ActivationSettings.BAMBOO)
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
-            .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
             .build();
       } else if (block == CRIMSON_PLANKS || block == WARPED_PLANKS) {
         FACTORY.createAllShapes(block)
             .setFenceSettings(null)
             .setActivationSettings(ActivationSettings.wood(block == WARPED_PLANKS ? BlockSetType.WARPED : BlockSetType.CRIMSON))
-            .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
             .build();
       } else {
         FACTORY.createAllShapes(block)
             .setFenceSettings(null)
             .setActivationSettings(woodenButtonSettings.next())
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
-            .setRecipeGroup(blockShape -> "wooden_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
             .build();
       }
     }
@@ -234,7 +240,7 @@ public final class ExtShapeBlocks {
           ExtShapeBlockInterface.STONECUTTABLE_BLOCKS.add(block);
           return block;
         })
-        .setBlockSettings(AbstractBlock.Settings.copy(PETRIFIED_OAK_SLAB))
+        .setBlockSettings(BlockBehaviour.Properties.ofFullCopy(PETRIFIED_OAK_SLAB))
         .setIdentifier(ExtShape.id("petrified_oak_planks"))
         .build();
 
@@ -246,7 +252,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.STONE)
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape1, builder1) -> builder1.blockSettings.strength(-1.0F, 3600000.0F).allowsSpawning(Blocks::never).lootTable(Optional.of(RegistryKey.of(RegistryKeys.LOOT_TABLE, builder1.getBlockId().withPrefixedPath("blocks/")))).pistonBehavior(PistonBehavior.BLOCK))
+        .addPreBuildConsumer((blockShape1, builder1) -> builder1.blockSettings.strength(-1.0F, 3600000.0F).isValidSpawn(Blocks::never).overrideLootTable(Optional.of(ResourceKey.create(Registries.LOOT_TABLE, builder1.getBlockId().withPrefix("blocks/")))).pushReaction(PushReaction.BLOCK))
         .build();
 
     // 青金石块。
@@ -284,7 +290,7 @@ public final class ExtShapeBlocks {
           .setFenceSettings(FenceSettings.WOOL)
           .setActivationSettings(ActivationSettings.WOOL)
           .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 50))
-          .setRecipeGroup(blockShape -> "wool_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "wool_" + blockShape.getSerializedName())
           .build();
     }
 
@@ -321,7 +327,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.HARD_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pistonBehavior(PistonBehavior.BLOCK))
+        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pushReaction(PushReaction.BLOCK))
         .build();
 
     // 钻石块。
@@ -512,7 +518,7 @@ public final class ExtShapeBlocks {
     // 平滑石头比较特殊，完整方块和台阶不同。
     SMOOTH_STONE_DOUBLE_SLAB = FACTORY.modify(new BlockBuilder())
         .setInstanceSupplier(builder -> new Block(builder.blockSettings))
-        .setBlockSettings(AbstractBlock.Settings.copy(SMOOTH_STONE))
+        .setBlockSettings(BlockBehaviour.Properties.ofFullCopy(SMOOTH_STONE))
         .setIdentifier(ExtShape.id("smooth_stone_slab_double")).build();
 
     FACTORY.createAllShapes(SMOOTH_STONE)
@@ -559,7 +565,7 @@ public final class ExtShapeBlocks {
           .markStoneCuttable() // 下面这些标签已带有 pickaxe_mineable
           .setFenceSettings(new FenceSettings(Items.CLAY, ExtShapeBlockTypes.STONE_WOOD_TYPE))
           .setActivationSettings(ActivationSettings.STONE)
-          .setRecipeGroup(blockShape -> "concrete_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "concrete_" + blockShape.getSerializedName())
           .build();
     }
 
@@ -595,7 +601,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.HARD_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pistonBehavior(PistonBehavior.BLOCK))
+        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pushReaction(PushReaction.BLOCK))
         .build();
 
     // 黑石及其变种。
@@ -647,7 +653,7 @@ public final class ExtShapeBlocks {
           if (dropExperience) {
             final float logicalCompleteness = blockShape.logicalCompleteness(state);
             if (logicalCompleteness == 1 || world.getRandom().nextFloat() < logicalCompleteness)
-              ((BlockAccessor) state.getBlock()).callDropExperienceWhenMined(world, pos, stack, ConstantIntProvider.create(1));
+              ((BlockAccessor) state.getBlock()).callTryDropExperience(world, pos, stack, ConstantInt.of(1));
           }
         }).build()))
         .build();

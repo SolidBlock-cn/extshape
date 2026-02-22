@@ -3,27 +3,27 @@ package pers.solid.extshape.block;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Oxidizable;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.data.recipe.StonecuttingRecipeJsonBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -32,31 +32,31 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 /**
  * 本模组中的楼梯方块。受原版限制，基础方块（{@link #baseBlock}）不能为 {@code null}。
  */
-public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeStairsBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeStairsBlock::new);
+public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBlockInterface {
+  public static final MapCodec<ExtShapeStairsBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeStairsBlock::new);
 
   public final @NotNull Block baseBlock;
 
-  public ExtShapeStairsBlock(@NotNull Block baseBlock, Settings settings) {
-    super(baseBlock.getDefaultState(), settings);
+  public ExtShapeStairsBlock(@NotNull Block baseBlock, Properties settings) {
+    super(baseBlock.defaultBlockState(), settings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public MutableText getName() {
-    return Text.translatable("block.extshape.?_stairs", this.getNamePrefix());
+  public MutableComponent getName() {
+    return Component.translatable("block.extshape.?_stairs", this.getNamePrefix());
   }
 
   @Override
-  public @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerato) {
+  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerato) {
     return simpleStoneCuttingRecipe(1, recipeGenerato);
   }
 
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
+  public @Nullable RecipeBuilder getCraftingRecipe(RecipeProvider recipeGenerator) {
     // recipeCategory 一定量 building_blocks，所以没有问题
-    return recipeGenerator.createStairsRecipe(this, Ingredient.ofItems(baseBlock))
-        .criterion(RecipeGenerator.hasItem(baseBlock), recipeGenerator.conditionsFromItem(baseBlock))
+    return recipeGenerator.stairBuilder(this, Ingredient.of(baseBlock))
+        .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock))
         .group(getRecipeGroup());
   }
 
@@ -67,12 +67,12 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
 
   @Environment(EnvType.CLIENT)
   @Override
-  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).stairs(this);
   }
 
   @Override
-  public MapCodec<? extends ExtShapeStairsBlock> getCodec() {
+  public MapCodec<? extends ExtShapeStairsBlock> codec() {
     return CODEC;
   }
 
@@ -84,69 +84,69 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
   public static class WithExtension extends ExtShapeStairsBlock {
     private final @NotNull BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Properties settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
 
     @Override
-    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
-      super.onStacksDropped(state, world, pos, stack, dropExperience);
+    public void spawnAfterBreak(BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.spawnAfterBreak(state, world, pos, stack, dropExperience);
       extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
     }
 
     @Override
-    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+    public void onProjectileHit(Level world, BlockState state, BlockHitResult hit, Projectile projectile) {
       super.onProjectileHit(world, state, hit, projectile);
       extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
     }
 
     @Override
-    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-      super.onSteppedOn(world, pos, state, entity);
+    public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
+      super.stepOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
     }
 
     @Override
-    public boolean emitsRedstonePower(BlockState state) {
-      return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.emitsRedstonePower(state));
+    public boolean isSignalSource(BlockState state) {
+      return super.isSignalSource(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.isSignalSource(state));
     }
 
     @Override
-    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getWeakRedstonePower(state, world, pos, direction));
+    public int getSignal(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
+      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getSignal(state, world, pos, direction));
     }
   }
 
   /**
-   * @see net.minecraft.block.OxidizableStairsBlock
+   * @see net.minecraft.world.level.block.WeatheringCopperStairBlock
    */
-  public static class WithOxidation extends ExtShapeStairsBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
+  public static class WithOxidation extends ExtShapeStairsBlock implements WeatheringCopper {
+    private final @NotNull WeatherState oxidationLevel;
+    public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WeatherState oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-      this.tickDegradation(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+      this.changeOverTime(state, world, pos, random);
     }
 
     @Override
-    public boolean hasRandomTicks(BlockState state) {
-      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    public boolean isRandomlyTicking(BlockState state) {
+      return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override
-    public OxidationLevel getDegradationLevel() {
+    public WeatherState getAge() {
       return oxidationLevel;
     }
 
     @Override
-    public MapCodec<? extends WithOxidation> getCodec() {
+    public MapCodec<? extends WithOxidation> codec() {
       return CODEC;
     }
   }

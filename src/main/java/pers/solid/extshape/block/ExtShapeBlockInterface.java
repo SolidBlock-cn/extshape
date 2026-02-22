@@ -6,21 +6,17 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.data.loottable.BlockLootTableGenerator;
-import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.data.recipe.StonecuttingRecipeJsonBuilder;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.loot.LootTable;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,10 +48,10 @@ public interface ExtShapeBlockInterface {
    * 方块所在的合成配方的组。
    *
    * @return 方块合成配方中的 {@code group} 字段。
-   * @see net.minecraft.data.recipe.CraftingRecipeJsonBuilder#group(String)
+   * @see net.minecraft.data.recipes.RecipeBuilder#group(String)
    */
   default String getRecipeGroup() {
-    return RecipeGroupRegistry.getRecipeGroup((ItemConvertible) this);
+    return RecipeGroupRegistry.getRecipeGroup((ItemLike) this);
   }
 
   /**
@@ -63,7 +59,7 @@ public interface ExtShapeBlockInterface {
    *
    * @return 方块的切石配方。用于切石机。
    */
-  default @Nullable StonecuttingRecipeJsonBuilder getStonecuttingRecipe(RecipeGenerator recipeGenerato) {
+  default @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerato) {
     return null;
   }
 
@@ -77,11 +73,11 @@ public interface ExtShapeBlockInterface {
     return baseBlock != null && STONECUTTABLE_BASE_BLOCKS.contains(baseBlock);
   }
 
-  default LootTable.Builder getLootTable(BlockLootTableGenerator blockLootTableGenerator) {
-    return blockLootTableGenerator.drops((ItemConvertible) this);
+  default LootTable.Builder getLootTable(BlockLootSubProvider blockLootTableGenerator) {
+    return blockLootTableGenerator.createSingleItemTable((ItemLike) this);
   }
 
-  default CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
+  default RecipeBuilder getCraftingRecipe(RecipeProvider recipeGenerator) {
     return null;
   }
 
@@ -89,9 +85,9 @@ public interface ExtShapeBlockInterface {
     return (this instanceof Block && STONECUTTABLE_BLOCKS.contains(this)) || isStoneCut(getBaseBlock());
   }
 
-  default StonecuttingRecipeJsonBuilder simpleStoneCuttingRecipe(int resultCount, RecipeGenerator recipeGenerator) {
+  default SingleItemRecipeBuilder simpleStoneCuttingRecipe(int resultCount, RecipeProvider recipeGenerator) {
     final Block baseBlock = getBaseBlock();
-    return StonecuttingRecipeJsonBuilder.createStonecutting(Ingredient.ofItems(baseBlock), getRecipeCategory(), (ItemConvertible) this, resultCount).criterion("has_base_block", recipeGenerator.conditionsFromItem(baseBlock));
+    return SingleItemRecipeBuilder.stonecutting(Ingredient.of(baseBlock), getRecipeCategory(), (ItemLike) this, resultCount).unlockedBy("has_base_block", recipeGenerator.has(baseBlock));
   }
 
   /**
@@ -119,22 +115,22 @@ public interface ExtShapeBlockInterface {
   }
 
   @Environment(EnvType.CLIENT)
-  void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator);
+  void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator);
 
-  default void registerRecipes(RecipeGenerator recipeGenerator, RecipeExporter exporter) {
-    final CraftingRecipeJsonBuilder craftingRecipe = getCraftingRecipe(recipeGenerator);
+  default void registerRecipes(RecipeProvider recipeGenerator, RecipeOutput exporter) {
+    final RecipeBuilder craftingRecipe = getCraftingRecipe(recipeGenerator);
     if (craftingRecipe != null) {
-      craftingRecipe.offerTo(exporter);
+      craftingRecipe.save(exporter);
     }
     if (shouldWriteStonecuttingRecipe()) {
-      final StonecuttingRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe(recipeGenerator);
+      final SingleItemRecipeBuilder stonecuttingRecipe = getStonecuttingRecipe(recipeGenerator);
       if (stonecuttingRecipe != null) {
-        stonecuttingRecipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Registries.ITEM.getId(stonecuttingRecipe.getOutputItem()).withSuffixedPath("_from_stonecutting")));
+        stonecuttingRecipe.save(exporter, ResourceKey.create(Registries.RECIPE, BuiltInRegistries.ITEM.getKey(stonecuttingRecipe.getResult()).withSuffix("_from_stonecutting")));
       }
     }
   }
 
-  static <B extends Block & ExtShapeBlockInterface> MapCodec<B> createCodecWithBaseBlock(RecordCodecBuilder<B, AbstractBlock.Settings> settings, BiFunction<Block, AbstractBlock.Settings, B> function) {
-    return RecordCodecBuilder.mapCodec(i -> i.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), settings).apply(i, function));
+  static <B extends Block & ExtShapeBlockInterface> MapCodec<B> createCodecWithBaseBlock(RecordCodecBuilder<B, BlockBehaviour.Properties> settings, BiFunction<Block, BlockBehaviour.Properties, B> function) {
+    return RecordCodecBuilder.mapCodec(i -> i.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), settings).apply(i, function));
   }
 }

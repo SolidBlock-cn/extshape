@@ -3,10 +3,10 @@ package pers.solid.extshape.blockus.mixin;
 import com.mojang.datafixers.DataFixerBuilder;
 import com.mojang.datafixers.schemas.Schema;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.datafixer.Schemas;
-import net.minecraft.datafixer.fix.BlockNameFix;
-import net.minecraft.datafixer.fix.ItemNameFix;
-import net.minecraft.util.DyeColor;
+import net.minecraft.util.datafix.DataFixers;
+import net.minecraft.util.datafix.fixes.BlockRenameFix;
+import net.minecraft.util.datafix.fixes.ItemRenameFix;
+import net.minecraft.world.item.DyeColor;
 import org.apache.commons.lang3.Validate;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,18 +24,18 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.UnaryOperator;
 
-@Mixin(Schemas.class)
+@Mixin(DataFixers.class)
 public abstract class BlockusSchemasMixin {
   @Shadow
-  private static UnaryOperator<String> replacing(Map<String, String> replacements) {
+  private static UnaryOperator<String> createRenamer(Map<String, String> replacements) {
     return null;
   }
 
   @Shadow
   @Final
-  private static BiFunction<Integer, Schema, Schema> EMPTY_IDENTIFIER_NORMALIZE;
+  private static BiFunction<Integer, Schema, Schema> SAME_NAMESPACED;
 
-  @Inject(method = "build", at = @At("TAIL"))
+  @Inject(method = "addFixers", at = @At("TAIL"))
   private static void postBuild(DataFixerBuilder builder, CallbackInfo ci) {
     final Map<String, String> idMap = new HashMap<>();
     removeFenceAndGate(idMap, "stone_tiles", "extshape:stone");
@@ -143,8 +143,8 @@ public abstract class BlockusSchemasMixin {
     removeShapesFor(idMap, "stripped_white_oak_log", "extshape_blockus:stripped_white_oak_wood", BlockShape.STAIRS, BlockShape.SLAB, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_STAIRS, BlockShape.QUARTER_PIECE, BlockShape.VERTICAL_QUARTER_PIECE);
 
     for (DyeColor color : DyeColor.values()) {
-      removeShapesExcept(idMap, "chiseled_" + color.asString() + "_concrete_brick", "extshape_blockus:" + color.asString() + "_concrete_brick", BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL, BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE);
-      removeShapesFor(idMap, "chiseled_" + color.asString() + "_concrete_brick", "blockus:" + color.asString() + "_concrete_brick", BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL);
+      removeShapesExcept(idMap, "chiseled_" + color.getSerializedName() + "_concrete_brick", "extshape_blockus:" + color.getSerializedName() + "_concrete_brick", BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL, BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE);
+      removeShapesFor(idMap, "chiseled_" + color.getSerializedName() + "_concrete_brick", "blockus:" + color.getSerializedName() + "_concrete_brick", BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL);
     }
 
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
@@ -156,10 +156,10 @@ public abstract class BlockusSchemasMixin {
       });
     }
 
-    final Schema schema = builder.addSchema(4081, EMPTY_IDENTIFIER_NORMALIZE);
-    final UnaryOperator<String> unaryOperator = replacing(idMap);
-    builder.addFixer(BlockNameFix.create(schema, "Rename removed blocks in Extended Block Shapes - Blockus mod", unaryOperator));
-    builder.addFixer(ItemNameFix.create(schema, "Rename removed items in Extended Block Shapes - Blockus mod", unaryOperator));
+    final Schema schema = builder.addSchema(4081, SAME_NAMESPACED);
+    final UnaryOperator<String> unaryOperator = createRenamer(idMap);
+    builder.addFixer(BlockRenameFix.create(schema, "Rename removed blocks in Extended Block Shapes - Blockus mod", unaryOperator));
+    builder.addFixer(ItemRenameFix.create(schema, "Rename removed items in Extended Block Shapes - Blockus mod", unaryOperator));
 
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
       ExtShapeBlockus.replacing_id_map = idMap;
@@ -175,7 +175,7 @@ public abstract class BlockusSchemasMixin {
   @Unique
   private static void removeShapesFor(Map<String, String> idMap, String from, String to, BlockShape... shapes) {
     for (BlockShape shape : shapes) {
-      idMap.put("extshape_blockus:" + from + "_" + shape.asString(), to + "_" + shape.asString());
+      idMap.put("extshape_blockus:" + from + "_" + shape.getSerializedName(), to + "_" + shape.getSerializedName());
     }
   }
 
@@ -184,7 +184,7 @@ public abstract class BlockusSchemasMixin {
     final Set<BlockShape> list = Set.of(except);
     for (BlockShape shape : BlockShape.values()) {
       if (!list.contains(shape)) {
-        idMap.put("extshape_blockus:" + from + "_" + shape.asString(), to + "_" + shape.asString());
+        idMap.put("extshape_blockus:" + from + "_" + shape.getSerializedName(), to + "_" + shape.getSerializedName());
       }
     }
   }

@@ -2,8 +2,8 @@ package pers.solid.extshape.util;
 
 import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.Oxidizable;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import pers.solid.extshape.block.CopperManager;
 
 import java.util.Arrays;
@@ -37,7 +37,7 @@ public record ActivationSettings(BlockSetType blockSetType, int buttonTime, int 
   }
 
   public static final ActivationSettings STONE = stone(BlockSetType.STONE);
-  public static final ImmutableMap<Oxidizable.OxidationLevel, ActivationSettings> COPPER = Arrays.stream(Oxidizable.OxidationLevel.values()).collect(ImmutableMap.toImmutableMap(Functions.identity(), oxidationLevel -> {
+  public static final ImmutableMap<WeatheringCopper.WeatherState, ActivationSettings> COPPER = Arrays.stream(WeatheringCopper.WeatherState.values()).collect(ImmutableMap.toImmutableMap(Functions.identity(), oxidationLevel -> {
     final int activationRate = CopperManager.getActivationRate(oxidationLevel);
     return new ActivationSettings(BlockSetType.COPPER, activationRate, activationRate);
   }));

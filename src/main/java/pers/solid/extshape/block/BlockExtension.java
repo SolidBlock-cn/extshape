@@ -1,19 +1,19 @@
 package pers.solid.extshape.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 /**
  * <p>方块的一些扩展行为组成的记录。这个记录在未来版本可能会增加新内容，因此建议使用 {@code BlockExtension.builder().build()}。不含有任何行为的对象可见 {@link #EMPTY}。
@@ -25,10 +25,10 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
    */
   public static final BlockExtension EMPTY = new BlockExtension(StacksDroppedCallback.EMPTY, ProjectileHitCallback.EMPTY, SteppedOnCallback.EMPTY, EmitsRedstonePower.EMPTY, WeakRedstonePower.EMPTY);
   public static final BlockExtension AMETHYST = BlockExtension.builder().setProjectileHitCallback((world, state, hit, projectile) -> {
-    if (!world.isClient()) {
+    if (!world.isClientSide()) {
       BlockPos blockPos = hit.getBlockPos();
-      world.playSound(null, blockPos, SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
-      world.playSound(null, blockPos, SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SoundCategory.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
+      world.playSound(null, blockPos, SoundEvents.AMETHYST_BLOCK_HIT, SoundSource.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
+      world.playSound(null, blockPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
     }
   }).build();
 
@@ -48,7 +48,7 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
   /**
    * 方块被破坏后掉落物品的行为，例如幽匿块被破坏后掉落经验。
    *
-   * @see AbstractBlock#onStacksDropped
+   * @see BlockBehaviour#spawnAfterBreak
    */
   @FunctionalInterface
   public interface StacksDroppedCallback {
@@ -58,13 +58,13 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
     /**
      * 方块被破坏后的行为。
      */
-    void onStackDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience);
+    void onStackDropped(BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience);
   }
 
   /**
    * 方块被弹射物击中后的行为，例如 紫水晶被击中后发出清脆响声。
    *
-   * @see AbstractBlock#onProjectileHit
+   * @see BlockBehaviour#onProjectileHit
    */
   @FunctionalInterface
   public interface ProjectileHitCallback {
@@ -74,13 +74,13 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
     /**
      * 方块被弹射物击中后的行为。
      */
-    void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile);
+    void onProjectileHit(Level world, BlockState state, BlockHitResult hit, Projectile projectile);
   }
 
   /**
    * 玩家踩在方块上时的行为，例如沥青给予玩家加速效果。
    *
-   * @see Block#onSteppedOn
+   * @see Block#stepOn
    */
   @FunctionalInterface
   public interface SteppedOnCallback {
@@ -89,13 +89,13 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
     /**
      * 玩家踩在方块上时的行为。
      */
-    void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity);
+    void onSteppedOn(Level world, BlockPos pos, BlockState state, Entity entity);
   }
 
   /**
    * 方块是否产生红石信号，例如红石块会始终产生红石信号。
    *
-   * @see AbstractBlock#emitsRedstonePower
+   * @see BlockBehaviour#isSignalSource
    */
   @FunctionalInterface
   public interface EmitsRedstonePower {
@@ -112,7 +112,7 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
   /**
    * 方块是否产生弱红石信号（即为方块弱充电）。例如红石块会始终为方块提供 15 的充能等级。
    *
-   * @see AbstractBlock#getWeakRedstonePower
+   * @see BlockBehaviour#getSignal
    */
   @FunctionalInterface
   public interface WeakRedstonePower {
@@ -123,7 +123,7 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
      *
      * @return 方块的弱红石信号等级。
      */
-    int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction, int original);
+    int getWeakRedstonePower(BlockState state, BlockGetter world, BlockPos pos, Direction direction, int original);
   }
 
   public static class Builder {

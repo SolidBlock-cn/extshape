@@ -2,11 +2,11 @@ package pers.solid.extshape.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.BlockStateVariantMap;
-import net.minecraft.client.data.TexturedModel;
-import net.minecraft.client.render.model.json.ModelVariantOperator;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
+import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.renderer.block.model.VariantMutator;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Contract;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
-@Mixin(BlockStateModelGenerator.class)
+@Mixin(BlockModelGenerators.class)
 public interface BlockStateModelGeneratorAccessor {
   @Contract
   @Accessor
-  static BlockStateVariantMap<ModelVariantOperator> getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS() {
+  static PropertyDispatch<VariantMutator> getROTATION_HORIZONTAL_FACING_ALT() {
     throw new AssertionError();
   }
 

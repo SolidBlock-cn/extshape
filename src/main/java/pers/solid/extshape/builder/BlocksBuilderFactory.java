@@ -1,7 +1,7 @@
 package pers.solid.extshape.builder;
 
 import com.google.common.collect.ImmutableSet;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

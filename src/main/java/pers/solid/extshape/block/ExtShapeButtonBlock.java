@@ -5,23 +5,27 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.*;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -33,16 +37,16 @@ import pers.solid.extshape.util.ActivationSettings;
  * 本模组中的按钮方块。按钮的激活时长可能会是特制的。
  */
 public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeButtonBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getBlockSetType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getPressTicks())).apply(instance, ExtShapeButtonBlock::new));
+  public static final MapCodec<ExtShapeButtonBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getTicksToStayPressed())).apply(instance, ExtShapeButtonBlock::new));
 
   public final @NotNull Block baseBlock;
 
-  public ExtShapeButtonBlock(@NotNull Block baseBlock, Settings settings, BlockSetType blockSetType, int pressTicks) {
+  public ExtShapeButtonBlock(@NotNull Block baseBlock, Properties settings, BlockSetType blockSetType, int pressTicks) {
     super(blockSetType, pressTicks, settings);
     this.baseBlock = baseBlock;
   }
 
-  public ExtShapeButtonBlock(@NotNull Block baseBlock, Settings blockSettings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapeButtonBlock(@NotNull Block baseBlock, Properties blockSettings, @NotNull ActivationSettings activationSettings) {
     super(activationSettings.blockSetType(), activationSettings.buttonTime(), blockSettings);
     this.baseBlock = baseBlock;
   }
@@ -53,21 +57,21 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   }
 
   @Override
-  public MutableText getName() {
-    return Text.translatable("block.extshape.?_button", this.getNamePrefix());
+  public MutableComponent getName() {
+    return Component.translatable("block.extshape.?_button", this.getNamePrefix());
   }
 
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
-    return recipeGenerator.createShapeless(getRecipeCategory(), this)
-        .input(baseBlock)
-        .criterion(RecipeGenerator.hasItem(baseBlock), recipeGenerator.conditionsFromItem(baseBlock))
+  public @Nullable RecipeBuilder getCraftingRecipe(RecipeProvider recipeGenerator) {
+    return recipeGenerator.shapeless(getRecipeCategory(), this)
+        .requires(baseBlock)
+        .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock))
         .group(getRecipeGroup());
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public MapCodec<ButtonBlock> getCodec() {
+  public MapCodec<ButtonBlock> codec() {
     return (MapCodec<ButtonBlock>) (MapCodec<?>) CODEC;
   }
 
@@ -78,87 +82,87 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
 
   @Environment(EnvType.CLIENT)
   @Override
-  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).button(this);
   }
 
 
   @Override
-  protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
-    super.onStateReplaced(state, world, pos, moved);
-    if (state.get(POWERED) && state.getBlock() instanceof ExtShapeButtonBlock && state.get(POWERED)) {
-      world.scheduleBlockTick(pos.toImmutable(), state.getBlock(), ((ButtonBlockAccessor) this).getPressTicks());
+  protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
+    super.affectNeighborsAfterRemoval(state, world, pos, moved);
+    if (state.getValue(POWERED) && state.getBlock() instanceof ExtShapeButtonBlock && state.getValue(POWERED)) {
+      world.scheduleTick(pos.immutable(), state.getBlock(), ((ButtonBlockAccessor) this).getTicksToStayPressed());
     }
   }
 
   public static class WithExtension extends ExtShapeButtonBlock {
     private final @NotNull BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Properties settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
       super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
 
     @Override
-    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
-      super.onStacksDropped(state, world, pos, stack, dropExperience);
+    public void spawnAfterBreak(BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.spawnAfterBreak(state, world, pos, stack, dropExperience);
       extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
     }
 
     @Override
-    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+    public void onProjectileHit(Level world, BlockState state, BlockHitResult hit, Projectile projectile) {
       super.onProjectileHit(world, state, hit, projectile);
       extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
     }
 
     @Override
-    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-      super.onSteppedOn(world, pos, state, entity);
+    public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
+      super.stepOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
     }
 
     @Override
-    public boolean emitsRedstonePower(BlockState state) {
-      return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.emitsRedstonePower(state));
+    public boolean isSignalSource(BlockState state) {
+      return super.isSignalSource(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.isSignalSource(state));
     }
 
     @Override
-    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getWeakRedstonePower(state, world, pos, direction));
+    public int getSignal(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
+      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getSignal(state, world, pos, direction));
     }
   }
 
-  public static class WithOxidation extends ExtShapeButtonBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getBlockSetType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getPressTicks()), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
+  public static class WithOxidation extends ExtShapeButtonBlock implements WeatheringCopper {
+    private final @NotNull WeatherState oxidationLevel;
+    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getTicksToStayPressed()), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, BlockSetType blockSetType, int pressTicks, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Properties settings, BlockSetType blockSetType, int pressTicks, @NotNull WeatherState oxidationLevel) {
       super(baseBlock, settings, blockSetType, pressTicks);
       this.oxidationLevel = oxidationLevel;
     }
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull ActivationSettings activationSettings, @NotNull WeatherState oxidationLevel) {
       this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.buttonTime(), oxidationLevel);
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-      this.tickDegradation(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+      this.changeOverTime(state, world, pos, random);
     }
 
     @Override
-    public boolean hasRandomTicks(BlockState state) {
-      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    public boolean isRandomlyTicking(BlockState state) {
+      return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override
-    public OxidationLevel getDegradationLevel() {
+    public WeatherState getAge() {
       return oxidationLevel;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public MapCodec<ButtonBlock> getCodec() {
+    public MapCodec<ButtonBlock> codec() {
       return (MapCodec<ButtonBlock>) (MapCodec<?>) CODEC;
     }
   }

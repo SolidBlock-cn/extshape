@@ -5,22 +5,21 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.command.CommandSource;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.CraftingRecipeInput;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
-import net.minecraft.text.Texts;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.stream.Streams;
 import org.jetbrains.annotations.ApiStatus;
@@ -50,90 +49,90 @@ public final class RecipeConflict {
    * @return 冲突的个数。
    */
   @SuppressWarnings("deprecation")
-  public static int checkConflict(ServerRecipeManager recipeManager, World world, @Nullable Predicate<Identifier> filter, Consumer<Supplier<Text>> messageConsumer) {
+  public static int checkConflict(RecipeManager recipeManager, Level world, @Nullable Predicate<Identifier> filter, Consumer<Supplier<Component>> messageConsumer) {
     int numberOfConflicts = 0;
-    for (RecipeEntry<?> recipeEntry : recipeManager.values()) {
+    for (RecipeHolder<?> recipeEntry : recipeManager.getRecipes()) {
       if (filter != null) {
-        if (!filter.test(recipeEntry.id().getValue())) {
+        if (!filter.test(recipeEntry.id().identifier())) {
           continue;
         }
       }
-      final CraftingRecipeInput craftingRecipeInput;
+      final CraftingInput craftingRecipeInput;
       final Recipe<?> recipe = recipeEntry.value();
       try {
         if (recipe instanceof ShapedRecipe shapedRecipe && recipe.getClass() == ShapedRecipe.class) {
           final List<Optional<Ingredient>> ingredients = shapedRecipe.getIngredients();
           final int width = shapedRecipe.getWidth();
           final int height = shapedRecipe.getHeight();
-          craftingRecipeInput = CraftingRecipeInput.create(width, height, ingredients.stream().map(ingredient -> ingredient
-              .map(Ingredient::getMatchingItems)
+          craftingRecipeInput = CraftingInput.of(width, height, ingredients.stream().map(ingredient -> ingredient
+              .map(Ingredient::items)
               .flatMap(Stream::findFirst)
-              .map(RegistryEntry::value)
+              .map(Holder::value)
               .map(ItemStack::new)
               .orElse(ItemStack.EMPTY)).toList());
         } else if (recipe instanceof ShapelessRecipe shapelessRecipe && recipe.getClass() == ShapelessRecipe.class) {
-          final List<Ingredient> ingredients = shapelessRecipe.getIngredientPlacement().getIngredients();
-          craftingRecipeInput = CraftingRecipeInput.create(3, 3, Stream.concat(ingredients.stream()
-              .map(Ingredient::getMatchingItems)
+          final List<Ingredient> ingredients = shapelessRecipe.placementInfo().ingredients();
+          craftingRecipeInput = CraftingInput.of(3, 3, Stream.concat(ingredients.stream()
+              .map(Ingredient::items)
               .map(Stream::findFirst)
               .flatMap(Optional::stream)
-              .map(RegistryEntry::value)
+              .map(Holder::value)
               .map(ItemStack::new), Streams.of(Iterables.cycle(ItemStack.EMPTY)).limit(9 - ingredients.size())).toList());
         } else {
           continue;
         }
-        final List<RecipeEntry<?>> allMatches = recipeManager.values().stream().filter((entry) -> {
+        final List<RecipeHolder<?>> allMatches = recipeManager.getRecipes().stream().filter((entry) -> {
           final Recipe<?> value = entry.value();
           return value instanceof CraftingRecipe craftingRecipe && craftingRecipe.matches(craftingRecipeInput, world);
         }).toList();
-        final long numberOfMatches = allMatches.stream().filter(entry -> filter == null || filter.test(entry.id().getValue())).filter(r -> !r.value().getIngredientPlacement().getIngredients().isEmpty()).count();
+        final long numberOfMatches = allMatches.stream().filter(entry -> filter == null || filter.test(entry.id().identifier())).filter(r -> !r.value().placementInfo().ingredients().isEmpty()).count();
         // 有些特殊合成表的材料是空的，在统计匹配次数时，应当予以忽略。
         if (numberOfMatches == 0) {
           for (int i = 0; i < 9; i++) {
-            LOGGER.info(String.valueOf(craftingRecipeInput.getStackInSlot(i)));
+            LOGGER.info(String.valueOf(craftingRecipeInput.getItem(i)));
           }
-          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.unknown", recipeEntry.id().getValue().toString()).formatted(Formatting.RED));
+          messageConsumer.accept(() -> Component.translatable("message.extshape.recipe_conflict.unknown", recipeEntry.id().identifier().toString()).withStyle(ChatFormatting.RED));
         } else if (numberOfMatches > 1) {
-          messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.detected", Texts.join(allMatches, craftingRecipe -> Text.literal(craftingRecipe.id().getValue().toString()))).formatted(Formatting.RED));
+          messageConsumer.accept(() -> Component.translatable("message.extshape.recipe_conflict.detected", ComponentUtils.formatList(allMatches, craftingRecipe -> Component.literal(craftingRecipe.id().identifier().toString()))).withStyle(ChatFormatting.RED));
           ++numberOfConflicts;
 
         }
       } catch (Exception exception) {
-        messageConsumer.accept(() -> Text.translatable("message.extshape.recipe_conflict.exception"));
+        messageConsumer.accept(() -> Component.translatable("message.extshape.recipe_conflict.exception"));
         LOGGER.error("Unknown exception when testing recipe duplication: ", exception);
         break;
       }
     }
     int finalNumberOfConflicts = numberOfConflicts;
-    messageConsumer.accept(() -> Text.translatable(finalNumberOfConflicts == 0 ? "message.extshape.recipe_conflict.finish.none" : finalNumberOfConflicts == 1 ? "message.extshape.recipe_conflict.finish.single" : "message.extshape.recipe_conflict.finish.plural", Integer.toString(finalNumberOfConflicts)));
+    messageConsumer.accept(() -> Component.translatable(finalNumberOfConflicts == 0 ? "message.extshape.recipe_conflict.finish.none" : finalNumberOfConflicts == 1 ? "message.extshape.recipe_conflict.finish.single" : "message.extshape.recipe_conflict.finish.plural", Integer.toString(finalNumberOfConflicts)));
     return numberOfConflicts;
   }
 
   /**
    * 注册用于检测合成表冲突的命令 {@code /extshape:check-conflict}。此命令只有由服主执行，执行时可能会花费一段时间。
    */
-  public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
-    dispatcher.register(CommandManager.literal("extshape:check-conflict")
-        .requires(CommandManager.requirePermissionLevel(CommandManager.OWNERS_CHECK))
+  public static void registerCommand(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess, Commands.CommandSelection environment) {
+    dispatcher.register(Commands.literal("extshape:check-conflict")
+        .requires(Commands.hasPermission(Commands.LEVEL_OWNERS))
         .executes(context -> executeCheckConflict(context, null))
-        .then(CommandManager.argument("namespace", StringArgumentType.greedyString())
+        .then(Commands.argument("namespace", StringArgumentType.greedyString())
             .suggests((context, builder) -> {
               final Matcher matcher = SPLIT_PATTERN.matcher(builder.getRemaining());
               int offset = 0;
               while (matcher.find()) {
                 offset = matcher.end();
               }
-              return CommandSource.suggestMatching(context.getSource().getRegistryManager().getOrThrow(RegistryKeys.RECIPE).streamKeys().map(RegistryKey::getValue).map(Identifier::getNamespace).distinct(), builder.createOffset(builder.getStart() + offset));
+              return SharedSuggestionProvider.suggest(context.getSource().registryAccess().lookupOrThrow(Registries.RECIPE).listElementIds().map(ResourceKey::identifier).map(Identifier::getNamespace).distinct(), builder.createOffset(builder.getStart() + offset));
             })
             .executes(context -> executeCheckConflict(context, StringArgumentType.getString(context, "namespace")))));
   }
 
   private static final Pattern SPLIT_PATTERN = Pattern.compile("\\s+");
 
-  private static int executeCheckConflict(CommandContext<ServerCommandSource> context, @Nullable String namespace) throws CommandSyntaxException {
-    final ServerCommandSource source = context.getSource();
-    source.sendFeedback(() -> Text.translatable("message.extshape.recipe_conflict.start"), true);
-    final ServerWorld world = source.getWorld();
+  private static int executeCheckConflict(CommandContext<CommandSourceStack> context, @Nullable String namespace) throws CommandSyntaxException {
+    final CommandSourceStack source = context.getSource();
+    source.sendSuccess(() -> Component.translatable("message.extshape.recipe_conflict.start"), true);
+    final ServerLevel world = source.getLevel();
     final Predicate<Identifier> predicate;
     if (namespace == null) {
       predicate = null;
@@ -146,7 +145,7 @@ public final class RecipeConflict {
         predicate = identifier -> ArrayUtils.contains(split, identifier.getNamespace());
       }
     }
-    return checkConflict(world.getRecipeManager(), world, predicate, text -> source.sendFeedback(text, true));
+    return checkConflict(world.recipeAccess(), world, predicate, text -> source.sendSuccess(text, true));
   }
 
 }

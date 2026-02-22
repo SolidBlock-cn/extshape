@@ -1,18 +1,18 @@
 package pers.solid.extshape.mixin;
 
-import net.minecraft.data.recipe.StonecuttingRecipeJsonBuilder;
-import net.minecraft.item.Item;
-import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.world.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(StonecuttingRecipeJsonBuilder.class)
+@Mixin(SingleItemRecipeBuilder.class)
 public interface StonecuttingRecipeJsonBuilderAccessor {
   @Accessor
   RecipeCategory getCategory();
 
   @Accessor
-  Item getOutput();
+  Item getResult();
 
   @Accessor
   int getCount();

@@ -4,21 +4,21 @@ import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.ConfirmScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.SimpleOption;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.OptionInstance;
+import net.minecraft.client.Options;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.ConfirmScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Util;
+import net.minecraft.world.item.CreativeModeTabs;
 import org.apache.commons.lang3.StringUtils;
 import pers.solid.extshape.builder.BlockShape;
 
@@ -31,69 +31,69 @@ import java.util.stream.Collectors;
 public class ExtShapeOptionsScreen extends Screen {
 
   private final Screen parent;
-  private final GameOptions gameOptions = MinecraftClient.getInstance().options;
+  private final Options gameOptions = Minecraft.getInstance().options;
   public final ExtShapeConfig oldConfig = ExtShapeConfig.CURRENT_CONFIG;
   public final ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
-  private final TextFieldWidget shapesToAddToVanillaTextField = Util.make(new TextFieldWidget(MinecraftClient.getInstance().textRenderer, width / 2 - 205, 76, 358, 20, Text.translatable("options.extshape.shapesToAddToVanilla")), textFieldWidget -> {
+  private final EditBox shapesToAddToVanillaTextField = Util.make(new EditBox(Minecraft.getInstance().font, width / 2 - 205, 76, 358, 20, Component.translatable("options.extshape.shapesToAddToVanilla")), textFieldWidget -> {
     textFieldWidget.setMaxLength(Integer.MAX_VALUE);
-    textFieldWidget.setText(convertCollectionToString(newConfig.shapesToAddToVanilla));
+    textFieldWidget.setValue(convertCollectionToString(newConfig.shapesToAddToVanilla));
     textFieldWidget.setEditable(newConfig.addToVanillaGroups);
-    textFieldWidget.setChangedListener(s -> {
+    textFieldWidget.setResponder(s -> {
       newConfig.shapesToAddToVanilla = convertStringToCollection(s);
-      textFieldWidget.setSuggestion(getSuggestion(textFieldWidget.getText()));
+      textFieldWidget.setSuggestion(getSuggestion(textFieldWidget.getValue()));
     });
   });
-  private final ButtonWidget resetShapesToAddToVanillaButton = ButtonWidget.builder(Text.translatable("options.extshape.reset"), button -> shapesToAddToVanillaTextField.setText(convertCollectionToString(ExtShapeConfig.DEFAULT_CONFIG.shapesToAddToVanilla)))
-      .dimensions(width / 2 + 155, 76, 50, 20)
+  private final Button resetShapesToAddToVanillaButton = Button.builder(Component.translatable("options.extshape.reset"), button -> shapesToAddToVanillaTextField.setValue(convertCollectionToString(ExtShapeConfig.DEFAULT_CONFIG.shapesToAddToVanilla)))
+      .bounds(width / 2 + 155, 76, 50, 20)
       .build();
-  private final TextFieldWidget shapesInSpecificGroupsTextField = Util.make(new TextFieldWidget(MinecraftClient.getInstance().textRenderer, width / 2 - 205, 121, 358, 20, Text.translatable("options.extshape.shapesInSpecificGroups")), textFieldWidget -> {
+  private final EditBox shapesInSpecificGroupsTextField = Util.make(new EditBox(Minecraft.getInstance().font, width / 2 - 205, 121, 358, 20, Component.translatable("options.extshape.shapesInSpecificGroups")), textFieldWidget -> {
     textFieldWidget.setMaxLength(Integer.MAX_VALUE);
-    textFieldWidget.setText(convertCollectionToString(newConfig.shapesInSpecificGroups));
+    textFieldWidget.setValue(convertCollectionToString(newConfig.shapesInSpecificGroups));
     textFieldWidget.setEditable(newConfig.showSpecificGroups);
-    textFieldWidget.setChangedListener(s -> {
+    textFieldWidget.setResponder(s -> {
       newConfig.shapesInSpecificGroups = convertStringToCollection(s);
-      textFieldWidget.setSuggestion(getSuggestion(textFieldWidget.getText()));
+      textFieldWidget.setSuggestion(getSuggestion(textFieldWidget.getValue()));
     });
   });
-  private final ButtonWidget resetShapesInSpecificGroupsButton = ButtonWidget.builder(Text.translatable("options.extshape.reset"), button -> shapesInSpecificGroupsTextField.setText(convertCollectionToString(ExtShapeConfig.DEFAULT_CONFIG.shapesInSpecificGroups)))
-      .dimensions(width / 2 + 155, 121, 50, 20)
+  private final Button resetShapesInSpecificGroupsButton = Button.builder(Component.translatable("options.extshape.reset"), button -> shapesInSpecificGroupsTextField.setValue(convertCollectionToString(ExtShapeConfig.DEFAULT_CONFIG.shapesInSpecificGroups)))
+      .bounds(width / 2 + 155, 121, 50, 20)
       .build();
-  private final ClickableWidget addToVanillaGroupsButton = SimpleOption.ofBoolean(
+  private final AbstractWidget addToVanillaGroupsButton = OptionInstance.createBoolean(
       "options.extshape.addToVanillaGroups",
-      SimpleOption.constantTooltip(
-          Text.translatable("options.extshape.addToVanillaGroups.tooltip", Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.BUILDING_BLOCKS).getDisplayStacks(), Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.COLORED_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.NATURAL).getDisplayName())
-              .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Text.literal("\n\n").append(Text.translatable("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : Text.empty())
+      OptionInstance.cachedConstantTooltip(
+          Component.translatable("options.extshape.addToVanillaGroups.tooltip", BuiltInRegistries.CREATIVE_MODE_TAB.getValueOrThrow(CreativeModeTabs.BUILDING_BLOCKS).getDisplayItems(), BuiltInRegistries.CREATIVE_MODE_TAB.getValueOrThrow(CreativeModeTabs.COLORED_BLOCKS).getDisplayName(), BuiltInRegistries.CREATIVE_MODE_TAB.getValueOrThrow(CreativeModeTabs.NATURAL_BLOCKS).getDisplayName())
+              .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Component.literal("\n\n").append(Component.translatable("options.extshape.addToVanillaGroups.blockus").withStyle(ChatFormatting.RED)) : Component.empty())
               .append("\n\n")
-              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))
+              .append(Component.translatable("options.extshape.default", CommonComponents.optionStatus(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).withStyle(ChatFormatting.GRAY))
               .append("\n\n")
-              .append(Text.translatable("options.extshape.addToVanillaGroups.warning_for_1.20").formatted(Formatting.YELLOW))),
+              .append(Component.translatable("options.extshape.addToVanillaGroups.warning_for_1.20").withStyle(ChatFormatting.YELLOW))),
       true,
       value -> {
         newConfig.addToVanillaGroups = value;
         shapesToAddToVanillaTextField.setEditable(value);
       }
-  ).createWidget(gameOptions, width / 2 - 205, 36, 200);
+  ).createButton(gameOptions, width / 2 - 205, 36, 200);
 
-  private final ClickableWidget showSpecificGroupsButton = SimpleOption.ofBoolean(
+  private final AbstractWidget showSpecificGroupsButton = OptionInstance.createBoolean(
       "options.extshape.showSpecificGroups",
-      SimpleOption.constantTooltip(
-          Text.translatable("options.extshape.showSpecificGroups.tooltip")
+      OptionInstance.cachedConstantTooltip(
+          Component.translatable("options.extshape.showSpecificGroups.tooltip")
               .append("\n\n")
-              .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))
+              .append(Component.translatable("options.extshape.default", CommonComponents.optionStatus(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).withStyle(ChatFormatting.GRAY))
               .append("\n\n")
-              .append(Text.translatable("options.extshape.showSpecificGroups.warning_for_1.20").formatted(Formatting.YELLOW))),
+              .append(Component.translatable("options.extshape.showSpecificGroups.warning_for_1.20").withStyle(ChatFormatting.YELLOW))),
       false,
       value -> {
         newConfig.showSpecificGroups = value;
         shapesInSpecificGroupsTextField.setEditable(value);
       }
-  ).createWidget(gameOptions, width / 2 + 5, 36, 200);
+  ).createButton(gameOptions, width / 2 + 5, 36, 200);
 
   // 完成按钮
-  private final ButtonWidget finishButton = new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).position(this.width / 2 - 100, this.height - 27).size(200, 20).build();
+  private final Button finishButton = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 - 100, this.height - 27).size(200, 20).build();
 
   public ExtShapeOptionsScreen(Screen parent) {
-    super(Text.translatable("options.extshape.title"));
+    super(Component.translatable("options.extshape.title"));
     this.parent = parent;
     addToVanillaGroupsButton.active = false;
     showSpecificGroupsButton.active = false;
@@ -106,28 +106,28 @@ public class ExtShapeOptionsScreen extends Screen {
     // 里面的内容不需要被选中，所以只是drawable。
 
     addToVanillaGroupsButton.setX(width / 2 - 205);
-    addDrawableChild(addToVanillaGroupsButton);
+    addRenderableWidget(addToVanillaGroupsButton);
     showSpecificGroupsButton.setX(width / 2 + 5);
-    addDrawableChild(showSpecificGroupsButton);
+    addRenderableWidget(showSpecificGroupsButton);
     shapesToAddToVanillaTextField.setX(width / 2 - 205);
-    addDrawableChild(shapesToAddToVanillaTextField);
+    addRenderableWidget(shapesToAddToVanillaTextField);
     resetShapesToAddToVanillaButton.setX(width / 2 + 155);
-    addDrawableChild(resetShapesToAddToVanillaButton);
+    addRenderableWidget(resetShapesToAddToVanillaButton);
     shapesInSpecificGroupsTextField.setX(width / 2 - 205);
-    addDrawableChild(shapesInSpecificGroupsTextField);
+    addRenderableWidget(shapesInSpecificGroupsTextField);
     resetShapesInSpecificGroupsButton.setX(width / 2 + 155);
-    addDrawableChild(resetShapesInSpecificGroupsButton);
+    addRenderableWidget(resetShapesInSpecificGroupsButton);
 
     finishButton.setPosition(width / 2 - 100, height - 27);
-    addDrawableChild(finishButton);
+    addRenderableWidget(finishButton);
   }
 
   @Override
-  public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+  public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
     super.render(context, mouseX, mouseY, delta);
-    context.drawCenteredTextWithShadow(this.textRenderer, this.title.asOrderedText(), this.width / 2, 16, 0xffffffff);
-    context.drawTextWithShadow(textRenderer, Text.translatable("options.extshape.shapesToAddToVanilla.description"), width / 2 - 205, 61, 0xffffffff);
-    context.drawTextWithShadow(textRenderer, Text.translatable("options.extshape.shapesInSpecificGroups.description"), width / 2 - 205, 106, 0xffffffff);
+    context.drawCenteredString(this.font, this.title.getVisualOrderText(), this.width / 2, 16, 0xffffffff);
+    context.drawString(font, Component.translatable("options.extshape.shapesToAddToVanilla.description"), width / 2 - 205, 61, 0xffffffff);
+    context.drawString(font, Component.translatable("options.extshape.shapesInSpecificGroups.description"), width / 2 - 205, 106, 0xffffffff);
   }
 
   public void save() {
@@ -162,31 +162,31 @@ public class ExtShapeOptionsScreen extends Screen {
   private boolean suppressedGroupsWarning = false;
 
   @Override
-  public void close() {
-    assert client != null;
+  public void onClose() {
+    assert minecraft != null;
     if (!suppressedGroupsWarning && !newConfig.addToVanillaGroups && !newConfig.showSpecificGroups
         && !(!oldConfig.addToVanillaGroups && !oldConfig.showSpecificGroups)) {
       // 由于两个设置都被关闭，因此需要确认是否不添加到任何物品栏。
-      client.setScreen(new ConfirmScreen(
+      minecraft.setScreen(new ConfirmScreen(
           t -> {
             if (t) {
               // 确定要继续
               suppressedGroupsWarning = true;
-              close();
+              onClose();
             } else {
               // 返回重新修改
-              client.setScreen(this);
+              minecraft.setScreen(this);
             }
           },
-          Text.translatable("options.extshape.confirm"),
-          Text.translatable("options.extshape.confirm.noGroups", Text.translatable("options.extshape.addToVanillaGroups").formatted(Formatting.GRAY), Text.translatable("options.extshape.showSpecificGroups").formatted(Formatting.GRAY), ScreenTexts.OFF),
-          ScreenTexts.YES,
-          Text.translatable("options.extshape.confirm.redo")
+          Component.translatable("options.extshape.confirm"),
+          Component.translatable("options.extshape.confirm.noGroups", Component.translatable("options.extshape.addToVanillaGroups").withStyle(ChatFormatting.GRAY), Component.translatable("options.extshape.showSpecificGroups").withStyle(ChatFormatting.GRAY), CommonComponents.OPTION_OFF),
+          CommonComponents.GUI_YES,
+          Component.translatable("options.extshape.confirm.redo")
       ));
       return;
     }
     save();
-    client.setScreen(parent);
+    minecraft.setScreen(parent);
   }
 
   private static Collection<BlockShape> convertStringToCollection(String s) {
@@ -194,7 +194,7 @@ public class ExtShapeOptionsScreen extends Screen {
   }
 
   private static String convertCollectionToString(Collection<BlockShape> list) {
-    return list.stream().map(BlockShape::asString).collect(Collectors.joining(StringUtils.SPACE));
+    return list.stream().map(BlockShape::getSerializedName).collect(Collectors.joining(StringUtils.SPACE));
   }
 
   private static String getSuggestion(String currentValue) {
@@ -205,7 +205,7 @@ public class ExtShapeOptionsScreen extends Screen {
       return null;
     }
     for (BlockShape value : BlockShape.values()) {
-      final String name = value.asString();
+      final String name = value.getSerializedName();
       if (name.startsWith(last)) {
         return name.substring(last.length());
       }

@@ -6,11 +6,11 @@ import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.utils.helper.BlockMaps;
 import com.google.common.collect.ImmutableMultimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.util.DyeColor;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
@@ -34,7 +34,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     INSTANCE = builder.build();
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeGenerator recipeGenerator, @NotNull RecipeExporter exporter) {
+  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeProvider recipeGenerator, @NotNull RecipeOutput exporter) {
     super(baseBlock, defaultNamespace, recipeGenerator, exporter);
   }
 
@@ -44,7 +44,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   }
 
   /**
-   * @see BlockusRecipeProvider#getRecipeGenerator
+   * @see BlockusRecipeProvider#createRecipeProvider
    */
   private static void registerBlockusStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
     for (ConcreteBundle concreteType : ConcreteBundle.values()) {

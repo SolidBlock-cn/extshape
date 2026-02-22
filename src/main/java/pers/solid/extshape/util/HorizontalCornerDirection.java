@@ -1,13 +1,13 @@
 package pers.solid.extshape.util;
 
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  *
  * @see Direction
  */
-public enum HorizontalCornerDirection implements StringIdentifiable {
+public enum HorizontalCornerDirection implements StringRepresentable {
   SOUTH_WEST(0, 2, "south_west", new Vec3i(-1, 0, 1)),
   NORTH_WEST(1, 3, "north_west", new Vec3i(-1, 0, -1)),
   NORTH_EAST(2, 0, "north_east", new Vec3i(1, 0, -1)),
@@ -54,11 +54,11 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
   }
 
   public static HorizontalCornerDirection byId(int id) {
-    return VALUES[MathHelper.abs(id % VALUES.length)];
+    return VALUES[Mth.abs(id % VALUES.length)];
   }
 
   public static HorizontalCornerDirection fromHorizontal(int value) {
-    return VALUES[MathHelper.abs(value % VALUES.length)];
+    return VALUES[Mth.abs(value % VALUES.length)];
   }
 
   /**
@@ -68,15 +68,15 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
    * @return 离该旋转角度最近的方向。
    */
   public static HorizontalCornerDirection fromRotation(double rotation) {
-    return fromHorizontal(MathHelper.floor(rotation / 90.0D) & 3);
+    return fromHorizontal(Mth.floor(rotation / 90.0D) & 3);
   }
 
-  public static HorizontalCornerDirection random(Random random) {
+  public static HorizontalCornerDirection random(RandomSource random) {
     return Util.getRandom(ALL, random);
   }
 
   @Override
-  public String asString() {
+  public String getSerializedName() {
     return this.name;
   }
 
@@ -113,7 +113,7 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     return this.vector;
   }
 
-  public HorizontalCornerDirection rotate(BlockRotation rotation) {
+  public HorizontalCornerDirection rotate(Rotation rotation) {
     return switch (rotation) {
       case CLOCKWISE_90 -> this.rotateYClockwise();
       case CLOCKWISE_180 -> this.getOpposite();
@@ -122,7 +122,7 @@ public enum HorizontalCornerDirection implements StringIdentifiable {
     };
   }
 
-  public HorizontalCornerDirection mirror(BlockMirror mirror) {
+  public HorizontalCornerDirection mirror(Mirror mirror) {
     return switch (mirror) {
       case FRONT_BACK -> switch (this) {
         case NORTH_EAST -> NORTH_WEST;

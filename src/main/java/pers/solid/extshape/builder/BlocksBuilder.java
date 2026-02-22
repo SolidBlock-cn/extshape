@@ -3,11 +3,11 @@ package pers.solid.extshape.builder;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
-import net.minecraft.block.Block;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.item.Item;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -95,8 +95,8 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
         ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarSlabBlock(builder.baseBlock, builder.blockSettings);
       } else if (blockShape == BlockShape.VERTICAL_SLAB) {
         ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarVerticalSlabBlock(builder.baseBlock, builder.blockSettings);
-      } else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
-        abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
+      } else if (baseBlock.getStateDefinition().getProperties().contains(BlockStateProperties.AXIS)) {
+        abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.X)).getMapColor());
       }
     });
   }
@@ -121,8 +121,8 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
         ((AbstractBlockBuilder<SlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarUvLockedSlabBlock(builder.baseBlock, builder.blockSettings);
       } /*else if (blockShape == BlockShape.VERTICAL_SLAB) {
         ((AbstractBlockBuilder<VerticalSlabBlock>) abstractBlockBuilder).instanceSupplier = builder -> new ExtShapePillarVerticalSlabBlock(builder.baseBlock, builder.blockSettings);
-      } */ else if (baseBlock.getStateManager().getProperties().contains(Properties.AXIS)) {
-        abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.getDefaultState().with(Properties.AXIS, Direction.Axis.X)).getMapColor());
+      } */ else if (baseBlock.getStateDefinition().getProperties().contains(BlockStateProperties.AXIS)) {
+        abstractBlockBuilder.blockSettings.mapColor(((AbstractBlockStateAccessor) baseBlock.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.X)).getMapColor());
       }
     });
   }
@@ -344,7 +344,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       case 8 -> new WallBuilder(baseBlock);
       case 9 -> new ButtonBuilder(baseBlock, Objects.requireNonNull(activationSettings, "activationSettings"));
       case 10 -> new PressurePlateBuilder(baseBlock, Objects.requireNonNull(activationSettings, "activationSettings"));
-      default -> throw new IllegalArgumentException("The Shape object " + shape.asString() + " is not supported, which may be provided by other mod. You may extend BlocksBuilder class and define your own 'createBlockBuilderFor' with support for your Shape object.");
+      default -> throw new IllegalArgumentException("The Shape object " + shape.getSerializedName() + " is not supported, which may be provided by other mod. You may extend BlocksBuilder class and define your own 'createBlockBuilderFor' with support for your Shape object.");
     };
     builder.defaultNamespace = this.defaultNamespace;
     builder.instanceCollection = this.instanceCollection;

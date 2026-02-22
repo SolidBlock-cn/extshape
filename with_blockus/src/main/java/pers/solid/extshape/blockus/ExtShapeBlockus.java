@@ -4,9 +4,9 @@ import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.Block;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Block;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -23,7 +23,7 @@ public class ExtShapeBlockus implements ModInitializer {
   public static final String NAMESPACE = "extshape_blockus";
   public static final Logger LOGGER = LoggerFactory.getLogger("Extended Block Shapes for Blockus");
 
-  private static final Identifier defaultId = Identifier.of(NAMESPACE, "default");
+  private static final Identifier defaultId = Identifier.fromNamespaceAndPath(NAMESPACE, "default");
 
   /**
    * 此字段仅在开发环境下生效，将在初始化 data fixer 时设置值，从而在完成注册后验证其中的 id 是否有效。
@@ -71,10 +71,10 @@ public class ExtShapeBlockus implements ModInitializer {
     Validate.notEmpty(ExtShapeBlockusBlocks.BLOCKUS_BLOCKS);
 
     for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
-      final Identifier blockId = Registries.BLOCK.getId(block);
-      final Identifier blockusId = Identifier.of(Blockus.MOD_ID, blockId.getPath());
-      if (Registries.BLOCK.containsId(blockusId)) {
-        final Block blockusBlock = Registries.BLOCK.get(blockusId);
+      final Identifier blockId = BuiltInRegistries.BLOCK.getKey(block);
+      final Identifier blockusId = Identifier.fromNamespaceAndPath(Blockus.MOD_ID, blockId.getPath());
+      if (BuiltInRegistries.BLOCK.containsKey(blockusId)) {
+        final Block blockusBlock = BuiltInRegistries.BLOCK.getValue(blockusId);
         if (blockusBlock == BlockusBlocks.PAPER_WALL) {
           // 纸墙不属于墙方块，予以豁免。
           continue;
@@ -88,18 +88,18 @@ public class ExtShapeBlockus implements ModInitializer {
     if (replacing_id_map == null) return;
     final List<RuntimeException> exceptions = new ArrayList<>();
     replacing_id_map.forEach((k, v) -> {
-      final Identifier key = Identifier.of(k);
+      final Identifier key = Identifier.parse(k);
       try {
-        Validate.validState(!Registries.BLOCK.containsId(key), "The id %s is to be replaced, but still exists in the block registry!", key);
-        Validate.validState(!Registries.ITEM.containsId(key), "The id %s is to be replaced, but still exists in the item registry!", key);
+        Validate.validState(!BuiltInRegistries.BLOCK.containsKey(key), "The id %s is to be replaced, but still exists in the block registry!", key);
+        Validate.validState(!BuiltInRegistries.ITEM.containsKey(key), "The id %s is to be replaced, but still exists in the item registry!", key);
       } catch (RuntimeException e) {
         LOGGER.error("Data fixer:", e);
         exceptions.add(e);
       }
-      final Identifier value = Identifier.of(v);
+      final Identifier value = Identifier.parse(v);
       try {
-        Validate.validState(Registries.BLOCK.containsId(value), "The id %s is to be replace with, but does not exist in the block registry!", value);
-        Validate.validState(Registries.ITEM.containsId(value), "The id %s is to be replace with, but does not exist in the item registry!", value);
+        Validate.validState(BuiltInRegistries.BLOCK.containsKey(value), "The id %s is to be replace with, but does not exist in the block registry!", value);
+        Validate.validState(BuiltInRegistries.ITEM.containsKey(value), "The id %s is to be replace with, but does not exist in the item registry!", value);
       } catch (RuntimeException e) {
         LOGGER.error("Data fixer:", e);
         exceptions.add(e);

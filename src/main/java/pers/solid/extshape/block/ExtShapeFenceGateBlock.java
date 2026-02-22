@@ -4,25 +4,29 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.*;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.data.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -34,20 +38,20 @@ import pers.solid.extshape.util.FenceSettings;
  * 本模组中的栅栏门方块。
  */
 public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeFenceGateBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), createSettingsCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient)).apply(instance, ExtShapeFenceGateBlock::new));
+  public static final MapCodec<ExtShapeFenceGateBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient)).apply(instance, ExtShapeFenceGateBlock::new));
   public final @NotNull Block baseBlock;
   /**
    * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
    */
   private final Item secondIngredient;
 
-  public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Settings settings, @NotNull WoodType woodType, @Nullable Item secondIngredient) {
+  public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Properties settings, @NotNull WoodType woodType, @Nullable Item secondIngredient) {
     super(woodType, settings);
     this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
   }
 
-  public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Settings settings, @NotNull FenceSettings fenceSettings) {
+  public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Properties settings, @NotNull FenceSettings fenceSettings) {
     this(baseBlock, settings, fenceSettings.woodType(), fenceSettings.secondIngredient());
   }
 
@@ -57,8 +61,8 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
   }
 
   @Override
-  public MutableText getName() {
-    return Text.translatable("block.extshape.?_fence_gate", this.getNamePrefix());
+  public MutableComponent getName() {
+    return Component.translatable("block.extshape.?_fence_gate", this.getNamePrefix());
   }
 
   public @Nullable Item getSecondIngredient() {
@@ -66,13 +70,13 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
   }
 
   @Override
-  public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe(RecipeGenerator recipeGenerator) {
-    final ShapedRecipeJsonBuilder craftingRecipe = recipeGenerator.createShaped(getRecipeCategory(), this, 3)
-        .input('W', baseBlock)
-        .input('#', secondIngredient)
+  public @Nullable RecipeBuilder getCraftingRecipe(RecipeProvider recipeGenerator) {
+    final ShapedRecipeBuilder craftingRecipe = recipeGenerator.shaped(getRecipeCategory(), this, 3)
+        .define('W', baseBlock)
+        .define('#', secondIngredient)
         .pattern("#W#")
         .pattern("#W#")
-        .criterion(RecipeGenerator.hasItem(baseBlock), recipeGenerator.conditionsFromItem(baseBlock));
+        .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock));
     return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
   }
 
@@ -83,85 +87,85 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
 
   @Environment(EnvType.CLIENT)
   @Override
-  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).fenceGate(this);
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public MapCodec<FenceGateBlock> getCodec() {
+  public MapCodec<FenceGateBlock> codec() {
     return (MapCodec<FenceGateBlock>) (MapCodec<?>) CODEC;
   }
 
   public static class WithExtension extends ExtShapeFenceGateBlock {
     private final @NotNull BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull FenceSettings fenceSettings, @NotNull BlockExtension extension) {
+    public WithExtension(@NotNull Block baseBlock, Properties settings, @NotNull FenceSettings fenceSettings, @NotNull BlockExtension extension) {
       super(baseBlock, settings, fenceSettings);
       this.extension = extension;
     }
 
     @Override
-    public void onStacksDropped(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, boolean dropExperience) {
-      super.onStacksDropped(state, world, pos, stack, dropExperience);
+    public void spawnAfterBreak(BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience) {
+      super.spawnAfterBreak(state, world, pos, stack, dropExperience);
       extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
     }
 
     @Override
-    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+    public void onProjectileHit(Level world, BlockState state, BlockHitResult hit, Projectile projectile) {
       super.onProjectileHit(world, state, hit, projectile);
       extension.projectileHitCallback().onProjectileHit(world, state, hit, projectile);
     }
 
     @Override
-    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-      super.onSteppedOn(world, pos, state, entity);
+    public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
+      super.stepOn(world, pos, state, entity);
       extension.steppedOnCallback().onSteppedOn(world, pos, state, entity);
     }
 
     @Override
-    public boolean emitsRedstonePower(BlockState state) {
-      return super.emitsRedstonePower(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.emitsRedstonePower(state));
+    public boolean isSignalSource(BlockState state) {
+      return super.isSignalSource(state) || extension.emitsRedstonePower().emitsRedstonePower(state, super.isSignalSource(state));
     }
 
     @Override
-    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getWeakRedstonePower(state, world, pos, direction));
+    public int getSignal(BlockState state, BlockGetter world, BlockPos pos, Direction direction) {
+      return extension.weakRedstonePower().getWeakRedstonePower(state, world, pos, direction, super.getSignal(state, world, pos, direction));
     }
   }
 
-  public static class WithOxidation extends ExtShapeFenceGateBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), createSettingsCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceGateBlock::getSecondIngredient), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
+  public static class WithOxidation extends ExtShapeFenceGateBlock implements WeatheringCopper {
+    private final @NotNull WeatherState oxidationLevel;
+    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceGateBlock::getSecondIngredient), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull WoodType woodType, @Nullable Item secondIngredient, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WoodType woodType, @Nullable Item secondIngredient, @NotNull WeatherState oxidationLevel) {
       super(baseBlock, settings, woodType, secondIngredient);
       this.oxidationLevel = oxidationLevel;
     }
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull FenceSettings fenceSettings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull FenceSettings fenceSettings, @NotNull WeatherState oxidationLevel) {
       super(baseBlock, settings, fenceSettings);
       this.oxidationLevel = oxidationLevel;
     }
 
     @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-      this.tickDegradation(state, world, pos, random);
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+      this.changeOverTime(state, world, pos, random);
     }
 
     @Override
-    public boolean hasRandomTicks(BlockState state) {
-      return Oxidizable.getIncreasedOxidationBlock(state.getBlock()).isPresent();
+    public boolean isRandomlyTicking(BlockState state) {
+      return WeatheringCopper.getNext(state.getBlock()).isPresent();
     }
 
     @Override
-    public OxidationLevel getDegradationLevel() {
+    public WeatherState getAge() {
       return oxidationLevel;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public MapCodec<FenceGateBlock> getCodec() {
+    public MapCodec<FenceGateBlock> codec() {
       return (MapCodec<FenceGateBlock>) (MapCodec<?>) CODEC;
     }
   }

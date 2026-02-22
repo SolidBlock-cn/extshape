@@ -8,9 +8,9 @@ import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
@@ -19,12 +19,12 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import java.util.concurrent.CompletableFuture;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
-  public ExtShapeBlockusBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+  public ExtShapeBlockusBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
   }
 
   @Override
-  protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+  protected void addTags(HolderLookup.Provider wrapperLookup) {
     // region 形状标签
 
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
@@ -40,14 +40,14 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     }
     ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS.forEach((blockShape, tag) -> {
       valueLookupBuilder(ExtShapeTags.SHAPE_TO_TAG.get(blockShape)).addTag(tag);
-      valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).addTag(tag);
+      valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(tag);
     });
 
     // endregion
 
     // region mineable 方块标签
 
-    addForShapes(BlockTags.PICKAXE_MINEABLE,
+    addForShapes(BlockTags.MINEABLE_WITH_PICKAXE,
         BlockusBlocks.CRIMSON_WART_BRICKS.block(),
         BlockusBlocks.WARPED_WART_BRICKS.block(),
         BlockusBlocks.NETHER_TILES.block(),
@@ -63,7 +63,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.ENDER_BLOCK,
         BlockusBlocks.NETHER_STAR_BLOCK);
 
-    addForShapes(BlockTags.HOE_MINEABLE,
+    addForShapes(BlockTags.MINEABLE_WITH_HOE,
         BlockusBlocks.CHORUS_BLOCK,
         BlockusBlocks.THATCH.block(),
         BlockusBlocks.ROTTEN_FLESH_BLOCK);

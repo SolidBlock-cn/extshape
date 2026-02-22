@@ -2,18 +2,18 @@ package pers.solid.extshape.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.TextureMap;
-import net.minecraft.client.render.model.json.ModelVariant;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.renderer.block.model.Variant;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Environment(EnvType.CLIENT)
-@Mixin(BlockStateModelGenerator.BlockTexturePool.class)
+@Mixin(BlockModelGenerators.BlockFamilyProvider.class)
 public interface BlockTexturePoolAccessor {
   @Accessor
-  void setBaseModelId(ModelVariant baseModelId);
+  void setFullBlock(Variant baseModelId);
 
   @Accessor
-  TextureMap getTextures();
+  TextureMapping getMapping();
 }

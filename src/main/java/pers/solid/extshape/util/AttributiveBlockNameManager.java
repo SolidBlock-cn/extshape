@@ -1,10 +1,10 @@
 package pers.solid.extshape.util;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
-import net.minecraft.util.Language;
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Contract;
@@ -78,9 +78,9 @@ public final class AttributiveBlockNameManager {
     return replace(from, replacement, from);
   }
 
-  public static MutableText getAttributiveBlockName(MutableText text) {
-    if (text.getContent() instanceof TranslatableTextContent translatableTextContent) {
-      final MutableText translatable = Text.translatable(ATTRIBUTIVE_KEY, ArrayUtils.insert(0, translatableTextContent.getArgs(), translatableTextContent.getKey()));
+  public static MutableComponent getAttributiveBlockName(MutableComponent text) {
+    if (text.getContents() instanceof TranslatableContents translatableTextContent) {
+      final MutableComponent translatable = Component.translatable(ATTRIBUTIVE_KEY, ArrayUtils.insert(0, translatableTextContent.getArgs(), translatableTextContent.getKey()));
       translatable.setStyle(text.getStyle());
       text.getSiblings().forEach(translatable::append);
       return translatable;
@@ -91,7 +91,7 @@ public final class AttributiveBlockNameManager {
 
   @Contract("_, _, !null -> !null")
   public static String convertToAttributive(@NotNull String from, @NotNull Language language, @Nullable String defaultValue) {
-    final String code = language.get("language.code");
+    final String code = language.getOrDefault("language.code");
     String result = replace(from, EN_REPLACEMENT, null);
     if (result == null && code.startsWith("zho")) {
       result = replace(from, ZH_REPLACEMENT, null);

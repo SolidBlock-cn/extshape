@@ -6,13 +6,13 @@ import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.google.common.collect.*;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import pers.solid.extshape.VanillaItemGroup;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
@@ -73,7 +73,7 @@ public final class ExtShapeBlockusItemGroup {
     addModifyEntriesEvent(BlockusItemGroups.BLOCKUS_COLORED_TILES);
   }
 
-  private static void addModifyEntriesEvent(RegistryKey<ItemGroup> itemGroup) {
+  private static void addModifyEntriesEvent(ResourceKey<CreativeModeTab> itemGroup) {
     final Event<ItemGroupEvents.ModifyEntries> event = ItemGroupEvents.modifyEntriesEvent(itemGroup);
     event.addPhaseOrdering(Event.DEFAULT_PHASE, ADD_EXTRA_ITEMS);
     event.register(ADD_EXTRA_ITEMS, entries -> {

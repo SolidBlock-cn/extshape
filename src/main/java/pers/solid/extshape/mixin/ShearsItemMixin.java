@@ -2,10 +2,10 @@ package pers.solid.extshape.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.block.Block;
-import net.minecraft.component.type.ToolComponent;
-import net.minecraft.item.ShearsItem;
-import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -20,12 +20,12 @@ public abstract class ShearsItemMixin {
   /**
    * 通过修改组件，允许快速挖掘本模组中的羊毛方块。
    */
-  @ModifyArg(method = "createToolComponent", at = @At(value = "INVOKE", target = "Lnet/minecraft/component/type/ToolComponent;<init>(Ljava/util/List;FIZ)V"), index = 0)
-  private static List<ToolComponent.Rule> addMineableTag(List<ToolComponent.Rule> blocks, @Local RegistryEntryLookup<Block> registryEntryLookup) {
-    if (!(blocks instanceof ArrayList<ToolComponent.Rule> || blocks instanceof LinkedList<ToolComponent.Rule> || blocks instanceof ObjectArrayList<ToolComponent.Rule>)) {
+  @ModifyArg(method = "createToolProperties", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/component/Tool;<init>(Ljava/util/List;FIZ)V"), index = 0)
+  private static List<Tool.Rule> addMineableTag(List<Tool.Rule> blocks, @Local HolderGetter<Block> registryEntryLookup) {
+    if (!(blocks instanceof ArrayList<Tool.Rule> || blocks instanceof LinkedList<Tool.Rule> || blocks instanceof ObjectArrayList<Tool.Rule>)) {
       blocks = new ArrayList<>(blocks);
     }
-    blocks.add(ToolComponent.Rule.of(registryEntryLookup.getOrThrow(ExtShapeTags.WOOLEN_BLOCKS), 5));
+    blocks.add(Tool.Rule.overrideSpeed(registryEntryLookup.getOrThrow(ExtShapeTags.WOOLEN_BLOCKS), 5));
     return blocks;
   }
 }

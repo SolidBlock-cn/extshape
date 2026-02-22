@@ -3,68 +3,68 @@ package pers.solid.extshape.block;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.*;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.Models;
-import net.minecraft.client.data.VariantsBlockModelDefinitionCreator;
-import net.minecraft.client.render.model.json.WeightedVariant;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.Direction;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.mixin.BlockStateModelGeneratorAccessor;
 import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
-  public static final EnumProperty<Direction> FACING = HorizontalFacingBlock.FACING;
+  public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
   public static final MapCodec<ExtShapeHorizontalFacingPressurePlateBlock> CODEC = createCodec(ExtShapeHorizontalFacingPressurePlateBlock::new);
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {
+  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Properties settings, @NotNull BlockSetType blockSetType, int tickRate) {
     super(baseBlock, settings, blockSetType, tickRate);
-    setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
+    registerDefaultState(defaultBlockState().setValue(FACING, Direction.SOUTH));
   }
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Properties settings, @NotNull ActivationSettings activationSettings) {
     this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime());
   }
 
   @Override
-  protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-    super.appendProperties(builder);
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    super.createBlockStateDefinition(builder);
     builder.add(FACING);
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
-    final BlockState placementState = super.getPlacementState(ctx);
-    return placementState != null ? placementState.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()) : null;
+  public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    final BlockState placementState = super.getStateForPlacement(ctx);
+    return placementState != null ? placementState.setValue(FACING, ctx.getHorizontalDirection().getOpposite()) : null;
   }
 
   @Override
-  public BlockState rotate(BlockState state, BlockRotation rotation) {
-    return state.with(FACING, rotation.rotate(state.get(FACING)));
+  public BlockState rotate(BlockState state, Rotation rotation) {
+    return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
   }
 
   @Override
-  public BlockState mirror(BlockState state, BlockMirror mirror) {
-    return state.rotate(mirror.getRotation(state.get(FACING)));
+  public BlockState mirror(BlockState state, Mirror mirror) {
+    return state.rotate(mirror.getRotation(state.getValue(FACING)));
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public MapCodec<PressurePlateBlock> getCodec() {
+  public MapCodec<PressurePlateBlock> codec() {
     return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
   }
 
   @Environment(EnvType.CLIENT)
   @Override
-  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
-    final WeightedVariant upModel = BlockStateModelGenerator.createWeightedVariant(Models.PRESSURE_PLATE_UP.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
-    final WeightedVariant downModel = BlockStateModelGenerator.createWeightedVariant(Models.PRESSURE_PLATE_DOWN.upload(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelCollector));
-    blockStateModelGenerator.blockStateCollector.accept(((VariantsBlockModelDefinitionCreator) BlockStateModelGenerator.createPressurePlateBlockState(this, upModel, downModel)).apply(BlockStateModelGeneratorAccessor.getSOUTH_DEFAULT_HORIZONTAL_ROTATION_OPERATIONS()));
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
+    final MultiVariant upModel = BlockModelGenerators.plainVariant(ModelTemplates.PRESSURE_PLATE_UP.create(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelOutput));
+    final MultiVariant downModel = BlockModelGenerators.plainVariant(ModelTemplates.PRESSURE_PLATE_DOWN.create(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator.modelOutput));
+    blockStateModelGenerator.blockStateOutput.accept(((MultiVariantGenerator) BlockModelGenerators.createPressurePlate(this, upModel, downModel)).with(BlockStateModelGeneratorAccessor.getROTATION_HORIZONTAL_FACING_ALT()));
   }
 }

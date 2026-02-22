@@ -6,10 +6,10 @@ import com.brand.blockus.registry.tag.BlockusItemTags;
 import com.brand.blockus.utils.helper.WoodMaps;
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
@@ -20,12 +20,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
-  public ExtShapeBlockusItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
+  public ExtShapeBlockusItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
     super(output, completableFuture, blockTagProvider);
   }
 
   @Override
-  protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+  protected void addTags(HolderLookup.Provider wrapperLookup) {
     for (TagKey<Block> tag : Iterables.concat(ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS.values(), ExtShapeTags.SHAPE_TO_TAG.values())) {
       copyWithSameId(tag);
     }

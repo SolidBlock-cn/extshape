@@ -3,11 +3,11 @@ package pers.solid.extshape.data;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.block.Block;
-import net.minecraft.block.ButtonBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.loot.LootTable;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
@@ -16,7 +16,7 @@ import pers.solid.extshape.builder.BlockShape;
 import java.util.concurrent.CompletableFuture;
 
 public class ExtShapeLootTableProvider extends FabricBlockLootTableProvider {
-  protected ExtShapeLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+  protected ExtShapeLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
     super(dataOutput, registryLookup);
   }
 
@@ -24,7 +24,7 @@ public class ExtShapeLootTableProvider extends FabricBlockLootTableProvider {
   public void generate() {
     final ImmutableMap<Block, UnusualLootTables.@NotNull LootTableFunction> instance = new UnusualLootTables().createInstance();
     for (Block block : ExtShapeBlocks.getBlocks()) {
-      if (block.getLootTableKey().isEmpty()) {
+      if (block.getLootTable().isEmpty()) {
         continue;
       }
       if (block instanceof ExtShapeBlockInterface i) {
@@ -36,10 +36,10 @@ public class ExtShapeLootTableProvider extends FabricBlockLootTableProvider {
         } else {
           lootTable = i.getLootTable(this);
         }
-        this.addDrop(block, lootTable);
+        this.add(block, lootTable);
       }
     }
-    this.addDrop(ExtShapeBlocks.PETRIFIED_OAK_PLANKS);
-    this.addDrop(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
+    this.dropSelf(ExtShapeBlocks.PETRIFIED_OAK_PLANKS);
+    this.dropSelf(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB);
   }
 }

@@ -9,26 +9,22 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourcePackManager;
-import net.minecraft.resource.featuretoggle.FeatureSet;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -67,7 +63,7 @@ public class ExtShape implements ModInitializer {
   public static final String MOD_ID = "extshape";
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShape.class);
 
-  private static final Identifier defaultId = Identifier.of(MOD_ID, "default");
+  private static final Identifier defaultId = Identifier.fromNamespaceAndPath(MOD_ID, "default");
 
   /**
    * 该字段仅在开发环境中使用，在加载 DataFixer 时赋值，并在完成注册表后检查。
@@ -91,7 +87,7 @@ public class ExtShape implements ModInitializer {
 
     // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
     VanillaItemGroup.registerForMod();
-    ResourceLoader.registerBuiltinPack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Text.translatable("resourcePack.extshape.recipe_tweak.name"), PackActivationType.DEFAULT_ENABLED);
+    ResourceLoader.registerBuiltinPack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Component.translatable("resourcePack.extshape.recipe_tweak.name"), PackActivationType.DEFAULT_ENABLED);
 
     registerStrippableBlocks();
     registerFuels();
@@ -112,25 +108,25 @@ public class ExtShape implements ModInitializer {
   private static void validateTags(MinecraftServer server) {
     final ObjectSet<Block> blocks = ExtShapeBlocks.getBlocks();
     for (Block block : blocks) {
-      if (!block.isEnabled(server.getOverworld().getEnabledFeatures())) {
+      if (!block.isEnabled(server.overworld().enabledFeatures())) {
         continue;
       }
       if (block instanceof ExtShapeBlockInterface i) {
         final Block baseBlock = i.getBaseBlock();
-        final Registry<Block> blockRegistry = server.getRegistryManager().getOrThrow(RegistryKeys.BLOCK);
-        final RegistryEntry<Block> blockEntry = blockRegistry.getEntry(block);
-        final RegistryEntry<Block> baseBlockEntry = blockRegistry.getEntry(baseBlock);
+        final Registry<Block> blockRegistry = server.registryAccess().lookupOrThrow(Registries.BLOCK);
+        final Holder<Block> blockEntry = blockRegistry.wrapAsHolder(block);
+        final Holder<Block> baseBlockEntry = blockRegistry.wrapAsHolder(baseBlock);
 
-        for (TagKey<Block> tag : List.of(BlockTags.AXE_MINEABLE, BlockTags.HOE_MINEABLE, BlockTags.PICKAXE_MINEABLE, BlockTags.SHOVEL_MINEABLE)) {
-          final boolean blockInTag = blockEntry.isIn(tag);
-          final boolean baseBlockInTag = baseBlockEntry.isIn(tag);
-          if (tag == BlockTags.AXE_MINEABLE && blockEntry.isIn(BlockTags.FENCE_GATES)) continue;
-          if (tag == BlockTags.PICKAXE_MINEABLE && blockEntry.isIn(BlockTags.WALLS)) continue;
+        for (TagKey<Block> tag : List.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_SHOVEL)) {
+          final boolean blockInTag = blockEntry.is(tag);
+          final boolean baseBlockInTag = baseBlockEntry.is(tag);
+          if (tag == BlockTags.MINEABLE_WITH_AXE && blockEntry.is(BlockTags.FENCE_GATES)) continue;
+          if (tag == BlockTags.MINEABLE_WITH_PICKAXE && blockEntry.is(BlockTags.WALLS)) continue;
           Validate.validState(blockInTag == baseBlockInTag, "Mineable tags for %s does not match! The block %s in the tag: %s, but the base block %s in the tag: %s", tag, block, blockInTag, baseBlock, baseBlockInTag);
         }
         ExtShapeTags.SHAPE_TO_TAG.forEach((blockShape, blockTagKey) -> {
           final boolean blockInShape = blockShape.test(block);
-          final boolean blockInTag = blockEntry.isIn(blockTagKey);
+          final boolean blockInTag = blockEntry.is(blockTagKey);
           Validate.validState(blockInShape == blockInTag, "Tag check for %s does not match! The block %s in the shape: %s, but the block in the shape tag: %s", blockTagKey, block, blockInShape, blockInTag);
         });
       }
@@ -169,7 +165,7 @@ public class ExtShape implements ModInitializer {
    * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。部分是直接由其标签决定的，例如木制、竹制的楼梯、台阶，原版的标签即定义了可作为燃料。
    *
    * @see ExtShapeBlocks
-   * @see net.minecraft.item.FuelRegistry#createDefault(RegistryWrapper.WrapperLookup, FeatureSet)
+   * @see net.minecraft.world.level.block.entity.FuelValues#vanillaBurnTimes(HolderLookup.Provider, FeatureFlagSet)
    */
   @ApiStatus.AvailableSince("1.5.0")
   private static void registerFuels() {
@@ -199,24 +195,24 @@ public class ExtShape implements ModInitializer {
     map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
     map.put(ExtShapeTags.WOOLEN_WALLS, 100);
 
-    FuelRegistryEvents.BUILD.register((builder, context) -> map.forEach((blockTagKey, integer) -> builder.add(TagKey.of(RegistryKeys.ITEM, blockTagKey.id()), integer)));
+    FuelRegistryEvents.BUILD.register((builder, context) -> map.forEach((blockTagKey, integer) -> builder.add(TagKey.create(Registries.ITEM, blockTagKey.location()), integer)));
   }
 
   private static void validateIdMap() {
     if (idMapToVerify == null) return;
     final List<RuntimeException> exceptions = new ArrayList<>();
     idMapToVerify.forEach((k, v) -> {
-      final Identifier key = Identifier.of(k);
+      final Identifier key = Identifier.parse(k);
       try {
-        Validate.validState(!Registries.BLOCK.containsId(key), "The id %s is to be replaced, but still exists in the block registry!", key);
-        Validate.validState(!Registries.ITEM.containsId(key), "The id %s is to be replaced, but still exists in the item registry!", key);
+        Validate.validState(!BuiltInRegistries.BLOCK.containsKey(key), "The id %s is to be replaced, but still exists in the block registry!", key);
+        Validate.validState(!BuiltInRegistries.ITEM.containsKey(key), "The id %s is to be replaced, but still exists in the item registry!", key);
       } catch (RuntimeException e) {
         exceptions.add(e);
       }
-      final Identifier value = Identifier.of(v);
+      final Identifier value = Identifier.parse(v);
       try {
-        Validate.validState(Registries.BLOCK.containsId(value), "The id %s is to be replace with, but does not exist in the block registry!", value);
-        Validate.validState(Registries.ITEM.containsId(value), "The id %s is to be replace with, but does not exist in the item registry!", value);
+        Validate.validState(BuiltInRegistries.BLOCK.containsKey(value), "The id %s is to be replace with, but does not exist in the block registry!", value);
+        Validate.validState(BuiltInRegistries.ITEM.containsKey(value), "The id %s is to be replace with, but does not exist in the item registry!", value);
       } catch (RuntimeException e) {
         exceptions.add(e);
       }

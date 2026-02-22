@@ -1,8 +1,8 @@
 package pers.solid.extshape.util;
 
-import net.minecraft.block.WoodType;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.properties.WoodType;
 
 /**
  * 存储用于栅栏和栅栏门的一些设置，在构建方块时会使用到。

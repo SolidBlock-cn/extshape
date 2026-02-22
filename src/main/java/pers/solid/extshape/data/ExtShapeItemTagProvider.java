@@ -5,14 +5,14 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.BlockShape;
@@ -27,13 +27,13 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
   protected final @NotNull ExtShapeBlockTagProvider blockTagProvider;
 
-  public ExtShapeItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
+  public ExtShapeItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
     super(output, completableFuture, blockTagProvider);
     this.blockTagProvider = blockTagProvider;
   }
 
   @Override
-  protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+  protected void addTags(HolderLookup.Provider wrapperLookup) {
     copy(BlockTags.DAMPENS_VIBRATIONS, ItemTags.DAMPENS_VIBRATIONS);
     copyWithSameId(ExtShapeTags.WOOLEN_BLOCKS);
     copyWithSameId(ExtShapeTags.WOODEN_BLOCKS);
@@ -69,7 +69,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
   }
 
   protected void copyWithSameId(TagKey<Block> blockTag) {
-    copy(blockTag, TagKey.of(RegistryKeys.ITEM, blockTag.id()));
+    copy(blockTag, TagKey.create(Registries.ITEM, blockTag.location()));
   }
 
   protected void addForShapes(TagKey<Item> tag, Block baseBlock) {

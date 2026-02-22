@@ -1,11 +1,11 @@
 package pers.solid.extshape.tag;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
@@ -237,7 +237,7 @@ public final class ExtShapeTags {
       .build();
 
   /**
-   * 类似于 {@link BlockTags#SNOW}，但是不同的是，该方块标签中，{@link net.minecraft.block.SnowyBlock#isSnow(BlockState)} 对于该标签的方块必须有底部的完整碰撞箱才会让方块显示为雪。
+   * 类似于 {@link BlockTags#SNOW}，但是不同的是，该方块标签中，{@link net.minecraft.world.level.block.SnowyDirtBlock#isSnowySetting(BlockState)} 对于该标签的方块必须有底部的完整碰撞箱才会让方块显示为雪。
    */
   public static final TagKey<Block> SNOW = of("snow");
 
@@ -248,7 +248,7 @@ public final class ExtShapeTags {
   }
 
   private static TagKey<Block> of(@NotNull String path) {
-    return TagKey.of(RegistryKeys.BLOCK, ExtShape.id(path));
+    return TagKey.create(Registries.BLOCK, ExtShape.id(path));
   }
 
 }

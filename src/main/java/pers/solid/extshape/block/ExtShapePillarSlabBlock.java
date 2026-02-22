@@ -5,16 +5,16 @@ import com.google.common.collect.Sets;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.Direction;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 /**
- * 类似于普通的台阶，但是像 {@link PillarBlock} 那样拥有摆放的方向。
+ * 类似于普通的台阶，但是像 {@link RotatedPillarBlock} 那样拥有摆放的方向。
  */
 public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
   public static final Set<Block> BASE_BLOCKS_WITH_HORIZONTAL_COLUMN = Sets.newHashSet(Iterables.concat(
@@ -32,43 +32,43 @@ public class ExtShapePillarSlabBlock extends ExtShapeSlabBlock {
       BlockCollections.STRIPPED_LOGS,
       Arrays.asList(Blocks.HAY_BLOCK, Blocks.PURPUR_PILLAR, Blocks.QUARTZ_PILLAR, Blocks.OCHRE_FROGLIGHT, Blocks.VERDANT_FROGLIGHT, Blocks.PEARLESCENT_FROGLIGHT)
   ));
-  public static final EnumProperty<Direction.Axis> AXIS = PillarBlock.AXIS;
-  public static final MapCodec<ExtShapePillarSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapePillarSlabBlock::new);
+  public static final EnumProperty<Direction.Axis> AXIS = RotatedPillarBlock.AXIS;
+  public static final MapCodec<ExtShapePillarSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapePillarSlabBlock::new);
 
-  public ExtShapePillarSlabBlock(@NotNull Block baseBlock, Settings settings) {
+  public ExtShapePillarSlabBlock(@NotNull Block baseBlock, Properties settings) {
     super(baseBlock, settings);
-    setDefaultState(getDefaultState().with(AXIS, Direction.Axis.Y));
+    registerDefaultState(defaultBlockState().setValue(AXIS, Direction.Axis.Y));
   }
 
   @Override
-  protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-    super.appendProperties(builder);
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    super.createBlockStateDefinition(builder);
     builder.add(AXIS);
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
-    final BlockState placementState = super.getPlacementState(ctx);
-    final BlockState oldState = ctx.getWorld().getBlockState(ctx.getBlockPos());
-    if (oldState.isOf(this) && placementState != null) {
-      return placementState.with(AXIS, oldState.get(AXIS));
+  public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    final BlockState placementState = super.getStateForPlacement(ctx);
+    final BlockState oldState = ctx.getLevel().getBlockState(ctx.getClickedPos());
+    if (oldState.is(this) && placementState != null) {
+      return placementState.setValue(AXIS, oldState.getValue(AXIS));
     }
-    return placementState != null ? placementState.with(AXIS, ctx.getSide().getAxis()) : null;
+    return placementState != null ? placementState.setValue(AXIS, ctx.getClickedFace().getAxis()) : null;
   }
 
   @Override
-  public BlockState rotate(BlockState state, BlockRotation rotation) {
-    return PillarBlock.changeRotation(super.rotate(state, rotation), rotation);
+  public BlockState rotate(BlockState state, Rotation rotation) {
+    return RotatedPillarBlock.rotatePillar(super.rotate(state, rotation), rotation);
   }
 
   @Override
-  public MapCodec<? extends ExtShapePillarSlabBlock> getCodec() {
+  public MapCodec<? extends ExtShapePillarSlabBlock> codec() {
     return CODEC;
   }
 
   @Environment(EnvType.CLIENT)
   @Override
-  public void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator) {
+  public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     ExtShapeBlockStateModelGenerator.registerPillarSlab(this, baseBlock, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator, BASE_BLOCKS_WITH_HORIZONTAL_COLUMN.contains(baseBlock));
   }
 }

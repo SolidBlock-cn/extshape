@@ -1,7 +1,7 @@
 package pers.solid.extshape.builder;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.SlabBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeSlabBlock;
 

@@ -1,15 +1,15 @@
 package pers.solid.extshape.mixin;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Block.class)
 public interface BlockAccessor {
   @Invoker
-  void callDropExperienceWhenMined(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience);
+  void callTryDropExperience(ServerLevel world, BlockPos pos, ItemStack tool, IntProvider experience);
 }

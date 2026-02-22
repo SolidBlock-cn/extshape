@@ -3,9 +3,9 @@ package pers.solid.extshape.blockus.data;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 
 public class ExtShapeBlockusDataGenerator implements DataGeneratorEntrypoint {
   @Override
@@ -14,7 +14,7 @@ public class ExtShapeBlockusDataGenerator implements DataGeneratorEntrypoint {
     pack.addProvider(ExtShapeBlockusModelProvider::new);
     pack.addProvider((fabricDataOutput, completableFuture) -> new FabricRecipeProvider(fabricDataOutput, completableFuture) {
       @Override
-      protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup wrapperLookup, RecipeExporter recipeExporter) {
+      protected RecipeProvider createRecipeProvider(HolderLookup.Provider wrapperLookup, RecipeOutput recipeExporter) {
         return new ExtShapeBlockusRecipeGenerator(wrapperLookup, recipeExporter);
       }
 

@@ -10,24 +10,19 @@ import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
-import net.minecraft.block.WoodType;
-import net.minecraft.component.type.TooltipDisplayComponent;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Util;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
@@ -634,7 +629,7 @@ public final class ExtShapeBlockusBlocks {
       final BlocksBuilder builder = FACTORY.createConstructionOnly(bsswBundle.block())
           .without(BlockShape.STAIRS, BlockShape.SLAB)
           .with(BlockShape.WALL)
-          .setRecipeGroup(blockShape -> "wooden_mosaic_" + blockShape.asString());
+          .setRecipeGroup(blockShape -> "wooden_mosaic_" + blockShape.getSerializedName());
       if (isNonFlammable) {
         builder.build();
       } else {
@@ -648,7 +643,7 @@ public final class ExtShapeBlockusBlocks {
         FACTORY.createConstructionOnly(bsswBundle.block())
             .without(BlockShape.STAIRS, BlockShape.SLAB)
             .with(BlockShape.WALL)
-            .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.getSerializedName())
             .build();
       } else {
         FACTORY.createConstructionOnly(bsswBundle.block())
@@ -656,7 +651,7 @@ public final class ExtShapeBlockusBlocks {
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
             .fuelTime(300)
-            .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.getSerializedName())
             .build();
       }
     });
@@ -665,14 +660,14 @@ public final class ExtShapeBlockusBlocks {
       if (isNonFlammable) {
         FACTORY.createConstructionOnly(block)
             .with(BlockShape.WALL)
-            .setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.getSerializedName())
             .build();
       } else {
         FACTORY.createConstructionOnly(block)
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
             .fuelTime(300)
-            .setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.getSerializedName())
             .build();
       }
     });
@@ -680,14 +675,14 @@ public final class ExtShapeBlockusBlocks {
       if (woodType.equals(WoodMaps.CRIMSON.getId()) || woodType.equals(WoodMaps.WARPED.getId()) || woodType.equals(WoodMaps.CHARRED.getId())) {
         FACTORY.createConstructionOnly(block)
             .setPillar()
-            .setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "small_logs_" + blockShape.getSerializedName())
             .build();
       } else {
         FACTORY.createConstructionOnly(block)
             .setPillar()
             .addPostBuildConsumer(logFlammable)
             .fuelTime(300)
-            .setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString())
+            .setRecipeGroup(blockShape -> "small_logs_" + blockShape.getSerializedName())
             .build();
       }
     });
@@ -738,7 +733,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.NETHERITE_BRICKS)
         .withoutRedstone()
         .without(BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireproof())
+        .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireResistant())
         .build();
 
     markStoneCuttableWhenCreating = false;
@@ -751,7 +746,7 @@ public final class ExtShapeBlockusBlocks {
     for (var bsswBundle : BlockusBlocks.STAINED_STONE_BRICKS.colorMap().values()) {
       create(bsswBundle)
           .markStoneCuttable()
-          .setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.getSerializedName())
           .setActivationSettings(ActivationSettings.STONE)
           .setFenceSettings(FenceSettings.STONE)
           .without(BlockShape.BUTTON)
@@ -760,7 +755,7 @@ public final class ExtShapeBlockusBlocks {
     BlockusBlocks.CONCRETE_BRICKS.colorMap().forEach((dyeColor, concreteVariants) -> FACTORY.createConstructionOnly(concreteVariants.block())
         .markStoneCuttable()
         .without(BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL)
-        .setRecipeGroup(blockShape1 -> "concrete_brick_" + blockShape1.asString())
+        .setRecipeGroup(blockShape1 -> "concrete_brick_" + blockShape1.getSerializedName())
         .setActivationSettings(ActivationSettings.STONE)
         .setFenceSettings(FenceSettings.STONE)
         .build());
@@ -775,7 +770,7 @@ public final class ExtShapeBlockusBlocks {
           .markStoneCuttable()
           .setActivationSettings(ActivationSettings.STONE)
           .setFenceSettings(FenceSettings.STONE)
-          .setRecipeGroup(blockShape -> "shingles_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "shingles_" + blockShape.getSerializedName())
           .build();
     }
 
@@ -789,7 +784,7 @@ public final class ExtShapeBlockusBlocks {
           })
           .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60))
           .fuelTime(100)
-          .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.getSerializedName())
           .setActivationSettings(ActivationSettings.WOOL)
           .setFenceSettings(FenceSettings.WOOL)
           .build());
@@ -797,7 +792,7 @@ public final class ExtShapeBlockusBlocks {
     for (var block : BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap().values()) {
       FACTORY.createConstructionOnly(block)
           .markStoneCuttable().with(BlockShape.WALL)
-          .setRecipeGroup(blockShape -> "glazed_terracotta_pillar_" + blockShape.asString())
+          .setRecipeGroup(blockShape -> "glazed_terracotta_pillar_" + blockShape.getSerializedName())
           .setPillar()
           .build();
     }
@@ -860,29 +855,29 @@ public final class ExtShapeBlockusBlocks {
         .setStoneFenceSettings(Items.NETHER_STAR).withExtension(BlockExtension.builder()
             .setSteppedOnCallback((world, pos, state, entity) -> {
               if (entity.getType() == EntityType.PLAYER) {
-                ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 3, true, false, false));
-                ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 900, 3, true, false, true));
-                ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 80, 2, true, false, true));
+                ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1, 3, true, false, false));
+                ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 900, 3, true, false, true));
+                ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, 80, 2, true, false, true));
               }
             })
             .build())
         .addPreBuildConsumer((blockShape, builder) -> {
-          builder.setItemSettings(new Item.Settings().rarity(Rarity.RARE));
+          builder.setItemSettings(new Item.Properties().rarity(Rarity.RARE));
           builder.setItemInstanceSupplier(builder0 -> new ExtShapeBlockItem(builder0.instance, builder0.itemSettings.rarity(Rarity.UNCOMMON)) {
             @Override
-            public boolean hasGlint(ItemStack stack) {
+            public boolean isFoil(ItemStack stack) {
               return true;
             }
 
             @SuppressWarnings("deprecation")
             @Override
-            public void appendTooltip(ItemStack stack, TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
-              super.appendTooltip(stack, context, displayComponent, textConsumer, type);
-              textConsumer.accept(ScreenTexts.EMPTY);
-              textConsumer.accept(Text.translatable(Util.createTranslationKey("blockitem", Blockus.id("when_stepped_on"))).formatted(Formatting.GRAY));
-              textConsumer.accept(ScreenTexts.space().append(StatusEffects.REGENERATION.value().getName()).append(" IV").formatted(Formatting.BLUE));
-              textConsumer.accept(ScreenTexts.space().append(StatusEffects.ABSORPTION.value().getName()).append(" IV").formatted(Formatting.BLUE).append(" - 00:45"));
-              textConsumer.accept(ScreenTexts.space().append(StatusEffects.STRENGTH.value().getName()).append(" III").formatted(Formatting.BLUE).append(" - 00:04"));
+            public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag type) {
+              super.appendHoverText(stack, context, displayComponent, textConsumer, type);
+              textConsumer.accept(CommonComponents.EMPTY);
+              textConsumer.accept(Component.translatable(Util.makeDescriptionId("blockitem", Blockus.id("when_stepped_on"))).withStyle(ChatFormatting.GRAY));
+              textConsumer.accept(CommonComponents.space().append(MobEffects.REGENERATION.value().getDisplayName()).append(" IV").withStyle(ChatFormatting.BLUE));
+              textConsumer.accept(CommonComponents.space().append(MobEffects.ABSORPTION.value().getDisplayName()).append(" IV").withStyle(ChatFormatting.BLUE).append(" - 00:45"));
+              textConsumer.accept(CommonComponents.space().append(MobEffects.STRENGTH.value().getDisplayName()).append(" III").withStyle(ChatFormatting.BLUE).append(" - 00:04"));
             }
           });
         })

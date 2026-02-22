@@ -1,10 +1,10 @@
 package pers.solid.extshape.builder;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.util.Util;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
@@ -16,10 +16,10 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
   public final ActivationSettings activationSettings;
 
   public PressurePlateBuilder(Block baseBlock, @NotNull ActivationSettings activationSettings) {
-    super(baseBlock, Util.make(AbstractBlock.Settings.copy(baseBlock)
+    super(baseBlock, Util.make(BlockBehaviour.Properties.ofFullCopy(baseBlock)
         .noCollision()
-        .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))
-        .pistonBehavior(baseBlock.getDefaultState().getPistonBehavior() == PistonBehavior.BLOCK ? PistonBehavior.BLOCK : PistonBehavior.DESTROY), settings -> ((AbstractBlockSettingsAccessor) settings).setToolRequired(false)), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings));
+        .strength(computeStrength(baseBlock.defaultDestroyTime()), computeStrength(baseBlock.getExplosionResistance()))
+        .pushReaction(baseBlock.defaultBlockState().getPistonPushReaction() == PushReaction.BLOCK ? PushReaction.BLOCK : PushReaction.DESTROY), settings -> ((AbstractBlockSettingsAccessor) settings).setRequiresCorrectToolForDrops(false)), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings));
     this.activationSettings = activationSettings;
     this.shape = BlockShape.PRESSURE_PLATE;
   }

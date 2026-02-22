@@ -1,6 +1,6 @@
 package pers.solid.extshape.builder;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeVerticalStairsBlock;
 import pers.solid.extshape.block.VerticalStairsBlock;

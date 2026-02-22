@@ -4,12 +4,13 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.gson.*;
-import net.minecraft.block.*;
-import net.minecraft.block.enums.SlabType;
-import net.minecraft.data.family.BlockFamily;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.data.BlockFamily;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +26,7 @@ import java.util.function.Predicate;
 /**
  * 方块形状。以前是枚举，现在不是了。每个形状对象创建时，都会自动加入 {@link #NAME_TO_SHAPE} 和 {@link #SHAPES} 中，相当于一个“注册表”。部分形状有对应的原版的方块变种类型（{@link #vanillaVariant}）。
  */
-public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, Predicate<Block> {
+public class BlockShape implements StringRepresentable, Comparable<BlockShape>, Predicate<Block> {
 
   /**
    * 由形状名称到形状对象的映射，由 {@link #byName(String)} 使用。
@@ -42,7 +43,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
 
   // 扩展方块形状模组内置的方块形状部分。
 
-  public static final BlockShape STAIRS = new BlockShape(Predicates.instanceOf(StairsBlock.class), BlockFamily.Variant.STAIRS, "stairs", 1f, true);
+  public static final BlockShape STAIRS = new BlockShape(Predicates.instanceOf(StairBlock.class), BlockFamily.Variant.STAIRS, "stairs", 1f, true);
   public static final BlockShape SLAB = new BlockShape(Predicates.instanceOf(SlabBlock.class), BlockFamily.Variant.SLAB, "slab", 0.5f, true);
   public static final BlockShape VERTICAL_SLAB = new BlockShape(Predicates.instanceOf(VerticalSlabBlock.class), null, "vertical_slab", 0.5f, true);
   public static final BlockShape VERTICAL_STAIRS = new BlockShape(Predicates.instanceOf(VerticalStairsBlock.class), null, "vertical_stairs", 1f, true);
@@ -68,7 +69,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
    */
   public final @Nullable BlockFamily.Variant vanillaVariant;
   /**
-   * 该形状的名称，由 {@link #asString()} 使用。
+   * 该形状的名称，由 {@link #getSerializedName()} 使用。
    */
   private final @NotNull String name;
   /**
@@ -109,7 +110,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
 
   @Override
   @NotNull
-  public String asString() {
+  public String getSerializedName() {
     return name;
   }
 
@@ -142,7 +143,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
   }
 
   public float logicalCompleteness(@NotNull BlockState blockState) {
-    if (this == SLAB && blockState.contains(Properties.SLAB_TYPE) && blockState.get(Properties.SLAB_TYPE) == SlabType.DOUBLE) {
+    if (this == SLAB && blockState.hasProperty(BlockStateProperties.SLAB_TYPE) && blockState.getValue(BlockStateProperties.SLAB_TYPE) == SlabType.DOUBLE) {
       return 1;
     } else {
       return logicalCompleteness;
@@ -159,7 +160,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
 
     @Override
     public JsonElement serialize(BlockShape src, Type typeOfSrc, JsonSerializationContext context) {
-      return new JsonPrimitive(src.asString());
+      return new JsonPrimitive(src.getSerializedName());
     }
   }
 }

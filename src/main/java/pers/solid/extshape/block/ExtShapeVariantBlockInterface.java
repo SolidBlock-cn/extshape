@@ -1,7 +1,7 @@
 package pers.solid.extshape.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.text.MutableText;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.util.AttributiveBlockNameManager;
 
@@ -17,7 +17,7 @@ public interface ExtShapeVariantBlockInterface extends ExtShapeBlockInterface {
   @NotNull
   Block getBaseBlock();
 
-  default @NotNull MutableText getNamePrefix() {
+  default @NotNull MutableComponent getNamePrefix() {
     final Block baseBlock = this.getBaseBlock();
     return AttributiveBlockNameManager.getAttributiveBlockName(baseBlock.getName());
   }

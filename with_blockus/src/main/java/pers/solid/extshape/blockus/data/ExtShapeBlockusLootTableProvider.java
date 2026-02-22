@@ -3,9 +3,9 @@ package pers.solid.extshape.blockus.data;
 import com.google.common.collect.ImmutableMap;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.block.Block;
-import net.minecraft.loot.LootTable;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.BlockusUnusualLootTables;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
@@ -15,7 +15,7 @@ import pers.solid.extshape.data.UnusualLootTables;
 import java.util.concurrent.CompletableFuture;
 
 public class ExtShapeBlockusLootTableProvider extends FabricBlockLootTableProvider {
-  protected ExtShapeBlockusLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+  protected ExtShapeBlockusLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
     super(dataOutput, registryLookup);
   }
 
@@ -32,7 +32,7 @@ public class ExtShapeBlockusLootTableProvider extends FabricBlockLootTableProvid
         } else {
           lootTable = i.getLootTable(this);
         }
-        this.addDrop(block, lootTable);
+        this.add(block, lootTable);
       }
     }
   }

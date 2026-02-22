@@ -1,7 +1,7 @@
 package pers.solid.extshape.builder;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.FenceGateBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceGateBlock;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeFenceGateBlock;
 import pers.solid.extshape.util.FenceSettings;

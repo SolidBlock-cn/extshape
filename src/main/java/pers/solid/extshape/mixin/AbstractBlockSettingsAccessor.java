@@ -1,17 +1,17 @@
 package pers.solid.extshape.mixin;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.function.ToIntFunction;
 
-@Mixin(AbstractBlock.Settings.class)
+@Mixin(BlockBehaviour.Properties.class)
 public interface AbstractBlockSettingsAccessor {
   @Accessor
-  void setToolRequired(boolean toolRequired);
+  void setRequiresCorrectToolForDrops(boolean toolRequired);
 
   @Accessor
-  ToIntFunction<BlockState> getLuminance();
+  ToIntFunction<BlockState> getLightEmission();
 }

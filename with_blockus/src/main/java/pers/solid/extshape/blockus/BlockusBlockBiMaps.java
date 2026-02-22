@@ -5,9 +5,9 @@ import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.registry.content.bundles.WoolBundle;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.data.family.BlockFamily;
+import net.minecraft.data.BlockFamily;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.BlockBiMaps;
 

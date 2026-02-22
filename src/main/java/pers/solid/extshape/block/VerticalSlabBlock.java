@@ -1,93 +1,97 @@
 package pers.solid.extshape.block;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.*;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 /**
  * 竖直台阶。
  */
-public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterloggable {
-  public static final EnumProperty<Direction> HORIZONTAL_FACING = Properties.HORIZONTAL_FACING;
-  public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-  protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0, 0, 0, 16, 16, 8);
-  protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0, 0, 8, 16, 16, 16);
-  protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8, 0, 0, 16, 16, 16);
-  protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0, 0, 0, 8, 16, 16);
-  public static final MapCodec<VerticalSlabBlock> CODEC = createCodec(VerticalSlabBlock::new);
+public class VerticalSlabBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
+  public static final EnumProperty<Direction> HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
+  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  protected static final VoxelShape NORTH_SHAPE = Block.box(0, 0, 0, 16, 16, 8);
+  protected static final VoxelShape SOUTH_SHAPE = Block.box(0, 0, 8, 16, 16, 16);
+  protected static final VoxelShape EAST_SHAPE = Block.box(8, 0, 0, 16, 16, 16);
+  protected static final VoxelShape WEST_SHAPE = Block.box(0, 0, 0, 8, 16, 16);
+  public static final MapCodec<VerticalSlabBlock> CODEC = simpleCodec(VerticalSlabBlock::new);
 
-  public VerticalSlabBlock(Settings settings) {
+  public VerticalSlabBlock(Properties settings) {
     super(settings);
-    setDefaultState(getDefaultState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
+    registerDefaultState(defaultBlockState().setValue(HORIZONTAL_FACING, Direction.NORTH).setValue(WATERLOGGED, false));
   }
 
   @Override
-  protected MapCodec<? extends VerticalSlabBlock> getCodec() {
+  protected MapCodec<? extends VerticalSlabBlock> codec() {
     return CODEC;
   }
 
 
   @Override
-  protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-    if (state.get(WATERLOGGED)) {
-      tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+  protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+    if (state.getValue(WATERLOGGED)) {
+      tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     }
-    return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+    return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
   }
 
   @Override
-  protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
     stateManager.add(HORIZONTAL_FACING).add(WATERLOGGED);
   }
 
   @Override
-  public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    Direction dir = state.get(HORIZONTAL_FACING);
+  public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    Direction dir = state.getValue(HORIZONTAL_FACING);
     return switch (dir) {
       case NORTH -> NORTH_SHAPE;
       case SOUTH -> SOUTH_SHAPE;
       case EAST -> EAST_SHAPE;
       case WEST -> WEST_SHAPE;
-      default -> VoxelShapes.fullCube();
+      default -> Shapes.block();
     };
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
-    BlockPos blockPos = ctx.getBlockPos();
-    FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-    final Direction.Axis axis = ctx.getHorizontalPlayerFacing().getAxis();
-    final double d = ctx.getHitPos().getComponentAlongAxis(axis) - blockPos.getComponentAlongAxis(axis);
+  public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    BlockPos blockPos = ctx.getClickedPos();
+    FluidState fluidState = ctx.getLevel().getFluidState(blockPos);
+    final Direction.Axis axis = ctx.getHorizontalDirection().getAxis();
+    final double d = ctx.getClickLocation().get(axis) - blockPos.get(axis);
     final Direction facing = switch (axis) {
       case X -> d < 0.5 ? Direction.WEST : Direction.EAST;
       case Z -> d < 0.5 ? Direction.NORTH : Direction.SOUTH;
       default -> Direction.NORTH;
     };
-    return this.getDefaultState().with(FACING, facing).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+    return this.defaultBlockState().setValue(FACING, facing).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
   }
 
   @Override
   public FluidState getFluidState(BlockState state) {
-    return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 
   @Override
-  protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+  protected boolean isPathfindable(BlockState state, PathComputationType type) {
     return false;
   }
 }

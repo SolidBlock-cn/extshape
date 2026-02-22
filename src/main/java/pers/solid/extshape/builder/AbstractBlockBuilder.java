@@ -2,17 +2,17 @@ package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.*;
@@ -53,7 +53,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    * 是否为该方块构建物品。
    */
   public final boolean buildItem;
-  public AbstractBlock.Settings blockSettings;
+  public BlockBehaviour.Properties blockSettings;
   /**
    * 是否将方块添加到相应的 {@link BlockBiMaps} 中。
    */
@@ -67,9 +67,9 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    */
   public boolean registerBlock, registerItem;
   /**
-   * 该方块对应物品的 {@link Item.Settings}。
+   * 该方块对应物品的 {@link Item.Properties}。
    */
-  public Item.Settings itemSettings;
+  public Item.Properties itemSettings;
   /**
    * 该方块所拥有的 id，将会在注册时使用。
    */
@@ -102,28 +102,28 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    */
   protected @NotNull Function<AbstractBlockBuilder<T>, BlockItem> itemInstanceSupplier = builder -> new ExtShapeBlockItem(builder.instance, builder.itemSettings);
 
-  protected AbstractBlockBuilder(@Nullable Block baseBlock, AbstractBlock.Settings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
+  protected AbstractBlockBuilder(@Nullable Block baseBlock, BlockBehaviour.Properties settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
     this.baseBlock = baseBlock;
     this.registerBlock = true;
     this.registerItem = true;
     this.blockSettings = settings;
     this.buildItem = true;
     this.shouldAddToBlockBiMap = true;
-    this.itemSettings = new Item.Settings();
+    this.itemSettings = new Item.Properties();
     if (baseBlock != null && baseBlock.asItem() != null) {
-      final var component = baseBlock.asItem().getComponents().get(DataComponentTypes.DAMAGE_RESISTANT);
-      if (((AbstractBlockSettingsAccessor) blockSettings).getLuminance().applyAsInt(baseBlock.getDefaultState()) > 1) {
-        blockSettings.nonOpaque();
+      final var component = baseBlock.asItem().components().get(DataComponents.DAMAGE_RESISTANT);
+      if (((AbstractBlockSettingsAccessor) blockSettings).getLightEmission().applyAsInt(baseBlock.defaultBlockState()) > 1) {
+        blockSettings.noOcclusion();
       }
       if (component != null && DamageTypeTags.IS_FIRE.equals(component.types())) {
-        itemSettings.fireproof();
+        itemSettings.fireResistant();
       }
     }
     this.instanceSupplier = instanceSupplier;
   }
 
   protected AbstractBlockBuilder(Block baseBlock, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
-    this(baseBlock, AbstractBlock.Settings.copy(baseBlock), instanceSupplier);
+    this(baseBlock, BlockBehaviour.Properties.ofFullCopy(baseBlock), instanceSupplier);
   }
 
   /**
@@ -155,7 +155,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   public static Identifier convertIdentifier(@NotNull Identifier identifier, @Nullable String namespace, @NotNull String suffix) {
     String path = identifier.getPath();
     String basePath = getPathPrefixOf(path);
-    return Identifier.of(namespace == null ? identifier.getNamespace() : namespace, basePath + suffix);
+    return Identifier.fromNamespaceAndPath(namespace == null ? identifier.getNamespace() : namespace, basePath + suffix);
   }
 
 
@@ -166,7 +166,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> setBlockSettings(AbstractBlock.Settings settings) {
+  public AbstractBlockBuilder<T> setBlockSettings(BlockBehaviour.Properties settings) {
     this.blockSettings = settings;
     return this;
   }
@@ -178,7 +178,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public AbstractBlockBuilder<T> setItemSettings(Item.Settings settings) {
+  public AbstractBlockBuilder<T> setItemSettings(Item.Properties settings) {
     this.itemSettings = settings;
     return this;
   }
@@ -187,7 +187,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    * @return 从注册表获取方块对应基础方块的命名空间id。
    */
   protected Identifier getBaseIdentifier() {
-    return Registries.BLOCK.getId(baseBlock);
+    return BuiltInRegistries.BLOCK.getKey(baseBlock);
   }
 
   /**
@@ -264,7 +264,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    * 立即使用当前的 {@link #instanceSupplier} 生成方块实例。
    */
   protected void createInstance() {
-    blockSettings.registryKey(RegistryKey.of(RegistryKeys.BLOCK, getBlockId()));
+    blockSettings.setId(ResourceKey.create(Registries.BLOCK, getBlockId()));
     this.instance = this.instanceSupplier.apply(this);
   }
 
@@ -272,7 +272,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    * 立即使用当前的 {@link #itemInstanceSupplier} 生成物品实例。
    */
   protected void createItemInstance() {
-    itemSettings.registryKey(RegistryKey.of(RegistryKeys.ITEM, getBlockId()));
+    itemSettings.setId(ResourceKey.create(Registries.ITEM, getBlockId()));
     this.itemInstance = itemInstanceSupplier.apply(this);
   }
 
@@ -286,15 +286,15 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     if (this.registerBlock) {
       final Identifier blockId = this.getBlockId();
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-        final Identifier vanillaId = Identifier.ofVanilla(blockId.getPath());
-        Validate.validState(!Registries.BLOCK.containsId(vanillaId), "The block with id cannot be registered because there is a same block whose id is %s!", blockId, vanillaId);
+        final Identifier vanillaId = Identifier.withDefaultNamespace(blockId.getPath());
+        Validate.validState(!BuiltInRegistries.BLOCK.containsKey(vanillaId), "The block with id cannot be registered because there is a same block whose id is %s!", blockId, vanillaId);
       }
-      Registry.register(Registries.BLOCK, blockId, instance);
+      Registry.register(BuiltInRegistries.BLOCK, blockId, instance);
     }
     if (buildItem) {
       createItemInstance();
       if (registerItem) {
-        Registry.register(Registries.ITEM, identifier, this.itemInstance);
+        Registry.register(BuiltInRegistries.ITEM, identifier, this.itemInstance);
       }
     }
 

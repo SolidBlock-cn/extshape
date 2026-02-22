@@ -6,17 +6,17 @@ import com.mojang.datafixers.util.Function3;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
-import net.minecraft.block.*;
-import net.minecraft.data.recipe.CraftingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.data.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChangeOverTimeBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
@@ -53,7 +53,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
    * 依次排列的不同的氧化等级。
    */
-  public static final ImmutableList<Oxidizable.OxidationLevel> OXIDATION_LEVELS = ImmutableList.of(Oxidizable.OxidationLevel.UNAFFECTED, Oxidizable.OxidationLevel.EXPOSED, Oxidizable.OxidationLevel.WEATHERED, Oxidizable.OxidationLevel.OXIDIZED);
+  public static final ImmutableList<WeatheringCopper.WeatherState> OXIDATION_LEVELS = ImmutableList.of(WeatheringCopper.WeatherState.UNAFFECTED, WeatheringCopper.WeatherState.EXPOSED, WeatheringCopper.WeatherState.WEATHERED, WeatheringCopper.WeatherState.OXIDIZED);
 
   public static final CopperManager COPPER = new CopperManager(COPPER_BLOCKS, WAXED_COPPER_BLOCKS);
   public static final CopperManager CUT_COPPER = new CopperManager(CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS);
@@ -61,7 +61,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
    * 为一个特定氧化等级以及涂蜡情况的铜方块注册 {@code BlocksBuilder}。
    */
-  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, @NotNull Oxidizable.OxidationLevel oxidationLevel, boolean waxed) {
+  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, @NotNull WeatheringCopper.WeatherState oxidationLevel, boolean waxed) {
     final BlocksBuilder builder = blocksBuilderFactory.createAllShapes(copperBase).setActivationSettings(ActivationSettings.COPPER.get(oxidationLevel));
 
     if (!waxed) {
@@ -138,17 +138,17 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
     registerExtendedWax(blocksBuilderFactory, unwaxed, waxed);
   }
 
-  public static <B extends Block & ExtShapeBlockInterface & Oxidizable> MapCodec<B> createCodec(RecordCodecBuilder<B, AbstractBlock.Settings> settingsCodec, Function3<Block, AbstractBlock.Settings, Oxidizable.OxidationLevel, B> function) {
+  public static <B extends Block & ExtShapeBlockInterface & WeatheringCopper> MapCodec<B> createCodec(RecordCodecBuilder<B, BlockBehaviour.Properties> settingsCodec, Function3<Block, BlockBehaviour.Properties, WeatheringCopper.WeatherState, B> function) {
     return RecordCodecBuilder.mapCodec(instance -> instance.group(
-        Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock),
+        BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock),
         settingsCodec,
         weatheringStateField()
     ).apply(instance, function));
   }
 
   @NotNull
-  public static <B extends Oxidizable> RecordCodecBuilder<B, Oxidizable.OxidationLevel> weatheringStateField() {
-    return Oxidizable.OxidationLevel.CODEC.fieldOf("weathering_state").forGetter(Degradable::getDegradationLevel);
+  public static <B extends WeatheringCopper> RecordCodecBuilder<B, WeatheringCopper.WeatherState> weatheringStateField() {
+    return WeatheringCopper.WeatherState.CODEC.fieldOf("weathering_state").forGetter(ChangeOverTimeBlock::getAge);
   }
 
   /**
@@ -157,7 +157,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
    * @param oxidationLevel 氧化等级。
    * @return 方块激活持续的刻数。
    */
-  public static int getActivationRate(@NotNull Oxidizable.OxidationLevel oxidationLevel) {
+  public static int getActivationRate(@NotNull WeatheringCopper.WeatherState oxidationLevel) {
     return switch (oxidationLevel) {
       case UNAFFECTED -> 10;
       case EXPOSED -> 40;
@@ -166,7 +166,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
     };
   }
 
-  public void generateWaxRecipes(RecipeGenerator recipeGenerator, RecipeExporter exporter, Predicate<Block> blockPredicate) {
+  public void generateWaxRecipes(RecipeProvider recipeGenerator, RecipeOutput exporter, Predicate<Block> blockPredicate) {
     Preconditions.checkArgument(unwaxed.size() == waxed.size(), "unwaxedBlocks and waxedBlocks must be of same size!");
 
     for (int i = 0; i < unwaxed.size(); i++) {
@@ -176,17 +176,17 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
     }
   }
 
-  private static void generateWaxRecipesForShapes(RecipeGenerator recipeGenerator, RecipeExporter exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
+  private static void generateWaxRecipesForShapes(RecipeProvider recipeGenerator, RecipeOutput exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
     for (BlockShape shape : BlockShape.values()) {
       final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
       final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
       if (unwaxed != null && waxed != null && blockPredicate.test(waxed)) {
-        final ShapelessRecipeJsonBuilder recipe = recipeGenerator.createShapeless(RecipeCategory.BUILDING_BLOCKS, waxed)
-            .input(unwaxed)
-            .input(Items.HONEYCOMB)
-            .group(RecipeGenerator.getItemPath(waxed))
-            .criterion(RecipeGenerator.hasItem(unwaxed), recipeGenerator.conditionsFromItem(unwaxed));
-        recipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(CraftingRecipeJsonBuilder.getItemId(waxed).getNamespace(), RecipeGenerator.convertBetween(waxed, Items.HONEYCOMB))));
+        final ShapelessRecipeBuilder recipe = recipeGenerator.shapeless(RecipeCategory.BUILDING_BLOCKS, waxed)
+            .requires(unwaxed)
+            .requires(Items.HONEYCOMB)
+            .group(RecipeProvider.getItemName(waxed))
+            .unlockedBy(RecipeProvider.getHasName(unwaxed), recipeGenerator.has(unwaxed));
+        recipe.save(exporter, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(RecipeBuilder.getDefaultRecipeId(waxed).getNamespace(), RecipeProvider.getConversionRecipeName(waxed, Items.HONEYCOMB))));
       }
     }
   }

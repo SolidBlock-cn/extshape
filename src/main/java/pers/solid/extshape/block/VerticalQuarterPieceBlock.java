@@ -2,29 +2,29 @@ package pers.solid.extshape.block;
 
 import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
@@ -34,84 +34,84 @@ import java.util.Map;
 /**
  * 纵条方块，只占 1/4 体积的方块。
  */
-public class VerticalQuarterPieceBlock extends Block implements Waterloggable {
+public class VerticalQuarterPieceBlock extends Block implements SimpleWaterloggedBlock {
   public static final Map<HorizontalCornerDirection, VoxelShape> VOXELS = Maps.toMap(Arrays.asList(HorizontalCornerDirection.values()), dir -> {
     Vec3i vec = dir.getVector();
-    return (VoxelShapes.cuboid(Math.min(vec.getX() + 1, 1) * 0.5, 0,
+    return (Shapes.box(Math.min(vec.getX() + 1, 1) * 0.5, 0,
         Math.min(vec.getZ() + 1, 1) * 0.5, Math.max(vec.getX() + 1, 1) * 0.5, 1,
         Math.max(vec.getZ() + 1, 1) * 0.5));
 
   });
-  public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-  public static final EnumProperty<HorizontalCornerDirection> FACING = EnumProperty.of("facing",
+  public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+  public static final EnumProperty<HorizontalCornerDirection> FACING = EnumProperty.create("facing",
       HorizontalCornerDirection.class);
-  public static final MapCodec<VerticalQuarterPieceBlock> CODEC = createCodec(VerticalQuarterPieceBlock::new);
+  public static final MapCodec<VerticalQuarterPieceBlock> CODEC = simpleCodec(VerticalQuarterPieceBlock::new);
 
-  public VerticalQuarterPieceBlock(Settings settings) {
+  public VerticalQuarterPieceBlock(Properties settings) {
     super(settings);
-    this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false).with(FACING, HorizontalCornerDirection.SOUTH_WEST));
+    this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false).setValue(FACING, HorizontalCornerDirection.SOUTH_WEST));
   }
 
   @Override
-  protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     builder.add(WATERLOGGED).add(FACING);
   }
 
   @Nullable
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
-    BlockPos blockPos = ctx.getBlockPos();
-    FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
-    double x_diff = ctx.getHitPos().x - ctx.getBlockPos().getX();
-    double z_diff = ctx.getHitPos().z - ctx.getBlockPos().getZ();
+  public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    BlockPos blockPos = ctx.getClickedPos();
+    FluidState fluidState = ctx.getLevel().getFluidState(blockPos);
+    double x_diff = ctx.getClickLocation().x - ctx.getClickedPos().getX();
+    double z_diff = ctx.getClickLocation().z - ctx.getClickedPos().getZ();
     final HorizontalCornerDirection facing;
     if (x_diff < 0.5) {
       facing = z_diff < 0.5 ? HorizontalCornerDirection.NORTH_WEST : HorizontalCornerDirection.SOUTH_WEST;
     } else {
       facing = z_diff < 0.5 ? HorizontalCornerDirection.NORTH_EAST : HorizontalCornerDirection.SOUTH_EAST;
     }
-    return this.getDefaultState()
-        .with(FACING, facing)
-        .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+    return this.defaultBlockState()
+        .setValue(FACING, facing)
+        .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
   }
 
   @Override
-  public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    HorizontalCornerDirection dir = state.get(FACING);
+  public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+    HorizontalCornerDirection dir = state.getValue(FACING);
     return VOXELS.get(dir);
   }
 
   @Override
-  public BlockState rotate(BlockState state, BlockRotation rotation) {
-    return super.rotate(state, rotation).with(FACING, state.get(FACING).rotate(rotation));
+  public BlockState rotate(BlockState state, Rotation rotation) {
+    return super.rotate(state, rotation).setValue(FACING, state.getValue(FACING).rotate(rotation));
   }
 
   @Override
-  public BlockState mirror(BlockState state, BlockMirror mirror) {
-    return super.mirror(state, mirror).with(FACING, state.get(FACING).mirror(mirror));
+  public BlockState mirror(BlockState state, Mirror mirror) {
+    return super.mirror(state, mirror).setValue(FACING, state.getValue(FACING).mirror(mirror));
   }
 
   @Override
   public FluidState getFluidState(BlockState state) {
-    return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
   }
 
 
   @Override
-  protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-    if (state.get(WATERLOGGED)) {
-      tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+  protected BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+    if (state.getValue(WATERLOGGED)) {
+      tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     }
-    return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+    return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
   }
 
   @Override
-  protected MapCodec<? extends VerticalQuarterPieceBlock> getCodec() {
+  protected MapCodec<? extends VerticalQuarterPieceBlock> codec() {
     return CODEC;
   }
 
   @Override
-  protected boolean canPathfindThrough(BlockState state, NavigationType type) {
+  protected boolean isPathfindable(BlockState state, PathComputationType type) {
     return false;
   }
 }
