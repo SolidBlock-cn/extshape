@@ -18,7 +18,7 @@ import java.util.Optional;
 @Mixin(Tool.class)
 public abstract class ToolComponentMixin {
   @ModifyExpressionValue(method = {"getMiningSpeed", "isCorrectForDrops"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/core/HolderSet;)Z"))
-  private boolean modifyIsIn(boolean original, @Local Tool.Rule rule, @Local(argsOnly = true) BlockState instance) {
+  private boolean modifyIsIn(boolean original, @Local(name = "rule") Tool.Rule rule, @Local(argsOnly = true) BlockState instance) {
     final HolderSet<Block> registryEntryList = rule.blocks();
     final Optional<TagKey<Block>> tagKey = registryEntryList.unwrapKey();
     if (instance.getBlock() instanceof ExtShapeWallBlock wall && tagKey.isPresent() && tagKey.get().equals(BlockTags.MINEABLE_WITH_PICKAXE)) {

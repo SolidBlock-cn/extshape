@@ -8,7 +8,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
@@ -110,7 +113,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
           final var value = entry.getValue();
           final var previousValue = previous.get(key);
           if (value != null && previousValue != null) {
-            OxidizableBlocksRegistry.registerOxidizableBlockPair(previousValue.instance, value.instance);
+            OxidizableBlocksRegistry.registerNextStage(previousValue.instance, value.instance);
           }
         }
       }
@@ -126,7 +129,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
         final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
         final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
         if (unwaxed != null && waxed != null && blocksBuilderFactory.instanceCollection != null && blocksBuilderFactory.instanceCollection.contains(unwaxed) && blocksBuilderFactory.instanceCollection.contains(waxed)) {
-          OxidizableBlocksRegistry.registerWaxableBlockPair(unwaxed, waxed);
+          OxidizableBlocksRegistry.registerWaxable(unwaxed, waxed);
         }
       }
     }
@@ -186,7 +189,8 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
             .requires(Items.HONEYCOMB)
             .group(RecipeProvider.getItemName(waxed))
             .unlockedBy(RecipeProvider.getHasName(unwaxed), recipeGenerator.has(unwaxed));
-        recipe.save(exporter, ResourceKey.create(Registries.RECIPE, Identifier.fromNamespaceAndPath(RecipeBuilder.getDefaultRecipeId(waxed).getNamespace(), RecipeProvider.getConversionRecipeName(waxed, Items.HONEYCOMB))));
+        @SuppressWarnings("deprecation") final Identifier identifier = Identifier.fromNamespaceAndPath(waxed.asItem().builtInRegistryHolder().key().identifier().getNamespace(), RecipeProvider.getConversionRecipeName(waxed, Items.HONEYCOMB));
+        recipe.save(exporter, ResourceKey.create(Registries.RECIPE, identifier));
       }
     }
   }

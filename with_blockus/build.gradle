@@ -29,7 +29,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
         println("CurseForge 令牌: ${screenToken(curseForgeToken)}")
         if (curseForgeToken) apiToken = curseForgeToken
     }
-    def mainFile = upload('841655', remapJar)
+    def mainFile = upload('841655', jar)
     mainFile.changelog = ''
     mainFile.releaseType = release_type
 
@@ -44,7 +44,7 @@ modrinth {
     String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
     versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
     versionType = release_type
-    uploadFile = remapJar
+    uploadFile = jar
     gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version as String) : (project.supported_minecraft_versions as String).split(',') as List<String>
     loaders = [platform]
     var list = [new ModDependency('tb7kCxSW', 'required'), new ModDependency('zFiY2Go0', 'required')]
@@ -63,7 +63,7 @@ githubRelease {
     targetCommitish = "1.21.8"
     draft = true
     prerelease = false
-    releaseAssets remapJar, remapSourcesJar
+    releaseAssets jar, sourcesJar
     allowUploadToExisting = true
     apiEndpoint = "https://api.github.com"
 }

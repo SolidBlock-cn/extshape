@@ -5,7 +5,6 @@
     "minecraft:coal_block"
   ],
   "result": {
-    "count": 1,
     "id": "extshape:coal_button"
   }
 }

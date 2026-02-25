@@ -2,8 +2,8 @@ package pers.solid.extshape.data;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.*;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
@@ -12,6 +12,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.Validate;
+import org.jspecify.annotations.NonNull;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -26,7 +27,7 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider {
+public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
   /**
    * 各类型方块的标签，不包括染色陶瓦的，因为染色陶瓦的标签已经被添加到了陶瓦的标签中。
    */
@@ -37,12 +38,12 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
    */
   public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ImmutableSet.of(Blocks.STONE, Blocks.SMOOTH_STONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.GILDED_BLACKSTONE);
 
-  public ExtShapeBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+  public ExtShapeBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
   }
 
   @Override
-  protected void addTags(HolderLookup.Provider wrapperLookup) {
+  protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
 
     // region 基础形状部分
 
@@ -236,11 +237,11 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     // region 特殊标签部分
 
     addForConstructionShapes(BlockTags.ENDERMAN_HOLDABLE, Blocks.DIRT, Blocks.PUMPKIN, Blocks.MELON);
-    addForConstructionShapes(BlockTags.BAMBOO_PLANTABLE_ON, Blocks.DIRT);
-    addForConstructionShapes(BlockTags.DRY_VEGETATION_MAY_PLACE_ON, Blocks.DIRT);
+    addForConstructionShapes(BlockTags.SUPPORTS_BAMBOO, Blocks.DIRT);
+    addForConstructionShapes(BlockTags.SUPPORTS_DRY_VEGETATION, Blocks.DIRT);
     ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.forEach((shape, tag) -> {
       if (shape.isConstruction) {
-        valueLookupBuilder(BlockTags.DRY_VEGETATION_MAY_PLACE_ON).addTag(tag);
+        valueLookupBuilder(BlockTags.SUPPORTS_DRY_VEGETATION).addTag(tag);
       }
     });
 
@@ -275,7 +276,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     );
     addForShapes(BlockTags.DRAGON_IMMUNE, Blocks.OBSIDIAN);
     addForShapes(ExtShapeTags.SNOW, Blocks.SNOW_BLOCK);
-    addForConstructionShapes(BlockTags.SMALL_DRIPLEAF_PLACEABLE, Blocks.CLAY, Blocks.MOSS_BLOCK);
+    addForConstructionShapes(BlockTags.SUPPORTS_SMALL_DRIPLEAF, Blocks.CLAY, Blocks.MOSS_BLOCK);
     addForConstructionShapes(BlockTags.ENDERMAN_HOLDABLE, Blocks.CLAY);
     addForShapes(BlockTags.INFINIBURN_OVERWORLD, Blocks.NETHERRACK);
     addForShapes(BlockTags.DRAGON_IMMUNE, Blocks.OBSIDIAN, Blocks.END_STONE, Blocks.END_STONE_BRICKS, Blocks.CRYING_OBSIDIAN);

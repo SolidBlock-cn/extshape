@@ -1,8 +1,8 @@
 package pers.solid.extshape.data;
 
 import com.google.common.collect.Iterables;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
@@ -23,11 +23,11 @@ import pers.solid.extshape.util.BlockCollections;
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
-public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
+public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
 
   protected final @NotNull ExtShapeBlockTagProvider blockTagProvider;
 
-  public ExtShapeItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
+  public ExtShapeItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
     super(output, completableFuture, blockTagProvider);
     this.blockTagProvider = blockTagProvider;
   }

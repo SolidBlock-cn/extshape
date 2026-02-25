@@ -3,7 +3,6 @@ package pers.solid.extshape.builder;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Registry;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -11,6 +10,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.apache.commons.lang3.StringUtils;
@@ -111,7 +111,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     this.shouldAddToBlockBiMap = true;
     this.itemSettings = new Item.Properties();
     if (baseBlock != null && baseBlock.asItem() != null) {
-      final var component = baseBlock.asItem().components().get(DataComponents.DAMAGE_RESISTANT);
+      final DamageResistant component = null;// todo 完成防火设置 baseBlock.asItem().components().get(DataComponents.DAMAGE_RESISTANT);
       if (((AbstractBlockSettingsAccessor) blockSettings).getLightEmission().applyAsInt(baseBlock.defaultBlockState()) > 1) {
         blockSettings.noOcclusion();
       }

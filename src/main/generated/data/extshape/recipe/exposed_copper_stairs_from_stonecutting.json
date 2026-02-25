@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:exposed_copper",
   "result": {
-    "count": 1,
     "id": "extshape:exposed_copper_stairs"
   }
 }

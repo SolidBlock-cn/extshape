@@ -32,7 +32,7 @@ public class TranslatableTextContentMixin {
   private String fallback;
 
   @WrapWithCondition(method = "decompose", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/contents/TranslatableContents;decomposeTemplate(Ljava/lang/String;Ljava/util/function/Consumer;)V"))
-  public boolean modify(TranslatableContents instance, String translation, Consumer<FormattedText> partsConsumer, @Local ImmutableList.Builder<FormattedText> builder) {
+  public boolean modify(TranslatableContents instance, String translation, Consumer<FormattedText> partsConsumer, @Local(name = "parts") ImmutableList.Builder<FormattedText> builder) {
     Language language = Language.getInstance();
     if (key.equals(AttributiveBlockNameManager.ATTRIBUTIVE_KEY)) {
       final String newKey = (String) args[0];

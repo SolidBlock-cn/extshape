@@ -23,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.data.RecipeGroupRegistry;
+import pers.solid.extshape.mixin.StonecuttingRecipeJsonBuilderAccessor;
 
 import java.util.function.BiFunction;
 
@@ -48,7 +49,7 @@ public interface ExtShapeBlockInterface {
    * 方块所在的合成配方的组。
    *
    * @return 方块合成配方中的 {@code group} 字段。
-   * @see net.minecraft.data.recipes.RecipeBuilder#group(String)
+   * @see RecipeBuilder#group(String)
    */
   default String getRecipeGroup() {
     return RecipeGroupRegistry.getRecipeGroup((ItemLike) this);
@@ -125,7 +126,7 @@ public interface ExtShapeBlockInterface {
     if (shouldWriteStonecuttingRecipe()) {
       final SingleItemRecipeBuilder stonecuttingRecipe = getStonecuttingRecipe(recipeGenerator);
       if (stonecuttingRecipe != null) {
-        stonecuttingRecipe.save(exporter, ResourceKey.create(Registries.RECIPE, BuiltInRegistries.ITEM.getKey(stonecuttingRecipe.getResult()).withSuffix("_from_stonecutting")));
+        stonecuttingRecipe.save(exporter, ResourceKey.create(Registries.RECIPE, BuiltInRegistries.ITEM.getKey(((StonecuttingRecipeJsonBuilderAccessor) stonecuttingRecipe).getResult().item().value()).withSuffix("_from_stonecutting")));
       }
     }
   }

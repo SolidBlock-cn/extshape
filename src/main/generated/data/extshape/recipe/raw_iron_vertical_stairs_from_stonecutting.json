@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:raw_iron_block",
   "result": {
-    "count": 1,
     "id": "extshape:raw_iron_vertical_stairs"
   }
 }

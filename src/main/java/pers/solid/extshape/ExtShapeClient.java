@@ -3,7 +3,7 @@ package pers.solid.extshape;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.Minecraft;
 import pers.solid.extshape.config.ExtShapeOptionsScreen;
@@ -17,7 +17,7 @@ public class ExtShapeClient implements ClientModInitializer {
   public void onInitializeClient() {
     // 用于打开配置界面的 extshape:config 命令。
     // 当你没有安装 Mod Menu 时，仍可通过此命令来打开配置界面。
-    ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommandManager.literal("extshape:config").executes(context -> {
+    ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommands.literal("extshape:config").executes(context -> {
       final Minecraft client = context.getSource().getClient();
       client.schedule(() -> client.setScreen(new ExtShapeOptionsScreen(null)));
       return 1;

@@ -10,6 +10,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.util.datafix.fixes.BlockRenameFix;
 import net.minecraft.util.datafix.fixes.ItemRenameFix;
+import net.minecraft.util.filefix.FileFixerUpper;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Contract;
 import org.spongepowered.asm.mixin.Final;
@@ -42,7 +43,7 @@ public abstract class SchemasMixin {
   }
 
   @Inject(method = "addFixers", at = @At("TAIL"))
-  private static void postBuild(DataFixerBuilder builder, CallbackInfo ci) {
+  private static void postBuild(DataFixerBuilder builder, FileFixerUpper.Builder fileFixerUpper, CallbackInfo ci) {
     // in 24w18a (dataVersion = 3940), some blocks are not experimental, and we should convert them into vanilla ones.
     final Schema schema3939 = builder.addSchema(3939, SAME_NAMESPACED);
     final UnaryOperator<String> unaryOperator = createRenamer(Map.of(

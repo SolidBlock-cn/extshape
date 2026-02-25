@@ -5,7 +5,6 @@
     "minecraft:dripstone_block"
   ],
   "result": {
-    "count": 1,
     "id": "extshape:dripstone_button"
   }
 }

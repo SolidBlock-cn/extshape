@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:green_concrete",
   "result": {
-    "count": 1,
     "id": "extshape:green_concrete_wall"
   }
 }

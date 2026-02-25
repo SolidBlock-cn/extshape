@@ -1,8 +1,8 @@
 package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
+import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -279,13 +279,13 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   @CanIgnoreReturnValue
   @Contract(value = "_-> this")
   public BlocksBuilder compostingChance(final float baseCompostingChance) {
-    return addPostBuildConsumer((blockShape, builder) -> CompostingChanceRegistry.INSTANCE.add(builder.itemInstance, blockShape.logicalCompleteness * baseCompostingChance));
+    return addPostBuildConsumer((blockShape, builder) -> CompostableRegistry.INSTANCE.add(builder.itemInstance, blockShape.logicalCompleteness * baseCompostingChance));
   }
 
   @CanIgnoreReturnValue
   @Contract(value = "_-> this")
   public BlocksBuilder fuelTime(final int baseFuelTime) {
-    return addPostBuildConsumer((blockShape, builder) -> FuelRegistryEvents.BUILD.register((builder1, context) -> builder1.add(builder.itemInstance, (int) (blockShape.logicalCompleteness * baseFuelTime))));
+    return addPostBuildConsumer((blockShape, builder) -> FuelValueEvents.BUILD.register((builder1, context) -> builder1.add(builder.itemInstance, (int) (blockShape.logicalCompleteness * baseFuelTime))));
   }
 
   @CanIgnoreReturnValue

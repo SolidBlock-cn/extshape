@@ -21,7 +21,7 @@ public abstract class ShearsItemMixin {
    * 通过修改组件，允许快速挖掘本模组中的羊毛方块。
    */
   @ModifyArg(method = "createToolProperties", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/component/Tool;<init>(Ljava/util/List;FIZ)V"), index = 0)
-  private static List<Tool.Rule> addMineableTag(List<Tool.Rule> blocks, @Local HolderGetter<Block> registryEntryLookup) {
+  private static List<Tool.Rule> addMineableTag(List<Tool.Rule> blocks, @Local(name = "registrationLookup") HolderGetter<Block> registryEntryLookup) {
     if (!(blocks instanceof ArrayList<Tool.Rule> || blocks instanceof LinkedList<Tool.Rule> || blocks instanceof ObjectArrayList<Tool.Rule>)) {
       blocks = new ArrayList<>(blocks);
     }

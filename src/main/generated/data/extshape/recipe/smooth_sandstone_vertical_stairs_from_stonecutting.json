@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:smooth_sandstone",
   "result": {
-    "count": 1,
     "id": "extshape:smooth_sandstone_vertical_stairs"
   }
 }

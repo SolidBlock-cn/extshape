@@ -5,7 +5,7 @@ import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
@@ -33,7 +33,7 @@ public class ExtShapeModelProvider extends FabricModelProvider {
   protected final Map<Block, TextureMapping> textureMaps = new HashMap<>();
   protected final Map<Block, BlockModelGenerators.BlockFamilyProvider> poolMap = new HashMap<>();
 
-  public ExtShapeModelProvider(FabricDataOutput output) {
+  public ExtShapeModelProvider(FabricPackOutput output) {
     super(output);
     registerTextureMaps();
   }

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "concrete_vertical_quarter_piece",
   "ingredient": "extshape:cyan_concrete_vertical_slab",
   "result": {
     "count": 2,

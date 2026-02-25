@@ -8,7 +8,7 @@ import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -195,7 +195,7 @@ public class ExtShape implements ModInitializer {
     map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
     map.put(ExtShapeTags.WOOLEN_WALLS, 100);
 
-    FuelRegistryEvents.BUILD.register((builder, context) -> map.forEach((blockTagKey, integer) -> builder.add(TagKey.create(Registries.ITEM, blockTagKey.location()), integer)));
+    FuelValueEvents.BUILD.register((builder, context) -> map.forEach((blockTagKey, integer) -> builder.add(TagKey.create(Registries.ITEM, blockTagKey.location()), integer)));
   }
 
   private static void validateIdMap() {

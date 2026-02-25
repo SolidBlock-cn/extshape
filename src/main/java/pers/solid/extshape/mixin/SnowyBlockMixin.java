@@ -7,14 +7,14 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SnowyDirtBlock;
+import net.minecraft.world.level.block.SnowyBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import pers.solid.extshape.tag.ExtShapeTags;
 
-@Mixin(SnowyDirtBlock.class)
+@Mixin(SnowyBlock.class)
 public class SnowyBlockMixin extends Block {
 
   @SuppressWarnings("unused")
@@ -22,12 +22,12 @@ public class SnowyBlockMixin extends Block {
     super(settings);
   }
 
-  @ModifyExpressionValue(method = "getStateForPlacement", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/SnowyDirtBlock;isSnowySetting(Lnet/minecraft/world/level/block/state/BlockState;)Z"))
+  @ModifyExpressionValue(method = "getStateForPlacement", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/SnowyBlock;isSnowySetting(Lnet/minecraft/world/level/block/state/BlockState;)Z"))
   private boolean getPlacementState_snow(boolean original, @Local(argsOnly = true) BlockPlaceContext ctx) {
     return original || isSnow2(ctx.getLevel().getBlockState(ctx.getClickedPos().above()), ctx.getLevel(), ctx.getClickedPos().above());
   }
 
-  @ModifyExpressionValue(method = "updateShape", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/SnowyDirtBlock;isSnowySetting(Lnet/minecraft/world/level/block/state/BlockState;)Z"))
+  @ModifyExpressionValue(method = "updateShape", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/SnowyBlock;isSnowySetting(Lnet/minecraft/world/level/block/state/BlockState;)Z"))
   private boolean getStateForNeighborUpdate_snow(boolean original, @Local(argsOnly = true, ordinal = 1) BlockState neighborState, @Local(argsOnly = true) LevelReader world, @Local(argsOnly = true, ordinal = 1) BlockPos neighborPos) {
     return original || isSnow2(neighborState, world, neighborPos);
   }

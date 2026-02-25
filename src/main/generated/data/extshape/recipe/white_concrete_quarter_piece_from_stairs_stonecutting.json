@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "concrete_quarter_piece",
   "ingredient": "extshape:white_concrete_stairs",
   "result": {
     "count": 3,

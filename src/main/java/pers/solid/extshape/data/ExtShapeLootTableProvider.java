@@ -1,8 +1,8 @@
 package pers.solid.extshape.data;
 
 import com.google.common.collect.ImmutableMap;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -15,8 +15,8 @@ import pers.solid.extshape.builder.BlockShape;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ExtShapeLootTableProvider extends FabricBlockLootTableProvider {
-  protected ExtShapeLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+public class ExtShapeLootTableProvider extends FabricBlockLootSubProvider {
+  protected ExtShapeLootTableProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
     super(dataOutput, registryLookup);
   }
 

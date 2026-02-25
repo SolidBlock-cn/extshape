@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:blue_terracotta",
   "result": {
-    "count": 1,
     "id": "extshape:blue_terracotta_vertical_stairs"
   }
 }

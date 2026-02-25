@@ -51,7 +51,7 @@ public class CrossShapeDataGeneration {
   }
 
   public Identifier recipeIdOf(ItemLike item, String suffix) {
-    final Identifier identifier = RecipeBuilder.getDefaultRecipeId(item);
+    @SuppressWarnings("deprecation") final Identifier identifier = item.asItem().builtInRegistryHolder().key().identifier();
     return Identifier.fromNamespaceAndPath(defaultNamespace == null ? identifier.getNamespace() : defaultNamespace, suffix == null ? identifier.getPath() : identifier.getPath() + suffix);
   }
 
@@ -194,13 +194,13 @@ public class CrossShapeDataGeneration {
         if (!(output instanceof ExtShapeBlockInterface) || !((ExtShapeBlockInterface) output).shouldWriteStonecuttingRecipe()) continue;
         SingleItemRecipeBuilder recipe = ((ExtShapeBlockInterface) output).getStonecuttingRecipe(recipeGenerator);
         if (recipe != null) {
-          final Identifier secondaryId = RecipeBuilder.getDefaultRecipeId(output).withSuffix("_from_" + path + "_stonecutting");
+          @SuppressWarnings("deprecation") final Identifier secondaryId = output.builtInRegistryHolder().key().identifier().withSuffix("_from_" + path + "_stonecutting");
           StonecuttingRecipeJsonBuilderAccessor accessor = (StonecuttingRecipeJsonBuilderAccessor) recipe;
           final SingleItemRecipeBuilder secondaryRecipe = SingleItemRecipeBuilder.stonecutting(
               Ingredient.of(uncutBaseBlock),
               accessor.getCategory(),
-              accessor.getResult(),
-              accessor.getCount() * uncutBaseBlockInfo.rightInt()
+              accessor.getResult().item().value(),
+              accessor.getResult().count() * uncutBaseBlockInfo.rightInt()
           ).unlockedBy("has_" + path, recipeGenerator.has(uncutBaseBlock));
           secondaryRecipe.save(exporter, ResourceKey.create(Registries.RECIPE, secondaryId));
         }
