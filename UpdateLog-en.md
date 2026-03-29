@@ -1,5 +1,15 @@
 # Update log
 
+### 3.1.3-beta.1
+
+- Fit Blockus new versions.
+- Added blocks related to small crimson and warped logs into `#non_flammable_wood` item tag.
+- Fixed the issue of blocks related to light gray stone bricks are missing.
+
+> **Important note**
+>
+> As the updates of Blockus changed the name of small logs, after updating the mod, if you have used blocks related to small logs, please make a back-up for your level.
+
 ### 3.1.2
 
 - Fixed the issue that the bottom side of bottom slabs and the top side of the top slabs do not emit light when blocked by solid blocks on the four horizontal sides (issue #78).

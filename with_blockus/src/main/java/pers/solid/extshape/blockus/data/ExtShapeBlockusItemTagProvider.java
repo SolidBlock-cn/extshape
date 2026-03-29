@@ -35,7 +35,9 @@ public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
     copyWithSameId(ExtShapeTags.WOOLEN_BLOCKS);
 
     addForShapes(ItemTags.NON_FLAMMABLE_WOOD,
-        BlockusBlocks.CHARRED.planks()
+        BlockusBlocks.CHARRED.planks(),
+        BlockusBlocks.SMALL_LOGS.get("crimson"),
+        BlockusBlocks.SMALL_LOGS.get("warped")
     );
     addForShapes(ItemTags.NON_FLAMMABLE_WOOD, () -> Stream.of(WoodMaps.CRIMSON, WoodMaps.WARPED, WoodMaps.CHARRED).map(WoodMaps::getId).flatMap(string -> Stream.of(BlockusBlocks.HERRINGBONE_PLANKS.get(string), BlockusBlocks.WOODEN_MOSAIC.get(string).block(), BlockusBlocks.MOSSY_PLANKS.get(string).block())).iterator());
     addForShapes(ItemTags.PIGLIN_LOVED, BlockusBlocks.GOLD_PLATING.block(), BlockusBlocks.GOLD_BRICKS.block());
