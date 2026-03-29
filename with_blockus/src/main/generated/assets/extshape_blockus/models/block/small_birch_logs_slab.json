@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "blockus:block/small_birch_logs_top",
+    "side": "blockus:block/small_birch_logs",
+    "top": "blockus:block/small_birch_logs_top"
+  }
+}

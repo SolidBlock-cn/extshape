@@ -2,7 +2,6 @@ package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
-import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -10,11 +9,8 @@ import net.minecraft.data.client.TextureKey;
 import net.minecraft.data.client.TextureMap;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
-import pers.solid.extshape.blockus.BlockusBlockCollections;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.data.ExtShapeModelProvider;
-
-import java.util.function.Supplier;
 
 public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
 
@@ -34,24 +30,24 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
   }
 
   protected void registerTextureMaps() {
-    register(BlockusBlocks.ROUGH_BASALT.block, Identifier.ofVanilla("block/basalt_top"));
-    register(BlockusBlocks.ROUGH_SANDSTONE.block, Identifier.ofVanilla("block/sandstone_bottom"));
-    register(BlockusBlocks.ROUGH_RED_SANDSTONE.block, Identifier.ofVanilla("block/red_sandstone_bottom"));
-    register(BlockusBlocks.ROUGH_SOUL_SANDSTONE.block, Identifier.of(Blockus.MOD_ID, "block/soul_sandstone_bottom"));
+    register(BlockusBlocks.ROUGH_BASALT.block(), Identifier.ofVanilla("block/basalt_top"));
+    register(BlockusBlocks.ROUGH_SANDSTONE.block(), Identifier.ofVanilla("block/sandstone_bottom"));
+    register(BlockusBlocks.ROUGH_RED_SANDSTONE.block(), Identifier.ofVanilla("block/red_sandstone_bottom"));
+    register(BlockusBlocks.ROUGH_SOUL_SANDSTONE.block(), Identifier.of(Blockus.MOD_ID, "block/soul_sandstone_bottom"));
 
     registerSuffixed(BlockusBlocks.STRIPPED_WHITE_OAK_LOG, TextureKey.END, "_top");
     register(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD, Identifier.of(Blockus.MOD_ID, "block/stripped_white_oak_log"));
     registerSuffixed(BlockusBlocks.WHITE_OAK_LOG, TextureKey.END, "_top");
     register(BlockusBlocks.WHITE_OAK_WOOD, Identifier.of(Blockus.MOD_ID, "block/white_oak_log"));
 
-    registerSuffixed(BlockusBlocks.SOUL_SANDSTONE.block, TextureKey.TOP, "_top");
-    register(BlockusBlocks.SMOOTH_SOUL_SANDSTONE.block, Identifier.of(Blockus.MOD_ID, "block/soul_sandstone_top"));
+    registerSuffixed(BlockusBlocks.SOUL_SANDSTONE.block(), TextureKey.TOP, "_top");
+    register(BlockusBlocks.SMOOTH_SOUL_SANDSTONE.block(), Identifier.of(Blockus.MOD_ID, "block/soul_sandstone_top"));
 
-    for (var block : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
+    for (var block : BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap().values()) {
       registerSuffixed(block, TextureKey.END, "_top");
     }
 
-    for (final Block block : BlockusBlockCollections.SMALL_LOGS) {
+    for (final Block block : BlockusBlocks.SMALL_LOGS.bundle().values()) {
       registerSuffixed(block, TextureKey.END, "_top");
     }
   }

@@ -4,7 +4,7 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 import java.util.regex.Pattern
 
 plugins {
-    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布

@@ -2,6 +2,7 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.itemgroups.BlockusItemGroups;
 import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.google.common.collect.*;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -10,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import pers.solid.extshape.VanillaItemGroup;
 import pers.solid.extshape.builder.BlockShape;
@@ -32,9 +34,9 @@ public final class ExtShapeBlockusItemGroup {
   }
 
   private static final ImmutableSet<Block> SPECIAL_SORTED_RAINBOW_BLOCKS = Streams.concat(
-      BlockusBlockCollections.TINTED_SHINGLES.stream().map(t -> t.block),
-      BlockusBlockCollections.STAINED_STONE_BRICKS.stream().map(bsswTypes -> bsswTypes.block),
-      Stream.of(BlockusBlocks.SHINGLES).map(bssTypes -> bssTypes.block)).collect(ImmutableSet.toImmutableSet());
+      BlockusBlocks.STAINED_SHINGLES.colorMap().values().stream().map(BSSWBundle::block),
+      BlockusBlocks.STAINED_STONE_BRICKS.colorMap().values().stream().map(BSSWBundle::block),
+      Stream.of(BlockusBlocks.SHINGLES).map(BSSWBundle::block)).collect(ImmutableSet.toImmutableSet());
 
   public static void addVanillaGroupRules(Collection<BlockShape> shapes) {
     final Multimap<Item, Item> buildingAppendingRule = VanillaItemGroup.getAppendingRule(BlockusItemGroups.BLOCKUS_BUILDING_BLOCKS);
@@ -43,20 +45,20 @@ public final class ExtShapeBlockusItemGroup {
     final Multimap<Item, Item> coloredTilesAppendingRule = VanillaItemGroup.getAppendingRule(BlockusItemGroups.BLOCKUS_COLORED_TILES);
     new EntryVariantAppender(BlockusItemGroups.BLOCKUS_COLORED_BLOCKS, shapes, Iterables.filter(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, input -> !SPECIAL_SORTED_RAINBOW_BLOCKS.contains(input)), ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains).appendItems(coloredAppendingRule);
     new EntryVariantAppender(BlockusItemGroups.BLOCKUS_COLORED_TILES, shapes, Iterables.filter(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, input -> !SPECIAL_SORTED_RAINBOW_BLOCKS.contains(input)), ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains).appendItems(coloredTilesAppendingRule);
-    final Item shingleAnchor = BlockusBlocks.PINK_SHINGLES.slab.asItem();
-    final Item stainedStoneBrickAnchor = BlockusBlocks.PINK_STONE_BRICKS.wall.asItem();
+    final Item shingleAnchor = BlockusBlocks.STAINED_SHINGLES.colorMap().get(DyeColor.PINK).slab().asItem();
+    final Item stainedStoneBrickAnchor = BlockusBlocks.STAINED_STONE_BRICKS.colorMap().get(DyeColor.PINK).wall().asItem();
     for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
       BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
-      final Block block1 = biMap.get(BlockusBlocks.SHINGLES.block);
+      final Block block1 = biMap.get(BlockusBlocks.SHINGLES.block());
       if (block1 != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block1))
         coloredAppendingRule.put(shingleAnchor, block1.asItem());
-      for (var bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
-        final Block block = biMap.get(bssTypes.block);
+      for (var bsswBundle : BlockusBlocks.STAINED_SHINGLES.colorMap().values()) {
+        final Block block = biMap.get(bsswBundle.block());
         if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
           coloredAppendingRule.put(shingleAnchor, block.asItem());
       }
-      for (var bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
-        final Block block = biMap.get(bsswTypes.block);
+      for (var bsswBundle : BlockusBlocks.STAINED_STONE_BRICKS.colorMap().values()) {
+        final Block block = biMap.get(bsswBundle.block());
         if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
           coloredAppendingRule.put(stainedStoneBrickAnchor, block.asItem());
       }
