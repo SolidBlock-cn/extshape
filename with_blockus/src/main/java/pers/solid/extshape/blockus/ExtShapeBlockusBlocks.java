@@ -907,8 +907,8 @@ public final class ExtShapeBlockusBlocks {
     return blocksBuilder;
   }
 
-  private static BlocksBuilder create(WoodBundle woodTypes) {
-    return create(woodTypes.planks()).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
+  private static BlocksBuilder create(WoodBundle woodBundle) {
+    return create(woodBundle.planks()).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
   }
 
   private static void buildCircularPavingBlock(BlocksBuilder blocksBuilder) {

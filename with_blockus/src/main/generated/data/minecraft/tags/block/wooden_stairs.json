@@ -1,7 +1,5 @@
 {
   "values": [
-    "extshape_blockus:herringbone_crimson_stairs",
-    "extshape_blockus:herringbone_oak_stairs",
     "extshape_blockus:herringbone_warped_stairs",
     "extshape_blockus:herringbone_jungle_stairs",
     "extshape_blockus:herringbone_pale_oak_stairs",
@@ -14,6 +12,8 @@
     "extshape_blockus:herringbone_mangrove_stairs",
     "extshape_blockus:herringbone_birch_stairs",
     "extshape_blockus:herringbone_bamboo_stairs",
-    "extshape_blockus:herringbone_spruce_stairs"
+    "extshape_blockus:herringbone_spruce_stairs",
+    "extshape_blockus:herringbone_crimson_stairs",
+    "extshape_blockus:herringbone_oak_stairs"
   ]
 }

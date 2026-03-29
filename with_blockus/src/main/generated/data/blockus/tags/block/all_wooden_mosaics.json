@@ -1,20 +1,5 @@
 {
   "values": [
-    "extshape_blockus:cherry_mosaic_vertical_slab",
-    "extshape_blockus:cherry_mosaic_vertical_stairs",
-    "extshape_blockus:cherry_mosaic_quarter_piece",
-    "extshape_blockus:cherry_mosaic_vertical_quarter_piece",
-    "extshape_blockus:cherry_mosaic_wall",
-    "extshape_blockus:crimson_mosaic_vertical_slab",
-    "extshape_blockus:crimson_mosaic_vertical_stairs",
-    "extshape_blockus:crimson_mosaic_quarter_piece",
-    "extshape_blockus:crimson_mosaic_vertical_quarter_piece",
-    "extshape_blockus:crimson_mosaic_wall",
-    "extshape_blockus:warped_mosaic_vertical_slab",
-    "extshape_blockus:warped_mosaic_vertical_stairs",
-    "extshape_blockus:warped_mosaic_quarter_piece",
-    "extshape_blockus:warped_mosaic_vertical_quarter_piece",
-    "extshape_blockus:warped_mosaic_wall",
     "extshape_blockus:jungle_mosaic_vertical_slab",
     "extshape_blockus:jungle_mosaic_vertical_stairs",
     "extshape_blockus:jungle_mosaic_quarter_piece",
@@ -69,6 +54,21 @@
     "extshape_blockus:white_oak_mosaic_vertical_stairs",
     "extshape_blockus:white_oak_mosaic_quarter_piece",
     "extshape_blockus:white_oak_mosaic_vertical_quarter_piece",
-    "extshape_blockus:white_oak_mosaic_wall"
+    "extshape_blockus:white_oak_mosaic_wall",
+    "extshape_blockus:cherry_mosaic_vertical_slab",
+    "extshape_blockus:cherry_mosaic_vertical_stairs",
+    "extshape_blockus:cherry_mosaic_quarter_piece",
+    "extshape_blockus:cherry_mosaic_vertical_quarter_piece",
+    "extshape_blockus:cherry_mosaic_wall",
+    "extshape_blockus:crimson_mosaic_vertical_slab",
+    "extshape_blockus:crimson_mosaic_vertical_stairs",
+    "extshape_blockus:crimson_mosaic_quarter_piece",
+    "extshape_blockus:crimson_mosaic_vertical_quarter_piece",
+    "extshape_blockus:crimson_mosaic_wall",
+    "extshape_blockus:warped_mosaic_vertical_slab",
+    "extshape_blockus:warped_mosaic_vertical_stairs",
+    "extshape_blockus:warped_mosaic_quarter_piece",
+    "extshape_blockus:warped_mosaic_vertical_quarter_piece",
+    "extshape_blockus:warped_mosaic_wall"
   ]
 }
