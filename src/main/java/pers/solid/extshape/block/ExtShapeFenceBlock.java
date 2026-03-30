@@ -41,7 +41,7 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
    */
   private final Item secondIngredient;
 
-  public ExtShapeFenceBlock(Block baseBlock,Item secondIngredient, Properties settings) {
+  public ExtShapeFenceBlock(Block baseBlock, Item secondIngredient, Properties settings) {
     super(settings);
     this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
@@ -60,11 +60,11 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   @Override
   public @Nullable RecipeBuilder getCraftingRecipe(RecipeProvider recipeGenerator) {
     return recipeGenerator.shaped(getRecipeCategory(), this, 2)
-            .pattern("W#W").pattern("W#W")
-            .group(getRecipeGroup())
-            .define('W', baseBlock)
-            .define('#', getSecondIngredient())
-            .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock));
+        .pattern("W#W").pattern("W#W")
+        .group(getRecipeGroup())
+        .define('W', baseBlock)
+        .define('#', getSecondIngredient())
+        .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock));
   }
 
   public Item getSecondIngredient() {
