@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.client.renderer.block.model.VariantMutator;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Contract;
 import org.spongepowered.asm.mixin.Mixin;

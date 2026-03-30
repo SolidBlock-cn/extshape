@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "blockus:chocolate_squares",
   "result": {
-    "count": 1,
     "id": "extshape_blockus:chocolate_squares_stairs"
   }
 }

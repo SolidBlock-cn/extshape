@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "blockus:smooth_soul_sandstone",
   "result": {
-    "count": 1,
     "id": "extshape_blockus:smooth_soul_sandstone_wall"
   }
 }

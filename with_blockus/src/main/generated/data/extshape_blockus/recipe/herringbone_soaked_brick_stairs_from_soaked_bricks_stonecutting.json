@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "blockus:soaked_bricks",
   "result": {
-    "count": 1,
     "id": "extshape_blockus:herringbone_soaked_brick_stairs"
   }
 }

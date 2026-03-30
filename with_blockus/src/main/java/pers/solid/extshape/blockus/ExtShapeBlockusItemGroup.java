@@ -4,8 +4,8 @@ import com.brand.blockus.itemgroups.BlockusItemGroups;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.google.common.collect.*;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.event.Event;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
@@ -74,7 +74,7 @@ public final class ExtShapeBlockusItemGroup {
   }
 
   private static void addModifyEntriesEvent(ResourceKey<CreativeModeTab> itemGroup) {
-    final Event<ItemGroupEvents.ModifyEntries> event = ItemGroupEvents.modifyEntriesEvent(itemGroup);
+    final Event<CreativeModeTabEvents.ModifyOutput> event = CreativeModeTabEvents.modifyOutputEvent(itemGroup);
     event.addPhaseOrdering(Event.DEFAULT_PHASE, ADD_EXTRA_ITEMS);
     event.register(ADD_EXTRA_ITEMS, entries -> {
       if (!ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups) {

@@ -6,6 +6,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.util.datafix.fixes.BlockRenameFix;
 import net.minecraft.util.datafix.fixes.ItemRenameFix;
+import net.minecraft.util.filefix.FileFixerUpper;
 import net.minecraft.world.item.DyeColor;
 import org.apache.commons.lang3.Validate;
 import org.spongepowered.asm.mixin.Final;
@@ -36,7 +37,7 @@ public abstract class BlockusSchemasMixin {
   private static BiFunction<Integer, Schema, Schema> SAME_NAMESPACED;
 
   @Inject(method = "addFixers", at = @At("TAIL"))
-  private static void postBuild(DataFixerBuilder builder, CallbackInfo ci) {
+  private static void postBuild(final DataFixerBuilder fixerUpper, final FileFixerUpper.Builder fileFixerUpper, CallbackInfo ci) {
     final Map<String, String> idMap = new HashMap<>();
     removeFenceAndGate(idMap, "stone_tiles", "extshape:stone");
     removeFenceAndGate(idMap, "herringbone_stone_brick", "extshape:stone_brick");
@@ -156,10 +157,10 @@ public abstract class BlockusSchemasMixin {
       });
     }
 
-    final Schema schema = builder.addSchema(4081, SAME_NAMESPACED);
+    final Schema schema = fixerUpper.addSchema(4081, SAME_NAMESPACED);
     final UnaryOperator<String> unaryOperator = createRenamer(idMap);
-    builder.addFixer(BlockRenameFix.create(schema, "Rename removed blocks in Extended Block Shapes - Blockus mod", unaryOperator));
-    builder.addFixer(ItemRenameFix.create(schema, "Rename removed items in Extended Block Shapes - Blockus mod", unaryOperator));
+    fixerUpper.addFixer(BlockRenameFix.create(schema, "Rename removed blocks in Extended Block Shapes - Blockus mod", unaryOperator));
+    fixerUpper.addFixer(ItemRenameFix.create(schema, "Rename removed items in Extended Block Shapes - Blockus mod", unaryOperator));
 
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
       ExtShapeBlockus.replacing_id_map = idMap;

@@ -7,7 +7,7 @@ import com.brand.blockus.registry.content.bundles.WoolBundle;
 import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +19,7 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import java.util.concurrent.CompletableFuture;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
-  public ExtShapeBlockusBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+  public ExtShapeBlockusBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
   }
 

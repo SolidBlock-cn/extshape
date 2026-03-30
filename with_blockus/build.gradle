@@ -14,11 +14,12 @@ group = rootProject.maven_group
 repositories {
 }
 dependencies {
+    // 由于 Blockus 模组取消了对 Terraform 的依赖，这里也一并进取消
     // Blockus 模组
-    api("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}") {
-        exclude module: "fabric-loader"
-    }
-    compileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
+//    api("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}") {
+//        exclude module: "fabric-loader"
+//    }
+//    compileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
     api "maven.modrinth:blockus:${project.blockus_version}"
     implementation rootProject
 }

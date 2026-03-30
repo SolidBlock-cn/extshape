@@ -19,7 +19,7 @@ public final class BlockusBlockBiMaps {
   }
 
   static void importFromBlockus() {
-    final Stream<BlockFamily> families = BlockusFamilies.getFamilies();
+    final Stream<BlockFamily> families = BlockusFamilies.getAllFamilies();
     families.forEach(blockFamily -> {
       Block baseBlock = blockFamily.getBaseBlock();
       // ignore netherite block because it belongs to vanilla

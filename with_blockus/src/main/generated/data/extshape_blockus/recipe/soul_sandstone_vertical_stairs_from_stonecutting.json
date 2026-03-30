@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "blockus:soul_sandstone",
   "result": {
-    "count": 1,
     "id": "extshape_blockus:soul_sandstone_vertical_stairs"
   }
 }

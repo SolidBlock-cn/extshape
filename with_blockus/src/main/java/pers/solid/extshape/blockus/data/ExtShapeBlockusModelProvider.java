@@ -4,10 +4,11 @@ import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
@@ -17,7 +18,7 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 @Environment(EnvType.CLIENT)
 public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
 
-  public ExtShapeBlockusModelProvider(FabricDataOutput output) {
+  public ExtShapeBlockusModelProvider(FabricPackOutput output) {
     super(output);
   }
 
@@ -61,7 +62,7 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
   }
 
   private void register(Block block, Identifier identifier) {
-    textureMaps.computeIfAbsent(block, TextureMapping::cube).put(TextureSlot.ALL, identifier);
+    textureMaps.computeIfAbsent(block, TextureMapping::cube).put(TextureSlot.ALL, new Material(identifier, false));
   }
 
   @Override

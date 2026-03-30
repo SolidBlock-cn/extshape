@@ -8,7 +8,7 @@ import com.brand.blockus.utils.helper.WoodMaps;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
@@ -800,7 +800,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.THATCH)
         .addPostBuildConsumer((blockShape4, blockBuilder3) -> {
           FlammableBlockRegistry.getDefaultInstance().add(blockBuilder3.instance, 60, 20);
-          CompostingChanceRegistry.INSTANCE.add(blockBuilder3.instance, blockShape4.logicalCompleteness * 0.75f);
+          CompostableRegistry.INSTANCE.add(blockBuilder3.instance, blockShape4.logicalCompleteness * 0.75f);
         })
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.WHEAT, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))

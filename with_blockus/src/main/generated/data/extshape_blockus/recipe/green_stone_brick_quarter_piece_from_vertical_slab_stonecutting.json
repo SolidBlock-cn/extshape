@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "stained_stone_brick_quarter_piece",
   "ingredient": "extshape_blockus:green_stone_brick_vertical_slab",
   "result": {
     "count": 2,

@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:honeycomb_block",
   "result": {
-    "count": 1,
     "id": "extshape_blockus:honeycomb_brick_vertical_stairs"
   }
 }

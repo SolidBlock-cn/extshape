@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "shingles_quarter_piece",
   "ingredient": "blockus:white_shingles_stairs",
   "result": {
     "count": 3,

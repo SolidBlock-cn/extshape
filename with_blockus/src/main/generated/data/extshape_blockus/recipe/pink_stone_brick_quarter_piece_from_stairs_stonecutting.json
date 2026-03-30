@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "stained_stone_brick_quarter_piece",
   "ingredient": "blockus:pink_stone_brick_stairs",
   "result": {
     "count": 3,

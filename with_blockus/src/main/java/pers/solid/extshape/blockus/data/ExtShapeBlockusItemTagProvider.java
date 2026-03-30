@@ -5,7 +5,7 @@ import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.brand.blockus.registry.tag.BlockusItemTags;
 import com.brand.blockus.utils.helper.WoodMaps;
 import com.google.common.collect.Iterables;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
-  public ExtShapeBlockusItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
+  public ExtShapeBlockusItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
     super(output, completableFuture, blockTagProvider);
   }
 

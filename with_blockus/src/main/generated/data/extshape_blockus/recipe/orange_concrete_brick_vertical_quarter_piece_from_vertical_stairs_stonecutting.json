@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "concrete_brick_vertical_quarter_piece",
   "ingredient": "extshape_blockus:orange_concrete_brick_vertical_stairs",
   "result": {
     "count": 3,

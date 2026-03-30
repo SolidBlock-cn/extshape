@@ -28,13 +28,13 @@
   ],
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
-    "minecraft": "1.21.11",
+    "fabric-api": "*",
+    "minecraft": "~26.1",
     "extshape": [">=3.0.0-0", "${version}"],
-    "blockus": ">=2.15.0"
+    "blockus": ">=2.16.0"
   },
   "recommends": {
-    "minecraft": "1.21.11"
+    "minecraft": "26.1"
   },
   "custom": {
     "modmenu": {

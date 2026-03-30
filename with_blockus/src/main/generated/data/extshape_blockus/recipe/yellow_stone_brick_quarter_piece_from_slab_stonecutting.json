@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "stained_stone_brick_quarter_piece",
   "ingredient": "blockus:yellow_stone_brick_slab",
   "result": {
     "count": 2,

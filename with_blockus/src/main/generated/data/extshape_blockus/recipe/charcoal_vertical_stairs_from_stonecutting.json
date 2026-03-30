@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "blockus:charcoal_block",
   "result": {
-    "count": 1,
     "id": "extshape_blockus:charcoal_vertical_stairs"
   }
 }

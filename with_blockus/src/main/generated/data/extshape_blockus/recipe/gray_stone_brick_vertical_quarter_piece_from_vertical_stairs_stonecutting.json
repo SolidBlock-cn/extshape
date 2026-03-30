@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "stained_stone_brick_vertical_quarter_piece",
   "ingredient": "extshape_blockus:gray_stone_brick_vertical_stairs",
   "result": {
     "count": 3,

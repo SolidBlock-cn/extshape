@@ -1,6 +1,5 @@
 {
   "type": "minecraft:stonecutting",
-  "group": "shingles_vertical_quarter_piece",
   "ingredient": "extshape_blockus:yellow_shingles_vertical_slab",
   "result": {
     "count": 2,

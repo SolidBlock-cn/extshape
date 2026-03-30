@@ -2,7 +2,6 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:andesite",
   "result": {
-    "count": 1,
     "id": "extshape_blockus:andesite_brick_vertical_stairs"
   }
 }
