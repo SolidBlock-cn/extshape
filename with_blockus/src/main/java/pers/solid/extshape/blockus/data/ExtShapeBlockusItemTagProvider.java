@@ -10,7 +10,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
 import pers.solid.extshape.data.ExtShapeItemTagProvider;
@@ -20,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
-  public ExtShapeBlockusItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
+  public ExtShapeBlockusItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExtShapeBlockTagProvider blockTagProvider) {
     super(output, completableFuture, blockTagProvider);
   }
 
