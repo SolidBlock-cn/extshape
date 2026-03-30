@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.storage.loot.LootTable;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -22,7 +21,7 @@ public class ExtShapeLootTableProvider extends FabricBlockLootTableProvider {
 
   @Override
   public void generate() {
-    final ImmutableMap<Block, UnusualLootTables.@NotNull LootTableFunction> instance = new UnusualLootTables().createInstance();
+    final ImmutableMap<Block, UnusualLootTables.LootTableFunction> instance = new UnusualLootTables().createInstance();
     for (Block block : ExtShapeBlocks.getBlocks()) {
       if (block.getLootTable().isEmpty()) {
         continue;

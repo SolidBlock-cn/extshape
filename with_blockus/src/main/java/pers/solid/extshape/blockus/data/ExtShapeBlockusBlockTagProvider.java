@@ -11,6 +11,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
@@ -357,13 +359,15 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     // endregion 其他通用方块标签
   }
 
+  @Contract("null -> fail")
   @Override
-  protected void checkValidBaseBlock(Block baseBlock) {
+  protected void checkValidBaseBlock(@Nullable Block baseBlock) {
     Preconditions.checkArgument(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.contains(baseBlock), "%s is not a base block for Extended Block Shapes - Blockus", baseBlock);
   }
 
+  @Contract("null -> false")
   @Override
-  protected boolean isValidBlock(Block block) {
+  protected boolean isValidBlock(@Nullable Block block) {
     return ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block);
   }
 }

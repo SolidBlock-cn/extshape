@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.mixin.AbstractBlockSettingsAccessor;
@@ -17,7 +16,7 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
 
   public final ActivationSettings activationSettings;
 
-  public ButtonBuilder(Block baseBlock, @NotNull ActivationSettings activationSettings) {
+  public ButtonBuilder(Block baseBlock, ActivationSettings activationSettings) {
     super(baseBlock, Util.make(BlockBehaviour.Properties.ofFullCopy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.defaultDestroyTime()), computeStrength(baseBlock.getExplosionResistance()))

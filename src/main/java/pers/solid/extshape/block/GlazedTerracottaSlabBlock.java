@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -24,7 +23,7 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
   public static final MapCodec<GlazedTerracottaSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), GlazedTerracottaSlabBlock::new);
   public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-  public GlazedTerracottaSlabBlock(@NotNull Block baseBlock, Properties settings) {
+  public GlazedTerracottaSlabBlock(Block baseBlock, Properties settings) {
     super(baseBlock, settings);
     registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH));
   }

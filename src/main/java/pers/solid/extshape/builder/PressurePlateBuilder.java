@@ -5,7 +5,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
 import pers.solid.extshape.mixin.AbstractBlockSettingsAccessor;
@@ -15,7 +14,7 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
 
   public final ActivationSettings activationSettings;
 
-  public PressurePlateBuilder(Block baseBlock, @NotNull ActivationSettings activationSettings) {
+  public PressurePlateBuilder(Block baseBlock, ActivationSettings activationSettings) {
     super(baseBlock, Util.make(BlockBehaviour.Properties.ofFullCopy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.defaultDestroyTime()), computeStrength(baseBlock.getExplosionResistance()))

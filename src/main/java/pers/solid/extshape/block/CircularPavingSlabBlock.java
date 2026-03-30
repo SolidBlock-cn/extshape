@@ -13,14 +13,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 
 public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-  public CircularPavingSlabBlock(@NotNull Block baseBlock, Properties settings) {
+  public CircularPavingSlabBlock(Block baseBlock, Properties settings) {
     super(baseBlock, settings);
     registerDefaultState(defaultBlockState().setValue(FACING, Direction.SOUTH));
   }
@@ -32,7 +32,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   }
 
   @Override
-  public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+  public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
     final BlockState placementState = super.getStateForPlacement(ctx);
     if (placementState != null && placementState.getValue(TYPE) == SlabType.DOUBLE) {
       return placementState;

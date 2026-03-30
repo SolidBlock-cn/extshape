@@ -45,8 +45,8 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   @Override
-  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerato) {
-    return simpleStoneCuttingRecipe(2, recipeGenerato);
+  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerator) {
+    return simpleStoneCuttingRecipe(2, recipeGenerator);
   }
 
   @Override

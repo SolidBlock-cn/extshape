@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -39,20 +38,20 @@ import pers.solid.extshape.util.ActivationSettings;
 public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeButtonBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getTicksToStayPressed())).apply(instance, ExtShapeButtonBlock::new));
 
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public ExtShapeButtonBlock(@NotNull Block baseBlock, Properties settings, BlockSetType blockSetType, int pressTicks) {
+  public ExtShapeButtonBlock(Block baseBlock, Properties settings, BlockSetType blockSetType, int pressTicks) {
     super(blockSetType, pressTicks, settings);
     this.baseBlock = baseBlock;
   }
 
-  public ExtShapeButtonBlock(@NotNull Block baseBlock, Properties blockSettings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapeButtonBlock(Block baseBlock, Properties blockSettings, ActivationSettings activationSettings) {
     super(activationSettings.blockSetType(), activationSettings.buttonTime(), blockSettings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -96,9 +95,9 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   }
 
   public static class WithExtension extends ExtShapeButtonBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Properties settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Properties settings, ActivationSettings activationSettings, BlockExtension extension) {
       super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
@@ -133,15 +132,15 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   }
 
   public static class WithOxidation extends ExtShapeButtonBlock implements WeatheringCopper {
-    private final @NotNull WeatherState oxidationLevel;
+    private final WeatherState oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getTicksToStayPressed()), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, BlockSetType blockSetType, int pressTicks, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, BlockSetType blockSetType, int pressTicks, WeatherState oxidationLevel) {
       super(baseBlock, settings, blockSetType, pressTicks);
       this.oxidationLevel = oxidationLevel;
     }
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull ActivationSettings activationSettings, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, ActivationSettings activationSettings, WeatherState oxidationLevel) {
       this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.buttonTime(), oxidationLevel);
     }
 

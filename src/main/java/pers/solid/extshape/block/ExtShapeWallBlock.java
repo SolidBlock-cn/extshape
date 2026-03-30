@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -35,15 +34,15 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlockInterface {
   @SuppressWarnings("unchecked")
   public static final MapCodec<WallBlock> CODEC = (MapCodec<WallBlock>) (MapCodec<?>) ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeWallBlock::new);
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public ExtShapeWallBlock(@NotNull Block baseBlock, Properties settings) {
+  public ExtShapeWallBlock(Block baseBlock, Properties settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -60,8 +59,8 @@ public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlock
   }
 
   @Override
-  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerato) {
-    return simpleStoneCuttingRecipe(1, recipeGenerato);
+  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerator) {
+    return simpleStoneCuttingRecipe(1, recipeGenerator);
   }
 
   @Override
@@ -81,9 +80,9 @@ public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlock
   }
 
   public static class WithExtension extends ExtShapeWallBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Properties settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Properties settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -118,10 +117,10 @@ public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlock
   }
 
   public static class WithOxidation extends ExtShapeWallBlock implements WeatheringCopper {
-    private final @NotNull WeatherState oxidationLevel;
+    private final WeatherState oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

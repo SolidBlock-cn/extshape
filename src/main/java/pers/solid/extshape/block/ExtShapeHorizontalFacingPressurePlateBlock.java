@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.mixin.BlockStateModelGeneratorAccessor;
 import pers.solid.extshape.util.ActivationSettings;
@@ -23,12 +23,12 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
   public static final MapCodec<ExtShapeHorizontalFacingPressurePlateBlock> CODEC = createCodec(ExtShapeHorizontalFacingPressurePlateBlock::new);
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Properties settings, @NotNull BlockSetType blockSetType, int tickRate) {
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Properties settings, BlockSetType blockSetType, int tickRate) {
     super(baseBlock, settings, blockSetType, tickRate);
     registerDefaultState(defaultBlockState().setValue(FACING, Direction.SOUTH));
   }
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Properties settings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Properties settings, ActivationSettings activationSettings) {
     this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime());
   }
 
@@ -39,7 +39,7 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   }
 
   @Override
-  public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+  public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
     final BlockState placementState = super.getStateForPlacement(ctx);
     return placementState != null ? placementState.setValue(FACING, ctx.getHorizontalDirection().getOpposite()) : null;
   }

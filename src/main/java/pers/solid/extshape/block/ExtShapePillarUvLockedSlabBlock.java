@@ -5,14 +5,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.world.level.block.Block;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 
 public class ExtShapePillarUvLockedSlabBlock extends ExtShapePillarSlabBlock {
   public static final MapCodec<ExtShapePillarUvLockedSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapePillarUvLockedSlabBlock::new);
 
-  public ExtShapePillarUvLockedSlabBlock(@NotNull Block baseBlock, Properties settings) {
+  public ExtShapePillarUvLockedSlabBlock(Block baseBlock, Properties settings) {
     super(baseBlock, settings);
   }
 

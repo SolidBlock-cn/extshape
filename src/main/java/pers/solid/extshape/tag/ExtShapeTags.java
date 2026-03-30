@@ -7,7 +7,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 
@@ -237,7 +236,7 @@ public final class ExtShapeTags {
       .build();
 
   /**
-   * 类似于 {@link BlockTags#SNOW}，但是不同的是，该方块标签中，{@link net.minecraft.world.level.block.SnowyDirtBlock#isSnowySetting(BlockState)} 对于该标签的方块必须有底部的完整碰撞箱才会让方块显示为雪。
+   * 类似于 {@link BlockTags#SNOW}，但是不同的是，该方块标签中，{@link net.minecraft.world.level.block.SnowyBlock#isSnowySetting(BlockState)} 对于该标签的方块必须有底部的完整碰撞箱才会让方块显示为雪。
    */
   public static final TagKey<Block> SNOW = of("snow");
 
@@ -247,7 +246,7 @@ public final class ExtShapeTags {
   public static void init() {
   }
 
-  private static TagKey<Block> of(@NotNull String path) {
+  private static TagKey<Block> of(String path) {
     return TagKey.create(Registries.BLOCK, ExtShape.id(path));
   }
 

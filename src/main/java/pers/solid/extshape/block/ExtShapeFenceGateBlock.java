@@ -27,7 +27,6 @@ import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -39,24 +38,24 @@ import pers.solid.extshape.util.FenceSettings;
  */
 public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeFenceGateBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient)).apply(instance, ExtShapeFenceGateBlock::new));
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
   /**
    * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
    */
   private final Item secondIngredient;
 
-  public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Properties settings, @NotNull WoodType woodType, @Nullable Item secondIngredient) {
+  public ExtShapeFenceGateBlock(Block baseBlock, Properties settings, WoodType woodType, Item secondIngredient) {
     super(woodType, settings);
     this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
   }
 
-  public ExtShapeFenceGateBlock(@NotNull Block baseBlock, Properties settings, @NotNull FenceSettings fenceSettings) {
+  public ExtShapeFenceGateBlock(Block baseBlock, Properties settings, FenceSettings fenceSettings) {
     this(baseBlock, settings, fenceSettings.woodType(), fenceSettings.secondIngredient());
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -65,7 +64,7 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
     return Component.translatable("block.extshape.?_fence_gate", this.getNamePrefix());
   }
 
-  public @Nullable Item getSecondIngredient() {
+  public Item getSecondIngredient() {
     return secondIngredient;
   }
 
@@ -77,7 +76,7 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
         .pattern("#W#")
         .pattern("#W#")
         .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock));
-    return craftingRecipe != null ? craftingRecipe.group(getRecipeGroup()) : null;
+    return craftingRecipe.group(getRecipeGroup());
   }
 
   @Override
@@ -98,9 +97,9 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
   }
 
   public static class WithExtension extends ExtShapeFenceGateBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Properties settings, @NotNull FenceSettings fenceSettings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Properties settings, FenceSettings fenceSettings, BlockExtension extension) {
       super(baseBlock, settings, fenceSettings);
       this.extension = extension;
     }
@@ -135,15 +134,15 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
   }
 
   public static class WithOxidation extends ExtShapeFenceGateBlock implements WeatheringCopper {
-    private final @NotNull WeatherState oxidationLevel;
+    private final WeatherState oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceGateBlock::getSecondIngredient), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WoodType woodType, @Nullable Item secondIngredient, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, WoodType woodType, Item secondIngredient, WeatherState oxidationLevel) {
       super(baseBlock, settings, woodType, secondIngredient);
       this.oxidationLevel = oxidationLevel;
     }
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull FenceSettings fenceSettings, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, FenceSettings fenceSettings, WeatherState oxidationLevel) {
       super(baseBlock, settings, fenceSettings);
       this.oxidationLevel = oxidationLevel;
     }

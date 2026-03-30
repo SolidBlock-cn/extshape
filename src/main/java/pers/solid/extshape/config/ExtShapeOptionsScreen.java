@@ -24,13 +24,12 @@ import pers.solid.extshape.builder.BlockShape;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
 public class ExtShapeOptionsScreen extends Screen {
 
-  private final Screen parent;
+  private final @Nullable Screen parent;
   private final Options gameOptions = Minecraft.getInstance().options;
   public final ExtShapeConfig oldConfig = ExtShapeConfig.CURRENT_CONFIG;
   public final ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
@@ -92,7 +91,7 @@ public class ExtShapeOptionsScreen extends Screen {
   // 完成按钮
   private final Button finishButton = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 - 100, this.height - 27).size(200, 20).build();
 
-  public ExtShapeOptionsScreen(Screen parent) {
+  public ExtShapeOptionsScreen(@Nullable Screen parent) {
     super(Component.translatable("options.extshape.title"));
     this.parent = parent;
     addToVanillaGroupsButton.active = false;
@@ -163,7 +162,6 @@ public class ExtShapeOptionsScreen extends Screen {
 
   @Override
   public void onClose() {
-    assert minecraft != null;
     if (!suppressedGroupsWarning && !newConfig.addToVanillaGroups && !newConfig.showSpecificGroups
         && !(!oldConfig.addToVanillaGroups && !oldConfig.showSpecificGroups)) {
       // 由于两个设置都被关闭，因此需要确认是否不添加到任何物品栏。
@@ -190,7 +188,7 @@ public class ExtShapeOptionsScreen extends Screen {
   }
 
   private static Collection<BlockShape> convertStringToCollection(String s) {
-    return Arrays.stream(StringUtils.split(s)).map(BlockShape::byName).filter(Objects::nonNull).collect(ImmutableSet.toImmutableSet());
+    return Arrays.stream(StringUtils.split(s)).map(BlockShape::byName).collect(ImmutableSet.toImmutableSet());
   }
 
   private static String convertCollectionToString(Collection<BlockShape> list) {

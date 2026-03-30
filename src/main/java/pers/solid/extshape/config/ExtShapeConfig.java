@@ -34,7 +34,7 @@ public class ExtShapeConfig implements Cloneable {
   /**
    * 本模组当前的配置。
    */
-  public static ExtShapeConfig CURRENT_CONFIG;
+  public static ExtShapeConfig CURRENT_CONFIG = DEFAULT_CONFIG;
   /**
    * 当配置更新后，这个值就会是 {@code true}，参见 {@link pers.solid.extshape.mixin.ItemGroupsMixin}。
    */
@@ -90,11 +90,6 @@ public class ExtShapeConfig implements Cloneable {
   public static ExtShapeConfig readFile(File file) throws IOException {
     try (final FileReader fileReader = new FileReader(file)) {
       final ExtShapeConfig config = GSON.fromJson(fileReader, ExtShapeConfig.class);
-      if (config == null) {
-        final ExtShapeConfig newConfig = new ExtShapeConfig();
-        newConfig.tryWriteFile(file);
-        return newConfig;
-      }
       config.shapesToAddToVanilla = new LinkedHashSet<>(config.shapesToAddToVanilla);
       config.shapesInSpecificGroups = new LinkedHashSet<>(config.shapesInSpecificGroups);
       return config;
