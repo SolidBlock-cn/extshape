@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.*;
 import pers.solid.extshape.data.RecipeGroupRegistry;
@@ -45,9 +44,9 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   /**
    * 基础方块。对于 BlocksBuilder 而言，基础方块不能是 {@code null}。
    */
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public BlocksBuilder setFenceSettings(FenceSettings fenceSettings) {
+  public BlocksBuilder setFenceSettings(@Nullable FenceSettings fenceSettings) {
     this.fenceSettings = fenceSettings;
     return this;
   }
@@ -72,7 +71,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   protected @Nullable BiConsumer<BlockShape, AbstractBlockBuilder<?>> postBuildConsumer;
 
-  public BlocksBuilder(@NotNull Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
+  public BlocksBuilder(Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
     this.baseBlock = baseBlock;
     this.shapesToBuild = shapesToBuild;
     this.fenceSettings = FenceSettings.DEFAULT;
@@ -83,11 +82,11 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    * 设置其构建的方块可能需要实现的扩展功能。
    */
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder withExtension(@NotNull BlockExtension blockExtension) {
+  public BlocksBuilder withExtension(BlockExtension blockExtension) {
     return addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.withExtension(blockExtension));
   }
 
-  @SuppressWarnings({"unchecked", "RedundantCast"})
+  @SuppressWarnings({"unchecked"})
   @Contract(value = "-> this", mutates = "this")
   public BlocksBuilder setPillar() {
     return addPreBuildConsumer((blockShape, abstractBlockBuilder) -> {
@@ -101,7 +100,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     });
   }
 
-  @SuppressWarnings({"unchecked", "RedundantCast"})
+  @SuppressWarnings({"unchecked"})
   @Contract(value = "-> this", mutates = "this")
   public BlocksBuilder setCircularPaving() {
     return addPreBuildConsumer((blockShape, abstractBlockBuilder) -> {
@@ -113,7 +112,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
     });
   }
 
-  @SuppressWarnings({"unchecked", "RedundantCast"})
+  @SuppressWarnings({"unchecked"})
   @Contract(value = "-> this", mutates = "this")
   public BlocksBuilder setPillarUvLocked() {
     return addPreBuildConsumer((blockShape, abstractBlockBuilder) -> {
@@ -207,7 +206,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder withFences(@NotNull FenceSettings fenceSettings) {
+  public BlocksBuilder withFences(FenceSettings fenceSettings) {
     with(BlockShape.FENCE, BlockShape.FENCE_GATE);
     this.fenceSettings = fenceSettings;
     return this;
@@ -231,7 +230,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder withButton(@NotNull ActivationSettings type) {
+  public BlocksBuilder withButton(ActivationSettings type) {
     with(BlockShape.BUTTON);
     this.activationSettings = type;
     return this;
@@ -242,7 +241,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @CanIgnoreReturnValue
   @Contract(value = "_ -> this", mutates = "this")
-  public BlocksBuilder withPressurePlate(@NotNull ActivationSettings activationSettings) {
+  public BlocksBuilder withPressurePlate(ActivationSettings activationSettings) {
     with(BlockShape.PRESSURE_PLATE);
     this.activationSettings = activationSettings;
     return this;
@@ -256,7 +255,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   public BlocksBuilder addPreBuildConsumer(BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> biConsumer) {
     if (preBuildConsumer == null) {
       preBuildConsumer = biConsumer;
-    } else if (biConsumer != null) {
+    } else {
       preBuildConsumer = preBuildConsumer.andThen(biConsumer);
     }
     return this;
@@ -270,7 +269,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   public BlocksBuilder addPostBuildConsumer(BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> biConsumer) {
     if (postBuildConsumer == null) {
       postBuildConsumer = biConsumer;
-    } else if (biConsumer != null) {
+    } else {
       postBuildConsumer = postBuildConsumer.andThen(biConsumer);
     }
     return this;
@@ -330,7 +329,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
    */
   @Contract(pure = true)
   @Nullable
-  protected AbstractBlockBuilder<? extends Block> createBlockBuilderFor(@NotNull BlockShape shape) {
+  protected AbstractBlockBuilder<? extends Block> createBlockBuilderFor(BlockShape shape) {
     final int id = shape.id;
     final AbstractBlockBuilder<? extends Block> builder = switch (id) {
       case 0 -> new StairsBuilder(baseBlock);
@@ -340,7 +339,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       case 4 -> new QuarterPieceBuilder(baseBlock);
       case 5 -> new VerticalQuarterPieceBuilder(baseBlock);
       case 6 -> new FenceBuilder(baseBlock, Objects.requireNonNull(fenceSettings, "fenceSettings").secondIngredient());
-      case 7 -> new FenceGateBuilder(baseBlock, fenceSettings);
+      case 7 -> new FenceGateBuilder(baseBlock, Objects.requireNonNull(fenceSettings, "fenceSettings"));
       case 8 -> new WallBuilder(baseBlock);
       case 9 -> new ButtonBuilder(baseBlock, Objects.requireNonNull(activationSettings, "activationSettings"));
       case 10 -> new PressurePlateBuilder(baseBlock, Objects.requireNonNull(activationSettings, "activationSettings"));

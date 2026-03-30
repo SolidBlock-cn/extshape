@@ -28,6 +28,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.util.HorizontalCornerDirection;
 
+import java.util.Objects;
+
 public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock {
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
   public static final EnumProperty<HorizontalCornerDirection> FACING = VerticalQuarterPieceBlock.FACING;
@@ -71,7 +73,8 @@ public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock
 
   @Override
   public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-    return VOXELS.get(state.getValue(FACING));
+    final HorizontalCornerDirection facing = state.getValue(FACING);
+    return Objects.requireNonNull(VOXELS.get(facing), "unknown shape");
   }
 
   @Override

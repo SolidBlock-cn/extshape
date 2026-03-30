@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -36,20 +35,20 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeFenceBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient), propertiesCodec()).apply(instance, ExtShapeFenceBlock::new));
 
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
   /**
    * 合成栅栏方块需要使用的第二个材料。
    */
-  private final @Nullable Item secondIngredient;
+  private final Item secondIngredient;
 
-  public ExtShapeFenceBlock(@NotNull Block baseBlock, @Nullable Item secondIngredient, Properties settings) {
+  public ExtShapeFenceBlock(Block baseBlock,Item secondIngredient, Properties settings) {
     super(settings);
     this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -60,15 +59,14 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
 
   @Override
   public @Nullable RecipeBuilder getCraftingRecipe(RecipeProvider recipeGenerator) {
-    return secondIngredient == null ? null : recipeGenerator.shaped(getRecipeCategory(), this, 2)
-        .pattern("W#W").pattern("W#W")
-        .group(getRecipeGroup())
-        .define('W', baseBlock)
-        .define('#', getSecondIngredient())
-        .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock));
+    return recipeGenerator.shaped(getRecipeCategory(), this, 2)
+            .pattern("W#W").pattern("W#W")
+            .group(getRecipeGroup())
+            .define('W', baseBlock)
+            .define('#', getSecondIngredient())
+            .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock));
   }
 
-  @Nullable
   public Item getSecondIngredient() {
     return secondIngredient;
   }
@@ -91,9 +89,9 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   }
 
   public static class WithExtension extends ExtShapeFenceBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, @Nullable Item secondIngredient, Properties settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Item secondIngredient, Properties settings, BlockExtension extension) {
       super(baseBlock, secondIngredient, settings);
       this.extension = extension;
     }
@@ -129,10 +127,10 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   }
 
   public static class WithOxidation extends ExtShapeFenceBlock implements WeatheringCopper {
-    private final @NotNull WeatherState oxidationLevel;
+    private final WeatherState oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceBlock::getSecondIngredient), propertiesCodec(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(@NotNull Block baseBlock, @Nullable Item secondIngredient, Properties settings, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Item secondIngredient, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, secondIngredient, settings);
       this.oxidationLevel = oxidationLevel;
     }

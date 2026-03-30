@@ -3,7 +3,6 @@ package pers.solid.extshape.builder;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -34,11 +33,11 @@ public class BlocksBuilderFactory {
   public BlocksBuilderFactory() {
   }
 
-  protected BlocksBuilder createInternal(@NotNull Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
+  protected BlocksBuilder createInternal(Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
     return new BlocksBuilder(baseBlock, shapesToBuild);
   }
 
-  protected BlocksBuilder create(@NotNull Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
+  protected BlocksBuilder create(Block baseBlock, SortedSet<BlockShape> shapesToBuild) {
     final BlocksBuilder blocksBuilder = createInternal(baseBlock, shapesToBuild);
     blocksBuilder.defaultNamespace = defaultNamespace;
     blocksBuilder.instanceCollection = instanceCollection;
@@ -48,7 +47,7 @@ public class BlocksBuilderFactory {
     return blocksBuilder;
   }
 
-  public BlocksBuilder createAllShapes(@NotNull Block baseBlock) {
+  public BlocksBuilder createAllShapes(Block baseBlock) {
     return create(baseBlock, new TreeSet<>(SHAPES));
   }
 
@@ -59,7 +58,7 @@ public class BlocksBuilderFactory {
    * @return 新的 BlocksBuilder。
    */
   @Contract("_ -> new")
-  public BlocksBuilder createEmpty(@NotNull Block baseBlock) {
+  public BlocksBuilder createEmpty(Block baseBlock) {
     return create(baseBlock, new TreeSet<>());
   }
 
@@ -70,7 +69,7 @@ public class BlocksBuilderFactory {
    * @return 新的 BlocksBuilder。
    */
   @Contract("_ -> new")
-  public BlocksBuilder createConstructionOnly(@NotNull Block baseBlock) {
+  public BlocksBuilder createConstructionOnly(Block baseBlock) {
     return createEmpty(baseBlock).withConstructionShapes();
   }
 

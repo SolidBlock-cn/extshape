@@ -8,7 +8,6 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
@@ -63,7 +62,7 @@ public final class AttributiveBlockNameManager {
   }
 
   @Contract("_, _, !null -> !null")
-  public static @Nullable String replace(@NotNull String from, @NotNull Map<? extends Pattern, ? extends String> replacement, @Nullable String defaultValue) {
+  public static @Nullable String replace(String from, Map<? extends Pattern, ? extends String> replacement, @Nullable String defaultValue) {
     for (Map.Entry<? extends Pattern, ? extends String> entry : replacement.entrySet()) {
       final Matcher matcher = entry.getKey().matcher(from);
       if (matcher.find()) {
@@ -74,7 +73,7 @@ public final class AttributiveBlockNameManager {
   }
 
 
-  public static @NotNull String replace(@NotNull String from, @NotNull Map<? extends Pattern, ? extends String> replacement) {
+  public static String replace(String from, Map<? extends Pattern, ? extends String> replacement) {
     return replace(from, replacement, from);
   }
 
@@ -90,7 +89,7 @@ public final class AttributiveBlockNameManager {
   }
 
   @Contract("_, _, !null -> !null")
-  public static String convertToAttributive(@NotNull String from, @NotNull Language language, @Nullable String defaultValue) {
+  public static @Nullable String convertToAttributive(String from, Language language, @Nullable String defaultValue) {
     final String code = language.getOrDefault("language.code");
     String result = replace(from, EN_REPLACEMENT, null);
     if (result == null && code.startsWith("zho")) {
@@ -121,7 +120,7 @@ public final class AttributiveBlockNameManager {
     return result;
   }
 
-  public static @NotNull String convertToAttributive(@NotNull String from, @NotNull Language language) {
+  public static String convertToAttributive(String from, Language language) {
     return convertToAttributive(from, language, from);
   }
 }

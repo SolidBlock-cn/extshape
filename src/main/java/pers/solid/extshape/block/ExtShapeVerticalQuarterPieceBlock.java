@@ -51,8 +51,8 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   }
 
   @Override
-  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerato) {
-    return simpleStoneCuttingRecipe(4, recipeGenerato);
+  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerator) {
+    return simpleStoneCuttingRecipe(4, recipeGenerator);
   }
 
   @Override

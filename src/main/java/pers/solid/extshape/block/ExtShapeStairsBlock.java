@@ -48,8 +48,8 @@ public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBl
   }
 
   @Override
-  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerato) {
-    return simpleStoneCuttingRecipe(1, recipeGenerato);
+  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerator) {
+    return simpleStoneCuttingRecipe(1, recipeGenerator);
   }
 
   @Override

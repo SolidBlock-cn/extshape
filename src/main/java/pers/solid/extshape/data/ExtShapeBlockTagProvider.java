@@ -12,7 +12,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.Validate;
-import org.jspecify.annotations.NonNull;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.Nullable;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -43,7 +44,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
   }
 
   @Override
-  protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
+  protected void addTags(HolderLookup.Provider wrapperLookup) {
 
     // region 基础形状部分
 
@@ -384,7 +385,8 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
    * @throws IllegalArgumentException 模组不是本模组中使用的基础方块。
    * @implNote 其他模组继承此类时需要重写此方法。
    */
-  protected void checkValidBaseBlock(Block baseBlock) {
+  @Contract("null -> fail")
+  protected void checkValidBaseBlock(@Nullable Block baseBlock) {
     Preconditions.checkArgument(ExtShapeBlocks.containsBaseBlock(baseBlock), "%s is not a base block", baseBlock);
   }
 
@@ -393,7 +395,8 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
    *
    * @implNote 其他模组继承此类时需要重写此方法。
    */
-  protected boolean isValidBlock(Block block) {
+  @Contract("null -> false")
+  protected boolean isValidBlock(@Nullable Block block) {
     return ExtShapeBlocks.contains(block);
   }
 }

@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
@@ -35,15 +34,15 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeVerticalStairsBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeVerticalStairsBlock::new);
 
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public ExtShapeVerticalStairsBlock(@NotNull Block baseBlock, Properties settings) {
+  public ExtShapeVerticalStairsBlock(Block baseBlock, Properties settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -62,8 +61,8 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
 
 
   @Override
-  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerato) {
-    return simpleStoneCuttingRecipe(1, recipeGenerato);
+  public @Nullable SingleItemRecipeBuilder getStonecuttingRecipe(RecipeProvider recipeGenerator) {
+    return simpleStoneCuttingRecipe(1, recipeGenerator);
   }
 
   @Override
@@ -83,9 +82,9 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   }
 
   public static class WithExtension extends ExtShapeVerticalStairsBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Properties settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Properties settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -120,10 +119,10 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   }
 
   public static class WithOxidation extends ExtShapeVerticalStairsBlock implements WeatheringCopper {
-    private final @NotNull WeatherState oxidationLevel;
+    private final WeatherState oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

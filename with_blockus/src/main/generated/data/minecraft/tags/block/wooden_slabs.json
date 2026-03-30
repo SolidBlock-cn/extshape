@@ -1,5 +1,6 @@
 {
   "values": [
+    "extshape_blockus:herringbone_jungle_slab",
     "extshape_blockus:herringbone_warped_slab",
     "extshape_blockus:herringbone_oak_slab",
     "extshape_blockus:herringbone_crimson_slab",
@@ -13,7 +14,6 @@
     "extshape_blockus:herringbone_raw_bamboo_slab",
     "extshape_blockus:herringbone_charred_slab",
     "extshape_blockus:herringbone_dark_oak_slab",
-    "extshape_blockus:herringbone_pale_oak_slab",
-    "extshape_blockus:herringbone_jungle_slab"
+    "extshape_blockus:herringbone_pale_oak_slab"
   ]
 }

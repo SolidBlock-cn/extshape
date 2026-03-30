@@ -2,6 +2,7 @@
   "values": [
     "extshape_blockus:white_oak_wall",
     "extshape_blockus:charred_wall",
+    "extshape_blockus:herringbone_jungle_wall",
     "extshape_blockus:herringbone_warped_wall",
     "extshape_blockus:herringbone_oak_wall",
     "extshape_blockus:herringbone_crimson_wall",
@@ -15,7 +16,6 @@
     "extshape_blockus:herringbone_raw_bamboo_wall",
     "extshape_blockus:herringbone_charred_wall",
     "extshape_blockus:herringbone_dark_oak_wall",
-    "extshape_blockus:herringbone_pale_oak_wall",
-    "extshape_blockus:herringbone_jungle_wall"
+    "extshape_blockus:herringbone_pale_oak_wall"
   ]
 }

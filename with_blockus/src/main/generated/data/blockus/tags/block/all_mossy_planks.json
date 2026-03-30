@@ -1,5 +1,10 @@
 {
   "values": [
+    "extshape_blockus:mossy_jungle_vertical_slab",
+    "extshape_blockus:mossy_jungle_vertical_stairs",
+    "extshape_blockus:mossy_jungle_quarter_piece",
+    "extshape_blockus:mossy_jungle_vertical_quarter_piece",
+    "extshape_blockus:mossy_jungle_wall",
     "extshape_blockus:mossy_warped_vertical_slab",
     "extshape_blockus:mossy_warped_vertical_stairs",
     "extshape_blockus:mossy_warped_quarter_piece",
@@ -69,11 +74,6 @@
     "extshape_blockus:mossy_pale_oak_vertical_stairs",
     "extshape_blockus:mossy_pale_oak_quarter_piece",
     "extshape_blockus:mossy_pale_oak_vertical_quarter_piece",
-    "extshape_blockus:mossy_pale_oak_wall",
-    "extshape_blockus:mossy_jungle_vertical_slab",
-    "extshape_blockus:mossy_jungle_vertical_stairs",
-    "extshape_blockus:mossy_jungle_quarter_piece",
-    "extshape_blockus:mossy_jungle_vertical_quarter_piece",
-    "extshape_blockus:mossy_jungle_wall"
+    "extshape_blockus:mossy_pale_oak_wall"
   ]
 }

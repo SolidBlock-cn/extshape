@@ -8,7 +8,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.Identifier;
-import org.jspecify.annotations.NonNull;
 import pers.solid.extshape.ExtShape;
 
 public class ExtShapeDataGenerator implements DataGeneratorEntrypoint {
@@ -19,12 +18,12 @@ public class ExtShapeDataGenerator implements DataGeneratorEntrypoint {
     pack.addProvider(ExtShapeModelProvider::new);
     pack.addProvider((output, registriesFuture) -> new FabricRecipeProvider(output, registriesFuture) {
       @Override
-      protected @NonNull RecipeProvider createRecipeProvider(HolderLookup.@NonNull Provider registryLookup, @NonNull RecipeOutput exporter) {
+      protected RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput exporter) {
         return new ExtShapeRecipeGenerator(registryLookup, exporter);
       }
 
       @Override
-      public @NonNull String getName() {
+      public String getName() {
         return "Recipe";
       }
     });
@@ -35,17 +34,17 @@ public class ExtShapeDataGenerator implements DataGeneratorEntrypoint {
     final FabricDataGenerator.Pack recipeTweak = fabricDataGenerator.createBuiltinResourcePack(ExtShape.id("recipe_tweak"));
     recipeTweak.addProvider((output, registriesFuture) -> new FabricRecipeProvider(output, registriesFuture) {
       @Override
-      public @NonNull String getName() {
+      public String getName() {
         return "RecipeTweak";
       }
 
       @Override
-      protected @NonNull RecipeProvider createRecipeProvider(HolderLookup.@NonNull Provider registryLookup, @NonNull RecipeOutput exporter) {
+      protected RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput exporter) {
         return new ExtShapeTweakRecipeProvider(registryLookup, exporter);
       }
 
       @Override
-      protected @NonNull Identifier getRecipeIdentifier(@NonNull Identifier identifier) {
+      protected Identifier getRecipeIdentifier(Identifier identifier) {
         return identifier;
       }
     });
