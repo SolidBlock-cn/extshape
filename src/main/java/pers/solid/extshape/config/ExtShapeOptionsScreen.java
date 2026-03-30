@@ -20,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.CreativeModeTabs;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 
 import java.util.Arrays;
@@ -195,7 +196,7 @@ public class ExtShapeOptionsScreen extends Screen {
     return list.stream().map(BlockShape::getSerializedName).collect(Collectors.joining(StringUtils.SPACE));
   }
 
-  private static String getSuggestion(String currentValue) {
+  private static @Nullable String getSuggestion(String currentValue) {
     final String[] split = StringUtils.split(currentValue);
     if (split.length == 0) return null;
     final String last = split[split.length - 1];
