@@ -707,7 +707,7 @@ public final class ExtShapeBlockusBlocks {
             .setRecipeGroup(blockShape -> "small_logs_" + blockShape.getSerializedName())
             .build();
       }
-    };
+    }
 
     markStoneCuttableWhenCreating = true;
     create(BlockusBlocks.CHOCOLATE_BLOCK)
