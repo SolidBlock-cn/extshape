@@ -8,11 +8,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.DamageResistant;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.apache.commons.lang3.StringUtils;
@@ -116,15 +113,9 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     this.buildItem = true;
     this.shouldAddToBlockBiMap = true;
     this.itemSettings = new Item.Properties();
-    if (baseBlock != null && baseBlock.asItem() != Items.AIR) {
-      final @Nullable DamageResistant component = baseBlock.asItem().components().get(DataComponents.DAMAGE_RESISTANT);
+    if (baseBlock != null) {
       if (((AbstractBlockSettingsAccessor) blockSettings).getLightEmission().applyAsInt(baseBlock.defaultBlockState()) > 1) {
         blockSettings.noOcclusion();
-      }
-      if (component != null) {
-        if (DamageTypeTags.IS_FIRE.equals(component.types().unwrapKey().orElse(null))) {
-          itemSettings.fireResistant();
-        }
       }
     }
     this.instanceSupplier = instanceSupplier;

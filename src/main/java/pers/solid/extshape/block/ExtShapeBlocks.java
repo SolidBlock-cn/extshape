@@ -590,6 +590,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.NETHERITE_INGOT, ExtShapeBlockTypes.NETHERITE_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.hard(ExtShapeBlockTypes.NETHERITE_BLOCK_SET_TYPE))
+        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireResistant())
         .build();
 
     // 远古残骸。
@@ -597,6 +598,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.NETHERITE_SCRAP, ExtShapeBlockTypes.ANCIENT_DEBRIS_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.hard(ExtShapeBlockTypes.ANCIENT_DEBRIS_BLOCK_SET_TYPE))
+        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireResistant())
         .build();
 
     // 哭泣的黑曜石。
