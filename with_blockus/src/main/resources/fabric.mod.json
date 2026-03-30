@@ -31,7 +31,7 @@
     "fabric": "*",
     "minecraft": ">=1.21 <=1.21.1",
     "extshape": [">=3.0.0-0", "${version}"],
-    "blockus": ">=2.9.4"
+    "blockus": ">=2.9.13"
   },
   "custom": {
     "modmenu": {
