@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:pink_terracotta",
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:pink_shingles_vertical_quarter_piece"
+  }
+}
