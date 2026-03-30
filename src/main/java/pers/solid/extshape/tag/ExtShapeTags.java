@@ -7,7 +7,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 
@@ -249,7 +248,7 @@ public final class ExtShapeTags {
   public static void init() {
   }
 
-  private static TagKey<Block> of(@NotNull String path) {
+  private static TagKey<Block> of(String path) {
     return TagKey.of(RegistryKeys.BLOCK, ExtShape.id(path));
   }
 

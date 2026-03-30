@@ -10,7 +10,6 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -22,7 +21,7 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
   public static final MapCodec<GlazedTerracottaSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), GlazedTerracottaSlabBlock::new);
   public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-  public GlazedTerracottaSlabBlock(@NotNull Block baseBlock, Settings settings) {
+  public GlazedTerracottaSlabBlock(Block baseBlock, Settings settings) {
     super(baseBlock, settings);
     setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
   }

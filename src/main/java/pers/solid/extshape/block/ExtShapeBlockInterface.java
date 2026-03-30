@@ -18,7 +18,6 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -35,7 +34,6 @@ public interface ExtShapeBlockInterface {
    *
    * @return 方块的基础方块。
    */
-  @NotNull
   Block getBaseBlock();
 
   /**
@@ -70,14 +68,14 @@ public interface ExtShapeBlockInterface {
    * @return 方块能否被切石机切石。
    */
   static boolean isStoneCut(Block baseBlock) {
-    return baseBlock != null && STONECUTTABLE_BASE_BLOCKS.contains(baseBlock);
+    return STONECUTTABLE_BASE_BLOCKS.contains(baseBlock);
   }
 
   default LootTable.Builder getLootTable(BlockLootTableGenerator blockLootTableGenerator) {
     return blockLootTableGenerator.drops((ItemConvertible) this);
   }
 
-  default CraftingRecipeJsonBuilder getCraftingRecipe() {
+  default @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     return null;
   }
 
@@ -97,20 +95,20 @@ public interface ExtShapeBlockInterface {
    * @implNote 实现了此类的必须适当返回。如果返回 {@code null}，那么即使 {@link BlockShape#getShapeOf} 找得到对应类的形状对象，也不会再去查找了。
    */
   @Contract(pure = true)
-  default BlockShape getBlockShape() {
+  default @Nullable BlockShape getBlockShape() {
     return null;
   }
 
-  default @Nullable RecipeCategory getRecipeCategory() {
+  default RecipeCategory getRecipeCategory() {
     final BlockShape blockShape = getBlockShape();
-    if (blockShape.isConstruction) {
+    if (blockShape == null || blockShape.isConstruction) {
       return RecipeCategory.BUILDING_BLOCKS;
     } else if (blockShape == BlockShape.FENCE || blockShape == BlockShape.WALL) {
       return RecipeCategory.DECORATIONS;
     } else if (blockShape == BlockShape.FENCE_GATE || blockShape == BlockShape.PRESSURE_PLATE || blockShape == BlockShape.BUTTON) {
       return RecipeCategory.REDSTONE;
     } else {
-      return null;
+      return RecipeCategory.MISC;
     }
   }
 

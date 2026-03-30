@@ -144,7 +144,6 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
     ).apply(instance, function));
   }
 
-  @NotNull
   public static <B extends Oxidizable> RecordCodecBuilder<B, Oxidizable.OxidationLevel> weatheringStateField() {
     return Oxidizable.OxidationLevel.CODEC.fieldOf("weathering_state").forGetter(Degradable::getDegradationLevel);
   }

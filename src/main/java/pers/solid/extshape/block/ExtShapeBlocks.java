@@ -11,6 +11,8 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.*;
@@ -47,7 +49,8 @@ public final class ExtShapeBlocks {
   /**
    * 检测特定方块是否为本模组中的方块。
    */
-  public static boolean contains(Block block) {
+  @Contract("null -> false")
+  public static boolean contains(@Nullable Block block) {
     return BLOCKS.contains(block);
   }
 
@@ -66,7 +69,7 @@ public final class ExtShapeBlocks {
   /**
    * 检测特定方块是否为本模组的基本方块。
    */
-  public static boolean containsBaseBlock(Block baseBlock) {
+  public static boolean containsBaseBlock(@Nullable Block baseBlock) {
     return BASE_BLOCKS.contains(baseBlock);
   }
 

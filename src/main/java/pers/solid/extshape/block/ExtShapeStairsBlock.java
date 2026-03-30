@@ -33,7 +33,7 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeStairsBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeStairsBlock::new);
 
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
   public ExtShapeStairsBlock(@NotNull Block baseBlock, Settings settings) {
     super(baseBlock.getDefaultState(), settings);
@@ -74,12 +74,12 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
   public static class WithExtension extends ExtShapeStairsBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
     public WithExtension(Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
@@ -119,7 +119,7 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
    * @see net.minecraft.block.OxidizableStairsBlock
    */
   public static class WithOxidation extends ExtShapeStairsBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
 
     public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {

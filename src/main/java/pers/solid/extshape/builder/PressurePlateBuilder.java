@@ -4,7 +4,6 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.piston.PistonBehavior;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
 import pers.solid.extshape.util.ActivationSettings;
@@ -13,7 +12,7 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
 
   public final ActivationSettings activationSettings;
 
-  public PressurePlateBuilder(Block baseBlock, @NotNull ActivationSettings activationSettings) {
+  public PressurePlateBuilder(Block baseBlock, ActivationSettings activationSettings) {
     super(baseBlock, AbstractBlock.Settings.copy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.getHardness()), computeStrength(baseBlock.getBlastResistance()))

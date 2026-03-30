@@ -30,7 +30,7 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeVerticalQuarterPieceBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalQuarterPieceBlock::new);
 
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
   public ExtShapeVerticalQuarterPieceBlock(@NotNull Block baseBlock, Settings settings) {
     super(settings);
@@ -38,7 +38,7 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -68,7 +68,7 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   }
 
   public static class WithExtension extends ExtShapeVerticalQuarterPieceBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
     public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
@@ -105,7 +105,7 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   }
 
   public static class WithOxidation extends ExtShapeVerticalQuarterPieceBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
 
     public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {

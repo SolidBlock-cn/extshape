@@ -47,7 +47,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -67,7 +67,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   public static class WithExtension extends ExtShapeVerticalSlabBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
     public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
       super(baseBlock, settings);
@@ -106,7 +106,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   public static class WithOxidation extends ExtShapeVerticalSlabBlock implements Oxidizable {
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
 
     public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
       super(baseBlock, settings);

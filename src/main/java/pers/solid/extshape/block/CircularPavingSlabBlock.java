@@ -11,14 +11,14 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 
 public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
-  public CircularPavingSlabBlock(@NotNull Block baseBlock, Settings settings) {
+  public CircularPavingSlabBlock(Block baseBlock, Settings settings) {
     super(baseBlock, settings);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
   }
@@ -30,7 +30,7 @@ public class CircularPavingSlabBlock extends ExtShapeSlabBlock {
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
+  public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
     final BlockState placementState = super.getPlacementState(ctx);
     if (placementState != null && placementState.get(TYPE) == SlabType.DOUBLE) {
       return placementState;

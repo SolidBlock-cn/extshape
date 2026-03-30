@@ -24,7 +24,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -34,15 +33,15 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  */
 public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeSlabBlock::new);
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public ExtShapeSlabBlock(@NotNull Block baseBlock, Settings settings) {
+  public ExtShapeSlabBlock(Block baseBlock, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -85,9 +84,9 @@ public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlock
   }
 
   public static class WithExtension extends ExtShapeSlabBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -125,10 +124,10 @@ public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlock
    * @see net.minecraft.block.OxidizableSlabBlock
    */
   public static class WithOxidation extends ExtShapeSlabBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

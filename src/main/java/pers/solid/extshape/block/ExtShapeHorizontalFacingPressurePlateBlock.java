@@ -12,7 +12,7 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.ActivationSettings;
 
@@ -20,12 +20,12 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
   public static final MapCodec<ExtShapeHorizontalFacingPressurePlateBlock> CODEC = createCodec(ExtShapeHorizontalFacingPressurePlateBlock::new);
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, BlockSetType blockSetType, int tickRate) {
     super(baseBlock, settings, blockSetType, tickRate);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
   }
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, ActivationSettings activationSettings) {
     this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime());
   }
 
@@ -36,7 +36,7 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
+  public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
     final BlockState placementState = super.getPlacementState(ctx);
     return placementState != null ? placementState.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()) : null;
   }

@@ -10,7 +10,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.BlockCollections;
@@ -19,7 +18,7 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
   public static final MapCodec<ExtShapePillarVerticalSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapePillarVerticalSlabBlock::new);
   public static final EnumProperty<Direction.Axis> AXIS = PillarBlock.AXIS;
 
-  public ExtShapePillarVerticalSlabBlock(@NotNull Block baseBlock, Settings settings) {
+  public ExtShapePillarVerticalSlabBlock(Block baseBlock, Settings settings) {
     super(baseBlock, settings);
     setDefaultState(getDefaultState().with(AXIS, Direction.Axis.Y));
   }

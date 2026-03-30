@@ -11,7 +11,6 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.StringIdentifiable;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.block.*;
@@ -70,7 +69,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
   /**
    * 该形状的名称，由 {@link #asString()} 使用。
    */
-  private final @NotNull String name;
+  private final String name;
   /**
    * 该方块在占整个方块的大致比例，通常会与游戏内的行为相仿。楼梯方块显然是 3/4，但是其各个方面的数据都与原版方块相同，因此其逻辑上的完整度为 1。
    */
@@ -81,7 +80,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
   public final boolean isConstruction;
   public final int id;
 
-  public BlockShape(Predicate<Block> blockPredicate, @Nullable BlockFamily.Variant vanillaVariant, @NotNull String name, float logicalCompleteness, boolean isConstruction) {
+  public BlockShape(Predicate<Block> blockPredicate, @Nullable BlockFamily.Variant vanillaVariant, String name, float logicalCompleteness, boolean isConstruction) {
     this.blockPredicate = blockPredicate;
     this.vanillaVariant = vanillaVariant;
     this.name = name;
@@ -108,7 +107,6 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
   }
 
   @Override
-  @NotNull
   public String asString() {
     return name;
   }
@@ -127,7 +125,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
   }
 
   @Override
-  public int compareTo(@NotNull BlockShape o) {
+  public int compareTo(BlockShape o) {
     return id - o.id;
   }
 
@@ -141,7 +139,7 @@ public class BlockShape implements StringIdentifiable, Comparable<BlockShape>, P
     }
   }
 
-  public float logicalCompleteness(@NotNull BlockState blockState) {
+  public float logicalCompleteness(BlockState blockState) {
     if (this == SLAB && blockState.contains(Properties.SLAB_TYPE) && blockState.get(Properties.SLAB_TYPE) == SlabType.DOUBLE) {
       return 1;
     } else {

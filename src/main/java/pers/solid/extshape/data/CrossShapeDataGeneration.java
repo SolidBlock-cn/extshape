@@ -29,9 +29,9 @@ public class CrossShapeDataGeneration {
   /**
    * 基础方块。
    */
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
   public final @Nullable String defaultNamespace;
-  public final @NotNull RecipeExporter exporter;
+  public final RecipeExporter exporter;
   /**
    * 是否启用同种形状之间的方块切石功能，例如将非切制的楼梯切成已切制的横条。如果未启用，则只能将非切制的楼梯切成非切制的横条，但是基础方块仍不在此限。将此设置为 {@code false} 是为了与原版的行为相匹配。
    */
@@ -47,36 +47,36 @@ public class CrossShapeDataGeneration {
     return RecipeCategory.BUILDING_BLOCKS;
   }
 
-  public Identifier recipeIdOf(ItemConvertible item, String suffix) {
+  public Identifier recipeIdOf(ItemConvertible item, @Nullable String suffix) {
     final Identifier identifier = CraftingRecipeJsonBuilder.getItemId(item);
     return Identifier.of(defaultNamespace == null ? identifier.getNamespace() : defaultNamespace, suffix == null ? identifier.getPath() : identifier.getPath() + suffix);
   }
 
-  public void slabToVerticalSlab(final @NotNull Block slab, final @NotNull Block verticalSlab) {
+  public void slabToVerticalSlab(final Block slab, final Block verticalSlab) {
     writeBlockRotationRecipe(slab, verticalSlab, null, "has_slab");
   }
 
-  public void verticalSlabToSlab(final @NotNull Block verticalSlab, final @NotNull Block slab) {
+  public void verticalSlabToSlab(final Block verticalSlab, final Block slab) {
     writeBlockRotationRecipe(verticalSlab, slab, "_from_vertical_slab", "has_vertical_slab");
   }
 
-  public void stairsToVerticalStairs(final @NotNull Block stairs, final @NotNull Block verticalStairs) {
+  public void stairsToVerticalStairs(final Block stairs, final Block verticalStairs) {
     writeBlockRotationRecipe(stairs, verticalStairs, null, "has_stairs");
   }
 
-  public void verticalStairsToStairs(final @NotNull Block verticalStairs, final @NotNull Block stairs) {
+  public void verticalStairsToStairs(final Block verticalStairs, final Block stairs) {
     writeBlockRotationRecipe(verticalStairs, stairs, "_from_vertical_stairs", "has_vertical_stairs");
   }
 
-  public void quarterPieceToVerticalQuarterPiece(final @NotNull Block quarterPiece, final @NotNull Block verticalQuarterPiece) {
+  public void quarterPieceToVerticalQuarterPiece(final Block quarterPiece, final Block verticalQuarterPiece) {
     writeBlockRotationRecipe(quarterPiece, verticalQuarterPiece, null, "has_quarter_piece");
   }
 
-  public void verticalQuarterPieceToQuarterPiece(final @NotNull Block verticalQuarterPiece, final @NotNull Block quarterPiece) {
+  public void verticalQuarterPieceToQuarterPiece(final Block verticalQuarterPiece, final Block quarterPiece) {
     writeBlockRotationRecipe(verticalQuarterPiece, quarterPiece, "_from_vertical_quarter_piece", "has_vertical_quarter_piece");
   }
 
-  protected void writeBlockRotationRecipe(final @NotNull Block from, final @NotNull Block to, @Nullable String suffix, String criterionName) {
+  protected void writeBlockRotationRecipe(final Block from, final Block to, @Nullable String suffix, String criterionName) {
     final Identifier recipeId = recipeIdOf(to, suffix);
     final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(getRecipeCategory(), to).input(Ingredient.ofItems(from));
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(to);
@@ -84,11 +84,11 @@ public class CrossShapeDataGeneration {
     recipe.offerTo(exporter, recipeId);
   }
 
-  public void cutStairsToQuarterPiece(final @NotNull Block stairs, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
+  public void cutStairsToQuarterPiece(final Block stairs, final Block quarterPiece, @Nullable String suffix, int scale) {
     generateSimpleStonecuttingRecipe(stairs, quarterPiece, 3 * scale, suffix == null ? "_from_stairs_stonecutting" : suffix, "has_stairs");
   }
 
-  public void craftSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix) {
+  public void craftSlabToQuarterPiece(final Block slab, final Block quarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(quarterPiece, suffix == null ? "_from_slab" : suffix);
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(quarterPiece);
     final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), quarterPiece, 6)
@@ -99,11 +99,11 @@ public class CrossShapeDataGeneration {
     recipe.offerTo(exporter, recipeId);
   }
 
-  public void cutSlabToQuarterPiece(final @NotNull Block slab, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
+  public void cutSlabToQuarterPiece(final Block slab, final Block quarterPiece, @Nullable String suffix, int scale) {
     generateSimpleStonecuttingRecipe(slab, quarterPiece, 2 * scale, suffix == null ? "_from_slab_stonecutting" : suffix, "has_slab");
   }
 
-  public void craftVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix) {
+  public void craftVerticalSlabToQuarterPiece(final Block verticalSlab, final Block quarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(quarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(quarterPiece);
     final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), quarterPiece, 6)
@@ -114,11 +114,11 @@ public class CrossShapeDataGeneration {
     recipe.offerTo(exporter, recipeId);
   }
 
-  public void cutVerticalSlabToQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block quarterPiece, @Nullable String suffix, int scale) {
+  public void cutVerticalSlabToQuarterPiece(final Block verticalSlab, final Block quarterPiece, @Nullable String suffix, int scale) {
     generateSimpleStonecuttingRecipe(verticalSlab, quarterPiece, 2 * scale, suffix == null ? "_from_vertical_slab_stonecutting" : suffix, "has_vertical_slab");
   }
 
-  public void craftVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix) {
+  public void craftVerticalSlabToVerticalQuarterPiece(final Block verticalSlab, final Block verticalQuarterPiece, @Nullable String suffix) {
     final Identifier recipeId = recipeIdOf(verticalQuarterPiece, suffix == null ? "_from_vertical_slab" : suffix);
     final String recipeGroup = RecipeGroupRegistry.getRecipeGroup(verticalQuarterPiece);
     final ShapedRecipeJsonBuilder recipe = ShapedRecipeJsonBuilder.create(getRecipeCategory(), verticalQuarterPiece, 6)
@@ -129,17 +129,17 @@ public class CrossShapeDataGeneration {
     recipe.offerTo(exporter, recipeId);
   }
 
-  public void cutVerticalSlabToVerticalQuarterPiece(final @NotNull Block verticalSlab, final @NotNull Block verticalQuarterPiece, @Nullable String suffix, int scale) {
+  public void cutVerticalSlabToVerticalQuarterPiece(final Block verticalSlab, final Block verticalQuarterPiece, @Nullable String suffix, int scale) {
     generateSimpleStonecuttingRecipe(verticalSlab, verticalQuarterPiece, 2 * scale, suffix == null ? "_from_vertical_slab_stonecutting" : suffix, "has_vertical_slab");
   }
 
-  public void cutVerticalStairsToVerticalQuarterPiece(final @NotNull Block verticalStairs, final @NotNull Block verticalQuarterPiece, @Nullable String suffix, int scale) {
+  public void cutVerticalStairsToVerticalQuarterPiece(final Block verticalStairs, final Block verticalQuarterPiece, @Nullable String suffix, int scale) {
     generateSimpleStonecuttingRecipe(verticalStairs, verticalQuarterPiece, 3 * scale, suffix == null ? "_from_vertical_stairs_stonecutting" : suffix, "has_vertical_stairs");
   }
 
   protected void generateSimpleStonecuttingRecipe(
-      ItemConvertible ingredient,
-      ItemConvertible result,
+     @Nullable ItemConvertible ingredient,
+     @Nullable ItemConvertible result,
       int count,
       @Nullable String suffix,
       String criterionName
@@ -275,7 +275,6 @@ public class CrossShapeDataGeneration {
     }
   }
 
-  @NotNull
   protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
     final ImmutableCollection<Block> blocks = VanillaStonecutting.INSTANCE.get(baseBlock);
     final ImmutableCollection<ObjectIntPair<Block>> weightedBlocks = VanillaStonecutting.INSTANCE_WITH_WEIGHT.get(baseBlock);

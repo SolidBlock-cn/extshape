@@ -16,7 +16,7 @@ public final class RecipeGroupRegistry {
   public static final Map<Item, String> INSTANCE = new HashMap<>();
 
   @Contract(pure = true)
-  public static @NotNull String getRecipeGroup(@NotNull ItemConvertible itemConvertible) {
+  public static String getRecipeGroup(@NotNull ItemConvertible itemConvertible) {
     return INSTANCE.getOrDefault(itemConvertible.asItem(), StringUtils.EMPTY);
   }
 

@@ -53,7 +53,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -101,7 +101,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   public static class WithExtension extends ExtShapePressurePlateBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
     public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
       super(baseBlock, settings, activationSettings);
@@ -138,7 +138,7 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   public static class WithOxidation extends ExtShapePressurePlateBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.blockSetType), tickRateField(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
     public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate, @NotNull OxidationLevel oxidationLevel) {
@@ -172,7 +172,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     }
   }
 
-  @NotNull
   private static <B extends ExtShapePressurePlateBlock> RecordCodecBuilder<B, Integer> tickRateField() {
     return Codec.INT.fieldOf("tick_rate").forGetter(b -> b.tickRate);
   }

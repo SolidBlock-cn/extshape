@@ -742,7 +742,7 @@ public final class ExtShapeBlockusBlocks {
     for (var entry : BlockusBlocks.MOSSY_PLANKS.bundle().entrySet()) {
       final String woodType = entry.getKey();
       final BSSWBundle bsswBundle = entry.getValue();
-      final boolean isNonFlammable = "warped".equals(woodType) || "crimson".equals(woodType)  || "charred".equals(woodType);
+      final boolean isNonFlammable = "warped".equals(woodType) || "crimson".equals(woodType) || "charred".equals(woodType);
       if (isNonFlammable) {
         FACTORY.createConstructionOnly(bsswBundle.block())
             .without(BlockShape.STAIRS, BlockShape.SLAB)

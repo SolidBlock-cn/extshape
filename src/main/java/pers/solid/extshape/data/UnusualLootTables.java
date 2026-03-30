@@ -49,11 +49,11 @@ public class UnusualLootTables {
    * 对应形状估算的体积，用于与基础方块的掉落数相乘。
    */
   @Contract(pure = true)
-  public static float shapeVolume(@NotNull BlockShape shape) {
+  public static float shapeVolume(BlockShape shape) {
     return shape.isConstruction ? shape.logicalCompleteness : 1;
   }
 
-  public static ConstantLootNumberProvider shapeVolumeConstantProvider(@NotNull BlockShape shape, float count) {
+  public static ConstantLootNumberProvider shapeVolumeConstantProvider(BlockShape shape, float count) {
     return ConstantLootNumberProvider.create(shapeVolume(shape) * count);
   }
 
@@ -92,7 +92,7 @@ public class UnusualLootTables {
     return addDropsDoubleSlabPool(LootTable.builder(), drop, conditionBuilder, child, childWhenDoubleSlab);
   }
 
-  public static LootTable.Builder addDropsDoubleSlabPool(@NotNull LootTable.Builder builder, @NotNull Block drop, LootCondition.@NotNull Builder conditionBuilder, LootPoolEntry.@NotNull Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
+  public static LootTable.Builder addDropsDoubleSlabPool(LootTable.Builder builder, Block drop, LootCondition.Builder conditionBuilder, LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
     if (childWhenDoubleSlab == null) {
       builder
           .pool(LootPool.builder()
@@ -126,7 +126,7 @@ public class UnusualLootTables {
   }
 
   @Unmodifiable
-  public ImmutableMap<Block, @NotNull LootTableFunction> createInstance() {
+  public ImmutableMap<Block, LootTableFunction> createInstance() {
     final ImmutableMap.Builder<Block, LootTableFunction> builder = new ImmutableMap.Builder<>();
     registerUnusualLootTables(builder);
     return builder.build();
@@ -233,7 +233,7 @@ public class UnusualLootTables {
    * @return 战利品表。
    * @see net.minecraft.data.server.loottable.BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)
    */
-  public LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(@NotNull Block drop, boolean isSlab, BlockLootTableGenerator generator) {
+  public LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(Block drop, boolean isSlab, BlockLootTableGenerator generator) {
     final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop);
     if (isSlab) {
       itemEntryBuilder.apply(
