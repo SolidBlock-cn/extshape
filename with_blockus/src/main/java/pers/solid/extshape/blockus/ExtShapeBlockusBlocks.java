@@ -841,7 +841,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.NETHERITE_BRICKS)
         .withoutRedstone()
         .without(BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireproof())
+        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireproof())
         .build();
 
     markStoneCuttableWhenCreating = false;

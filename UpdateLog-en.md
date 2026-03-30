@@ -4,6 +4,7 @@
 
 - Support Minecraft 26.1 release version.
 - Use `@NullMarked`.
+- Fixed the issue that items of netherite blocks are not fire-resistant in 26.1.
 
 > Since this version, the version number of the mod file use an add symbol instead of hyphen to identify Minecraft versions, for example `3.1.3+mc26.1` instead of `3.1.3-mc26.1`.
 

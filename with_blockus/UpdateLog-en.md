@@ -6,6 +6,7 @@
 - Added blocks related to small crimson and warped logs into `#non_flammable_wood` item tag.
 - Fixed the issue of blocks related to light gray stone bricks are missing.
 - Use `@NullMarked`.
+- Fixed the issue that blocks related to netherite bricks are not fire-resistant.
 
 > **Important note**
 >
