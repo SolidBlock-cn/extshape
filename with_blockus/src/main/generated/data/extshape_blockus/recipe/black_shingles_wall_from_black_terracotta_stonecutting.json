@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:black_terracotta",
+  "result": {
+    "id": "extshape_blockus:black_shingles_wall"
+  }
+}

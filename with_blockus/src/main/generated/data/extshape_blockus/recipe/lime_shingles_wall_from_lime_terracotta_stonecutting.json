@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:lime_terracotta",
+  "result": {
+    "id": "extshape_blockus:lime_shingles_wall"
+  }
+}
