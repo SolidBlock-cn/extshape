@@ -1,14 +1,11 @@
 # Update log
 
-### 3.1.3-beta.1
+### 3.1.3
 
-- Fit Blockus new versions.
-- Added blocks related to small crimson and warped logs into `#non_flammable_wood` item tag.
-- Fixed the issue of blocks related to light gray stone bricks are missing.
+- Support Minecraft 26.1 release version.
+- Use `@NullMarked`.
 
-> **Important note**
->
-> As the updates of Blockus changed the name of small logs, after updating the mod, if you have used blocks related to small logs, please make a back-up for your level.
+> Since this version, the version number of the mod file use an add symbol instead of hyphen to identify Minecraft versions, for example `3.1.3+mc26.1` instead of `3.1.3-mc26.1`.
 
 ### 3.1.2
 
