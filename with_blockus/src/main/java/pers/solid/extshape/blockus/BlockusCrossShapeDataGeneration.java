@@ -2,8 +2,10 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
 import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.utils.helper.BlockMaps;
+import com.brand.blockus.utils.helper.BlockOrder;
 import com.google.common.collect.ImmutableMultimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
@@ -14,10 +16,8 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.data.CrossShapeDataGeneration;
 import pers.solid.extshape.data.VanillaStonecutting;
-import pers.solid.extshape.util.BlockCollections;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -48,9 +48,13 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
    */
   private static void registerBlockusStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
     for (ConcreteBundle concreteBundle : ConcreteBundle.values()) {
-      for (Map.Entry<DyeColor, ConcreteBundle.ConcreteVariants> entry : concreteBundle.colorMap().entrySet()) {
-        final ConcreteBundle.ConcreteVariants concreteVariants = entry.getValue();
-        Block base = BlockMaps.CONCRETE_MAP.get(entry.getKey());
+      final Map<DyeColor, ConcreteBundle.ConcreteVariants> concreteBundleMap = concreteBundle.colorMap();
+      for (DyeColor dyeColor : BlockOrder.COLOR) {
+        final ConcreteBundle.ConcreteVariants concreteVariants = concreteBundleMap.get(dyeColor);
+        if (concreteVariants == null) {
+          continue;
+        }
+        Block base = BlockMaps.CONCRETE_MAP.get(dyeColor);
         builder.put(concreteVariants.block(), base);
         builder.put(concreteVariants.chiseled(), base);
         builder.put(concreteVariants.pillar(), base);
@@ -154,17 +158,22 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.CHOCOLATE_BRICKS.block(), BlockusBlocks.CHOCOLATE_BLOCK.block());
     builder.put(BlockusBlocks.CHOCOLATE_SQUARES, BlockusBlocks.CHOCOLATE_BLOCK.block());
 
-    // shingles and terracotta
+    // shingles and terracotta and glazed terracotta
     builder.put(BlockusBlocks.SHINGLES.block(), Blocks.TERRACOTTA);
-    final Iterator<Block> terracottaIterator = BlockCollections.STAINED_TERRACOTTA.iterator();
-    for (var bsswBundle : BlockusBlocks.STAINED_SHINGLES.colorMap().values()) {
-      builder.put(bsswBundle.block(), terracottaIterator.next());
-    }
 
-    // glazed terracotta
-    final Iterator<Block> glazedTerracottaIterator = BlockCollections.GLAZED_TERRACOTTA.iterator();
-    for (var block : BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap().values()) {
-      builder.put(block, glazedTerracottaIterator.next());
+    final Map<DyeColor, BSSWBundle> stainedShinglesColorMap = BlockusBlocks.STAINED_SHINGLES.colorMap();
+    final Map<DyeColor, Block> glazedTerracottaPillarColorMap = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap();
+    for (DyeColor dyeColor : BlockOrder.COLOR) {
+      final Block terracotta = BlockMaps.TERRACOTTA_MAP.get(dyeColor);
+      final BSSWBundle stainedShingles = stainedShinglesColorMap.get(dyeColor);
+      final Block glazedTerracotta = BlockMaps.GLAZED_TERRACOTTA_MAP.get(dyeColor);
+      final Block glazedTerracottaPilar = glazedTerracottaPillarColorMap.get(dyeColor);
+      if (stainedShingles != null && terracotta != null) {
+        builder.put(stainedShingles.block(), terracotta);
+      }
+      if (glazedTerracottaPilar != null && glazedTerracotta != null) {
+        builder.put(glazedTerracottaPilar, glazedTerracotta);
+      }
     }
 
     // 1.20 新增：矿物方块与矿物砖的转换
