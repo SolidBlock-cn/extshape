@@ -15,12 +15,12 @@ repositories {
 }
 dependencies {
     // Blockus 模组
-    modApi("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}") {
+    api("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_version}") {
         exclude module: "fabric-loader"
     }
-    modCompileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
-    modApi "maven.modrinth:blockus:${project.blockus_version}"
-    implementation project(path: ':', configuration: "namedElements")
+    compileOnly "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_version}"
+    api "maven.modrinth:blockus:${project.blockus_version}"
+    implementation rootProject
 }
 
 tasks.register('curseforge', TaskPublishCurseForge) {

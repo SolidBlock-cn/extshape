@@ -157,7 +157,7 @@ project(':runtest') {
     }
     dependencies {
         implementation rootProject
-//        implementation project(path: ':with_blockus')
+        implementation project(path: ':with_blockus')
         if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
             runtimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
         }
