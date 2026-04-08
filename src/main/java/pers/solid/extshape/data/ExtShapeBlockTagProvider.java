@@ -161,8 +161,10 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
             Blocks.RAW_COPPER_BLOCK,
             Blocks.RAW_GOLD_BLOCK,
             Blocks.SULFUR,
+            Blocks.POLISHED_SULFUR,
             Blocks.SULFUR_BRICKS,
             Blocks.CINNABAR,
+            Blocks.POLISHED_CINNABAR,
             Blocks.CINNABAR_BRICKS
         )
     ));
