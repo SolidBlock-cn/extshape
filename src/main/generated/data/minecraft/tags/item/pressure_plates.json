@@ -88,6 +88,10 @@
     "extshape:raw_gold_pressure_plate",
     "extshape:ochre_froglight_pressure_plate",
     "extshape:verdant_froglight_pressure_plate",
-    "extshape:pearlescent_froglight_pressure_plate"
+    "extshape:pearlescent_froglight_pressure_plate",
+    "extshape:sulfur_pressure_plate",
+    "extshape:sulfur_brick_pressure_plate",
+    "extshape:cinnabar_pressure_plate",
+    "extshape:cinnabar_brick_pressure_plate"
   ]
 }

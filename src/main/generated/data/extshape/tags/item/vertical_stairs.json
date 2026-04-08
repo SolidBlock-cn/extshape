@@ -104,6 +104,10 @@
     "extshape:raw_gold_vertical_stairs",
     "extshape:ochre_froglight_vertical_stairs",
     "extshape:verdant_froglight_vertical_stairs",
-    "extshape:pearlescent_froglight_vertical_stairs"
+    "extshape:pearlescent_froglight_vertical_stairs",
+    "extshape:sulfur_vertical_stairs",
+    "extshape:sulfur_brick_vertical_stairs",
+    "extshape:cinnabar_vertical_stairs",
+    "extshape:cinnabar_brick_vertical_stairs"
   ]
 }

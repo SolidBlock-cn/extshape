@@ -98,6 +98,10 @@
     "extshape:raw_gold_fence_gate",
     "extshape:ochre_froglight_fence_gate",
     "extshape:verdant_froglight_fence_gate",
-    "extshape:pearlescent_froglight_fence_gate"
+    "extshape:pearlescent_froglight_fence_gate",
+    "extshape:sulfur_fence_gate",
+    "extshape:sulfur_brick_fence_gate",
+    "extshape:cinnabar_fence_gate",
+    "extshape:cinnabar_brick_fence_gate"
   ]
 }

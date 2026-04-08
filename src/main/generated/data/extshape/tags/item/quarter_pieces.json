@@ -104,6 +104,10 @@
     "extshape:raw_gold_quarter_piece",
     "extshape:ochre_froglight_quarter_piece",
     "extshape:verdant_froglight_quarter_piece",
-    "extshape:pearlescent_froglight_quarter_piece"
+    "extshape:pearlescent_froglight_quarter_piece",
+    "extshape:sulfur_quarter_piece",
+    "extshape:sulfur_brick_quarter_piece",
+    "extshape:cinnabar_quarter_piece",
+    "extshape:cinnabar_brick_quarter_piece"
   ]
 }

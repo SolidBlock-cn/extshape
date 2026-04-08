@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "minecraft:sulfur_stairs"
+  ],
+  "result": {
+    "id": "extshape:sulfur_vertical_stairs"
+  }
+}

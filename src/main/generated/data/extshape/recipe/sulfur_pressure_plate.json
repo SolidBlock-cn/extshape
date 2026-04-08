@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "minecraft:sulfur"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "extshape:sulfur_pressure_plate"
+  }
+}
