@@ -753,10 +753,24 @@ public final class ExtShapeBlocks {
     }
 
     // 硫黄和朱砂
-    FACTORY.createAllShapes(SULFUR).build();
-    FACTORY.createAllShapes(SULFUR_BRICKS).build();
-    FACTORY.createAllShapes(CINNABAR).build();
-    FACTORY.createAllShapes(CINNABAR_BRICKS).build();
+    FACTORY.createAllShapes(SULFUR)
+        .markStoneCuttable()
+        .build();
+    FACTORY.createAllShapes(POLISHED_SULFUR)
+        .markStoneCuttable()
+        .build();
+    FACTORY.createAllShapes(SULFUR_BRICKS)
+        .markStoneCuttable()
+        .build();
+    FACTORY.createAllShapes(CINNABAR)
+        .markStoneCuttable()
+        .build();
+    FACTORY.createAllShapes(POLISHED_CINNABAR)
+        .markStoneCuttable()
+        .build();
+    FACTORY.createAllShapes(CINNABAR_BRICKS)
+        .markStoneCuttable()
+        .build();
 
     ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());
   }

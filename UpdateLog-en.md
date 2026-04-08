@@ -2,7 +2,7 @@
 
 ### 3.1.4.1-beta.1
 
-- Fit 26.1 snapshots.
+- Fit 26.1 snapshots. Added all variants for sulfur, polished sulfur, sulfur bricks, cinnabar, polished cinnabar, cinnabar bricks. Variants for chiseled sulfur and chiseled cinnabar are not added.
 - Petrified oak planks and double smooth stone stairs can be absorbed by Sulfur Cube and belong to regular type (same as stone blocks).
 
 ### 3.1.3

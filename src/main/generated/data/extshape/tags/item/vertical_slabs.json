@@ -106,8 +106,10 @@
     "extshape:verdant_froglight_vertical_slab",
     "extshape:pearlescent_froglight_vertical_slab",
     "extshape:sulfur_vertical_slab",
+    "extshape:polished_sulfur_vertical_slab",
     "extshape:sulfur_brick_vertical_slab",
     "extshape:cinnabar_vertical_slab",
+    "extshape:polished_cinnabar_vertical_slab",
     "extshape:cinnabar_brick_vertical_slab"
   ]
 }

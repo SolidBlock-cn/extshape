@@ -95,8 +95,10 @@
     "extshape:verdant_froglight_fence",
     "extshape:pearlescent_froglight_fence",
     "extshape:sulfur_fence",
+    "extshape:polished_sulfur_fence",
     "extshape:sulfur_brick_fence",
     "extshape:cinnabar_fence",
+    "extshape:polished_cinnabar_fence",
     "extshape:cinnabar_brick_fence"
   ]
 }

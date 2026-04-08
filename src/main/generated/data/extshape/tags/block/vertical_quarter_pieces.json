@@ -106,8 +106,10 @@
     "extshape:verdant_froglight_vertical_quarter_piece",
     "extshape:pearlescent_froglight_vertical_quarter_piece",
     "extshape:sulfur_vertical_quarter_piece",
+    "extshape:polished_sulfur_vertical_quarter_piece",
     "extshape:sulfur_brick_vertical_quarter_piece",
     "extshape:cinnabar_vertical_quarter_piece",
+    "extshape:polished_cinnabar_vertical_quarter_piece",
     "extshape:cinnabar_brick_vertical_quarter_piece"
   ]
 }
