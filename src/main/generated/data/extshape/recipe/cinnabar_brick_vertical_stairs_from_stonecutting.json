@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cinnabar_bricks",
+  "result": {
+    "id": "extshape:cinnabar_brick_vertical_stairs"
+  }
+}
