@@ -68,6 +68,7 @@ githubRelease {
     repo = "extshape"
     tagName = "v$project.mod_version"
     targetCommitish = "1.21.1"
+    releaseName = "v$project.mod_version"
     body = changelogContent
     draft = true
     prerelease = false
