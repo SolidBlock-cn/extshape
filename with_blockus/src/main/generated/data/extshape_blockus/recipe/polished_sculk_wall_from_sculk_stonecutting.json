@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:sculk",
-  "result": {
-    "id": "extshape_blockus:polished_sculk_wall"
-  }
-}

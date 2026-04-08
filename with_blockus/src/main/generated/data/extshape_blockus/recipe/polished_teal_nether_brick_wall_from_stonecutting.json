@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:polished_teal_nether_bricks",
-  "result": {
-    "id": "extshape_blockus:polished_teal_nether_brick_wall"
-  }
-}

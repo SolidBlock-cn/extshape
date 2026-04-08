@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:polished_end_stone",
-  "result": {
-    "id": "extshape_blockus:polished_end_stone_wall"
-  }
-}

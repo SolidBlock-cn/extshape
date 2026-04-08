@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:polished_netherrack",
-  "result": {
-    "id": "extshape_blockus:polished_netherrack_wall"
-  }
-}
