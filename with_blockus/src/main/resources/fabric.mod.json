@@ -33,9 +33,6 @@
     "extshape": [">=3.0.0-0", "${version}"],
     "blockus": ">=2.16.0"
   },
-  "recommends": {
-    "minecraft": "26.1"
-  },
   "custom": {
     "modmenu": {
       "links": {
