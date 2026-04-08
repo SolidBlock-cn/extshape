@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -66,6 +67,8 @@ public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider
         Arrays.asList(Blocks.CRIMSON_PLANKS, Blocks.WARPED_PLANKS)
     ));
     addForShapes(ItemTags.PIGLIN_LOVED, Blocks.GOLD_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.GILDED_BLACKSTONE);
+
+    valueLookupBuilder(ItemTags.SULFUR_CUBE_ARCHETYPE_REGULAR).add(ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem(), ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem());
   }
 
   protected void copyWithSameId(TagKey<Block> blockTag) {

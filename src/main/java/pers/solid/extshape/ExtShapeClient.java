@@ -19,7 +19,7 @@ public class ExtShapeClient implements ClientModInitializer {
     // 当你没有安装 Mod Menu 时，仍可通过此命令来打开配置界面。
     ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(ClientCommands.literal("extshape:config").executes(context -> {
       final Minecraft client = context.getSource().getClient();
-      client.schedule(() -> client.setScreen(new ExtShapeOptionsScreen(client.screen)));
+      client.schedule(() -> client.setScreenAndShow(new ExtShapeOptionsScreen(client.gui.screen())));
       return 1;
     })));
   }

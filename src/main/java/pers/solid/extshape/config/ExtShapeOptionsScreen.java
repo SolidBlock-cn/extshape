@@ -166,7 +166,7 @@ public class ExtShapeOptionsScreen extends Screen {
     if (!suppressedGroupsWarning && !newConfig.addToVanillaGroups && !newConfig.showSpecificGroups
         && !(!oldConfig.addToVanillaGroups && !oldConfig.showSpecificGroups)) {
       // 由于两个设置都被关闭，因此需要确认是否不添加到任何物品栏。
-      minecraft.setScreen(new ConfirmScreen(
+      minecraft.setScreenAndShow(new ConfirmScreen(
           t -> {
             if (t) {
               // 确定要继续
@@ -174,7 +174,7 @@ public class ExtShapeOptionsScreen extends Screen {
               onClose();
             } else {
               // 返回重新修改
-              minecraft.setScreen(this);
+              minecraft.setScreenAndShow(this);
             }
           },
           Component.translatable("options.extshape.confirm"),
@@ -185,7 +185,7 @@ public class ExtShapeOptionsScreen extends Screen {
       return;
     }
     save();
-    minecraft.setScreen(parent);
+    minecraft.setScreenAndShow(parent);
   }
 
   private static Collection<BlockShape> convertStringToCollection(String s) {

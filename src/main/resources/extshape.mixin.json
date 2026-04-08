@@ -17,7 +17,6 @@
     "ItemMixin",
     "ItemSettingAccessor",
     "SchemasMixin",
-    "ShearsItemMixin",
     "SnowyBlockMixin",
     "StonecuttingRecipeJsonBuilderAccessor",
     "TranslatableTextContentAccessor",

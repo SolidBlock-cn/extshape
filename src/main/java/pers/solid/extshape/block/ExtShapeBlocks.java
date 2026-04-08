@@ -287,7 +287,7 @@ public final class ExtShapeBlocks {
     }
 
     // 羊毛。
-    for (final Block block : BlockCollections.WOOLS) {
+    for (final Block block : WOOL.asList()) {
       // 下面这些标签均属于 woolen_blocks
       FACTORY.createAllShapes(block)
           .setFenceSettings(FenceSettings.WOOL)
@@ -484,7 +484,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()  // 下面这些标签已带有 pickaxe_mineable
         .setFenceSettings(new FenceSettings(Items.CLAY, ExtShapeBlockTypes.STONE_WOOD_TYPE))
         .build();
-    for (final Block block : BlockCollections.STAINED_TERRACOTTA) {
+    for (final Block block : DYED_TERRACOTTA.asList()) {
       FACTORY.createAllShapes(block)
           .markStoneCuttable()
           .setFenceSettings(new FenceSettings(Items.CLAY, ExtShapeBlockTypes.STONE_WOOD_TYPE))
@@ -553,7 +553,7 @@ public final class ExtShapeBlocks {
         .build();
 
     // 带釉陶瓦只注册台阶。
-    for (final Block block : BlockCollections.GLAZED_TERRACOTTA) {
+    for (final Block block : GLAZED_TERRACOTTA.asList()) {
       BASE_BLOCKS.add(block);
       ExtShapeBlockInterface.STONECUTTABLE_BASE_BLOCKS.add(block);
       final SlabBlock slabBlock = FACTORY.modify(new SlabBuilder(block))
@@ -563,7 +563,7 @@ public final class ExtShapeBlocks {
     }
 
     // 彩色混凝土。
-    for (final Block block : BlockCollections.CONCRETES) {
+    for (final Block block : CONCRETE.asList()) {
       FACTORY.createAllShapes(block)
           .markStoneCuttable() // 下面这些标签已带有 pickaxe_mineable
           .setFenceSettings(new FenceSettings(Items.CLAY, ExtShapeBlockTypes.STONE_WOOD_TYPE))
@@ -751,6 +751,12 @@ public final class ExtShapeBlocks {
           .setPillar()
           .build();
     }
+
+    // 硫黄和朱砂
+    FACTORY.createAllShapes(SULFUR).build();
+    FACTORY.createAllShapes(SULFUR_BRICKS).build();
+    FACTORY.createAllShapes(CINNABAR).build();
+    FACTORY.createAllShapes(CINNABAR_BRICKS).build();
 
     ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());
   }

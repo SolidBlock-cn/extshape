@@ -40,19 +40,19 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
    * 不同氧化等级的铜方块。
    */
-  public static final ImmutableList<Block> COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK, Blocks.EXPOSED_COPPER, Blocks.WEATHERED_COPPER, Blocks.OXIDIZED_COPPER);
+  public static final ImmutableList<Block> COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK.unaffected(), Blocks.COPPER_BLOCK.exposed(), Blocks.COPPER_BLOCK.weathered(), Blocks.COPPER_BLOCK.oxidized());
   /**
    * 不同氧化等级的切制铜方块。
    */
-  public static final ImmutableList<Block> CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER, Blocks.EXPOSED_CUT_COPPER, Blocks.WEATHERED_CUT_COPPER, Blocks.OXIDIZED_CUT_COPPER);
+  public static final ImmutableList<Block> CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER.unaffected(), Blocks.CUT_COPPER.exposed(), Blocks.CUT_COPPER.weathered(), Blocks.CUT_COPPER.oxidized());
   /**
    * 不同氧化等级的涂蜡铜方块。
    */
-  public static final ImmutableList<Block> WAXED_COPPER_BLOCKS = ImmutableList.of(Blocks.WAXED_COPPER_BLOCK, Blocks.WAXED_EXPOSED_COPPER, Blocks.WAXED_WEATHERED_COPPER, Blocks.WAXED_OXIDIZED_COPPER);
+  public static final ImmutableList<Block> WAXED_COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK.waxed(), Blocks.COPPER_BLOCK.waxedExposed(), Blocks.COPPER_BLOCK.waxedWeathered(), Blocks.COPPER_BLOCK.waxedOxidized());
   /**
    * 不同氧化等级的涂蜡切制铜方块。
    */
-  public static final ImmutableList<Block> WAXED_CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.WAXED_CUT_COPPER, Blocks.WAXED_EXPOSED_CUT_COPPER, Blocks.WAXED_WEATHERED_CUT_COPPER, Blocks.WAXED_OXIDIZED_CUT_COPPER);
+  public static final ImmutableList<Block> WAXED_CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER.waxed(), Blocks.CUT_COPPER.waxedExposed(), Blocks.CUT_COPPER.waxedWeathered(), Blocks.CUT_COPPER.waxedOxidized());
   /**
    * 依次排列的不同的氧化等级。
    */

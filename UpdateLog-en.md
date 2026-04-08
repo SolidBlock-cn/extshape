@@ -1,5 +1,10 @@
 # Update log
 
+### 3.1.4.1-beta.1
+
+- Fit 26.1 snapshots.
+- Petrified oak planks and double smooth stone stairs can be absorbed by Sulfur Cube and belong to regular type (same as stone blocks).
+
 ### 3.1.3
 
 - Support Minecraft 26.1 release version.

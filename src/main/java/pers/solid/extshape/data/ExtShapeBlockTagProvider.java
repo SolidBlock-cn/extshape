@@ -83,6 +83,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOOLEN_TAG.values()) {
       valueLookupBuilder(ExtShapeTags.WOOLEN_BLOCKS).addTag(tag);
     }
+    valueLookupBuilder(BlockTags.SHEARS_MAJOR_BREAKING_SPEED).addTag(ExtShapeTags.WOOLEN_BLOCKS);
     valueLookupBuilder(ExtShapeTags.WOODEN_BLOCKS)
         .addTag(ExtShapeTags.LOG_BLOCKS);
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOODEN_TAG.values()) {
@@ -158,7 +159,11 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
             Blocks.SMOOTH_BASALT,
             Blocks.RAW_IRON_BLOCK,
             Blocks.RAW_COPPER_BLOCK,
-            Blocks.RAW_GOLD_BLOCK
+            Blocks.RAW_GOLD_BLOCK,
+            Blocks.SULFUR,
+            Blocks.SULFUR_BRICKS,
+            Blocks.CINNABAR,
+            Blocks.CINNABAR_BRICKS
         )
     ));
 

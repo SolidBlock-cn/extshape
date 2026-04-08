@@ -57,7 +57,7 @@ public final class VanillaItemGroup {
     final Multimap<Item, Item> apRedstone = getAppendingRule(CreativeModeTabs.REDSTONE_BLOCKS);
     apRedstone.put(Items.STONE_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.OBSIDIAN)).asItem());
     final Multimap<Item, Item> preRedstone = getPrependingRule(CreativeModeTabs.REDSTONE_BLOCKS);
-    preRedstone.put(Items.OAK_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.WHITE_WOOL)).asItem());
+    preRedstone.put(Items.OAK_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.WOOL.white())).asItem());
 
     UPDATE_SHAPES_EVENT.register(() -> {
       PREPENDING_RULES.clear();
