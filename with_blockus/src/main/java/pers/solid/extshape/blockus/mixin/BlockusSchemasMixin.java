@@ -27,13 +27,13 @@ import java.util.function.UnaryOperator;
 @Mixin(DataFixers.class)
 public abstract class BlockusSchemasMixin {
   @Shadow
+  @Final
+  private static BiFunction<Integer, Schema, Schema> SAME_NAMESPACED;
+
+  @Shadow
   private static UnaryOperator<String> createRenamer(Map<String, String> replacements) {
     return null;
   }
-
-  @Shadow
-  @Final
-  private static BiFunction<Integer, Schema, Schema> SAME_NAMESPACED;
 
   @Inject(method = "addFixers", at = @At("TAIL"))
   private static void postBuild(DataFixerBuilder builder, CallbackInfo ci) {
@@ -187,5 +187,10 @@ public abstract class BlockusSchemasMixin {
         idMap.put("extshape_blockus:" + from + "_" + shape.getSerializedName(), to + "_" + shape.getSerializedName());
       }
     }
+  }
+
+  @Unique
+  private static void replaceWallToBlockusOnes(Map<String, String> idMap, String baseName) {
+    idMap.put("extshape_blockus:" + baseName + "_wall", "blockus:" + baseName + "_wall");
   }
 }
