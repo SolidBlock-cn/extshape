@@ -1,5 +1,11 @@
 # Update log (for Blockus part)
 
+### 3.1.4
+
+- Since the new version of Blockus mod has added walls for polished blocks, the mod no longer adds these blocks. The mod uses the feature of registry alias in Fabric API to make old names (blocks in Extended Block Shapes - Blockus) compatible with new version (blocks in Blockus). For example, `extshape_blockus:polished_purpur_wall` will be identical to `blockus:polished_purpur_wall`.
+
+> The Extended Block Shapes main mod in 3.0.4 version also conducted a change of block name, but DataFixer was used at that version, and may not be applicable to Minecraft versions 1.21.3 and before. In the future, the registry alias in Fabric API might also be used, making these changes applicable to versions 1.21.3 and before.
+
 ### 3.1.3
 
 - Fit Blockus new versions.
