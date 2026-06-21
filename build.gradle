@@ -4,7 +4,7 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 import java.util.regex.Pattern
 
 plugins {
-    id "net.fabricmc.fabric-loom" version '1.16-SNAPSHOT'
+    id "net.fabricmc.fabric-loom" version '1.17-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
@@ -158,7 +158,7 @@ project(':runtest') {
     }
     dependencies {
         implementation rootProject
-//        implementation project(path: ':with_blockus')
+        implementation project(path: ':with_blockus')
         if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
             runtimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
         }
