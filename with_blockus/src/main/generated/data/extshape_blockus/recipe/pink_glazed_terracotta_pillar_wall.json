@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "glazed_terracotta_pillar_wall",
   "key": {
     "#": "blockus:pink_glazed_terracotta_pillar"

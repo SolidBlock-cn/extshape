@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "mossy_wooden_wall",
   "key": {
     "#": "blockus:mossy_acacia_planks"

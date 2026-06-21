@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "#": "minecraft:phantom_membrane",
     "W": "blockus:small_phantom_purpur_bricks"

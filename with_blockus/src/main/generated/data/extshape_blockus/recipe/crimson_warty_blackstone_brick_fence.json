@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "#": "minecraft:flint",
     "W": "blockus:crimson_warty_blackstone_bricks"

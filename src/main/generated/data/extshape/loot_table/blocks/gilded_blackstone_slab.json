@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -28,7 +27,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "conditions": [
                     {
                       "block": "extshape:gilded_blackstone_slab",
@@ -63,7 +61,6 @@
                   ],
                   "functions": [
                     {
-                      "add": false,
                       "count": {
                         "type": "minecraft:uniform",
                         "max": 5.0,
@@ -78,7 +75,6 @@
                   "type": "minecraft:item",
                   "functions": [
                     {
-                      "add": false,
                       "count": 2.0,
                       "function": "minecraft:set_count"
                     }
@@ -118,7 +114,6 @@
                   ],
                   "functions": [
                     {
-                      "add": false,
                       "count": {
                         "type": "minecraft:uniform",
                         "max": 2.5,

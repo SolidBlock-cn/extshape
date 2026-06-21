@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "stripped_wood_wall",
   "key": {
     "#": "minecraft:stripped_spruce_wood"

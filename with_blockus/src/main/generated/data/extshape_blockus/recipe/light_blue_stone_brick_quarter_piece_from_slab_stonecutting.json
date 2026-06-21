@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:light_blue_stone_brick_slab",
-  "result": {
-    "count": 2,
-    "id": "extshape_blockus:light_blue_stone_brick_quarter_piece"
-  }
-}

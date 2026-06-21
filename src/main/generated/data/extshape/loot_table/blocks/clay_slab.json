@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -28,7 +27,6 @@
               ],
               "functions": [
                 {
-                  "add": false,
                   "conditions": [
                     {
                       "block": "extshape:clay_slab",
@@ -48,12 +46,10 @@
               "type": "minecraft:item",
               "functions": [
                 {
-                  "add": false,
                   "count": 2.0,
                   "function": "minecraft:set_count"
                 },
                 {
-                  "add": false,
                   "conditions": [
                     {
                       "block": "extshape:clay_slab",

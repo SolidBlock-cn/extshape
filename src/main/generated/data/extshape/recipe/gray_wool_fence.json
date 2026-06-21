@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "wool_fence",
   "key": {
     "#": "minecraft:string",

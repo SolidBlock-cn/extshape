@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "wood_wall",
   "key": {
     "#": "minecraft:pale_oak_wood"

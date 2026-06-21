@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "concrete_wall",
   "key": {
     "#": "minecraft:red_concrete"

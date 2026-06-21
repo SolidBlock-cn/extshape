@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "#": "minecraft:pointed_dripstone",
     "W": "minecraft:dripstone_block"

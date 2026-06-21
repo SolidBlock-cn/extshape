@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "#": "minecraft:pumpkin_seeds",
     "W": "minecraft:pumpkin"

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "#": "blockus:rainbow_petals",
     "W": "blockus:rainbow_glowstone"

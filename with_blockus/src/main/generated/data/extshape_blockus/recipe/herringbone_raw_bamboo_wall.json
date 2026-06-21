@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "herringbone_wooden_wall",
   "key": {
     "#": "blockus:herringbone_raw_bamboo_planks"

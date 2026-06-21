@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "wooden_mosaic_wall",
   "key": {
     "#": "blockus:spruce_mosaic"

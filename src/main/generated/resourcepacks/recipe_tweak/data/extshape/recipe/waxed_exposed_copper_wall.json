@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "#": "minecraft:waxed_exposed_copper",
     "*": "minecraft:copper_ingot"
