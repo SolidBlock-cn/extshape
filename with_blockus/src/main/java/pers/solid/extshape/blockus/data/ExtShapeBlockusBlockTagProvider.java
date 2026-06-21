@@ -2,8 +2,6 @@ package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.BSSWBundle;
-import com.brand.blockus.registry.content.bundles.ConcreteBundle;
-import com.brand.blockus.registry.content.bundles.WoolBundle;
 import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.brand.blockus.utils.helper.WoodMaps;
@@ -13,6 +11,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ColorCollection;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
@@ -22,7 +21,7 @@ import pers.solid.extshape.tag.ExtShapeTags;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
@@ -35,8 +34,9 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
   protected void addTags(HolderLookup.Provider wrapperLookup) {
     // region 形状标签
 
+    final Set<Block> blockusGlazedTerracottaBlocks = Set.copyOf(BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().asList());
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
-      if (BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap().containsValue(baseBlock)) {
+      if (blockusGlazedTerracottaBlocks.contains(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS);
       } else if (BlockusBlocks.SMALL_LOGS.bundle().containsValue(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_LOG_TAG);
@@ -47,8 +47,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
       }
     }
     ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS.forEach((blockShape, tag) -> {
-      valueLookupBuilder(ExtShapeTags.SHAPE_TO_TAG.get(blockShape)).addTag(tag);
-      valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(tag);
+      builder(ExtShapeTags.SHAPE_TO_TAG.get(blockShape)).addTag(tag);
+      builder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(tag);
     });
 
     // endregion
@@ -337,20 +337,20 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
 
-    final Map<DyeColor, BSSWBundle> stainedStoneBricksColorMap = BlockusBlocks.STAINED_STONE_BRICKS.colorMap();
-    addForShapes(BlockusBlockTags.STAINED_STONE_BRICKS, Arrays.stream(BlockOrder.COLOR).map(dyeColor -> stainedStoneBricksColorMap.get(dyeColor).block()).filter(Objects::nonNull)::iterator);
+    final ColorCollection<Block> stainedStoneBricks = BlockusBlocks.DYED_STONE_BRICKS.block().blocks();
+    addForShapes(BlockusBlockTags.ALL_DYED_STONE_BRICKS, Arrays.stream(DyeColor.values()).map(stainedStoneBricks::pick)::iterator);
 
-    final Map<DyeColor, ConcreteBundle.ConcreteVariants> concreteBricksColorMap = BlockusBlocks.CONCRETE_BRICKS.colorMap();
-    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Arrays.stream(BlockOrder.COLOR).map(dyeColor -> concreteBricksColorMap.get(dyeColor).block()).filter(Objects::nonNull)::iterator);
+    final ColorCollection<Block> concreteBricks = BlockusBlocks.CONCRETE_BRICKS.block().blocks();
+    addForShapes(BlockusBlockTags.ALL_CONCRETE_BRICKS, Arrays.stream(DyeColor.values()).map(concreteBricks::pick)::iterator);
 
-    addForShapes(BlockusBlockTags.SHINGLES, BlockusBlocks.SHINGLES.block());
-    final Map<DyeColor, BSSWBundle> stainedShinglesColorMap = BlockusBlocks.STAINED_SHINGLES.colorMap();
-    addForShapes(BlockusBlockTags.SHINGLES, Arrays.stream(BlockOrder.COLOR).map(dyeColor -> stainedShinglesColorMap.get(dyeColor).block()).filter(Objects::nonNull)::iterator);
+    addForShapes(BlockusBlockTags.ALL_SHINGLES, BlockusBlocks.SHINGLES.block());
+    final ColorCollection<Block> stainedShingles = BlockusBlocks.DYED_SHINGLES.block().blocks();
+    addForShapes(BlockusBlockTags.ALL_SHINGLES, Arrays.stream(DyeColor.values()).map(stainedShingles::pick)::iterator);
 
-    final Map<DyeColor, WoolBundle.WoolVariants> patternedWoolColorMap = BlockusBlocks.PATTERNED_WOOL.colorMap();
-    final Map<DyeColor, WoolBundle.WoolVariants> ginghamWoolColorMap = BlockusBlocks.GINGHAM_WOOL.colorMap();
-    addForShapes(BlockusBlockTags.ALL_PATTERNED_WOOLS, Arrays.stream(BlockOrder.COLOR).flatMap(dyeColor -> Stream.of(patternedWoolColorMap.get(dyeColor), ginghamWoolColorMap.get(dyeColor))).filter(Objects::nonNull).map(WoolBundle.WoolVariants::block)::iterator);
-    addForShapes(ExtShapeTags.WOOLEN_BLOCKS, Arrays.stream(BlockOrder.COLOR).flatMap(dyeColor -> Stream.of(patternedWoolColorMap.get(dyeColor), ginghamWoolColorMap.get(dyeColor))).filter(Objects::nonNull).map(WoolBundle.WoolVariants::block)::iterator);
+    final ColorCollection<Block> patternedWools = BlockusBlocks.PATTERNED_WOOL.block().blocks();
+    final ColorCollection<Block> ginghamWools = BlockusBlocks.GINGHAM_WOOL.block().blocks();
+    addForShapes(BlockusBlockTags.ALL_PATTERNED_WOOLS, Arrays.stream(DyeColor.values()).flatMap(dyeColor -> Stream.of(patternedWools.pick(dyeColor), ginghamWools.pick(dyeColor)))::iterator);
+    addForShapes(ExtShapeTags.WOOLEN_BLOCKS, Arrays.stream(DyeColor.values()).flatMap(dyeColor -> Stream.of(patternedWools.pick(dyeColor), ginghamWools.pick(dyeColor)))::iterator);
 
     addForShapes(BlockusBlockTags.THATCH, BlockusBlocks.THATCH.block());
 

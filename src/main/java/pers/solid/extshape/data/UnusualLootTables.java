@@ -1,7 +1,7 @@
 package pers.solid.extshape.data;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;

@@ -34,8 +34,8 @@ public final class ExtShapeBlockusItemGroup {
   }
 
   private static final ImmutableSet<Block> SPECIAL_SORTED_RAINBOW_BLOCKS = Streams.concat(
-      BlockusBlocks.STAINED_SHINGLES.colorMap().values().stream().map(BSSWBundle::block),
-      BlockusBlocks.STAINED_STONE_BRICKS.colorMap().values().stream().map(BSSWBundle::block),
+      BlockusBlocks.DYED_SHINGLES.block().blocks().asList().stream(),
+      BlockusBlocks.DYED_STONE_BRICKS.block().blocks().asList().stream(),
       Stream.of(BlockusBlocks.SHINGLES).map(BSSWBundle::block)).collect(ImmutableSet.toImmutableSet());
 
   public static void addVanillaGroupRules(Collection<BlockShape> shapes) {
@@ -45,20 +45,20 @@ public final class ExtShapeBlockusItemGroup {
     final Multimap<Item, Item> coloredTilesAppendingRule = VanillaItemGroup.getAppendingRule(BlockusItemGroups.BLOCKUS_COLORED_TILES);
     new EntryVariantAppender(BlockusItemGroups.BLOCKUS_COLORED_BLOCKS, shapes, Iterables.filter(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, input -> !SPECIAL_SORTED_RAINBOW_BLOCKS.contains(input)), ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains).appendItems(coloredAppendingRule);
     new EntryVariantAppender(BlockusItemGroups.BLOCKUS_COLORED_TILES, shapes, Iterables.filter(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, input -> !SPECIAL_SORTED_RAINBOW_BLOCKS.contains(input)), ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains).appendItems(coloredTilesAppendingRule);
-    final Item shingleAnchor = BlockusBlocks.STAINED_SHINGLES.colorMap().get(DyeColor.PINK).slab().asItem();
-    final Item stainedStoneBrickAnchor = BlockusBlocks.STAINED_STONE_BRICKS.colorMap().get(DyeColor.PINK).wall().asItem();
+    final Item shingleAnchor = BlockusBlocks.DYED_SHINGLES.slab().blocks().pick(DyeColor.PINK).asItem();
+    final Item stainedStoneBrickAnchor = BlockusBlocks.DYED_STONE_BRICKS.wall().blocks().pick(DyeColor.PINK).asItem();
     for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
       BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
       final Block block1 = biMap.get(BlockusBlocks.SHINGLES.block());
       if (block1 != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block1))
         coloredAppendingRule.put(shingleAnchor, block1.asItem());
-      for (var bsswBundle : BlockusBlocks.STAINED_SHINGLES.colorMap().values()) {
-        final Block block = biMap.get(bsswBundle.block());
+      for (var dyedShinglesBlock : BlockusBlocks.DYED_SHINGLES.block().blocks().asList()) {
+        final Block block = biMap.get(dyedShinglesBlock);
         if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
           coloredAppendingRule.put(shingleAnchor, block.asItem());
       }
-      for (var bsswBundle : BlockusBlocks.STAINED_STONE_BRICKS.colorMap().values()) {
-        final Block block = biMap.get(bsswBundle.block());
+      for (var dyedStoneBricksBlock : BlockusBlocks.DYED_STONE_BRICKS.block().blocks().asList()) {
+        final Block block = biMap.get(dyedStoneBricksBlock);
         if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
           coloredAppendingRule.put(stainedStoneBrickAnchor, block.asItem());
       }

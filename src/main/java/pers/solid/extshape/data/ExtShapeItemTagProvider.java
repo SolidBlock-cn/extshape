@@ -6,7 +6,9 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -68,7 +70,7 @@ public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider
     ));
     addForShapes(ItemTags.PIGLIN_LOVED, Blocks.GOLD_BLOCK, Blocks.RAW_GOLD_BLOCK, Blocks.GILDED_BLACKSTONE);
 
-    valueLookupBuilder(ItemTags.SULFUR_CUBE_ARCHETYPE_REGULAR).add(ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem(), ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem());
+    builder(ItemTags.SULFUR_CUBE_ARCHETYPE_SLOW_BOUNCY).add(keyOf(ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem()), keyOf(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem()));
   }
 
   protected void copyWithSameId(TagKey<Block> blockTag) {
@@ -77,11 +79,11 @@ public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider
 
   protected void addForShapes(TagKey<Item> tag, Block baseBlock) {
     checkValidBaseBlock(baseBlock);
-    final var builder = valueLookupBuilder(tag);
+    final var builder = builder(tag);
     for (BlockShape shape : BlockShape.values()) {
       final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (isValidBlock(block)) {
-        builder.add(block.asItem());
+        builder.add(keyOf(block.asItem()));
       }
     }
   }
@@ -91,13 +93,13 @@ public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider
   }
 
   protected void addForShapes(TagKey<Item> tag, Iterable<Block> baseBlocks) {
-    final var builder = valueLookupBuilder(tag);
+    final var builder = builder(tag);
     for (Block baseBlock : baseBlocks) {
       checkValidBaseBlock(baseBlock);
       for (BlockShape shape : BlockShape.values()) {
         final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
         if (isValidBlock(block)) {
-          builder.add(block.asItem());
+          builder.add(keyOf(block.asItem()));
         }
       }
     }
@@ -123,5 +125,9 @@ public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider
   @Contract("null -> false")
   protected boolean isValidBlock(@Nullable Block block) {
     return blockTagProvider.isValidBlock(block);
+  }
+
+  private static ResourceKey<Item> keyOf(Item item) {
+    return BuiltInRegistries.ITEM.getResourceKey(item).orElseThrow();
   }
 }

@@ -40,19 +40,19 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
    * 不同氧化等级的铜方块。
    */
-  public static final ImmutableList<Block> COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK.unaffected(), Blocks.COPPER_BLOCK.exposed(), Blocks.COPPER_BLOCK.weathered(), Blocks.COPPER_BLOCK.oxidized());
+  public static final ImmutableList<Block> COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK.weathering().unaffected(), Blocks.COPPER_BLOCK.weathering().exposed(), Blocks.COPPER_BLOCK.weathering().weathered(), Blocks.COPPER_BLOCK.weathering().oxidized());
   /**
    * 不同氧化等级的切制铜方块。
    */
-  public static final ImmutableList<Block> CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER.unaffected(), Blocks.CUT_COPPER.exposed(), Blocks.CUT_COPPER.weathered(), Blocks.CUT_COPPER.oxidized());
+  public static final ImmutableList<Block> CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER.weathering().unaffected(), Blocks.CUT_COPPER.weathering().exposed(), Blocks.CUT_COPPER.weathering().weathered(), Blocks.CUT_COPPER.weathering().oxidized());
   /**
    * 不同氧化等级的涂蜡铜方块。
    */
-  public static final ImmutableList<Block> WAXED_COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK.waxed(), Blocks.COPPER_BLOCK.waxedExposed(), Blocks.COPPER_BLOCK.waxedWeathered(), Blocks.COPPER_BLOCK.waxedOxidized());
+  public static final ImmutableList<Block> WAXED_COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK.waxed().unaffected(), Blocks.COPPER_BLOCK.waxed().exposed(), Blocks.COPPER_BLOCK.waxed().weathered(), Blocks.COPPER_BLOCK.waxed().oxidized());
   /**
    * 不同氧化等级的涂蜡切制铜方块。
    */
-  public static final ImmutableList<Block> WAXED_CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER.waxed(), Blocks.CUT_COPPER.waxedExposed(), Blocks.CUT_COPPER.waxedWeathered(), Blocks.CUT_COPPER.waxedOxidized());
+  public static final ImmutableList<Block> WAXED_CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER.waxed().unaffected(), Blocks.CUT_COPPER.waxed().exposed(), Blocks.CUT_COPPER.waxed().weathered(), Blocks.CUT_COPPER.waxed().oxidized());
   /**
    * 依次排列的不同的氧化等级。
    */

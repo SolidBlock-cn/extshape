@@ -48,7 +48,7 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
     registerSuffixed(BlockusBlocks.SOUL_SANDSTONE.block(), TextureSlot.TOP, "_top");
     register(BlockusBlocks.SMOOTH_SOUL_SANDSTONE.block(), Identifier.fromNamespaceAndPath(Blockus.MOD_ID, "block/soul_sandstone_top"));
 
-    for (var block : BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap().values()) {
+    for (var block : BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().asList()) {
       registerSuffixed(block, TextureSlot.END, "_top");
     }
 

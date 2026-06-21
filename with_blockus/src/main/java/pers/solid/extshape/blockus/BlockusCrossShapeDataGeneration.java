@@ -2,9 +2,7 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
 import com.brand.blockus.registry.content.BlockusBlocks;
-import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
-import com.brand.blockus.utils.helper.BlockMaps;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.google.common.collect.ImmutableMultimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
@@ -13,13 +11,13 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColorCollection;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.data.CrossShapeDataGeneration;
 import pers.solid.extshape.data.VanillaStonecutting;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -49,16 +47,14 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
    */
   private static void registerBlockusStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
     for (ConcreteBundle concreteBundle : ConcreteBundle.values()) {
-      final Map<DyeColor, ConcreteBundle.ConcreteVariants> concreteBundleMap = concreteBundle.colorMap();
+      final ColorCollection<Block> concreteBlocks = concreteBundle.block().blocks();
+      final ColorCollection<Block> chiseledBlocks = concreteBundle.chiseled().blocks();
+      final ColorCollection<Block> pillarBlocks = concreteBundle.pillar().blocks();
       for (DyeColor dyeColor : BlockOrder.COLOR) {
-        final ConcreteBundle.ConcreteVariants concreteVariants = concreteBundleMap.get(dyeColor);
-        if (concreteVariants == null) {
-          continue;
-        }
-        Block base = BlockMaps.CONCRETE_MAP.get(dyeColor);
-        builder.put(concreteVariants.block(), base);
-        builder.put(concreteVariants.chiseled(), base);
-        builder.put(concreteVariants.pillar(), base);
+        Block base = Blocks.CONCRETE.pick(dyeColor);
+        builder.put(concreteBlocks.pick(dyeColor), base);
+        builder.put(chiseledBlocks.pick(dyeColor), base);
+        builder.put(pillarBlocks.pick(dyeColor), base);
       }
     }
     builder.put(BlockusBlocks.MUD_BRICK_PILLAR, Blocks.MUD_BRICKS);
@@ -162,19 +158,13 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     // shingles and terracotta and glazed terracotta
     builder.put(BlockusBlocks.SHINGLES.block(), Blocks.TERRACOTTA);
 
-    final Map<DyeColor, BSSWBundle> stainedShinglesColorMap = BlockusBlocks.STAINED_SHINGLES.colorMap();
-    final Map<DyeColor, Block> glazedTerracottaPillarColorMap = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap();
     for (DyeColor dyeColor : BlockOrder.COLOR) {
-      final Block terracotta = BlockMaps.TERRACOTTA_MAP.get(dyeColor);
-      final BSSWBundle stainedShingles = stainedShinglesColorMap.get(dyeColor);
-      final Block glazedTerracotta = BlockMaps.GLAZED_TERRACOTTA_MAP.get(dyeColor);
-      final Block glazedTerracottaPilar = glazedTerracottaPillarColorMap.get(dyeColor);
-      if (stainedShingles != null && terracotta != null) {
-        builder.put(stainedShingles.block(), terracotta);
-      }
-      if (glazedTerracottaPilar != null && glazedTerracotta != null) {
-        builder.put(glazedTerracottaPilar, glazedTerracotta);
-      }
+      final Block terracotta = Blocks.DYED_TERRACOTTA.pick(dyeColor);
+      final Block stainedShingleBlock = BlockusBlocks.DYED_SHINGLES.block().blocks().pick(dyeColor);
+      final Block glazedTerracotta = Blocks.GLAZED_TERRACOTTA.pick(dyeColor);
+      final Block glazedTerracottaPilar = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().pick(dyeColor);
+      builder.put(stainedShingleBlock, terracotta);
+      builder.put(glazedTerracottaPilar, glazedTerracotta);
     }
 
     // 1.20 新增：矿物方块与矿物砖的转换

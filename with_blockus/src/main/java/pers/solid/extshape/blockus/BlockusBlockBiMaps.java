@@ -6,8 +6,10 @@ import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.registry.content.bundles.WoolBundle;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColorCollection;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.BlockBiMaps;
 
@@ -52,25 +54,33 @@ public final class BlockusBlockBiMaps {
         BlockBiMaps.setBlockOf(BlockShape.WALL, bsswBundle.block(), bsswBundle.wall());
       }
     });
-    WoolBundle.values().forEach(woolBundle -> woolBundle.colorMap().values().forEach(woolVariants -> {
-      if (woolVariants.stairs() != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woolVariants.block(), woolVariants.stairs());
+    WoolBundle.values().forEach(woolBundle -> {
+      final ColorCollection<Block> woolBlocks = woolBundle.block().blocks();
+      final ColorCollection<Block> woolStairsBlocks = woolBundle.stairs().blocks();
+      final ColorCollection<Block> woolSlabBlocks = woolBundle.slab().blocks();
+      for (DyeColor dyeColor : DyeColor.values()) {
+        final Block woolBlock = woolBlocks.pick(dyeColor);
+        final Block woolStairs = woolStairsBlocks.pick(dyeColor);
+        final Block woolSlab = woolSlabBlocks.pick(dyeColor);
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woolBlock, woolStairs);
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, woolBlock, woolSlab);
       }
-      if (woolVariants.slab() != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, woolVariants.block(), woolVariants.slab());
+    });
+    ConcreteBundle.values().forEach(concreteBundle -> {
+      final ColorCollection<Block> concreteBlocks = concreteBundle.block().blocks();
+      final ColorCollection<Block> concreteStairsBlocks = concreteBundle.stairs().blocks();
+      final ColorCollection<Block> concreteSlabBlocks = concreteBundle.slab().blocks();
+      final ColorCollection<Block> concreteWallBlocks = concreteBundle.wall().blocks();
+      for (DyeColor dyeColor : DyeColor.values()) {
+        final Block concreteBlock = concreteBlocks.pick(dyeColor);
+        final Block concreteStairsBlock = concreteStairsBlocks.pick(dyeColor);
+        final Block concreteSlabBlock = concreteSlabBlocks.pick(dyeColor);
+        final Block concreteWallBlock = concreteWallBlocks.pick(dyeColor);
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteBlock, concreteStairsBlock);
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteBlock, concreteSlabBlock);
+        BlockBiMaps.setBlockOf(BlockShape.WALL, concreteBlock, concreteWallBlock);
       }
-    }));
-    ConcreteBundle.values().forEach(concreteBundle -> concreteBundle.colorMap().values().forEach(concreteVariants -> {
-      if (concreteVariants.stairs() != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteVariants.block(), concreteVariants.stairs());
-      }
-      if (concreteVariants.slab() != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteVariants.block(), concreteVariants.slab());
-      }
-      if (concreteVariants.wall() != null) {
-        BlockBiMaps.setBlockOf(BlockShape.WALL, concreteVariants.block(), concreteVariants.wall());
-      }
-    }));
+    });
 
     BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.LIMESTONE.block(), BlockusBlocks.LIMESTONE_PRESSURE_PLATE);
     BlockBiMaps.setBlockOf(BlockShape.PRESSURE_PLATE, BlockusBlocks.MARBLE.block(), BlockusBlocks.MARBLE_PRESSURE_PLATE);

@@ -3,9 +3,8 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.BSSWBundle;
-import com.brand.blockus.registry.content.bundles.ConcreteBundle;
+import com.brand.blockus.registry.content.bundles.DyedBSSWBundle;
 import com.brand.blockus.registry.content.bundles.WoodBundle;
-import com.brand.blockus.registry.content.bundles.WoolBundle;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.brand.blockus.utils.helper.WoodMaps;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
@@ -19,11 +18,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Util;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ColorCollection;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import org.jetbrains.annotations.UnmodifiableView;
@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public final class ExtShapeBlockusBlocks {
 
@@ -765,23 +766,18 @@ public final class ExtShapeBlockusBlocks {
         .setPillar()
         .build();
 
-    for (var bsswBundle : BlockusBlocks.STAINED_STONE_BRICKS.colorMap().values()) {
-      create(bsswBundle)
-          .markStoneCuttable()
-          .setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.getSerializedName())
-          .setActivationSettings(ActivationSettings.STONE)
-          .setFenceSettings(FenceSettings.STONE)
-          .without(BlockShape.BUTTON)
-          .build();
-    }
+    createForDyed(BlockusBlocks.DYED_STONE_BRICKS, ExtShapeBlockusBlocks::create, (dyeColor, blocksBuilder) -> blocksBuilder
+        .markStoneCuttable()
+        .setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.getSerializedName())
+        .setActivationSettings(ActivationSettings.STONE)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON)
+        .build()
+    );
 
-    final Map<DyeColor, ConcreteBundle.ConcreteVariants> concreteBricksMap = BlockusBlocks.CONCRETE_BRICKS.colorMap();
+    final ColorCollection<Block> concreteBricksBlocks = BlockusBlocks.CONCRETE_BRICKS.block().blocks();
     for (DyeColor dyeColor : BlockOrder.COLOR) {
-      final ConcreteBundle.ConcreteVariants concreteVariants = concreteBricksMap.get(dyeColor);
-      if (concreteVariants == null) {
-        continue;
-      }
-      FACTORY.createConstructionOnly(concreteVariants.block())
+      FACTORY.createConstructionOnly(concreteBricksBlocks.pick(dyeColor))
           .markStoneCuttable()
           .without(BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL)
           .setRecipeGroup(blockShape1 -> "concrete_brick_" + blockShape1.getSerializedName())
@@ -795,27 +791,22 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.STONE)
         .setFenceSettings(FenceSettings.STONE)
         .build();
-    for (var bssTypes : BlockusBlocks.STAINED_SHINGLES.colorMap().values()) {
-      create(bssTypes)
-          .markStoneCuttable()
-          .setActivationSettings(ActivationSettings.STONE)
-          .setFenceSettings(FenceSettings.STONE)
-          .setRecipeGroup(blockShape -> "shingles_" + blockShape.getSerializedName())
-          .build();
-    }
+    createForDyed(BlockusBlocks.DYED_SHINGLES, ExtShapeBlockusBlocks::create, (dyeColor, blocksBuilder) -> blocksBuilder
+        .markStoneCuttable()
+        .setActivationSettings(ActivationSettings.STONE)
+        .setFenceSettings(FenceSettings.STONE)
+        .setRecipeGroup(blockShape -> "shingles_" + blockShape.getSerializedName())
+        .build());
 
-    for (var woolTypes : List.of(BlockusBlocks.PATTERNED_WOOL, BlockusBlocks.GINGHAM_WOOL)) {
-      final Map<DyeColor, WoolBundle.WoolVariants> colorMap = woolTypes.colorMap();
+    for (var woolBundle : List.of(BlockusBlocks.PATTERNED_WOOL, BlockusBlocks.GINGHAM_WOOL)) {
+      final ColorCollection<Block> woolBlocks = woolBundle.block().blocks();
+      final ColorCollection<Block> woolCarpetBlocks = woolBundle.carpet().blocks();
       for (DyeColor dyeColor : BlockOrder.COLOR) {
-        final WoolBundle.WoolVariants woolVariants = colorMap.get(dyeColor);
-        if (woolVariants == null) {
-          continue;
-        }
-        FACTORY.createAllShapes(woolVariants.block())
+        FACTORY.createAllShapes(woolBlocks.pick(dyeColor))
             .without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.BUTTON)
             .addPreBuildConsumer((blockShape, blockBuilder) -> {
               if (blockShape == BlockShape.PRESSURE_PLATE) {
-                ((PressurePlateBuilder) blockBuilder).setInstanceSupplier(x -> new WoolPressurePlate(x.baseBlock, x.blockSettings, ((PressurePlateBuilder) x).activationSettings, woolVariants.carpet()));
+                ((PressurePlateBuilder) blockBuilder).setInstanceSupplier(x -> new WoolPressurePlate(x.baseBlock, x.blockSettings, ((PressurePlateBuilder) x).activationSettings, woolCarpetBlocks.pick(dyeColor)));
               }
             })
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60))
@@ -827,9 +818,9 @@ public final class ExtShapeBlockusBlocks {
       }
     }
 
-    final Map<DyeColor, Block> glazedTerracottaPillarMap = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap();
+    final ColorCollection<Block> glazedTerracottaPillarBlocks = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks();
     for (DyeColor dyeColor : BlockOrder.COLOR) {
-      final Block block = glazedTerracottaPillarMap.get(dyeColor);
+      final Block block = glazedTerracottaPillarBlocks.pick(dyeColor);
       if (block == null) continue;
       FACTORY.createConstructionOnly(block)
           .markStoneCuttable().with(BlockShape.WALL)
@@ -895,7 +886,7 @@ public final class ExtShapeBlockusBlocks {
         .withoutRedstone()
         .setStoneFenceSettings(Items.NETHER_STAR).withExtension(BlockExtension.builder()
             .setSteppedOnCallback((world, pos, state, entity) -> {
-              if (entity.getType() == EntityType.PLAYER) {
+              if (entity.getType() == EntityTypes.PLAYER) {
                 ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1, 3, true, false, false));
                 ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 900, 3, true, false, true));
                 ((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, 80, 2, true, false, true));
@@ -950,6 +941,18 @@ public final class ExtShapeBlockusBlocks {
 
   private static BlocksBuilder create(WoodBundle woodBundle) {
     return create(woodBundle.planks()).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
+  }
+
+  private static void createForDyed(DyedBSSWBundle dyedBSSWBundle, Function<Block, BlocksBuilder> builderCreator, BiConsumer<DyeColor, BlocksBuilder> builderConsumer) {
+    final ColorCollection<Block> blocks = dyedBSSWBundle.block().blocks();
+    for (DyeColor dyeColor : DyeColor.values()) {
+      final Block baseBlock = blocks.pick(dyeColor);
+      final BlocksBuilder blocksBuilder = builderCreator.apply(baseBlock);
+      if (dyedBSSWBundle.stairs() != null) blocksBuilder.without(BlockShape.STAIRS);
+      if (dyedBSSWBundle.slab() != null) blocksBuilder.without(BlockShape.SLAB);
+      if (dyedBSSWBundle.wall() != null) blocksBuilder.without(BlockShape.WALL);
+      builderConsumer.accept(dyeColor, blocksBuilder);
+    }
   }
 
   private static void buildCircularPavingBlock(BlocksBuilder blocksBuilder) {
