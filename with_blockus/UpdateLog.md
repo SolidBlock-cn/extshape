@@ -1,5 +1,10 @@
 ## 更新日志（适用于 Blockus 部分）
 
+### 3.1.5
+
+- 同步 Blockus 变更，现在在创造模式物品栏中，不再为染色的石砖和陶瓦特殊排序。
+- 同步 Blockus 变更，为 26.2 版本加入硫黄和朱砂相关方块。
+
 ### 3.1.4
 
 - 由于新版本 Blockus 添加了磨制方块的墙，因此本模组不再加入这些方块。本模组会使用 Fabric API 中的 registry alias 功能，使其旧版名称（Extended Block Shapes - Blockus 中的方块）兼容新版（Blockus 中的方块），例如 `extshape_blockus:polished_purpur_wall` 将等价于 `blockus:polished_purpur_wall`。
