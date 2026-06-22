@@ -1,5 +1,10 @@
 # Update log (for Blockus part)
 
+### 3.1.5
+
+- Synchronizing to Blockus changes, now in the Creative Mode inventory, no special sorting is applied for dyed stone bricks and terracotta.
+- Synchronizing to Blockus changes, added blocks related to sulfur and cinnabar for 26.2.
+
 ### 3.1.4
 
 - Since the new version of Blockus mod has added walls for polished blocks, the mod no longer adds these blocks. The mod uses the feature of registry alias in Fabric API to make old names (blocks in Extended Block Shapes - Blockus) compatible with new version (blocks in Blockus). For example, `extshape_blockus:polished_purpur_wall` will be identical to `blockus:polished_purpur_wall`.
