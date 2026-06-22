@@ -1,10 +1,10 @@
 package pers.solid.extshape;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectSet;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -23,11 +23,19 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SelectableRecipe;
+import net.minecraft.world.item.crafting.StonecutterRecipe;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
@@ -38,10 +46,8 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -68,12 +74,12 @@ public class ExtShape implements ModInitializer {
   /**
    * 该字段仅在开发环境中使用，在加载 DataFixer 时赋值，并在完成注册表后检查。
    */
-  public static Map<String, String> idMapToVerify = null;
+  public static @Nullable Map<String, String> idMapToVerify = null;
 
   /**
    * 创建一个以模型命名 id 为命名空间的 id。
    */
-  public static Identifier id(@NotNull String path) {
+  public static Identifier id(String path) {
     // 使用 withPath 是为了避免不必要地对 namespace 进行 validate。
     return defaultId.withPath(path);
   }
@@ -99,14 +105,25 @@ public class ExtShape implements ModInitializer {
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
       validateIdMap();
       ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-        LOGGER.info("Verifying Extended Block Shapes mod content");
-        validateTags(server);
+        LOGGER.info("Validating Extended Block Shapes mod content");
+        validateTagsForBlocks(server, ExtShapeBlocks.getBlocks());
+        LOGGER.info("Extended Block Shapes mod content is successfully validated");
+
+        LOGGER.info("Validating Extended Block Shapes recipes");
+        validateStonecuttingForBlocks(server, ExtShapeBlocks.getBaseBlocks());
+        LOGGER.info("Extended Block Shapes recipes are successfully validated");
       });
     }
   }
 
-  private static void validateTags(MinecraftServer server) {
-    final ObjectSet<Block> blocks = ExtShapeBlocks.getBlocks();
+  /**
+   * <p>检测各方块所属 mineable 标签与其基础方块是否一致，如果不一致，则会抛出错误。例如，如果基础方块有 mineable/axe 标签，其墙却没有，或者基础方块没有 mineable/pickaxe 标签，但其栅栏方块有，这些情况都会抛出错误。
+   * <p>此方法只能在运行后执行，因为需要已加载数据包。
+   */
+  @ApiStatus.AvailableSince("3.1.5")
+  public static void validateTagsForBlocks(MinecraftServer server, Collection<Block> blocks) {
+    int errors = 0;
+
     for (Block block : blocks) {
       if (!block.isEnabled(server.overworld().enabledFeatures())) {
         continue;
@@ -117,19 +134,121 @@ public class ExtShape implements ModInitializer {
         final Holder<Block> blockEntry = blockRegistry.wrapAsHolder(block);
         final Holder<Block> baseBlockEntry = blockRegistry.wrapAsHolder(baseBlock);
 
-        for (TagKey<Block> tag : List.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_SHOVEL)) {
+        for (TagKey<Block> tag : ImmutableSet.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.MINEABLE_WITH_HOE, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.NEEDS_DIAMOND_TOOL, BlockTags.NEEDS_IRON_TOOL, BlockTags.NEEDS_STONE_TOOL, BlockTags.SWORD_EFFICIENT, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, BlockTags.INCORRECT_FOR_COPPER_TOOL, BlockTags.INCORRECT_FOR_GOLD_TOOL, BlockTags.INCORRECT_FOR_IRON_TOOL, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, BlockTags.INCORRECT_FOR_STONE_TOOL, BlockTags.INCORRECT_FOR_WOODEN_TOOL)) {
           final boolean blockInTag = blockEntry.is(tag);
           final boolean baseBlockInTag = baseBlockEntry.is(tag);
-          if (tag == BlockTags.MINEABLE_WITH_AXE && blockEntry.is(BlockTags.FENCE_GATES)) continue;
-          if (tag == BlockTags.MINEABLE_WITH_PICKAXE && blockEntry.is(BlockTags.WALLS)) continue;
-          Validate.validState(blockInTag == baseBlockInTag, "Mineable tags for %s does not match! The block %s in the tag: %s, but the base block %s in the tag: %s", tag, block, blockInTag, baseBlock, baseBlockInTag);
+          if (blockInTag != baseBlockInTag) {
+            LOGGER.error("Tag check for {} does not match! The block {} in the tag: {}, but the base block {} in the tag: {}", tag.location(), BuiltInRegistries.BLOCK.getKey(block), blockInTag, BuiltInRegistries.BLOCK.getKey(baseBlock), baseBlockInTag);
+            errors++;
+          }
         }
-        ExtShapeTags.SHAPE_TO_TAG.forEach((blockShape, blockTagKey) -> {
+        for (Map.Entry<BlockShape, TagKey<Block>> entry : ExtShapeTags.SHAPE_TO_TAG.entrySet()) {
+          BlockShape blockShape = entry.getKey();
+          TagKey<Block> blockTagKey = entry.getValue();
           final boolean blockInShape = blockShape.test(block);
           final boolean blockInTag = blockEntry.is(blockTagKey);
-          Validate.validState(blockInShape == blockInTag, "Tag check for %s does not match! The block %s in the shape: %s, but the block in the shape tag: %s", blockTagKey, block, blockInShape, blockInTag);
-        });
+          if (blockInShape != blockInTag) {
+            LOGGER.error("Tag check for {} does not match! The block {} in the shape: {}, but the block in the shape tag: {}", blockTagKey.location(), BuiltInRegistries.BLOCK.getKey(block), blockInShape, blockInTag);
+            errors++;
+          }
+        }
       }
+    }
+
+    if (errors > 0) {
+      throw new IllegalStateException("Failed to validate tags for blocks with " + errors + " errors!");
+    }
+  }
+
+  /**
+   * 验证模组的切石配方，避免出现基础方块 A 能切成 A 的 X 形状但不能切成 Y 形状，或 A 能切成 B 的 X 形状但不能切成 Y 形状的问题。注意：仅限切石为建筑方块形状以及墙，如果切石为其他形状，则会抛出错误。
+   */
+  @ApiStatus.AvailableSince("3.1.5")
+  public static void validateStonecuttingForBlocks(MinecraftServer server, Collection<Block> baseBlocks) {
+    final SelectableRecipe.SingleInputSet<StonecutterRecipe> stonecutter = server.getRecipeManager().stonecutterRecipes();
+    int errors = 0;
+
+    final Object2IntMap<BlockShape> stoneCuttableShapes = Object2IntMap.ofEntries(
+        Object2IntMap.entry(BlockShape.STAIRS, 1),
+        Object2IntMap.entry(BlockShape.SLAB, 2),
+        Object2IntMap.entry(BlockShape.VERTICAL_QUARTER_PIECE, 4),
+        Object2IntMap.entry(BlockShape.VERTICAL_SLAB, 2),
+        Object2IntMap.entry(BlockShape.VERTICAL_STAIRS, 1),
+        Object2IntMap.entry(BlockShape.QUARTER_PIECE, 4),
+        Object2IntMap.entry(BlockShape.WALL, 1)
+    );
+    for (Block baseBlock : baseBlocks) {
+      final SelectableRecipe.SingleInputSet<StonecutterRecipe> set = stonecutter.selectByInput(new ItemStack(baseBlock));
+      if (set.isEmpty()) {
+        continue;
+      }
+
+      // 映射，键为对应合成产物的基础方块（可能和 baseBlock 变量的值相同或不同），值为形状到布尔值的映射（方块存在且可合成的为 true，方块存在且不可合成的为 false，方块不存在的为 null）
+      final Map<Block, Set<BlockShape>> map = new HashMap<>();
+      for (SelectableRecipe.SingleInputEntry<StonecutterRecipe> entry : set.entries()) {
+        final Optional<RecipeHolder<StonecutterRecipe>> optional = entry.recipe().recipe();
+        if (optional.isEmpty()) {
+          continue;
+        }
+
+        final RecipeHolder<StonecutterRecipe> recipeHolder = optional.get();
+        final StonecutterRecipe recipe = recipeHolder.value();
+        final Item resultItem;
+        final int resultCount;
+
+        if (recipe.resultDisplay() instanceof SlotDisplay.ItemSlotDisplay(Holder<Item> resultItemHolder)) {
+          resultItem = resultItemHolder.value();
+          resultCount = 1;
+        } else if (recipe.resultDisplay() instanceof SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate stack)) {
+          resultItem = stack.item().value();
+          resultCount = stack.count();
+        } else {
+          continue;
+        }
+
+        if (!recipeHolder.id().identifier().getPath().startsWith(BuiltInRegistries.ITEM.getKey(resultItem).getPath())) {
+          LOGGER.error("Stonecutting recipe name mismatches! Recipe name {} does not start with item name of {}.", recipeHolder.id().identifier(), BuiltInRegistries.ITEM.getKey(resultItem));
+          errors++;
+        }
+
+        if (!(resultItem instanceof BlockItem blockItem)) {
+          continue;
+        }
+
+        final Block resultBlock = blockItem.getBlock();
+        final BlockShape resultShape = BlockShape.getShapeOf(resultBlock);
+        if (resultShape != null) {
+          final Block resultBase = BlockBiMaps.of(resultShape).inverse().get(resultBlock);
+          if (!stoneCuttableShapes.containsKey(resultShape)) {
+            LOGGER.error("The shape {} should not be stone-cut, but {} can be cut into these shapes of {}!", resultShape.getSerializedName(), BuiltInRegistries.BLOCK.getKey(baseBlock), BuiltInRegistries.BLOCK.getKey(resultBase));
+            errors++;
+          }
+          /* 检测切石产生的方块数量是否符合要求。
+          由于一个铜能切成 4 个切制铜块，因此切成各种形状也是按照 4 倍（原版也是如此）。目前，模组不对切石配方进行此检测。
+
+          if (stoneCuttableShapes.getInt(resultShape) != resultCount) {
+            LOGGER.error("Result count mismatches! The shape {} is expected to have {} results, but {} can be cut into {} items of {}!", resultShape.getSerializedName(), stoneCuttableShapes.getInt(resultShape), BuiltInRegistries.BLOCK.getKey(baseBlock), resultCount, BuiltInRegistries.ITEM.getKey(resultItem));
+          }*/
+
+          map.computeIfAbsent(resultBase, _ -> new HashSet<>()).add(resultShape);
+        }
+      }
+
+      for (Map.Entry<Block, Set<BlockShape>> e : map.entrySet()) {
+        final Block resultBase = e.getKey();
+        final Set<BlockShape> craftableShapes = e.getValue();
+        final Set<BlockShape> uncraftableShapes = stoneCuttableShapes.keySet().stream().filter(blockShape -> BlockBiMaps.getBlockOf(blockShape, resultBase) != null).filter(blockShape -> !craftableShapes.contains(blockShape)).collect(Collectors.toSet());
+
+
+        if (!uncraftableShapes.isEmpty()) {
+          LOGGER.error("{} can be stone-cut into {} of {}, but cannot be cut into {} of that block!", BuiltInRegistries.BLOCK.getKey(baseBlock), craftableShapes.stream().map(BlockShape::getSerializedName).collect(Collectors.joining(", ")), BuiltInRegistries.BLOCK.getKey(resultBase), uncraftableShapes.stream().map(BlockShape::getSerializedName).collect(Collectors.joining(", ")));
+          errors++;
+        }
+      }
+    }
+
+    if (errors > 0) {
+      throw new IllegalStateException("Failed to validate stonecutting recipes with " + errors + " errors!");
     }
   }
 

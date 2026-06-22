@@ -26,8 +26,7 @@
   "client": [
     "BlockStateModelGeneratorAccessor",
     "BlockTexturePoolAccessor",
-    "TextureMapAccessor",
-    "ToolComponentMixin"
+    "TextureMapAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

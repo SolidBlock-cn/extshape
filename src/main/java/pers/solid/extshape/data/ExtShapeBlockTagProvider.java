@@ -21,10 +21,7 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
@@ -97,7 +94,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
-    addForShapes(BlockTags.MINEABLE_WITH_PICKAXE, Iterables.concat(
+    final ImmutableSet<Block> pickaxeMineableBaseBlocks = ImmutableSet.copyOf(Iterables.concat(
         BlockCollections.STONES,
         BlockCollections.UNCOLORED_SANDSTONES,
         BlockCollections.RED_SANDSTONES,
@@ -161,6 +158,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
             Blocks.RAW_GOLD_BLOCK
         )
     ));
+    addForShapes(BlockTags.MINEABLE_WITH_PICKAXE, pickaxeMineableBaseBlocks);
 
     // 所有的混凝土和陶瓦加入 pickaxe_mineable
     for (TagKey<Block> tag : Iterables.concat(ExtShapeTags.SHAPE_TO_CONCRETE_TAG.values(), ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.values())) {
@@ -195,7 +193,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         Blocks.RAW_IRON_BLOCK,
         Blocks.RAW_COPPER_BLOCK
     );
-    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
+    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
     addForShapes(BlockTags.NEEDS_IRON_TOOL,
         Blocks.GOLD_BLOCK,
         Blocks.DIAMOND_BLOCK,
@@ -208,6 +206,28 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         Blocks.ANCIENT_DEBRIS,
         Blocks.CRYING_OBSIDIAN
     );
+
+    final ImmutableSet<Block> woodBlocks = Stream.of(BlockCollections.LOGS, BlockCollections.STRIPPED_LOGS, BlockCollections.WOODS, BlockCollections.STRIPPED_WOODS, BlockCollections.STEMS, BlockCollections.STRIPPED_STEMS, BlockCollections.HYPHAES, BlockCollections.STRIPPED_HYPHAES, BlockCollections.PLANKS, List.of(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK)).flatMap(Collection::stream).collect(ImmutableSet.toImmutableSet());
+
+    valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
+        .removeAll(ExtShapeBlocks.getBaseBlocks().stream()
+            .filter(block -> !(pickaxeMineableBaseBlocks.contains(block) || BlockCollections.CONCRETES.contains(block) || block == Blocks.TERRACOTTA || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || woodBlocks.contains(block)))
+            .map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block))
+            .filter(Objects::nonNull)
+            .filter(ExtShapeBlocks::contains))
+        .removeTag(ExtShapeTags.SHAPE_TO_WOODEN_TAG.get(BlockShape.WALL))
+        .removeTag(ExtShapeTags.SHAPE_TO_LOG_TAG.get(BlockShape.WALL));
+    // 注：由于直接移除了 wooden_wall 和 log_wall 标签，所以不再单独移除木制相关方块
+
+    final Set<Block> axeMineableBaseBlocks = Set.of(Blocks.MELON, Blocks.PUMPKIN);
+    valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE)
+        .removeAll(ExtShapeBlocks.getBaseBlocks().stream()
+            .filter(block -> !woodBlocks.contains(block) && !axeMineableBaseBlocks.contains(block))
+            .map(block -> BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, block))
+            .filter(Objects::nonNull)
+            .filter(ExtShapeBlocks::contains));
+
+    addForShapes(BlockTags.SWORD_EFFICIENT, Blocks.PUMPKIN, Blocks.MELON);
 
     // endregion mineable 部分
 
