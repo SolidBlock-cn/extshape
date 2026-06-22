@@ -6,8 +6,11 @@ import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.brand.blockus.utils.helper.WoodMaps;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Streams;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
@@ -16,11 +19,14 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
+import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
 import pers.solid.extshape.tag.ExtShapeTags;
+import pers.solid.extshape.util.BlockBiMaps;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
@@ -34,13 +40,14 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
   protected void addTags(HolderLookup.Provider wrapperLookup) {
     // region 形状标签
 
+    final ImmutableSet<Block> mossyPlanksBlocks = BlockusBlocks.MOSSY_PLANKS.bundle().values().stream().map(BSSWBundle::block).collect(ImmutableSet.toImmutableSet());
     final Set<Block> blockusGlazedTerracottaBlocks = Set.copyOf(BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().asList());
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
       if (blockusGlazedTerracottaBlocks.contains(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS);
       } else if (BlockusBlocks.SMALL_LOGS.bundle().containsValue(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_LOG_TAG);
-      } else if (BlockusBlocks.HERRINGBONE_PLANKS.bundle().containsValue(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks() || baseBlock == BlockusBlocks.CHARRED.planks()) {
+      } else if (BlockusBlocks.HERRINGBONE_PLANKS.bundle().containsValue(baseBlock) || mossyPlanksBlocks.contains(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks() || baseBlock == BlockusBlocks.CHARRED.planks() || baseBlock == BlockusBlocks.RAW_BAMBOO.planks() || baseBlock == BlockusBlocks.WHITE_OAK_WOOD || baseBlock == BlockusBlocks.STRIPPED_WHITE_OAK_WOOD) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_WOODEN_TAG);
       } else {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_TAG);
@@ -69,7 +76,33 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.NETHERITE_BRICKS.block(),
         BlockusBlocks.CHARCOAL_BLOCK,
         BlockusBlocks.ENDER_BLOCK,
-        BlockusBlocks.NETHER_STAR_BLOCK);
+        BlockusBlocks.NETHER_STAR_BLOCK,
+        BlockusBlocks.STARS_BLOCK);
+
+    builder(BlockTags.MINEABLE_WITH_PICKAXE).removeAll(Streams.concat(Stream.of(
+            BlockusBlocks.PAPER_BLOCK,
+            BlockusBlocks.BURNT_PAPER_BLOCK,
+            BlockusBlocks.ROTTEN_FLESH_BLOCK,
+            BlockusBlocks.MEMBRANE_BLOCK,
+            BlockusBlocks.BLAZE_LANTERN,
+            BlockusBlocks.RAINBOW_GLOWSTONE,
+            BlockusBlocks.CHORUS_BLOCK,
+            BlockusBlocks.THATCH.block()
+        ), BlockusBlocks.PATTERNED_WOOL.block().blocks().asList().stream(), BlockusBlocks.GINGHAM_WOOL.block().blocks().asList().stream(), BlockusBlocks.WOODEN_MOSAIC.bundle().values().stream().map(BSSWBundle::block))
+        .map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block))
+        .filter(Objects::nonNull)
+        .filter(ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains)
+        .flatMap(block -> BuiltInRegistries.BLOCK.getResourceKey(block).stream()));
+    // 注：主模组已经将 wooden_wall 和 log_wall 标签移出 mineable/pickaxe 标签。
+
+    final ImmutableSet<Block> woodenBlocks = ImmutableSet.of(BlockusBlocks.WHITE_OAK_WOOD, BlockusBlocks.STRIPPED_WHITE_OAK_WOOD); // 木马赛克等方块本就没有创建栅栏门，故不计入，一些方块的栅栏在 Blockus 中就有，故也不计入
+    builder(BlockTags.MINEABLE_WITH_AXE).removeAll(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS
+        .stream()
+        .filter(block -> !woodenBlocks.contains(block))
+        .map(block -> BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, block))
+        .filter(Objects::nonNull)
+        .filter(ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains)
+        .flatMap(block -> BuiltInRegistries.BLOCK.getResourceKey(block).stream()));
 
     addForShapes(BlockTags.MINEABLE_WITH_HOE,
         BlockusBlocks.CHORUS_BLOCK,
@@ -87,7 +120,10 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.DIAMOND_BRICKS.block(),
         BlockusBlocks.NETHER_STAR_BLOCK
     );
+
     addForShapes(BlockTags.NEEDS_DIAMOND_TOOL, BlockusBlocks.NETHERITE_BRICKS.block());
+
+    addForShapes(BlockTags.SWORD_EFFICIENT, BlockusBlocks.CHORUS_BLOCK);
 
     // endregion mineable 方块标签
 
@@ -226,9 +262,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.SMALL_MAGMA_BRICKS.block()
     );
 
-    addForShapes(BlockusBlockTags.BLAZE_BRICKS,
-        BlockusBlocks.BLAZE_BRICKS.block(),
-        BlockusBlocks.BLAZE_LANTERN);
+    addForShapes(BlockusBlockTags.BLAZE_BRICKS, BlockusBlocks.BLAZE_BRICKS.block());
 
     addForShapes(BlockusBlockTags.NETHER_BRICKS,
         BlockusBlocks.POLISHED_NETHER_BRICKS.block(),
@@ -259,6 +293,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.HERRINGBONE_SANDY_BRICKS
     );
 
+    addForShapes(BlockusBlockTags.RESIN_BLOCKS, BlockusBlocks.LARGE_RESIN_BRICKS.block(), BlockusBlocks.HERRINGBONE_RESIN_BRICKS);
+
     addForShapes(BlockusBlockTags.SANDSTONE,
         BlockusBlocks.ROUGH_SANDSTONE.block(),
         BlockusBlocks.SANDSTONE_BRICKS.block(),
@@ -272,6 +308,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
     addForShapes(BlockusBlockTags.SOUL_SANDSTONE,
+        BlockusBlocks.SOUL_SANDSTONE.block(),
         BlockusBlocks.ROUGH_SOUL_SANDSTONE.block(),
         BlockusBlocks.SOUL_SANDSTONE_BRICKS.block(),
         BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS.block(),

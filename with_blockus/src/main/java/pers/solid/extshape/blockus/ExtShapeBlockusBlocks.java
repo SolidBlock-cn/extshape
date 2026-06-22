@@ -527,6 +527,7 @@ public final class ExtShapeBlockusBlocks {
         .setStoneFenceSettings(Items.SOUL_SAND)
         .build();
     FACTORY.createConstructionOnly(BlockusBlocks.CUT_SOUL_SANDSTONE)
+        .markStoneCuttable()
         .build();
 
     create(BlockusBlocks.RAINBOW_BLOCK)
