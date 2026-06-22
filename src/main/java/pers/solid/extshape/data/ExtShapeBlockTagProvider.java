@@ -97,7 +97,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
-    addForShapes(BlockTags.MINEABLE_WITH_PICKAXE, Iterables.concat(
+    final ImmutableSet<Block> pickaxeMineableBaseBlocks = ImmutableSet.copyOf(Iterables.concat(
         BlockCollections.STONES,
         BlockCollections.UNCOLORED_SANDSTONES,
         BlockCollections.RED_SANDSTONES,
@@ -161,6 +161,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
             Blocks.RAW_GOLD_BLOCK
         )
     ));
+    addForShapes(BlockTags.MINEABLE_WITH_PICKAXE, pickaxeMineableBaseBlocks);
 
     // 所有的混凝土和陶瓦加入 pickaxe_mineable
     for (TagKey<Block> tag : Iterables.concat(ExtShapeTags.SHAPE_TO_CONCRETE_TAG.values(), ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.values())) {
@@ -195,7 +196,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.RAW_IRON_BLOCK,
         Blocks.RAW_COPPER_BLOCK
     );
-    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
+    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
     addForShapes(BlockTags.NEEDS_IRON_TOOL,
         Blocks.GOLD_BLOCK,
         Blocks.DIAMOND_BLOCK,
@@ -208,6 +209,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.ANCIENT_DEBRIS,
         Blocks.CRYING_OBSIDIAN
     );
+
+    addForShapes(BlockTags.SWORD_EFFICIENT, Blocks.PUMPKIN, Blocks.MELON);
 
     // endregion mineable 部分
 

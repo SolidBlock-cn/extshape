@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChangeOverTimeBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -61,7 +60,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
    * 为一个特定氧化等级以及涂蜡情况的铜方块注册 {@code BlocksBuilder}。
    */
-  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, @NotNull WeatheringCopper.WeatherState oxidationLevel, boolean waxed) {
+  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, WeatheringCopper.WeatherState oxidationLevel, boolean waxed) {
     final BlocksBuilder builder = blocksBuilderFactory.createAllShapes(copperBase).setActivationSettings(ActivationSettings.COPPER.get(oxidationLevel));
 
     if (!waxed) {
@@ -146,7 +145,6 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
     ).apply(instance, function));
   }
 
-  @NotNull
   public static <B extends WeatheringCopper> RecordCodecBuilder<B, WeatheringCopper.WeatherState> weatheringStateField() {
     return WeatheringCopper.WeatherState.CODEC.fieldOf("weathering_state").forGetter(ChangeOverTimeBlock::getAge);
   }
@@ -157,7 +155,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
    * @param oxidationLevel 氧化等级。
    * @return 方块激活持续的刻数。
    */
-  public static int getActivationRate(@NotNull WeatheringCopper.WeatherState oxidationLevel) {
+  public static int getActivationRate(WeatheringCopper.WeatherState oxidationLevel) {
     return switch (oxidationLevel) {
       case UNAFFECTED -> 10;
       case EXPOSED -> 40;
