@@ -39,6 +39,10 @@ public class CrossShapeDataGeneration {
    * 是否启用同种形状之间的方块切石功能，例如将非切制的楼梯切成已切制的横条。如果未启用，则只能将非切制的楼梯切成非切制的横条，但是基础方块仍不在此限。将此设置为 {@code false} 是为了与原版的行为相匹配。
    */
   public final boolean enableCuttingShape = false;
+  /**
+   * 是否启用同种基础方块之间转移的配方（包括合成与切石），如果为 false，则只生成跨基础方块的切石配方。这是考虑到模组中的方块切成原版方块的情况。
+   */
+  public boolean enableConversionWithinBlock = true;
 
   public CrossShapeDataGeneration(@NotNull Block baseBlock, @Nullable String defaultNamespace, @NotNull RecipeGenerator recipeGenerator, @NotNull RecipeExporter exporter) {
     this.baseBlock = baseBlock;
@@ -162,7 +166,7 @@ public class CrossShapeDataGeneration {
     // 台阶与垂直台阶之间的配方。
     final @Nullable Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, baseBlock);
     final @Nullable Block verticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, baseBlock);
-    if (slab != null && verticalSlab != null) {
+    if (slab != null && verticalSlab != null && enableConversionWithinBlock) {
       slabToVerticalSlab(slab, verticalSlab);
       verticalSlabToSlab(verticalSlab, slab);
     }
@@ -170,7 +174,7 @@ public class CrossShapeDataGeneration {
     // 楼梯与垂直楼梯之间的配方。
     final @Nullable Block stairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, baseBlock);
     final @Nullable Block verticalStairs = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, baseBlock);
-    if (stairs != null && verticalStairs != null) {
+    if (stairs != null && verticalStairs != null && enableConversionWithinBlock) {
       stairsToVerticalStairs(stairs, verticalStairs);
       verticalStairsToStairs(verticalStairs, stairs);
     }
@@ -178,7 +182,7 @@ public class CrossShapeDataGeneration {
     // 横条与纵条之间的配方。
     final @Nullable Block quarterPiece = BlockBiMaps.getBlockOf(BlockShape.QUARTER_PIECE, baseBlock);
     final @Nullable Block verticalQuarterPiece = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_QUARTER_PIECE, baseBlock);
-    if (quarterPiece != null && verticalQuarterPiece != null) {
+    if (quarterPiece != null && verticalQuarterPiece != null && enableConversionWithinBlock) {
       quarterPieceToVerticalQuarterPiece(quarterPiece, verticalQuarterPiece);
       verticalQuarterPieceToQuarterPiece(verticalQuarterPiece, quarterPiece);
     }
@@ -211,7 +215,7 @@ public class CrossShapeDataGeneration {
     if (quarterPiece != null) {
       // 1x楼梯 -> 3x横条
       if (stairs != null && shouldStoneCut) {
-        cutStairsToQuarterPiece(stairs, quarterPiece, null, 1);
+        if (enableConversionWithinBlock) cutStairsToQuarterPiece(stairs, quarterPiece, null, 1);
         if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
           final Block uncutBaseBlock = uncutBaseBlockInfo.left();
           final Block uncutStairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, uncutBaseBlock);
@@ -223,9 +227,9 @@ public class CrossShapeDataGeneration {
 
       // 1x台阶 -> 2x横条
       if (slab != null) {
-        craftSlabToQuarterPiece(slab, quarterPiece, null);
+        if (enableConversionWithinBlock) craftSlabToQuarterPiece(slab, quarterPiece, null);
         if (shouldStoneCut) {
-          cutSlabToQuarterPiece(slab, quarterPiece, null, 1);
+          if (enableConversionWithinBlock) cutSlabToQuarterPiece(slab, quarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
             final Block uncutSlab = BlockBiMaps.getBlockOf(BlockShape.SLAB, uncutBaseBlock);
@@ -238,9 +242,9 @@ public class CrossShapeDataGeneration {
 
       // 1x纵台阶 -> 2x横条
       if (verticalSlab != null) {
-        craftVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null);
+        if (enableConversionWithinBlock) craftVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null);
         if (shouldStoneCut) {
-          cutVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null, 1);
+          if (enableConversionWithinBlock) cutVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
             final Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
@@ -254,9 +258,9 @@ public class CrossShapeDataGeneration {
     if (verticalQuarterPiece != null) {
       // 1x纵台阶 -> 2x纵条
       if (verticalSlab != null) {
-        craftVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null);
+        if (enableConversionWithinBlock) craftVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null);
         if (shouldStoneCut) {
-          cutVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null, 1);
+          if (enableConversionWithinBlock) cutVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
             final Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
@@ -268,7 +272,7 @@ public class CrossShapeDataGeneration {
 
       // 1x纵楼梯 -> 3x纵条
       if (verticalStairs != null && shouldStoneCut) {
-        cutVerticalStairsToVerticalQuarterPiece(verticalStairs, verticalQuarterPiece, null, 1);
+        if (enableConversionWithinBlock) cutVerticalStairsToVerticalQuarterPiece(verticalStairs, verticalQuarterPiece, null, 1);
         if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
           final Block uncutBaseBlock = uncutBaseBlockInfo.left();
           final Block uncutVerticalStairs = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, uncutBaseBlock);

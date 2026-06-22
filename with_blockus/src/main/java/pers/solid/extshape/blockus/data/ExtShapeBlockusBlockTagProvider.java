@@ -6,6 +6,7 @@ import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.registry.content.bundles.WoolBundle;
 import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
@@ -27,12 +28,13 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
   protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
     // region 形状标签
 
+    final ImmutableSet<Block> mossyPlanksBlocks = BlockusBlocks.MOSSY_PLANKS.bundle().values().stream().map(BSSWBundle::block).collect(ImmutableSet.toImmutableSet());
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
       if (BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap().containsValue(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS);
       } else if (BlockusBlocks.SMALL_LOGS.bundle().containsValue(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_LOG_TAG);
-      } else if (BlockusBlocks.HERRINGBONE_PLANKS.bundle().containsValue(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks() || baseBlock == BlockusBlocks.CHARRED.planks()) {
+      } else if (BlockusBlocks.HERRINGBONE_PLANKS.bundle().containsValue(baseBlock) || mossyPlanksBlocks.contains(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks() || baseBlock == BlockusBlocks.CHARRED.planks() || baseBlock == BlockusBlocks.RAW_BAMBOO.planks() || baseBlock == BlockusBlocks.WHITE_OAK_WOOD || baseBlock == BlockusBlocks.STRIPPED_WHITE_OAK_WOOD) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_WOODEN_TAG);
       } else {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_TAG);
@@ -61,7 +63,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.NETHERITE_BRICKS.block(),
         BlockusBlocks.CHARCOAL_BLOCK,
         BlockusBlocks.ENDER_BLOCK,
-        BlockusBlocks.NETHER_STAR_BLOCK);
+        BlockusBlocks.NETHER_STAR_BLOCK,
+        BlockusBlocks.STARS_BLOCK);
 
     addForShapes(BlockTags.HOE_MINEABLE,
         BlockusBlocks.CHORUS_BLOCK,
@@ -79,7 +82,10 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.DIAMOND_BRICKS.block(),
         BlockusBlocks.NETHER_STAR_BLOCK
     );
+
     addForShapes(BlockTags.NEEDS_DIAMOND_TOOL, BlockusBlocks.NETHERITE_BRICKS.block());
+
+    addForShapes(BlockTags.SWORD_EFFICIENT, BlockusBlocks.CHORUS_BLOCK);
 
     // endregion mineable 方块标签
 
@@ -218,9 +224,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.SMALL_MAGMA_BRICKS.block()
     );
 
-    addForShapes(BlockusBlockTags.BLAZE_BRICKS,
-        BlockusBlocks.BLAZE_BRICKS.block(),
-        BlockusBlocks.BLAZE_LANTERN);
+    addForShapes(BlockusBlockTags.BLAZE_BRICKS, BlockusBlocks.BLAZE_BRICKS.block());
 
     addForShapes(BlockusBlockTags.NETHER_BRICKS,
         BlockusBlocks.POLISHED_NETHER_BRICKS.block(),
@@ -251,6 +255,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.HERRINGBONE_SANDY_BRICKS
     );
 
+    addForShapes(BlockusBlockTags.RESIN_BLOCKS, BlockusBlocks.LARGE_RESIN_BRICKS.block(), BlockusBlocks.HERRINGBONE_RESIN_BRICKS);
+
     addForShapes(BlockusBlockTags.SANDSTONE,
         BlockusBlocks.ROUGH_SANDSTONE.block(),
         BlockusBlocks.SANDSTONE_BRICKS.block(),
@@ -264,6 +270,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
     addForShapes(BlockusBlockTags.SOUL_SANDSTONE,
+        BlockusBlocks.SOUL_SANDSTONE.block(),
         BlockusBlocks.ROUGH_SOUL_SANDSTONE.block(),
         BlockusBlocks.SOUL_SANDSTONE_BRICKS.block(),
         BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS.block(),
