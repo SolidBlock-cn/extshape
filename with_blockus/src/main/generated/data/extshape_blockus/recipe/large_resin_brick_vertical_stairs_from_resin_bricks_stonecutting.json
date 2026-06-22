@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:resin_bricks",
+  "result": {
+    "id": "extshape_blockus:large_resin_brick_vertical_stairs"
+  }
+}

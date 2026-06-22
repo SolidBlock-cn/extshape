@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:polished_end_stone",
+  "result": {
+    "id": "extshape:end_stone_brick_vertical_stairs"
+  }
+}
