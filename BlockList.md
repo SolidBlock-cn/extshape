@@ -1,5 +1,9 @@
 # 方块列表 List of blocks
 
+点击[在线文档链接](https://www.kdocs.cn/l/cqyeH2FvN5RU)或查看文档底部的图片以查看所有方块列表。
+
+Click the [online document link](https://www.kdocs.cn/l/cqyeH2FvN5RU) or view the image at the bottom of this document to see the list of all blocks.
+
 ## 说明
 
 - **原版**：该方块在原版就有。
