@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "stripped_wood_slab_from_rotation",
+  "ingredients": [
+    "extshape:stripped_poplar_wood_vertical_slab"
+  ],
+  "result": {
+    "id": "extshape:stripped_poplar_wood_slab"
+  }
+}

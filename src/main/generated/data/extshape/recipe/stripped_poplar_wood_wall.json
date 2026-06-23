@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stripped_wood_wall",
+  "key": {
+    "#": "minecraft:stripped_poplar_wood"
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:stripped_poplar_wood_wall"
+  }
+}

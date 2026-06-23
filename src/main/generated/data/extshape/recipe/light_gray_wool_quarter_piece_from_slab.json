@@ -3,7 +3,7 @@
   "category": "building",
   "group": "wool_quarter_piece_from_slab",
   "key": {
-    "#": "extshape:light_gray_wool_slab"
+    "#": "minecraft:light_gray_wool_slab"
   },
   "pattern": [
     "###"

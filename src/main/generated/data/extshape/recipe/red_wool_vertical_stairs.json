@@ -3,7 +3,7 @@
   "category": "building",
   "group": "wool_vertical_stairs_from_rotation",
   "ingredients": [
-    "extshape:red_wool_stairs"
+    "minecraft:red_wool_stairs"
   ],
   "result": {
     "id": "extshape:red_wool_vertical_stairs"

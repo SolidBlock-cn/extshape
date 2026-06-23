@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wood_quarter_piece_from_rotation",
+  "ingredients": [
+    "extshape:poplar_wood_vertical_quarter_piece"
+  ],
+  "result": {
+    "id": "extshape:poplar_wood_quarter_piece"
+  }
+}

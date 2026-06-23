@@ -3,7 +3,7 @@
   "category": "building",
   "group": "wool_vertical_slab_from_rotation",
   "ingredients": [
-    "extshape:magenta_wool_slab"
+    "minecraft:magenta_wool_slab"
   ],
   "result": {
     "id": "extshape:magenta_wool_vertical_slab"

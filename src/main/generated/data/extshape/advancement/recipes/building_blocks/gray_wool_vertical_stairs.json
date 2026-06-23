@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "extshape:gray_wool_stairs"
+            "items": "minecraft:gray_wool_stairs"
           }
         ]
       },

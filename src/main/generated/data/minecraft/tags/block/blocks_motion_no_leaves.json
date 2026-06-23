@@ -1,0 +1,10 @@
+{
+  "values": [
+    "extshape:smooth_stone_slab_double",
+    "extshape:petrified_oak_planks",
+    "#extshape:vertical_slabs",
+    "#extshape:vertical_stairs",
+    "#extshape:quarter_pieces",
+    "#extshape:vertical_quarter_pieces"
+  ]
+}

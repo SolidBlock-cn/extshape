@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wood_button",
+  "ingredients": [
+    "minecraft:poplar_wood"
+  ],
+  "result": {
+    "id": "extshape:poplar_wood_button"
+  }
+}

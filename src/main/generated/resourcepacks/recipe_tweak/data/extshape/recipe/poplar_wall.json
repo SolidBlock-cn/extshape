@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_wall",
+  "key": {
+    "#": "minecraft:poplar_planks",
+    "*": "minecraft:stick"
+  },
+  "pattern": [
+    " * ",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape:poplar_wall"
+  }
+}
