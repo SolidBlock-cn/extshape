@@ -10,6 +10,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
@@ -20,8 +21,19 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import java.util.concurrent.CompletableFuture;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
+  public static final ImmutableSet<String> STONE_BASE_BLOCK_KEYWORDS = ImmutableSet.of("stone", "andesite", "granite", "diorite", "limestone", "marble", "viridite", "netherrack", "basalt", "deepslate", "tuff", "sulfur", "cinnabar", "nether_brick");
+  /**
+   * 此集内的方块会被加入 {@code #stone_pressure_plates} 和 {@code #stone_buttons}。注意这些方块必须要拥有 {@code mineable/pickaxe} 标签。
+   */
+  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.stream().filter(block -> STONE_BASE_BLOCK_KEYWORDS.stream().anyMatch(Registries.BLOCK.getId(block).getPath()::contains)).filter(block -> !Registries.BLOCK.getId(block).getPath().contains("glowstone")).collect(ImmutableSet.toImmutableSet());
+
   public ExtShapeBlockusBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
     super(output, registriesFuture);
+  }
+
+  @Override
+  protected boolean isStoneBaseBlock(Block baseBlock) {
+    return super.isStoneBaseBlock(baseBlock) || STONE_BASE_BLOCKS.contains(baseBlock);
   }
 
   @Override

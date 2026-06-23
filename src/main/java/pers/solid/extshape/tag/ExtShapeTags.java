@@ -92,8 +92,9 @@ public final class ExtShapeTags {
 
 
   /* 压力板 */
-  public static final TagKey<Block> PRESSURE_PLATES = BlockTags.PRESSURE_PLATES;  // ItemTags.PRESSURE_PLATES不存在
+  public static final TagKey<Block> PRESSURE_PLATES = of("pressure_plates"); // 在原版中，该标签仅有方块，没有物品
   public static final TagKey<Block> WOODEN_PRESSURE_PLATES = BlockTags.WOODEN_PRESSURE_PLATES;
+  public static final TagKey<Block> STONE_PRESSURE_PLATES = of("stone_pressure_plates"); // 在原版中，该标签仅有方块，没有物品
   public static final TagKey<Block> LOG_PRESSURE_PLATES = of("log_pressure_plates");
   public static final TagKey<Block> WOOLEN_PRESSURE_PLATES = of("woolen_pressure_plates");
   public static final TagKey<Block> CONCRETE_PRESSURE_PLATES = of("concrete_pressure_plates");
