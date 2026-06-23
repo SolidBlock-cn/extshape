@@ -1,9 +1,14 @@
 # 更新日志
 
+### 3.1.6-beta.1
+
+- 为 26.2 以上版本调整创造模式物品栏中的铜相关方块排序，以匹配原版。
+- 适应 26.3-snapshot-1。
+
 ### 3.1.5
 
 - 现在在开发环境中，会进一步验证方块标签，和方块采集相关的方块标签（`#mineable/*`、`#needs_*_tool`、`#incorrect_for_*_tool`，以及 26.2 引入的 `#shears_*_breaking_speed`），基础方块有的，其变种方块必须有，基础方块没有的，其变种方块必须没有，否则抛出错误。同时，对方块标签进行了以下更改：
-    - 修复各氧化程度的涂腊铜块相关方块没有 `#needs_stone_tool` 标签的问题。
+    - 修复各氧化程度的涂蜡铜块相关方块没有 `#needs_stone_tool` 标签的问题。
     - 修复南瓜和西瓜相关方块没有 `#sword_efficient` 标签的问题。
 - 现在在开发环境中，会验证物品标签。由于原版的 `#pressure_plates` 和 `#stone_pressure_plates` 只有方块标签，没有物品标签，本模组现在使用方块和物品标签 `#extshape:pressure_plates` 和 `#extshape:stone_pressure_plates`，其中方块标签 `#extshape:pressure_plates` 和 `#extshape:stone_pressure_plates` 被视为原版方块标签 `#pressure_plates` 和 `#extshape:stone_pressure_plates` 的别称。同时，对物品标签作出了如下更改：
     - 修复了之前的 `#pressure_plates` 物品标签不包含 `#wooden_pressure_plates` 和 `#stone_pressure_plates` 的问题（现在物品标签不使用原版不存在 `#pressure_plates` 和 `#stone_pressure_plates`）。

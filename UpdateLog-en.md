@@ -1,5 +1,10 @@
 # Update log
 
+### 3.1.6-beta.1
+
+- Adjusted the sorting of copper blocks in the creative mode inventory for versions 26.2 and above to match vanilla.
+- Fit 26.3-snapshot-1.
+
 ### 3.1.5
 
 - Now in the development environment, block tags are verified more. Block Tags related to block harvesting (`#mineable/*`, `#needs_*_tool`, `#incorrect_for_*_tool`, and `#shears_*_breaking_speed` introduced in 26.2), those existing in base blocks must exist in variants block, and those not existing in base blocks must not exist in variants block, otherwise errors are thrown. Meanwhile, the following changes are applied to block tags:
