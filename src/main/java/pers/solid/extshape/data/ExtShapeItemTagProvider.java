@@ -39,6 +39,10 @@ public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider
     copyWithSameId(ExtShapeTags.WOODEN_BLOCKS);
     copyWithSameId(ExtShapeTags.LOG_BLOCKS);
 
+    // 原版的物品标签只有 wooden_pressure_plates，没有普通和石质
+    copyWithSameId(ExtShapeTags.STONE_PRESSURE_PLATES);
+    copyWithSameId(BlockTags.STONE_BUTTONS);
+
     for (TagKey<Block> tag : Iterables.concat(
         ExtShapeTags.SHAPE_TO_TAG.values(),
         ExtShapeTags.SHAPE_TO_WOODEN_TAG.values(),
