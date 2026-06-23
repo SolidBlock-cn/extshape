@@ -78,13 +78,6 @@ public final class VanillaStonecutting {
     builder.put(Blocks.POLISHED_TUFF, Blocks.TUFF);
     builder.put(Blocks.TUFF_BRICKS, Blocks.TUFF);
     builder.put(Blocks.TUFF_BRICKS, Blocks.POLISHED_TUFF);
-
-    // 于 26.1 加入
-    builder.put(Blocks.COBBLESTONE, Blocks.STONE);
-    builder.put(Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE);
-    builder.put(Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE);
-    builder.put(Blocks.DEEPSLATE_BRICKS, Blocks.DEEPSLATE);
-    builder.put(Blocks.DEEPSLATE_TILES, Blocks.DEEPSLATE);
   }
 
   private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {
