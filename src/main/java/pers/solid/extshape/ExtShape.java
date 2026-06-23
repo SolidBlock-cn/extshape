@@ -1,6 +1,7 @@
 package pers.solid.extshape;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -18,6 +19,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.references.BlockItemId;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.BlockTags;
@@ -97,6 +100,7 @@ public class ExtShape implements ModInitializer {
 
     registerStrippableBlocks();
     registerFuels();
+    registerRegistryAliases();
 
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
 
@@ -324,6 +328,13 @@ public class ExtShape implements ModInitializer {
     map.put(ExtShapeTags.WOOLEN_WALLS, 100);
 
     FuelValueEvents.BUILD.register((builder, context) -> map.forEach((blockTagKey, integer) -> builder.add(TagKey.create(Registries.ITEM, blockTagKey.location()), integer)));
+  }
+
+  private static void registerRegistryAliases() {
+    for (BlockItemId blockItemId : Iterables.concat(BlockItemIds.WOOL_STAIRS.asList(), BlockItemIds.WOOL_SLAB.asList())) {
+      BuiltInRegistries.BLOCK.addAlias(id(blockItemId.block().identifier().getPath()), blockItemId.block().identifier());
+      BuiltInRegistries.ITEM.addAlias(id(blockItemId.item().identifier().getPath()), blockItemId.item().identifier());
+    }
   }
 
   private static void validateIdMap() {

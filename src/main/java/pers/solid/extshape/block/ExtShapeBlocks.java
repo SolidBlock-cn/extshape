@@ -161,6 +161,8 @@ public final class ExtShapeBlocks {
         ActivationSettings.wood(BlockSetType.ACACIA),
         ActivationSettings.wood(BlockSetType.CHERRY),
         ActivationSettings.wood(BlockSetType.DARK_OAK),
+        ActivationSettings.wood(BlockSetType.PALE_OAK),
+        ActivationSettings.wood(BlockSetType.POPLAR),
         ActivationSettings.wood(BlockSetType.MANGROVE));
     final Iterator<ActivationSettings> netherWoodButtonSettings = Iterators.cycle(ActivationSettings.wood(BlockSetType.WARPED), ActivationSettings.wood(BlockSetType.CRIMSON));
     final Iterator<WoodType> woodTypes = Iterators.cycle(
@@ -171,6 +173,8 @@ public final class ExtShapeBlocks {
         WoodType.ACACIA,
         WoodType.CHERRY,
         WoodType.DARK_OAK,
+        WoodType.PALE_OAK,
+        WoodType.POPLAR,
         WoodType.MANGROVE
     );
     final Iterator<WoodType> netherWoodTypes = Iterators.cycle(WoodType.WARPED, WoodType.CRIMSON);

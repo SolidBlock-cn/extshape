@@ -284,6 +284,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   @CanIgnoreReturnValue
   @Contract(value = "_-> this")
   public BlocksBuilder fuelTime(final int baseFuelTime) {
+    // todo 每创建一个可在熔炉中燃烧的方块，都会要在这里注册一次，这样做不合适，考虑改进
     return addPostBuildConsumer((blockShape, builder) -> FuelValueEvents.BUILD.register((builder1, context) -> builder1.add(builder.itemInstance, (int) (blockShape.logicalCompleteness * baseFuelTime))));
   }
 

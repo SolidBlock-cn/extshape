@@ -74,7 +74,8 @@ public final class VanillaItemGroup {
     preBuilding.put(Items.SMOOTH_STONE_SLAB, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem());
     apBuilding.put(Items.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem());
     new EntryVariantAppender(CreativeModeTabs.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA || SPECIAL_SORTED_ITEMS.contains(block))), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);
-    new EntryVariantAppender(CreativeModeTabs.COLORED_BLOCKS, shapes, Iterables.concat(BlockCollections.WOOLS, Collections.singleton(Blocks.TERRACOTTA), BlockCollections.STAINED_TERRACOTTA, BlockCollections.CONCRETES, BlockCollections.GLAZED_TERRACOTTA), ExtShapeBlocks::contains).appendItems(getAppendingRule(CreativeModeTabs.COLORED_BLOCKS));
+    final Multimap<Item, Item> coloredAppendingRule = getAppendingRule(CreativeModeTabs.COLORED_BLOCKS);
+    new EntryVariantAppender(CreativeModeTabs.COLORED_BLOCKS, shapes, Collections.singleton(Blocks.TERRACOTTA), ExtShapeBlocks::contains).appendItems(coloredAppendingRule);
     // natural 物品组应该排除变种的方块（这些方块已出现在了建筑方块物品组中）。
     final Set<Block> excludedInNatural = Set.of(Blocks.DEEPSLATE, Blocks.NETHERRACK, Blocks.BASALT, Blocks.SMOOTH_BASALT, Blocks.END_STONE, Blocks.AMETHYST_BLOCK);
     new EntryVariantAppender(CreativeModeTabs.NATURAL_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.LOGS.contains(block) || BlockCollections.STEMS.contains(block) || excludedInNatural.contains(block))), ExtShapeBlocks::contains).appendItems(getAppendingRule(CreativeModeTabs.NATURAL_BLOCKS));
@@ -84,6 +85,11 @@ public final class VanillaItemGroup {
     final Item waxedCopperAnchor = Items.COPPER_BLOCK.waxed().oxidized();
     final Item unwaxedCutCopperAnchor = Items.CUT_COPPER_SLAB.weathering().oxidized();
     final Item waxedCutCopperAnchor = Items.CUT_COPPER_SLAB.waxed().oxidized();
+
+    final Item woolAnchor = Items.WOOL_SLAB.black();
+    final Item dyedTerracottaAnchor = Items.DYED_TERRACOTTA.black();
+    final Item concreteAnchor = Items.CONCRETE.black();
+    final Item glazedTerracottaAnchor = Items.GLAZED_TERRACOTTA.black();
 
     for (BlockShape blockShape : BlockShape.values()) {
       BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
@@ -110,6 +116,31 @@ public final class VanillaItemGroup {
         final Block variant = biMap.get(block);
         if (ExtShapeBlocks.contains(variant)) {
           apBuilding.put(waxedCutCopperAnchor, variant.asItem());
+        }
+      });
+
+      Blocks.WOOL.forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          coloredAppendingRule.put(woolAnchor, variant.asItem());
+        }
+      });
+      Blocks.DYED_TERRACOTTA.forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          coloredAppendingRule.put(dyedTerracottaAnchor, variant.asItem());
+        }
+      });
+      Blocks.CONCRETE.forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          coloredAppendingRule.put(concreteAnchor, variant.asItem());
+        }
+      });
+      Blocks.GLAZED_TERRACOTTA.forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          coloredAppendingRule.put(glazedTerracottaAnchor, variant.asItem());
         }
       });
     }

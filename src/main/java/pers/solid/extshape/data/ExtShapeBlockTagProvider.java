@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.tags.BlockItemTagAppender;
 import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
@@ -63,9 +64,12 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
     builder(BlockTags.OCCLUDES_VIBRATION_SIGNALS).addTag(ExtShapeTags.WOOLEN_BLOCKS);
     aliasGroup(ExtShape.id("pressure_plates")).add(ExtShapeTags.PRESSURE_PLATES, BlockTags.PRESSURE_PLATES);
     aliasGroup(ExtShape.id("stone_pressure_plates")).add(ExtShapeTags.STONE_PRESSURE_PLATES, BlockTags.STONE_PRESSURE_PLATES);
+
     builder(BlockTags.PRESSURE_PLATES).addOptionalTag(ExtShapeTags.PRESSURE_PLATES);
     builder(BlockTags.STONE_PRESSURE_PLATES).addOptionalTag(ExtShapeTags.STONE_PRESSURE_PLATES);
     builder(ExtShapeTags.PRESSURE_PLATES).addTag(ExtShapeTags.WOODEN_PRESSURE_PLATES).addTag(ExtShapeTags.STONE_PRESSURE_PLATES);
+
+    builder(BlockTags.BLOCKS_MOTION_NO_LEAVES).add(blockItemIdOf(ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB, ExtShapeBlocks.PETRIFIED_OAK_PLANKS)).addTag(ExtShapeTags.VERTICAL_SLABS).addTag(ExtShapeTags.VERTICAL_STAIRS).addTag(ExtShapeTags.QUARTER_PIECES).addTag(ExtShapeTags.VERTICAL_QUARTER_PIECES);
 
     // 将原木的所有标签加入 log_blocks
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_LOG_TAG.values()) {
@@ -97,8 +101,10 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
     }
     builder(BlockTags.SLABS).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
 
+    final BlockItemTagAppender<Block> woolenBlocksBuilder = builder(ExtShapeTags.WOOLEN_BLOCKS);
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_WOOLEN_TAG.values()) {
-      builder(ExtShapeTags.WOOLEN_BLOCKS).addTag(tag);
+      // 之所以使用 forceAddTag，是因为原版的标签不识别
+      woolenBlocksBuilder.forceAddTag(tag);
     }
     builder(BlockTags.SHEARS_MAJOR_BREAKING_SPEED).addTag(ExtShapeTags.WOOLEN_BLOCKS);
     builder(ExtShapeTags.WOODEN_BLOCKS)
