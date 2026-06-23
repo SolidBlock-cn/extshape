@@ -7,6 +7,7 @@ import com.brand.blockus.utils.helper.WoodMaps;
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -25,10 +26,12 @@ public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
 
   @Override
   protected void addTags(HolderLookup.Provider wrapperLookup) {
-    for (TagKey<Block> tag : Iterables.concat(ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS.values(), ExtShapeTags.SHAPE_TO_TAG.values())) {
+    for (TagKey<Block> tag : Iterables.concat(ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS.values(), ExtShapeTags.SHAPE_TO_TAG.values(), ExtShapeTags.SHAPE_TO_WOODEN_TAG.values(), ExtShapeTags.SHAPE_TO_LOG_TAG.values())) {
       copyWithSameId(tag);
     }
 
+    copyWithSameId(ExtShapeTags.STONE_PRESSURE_PLATES);
+    copyWithSameId(BlockTags.STONE_BUTTONS);
     this.copy(BlockusBlockTags.ALL_PATTERNED_WOOLS, BlockusItemTags.ALL_PATTERNED_WOOLS);
     copyWithSameId(ExtShapeTags.LOG_BLOCKS);
     copyWithSameId(ExtShapeTags.WOOLEN_BLOCKS);
