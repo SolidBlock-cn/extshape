@@ -1,8 +1,6 @@
 package pers.solid.extshape;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
@@ -22,6 +20,7 @@ import pers.solid.extshape.util.BlockCollections;
 import pers.solid.extshape.util.EntryVariantAppender;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 本类用于将物品添加到原版物品组。
@@ -38,6 +37,8 @@ public final class VanillaItemGroup {
       runnable.run();
     }
   });
+
+  private static final Set<Block> SPECIAL_SORTED_ITEMS = Streams.concat(Blocks.COPPER_BLOCK.asList().stream(), Blocks.CUT_COPPER.asList().stream()).collect(Collectors.toUnmodifiableSet());
 
   private VanillaItemGroup() {
   }
@@ -72,10 +73,45 @@ public final class VanillaItemGroup {
     final Multimap<Item, Item> preBuilding = getPrependingRule(CreativeModeTabs.BUILDING_BLOCKS);
     preBuilding.put(Items.SMOOTH_STONE_SLAB, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem());
     apBuilding.put(Items.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem());
-    new EntryVariantAppender(CreativeModeTabs.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA)), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);
+    new EntryVariantAppender(CreativeModeTabs.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA || SPECIAL_SORTED_ITEMS.contains(block))), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);
     new EntryVariantAppender(CreativeModeTabs.COLORED_BLOCKS, shapes, Iterables.concat(BlockCollections.WOOLS, Collections.singleton(Blocks.TERRACOTTA), BlockCollections.STAINED_TERRACOTTA, BlockCollections.CONCRETES, BlockCollections.GLAZED_TERRACOTTA), ExtShapeBlocks::contains).appendItems(getAppendingRule(CreativeModeTabs.COLORED_BLOCKS));
     // natural 物品组应该排除变种的方块（这些方块已出现在了建筑方块物品组中）。
     final Set<Block> excludedInNatural = Set.of(Blocks.DEEPSLATE, Blocks.NETHERRACK, Blocks.BASALT, Blocks.SMOOTH_BASALT, Blocks.END_STONE, Blocks.AMETHYST_BLOCK);
     new EntryVariantAppender(CreativeModeTabs.NATURAL_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.LOGS.contains(block) || BlockCollections.STEMS.contains(block) || excludedInNatural.contains(block))), ExtShapeBlocks::contains).appendItems(getAppendingRule(CreativeModeTabs.NATURAL_BLOCKS));
+
+    // 对原版切制铜块（含涂蜡变种）的特殊处理
+    final Item unwaxedCopperAnchor = Items.COPPER_BLOCK.weathering().oxidized();
+    final Item waxedCopperAnchor = Items.COPPER_BLOCK.waxed().oxidized();
+    final Item unwaxedCutCopperAnchor = Items.CUT_COPPER_SLAB.weathering().oxidized();
+    final Item waxedCutCopperAnchor = Items.CUT_COPPER_SLAB.waxed().oxidized();
+
+    for (BlockShape blockShape : BlockShape.values()) {
+      BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
+
+      Blocks.COPPER_BLOCK.weathering().forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          apBuilding.put(unwaxedCopperAnchor, variant.asItem());
+        }
+      });
+      Blocks.COPPER_BLOCK.waxed().forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          apBuilding.put(waxedCopperAnchor, variant.asItem());
+        }
+      });
+      Blocks.CUT_COPPER.weathering().forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          apBuilding.put(unwaxedCutCopperAnchor, variant.asItem());
+        }
+      });
+      Blocks.CUT_COPPER.waxed().forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          apBuilding.put(waxedCutCopperAnchor, variant.asItem());
+        }
+      });
+    }
   }
 }
