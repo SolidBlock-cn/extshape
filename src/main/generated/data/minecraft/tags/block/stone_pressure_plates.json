@@ -1,6 +1,8 @@
 {
   "values": [
-    "extshape:smooth_stone_pressure_plate",
-    "extshape:blackstone_pressure_plate"
+    {
+      "id": "#extshape:stone_pressure_plates",
+      "required": false
+    }
   ]
 }
