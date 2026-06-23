@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:sulfur",
+  "result": {
+    "count": 4,
+    "id": "extshape:sulfur_brick_vertical_quarter_piece"
+  }
+}

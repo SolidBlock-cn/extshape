@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "extshape_blockus:herringbone_sulfur_brick_vertical_stairs"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

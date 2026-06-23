@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:sulfur",
+  "result": {
+    "id": "extshape_blockus:sulfur_tile_vertical_stairs"
+  }
+}

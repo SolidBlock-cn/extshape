@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:sulfur_bricks",
+  "result": {
+    "id": "extshape_blockus:herringbone_sulfur_brick_vertical_stairs"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "blockus:block/herringbone_sulfur_bricks"
+  }
+}

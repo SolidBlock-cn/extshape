@@ -1,0 +1,25 @@
+{
+  "values": [
+    "extshape_blockus:sulfur_tile_vertical_slab",
+    "extshape_blockus:sulfur_tile_vertical_stairs",
+    "extshape_blockus:sulfur_tile_quarter_piece",
+    "extshape_blockus:sulfur_tile_vertical_quarter_piece",
+    "extshape_blockus:sulfur_tile_fence",
+    "extshape_blockus:sulfur_tile_fence_gate",
+    "extshape_blockus:sulfur_tile_button",
+    "extshape_blockus:sulfur_tile_pressure_plate",
+    "extshape_blockus:herringbone_sulfur_brick_stairs",
+    "extshape_blockus:herringbone_sulfur_brick_slab",
+    "extshape_blockus:herringbone_sulfur_brick_vertical_slab",
+    "extshape_blockus:herringbone_sulfur_brick_vertical_stairs",
+    "extshape_blockus:herringbone_sulfur_brick_quarter_piece",
+    "extshape_blockus:herringbone_sulfur_brick_vertical_quarter_piece",
+    "extshape_blockus:herringbone_sulfur_brick_fence",
+    "extshape_blockus:herringbone_sulfur_brick_fence_gate",
+    "extshape_blockus:herringbone_sulfur_brick_wall",
+    "extshape_blockus:herringbone_sulfur_brick_button",
+    "extshape_blockus:herringbone_sulfur_brick_pressure_plate",
+    "extshape_blockus:sulfur_circular_paving_slab",
+    "extshape_blockus:sulfur_circular_paving_pressure_plate"
+  ]
+}

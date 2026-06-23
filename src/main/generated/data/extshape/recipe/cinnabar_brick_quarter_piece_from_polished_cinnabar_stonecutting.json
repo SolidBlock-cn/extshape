@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:polished_cinnabar",
+  "result": {
+    "count": 4,
+    "id": "extshape:cinnabar_brick_quarter_piece"
+  }
+}

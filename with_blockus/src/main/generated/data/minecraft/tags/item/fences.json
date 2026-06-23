@@ -1,6 +1,10 @@
 {
   "values": [
     "extshape_blockus:polished_dripstone_fence",
+    "extshape_blockus:sulfur_tile_fence",
+    "extshape_blockus:herringbone_sulfur_brick_fence",
+    "extshape_blockus:cinnabar_tile_fence",
+    "extshape_blockus:herringbone_cinnabar_brick_fence",
     "extshape_blockus:mossy_tuff_brick_fence",
     "extshape_blockus:mossy_deepslate_brick_fence",
     "extshape_blockus:polished_sculk_fence",
@@ -63,8 +67,6 @@
     "extshape_blockus:polished_end_stone_fence",
     "extshape_blockus:small_end_stone_brick_fence",
     "extshape_blockus:end_tile_fence",
-    "extshape_blockus:white_oak_wood_fence",
-    "extshape_blockus:stripped_white_oak_wood_fence",
     "extshape_blockus:chocolate_fence",
     "extshape_blockus:chocolate_brick_fence",
     "extshape_blockus:chocolate_squares_fence",

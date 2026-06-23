@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "extshape_blockus:herringbone_cinnabar_brick_pressure_plate"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

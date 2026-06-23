@@ -2,7 +2,7 @@
   "parent": "extshape:block/vertical_slab_column_unordered_top",
   "textures": {
     "bottom": "blockus:block/black_glazed_terracotta_pillar_top",
-    "side": "blockus:block/black_glazed_terracotta_pillar",
+    "side": "blockus:block/black_glazed_terracotta_pillar_side",
     "top": "blockus:block/black_glazed_terracotta_pillar_top"
   }
 }

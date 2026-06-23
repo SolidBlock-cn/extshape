@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:soul_sandstone",
+  "result": {
+    "id": "extshape_blockus:cut_soul_sandstone_stairs"
+  }
+}

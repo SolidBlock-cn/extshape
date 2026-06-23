@@ -2,7 +2,7 @@
   "parent": "extshape:block/vertical_quarter_piece",
   "textures": {
     "bottom": "blockus:block/yellow_glazed_terracotta_pillar_top",
-    "side": "blockus:block/yellow_glazed_terracotta_pillar",
+    "side": "blockus:block/yellow_glazed_terracotta_pillar_side",
     "top": "blockus:block/yellow_glazed_terracotta_pillar_top"
   }
 }

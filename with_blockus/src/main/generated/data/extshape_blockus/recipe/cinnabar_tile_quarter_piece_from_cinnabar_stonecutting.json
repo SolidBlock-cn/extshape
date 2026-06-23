@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cinnabar",
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:cinnabar_tile_quarter_piece"
+  }
+}

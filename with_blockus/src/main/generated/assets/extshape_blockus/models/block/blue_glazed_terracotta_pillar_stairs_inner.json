@@ -2,7 +2,7 @@
   "parent": "minecraft:block/inner_stairs",
   "textures": {
     "bottom": "blockus:block/blue_glazed_terracotta_pillar_top",
-    "side": "blockus:block/blue_glazed_terracotta_pillar",
+    "side": "blockus:block/blue_glazed_terracotta_pillar_side",
     "top": "blockus:block/blue_glazed_terracotta_pillar_top"
   }
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "blockus:block/purple_glazed_terracotta_pillar_top",
-    "side": "blockus:block/purple_glazed_terracotta_pillar",
+    "side": "blockus:block/purple_glazed_terracotta_pillar_side",
     "top": "blockus:block/purple_glazed_terracotta_pillar_top"
   }
 }
