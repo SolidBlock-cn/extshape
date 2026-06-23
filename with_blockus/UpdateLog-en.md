@@ -3,7 +3,7 @@
 ### 3.1.5
 
 - Synchronizing to Blockus changes, now in the Creative Mode inventory, no special sorting is applied for dyed stone bricks and terracotta.
-- Synchronizing to Blockus changes, added blocks related to sulfur and cinnabar for 26.2.
+- Synchronizing to Blockus changes, added blocks related to sulfur and cinnabar as well as relevant stoncutting recipes for 26.2.
 - Adjusted the following block tags:
     - Fixed the issue that blaze lantern blocks are correctly added to `#blockus:blaze_bricks` block tag.
     - Fixed the issue that the extended shapes of soul sandstone are not added to `#blockus:soul_sandstone` block tag.
@@ -18,6 +18,8 @@
     - Now resin bricks can be cut into blocks related to herringbone resin bricks and large resin bricks.
     - Now stone can be cut into blocks related to stone tiles.
     - Now tuff, polished tuff, tuff bricks can be cut into blocks related to tuff tiles.
+- Added some stone pressure plates and buttons to `#extshape:stone_pressure_plates` and `#minecraft:stone_buttons` block and item tags.
+- Fixed the issue of missing texture of glazed terracotta pillar blocks in 26.2.
 
 > Note: In some early Minecraft versions, the block tags and stonecutting recipes of Blockus mod may differ from what is described here, and the mod will be adjusted to match Blockus mod.
 
