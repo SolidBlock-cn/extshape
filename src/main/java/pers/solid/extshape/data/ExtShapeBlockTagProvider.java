@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -34,12 +35,24 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
   public static final ImmutableList<ImmutableMap<BlockShape, TagKey<Block>>> TYPE_SHAPE_TAGS = ImmutableList.of(ExtShapeTags.SHAPE_TO_WOODEN_TAG, ExtShapeTags.SHAPE_TO_LOG_TAG, ExtShapeTags.SHAPE_TO_WOOLEN_TAG, ExtShapeTags.SHAPE_TO_CONCRETE_TAG, ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG);
 
   /**
-   * 此集内的方块会被加入 {#code stone_pressure_plates} 和 {@code stone_buttons}。
+   * 此集内的方块会被加入 {@code #stone_pressure_plates} 和 {@code #stone_buttons}。注意：这些方块必须拥有 {@code mineable/pickaxe} 标签。
    */
-  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ImmutableSet.of(Blocks.STONE, Blocks.SMOOTH_STONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.GILDED_BLACKSTONE);
+  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ImmutableSet.of(Blocks.STONE, Blocks.COBBLESTONE, Blocks.MOSSY_COBBLESTONE, Blocks.SMOOTH_STONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.GILDED_BLACKSTONE, Blocks.END_STONE, Blocks.END_STONE_BRICKS, Blocks.TUFF, Blocks.TUFF_BRICKS, Blocks.POLISHED_TUFF, Blocks.ANDESITE, Blocks.POLISHED_ANDESITE, Blocks.GRANITE, Blocks.POLISHED_GRANITE, Blocks.DIORITE, Blocks.POLISHED_DIORITE, Blocks.CALCITE, Blocks.NETHERRACK, Blocks.NETHER_BRICKS, Blocks.RED_NETHER_BRICKS, Blocks.BASALT, Blocks.POLISHED_BASALT, Blocks.SMOOTH_BASALT, Blocks.SANDSTONE, Blocks.SMOOTH_SANDSTONE, Blocks.CUT_SANDSTONE, Blocks.RED_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE, Blocks.CUT_RED_SANDSTONE, Blocks.STONE_BRICKS, Blocks.MOSSY_STONE_BRICKS, Blocks.DEEPSLATE, Blocks.DEEPSLATE_TILES, Blocks.DEEPSLATE_BRICKS, Blocks.COBBLED_DEEPSLATE, Blocks.SULFUR, Blocks.SULFUR_BRICKS, Blocks.POLISHED_SULFUR, Blocks.CINNABAR, Blocks.CINNABAR_BRICKS, Blocks.POLISHED_CINNABAR);
 
   public ExtShapeBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
+  }
+
+  protected static BlockItemId blockItemIdOf(Block block) {
+    return BlockItemId.create(BuiltInRegistries.BLOCK.getKey(block), BuiltInRegistries.ITEM.getKey(block.asItem()));
+  }
+
+  protected static BlockItemId[] blockItemIdOf(Block... block) {
+    final BlockItemId[] ids = new BlockItemId[block.length];
+    for (int i = 0; i < block.length; i++) {
+      ids[i] = blockItemIdOf(block[i]);
+    }
+    return ids;
   }
 
   @Override
@@ -48,6 +61,11 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
     // region 基础形状部分
 
     builder(BlockTags.OCCLUDES_VIBRATION_SIGNALS).addTag(ExtShapeTags.WOOLEN_BLOCKS);
+    aliasGroup(ExtShape.id("pressure_plates")).add(ExtShapeTags.PRESSURE_PLATES, BlockTags.PRESSURE_PLATES);
+    aliasGroup(ExtShape.id("stone_pressure_plates")).add(ExtShapeTags.STONE_PRESSURE_PLATES, BlockTags.STONE_PRESSURE_PLATES);
+    builder(BlockTags.PRESSURE_PLATES).addOptionalTag(ExtShapeTags.PRESSURE_PLATES);
+    builder(BlockTags.STONE_PRESSURE_PLATES).addOptionalTag(ExtShapeTags.STONE_PRESSURE_PLATES);
+    builder(ExtShapeTags.PRESSURE_PLATES).addTag(ExtShapeTags.WOODEN_PRESSURE_PLATES).addTag(ExtShapeTags.STONE_PRESSURE_PLATES);
 
     // 将原木的所有标签加入 log_blocks
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_LOG_TAG.values()) {
@@ -394,10 +412,10 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
       TagKey<Block> tag = tags.containsKey(shape) ? tags.get(shape) : ExtShapeTags.SHAPE_TO_TAG.get(shape);
 
       // 对石质压力板的特殊处理
-      if (STONE_BASE_BLOCKS.contains(baseBlock)) {
-        if (BlockTags.PRESSURE_PLATES.equals(tag)) {
-          tag = BlockTags.STONE_PRESSURE_PLATES;
-        } else if (BlockTags.BUTTONS.equals(tag)) {
+      if (isStoneBaseBlock(baseBlock)) {
+        if (ExtShapeTags.PRESSURE_PLATES.equals(tag)) {
+          tag = ExtShapeTags.STONE_PRESSURE_PLATES;
+        } else if (ExtShapeTags.BUTTONS.equals(tag)) {
           tag = BlockTags.STONE_BUTTONS;
         }
       }
@@ -408,6 +426,10 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         builder(tag).add(blockItemIdOf(block));
       }
     }
+  }
+
+  protected boolean isStoneBaseBlock(Block baseBlock) {
+    return STONE_BASE_BLOCKS.contains(baseBlock);
   }
 
   /**
@@ -429,17 +451,5 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
   @Contract("null -> false")
   protected boolean isValidBlock(@Nullable Block block) {
     return ExtShapeBlocks.contains(block);
-  }
-
-  protected static BlockItemId blockItemIdOf(Block block) {
-    return BlockItemId.create(BuiltInRegistries.BLOCK.getKey(block), BuiltInRegistries.ITEM.getKey(block.asItem()));
-  }
-
-  protected static BlockItemId[] blockItemIdOf(Block... block) {
-    final BlockItemId[] ids = new BlockItemId[block.length];
-    for (int i = 0; i < block.length; i++) {
-      ids[i] = blockItemIdOf(block[i]);
-    }
-    return ids;
   }
 }

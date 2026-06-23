@@ -32,8 +32,19 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
+  public static final ImmutableSet<String> STONE_BASE_BLOCK_KEYWORDS = ImmutableSet.of("stone", "andesite", "granite", "diorite", "limestone", "marble", "viridite", "netherrack", "basalt", "deepslate", "tuff", "sulfur", "cinnabar", "nether_brick");
+  /**
+   * 此集内的方块会被加入 {@code #stone_pressure_plates} 和 {@code #stone_buttons}。注意这些方块必须要拥有 {@code mineable/pickaxe} 标签。
+   */
+  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.stream().filter(block -> STONE_BASE_BLOCK_KEYWORDS.stream().anyMatch(BuiltInRegistries.BLOCK.getKey(block).getPath()::contains)).filter(block -> !BuiltInRegistries.BLOCK.getKey(block).getPath().contains("glowstone")).collect(ImmutableSet.toImmutableSet());
+
   public ExtShapeBlockusBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
     super(output, registriesFuture);
+  }
+
+  @Override
+  protected boolean isStoneBaseBlock(Block baseBlock) {
+    return super.isStoneBaseBlock(baseBlock) || STONE_BASE_BLOCKS.contains(baseBlock);
   }
 
   @Override
@@ -155,6 +166,15 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.POLISHED_DRIPSTONE.block(),
         BlockusBlocks.DRIPSTONE_BRICKS.block(),
         BlockusBlocks.MOSSY_DRIPSTONE_BRICKS.block());
+
+    addForShapes(BlockusBlockTags.SULFUR_BLOCKS,
+        BlockusBlocks.SULFUR_TILES.block(),
+        BlockusBlocks.HERRINGBONE_SULFUR_BRICKS,
+        BlockusBlocks.SULFUR_CIRCULAR_PAVING);
+    addForShapes(BlockusBlockTags.CINNABAR_BLOCKS,
+        BlockusBlocks.CINNABAR_TILES.block(),
+        BlockusBlocks.HERRINGBONE_CINNABAR_BRICKS,
+        BlockusBlocks.CINNABAR_CIRCULAR_PAVING);
 
     addForShapes(BlockusBlockTags.TUFF_BLOCKS,
         BlockusBlocks.MOSSY_TUFF_BRICKS.block(),

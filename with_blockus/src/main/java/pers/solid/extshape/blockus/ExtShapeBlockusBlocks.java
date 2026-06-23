@@ -118,6 +118,16 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.DRIPSTONE)
         .build();
 
+    create(BlockusBlocks.SULFUR_TILES).build();
+    create(BlockusBlocks.HERRINGBONE_SULFUR_BRICKS).build();
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.SULFUR_CIRCULAR_PAVING)
+        .markStoneCuttable());
+
+    create(BlockusBlocks.CINNABAR_TILES).build();
+    create(BlockusBlocks.HERRINGBONE_CINNABAR_BRICKS).build();
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.CINNABAR_CIRCULAR_PAVING)
+        .markStoneCuttable());
+
     create(BlockusBlocks.MOSSY_TUFF_BRICKS)
         .setFenceSettings(FenceSettings.TUFF)
         .setActivationSettings(ActivationSettings.TUFF)

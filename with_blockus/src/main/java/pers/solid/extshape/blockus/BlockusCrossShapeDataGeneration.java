@@ -77,6 +77,13 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.POLISHED_DRIPSTONE.block(), Blocks.DRIPSTONE_BLOCK);
     builder.putAll(BlockusBlocks.DRIPSTONE_BRICKS.block(), Blocks.DRIPSTONE_BLOCK, BlockusBlocks.POLISHED_DRIPSTONE.block());
 
+    builder.putAll(BlockusBlocks.SULFUR_TILES.block(), Blocks.SULFUR, Blocks.POLISHED_SULFUR, Blocks.SULFUR_BRICKS);
+    builder.putAll(BlockusBlocks.HERRINGBONE_SULFUR_BRICKS, Blocks.SULFUR, Blocks.POLISHED_SULFUR, Blocks.SULFUR_BRICKS);
+    builder.putAll(BlockusBlocks.SULFUR_CIRCULAR_PAVING, Blocks.SULFUR, Blocks.POLISHED_SULFUR, Blocks.SULFUR_BRICKS);
+    builder.putAll(BlockusBlocks.CINNABAR_TILES.block(), Blocks.CINNABAR, Blocks.POLISHED_CINNABAR, Blocks.CINNABAR_BRICKS);
+    builder.putAll(BlockusBlocks.HERRINGBONE_CINNABAR_BRICKS, Blocks.CINNABAR, Blocks.POLISHED_CINNABAR, Blocks.CINNABAR_BRICKS);
+    builder.putAll(BlockusBlocks.CINNABAR_CIRCULAR_PAVING, Blocks.CINNABAR, Blocks.POLISHED_CINNABAR, Blocks.CINNABAR_BRICKS);
+
     builder.putAll(BlockusBlocks.TUFF_TILES.block(), Blocks.TUFF, Blocks.POLISHED_TUFF, Blocks.TUFF_BRICKS);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.HERRINGBONE_TUFF_BRICKS, BlockusBlocks.TUFF_CIRCULAR_PAVING), Blocks.TUFF, Blocks.POLISHED_TUFF, Blocks.TUFF_BRICKS);
 

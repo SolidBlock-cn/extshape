@@ -124,13 +124,14 @@ public class ExtShape implements ModInitializer {
   public static void validateTagsForBlocks(MinecraftServer server, Collection<Block> blocks) {
     int errors = 0;
 
+    final Registry<Block> blockRegistry = server.registryAccess().lookupOrThrow(Registries.BLOCK);
+    final Registry<Item> itemRegistry = server.registryAccess().lookupOrThrow(Registries.ITEM);
     for (Block block : blocks) {
       if (!block.isEnabled(server.overworld().enabledFeatures())) {
         continue;
       }
       if (block instanceof ExtShapeBlockInterface i) {
         final Block baseBlock = i.getBaseBlock();
-        final Registry<Block> blockRegistry = server.registryAccess().lookupOrThrow(Registries.BLOCK);
         final Holder<Block> blockEntry = blockRegistry.wrapAsHolder(block);
         final Holder<Block> baseBlockEntry = blockRegistry.wrapAsHolder(baseBlock);
 
@@ -149,6 +150,14 @@ public class ExtShape implements ModInitializer {
           final boolean blockInTag = blockEntry.is(blockTagKey);
           if (blockInShape != blockInTag) {
             LOGGER.error("Tag check for {} does not match! The block {} in the shape: {}, but the block in the shape tag: {}", blockTagKey.location(), BuiltInRegistries.BLOCK.getKey(block), blockInShape, blockInTag);
+            errors++;
+          }
+
+          final Item item = block.asItem();
+          TagKey<Item> itemTagKey = TagKey.create(Registries.ITEM, blockTagKey.location());
+          final boolean itemInTag = itemRegistry.wrapAsHolder(item).is(itemTagKey);
+          if (blockInShape != itemInTag) {
+            LOGGER.error("Tag check for {} does not match! The block item {} in the shape: {}, but the item in the shape tag: {}", itemTagKey.location(), BuiltInRegistries.ITEM.getKey(item), blockInShape, itemInTag);
             errors++;
           }
         }
