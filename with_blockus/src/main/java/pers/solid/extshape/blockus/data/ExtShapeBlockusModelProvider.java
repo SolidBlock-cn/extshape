@@ -50,6 +50,7 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
 
     for (var block : BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().asList()) {
       registerSuffixed(block, TextureSlot.END, "_top");
+      registerSuffixed(block, TextureSlot.SIDE, "_side");
     }
 
     for (final Block block : BlockusBlocks.SMALL_LOGS.bundle().values()) {
