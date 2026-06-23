@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "blockus:block/cyan_glazed_terracotta_pillar"
+    "wall": "blockus:block/cyan_glazed_terracotta_pillar_side"
   }
 }

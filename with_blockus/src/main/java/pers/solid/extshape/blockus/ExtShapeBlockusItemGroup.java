@@ -1,10 +1,9 @@
 package pers.solid.extshape.blockus;
 
 import com.brand.blockus.itemgroups.BlockusItemGroups;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimap;
+import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.utils.helper.BlockOrder;
+import com.google.common.collect.*;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.resources.Identifier;
@@ -13,9 +12,11 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ColorCollection;
 import pers.solid.extshape.VanillaItemGroup;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.EntryVariantAppender;
 
 import java.util.Collection;
@@ -31,7 +32,13 @@ public final class ExtShapeBlockusItemGroup {
   private ExtShapeBlockusItemGroup() {
   }
 
-  private static final ImmutableSet<Block> SPECIAL_SORTED_RAINBOW_BLOCKS = ImmutableSet.of();
+  private static final ImmutableSet<Block> SPECIAL_SORTED_RAINBOW_BLOCKS = Streams.concat(
+      BlockusBlocks.DYED_STONE_BRICKS.block().blocks().asList().stream(),
+      BlockusBlocks.DYED_SHINGLES.block().blocks().asList().stream(),
+      BlockusBlocks.CONCRETE_BRICKS.block().blocks().asList().stream(),
+      BlockusBlocks.PATTERNED_WOOL.block().blocks().asList().stream(),
+      BlockusBlocks.GINGHAM_WOOL.block().blocks().asList().stream()).collect(ImmutableSet.toImmutableSet()
+  );
 
   public static void addVanillaGroupRules(Collection<BlockShape> shapes) {
     final Multimap<Item, Item> buildingAppendingRule = VanillaItemGroup.getAppendingRule(BlockusItemGroups.BLOCKUS_BUILDING_BLOCKS);
@@ -40,6 +47,62 @@ public final class ExtShapeBlockusItemGroup {
     final Multimap<Item, Item> coloredTilesAppendingRule = VanillaItemGroup.getAppendingRule(BlockusItemGroups.BLOCKUS_COLORED_TILES);
     new EntryVariantAppender(BlockusItemGroups.BLOCKUS_COLORED_BLOCKS, shapes, Iterables.filter(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, input -> !SPECIAL_SORTED_RAINBOW_BLOCKS.contains(input)), ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains).appendItems(coloredAppendingRule);
     new EntryVariantAppender(BlockusItemGroups.BLOCKUS_COLORED_TILES, shapes, Iterables.filter(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, input -> !SPECIAL_SORTED_RAINBOW_BLOCKS.contains(input)), ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains).appendItems(coloredTilesAppendingRule);
+
+    final Item stainedStoneBrickAnchor = BlockusBlocks.DYED_STONE_BRICKS.wall().items().pick(BlockOrder.COLOR.getLast());
+    final Item stainedShinglesAnchor = BlockusBlocks.DYED_SHINGLES.slab().items().pick(BlockOrder.COLOR.getLast());
+    final Item concreteBricksAnchor = BlockusBlocks.CONCRETE_BRICKS.wall().items().pick(BlockOrder.COLOR.getLast());
+    final Item patternedWoolAnchor = BlockusBlocks.PATTERNED_WOOL.slab().items().pick(BlockOrder.COLOR.getLast());
+    final Item ginghamWoolAnchor = BlockusBlocks.DYED_STONE_BRICKS.slab().items().pick(BlockOrder.COLOR.getLast());
+
+    final ColorCollection<Block> stainedStoneBrickBlocks = BlockusBlocks.DYED_STONE_BRICKS.block().blocks();
+    final ColorCollection<Block> stainedShinglesBrickBlocks = BlockusBlocks.DYED_SHINGLES.block().blocks();
+    final ColorCollection<Block> concreteBrickBlocks = BlockusBlocks.CONCRETE_BRICKS.block().blocks();
+    final ColorCollection<Block> patternedWoolBlocks = BlockusBlocks.PATTERNED_WOOL.block().blocks();
+    final ColorCollection<Block> ginghamWoolBlocks = BlockusBlocks.GINGHAM_WOOL.block().blocks();
+
+    // 添加特殊排序的方块
+    for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
+      BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
+
+      // 染色石砖
+      for (var baseBlock : stainedStoneBrickBlocks.asList()) {
+        final Block block = biMap.get(baseBlock);
+        if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
+          coloredAppendingRule.put(stainedStoneBrickAnchor, block.asItem());
+      }
+
+      // 瓦片
+      for (var baseBlock : stainedShinglesBrickBlocks.asList()) {
+        final Block block = biMap.get(baseBlock);
+        if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) {
+          coloredAppendingRule.put(stainedShinglesAnchor, block.asItem());
+        }
+      }
+
+      // 混凝土砖
+      for (var baseBlock : concreteBrickBlocks.asList()) {
+        final Block block = biMap.get(baseBlock);
+        if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) {
+          coloredAppendingRule.put(concreteBricksAnchor, block.asItem());
+        }
+      }
+
+      // 花纹羊毛
+      for (var baseBlock : patternedWoolBlocks.asList()) {
+        final Block block = biMap.get(baseBlock);
+        if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) {
+          coloredAppendingRule.put(patternedWoolAnchor, block.asItem());
+        }
+      }
+
+      // 方格羊毛
+      for (var baseBlock : ginghamWoolBlocks.asList()) {
+        final Block block = biMap.get(baseBlock);
+        if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block)) {
+          coloredAppendingRule.put(ginghamWoolAnchor, block.asItem());
+        }
+      }
+    }
   }
 
 
