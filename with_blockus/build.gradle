@@ -68,7 +68,7 @@ githubRelease {
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "26.2"
+    targetCommitish = "26.3"
     releaseName = "v$project.mod_version"
     body = changelogContent
     draft = true
