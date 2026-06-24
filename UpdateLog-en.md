@@ -1,9 +1,16 @@
 # Update log
 
+### 3.1.6-beta.2
+
+- Added the verification feature of wooden block types, and solved the potential issues that some wood blocks may have incorrect sounds.
+
 ### 3.1.6-beta.1
 
 - Adjusted the sorting of copper blocks in the creative mode inventory for versions 26.2 and above to match vanilla.
 - Fit 26.3-snapshot-1.
+    - Now in 26.3 versions, the mod no longer provides wool stairs and slabs, because they already exist in vanilla. The former block and item IDs in the mod will be redirected to vanilla IDs, making use of the registry alias feature of Fabric API. For example, `extshape:red_wood_stairs` will be identical to `minecraft:red_wood_stairs`.
+    - Now in 26.3 versions, there are no longer `#extshape:woolen_stairs` and `#extshape:woolen_slabs` block and item tags, and the vanilla `#minecraft:wool_stairs` and `#minecraft:wool_slabs` block and item tags will be directly used.
+    - Now in 26.3 versions, petrified oak planks, double smooth stone slab blocks and all extended shapes are added to `#blocks_motion_no_leaves` block tag, so as to be automatically added to block tags like`#blocks_motion`.
 
 ### 3.1.5
 
