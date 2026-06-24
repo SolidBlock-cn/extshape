@@ -1,9 +1,16 @@
 # 更新日志
 
+### 3.1.6-beta.2
+
+- 加入木制方块类型验证机制，并修复了可能导致部分木制方块的声音不正确的问题。
+
 ### 3.1.6-beta.1
 
 - 为 26.2 以上版本调整创造模式物品栏中的铜相关方块排序，以匹配原版。
 - 适应 26.3-snapshot-1。
+    - 现在在 26.3 版本中，本模组不专门提供羊毛的楼梯和羊毛台阶，因为原版已经有了。之前的模组中的方块和物品 ID 会利用 Fabric API 的注册表别称功能重定向到原版的 ID，例如 `extshape:red_wood_stairs` 将等价于 `minecraft:red_wood_stairs`。
+    - 现在在 26.3 版本中，不再有 `#extshape:woolen_stairs` 和 `#extshape:woolen_slabs` 方块和物品标签，将直接使用原版的 `#minecraft:wool_stairs` 和 `#minecraft:wool_slabs` 方块和物品标签。
+    - 现在在 26.3 版本中，石化橡木木板、双层平滑石台阶以及所有的扩展形状的方块将加入 `#blocks_motion_no_leaves` 方块标签，进而自动加入 `#blocks_motion` 等方块标签。
 
 ### 3.1.5
 
