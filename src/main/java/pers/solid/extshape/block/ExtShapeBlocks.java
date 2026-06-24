@@ -5,6 +5,7 @@ import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Util;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
@@ -153,7 +155,7 @@ public final class ExtShapeBlocks {
 
     // an infinite cycling loop for wooden block set types, which each cycle should correspond to
     // BlockCollections.WOODS, which does not include bamboo and nether woods.
-    final Iterator<ActivationSettings> woodenButtonSettings = Iterators.cycle(
+    final Iterator<ActivationSettings> overworldWoodActivationSettings = Iterators.cycle(
         ActivationSettings.wood(BlockSetType.OAK),
         ActivationSettings.wood(BlockSetType.SPRUCE),
         ActivationSettings.wood(BlockSetType.BIRCH),
@@ -161,9 +163,10 @@ public final class ExtShapeBlocks {
         ActivationSettings.wood(BlockSetType.ACACIA),
         ActivationSettings.wood(BlockSetType.CHERRY),
         ActivationSettings.wood(BlockSetType.DARK_OAK),
+        ActivationSettings.wood(BlockSetType.PALE_OAK),
         ActivationSettings.wood(BlockSetType.MANGROVE));
-    final Iterator<ActivationSettings> netherWoodButtonSettings = Iterators.cycle(ActivationSettings.wood(BlockSetType.WARPED), ActivationSettings.wood(BlockSetType.CRIMSON));
-    final Iterator<WoodType> woodTypes = Iterators.cycle(
+    final Iterator<ActivationSettings> netherWoodActivationSettings = Iterators.cycle(ActivationSettings.wood(BlockSetType.WARPED), ActivationSettings.wood(BlockSetType.CRIMSON));
+    final Iterator<WoodType> ovrewordWoodTypes = Iterators.cycle(
         WoodType.OAK,
         WoodType.SPRUCE,
         WoodType.BIRCH,
@@ -171,41 +174,53 @@ public final class ExtShapeBlocks {
         WoodType.ACACIA,
         WoodType.CHERRY,
         WoodType.DARK_OAK,
+        WoodType.PALE_OAK,
         WoodType.MANGROVE
     );
     final Iterator<WoodType> netherWoodTypes = Iterators.cycle(WoodType.WARPED, WoodType.CRIMSON);
     // 木头
     for (final Block block : BlockCollections.WOODS) {
+      final WoodType woodType = ovrewordWoodTypes.next();
+      final ActivationSettings activationSettings = overworldWoodActivationSettings.next();
+      checkWoodValidity(block, woodType, activationSettings);
       FACTORY.createAllShapes(block)
-          .setFenceSettings(new FenceSettings(Items.STICK, woodTypes.next()))
-          .setActivationSettings(woodenButtonSettings.next())
+          .setFenceSettings(new FenceSettings(Items.STICK, woodType))
+          .setActivationSettings(activationSettings)
           .setPillar()
           .addPostBuildConsumer(woodFlammable)
           .setRecipeGroup(blockShape -> "wood_" + blockShape.getSerializedName())
           .build();
     }
     for (final Block block : BlockCollections.STRIPPED_WOODS) {
+      final WoodType woodType = ovrewordWoodTypes.next();
+      final ActivationSettings activationSettings = overworldWoodActivationSettings.next();
+      checkWoodValidity(block, woodType, activationSettings);
       FACTORY.createAllShapes(block)
-          .setFenceSettings(new FenceSettings(Items.STICK, woodTypes.next()))
-          .setActivationSettings(woodenButtonSettings.next())
+          .setFenceSettings(new FenceSettings(Items.STICK, woodType))
+          .setActivationSettings(activationSettings)
           .setPillar()
           .addPostBuildConsumer(woodFlammable)
           .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.getSerializedName())
           .build();
     }
     for (final Block block : BlockCollections.HYPHAES) {
-      ActivationSettings activationSettings = netherWoodButtonSettings.next();
+      final WoodType woodType = netherWoodTypes.next();
+      ActivationSettings activationSettings = netherWoodActivationSettings.next();
+      checkWoodValidity(block, woodType, activationSettings);
       FACTORY.createAllShapes(block)
-          .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
+          .setFenceSettings(new FenceSettings(Items.STICK, woodType))
           .setActivationSettings(activationSettings)
           .setPillar()
           .setRecipeGroup(blockShape -> "wood_" + blockShape.getSerializedName())
           .build();
     }
     for (final Block block : BlockCollections.STRIPPED_HYPHAES) {
+      final WoodType woodType = netherWoodTypes.next();
+      final ActivationSettings activationSettings = netherWoodActivationSettings.next();
+      checkWoodValidity(block, woodType, activationSettings);
       FACTORY.createAllShapes(block)
-          .setFenceSettings(new FenceSettings(Items.STICK, netherWoodTypes.next()))
-          .setActivationSettings(netherWoodButtonSettings.next())
+          .setFenceSettings(new FenceSettings(Items.STICK, woodType))
+          .setActivationSettings(activationSettings)
           .setPillar()
           .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.getSerializedName())
           .build();
@@ -227,9 +242,11 @@ public final class ExtShapeBlocks {
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
             .build();
       } else {
+        final ActivationSettings activationSettings = overworldWoodActivationSettings.next();
+        checkWoodValidity(block, null, activationSettings);
         FACTORY.createAllShapes(block)
             .setFenceSettings(null)
-            .setActivationSettings(woodenButtonSettings.next())
+            .setActivationSettings(activationSettings)
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
             .build();
@@ -753,6 +770,22 @@ public final class ExtShapeBlocks {
     }
 
     ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());
+  }
+
+  /**
+   * 检测指定的方块与 woodType 和 activationSettings 参数是否匹配，会通过方块名称检测。
+   *
+   * @since 3.1.6
+   */
+  @ApiStatus.AvailableSince("3.1.6")
+  private static void checkWoodValidity(Block block, @Nullable WoodType woodType, @Nullable ActivationSettings activationSettings) {
+    final String idPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
+    if (woodType != null && !idPath.contains(woodType.name())) {
+      throw new IllegalArgumentException(String.format("Block id '%s' does not contain wood type '%s", idPath, woodType.name()));
+    }
+    if (activationSettings != null && !idPath.contains(activationSettings.blockSetType().name())) {
+      throw new IllegalArgumentException(String.format("Block id '%s' does not contain activation settings '%s", idPath, activationSettings.blockSetType().name()));
+    }
   }
 
   private ExtShapeBlocks() {
