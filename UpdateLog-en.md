@@ -1,5 +1,10 @@
 # Update log
 
+### 3.1.6-beta.4
+
+- Update to 26.3 snapshot 2.
+    - This mod does not modify the default `block_transformer` item component, but has some special handling in implementation, so that wood blocks in this mod can be correctly stripped.
+
 ### 3.1.6-beta.3
 
 - Optimized the way the fuels are registered.
