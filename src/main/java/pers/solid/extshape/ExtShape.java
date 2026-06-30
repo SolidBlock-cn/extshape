@@ -10,7 +10,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.registry.FuelValueEvents;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -279,7 +278,8 @@ public class ExtShape implements ModInitializer {
   public static final List<BlockTransformer.BlockTransformData> EXTENDED_STRIPPABLE_BLOCKS = new ArrayList<>();
 
   /**
-   * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故不使用 {@link StrippableBlockRegistry}，而使用 {@link BlockTransformerMixin}。
+   * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故使用 {@link BlockTransformerMixin}。
+   * todo 改善文档
    */
   private static void registerStrippableBlocks() {
     Streams.concat(
