@@ -1,12 +1,13 @@
 package pers.solid.extshape.data;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMultimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.CopperManager;
@@ -88,14 +89,13 @@ public final class VanillaStonecutting {
   }
 
   private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {
-    registerCutCopperBlocks(builder, CopperManager.CUT_COPPER_BLOCKS, CopperManager.COPPER_BLOCKS);
-    registerCutCopperBlocks(builder, CopperManager.WAXED_CUT_COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS);
+    registerCutCopperBlocks(builder, Blocks.CUT_COPPER.weathering(), Blocks.COPPER_BLOCK.weathering());
+    registerCutCopperBlocks(builder, Blocks.CUT_COPPER.waxed(), Blocks.COPPER_BLOCK.waxed());
   }
 
-  private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder, List<Block> cutCoppers, List<Block> uncutCoppers) {
-    Preconditions.checkArgument(cutCoppers.size() == uncutCoppers.size(), "cutCoppers and uncutCoppers must be of same size!");
-    for (int i = 0; i < cutCoppers.size(); i++) {
-      builder.put(cutCoppers.get(i), ObjectIntPair.of(uncutCoppers.get(i), 4));
+  private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder, WeatheringCopperCollection.ByState<Block> cutCoppers, WeatheringCopperCollection.ByState<Block> uncutCoppers) {
+    for (WeatheringCopper.WeatherState oxidationLevel : CopperManager.OXIDATION_LEVELS) {
+      builder.put(cutCoppers.pick(oxidationLevel), ObjectIntPair.of(uncutCoppers.pick(oxidationLevel), 4));
     }
   }
 }

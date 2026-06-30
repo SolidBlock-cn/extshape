@@ -137,6 +137,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     // region 特殊方块标签
     addForShapes(BlockusBlockTags.STONE_BLOCKS,
+        BlockusBlocks.COBBLESTONE_BRICKS.block(),
+        BlockusBlocks.MOSSY_COBBLESTONE_BRICKS.block(),
         BlockusBlocks.STONE_TILES.block(),
         BlockusBlocks.HERRINGBONE_STONE_BRICKS,
         BlockusBlocks.STONE_CIRCULAR_PAVING
@@ -238,6 +240,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.VIRIDITE_CIRCULAR_PAVING
     );
 
+    addForShapes(BlockusBlockTags.WATER_BRICKS, BlockusBlocks.WATER_BRICKS.block());
     addForShapes(BlockusBlockTags.LAVA_BRICKS,
         BlockusBlocks.LAVA_BRICKS.block()
     );
@@ -300,6 +303,9 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.SANDY_BRICKS.block(),
         BlockusBlocks.HERRINGBONE_SANDY_BRICKS
     );
+
+    addForShapes(BlockusBlockTags.TUFF_BLOCKS, BlockusBlocks.COPPER_TUFF_BRICKS.block().blocks().asList());
+    addForShapes(BlockusBlockTags.COPPER_BLOCKS, BlockusBlocks.COPPER_BRICKS.block().blocks().asList());
 
     addForShapes(BlockusBlockTags.RESIN_BLOCKS, BlockusBlocks.LARGE_RESIN_BRICKS.block(), BlockusBlocks.HERRINGBONE_RESIN_BRICKS);
 

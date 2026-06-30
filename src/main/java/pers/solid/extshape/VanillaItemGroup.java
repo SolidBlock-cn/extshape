@@ -77,5 +77,40 @@ public final class VanillaItemGroup {
     // natural 物品组应该排除变种的方块（这些方块已出现在了建筑方块物品组中）。
     final Set<Block> excludedInNatural = Set.of(Blocks.DEEPSLATE, Blocks.NETHERRACK, Blocks.BASALT, Blocks.SMOOTH_BASALT, Blocks.END_STONE, Blocks.AMETHYST_BLOCK);
     new EntryVariantAppender(CreativeModeTabs.NATURAL_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.LOGS.contains(block) || BlockCollections.STEMS.contains(block) || excludedInNatural.contains(block))), ExtShapeBlocks::contains).appendItems(getAppendingRule(CreativeModeTabs.NATURAL_BLOCKS));
+
+    // 对原版切制铜块（含涂蜡变种）的特殊处理
+    final Item unwaxedCopperAnchor = Items.COPPER_BLOCK.weathering().oxidized();
+    final Item waxedCopperAnchor = Items.COPPER_BLOCK.waxed().oxidized();
+    final Item unwaxedCutCopperAnchor = Items.CUT_COPPER_SLAB.weathering().oxidized();
+    final Item waxedCutCopperAnchor = Items.CUT_COPPER_SLAB.waxed().oxidized();
+
+    for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
+      BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
+
+      Blocks.COPPER_BLOCK.weathering().forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          apBuilding.put(unwaxedCopperAnchor, variant.asItem());
+        }
+      });
+      Blocks.COPPER_BLOCK.waxed().forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          apBuilding.put(waxedCopperAnchor, variant.asItem());
+        }
+      });
+      Blocks.CUT_COPPER.weathering().forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          apBuilding.put(unwaxedCutCopperAnchor, variant.asItem());
+        }
+      });
+      Blocks.CUT_COPPER.waxed().forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (ExtShapeBlocks.contains(variant)) {
+          apBuilding.put(waxedCutCopperAnchor, variant.asItem());
+        }
+      });
+    }
   }
 }

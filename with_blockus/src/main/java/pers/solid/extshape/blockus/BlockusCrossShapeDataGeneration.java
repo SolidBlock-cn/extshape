@@ -13,10 +13,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.*;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.data.CrossShapeDataGeneration;
 import pers.solid.extshape.data.VanillaStonecutting;
@@ -73,6 +73,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
         builder.put(concreteVariants.block(), base);
       }
     }
+    builder.putAll(BlockusBlocks.COBBLESTONE_BRICKS.block(), Blocks.COBBLESTONE, Blocks.STONE);
+    builder.putAll(BlockusBlocks.MOSSY_COBBLESTONE_BRICKS.block(), Blocks.MOSSY_COBBLESTONE);
     builder.putAll(BlockusBlocks.STONE_TILES.block(), Blocks.STONE, Blocks.STONE_BRICKS);
     builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE);
     builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE_BRICKS);
@@ -189,6 +191,20 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.EMERALD_BRICKS.block(), Blocks.EMERALD_BLOCK);
     builder.put(BlockusBlocks.DIAMOND_BRICKS.block(), Blocks.DIAMOND_BLOCK);
     builder.put(BlockusBlocks.NETHERITE_BRICKS.block(), Blocks.NETHERITE_BLOCK);
+
+    // 和铜相关的
+    final WeatheringCopperCollection.ByState<Block> weatheringCopper = Blocks.COPPER_BLOCK.weathering();
+    final WeatheringCopperCollection.ByState<Block> waxedCopper = Blocks.COPPER_BLOCK.waxed();
+    final WeatheringCopperCollection.ByState<Block> weatheringCutCopper = Blocks.CUT_COPPER.weathering();
+    final WeatheringCopperCollection.ByState<Block> waxedCutCopper = Blocks.CUT_COPPER.waxed();
+    final WeatheringCopperCollection<Block> copperBricks = BlockusBlocks.COPPER_BRICKS.block().blocks();
+    final WeatheringCopperCollection.ByState<Block> weatheringCopperBricks = copperBricks.weathering();
+    final WeatheringCopperCollection.ByState<Block> waxedCopperBricks = copperBricks.waxed();
+
+    for (WeatheringCopper.WeatherState oxidationLevel : CopperManager.OXIDATION_LEVELS) {
+      builder.putAll(weatheringCopperBricks.pick(oxidationLevel), weatheringCopper.pick(oxidationLevel), weatheringCutCopper.pick(oxidationLevel));
+      builder.putAll(waxedCopperBricks.pick(oxidationLevel), waxedCopper.pick(oxidationLevel), waxedCutCopper.pick(oxidationLevel));
+    }
   }
 
   private static void putMultipleWithMid(ImmutableMultimap.Builder<Block, Block> builder, Block midOutput, Block ingredient1, Block ingredient2, Block... outputs) {

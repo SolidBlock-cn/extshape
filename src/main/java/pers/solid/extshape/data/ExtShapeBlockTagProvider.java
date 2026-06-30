@@ -15,7 +15,6 @@ import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Contract;
 import org.jspecify.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeTags;
@@ -104,10 +103,8 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         BlockCollections.STONES,
         BlockCollections.UNCOLORED_SANDSTONES,
         BlockCollections.RED_SANDSTONES,
-        CopperManager.COPPER_BLOCKS,
-        CopperManager.CUT_COPPER_BLOCKS,
-        CopperManager.WAXED_COPPER_BLOCKS,
-        CopperManager.WAXED_CUT_COPPER_BLOCKS,
+        Blocks.COPPER_BLOCK.asList(),
+        Blocks.CUT_COPPER.asList(),
         ImmutableSet.of(
             Blocks.COBBLESTONE,
             Blocks.LAPIS_BLOCK,
@@ -199,7 +196,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         Blocks.RAW_IRON_BLOCK,
         Blocks.RAW_COPPER_BLOCK
     );
-    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
+    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(Blocks.COPPER_BLOCK.asList(), Blocks.CUT_COPPER.asList()));
     addForShapes(BlockTags.NEEDS_IRON_TOOL,
         Blocks.GOLD_BLOCK,
         Blocks.DIAMOND_BLOCK,
