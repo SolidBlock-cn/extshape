@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Function3;
 import com.mojang.serialization.MapCodec;
@@ -15,50 +14,28 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChangeOverTimeBlock;
-import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 /**
  * 处理铜的生锈、除蜡、涂蜡的一些类。
- *
- * @param unwaxed 未涂蜡的铜块，氧化程度从低到高的列表
- * @param waxed   涂蜡的铜块，氧化程度从低到高的列表，需要与未涂蜡的铜块对应
  */
-public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
-  /**
-   * 不同氧化等级的铜方块。
-   */
-  public static final ImmutableList<Block> COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK.weathering().unaffected(), Blocks.COPPER_BLOCK.weathering().exposed(), Blocks.COPPER_BLOCK.weathering().weathered(), Blocks.COPPER_BLOCK.weathering().oxidized());
-  /**
-   * 不同氧化等级的切制铜方块。
-   */
-  public static final ImmutableList<Block> CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER.weathering().unaffected(), Blocks.CUT_COPPER.weathering().exposed(), Blocks.CUT_COPPER.weathering().weathered(), Blocks.CUT_COPPER.weathering().oxidized());
-  /**
-   * 不同氧化等级的涂蜡铜方块。
-   */
-  public static final ImmutableList<Block> WAXED_COPPER_BLOCKS = ImmutableList.of(Blocks.COPPER_BLOCK.waxed().unaffected(), Blocks.COPPER_BLOCK.waxed().exposed(), Blocks.COPPER_BLOCK.waxed().weathered(), Blocks.COPPER_BLOCK.waxed().oxidized());
-  /**
-   * 不同氧化等级的涂蜡切制铜方块。
-   */
-  public static final ImmutableList<Block> WAXED_CUT_COPPER_BLOCKS = ImmutableList.of(Blocks.CUT_COPPER.waxed().unaffected(), Blocks.CUT_COPPER.waxed().exposed(), Blocks.CUT_COPPER.waxed().weathered(), Blocks.CUT_COPPER.waxed().oxidized());
+public record CopperManager(WeatheringCopperCollection<Block> copperCollection) {
   /**
    * 依次排列的不同的氧化等级。
    */
   public static final ImmutableList<WeatheringCopper.WeatherState> OXIDATION_LEVELS = ImmutableList.of(WeatheringCopper.WeatherState.UNAFFECTED, WeatheringCopper.WeatherState.EXPOSED, WeatheringCopper.WeatherState.WEATHERED, WeatheringCopper.WeatherState.OXIDIZED);
 
-  public static final CopperManager COPPER = new CopperManager(COPPER_BLOCKS, WAXED_COPPER_BLOCKS);
-  public static final CopperManager CUT_COPPER = new CopperManager(CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS);
+  public static final CopperManager COPPER = new CopperManager(Blocks.COPPER_BLOCK);
+  public static final CopperManager CUT_COPPER = new CopperManager(Blocks.CUT_COPPER);
 
   /**
    * 为一个特定氧化等级以及涂蜡情况的铜方块注册 {@code BlocksBuilder}。
@@ -100,30 +77,34 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
     return builder;
   }
 
-  public static void registerWithMultipleOxidizationLevel(BlocksBuilderFactory blocksBuilderFactory, List<Block> coppers, boolean waxed) {
-    final BlocksBuilder[] blocksBuilders = new BlocksBuilder[coppers.size()];
-    for (int i = 0; i < coppers.size(); i++) {
-      final BlocksBuilder blocksBuilder = registerCopperBlock(blocksBuilderFactory, coppers.get(i), OXIDATION_LEVELS.get(i), waxed);
-      blocksBuilders[i] = blocksBuilder;
-      if (i > 0 && !waxed) {
-        final BlocksBuilder previous = blocksBuilders[i - 1];
-        for (var entry : blocksBuilder.entrySet()) {
+  public static void registerWithMultipleOxidizationLevel(BlocksBuilderFactory blocksBuilderFactory, WeatheringCopperCollection<Block> copperCollection) {
+    final WeatheringCopperCollection.ByState<Block> weathering = copperCollection.weathering();
+    final WeatheringCopperCollection.ByState<Block> waxed = copperCollection.waxed();
+    @Nullable BlocksBuilder previousWeathering = null;
+    for (WeatheringCopper.WeatherState oxidationLevel : OXIDATION_LEVELS) {
+      final BlocksBuilder weatheringBuilder = registerCopperBlock(blocksBuilderFactory, weathering.pick(oxidationLevel), oxidationLevel, false);
+      final BlocksBuilder waxedBuilder = registerCopperBlock(blocksBuilderFactory, waxed.pick(oxidationLevel), oxidationLevel, true);
+
+      if (previousWeathering != null) {
+        for (var entry : weatheringBuilder.entrySet()) {
           final BlockShape key = entry.getKey();
           final var value = entry.getValue();
-          final var previousValue = previous.get(key);
+          final var previousValue = previousWeathering.get(key);
           if (value != null && previousValue != null) {
             OxidizableBlocksRegistry.registerNextStage(previousValue.instance, value.instance);
           }
         }
       }
+      previousWeathering = weatheringBuilder;
     }
   }
 
-  public static void registerExtendedWax(BlocksBuilderFactory blocksBuilderFactory, List<Block> unwaxedBases, List<Block> waxedBases) {
-    Preconditions.checkArgument(unwaxedBases.size() == waxedBases.size(), "unwaxedBases and waxedBases should be of same size!");
-    for (int i = 0; i < unwaxedBases.size(); i++) {
-      final Block unwaxedBase = unwaxedBases.get(i);
-      final Block waxedBase = waxedBases.get(i);
+  public static void registerExtendedWax(BlocksBuilderFactory blocksBuilderFactory, WeatheringCopperCollection<Block> copperCollection) {
+    final WeatheringCopperCollection.ByState<Block> weatheringCollection = copperCollection.weathering();
+    final WeatheringCopperCollection.ByState<Block> waxedCollection = copperCollection.waxed();
+    for (WeatheringCopper.WeatherState oxidationLevel : OXIDATION_LEVELS) {
+      final Block unwaxedBase = weatheringCollection.pick(oxidationLevel);
+      final Block waxedBase = waxedCollection.pick(oxidationLevel);
       for (BlockShape shape : BlockShape.values()) {
         final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
         final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
@@ -135,9 +116,8 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   }
 
   public void registerBlocks(BlocksBuilderFactory blocksBuilderFactory) {
-    registerWithMultipleOxidizationLevel(blocksBuilderFactory, unwaxed, false);
-    registerWithMultipleOxidizationLevel(blocksBuilderFactory, waxed, true);
-    registerExtendedWax(blocksBuilderFactory, unwaxed, waxed);
+    registerWithMultipleOxidizationLevel(blocksBuilderFactory, copperCollection);
+    registerExtendedWax(blocksBuilderFactory, copperCollection);
   }
 
   public static <B extends Block & ExtShapeBlockInterface & WeatheringCopper> MapCodec<B> createCodec(RecordCodecBuilder<B, BlockBehaviour.Properties> settingsCodec, Function3<Block, BlockBehaviour.Properties, WeatheringCopper.WeatherState, B> function) {
@@ -168,11 +148,11 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   }
 
   public void generateWaxRecipes(RecipeProvider recipeGenerator, RecipeOutput exporter, Predicate<Block> blockPredicate) {
-    Preconditions.checkArgument(unwaxed.size() == waxed.size(), "unwaxedBlocks and waxedBlocks must be of same size!");
-
-    for (int i = 0; i < unwaxed.size(); i++) {
-      final Block unwaxedBaseBlock = unwaxed.get(i);
-      final Block waxedBaseBlock = waxed.get(i);
+    final WeatheringCopperCollection.ByState<Block> weathering = copperCollection.weathering();
+    final WeatheringCopperCollection.ByState<Block> waxed = copperCollection.waxed();
+    for (WeatheringCopper.WeatherState oxidationLevel : OXIDATION_LEVELS) {
+      final Block unwaxedBaseBlock = weathering.pick(oxidationLevel);
+      final Block waxedBaseBlock = waxed.pick(oxidationLevel);
       generateWaxRecipesForShapes(recipeGenerator, exporter, unwaxedBaseBlock, waxedBaseBlock, blockPredicate);
     }
   }

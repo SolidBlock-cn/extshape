@@ -12,6 +12,7 @@
     "ButtonBlockAccessor",
     "DisplayContextMixin",
     "FenceGateAccessor",
+    "FuelValuesBuilderAccessor",
     "ItemGroupEntriesImplMixin",
     "ItemGroupsMixin",
     "ItemMixin",

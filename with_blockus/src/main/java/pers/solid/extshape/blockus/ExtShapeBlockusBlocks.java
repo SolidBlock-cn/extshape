@@ -346,6 +346,9 @@ public final class ExtShapeBlockusBlocks {
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.VIRIDITE_CIRCULAR_PAVING)
         .markStoneCuttable());
 
+    create(BlockusBlocks.WATER_BRICKS)
+        .setFenceSettings(FenceSettings.STONE)
+        .build();
     create(BlockusBlocks.LAVA_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
         .build();
@@ -624,26 +627,22 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar()
         .addPostBuildConsumer(logFlammable)
-        .fuelTime(300)
         .build();
     FACTORY.createAllShapes(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .setPillar()
         .addPostBuildConsumer(logFlammable)
-        .fuelTime(300)
         .build();
 
     final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> plankFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20);
     create(BlockusBlocks.WHITE_OAK)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .addPostBuildConsumer(plankFlammable)
-        .fuelTime(300)
         .build();
     create(BlockusBlocks.RAW_BAMBOO)
         .setActivationSettings(ActivationSettings.BAMBOO)
         .setFenceSettings(new FenceSettings(Items.BAMBOO, WoodType.BAMBOO))
         .addPostBuildConsumer(plankFlammable)
-        .fuelTime(300)
         .build();
     create(BlockusBlocks.CHARRED)
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
@@ -685,7 +684,6 @@ public final class ExtShapeBlockusBlocks {
             .without(BlockShape.STAIRS, BlockShape.SLAB)
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
-            .fuelTime(300)
             .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.getSerializedName())
             .build();
       }
@@ -706,7 +704,6 @@ public final class ExtShapeBlockusBlocks {
         FACTORY.createConstructionOnly(block)
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
-            .fuelTime(300)
             .setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.getSerializedName())
             .build();
       }
@@ -724,7 +721,6 @@ public final class ExtShapeBlockusBlocks {
         FACTORY.createConstructionOnly(block)
             .setPillar()
             .addPostBuildConsumer(logFlammable)
-            .fuelTime(300)
             .setRecipeGroup(blockShape -> "small_logs_" + blockShape.getSerializedName())
             .build();
       }
@@ -834,7 +830,6 @@ public final class ExtShapeBlockusBlocks {
               }
             })
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60))
-            .fuelTime(100)
             .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.getSerializedName())
             .setActivationSettings(ActivationSettings.WOOL)
             .setFenceSettings(FenceSettings.WOOL)
@@ -863,7 +858,6 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.PAPER_BLOCK)
         .addPostBuildConsumer((blockShape3, blockBuilder2) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder2.instance, 30, 60))
-        .fuelTime(100)
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.PAPER, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
         .build();
@@ -887,7 +881,6 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.CHARCOAL_BLOCK)
         .markStoneCuttable()
         .setStoneFenceSettings(Items.CHARCOAL)
-        .fuelTime(16000)
         .build();
 
     // sugar 没有，因为是下落方块，不符合条件。
