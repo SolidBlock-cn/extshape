@@ -516,7 +516,6 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.COAL, ExtShapeBlockTypes.STONE_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.ORE_BLOCK)
-        .fuelTime(16000)
         .build();
 
     // 浮冰。

@@ -5,11 +5,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntSortedMap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.registry.FuelValueEvents;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -24,6 +25,7 @@ import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.BlockItem;
@@ -36,6 +38,7 @@ import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.FuelValues;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
@@ -45,11 +48,14 @@ import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.mixin.AxeItemMixin;
+import pers.solid.extshape.mixin.FuelValuesBuilderAccessor;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -271,7 +277,7 @@ public class ExtShape implements ModInitializer {
   public static final Map<Block, Block> EXTENDED_STRIPPABLE_BLOCKS = new HashMap<>();
 
   /**
-   * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故不使用 {@link net.fabricmc.fabric.api.registry.StrippableBlockRegistry}，而使用 {@link pers.solid.extshape.mixin.AxeItemMixin}。
+   * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故不使用 {@link StrippableBlockRegistry}，而使用 {@link AxeItemMixin}。
    */
   private static void registerStrippableBlocks() {
     Streams.concat(
@@ -297,37 +303,89 @@ public class ExtShape implements ModInitializer {
    * 在初始化时，注册所有的燃料。注意：对于 Forge 版本，物品的燃烧由 {@code IForgeItem} 的相关接口决定。部分是直接由其标签决定的，例如木制、竹制的楼梯、台阶，原版的标签即定义了可作为燃料。
    *
    * @see ExtShapeBlocks
-   * @see net.minecraft.world.level.block.entity.FuelValues#vanillaBurnTimes(HolderLookup.Provider, FeatureFlagSet)
+   * @see FuelValues#vanillaBurnTimes(HolderLookup.Provider, FeatureFlagSet)
    */
   @ApiStatus.AvailableSince("1.5.0")
   private static void registerFuels() {
-    final Object2IntMap<TagKey<Block>> map = new Object2IntOpenHashMap<>();
+    FuelValueEvents.BUILD.register((builder, context) -> registerFuelTimes(builder, ExtShapeBlocks.getBaseBlocks(), ExtShapeBlocks::contains));
 
-    // 参照原版木制（含下界木）楼梯和台阶，楼梯燃烧时间为 300 刻，台阶燃烧时间为 150 刻。
-    // 但是，non_flammable_wood 标签的仍然不会被熔炉接受。
-    map.put(ExtShapeTags.WOODEN_VERTICAL_STAIRS, 300);
-    map.put(ExtShapeTags.WOODEN_VERTICAL_SLABS, 150);
-    map.put(ExtShapeTags.WOODEN_QUARTER_PIECES, 75);
-    map.put(ExtShapeTags.WOODEN_VERTICAL_QUARTER_PIECES, 75);
-    map.put(ExtShapeTags.WOODEN_WALLS, 300);
+    if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+      FuelValueEvents.EXCLUSIONS.register((builder, context) -> verityFuelTimes(builder.build(), "Extended Block Shapes", ExtShapeBlocks.getBaseBlocks(), ExtShapeBlocks::contains));
+    }
+  }
 
-    // 参照原版羊毛燃烧时间为 100 刻，楼梯燃烧时间和基础方块相同，台阶燃烧时间为一半。
-    map.put(ExtShapeTags.WOOLEN_STAIRS, 100);
-    map.put(ExtShapeTags.WOOLEN_SLABS, 50);
-    map.put(ExtShapeTags.WOOLEN_QUARTER_PIECES, 25);
-    map.put(ExtShapeTags.WOOLEN_VERTICAL_STAIRS, 100);
-    map.put(ExtShapeTags.WOOLEN_VERTICAL_SLABS, 50);
-    map.put(ExtShapeTags.WOOLEN_VERTICAL_QUARTER_PIECES, 25);
+  /**
+   * 根据原版的燃料情况，注册熔炉燃料，这一过程可自动化完成。在 {@code #non_flammable_wood} 标签的物品不会注册。
+   */
+  public static void registerFuelTimes(FuelValues.Builder builder, Collection<Block> baseBlocks, Predicate<Block> filter) {
+    final Object2IntSortedMap<Item> values = ((FuelValuesBuilderAccessor) builder).getValues();
+    for (Block baseBlock : baseBlocks) {
+      final int vanillaResult = values.getInt(baseBlock.asItem());
+      @SuppressWarnings("deprecation") final Holder.Reference<Item> itemHolder = baseBlock.asItem().builtInRegistryHolder();
+      if (vanillaResult > 0 && !itemHolder.is(ItemTags.NON_FLAMMABLE_WOOD)) {
+        for (BlockShape blockShape : BlockShape.values()) {
+          final @Nullable Block shaped = BlockBiMaps.getBlockOf(blockShape, baseBlock);
+          if (shaped != null && filter.test(shaped)) {
+            builder.add(shaped, (int) (vanillaResult * blockShape.logicalCompleteness));
+          }
+        }
+      } else {
+        // 考虑到原版将所有的 #fence_gates 设置为燃料，因此这里需要进行取消。
+        final Block fenceGate = BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, baseBlock);
+        if (fenceGate != null && filter.test(fenceGate)) {
+          values.removeInt(fenceGate.asItem());
+        }
+      }
+    }
+  }
 
-    // 栅栏、栅栏门、压力板、燃烧时间和基础方块一致，门的燃烧时间为三分之二，按钮为三分之一。
-    // 但考虑到羊毛压力板是与地毯相互合成的，故燃烧时间与地毯一致，为 67。
-    map.put(ExtShapeTags.WOOLEN_FENCES, 100);
-    map.put(ExtShapeTags.WOOLEN_FENCE_GATES, 100);
-    map.put(ExtShapeTags.WOOLEN_PRESSURE_PLATES, 67);
-    map.put(ExtShapeTags.WOOLEN_BUTTONS, 33);
-    map.put(ExtShapeTags.WOOLEN_WALLS, 100);
+  /**
+   * 检查模组中的方块在熔炉中的燃烧情况是否与基础方块相符。
+   */
+  public static void verityFuelTimes(FuelValues fuelValues, String name, Collection<Block> baseBlocks, Predicate<Block> filter) {
+    LOGGER.info("Verifying {} Fuel Times", name);
+    int errors = 0;
 
-    FuelValueEvents.BUILD.register((builder, context) -> map.forEach((blockTagKey, integer) -> builder.add(TagKey.create(Registries.ITEM, blockTagKey.location()), integer)));
+    for (Block baseBlock : baseBlocks) {
+      final ItemStack baseStack = new ItemStack(baseBlock);
+      final boolean baseIsFuel = fuelValues.isFuel(baseStack);
+      final int baseDuration = fuelValues.burnDuration(baseStack);
+      for (BlockShape blockShape : BlockShape.values()) {
+        final Block shaped = BlockBiMaps.getBlockOf(blockShape, baseBlock);
+        if (shaped == null || !filter.test(shaped)) {
+          continue;
+        }
+
+        final ItemStack shapedStack = new ItemStack(shaped);
+        final boolean shapeIsFuel = fuelValues.isFuel(shapedStack);
+        final int shapeDuration = fuelValues.burnDuration(shapedStack);
+
+        if (baseIsFuel != shapeIsFuel) {
+          LOGGER.error("Fuel check failed! The base block {} is fuel: {}, but its {} shape {} is fuel: {}",
+              BuiltInRegistries.BLOCK.getKey(baseBlock),
+              baseIsFuel,
+              blockShape.getSerializedName(),
+              BuiltInRegistries.BLOCK.getKey(shaped),
+              shapeIsFuel);
+          errors++;
+        }
+        if (shapeDuration > baseDuration) {
+          LOGGER.error("Fuel check failed! The base block {} has burn duration: {}, but its {} shape {} has burn duration: {}",
+              BuiltInRegistries.BLOCK.getKey(baseBlock),
+              baseDuration,
+              blockShape.getSerializedName(),
+              BuiltInRegistries.BLOCK.getKey(shaped),
+              shapeDuration);
+          errors++;
+        }
+      }
+    }
+
+    if (errors > 0) {
+      throw new IllegalStateException(String.format("Fuel check of %s failed with %s errors!", name, errors));
+    } else {
+      LOGGER.info("Fuel check of {} completed", name);
+    }
   }
 
   private static void registerRegistryAliases() {

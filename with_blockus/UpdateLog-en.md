@@ -1,5 +1,20 @@
 # Update log (for Blockus part)
 
+### 3.1.6-beta.3
+
+- Fixed the issue that gingham wool is incorrectly sorted in the Creative Mode inventory.
+- Added blocks related to cobblestone bricks, mossy cobblestone bricks, copper bricks and tuff blocks. Note: Currently all shapes are added, but the possibility that some shapes (especially button) may be removed in the future is not excluded.
+    - Shape variants of cobblestone bricks and mossy cobblestone bricks are added to `#blockus:stone_blocks` block tag. Shape variants of copper bricks are added to `#blockus:copper_blocks` block tag. Shape variants of copper tuff blocks are added to `#blockus:tuff_blocks` block tag.
+    - Shape variants of copper bricks and copper tuff bricks can be normally oxidized, unweathered, waxed or unwaxed.
+- Added blocks related to water bricks. This block used not to be added due to the issue of incorrect model, but the issue is not found at present so it is added now.
+    - Shape variants of water bricks are all added to `#blockus:water_bricks` block tag.
+- Optimized the way the fuels are registered.
+    - Now registration will no longer happen for every single block. It can improve loading speed in theory.
+    - Now the fuel time is automatically decided according to registered fuel time.
+    - Added the verification of fuel time. In the development environment, if a base block can be used as fuel but its shape variants cannot, or a bae block cannot be used as fuel but the shape variants can, exceptions will be thrown.
+    - As vanilla treats all items with `#fence_gates` item tags as fuel, some fence gate blocks made of non-burnable blocks were also used as fuels. This issue has now been fixed.
+- Now in vanilla, when handling special sorted blocks (such as copper-related blocks), the "shapes to add to vanilla" in the mod's config will also be used.
+
 ### 3.1.5
 
 - Synchronizing to Blockus changes, now in the Creative Mode inventory, no special sorting is applied for dyed stone bricks and terracotta.

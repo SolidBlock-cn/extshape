@@ -2,7 +2,6 @@ package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.registry.CompostableRegistry;
-import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -279,13 +278,6 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
   @Contract(value = "_-> this")
   public BlocksBuilder compostingChance(final float baseCompostingChance) {
     return addPostBuildConsumer((blockShape, builder) -> CompostableRegistry.INSTANCE.add(builder.itemInstance, blockShape.logicalCompleteness * baseCompostingChance));
-  }
-
-  @CanIgnoreReturnValue
-  @Contract(value = "_-> this")
-  public BlocksBuilder fuelTime(final int baseFuelTime) {
-    // todo 每创建一个可在熔炉中燃烧的方块，都会要在这里注册一次，这样做不合适，考虑改进
-    return addPostBuildConsumer((blockShape, builder) -> FuelValueEvents.BUILD.register((builder1, context) -> builder1.add(builder.itemInstance, (int) (blockShape.logicalCompleteness * baseFuelTime))));
   }
 
   @CanIgnoreReturnValue
