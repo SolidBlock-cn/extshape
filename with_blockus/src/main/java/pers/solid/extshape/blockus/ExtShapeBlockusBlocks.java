@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
+import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
@@ -61,6 +62,14 @@ public final class ExtShapeBlockusBlocks {
 
     BlockusBlockBiMaps.importFromBlockus();
     markStoneCuttableWhenCreating = true;
+    create(BlockusBlocks.COBBLESTONE_BRICKS)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
+    create(BlockusBlocks.MOSSY_COBBLESTONE_BRICKS)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
     create(BlockusBlocks.STONE_TILES)
         .setFenceSettings(FenceSettings.STONE)
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
@@ -769,6 +778,10 @@ public final class ExtShapeBlockusBlocks {
         .without(BlockShape.FENCE, BlockShape.FENCE_GATE)
         .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireResistant())
         .build();
+
+    // 铜砖
+    new CopperManager(BlockusBlocks.COPPER_BRICKS.block().blocks()).registerBlocks(FACTORY);
+    new CopperManager(BlockusBlocks.COPPER_TUFF_BRICKS.block().blocks()).registerBlocks(FACTORY);
 
     markStoneCuttableWhenCreating = false;
 

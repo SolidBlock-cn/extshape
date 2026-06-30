@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "blockus:weathered_copper_brick_stairs"
+  ],
+  "result": {
+    "id": "extshape_blockus:weathered_copper_brick_vertical_stairs"
+  }
+}

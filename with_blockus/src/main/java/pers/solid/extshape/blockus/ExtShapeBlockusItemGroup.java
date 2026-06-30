@@ -52,7 +52,7 @@ public final class ExtShapeBlockusItemGroup {
     final Item stainedShinglesAnchor = BlockusBlocks.DYED_SHINGLES.slab().items().pick(BlockOrder.COLOR.getLast());
     final Item concreteBricksAnchor = BlockusBlocks.CONCRETE_BRICKS.wall().items().pick(BlockOrder.COLOR.getLast());
     final Item patternedWoolAnchor = BlockusBlocks.PATTERNED_WOOL.slab().items().pick(BlockOrder.COLOR.getLast());
-    final Item ginghamWoolAnchor = BlockusBlocks.DYED_STONE_BRICKS.slab().items().pick(BlockOrder.COLOR.getLast());
+    final Item ginghamWoolAnchor = BlockusBlocks.GINGHAM_WOOL.slab().items().pick(BlockOrder.COLOR.getLast());
 
     final ColorCollection<Block> stainedStoneBrickBlocks = BlockusBlocks.DYED_STONE_BRICKS.block().blocks();
     final ColorCollection<Block> stainedShinglesBrickBlocks = BlockusBlocks.DYED_SHINGLES.block().blocks();
