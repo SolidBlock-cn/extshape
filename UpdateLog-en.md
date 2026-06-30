@@ -2,12 +2,6 @@
 
 ### 3.1.6-beta.3
 
-- Fixed the issue that gingham wool is incorrectly sorted in the Creative Mode inventory.
-- Added blocks related to cobblestone bricks, mossy cobblestone bricks, copper bricks and tuff blocks. Note: Currently all shapes are added, but the possibility that some shapes (especially button) may be removed in the future is not excluded.
-    - Shape variants of cobblestone bricks and mossy cobblestone bricks are added to `#blockus:stone_blocks` block tag. Shape variants of copper bricks are added to `#blockus:copper_blocks` block tag. Shape variants of copper tuff blocks are added to `#blockus:tuff_blocks` block tag.
-    - Shape variants of copper bricks and copper tuff bricks can be normally oxidized, unweathered, waxed or unwaxed.
-- Added blocks related to water bricks. This block used not to be added due to the issue of incorrect model, but the issue is not found at present so it is added now.
-    - Shape variants of water bricks are all added to `#blockus:water_bricks` block tag.
 - Optimized the way the fuels are registered.
     - Now registration will no longer happen for every single block. It can improve loading speed in theory.
     - Now the fuel time is automatically decided according to registered fuel time.
