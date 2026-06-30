@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -33,16 +32,10 @@ public class VerticalSlabBlock extends HorizontalDirectionalBlock implements Sim
   protected static final VoxelShape SOUTH_SHAPE = Block.box(0, 0, 8, 16, 16, 16);
   protected static final VoxelShape EAST_SHAPE = Block.box(8, 0, 0, 16, 16, 16);
   protected static final VoxelShape WEST_SHAPE = Block.box(0, 0, 0, 8, 16, 16);
-  public static final MapCodec<VerticalSlabBlock> CODEC = simpleCodec(VerticalSlabBlock::new);
 
   public VerticalSlabBlock(Properties settings) {
     super(settings);
     registerDefaultState(defaultBlockState().setValue(HORIZONTAL_FACING, Direction.NORTH).setValue(WATERLOGGED, false));
-  }
-
-  @Override
-  protected MapCodec<? extends VerticalSlabBlock> codec() {
-    return CODEC;
   }
 
 

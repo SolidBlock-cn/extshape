@@ -1,15 +1,12 @@
 package pers.solid.extshape.block;
 
-import com.mojang.datafixers.util.Function4;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.network.chat.Component;
@@ -37,12 +34,6 @@ import pers.solid.extshape.util.ActivationSettings;
  * 本模组中的压力板方块，方块的激活时长和激活类型可能是自定义的。
  */
 public class ExtShapePressurePlateBlock extends PressurePlateBlock implements ExtShapeVariantBlockInterface {
-
-  protected static <B extends ExtShapePressurePlateBlock> MapCodec<B> createCodec(Function4<Block, Properties, BlockSetType, Integer, B> function) {
-    return RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), propertiesCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.type), tickRateField()).apply(instance, function));
-  }
-
-  public static final MapCodec<ExtShapePressurePlateBlock> CODEC = createCodec(ExtShapePressurePlateBlock::new);
 
   public final Block baseBlock;
   protected final int tickRate;
@@ -85,12 +76,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).pressurePlate(this);
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public MapCodec<PressurePlateBlock> codec() {
-    return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
   }
 
   @Override
@@ -145,7 +130,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
 
   public static class WithOxidation extends ExtShapePressurePlateBlock implements WeatheringCopper {
     private final @NotNull WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), propertiesCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.type), tickRateField(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
     public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull BlockSetType blockSetType, int tickRate, @NotNull WeatherState oxidationLevel) {
       super(baseBlock, settings, blockSetType, tickRate);
@@ -171,11 +155,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
       return oxidationLevel;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public MapCodec<PressurePlateBlock> codec() {
-      return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
-    }
   }
 
   @NotNull

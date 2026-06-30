@@ -1,14 +1,10 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.network.chat.Component;
@@ -36,7 +32,6 @@ import pers.solid.extshape.util.ActivationSettings;
  * 本模组中的按钮方块。按钮的激活时长可能会是特制的。
  */
 public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeButtonBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getTicksToStayPressed())).apply(instance, ExtShapeButtonBlock::new));
 
   public final Block baseBlock;
 
@@ -66,12 +61,6 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
         .requires(baseBlock)
         .unlockedBy(RecipeProvider.getHasName(baseBlock), recipeGenerator.has(baseBlock))
         .group(getRecipeGroup());
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public MapCodec<ButtonBlock> codec() {
-    return (MapCodec<ButtonBlock>) (MapCodec<?>) CODEC;
   }
 
   @Override
@@ -133,7 +122,6 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
 
   public static class WithOxidation extends ExtShapeButtonBlock implements WeatheringCopper {
     private final WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(b -> ((ButtonBlockAccessor) b).getType()), Codec.INT.fieldOf("press_ticks").forGetter(b -> ((ButtonBlockAccessor) b).getTicksToStayPressed()), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
     public WithOxidation(Block baseBlock, Properties settings, BlockSetType blockSetType, int pressTicks, WeatherState oxidationLevel) {
       super(baseBlock, settings, blockSetType, pressTicks);
@@ -159,10 +147,5 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
       return oxidationLevel;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public MapCodec<ButtonBlock> codec() {
-      return (MapCodec<ButtonBlock>) (MapCodec<?>) CODEC;
-    }
   }
 }

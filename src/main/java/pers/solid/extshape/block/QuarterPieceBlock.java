@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -42,7 +41,6 @@ public class QuarterPieceBlock extends HorizontalDirectionalBlock implements Sim
   protected static final VoxelShape SOUTH_TOP_SHAPE = Block.box(0, 8, 8, 16, 16, 16);
   protected static final VoxelShape EAST_TOP_SHAPE = Block.box(8, 8, 0, 16, 16, 16);
   protected static final VoxelShape WEST_TOP_SHAPE = Block.box(0, 8, 0, 8, 16, 16);
-  public static final MapCodec<QuarterPieceBlock> CODEC = simpleCodec(QuarterPieceBlock::new);
 
   public QuarterPieceBlock(Properties settings) {
     super(settings);
@@ -50,11 +48,6 @@ public class QuarterPieceBlock extends HorizontalDirectionalBlock implements Sim
         .setValue(FACING, Direction.NORTH)
         .setValue(WATERLOGGED, false)
         .setValue(HALF, Half.BOTTOM));
-  }
-
-  @Override
-  protected MapCodec<? extends QuarterPieceBlock> codec() {
-    return CODEC;
   }
 
   @Override

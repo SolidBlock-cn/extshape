@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -31,7 +30,6 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  * 本模组中的纵条方块。
  */
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeVerticalQuarterPieceBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeVerticalQuarterPieceBlock::new);
 
   public final @NotNull Block baseBlock;
 
@@ -64,11 +62,6 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     ExtShapeBlockStateModelGenerator.registerVerticalQuarterPiece(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
-  }
-
-  @Override
-  protected MapCodec<? extends ExtShapeVerticalQuarterPieceBlock> codec() {
-    return CODEC;
   }
 
   public static class WithExtension extends ExtShapeVerticalQuarterPieceBlock {
@@ -110,7 +103,6 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
 
   public static class WithOxidation extends ExtShapeVerticalQuarterPieceBlock implements WeatheringCopper {
     private final @NotNull WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
     public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WeatherState oxidationLevel) {
       super(baseBlock, settings);
@@ -132,9 +124,5 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
       return oxidationLevel;
     }
 
-    @Override
-    public MapCodec<? extends WithOxidation> codec() {
-      return CODEC;
-    }
   }
 }

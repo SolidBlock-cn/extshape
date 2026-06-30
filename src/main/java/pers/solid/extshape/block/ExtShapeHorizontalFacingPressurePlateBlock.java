@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -9,7 +8,10 @@ import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -21,7 +23,6 @@ import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
   public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
-  public static final MapCodec<ExtShapeHorizontalFacingPressurePlateBlock> CODEC = createCodec(ExtShapeHorizontalFacingPressurePlateBlock::new);
 
   public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Properties settings, BlockSetType blockSetType, int tickRate) {
     super(baseBlock, settings, blockSetType, tickRate);
@@ -52,12 +53,6 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   @Override
   public BlockState mirror(BlockState state, Mirror mirror) {
     return state.rotate(mirror.getRotation(state.getValue(FACING)));
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public MapCodec<PressurePlateBlock> codec() {
-    return (MapCodec<PressurePlateBlock>) (MapCodec<?>) CODEC;
   }
 
   @Environment(EnvType.CLIENT)

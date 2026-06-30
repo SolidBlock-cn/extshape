@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -33,7 +32,6 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  */
 public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlockInterface {
   @SuppressWarnings("unchecked")
-  public static final MapCodec<WallBlock> CODEC = (MapCodec<WallBlock>) (MapCodec<?>) ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeWallBlock::new);
   public final Block baseBlock;
 
   public ExtShapeWallBlock(Block baseBlock, Properties settings) {
@@ -72,11 +70,6 @@ public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlock
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).wall(this);
-  }
-
-  @Override
-  public MapCodec<WallBlock> codec() {
-    return CODEC;
   }
 
   public static class WithExtension extends ExtShapeWallBlock {
@@ -118,7 +111,6 @@ public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlock
 
   public static class WithOxidation extends ExtShapeWallBlock implements WeatheringCopper {
     private final WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
     public WithOxidation(Block baseBlock, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, settings);
@@ -140,10 +132,5 @@ public class ExtShapeWallBlock extends WallBlock implements ExtShapeVariantBlock
       return oxidationLevel;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public MapCodec<WallBlock> codec() {
-      return (MapCodec<WallBlock>) (MapCodec<?>) CODEC;
-    }
   }
 }

@@ -1,7 +1,6 @@
 package pers.solid.extshape.block;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -34,7 +33,6 @@ public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
   public static final EnumProperty<HorizontalCornerDirection> FACING = VerticalQuarterPieceBlock.FACING;
   public static final ImmutableMap<HorizontalCornerDirection, VoxelShape> VOXELS;
-  public static final MapCodec<VerticalStairsBlock> CODEC = simpleCodec(VerticalStairsBlock::new);
 
   static {
     ImmutableMap.Builder<HorizontalCornerDirection, VoxelShape> builder = new ImmutableMap.Builder<>();
@@ -98,11 +96,6 @@ public class VerticalStairsBlock extends Block implements SimpleWaterloggedBlock
       tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     }
     return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
-  }
-
-  @Override
-  protected MapCodec<? extends VerticalStairsBlock> codec() {
-    return CODEC;
   }
 
   @Override

@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -30,7 +29,6 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  * 本模组中的横条方块。
  */
 public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeQuarterPieceBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeQuarterPieceBlock::new);
   public final Block baseBlock;
 
   public ExtShapeQuarterPieceBlock(Block baseBlock, Properties settings) {
@@ -62,11 +60,6 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     ExtShapeBlockStateModelGenerator.registerQuarterPiece(this, modelProvider.getTextureMap(baseBlock, blockStateModelGenerator), blockStateModelGenerator);
-  }
-
-  @Override
-  protected MapCodec<? extends ExtShapeQuarterPieceBlock> codec() {
-    return CODEC;
   }
 
   public static class WithExtension extends ExtShapeQuarterPieceBlock {
@@ -108,7 +101,6 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
 
   public static class WithOxidation extends ExtShapeQuarterPieceBlock implements WeatheringCopper {
     private final WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
     public WithOxidation(Block baseBlock, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, settings);
@@ -130,9 +122,5 @@ public class ExtShapeQuarterPieceBlock extends QuarterPieceBlock implements ExtS
       return oxidationLevel;
     }
 
-    @Override
-    public MapCodec<? extends WithOxidation> codec() {
-      return CODEC;
-    }
   }
 }

@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -33,7 +32,6 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  * 本模组中的楼梯方块。受原版限制，基础方块（{@link #baseBlock}）不能为 {@code null}。
  */
 public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeStairsBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeStairsBlock::new);
 
   public final @NotNull Block baseBlock;
 
@@ -69,11 +67,6 @@ public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBl
   @Override
   public void registerModel(ExtShapeModelProvider modelProvider, BlockModelGenerators blockStateModelGenerator) {
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).stairs(this);
-  }
-
-  @Override
-  public MapCodec<? extends ExtShapeStairsBlock> codec() {
-    return CODEC;
   }
 
   @Override
@@ -123,7 +116,6 @@ public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBl
    */
   public static class WithOxidation extends ExtShapeStairsBlock implements WeatheringCopper {
     private final @NotNull WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
     public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WeatherState oxidationLevel) {
       super(baseBlock, settings);
@@ -143,11 +135,6 @@ public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBl
     @Override
     public WeatherState getAge() {
       return oxidationLevel;
-    }
-
-    @Override
-    public MapCodec<? extends WithOxidation> codec() {
-      return CODEC;
     }
   }
 }

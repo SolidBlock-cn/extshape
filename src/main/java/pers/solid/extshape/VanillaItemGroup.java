@@ -86,6 +86,11 @@ public final class VanillaItemGroup {
     final Item unwaxedCutCopperAnchor = Items.CUT_COPPER_SLAB.weathering().oxidized();
     final Item waxedCutCopperAnchor = Items.CUT_COPPER_SLAB.waxed().oxidized();
 
+    final Item woolAnchor = Items.WOOL_SLAB.black();
+    final Item dyedTerracottaAnchor = Items.DYED_TERRACOTTA.black();
+    final Item concreteAnchor = Items.CONCRETE.black();
+    final Item glazedTerracottaAnchor = Items.GLAZED_TERRACOTTA.black();
+
     for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
       BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
 

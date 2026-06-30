@@ -1,7 +1,6 @@
 package pers.solid.extshape.block;
 
 import com.google.common.collect.Maps;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -45,7 +44,6 @@ public class VerticalQuarterPieceBlock extends Block implements SimpleWaterlogge
   public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
   public static final EnumProperty<HorizontalCornerDirection> FACING = EnumProperty.create("facing",
       HorizontalCornerDirection.class);
-  public static final MapCodec<VerticalQuarterPieceBlock> CODEC = simpleCodec(VerticalQuarterPieceBlock::new);
 
   public VerticalQuarterPieceBlock(Properties settings) {
     super(settings);
@@ -103,11 +101,6 @@ public class VerticalQuarterPieceBlock extends Block implements SimpleWaterlogge
       tickView.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
     }
     return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
-  }
-
-  @Override
-  protected MapCodec<? extends VerticalQuarterPieceBlock> codec() {
-    return CODEC;
   }
 
   @Override

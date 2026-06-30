@@ -1,13 +1,10 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -30,14 +27,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
-import pers.solid.extshape.mixin.FenceGateAccessor;
 import pers.solid.extshape.util.FenceSettings;
 
 /**
  * 本模组中的栅栏门方块。
  */
 public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeFenceGateBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient)).apply(instance, ExtShapeFenceGateBlock::new));
   public final Block baseBlock;
   /**
    * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
@@ -90,12 +85,6 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).fenceGate(this);
   }
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public MapCodec<FenceGateBlock> codec() {
-    return (MapCodec<FenceGateBlock>) (MapCodec<?>) CODEC;
-  }
-
   public static class WithExtension extends ExtShapeFenceGateBlock {
     private final BlockExtension extension;
 
@@ -135,7 +124,6 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
 
   public static class WithOxidation extends ExtShapeFenceGateBlock implements WeatheringCopper {
     private final WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceGateBlock::getSecondIngredient), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
     public WithOxidation(Block baseBlock, Properties settings, WoodType woodType, Item secondIngredient, WeatherState oxidationLevel) {
       super(baseBlock, settings, woodType, secondIngredient);
@@ -162,10 +150,5 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
       return oxidationLevel;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public MapCodec<FenceGateBlock> codec() {
-      return (MapCodec<FenceGateBlock>) (MapCodec<?>) CODEC;
-    }
   }
 }

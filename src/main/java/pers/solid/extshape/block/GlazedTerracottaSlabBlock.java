@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -20,7 +19,6 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  * 带釉陶瓦台阶方块。
  */
 public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
-  public static final MapCodec<GlazedTerracottaSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), GlazedTerracottaSlabBlock::new);
   public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
   public GlazedTerracottaSlabBlock(Block baseBlock, Properties settings) {
@@ -45,11 +43,6 @@ public class GlazedTerracottaSlabBlock extends ExtShapeSlabBlock {
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     super.createBlockStateDefinition(builder);
     builder.add(FACING);
-  }
-
-  @Override
-  public MapCodec<? extends GlazedTerracottaSlabBlock> codec() {
-    return CODEC;
   }
 
   @Environment(EnvType.CLIENT)

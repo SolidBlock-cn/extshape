@@ -17,6 +17,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.BlockTransformer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -48,7 +49,8 @@ import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.mixin.AxeItemMixin;
+import pers.solid.extshape.mixin.BlockTransformerMappingsAccessor;
+import pers.solid.extshape.mixin.BlockTransformerMixin;
 import pers.solid.extshape.mixin.FuelValuesBuilderAccessor;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -274,10 +276,10 @@ public class ExtShape implements ModInitializer {
   /**
    * 可通过斧去皮的方块，包括模组中的。
    */
-  public static final Map<Block, Block> EXTENDED_STRIPPABLE_BLOCKS = new HashMap<>();
+  public static final List<BlockTransformer.BlockTransformData> EXTENDED_STRIPPABLE_BLOCKS = new ArrayList<>();
 
   /**
-   * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故不使用 {@link StrippableBlockRegistry}，而使用 {@link AxeItemMixin}。
+   * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故不使用 {@link StrippableBlockRegistry}，而使用 {@link BlockTransformerMixin}。
    */
   private static void registerStrippableBlocks() {
     Streams.concat(
@@ -293,7 +295,7 @@ public class ExtShape implements ModInitializer {
         final Block input = BlockBiMaps.getBlockOf(shape, inputBase);
         final Block output = BlockBiMaps.getBlockOf(shape, outputBase);
         if (input != null && output != null) {
-          EXTENDED_STRIPPABLE_BLOCKS.put(input, output);
+          EXTENDED_STRIPPABLE_BLOCKS.add(BlockTransformerMappingsAccessor.callGetStrippableBlockData(input, output));
         }
       }
     });

@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -17,7 +16,6 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.BlockCollections;
 
 public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
-  public static final MapCodec<ExtShapePillarVerticalSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapePillarVerticalSlabBlock::new);
   public static final EnumProperty<Direction.Axis> AXIS = RotatedPillarBlock.AXIS;
 
   public ExtShapePillarVerticalSlabBlock(Block baseBlock, Properties settings) {
@@ -44,11 +42,6 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
   @Override
   public BlockState rotate(BlockState state, Rotation rotation) {
     return RotatedPillarBlock.rotatePillar(super.rotate(state, rotation), rotation);
-  }
-
-  @Override
-  protected MapCodec<? extends ExtShapePillarVerticalSlabBlock> codec() {
-    return CODEC;
   }
 
   @Environment(EnvType.CLIENT)

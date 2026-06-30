@@ -1,6 +1,5 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -34,7 +33,6 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  * 本模组中的台阶方块。
  */
 public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeSlabBlock::new);
   public final Block baseBlock;
 
   public ExtShapeSlabBlock(Block baseBlock, Properties settings) {
@@ -81,11 +79,6 @@ public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlock
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).slab(this);
   }
 
-  @Override
-  public MapCodec<? extends ExtShapeSlabBlock> codec() {
-    return CODEC;
-  }
-
   public static class WithExtension extends ExtShapeSlabBlock {
     private final BlockExtension extension;
 
@@ -128,7 +121,6 @@ public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlock
    */
   public static class WithOxidation extends ExtShapeSlabBlock implements WeatheringCopper {
     private final WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
     public WithOxidation(Block baseBlock, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, settings);
@@ -150,9 +142,5 @@ public class ExtShapeSlabBlock extends SlabBlock implements ExtShapeVariantBlock
       return oxidationLevel;
     }
 
-    @Override
-    public MapCodec<? extends WithOxidation> codec() {
-      return CODEC;
-    }
   }
 }

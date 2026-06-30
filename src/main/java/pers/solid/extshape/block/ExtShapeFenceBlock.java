@@ -1,13 +1,10 @@
 package pers.solid.extshape.block;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.network.chat.Component;
@@ -33,7 +30,6 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  * 本模组中的栅栏方块。
  */
 public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlockInterface {
-  public static final MapCodec<ExtShapeFenceBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(block -> block.secondIngredient), propertiesCodec()).apply(instance, ExtShapeFenceBlock::new));
 
   public final Block baseBlock;
   /**
@@ -82,12 +78,6 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
     modelProvider.getBlockTexturePool(baseBlock, blockStateModelGenerator).fence(this);
   }
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public MapCodec<FenceBlock> codec() {
-    return (MapCodec<FenceBlock>) (MapCodec<?>) CODEC;
-  }
-
   public static class WithExtension extends ExtShapeFenceBlock {
     private final BlockExtension extension;
 
@@ -128,7 +118,6 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
 
   public static class WithOxidation extends ExtShapeFenceBlock implements WeatheringCopper {
     private final WeatherState oxidationLevel;
-    public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceBlock::getSecondIngredient), propertiesCodec(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
     public WithOxidation(Block baseBlock, Item secondIngredient, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, secondIngredient, settings);
@@ -150,10 +139,5 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
       return oxidationLevel;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public MapCodec<FenceBlock> codec() {
-      return (MapCodec<FenceBlock>) (MapCodec<?>) CODEC;
-    }
   }
 }
