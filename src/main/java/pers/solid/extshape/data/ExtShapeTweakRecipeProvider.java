@@ -4,17 +4,18 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import pers.solid.extshape.ExtShape;
@@ -33,8 +34,8 @@ import java.util.List;
  */
 public class ExtShapeTweakRecipeProvider extends RecipeProvider {
 
-  protected ExtShapeTweakRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
-    super(registries, exporter);
+  protected ExtShapeTweakRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+    super(recipeOutput, advancementOutput);
   }
 
   @Override

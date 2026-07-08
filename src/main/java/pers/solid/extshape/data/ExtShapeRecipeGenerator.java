@@ -2,10 +2,11 @@ package pers.solid.extshape.data;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import pers.solid.extshape.ExtShape;
@@ -15,8 +16,8 @@ import pers.solid.extshape.block.ExtShapeBlocks;
 
 public class ExtShapeRecipeGenerator extends RecipeProvider {
 
-  protected ExtShapeRecipeGenerator(HolderLookup.Provider registries, RecipeOutput exporter) {
-    super(registries, exporter);
+  protected ExtShapeRecipeGenerator(final BootstrapContext<Recipe<?>> recipeOutput, final BootstrapContext<Advancement> advancementOutput) {
+    super(recipeOutput, advancementOutput);
   }
 
   @Override

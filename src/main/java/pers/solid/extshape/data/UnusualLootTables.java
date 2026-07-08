@@ -3,8 +3,7 @@ package pers.solid.extshape.data;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -46,7 +45,7 @@ import pers.solid.extshape.builder.BlockShape;
 @ApiStatus.AvailableSince("1.5.1")
 public class UnusualLootTables {
   public static final StatePropertiesPredicate.Builder EXACT_MATCH_DOUBLE_SLAB = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.SLAB_TYPE, SlabType.DOUBLE);
-  protected final LootTableFunction dropsDoubleWithSilkTouchOrNone = (baseBlock, shape, block, lookup, generator) -> dropsDoubleSlabWithSilkTouchOrNone(block, shape == BlockShape.SLAB, generator);
+  protected final LootTableFunction dropsDoubleWithSilkTouchOrNone = (baseBlock, shape, block, enchantments, generator) -> dropsDoubleSlabWithSilkTouchOrNone(block, shape == BlockShape.SLAB, generator);
 
   /**
    * 对应形状估算的体积，用于与基础方块的掉落数相乘。
@@ -120,12 +119,12 @@ public class UnusualLootTables {
     return builder;
   }
 
-  protected Holder<Enchantment> fortune(HolderLookup.Provider registryLookup) {
-    return registryLookup.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE);
+  protected Holder<Enchantment> fortune(HolderGetter<Enchantment> enchantments) {
+    return enchantments.getOrThrow(Enchantments.FORTUNE);
   }
 
-  protected LootItemConditionalFunction.Builder<?> fortuneFunction(HolderLookup.Provider registryLookup) {
-    return ApplyBonusCount.addUniformBonusCount(fortune(registryLookup));
+  protected LootItemConditionalFunction.Builder<?> fortuneFunction(HolderGetter<Enchantment> enchantments) {
+    return ApplyBonusCount.addUniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE));
   }
 
   @Unmodifiable
@@ -143,48 +142,48 @@ public class UnusualLootTables {
   private void registerUnusualLootTables(ImmutableMap.Builder<Block, LootTableFunction> builder) {
     builder.put(Blocks.CLAY, dropsWithSilkTouchOrConst(Items.CLAY_BALL, 4));
     builder.put(Blocks.SNOW_BLOCK, dropsWithSilkTouchOrConst(Items.SNOWBALL, 4));
-    builder.put(Blocks.GLOWSTONE, (baseBlock, shape, block, lookup, generator) -> {
+    builder.put(Blocks.GLOWSTONE, (baseBlock, shape, block, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.GLOWSTONE_DUST)
               .apply(SetItemCountFunction.setCount(UniformGenerator.between(2 * shapeVolume, 4 * shapeVolume)))
-              .apply(fortuneFunction(lookup))
+              .apply(fortuneFunction(enchantments))
               .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (shapeVolume * 4))))),
           shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.GLOWSTONE_DUST)
               .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
-              .apply(fortuneFunction(lookup))
+              .apply(fortuneFunction(enchantments))
               .apply(LimitCount.limitCount(IntRange.range(1, 4)))) : null, generator);
     });
-    builder.put(Blocks.MELON, (baseBlock, shape, block, lookup, generator) -> {
+    builder.put(Blocks.MELON, (baseBlock, shape, block, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.MELON_SLICE)
               .apply(SetItemCountFunction.setCount(UniformGenerator.between(shapeVolume * 2, shapeVolume * 4)))
-              .apply(fortuneFunction(lookup))
+              .apply(fortuneFunction(enchantments))
               .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (shapeVolume * 4))))),
           shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.MELON_SLICE)
               .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
-              .apply(fortuneFunction(lookup))
+              .apply(fortuneFunction(enchantments))
               .apply(LimitCount.limitCount(IntRange.range(1, 4)))) : null, generator);
     });
-    builder.put(Blocks.SEA_LANTERN, (baseBlock, shape, block, lookup, generator) -> {
+    builder.put(Blocks.SEA_LANTERN, (baseBlock, shape, block, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
           .apply(SetItemCountFunction.setCount(UniformGenerator.between(2 * shapeVolume, 3 * shapeVolume)))
-          .apply(fortuneFunction(lookup))
+          .apply(fortuneFunction(enchantments))
           .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (5 * shapeVolume))))
       ), shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
           .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 3)))
-          .apply(fortuneFunction(lookup))
+          .apply(fortuneFunction(enchantments))
           .apply(LimitCount.limitCount(IntRange.range(1, 5)))
       ) : null, generator);
     });
-    builder.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block, lookup, generator) -> {
+    builder.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionCondition(block, LootItem.lootTableItem(Items.GOLD_NUGGET)
           .apply(SetItemCountFunction.setCount(UniformGenerator.between(shapeVolume * 2, shapeVolume * 5)))
-          .when(BonusLevelTableCondition.bonusLevelFlatChance(fortune(lookup), 0.1F, 0.14285715F, 0.25F, 1.0F))
+          .when(BonusLevelTableCondition.bonusLevelFlatChance(fortune(enchantments), 0.1F, 0.14285715F, 0.25F, 1.0F))
           .otherwise(LootItem.lootTableItem(block))), shape == BlockShape.SLAB ? generator.applyExplosionCondition(block, LootItem.lootTableItem(Items.GOLD_NUGGET)
           .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 5)))
-          .when(BonusLevelTableCondition.bonusLevelFlatChance(fortune(lookup), 0.1F, 0.14285715F, 0.25F, 1.0F))
+          .when(BonusLevelTableCondition.bonusLevelFlatChance(fortune(enchantments), 0.1F, 0.14285715F, 0.25F, 1.0F))
           .otherwise(LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))) : null, generator);
     });
     builder.put(Blocks.ICE, dropsDoubleWithSilkTouchOrNone);
@@ -200,7 +199,7 @@ public class UnusualLootTables {
    * @param fullCount 没有精准采集时，掉落的物品对应完整方块大小时的数量。
    */
   public LootTableFunction dropsWithSilkTouchOrConst(ItemLike drop, float fullCount) {
-    return (baseBlock, shape, block, lookup, generator) -> {
+    return (baseBlock, shape, block, enchantments, generator) -> {
       final LootPoolSingletonContainer.Builder<?> entryBuilder = entryBuilderConstCount(drop, fullCount, shape, block);
       if (shape == BlockShape.SLAB) {
         return LootTable.lootTable()
@@ -255,6 +254,6 @@ public class UnusualLootTables {
 
   @FunctionalInterface
   public interface LootTableFunction {
-    LootTable.Builder apply(Block baseBlock, BlockShape shape, Block block, HolderLookup.Provider lookup, BlockLootSubProvider generator);
+    LootTable.Builder apply(Block baseBlock, BlockShape shape, Block block, HolderGetter<Enchantment> enchantments, BlockLootSubProvider generator);
   }
 }

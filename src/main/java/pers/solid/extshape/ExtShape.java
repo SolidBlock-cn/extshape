@@ -54,6 +54,7 @@ import pers.solid.extshape.mixin.FuelValuesBuilderAccessor;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
+import pers.solid.extshape.util.ShapeVariantNumber;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -98,6 +99,7 @@ public class ExtShape implements ModInitializer {
   @Override
   public void onInitialize() {
     ExtShapeConfig.init();
+    Registry.register(BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE, id("shaped_variant"), ShapeVariantNumber.MAP_CODEC);
     ExtShapeBlocks.init();
     ExtShapeTags.init();
 

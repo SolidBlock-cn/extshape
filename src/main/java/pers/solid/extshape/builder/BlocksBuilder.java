@@ -1,12 +1,14 @@
 package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
-import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.*;
@@ -276,8 +278,24 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
 
   @CanIgnoreReturnValue
   @Contract(value = "_-> this")
-  public BlocksBuilder compostingChance(final float baseCompostingChance) {
-    return addPostBuildConsumer((blockShape, builder) -> CompostableRegistry.INSTANCE.add(builder.itemInstance, blockShape.logicalCompleteness * baseCompostingChance));
+  public BlocksBuilder compostingChance(final ResourceKey<NumberProvider> baseCompostingChance) {
+    // todo 考虑以后引入更加灵活复杂的堆肥概率
+    return addPreBuildConsumer((blockShape, builder) -> {
+      final ResourceKey<NumberProvider> compostingChance;
+      if (blockShape.logicalCompleteness > 0.5) {
+        compostingChance = baseCompostingChance;
+      } else if (blockShape.logicalCompleteness > 0.25) {
+        if (NumberProviders.COMPOSTABLE_ALWAYS_ADD_ONE.equals(baseCompostingChance)) {
+          compostingChance = NumberProviders.COMPOSTABLE_LOW_MEDIUM;
+        } else {
+          compostingChance = NumberProviders.COMPOSTABLE_LOW;
+        }
+      } else {
+        compostingChance = NumberProviders.COMPOSTABLE_LOW;
+      }
+
+      builder.itemSettings.compostable(compostingChance);
+    });
   }
 
   @CanIgnoreReturnValue

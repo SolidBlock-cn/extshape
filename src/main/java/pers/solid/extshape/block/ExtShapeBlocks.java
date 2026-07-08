@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
@@ -385,7 +386,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(PUMPKIN)
         .setFenceSettings(new FenceSettings(Items.PUMPKIN_SEEDS, WoodType.OAK))
         .setActivationSettings(ActivationSettings.CROPS)
-        .compostingChance(0.65f)
+        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
         .build();
 
     // 下界岩。
@@ -426,7 +427,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(MELON)
         .setFenceSettings(new FenceSettings(Items.MELON_SLICE, WoodType.OAK))
         .setActivationSettings(ActivationSettings.CROPS)
-        .compostingChance(0.65f)
+        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
         .build();
 
     // 树脂的各种方块
@@ -560,12 +561,12 @@ public final class ExtShapeBlocks {
 
     // 下界疣块、诡异疣块。
     FACTORY.createAllShapes(NETHER_WART_BLOCK)
-        .compostingChance(0.85f)
+        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM_HIGH)
         .setFenceSettings(new FenceSettings(Items.NETHER_WART, ExtShapeBlockTypes.WART_BLOCK_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.WART)
         .build();
     FACTORY.createAllShapes(WARPED_WART_BLOCK)
-        .compostingChance(0.85f)
+        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM_HIGH)
         .setFenceSettings(new FenceSettings(Items.NETHER_WART, ExtShapeBlockTypes.WART_BLOCK_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.WART)
         .build();
@@ -594,7 +595,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(SHROOMLIGHT)
         .setFenceSettings(new FenceSettings(Items.GLOWSTONE_DUST, ExtShapeBlockTypes.SHROOMLIGHT_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.SHROMLIGHT_BLOCK_SET_TYPE))
-        .compostingChance(0.65f)
+        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
         .build();
 
     // 蜜脾块。
@@ -693,12 +694,12 @@ public final class ExtShapeBlocks {
         .build();
     FACTORY.createAllShapes(MOSS_BLOCK)
         .setFenceSettings(new FenceSettings(Items.MOSS_CARPET, ExtShapeBlockTypes.MOSS_BLOCK_WOOD_TYPE))
-        .compostingChance(0.65f)
+        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
         .setActivationSettings(ActivationSettings.MOSS)
         .build();
     FACTORY.createAllShapes(PALE_MOSS_BLOCK)
         .setFenceSettings(new FenceSettings(Items.PALE_MOSS_CARPET, ExtShapeBlockTypes.MOSS_BLOCK_WOOD_TYPE))
-        .compostingChance(0.65f)
+        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
         .setActivationSettings(ActivationSettings.MOSS)
         .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(abstractBlockBuilder.instance, 5, 100))
         .build();
