@@ -1,5 +1,12 @@
 # Update log
 
+### 3.1.6-beta.5
+
+- Update to 26.3 snapshot 3.
+- Following vanilla changes, current block loot tables will also reference the loot table predicate in the dynamic registry, instead of inlined in loot tables.
+- Following vanilla changes, composting chances will use the number providers in the dynamic registry.
+    - In the current version, the composting chance of some items has been changes comparing to the previous version, as only vanilla number providers are used currently. Further adjustments will be made in future versions.
+
 ### 3.1.6-beta.4
 
 - Update to 26.3 snapshot 2.
