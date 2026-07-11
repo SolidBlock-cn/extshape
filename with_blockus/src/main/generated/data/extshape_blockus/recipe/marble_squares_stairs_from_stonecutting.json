@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:marble_squares",
-  "result": {
-    "id": "extshape_blockus:marble_squares_stairs"
-  }
-}

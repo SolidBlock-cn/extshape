@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "extshape_blockus:purpur_squares_slab"
+            "items": "blockus:purpur_squares_slab"
           }
         ]
       },

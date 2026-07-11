@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "extshape_blockus:phantom_purpur_squares_slab",
+  "ingredient": "blockus:phantom_purpur_squares_slab",
   "result": {
     "count": 2,
     "id": "extshape_blockus:phantom_purpur_squares_quarter_piece"

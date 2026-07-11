@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": "extshape_blockus:purpur_squares_slab"
+    "#": "blockus:purpur_squares_slab"
   },
   "pattern": [
     "###"

@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:viridite",
-  "result": {
-    "id": "extshape_blockus:viridite_squares_wall"
-  }
-}

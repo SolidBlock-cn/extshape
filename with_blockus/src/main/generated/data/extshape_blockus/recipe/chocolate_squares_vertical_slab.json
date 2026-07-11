@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    "extshape_blockus:chocolate_squares_slab"
+    "blockus:chocolate_squares_slab"
   ],
   "result": {
     "id": "extshape_blockus:chocolate_squares_vertical_slab"
