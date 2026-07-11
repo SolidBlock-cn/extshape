@@ -218,7 +218,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.LIMESTONE_BRICKS.block(),
         BlockusBlocks.SMALL_LIMESTONE_BRICKS.block(),
         BlockusBlocks.LIMESTONE_TILES.block(),
-        BlockusBlocks.LIMESTONE_SQUARES,
+        BlockusBlocks.LIMESTONE_SQUARES.block(),
         BlockusBlocks.LIMESTONE_CIRCULAR_PAVING
     );
 
@@ -228,7 +228,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.MARBLE_BRICKS.block(),
         BlockusBlocks.SMALL_MARBLE_BRICKS.block(),
         BlockusBlocks.MARBLE_TILES.block(),
-        BlockusBlocks.MARBLE_SQUARES,
+        BlockusBlocks.MARBLE_SQUARES.block(),
         BlockusBlocks.MARBLE_CIRCULAR_PAVING
     );
 
@@ -238,7 +238,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.BLUESTONE_BRICKS.block(),
         BlockusBlocks.SMALL_BLUESTONE_BRICKS.block(),
         BlockusBlocks.BLUESTONE_TILES.block(),
-        BlockusBlocks.BLUESTONE_SQUARES,
+        BlockusBlocks.BLUESTONE_SQUARES.block(),
         BlockusBlocks.BLUESTONE_CIRCULAR_PAVING
     );
 
@@ -248,7 +248,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.VIRIDITE_BRICKS.block(),
         BlockusBlocks.SMALL_VIRIDITE_BRICKS.block(),
         BlockusBlocks.VIRIDITE_TILES.block(),
-        BlockusBlocks.VIRIDITE_SQUARES,
+        BlockusBlocks.VIRIDITE_SQUARES.block(),
         BlockusBlocks.VIRIDITE_CIRCULAR_PAVING
     );
 
@@ -352,7 +352,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.PURPUR_BRICKS.block(),
         BlockusBlocks.SMALL_PURPUR_BRICKS.block(),
         BlockusBlocks.POLISHED_PURPUR.block(),
-        BlockusBlocks.PURPUR_SQUARES
+        BlockusBlocks.PURPUR_SQUARES.block()
     );
 
     addForShapes(BlockusBlockTags.PHANTOM_PURPUR_BLOCKS,
@@ -360,7 +360,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.SMALL_PHANTOM_PURPUR_BRICKS.block(),
         BlockusBlocks.PHANTOM_PURPUR_BLOCK.block(),
         BlockusBlocks.POLISHED_PHANTOM_PURPUR.block(),
-        BlockusBlocks.PHANTOM_PURPUR_SQUARES
+        BlockusBlocks.PHANTOM_PURPUR_SQUARES.block()
     );
 
     addForShapes(BlockusBlockTags.END_STONE_BLOCKS,
@@ -388,7 +388,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     addForShapes(BlockusBlockTags.CHOCOLATE_BLOCKS,
         BlockusBlocks.CHOCOLATE_BLOCK.block(),
         BlockusBlocks.CHOCOLATE_BRICKS.block(),
-        BlockusBlocks.CHOCOLATE_SQUARES
+        BlockusBlocks.CHOCOLATE_SQUARES.block()
     );
 
     addForShapes(BlockTags.BEACON_BASE_BLOCKS,
