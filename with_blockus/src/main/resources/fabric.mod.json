@@ -30,8 +30,8 @@
     "fabricloader": "*",
     "fabric-api": "*",
     "minecraft": "~26.2",
-    "extshape": [">=3.0.0-0", "${version}"],
-    "blockus": ">=2.17.0"
+    "extshape": [">=3.1.6-beta.3", "${version}"],
+    "blockus": ">=2.17.3"
   },
   "custom": {
     "modmenu": {
