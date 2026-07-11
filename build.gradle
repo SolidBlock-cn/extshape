@@ -219,9 +219,6 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 //    }
 
     mainFile.addRelations 'requiredDependency', 'fabric-api'
-
-    // The sources JAR
-    mainFile.withAdditionalFile(sourcesJar)
 }
 
 modrinth {
