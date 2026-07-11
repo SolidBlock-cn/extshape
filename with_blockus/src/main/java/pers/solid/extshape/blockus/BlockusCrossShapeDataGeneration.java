@@ -6,6 +6,7 @@ import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.utils.helper.BlockMaps;
 import com.brand.blockus.utils.helper.BlockOrder;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
@@ -13,7 +14,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.CopperManager;
@@ -193,18 +195,22 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.DIAMOND_BRICKS.block(), Blocks.DIAMOND_BLOCK);
     builder.put(BlockusBlocks.NETHERITE_BRICKS.block(), Blocks.NETHERITE_BLOCK);
 
-    // 和铜相关的
-    final WeatheringCopperCollection.ByState<Block> weatheringCopper = Blocks.COPPER_BLOCK.weathering();
-    final WeatheringCopperCollection.ByState<Block> waxedCopper = Blocks.COPPER_BLOCK.waxed();
-    final WeatheringCopperCollection.ByState<Block> weatheringCutCopper = Blocks.CUT_COPPER.weathering();
-    final WeatheringCopperCollection.ByState<Block> waxedCutCopper = Blocks.CUT_COPPER.waxed();
-    final WeatheringCopperCollection<Block> copperBricks = BlockusBlocks.COPPER_BRICKS.block().blocks();
-    final WeatheringCopperCollection.ByState<Block> weatheringCopperBricks = copperBricks.weathering();
-    final WeatheringCopperCollection.ByState<Block> waxedCopperBricks = copperBricks.waxed();
+    final List<Block> unwaxedCopperBricksList = BlockusCopperManager.COPPER_BRICKS.unwaxed();
+    final ImmutableList<Block> unwaxedCopperBlockList = CopperManager.COPPER_BLOCKS;
+    final ImmutableList<Block> unwaxedCutCopperBlockList = CopperManager.CUT_COPPER_BLOCKS;
+    for (int i = 0; i < unwaxedCopperBricksList.size(); i++) {
+      final Block unwaxedCopperBricks = unwaxedCopperBricksList.get(i);
+      builder.put(unwaxedCopperBricks, unwaxedCopperBlockList.get(i));
+      builder.put(unwaxedCopperBricks, unwaxedCutCopperBlockList.get(i));
+    }
 
-    for (WeatheringCopper.WeatherState oxidationLevel : CopperManager.OXIDATION_LEVELS) {
-      builder.putAll(weatheringCopperBricks.pick(oxidationLevel), weatheringCopper.pick(oxidationLevel), weatheringCutCopper.pick(oxidationLevel));
-      builder.putAll(waxedCopperBricks.pick(oxidationLevel), waxedCopper.pick(oxidationLevel), waxedCutCopper.pick(oxidationLevel));
+    final List<Block> waxedCopperBricksList = BlockusCopperManager.COPPER_BRICKS.waxed();
+    final ImmutableList<Block> waxedCopperBlockList = CopperManager.WAXED_COPPER_BLOCKS;
+    final ImmutableList<Block> waxedCutCopperBlockList = CopperManager.WAXED_CUT_COPPER_BLOCKS;
+    for (int i = 0; i < waxedCopperBricksList.size(); i++) {
+      final Block waxedCopperBricks = waxedCopperBricksList.get(i);
+      builder.put(waxedCopperBricks, waxedCopperBlockList.get(i));
+      builder.put(waxedCopperBricks, waxedCutCopperBlockList.get(i));
     }
   }
 

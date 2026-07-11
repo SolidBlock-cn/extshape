@@ -18,10 +18,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import pers.solid.extshape.ExtShape;
-import pers.solid.extshape.block.ExtShapeButtonBlock;
-import pers.solid.extshape.block.ExtShapePressurePlateBlock;
-import pers.solid.extshape.block.ExtShapeSlabBlock;
-import pers.solid.extshape.block.ExtShapeWallBlock;
+import pers.solid.extshape.block.*;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
@@ -127,7 +124,8 @@ public class ExtShapeTweakRecipeProvider extends RecipeProvider {
         Pair.of(Blocks.STRIPPED_BAMBOO_BLOCK, Ingredient.of(Items.REDSTONE)),
         Pair.of(Blocks.RESIN_BLOCK, tag(ConventionalItemTags.RESIN_CLUMPS))
     );
-    baseAndResource = Iterables.concat(baseAndResource, Iterables.transform(Iterables.concat(Blocks.COPPER_BLOCK.asList(),
+    baseAndResource = Iterables.concat(baseAndResource, Iterables.transform(Iterables.concat(CopperManager.COPPER_BLOCKS,
+        CopperManager.WAXED_COPPER_BLOCKS,
         BlockCollections.LOGS,
         BlockCollections.WOODS,
         BlockCollections.HYPHAES,
@@ -164,7 +162,7 @@ public class ExtShapeTweakRecipeProvider extends RecipeProvider {
           .unlockedBy(getHasName(baseBlock), has(baseBlock))
           .save(output);
     }
-    for (Block baseBlock : Blocks.COPPER_BLOCK.asList()) {
+    for (Block baseBlock : Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS)) {
       final ExtShapeWallBlock wall = (ExtShapeWallBlock) BlockBiMaps.getBlockOf(BlockShape.WALL, baseBlock);
       Preconditions.checkNotNull(wall, "wall of %s", baseBlock);
 

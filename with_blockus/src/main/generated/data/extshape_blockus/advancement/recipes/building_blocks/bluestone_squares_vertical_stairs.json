@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "extshape_blockus:bluestone_squares_stairs"
+            "items": "blockus:bluestone_squares_stairs"
           }
         ]
       },

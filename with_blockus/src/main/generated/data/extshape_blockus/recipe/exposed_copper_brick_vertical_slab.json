@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "blockus:exposed_copper_brick_slab"
+  ],
+  "result": {
+    "id": "extshape_blockus:exposed_copper_brick_vertical_slab"
+  }
+}

@@ -60,6 +60,14 @@ public final class ExtShapeBlockusBlocks {
 
     BlockusBlockBiMaps.importFromBlockus();
     markStoneCuttableWhenCreating = true;
+    create(BlockusBlocks.COBBLESTONE_BRICKS)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
+    create(BlockusBlocks.MOSSY_COBBLESTONE_BRICKS)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
     create(BlockusBlocks.STONE_TILES)
         .setFenceSettings(FenceSettings.STONE)
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
@@ -754,6 +762,10 @@ public final class ExtShapeBlockusBlocks {
         .without(BlockShape.FENCE, BlockShape.FENCE_GATE)
         .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireResistant())
         .build();
+
+    // 铜砖
+    BlockusCopperManager.COPPER_BRICKS.registerBlocks(FACTORY);
+    BlockusCopperManager.COPPER_TUFF.registerBlocks(FACTORY);
 
     markStoneCuttableWhenCreating = false;
 

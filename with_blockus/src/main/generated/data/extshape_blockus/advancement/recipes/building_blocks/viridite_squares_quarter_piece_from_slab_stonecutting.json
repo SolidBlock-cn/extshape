@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "extshape_blockus:viridite_squares_slab"
+            "items": "blockus:viridite_squares_slab"
           }
         ]
       },

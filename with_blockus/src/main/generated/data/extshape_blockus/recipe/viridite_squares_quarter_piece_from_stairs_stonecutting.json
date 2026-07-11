@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "extshape_blockus:viridite_squares_stairs",
+  "ingredient": "blockus:viridite_squares_stairs",
   "result": {
     "count": 3,
     "id": "extshape_blockus:viridite_squares_quarter_piece"

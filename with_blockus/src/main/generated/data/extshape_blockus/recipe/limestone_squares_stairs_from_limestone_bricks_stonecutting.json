@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:limestone_bricks",
-  "result": {
-    "id": "extshape_blockus:limestone_squares_stairs"
-  }
-}

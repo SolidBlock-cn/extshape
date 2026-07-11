@@ -18,6 +18,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.blockus.BlockusCopperManager;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.builder.BlockShape;
@@ -304,8 +305,10 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.HERRINGBONE_SANDY_BRICKS
     );
 
-    addForShapes(BlockusBlockTags.TUFF_BLOCKS, BlockusBlocks.COPPER_TUFF_BRICKS.block().blocks().asList());
-    addForShapes(BlockusBlockTags.COPPER_BLOCKS, BlockusBlocks.COPPER_BRICKS.block().blocks().asList());
+    addForShapes(BlockusBlockTags.TUFF_BLOCKS, BlockusCopperManager.COPPER_TUFF.unwaxed());
+    addForShapes(BlockusBlockTags.TUFF_BLOCKS, BlockusCopperManager.COPPER_TUFF.waxed());
+    addForShapes(BlockusBlockTags.COPPER_BLOCKS, BlockusCopperManager.COPPER_BRICKS.unwaxed());
+    addForShapes(BlockusBlockTags.COPPER_BLOCKS, BlockusCopperManager.COPPER_BRICKS.waxed());
 
     addForShapes(BlockusBlockTags.RESIN_BLOCKS, BlockusBlocks.LARGE_RESIN_BRICKS.block(), BlockusBlocks.HERRINGBONE_RESIN_BRICKS);
 

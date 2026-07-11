@@ -1,5 +1,6 @@
 {
   "values": [
+    "extshape_blockus:water_brick_button",
     "extshape_blockus:lava_brick_button",
     "extshape_blockus:snow_brick_button",
     "extshape_blockus:glowing_obsidian_button",
@@ -18,6 +19,14 @@
     "extshape_blockus:chocolate_button",
     "extshape_blockus:chocolate_brick_button",
     "extshape_blockus:chocolate_squares_button",
+    "extshape_blockus:copper_brick_button",
+    "extshape_blockus:exposed_copper_brick_button",
+    "extshape_blockus:weathered_copper_brick_button",
+    "extshape_blockus:oxidized_copper_brick_button",
+    "extshape_blockus:waxed_copper_brick_button",
+    "extshape_blockus:waxed_exposed_copper_brick_button",
+    "extshape_blockus:waxed_weathered_copper_brick_button",
+    "extshape_blockus:waxed_oxidized_copper_brick_button",
     "extshape_blockus:chorus_button",
     "extshape_blockus:shingles_button",
     "extshape_blockus:white_shingles_button",

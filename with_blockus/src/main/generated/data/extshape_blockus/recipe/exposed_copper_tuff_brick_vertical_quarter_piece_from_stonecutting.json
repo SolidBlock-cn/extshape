@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:exposed_copper_tuff_bricks",
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:exposed_copper_tuff_brick_vertical_quarter_piece"
+  }
+}
