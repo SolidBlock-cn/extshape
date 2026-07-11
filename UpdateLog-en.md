@@ -1,5 +1,9 @@
 # Update log
 
+### 3.1.6
+
+- See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
+
 ### 3.1.6-beta.3
 
 - Optimized the way the fuels are registered.
