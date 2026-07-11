@@ -1,5 +1,11 @@
 ## 更新日志（适用于 Blockus 部分）
 
+### 3.1.6
+
+- 适应 Blockus 2.17.3 和 2.16.6 新版本，由于 Blockus 加入了一些方纹方块的楼梯、台阶和墙，本模组不再加入上述方块。针对上述方块，以 `extshape_blockus` 为命名空间的旧方块和物品的 ID 已注册为命名空间为 `blockus` 的 ID。例如，方块和物品 ID `extshape_blockus:marble_squares_slab` 将等价于 `blockus:marble_squares_slab`。
+    - 现在在切石机中，巧克力砖的相关方块可直接切成方纹巧克力的相关方块。
+- 参见 3.1.6-beta.3 的更新日志。
+
 ### 3.1.6-beta.3
 
 - 修复方格羊毛在创造模式物品栏中的排序错误的问题。
