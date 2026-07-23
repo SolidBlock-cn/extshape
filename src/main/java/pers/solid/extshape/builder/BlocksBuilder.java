@@ -8,12 +8,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.*;
 import pers.solid.extshape.data.RecipeGroupRegistry;
 import pers.solid.extshape.mixin.AbstractBlockStateAccessor;
+import pers.solid.extshape.number.ExtShapeNumberProviders;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.ExtShapeBlockTypes;
@@ -278,23 +278,19 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
 
   @CanIgnoreReturnValue
   @Contract(value = "_-> this")
-  public BlocksBuilder compostingChance(final ResourceKey<NumberProvider> baseCompostingChance) {
-    // todo 考虑以后引入更加灵活复杂的堆肥概率
+  public BlocksBuilder compostingChance(final ExtShapeNumberProviders.VariantSeries variantSeries) {
     return addPreBuildConsumer((blockShape, builder) -> {
-      final ResourceKey<NumberProvider> compostingChance;
-      if (blockShape.logicalCompleteness > 0.5) {
-        compostingChance = baseCompostingChance;
-      } else if (blockShape.logicalCompleteness > 0.25) {
-        if (NumberProviders.COMPOSTABLE_ALWAYS_ADD_ONE.equals(baseCompostingChance)) {
-          compostingChance = NumberProviders.COMPOSTABLE_LOW_MEDIUM;
-        } else {
-          compostingChance = NumberProviders.COMPOSTABLE_LOW;
-        }
-      } else {
-        compostingChance = NumberProviders.COMPOSTABLE_LOW;
-      }
-
+      final ResourceKey<NumberProvider> compostingChance = variantSeries.pickForShape(blockShape);
       builder.itemSettings.compostable(compostingChance);
+    });
+  }
+
+  @CanIgnoreReturnValue
+  @Contract(value = "_-> this")
+  public BlocksBuilder cookingTime(final ExtShapeNumberProviders.VariantSeries variantSeries) {
+    return addPreBuildConsumer((blockShape, builder) -> {
+      final ResourceKey<NumberProvider> burnTime = variantSeries.pickForShape(blockShape);
+      builder.itemSettings.cookingFuel(burnTime);
     });
   }
 

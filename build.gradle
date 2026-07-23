@@ -65,7 +65,7 @@ allprojects {
         implementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
         // ModMenu 模组
         // todo 在 Mod Menu 支持 26.3 后，下面的 compileOnly 修改为 implementation
-        compileOnly("com.terraformersmc:modmenu:${project.modmenu_version}")
+//        compileOnly("com.terraformersmc:modmenu:${project.modmenu_version}")
 
         // 下面两个模组均存储于本地的 maven 仓库。
 

@@ -18,7 +18,7 @@ public class PressurePlateBuilder extends AbstractBlockBuilder<PressurePlateBloc
     super(baseBlock, Util.make(BlockBehaviour.Properties.ofFullCopy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.defaultDestroyTime()), computeStrength(baseBlock.getExplosionResistance()))
-        .pushReaction(baseBlock.defaultBlockState().getPistonPushReaction() == PushReaction.BLOCK ? PushReaction.BLOCK : PushReaction.DESTROY), settings -> ((AbstractBlockSettingsAccessor) settings).setRequiresCorrectToolForDrops(false)), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings));
+        .pushReaction(baseBlock.defaultBlockState().getPistonPushReaction() == PushReaction.IMMOVEABLE ? PushReaction.IMMOVEABLE : PushReaction.POPPED), settings -> ((AbstractBlockSettingsAccessor) settings).setRequiresCorrectToolForDrops(false)), builder -> new ExtShapePressurePlateBlock(builder.baseBlock, builder.blockSettings, ((PressurePlateBuilder) builder).activationSettings));
     this.activationSettings = activationSettings;
     this.shape = BlockShape.PRESSURE_PLATE;
   }

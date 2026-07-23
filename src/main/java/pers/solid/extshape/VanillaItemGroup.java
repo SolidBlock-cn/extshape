@@ -5,10 +5,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.ApiStatus;
@@ -86,10 +83,10 @@ public final class VanillaItemGroup {
     final Item unwaxedCutCopperAnchor = Items.CUT_COPPER_SLAB.weathering().oxidized();
     final Item waxedCutCopperAnchor = Items.CUT_COPPER_SLAB.waxed().oxidized();
 
-    final Item woolAnchor = Items.WOOL_SLAB.black();
-    final Item dyedTerracottaAnchor = Items.DYED_TERRACOTTA.black();
-    final Item concreteAnchor = Items.CONCRETE.black();
-    final Item glazedTerracottaAnchor = Items.GLAZED_TERRACOTTA.black();
+    final Item woolAnchor = Items.WOOL_SLAB.pink();
+    final Item dyedTerracottaAnchor = Items.DYED_TERRACOTTA.pink();
+    final Item concreteAnchor = Items.CONCRETE.pink();
+    final Item glazedTerracottaAnchor = Items.GLAZED_TERRACOTTA.pink();
 
     for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
       BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
@@ -119,25 +116,27 @@ public final class VanillaItemGroup {
         }
       });
 
-      Blocks.WOOL.forEach(block -> {
+      List<DyeColor> gameplayColorOrder = List.of(DyeColor.WHITE, DyeColor.LIGHT_GRAY, DyeColor.GRAY, DyeColor.BLACK, DyeColor.BROWN, DyeColor.RED, DyeColor.ORANGE, DyeColor.YELLOW, DyeColor.LIME, DyeColor.GREEN, DyeColor.CYAN, DyeColor.LIGHT_BLUE, DyeColor.BLUE, DyeColor.PURPLE, DyeColor.MAGENTA, DyeColor.PINK);
+
+      Lists.transform(gameplayColorOrder, Blocks.WOOL::pick).forEach(block -> {
         final Block variant = biMap.get(block);
         if (ExtShapeBlocks.contains(variant)) {
           coloredAppendingRule.put(woolAnchor, variant.asItem());
         }
       });
-      Blocks.DYED_TERRACOTTA.forEach(block -> {
+      Lists.transform(gameplayColorOrder, Blocks.DYED_TERRACOTTA::pick).forEach(block -> {
         final Block variant = biMap.get(block);
         if (ExtShapeBlocks.contains(variant)) {
           coloredAppendingRule.put(dyedTerracottaAnchor, variant.asItem());
         }
       });
-      Blocks.CONCRETE.forEach(block -> {
+      Lists.transform(gameplayColorOrder, Blocks.CONCRETE::pick).forEach(block -> {
         final Block variant = biMap.get(block);
         if (ExtShapeBlocks.contains(variant)) {
           coloredAppendingRule.put(concreteAnchor, variant.asItem());
         }
       });
-      Blocks.GLAZED_TERRACOTTA.forEach(block -> {
+      Lists.transform(gameplayColorOrder, Blocks.GLAZED_TERRACOTTA::pick).forEach(block -> {
         final Block variant = biMap.get(block);
         if (ExtShapeBlocks.contains(variant)) {
           coloredAppendingRule.put(glazedTerracottaAnchor, variant.asItem());

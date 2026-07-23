@@ -20,7 +20,7 @@ public class ButtonBuilder extends AbstractBlockBuilder<ButtonBlock> {
     super(baseBlock, Util.make(BlockBehaviour.Properties.ofFullCopy(baseBlock)
         .noCollision()
         .strength(computeStrength(baseBlock.defaultDestroyTime()), computeStrength(baseBlock.getExplosionResistance()))
-        .pushReaction(baseBlock.defaultBlockState().getPistonPushReaction() == PushReaction.BLOCK ? PushReaction.BLOCK : PushReaction.DESTROY)
+        .pushReaction(baseBlock.defaultBlockState().getPistonPushReaction() == PushReaction.IMMOVEABLE ? PushReaction.IMMOVEABLE : PushReaction.POPPED)
         .instrument(NoteBlockInstrument.HARP)
         .mapColor(MapColor.NONE), settings -> ((AbstractBlockSettingsAccessor) settings).setRequiresCorrectToolForDrops(false)), builder -> new ExtShapeButtonBlock(builder.baseBlock, builder.blockSettings, ((ButtonBuilder) builder).activationSettings));
     this.shape = BlockShape.BUTTON;

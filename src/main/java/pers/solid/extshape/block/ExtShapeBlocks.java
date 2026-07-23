@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
@@ -29,6 +28,7 @@ import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.data.RecipeGroupRegistry;
 import pers.solid.extshape.mixin.BlockAccessor;
+import pers.solid.extshape.number.ExtShapeNumberProviders;
 import pers.solid.extshape.util.*;
 
 import java.util.Iterator;
@@ -144,6 +144,7 @@ public final class ExtShapeBlocks {
         .setPillarUvLocked()
         .addPreBuildConsumer((blockShape4, builder3) -> builder3.blockSettings.mapColor(MapColor.PLANT))
         .addPostBuildConsumer(woodFlammable)
+        .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
         .build();
     // 去皮的竹子。
     FACTORY.createAllShapes(STRIPPED_BAMBOO_BLOCK)
@@ -152,6 +153,7 @@ public final class ExtShapeBlocks {
         .setPillarUvLocked()
         .addPreBuildConsumer((blockShape2, builder2) -> builder2.blockSettings.mapColor(MapColor.COLOR_YELLOW))
         .addPostBuildConsumer(woodFlammable)
+        .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
         .build();
 
     // an infinite cycling loop for wooden block set types, which each cycle should correspond to
@@ -192,6 +194,7 @@ public final class ExtShapeBlocks {
           .setPillar()
           .addPostBuildConsumer(woodFlammable)
           .setRecipeGroup(blockShape -> "wood_" + blockShape.getSerializedName())
+          .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
           .build();
     }
     for (final Block block : BlockCollections.STRIPPED_WOODS) {
@@ -204,6 +207,7 @@ public final class ExtShapeBlocks {
           .setPillar()
           .addPostBuildConsumer(woodFlammable)
           .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.getSerializedName())
+          .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
           .build();
     }
     for (final Block block : BlockCollections.HYPHAES) {
@@ -237,6 +241,7 @@ public final class ExtShapeBlocks {
             .setActivationSettings(ActivationSettings.BAMBOO)
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
+            .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
             .build();
       } else if (block == CRIMSON_PLANKS || block == WARPED_PLANKS) {
         FACTORY.createAllShapes(block)
@@ -252,6 +257,7 @@ public final class ExtShapeBlocks {
             .setActivationSettings(activationSettings)
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
+            .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
             .build();
       }
     }
@@ -275,7 +281,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.STONE)
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape1, builder1) -> builder1.blockSettings.strength(-1.0F, 3600000.0F).isValidSpawn(Blocks::never).overrideLootTable(Optional.of(ResourceKey.create(Registries.LOOT_TABLE, builder1.getBlockId().withPrefix("blocks/")))).pushReaction(PushReaction.BLOCK))
+        .addPreBuildConsumer((blockShape1, builder1) -> builder1.blockSettings.strength(-1.0F, 3600000.0F).isValidSpawn(Blocks::never).overrideLootTable(Optional.of(ResourceKey.create(Registries.LOOT_TABLE, builder1.getBlockId().withPrefix("blocks/")))).pushReaction(PushReaction.IMMOVEABLE))
         .build();
 
     // 青金石块。
@@ -314,6 +320,7 @@ public final class ExtShapeBlocks {
           .setActivationSettings(ActivationSettings.WOOL)
           .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 50))
           .setRecipeGroup(blockShape -> "wool_" + blockShape.getSerializedName())
+          .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOL)
           .build();
     }
 
@@ -350,7 +357,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.HARD_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pushReaction(PushReaction.BLOCK))
+        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pushReaction(PushReaction.IMMOVEABLE))
         .build();
 
     // 钻石块。
@@ -386,7 +393,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(PUMPKIN)
         .setFenceSettings(new FenceSettings(Items.PUMPKIN_SEEDS, WoodType.OAK))
         .setActivationSettings(ActivationSettings.CROPS)
-        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
+        .compostingChance(ExtShapeNumberProviders.COMPOSTABLE_MEDIUM)
         .build();
 
     // 下界岩。
@@ -427,7 +434,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(MELON)
         .setFenceSettings(new FenceSettings(Items.MELON_SLICE, WoodType.OAK))
         .setActivationSettings(ActivationSettings.CROPS)
-        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
+        .compostingChance(ExtShapeNumberProviders.COMPOSTABLE_MEDIUM)
         .build();
 
     // 树脂的各种方块
@@ -517,6 +524,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.COAL, ExtShapeBlockTypes.STONE_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.ORE_BLOCK)
+        .cookingTime(ExtShapeNumberProviders.COOKING_TIME_COAL_BLOCK)
         .build();
 
     // 浮冰。
@@ -561,12 +569,12 @@ public final class ExtShapeBlocks {
 
     // 下界疣块、诡异疣块。
     FACTORY.createAllShapes(NETHER_WART_BLOCK)
-        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM_HIGH)
+        .compostingChance(ExtShapeNumberProviders.COMPOSTABLE_MEDIUM_HIGH)
         .setFenceSettings(new FenceSettings(Items.NETHER_WART, ExtShapeBlockTypes.WART_BLOCK_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.WART)
         .build();
     FACTORY.createAllShapes(WARPED_WART_BLOCK)
-        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM_HIGH)
+        .compostingChance(ExtShapeNumberProviders.COMPOSTABLE_MEDIUM_HIGH)
         .setFenceSettings(new FenceSettings(Items.NETHER_WART, ExtShapeBlockTypes.WART_BLOCK_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.WART)
         .build();
@@ -595,7 +603,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(SHROOMLIGHT)
         .setFenceSettings(new FenceSettings(Items.GLOWSTONE_DUST, ExtShapeBlockTypes.SHROOMLIGHT_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockTypes.SHROMLIGHT_BLOCK_SET_TYPE))
-        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
+        .compostingChance(ExtShapeNumberProviders.COMPOSTABLE_MEDIUM)
         .build();
 
     // 蜜脾块。
@@ -625,7 +633,7 @@ public final class ExtShapeBlocks {
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.HARD_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.HARD)
-        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pushReaction(PushReaction.BLOCK))
+        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.blockSettings.pushReaction(PushReaction.IMMOVEABLE))
         .build();
 
     // 黑石及其变种。
@@ -694,12 +702,12 @@ public final class ExtShapeBlocks {
         .build();
     FACTORY.createAllShapes(MOSS_BLOCK)
         .setFenceSettings(new FenceSettings(Items.MOSS_CARPET, ExtShapeBlockTypes.MOSS_BLOCK_WOOD_TYPE))
-        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
+        .compostingChance(ExtShapeNumberProviders.COMPOSTABLE_MEDIUM)
         .setActivationSettings(ActivationSettings.MOSS)
         .build();
     FACTORY.createAllShapes(PALE_MOSS_BLOCK)
         .setFenceSettings(new FenceSettings(Items.PALE_MOSS_CARPET, ExtShapeBlockTypes.MOSS_BLOCK_WOOD_TYPE))
-        .compostingChance(NumberProviders.COMPOSTABLE_MEDIUM)
+        .compostingChance(ExtShapeNumberProviders.COMPOSTABLE_MEDIUM)
         .setActivationSettings(ActivationSettings.MOSS)
         .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(abstractBlockBuilder.instance, 5, 100))
         .build();

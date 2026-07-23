@@ -11,6 +11,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.IntRange;
@@ -19,15 +20,16 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
+import net.minecraft.world.level.storage.loot.entries.UniformContainerBase;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.LimitCount;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
@@ -45,7 +47,7 @@ import pers.solid.extshape.builder.BlockShape;
 @ApiStatus.AvailableSince("1.5.1")
 public class UnusualLootTables {
   public static final StatePropertiesPredicate.Builder EXACT_MATCH_DOUBLE_SLAB = StatePropertiesPredicate.Builder.properties().hasProperty(BlockStateProperties.SLAB_TYPE, SlabType.DOUBLE);
-  protected final LootTableFunction dropsDoubleWithSilkTouchOrNone = (baseBlock, shape, block, enchantments, generator) -> dropsDoubleSlabWithSilkTouchOrNone(block, shape == BlockShape.SLAB, generator);
+  protected final LootTableFunction dropsDoubleWithSilkTouchOrNone = (baseBlock, shape, block, blocks, enchantments, generator) -> dropsDoubleSlabWithSilkTouchOrNone(blocks, block, shape == BlockShape.SLAB, generator);
 
   /**
    * 对应形状估算的体积，用于与基础方块的掉落数相乘。
@@ -55,7 +57,7 @@ public class UnusualLootTables {
     return shape.isConstruction ? shape.logicalCompleteness : 1;
   }
 
-  public static ConstantValue shapeVolumeConstantProvider(BlockShape shape, float count) {
+  public static Holder<NumberProvider> shapeVolumeConstantProvider(BlockShape shape, float count) {
     return ConstantValue.exactly(shapeVolume(shape) * count);
   }
 
@@ -68,15 +70,14 @@ public class UnusualLootTables {
    * @param block     方块自身。
    * @return 战利品表项。
    */
-  private static LootPoolSingletonContainer.Builder<?> entryBuilderConstCount(ItemLike drop, float fullCount, BlockShape shape, Block block) {
-    final LootPoolSingletonContainer.Builder<?> itemEntryBuilder = LootItem.lootTableItem(drop)
+  private static UniformContainerBase.Builder<?> entryBuilderConstCount(HolderGetter<Block> blocks, ItemLike drop, float fullCount, BlockShape shape, Block block) {
+    final UniformContainerBase.Builder<?> itemEntryBuilder = LootItem.lootTableItem(drop)
         // 根据该方块的形状确定数量。
         .apply(SetItemCountFunction.setCount(shapeVolumeConstantProvider(shape, fullCount)));
     if (shape == BlockShape.SLAB) {
       itemEntryBuilder
           .apply(SetItemCountFunction.setCount(shapeVolumeConstantProvider(shape, fullCount * 2))
-              .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
-                  .setProperties(EXACT_MATCH_DOUBLE_SLAB)));
+              .when(MatchBlock.blockMatches(blocks, block, StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))));
     }
     return itemEntryBuilder;
   }
@@ -90,11 +91,11 @@ public class UnusualLootTables {
    * @param childWhenDoubleSlab 不符合条件，且为双层台阶时，需要使用的战利品表池。当方块本身就不是台阶时，此参数应为 {@code null}。
    * @return 战利品表。
    */
-  public static LootTable.Builder dropsDoubleSlab(Block drop, LootItemCondition.Builder conditionBuilder, LootPoolEntryContainer.Builder<?> child, @Nullable LootPoolEntryContainer.Builder<?> childWhenDoubleSlab) {
-    return addDropsDoubleSlabPool(LootTable.lootTable(), drop, conditionBuilder, child, childWhenDoubleSlab);
+  public static LootTable.Builder dropsDoubleSlab(HolderGetter<Block> blocks, Block drop, Holder<LootItemCondition> conditionBuilder, LootPoolEntryContainer.Builder<?> child, @Nullable LootPoolEntryContainer.Builder<?> childWhenDoubleSlab) {
+    return addDropsDoubleSlabPool(blocks, LootTable.lootTable(), drop, conditionBuilder, child, childWhenDoubleSlab);
   }
 
-  public static LootTable.Builder addDropsDoubleSlabPool(LootTable.Builder builder, Block drop, LootItemCondition.Builder conditionBuilder, LootPoolEntryContainer.Builder<?> child, @Nullable LootPoolEntryContainer.Builder<?> childWhenDoubleSlab) {
+  public static LootTable.Builder addDropsDoubleSlabPool(HolderGetter<Block> blocks, LootTable.Builder builder, Block drop, Holder<LootItemCondition> conditionBuilder, LootPoolEntryContainer.Builder<?> child, @Nullable LootPoolEntryContainer.Builder<?> childWhenDoubleSlab) {
     if (childWhenDoubleSlab == null) {
       builder
           .withPool(LootPool.lootPool()
@@ -110,10 +111,10 @@ public class UnusualLootTables {
               .add(AlternativesEntry.alternatives(
                   LootItem.lootTableItem(drop)
                       .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))
-                          .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(drop).setProperties(EXACT_MATCH_DOUBLE_SLAB)))
+                          .when(MatchBlock.blockMatches(blocks, drop, StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))))
                       .when(conditionBuilder),
                   childWhenDoubleSlab
-                      .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(drop).setProperties(EXACT_MATCH_DOUBLE_SLAB)),
+                      .when(MatchBlock.blockMatches(blocks, drop, StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))),
                   child)));
     }
     return builder;
@@ -142,9 +143,9 @@ public class UnusualLootTables {
   private void registerUnusualLootTables(ImmutableMap.Builder<Block, LootTableFunction> builder) {
     builder.put(Blocks.CLAY, dropsWithSilkTouchOrConst(Items.CLAY_BALL, 4));
     builder.put(Blocks.SNOW_BLOCK, dropsWithSilkTouchOrConst(Items.SNOWBALL, 4));
-    builder.put(Blocks.GLOWSTONE, (baseBlock, shape, block, enchantments, generator) -> {
+    builder.put(Blocks.GLOWSTONE, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.GLOWSTONE_DUST)
+      return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.GLOWSTONE_DUST)
               .apply(SetItemCountFunction.setCount(UniformGenerator.between(2 * shapeVolume, 4 * shapeVolume)))
               .apply(fortuneFunction(enchantments))
               .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (shapeVolume * 4))))),
@@ -153,9 +154,9 @@ public class UnusualLootTables {
               .apply(fortuneFunction(enchantments))
               .apply(LimitCount.limitCount(IntRange.range(1, 4)))) : null, generator);
     });
-    builder.put(Blocks.MELON, (baseBlock, shape, block, enchantments, generator) -> {
+    builder.put(Blocks.MELON, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.MELON_SLICE)
+      return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.MELON_SLICE)
               .apply(SetItemCountFunction.setCount(UniformGenerator.between(shapeVolume * 2, shapeVolume * 4)))
               .apply(fortuneFunction(enchantments))
               .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (shapeVolume * 4))))),
@@ -164,9 +165,9 @@ public class UnusualLootTables {
               .apply(fortuneFunction(enchantments))
               .apply(LimitCount.limitCount(IntRange.range(1, 4)))) : null, generator);
     });
-    builder.put(Blocks.SEA_LANTERN, (baseBlock, shape, block, enchantments, generator) -> {
+    builder.put(Blocks.SEA_LANTERN, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
+      return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
           .apply(SetItemCountFunction.setCount(UniformGenerator.between(2 * shapeVolume, 3 * shapeVolume)))
           .apply(fortuneFunction(enchantments))
           .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (5 * shapeVolume))))
@@ -176,9 +177,9 @@ public class UnusualLootTables {
           .apply(LimitCount.limitCount(IntRange.range(1, 5)))
       ) : null, generator);
     });
-    builder.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block, enchantments, generator) -> {
+    builder.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
-      return dropsDoubleSlabWithSilkTouch(block, generator.applyExplosionCondition(block, LootItem.lootTableItem(Items.GOLD_NUGGET)
+      return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionCondition(block, LootItem.lootTableItem(Items.GOLD_NUGGET)
           .apply(SetItemCountFunction.setCount(UniformGenerator.between(shapeVolume * 2, shapeVolume * 5)))
           .when(BonusLevelTableCondition.bonusLevelFlatChance(fortune(enchantments), 0.1F, 0.14285715F, 0.25F, 1.0F))
           .otherwise(LootItem.lootTableItem(block))), shape == BlockShape.SLAB ? generator.applyExplosionCondition(block, LootItem.lootTableItem(Items.GOLD_NUGGET)
@@ -199,14 +200,14 @@ public class UnusualLootTables {
    * @param fullCount 没有精准采集时，掉落的物品对应完整方块大小时的数量。
    */
   public LootTableFunction dropsWithSilkTouchOrConst(ItemLike drop, float fullCount) {
-    return (baseBlock, shape, block, enchantments, generator) -> {
-      final LootPoolSingletonContainer.Builder<?> entryBuilder = entryBuilderConstCount(drop, fullCount, shape, block);
+    return (baseBlock, shape, block, blocks, enchantments, generator) -> {
+      final UniformContainerBase.Builder<?> entryBuilder = entryBuilderConstCount(blocks, drop, fullCount, shape, block);
       if (shape == BlockShape.SLAB) {
         return LootTable.lootTable()
             .withPool(LootPool.lootPool()
                 .add(LootItem.lootTableItem(block)
                     .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))
-                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(EXACT_MATCH_DOUBLE_SLAB)))
+                        .when(MatchBlock.blockMatches(blocks, block, StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))))
                     .when(generator.hasSilkTouch())
                     .otherwise(entryBuilder)));
       } else {
@@ -223,8 +224,8 @@ public class UnusualLootTables {
    * @param childWhenDoubleSlab 没有精准采集，且为双层台阶时，需要使用的战利品表池。当方块本身就不是台阶时，此参数应为 {@code null}。
    * @return 战利品表。
    */
-  public LootTable.Builder dropsDoubleSlabWithSilkTouch(Block drop, LootPoolEntryContainer.Builder<?> child, @Nullable LootPoolEntryContainer.Builder<?> childWhenDoubleSlab, BlockLootSubProvider generator) {
-    return dropsDoubleSlab(drop, generator.hasSilkTouch(), child, childWhenDoubleSlab);
+  public LootTable.Builder dropsDoubleSlabWithSilkTouch(HolderGetter<Block> blocks, Block drop, LootPoolEntryContainer.Builder<?> child, @Nullable LootPoolEntryContainer.Builder<?> childWhenDoubleSlab, BlockLootSubProvider generator) {
+    return dropsDoubleSlab(blocks, drop, generator.hasSilkTouch(), child, childWhenDoubleSlab);
   }
 
   /**
@@ -235,13 +236,12 @@ public class UnusualLootTables {
    * @return 战利品表。
    * @see BlockLootSubProvider#createSilkTouchDispatchTable(Block, LootPoolEntryContainer.Builder)
    */
-  public LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(Block drop, boolean isSlab, BlockLootSubProvider generator) {
-    final LootPoolSingletonContainer.Builder<?> itemEntryBuilder = LootItem.lootTableItem(drop);
+  public LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(HolderGetter<Block> blocks, Block drop, boolean isSlab, BlockLootSubProvider generator) {
+    final UniformContainerBase.Builder<?> itemEntryBuilder = LootItem.lootTableItem(drop);
     if (isSlab) {
       itemEntryBuilder.apply(
           SetItemCountFunction.setCount(ConstantValue.exactly(2))
-              .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(drop)
-                  .setProperties(EXACT_MATCH_DOUBLE_SLAB))
+              .when(MatchBlock.blockMatches(blocks, drop, StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE)))
       );
     }
     return LootTable.lootTable()
@@ -254,6 +254,6 @@ public class UnusualLootTables {
 
   @FunctionalInterface
   public interface LootTableFunction {
-    LootTable.Builder apply(Block baseBlock, BlockShape shape, Block block, HolderGetter<Enchantment> enchantments, BlockLootSubProvider generator);
+    LootTable.Builder apply(Block baseBlock, BlockShape shape, Block block, HolderGetter<Block> blocks, HolderGetter<Enchantment> enchantments, BlockLootSubProvider generator);
   }
 }
