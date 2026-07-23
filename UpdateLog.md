@@ -4,6 +4,23 @@
 
 - 参见 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3 的更新日志。
 
+### 3.1.6-beta.6
+
+- 加入新的数值提供器类型：`enhanced_commands:product`，用于计算多个数值提供器的值的乘积。
+    - 有一个字段：`values`，其值为数值提供器的列表或标签。
+- 添加了变种修饰器值的数值提供器，均为常量值，其 ID 和值分别为：
+    - `enhanced_commands:shape_variant_modifier/half`：0.5
+    - `enhanced_commands:shape_variant_modifier/one_third`：1/3
+    - `enhanced_commands:shape_variant_modifier/quarter`：0.25
+- 为一些方块的形状变种添加了堆肥和烧炼的数值提供器，其 ID 为 `enhanced_commands:shape_variant/<场景类型>/<基准名称>/<变种类型>`，其中 `<场景类型>` 的值为 `compostable` 或 `cooking`，变种类型为 `half`、`one_third` 或 `quarter`。示例：`enhanced_commands:shape_variant/compostable/medium/half`、`enhanced_commands:shape_variant/cooking/time_wool/quarter`。
+    - `half` 变种类型用于台阶和竖直台阶，`one_third` 变种类型适用于按钮和耐力板，`quarter` 变种类型适用于纵条和横条。例如，黄色羊毛按钮的烧炼数值提供器为 `ehanced_commands:shape_variant/cooking/time_wool/one_third`，苍白苔藓横条的堆肥数值提供器为 `enhanced_commands:shape_variant/compostable/mediun/quarter`。
+    - 楼梯、竖直楼梯、栅栏、栅栏门、墙均使用其基础方块的烧炼或堆肥数值提供器。例如，黄色羊毛墙的烧炼数值提供器为 `minecraft:cooking/time_wool`，苍白苔藓栅栏的堆肥数值提供器为 `minecraft:compostable/medium`。
+    - 对于堆肥的数值提供器，其值为 1 的概率为基准值（基础方块的堆肥数值提供器的值）为 1 的概率乘以对应的变种修饰器值，但类似原版行为，当堆肥桶为空时，堆肥始终成功。
+    - 对于烧炼的数值提供器，其烧炼时间为基准值（基础方块的烧炼数值提供器的值）乘以对应的变种修饰器值。
+    - 这些数值提供器会受到对应基础方块数值提供器的影响，同时也会受到变种修饰器值的数值提供器（`enhanced_commands:shape_variant_modifier/<变种类型>`）的影响。
+- 修复了 26.3 的创造模式物品栏中染色方块排序错误的问题。
+- 上述更改仅适用于 26.3 快照及以上版本。
+
 ### 3.1.6-beta.5
 
 - 更新至 26.3 snapshot 3。
@@ -103,7 +120,7 @@
 #### 3.0.5 的 Blockus 部分
 
 - 从 1.21.3 版本开始，对 Blockus 模组中的方块作如下变更：
-    - 删除以下方块的**栅栏和栅栏门**：
+    - 删除以下方块的 **栅栏和栅栏门**：
         - 石瓦（替换为石头）
         - 人字形纹石砖（替换为石砖）
         - 安山岩砖（替换为安山岩）
@@ -152,7 +169,7 @@
         - 幻翼紫颂砖（替换为小型幻翼紫颂砖）
         - 方纹幻翼紫颂块（替换为磨制幻翼紫颂块）
         - 人字形纹末地石砖（替换为小型末地石砖）
-    - 删除以下方块的**所有形状**：
+    - 删除以下方块的 **所有形状**：
         - 雕纹安山岩（替换为安山岩）
         - 雕纹闪长岩（替换为闪长岩）
         - 雕纹花岗岩（替换为花岗岩）
