@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:gray_wool_pressure_plate"
+        "recipes": "extshape:gray_wool_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

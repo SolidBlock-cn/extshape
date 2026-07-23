@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:oxidized_copper_stairs"
+        "recipes": "extshape:oxidized_copper_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

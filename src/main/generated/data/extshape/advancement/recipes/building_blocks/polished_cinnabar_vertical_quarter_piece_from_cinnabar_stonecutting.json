@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:polished_cinnabar_vertical_quarter_piece_from_cinnabar_stonecutting"
+        "recipes": "extshape:polished_cinnabar_vertical_quarter_piece_from_cinnabar_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

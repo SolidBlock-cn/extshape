@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:warped_wart_fence"
+        "recipes": "extshape:warped_wart_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

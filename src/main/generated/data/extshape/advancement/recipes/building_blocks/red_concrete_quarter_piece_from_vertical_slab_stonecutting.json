@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:red_concrete_quarter_piece_from_vertical_slab_stonecutting"
+        "recipes": "extshape:red_concrete_quarter_piece_from_vertical_slab_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

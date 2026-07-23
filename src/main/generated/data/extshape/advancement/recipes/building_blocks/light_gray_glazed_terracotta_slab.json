@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:light_gray_glazed_terracotta_slab"
+        "recipes": "extshape:light_gray_glazed_terracotta_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

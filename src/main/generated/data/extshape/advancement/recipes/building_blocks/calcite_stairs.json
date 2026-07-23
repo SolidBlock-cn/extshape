@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:calcite_stairs"
+        "recipes": "extshape:calcite_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

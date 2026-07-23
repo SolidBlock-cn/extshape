@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:pink_wool_stairs_from_vertical_stairs"
+        "recipes": "extshape:pink_wool_stairs_from_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:waxed_exposed_cut_copper_quarter_piece_from_slab"
+        "recipes": "extshape:waxed_exposed_cut_copper_quarter_piece_from_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

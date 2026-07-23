@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:amethyst_fence"
+        "recipes": "extshape:amethyst_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:white_wool_button"
+        "recipes": "extshape:white_wool_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

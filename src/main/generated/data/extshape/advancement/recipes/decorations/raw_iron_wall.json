@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:raw_iron_wall"
+        "recipes": "extshape:raw_iron_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

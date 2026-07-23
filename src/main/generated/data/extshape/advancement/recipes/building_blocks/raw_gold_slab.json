@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:raw_gold_slab"
+        "recipes": "extshape:raw_gold_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

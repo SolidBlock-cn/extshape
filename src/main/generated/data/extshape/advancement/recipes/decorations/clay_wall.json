@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:clay_wall"
+        "recipes": "extshape:clay_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

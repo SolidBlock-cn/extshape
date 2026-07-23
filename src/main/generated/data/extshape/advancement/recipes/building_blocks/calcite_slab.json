@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:calcite_slab"
+        "recipes": "extshape:calcite_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

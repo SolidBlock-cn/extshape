@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:number_dispatcher",
+  "cases": [
+    {
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "minecraft:composter",
+        "state": {
+          "level": "0"
+        }
+      },
+      "number_provider": 1.0
+    },
+    {
+      "condition": {
+        "type": "minecraft:random_chance",
+        "chance": "extshape:shape_variant_modifier/quarter"
+      },
+      "number_provider": "minecraft:compostable/medium"
+    }
+  ]
+}

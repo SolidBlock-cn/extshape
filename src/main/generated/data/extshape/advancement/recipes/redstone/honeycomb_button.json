@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:honeycomb_button"
+        "recipes": "extshape:honeycomb_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:weathered_copper_fence_gate"
+        "recipes": "extshape:weathered_copper_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

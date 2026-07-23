@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:amethyst_wall"
+        "recipes": "extshape:amethyst_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

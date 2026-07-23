@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:brown_wool_wall"
+        "recipes": "extshape:brown_wool_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

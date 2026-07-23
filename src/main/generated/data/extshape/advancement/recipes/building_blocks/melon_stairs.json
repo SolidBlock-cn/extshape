@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:melon_stairs"
+        "recipes": "extshape:melon_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

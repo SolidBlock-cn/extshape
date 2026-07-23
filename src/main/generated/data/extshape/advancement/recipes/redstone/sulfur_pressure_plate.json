@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:sulfur_pressure_plate"
+        "recipes": "extshape:sulfur_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

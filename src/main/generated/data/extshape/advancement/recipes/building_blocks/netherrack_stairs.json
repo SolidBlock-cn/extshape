@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:netherrack_stairs"
+        "recipes": "extshape:netherrack_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

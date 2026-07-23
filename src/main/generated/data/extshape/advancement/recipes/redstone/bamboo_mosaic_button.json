@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:bamboo_mosaic_button"
+        "recipes": "extshape:bamboo_mosaic_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

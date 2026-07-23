@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:gold_fence"
+        "recipes": "extshape:gold_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:red_nether_brick_button"
+        "recipes": "extshape:red_nether_brick_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

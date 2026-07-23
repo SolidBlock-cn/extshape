@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:purple_concrete_stairs"
+        "recipes": "extshape:purple_concrete_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

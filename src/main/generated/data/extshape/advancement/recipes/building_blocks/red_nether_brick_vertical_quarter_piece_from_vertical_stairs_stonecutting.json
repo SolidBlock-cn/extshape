@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:red_nether_brick_vertical_quarter_piece_from_vertical_stairs_stonecutting"
+        "recipes": "extshape:red_nether_brick_vertical_quarter_piece_from_vertical_stairs_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

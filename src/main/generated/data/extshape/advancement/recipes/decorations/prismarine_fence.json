@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:prismarine_fence"
+        "recipes": "extshape:prismarine_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

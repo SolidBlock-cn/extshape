@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:acacia_quarter_piece_from_vertical_quarter_piece"
+        "recipes": "extshape:acacia_quarter_piece_from_vertical_quarter_piece"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

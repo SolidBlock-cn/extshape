@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:pumpkin_fence"
+        "recipes": "extshape:pumpkin_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

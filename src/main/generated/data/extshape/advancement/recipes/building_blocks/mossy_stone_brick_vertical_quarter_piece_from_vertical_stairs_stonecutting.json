@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:mossy_stone_brick_vertical_quarter_piece_from_vertical_stairs_stonecutting"
+        "recipes": "extshape:mossy_stone_brick_vertical_quarter_piece_from_vertical_stairs_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

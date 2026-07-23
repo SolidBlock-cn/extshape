@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:diamond_fence_gate"
+        "recipes": "extshape:diamond_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

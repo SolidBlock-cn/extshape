@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:black_carpet_from_pressure_plate"
+        "recipes": "extshape:black_carpet_from_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

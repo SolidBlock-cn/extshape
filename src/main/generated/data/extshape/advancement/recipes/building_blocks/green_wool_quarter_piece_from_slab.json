@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:green_wool_quarter_piece_from_slab"
+        "recipes": "extshape:green_wool_quarter_piece_from_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

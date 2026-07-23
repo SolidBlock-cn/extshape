@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:jungle_wall"
+        "recipes": "extshape:jungle_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

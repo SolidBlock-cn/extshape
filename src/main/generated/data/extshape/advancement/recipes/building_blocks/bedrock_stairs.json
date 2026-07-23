@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:bedrock_stairs"
+        "recipes": "extshape:bedrock_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

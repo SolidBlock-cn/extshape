@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:gold_wall"
+        "recipes": "extshape:gold_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

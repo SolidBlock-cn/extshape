@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dirt_fence"
+        "recipes": "extshape:dirt_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:waxed_exposed_cut_copper_wall"
+        "recipes": "extshape:waxed_exposed_cut_copper_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

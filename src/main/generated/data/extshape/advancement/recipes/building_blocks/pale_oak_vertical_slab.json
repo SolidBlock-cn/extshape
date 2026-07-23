@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:pale_oak_vertical_slab"
+        "recipes": "extshape:pale_oak_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

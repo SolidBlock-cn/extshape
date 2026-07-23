@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dirt_button"
+        "recipes": "extshape:dirt_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

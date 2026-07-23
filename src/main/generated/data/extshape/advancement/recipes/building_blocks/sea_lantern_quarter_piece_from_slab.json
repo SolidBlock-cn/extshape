@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:sea_lantern_quarter_piece_from_slab"
+        "recipes": "extshape:sea_lantern_quarter_piece_from_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

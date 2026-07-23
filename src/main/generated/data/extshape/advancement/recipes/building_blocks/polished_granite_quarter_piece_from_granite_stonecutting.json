@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:polished_granite_quarter_piece_from_granite_stonecutting"
+        "recipes": "extshape:polished_granite_quarter_piece_from_granite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

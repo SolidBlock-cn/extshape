@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:birch_wall"
+        "recipes": "extshape:birch_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

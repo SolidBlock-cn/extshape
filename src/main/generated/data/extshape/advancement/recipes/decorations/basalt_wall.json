@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:basalt_wall"
+        "recipes": "extshape:basalt_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

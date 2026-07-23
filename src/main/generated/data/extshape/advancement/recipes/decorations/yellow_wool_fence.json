@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:yellow_wool_fence"
+        "recipes": "extshape:yellow_wool_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

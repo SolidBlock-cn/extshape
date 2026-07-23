@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:gilded_blackstone_vertical_slab"
+        "recipes": "extshape:gilded_blackstone_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

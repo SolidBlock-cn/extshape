@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:emerald_wall"
+        "recipes": "extshape:emerald_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

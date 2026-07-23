@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:verdant_froglight_button"
+        "recipes": "extshape:verdant_froglight_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

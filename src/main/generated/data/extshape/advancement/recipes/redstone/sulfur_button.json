@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:sulfur_button"
+        "recipes": "extshape:sulfur_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

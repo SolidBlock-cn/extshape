@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dirt_vertical_slab"
+        "recipes": "extshape:dirt_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

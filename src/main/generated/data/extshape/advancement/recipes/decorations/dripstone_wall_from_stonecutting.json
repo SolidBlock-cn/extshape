@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dripstone_wall_from_stonecutting"
+        "recipes": "extshape:dripstone_wall_from_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

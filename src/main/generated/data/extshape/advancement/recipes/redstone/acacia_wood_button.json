@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:acacia_wood_button"
+        "recipes": "extshape:acacia_wood_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

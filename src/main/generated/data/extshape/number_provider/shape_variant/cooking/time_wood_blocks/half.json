@@ -1,0 +1,7 @@
+{
+  "type": "extshape:product",
+  "values": [
+    "minecraft:cooking/time_wood_blocks",
+    "extshape:shape_variant_modifier/half"
+  ]
+}

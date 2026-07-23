@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:bamboo_block_vertical_stairs"
+        "recipes": "extshape:bamboo_block_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

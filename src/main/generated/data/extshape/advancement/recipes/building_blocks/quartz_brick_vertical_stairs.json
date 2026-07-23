@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:quartz_brick_vertical_stairs"
+        "recipes": "extshape:quartz_brick_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

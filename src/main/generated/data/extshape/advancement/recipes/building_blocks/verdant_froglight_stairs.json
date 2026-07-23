@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:verdant_froglight_stairs"
+        "recipes": "extshape:verdant_froglight_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

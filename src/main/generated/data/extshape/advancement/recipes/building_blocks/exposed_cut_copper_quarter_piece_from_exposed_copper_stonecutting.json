@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:exposed_cut_copper_quarter_piece_from_exposed_copper_stonecutting"
+        "recipes": "extshape:exposed_cut_copper_quarter_piece_from_exposed_copper_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

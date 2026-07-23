@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:cherry_wood_button"
+        "recipes": "extshape:cherry_wood_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

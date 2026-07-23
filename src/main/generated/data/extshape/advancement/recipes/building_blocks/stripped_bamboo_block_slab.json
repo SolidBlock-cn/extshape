@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:stripped_bamboo_block_slab"
+        "recipes": "extshape:stripped_bamboo_block_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

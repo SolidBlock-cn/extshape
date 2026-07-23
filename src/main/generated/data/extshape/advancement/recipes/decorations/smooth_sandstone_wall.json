@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:smooth_sandstone_wall"
+        "recipes": "extshape:smooth_sandstone_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

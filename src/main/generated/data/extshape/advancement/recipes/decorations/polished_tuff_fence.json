@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:polished_tuff_fence"
+        "recipes": "extshape:polished_tuff_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

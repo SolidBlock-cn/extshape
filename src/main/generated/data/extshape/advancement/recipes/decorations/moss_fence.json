@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:moss_fence"
+        "recipes": "extshape:moss_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

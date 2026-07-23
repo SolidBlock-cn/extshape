@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:warped_hyphae_wall"
+        "recipes": "extshape:warped_hyphae_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

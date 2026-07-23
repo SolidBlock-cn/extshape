@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:snow_button"
+        "recipes": "extshape:snow_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

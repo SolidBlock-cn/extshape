@@ -8,27 +8,18 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:reference",
-                  "name": "minecraft:tool/can_silk_touch"
-                }
-              ],
-              "functions": [
-                {
-                  "conditions": [
-                    {
-                      "block": "extshape:gilded_blackstone_slab",
-                      "condition": "minecraft:block_state_property",
-                      "properties": {
-                        "type": "double"
-                      }
-                    }
-                  ],
-                  "count": 2.0,
-                  "function": "minecraft:set_count"
-                }
-              ],
+              "condition": "minecraft:tool/can_silk_touch",
+              "modifier": {
+                "type": "minecraft:set_count",
+                "condition": {
+                  "type": "minecraft:match_block",
+                  "blocks": "extshape:gilded_blackstone_slab",
+                  "state": {
+                    "type": "double"
+                  }
+                },
+                "count": 2.0
+              },
               "name": "extshape:gilded_blackstone_slab"
             },
             {
@@ -36,81 +27,74 @@
               "children": [
                 {
                   "type": "minecraft:item",
-                  "conditions": [
-                    {
-                      "chances": [
-                        0.1,
-                        0.14285715,
-                        0.25,
-                        1.0
-                      ],
-                      "condition": "minecraft:table_bonus",
-                      "enchantment": "minecraft:fortune"
+                  "condition": {
+                    "type": "minecraft:table_bonus",
+                    "chances": [
+                      0.1,
+                      0.14285715,
+                      0.25,
+                      1.0
+                    ],
+                    "enchantment": "minecraft:fortune"
+                  },
+                  "modifier": {
+                    "type": "minecraft:set_count",
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 5.0,
+                      "min": 2.0
                     }
-                  ],
-                  "functions": [
-                    {
-                      "count": {
-                        "type": "minecraft:uniform",
-                        "max": 5.0,
-                        "min": 2.0
-                      },
-                      "function": "minecraft:set_count"
-                    }
-                  ],
+                  },
                   "name": "minecraft:gold_nugget"
                 },
                 {
                   "type": "minecraft:item",
-                  "functions": [
-                    {
-                      "count": 2.0,
-                      "function": "minecraft:set_count"
-                    }
-                  ],
+                  "modifier": {
+                    "type": "minecraft:set_count",
+                    "count": 2.0
+                  },
                   "name": "extshape:gilded_blackstone_slab"
                 }
               ],
-              "conditions": [
-                {
-                  "condition": "minecraft:survives_explosion"
-                },
-                {
-                  "block": "extshape:gilded_blackstone_slab",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "type": "double"
+              "condition": {
+                "type": "minecraft:all_of",
+                "terms": [
+                  {
+                    "type": "minecraft:survives_explosion"
+                  },
+                  {
+                    "type": "minecraft:match_block",
+                    "blocks": "extshape:gilded_blackstone_slab",
+                    "state": {
+                      "type": "double"
+                    }
                   }
-                }
-              ]
+                ]
+              }
             },
             {
               "type": "minecraft:alternatives",
               "children": [
                 {
                   "type": "minecraft:item",
-                  "conditions": [
-                    {
-                      "chances": [
-                        0.1,
-                        0.14285715,
-                        0.25,
-                        1.0
-                      ],
-                      "condition": "minecraft:table_bonus",
-                      "enchantment": "minecraft:fortune"
+                  "condition": {
+                    "type": "minecraft:table_bonus",
+                    "chances": [
+                      0.1,
+                      0.14285715,
+                      0.25,
+                      1.0
+                    ],
+                    "enchantment": "minecraft:fortune"
+                  },
+                  "modifier": {
+                    "type": "minecraft:set_count",
+                    "count": {
+                      "type": "minecraft:uniform",
+                      "max": 2.5,
+                      "min": 1.0
                     }
-                  ],
-                  "functions": [
-                    {
-                      "count": {
-                        "type": "minecraft:uniform",
-                        "max": 2.5,
-                        "min": 1.0
-                      },
-                      "function": "minecraft:set_count"
-                    }
-                  ],
+                  },
                   "name": "minecraft:gold_nugget"
                 },
                 {
@@ -118,11 +102,9 @@
                   "name": "extshape:gilded_blackstone_slab"
                 }
               ],
-              "conditions": [
-                {
-                  "condition": "minecraft:survives_explosion"
-                }
-              ]
+              "condition": {
+                "type": "minecraft:survives_explosion"
+              }
             }
           ]
         }

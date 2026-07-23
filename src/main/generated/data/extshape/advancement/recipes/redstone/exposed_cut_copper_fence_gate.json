@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:exposed_cut_copper_fence_gate"
+        "recipes": "extshape:exposed_cut_copper_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

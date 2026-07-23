@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:snow_wall"
+        "recipes": "extshape:snow_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

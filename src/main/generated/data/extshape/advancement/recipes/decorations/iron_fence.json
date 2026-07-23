@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:iron_fence"
+        "recipes": "extshape:iron_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

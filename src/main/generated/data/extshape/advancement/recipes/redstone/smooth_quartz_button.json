@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:smooth_quartz_button"
+        "recipes": "extshape:smooth_quartz_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:brown_concrete_quarter_piece_from_slab_stonecutting"
+        "recipes": "extshape:brown_concrete_quarter_piece_from_slab_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:white_concrete_vertical_stairs_from_stonecutting"
+        "recipes": "extshape:white_concrete_vertical_stairs_from_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

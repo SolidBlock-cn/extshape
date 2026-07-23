@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:lime_concrete_button"
+        "recipes": "extshape:lime_concrete_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

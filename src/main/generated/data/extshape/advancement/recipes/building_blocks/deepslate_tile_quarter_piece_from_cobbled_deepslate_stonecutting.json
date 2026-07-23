@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:deepslate_tile_quarter_piece_from_cobbled_deepslate_stonecutting"
+        "recipes": "extshape:deepslate_tile_quarter_piece_from_cobbled_deepslate_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

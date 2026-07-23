@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:ochre_froglight_fence"
+        "recipes": "extshape:ochre_froglight_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

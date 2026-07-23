@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:packed_ice_fence"
+        "recipes": "extshape:packed_ice_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

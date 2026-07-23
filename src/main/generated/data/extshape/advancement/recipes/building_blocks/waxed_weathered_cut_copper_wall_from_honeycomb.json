@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:waxed_weathered_cut_copper_wall_from_honeycomb"
+        "recipes": "extshape:waxed_weathered_cut_copper_wall_from_honeycomb"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

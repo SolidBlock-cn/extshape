@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:tuff_brick_pressure_plate"
+        "recipes": "extshape:tuff_brick_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:packed_ice_stairs"
+        "recipes": "extshape:packed_ice_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

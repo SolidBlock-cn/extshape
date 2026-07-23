@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:brick_button"
+        "recipes": "extshape:brick_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

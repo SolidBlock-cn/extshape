@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:warped_hyphae_fence_gate"
+        "recipes": "extshape:warped_hyphae_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

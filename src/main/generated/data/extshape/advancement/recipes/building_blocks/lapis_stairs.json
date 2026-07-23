@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:lapis_stairs"
+        "recipes": "extshape:lapis_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

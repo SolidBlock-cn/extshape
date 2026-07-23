@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:emerald_slab"
+        "recipes": "extshape:emerald_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

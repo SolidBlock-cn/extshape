@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:lapis_button"
+        "recipes": "extshape:lapis_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

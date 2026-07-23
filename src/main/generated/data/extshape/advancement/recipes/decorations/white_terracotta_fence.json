@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:white_terracotta_fence"
+        "recipes": "extshape:white_terracotta_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

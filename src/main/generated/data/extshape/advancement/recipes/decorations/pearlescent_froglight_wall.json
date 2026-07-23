@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:pearlescent_froglight_wall"
+        "recipes": "extshape:pearlescent_froglight_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

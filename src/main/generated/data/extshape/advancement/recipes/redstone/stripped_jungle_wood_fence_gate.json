@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:stripped_jungle_wood_fence_gate"
+        "recipes": "extshape:stripped_jungle_wood_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

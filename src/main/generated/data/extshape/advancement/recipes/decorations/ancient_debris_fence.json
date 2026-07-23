@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:ancient_debris_fence"
+        "recipes": "extshape:ancient_debris_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

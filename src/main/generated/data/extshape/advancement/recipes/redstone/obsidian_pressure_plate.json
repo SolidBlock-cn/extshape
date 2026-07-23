@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:obsidian_pressure_plate"
+        "recipes": "extshape:obsidian_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

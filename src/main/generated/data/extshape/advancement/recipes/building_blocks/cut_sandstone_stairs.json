@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:cut_sandstone_stairs"
+        "recipes": "extshape:cut_sandstone_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

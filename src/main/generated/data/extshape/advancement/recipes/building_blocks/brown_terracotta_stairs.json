@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:brown_terracotta_stairs"
+        "recipes": "extshape:brown_terracotta_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

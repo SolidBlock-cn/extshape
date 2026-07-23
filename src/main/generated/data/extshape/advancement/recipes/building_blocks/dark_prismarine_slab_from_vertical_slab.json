@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dark_prismarine_slab_from_vertical_slab"
+        "recipes": "extshape:dark_prismarine_slab_from_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:light_blue_wool_vertical_slab"
+        "recipes": "extshape:light_blue_wool_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

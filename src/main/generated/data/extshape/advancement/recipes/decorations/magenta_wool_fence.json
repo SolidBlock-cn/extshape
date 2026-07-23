@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:magenta_wool_fence"
+        "recipes": "extshape:magenta_wool_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

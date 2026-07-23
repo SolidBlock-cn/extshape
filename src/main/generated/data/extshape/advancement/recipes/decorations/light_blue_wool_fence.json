@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:light_blue_wool_fence"
+        "recipes": "extshape:light_blue_wool_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

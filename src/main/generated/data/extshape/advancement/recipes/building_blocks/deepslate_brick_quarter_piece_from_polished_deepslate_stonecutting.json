@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:deepslate_brick_quarter_piece_from_polished_deepslate_stonecutting"
+        "recipes": "extshape:deepslate_brick_quarter_piece_from_polished_deepslate_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

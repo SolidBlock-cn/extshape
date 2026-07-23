@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:white_wool_slab_from_vertical_slab"
+        "recipes": "extshape:white_wool_slab_from_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

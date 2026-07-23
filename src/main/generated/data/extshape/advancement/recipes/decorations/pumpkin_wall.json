@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:pumpkin_wall"
+        "recipes": "extshape:pumpkin_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

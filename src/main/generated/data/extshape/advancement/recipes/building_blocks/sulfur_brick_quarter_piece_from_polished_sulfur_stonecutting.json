@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:sulfur_brick_quarter_piece_from_polished_sulfur_stonecutting"
+        "recipes": "extshape:sulfur_brick_quarter_piece_from_polished_sulfur_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

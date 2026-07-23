@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:diamond_wall"
+        "recipes": "extshape:diamond_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:clay_button"
+        "recipes": "extshape:clay_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:crimson_hyphae_fence"
+        "recipes": "extshape:crimson_hyphae_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

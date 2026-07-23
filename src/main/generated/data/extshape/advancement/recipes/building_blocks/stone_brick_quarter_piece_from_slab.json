@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:stone_brick_quarter_piece_from_slab"
+        "recipes": "extshape:stone_brick_quarter_piece_from_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

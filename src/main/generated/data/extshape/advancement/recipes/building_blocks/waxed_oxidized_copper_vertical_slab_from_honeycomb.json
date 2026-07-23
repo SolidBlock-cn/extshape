@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:waxed_oxidized_copper_vertical_slab_from_honeycomb"
+        "recipes": "extshape:waxed_oxidized_copper_vertical_slab_from_honeycomb"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

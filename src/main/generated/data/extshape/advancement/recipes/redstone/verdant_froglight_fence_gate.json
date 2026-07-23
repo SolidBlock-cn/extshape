@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:verdant_froglight_fence_gate"
+        "recipes": "extshape:verdant_froglight_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

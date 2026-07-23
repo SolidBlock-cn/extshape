@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:white_concrete_fence_gate"
+        "recipes": "extshape:white_concrete_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

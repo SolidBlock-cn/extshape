@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:cinnabar_brick_vertical_slab_from_cinnabar_stonecutting"
+        "recipes": "extshape:cinnabar_brick_vertical_slab_from_cinnabar_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

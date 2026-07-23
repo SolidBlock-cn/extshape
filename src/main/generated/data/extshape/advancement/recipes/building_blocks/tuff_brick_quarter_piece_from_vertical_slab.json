@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:tuff_brick_quarter_piece_from_vertical_slab"
+        "recipes": "extshape:tuff_brick_quarter_piece_from_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

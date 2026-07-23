@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:cherry_vertical_stairs"
+        "recipes": "extshape:cherry_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

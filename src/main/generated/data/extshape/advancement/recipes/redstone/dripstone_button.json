@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dripstone_button"
+        "recipes": "extshape:dripstone_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

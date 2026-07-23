@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:polished_blackstone_vertical_stairs_from_blackstone_stonecutting"
+        "recipes": "extshape:polished_blackstone_vertical_stairs_from_blackstone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

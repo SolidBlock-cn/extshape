@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:blackstone_button"
+        "recipes": "extshape:blackstone_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

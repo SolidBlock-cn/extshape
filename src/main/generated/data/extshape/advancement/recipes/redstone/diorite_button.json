@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:diorite_button"
+        "recipes": "extshape:diorite_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

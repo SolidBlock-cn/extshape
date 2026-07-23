@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:sea_lantern_stairs"
+        "recipes": "extshape:sea_lantern_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

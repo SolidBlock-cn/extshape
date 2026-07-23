@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:smooth_basalt_stairs_from_stonecutting"
+        "recipes": "extshape:smooth_basalt_stairs_from_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

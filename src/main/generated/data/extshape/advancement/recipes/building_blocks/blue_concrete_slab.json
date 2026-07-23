@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:blue_concrete_slab"
+        "recipes": "extshape:blue_concrete_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

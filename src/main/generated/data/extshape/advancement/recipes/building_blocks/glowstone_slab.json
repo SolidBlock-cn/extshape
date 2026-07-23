@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:glowstone_slab"
+        "recipes": "extshape:glowstone_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

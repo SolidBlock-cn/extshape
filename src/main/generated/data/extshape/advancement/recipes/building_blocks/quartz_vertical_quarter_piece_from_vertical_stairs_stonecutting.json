@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:quartz_vertical_quarter_piece_from_vertical_stairs_stonecutting"
+        "recipes": "extshape:quartz_vertical_quarter_piece_from_vertical_stairs_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

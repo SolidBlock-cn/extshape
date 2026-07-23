@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:end_stone_wall"
+        "recipes": "extshape:end_stone_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

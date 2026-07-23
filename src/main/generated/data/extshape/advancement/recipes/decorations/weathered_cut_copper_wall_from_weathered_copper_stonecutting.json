@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:weathered_cut_copper_wall_from_weathered_copper_stonecutting"
+        "recipes": "extshape:weathered_cut_copper_wall_from_weathered_copper_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

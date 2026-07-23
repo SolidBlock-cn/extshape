@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:stripped_warped_hyphae_pressure_plate"
+        "recipes": "extshape:stripped_warped_hyphae_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

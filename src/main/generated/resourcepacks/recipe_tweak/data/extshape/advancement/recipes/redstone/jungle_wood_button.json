@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:jungle_wood_button"
+        "recipes": "extshape:jungle_wood_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

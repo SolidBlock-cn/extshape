@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:sculk_button"
+        "recipes": "extshape:sculk_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

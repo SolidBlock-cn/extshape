@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:bedrock_button"
+        "recipes": "extshape:bedrock_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

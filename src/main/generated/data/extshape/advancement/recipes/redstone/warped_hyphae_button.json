@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:warped_hyphae_button"
+        "recipes": "extshape:warped_hyphae_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

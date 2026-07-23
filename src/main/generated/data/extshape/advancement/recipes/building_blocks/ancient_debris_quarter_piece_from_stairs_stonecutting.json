@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:ancient_debris_quarter_piece_from_stairs_stonecutting"
+        "recipes": "extshape:ancient_debris_quarter_piece_from_stairs_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

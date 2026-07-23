@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:obsidian_vertical_slab"
+        "recipes": "extshape:obsidian_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

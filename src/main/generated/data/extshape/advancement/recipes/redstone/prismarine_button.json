@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:prismarine_button"
+        "recipes": "extshape:prismarine_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

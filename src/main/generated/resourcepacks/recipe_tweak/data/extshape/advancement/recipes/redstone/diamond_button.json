@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:diamond_button"
+        "recipes": "extshape:diamond_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

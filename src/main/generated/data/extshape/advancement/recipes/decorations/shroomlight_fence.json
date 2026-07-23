@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:shroomlight_fence"
+        "recipes": "extshape:shroomlight_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

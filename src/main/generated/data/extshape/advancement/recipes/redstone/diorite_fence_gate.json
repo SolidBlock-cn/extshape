@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:diorite_fence_gate"
+        "recipes": "extshape:diorite_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

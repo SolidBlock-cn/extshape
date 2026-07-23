@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:white_concrete_wall"
+        "recipes": "extshape:white_concrete_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

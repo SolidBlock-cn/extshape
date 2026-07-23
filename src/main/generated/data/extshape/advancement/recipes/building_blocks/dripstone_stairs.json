@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dripstone_stairs"
+        "recipes": "extshape:dripstone_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

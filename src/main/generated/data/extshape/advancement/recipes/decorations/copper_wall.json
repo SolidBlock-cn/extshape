@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:copper_wall"
+        "recipes": "extshape:copper_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

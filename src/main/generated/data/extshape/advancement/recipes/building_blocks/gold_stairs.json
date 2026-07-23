@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:gold_stairs"
+        "recipes": "extshape:gold_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

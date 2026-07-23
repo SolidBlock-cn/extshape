@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:brown_concrete_fence"
+        "recipes": "extshape:brown_concrete_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

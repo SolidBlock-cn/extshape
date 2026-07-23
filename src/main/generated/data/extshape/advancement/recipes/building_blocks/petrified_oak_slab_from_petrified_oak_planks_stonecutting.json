@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:petrified_oak_slab_from_petrified_oak_planks_stonecutting"
+        "recipes": "extshape:petrified_oak_slab_from_petrified_oak_planks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

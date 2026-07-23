@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:waxed_copper_slab"
+        "recipes": "extshape:waxed_copper_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

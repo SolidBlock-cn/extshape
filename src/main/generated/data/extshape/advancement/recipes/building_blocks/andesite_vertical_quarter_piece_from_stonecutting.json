@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:andesite_vertical_quarter_piece_from_stonecutting"
+        "recipes": "extshape:andesite_vertical_quarter_piece_from_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

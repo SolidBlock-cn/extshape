@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:cinnabar_button"
+        "recipes": "extshape:cinnabar_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

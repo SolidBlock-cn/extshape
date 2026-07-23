@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:bedrock_fence"
+        "recipes": "extshape:bedrock_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:sulfur_vertical_slab"
+        "recipes": "extshape:sulfur_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

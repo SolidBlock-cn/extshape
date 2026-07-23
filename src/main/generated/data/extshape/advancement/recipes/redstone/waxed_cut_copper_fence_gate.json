@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:waxed_cut_copper_fence_gate"
+        "recipes": "extshape:waxed_cut_copper_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

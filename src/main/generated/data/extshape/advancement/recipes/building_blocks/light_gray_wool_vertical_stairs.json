@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:light_gray_wool_vertical_stairs"
+        "recipes": "extshape:light_gray_wool_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

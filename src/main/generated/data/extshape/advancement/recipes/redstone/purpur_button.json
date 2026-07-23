@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:purpur_button"
+        "recipes": "extshape:purpur_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

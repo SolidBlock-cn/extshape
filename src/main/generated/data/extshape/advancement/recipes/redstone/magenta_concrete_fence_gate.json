@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:magenta_concrete_fence_gate"
+        "recipes": "extshape:magenta_concrete_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:netherite_wall"
+        "recipes": "extshape:netherite_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

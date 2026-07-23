@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:crying_obsidian_stairs"
+        "recipes": "extshape:crying_obsidian_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

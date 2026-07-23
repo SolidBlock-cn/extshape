@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:birch_vertical_stairs"
+        "recipes": "extshape:birch_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

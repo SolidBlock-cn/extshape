@@ -2,30 +2,21 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "minecraft:reference",
-          "name": "minecraft:tool/can_silk_touch"
-        }
-      ],
+      "condition": "minecraft:tool/can_silk_touch",
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "conditions": [
-                {
-                  "block": "extshape:packed_ice_slab",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "type": "double"
-                  }
-                }
-              ],
-              "count": 2.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "condition": {
+              "type": "minecraft:match_block",
+              "blocks": "extshape:packed_ice_slab",
+              "state": {
+                "type": "double"
+              }
+            },
+            "count": 2.0
+          },
           "name": "extshape:packed_ice_slab"
         }
       ],

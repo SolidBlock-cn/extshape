@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:spruce_wood_stairs_from_vertical_stairs"
+        "recipes": "extshape:spruce_wood_stairs_from_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

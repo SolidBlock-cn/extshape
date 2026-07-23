@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:nether_wart_button"
+        "recipes": "extshape:nether_wart_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

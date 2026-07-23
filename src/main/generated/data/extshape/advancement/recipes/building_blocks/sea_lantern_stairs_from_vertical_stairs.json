@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:sea_lantern_stairs_from_vertical_stairs"
+        "recipes": "extshape:sea_lantern_stairs_from_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

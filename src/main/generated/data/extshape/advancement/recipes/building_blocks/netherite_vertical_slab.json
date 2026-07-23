@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:netherite_vertical_slab"
+        "recipes": "extshape:netherite_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

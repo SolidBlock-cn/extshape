@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:bamboo_block_fence"
+        "recipes": "extshape:bamboo_block_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

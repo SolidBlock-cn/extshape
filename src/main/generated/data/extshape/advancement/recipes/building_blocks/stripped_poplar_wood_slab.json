@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:stripped_poplar_wood_slab"
+        "recipes": "extshape:stripped_poplar_wood_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

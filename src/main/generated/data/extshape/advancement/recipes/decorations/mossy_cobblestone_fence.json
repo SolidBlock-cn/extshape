@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:mossy_cobblestone_fence"
+        "recipes": "extshape:mossy_cobblestone_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

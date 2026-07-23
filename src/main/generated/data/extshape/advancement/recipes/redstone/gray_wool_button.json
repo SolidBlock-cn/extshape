@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:gray_wool_button"
+        "recipes": "extshape:gray_wool_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

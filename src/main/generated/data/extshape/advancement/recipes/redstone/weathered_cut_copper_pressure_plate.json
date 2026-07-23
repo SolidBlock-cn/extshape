@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:weathered_cut_copper_pressure_plate"
+        "recipes": "extshape:weathered_cut_copper_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

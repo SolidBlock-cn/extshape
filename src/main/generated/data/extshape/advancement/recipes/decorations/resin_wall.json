@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:resin_wall"
+        "recipes": "extshape:resin_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

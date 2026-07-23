@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:bamboo_mosaic_quarter_piece_from_slab"
+        "recipes": "extshape:bamboo_mosaic_quarter_piece_from_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

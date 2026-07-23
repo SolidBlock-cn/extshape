@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dripstone_fence"
+        "recipes": "extshape:dripstone_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

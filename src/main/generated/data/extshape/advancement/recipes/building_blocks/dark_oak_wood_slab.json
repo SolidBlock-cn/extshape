@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:dark_oak_wood_slab"
+        "recipes": "extshape:dark_oak_wood_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:cobbled_deepslate_fence"
+        "recipes": "extshape:cobbled_deepslate_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

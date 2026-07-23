@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:melon_button"
+        "recipes": "extshape:melon_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

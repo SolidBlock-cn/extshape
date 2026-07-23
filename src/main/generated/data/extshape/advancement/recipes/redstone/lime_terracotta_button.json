@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:lime_terracotta_button"
+        "recipes": "extshape:lime_terracotta_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:netherrack_fence"
+        "recipes": "extshape:netherrack_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

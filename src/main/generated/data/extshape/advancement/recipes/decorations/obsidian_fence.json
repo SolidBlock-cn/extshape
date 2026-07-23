@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:obsidian_fence"
+        "recipes": "extshape:obsidian_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

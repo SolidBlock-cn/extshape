@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:nether_wart_stairs_from_vertical_stairs"
+        "recipes": "extshape:nether_wart_stairs_from_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

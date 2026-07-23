@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:birch_wood_slab"
+        "recipes": "extshape:birch_wood_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

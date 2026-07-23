@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:waxed_weathered_copper_vertical_stairs"
+        "recipes": "extshape:waxed_weathered_copper_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

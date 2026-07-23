@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:pale_moss_stairs"
+        "recipes": "extshape:pale_moss_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

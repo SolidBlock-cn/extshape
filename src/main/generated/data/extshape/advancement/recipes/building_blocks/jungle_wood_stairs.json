@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:jungle_wood_stairs"
+        "recipes": "extshape:jungle_wood_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

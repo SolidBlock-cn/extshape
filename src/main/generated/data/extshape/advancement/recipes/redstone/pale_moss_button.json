@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:pale_moss_button"
+        "recipes": "extshape:pale_moss_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

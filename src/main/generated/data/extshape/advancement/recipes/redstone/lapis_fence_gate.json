@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:lapis_fence_gate"
+        "recipes": "extshape:lapis_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

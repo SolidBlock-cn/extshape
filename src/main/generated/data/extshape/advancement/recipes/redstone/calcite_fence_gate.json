@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:calcite_fence_gate"
+        "recipes": "extshape:calcite_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

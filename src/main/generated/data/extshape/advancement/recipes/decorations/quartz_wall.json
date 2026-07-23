@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:quartz_wall"
+        "recipes": "extshape:quartz_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

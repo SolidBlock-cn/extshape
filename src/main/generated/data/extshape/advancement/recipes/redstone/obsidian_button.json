@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape:obsidian_button"
+        "recipes": "extshape:obsidian_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
