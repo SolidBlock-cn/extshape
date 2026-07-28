@@ -4,6 +4,10 @@
 
 - See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
 
+### 3.1.6-beta.7
+
+- Compatible with 26.3-snapshot-6.
+
 ### 3.1.6-beta.6
 
 - Added a new number provider type: `enhanced_commands:product`, used to calculate the product of values of multiple number providers.

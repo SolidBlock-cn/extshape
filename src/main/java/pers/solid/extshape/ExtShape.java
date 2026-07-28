@@ -21,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.references.BlockItemId;
 import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -35,6 +36,8 @@ import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ResolvableNumber;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
@@ -328,13 +331,16 @@ public class ExtShape implements ModInitializer {
               shapeIsFuel);
           errors++;
         }
-        if (shapeIsFuel && baseIsFuel && !shapeCookingFuel.burnTime().identifier().getPath().contains(baseCookingFuel.burnTime().identifier().getPath())) {
+        if (shapeIsFuel && baseIsFuel
+            && shapeCookingFuel.burnTime() instanceof ResolvableNumber.Reference(ResourceKey<NumberProvider> shapeKey)
+            && baseCookingFuel.burnTime() instanceof ResolvableNumber.Reference(ResourceKey<NumberProvider> baseKey)
+            && !(shapeKey.identifier().getPath().contains(baseKey.identifier().getPath()))) {
           LOGGER.error("Fuel check failed! The base block {} has burn time id: {}, but its {} shape {} has burn time id: {}",
               BuiltInRegistries.BLOCK.getKey(baseBlock),
-              baseCookingFuel.burnTime().identifier(),
+              baseKey.identifier(),
               blockShape.getSerializedName(),
               BuiltInRegistries.BLOCK.getKey(shaped),
-              shapeCookingFuel.burnTime().identifier());
+              shapeKey.identifier());
           errors++;
         }
       }
