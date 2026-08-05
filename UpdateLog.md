@@ -4,6 +4,12 @@
 
 - 参见 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3 的更新日志。
 
+### 3.1.6-beta.8
+
+- 兼容 26.3-snapshot-7。模组的此前版本的混凝土楼梯和台阶将替换为原版的相应方块。
+- 现在在 26.3 版本中，不再有 `#extshape:concrete_stairs` 和 `#extshape:concrete_slabs` 方块和物品标签，因为原版已有 `#concrete_stairs` 和 `#concrete_slabs` 标签。
+- 由于原版的混凝土楼梯和台阶不支持切石，从此版本起，在 26.3 版本中，本模组中的混凝土相关方块将不支持切石。
+
 ### 3.1.6-beta.7
 
 - 兼容 26.3-snapshot-6。

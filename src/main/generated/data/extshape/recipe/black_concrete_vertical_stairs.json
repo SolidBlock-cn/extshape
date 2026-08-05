@@ -3,7 +3,7 @@
   "category": "building",
   "group": "concrete_vertical_stairs_from_rotation",
   "ingredients": [
-    "extshape:black_concrete_stairs"
+    "minecraft:black_concrete_stairs"
   ],
   "result": {
     "id": "extshape:black_concrete_vertical_stairs"

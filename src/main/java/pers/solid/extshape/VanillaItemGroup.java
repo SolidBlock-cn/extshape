@@ -85,7 +85,7 @@ public final class VanillaItemGroup {
 
     final Item woolAnchor = Items.WOOL_SLAB.pink();
     final Item dyedTerracottaAnchor = Items.DYED_TERRACOTTA.pink();
-    final Item concreteAnchor = Items.CONCRETE.pink();
+    final Item concreteAnchor = Items.CONCRETE_SLAB.pink();
     final Item glazedTerracottaAnchor = Items.GLAZED_TERRACOTTA.pink();
 
     for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {

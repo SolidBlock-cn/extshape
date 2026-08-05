@@ -3,7 +3,7 @@
   "category": "building",
   "group": "concrete_quarter_piece_from_slab",
   "key": {
-    "#": "extshape:light_gray_concrete_slab"
+    "#": "minecraft:light_gray_concrete_slab"
   },
   "pattern": [
     "###"

@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:cyan_concrete",
-  "result": {
-    "id": "extshape:cyan_concrete_wall"
-  }
-}

@@ -1,20 +1,20 @@
-// 26.3-snapshot-5	-999999999-01-01T00:00:00	Extended Block Shapes/Tags for minecraft:block
-3765b85ed1c07ac9bd56fcd8b48dbc4511026a1b data/c/tags/block/dyed/black.json
-3ce15ff5664977608987e9ecf98214da3356a7a8 data/c/tags/block/dyed/blue.json
-53c118592a706a0154ca253543a17697d5858084 data/c/tags/block/dyed/brown.json
-69b486d49d495cbdb9d8b9c5e75160548865e81c data/c/tags/block/dyed/cyan.json
-b30b5cb0d3eeb469894248c27978b5737ca5a7f2 data/c/tags/block/dyed/gray.json
-3efe92c1cdc3f0d04a1c02c6bb62880ea026deb6 data/c/tags/block/dyed/green.json
-ecaf3187dbb83bbc0baae399f44cb75720c5e741 data/c/tags/block/dyed/light_blue.json
-69f280497b9990d3bb0650040cd1fed382f09028 data/c/tags/block/dyed/light_gray.json
-e62933133d8a540b01040d980f38aa5628b5ca10 data/c/tags/block/dyed/lime.json
-29a8fbfa5b86ef607d4f404abd0183033a7385c2 data/c/tags/block/dyed/magenta.json
-947ca75a5cea7e948531a4688f0f157183635cc4 data/c/tags/block/dyed/orange.json
-816f7b392371dc029ad5049653a807ee44a92dff data/c/tags/block/dyed/pink.json
-7af582bffbf7bb72858362b0fbf57612eab54499 data/c/tags/block/dyed/purple.json
-6271d4e58bc6f92eda9211159d10873f185c0b9c data/c/tags/block/dyed/red.json
-f8143b4e1ae0db11b60519f228c7b94afa77361f data/c/tags/block/dyed/white.json
-5e74ab3a995db6885fe9b7489ed61937f63c0f8a data/c/tags/block/dyed/yellow.json
+// 26.3-snapshot-7	-999999999-01-01T00:00:00	Extended Block Shapes/Tags for minecraft:block
+4f0f7f7ab93e2be0f4b46b048eee4a864b772750 data/c/tags/block/dyed/black.json
+8d2ffbdab26dda31016925f7a06ee6e7652638e8 data/c/tags/block/dyed/blue.json
+5380a3b46c9fce0969edef1ce7e6d380524917ca data/c/tags/block/dyed/brown.json
+b58ae93e72f7b47b8fa22692292a606bd33a1368 data/c/tags/block/dyed/cyan.json
+5cdf5539f274f327999b6a0270828e602d10ee01 data/c/tags/block/dyed/gray.json
+31f8bc26d6b9339fdb295a4043931f9eb7e771d3 data/c/tags/block/dyed/green.json
+11ee0fcaa04629cd5ffade3ffedf6bfe0603f81b data/c/tags/block/dyed/light_blue.json
+e3c822dbe341b4192710aa235e58f205572af862 data/c/tags/block/dyed/light_gray.json
+4090953c5c7e50e7dbf312f637e8c8e87b4a1e27 data/c/tags/block/dyed/lime.json
+15a35cb3d3b5cfddec7b3a0ffa2d754a1f71ac10 data/c/tags/block/dyed/magenta.json
+1bef137399ee7cb66f1c7af975ec494d271df570 data/c/tags/block/dyed/orange.json
+b28cecc62463e02cae07ce55c62aa23fe87bd076 data/c/tags/block/dyed/pink.json
+514ffe535e8d6e55abbd91122ef1f3f61a6d8c04 data/c/tags/block/dyed/purple.json
+5ce31b9d63d0b740311d48a2969a7bdeac340a48 data/c/tags/block/dyed/red.json
+3063cdb7cb2b8ce798def4cd09d0384e94d96ad5 data/c/tags/block/dyed/white.json
+b8cd3e7cb11c1639544290c3a2138f830a8b555c data/c/tags/block/dyed/yellow.json
 17d85cf29b5c83a000bbd1296302a78e660162eb data/c/tags/block/sandstone/red_stairs.json
 6fe210c3d5b0e4bdcb5033a66a3ce71c987c982f data/c/tags/block/sandstone/uncolored_stairs.json
 8efcd3a6af877f6c6ff6e40a077213e873cdee9c data/extshape/fabric/tag_aliases/block/pressure_plates.json
@@ -24,8 +24,6 @@ f8143b4e1ae0db11b60519f228c7b94afa77361f data/c/tags/block/dyed/white.json
 de2f213e151b6cd9af83c2e8e4dc7d6dc346dfbe data/extshape/tags/block/concrete_fences.json
 3da871ba0185b2f7bafb4c23ffd1a1bc68cc2563 data/extshape/tags/block/concrete_pressure_plates.json
 420e0fef026b9e1304889bd7e5c7755d3380e959 data/extshape/tags/block/concrete_quarter_pieces.json
-25cc2f55fca138362835895a72bd6a7f8cbf6f90 data/extshape/tags/block/concrete_slabs.json
-03042a114495046083b2bab7ab4886e84f4cb7a3 data/extshape/tags/block/concrete_stairs.json
 ca60a548891cfe0a38ce81930ba0131c4b10d9fd data/extshape/tags/block/concrete_vertical_quarter_pieces.json
 d45861e6a89abdafa363f65dc61d0ec89d47f927 data/extshape/tags/block/concrete_vertical_slabs.json
 0a9d57327c57c5723963ce13a8473bbd4cf24efa data/extshape/tags/block/concrete_vertical_stairs.json
@@ -99,7 +97,7 @@ a43690fd1026e3f9aa0d1d548ca0478b1df46201 data/minecraft/tags/block/infiniburn_en
 443a90300f0415fa4cbf8f0b3061aefce4b0eab7 data/minecraft/tags/block/infiniburn_overworld.json
 50cef90906ab343446135d2285ba3e951f9ed536 data/minecraft/tags/block/mineable/axe.json
 35a18fadcd1e8274a0987b65e274992dfae2411c data/minecraft/tags/block/mineable/hoe.json
-87984b793efd240fb6fa623c16d418ce385452b3 data/minecraft/tags/block/mineable/pickaxe.json
+3b22be96ecb2dad3e9ac307cece640de87935851 data/minecraft/tags/block/mineable/pickaxe.json
 3d4e38d1370483c0a8a59b2bec54e7d366010aa6 data/minecraft/tags/block/mineable/shovel.json
 6a4b7f567422639c419eef8026a37ca98509cd25 data/minecraft/tags/block/needs_diamond_tool.json
 b0cdf8245402e06ee011cc4d5bbad6b42aa4bc44 data/minecraft/tags/block/needs_iron_tool.json
@@ -107,8 +105,8 @@ d3efd389e2b6928ff1c8a73bad28a2e06e62f91b data/minecraft/tags/block/needs_stone_t
 1e34d90e78825a9fbd9df7f9fe8b7a847e4fb213 data/minecraft/tags/block/occludes_vibration_signals.json
 593c9959f1fa28f67c4de9cde0ac22f1077f3f46 data/minecraft/tags/block/pressure_plates.json
 1e34d90e78825a9fbd9df7f9fe8b7a847e4fb213 data/minecraft/tags/block/shears_major_breaking_speed.json
-cd69abb90ca30cf9c4764143c8a7847d8e977e89 data/minecraft/tags/block/slabs.json
-ae455f2b17296203762318cabd2d1b5560991d9c data/minecraft/tags/block/stairs.json
+7a4f8cca0fb81974ed9ff5d6926b8f5dc8123348 data/minecraft/tags/block/slabs.json
+28f462c671bdd9e9d998664ca9b98ecca011848a data/minecraft/tags/block/stairs.json
 591846f3a0515ab15510cef332de82a691c1496d data/minecraft/tags/block/stone_buttons.json
 007b6c408b0cbdbdcddf81d1ea063ff75070d593 data/minecraft/tags/block/stone_pressure_plates.json
 1d3073a3a62913ccde3424878d52e9403e930554 data/minecraft/tags/block/supports_bamboo.json

@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:light_gray_concrete",
-  "result": {
-    "id": "extshape:light_gray_concrete_stairs"
-  }
-}

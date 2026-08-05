@@ -3,7 +3,7 @@
   "category": "building",
   "group": "concrete_vertical_slab_from_rotation",
   "ingredients": [
-    "extshape:magenta_concrete_slab"
+    "minecraft:magenta_concrete_slab"
   ],
   "result": {
     "id": "extshape:magenta_concrete_vertical_slab"

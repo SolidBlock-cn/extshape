@@ -8,8 +8,8 @@ import com.mojang.datafixers.DataFixerBuilder;
 import com.mojang.datafixers.schemas.Schema;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.datafix.DataFixers;
-import net.minecraft.util.datafix.fixes.BlockRenameFix;
 import net.minecraft.util.datafix.fixes.ItemRenameFix;
+import net.minecraft.util.datafix.fixes.LegacyBlockRenameFix;
 import net.minecraft.util.filefix.FileFixerUpper;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Contract;
@@ -51,7 +51,7 @@ public abstract class SchemasMixin {
         "extshape:tuff_slab", "minecraft:tuff_slab",
         "extshape:tuff_wall", "minecraft:tuff_wall"
     ));
-    builder.addFixer(BlockRenameFix.create(schema3939, "Rename tuff stairs and slab blocks from 'extshape' namespace to vanilla ones", unaryOperator));
+    builder.addFixer(LegacyBlockRenameFix.create(schema3939, "Rename tuff stairs and slab blocks from 'extshape' namespace to vanilla ones", unaryOperator));
     builder.addFixer(ItemRenameFix.create(schema3939, "Rename tuff stairs and slab items from 'extshape' namespace to vanilla ones", unaryOperator));
 
     // in 24w44a (dataVersion = 4174), we have removed some blocks.
@@ -115,7 +115,7 @@ public abstract class SchemasMixin {
       ExtShape.idMapToVerify = idMap;
     }
     final UnaryOperator<String> unaryOperator2 = createRenamer(idMap);
-    builder.addFixer(BlockRenameFix.create(schema4173, "Rename some removed blocks of Extended Block Shapes mod", unaryOperator2));
+    builder.addFixer(LegacyBlockRenameFix.create(schema4173, "Rename some removed blocks of Extended Block Shapes mod", unaryOperator2));
     builder.addFixer(ItemRenameFix.create(schema4173, "Rename some removed items of Extended Block Shapes mod", unaryOperator2));
   }
 }

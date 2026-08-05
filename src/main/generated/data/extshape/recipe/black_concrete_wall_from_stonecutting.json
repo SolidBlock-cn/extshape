@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:black_concrete",
-  "result": {
-    "id": "extshape:black_concrete_wall"
-  }
-}

@@ -192,7 +192,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
 
     // 所有的混凝土和陶瓦加入 pickaxe_mineable
     for (TagKey<Block> tag : Iterables.concat(ExtShapeTags.SHAPE_TO_CONCRETE_TAG.values(), ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.values())) {
-      builder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(tag);
+      builder(BlockTags.MINEABLE_WITH_PICKAXE).forceAddTag(tag);
     }
     builder(BlockTags.MINEABLE_WITH_PICKAXE).addTag(ExtShapeTags.GLAZED_TERRACOTTA_SLABS);
 

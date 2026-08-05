@@ -34,7 +34,7 @@ public final class ExtShapeTags {
   public static final TagKey<Block> WOODEN_STAIRS = BlockTags.WOODEN_STAIRS;
   public static final TagKey<Block> LOG_STAIRS = of("log_stairs");
   public static final TagKey<Block> WOOLEN_STAIRS = BlockItemTags.WOOL_STAIRS.block();
-  public static final TagKey<Block> CONCRETE_STAIRS = of("concrete_stairs");
+  public static final TagKey<Block> CONCRETE_STAIRS = BlockItemTags.CONCRETE_STAIRS.block();
   public static final TagKey<Block> TERRACOTTA_STAIRS = of("terracotta_stairs");
   public static final TagKey<Block> STAINED_TERRACOTTA_STAIRS = of("stained_terracotta_stairs");
 
@@ -44,7 +44,7 @@ public final class ExtShapeTags {
   public static final TagKey<Block> WOODEN_SLABS = BlockTags.WOODEN_SLABS;
   public static final TagKey<Block> LOG_SLABS = of("log_slabs");
   public static final TagKey<Block> WOOLEN_SLABS = BlockItemTags.WOOL_SLABS.block();
-  public static final TagKey<Block> CONCRETE_SLABS = of("concrete_slabs");
+  public static final TagKey<Block> CONCRETE_SLABS = BlockItemTags.CONCRETE_SLABS.block();
   public static final TagKey<Block> TERRACOTTA_SLABS = of("terracotta_slabs");
   public static final TagKey<Block> STAINED_TERRACOTTA_SLABS = of("stained_terracotta_slabs");
   public static final TagKey<Block> GLAZED_TERRACOTTA_SLABS = of("glazed_terracotta_slabs");

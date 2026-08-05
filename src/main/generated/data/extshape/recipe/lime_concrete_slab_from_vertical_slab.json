@@ -1,11 +1,10 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "concrete_slab_from_rotation",
   "ingredients": [
     "extshape:lime_concrete_vertical_slab"
   ],
   "result": {
-    "id": "extshape:lime_concrete_slab"
+    "id": "minecraft:lime_concrete_slab"
   }
 }

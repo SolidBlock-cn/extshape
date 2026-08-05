@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:brown_concrete",
-  "result": {
-    "count": 4,
-    "id": "extshape:brown_concrete_vertical_quarter_piece"
-  }
-}

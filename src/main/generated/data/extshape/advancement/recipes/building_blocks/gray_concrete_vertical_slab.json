@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "extshape:gray_concrete_slab"
+            "items": "minecraft:gray_concrete_slab"
           }
         ]
       },

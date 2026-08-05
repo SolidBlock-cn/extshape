@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:orange_concrete",
-  "result": {
-    "id": "extshape:orange_concrete_stairs"
-  }
-}

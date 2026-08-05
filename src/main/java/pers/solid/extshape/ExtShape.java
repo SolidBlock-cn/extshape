@@ -23,12 +23,14 @@ import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.component.BlockTransformerMappings;
 import net.minecraft.world.item.component.CookingFuel;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SelectableRecipe;
@@ -36,6 +38,9 @@ import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.stateproviders.CopyPropertiesProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ResolvableNumber;
 import org.apache.commons.lang3.Validate;
@@ -47,7 +52,6 @@ import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.mixin.BlockTransformerMappingsAccessor;
 import pers.solid.extshape.mixin.BlockTransformerMixin;
 import pers.solid.extshape.number.ProductNumberProvider;
 import pers.solid.extshape.tag.ExtShapeTags;
@@ -105,7 +109,7 @@ public class ExtShape implements ModInitializer {
     VanillaItemGroup.registerForMod();
     ResourceLoader.registerBuiltinPack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Component.translatable("resourcePack.extshape.recipe_tweak.name"), PackActivationType.DEFAULT_ENABLED);
 
-    registerStrippableBlocks();
+    EXTENDED_STRIPPABLE_BLOCKS.add(createEnhancedBlockTransformData());
     registerRegistryAliases();
 
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
@@ -272,15 +276,18 @@ public class ExtShape implements ModInitializer {
   }
 
   /**
-   * 可通过斧去皮的方块，包括模组中的。
+   * 模组中的通过斧去皮的方块转换数据。
    */
   public static final List<BlockTransformer.BlockTransformData> EXTENDED_STRIPPABLE_BLOCKS = new ArrayList<>();
 
   /**
-   * 注册所有可去皮的方块。考虑到存在复杂的方块状态的情况，故使用 {@link BlockTransformerMixin}。
-   * todo 改善文档
+   * 创建用于本模组中的去皮方块的 {@link BlockTransformer.BlockTransformData}。本模组不修改原版的 {@link BlockTransformerMappings#AXE_STRIPPABLES}，而是通过 {@link BlockTransformerMixin} 让斧在给树去皮时，识别本模组中的可去皮方块。
+   *
+   * @see BlockTransformerMixin
+   * @see #EXTENDED_STRIPPABLE_BLOCKS
    */
-  private static void registerStrippableBlocks() {
+  private static BlockTransformer.BlockTransformData createEnhancedBlockTransformData() {
+    final RuleBasedStateProvider.Builder ruleBasedStateProviderBuilder = RuleBasedStateProvider.builder();
     Streams.concat(
         IntStream.range(0, BlockCollections.LOGS.size()).mapToObj(i -> Pair.of(BlockCollections.LOGS.get(i), BlockCollections.STRIPPED_LOGS.get(i))),
         IntStream.range(0, BlockCollections.WOODS.size()).mapToObj(i -> Pair.of(BlockCollections.WOODS.get(i), BlockCollections.STRIPPED_WOODS.get(i))),
@@ -294,10 +301,12 @@ public class ExtShape implements ModInitializer {
         final Block input = BlockBiMaps.getBlockOf(shape, inputBase);
         final Block output = BlockBiMaps.getBlockOf(shape, outputBase);
         if (input != null && output != null) {
-          EXTENDED_STRIPPABLE_BLOCKS.add(BlockTransformerMappingsAccessor.callGetStrippableBlockData(input, output));
+          ruleBasedStateProviderBuilder.ifTrueThenProvide(BlockPredicate.matchesBlocks(input), new CopyPropertiesProvider(output));
         }
       }
     });
+
+    return BlockTransformer.BlockTransformData.builder(ruleBasedStateProviderBuilder.build()).sound(SoundEvents.AXE_STRIP).build();
   }
 
 
@@ -354,7 +363,7 @@ public class ExtShape implements ModInitializer {
   }
 
   private static void registerRegistryAliases() {
-    for (BlockItemId blockItemId : Iterables.concat(BlockItemIds.WOOL_STAIRS.asList(), BlockItemIds.WOOL_SLAB.asList())) {
+    for (BlockItemId blockItemId : Iterables.concat(BlockItemIds.WOOL_STAIRS.asList(), BlockItemIds.WOOL_SLAB.asList(), BlockItemIds.CONCRETE_STAIRS.asList(), BlockItemIds.CONCRETE_SLAB.asList())) {
       BuiltInRegistries.BLOCK.addAlias(id(blockItemId.block().identifier().getPath()), blockItemId.block().identifier());
       BuiltInRegistries.ITEM.addAlias(id(blockItemId.item().identifier().getPath()), blockItemId.item().identifier());
     }

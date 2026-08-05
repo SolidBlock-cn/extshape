@@ -4,6 +4,12 @@
 
 - See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
 
+### 3.1.6-beta.8
+
+- Compatible with 26.3-snapshot-7. The concrete stairs and slab blocks of the mod in the previous versions will be converted to relevant vanilla blocks.
+- Now in 26.3 versions, block and item tags `#extshape:concrete_stairs` and `#extshape:concrete_slabs` no longer exist, as vanilla `#concrete_stairs` and `#concrete_slabs` already exist.
+- Since vanilla concrete stairs and slabs do not support stonecutting, since this version, blocks related to concretes no longer support stonecutting in 26.3 versions.
+
 ### 3.1.6-beta.7
 
 - Compatible with 26.3-snapshot-6.

@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:lime_concrete",
-  "result": {
-    "id": "extshape:lime_concrete_wall"
-  }
-}
