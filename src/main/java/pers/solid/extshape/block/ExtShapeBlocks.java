@@ -592,6 +592,7 @@ public final class ExtShapeBlocks {
     // 彩色混凝土。
     for (final Block block : CONCRETE.asList()) {
       FACTORY.createAllShapes(block)
+          .markStoneCuttable() // 下面这些标签已带有 pickaxe_mineable
           .setFenceSettings(new FenceSettings(Items.CLAY, ExtShapeBlockTypes.STONE_WOOD_TYPE))
           .setActivationSettings(ActivationSettings.STONE)
           .setRecipeGroup(blockShape -> "concrete_" + blockShape.getSerializedName())

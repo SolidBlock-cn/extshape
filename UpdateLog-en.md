@@ -4,6 +4,10 @@
 
 - See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
 
+### 3.1.6-beta.9
+
+- Following the changes of 26.3-snapshot-8, now concretes can be cut into blocks of this mod with the stonecutter.
+
 ### 3.1.6-beta.8
 
 - Compatible with 26.3-snapshot-7. The concrete stairs and slab blocks of the mod in the previous versions will be converted to relevant vanilla blocks.
