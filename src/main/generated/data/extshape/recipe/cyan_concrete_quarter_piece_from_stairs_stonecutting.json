@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:cyan_concrete_stairs",
+  "result": {
+    "count": 3,
+    "id": "extshape:cyan_concrete_quarter_piece"
+  }
+}

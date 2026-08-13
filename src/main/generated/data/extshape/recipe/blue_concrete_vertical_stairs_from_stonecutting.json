@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:blue_concrete",
+  "result": {
+    "id": "extshape:blue_concrete_vertical_stairs"
+  }
+}
