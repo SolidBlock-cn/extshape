@@ -13,12 +13,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.NumberDispatcher;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
+import net.minecraft.world.level.storage.loot.providers.number.*;
 import pers.solid.extshape.number.ExtShapeNumberProviders;
-import pers.solid.extshape.number.ProductNumberProvider;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -74,9 +70,9 @@ public class ExtShapeNumberProviderProvider extends FabricCodecDataProvider<Numb
     final Holder.Reference<NumberProvider> half = Holder.Reference.createStandAlone(owner, ExtShapeNumberProviders.SHAPE_VARIANT_MULTIPLIER_HALF);
     final Holder.Reference<NumberProvider> quarter = Holder.Reference.createStandAlone(owner, ExtShapeNumberProviders.SHAPE_VARIANT_MULTIPLIER_QUARTER);
     final Holder.Reference<NumberProvider> oneThird = Holder.Reference.createStandAlone(owner, ExtShapeNumberProviders.SHAPE_VARIANT_MULTIPLIER_ONE_THIRD);
-    registry.accept(variantSeries.half(), new ProductNumberProvider(HolderSet.direct(base, half)));
-    registry.accept(variantSeries.quarter(), new ProductNumberProvider(HolderSet.direct(base, quarter)));
-    registry.accept(variantSeries.oneThird(), new ProductNumberProvider(HolderSet.direct(base, oneThird)));
+    registry.accept(variantSeries.half(), new Product(HolderSet.direct(base, half)));
+    registry.accept(variantSeries.quarter(), new Product(HolderSet.direct(base, quarter)));
+    registry.accept(variantSeries.oneThird(), new Product(HolderSet.direct(base, oneThird)));
   }
 
   @Override

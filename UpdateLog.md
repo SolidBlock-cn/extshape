@@ -4,6 +4,10 @@
 
 - 参见 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3 的更新日志。
 
+### 3.1.6-beta.10
+
+- 移除了 `extshape:product` 数值提供器类型，现在使用原版 26.3-snapshot-9 加入的 `minecraft:product` 数值提供器类型。
+
 ### 3.1.6-beta.9
 
 - 同步 26.3-snapshot-8 的变更，现在混凝土可以切石为本模组中的方块了。

@@ -53,7 +53,6 @@ import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.mixin.BlockTransformerMixin;
-import pers.solid.extshape.number.ProductNumberProvider;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
@@ -101,7 +100,6 @@ public class ExtShape implements ModInitializer {
   @Override
   public void onInitialize() {
     ExtShapeConfig.init();
-    Registry.register(BuiltInRegistries.LOOT_NUMBER_PROVIDER_TYPE, id("product"), ProductNumberProvider.MAP_CODEC);
     ExtShapeBlocks.init();
     ExtShapeTags.init();
 

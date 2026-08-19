@@ -4,6 +4,10 @@
 
 - See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
 
+### 3.1.6-beta.10
+
+- Removed `extshape:product` number provider type, and the `minecraft:product` number provider type of vanilla 26.3-snapshot-9 is used instead.
+
 ### 3.1.6-beta.9
 
 - Following the changes of 26.3-snapshot-8, now concretes can be cut into blocks of this mod with the stonecutter.
