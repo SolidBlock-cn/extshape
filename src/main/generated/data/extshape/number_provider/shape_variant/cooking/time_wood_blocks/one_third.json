@@ -1,6 +1,6 @@
 {
-  "type": "extshape:product",
-  "values": [
+  "type": "minecraft:product",
+  "operands": [
     "minecraft:cooking/time_wood_blocks",
     "extshape:shape_variant_modifier/one_third"
   ]
