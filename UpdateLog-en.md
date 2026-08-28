@@ -4,6 +4,10 @@
 
 - See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
 
+### 3.1.6-beta.11
+
+- Update for 26.3-snapshot-10. Now the stripping of wood and bamboo blocks in this mod uses the entry with ID `extshape:axe` of the vanilla registry `block_transformer`.
+
 ### 3.1.6-beta.10
 
 - Removed `extshape:product` number provider type, and the `minecraft:product` number provider type of vanilla 26.3-snapshot-9 is used instead.

@@ -2,8 +2,6 @@ package pers.solid.extshape;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Streams;
-import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -13,7 +11,6 @@ import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.component.BlockTransformer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -23,24 +20,18 @@ import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.item.component.BlockTransformerMappings;
 import net.minecraft.world.item.component.CookingFuel;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SelectableRecipe;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.stateproviders.CopyPropertiesProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedStateProvider;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ResolvableNumber;
 import org.apache.commons.lang3.Validate;
@@ -52,16 +43,12 @@ import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
-import pers.solid.extshape.mixin.BlockTransformerMixin;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
-import pers.solid.extshape.util.BlockCollections;
 
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * <p>欢迎使用扩展方块形状模组。本模组为许多方块提供了各个形状的变种，包括原版不存在的形状。
@@ -107,7 +94,6 @@ public class ExtShape implements ModInitializer {
     VanillaItemGroup.registerForMod();
     ResourceLoader.registerBuiltinPack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Component.translatable("resourcePack.extshape.recipe_tweak.name"), PackActivationType.DEFAULT_ENABLED);
 
-    EXTENDED_STRIPPABLE_BLOCKS.add(createEnhancedBlockTransformData());
     registerRegistryAliases();
 
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
@@ -271,40 +257,6 @@ public class ExtShape implements ModInitializer {
     if (errors > 0) {
       throw new IllegalStateException("Failed to validate stonecutting recipes with " + errors + " errors!");
     }
-  }
-
-  /**
-   * 模组中的通过斧去皮的方块转换数据。
-   */
-  public static final List<BlockTransformer.BlockTransformData> EXTENDED_STRIPPABLE_BLOCKS = new ArrayList<>();
-
-  /**
-   * 创建用于本模组中的去皮方块的 {@link BlockTransformer.BlockTransformData}。本模组不修改原版的 {@link BlockTransformerMappings#AXE_STRIPPABLES}，而是通过 {@link BlockTransformerMixin} 让斧在给树去皮时，识别本模组中的可去皮方块。
-   *
-   * @see BlockTransformerMixin
-   * @see #EXTENDED_STRIPPABLE_BLOCKS
-   */
-  private static BlockTransformer.BlockTransformData createEnhancedBlockTransformData() {
-    final RuleBasedStateProvider.Builder ruleBasedStateProviderBuilder = RuleBasedStateProvider.builder();
-    Streams.concat(
-        IntStream.range(0, BlockCollections.LOGS.size()).mapToObj(i -> Pair.of(BlockCollections.LOGS.get(i), BlockCollections.STRIPPED_LOGS.get(i))),
-        IntStream.range(0, BlockCollections.WOODS.size()).mapToObj(i -> Pair.of(BlockCollections.WOODS.get(i), BlockCollections.STRIPPED_WOODS.get(i))),
-        IntStream.range(0, BlockCollections.HYPHAES.size()).mapToObj(i -> Pair.of(BlockCollections.HYPHAES.get(i), BlockCollections.STRIPPED_HYPHAES.get(i))),
-        IntStream.range(0, BlockCollections.STEMS.size()).mapToObj(i -> Pair.of(BlockCollections.STEMS.get(i), BlockCollections.STRIPPED_STEMS.get(i))),
-        Stream.of(Pair.of(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK))
-    ).forEach(pair -> {
-      final Block inputBase = pair.getFirst();
-      final Block outputBase = pair.getSecond();
-      for (BlockShape shape : BlockShape.values()) {
-        final Block input = BlockBiMaps.getBlockOf(shape, inputBase);
-        final Block output = BlockBiMaps.getBlockOf(shape, outputBase);
-        if (input != null && output != null) {
-          ruleBasedStateProviderBuilder.ifTrueThenProvide(BlockPredicate.matchesBlocks(input), new CopyPropertiesProvider(output));
-        }
-      }
-    });
-
-    return BlockTransformer.BlockTransformData.builder(ruleBasedStateProviderBuilder.build()).sound(SoundEvents.AXE_STRIP).build();
   }
 
 

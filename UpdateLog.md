@@ -4,6 +4,10 @@
 
 - 参见 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3 的更新日志。
 
+### 3.1.6-beta.11
+
+- 更新 26.3-snapshot-10。现在本模组中的木制和竹制方块去皮使用原版的 `block_transformer` 注册表中 ID 为 `extshape:axe` 的项。
+
 ### 3.1.6-beta.10
 
 - 移除了 `extshape:product` 数值提供器类型，现在使用原版 26.3-snapshot-9 加入的 `minecraft:product` 数值提供器类型。
