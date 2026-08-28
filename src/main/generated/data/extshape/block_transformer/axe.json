@@ -1,0 +1,1870 @@
+[
+  {
+    "block_state_provider": {
+      "type": "minecraft:rule_based_state_provider",
+      "rules": [
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:oak_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_oak_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:spruce_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_spruce_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:birch_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_birch_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:jungle_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_jungle_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:acacia_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_acacia_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:cherry_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_cherry_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:dark_oak_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_dark_oak_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:pale_oak_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_pale_oak_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:poplar_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_poplar_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:mangrove_wood_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_mangrove_wood_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:warped_hyphae_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_warped_hyphae_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:crimson_hyphae_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_crimson_hyphae_pressure_plate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_vertical_slab"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_vertical_slab"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_vertical_stairs"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_vertical_stairs"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_vertical_quarter_piece"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_vertical_quarter_piece"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_fence"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_fence"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_fence_gate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_fence_gate"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_wall"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_wall"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_button"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_button"
+            }
+          }
+        },
+        {
+          "if_true": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "extshape:bamboo_block_pressure_plate"
+          },
+          "then": {
+            "type": "minecraft:copy_properties_provider",
+            "source": {
+              "type": "minecraft:simple_state_provider",
+              "state": "extshape:stripped_bamboo_block_pressure_plate"
+            }
+          }
+        }
+      ]
+    },
+    "item_damage_per_use": 1,
+    "sound": "minecraft:item.axe.strip"
+  }
+]
