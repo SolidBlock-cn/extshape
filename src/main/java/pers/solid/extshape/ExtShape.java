@@ -143,7 +143,7 @@ public class ExtShape implements ModInitializer {
           if (tag == BlockTags.AXE_MINEABLE && blockEntry.isIn(BlockTags.FENCE_GATES)) continue;
           if (tag == BlockTags.PICKAXE_MINEABLE && blockEntry.isIn(BlockTags.WALLS)) continue;
           if (blockInTag != baseBlockInTag) {
-            LOGGER.error("Tag check for {} does not match! The block {} in the tag: {}, but the base block {} in the tag: {}", tag.id(), Registries.BLOCK.getKey(block), blockInTag, Registries.BLOCK.getKey(baseBlock), baseBlockInTag);
+            LOGGER.error("Tag check for {} does not match! The block {} in the tag: {}, but the base block {} in the tag: {}", tag.id(), Registries.BLOCK.getId(block), blockInTag, Registries.BLOCK.getId(baseBlock), baseBlockInTag);
             errors++;
           }
         }
@@ -153,7 +153,7 @@ public class ExtShape implements ModInitializer {
           final boolean blockInShape = blockShape.test(block);
           final boolean blockInTag = blockEntry.isIn(blockTagKey);
           if (blockInShape != blockInTag) {
-            LOGGER.error("Tag check for {} does not match! The block {} in the shape: {}, but the block in the shape tag: {}", blockTagKey.id(), Registries.BLOCK.getKey(block), blockInShape, blockInTag);
+            LOGGER.error("Tag check for {} does not match! The block {} in the shape: {}, but the block in the shape tag: {}", blockTagKey.id(), Registries.BLOCK.getId(block), blockInShape, blockInTag);
             errors++;
           }
 
@@ -161,7 +161,7 @@ public class ExtShape implements ModInitializer {
           TagKey<Item> itemTagKey = TagKey.of(RegistryKeys.ITEM, blockTagKey.id());
           final boolean itemInTag = itemRegistry.getEntry(item).isIn(itemTagKey);
           if (blockInShape != itemInTag) {
-            LOGGER.error("Tag check for {} does not match! The block item {} in the shape: {}, but the item in the shape tag: {}", itemTagKey.id(), Registries.ITEM.getKey(item), blockInShape, itemInTag);
+            LOGGER.error("Tag check for {} does not match! The block item {} in the shape: {}, but the item in the shape tag: {}", itemTagKey.id(), Registries.ITEM.getId(item), blockInShape, itemInTag);
             errors++;
           }
         }
@@ -220,7 +220,7 @@ public class ExtShape implements ModInitializer {
         }
 
         if (!recipeHolder.id().getValue().getPath().startsWith(Registries.ITEM.getId(resultItem).getPath())) {
-          LOGGER.error("Stonecutting recipe name mismatches! Recipe name {} does not start with item name of {}.", recipeHolder.id().getValue(), Registries.ITEM.getKey(resultItem));
+          LOGGER.error("Stonecutting recipe name mismatches! Recipe name {} does not start with item name of {}.", recipeHolder.id().getValue(), Registries.ITEM.getId(resultItem));
           errors++;
         }
 
@@ -232,15 +232,18 @@ public class ExtShape implements ModInitializer {
         final BlockShape resultShape = BlockShape.getShapeOf(resultBlock);
         if (resultShape != null) {
           final Block resultBase = BlockBiMaps.of(resultShape).inverse().get(resultBlock);
+          if (resultBase == null) {
+            continue;
+          }
           if (!stoneCuttableShapes.containsKey(resultShape)) {
-            LOGGER.error("The shape {} should not be stone-cut, but {} can be cut into these shapes of {}!", resultShape.asString(), Registries.BLOCK.getKey(baseBlock), Registries.BLOCK.getKey(resultBase));
+            LOGGER.error("The shape {} should not be stone-cut, but {} can be cut into these shapes of {}!", resultShape.asString(), Registries.BLOCK.getId(baseBlock), Registries.BLOCK.getId(resultBase));
             errors++;
           }
           /* 检测切石产生的方块数量是否符合要求。
           由于一个铜能切成 4 个切制铜块，因此切成各种形状也是按照 4 倍（原版也是如此）。目前，模组不对切石配方进行此检测。
 
           if (stoneCuttableShapes.getInt(resultShape) != resultCount) {
-            LOGGER.error("Result count mismatches! The shape {} is expected to have {} results, but {} can be cut into {} items of {}!", resultShape.getSerializedName(), stoneCuttableShapes.getInt(resultShape), BuiltInRegistries.BLOCK.getKey(baseBlock), resultCount, BuiltInRegistries.ITEM.getKey(resultItem));
+            LOGGER.error("Result count mismatches! The shape {} is expected to have {} results, but {} can be cut into {} items of {}!", resultShape.getSerializedName(), stoneCuttableShapes.getInt(resultShape), Registries.BLOCK.getId(baseBlock), resultCount, Registries.ITEM.getId(resultItem));
           }*/
 
           map.computeIfAbsent(resultBase, block -> new HashSet<>()).add(resultShape);
@@ -254,7 +257,7 @@ public class ExtShape implements ModInitializer {
 
 
         if (!uncraftableShapes.isEmpty()) {
-          LOGGER.error("{} can be stone-cut into {} of {}, but cannot be cut into {} of that block!", Registries.BLOCK.getKey(baseBlock), craftableShapes.stream().map(BlockShape::asString).collect(Collectors.joining(", ")), Registries.BLOCK.getKey(resultBase), uncraftableShapes.stream().map(BlockShape::asString).collect(Collectors.joining(", ")));
+          LOGGER.error("{} can be stone-cut into {} of {}, but cannot be cut into {} of that block!", Registries.BLOCK.getId(baseBlock), craftableShapes.stream().map(BlockShape::asString).collect(Collectors.joining(", ")), Registries.BLOCK.getId(resultBase), uncraftableShapes.stream().map(BlockShape::asString).collect(Collectors.joining(", ")));
           errors++;
         }
       }
