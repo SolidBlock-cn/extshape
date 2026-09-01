@@ -110,7 +110,7 @@
 ### 3.1.1
 
 - Fixed the incompatibility with Sinytra Connector.
-- Mod updated to 1.21.8. For updated contents, please refer to the update log for 3.1.0 and earlier versions.
+- Mod updated to 1.21.11. For updated contents, please refer to the update log for 3.1.0 and earlier versions.
 
 ### 3.1.0
 
@@ -283,6 +283,12 @@
 - Fit for new BRRP API.
 - Fit Blocks 2.9.2。
 - Following Blockus 2.9.2 changes, canceled rainbow glowstone dropping rainbow petals.
+
+### 2.2.1.9
+
+The update only applies to older versions, fixing the issue that the pressure plates and buttons of some blocks like wool may cause the server to crash (issue #80).
+
+This version is published in Jan 2026, which is only a fix update to mods for older MC versions, and still depends on BRRP. It does not mean that the mod for these MC versions will follow up updates for the subsequent updates.
 
 ### 2.2.1
 

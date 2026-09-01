@@ -8,7 +8,7 @@ apply plugin: "com.modrinth.minotaur"
 base {
     archivesName = rootProject.archives_base_name_blockus + "-fabric"
 }
-version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
+version = rootProject.mod_version + '+mc' + rootProject.minecraft_version
 group = rootProject.maven_group
 
 repositories {
@@ -68,6 +68,7 @@ githubRelease {
     repo = "extshape"
     tagName = "v$project.mod_version"
     targetCommitish = "26.1"
+    releaseName = "v$project.mod_version"
     body = changelogContent
     draft = true
     prerelease = false
