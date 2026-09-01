@@ -8,7 +8,7 @@ apply plugin: "com.modrinth.minotaur"
 base {
     archivesName = rootProject.archives_base_name_blockus + "-fabric"
 }
-version = rootProject.mod_version + '-mc' + rootProject.minecraft_version
+version = rootProject.mod_version + '+mc' + rootProject.minecraft_version
 group = rootProject.maven_group
 
 repositories {
@@ -23,6 +23,12 @@ dependencies {
     implementation project(path: ':', configuration: "namedElements")
 }
 
+// 模组发布部分
+
+println "Extended Block Shapes (Blockus) 当前版本（${project.mod_version}）更新记录："
+final String changelogContent = getUpdateLog(project.mod_version, project)
+println changelogContent
+
 tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
         def getenv = System.getenv("CURSEFORGE_TOKEN")
@@ -30,7 +36,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
         if (getenv) apiToken = getenv
     }
     def mainFile = upload('841655', remapJar)
-    mainFile.changelog = ''
+    mainFile.changelog = changelogContent
     mainFile.releaseType = release_type
 
     for (final String v in ((rootProject.supported_minecraft_versions as String).split(','))) {
@@ -50,17 +56,20 @@ modrinth {
     var list = [new ModDependency('tb7kCxSW', 'required'), new ModDependency('zFiY2Go0', 'required')]
     if (platform == 'fabric') list.add new ModDependency('P7dR8mSH', 'required')
     dependencies = list
+    changelog = changelogContent
 }
 githubRelease {
-    def getenv = System.getenv("GITHUB_TOKEN")
-    if (getenv) token = getenv
+    def githubToken = System.getenv("GITHUB_TOKEN")
+    if (githubToken) token = githubToken
     tasks.githubRelease.doFirst {
-        println "GitHub 令牌: $getenv"
+        println "GitHub 令牌: ${screenToken(githubToken)}"
     }
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "1.20.4"
+    targetCommitish = "1.20.6"
+    releaseName = "v$project.mod_version"
+    body = changelogContent
     draft = true
     prerelease = false
     releaseAssets remapJar, remapSourcesJar
