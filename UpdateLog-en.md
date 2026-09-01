@@ -4,6 +4,57 @@
 
 - See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
 
+### 3.1.6-beta.11
+
+- Update for 26.3-snapshot-10. Now the stripping of wood and bamboo blocks in this mod uses the entry with ID `extshape:axe` of the vanilla registry `block_transformer`.
+
+### 3.1.6-beta.10
+
+- Removed `extshape:product` number provider type, and the `minecraft:product` number provider type of vanilla 26.3-snapshot-9 is used instead.
+
+### 3.1.6-beta.9
+
+- Following the changes of 26.3-snapshot-8, now concretes can be cut into blocks of this mod with the stonecutter.
+
+### 3.1.6-beta.8
+
+- Compatible with 26.3-snapshot-7. The concrete stairs and slab blocks of the mod in the previous versions will be converted to relevant vanilla blocks.
+- Now in 26.3 versions, block and item tags `#extshape:concrete_stairs` and `#extshape:concrete_slabs` no longer exist, as vanilla `#concrete_stairs` and `#concrete_slabs` already exist.
+- Since vanilla concrete stairs and slabs do not support stonecutting, since this version, blocks related to concretes no longer support stonecutting in 26.3 versions.
+
+### 3.1.6-beta.7
+
+- Compatible with 26.3-snapshot-6.
+
+### 3.1.6-beta.6
+
+- Added a new number provider type: `enhanced_commands:product`, used to calculate the product of values of multiple number providers.
+    - It has one field: `values`, the value is the list or tag of number providers.
+- Added the number provider of variant modifier value, all of which are constant values, whose ID and values are:
+    - `enhanced_commands:shape_variant_modifier/half`: 0.5
+    - `enhanced_commands:shape_variant_modifier/one_third`: 1/3
+    - `enhanced_commands:shape_variant_modifier/quarter`: 0.25
+- Added the number provider for the composting and cooking for the shape variants of some blocks. The ID is `enhanced_commands:shape_variant/<scene type>/<base name>/<variant type>`, where the value of `<scene type>` is `compostable` or `cooking`, the `<variant type` is `half`, `one_third` or `quarter`. Example: `enhanced_commands:shape_variant/compostable/medium/half`, `enhanced_commands:shape_variant/cooking/time_wool/quarter`.
+    - `half` variant type is used for slabs and vertical slabs, `one_third` variant type is used for buttons and pressure plates, `quarter` variant type is used for vertical quarter pieces and quarter pieces. For example, the cooking number provider of yellow wool button is `ehanced_commands:shape_variant/cooking/time_wool/one_third`, the composting number provider of pale moss is `enhanced_commands:shape_variant/compostable/mediun/quarter`.
+    - Stairs, vertical stairs, fences, fence gates and walls use the cooking or composting number provider of their base blocks. For example, the cooking number provider of yellow wool wall is `minecraft:cooking/time_wool`, and the composting number provider of pale moss fences is `minecraft:compostable/medium`.
+    - For composting number providers, the probability the value is 1 is the probability its base value (the value of the composting number provider of the base block) is 1 multiplied by the value of its corresponding variant modifier, but similar to vanilla behavior, composting always successes when the composter block is empty.
+    - For cooking number providers, the cooking time is the base value (the value of the cooking number provider of the base block) multiplied by the value of its corresponding variant modifier.
+    - These number providers are affected by the number providers of the corresponding base blocks, and meanwhile affected by the number provider of variant modifier value (`enhanced_commands:shape_variant_modifier/<变种类型>`).
+- Fixed the issue of wrong block sort of colored blocks in the creative mode inventory in 26.3.
+- The changes above only apply to 26.3 snapshots and higher versions.
+
+### 3.1.6-beta.5
+
+- Update to 26.3 snapshot 3.
+- Following vanilla changes, current block loot tables will also reference the loot table predicate in the dynamic registry, instead of inlined in loot tables.
+- Following vanilla changes, composting chances will use the number providers in the dynamic registry.
+    - In the current version, the composting chance of some items has been changes comparing to the previous version, as only vanilla number providers are used currently. Further adjustments will be made in future versions.
+
+### 3.1.6-beta.4
+
+- Update to 26.3 snapshot 2.
+    - This mod does not modify the default `block_transformer` item component of axes, but has some special handling in implementation, so that wood blocks in this mod can be correctly stripped.
+
 ### 3.1.6-beta.3
 
 - Optimized the way the fuels are registered.
@@ -38,6 +89,11 @@
 - Now the [tag removal feature of Fabric API](https://fabricmc.net/2026/06/15/262.html#tag-removal) introduced in 0.150.1 will be used, removing non-pickaxe-mineable walls (such as wooden walls and woolen walls) and non-axe-mineable fence gates (such as stone fence gates) directly from `#mineable/pickaxe` and `#mineable/axe` block tags; these blocks no longer have those tags.
 - In versions 26.2 and above, the sulfur cube archetype of petrified oak planks and smooth stone double slab are `slow_bouncy`.
 - Added stonecutting recipes for blocks of sulfur and cinnabar.
+
+### 3.1.4.1-beta.1
+
+- Fit 26.1 snapshots. Added all variants for sulfur, polished sulfur, sulfur bricks, cinnabar, polished cinnabar, cinnabar bricks. Variants for chiseled sulfur and chiseled cinnabar are not added.
+- Petrified oak planks and double smooth stone stairs can be absorbed by Sulfur Cube and belong to regular type (same as stone blocks).
 
 ### 3.1.3
 
@@ -335,8 +391,7 @@ This version is published in Jan 2026, which is only a fix update to mods for ol
 ### 2.0.2
 
 - Adapt to new version Blockus mod.
-- Fixed the issue that vertical stairs have the incorrect tag `extshape:vertical_slabs` instead
-  of `extshape:vertical_stairs`.
+- Fixed the issue that vertical stairs have the incorrect tag `extshape:vertical_slabs` instead of `extshape:vertical_stairs`.
 - Adjusted the way item groups are modified.
 - Modified the loot table of variants of Stars Block and Nether Star Block in Blockus mod.
 

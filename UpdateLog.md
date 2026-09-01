@@ -4,6 +4,57 @@
 
 - 参见 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3 的更新日志。
 
+### 3.1.6-beta.11
+
+- 更新 26.3-snapshot-10。现在本模组中的木制和竹制方块去皮使用原版的 `block_transformer` 注册表中 ID 为 `extshape:axe` 的项。
+
+### 3.1.6-beta.10
+
+- 移除了 `extshape:product` 数值提供器类型，现在使用原版 26.3-snapshot-9 加入的 `minecraft:product` 数值提供器类型。
+
+### 3.1.6-beta.9
+
+- 同步 26.3-snapshot-8 的变更，现在混凝土可以切石为本模组中的方块了。
+
+### 3.1.6-beta.8
+
+- 兼容 26.3-snapshot-7。模组的此前版本的混凝土楼梯和台阶将替换为原版的相应方块。
+- 现在在 26.3 版本中，不再有 `#extshape:concrete_stairs` 和 `#extshape:concrete_slabs` 方块和物品标签，因为原版已有 `#concrete_stairs` 和 `#concrete_slabs` 标签。
+- 由于原版的混凝土楼梯和台阶不支持切石，从此版本起，在 26.3 版本中，本模组中的混凝土相关方块将不支持切石。
+
+### 3.1.6-beta.7
+
+- 兼容 26.3-snapshot-6。
+
+### 3.1.6-beta.6
+
+- 加入新的数值提供器类型：`enhanced_commands:product`，用于计算多个数值提供器的值的乘积。
+    - 有一个字段：`values`，其值为数值提供器的列表或标签。
+- 添加了变种修饰器值的数值提供器，均为常量值，其 ID 和值分别为：
+    - `enhanced_commands:shape_variant_modifier/half`：0.5
+    - `enhanced_commands:shape_variant_modifier/one_third`：1/3
+    - `enhanced_commands:shape_variant_modifier/quarter`：0.25
+- 为一些方块的形状变种添加了堆肥和烧炼的数值提供器，其 ID 为 `enhanced_commands:shape_variant/<场景类型>/<基准名称>/<变种类型>`，其中 `<场景类型>` 的值为 `compostable` 或 `cooking`，变种类型为 `half`、`one_third` 或 `quarter`。示例：`enhanced_commands:shape_variant/compostable/medium/half`、`enhanced_commands:shape_variant/cooking/time_wool/quarter`。
+    - `half` 变种类型用于台阶和竖直台阶，`one_third` 变种类型适用于按钮和耐力板，`quarter` 变种类型适用于纵条和横条。例如，黄色羊毛按钮的烧炼数值提供器为 `ehanced_commands:shape_variant/cooking/time_wool/one_third`，苍白苔藓横条的堆肥数值提供器为 `enhanced_commands:shape_variant/compostable/mediun/quarter`。
+    - 楼梯、竖直楼梯、栅栏、栅栏门、墙均使用其基础方块的烧炼或堆肥数值提供器。例如，黄色羊毛墙的烧炼数值提供器为 `minecraft:cooking/time_wool`，苍白苔藓栅栏的堆肥数值提供器为 `minecraft:compostable/medium`。
+    - 对于堆肥的数值提供器，其值为 1 的概率为基准值（基础方块的堆肥数值提供器的值）为 1 的概率乘以对应的变种修饰器值，但类似原版行为，当堆肥桶为空时，堆肥始终成功。
+    - 对于烧炼的数值提供器，其烧炼时间为基准值（基础方块的烧炼数值提供器的值）乘以对应的变种修饰器值。
+    - 这些数值提供器会受到对应基础方块数值提供器的影响，同时也会受到变种修饰器值的数值提供器（`enhanced_commands:shape_variant_modifier/<变种类型>`）的影响。
+- 修复了 26.3 的创造模式物品栏中染色方块排序错误的问题。
+- 上述更改仅适用于 26.3 快照及以上版本。
+
+### 3.1.6-beta.5
+
+- 更新至 26.3 snapshot 3。
+- 跟随原版变更，现在的方块战利品表也将引用动态注册表中的战利品表谓词，而非内联于战利品表中。
+- 跟随原版变更，堆肥概率将使用动态注册表中的数值提供器。
+    - 当前版本中，一些方块的堆肥概率相比之前有所变更，因为目前仅使用原版的数值提供器。后续版本会继续调整。
+
+### 3.1.6-beta.4
+
+- 更新至 26.3 snapshot 2。
+    - 此模组不修改斧拥有的默认 `block_transformer` 物品组件，而是在实现上特殊处理，从而能正确将本模组的木头类方块去皮。
+
 ### 3.1.6-beta.3
 
 - 优化了熔炉燃料的注册方式。
@@ -38,6 +89,11 @@
 - 现在会使用 Fabric API 0.150.1 引入的[标签移除](https://fabricmc.net/2026/06/15/262.html#tag-removal)功能，将非镐可挖掘质的墙（例如木墙和羊毛墙）和非斧可挖掘的栅栏门（例如石质栅栏门）直接从 `#mineable/pickaxe` 和 `#mineable/axe` 标签移除，上述方块将不再拥有这些标签。
 - 在 26.2 以上版本中，石化橡木木板和双层平滑石台阶的硫方怪原型均为 `slow_bouncy`。
 - 为硫黄、朱砂相关方块加入了相应的切石配方。
+
+### 3.1.4.1-beta.1
+
+- 适应 26.1 快照版本。为硫黄、磨制硫黄、硫黄砖、朱砂、磨制朱砂、朱砂砖添加了所有变种。雕纹硫黄和雕纹朱砂不添加相关变种。
+- 石化橡木木板和双层平滑石台阶可被 Sulfur Cube 吸收，且均属于 regular 类型（和石头类方块相同）。
 
 ### 3.1.3
 
@@ -86,7 +142,7 @@
 #### 3.0.5 的 Blockus 部分
 
 - 从 1.21.3 版本开始，对 Blockus 模组中的方块作如下变更：
-    - 删除以下方块的**栅栏和栅栏门**：
+    - 删除以下方块的 **栅栏和栅栏门**：
         - 石瓦（替换为石头）
         - 人字形纹石砖（替换为石砖）
         - 安山岩砖（替换为安山岩）
@@ -135,7 +191,7 @@
         - 幻翼紫颂砖（替换为小型幻翼紫颂砖）
         - 方纹幻翼紫颂块（替换为磨制幻翼紫颂块）
         - 人字形纹末地石砖（替换为小型末地石砖）
-    - 删除以下方块的**所有形状**：
+    - 删除以下方块的 **所有形状**：
         - 雕纹安山岩（替换为安山岩）
         - 雕纹闪长岩（替换为闪长岩）
         - 雕纹花岗岩（替换为花岗岩）
