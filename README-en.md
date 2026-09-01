@@ -6,7 +6,7 @@
 
 This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [Block List](BlockList.md).
 
-At present, this mod supports Minecraft Java Edition 1.21.11–1.16.5. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
+At present, this mod supports Minecraft Java Edition. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
 
 If you have installed Extended Block Shapes and Blockus, you may also optionally install [Extended Block Shapes - Blockus](#Blockus), to add inter-mod support for Blockus.
 
@@ -46,7 +46,7 @@ In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of 
 | nether wart, warped wart                | 45                     | 45                    |
 | amethyst                                | 35                     | 25                    |
 
-This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs.
+This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs. Both of the two blocks can be placed into sulfur cubes, and their sulfur cube archetypes are both `#slow_bouncy` (same to stone).
 
 Blocks added by this mod inherit most features of their base blocks:
 
@@ -98,6 +98,8 @@ In stonecutters, one base blocks can be cut into various shapes for cut base blo
 
 The second crafting ingredient for crafting fences and fences (apart from base blocks) is dependent on its base block. See details in [block list](BlockList.md).
 
+All unwaxed copper blocks can be crafted with honeycomb into corresponding waxed blocks.
+
 ### Built-in data pack fixing recipe conflicts
 
 Some recipes may conflict with vanilla. To avoid the conflicts, there is a built-in data pack in this mod to avoid recipe conflicts, which is enabled by default. When the data pack is enabled, the following crafting will change:
@@ -111,7 +113,9 @@ Some recipes may conflict with vanilla. To avoid the conflicts, there is a built
 - Walls of planks are crafted from 6 planks and 1 stick.
 - Copper walls and waxed copper walls (including all oxidization levels) are crafted from 6 base blocks and 1 copper ingot.
 
-All unwaxed copper blocks can be crafted with honeycomb into corresponding waxed blocks.
+This datapack is enabled by default. If it's not enabled in your word, you can run command `/datapack enable "extshape:recipe_tweak"`.
+
+> If you installed the part that cooperates with other mods (see [inter-mod support](#inter-mod-support)), the recipe conflicts are unavoidable. In this case it's recommended to install mods that fix the recipe conflict.
 
 #### The command to manually test recipe conflicts
 
