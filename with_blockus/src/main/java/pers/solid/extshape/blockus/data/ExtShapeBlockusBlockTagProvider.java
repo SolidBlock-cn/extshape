@@ -5,20 +5,28 @@ import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.registry.content.bundles.WoolBundle;
 import com.brand.blockus.registry.tag.BlockusBlockTags;
+import com.brand.blockus.utils.helper.BlockOrder;
+import com.brand.blockus.utils.helper.WoodMaps;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.util.DyeColor;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
 import pers.solid.extshape.tag.ExtShapeTags;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
   public static final ImmutableSet<String> STONE_BASE_BLOCK_KEYWORDS = ImmutableSet.of("stone", "andesite", "granite", "diorite", "limestone", "marble", "viridite", "netherrack", "basalt", "deepslate", "tuff", "sulfur", "cinnabar", "nether_brick");
@@ -322,12 +330,15 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.STRIPPED_WHITE_OAK_WOOD
     );
 
-    for (BSSWBundle bundle : BlockusBlocks.WOODEN_MOSAIC.bundle().values()) {
-      addForShapes(BlockusBlockTags.ALL_WOODEN_MOSAICS, bundle.block());
-    }
-
-    for (BSSWBundle bundle : BlockusBlocks.MOSSY_PLANKS.bundle().values()) {
-      addForShapes(BlockusBlockTags.ALL_MOSSY_PLANKS, bundle.block());
+    final Map<String, BSSWBundle> woodenMosaicBundle = BlockusBlocks.WOODEN_MOSAIC.bundle();
+    final Map<String, BSSWBundle> mossyPlanksBundle = BlockusBlocks.MOSSY_PLANKS.bundle();
+    for (WoodMaps woodMaps : BlockOrder.WOOD) {
+      if (woodenMosaicBundle.containsKey(woodMaps.getId())) {
+        addForShapes(BlockusBlockTags.ALL_WOODEN_MOSAICS, woodenMosaicBundle.get(woodMaps.getId()).block());
+      }
+      if (mossyPlanksBundle.containsKey(woodMaps.getId())) {
+        addForShapes(BlockusBlockTags.ALL_MOSSY_PLANKS, mossyPlanksBundle.get(woodMaps.getId()).block());
+      }
     }
 
     addForShapes(BlockusBlockTags.CHOCOLATE_BLOCKS,
@@ -345,16 +356,20 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
 
-    addForShapes(BlockusBlockTags.STAINED_STONE_BRICKS, Iterables.transform(BlockusBlocks.STAINED_STONE_BRICKS.colorMap().values(), BSSWBundle::block));
+    final Map<DyeColor, BSSWBundle> stainedStoneBricksColorMap = BlockusBlocks.STAINED_STONE_BRICKS.colorMap();
+    addForShapes(BlockusBlockTags.STAINED_STONE_BRICKS, Arrays.stream(BlockOrder.COLOR).map(dyeColor -> stainedStoneBricksColorMap.get(dyeColor).block()).filter(Objects::nonNull)::iterator);
 
-    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlocks.CONCRETE_BRICKS.colorMap().values(), ConcreteBundle.ConcreteVariants::block));
-//    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlocks.CONCRETE_BRICKS.colorMap().values(), ConcreteBundle.ConcreteVariants::chiseled));
+    final Map<DyeColor, ConcreteBundle.ConcreteVariants> concreteBricksColorMap = BlockusBlocks.CONCRETE_BRICKS.colorMap();
+    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Arrays.stream(BlockOrder.COLOR).map(dyeColor -> concreteBricksColorMap.get(dyeColor).block()).filter(Objects::nonNull)::iterator);
 
     addForShapes(BlockusBlockTags.SHINGLES, BlockusBlocks.SHINGLES.block());
-    addForShapes(BlockusBlockTags.SHINGLES, Iterables.transform(BlockusBlocks.STAINED_SHINGLES.colorMap().values(), BSSWBundle::block));
+    final Map<DyeColor, BSSWBundle> stainedShinglesColorMap = BlockusBlocks.STAINED_SHINGLES.colorMap();
+    addForShapes(BlockusBlockTags.SHINGLES, Arrays.stream(BlockOrder.COLOR).map(dyeColor -> stainedShinglesColorMap.get(dyeColor).block()).filter(Objects::nonNull)::iterator);
 
-    addForShapes(BlockusBlockTags.ALL_PATTERNED_WOOLS, Iterables.transform(Iterables.concat(BlockusBlocks.PATTERNED_WOOL.colorMap().values(), BlockusBlocks.GINGHAM_WOOL.colorMap().values()), WoolBundle.WoolVariants::block));
-    addForShapes(ExtShapeTags.WOOLEN_BLOCKS, Iterables.transform(Iterables.concat(BlockusBlocks.PATTERNED_WOOL.colorMap().values(), BlockusBlocks.GINGHAM_WOOL.colorMap().values()), WoolBundle.WoolVariants::block));
+    final Map<DyeColor, WoolBundle.WoolVariants> patternedWoolColorMap = BlockusBlocks.PATTERNED_WOOL.colorMap();
+    final Map<DyeColor, WoolBundle.WoolVariants> ginghamWoolColorMap = BlockusBlocks.GINGHAM_WOOL.colorMap();
+    addForShapes(BlockusBlockTags.ALL_PATTERNED_WOOLS, Arrays.stream(BlockOrder.COLOR).flatMap(dyeColor -> Stream.of(patternedWoolColorMap.get(dyeColor), ginghamWoolColorMap.get(dyeColor))).filter(Objects::nonNull).map(WoolBundle.WoolVariants::block)::iterator);
+    addForShapes(ExtShapeTags.WOOLEN_BLOCKS, Arrays.stream(BlockOrder.COLOR).flatMap(dyeColor -> Stream.of(patternedWoolColorMap.get(dyeColor), ginghamWoolColorMap.get(dyeColor))).filter(Objects::nonNull).map(WoolBundle.WoolVariants::block)::iterator);
 
     addForShapes(BlockusBlockTags.THATCH, BlockusBlocks.THATCH.block());
 
@@ -376,13 +391,15 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     // endregion 其他通用方块标签
   }
 
+  @Contract("null -> fail")
   @Override
-  protected void checkValidBaseBlock(Block baseBlock) {
+  protected void checkValidBaseBlock(@Nullable Block baseBlock) {
     Preconditions.checkArgument(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.contains(baseBlock), "%s is not a base block for Extended Block Shapes - Blockus", baseBlock);
   }
 
+  @Contract("null -> false")
   @Override
-  protected boolean isValidBlock(Block block) {
+  protected boolean isValidBlock(@Nullable Block block) {
     return ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block);
   }
 }
