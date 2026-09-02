@@ -4,6 +4,10 @@
 
 - See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
 
+### 3.1.6-beta.12
+
+- Update for 26.3-pre-1. Following the vanilla changes, the number providers in this mod are split into `context_int_provider` and `context_float_provider`.
+
 ### 3.1.6-beta.11
 
 - Update for 26.3-snapshot-10. Now the stripping of wood and bamboo blocks in this mod uses the entry with ID `extshape:axe` of the vanilla registry `block_transformer`.

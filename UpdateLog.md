@@ -4,6 +4,10 @@
 
 - 参见 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3 的更新日志。
 
+### 3.1.6-beta.12
+
+- 更新 26.3-pre-1。跟随原版的变更，本模组中的数值提供器亦拆分为 `context_int_provider` 和 `context_float_provider`。
+
 ### 3.1.6-beta.11
 
 - 更新 26.3-snapshot-10。现在本模组中的木制和竹制方块去皮使用原版的 `block_transformer` 注册表中 ID 为 `extshape:axe` 的项。
