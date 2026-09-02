@@ -15,12 +15,12 @@
                 "type": "double"
               }
             },
-            "count": 2.0
+            "count": 2
           },
           "name": "extshape:sculk_slab"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

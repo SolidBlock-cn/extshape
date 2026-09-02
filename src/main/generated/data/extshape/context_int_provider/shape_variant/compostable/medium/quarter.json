@@ -9,14 +9,14 @@
           "level": "0"
         }
       },
-      "number_provider": 1.0
+      "value": 1
     },
     {
       "condition": {
         "type": "minecraft:random_chance",
         "chance": "extshape:shape_variant_modifier/quarter"
       },
-      "number_provider": "minecraft:compostable/medium"
+      "value": "minecraft:compostable/medium"
     }
   ]
 }

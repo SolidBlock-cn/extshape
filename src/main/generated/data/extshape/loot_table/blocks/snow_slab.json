@@ -18,7 +18,7 @@
                     "type": "double"
                   }
                 },
-                "count": 2.0
+                "count": 2
               },
               "name": "extshape:snow_slab"
             },
@@ -27,7 +27,7 @@
               "modifier": [
                 {
                   "type": "minecraft:set_count",
-                  "count": 2.0
+                  "count": 2
                 },
                 {
                   "type": "minecraft:set_count",
@@ -38,7 +38,7 @@
                       "type": "double"
                     }
                   },
-                  "count": 4.0
+                  "count": 4
                 }
               ],
               "name": "minecraft:snowball"
@@ -46,7 +46,7 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

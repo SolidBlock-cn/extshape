@@ -17,9 +17,12 @@
                 {
                   "type": "minecraft:set_count",
                   "count": {
-                    "type": "minecraft:uniform",
-                    "max": 1.5,
-                    "min": 1.0
+                    "type": "minecraft:from_float",
+                    "input": {
+                      "type": "minecraft:uniform",
+                      "max": 1.5,
+                      "min": 1.0
+                    }
                   }
                 },
                 {
@@ -33,8 +36,8 @@
                 {
                   "type": "minecraft:limit_count",
                   "limit": {
-                    "max": 2.0,
-                    "min": 0.0
+                    "max": 2,
+                    "min": 0
                   }
                 },
                 {
@@ -46,7 +49,7 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

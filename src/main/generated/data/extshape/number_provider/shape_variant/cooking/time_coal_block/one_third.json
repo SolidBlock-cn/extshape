@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:product",
-  "operands": [
-    "minecraft:cooking/time_coal_block",
-    "extshape:shape_variant_modifier/one_third"
-  ]
-}

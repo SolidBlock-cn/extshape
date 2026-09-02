@@ -18,7 +18,7 @@
                     "type": "double"
                   }
                 },
-                "count": 2.0
+                "count": 2
               },
               "name": "extshape:sea_lantern_slab"
             },
@@ -36,8 +36,8 @@
                   "type": "minecraft:set_count",
                   "count": {
                     "type": "minecraft:uniform",
-                    "max": 3.0,
-                    "min": 2.0
+                    "max": 3,
+                    "min": 2
                   }
                 },
                 {
@@ -51,8 +51,8 @@
                 {
                   "type": "minecraft:limit_count",
                   "limit": {
-                    "max": 5.0,
-                    "min": 1.0
+                    "max": 5,
+                    "min": 1
                   }
                 },
                 {
@@ -67,9 +67,12 @@
                 {
                   "type": "minecraft:set_count",
                   "count": {
-                    "type": "minecraft:uniform",
-                    "max": 1.5,
-                    "min": 1.0
+                    "type": "minecraft:from_float",
+                    "input": {
+                      "type": "minecraft:uniform",
+                      "max": 1.5,
+                      "min": 1.0
+                    }
                   }
                 },
                 {
@@ -83,8 +86,8 @@
                 {
                   "type": "minecraft:limit_count",
                   "limit": {
-                    "max": 2.0,
-                    "min": 0.0
+                    "max": 2,
+                    "min": 0
                   }
                 },
                 {
@@ -96,7 +99,7 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

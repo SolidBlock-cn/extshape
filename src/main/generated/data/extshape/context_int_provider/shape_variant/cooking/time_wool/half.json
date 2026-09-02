@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:from_float",
+  "input": {
+    "type": "minecraft:mul",
+    "inputs": [
+      {
+        "type": "minecraft:from_int",
+        "input": "minecraft:cooking/time_wool"
+      },
+      "extshape:shape_variant_modifier/half"
+    ]
+  }
+}

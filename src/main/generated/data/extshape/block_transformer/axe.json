@@ -1,7 +1,7 @@
 [
   {
     "block_state_provider": {
-      "type": "minecraft:rule_based_state_provider",
+      "type": "minecraft:rule_based",
       "rules": [
         {
           "if_true": {
@@ -9,10 +9,15 @@
             "blocks": "extshape:oak_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_stairs"
+              "id": "extshape:stripped_oak_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -22,10 +27,14 @@
             "blocks": "extshape:oak_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_slab"
+              "id": "extshape:stripped_oak_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -35,10 +44,14 @@
             "blocks": "extshape:oak_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_vertical_slab"
+              "id": "extshape:stripped_oak_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -48,10 +61,13 @@
             "blocks": "extshape:oak_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_vertical_stairs"
+              "id": "extshape:stripped_oak_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -61,10 +77,14 @@
             "blocks": "extshape:oak_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_quarter_piece"
+              "id": "extshape:stripped_oak_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -74,10 +94,13 @@
             "blocks": "extshape:oak_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_oak_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -87,10 +110,16 @@
             "blocks": "extshape:oak_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_fence"
+              "id": "extshape:stripped_oak_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -100,10 +129,15 @@
             "blocks": "extshape:oak_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_fence_gate"
+              "id": "extshape:stripped_oak_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -113,10 +147,17 @@
             "blocks": "extshape:oak_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_wall"
+              "id": "extshape:stripped_oak_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -126,10 +167,14 @@
             "blocks": "extshape:oak_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_button"
+              "id": "extshape:stripped_oak_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -139,10 +184,12 @@
             "blocks": "extshape:oak_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_oak_wood_pressure_plate"
+              "id": "extshape:stripped_oak_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -152,10 +199,15 @@
             "blocks": "extshape:spruce_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_stairs"
+              "id": "extshape:stripped_spruce_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -165,10 +217,14 @@
             "blocks": "extshape:spruce_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_slab"
+              "id": "extshape:stripped_spruce_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -178,10 +234,14 @@
             "blocks": "extshape:spruce_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_vertical_slab"
+              "id": "extshape:stripped_spruce_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -191,10 +251,13 @@
             "blocks": "extshape:spruce_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_vertical_stairs"
+              "id": "extshape:stripped_spruce_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -204,10 +267,14 @@
             "blocks": "extshape:spruce_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_quarter_piece"
+              "id": "extshape:stripped_spruce_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -217,10 +284,13 @@
             "blocks": "extshape:spruce_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_spruce_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -230,10 +300,16 @@
             "blocks": "extshape:spruce_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_fence"
+              "id": "extshape:stripped_spruce_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -243,10 +319,15 @@
             "blocks": "extshape:spruce_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_fence_gate"
+              "id": "extshape:stripped_spruce_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -256,10 +337,17 @@
             "blocks": "extshape:spruce_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_wall"
+              "id": "extshape:stripped_spruce_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -269,10 +357,14 @@
             "blocks": "extshape:spruce_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_button"
+              "id": "extshape:stripped_spruce_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -282,10 +374,12 @@
             "blocks": "extshape:spruce_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_spruce_wood_pressure_plate"
+              "id": "extshape:stripped_spruce_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -295,10 +389,15 @@
             "blocks": "extshape:birch_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_stairs"
+              "id": "extshape:stripped_birch_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -308,10 +407,14 @@
             "blocks": "extshape:birch_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_slab"
+              "id": "extshape:stripped_birch_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -321,10 +424,14 @@
             "blocks": "extshape:birch_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_vertical_slab"
+              "id": "extshape:stripped_birch_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -334,10 +441,13 @@
             "blocks": "extshape:birch_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_vertical_stairs"
+              "id": "extshape:stripped_birch_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -347,10 +457,14 @@
             "blocks": "extshape:birch_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_quarter_piece"
+              "id": "extshape:stripped_birch_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -360,10 +474,13 @@
             "blocks": "extshape:birch_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_birch_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -373,10 +490,16 @@
             "blocks": "extshape:birch_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_fence"
+              "id": "extshape:stripped_birch_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -386,10 +509,15 @@
             "blocks": "extshape:birch_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_fence_gate"
+              "id": "extshape:stripped_birch_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -399,10 +527,17 @@
             "blocks": "extshape:birch_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_wall"
+              "id": "extshape:stripped_birch_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -412,10 +547,14 @@
             "blocks": "extshape:birch_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_button"
+              "id": "extshape:stripped_birch_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -425,10 +564,12 @@
             "blocks": "extshape:birch_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_birch_wood_pressure_plate"
+              "id": "extshape:stripped_birch_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -438,10 +579,15 @@
             "blocks": "extshape:jungle_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_stairs"
+              "id": "extshape:stripped_jungle_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -451,10 +597,14 @@
             "blocks": "extshape:jungle_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_slab"
+              "id": "extshape:stripped_jungle_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -464,10 +614,14 @@
             "blocks": "extshape:jungle_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_vertical_slab"
+              "id": "extshape:stripped_jungle_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -477,10 +631,13 @@
             "blocks": "extshape:jungle_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_vertical_stairs"
+              "id": "extshape:stripped_jungle_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -490,10 +647,14 @@
             "blocks": "extshape:jungle_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_quarter_piece"
+              "id": "extshape:stripped_jungle_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -503,10 +664,13 @@
             "blocks": "extshape:jungle_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_jungle_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -516,10 +680,16 @@
             "blocks": "extshape:jungle_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_fence"
+              "id": "extshape:stripped_jungle_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -529,10 +699,15 @@
             "blocks": "extshape:jungle_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_fence_gate"
+              "id": "extshape:stripped_jungle_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -542,10 +717,17 @@
             "blocks": "extshape:jungle_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_wall"
+              "id": "extshape:stripped_jungle_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -555,10 +737,14 @@
             "blocks": "extshape:jungle_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_button"
+              "id": "extshape:stripped_jungle_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -568,10 +754,12 @@
             "blocks": "extshape:jungle_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_jungle_wood_pressure_plate"
+              "id": "extshape:stripped_jungle_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -581,10 +769,15 @@
             "blocks": "extshape:acacia_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_stairs"
+              "id": "extshape:stripped_acacia_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -594,10 +787,14 @@
             "blocks": "extshape:acacia_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_slab"
+              "id": "extshape:stripped_acacia_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -607,10 +804,14 @@
             "blocks": "extshape:acacia_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_vertical_slab"
+              "id": "extshape:stripped_acacia_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -620,10 +821,13 @@
             "blocks": "extshape:acacia_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_vertical_stairs"
+              "id": "extshape:stripped_acacia_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -633,10 +837,14 @@
             "blocks": "extshape:acacia_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_quarter_piece"
+              "id": "extshape:stripped_acacia_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -646,10 +854,13 @@
             "blocks": "extshape:acacia_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_acacia_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -659,10 +870,16 @@
             "blocks": "extshape:acacia_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_fence"
+              "id": "extshape:stripped_acacia_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -672,10 +889,15 @@
             "blocks": "extshape:acacia_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_fence_gate"
+              "id": "extshape:stripped_acacia_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -685,10 +907,17 @@
             "blocks": "extshape:acacia_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_wall"
+              "id": "extshape:stripped_acacia_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -698,10 +927,14 @@
             "blocks": "extshape:acacia_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_button"
+              "id": "extshape:stripped_acacia_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -711,10 +944,12 @@
             "blocks": "extshape:acacia_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_acacia_wood_pressure_plate"
+              "id": "extshape:stripped_acacia_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -724,10 +959,15 @@
             "blocks": "extshape:cherry_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_stairs"
+              "id": "extshape:stripped_cherry_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -737,10 +977,14 @@
             "blocks": "extshape:cherry_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_slab"
+              "id": "extshape:stripped_cherry_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -750,10 +994,14 @@
             "blocks": "extshape:cherry_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_vertical_slab"
+              "id": "extshape:stripped_cherry_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -763,10 +1011,13 @@
             "blocks": "extshape:cherry_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_vertical_stairs"
+              "id": "extshape:stripped_cherry_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -776,10 +1027,14 @@
             "blocks": "extshape:cherry_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_quarter_piece"
+              "id": "extshape:stripped_cherry_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -789,10 +1044,13 @@
             "blocks": "extshape:cherry_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_cherry_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -802,10 +1060,16 @@
             "blocks": "extshape:cherry_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_fence"
+              "id": "extshape:stripped_cherry_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -815,10 +1079,15 @@
             "blocks": "extshape:cherry_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_fence_gate"
+              "id": "extshape:stripped_cherry_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -828,10 +1097,17 @@
             "blocks": "extshape:cherry_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_wall"
+              "id": "extshape:stripped_cherry_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -841,10 +1117,14 @@
             "blocks": "extshape:cherry_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_button"
+              "id": "extshape:stripped_cherry_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -854,10 +1134,12 @@
             "blocks": "extshape:cherry_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_cherry_wood_pressure_plate"
+              "id": "extshape:stripped_cherry_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -867,10 +1149,15 @@
             "blocks": "extshape:dark_oak_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_stairs"
+              "id": "extshape:stripped_dark_oak_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -880,10 +1167,14 @@
             "blocks": "extshape:dark_oak_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_slab"
+              "id": "extshape:stripped_dark_oak_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -893,10 +1184,14 @@
             "blocks": "extshape:dark_oak_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_vertical_slab"
+              "id": "extshape:stripped_dark_oak_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -906,10 +1201,13 @@
             "blocks": "extshape:dark_oak_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_vertical_stairs"
+              "id": "extshape:stripped_dark_oak_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -919,10 +1217,14 @@
             "blocks": "extshape:dark_oak_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_quarter_piece"
+              "id": "extshape:stripped_dark_oak_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -932,10 +1234,13 @@
             "blocks": "extshape:dark_oak_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_dark_oak_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -945,10 +1250,16 @@
             "blocks": "extshape:dark_oak_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_fence"
+              "id": "extshape:stripped_dark_oak_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -958,10 +1269,15 @@
             "blocks": "extshape:dark_oak_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_fence_gate"
+              "id": "extshape:stripped_dark_oak_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -971,10 +1287,17 @@
             "blocks": "extshape:dark_oak_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_wall"
+              "id": "extshape:stripped_dark_oak_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -984,10 +1307,14 @@
             "blocks": "extshape:dark_oak_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_button"
+              "id": "extshape:stripped_dark_oak_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -997,10 +1324,12 @@
             "blocks": "extshape:dark_oak_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_dark_oak_wood_pressure_plate"
+              "id": "extshape:stripped_dark_oak_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -1010,10 +1339,15 @@
             "blocks": "extshape:pale_oak_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_stairs"
+              "id": "extshape:stripped_pale_oak_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1023,10 +1357,14 @@
             "blocks": "extshape:pale_oak_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_slab"
+              "id": "extshape:stripped_pale_oak_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1036,10 +1374,14 @@
             "blocks": "extshape:pale_oak_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_vertical_slab"
+              "id": "extshape:stripped_pale_oak_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1049,10 +1391,13 @@
             "blocks": "extshape:pale_oak_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_vertical_stairs"
+              "id": "extshape:stripped_pale_oak_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1062,10 +1407,14 @@
             "blocks": "extshape:pale_oak_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_quarter_piece"
+              "id": "extshape:stripped_pale_oak_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1075,10 +1424,13 @@
             "blocks": "extshape:pale_oak_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_pale_oak_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1088,10 +1440,16 @@
             "blocks": "extshape:pale_oak_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_fence"
+              "id": "extshape:stripped_pale_oak_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -1101,10 +1459,15 @@
             "blocks": "extshape:pale_oak_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_fence_gate"
+              "id": "extshape:stripped_pale_oak_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1114,10 +1477,17 @@
             "blocks": "extshape:pale_oak_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_wall"
+              "id": "extshape:stripped_pale_oak_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -1127,10 +1497,14 @@
             "blocks": "extshape:pale_oak_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_button"
+              "id": "extshape:stripped_pale_oak_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1140,10 +1514,12 @@
             "blocks": "extshape:pale_oak_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_pale_oak_wood_pressure_plate"
+              "id": "extshape:stripped_pale_oak_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -1153,10 +1529,15 @@
             "blocks": "extshape:poplar_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_stairs"
+              "id": "extshape:stripped_poplar_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1166,10 +1547,14 @@
             "blocks": "extshape:poplar_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_slab"
+              "id": "extshape:stripped_poplar_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1179,10 +1564,14 @@
             "blocks": "extshape:poplar_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_vertical_slab"
+              "id": "extshape:stripped_poplar_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1192,10 +1581,13 @@
             "blocks": "extshape:poplar_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_vertical_stairs"
+              "id": "extshape:stripped_poplar_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1205,10 +1597,14 @@
             "blocks": "extshape:poplar_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_quarter_piece"
+              "id": "extshape:stripped_poplar_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1218,10 +1614,13 @@
             "blocks": "extshape:poplar_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_poplar_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1231,10 +1630,16 @@
             "blocks": "extshape:poplar_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_fence"
+              "id": "extshape:stripped_poplar_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -1244,10 +1649,15 @@
             "blocks": "extshape:poplar_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_fence_gate"
+              "id": "extshape:stripped_poplar_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1257,10 +1667,17 @@
             "blocks": "extshape:poplar_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_wall"
+              "id": "extshape:stripped_poplar_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -1270,10 +1687,14 @@
             "blocks": "extshape:poplar_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_button"
+              "id": "extshape:stripped_poplar_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1283,10 +1704,12 @@
             "blocks": "extshape:poplar_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_poplar_wood_pressure_plate"
+              "id": "extshape:stripped_poplar_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -1296,10 +1719,15 @@
             "blocks": "extshape:mangrove_wood_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_stairs"
+              "id": "extshape:stripped_mangrove_wood_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1309,10 +1737,14 @@
             "blocks": "extshape:mangrove_wood_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_slab"
+              "id": "extshape:stripped_mangrove_wood_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1322,10 +1754,14 @@
             "blocks": "extshape:mangrove_wood_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_vertical_slab"
+              "id": "extshape:stripped_mangrove_wood_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1335,10 +1771,13 @@
             "blocks": "extshape:mangrove_wood_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_vertical_stairs"
+              "id": "extshape:stripped_mangrove_wood_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1348,10 +1787,14 @@
             "blocks": "extshape:mangrove_wood_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_quarter_piece"
+              "id": "extshape:stripped_mangrove_wood_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1361,10 +1804,13 @@
             "blocks": "extshape:mangrove_wood_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_vertical_quarter_piece"
+              "id": "extshape:stripped_mangrove_wood_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1374,10 +1820,16 @@
             "blocks": "extshape:mangrove_wood_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_fence"
+              "id": "extshape:stripped_mangrove_wood_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -1387,10 +1839,15 @@
             "blocks": "extshape:mangrove_wood_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_fence_gate"
+              "id": "extshape:stripped_mangrove_wood_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1400,10 +1857,17 @@
             "blocks": "extshape:mangrove_wood_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_wall"
+              "id": "extshape:stripped_mangrove_wood_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -1413,10 +1877,14 @@
             "blocks": "extshape:mangrove_wood_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_button"
+              "id": "extshape:stripped_mangrove_wood_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1426,10 +1894,12 @@
             "blocks": "extshape:mangrove_wood_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_mangrove_wood_pressure_plate"
+              "id": "extshape:stripped_mangrove_wood_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -1439,10 +1909,15 @@
             "blocks": "extshape:warped_hyphae_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_stairs"
+              "id": "extshape:stripped_warped_hyphae_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1452,10 +1927,14 @@
             "blocks": "extshape:warped_hyphae_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_slab"
+              "id": "extshape:stripped_warped_hyphae_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1465,10 +1944,14 @@
             "blocks": "extshape:warped_hyphae_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_vertical_slab"
+              "id": "extshape:stripped_warped_hyphae_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1478,10 +1961,13 @@
             "blocks": "extshape:warped_hyphae_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_vertical_stairs"
+              "id": "extshape:stripped_warped_hyphae_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1491,10 +1977,14 @@
             "blocks": "extshape:warped_hyphae_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_quarter_piece"
+              "id": "extshape:stripped_warped_hyphae_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1504,10 +1994,13 @@
             "blocks": "extshape:warped_hyphae_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_vertical_quarter_piece"
+              "id": "extshape:stripped_warped_hyphae_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1517,10 +2010,16 @@
             "blocks": "extshape:warped_hyphae_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_fence"
+              "id": "extshape:stripped_warped_hyphae_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -1530,10 +2029,15 @@
             "blocks": "extshape:warped_hyphae_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_fence_gate"
+              "id": "extshape:stripped_warped_hyphae_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1543,10 +2047,17 @@
             "blocks": "extshape:warped_hyphae_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_wall"
+              "id": "extshape:stripped_warped_hyphae_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -1556,10 +2067,14 @@
             "blocks": "extshape:warped_hyphae_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_button"
+              "id": "extshape:stripped_warped_hyphae_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1569,10 +2084,12 @@
             "blocks": "extshape:warped_hyphae_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_warped_hyphae_pressure_plate"
+              "id": "extshape:stripped_warped_hyphae_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -1582,10 +2099,15 @@
             "blocks": "extshape:crimson_hyphae_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_stairs"
+              "id": "extshape:stripped_crimson_hyphae_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1595,10 +2117,14 @@
             "blocks": "extshape:crimson_hyphae_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_slab"
+              "id": "extshape:stripped_crimson_hyphae_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1608,10 +2134,14 @@
             "blocks": "extshape:crimson_hyphae_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_vertical_slab"
+              "id": "extshape:stripped_crimson_hyphae_vertical_slab",
+              "properties": {
+                "axis": "y",
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1621,10 +2151,13 @@
             "blocks": "extshape:crimson_hyphae_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_vertical_stairs"
+              "id": "extshape:stripped_crimson_hyphae_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1634,10 +2167,14 @@
             "blocks": "extshape:crimson_hyphae_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_quarter_piece"
+              "id": "extshape:stripped_crimson_hyphae_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1647,10 +2184,13 @@
             "blocks": "extshape:crimson_hyphae_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_vertical_quarter_piece"
+              "id": "extshape:stripped_crimson_hyphae_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1660,10 +2200,16 @@
             "blocks": "extshape:crimson_hyphae_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_fence"
+              "id": "extshape:stripped_crimson_hyphae_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -1673,10 +2219,15 @@
             "blocks": "extshape:crimson_hyphae_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_fence_gate"
+              "id": "extshape:stripped_crimson_hyphae_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1686,10 +2237,17 @@
             "blocks": "extshape:crimson_hyphae_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_wall"
+              "id": "extshape:stripped_crimson_hyphae_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -1699,10 +2257,14 @@
             "blocks": "extshape:crimson_hyphae_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_button"
+              "id": "extshape:stripped_crimson_hyphae_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1712,10 +2274,12 @@
             "blocks": "extshape:crimson_hyphae_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_crimson_hyphae_pressure_plate"
+              "id": "extshape:stripped_crimson_hyphae_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         },
@@ -1725,10 +2289,15 @@
             "blocks": "extshape:bamboo_block_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_stairs"
+              "id": "extshape:stripped_bamboo_block_stairs",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "shape": "straight",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1738,10 +2307,14 @@
             "blocks": "extshape:bamboo_block_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_slab"
+              "id": "extshape:stripped_bamboo_block_slab",
+              "properties": {
+                "type": "bottom",
+                "axis": "y",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1751,10 +2324,13 @@
             "blocks": "extshape:bamboo_block_vertical_slab"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_vertical_slab"
+              "id": "extshape:stripped_bamboo_block_vertical_slab",
+              "properties": {
+                "facing": "north",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1764,10 +2340,13 @@
             "blocks": "extshape:bamboo_block_vertical_stairs"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_vertical_stairs"
+              "id": "extshape:stripped_bamboo_block_vertical_stairs",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1777,10 +2356,14 @@
             "blocks": "extshape:bamboo_block_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_quarter_piece"
+              "id": "extshape:stripped_bamboo_block_quarter_piece",
+              "properties": {
+                "facing": "north",
+                "half": "bottom",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1790,10 +2373,13 @@
             "blocks": "extshape:bamboo_block_vertical_quarter_piece"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_vertical_quarter_piece"
+              "id": "extshape:stripped_bamboo_block_vertical_quarter_piece",
+              "properties": {
+                "facing": "south_west",
+                "waterlogged": "false"
+              }
             }
           }
         },
@@ -1803,10 +2389,16 @@
             "blocks": "extshape:bamboo_block_fence"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_fence"
+              "id": "extshape:stripped_bamboo_block_fence",
+              "properties": {
+                "east": "false",
+                "north": "false",
+                "south": "false",
+                "waterlogged": "false",
+                "west": "false"
+              }
             }
           }
         },
@@ -1816,10 +2408,15 @@
             "blocks": "extshape:bamboo_block_fence_gate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_fence_gate"
+              "id": "extshape:stripped_bamboo_block_fence_gate",
+              "properties": {
+                "facing": "north",
+                "in_wall": "false",
+                "open": "false",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1829,10 +2426,17 @@
             "blocks": "extshape:bamboo_block_wall"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_wall"
+              "id": "extshape:stripped_bamboo_block_wall",
+              "properties": {
+                "east": "none",
+                "north": "none",
+                "south": "none",
+                "up": "true",
+                "waterlogged": "false",
+                "west": "none"
+              }
             }
           }
         },
@@ -1842,10 +2446,14 @@
             "blocks": "extshape:bamboo_block_button"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_button"
+              "id": "extshape:stripped_bamboo_block_button",
+              "properties": {
+                "face": "wall",
+                "facing": "north",
+                "powered": "false"
+              }
             }
           }
         },
@@ -1855,10 +2463,12 @@
             "blocks": "extshape:bamboo_block_pressure_plate"
           },
           "then": {
-            "type": "minecraft:copy_properties_provider",
+            "type": "minecraft:copy_properties",
             "source": {
-              "type": "minecraft:simple_state_provider",
-              "state": "extshape:stripped_bamboo_block_pressure_plate"
+              "id": "extshape:stripped_bamboo_block_pressure_plate",
+              "properties": {
+                "powered": "false"
+              }
             }
           }
         }
