@@ -32,8 +32,8 @@ import net.minecraft.world.item.crafting.SelectableRecipe;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
-import net.minecraft.world.level.storage.loot.providers.number.ResolvableNumber;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
@@ -291,8 +291,8 @@ public class ExtShape implements ModInitializer {
           errors++;
         }
         if (shapeIsFuel && baseIsFuel
-            && shapeCookingFuel.burnTime() instanceof ResolvableNumber.Reference(ResourceKey<NumberProvider> shapeKey)
-            && baseCookingFuel.burnTime() instanceof ResolvableNumber.Reference(ResourceKey<NumberProvider> baseKey)
+            && shapeCookingFuel.burnTime() instanceof ResolvableInt.Reference(ResourceKey<ContextIntProvider> shapeKey)
+            && baseCookingFuel.burnTime() instanceof ResolvableInt.Reference(ResourceKey<ContextIntProvider> baseKey)
             && !(shapeKey.identifier().getPath().contains(baseKey.identifier().getPath()))) {
           LOGGER.error("Fuel check failed! The base block {} has burn time id: {}, but its {} shape {} has burn time id: {}",
               BuiltInRegistries.BLOCK.getKey(baseBlock),

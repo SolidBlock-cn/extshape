@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.storage.loot.IntRange;
+import net.minecraft.world.level.storage.loot.IntLimit;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
@@ -28,9 +28,10 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
@@ -57,8 +58,8 @@ public class UnusualLootTables {
     return shape.isConstruction ? shape.logicalCompleteness : 1;
   }
 
-  public static Holder<NumberProvider> shapeVolumeConstantProvider(BlockShape shape, float count) {
-    return ConstantValue.exactly(shapeVolume(shape) * count);
+  public static Holder<ContextIntProvider> shapeVolumeConstantProvider(BlockShape shape, float count) {
+    return Holder.direct(new ConstantValue((int) (shapeVolume(shape) * count)));
   }
 
   /**
@@ -99,7 +100,7 @@ public class UnusualLootTables {
     if (childWhenDoubleSlab == null) {
       builder
           .withPool(LootPool.lootPool()
-              .setRolls(ConstantValue.exactly(1.0F))
+              .setRolls(ContextIntProviders.exactly(1))
               .add(AlternativesEntry.alternatives(
                   LootItem.lootTableItem(drop)
                       .when(conditionBuilder),
@@ -107,10 +108,10 @@ public class UnusualLootTables {
     } else {
       builder
           .withPool(LootPool.lootPool()
-              .setRolls(ConstantValue.exactly(1.0F))
+              .setRolls(ContextIntProviders.exactly(1))
               .add(AlternativesEntry.alternatives(
                   LootItem.lootTableItem(drop)
-                      .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))
+                      .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(2))
                           .when(MatchBlock.blockMatches(blocks, drop, StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))))
                       .when(conditionBuilder),
                   childWhenDoubleSlab
@@ -146,46 +147,46 @@ public class UnusualLootTables {
     builder.put(Blocks.GLOWSTONE, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.GLOWSTONE_DUST)
-              .apply(SetItemCountFunction.setCount(UniformGenerator.between(2 * shapeVolume, 4 * shapeVolume)))
+              .apply(SetItemCountFunction.setCount(ContextIntProviders.fromFloat(ContextFloatProviders.between(2 * shapeVolume, 4 * shapeVolume))))
               .apply(fortuneFunction(enchantments))
-              .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (shapeVolume * 4))))),
+              .apply(LimitCount.limitCount(IntLimit.range((int) shapeVolume, (int) (shapeVolume * 4))))),
           shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.GLOWSTONE_DUST)
-              .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
+              .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 4)))
               .apply(fortuneFunction(enchantments))
-              .apply(LimitCount.limitCount(IntRange.range(1, 4)))) : null, generator);
+              .apply(LimitCount.limitCount(IntLimit.range(1, 4)))) : null, generator);
     });
     builder.put(Blocks.MELON, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.MELON_SLICE)
-              .apply(SetItemCountFunction.setCount(UniformGenerator.between(shapeVolume * 2, shapeVolume * 4)))
+              .apply(SetItemCountFunction.setCount(ContextIntProviders.fromFloat(ContextFloatProviders.between(shapeVolume * 2, shapeVolume * 4))))
               .apply(fortuneFunction(enchantments))
-              .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (shapeVolume * 4))))),
+              .apply(LimitCount.limitCount(IntLimit.range((int) shapeVolume, (int) (shapeVolume * 4))))),
           shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.MELON_SLICE)
-              .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 4)))
+              .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 4)))
               .apply(fortuneFunction(enchantments))
-              .apply(LimitCount.limitCount(IntRange.range(1, 4)))) : null, generator);
+              .apply(LimitCount.limitCount(IntLimit.range(1, 4)))) : null, generator);
     });
     builder.put(Blocks.SEA_LANTERN, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
-          .apply(SetItemCountFunction.setCount(UniformGenerator.between(2 * shapeVolume, 3 * shapeVolume)))
+          .apply(SetItemCountFunction.setCount(ContextIntProviders.fromFloat(ContextFloatProviders.between(2 * shapeVolume, 3 * shapeVolume))))
           .apply(fortuneFunction(enchantments))
-          .apply(LimitCount.limitCount(IntRange.range((int) shapeVolume, (int) (5 * shapeVolume))))
+          .apply(LimitCount.limitCount(IntLimit.range((int) shapeVolume, (int) (5 * shapeVolume))))
       ), shape == BlockShape.SLAB ? generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_CRYSTALS)
-          .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 3)))
+          .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 3)))
           .apply(fortuneFunction(enchantments))
-          .apply(LimitCount.limitCount(IntRange.range(1, 5)))
+          .apply(LimitCount.limitCount(IntLimit.range(1, 5)))
       ) : null, generator);
     });
     builder.put(Blocks.GILDED_BLACKSTONE, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionCondition(block, LootItem.lootTableItem(Items.GOLD_NUGGET)
-          .apply(SetItemCountFunction.setCount(UniformGenerator.between(shapeVolume * 2, shapeVolume * 5)))
+          .apply(SetItemCountFunction.setCount(ContextIntProviders.fromFloat(ContextFloatProviders.between(shapeVolume * 2, shapeVolume * 5))))
           .when(BonusLevelTableCondition.bonusLevelFlatChance(fortune(enchantments), 0.1F, 0.14285715F, 0.25F, 1.0F))
           .otherwise(LootItem.lootTableItem(block))), shape == BlockShape.SLAB ? generator.applyExplosionCondition(block, LootItem.lootTableItem(Items.GOLD_NUGGET)
-          .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 5)))
+          .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 5)))
           .when(BonusLevelTableCondition.bonusLevelFlatChance(fortune(enchantments), 0.1F, 0.14285715F, 0.25F, 1.0F))
-          .otherwise(LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))) : null, generator);
+          .otherwise(LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(2))))) : null, generator);
     });
     builder.put(Blocks.ICE, dropsDoubleWithSilkTouchOrNone);
     builder.put(Blocks.BLUE_ICE, dropsDoubleWithSilkTouchOrNone);
@@ -206,7 +207,7 @@ public class UnusualLootTables {
         return LootTable.lootTable()
             .withPool(LootPool.lootPool()
                 .add(LootItem.lootTableItem(block)
-                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))
+                    .apply(SetItemCountFunction.setCount(ContextIntProviders.exactly(2))
                         .when(MatchBlock.blockMatches(blocks, block, StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE))))
                     .when(generator.hasSilkTouch())
                     .otherwise(entryBuilder)));
@@ -240,14 +241,14 @@ public class UnusualLootTables {
     final UniformContainerBase.Builder<?> itemEntryBuilder = LootItem.lootTableItem(drop);
     if (isSlab) {
       itemEntryBuilder.apply(
-          SetItemCountFunction.setCount(ConstantValue.exactly(2))
+          SetItemCountFunction.setCount(ContextIntProviders.exactly(2))
               .when(MatchBlock.blockMatches(blocks, drop, StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE)))
       );
     }
     return LootTable.lootTable()
         .withPool(LootPool.lootPool()
             .when(generator.hasSilkTouch())
-            .setRolls(ConstantValue.exactly(1.0F))
+            .setRolls(ContextIntProviders.exactly(1))
             .add(itemEntryBuilder));
   }
 

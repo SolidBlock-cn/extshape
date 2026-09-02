@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.*;
@@ -278,18 +278,18 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
 
   @CanIgnoreReturnValue
   @Contract(value = "_-> this")
-  public BlocksBuilder compostingChance(final ExtShapeNumberProviders.VariantSeries variantSeries) {
+  public BlocksBuilder compostingChance(final ExtShapeNumberProviders.VariantSeries<ContextIntProvider> variantSeries) {
     return addPreBuildConsumer((blockShape, builder) -> {
-      final ResourceKey<NumberProvider> compostingChance = variantSeries.pickForShape(blockShape);
+      final ResourceKey<ContextIntProvider> compostingChance = variantSeries.pickForShape(blockShape);
       builder.itemSettings.compostable(compostingChance);
     });
   }
 
   @CanIgnoreReturnValue
   @Contract(value = "_-> this")
-  public BlocksBuilder cookingTime(final ExtShapeNumberProviders.VariantSeries variantSeries) {
+  public BlocksBuilder cookingTime(final ExtShapeNumberProviders.VariantSeries<ContextIntProvider> variantSeries) {
     return addPreBuildConsumer((blockShape, builder) -> {
-      final ResourceKey<NumberProvider> burnTime = variantSeries.pickForShape(blockShape);
+      final ResourceKey<ContextIntProvider> burnTime = variantSeries.pickForShape(blockShape);
       builder.itemSettings.cookingFuel(burnTime);
     });
   }
