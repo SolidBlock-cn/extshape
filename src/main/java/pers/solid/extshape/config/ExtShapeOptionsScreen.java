@@ -22,6 +22,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import org.apache.commons.lang3.StringUtils;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.itemgroup.ItemGroupRules;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -146,7 +147,7 @@ public class ExtShapeOptionsScreen extends Screen {
       ExtShapeConfig.requireUpdateDisplay = true;
     }
     if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)) {
-      ExtShapeConfig.requireUpdateShapesToAddVanilla = true;
+      ItemGroupRules.rebuildRules();
     }
 
     // 应用物品组。/*if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {

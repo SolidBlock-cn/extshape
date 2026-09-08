@@ -39,7 +39,6 @@ public class ExtShapeConfig implements Cloneable {
    * 当配置更新后，这个值就会是 {@code true}，参见 {@link pers.solid.extshape.mixin.ItemGroupsMixin}。
    */
   public static boolean requireUpdateDisplay = false;
-  public static boolean requireUpdateShapesToAddVanilla = true;
 
   public static void init() {
     if (CONFIG_FILE.exists()) {
