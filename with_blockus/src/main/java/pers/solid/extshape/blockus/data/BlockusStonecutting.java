@@ -1,22 +1,18 @@
-package pers.solid.extshape.blockus;
+package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.google.common.collect.ImmutableMultimap;
-import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.data.CrossShapeDataGeneration;
+import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.data.VanillaStonecutting;
 
 import java.util.Arrays;
@@ -27,9 +23,8 @@ import java.util.stream.Collectors;
 /**
  * @see VanillaStonecutting
  */
-public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
+public final class BlockusStonecutting {
   public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
-
 
   static {
     final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
@@ -46,13 +41,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     }
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeProvider recipeGenerator, RecipeOutput exporter) {
-    super(baseBlock, defaultNamespace, recipeGenerator, exporter);
-  }
-
-  @Override
-  protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
-    return INSTANCE.get(baseBlock).stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList());
+  private BlockusStonecutting() {
   }
 
   /**
@@ -69,8 +58,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.putAll(BlockusBlocks.COBBLESTONE_BRICKS.block(), Blocks.COBBLESTONE, Blocks.STONE);
     builder.putAll(BlockusBlocks.MOSSY_COBBLESTONE_BRICKS.block(), Blocks.MOSSY_COBBLESTONE);
     builder.putAll(BlockusBlocks.STONE_TILES.block(), Blocks.STONE, Blocks.STONE_BRICKS);
-    builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE);
-    builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.STONE_CIRCULAR_PAVING, Blocks.STONE, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE, Blocks.STONE_BRICKS);
     putMultipleWithMid(builder, BlockusBlocks.ANDESITE_BRICKS.block(), Blocks.ANDESITE, Blocks.POLISHED_ANDESITE, BlockusBlocks.HERRINGBONE_ANDESITE_BRICKS, BlockusBlocks.ANDESITE_CIRCULAR_PAVING);
     putMultipleWithMid(builder, BlockusBlocks.DIORITE_BRICKS.block(), Blocks.DIORITE, Blocks.POLISHED_DIORITE, BlockusBlocks.HERRINGBONE_DIORITE_BRICKS, BlockusBlocks.DIORITE_CIRCULAR_PAVING);
     putMultipleWithMid(builder, BlockusBlocks.GRANITE_BRICKS.block(), Blocks.GRANITE, Blocks.POLISHED_GRANITE, BlockusBlocks.HERRINGBONE_GRANITE_BRICKS, BlockusBlocks.GRANITE_CIRCULAR_PAVING);
@@ -91,8 +80,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.POLISHED_AMETHYST.block(), Blocks.AMETHYST_BLOCK);
     builder.putAll(BlockusBlocks.AMETHYST_BRICKS.block(), Blocks.AMETHYST_BLOCK, BlockusBlocks.POLISHED_AMETHYST.block());
 
-    builder.putAll(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
-    builder.putAll(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
+    builder.putAll(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS, Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
+    builder.putAll(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING, Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
 
     builder.put(BlockusBlocks.POLISHED_SCULK.block(), Blocks.SCULK);
     builder.putAll(BlockusBlocks.SCULK_BRICKS.block(), BlockusBlocks.POLISHED_SCULK.block(), Blocks.SCULK);
@@ -131,6 +120,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.QUARTZ_TILES.block(), BlockusBlocks.QUARTZ_CIRCULAR_PAVING), Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_BRICKS);
     builder.put(BlockusBlocks.PRISMARINE_CIRCULAR_PAVING, Blocks.PRISMARINE_BRICKS);
+
+    // 红砖及各类变种
     builder.put(BlockusBlocks.LARGE_BRICKS.block(), Blocks.BRICKS);
     builder.put(BlockusBlocks.HERRINGBONE_BRICKS, Blocks.BRICKS);
     builder.put(BlockusBlocks.HERRINGBONE_SOAKED_BRICKS, BlockusBlocks.SOAKED_BRICKS.block());
@@ -163,18 +154,24 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     builder.put(BlockusBlocks.RAINBOW_BRICKS.block(), BlockusBlocks.RAINBOW_BLOCK);
     builder.put(BlockusBlocks.CHOCOLATE_BRICKS.block(), BlockusBlocks.CHOCOLATE_BLOCK.block());
-    builder.put(BlockusBlocks.CHOCOLATE_SQUARES.block(), BlockusBlocks.CHOCOLATE_BLOCK.block());
-    builder.put(BlockusBlocks.CHOCOLATE_SQUARES.block(), BlockusBlocks.CHOCOLATE_BRICKS.block());
+    builder.putAll(BlockusBlocks.CHOCOLATE_SQUARES.block(), BlockusBlocks.CHOCOLATE_BLOCK.block(), BlockusBlocks.CHOCOLATE_BRICKS.block());
 
     // shingles and terracotta and glazed terracotta
     builder.put(BlockusBlocks.SHINGLES.block(), Blocks.TERRACOTTA);
 
+    // 彩色瓦片
+    final ColorCollection<Block> dyedShinglesCollection = BlockusBlocks.DYED_SHINGLES.block().blocks();
     for (DyeColor dyeColor : BlockOrder.COLOR) {
       final Block terracotta = Blocks.DYED_TERRACOTTA.pick(dyeColor);
-      final Block stainedShingleBlock = BlockusBlocks.DYED_SHINGLES.block().blocks().pick(dyeColor);
+      final Block stainedShingles = dyedShinglesCollection.pick(dyeColor);
+      builder.put(stainedShingles, terracotta);
+    }
+
+    // 带釉陶瓦柱
+    final ColorCollection<Block> glazedTerracottaPillarCollections = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks();
+    for (DyeColor dyeColor : BlockOrder.COLOR) {
       final Block glazedTerracotta = Blocks.GLAZED_TERRACOTTA.pick(dyeColor);
-      final Block glazedTerracottaPilar = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().pick(dyeColor);
-      builder.put(stainedShingleBlock, terracotta);
+      final Block glazedTerracottaPilar = glazedTerracottaPillarCollections.pick(dyeColor);
       builder.put(glazedTerracottaPilar, glazedTerracotta);
     }
 
@@ -200,6 +197,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
       builder.putAll(weatheringCopperBricks.pick(oxidationLevel), weatheringCopper.pick(oxidationLevel), weatheringCutCopper.pick(oxidationLevel));
       builder.putAll(waxedCopperBricks.pick(oxidationLevel), waxedCopper.pick(oxidationLevel), waxedCutCopper.pick(oxidationLevel));
     }
+    // endregion 铜砖
   }
 
   private static void putMultipleWithMid(ImmutableMultimap.Builder<Block, Block> builder, Block midOutput, Block ingredient1, Block ingredient2, Block... outputs) {

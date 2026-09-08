@@ -2,9 +2,11 @@ package pers.solid.extshape.util;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
@@ -28,7 +30,7 @@ public final class BlockBiMaps {
    */
   private static final Map<BlockShape, BiMap<Block, Block>> SHAPE_TO_BI_MAP = new HashMap<>();
   /**
-   * 基础方块集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。
+   * 基础方块（包括其他模组中的）集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。会在调用 {@link #setBlockOf} 时自动写入。
    */
   public static final LinkedHashSet<Block> BASE_BLOCKS = new LinkedHashSet<>();
 
@@ -56,7 +58,6 @@ public final class BlockBiMaps {
         }
         if (variant != null) {
           setBlockOf(shape, baseBlock, variant);
-          BASE_BLOCKS.add(baseBlock);
         }
       }
     });
@@ -73,15 +74,31 @@ public final class BlockBiMaps {
   }
 
   /**
-   * 根据指定的形状和基础方块，获取变种方块。
+   * 根据指定的形状和基础方块，获取变种方块。方块不存在时返回 null。
    *
    * @param shape     形状。
    * @param baseBlock 基础方块。
    * @return 变种方块。
    */
-  @Nullable
-  public static Block getBlockOf(BlockShape shape, Block baseBlock) {
+  public static @Nullable Block getBlockOf(BlockShape shape, Block baseBlock) {
     return of(shape).get(baseBlock);
+  }
+
+
+  /**
+   * 根据指定的形状和基础方块，获取变种方块。方块不存在时抛出异常。
+   *
+   * @param shape     形状。
+   * @param baseBlock 基础方块。
+   * @return 变种方块。
+   */
+  @ApiStatus.AvailableSince("3.2.0")
+  public static Block getBlockOfOrThrow(BlockShape shape, Block baseBlock) {
+    final Block block = getBlockOf(shape, baseBlock);
+    if (block == null) {
+      throw new IllegalArgumentException("Block " + BuiltInRegistries.BLOCK.getKey(baseBlock) + " does not have the shape variant: " + shape.getSerializedName());
+    }
+    return block;
   }
 
   /**
@@ -94,7 +111,7 @@ public final class BlockBiMaps {
   public static void setBlockOf(BlockShape shape, Block baseBlock, Block block) {
     final BiMap<Block, Block> biMap = of(shape);
     if (biMap.containsKey(baseBlock)) {
-      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape.getSerializedName(), baseBlock, biMap.get(baseBlock), block);
+      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape.getSerializedName(), BuiltInRegistries.BLOCK.getKey(baseBlock), BuiltInRegistries.BLOCK.getKey(biMap.get(baseBlock)), BuiltInRegistries.BLOCK.getKey(block));
     }
     biMap.put(baseBlock, block);
     BASE_BLOCKS.add(baseBlock);

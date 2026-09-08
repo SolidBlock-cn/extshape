@@ -37,10 +37,10 @@ import java.util.function.BiConsumer;
 import static net.minecraft.world.level.block.Blocks.*;
 
 /**
- * <p>扩展方块形状模组所有的方块都是在此类定义的。类初始化时，就会实例化所有的方块对象。其中，{@linkplain  #PETRIFIED_OAK_PLANKS 石化橡木木板}和{@linkplain #SMOOTH_STONE_DOUBLE_SLAB 双层石台阶}直接以字段的形式储存，其他方块则需要通过 {@link BlockBiMaps#getBlockOf} 间接访问。
+ * <p>扩展方块形状模组所有的方块都是在此类定义的。类初始化时，就会实例化所有的方块对象。其中，{@linkplain  #PETRIFIED_OAK_PLANKS 石化橡木木板}和{@linkplain #SMOOTH_STONE_DOUBLE_SLAB 双层石台阶}直接以字段的形式储存，其他方块则需要通过 {@link BlockBiMaps#getBlockOf} 或 {@link BlockBiMaps#getBlockOfOrThrow} 间接访问。
  * <p>在使用此类的内容时尤其需要注意是否完成了初始化。如果在还没有初始化的时候使用本类的内容导致过早初始化，可能会产生错误。例如，Forge 模组是在注册表事件中将此类初始化的，因为此时注册表未冻结，可以注册，如过早或过晚注册则会产生问题。
  * <hr>
- * <p>Blocks in Extended Block Shapes mod are defined in this class. When the class is initialized, all block objects are instantiated. {@linkplain #PETRIFIED_OAK_PLANKS Petrified oak planks} and {@linkplain  #SMOOTH_STONE_DOUBLE_SLAB Smooth stone double slab} are stored directly in fields, while other blocks can be accessed indirectly through {@link BlockBiMaps#getBlockOf}.
+ * <p>Blocks in Extended Block Shapes mod are defined in this class. When the class is initialized, all block objects are instantiated. {@linkplain #PETRIFIED_OAK_PLANKS Petrified oak planks} and {@linkplain  #SMOOTH_STONE_DOUBLE_SLAB Smooth stone double slab} are stored directly in fields, while other blocks can be accessed indirectly through {@link BlockBiMaps#getBlockOf} or {@link BlockBiMaps#getBlockOfOrThrow}.
  * <p>It is important to notice whether the initialization is completed when using contents in this class. If you use content in this class before proper initialization and causes it initialized too early, some errors may be thrown. For example, Forge mod completes initialization of this class in registry events, as at that buttonTime the registry is unfrozen and allow registration; exceptions are thrown if registered too early or too late.
  */
 public final class ExtShapeBlocks {
@@ -165,7 +165,7 @@ public final class ExtShapeBlocks {
         ActivationSettings.wood(BlockSetType.DARK_OAK),
         ActivationSettings.wood(BlockSetType.PALE_OAK),
         ActivationSettings.wood(BlockSetType.MANGROVE));
-    final Iterator<ActivationSettings> netherWoodActivationSettings = Iterators.cycle(ActivationSettings.wood(BlockSetType.WARPED), ActivationSettings.wood(BlockSetType.CRIMSON));
+    final Iterator<ActivationSettings> netherWoodActivationSettings = Iterators.cycle(ActivationSettings.wood(BlockSetType.CRIMSON), ActivationSettings.wood(BlockSetType.WARPED));
     final Iterator<WoodType> ovrewordWoodTypes = Iterators.cycle(
         WoodType.OAK,
         WoodType.SPRUCE,
@@ -177,7 +177,7 @@ public final class ExtShapeBlocks {
         WoodType.PALE_OAK,
         WoodType.MANGROVE
     );
-    final Iterator<WoodType> netherWoodTypes = Iterators.cycle(WoodType.WARPED, WoodType.CRIMSON);
+    final Iterator<WoodType> netherWoodTypes = Iterators.cycle(WoodType.CRIMSON, WoodType.WARPED);
     // 木头
     for (final Block block : BlockCollections.WOODS) {
       final WoodType woodType = ovrewordWoodTypes.next();
@@ -532,13 +532,15 @@ public final class ExtShapeBlocks {
     }
 
     // 海晶灯。
-    FACTORY.createConstructionOnly(SEA_LANTERN).build();
+    FACTORY.createConstructionOnly(SEA_LANTERN)
+        .build();
 
     // 平滑石头比较特殊，完整方块和台阶不同。
     SMOOTH_STONE_DOUBLE_SLAB = FACTORY.modify(new BlockBuilder())
         .setInstanceSupplier(builder -> new Block(builder.blockSettings))
         .setBlockSettings(BlockBehaviour.Properties.ofFullCopy(SMOOTH_STONE))
-        .setIdentifier(ExtShape.id("smooth_stone_slab_double")).build();
+        .setIdentifier(ExtShape.id("smooth_stone_slab_double"))
+        .build();
 
     FACTORY.createAllShapes(SMOOTH_STONE)
         .markStoneCuttable()
@@ -800,10 +802,10 @@ public final class ExtShapeBlocks {
   private static void checkWoodValidity(Block block, @Nullable WoodType woodType, @Nullable ActivationSettings activationSettings) {
     final String idPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
     if (woodType != null && !idPath.contains(woodType.name())) {
-      throw new IllegalArgumentException(String.format("Block id '%s' does not contain wood type '%s", idPath, woodType.name()));
+      throw new IllegalArgumentException(String.format("Block id '%s' does not contain wood type '%s'", idPath, woodType.name()));
     }
     if (activationSettings != null && !idPath.contains(activationSettings.blockSetType().name())) {
-      throw new IllegalArgumentException(String.format("Block id '%s' does not contain activation settings '%s", idPath, activationSettings.blockSetType().name()));
+      throw new IllegalArgumentException(String.format("Block id '%s' does not contain activation settings '%s'", idPath, activationSettings.blockSetType().name()));
     }
   }
 

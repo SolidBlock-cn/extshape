@@ -10,7 +10,6 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.LimitCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.UnusualLootTables;
@@ -21,7 +20,7 @@ import pers.solid.extshape.data.UnusualLootTables;
 public class BlockusUnusualLootTables extends UnusualLootTables {
 
   @Unmodifiable
-  public final ImmutableMap<Block, UnusualLootTables.@NotNull LootTableFunction> createInstance() {
+  public final ImmutableMap<Block, UnusualLootTables.LootTableFunction> createInstance() {
     final ImmutableMap.Builder<Block, UnusualLootTables.LootTableFunction> builder = new ImmutableMap.Builder<>();
     registerUnusualLootTables(builder);
     return builder.build();

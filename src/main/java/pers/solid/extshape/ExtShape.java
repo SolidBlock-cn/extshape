@@ -28,11 +28,10 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SelectableRecipe;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
-import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.FuelValues;
@@ -45,6 +44,8 @@ import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.itemgroup.ExtShapeSpecificItemGroups;
+import pers.solid.extshape.itemgroup.ItemGroupRules;
 import pers.solid.extshape.mixin.AxeItemMixin;
 import pers.solid.extshape.mixin.FuelValuesBuilderAccessor;
 import pers.solid.extshape.tag.ExtShapeTags;
@@ -98,7 +99,11 @@ public class ExtShape implements ModInitializer {
     ExtShapeTags.init();
 
     // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
-    VanillaItemGroup.registerForMod();
+    ItemGroupRules.registerForMod();
+    if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
+      ExtShapeSpecificItemGroups.init();
+    }
+
     ResourceLoader.registerBuiltinPack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Component.translatable("resourcePack.extshape.recipe_tweak.name"), PackActivationType.DEFAULT_ENABLED);
 
     registerStrippableBlocks();
@@ -193,14 +198,23 @@ public class ExtShape implements ModInitializer {
         Object2IntMap.entry(BlockShape.WALL, 1)
     );
     for (Block baseBlock : baseBlocks) {
-      final SelectableRecipe.SingleInputSet<StonecutterRecipe> set = stonecutter.selectByInput(new ItemStack(baseBlock));
-      if (set.isEmpty()) {
+      // 对平滑石头方块予以额外豁免
+      if (Blocks.SMOOTH_STONE == baseBlock) {
+        continue;
+      }
+      final SelectableRecipe.SingleInputSet<StonecutterRecipe> matchingRecipes = stonecutter.selectByInput(new ItemStack(baseBlock));
+      if (matchingRecipes.isEmpty()) {
         continue;
       }
 
+      // 此方块能切石成哪些基础方块（不包括输入的自身）
+      final Set<Block> resultBases = new HashSet<>();
+
       // 映射，键为对应合成产物的基础方块（可能和 baseBlock 变量的值相同或不同），值为形状到布尔值的映射（方块存在且可合成的为 true，方块存在且不可合成的为 false，方块不存在的为 null）
-      final Map<Block, Set<BlockShape>> map = new HashMap<>();
-      for (SelectableRecipe.SingleInputEntry<StonecutterRecipe> entry : set.entries()) {
+      final Map<Block, Set<BlockShape>> resultBaseToShapes = new HashMap<>();
+
+      // 记录当前方块能够切石成哪些基础方块以及对应形状
+      for (SelectableRecipe.SingleInputEntry<StonecutterRecipe> entry : matchingRecipes.entries()) {
         final Optional<RecipeHolder<StonecutterRecipe>> optional = entry.recipe().recipe();
         if (optional.isEmpty()) {
           continue;
@@ -208,18 +222,9 @@ public class ExtShape implements ModInitializer {
 
         final RecipeHolder<StonecutterRecipe> recipeHolder = optional.get();
         final StonecutterRecipe recipe = recipeHolder.value();
-        final Item resultItem;
-        final int resultCount;
-
-        if (recipe.resultDisplay() instanceof SlotDisplay.ItemSlotDisplay(Holder<Item> resultItemHolder)) {
-          resultItem = resultItemHolder.value();
-          resultCount = 1;
-        } else if (recipe.resultDisplay() instanceof SlotDisplay.ItemStackSlotDisplay(ItemStackTemplate stack)) {
-          resultItem = stack.item().value();
-          resultCount = stack.count();
-        } else {
-          continue;
-        }
+        final ItemStack resultStack = recipe.assemble(new SingleRecipeInput(ItemStack.EMPTY));
+        final Item resultItem = resultStack.getItem();
+        final int resultCount = resultStack.getCount();
 
         if (!recipeHolder.id().identifier().getPath().startsWith(BuiltInRegistries.ITEM.getKey(resultItem).getPath())) {
           LOGGER.error("Stonecutting recipe name mismatches! Recipe name {} does not start with item name of {}.", recipeHolder.id().identifier(), BuiltInRegistries.ITEM.getKey(resultItem));
@@ -234,6 +239,11 @@ public class ExtShape implements ModInitializer {
         final BlockShape resultShape = BlockShape.getShapeOf(resultBlock);
         if (resultShape != null) {
           final Block resultBase = BlockBiMaps.of(resultShape).inverse().get(resultBlock);
+          if (resultBase == null) {
+            continue;
+          } else if (resultBase != baseBlock) {
+            resultBases.add(resultBase);
+          }
           if (!stoneCuttableShapes.containsKey(resultShape)) {
             LOGGER.error("The shape {} should not be stone-cut, but {} can be cut into these shapes of {}!", resultShape.getSerializedName(), BuiltInRegistries.BLOCK.getKey(baseBlock), BuiltInRegistries.BLOCK.getKey(resultBase));
             errors++;
@@ -245,11 +255,15 @@ public class ExtShape implements ModInitializer {
             LOGGER.error("Result count mismatches! The shape {} is expected to have {} results, but {} can be cut into {} items of {}!", resultShape.getSerializedName(), stoneCuttableShapes.getInt(resultShape), BuiltInRegistries.BLOCK.getKey(baseBlock), resultCount, BuiltInRegistries.ITEM.getKey(resultItem));
           }*/
 
-          map.computeIfAbsent(resultBase, _ -> new HashSet<>()).add(resultShape);
+          resultBaseToShapes.computeIfAbsent(resultBase, _ -> new HashSet<>()).add(resultShape);
+        } else if (BlockBiMaps.BASE_BLOCKS.contains(resultBlock)) {
+          // 方块不是形状变种，视为基础方块
+          resultBases.add(resultBlock);
         }
       }
 
-      for (Map.Entry<Block, Set<BlockShape>> e : map.entrySet()) {
+      // 检测方块的切石结果中的各情况是否一致。
+      for (Map.Entry<Block, Set<BlockShape>> e : resultBaseToShapes.entrySet()) {
         final Block resultBase = e.getKey();
         final Set<BlockShape> craftableShapes = e.getValue();
         final Set<BlockShape> uncraftableShapes = stoneCuttableShapes.keySet().stream().filter(blockShape -> BlockBiMaps.getBlockOf(blockShape, resultBase) != null).filter(blockShape -> !craftableShapes.contains(blockShape)).collect(Collectors.toSet());
@@ -257,6 +271,24 @@ public class ExtShape implements ModInitializer {
 
         if (!uncraftableShapes.isEmpty()) {
           LOGGER.error("{} can be stone-cut into {} of {}, but cannot be cut into {} of that block!", BuiltInRegistries.BLOCK.getKey(baseBlock), craftableShapes.stream().map(BlockShape::getSerializedName).collect(Collectors.joining(", ")), BuiltInRegistries.BLOCK.getKey(resultBase), uncraftableShapes.stream().map(BlockShape::getSerializedName).collect(Collectors.joining(", ")));
+          errors++;
+        }
+      }
+
+      // 检测方块切石为其他基础方块与方块切石为基础方块的形状变种是否一致。
+      for (Block resultBase : resultBases) {
+        final boolean whetherBaseCraftable = matchingRecipes.entries().stream().anyMatch(entry -> entry.recipe().recipe().map(recipe -> recipe.value().assemble(new SingleRecipeInput(ItemStack.EMPTY))).orElse(ItemStack.EMPTY).is(resultBase.asItem()));
+        final boolean whetherShapeVariantsExists = BlockBiMaps.BASE_BLOCKS.contains(resultBase);
+        final boolean whetherShapeVariantsCraftable = resultBaseToShapes.containsKey(resultBase) && !resultBaseToShapes.get(resultBase).isEmpty();
+
+        if (!whetherShapeVariantsExists) {
+          LOGGER.error("{} can be stone-cut into {} which is a base block, but it does not have shape variants!",
+              BuiltInRegistries.BLOCK.getKey(baseBlock), BuiltInRegistries.BLOCK.getKey(resultBase));
+          errors++;
+        }
+
+        if (whetherBaseCraftable != whetherShapeVariantsCraftable) {
+          LOGGER.error("Inter-shape stone-cutting mismatches! {} can be cut into another base block {}: {}, but can be cut into shape variants of {}: {}", BuiltInRegistries.BLOCK.getKey(baseBlock), BuiltInRegistries.BLOCK.getKey(resultBase), whetherBaseCraftable, BuiltInRegistries.BLOCK.getKey(resultBase), whetherShapeVariantsCraftable);
           errors++;
         }
       }
@@ -286,8 +318,8 @@ public class ExtShape implements ModInitializer {
       final Block inputBase = pair.getFirst();
       final Block outputBase = pair.getSecond();
       for (BlockShape shape : BlockShape.values()) {
-        final Block input = BlockBiMaps.getBlockOf(shape, inputBase);
-        final Block output = BlockBiMaps.getBlockOf(shape, outputBase);
+        final @Nullable Block input = BlockBiMaps.getBlockOf(shape, inputBase);
+        final @Nullable Block output = BlockBiMaps.getBlockOf(shape, outputBase);
         if (input != null && output != null) {
           EXTENDED_STRIPPABLE_BLOCKS.put(input, output);
         }

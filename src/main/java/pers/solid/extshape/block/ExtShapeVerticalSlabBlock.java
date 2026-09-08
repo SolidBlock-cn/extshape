@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
@@ -34,7 +33,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   public static final MapCodec<ExtShapeVerticalSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeVerticalSlabBlock::new);
   public final Block baseBlock;
 
-  public ExtShapeVerticalSlabBlock(@NotNull Block baseBlock, Properties settings) {
+  public ExtShapeVerticalSlabBlock(Block baseBlock, Properties settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
@@ -50,7 +49,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -71,9 +70,9 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   public static class WithExtension extends ExtShapeVerticalSlabBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Properties settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Properties settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -110,9 +109,9 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   public static class WithOxidation extends ExtShapeVerticalSlabBlock implements WeatheringCopper {
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
-    private final @NotNull WeatherState oxidationLevel;
+    private final WeatherState oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

@@ -22,6 +22,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * 竖直台阶。
@@ -72,7 +73,7 @@ public class VerticalSlabBlock extends HorizontalDirectionalBlock implements Sim
   }
 
   @Override
-  public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+  public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
     BlockPos blockPos = ctx.getClickedPos();
     FluidState fluidState = ctx.getLevel().getFluidState(blockPos);
     final Direction.Axis axis = ctx.getHorizontalDirection().getAxis();
