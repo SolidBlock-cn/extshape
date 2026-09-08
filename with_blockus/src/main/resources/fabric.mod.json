@@ -30,7 +30,7 @@
     "fabricloader": "*",
     "fabric-api": "*",
     "minecraft": "~26.3",
-    "extshape": [">=3.1.6", "${version}"],
+    "extshape": [">=3.2.0-beta.1", "${version}"],
     "blockus": ">=2.18.0"
   },
   "custom": {

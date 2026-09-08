@@ -4,7 +4,7 @@ import net.darkhax.curseforgegradle.TaskPublishCurseForge
 import java.util.regex.Pattern
 
 plugins {
-    id "net.fabricmc.fabric-loom" version '1.17-SNAPSHOT'
+    id "net.fabricmc.fabric-loom" version '1.19-SNAPSHOT'
     id 'maven-publish'
 
     // 用于模组发布
@@ -129,17 +129,11 @@ allprojects {
     }
 
     loom {
-        runs {
-            client {
-                programArg "-username=Solid"
-            }
-        }
-
         runConfigs.configureEach {
-            it.configName = "Minecraft Fabric ${it.name.capitalize()}"
-            ideConfigGenerated = true
+            it.displayName = "Minecraft Fabric ${it.name.capitalize()}"
+            generateRunConfig = true
 
-            runDir = project.relativePath(project(':').file('run')).toString()
+            runDirectory = project.relativePath(project(':').file('run')).toString()
         }
     }
 }
@@ -205,9 +199,9 @@ println changelogContent
 
 tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
-        def curseforgeToken = System.getenv("CURSEFORGE_TOKEN")
-        println("CurseForge 令牌: ${screenToken(curseforgeToken)}")
-        if (curseforgeToken) apiToken = curseforgeToken
+        def curseForgeToken = System.getenv("CURSEFORGE_TOKEN")
+        println("CurseForge 令牌: ${screenToken(curseForgeToken)}")
+        if (curseForgeToken) apiToken = curseForgeToken
     }
     def mainFile = upload('514125', jar)
     mainFile.changelog = changelogContent
@@ -225,7 +219,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 
 modrinth {
     projectId = 'tb7kCxSW'
-    String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
+    String platform = project.findProperty('loom.platform') ?: 'fabric'
     versionNumber = "${rootProject.mod_version}+mc${rootProject.minecraft_version}"
     versionType = release_type
     uploadFile = jar
