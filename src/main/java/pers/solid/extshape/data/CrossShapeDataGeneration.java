@@ -1,7 +1,6 @@
 package pers.solid.extshape.data;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -19,9 +18,6 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.StonecuttingRecipeJsonBuilderAccessor;
 import pers.solid.extshape.util.BlockBiMaps;
 
-import java.util.Collections;
-import java.util.stream.Collectors;
-
 
 /**
  * 处理同一方块不同形状的数据生成的类。只涉及基本的几种形状，且不涉及方块与基础方块之间的转化。
@@ -32,6 +28,11 @@ public class CrossShapeDataGeneration {
    */
   public final Block baseBlock;
   public final @Nullable String defaultNamespace;
+  /**
+   * 基础方块到切石前的切石方块的映射。例如，由于原版的石头可以生成石砖，那么这个映射就可以加入“石砖->石头”，从而在生成石砖的跨形状数据生成时，会生成石头到石砖的各形状的切石配方。
+   */
+  private final Multimap<Block, ObjectIntPair<Block>> baseToUncutBase;
+  private final RecipeProvider recipeGenerator;
   public final RecipeOutput exporter;
   /**
    * 是否启用同种形状之间的方块切石功能，例如将非切制的楼梯切成已切制的横条。如果未启用，则只能将非切制的楼梯切成非切制的横条，但是基础方块仍不在此限。将此设置为 {@code false} 是为了与原版的行为相匹配。
@@ -41,11 +42,11 @@ public class CrossShapeDataGeneration {
    * 是否启用同种基础方块之间转移的配方（包括合成与切石），如果为 false，则只生成跨基础方块的切石配方。这是考虑到模组中的方块切成原版方块的情况。
    */
   public boolean enableConversionWithinBlock = true;
-  private final RecipeProvider recipeGenerator;
 
-  public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeProvider recipeGenerator, RecipeOutput exporter) {
+  public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, Multimap<Block, ObjectIntPair<Block>> baseToUncutBase, RecipeProvider recipeGenerator, RecipeOutput exporter) {
     this.baseBlock = baseBlock;
     this.defaultNamespace = defaultNamespace;
+    this.baseToUncutBase = baseToUncutBase;
     this.recipeGenerator = recipeGenerator;
     this.exporter = exporter;
   }
@@ -194,7 +195,7 @@ public class CrossShapeDataGeneration {
       for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
         final Block uncutBaseBlock = uncutBaseBlockInfo.left();
         final String path = BuiltInRegistries.BLOCK.getKey(uncutBaseBlock).getPath();
-        final Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
+        final @Nullable Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
         if (!(output instanceof ExtShapeBlockInterface) || !((ExtShapeBlockInterface) output).shouldWriteStonecuttingRecipe()) continue;
         SingleItemRecipeBuilder recipe = ((ExtShapeBlockInterface) output).getStonecuttingRecipe(recipeGenerator);
         if (recipe != null) {
@@ -217,7 +218,7 @@ public class CrossShapeDataGeneration {
         if (enableConversionWithinBlock) cutStairsToQuarterPiece(stairs, quarterPiece, null, 1);
         if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
           final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-          final Block uncutStairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, uncutBaseBlock);
+          final @Nullable Block uncutStairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, uncutBaseBlock);
           if (uncutStairs == null) continue;
           final String name0 = BuiltInRegistries.BLOCK.getKey(uncutStairs).getPath();
           cutStairsToQuarterPiece(uncutStairs, quarterPiece, "_from_" + name0 + "_stonecutting", uncutBaseBlockInfo.rightInt());
@@ -231,7 +232,7 @@ public class CrossShapeDataGeneration {
           if (enableConversionWithinBlock) cutSlabToQuarterPiece(slab, quarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-            final Block uncutSlab = BlockBiMaps.getBlockOf(BlockShape.SLAB, uncutBaseBlock);
+            final @Nullable Block uncutSlab = BlockBiMaps.getBlockOf(BlockShape.SLAB, uncutBaseBlock);
             if (uncutSlab == null) continue;
             final String name0 = BuiltInRegistries.BLOCK.getKey(uncutSlab).getPath();
             cutSlabToQuarterPiece(uncutSlab, quarterPiece, "_from_" + name0 + "_stonecutting", uncutBaseBlockInfo.rightInt());
@@ -246,7 +247,7 @@ public class CrossShapeDataGeneration {
           if (enableConversionWithinBlock) cutVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-            final Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
+            final @Nullable Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
             if (uncutVerticalSlab == null) continue;
             cutVerticalSlabToQuarterPiece(uncutVerticalSlab, quarterPiece, "_from_" + BuiltInRegistries.BLOCK.getKey(uncutVerticalSlab).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
           }
@@ -262,7 +263,7 @@ public class CrossShapeDataGeneration {
           if (enableConversionWithinBlock) cutVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-            final Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
+            final @Nullable Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
             if (uncutVerticalSlab == null) return;
             cutVerticalSlabToVerticalQuarterPiece(uncutVerticalSlab, verticalQuarterPiece, "_from_" + BuiltInRegistries.BLOCK.getKey(uncutVerticalSlab).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
           }
@@ -274,7 +275,7 @@ public class CrossShapeDataGeneration {
         if (enableConversionWithinBlock) cutVerticalStairsToVerticalQuarterPiece(verticalStairs, verticalQuarterPiece, null, 1);
         if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
           final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-          final Block uncutVerticalStairs = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, uncutBaseBlock);
+          final @Nullable Block uncutVerticalStairs = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, uncutBaseBlock);
           if (uncutVerticalStairs == null) continue;
           cutVerticalStairsToVerticalQuarterPiece(uncutVerticalStairs, verticalQuarterPiece, "_from_" + BuiltInRegistries.BLOCK.getKey(uncutVerticalStairs).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
         }
@@ -283,8 +284,6 @@ public class CrossShapeDataGeneration {
   }
 
   protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
-    final ImmutableCollection<Block> blocks = VanillaStonecutting.INSTANCE.get(baseBlock);
-    final ImmutableCollection<ObjectIntPair<Block>> weightedBlocks = VanillaStonecutting.INSTANCE_WITH_WEIGHT.get(baseBlock);
-    return Iterables.concat(blocks.isEmpty() ? Collections.emptyList() : blocks.stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList()), weightedBlocks);
+    return baseToUncutBase.get(baseBlock);
   }
 }

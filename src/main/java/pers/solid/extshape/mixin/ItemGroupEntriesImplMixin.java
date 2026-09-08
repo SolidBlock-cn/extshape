@@ -13,8 +13,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pers.solid.extshape.VanillaItemGroup;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.itemgroup.ItemGroupRules;
+import pers.solid.extshape.itemgroup.ItemGroupRulesAccess;
 
 import java.util.Collection;
 import java.util.Set;
@@ -61,8 +62,9 @@ public abstract class ItemGroupEntriesImplMixin {
 
   @Inject(method = "<init>", at = @At("TAIL"))
   public void preInit(CreativeModeTab group, FeatureFlagSet enabledFeatures, CallbackInfo ci) {
-    prependingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(this.tab).map(VanillaItemGroup::getPrependingRule).orElse(null) : null;
-    appendingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(this.tab).map(VanillaItemGroup::getAppendingRule).orElse(null) : null;
+    final ItemGroupRulesAccess rulesAccess = ItemGroupRules.currentRules();
+    prependingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(this.tab).map(rulesAccess::getPrependingRule).orElse(null) : null;
+    appendingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(this.tab).map(rulesAccess::getAppendingRule).orElse(null) : null;
   }
 
   @Inject(method = "accept", at = @At("HEAD"))

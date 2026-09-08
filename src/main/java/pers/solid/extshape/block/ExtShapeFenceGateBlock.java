@@ -42,7 +42,7 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
   /**
    * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
    */
-  private final Item secondIngredient;
+  private final @Nullable Item secondIngredient;
 
   public ExtShapeFenceGateBlock(Block baseBlock, Properties settings, WoodType woodType, Item secondIngredient) {
     super(woodType, settings);
@@ -134,8 +134,8 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
   }
 
   public static class WithOxidation extends ExtShapeFenceGateBlock implements WeatheringCopper {
-    private final WeatherState oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), propertiesCodec(), WoodType.CODEC.fieldOf("wood_type").forGetter(block -> ((FenceGateAccessor) block).getType()), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceGateBlock::getSecondIngredient), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
+    private final WeatherState oxidationLevel;
 
     public WithOxidation(Block baseBlock, Properties settings, WoodType woodType, Item secondIngredient, WeatherState oxidationLevel) {
       super(baseBlock, settings, woodType, secondIngredient);

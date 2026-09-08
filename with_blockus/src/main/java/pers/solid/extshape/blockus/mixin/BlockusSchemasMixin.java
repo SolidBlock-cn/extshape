@@ -162,7 +162,7 @@ public abstract class BlockusSchemasMixin {
     builder.addFixer(ItemRenameFix.create(schema, "Rename removed items in Extended Block Shapes - Blockus mod", unaryOperator));
 
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-      ExtShapeBlockus.replacing_id_map = idMap;
+      ExtShapeBlockus.datafixer_replacing_id_map = idMap;
     }
   }
 

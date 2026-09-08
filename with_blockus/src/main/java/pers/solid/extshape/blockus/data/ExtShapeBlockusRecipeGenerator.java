@@ -2,6 +2,9 @@ package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
 import com.brand.blockus.registry.content.BlockusBlocks;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
+import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -13,8 +16,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
-import pers.solid.extshape.blockus.BlockusCrossShapeDataGeneration;
 import pers.solid.extshape.blockus.ExtShapeBlockus;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -34,14 +37,19 @@ public class ExtShapeBlockusRecipeGenerator extends RecipeProvider {
       }
     }
 
+    final Multimap<Block, ObjectIntPair<Block>> mappedInstance = Multimaps.transformValues(BlockusStonecutting.INSTANCE, input -> ObjectIntPair.of(input, 1));
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
-      final CrossShapeDataGeneration crossShapeDataGeneration = new BlockusCrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, this, output);
+      final CrossShapeDataGeneration crossShapeDataGeneration = new CrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, mappedInstance, this, output);
       crossShapeDataGeneration.generateCrossShapeData();
     }
-    // Blockus 的磨制末地石到原版的末地石砖
-    final CrossShapeDataGeneration vanillaEndStoneBricks = new BlockusCrossShapeDataGeneration(Blocks.END_STONE_BRICKS, ExtShapeBlockus.NAMESPACE, this, output);
-    vanillaEndStoneBricks.enableConversionWithinBlock = false;
-    vanillaEndStoneBricks.generateCrossShapeData();
+
+    for (Block baseBlock : BlockusStonecutting.INSTANCE.keys()) {
+      if (!ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.contains(baseBlock)) {
+        final CrossShapeDataGeneration crossShapeDataGeneration = new CrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, mappedInstance, this, output);
+        crossShapeDataGeneration.enableConversionWithinBlock = false;
+        crossShapeDataGeneration.generateCrossShapeData();
+      }
+    }
 
     registerShingleDyeingRecipes(output);
     registerStainedStoneBricksRecipe(output);
@@ -52,8 +60,8 @@ public class ExtShapeBlockusRecipeGenerator extends RecipeProvider {
     BlockusBlocks.STAINED_SHINGLES.colorMap().forEach((dyeColor, bsswBundle) -> {
       ItemLike dyeItem = BlockusRecipeProvider.DYE_MAP.get(dyeColor);
       for (BlockShape blockShape : BlockShape.values()) {
-        final Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block());
-        final Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswBundle.block());
+        final @Nullable Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block());
+        final @Nullable Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswBundle.block());
         if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
         createEnclosedRecipe(dyed, Ingredient.of(unDyed), dyeItem)
             .group("shingles_" + blockShape.getSerializedName() + "_from_dyeing")
@@ -67,8 +75,8 @@ public class ExtShapeBlockusRecipeGenerator extends RecipeProvider {
     BlockusBlocks.STAINED_STONE_BRICKS.colorMap().forEach((dyeColor, bsswBundle) -> {
       ItemLike dyeItem = BlockusRecipeProvider.DYE_MAP.get(dyeColor);
       for (BlockShape blockShape : BlockShape.values()) {
-        final Block unDyed = BlockBiMaps.getBlockOf(blockShape, Blocks.STONE_BRICKS);
-        final Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswBundle.block());
+        final @Nullable Block unDyed = BlockBiMaps.getBlockOf(blockShape, Blocks.STONE_BRICKS);
+        final @Nullable Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswBundle.block());
         if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
         final RecipeBuilder recipe = createEnclosedRecipe(dyed, Ingredient.of(unDyed), dyeItem)
             .group("stained_stone_brick_" + blockShape.getSerializedName() + "_from_dyeing")

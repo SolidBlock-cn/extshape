@@ -37,7 +37,9 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
     register(BlockusBlocks.ROUGH_SANDSTONE.block(), Identifier.withDefaultNamespace("block/sandstone_bottom"));
     register(BlockusBlocks.ROUGH_RED_SANDSTONE.block(), Identifier.withDefaultNamespace("block/red_sandstone_bottom"));
     register(BlockusBlocks.ROUGH_SOUL_SANDSTONE.block(), Identifier.fromNamespaceAndPath(Blockus.MOD_ID, "block/soul_sandstone_bottom"));
-    register(BlockusBlocks.CUT_SOUL_SANDSTONE, Identifier.fromNamespaceAndPath(Blockus.MOD_ID, "block/soul_sandstone_bottom"));
+
+    // 切制灵魂砂岩
+    textureMaps.put(BlockusBlocks.CUT_SOUL_SANDSTONE, TextureMapping.column(TextureMapping.getBlockTexture(BlockusBlocks.CUT_SOUL_SANDSTONE), TextureMapping.getBlockTexture(BlockusBlocks.SOUL_SANDSTONE.block(), "_top")));
 
     registerSuffixed(BlockusBlocks.STRIPPED_WHITE_OAK_LOG, TextureSlot.END, "_top");
     register(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD, Identifier.fromNamespaceAndPath(Blockus.MOD_ID, "block/stripped_white_oak_log"));
