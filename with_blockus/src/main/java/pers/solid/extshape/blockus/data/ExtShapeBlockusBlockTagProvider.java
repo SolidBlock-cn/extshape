@@ -8,11 +8,13 @@ import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.brand.blockus.utils.helper.WoodMaps;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.DyeColor;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.util.DyeColor;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
@@ -27,20 +29,32 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
+  public static final ImmutableSet<String> STONE_BASE_BLOCK_KEYWORDS = ImmutableSet.of("stone", "andesite", "granite", "diorite", "limestone", "marble", "viridite", "netherrack", "basalt", "deepslate", "tuff", "sulfur", "cinnabar", "nether_brick");
+  /**
+   * 此集内的方块会被加入 {@code #stone_pressure_plates} 和 {@code #stone_buttons}。注意这些方块必须要拥有 {@code mineable/pickaxe} 标签。
+   */
+  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.stream().filter(block -> STONE_BASE_BLOCK_KEYWORDS.stream().anyMatch(Registries.BLOCK.getId(block).getPath()::contains)).filter(block -> !Registries.BLOCK.getId(block).getPath().contains("glowstone")).collect(ImmutableSet.toImmutableSet());
+
   public ExtShapeBlockusBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
     super(output, registriesFuture);
+  }
+
+  @Override
+  protected boolean isStoneBaseBlock(Block baseBlock) {
+    return super.isStoneBaseBlock(baseBlock) || STONE_BASE_BLOCKS.contains(baseBlock);
   }
 
   @Override
   protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
     // region 形状标签
 
+    final ImmutableSet<Block> mossyPlanksBlocks = BlockusBlocks.MOSSY_PLANKS.bundle().values().stream().map(BSSWBundle::block).collect(ImmutableSet.toImmutableSet());
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
       if (BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap().containsValue(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS);
       } else if (BlockusBlocks.SMALL_LOGS.bundle().containsValue(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_LOG_TAG);
-      } else if (BlockusBlocks.HERRINGBONE_PLANKS.bundle().containsValue(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks() || baseBlock == BlockusBlocks.CHARRED.planks()) {
+      } else if (BlockusBlocks.HERRINGBONE_PLANKS.bundle().containsValue(baseBlock) || mossyPlanksBlocks.contains(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks() || baseBlock == BlockusBlocks.CHARRED.planks() || baseBlock == BlockusBlocks.RAW_BAMBOO.planks() || baseBlock == BlockusBlocks.WHITE_OAK_WOOD || baseBlock == BlockusBlocks.STRIPPED_WHITE_OAK_WOOD) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_WOODEN_TAG);
       } else {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_TAG);
@@ -70,7 +84,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.NETHERITE_BRICKS.block(),
         BlockusBlocks.CHARCOAL_BLOCK,
         BlockusBlocks.ENDER_BLOCK,
-        BlockusBlocks.NETHER_STAR_BLOCK);
+        BlockusBlocks.NETHER_STAR_BLOCK,
+        BlockusBlocks.STARS_BLOCK);
 
     addForShapes(BlockTags.HOE_MINEABLE,
         BlockusBlocks.CHORUS_BLOCK,
@@ -241,8 +256,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
     addForShapes(BlockusBlockTags.BLAZE_BRICKS,
-        BlockusBlocks.BLAZE_BRICKS.block(),
-        BlockusBlocks.BLAZE_LANTERN);
+        BlockusBlocks.BLAZE_BRICKS.block());
 
     addForShapes(BlockusBlockTags.NETHER_BRICKS,
         BlockusBlocks.POLISHED_NETHER_BRICKS.block(),
@@ -251,6 +265,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.HERRINGBONE_RED_NETHER_BRICKS,
         BlockusBlocks.CHARRED_NETHER_BRICKS.block(),
         BlockusBlocks.POLISHED_CHARRED_NETHER_BRICKS.block(),
+        BlockusBlocks.HERRINGBONE_CHARRED_NETHER_BRICKS,
         BlockusBlocks.TEAL_NETHER_BRICKS.block(),
         BlockusBlocks.POLISHED_TEAL_NETHER_BRICKS.block(),
         BlockusBlocks.HERRINGBONE_TEAL_NETHER_BRICKS
@@ -287,6 +302,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
     addForShapes(BlockusBlockTags.SOUL_SANDSTONE,
+        BlockusBlocks.SOUL_SANDSTONE.block(),
         BlockusBlocks.ROUGH_SOUL_SANDSTONE.block(),
         BlockusBlocks.SOUL_SANDSTONE_BRICKS.block(),
         BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS.block(),
@@ -362,7 +378,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     addForShapes(BlockusBlockTags.STAINED_STONE_BRICKS, Arrays.stream(BlockOrder.COLOR).map(dyeColor -> stainedStoneBricksColorMap.get(dyeColor).block()).filter(Objects::nonNull)::iterator);
 
     final Map<DyeColor, ConcreteBundle.ConcreteVariants> concreteBricksColorMap = BlockusBlocks.CONCRETE_BRICKS.colorMap();
-    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Arrays.stream(BlockOrder.COLOR).map(dyeColor -> concreteBricksColorMap.get(dyeColor).block()).filter(Objects::nonNull)::iterator);
+    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Arrays.stream(BlockOrder.COLOR).map(concreteBricksColorMap::get).flatMap(concreteVariants -> Stream.of(concreteVariants.block(), concreteVariants.chiseled())).filter(Objects::nonNull)::iterator);
 
     addForShapes(BlockusBlockTags.SHINGLES, BlockusBlocks.SHINGLES.block());
     final Map<DyeColor, BSSWBundle> stainedShinglesColorMap = BlockusBlocks.STAINED_SHINGLES.colorMap();

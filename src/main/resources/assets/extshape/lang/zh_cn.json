@@ -14,10 +14,12 @@
   "block.extshape.?_vertical_stairs": "竖直%s楼梯",
   "block.extshape.?_wall": "%s墙",
 
-  "itemGroup.extshape.colorful_blocks": "\u00a79扩展方块形状：\u00a7r彩色方块",
-  "itemGroup.extshape.other_blocks": "\u00a79扩展方块形状：\u00a7r其他",
-  "itemGroup.extshape.stone_blocks": "\u00a79扩展方块形状：\u00a7r石质方块",
-  "itemGroup.extshape.wooden_blocks": "\u00a79扩展方块形状：\u00a7r木制和竹制方块",
+  "itemGroup.extshape.prefix": "%s：",
+  "itemGroup.extshape.colored_blocks": "染色方块",
+  "itemGroup.extshape.other_blocks": "其他",
+  "itemGroup.extshape.stone_blocks": "石质方块",
+  "itemGroup.extshape.mineral_blocks": "矿物方块",
+  "itemGroup.extshape.wooden_blocks": "木制和竹制方块",
 
   "modmenu.descriptionTranslation.extshape": "本模组为许多原版方块添加了更多形状，包括原版不存在的形状，如垂直台阶、垂直楼梯和横条。大多数方块都具有类似原版的行为，就像其基础方块一样。例如，基岩楼梯和基岩台阶像基岩本身一样可以防爆防凋灵，羊毛栅栏和羊毛栅栏门可燃且可以被剪刀剪。\n借助此模组，你可以制作出更加精美的建筑，玩生存也会更加有趣。",
   "modmenu.summaryTranslation.extshape": "为许多原版方块添加更多形状",
@@ -25,15 +27,25 @@
   "options.extshape.title": "扩展方块形状模组配置",
   "options.extshape.addToVanillaGroups": "添加至原版物品组",
   "options.extshape.addToVanillaGroups.tooltip": "如果启用，此模组的方块将会直接添加到Minecraft的原版物品组中，例如%s、%s和%s。方块会直接添加到其基础方块后面，这样你可以方便地找到同一基础方块的不同形状的方块。默认情况下，会添加所有的形状。你可以在下面的文本框中指定添加哪些形状。",
-  "options.extshape.addToVanillaGroups.warning_for_1.20": "此版本中，这个选项不支持关闭。请在原版的物品组中寻找物品。",
+  "options.extshape.addToVanillaGroups.notice_for_effect": "立即生效。",
   "options.extshape.showSpecificGroups": "显示专用物品组",
   "options.extshape.showSpecificGroups.tooltip": "添加4个专门的物品组以显示所有拥有不同形状的方块（含原版和模组中的），这些方块按照其基础方块的顺序排列，基础方块相同的方块显示在一起。",
-  "options.extshape.showSpecificGroups.warning_for_1.20": "此版本不支持可配置的专用物品组。请在原版的物品组中寻找物品。",
+  "options.extshape.showSpecificGroups.notice_for_effect": "重启游戏后生效。",
   "options.extshape.shapesToAddToVanilla": "添加到原版物品组中的形状",
   "options.extshape.shapesToAddToVanilla.description": "需要将哪些形状的方块添加到原版物品组中？（用空格间隔。）",
   "options.extshape.shapesInSpecificGroups": "专用物品组中的形状",
   "options.extshape.shapesInSpecificGroups.description": "将哪些形状的方块添加到本模组的专用物品组中？（用空格间隔。）",
   "options.extshape.reset": "重置",
+
+  "options.extshape.sorting_examples": "示例：%s",
+  "options.extshape.wooden_and_bamboo_block_sorting": "木制与竹制方块专用物品组排序",
+  "options.extshape.wooden_and_bamboo_block_sorting.description": "创造模式物品栏中，木制与竹制方块的专用物品组中的方块的排序方式。",
+  "options.extshape.wooden_and_bamboo_block_sorting.same_species_different_forms_together": "相同物种不同形式的在一起",
+  "options.extshape.wooden_and_bamboo_block_sorting.same_form_different_species_together": "相同形式不同物种的在一起",
+  "options.extshape.colored_block_sorting": "染色方块专用物品组排序",
+  "options.extshape.colored_block_sorting.description": "创造模式物品栏中，染色方块的专用物品组中的方块的排序方式。",
+  "options.extshape.colored_block_sorting.same_color_different_shapes_together": "相同颜色不同形状的在一起",
+  "options.extshape.colored_block_sorting.same_shape_different_colors_together": "相同形状不同颜色的在一起",
 
   "options.extshape.default": "默认：%s",
   "options.extshape.confirm": "确定？",
@@ -49,8 +61,6 @@
   "message.extshape.recipe_conflict.finish.plural": "检测完成，共检测到%s个合成表撞车",
 
   "modmenu.nameTranslation.extshape": "扩展方块形状",
-
-  "options.extshape.addToVanillaGroups.blockus": "请注意：如要在创造模式物品栏中找到Blockus模组中的扩展形状的方块，你需要启用“添加至原版物品组”。这些方块只会显示在Blockus的物品组中。Blockus方块的扩展形状的方块没有专用物品组。",
 
   "resourcePack.extshape.recipe_tweak.name": "配方调整（扩展方块形状）",
   "resourcePack.extshape.recipe_tweak.description": "调整扩展方块形状模组的一些合成配方以修复与原版合成配方之间的冲突。如果安装了能解决合成配方冲突的模组，可以禁用此数据包。",

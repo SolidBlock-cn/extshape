@@ -39,6 +39,10 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
     copyWithSameId(ExtShapeTags.WOODEN_BLOCKS);
     copyWithSameId(ExtShapeTags.LOG_BLOCKS);
 
+    // 原版的物品标签只有 wooden_pressure_plates，没有普通和石质
+    copyWithSameId(ExtShapeTags.STONE_PRESSURE_PLATES);
+    copyWithSameId(BlockTags.STONE_BUTTONS);
+
     for (TagKey<Block> tag : Iterables.concat(
         ExtShapeTags.SHAPE_TO_TAG.values(),
         ExtShapeTags.SHAPE_TO_WOODEN_TAG.values(),
@@ -77,7 +81,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
     checkValidBaseBlock(baseBlock);
     final var builder = getOrCreateTagBuilder(tag);
     for (BlockShape shape : BlockShape.values()) {
-      final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+      final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (isValidBlock(block)) {
         builder.add(block.asItem());
       }
@@ -93,7 +97,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
     for (Block baseBlock : baseBlocks) {
       checkValidBaseBlock(baseBlock);
       for (BlockShape shape : BlockShape.values()) {
-        final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+        final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
         if (isValidBlock(block)) {
           builder.add(block.asItem());
         }

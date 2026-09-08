@@ -3,6 +3,7 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockBiMaps;
 
 import java.util.ArrayList;
@@ -37,28 +39,41 @@ public class ExtShapeBlockus implements ModInitializer {
   @Override
   public void onInitialize() {
     if (FabricLoader.getInstance().isModLoaded("blockus")) {
-      LOGGER.info("Blockus mod loaded. Extended Block Shapes mod is trying to apply it.");
+      LOGGER.info("Blockus mod loaded. Extended Block Shapes - Blockus mod is trying to apply it.");
       ExtShapeBlockusBlocks.init();
       ExtShapeBlockusAliases.initWallChanges();
       ExtShapeBlockusItemGroup.registerEvent();
       registerStrippableBlocks();
+      if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
+        ExtShapeBlockusSpecificItemGroups.init();
+      }
 
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
         validateBlockIds();
         validateReplacingIds();
+
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+          LOGGER.info("Validating Extended Block Shapes Blockus mod content");
+          ExtShape.validateTagsForBlocks(server, ExtShapeBlockusBlocks.BLOCKUS_BLOCKS);
+          LOGGER.info("Extended Block Shapes Blockus mod content is successfully validated");
+
+          LOGGER.info("Validating Extended Block Shapes Blockus recipes");
+          ExtShape.validateStonecuttingForBlocks(server, ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS);
+          LOGGER.info("Extended Block Shapes Blockus recipes are successfully validated");
+        });
       }
     }
   }
 
   private static void registerStrippableBlocks() {
     for (BlockShape shape : BlockShape.values()) {
-      var block1 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_LOG);
-      var block2 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_LOG);
+      @Nullable var block1 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_LOG);
+      @Nullable var block2 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_LOG);
       if (block1 != null && block2 != null) {
         ExtShape.EXTENDED_STRIPPABLE_BLOCKS.put(block1, block2);
       }
-      var block3 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_WOOD);
-      var block4 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_WOOD);
+      @Nullable var block3 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_WOOD);
+      @Nullable var block4 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_WOOD);
       if (block3 != null && block4 != null) {
         ExtShape.EXTENDED_STRIPPABLE_BLOCKS.put(block3, block4);
       }

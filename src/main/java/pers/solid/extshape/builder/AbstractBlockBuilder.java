@@ -275,10 +275,10 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    */
   public T build() {
     if (this.instance == null) this.createInstance();
-    final Identifier blockId = this.getBlockId();
     if (this.registerBlock) {
+      final Identifier blockId = this.getBlockId();
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-        final Identifier vanillaId = Identifier.of(blockId.getPath());
+        final Identifier vanillaId = Identifier.ofVanilla(blockId.getPath());
         Validate.validState(!Registries.BLOCK.containsId(vanillaId), "The block with id cannot be registered because there is a same block whose id is %s!", blockId, vanillaId);
       }
       Registry.register(Registries.BLOCK, blockId, instance);
@@ -286,7 +286,7 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     if (buildItem) {
       createItemInstance();
       if (registerItem) {
-        Registry.register(Registries.ITEM, blockId, this.itemInstance);
+        Registry.register(Registries.ITEM, identifier, this.itemInstance);
       }
     }
 

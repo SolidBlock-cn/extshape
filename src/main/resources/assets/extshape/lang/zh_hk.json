@@ -14,10 +14,12 @@
   "block.extshape.?_vertical_stairs": "豎直%s樓梯",
   "block.extshape.?_vertical_quarter_piece": "%s縱條",
 
-  "itemGroup.extshape.wooden_blocks": "\u00a79擴展方塊形狀：\u00a7r木製同竹製方塊",
-  "itemGroup.extshape.colorful_blocks": "\u00a79擴展方塊形狀：\u00a7r彩色方塊",
-  "itemGroup.extshape.stone_blocks": "\u00a79擴展方塊形狀：\u00a7r石質方塊",
-  "itemGroup.extshape.other_blocks": "\u00a79擴展方塊形狀：\u00a7r其他",
+  "itemGroup.extshape.prefix": "%s：",
+  "itemGroup.extshape.wooden_blocks": "木製同竹製方塊",
+  "itemGroup.extshape.colored_blocks": "染色方塊",
+  "itemGroup.extshape.stone_blocks": "石質方塊",
+  "itemGroup.extshape.mineral_blocks": "礦物方塊",
+  "itemGroup.extshape.other_blocks": "其他",
 
   "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗更多形狀，包括原版唔存在嘅形狀，如縱半磚、縱樓梯同橫條。大多數方塊都有好似原版一样嘅行為，就類似於基礎方塊。比如，基岩樓梯同基岩半磚像基岩本身一樣，可以防爆防凋零怪，羊毛欄杆同羊毛閘門可燃且可以被鉸剪剪碎。\n藉助此模組，你可以製作出更加精美嘅建築，玩生存也會更貪得意。",
   "modmenu.summaryTranslation.extshape": "為好多原版方塊添加咗更多形狀，且具有類似原版嘅行為。",
@@ -25,15 +27,25 @@
   "options.extshape.title": "擴展方塊形狀模組配置",
   "options.extshape.addToVanillaGroups": "添加至原版物品組",
   "options.extshape.addToVanillaGroups.tooltip": "如果啟用，此模組中嘅方塊將會直接添加到 Minecraft 嘅原版物品組中，例如%s、%s同%s。方塊會直接添加到其基礎方塊後面，咁你可以方便找到同一基礎方塊嘅不同形狀嘅方塊。默認情況下，會添加所有嘅形狀。你可以喺下方嘅文本框中指定添加邊個形狀。",
-  "options.extshape.addToVanillaGroups.warning_for_1.20": "此版本中，呢個選項唔支持關閉。請喺原版物品組中尋找物品。",
+  "options.extshape.addToVanillaGroups.notice_for_effect": "立即生效。",
   "options.extshape.showSpecificGroups": "顯示專用物品組",
   "options.extshape.showSpecificGroups.tooltip": "添加 4 個專用物品組以顯示所有擁有唔同形狀嘅方塊（含原版同模組中），依啲方塊按照其基礎方塊嘅順序排列，基礎方塊相同嘅方塊顯示喺一起。",
-  "options.extshape.showSpecificGroups.warning_for_1.20": "此版本唔支持可配置嘅專用物品組。請喺原版物品組中尋找物品。",
+  "options.extshape.showSpecificGroups.notice_for_effect": "重啟遊戲後生效。",
   "options.extshape.shapesToAddToVanilla": "添加到原版物品組中嘅形狀",
   "options.extshape.shapesToAddToVanilla.description": "需要將邊形狀嘅方塊添加到原版物品組中？（用空格間隔。）",
   "options.extshape.shapesInSpecificGroups": "專用物品組中嘅形狀",
   "options.extshape.shapesInSpecificGroups.description": "將邊形狀嘅方塊添加到本模組嘅專用物品組中？（用空格間隔。）",
   "options.extshape.reset": "重置",
+
+  "options.extshape.sorting_examples": "示例：%s",
+  "options.extshape.wooden_and_bamboo_block_sorting": "木製與竹製方塊專用物品組排序",
+  "options.extshape.wooden_and_bamboo_block_sorting.description": "創造模式物品欄中，木製與竹製方塊的專用物品組中的方塊的排序方式。",
+  "options.extshape.wooden_and_bamboo_block_sorting.same_species_different_forms_together": "相同物種不同形式的在一起",
+  "options.extshape.wooden_and_bamboo_block_sorting.same_form_different_species_together": "相同形式不同物種的在一起",
+  "options.extshape.colored_block_sorting": "染色方塊專用物品組排序",
+  "options.extshape.colored_block_sorting.description": "創造模式物品欄中，染色方塊的專用物品組中的方塊的排序方式。",
+  "options.extshape.colored_block_sorting.same_color_different_shapes_together": "相同顏色不同形狀的在一起",
+  "options.extshape.colored_block_sorting.same_shape_different_colors_together": "相同形狀不同顏色的在一起",
 
   "options.extshape.default": "默認：%s",
   "options.extshape.confirm": "確定？",
@@ -49,8 +61,6 @@
   "message.extshape.recipe_conflict.finish.plural": "檢測完成，共檢測到%s個合成表撞車",
 
   "modmenu.nameTranslation.extshape": "擴展方塊形狀",
-
-  "options.extshape.addToVanillaGroups.blockus": "請注意：如要喺創造模式中尋到 Blockus 模組中嘅擴展形狀嘅方塊，你需要啟用「添加至原版物品組」。呢啲方塊只會顯示喺 Blockus 嘅物品組中。Blockus 方塊嘅擴展形狀嘅方塊冇專用物品組。",
 
   "resourcePack.extshape.recipe_tweak.name": "配方調整",
   "resourcePack.extshape.recipe_tweak.description": "調整擴展方塊形狀模組嘅些合成配方以修復同原版合成配方之間嘅衝突。如果安裝中咗能解決合成配方衝突嘅模組，可以禁用呢個數據包。",

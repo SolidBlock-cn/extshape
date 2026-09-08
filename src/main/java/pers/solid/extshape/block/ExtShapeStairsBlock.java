@@ -22,7 +22,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -35,7 +34,7 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
 
   public final Block baseBlock;
 
-  public ExtShapeStairsBlock(@NotNull Block baseBlock, Settings settings) {
+  public ExtShapeStairsBlock(Block baseBlock, Settings settings) {
     super(baseBlock.getDefaultState(), settings);
     this.baseBlock = baseBlock;
   }
@@ -81,7 +80,7 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
   public static class WithExtension extends ExtShapeStairsBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -122,7 +121,7 @@ public class ExtShapeStairsBlock extends StairsBlock implements ExtShapeVariantB
     private final OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

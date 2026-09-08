@@ -38,9 +38,9 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   /**
    * 合成栅栏方块需要使用的第二个材料。
    */
-  private final Item secondIngredient;
+  private final @Nullable Item secondIngredient;
 
-  public ExtShapeFenceBlock(Block baseBlock,Item secondIngredient, Settings settings) {
+  public ExtShapeFenceBlock(Block baseBlock, @Nullable Item secondIngredient, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
@@ -59,13 +59,14 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   @Override
   public @Nullable CraftingRecipeJsonBuilder getCraftingRecipe() {
     return secondIngredient == null ? null : ShapedRecipeJsonBuilder.create(getRecipeCategory(), this, 2)
-            .pattern("W#W").pattern("W#W")
-            .group(getRecipeGroup())
+        .pattern("W#W").pattern("W#W")
+        .group(getRecipeGroup())
         .input('W', baseBlock)
         .input('#', getSecondIngredient())
         .criterion(RecipeProvider.hasItem(baseBlock), RecipeProvider.conditionsFromItem(baseBlock));
   }
 
+  @Nullable
   public Item getSecondIngredient() {
     return secondIngredient;
   }
@@ -125,8 +126,8 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   }
 
   public static class WithOxidation extends ExtShapeFenceBlock implements Oxidizable {
-    private final OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), Registries.ITEM.getCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceBlock::getSecondIngredient), createSettingsCodec(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
+    private final OxidationLevel oxidationLevel;
 
     public WithOxidation(Block baseBlock, @Nullable Item secondIngredient, Settings settings, OxidationLevel oxidationLevel) {
       super(baseBlock, secondIngredient, settings);

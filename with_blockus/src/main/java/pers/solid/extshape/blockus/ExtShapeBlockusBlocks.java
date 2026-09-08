@@ -8,7 +8,6 @@ import com.brand.blockus.registry.content.bundles.WoodBundle;
 import com.brand.blockus.registry.content.bundles.WoolBundle;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.brand.blockus.utils.helper.WoodMaps;
-import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
@@ -499,6 +498,10 @@ public final class ExtShapeBlockusBlocks {
         .setStoneFenceSettings(Items.NETHER_BRICK)
         .without(BlockShape.BUTTON)
         .build();
+    create(BlockusBlocks.HERRINGBONE_CHARRED_NETHER_BRICKS)
+        .setStoneFenceSettings(Items.NETHER_BRICK)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
     create(BlockusBlocks.TEAL_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
         .without(BlockShape.BUTTON)
@@ -808,7 +811,7 @@ public final class ExtShapeBlockusBlocks {
             .setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString())
             .build();
       }
-    };
+    }
 
     markStoneCuttableWhenCreating = true;
     create(BlockusBlocks.CHOCOLATE_BLOCK)
@@ -927,11 +930,11 @@ public final class ExtShapeBlockusBlocks {
               }
             })
             .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60))
-          .addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness)))
-          .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString())
+            .addPostBuildConsumer((blockShape, blockBuilder) -> FuelRegistry.INSTANCE.add(blockBuilder.instance, (int) (100 * blockShape.logicalCompleteness)))
+            .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString())
             .setActivationSettings(ActivationSettings.WOOL)
             .setFenceSettings(FenceSettings.WOOL)
-          .build();
+            .build();
       }
     }
 
@@ -1003,7 +1006,8 @@ public final class ExtShapeBlockusBlocks {
     FACTORY.createAllShapes(BlockusBlocks.NETHER_STAR_BLOCK)
         .markStoneCuttable()
         .withoutRedstone()
-        .setStoneFenceSettings(Items.NETHER_STAR).withExtension(BlockExtension.builder()
+        .setStoneFenceSettings(Items.NETHER_STAR)
+        .withExtension(BlockExtension.builder()
             .setSteppedOnCallback((world, pos, state, entity) -> {
               if (entity.getType() == EntityType.PLAYER) {
                 ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 3, true, false, false));

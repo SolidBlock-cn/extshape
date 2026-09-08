@@ -38,7 +38,7 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
    */
   private final Item secondIngredient;
 
-  public ExtShapeFenceGateBlock(Block baseBlock, Settings settings, WoodType woodType, Item secondIngredient) {
+  public ExtShapeFenceGateBlock(Block baseBlock, Settings settings, WoodType woodType, @Nullable Item secondIngredient) {
     super(woodType, settings);
     this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
@@ -58,7 +58,7 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
     return Text.translatable("block.extshape.?_fence_gate", this.getNamePrefix());
   }
 
-  public Item getSecondIngredient() {
+  public @Nullable Item getSecondIngredient() {
     return secondIngredient;
   }
 
