@@ -37,38 +37,37 @@ public final class BlockusBlockBiMaps {
         }
         if (variant != null) {
           BlockBiMaps.setBlockOf(shape, baseBlock, variant);
-          BlockBiMaps.BASE_BLOCKS.add(baseBlock);
         }
       }
     });
-    BSSWBundle.values().forEach(bsswTypes -> {
-      if (bsswTypes.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswTypes.block, bsswTypes.stairs);
+    BSSWBundle.values().forEach(bsswBundle -> {
+      if (bsswBundle.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, bsswBundle.block, bsswBundle.stairs);
       }
-      if (bsswTypes.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, bsswTypes.block, bsswTypes.slab);
+      if (bsswBundle.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, bsswBundle.block, bsswBundle.slab);
       }
-      if (bsswTypes.wall != null) {
-        BlockBiMaps.setBlockOf(BlockShape.WALL, bsswTypes.block, bsswTypes.wall);
-      }
-    });
-    WoolBundle.values().forEach(woolTypes -> {
-      if (woolTypes.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woolTypes.block, woolTypes.stairs);
-      }
-      if (woolTypes.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, woolTypes.block, woolTypes.slab);
+      if (bsswBundle.wall != null) {
+        BlockBiMaps.setBlockOf(BlockShape.WALL, bsswBundle.block, bsswBundle.wall);
       }
     });
-    ConcreteBundle.values().forEach(concreteTypes -> {
-      if (concreteTypes.stairs != null) {
-        BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteTypes.block, concreteTypes.stairs);
+    WoolBundle.values().forEach(woolBundle -> {
+      if (woolBundle.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, woolBundle.block, woolBundle.stairs);
       }
-      if (concreteTypes.slab != null) {
-        BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteTypes.block, concreteTypes.slab);
+      if (woolBundle.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, woolBundle.block, woolBundle.slab);
       }
-      if (concreteTypes.wall != null) {
-        BlockBiMaps.setBlockOf(BlockShape.WALL, concreteTypes.block, concreteTypes.wall);
+    });
+    ConcreteBundle.values().forEach(concreteBundle -> {
+      if (concreteBundle.stairs != null) {
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteBundle.block, concreteBundle.stairs);
+      }
+      if (concreteBundle.slab != null) {
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteBundle.block, concreteBundle.slab);
+      }
+      if (concreteBundle.wall != null) {
+        BlockBiMaps.setBlockOf(BlockShape.WALL, concreteBundle.block, concreteBundle.wall);
       }
     });
 

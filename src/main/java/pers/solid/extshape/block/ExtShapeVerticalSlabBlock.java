@@ -21,7 +21,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
@@ -34,7 +33,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   public static final MapCodec<ExtShapeVerticalSlabBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(createSettingsCodec(), ExtShapeVerticalSlabBlock::new);
   public final Block baseBlock;
 
-  public ExtShapeVerticalSlabBlock(@NotNull Block baseBlock, Settings settings) {
+  public ExtShapeVerticalSlabBlock(Block baseBlock, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
@@ -50,7 +49,7 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -71,9 +70,9 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
   }
 
   public static class WithExtension extends ExtShapeVerticalSlabBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -110,9 +109,9 @@ public class ExtShapeVerticalSlabBlock extends VerticalSlabBlock implements ExtS
 
   public static class WithOxidation extends ExtShapeVerticalSlabBlock implements Oxidizable {
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(createSettingsCodec(), WithOxidation::new);
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

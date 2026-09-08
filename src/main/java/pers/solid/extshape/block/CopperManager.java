@@ -17,7 +17,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -61,7 +61,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
    * 为一个特定氧化等级以及涂蜡情况的铜方块注册 {@code BlocksBuilder}。
    */
-  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, @NotNull Oxidizable.OxidationLevel oxidationLevel, boolean waxed) {
+  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, Oxidizable.OxidationLevel oxidationLevel, boolean waxed) {
     final BlocksBuilder builder = blocksBuilderFactory.createAllShapes(copperBase).setActivationSettings(ActivationSettings.COPPER.get(oxidationLevel));
 
     if (!waxed) {
@@ -123,8 +123,8 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
       final Block unwaxedBase = unwaxedBases.get(i);
       final Block waxedBase = waxedBases.get(i);
       for (BlockShape shape : BlockShape.values()) {
-        final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
-        final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
+        final @Nullable Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
+        final @Nullable Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
         if (unwaxed != null && waxed != null && blocksBuilderFactory.instanceCollection != null && blocksBuilderFactory.instanceCollection.contains(unwaxed) && blocksBuilderFactory.instanceCollection.contains(waxed)) {
           OxidizableBlocksRegistry.registerWaxableBlockPair(unwaxed, waxed);
         }
@@ -146,7 +146,6 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
     ).apply(instance, function));
   }
 
-  @NotNull
   public static <B extends Oxidizable> RecordCodecBuilder<B, Oxidizable.OxidationLevel> weatheringStateField() {
     return Oxidizable.OxidationLevel.CODEC.fieldOf("weathering_state").forGetter(Degradable::getDegradationLevel);
   }
@@ -157,7 +156,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
    * @param oxidationLevel 氧化等级。
    * @return 方块激活持续的刻数。
    */
-  public static int getActivationRate(@NotNull Oxidizable.OxidationLevel oxidationLevel) {
+  public static int getActivationRate(Oxidizable.OxidationLevel oxidationLevel) {
     return switch (oxidationLevel) {
       case UNAFFECTED -> 10;
       case EXPOSED -> 40;
@@ -178,8 +177,8 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
 
   private static void generateWaxRecipesForShapes(RecipeGenerator recipeGenerator, RecipeExporter exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
     for (BlockShape shape : BlockShape.values()) {
-      final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
-      final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
+      final @Nullable Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
+      final @Nullable Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
       if (unwaxed != null && waxed != null && blockPredicate.test(waxed)) {
         final ShapelessRecipeJsonBuilder recipe = recipeGenerator.createShapeless(RecipeCategory.BUILDING_BLOCKS, waxed)
             .input(unwaxed)

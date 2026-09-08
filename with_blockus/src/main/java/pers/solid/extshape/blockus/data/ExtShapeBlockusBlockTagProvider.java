@@ -4,11 +4,15 @@ import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.tag.BlockusBlockTags;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
@@ -18,20 +22,32 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import java.util.concurrent.CompletableFuture;
 
 public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
+  public static final ImmutableSet<String> STONE_BASE_BLOCK_KEYWORDS = ImmutableSet.of("stone", "andesite", "granite", "diorite", "limestone", "marble", "viridite", "netherrack", "basalt", "deepslate", "tuff", "sulfur", "cinnabar", "nether_brick");
+  /**
+   * 此集内的方块会被加入 {@code #stone_pressure_plates} 和 {@code #stone_buttons}。注意这些方块必须要拥有 {@code mineable/pickaxe} 标签。
+   */
+  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.stream().filter(block -> STONE_BASE_BLOCK_KEYWORDS.stream().anyMatch(Registries.BLOCK.getId(block).getPath()::contains)).filter(block -> !Registries.BLOCK.getId(block).getPath().contains("glowstone")).collect(ImmutableSet.toImmutableSet());
+
   public ExtShapeBlockusBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
     super(output, registriesFuture);
+  }
+
+  @Override
+  protected boolean isStoneBaseBlock(Block baseBlock) {
+    return super.isStoneBaseBlock(baseBlock) || STONE_BASE_BLOCKS.contains(baseBlock);
   }
 
   @Override
   protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
     // region 形状标签
 
+    final ImmutableSet<Block> mossyPlanksBlocks = BlockusBlockCollections.MOSSY_PLANKS.stream().map(bsswBundle -> bsswBundle.block).collect(ImmutableSet.toImmutableSet());
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
       if (BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS.contains(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeBlockusTags.GLAZED_TERRACOTTA_PILLAR_TAGS);
       } else if (BlockusBlockCollections.SMALL_LOGS.contains(baseBlock)) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_LOG_TAG);
-      } else if (BlockusBlockCollections.HERRINGBONE_PLANKS.contains(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks || baseBlock == BlockusBlocks.CHARRED.planks) {
+      } else if (BlockusBlockCollections.HERRINGBONE_PLANKS.contains(baseBlock) || mossyPlanksBlocks.contains(baseBlock) || baseBlock == BlockusBlocks.WHITE_OAK.planks || baseBlock == BlockusBlocks.CHARRED.planks || baseBlock == BlockusBlocks.RAW_BAMBOO.planks || baseBlock == BlockusBlocks.WHITE_OAK_WOOD || baseBlock == BlockusBlocks.STRIPPED_WHITE_OAK_WOOD) {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_WOODEN_TAG);
       } else {
         addShapesToCorrespondingTags(baseBlock, ExtShapeTags.SHAPE_TO_TAG);
@@ -60,7 +76,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.NETHERITE_BRICKS.block,
         BlockusBlocks.CHARCOAL_BLOCK,
         BlockusBlocks.ENDER_BLOCK,
-        BlockusBlocks.NETHER_STAR_BLOCK);
+        BlockusBlocks.NETHER_STAR_BLOCK,
+        BlockusBlocks.STARS_BLOCK);
 
     addForShapes(BlockTags.HOE_MINEABLE,
         BlockusBlocks.CHORUS_BLOCK,
@@ -185,6 +202,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.VIRIDITE_CIRCULAR_PAVING
     );
 
+    addForShapes(BlockusBlockTags.WATER_BRICKS, BlockusBlocks.WATER_BRICKS.block);
     addForShapes(BlockusBlockTags.LAVA_BRICKS,
         BlockusBlocks.LAVA_BRICKS.block
     );
@@ -218,8 +236,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
     addForShapes(BlockusBlockTags.BLAZE_BRICKS,
-        BlockusBlocks.BLAZE_BRICKS.block,
-        BlockusBlocks.BLAZE_LANTERN);
+        BlockusBlocks.BLAZE_BRICKS.block);
 
     addForShapes(BlockusBlockTags.NETHER_BRICKS,
         BlockusBlocks.POLISHED_NETHER_BRICKS.block,
@@ -250,6 +267,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.HERRINGBONE_SANDY_BRICKS
     );
 
+    addForShapes(BlockusBlockTags.RESIN_BLOCKS, BlockusBlocks.LARGE_RESIN_BRICKS.block, BlockusBlocks.HERRINGBONE_RESIN_BRICKS);
+
     addForShapes(BlockusBlockTags.SANDSTONE,
         BlockusBlocks.ROUGH_SANDSTONE.block,
         BlockusBlocks.SANDSTONE_BRICKS.block,
@@ -263,6 +282,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
     addForShapes(BlockusBlockTags.SOUL_SANDSTONE,
+        BlockusBlocks.SOUL_SANDSTONE.block,
         BlockusBlocks.ROUGH_SOUL_SANDSTONE.block,
         BlockusBlocks.SOUL_SANDSTONE_BRICKS.block,
         BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS.block,
@@ -328,7 +348,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     addForShapes(BlockusBlockTags.STAINED_STONE_BRICKS, Iterables.transform(BlockusBlockCollections.STAINED_STONE_BRICKS, input -> input.block));
 
     addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlockCollections.CONCRETE_BRICKS, input -> input.block));
-//    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlockCollections.CONCRETE_BRICKS, input -> input.chiseled));
 
     addForShapes(BlockusBlockTags.SHINGLES, BlockusBlocks.SHINGLES.block);
     addForShapes(BlockusBlockTags.SHINGLES, Iterables.transform(BlockusBlockCollections.TINTED_SHINGLES, input -> input.block));
@@ -356,13 +375,15 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     // endregion 其他通用方块标签
   }
 
+  @Contract("null -> fail")
   @Override
-  protected void checkValidBaseBlock(Block baseBlock) {
+  protected void checkValidBaseBlock(@Nullable Block baseBlock) {
     Preconditions.checkArgument(ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.contains(baseBlock), "%s is not a base block for Extended Block Shapes - Blockus", baseBlock);
   }
 
+  @Contract("null -> false")
   @Override
-  protected boolean isValidBlock(Block block) {
+  protected boolean isValidBlock(@Nullable Block block) {
     return ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block);
   }
 }

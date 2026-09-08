@@ -1,15 +1,17 @@
 package pers.solid.extshape.config;
 
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
@@ -17,20 +19,24 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
+import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.itemgroup.ItemGroupRules;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
 public class ExtShapeOptionsScreen extends Screen {
 
-  private final Screen parent;
+  private final @Nullable Screen parent;
   private final GameOptions gameOptions = MinecraftClient.getInstance().options;
   public final ExtShapeConfig oldConfig = ExtShapeConfig.CURRENT_CONFIG;
   public final ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
@@ -62,15 +68,15 @@ public class ExtShapeOptionsScreen extends Screen {
       "options.extshape.addToVanillaGroups",
       SimpleOption.constantTooltip(
           Text.translatable("options.extshape.addToVanillaGroups.tooltip", Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.BUILDING_BLOCKS).getDisplayStacks(), Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.COLORED_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getValueOrThrow(ItemGroups.NATURAL).getDisplayName())
-              .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Text.literal("\n\n").append(Text.translatable("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : Text.empty())
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))
               .append("\n\n")
-              .append(Text.translatable("options.extshape.addToVanillaGroups.warning_for_1.20").formatted(Formatting.YELLOW))),
-      true,
+              .append(Text.translatable("options.extshape.addToVanillaGroups.notice_for_effect").formatted(Formatting.YELLOW))),
+      newConfig.addToVanillaGroups,
       value -> {
         newConfig.addToVanillaGroups = value;
         shapesToAddToVanillaTextField.setEditable(value);
+        resetShapesToAddToVanillaButton.active = value;
       }
   ).createWidget(gameOptions, width / 2 - 205, 36, 200);
 
@@ -81,24 +87,54 @@ public class ExtShapeOptionsScreen extends Screen {
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))
               .append("\n\n")
-              .append(Text.translatable("options.extshape.showSpecificGroups.warning_for_1.20").formatted(Formatting.YELLOW))),
-      false,
+              .append(Text.translatable("options.extshape.showSpecificGroups.notice_for_effect").formatted(Formatting.YELLOW))),
+      newConfig.showSpecificGroups,
       value -> {
         newConfig.showSpecificGroups = value;
         shapesInSpecificGroupsTextField.setEditable(value);
+        resetShapesInSpecificGroupsButton.active = value;
+        this.coloredBlockSortingButton.active = value;
+        this.woodenBlockSortingButton.active = value;
       }
   ).createWidget(gameOptions, width / 2 + 5, 36, 200);
+
+  private final CyclingButtonWidget<WoodenAndBambooBlockSorting> woodenBlockSortingButton = CyclingButtonWidget.builder(WoodenAndBambooBlockSorting::displayName)
+      .values(WoodenAndBambooBlockSorting.values())
+      .initially(newConfig.woodenAndBambooBlockSorting)
+      .tooltip(value -> Tooltip.of(Text.empty()
+          .append(Text.translatable("options.extshape.wooden_and_bamboo_block_sorting.description"))
+          .append("\n\n")
+          .append(Text.translatable("options.extshape.default", ExtShapeConfig.DEFAULT_CONFIG.woodenAndBambooBlockSorting.displayName()).formatted(Formatting.GRAY))
+          .append("\n\n")
+          .append(Text.literal("[").formatted(Formatting.YELLOW, Formatting.BOLD).append(value.displayName()).append("]"))
+          .append("\n  ")
+          .append(Text.translatable("options.extshape.sorting_examples", Texts.join(value.examples(), Texts.DEFAULT_SEPARATOR_TEXT, Block::getName)).formatted(Formatting.GRAY))))
+      .build(width / 2 - 205, 151, 200, 20, Text.translatable("options.extshape.wooden_and_bamboo_block_sorting"), (button, value) -> newConfig.woodenAndBambooBlockSorting = value);
+
+  private final CyclingButtonWidget<ColoredBlockSorting> coloredBlockSortingButton = CyclingButtonWidget.builder(ColoredBlockSorting::displayName)
+      .values(ColoredBlockSorting.values())
+      .initially(newConfig.coloredBlockSorting)
+      .tooltip(value -> Tooltip.of(Text.empty()
+          .append(Text.translatable("options.extshape.colored_block_sorting.description"))
+          .append("\n\n")
+          .append(Text.translatable("options.extshape.default", ExtShapeConfig.DEFAULT_CONFIG.coloredBlockSorting.displayName()).formatted(Formatting.GRAY))
+          .append("\n\n")
+          .append(Text.literal("[").formatted(Formatting.YELLOW, Formatting.BOLD).append(value.displayName()).append("]"))
+          .append("\n  ")
+          .append(Text.translatable("options.extshape.sorting_examples", Texts.join(value.examples(), Texts.DEFAULT_SEPARATOR_TEXT, Block::getName)).formatted(Formatting.GRAY))))
+      .build(width / 2 - 205, 151, 200, 20, Text.translatable("options.extshape.colored_block_sorting"), (button, value) -> newConfig.coloredBlockSorting = value);
 
   // 完成按钮
   private final ButtonWidget finishButton = new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).position(this.width / 2 - 100, this.height - 27).size(200, 20).build();
 
-  public ExtShapeOptionsScreen(Screen parent) {
+  public ExtShapeOptionsScreen(@Nullable Screen parent) {
     super(Text.translatable("options.extshape.title"));
     this.parent = parent;
-    addToVanillaGroupsButton.active = false;
-    showSpecificGroupsButton.active = false;
-    shapesInSpecificGroupsTextField.active = false;
-    resetShapesInSpecificGroupsButton.active = false;
+
+    this.resetShapesInSpecificGroupsButton.active = newConfig.showSpecificGroups;
+    this.resetShapesToAddToVanillaButton.active = newConfig.addToVanillaGroups;
+    this.coloredBlockSortingButton.active = newConfig.showSpecificGroups;
+    this.woodenBlockSortingButton.active = newConfig.showSpecificGroups;
   }
 
   @Override
@@ -117,6 +153,11 @@ public class ExtShapeOptionsScreen extends Screen {
     addDrawableChild(shapesInSpecificGroupsTextField);
     resetShapesInSpecificGroupsButton.setX(width / 2 + 155);
     addDrawableChild(resetShapesInSpecificGroupsButton);
+
+    woodenBlockSortingButton.setX(width / 2 - 205);
+    addDrawableChild(woodenBlockSortingButton);
+    coloredBlockSortingButton.setX(width / 2 + 5);
+    addDrawableChild(coloredBlockSortingButton);
 
     finishButton.setPosition(width / 2 - 100, height - 27);
     addDrawableChild(finishButton);
@@ -143,20 +184,12 @@ public class ExtShapeOptionsScreen extends Screen {
         || !oldConfig.shapesInSpecificGroups.equals(newConfig.shapesInSpecificGroups)) {
       ExtShapeConfig.requireUpdateDisplay = true;
     }
-    if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)) {
-      ExtShapeConfig.requireUpdateShapesToAddVanilla = true;
+    if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)
+        || !oldConfig.woodenAndBambooBlockSorting.equals(newConfig.woodenAndBambooBlockSorting)
+        || !oldConfig.coloredBlockSorting.equals(newConfig.coloredBlockSorting)) {
+      ItemGroupRules.rebuildRules();
+      ExtShapeConfig.requireUpdateDisplay = true;
     }
-
-    // 应用物品组。/*if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {
-    //      if (newConfig.showSpecificGroups) {
-    //        ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
-    //        ExtShapeItemGroup.implementGroups();
-    //      } else {
-    //        ExtShape.LOGGER.info("Removing item groups at runtime. This may cause some instability.");
-    //        ExtShapeItemGroup.removeGroups();
-    //      }
-    //    }*/
-
   }
 
   private boolean suppressedGroupsWarning = false;
@@ -189,15 +222,15 @@ public class ExtShapeOptionsScreen extends Screen {
     client.setScreen(parent);
   }
 
-  private static Collection<BlockShape> convertStringToCollection(String s) {
-    return Arrays.stream(StringUtils.split(s)).map(BlockShape::byName).filter(Objects::nonNull).collect(ImmutableSet.toImmutableSet());
+  private static List<BlockShape> convertStringToCollection(String s) {
+    return Arrays.stream(StringUtils.split(s)).map(BlockShape::byName).filter(Objects::nonNull).distinct().collect(ImmutableList.toImmutableList());
   }
 
   private static String convertCollectionToString(Collection<BlockShape> list) {
     return list.stream().map(BlockShape::asString).collect(Collectors.joining(StringUtils.SPACE));
   }
 
-  private static String getSuggestion(String currentValue) {
+  private static @Nullable String getSuggestion(String currentValue) {
     final String[] split = StringUtils.split(currentValue);
     if (split.length == 0) return null;
     final String last = split[split.length - 1];
