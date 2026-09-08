@@ -2,14 +2,20 @@ package pers.solid.extshape.data;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimaps;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.CopperManager;
+import pers.solid.extshape.block.ExtShapeBlocks;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 这里记录了 Minecraft 原版的可切石方块。在生成切石配方的过程中，需要考虑间接切石的情形，因此需要使用到这里的例子。
@@ -24,42 +30,56 @@ public final class VanillaStonecutting {
   /**
    * 键为切石<i>之后</i>的方块，值为切石<i>之前</i>的方块。
    */
-  public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
-  public static final @Unmodifiable ImmutableMultimap<Block, ObjectIntPair<Block>> INSTANCE_WITH_WEIGHT;
+  public static final @Unmodifiable ImmutableMultimap<Block, ObjectIntPair<Block>> INSTANCE;
 
   private VanillaStonecutting() {
   }
 
   static {
-    final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
-    registerVanillaStonecutting(builder);
-    final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> weightedBuilder = new ImmutableMultimap.Builder<>();
-    registerCutCopperBlocks(weightedBuilder);
+    final ImmutableMultimap.Builder<Block, Block> simpleBuilder = new ImmutableMultimap.Builder<>();
+    registerVanillaStonecutting(simpleBuilder);
+    final ImmutableMultimap<Block, Block> simpleMap = simpleBuilder.build();
+    final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder = new ImmutableMultimap.Builder<>();
+    builder.putAll(Multimaps.transformValues(simpleMap, input -> ObjectIntPair.of(input, 1)));
+    registerCutCopperBlocks(builder);
+
+    if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+      final List<Block> unrecognizedBaseBlocks = simpleMap.keySet().stream().distinct()
+          .filter(block -> !ExtShapeBlocks.containsBaseBlock(block))
+          .toList();
+
+      if (!unrecognizedBaseBlocks.isEmpty()) {
+        throw new IllegalStateException("These blocks exist in the results of VanillaStonecutting.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(Registries.BLOCK::getId).map(Objects::toString).collect(Collectors.joining(", ")));
+      }
+    }
+
     INSTANCE = builder.build();
-    INSTANCE_WITH_WEIGHT = weightedBuilder.build();
   }
 
   private static void registerVanillaStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
+    // 石头
     builder.put(Blocks.STONE_BRICKS, Blocks.STONE);
-    builder.put(Blocks.CHISELED_STONE_BRICKS, Blocks.STONE);
+
+    // 砂岩
     builder.put(Blocks.CUT_SANDSTONE, Blocks.SANDSTONE);
-    builder.put(Blocks.CHISELED_SANDSTONE, Blocks.SANDSTONE);
     builder.put(Blocks.CUT_RED_SANDSTONE, Blocks.RED_SANDSTONE);
-    builder.put(Blocks.CHISELED_RED_SANDSTONE, Blocks.RED_SANDSTONE);
-    builder.put(Blocks.QUARTZ_PILLAR, Blocks.QUARTZ_BLOCK);
+
+    // 石英
     builder.put(Blocks.CHISELED_QUARTZ_BLOCK, Blocks.QUARTZ_BLOCK);
     builder.put(Blocks.QUARTZ_BRICKS, Blocks.QUARTZ_BLOCK);
-    builder.put(Blocks.CHISELED_STONE_BRICKS, Blocks.STONE_BRICKS);
-    builder.put(Blocks.CHISELED_NETHER_BRICKS, Blocks.NETHER_BRICKS);
+
+    // 废石
     builder.put(Blocks.POLISHED_ANDESITE, Blocks.ANDESITE);
-    builder.put(Blocks.POLISHED_BASALT, Blocks.BASALT);
     builder.put(Blocks.POLISHED_GRANITE, Blocks.GRANITE);
     builder.put(Blocks.POLISHED_DIORITE, Blocks.DIORITE);
+
+    // 末地
     builder.put(Blocks.END_STONE_BRICKS, Blocks.END_STONE);
+
+    // 深层石头
     builder.put(Blocks.POLISHED_BLACKSTONE, Blocks.BLACKSTONE);
     builder.put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.BLACKSTONE);
     builder.put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE);
-    builder.put(Blocks.CHISELED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.POLISHED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_BRICKS, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.COBBLED_DEEPSLATE);
@@ -67,13 +87,10 @@ public final class VanillaStonecutting {
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.POLISHED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.DEEPSLATE_BRICKS);
 
-    builder.put(Blocks.CHISELED_TUFF, Blocks.TUFF);
+    // 凝灰岩相关
     builder.put(Blocks.POLISHED_TUFF, Blocks.TUFF);
     builder.put(Blocks.TUFF_BRICKS, Blocks.TUFF);
-    builder.put(Blocks.CHISELED_TUFF_BRICKS, Blocks.TUFF);
     builder.put(Blocks.TUFF_BRICKS, Blocks.POLISHED_TUFF);
-    builder.put(Blocks.CHISELED_TUFF_BRICKS, Blocks.POLISHED_TUFF);
-    builder.put(Blocks.CHISELED_TUFF_BRICKS, Blocks.TUFF_BRICKS);
   }
 
   private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {

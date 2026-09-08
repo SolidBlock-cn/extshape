@@ -12,6 +12,9 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.Validate;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -33,9 +36,9 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
   public static final ImmutableList<ImmutableMap<BlockShape, TagKey<Block>>> TYPE_SHAPE_TAGS = ImmutableList.of(ExtShapeTags.SHAPE_TO_WOODEN_TAG, ExtShapeTags.SHAPE_TO_LOG_TAG, ExtShapeTags.SHAPE_TO_WOOLEN_TAG, ExtShapeTags.SHAPE_TO_CONCRETE_TAG, ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG);
 
   /**
-   * 此集内的方块会被加入 {#code stone_pressure_plates} 和 {@code stone_buttons}。
+   * 此集内的方块会被加入 {@code #stone_pressure_plates} 和 {@code #stone_buttons}。注意：这些方块必须拥有 {@code mineable/pickaxe} 标签。
    */
-  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ImmutableSet.of(Blocks.STONE, Blocks.SMOOTH_STONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.GILDED_BLACKSTONE);
+  public static final ImmutableSet<Block> STONE_BASE_BLOCKS = ImmutableSet.of(Blocks.STONE, Blocks.COBBLESTONE, Blocks.MOSSY_COBBLESTONE, Blocks.SMOOTH_STONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.GILDED_BLACKSTONE, Blocks.END_STONE, Blocks.END_STONE_BRICKS, Blocks.TUFF, Blocks.ANDESITE, Blocks.POLISHED_ANDESITE, Blocks.GRANITE, Blocks.POLISHED_GRANITE, Blocks.DIORITE, Blocks.POLISHED_DIORITE, Blocks.CALCITE, Blocks.NETHERRACK, Blocks.NETHER_BRICKS, Blocks.RED_NETHER_BRICKS, Blocks.BASALT, Blocks.POLISHED_BASALT, Blocks.SMOOTH_BASALT, Blocks.SANDSTONE, Blocks.SMOOTH_SANDSTONE, Blocks.CUT_SANDSTONE, Blocks.RED_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE, Blocks.CUT_RED_SANDSTONE, Blocks.STONE_BRICKS, Blocks.MOSSY_STONE_BRICKS, Blocks.DEEPSLATE, Blocks.DEEPSLATE_TILES, Blocks.DEEPSLATE_BRICKS, Blocks.COBBLED_DEEPSLATE);
 
   public ExtShapeBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
     super(output, registriesFuture);
@@ -47,6 +50,11 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     // region 基础形状部分
 
     valueLookupBuilder(BlockTags.OCCLUDES_VIBRATION_SIGNALS).addTag(ExtShapeTags.WOOLEN_BLOCKS);
+    aliasGroup(ExtShape.id("pressure_plates")).add(ExtShapeTags.PRESSURE_PLATES, BlockTags.PRESSURE_PLATES);
+    aliasGroup(ExtShape.id("stone_pressure_plates")).add(ExtShapeTags.STONE_PRESSURE_PLATES, BlockTags.STONE_PRESSURE_PLATES);
+    valueLookupBuilder(BlockTags.PRESSURE_PLATES).forceAddTag(ExtShapeTags.PRESSURE_PLATES);
+    valueLookupBuilder(BlockTags.STONE_PRESSURE_PLATES).forceAddTag(ExtShapeTags.STONE_PRESSURE_PLATES);
+    valueLookupBuilder(ExtShapeTags.PRESSURE_PLATES).addTag(ExtShapeTags.WOODEN_PRESSURE_PLATES).forceAddTag(ExtShapeTags.STONE_PRESSURE_PLATES);
 
     // 将原木的所有标签加入 log_blocks
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_LOG_TAG.values()) {
@@ -95,7 +103,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
-    addForShapes(BlockTags.PICKAXE_MINEABLE, Iterables.concat(
+    final Iterable<Block> pickaxeMineableBaseBlocks = Iterables.concat(
         BlockCollections.STONES,
         BlockCollections.UNCOLORED_SANDSTONES,
         BlockCollections.RED_SANDSTONES,
@@ -158,7 +166,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
             Blocks.RAW_COPPER_BLOCK,
             Blocks.RAW_GOLD_BLOCK
         )
-    ));
+    );
+    addForShapes(BlockTags.PICKAXE_MINEABLE, pickaxeMineableBaseBlocks);
 
     // 所有的混凝土和陶瓦加入 pickaxe_mineable
     for (TagKey<Block> tag : Iterables.concat(ExtShapeTags.SHAPE_TO_CONCRETE_TAG.values(), ExtShapeTags.SHAPE_TO_TERRACOTTA_TAG.values())) {
@@ -193,7 +202,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.RAW_IRON_BLOCK,
         Blocks.RAW_COPPER_BLOCK
     );
-    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
+    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
     addForShapes(BlockTags.NEEDS_IRON_TOOL,
         Blocks.GOLD_BLOCK,
         Blocks.DIAMOND_BLOCK,
@@ -206,6 +215,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.ANCIENT_DEBRIS,
         Blocks.CRYING_OBSIDIAN
     );
+
+    addForShapes(BlockTags.SWORD_EFFICIENT, Blocks.PUMPKIN, Blocks.MELON);
 
     // endregion mineable 部分
 
@@ -248,21 +259,21 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     addForShapes(BlockTags.WITHER_IMMUNE, Blocks.BEDROCK);
 
     for (Block block : BlockCollections.UNCOLORED_SANDSTONES) {
-      final Block stairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, block);
+      final @Nullable Block stairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, block);
       if (isValidBlock(stairs)) {
         valueLookupBuilder(ConventionalBlockTags.UNCOLORED_SANDSTONE_STAIRS).add(stairs);
       }
-      final Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, block);
+      final @Nullable Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, block);
       if (isValidBlock(slab)) {
         valueLookupBuilder(ConventionalBlockTags.UNCOLORED_SANDSTONE_SLABS).add(slab);
       }
     }
     for (Block block : BlockCollections.RED_SANDSTONES) {
-      final Block stairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, block);
+      final @Nullable Block stairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, block);
       if (isValidBlock(stairs)) {
         valueLookupBuilder(ConventionalBlockTags.RED_SANDSTONE_STAIRS).add(stairs);
       }
-      final Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, block);
+      final @Nullable Block slab = BlockBiMaps.getBlockOf(BlockShape.SLAB, block);
       if (isValidBlock(slab)) {
         valueLookupBuilder(ConventionalBlockTags.RED_SANDSTONE_SLABS).add(slab);
       }
@@ -299,7 +310,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     checkValidBaseBlock(baseBlock);
     final var builder = valueLookupBuilder(tag);
     for (BlockShape shape : BlockShape.values()) {
-      final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+      final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (isValidBlock(block)) {
         builder.add(block);
       }
@@ -315,7 +326,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     for (Block baseBlock : baseBlocks) {
       checkValidBaseBlock(baseBlock);
       for (BlockShape shape : BlockShape.values()) {
-        final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+        final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
         if (isValidBlock(block)) {
           builder.add(block);
         }
@@ -328,7 +339,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
     final var builder = valueLookupBuilder(tag);
     for (BlockShape shape : BlockShape.values()) {
       if (shape.isConstruction) {
-        final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+        final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
         if (isValidBlock(block)) {
           builder.add(block);
         }
@@ -346,7 +357,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
       checkValidBaseBlock(baseBlock);
       for (BlockShape shape : BlockShape.values()) {
         if (shape.isConstruction) {
-          final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+          final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
           if (isValidBlock(block)) {
             builder.add(block);
           }
@@ -361,20 +372,24 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
       TagKey<Block> tag = tags.containsKey(shape) ? tags.get(shape) : ExtShapeTags.SHAPE_TO_TAG.get(shape);
 
       // 对石质压力板的特殊处理
-      if (STONE_BASE_BLOCKS.contains(baseBlock)) {
-        if (BlockTags.PRESSURE_PLATES.equals(tag)) {
-          tag = BlockTags.STONE_PRESSURE_PLATES;
-        } else if (BlockTags.BUTTONS.equals(tag)) {
+      if (isStoneBaseBlock(baseBlock)) {
+        if (ExtShapeTags.PRESSURE_PLATES.equals(tag)) {
+          tag = ExtShapeTags.STONE_PRESSURE_PLATES;
+        } else if (ExtShapeTags.BUTTONS.equals(tag)) {
           tag = BlockTags.STONE_BUTTONS;
         }
       }
 
       Preconditions.checkNotNull(tag, "tag of shape %s", shape);
-      final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+      final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (isValidBlock(block)) {
         valueLookupBuilder(tag).add(block);
       }
     }
+  }
+
+  protected boolean isStoneBaseBlock(Block baseBlock) {
+    return STONE_BASE_BLOCKS.contains(baseBlock);
   }
 
   /**
@@ -383,7 +398,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
    * @throws IllegalArgumentException 模组不是本模组中使用的基础方块。
    * @implNote 其他模组继承此类时需要重写此方法。
    */
-  protected void checkValidBaseBlock(Block baseBlock) {
+  @Contract("null -> fail")
+  protected void checkValidBaseBlock(@Nullable Block baseBlock) {
     Preconditions.checkArgument(ExtShapeBlocks.containsBaseBlock(baseBlock), "%s is not a base block", baseBlock);
   }
 
@@ -392,7 +408,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
    *
    * @implNote 其他模组继承此类时需要重写此方法。
    */
-  protected boolean isValidBlock(Block block) {
+  @Contract("null -> false")
+  protected boolean isValidBlock(@Nullable Block block) {
     return ExtShapeBlocks.contains(block);
   }
 }

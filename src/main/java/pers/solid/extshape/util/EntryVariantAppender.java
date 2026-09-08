@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.RegistryKey;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
@@ -36,7 +37,7 @@ public record EntryVariantAppender(RegistryKey<ItemGroup> itemGroup, Iterable<Bl
       // 当已有物品中有基础方块时，才会将其各种形状的方块加到其后。
       @NotNull Block anchor = baseBlock;
       for (BlockShape shape : shapes) {
-        final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+        final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
         if (block == null) continue;
         // 考虑到有些情况下，自然方块收录了建筑方块的基础方块，但没有收入原版已有的形状，故这种情况下，其模组中的各种形状不会加入。
         if (blockPredicate.test(block)) {
@@ -45,7 +46,7 @@ public record EntryVariantAppender(RegistryKey<ItemGroup> itemGroup, Iterable<Bl
           anchor = block;
         }
         for (Block adjacentBaseBlock : ADJACENT_BASE_BLOCKS.get(baseBlock)) {
-          final Block adjacentBlock = BlockBiMaps.getBlockOf(shape, adjacentBaseBlock);
+          final @Nullable Block adjacentBlock = BlockBiMaps.getBlockOf(shape, adjacentBaseBlock);
           if (adjacentBlock == null) continue;
           // 考虑到有些情况下，自然方块收录了建筑方块的基础方块，但没有收入原版已有的形状，故这种情况下，其模组中的各种形状不会加入。
           if (blockPredicate.test(adjacentBlock)) {

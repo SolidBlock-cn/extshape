@@ -13,8 +13,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pers.solid.extshape.VanillaItemGroup;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.itemgroup.ItemGroupRules;
+import pers.solid.extshape.itemgroup.ItemGroupRulesAccess;
 
 import java.util.Collection;
 import java.util.Set;
@@ -23,19 +24,16 @@ import java.util.Set;
 public abstract class ItemGroupEntriesImplMixin {
   @Shadow
   @Final
-  private ItemGroup group;
-
-  @Shadow
-  @Final
-  private FeatureSet enabledFeatures;
-
-  @Shadow
-  @Final
   public Collection<ItemStack> parentTabStacks;
-
   @Shadow
   @Final
   public Set<ItemStack> searchTabStacks;
+  @Shadow
+  @Final
+  private ItemGroup group;
+  @Shadow
+  @Final
+  private FeatureSet enabledFeatures;
 
   @Unique
   public void addSwiftly(ItemStack stack, ItemGroup.StackVisibility visibility) {
@@ -61,8 +59,9 @@ public abstract class ItemGroupEntriesImplMixin {
 
   @Inject(method = "<init>", at = @At("TAIL"))
   public void preInit(ItemGroup group, FeatureSet enabledFeatures, CallbackInfo ci) {
-    prependingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? Registries.ITEM_GROUP.getKey(this.group).map(VanillaItemGroup::getPrependingRule).orElse(null) : null;
-    appendingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? Registries.ITEM_GROUP.getKey(this.group).map(VanillaItemGroup::getAppendingRule).orElse(null) : null;
+    final ItemGroupRulesAccess rulesAccess = ItemGroupRules.currentRules();
+    prependingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? Registries.ITEM_GROUP.getKey(this.group).map(rulesAccess::getPrependingRule).orElse(null) : null;
+    appendingRule = ExtShapeConfig.CURRENT_CONFIG.addToVanillaGroups ? Registries.ITEM_GROUP.getKey(this.group).map(rulesAccess::getAppendingRule).orElse(null) : null;
   }
 
   @Inject(method = "add", at = @At("HEAD"))
