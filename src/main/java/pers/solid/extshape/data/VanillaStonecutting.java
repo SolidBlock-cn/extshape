@@ -2,6 +2,7 @@ package pers.solid.extshape.data;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimaps;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
@@ -29,30 +30,30 @@ public final class VanillaStonecutting {
   /**
    * 键为切石<i>之后</i>的方块，值为切石<i>之前</i>的方块。
    */
-  public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
-  public static final @Unmodifiable ImmutableMultimap<Block, ObjectIntPair<Block>> INSTANCE_WITH_WEIGHT;
+  public static final @Unmodifiable ImmutableMultimap<Block, ObjectIntPair<Block>> INSTANCE;
 
   private VanillaStonecutting() {
   }
 
   static {
-    final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
-    registerVanillaStonecutting(builder);
-    final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> weightedBuilder = new ImmutableMultimap.Builder<>();
-    registerCutCopperBlocks(weightedBuilder);
-    INSTANCE = builder.build();
+    final ImmutableMultimap.Builder<Block, Block> simpleBuilder = new ImmutableMultimap.Builder<>();
+    registerVanillaStonecutting(simpleBuilder);
+    final ImmutableMultimap<Block, Block> simpleMap = simpleBuilder.build();
+    final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder = new ImmutableMultimap.Builder<>();
+    builder.putAll(Multimaps.transformValues(simpleMap, input -> ObjectIntPair.of(input, 1)));
+    registerCutCopperBlocks(builder);
 
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-      final List<Block> unrecognizedBaseBlocks = INSTANCE.keySet().stream().distinct()
+      final List<Block> unrecognizedBaseBlocks = simpleMap.keySet().stream().distinct()
           .filter(block -> !ExtShapeBlocks.containsBaseBlock(block))
           .toList();
 
       if (!unrecognizedBaseBlocks.isEmpty()) {
-        throw new IllegalStateException("These blocks exist in the results of VanillaStonecutting.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(Registries.BLOCK::getKey).map(Objects::toString).collect(Collectors.joining(", ")));
+        throw new IllegalStateException("These blocks exist in the results of VanillaStonecutting.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(Registries.BLOCK::getId).map(Objects::toString).collect(Collectors.joining(", ")));
       }
     }
 
-    INSTANCE_WITH_WEIGHT = weightedBuilder.build();
+    INSTANCE = builder.build();
   }
 
   private static void registerVanillaStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {

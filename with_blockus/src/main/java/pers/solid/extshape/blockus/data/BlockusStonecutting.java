@@ -1,4 +1,4 @@
-package pers.solid.extshape.blockus;
+package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
 import com.brand.blockus.registry.content.BlockusBlocks;
@@ -7,19 +7,14 @@ import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.utils.helper.BlockMaps;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.google.common.collect.ImmutableMultimap;
-import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.DyeColor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.data.CrossShapeDataGeneration;
+import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.data.VanillaStonecutting;
 
 import java.util.Arrays;
@@ -31,9 +26,8 @@ import java.util.stream.Collectors;
 /**
  * @see VanillaStonecutting
  */
-public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
+public final class BlockusStonecutting {
   public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
-
 
   static {
     final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
@@ -45,18 +39,12 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
           .toList();
 
       if (!unrecognizedBaseBlocks.isEmpty()) {
-        throw new IllegalStateException("These blocks exist in the results of BlockusCrossShapeDataGeneration.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(Registries.BLOCK::getKey).map(Objects::toString).collect(Collectors.joining(", ")));
+        throw new IllegalStateException("These blocks exist in the results of BlockusCrossShapeDataGeneration.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(Registries.BLOCK::getId).map(Objects::toString).collect(Collectors.joining(", ")));
       }
     }
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeGenerator recipeGenerator, @NotNull RecipeExporter exporter) {
-    super(baseBlock, defaultNamespace, recipeGenerator, exporter);
-  }
-
-  @Override
-  protected @NotNull Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
-    return INSTANCE.get(baseBlock).stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList());
+  private BlockusStonecutting() {
   }
 
   /**
@@ -78,8 +66,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 石头
     builder.putAll(BlockusBlocks.STONE_TILES.block(), Blocks.STONE, Blocks.STONE_BRICKS);
-    builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE);
-    builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.STONE_CIRCULAR_PAVING, Blocks.STONE, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE, Blocks.STONE_BRICKS);
 
     // 三废石
     putMultipleWithMid(builder, BlockusBlocks.ANDESITE_BRICKS.block(), Blocks.ANDESITE, Blocks.POLISHED_ANDESITE, BlockusBlocks.HERRINGBONE_ANDESITE_BRICKS, BlockusBlocks.ANDESITE_CIRCULAR_PAVING);
@@ -154,7 +142,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     // 海晶
     builder.put(BlockusBlocks.PRISMARINE_CIRCULAR_PAVING, Blocks.PRISMARINE_BRICKS);
 
-    // 红砖及各类砖块变种
+    // 红砖及各类变种
     builder.put(BlockusBlocks.LARGE_BRICKS.block(), Blocks.BRICKS);
     builder.put(BlockusBlocks.HERRINGBONE_BRICKS, Blocks.BRICKS);
     builder.put(BlockusBlocks.HERRINGBONE_SOAKED_BRICKS, BlockusBlocks.SOAKED_BRICKS.block());
@@ -195,22 +183,26 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 巧克力
     builder.put(BlockusBlocks.CHOCOLATE_BRICKS.block(), BlockusBlocks.CHOCOLATE_BLOCK.block());
-    builder.put(BlockusBlocks.CHOCOLATE_SQUARES, BlockusBlocks.CHOCOLATE_BLOCK.block());
+    builder.putAll(BlockusBlocks.CHOCOLATE_SQUARES, BlockusBlocks.CHOCOLATE_BLOCK.block(), BlockusBlocks.CHOCOLATE_BRICKS.block());
 
     // 瓦片
     builder.put(BlockusBlocks.SHINGLES.block(), Blocks.TERRACOTTA);
 
-    // 彩色瓦片和带釉陶瓦柱
+    // 彩色瓦片
     final Map<DyeColor, BSSWBundle> stainedShinglesColorMap = BlockusBlocks.STAINED_SHINGLES.colorMap();
-    final Map<DyeColor, Block> glazedTerracottaPillarColorMap = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap();
     for (DyeColor dyeColor : BlockOrder.COLOR) {
       final Block terracotta = BlockMaps.TERRACOTTA_MAP.get(dyeColor);
       final BSSWBundle stainedShingles = stainedShinglesColorMap.get(dyeColor);
-      final Block glazedTerracotta = BlockMaps.GLAZED_TERRACOTTA_MAP.get(dyeColor);
-      final Block glazedTerracottaPilar = glazedTerracottaPillarColorMap.get(dyeColor);
       if (stainedShingles != null && terracotta != null) {
         builder.put(stainedShingles.block(), terracotta);
       }
+    }
+
+    // 带釉陶瓦柱
+    final Map<DyeColor, Block> glazedTerracottaPillarColorMap = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap();
+    for (DyeColor dyeColor : BlockOrder.COLOR) {
+      final Block glazedTerracotta = BlockMaps.GLAZED_TERRACOTTA_MAP.get(dyeColor);
+      final Block glazedTerracottaPilar = glazedTerracottaPillarColorMap.get(dyeColor);
       if (glazedTerracottaPilar != null && glazedTerracotta != null) {
         builder.put(glazedTerracottaPilar, glazedTerracotta);
       }

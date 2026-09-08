@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +14,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * 本模组使用的配置文件。
+ * 本模组使用的配置文件。<b>注意：增减配置项时，必须修改 {@link #equals(Object)} 和 {@link #hashCode()} 方法！</b>
  */
 public class ExtShapeConfig implements Cloneable {
   /**
@@ -30,16 +30,17 @@ public class ExtShapeConfig implements Cloneable {
   private static final Gson GSON = new GsonBuilder()
       .setPrettyPrinting()
       .registerTypeAdapter(BlockShape.class, BlockShape.Serializer.INSTANCE)
+      .registerTypeAdapter(WoodenAndBambooBlockSorting.class, WoodenAndBambooBlockSorting.Serializer.INSTANCE)
+      .registerTypeAdapter(ColoredBlockSorting.class, ColoredBlockSorting.Serializer.INSTANCE)
       .create();
   /**
    * 本模组当前的配置。
    */
-  public static ExtShapeConfig CURRENT_CONFIG;
+  public static ExtShapeConfig CURRENT_CONFIG = DEFAULT_CONFIG;
   /**
    * 当配置更新后，这个值就会是 {@code true}，参见 {@link pers.solid.extshape.mixin.ItemGroupsMixin}。
    */
   public static boolean requireUpdateDisplay = false;
-  public static boolean requireUpdateShapesToAddVanilla = true;
 
   public static void init() {
     if (CONFIG_FILE.exists()) {
@@ -64,7 +65,7 @@ public class ExtShapeConfig implements Cloneable {
   /**
    * 需要添加到原版物品组的方块形状的列表。不应该含有重复元素。
    */
-  public Collection<BlockShape> shapesToAddToVanilla = ImmutableList.of(
+  public List<BlockShape> shapesToAddToVanilla = ImmutableList.of(
       BlockShape.STAIRS, BlockShape.SLAB, BlockShape.QUARTER_PIECE, BlockShape.VERTICAL_STAIRS, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_QUARTER_PIECE, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.WALL, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON
   );
   /**
@@ -74,7 +75,17 @@ public class ExtShapeConfig implements Cloneable {
   /**
    * 需要添加到专用物品组中的方块形状的列表。不应该含有重复元素。
    */
-  public Collection<BlockShape> shapesInSpecificGroups = shapesToAddToVanilla;
+  public List<BlockShape> shapesInSpecificGroups = shapesToAddToVanilla;
+
+  /**
+   * 规定如何排序专用物品组中的“木制方块”的排序。
+   */
+  public WoodenAndBambooBlockSorting woodenAndBambooBlockSorting = WoodenAndBambooBlockSorting.SAME_SPECIES_DIFFERENT_FORMS_TOGETHER;
+
+  /**
+   * 规定如何排序专用物品组中“染色方块”的排序。
+   */
+  public ColoredBlockSorting coloredBlockSorting = ColoredBlockSorting.SAME_COLOR_DIFFERENT_SHAPES_TOGETHER;
 
   /**
    * 从配置文件中读取并保存配置文件。如果捕获到异常，将会在控制台中输出。读取到的文件中，所有其他的 NBT 标签都被保留。
@@ -89,14 +100,14 @@ public class ExtShapeConfig implements Cloneable {
 
   public static ExtShapeConfig readFile(File file) throws IOException {
     try (final FileReader fileReader = new FileReader(file)) {
-      final ExtShapeConfig config = GSON.fromJson(fileReader, ExtShapeConfig.class);
+      final @Nullable ExtShapeConfig config = GSON.fromJson(fileReader, ExtShapeConfig.class);
       if (config == null) {
         final ExtShapeConfig newConfig = new ExtShapeConfig();
         newConfig.tryWriteFile(file);
         return newConfig;
       }
-      config.shapesToAddToVanilla = new LinkedHashSet<>(config.shapesToAddToVanilla);
-      config.shapesInSpecificGroups = new LinkedHashSet<>(config.shapesInSpecificGroups);
+      config.shapesToAddToVanilla = config.shapesToAddToVanilla.stream().filter(Objects::nonNull).distinct().collect(ImmutableList.toImmutableList());
+      config.shapesInSpecificGroups = config.shapesInSpecificGroups.stream().filter(Objects::nonNull).distinct().collect(ImmutableList.toImmutableList());
       return config;
     }
   }
@@ -114,11 +125,11 @@ public class ExtShapeConfig implements Cloneable {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof ExtShapeConfig that)) return false;
-    return addToVanillaGroups == that.addToVanillaGroups && showSpecificGroups == that.showSpecificGroups && Objects.equals(shapesToAddToVanilla, that.shapesToAddToVanilla) && Objects.equals(shapesInSpecificGroups, that.shapesInSpecificGroups);
+    return addToVanillaGroups == that.addToVanillaGroups && showSpecificGroups == that.showSpecificGroups && Objects.equals(shapesToAddToVanilla, that.shapesToAddToVanilla) && Objects.equals(shapesInSpecificGroups, that.shapesInSpecificGroups) && Objects.equals(this.woodenAndBambooBlockSorting, that.woodenAndBambooBlockSorting) && Objects.equals(this.coloredBlockSorting, that.coloredBlockSorting);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addToVanillaGroups, shapesToAddToVanilla, showSpecificGroups, shapesInSpecificGroups);
+    return Objects.hash(addToVanillaGroups, shapesToAddToVanilla, showSpecificGroups, shapesInSpecificGroups, woodenAndBambooBlockSorting, coloredBlockSorting);
   }
 }

@@ -23,7 +23,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -43,18 +42,18 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   public final Block baseBlock;
   protected final int tickRate;
 
-  public ExtShapePressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate) {
+  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, BlockSetType blockSetType, int tickRate) {
     super(blockSetType, settings);
     this.baseBlock = baseBlock;
     this.tickRate = tickRate;
   }
 
-  public ExtShapePressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapePressurePlateBlock(Block baseBlock, Settings settings, ActivationSettings activationSettings) {
     this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime());
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -103,9 +102,9 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   public static class WithExtension extends ExtShapePressurePlateBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Settings settings, ActivationSettings activationSettings, BlockExtension extension) {
       super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
@@ -140,15 +139,15 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
   }
 
   public static class WithOxidation extends ExtShapePressurePlateBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Registries.BLOCK.getCodec().fieldOf("base_block").forGetter(ExtShapePressurePlateBlock::getBaseBlock), createSettingsCodec(), BlockSetType.CODEC.fieldOf("block_set_type").forGetter(o -> o.blockSetType), tickRateField(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull BlockSetType blockSetType, int tickRate, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(Block baseBlock, Settings settings, BlockSetType blockSetType, int tickRate, OxidationLevel oxidationLevel) {
       super(baseBlock, settings, blockSetType, tickRate);
       this.oxidationLevel = oxidationLevel;
     }
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
+    public WithOxidation(Block baseBlock, Settings settings, ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
       this(baseBlock, settings, activationSettings.blockSetType(), activationSettings.plateTime(), oxidationLevel);
     }
 
@@ -174,7 +173,6 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     }
   }
 
-  @NotNull
   private static <B extends ExtShapePressurePlateBlock> RecordCodecBuilder<B, Integer> tickRateField() {
     return Codec.INT.fieldOf("tick_rate").forGetter(b -> b.tickRate);
   }
