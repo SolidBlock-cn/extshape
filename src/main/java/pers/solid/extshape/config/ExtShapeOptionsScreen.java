@@ -1,30 +1,32 @@
 package pers.solid.extshape.config;
 
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Block;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.itemgroup.ItemGroupRules;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
@@ -62,15 +64,15 @@ public class ExtShapeOptionsScreen extends Screen {
       "options.extshape.addToVanillaGroups",
       OptionInstance.cachedConstantTooltip(
           Component.translatable("options.extshape.addToVanillaGroups.tooltip", BuiltInRegistries.CREATIVE_MODE_TAB.getValueOrThrow(CreativeModeTabs.BUILDING_BLOCKS).getDisplayItems(), BuiltInRegistries.CREATIVE_MODE_TAB.getValueOrThrow(CreativeModeTabs.COLORED_BLOCKS).getDisplayName(), BuiltInRegistries.CREATIVE_MODE_TAB.getValueOrThrow(CreativeModeTabs.NATURAL_BLOCKS).getDisplayName())
-              .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Component.literal("\n\n").append(Component.translatable("options.extshape.addToVanillaGroups.blockus").withStyle(ChatFormatting.RED)) : Component.empty())
               .append("\n\n")
               .append(Component.translatable("options.extshape.default", CommonComponents.optionStatus(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).withStyle(ChatFormatting.GRAY))
               .append("\n\n")
-              .append(Component.translatable("options.extshape.addToVanillaGroups.warning_for_1.20").withStyle(ChatFormatting.YELLOW))),
-      true,
+              .append(Component.translatable("options.extshape.addToVanillaGroups.notice_for_effect").withStyle(ChatFormatting.YELLOW))),
+      newConfig.addToVanillaGroups,
       value -> {
         newConfig.addToVanillaGroups = value;
         shapesToAddToVanillaTextField.setEditable(value);
+        resetShapesToAddToVanillaButton.active = value;
       }
   ).createButton(gameOptions, width / 2 - 205, 36, 200);
 
@@ -81,13 +83,40 @@ public class ExtShapeOptionsScreen extends Screen {
               .append("\n\n")
               .append(Component.translatable("options.extshape.default", CommonComponents.optionStatus(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).withStyle(ChatFormatting.GRAY))
               .append("\n\n")
-              .append(Component.translatable("options.extshape.showSpecificGroups.warning_for_1.20").withStyle(ChatFormatting.YELLOW))),
-      false,
+              .append(Component.translatable("options.extshape.showSpecificGroups.notice_for_effect").withStyle(ChatFormatting.YELLOW))),
+      newConfig.showSpecificGroups,
       value -> {
         newConfig.showSpecificGroups = value;
         shapesInSpecificGroupsTextField.setEditable(value);
+        resetShapesInSpecificGroupsButton.active = value;
+        this.coloredBlockSortingButton.active = value;
+        this.woodenBlockSortingButton.active = value;
       }
   ).createButton(gameOptions, width / 2 + 5, 36, 200);
+
+  private final CycleButton<WoodenAndBambooBlockSorting> woodenBlockSortingButton = CycleButton.builder(WoodenAndBambooBlockSorting::displayName, newConfig.woodenAndBambooBlockSorting)
+      .withValues(WoodenAndBambooBlockSorting.values())
+      .withTooltip(value -> Tooltip.create(Component.empty()
+          .append(Component.translatable("options.extshape.wooden_and_bamboo_block_sorting.description"))
+          .append("\n\n")
+          .append(Component.translatable("options.extshape.default", ExtShapeConfig.DEFAULT_CONFIG.woodenAndBambooBlockSorting.displayName()).withStyle(ChatFormatting.GRAY))
+          .append("\n\n")
+          .append(Component.literal("[").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD).append(value.displayName()).append("]"))
+          .append("\n  ")
+          .append(Component.translatable("options.extshape.sorting_examples", ComponentUtils.formatList(value.examples(), ComponentUtils.DEFAULT_SEPARATOR, Block::getName)).withStyle(ChatFormatting.GRAY))))
+      .create(width / 2 - 205, 151, 200, 20, Component.translatable("options.extshape.wooden_and_bamboo_block_sorting"), (button, value) -> newConfig.woodenAndBambooBlockSorting = value);
+
+  private final CycleButton<ColoredBlockSorting> coloredBlockSortingButton = CycleButton.builder(ColoredBlockSorting::displayName, newConfig.coloredBlockSorting)
+      .withValues(ColoredBlockSorting.values())
+      .withTooltip(value -> Tooltip.create(Component.empty()
+          .append(Component.translatable("options.extshape.colored_block_sorting.description"))
+          .append("\n\n")
+          .append(Component.translatable("options.extshape.default", ExtShapeConfig.DEFAULT_CONFIG.coloredBlockSorting.displayName()).withStyle(ChatFormatting.GRAY))
+          .append("\n\n")
+          .append(Component.literal("[").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD).append(value.displayName()).append("]"))
+          .append("\n  ")
+          .append(Component.translatable("options.extshape.sorting_examples", ComponentUtils.formatList(value.examples(), ComponentUtils.DEFAULT_SEPARATOR, Block::getName)).withStyle(ChatFormatting.GRAY))))
+      .create(width / 2 - 205, 151, 200, 20, Component.translatable("options.extshape.colored_block_sorting"), (button, value) -> newConfig.coloredBlockSorting = value);
 
   // 完成按钮
   private final Button finishButton = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 - 100, this.height - 27).size(200, 20).build();
@@ -95,10 +124,11 @@ public class ExtShapeOptionsScreen extends Screen {
   public ExtShapeOptionsScreen(@Nullable Screen parent) {
     super(Component.translatable("options.extshape.title"));
     this.parent = parent;
-    addToVanillaGroupsButton.active = false;
-    showSpecificGroupsButton.active = false;
-    shapesInSpecificGroupsTextField.active = false;
-    resetShapesInSpecificGroupsButton.active = false;
+
+    this.resetShapesInSpecificGroupsButton.active = newConfig.showSpecificGroups;
+    this.resetShapesToAddToVanillaButton.active = newConfig.addToVanillaGroups;
+    this.coloredBlockSortingButton.active = newConfig.showSpecificGroups;
+    this.woodenBlockSortingButton.active = newConfig.showSpecificGroups;
   }
 
   @Override
@@ -117,6 +147,11 @@ public class ExtShapeOptionsScreen extends Screen {
     addRenderableWidget(shapesInSpecificGroupsTextField);
     resetShapesInSpecificGroupsButton.setX(width / 2 + 155);
     addRenderableWidget(resetShapesInSpecificGroupsButton);
+
+    woodenBlockSortingButton.setX(width / 2 - 205);
+    addRenderableWidget(woodenBlockSortingButton);
+    coloredBlockSortingButton.setX(width / 2 + 5);
+    addRenderableWidget(coloredBlockSortingButton);
 
     finishButton.setPosition(width / 2 - 100, height - 27);
     addRenderableWidget(finishButton);
@@ -143,20 +178,12 @@ public class ExtShapeOptionsScreen extends Screen {
         || !oldConfig.shapesInSpecificGroups.equals(newConfig.shapesInSpecificGroups)) {
       ExtShapeConfig.requireUpdateDisplay = true;
     }
-    if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)) {
-      ExtShapeConfig.requireUpdateShapesToAddVanilla = true;
+    if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)
+        || !oldConfig.woodenAndBambooBlockSorting.equals(newConfig.woodenAndBambooBlockSorting)
+        || !oldConfig.coloredBlockSorting.equals(newConfig.coloredBlockSorting)) {
+      ItemGroupRules.rebuildRules();
+      ExtShapeConfig.requireUpdateDisplay = true;
     }
-
-    // 应用物品组。/*if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {
-    //      if (newConfig.showSpecificGroups) {
-    //        ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
-    //        ExtShapeItemGroup.implementGroups();
-    //      } else {
-    //        ExtShape.LOGGER.info("Removing item groups at runtime. This may cause some instability.");
-    //        ExtShapeItemGroup.removeGroups();
-    //      }
-    //    }*/
-
   }
 
   private boolean suppressedGroupsWarning = false;
@@ -188,8 +215,8 @@ public class ExtShapeOptionsScreen extends Screen {
     minecraft.setScreen(parent);
   }
 
-  private static Collection<BlockShape> convertStringToCollection(String s) {
-    return Arrays.stream(StringUtils.split(s)).map(BlockShape::byName).collect(ImmutableSet.toImmutableSet());
+  private static List<BlockShape> convertStringToCollection(String s) {
+    return Arrays.stream(StringUtils.split(s)).map(BlockShape::byName).filter(Objects::nonNull).distinct().collect(ImmutableList.toImmutableList());
   }
 
   private static String convertCollectionToString(Collection<BlockShape> list) {

@@ -127,8 +127,8 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   }
 
   public static class WithOxidation extends ExtShapeFenceBlock implements WeatheringCopper {
-    private final WeatherState oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("base_block").forGetter(ExtShapeBlockInterface::getBaseBlock), BuiltInRegistries.ITEM.byNameCodec().fieldOf("second_ingredient").forGetter(ExtShapeFenceBlock::getSecondIngredient), propertiesCodec(), CopperManager.weatheringStateField()).apply(instance, WithOxidation::new));
+    private final WeatherState oxidationLevel;
 
     public WithOxidation(Block baseBlock, Item secondIngredient, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, secondIngredient, settings);

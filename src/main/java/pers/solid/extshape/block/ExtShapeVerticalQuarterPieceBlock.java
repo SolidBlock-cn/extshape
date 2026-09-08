@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
@@ -33,15 +32,15 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
 public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock implements ExtShapeVariantBlockInterface {
   public static final MapCodec<ExtShapeVerticalQuarterPieceBlock> CODEC = ExtShapeBlockInterface.createCodecWithBaseBlock(propertiesCodec(), ExtShapeVerticalQuarterPieceBlock::new);
 
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public ExtShapeVerticalQuarterPieceBlock(@NotNull Block baseBlock, Properties settings) {
+  public ExtShapeVerticalQuarterPieceBlock(Block baseBlock, Properties settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -72,9 +71,9 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   }
 
   public static class WithExtension extends ExtShapeVerticalQuarterPieceBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Properties settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Properties settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -109,10 +108,10 @@ public class ExtShapeVerticalQuarterPieceBlock extends VerticalQuarterPieceBlock
   }
 
   public static class WithOxidation extends ExtShapeVerticalQuarterPieceBlock implements WeatheringCopper {
-    private final @NotNull WeatherState oxidationLevel;
+    private final WeatherState oxidationLevel;
     public static final MapCodec<WithOxidation> CODEC = CopperManager.createCodec(propertiesCodec(), WithOxidation::new);
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }
