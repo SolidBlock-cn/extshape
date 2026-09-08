@@ -7,7 +7,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
 
@@ -92,8 +91,9 @@ public final class ExtShapeTags {
 
 
   /* 压力板 */
-  public static final TagKey<Block> PRESSURE_PLATES = BlockTags.PRESSURE_PLATES;  // ItemTags.PRESSURE_PLATES不存在
+  public static final TagKey<Block> PRESSURE_PLATES = of("pressure_plates"); // 在原版中，该标签仅有方块，没有物品
   public static final TagKey<Block> WOODEN_PRESSURE_PLATES = BlockTags.WOODEN_PRESSURE_PLATES;
+  public static final TagKey<Block> STONE_PRESSURE_PLATES = of("stone_pressure_plates"); // 在原版中，该标签仅有方块，没有物品
   public static final TagKey<Block> LOG_PRESSURE_PLATES = of("log_pressure_plates");
   public static final TagKey<Block> WOOLEN_PRESSURE_PLATES = of("woolen_pressure_plates");
   public static final TagKey<Block> CONCRETE_PRESSURE_PLATES = of("concrete_pressure_plates");
@@ -247,7 +247,7 @@ public final class ExtShapeTags {
   public static void init() {
   }
 
-  private static TagKey<Block> of(@NotNull String path) {
+  private static TagKey<Block> of(String path) {
     return TagKey.of(RegistryKeys.BLOCK, ExtShape.id(path));
   }
 
