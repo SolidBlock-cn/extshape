@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -33,9 +32,9 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  */
 public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBlockInterface {
 
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public ExtShapeStairsBlock(@NotNull Block baseBlock, Properties settings) {
+  public ExtShapeStairsBlock(Block baseBlock, Properties settings) {
     super(baseBlock.defaultBlockState(), settings);
     this.baseBlock = baseBlock;
   }
@@ -70,14 +69,14 @@ public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBl
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
   public static class WithExtension extends ExtShapeStairsBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Properties settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Properties settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -115,9 +114,9 @@ public class ExtShapeStairsBlock extends StairBlock implements ExtShapeVariantBl
    * @see net.minecraft.world.level.block.WeatheringCopperStairBlock
    */
   public static class WithOxidation extends ExtShapeStairsBlock implements WeatheringCopper {
-    private final @NotNull WeatherState oxidationLevel;
+    private final WeatherState oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Properties settings, @NotNull WeatherState oxidationLevel) {
+    public WithOxidation(Block baseBlock, Properties settings, WeatherState oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

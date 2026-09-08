@@ -29,7 +29,7 @@ public class ExtShapeRecipeGenerator extends RecipeProvider {
     }
 
     for (Block baseBlock : ExtShapeBlocks.getBaseBlocks()) {
-      final CrossShapeDataGeneration crossShapeDataGeneration = new CrossShapeDataGeneration(baseBlock, ExtShape.MOD_ID, this, output);
+      final CrossShapeDataGeneration crossShapeDataGeneration = new CrossShapeDataGeneration(baseBlock, ExtShape.MOD_ID, VanillaStonecutting.INSTANCE, this, output);
       crossShapeDataGeneration.generateCrossShapeData();
     }
 

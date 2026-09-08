@@ -16,7 +16,6 @@ public class ExtShapeDataGenerator implements DataGeneratorEntrypoint {
   @Override
   public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
     final FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-    FabricLoader.getInstance().getEnvironmentType();
     pack.addProvider(ExtShapeModelProvider::new);
     pack.addProvider((output, registriesFuture) -> new FabricRecipeProvider(output, registriesFuture) {
       @Override

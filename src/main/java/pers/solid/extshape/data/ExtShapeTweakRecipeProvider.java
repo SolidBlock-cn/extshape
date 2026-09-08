@@ -18,6 +18,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeButtonBlock;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
@@ -42,8 +43,7 @@ public class ExtShapeTweakRecipeProvider extends RecipeProvider {
   public void buildRecipes() {
     // 羊毛的特殊合成配方：羊毛压力板 ↔ 3个地毯
     for (Block baseBlock : BlockCollections.WOOLS) {
-      final ExtShapePressurePlateBlock pressurePlate = (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, baseBlock);
-      Preconditions.checkNotNull(pressurePlate, "pressure plate of %s", baseBlock);
+      final ExtShapePressurePlateBlock pressurePlate = (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOfOrThrow(BlockShape.PRESSURE_PLATE, baseBlock);
       final Identifier woolId = BuiltInRegistries.BLOCK.getKey(baseBlock);
       final Identifier carpetId = Identifier.fromNamespaceAndPath(woolId.getNamespace(), woolId.getPath().replaceAll("_wool$", "_carpet"));
       final Item carpet = BuiltInRegistries.ITEM.getValue(carpetId);
@@ -63,7 +63,7 @@ public class ExtShapeTweakRecipeProvider extends RecipeProvider {
 
     // 苔藓的特殊合成配方：覆地苔藓 ↔ 苔藓压力板
     final var carpetAndPlate = List.of(
-        Pair.of(Blocks.MOSS_CARPET, (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, Blocks.MOSS_BLOCK)),
+        Pair.of(Blocks.MOSS_CARPET, (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOfOrThrow(BlockShape.PRESSURE_PLATE, Blocks.MOSS_BLOCK)),
         Pair.of(Blocks.PALE_MOSS_CARPET, (ExtShapePressurePlateBlock) BlockBiMaps.getBlockOf(BlockShape.PRESSURE_PLATE, Blocks.PALE_MOSS_BLOCK))
     );
     for (var pair : carpetAndPlate) {
@@ -83,7 +83,7 @@ public class ExtShapeTweakRecipeProvider extends RecipeProvider {
     }
 
     // 特殊的雪台阶配方
-    final ExtShapeSlabBlock snowSlab = (ExtShapeSlabBlock) BlockBiMaps.getBlockOf(BlockShape.SLAB, Blocks.SNOW_BLOCK);
+    final ExtShapeSlabBlock snowSlab = (ExtShapeSlabBlock) BlockBiMaps.getBlockOfOrThrow(BlockShape.SLAB, Blocks.SNOW_BLOCK);
     Preconditions.checkNotNull(snowSlab, "snow slab");
     shapeless(snowSlab.getRecipeCategory(), snowSlab)
         .requires(Ingredient.of(Blocks.SNOW))
@@ -139,7 +139,7 @@ public class ExtShapeTweakRecipeProvider extends RecipeProvider {
         BlockCollections.STRIPPED_STEMS), baseBlock -> Pair.of(baseBlock, Ingredient.of(Items.REDSTONE))));
     for (Pair<Block, Ingredient> pair : baseAndResource) {
       final Block baseBlock = pair.getFirst();
-      final ExtShapeButtonBlock button = (ExtShapeButtonBlock) BlockBiMaps.getBlockOf(BlockShape.BUTTON, baseBlock);
+      final @Nullable ExtShapeButtonBlock button = (ExtShapeButtonBlock) BlockBiMaps.getBlockOf(BlockShape.BUTTON, baseBlock);
       if (button == null) continue;
 
       shapeless(button.getRecipeCategory(), button)
@@ -152,8 +152,7 @@ public class ExtShapeTweakRecipeProvider extends RecipeProvider {
 
     // 墙的合成配方
     for (Block baseBlock : BlockCollections.PLANKS) {
-      final ExtShapeWallBlock wall = (ExtShapeWallBlock) BlockBiMaps.getBlockOf(BlockShape.WALL, baseBlock);
-      Preconditions.checkNotNull(wall, "wall of %s", baseBlock);
+      final ExtShapeWallBlock wall = (ExtShapeWallBlock) BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, baseBlock);
 
       shaped(wall.getRecipeCategory(), wall, 6)
           .pattern(" * ")
@@ -166,8 +165,7 @@ public class ExtShapeTweakRecipeProvider extends RecipeProvider {
           .save(output);
     }
     for (Block baseBlock : Blocks.COPPER_BLOCK.asList()) {
-      final ExtShapeWallBlock wall = (ExtShapeWallBlock) BlockBiMaps.getBlockOf(BlockShape.WALL, baseBlock);
-      Preconditions.checkNotNull(wall, "wall of %s", baseBlock);
+      final ExtShapeWallBlock wall = (ExtShapeWallBlock) BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, baseBlock);
 
       shaped(wall.getRecipeCategory(), wall, 6)
           .pattern(" * ")

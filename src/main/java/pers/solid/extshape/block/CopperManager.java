@@ -73,6 +73,7 @@ public record CopperManager(WeatheringCopperCollection<Block> copperCollection) 
 
     builder.markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE))
+        .markStoneCuttable()
         .build();
     return builder;
   }
@@ -106,8 +107,8 @@ public record CopperManager(WeatheringCopperCollection<Block> copperCollection) 
       final Block unwaxedBase = weatheringCollection.pick(oxidationLevel);
       final Block waxedBase = waxedCollection.pick(oxidationLevel);
       for (BlockShape shape : BlockShape.values()) {
-        final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
-        final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
+        final @Nullable Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
+        final @Nullable Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
         if (unwaxed != null && waxed != null && blocksBuilderFactory.instanceCollection != null && blocksBuilderFactory.instanceCollection.contains(unwaxed) && blocksBuilderFactory.instanceCollection.contains(waxed)) {
           OxidizableBlocksRegistry.registerWaxable(unwaxed, waxed);
         }
@@ -159,8 +160,8 @@ public record CopperManager(WeatheringCopperCollection<Block> copperCollection) 
 
   private static void generateWaxRecipesForShapes(RecipeProvider recipeGenerator, RecipeOutput exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
     for (BlockShape shape : BlockShape.values()) {
-      final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
-      final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
+      final @Nullable Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
+      final @Nullable Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
       if (unwaxed != null && waxed != null && blockPredicate.test(waxed)) {
         final ShapelessRecipeBuilder recipe = recipeGenerator.shapeless(RecipeCategory.BUILDING_BLOCKS, waxed)
             .requires(unwaxed)

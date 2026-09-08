@@ -85,7 +85,7 @@ public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider
     checkValidBaseBlock(baseBlock);
     final var builder = builder(tag);
     for (BlockShape shape : BlockShape.values()) {
-      final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+      final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (isValidBlock(block)) {
         builder.add(keyOf(block.asItem()));
       }
@@ -101,7 +101,7 @@ public class ExtShapeItemTagProvider extends FabricTagsProvider.ItemTagsProvider
     for (Block baseBlock : baseBlocks) {
       checkValidBaseBlock(baseBlock);
       for (BlockShape shape : BlockShape.values()) {
-        final Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
+        final @Nullable Block block = BlockBiMaps.getBlockOf(shape, baseBlock);
         if (isValidBlock(block)) {
           builder.add(keyOf(block.asItem()));
         }
