@@ -32,6 +32,7 @@ import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
+import pers.solid.extshape.itemgroup.ExtShapeSpecificItemGroups;
 import pers.solid.extshape.itemgroup.ItemGroupRules;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -86,6 +87,10 @@ public class ExtShape implements ModInitializer {
 
     // registerFlammableBlocks(); 关于注册可燃方块的部分，请直接参见 ExtShapeBlocks 中的有关代码。
     ItemGroupRules.registerForMod();
+    if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
+      ExtShapeSpecificItemGroups.init();
+    }
+
     ResourceManagerHelper.registerBuiltinResourcePack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Text.translatable("resourcePack.extshape.recipe_tweak.name"), ResourcePackActivationType.DEFAULT_ENABLED);
 
     registerStrippableBlocks();

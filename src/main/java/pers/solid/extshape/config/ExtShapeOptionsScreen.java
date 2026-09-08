@@ -68,8 +68,8 @@ public class ExtShapeOptionsScreen extends Screen {
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))
               .append("\n\n")
-              .append(Text.translatable("options.extshape.addToVanillaGroups.warning_for_1.20").formatted(Formatting.YELLOW))),
-      true,
+              .append(Text.translatable("options.extshape.addToVanillaGroups.notice_for_effect").formatted(Formatting.YELLOW))),
+      newConfig.addToVanillaGroups,
       value -> {
         newConfig.addToVanillaGroups = value;
         shapesToAddToVanillaTextField.setEditable(value);
@@ -83,8 +83,8 @@ public class ExtShapeOptionsScreen extends Screen {
               .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.showSpecificGroups)).formatted(Formatting.GRAY))
               .append("\n\n")
-              .append(Text.translatable("options.extshape.showSpecificGroups.warning_for_1.20").formatted(Formatting.YELLOW))),
-      false,
+              .append(Text.translatable("options.extshape.showSpecificGroups.notice_for_effect").formatted(Formatting.YELLOW))),
+      newConfig.showSpecificGroups,
       value -> {
         newConfig.showSpecificGroups = value;
         shapesInSpecificGroupsTextField.setEditable(value);
@@ -97,10 +97,6 @@ public class ExtShapeOptionsScreen extends Screen {
   public ExtShapeOptionsScreen(Screen parent) {
     super(Text.translatable("options.extshape.title"));
     this.parent = parent;
-    addToVanillaGroupsButton.active = false;
-    showSpecificGroupsButton.active = false;
-    shapesInSpecificGroupsTextField.active = false;
-    resetShapesInSpecificGroupsButton.active = false;
   }
 
   @Override
@@ -149,17 +145,6 @@ public class ExtShapeOptionsScreen extends Screen {
     if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)) {
       ItemGroupRules.rebuildRules();
     }
-
-    // 应用物品组。/*if (oldConfig.showSpecificGroups != newConfig.showSpecificGroups) {
-    //      if (newConfig.showSpecificGroups) {
-    //        ExtShape.LOGGER.info("Adding item groups at runtime. This may cause some instability.");
-    //        ExtShapeItemGroup.implementGroups();
-    //      } else {
-    //        ExtShape.LOGGER.info("Removing item groups at runtime. This may cause some instability.");
-    //        ExtShapeItemGroup.removeGroups();
-    //      }
-    //    }*/
-
   }
 
   private boolean suppressedGroupsWarning = false;
