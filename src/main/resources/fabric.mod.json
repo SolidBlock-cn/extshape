@@ -22,6 +22,9 @@
     "client": [
       "pers.solid.extshape.ExtShapeClient"
     ],
+    "modmenu": [
+      "pers.solid.extshape.config.ExtShapeModMenu"
+    ],
     "fabric-datagen": [
       "pers.solid.extshape.data.ExtShapeDataGenerator"
     ]
