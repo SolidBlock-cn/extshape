@@ -4,6 +4,15 @@
 
 - See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
 
+### 3.1.6-rc.1
+
+- (For 26.3 only) Now the mod can be normally configured in the mod list of Mod Menu mod.
+- Known issue: Typing an invalid shape name in the text field in the configuration screen causes logging an error in the console. This issue also exists in other version.
+
+### 3.1.6-beta.12
+
+- Update for 26.3-pre-1. Following the vanilla changes, the number providers in this mod are split into `context_int_provider` and `context_float_provider`.
+
 ### 3.1.6-beta.11
 
 - Update for 26.3-snapshot-10. Now the stripping of wood and bamboo blocks in this mod uses the entry with ID `extshape:axe` of the vanilla registry `block_transformer`.
