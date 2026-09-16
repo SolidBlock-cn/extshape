@@ -853,7 +853,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.THATCH)
         .addPostBuildConsumer((blockShape4, blockBuilder3) -> {
           FlammableBlockRegistry.getDefaultInstance().add(blockBuilder3.instance, 60, 20);
-        }) // todo thatch 没有堆肥了？
+        }) // 茅草的基础方块能堆肥，但是楼梯和台阶不能堆肥（可能是 bug？）
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.WHEAT, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
         .build();
