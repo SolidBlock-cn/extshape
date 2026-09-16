@@ -2,10 +2,13 @@ package pers.solid.extshape;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
+import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -32,6 +35,7 @@ import net.minecraft.world.item.crafting.SelectableRecipe;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt;
 import org.apache.commons.lang3.Validate;
@@ -45,10 +49,13 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.tag.ExtShapeTags;
 import pers.solid.extshape.util.BlockBiMaps;
+import pers.solid.extshape.util.BlockCollections;
 
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * <p>欢迎使用扩展方块形状模组。本模组为许多方块提供了各个形状的变种，包括原版不存在的形状。
@@ -94,6 +101,7 @@ public class ExtShape implements ModInitializer {
     VanillaItemGroup.registerForMod();
     ResourceLoader.registerBuiltinPack(id("recipe_tweak"), FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(), Component.translatable("resourcePack.extshape.recipe_tweak.name"), PackActivationType.DEFAULT_ENABLED);
 
+    registerStrippableBlocks();
     registerRegistryAliases();
 
     CommandRegistrationCallback.EVENT.register(RecipeConflict::registerCommand);
@@ -261,6 +269,29 @@ public class ExtShape implements ModInitializer {
 
 
   /**
+   * 注册所有可去皮的方块。在 26.3 版本，可直接使用 Fabric API 中的 {@link BlockTransformerHelper#registerStripping(Block, Block)}。
+   */
+  private static void registerStrippableBlocks() {
+    Streams.concat(
+        IntStream.range(0, BlockCollections.LOGS.size()).mapToObj(i -> Pair.of(BlockCollections.LOGS.get(i), BlockCollections.STRIPPED_LOGS.get(i))),
+        IntStream.range(0, BlockCollections.WOODS.size()).mapToObj(i -> Pair.of(BlockCollections.WOODS.get(i), BlockCollections.STRIPPED_WOODS.get(i))),
+        IntStream.range(0, BlockCollections.HYPHAES.size()).mapToObj(i -> Pair.of(BlockCollections.HYPHAES.get(i), BlockCollections.STRIPPED_HYPHAES.get(i))),
+        IntStream.range(0, BlockCollections.STEMS.size()).mapToObj(i -> Pair.of(BlockCollections.STEMS.get(i), BlockCollections.STRIPPED_STEMS.get(i))),
+        Stream.of(Pair.of(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK))
+    ).forEach(pair -> {
+      final Block inputBase = pair.getFirst();
+      final Block outputBase = pair.getSecond();
+      for (BlockShape shape : BlockShape.values()) {
+        final Block input = BlockBiMaps.getBlockOf(shape, inputBase);
+        final Block output = BlockBiMaps.getBlockOf(shape, outputBase);
+        if (input != null && output != null) {
+          BlockTransformerHelper.registerStripping(input, output);
+        }
+      }
+    });
+  }
+
+  /**
    * 检查模组中的方块在熔炉中的燃烧情况是否与基础方块相符。
    */
   public static void verifyFuelTimes(String name, Collection<Block> baseBlocks, Predicate<Block> filter) {
@@ -312,6 +343,9 @@ public class ExtShape implements ModInitializer {
     }
   }
 
+  /**
+   * 应用方块和物品的更名，适用于 26.3 中加入的原版羊毛和混凝土楼梯和台阶。
+   */
   private static void registerRegistryAliases() {
     for (BlockItemId blockItemId : Iterables.concat(BlockItemIds.WOOL_STAIRS.asList(), BlockItemIds.WOOL_SLAB.asList(), BlockItemIds.CONCRETE_STAIRS.asList(), BlockItemIds.CONCRETE_SLAB.asList())) {
       BuiltInRegistries.BLOCK.addAlias(id(blockItemId.block().identifier().getPath()), blockItemId.block().identifier());

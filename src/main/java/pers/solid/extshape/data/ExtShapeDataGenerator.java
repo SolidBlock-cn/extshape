@@ -35,7 +35,6 @@ public class ExtShapeDataGenerator implements DataGeneratorEntrypoint {
 
     pack.addProvider(ExtShapeContextIntProviderProvider::new);
     pack.addProvider(ExtShapeContextFloatProviderProvider::new);
-    pack.addProvider(ExtShapeBlockTransformerProvider::new);
 
     final FabricDataGenerator.Pack recipeTweak = fabricDataGenerator.createBuiltinResourcePack(ExtShape.id("recipe_tweak"));
     recipeTweak.addProvider((output, registriesFuture) -> new FabricRecipeProvider(output, registriesFuture) {
