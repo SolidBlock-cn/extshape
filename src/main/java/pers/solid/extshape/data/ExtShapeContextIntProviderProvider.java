@@ -61,7 +61,7 @@ public class ExtShapeContextIntProviderProvider extends FabricCodecDataProvider<
     final HolderLookup.RegistryLookup<ContextFloatProvider> contextFloatProviders = registryLookup.lookupOrThrow(Registries.CONTEXT_FLOAT_PROVIDER);
     HolderOwner<ContextIntProvider> intOwner = contextIntProviders instanceof EmptyTagLookupWrapper<ContextIntProvider>(HolderLookup.RegistryLookup<ContextIntProvider> parent) ? parent : contextIntProviders;
     HolderOwner<ContextFloatProvider> floatOwner = contextFloatProviders instanceof EmptyTagLookupWrapper<ContextFloatProvider>(HolderLookup.RegistryLookup<ContextFloatProvider> parent) ? parent : contextFloatProviders;
-    // todo 寻找替代方案
+
     final Holder.Reference<ContextIntProvider> base = Holder.Reference.createStandAlone(intOwner, variantSeries.base());
     final Holder.Reference<ContextFloatProvider> half = Holder.Reference.createStandAlone(floatOwner, ExtShapeNumberProviders.SHAPE_VARIANT_MULTIPLIER_HALF);
     final Holder.Reference<ContextFloatProvider> quarter = Holder.Reference.createStandAlone(floatOwner, ExtShapeNumberProviders.SHAPE_VARIANT_MULTIPLIER_QUARTER);
@@ -77,7 +77,6 @@ public class ExtShapeContextIntProviderProvider extends FabricCodecDataProvider<
     HolderOwner<ContextIntProvider> intOwner = contextIntProviders instanceof EmptyTagLookupWrapper<ContextIntProvider>(HolderLookup.RegistryLookup<ContextIntProvider> parent) ? parent : contextIntProviders;
     HolderOwner<ContextFloatProvider> floatOwner = contextFloatProviders instanceof EmptyTagLookupWrapper<ContextFloatProvider>(HolderLookup.RegistryLookup<ContextFloatProvider> parent) ? parent : contextFloatProviders;
 
-    // todo 寻找替代方案
     final Holder.Reference<ContextIntProvider> base = Holder.Reference.createStandAlone(intOwner, variantSeries.base());
     final Holder.Reference<ContextFloatProvider> half = Holder.Reference.createStandAlone(floatOwner, ExtShapeNumberProviders.SHAPE_VARIANT_MULTIPLIER_HALF);
     final Holder.Reference<ContextFloatProvider> quarter = Holder.Reference.createStandAlone(floatOwner, ExtShapeNumberProviders.SHAPE_VARIANT_MULTIPLIER_QUARTER);
