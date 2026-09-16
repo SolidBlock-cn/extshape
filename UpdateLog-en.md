@@ -2,7 +2,9 @@
 
 ### 3.1.6
 
-- See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
+- See the update log for 3.1.6-beta.1, 3.1.6-beta.2, 3.1.6-beta.3.
+- For 26.3, see the update log for 3.1.6-beta.4, 3.1.6-beta.5, 3.1.6-beta.6, 3.1.6-beta.7, 3.1.6-beta.8, 3.1.9-beta.9, 3.1.9-beta.10, 3.1.6-beta.11, 3.1.6-beta.12, 3.1.6-rc.1.
+- For 26.3, now the stripping of wood blocks is registered through Fabric API.
 
 ### 3.1.6-rc.1
 
