@@ -42,6 +42,7 @@ public class ExtShapeBlockus implements ModInitializer {
       LOGGER.info("Blockus mod loaded. Extended Block Shapes mod is trying to apply it.");
       ExtShapeBlockusBlocks.init();
       ExtShapeBlockusAliases.initWallChanges();
+      ExtShapeBlockusAliases.initSquaresChanges();
       ExtShapeBlockusItemGroup.registerEvent();
       registerStrippableBlocks();
 

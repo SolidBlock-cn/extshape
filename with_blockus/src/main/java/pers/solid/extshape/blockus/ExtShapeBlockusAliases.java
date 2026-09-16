@@ -1,8 +1,13 @@
 package pers.solid.extshape.blockus;
 
 import com.brand.blockus.Blockus;
+import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +33,19 @@ public class ExtShapeBlockusAliases {
     convertWallsToBlockus("polished_purpur");
     convertWallsToBlockus("polished_phantom_purpur");
     convertWallsToBlockus("polished_end_stone");
+  }
 
+  /**
+   * 自 Blockus 2.17.3 和 2.16.6 开始，Blockus 为一些方纹方块加入了楼梯、台阶和墙。因此本模组的相关方块将自动重定向至 Blockus 的相关方块。
+   */
+  public static void initSquaresChanges() {
+    convertSquareBlockBundle(BlockusBlocks.LIMESTONE_SQUARES);
+    convertSquareBlockBundle(BlockusBlocks.MARBLE_SQUARES);
+    convertSquareBlockBundle(BlockusBlocks.BLUESTONE_SQUARES);
+    convertSquareBlockBundle(BlockusBlocks.VIRIDITE_SQUARES);
+    convertSquareBlockBundle(BlockusBlocks.PURPUR_SQUARES);
+    convertSquareBlockBundle(BlockusBlocks.PHANTOM_PURPUR_SQUARES);
+    convertSquareBlockBundle(BlockusBlocks.CHOCOLATE_SQUARES);
   }
 
   private static void convertWallsToBlockus(String baseName) {
@@ -58,6 +75,31 @@ public class ExtShapeBlockusAliases {
     }
     if (itemValid) {
       BuiltInRegistries.ITEM.addAlias(from, to);
+    }
+  }
+
+  private static void convertSquareBlockBundle(BSSWBundle bundle) {
+    final Block[] blocks = {bundle.stairs(), bundle.slab(), bundle.wall()};
+
+    for (Block block : blocks) {
+      final Identifier blockusId = BuiltInRegistries.BLOCK.getKey(block);
+      final Identifier extshapeId = ExtShapeBlockus.id(blockusId.getPath());
+
+      if (BuiltInRegistries.BLOCK.containsKey(extshapeId)) {
+        LOGGER.warn("Block id {} is supposed to be replaced with, but it actual exists along with {}", extshapeId, blockusId);
+      }
+
+      BuiltInRegistries.BLOCK.addAlias(extshapeId, blockusId);
+
+      final Item item = block.asItem();
+      if (item != Items.AIR) {
+        final Identifier blockusItemId = BuiltInRegistries.ITEM.getKey(item);
+        final Identifier extshapeItemId = ExtShapeBlockus.id(blockusItemId.getPath());
+        if (BuiltInRegistries.ITEM.containsKey(extshapeItemId)) {
+          LOGGER.warn("Item id {} is supposed to be replaced with, but it actual exists along with {}", extshapeItemId, blockusItemId);
+        }
+        BuiltInRegistries.ITEM.addAlias(extshapeItemId, blockusItemId);
+      }
     }
   }
 }
