@@ -1,4 +1,4 @@
-// 26.3-pre-1	-999999999-01-01T00:00:00	Extended Block Shapes/Block Loot Tables
+// 26.3	-999999999-01-01T00:00:00	Extended Block Shapes/Block Loot Tables
 1c3d642f9f3db370a0d8b91ee75940f58d2799c2 data/extshape/loot_table/blocks/acacia_quarter_piece.json
 fac800508368c0869882572e246dfed6d3dc88ca data/extshape/loot_table/blocks/acacia_vertical_quarter_piece.json
 54c4275b1e1e32e68e134c57278a67db3ca2270f data/extshape/loot_table/blocks/acacia_vertical_slab.json
