@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:limestone_tile_quarter_piece_from_limestone_bricks_stonecutting"
+        "recipes": "extshape_blockus:limestone_tile_quarter_piece_from_limestone_bricks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

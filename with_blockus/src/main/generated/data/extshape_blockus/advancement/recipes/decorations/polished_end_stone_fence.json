@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:polished_end_stone_fence"
+        "recipes": "extshape_blockus:polished_end_stone_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

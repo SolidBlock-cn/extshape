@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:phantom_purpur_brick_vertical_stairs_from_polished_phantom_purpur_stonecutting"
+        "recipes": "extshape_blockus:phantom_purpur_brick_vertical_stairs_from_polished_phantom_purpur_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

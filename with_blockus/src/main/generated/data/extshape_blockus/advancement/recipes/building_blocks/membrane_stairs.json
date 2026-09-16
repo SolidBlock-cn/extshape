@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:membrane_stairs"
+        "recipes": "extshape_blockus:membrane_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

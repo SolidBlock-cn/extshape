@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:herringbone_granite_brick_vertical_stairs_from_granite_stonecutting"
+        "recipes": "extshape_blockus:herringbone_granite_brick_vertical_stairs_from_granite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

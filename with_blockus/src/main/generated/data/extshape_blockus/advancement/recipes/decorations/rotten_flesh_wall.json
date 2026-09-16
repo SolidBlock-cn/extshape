@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:rotten_flesh_wall"
+        "recipes": "extshape_blockus:rotten_flesh_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

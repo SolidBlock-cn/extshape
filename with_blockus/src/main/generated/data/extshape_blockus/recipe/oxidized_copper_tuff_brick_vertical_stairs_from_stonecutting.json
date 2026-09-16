@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:oxidized_copper_tuff_bricks",
+  "result": {
+    "id": "extshape_blockus:oxidized_copper_tuff_brick_vertical_stairs"
+  }
+}

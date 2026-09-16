@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:shingles_button"
+        "recipes": "extshape_blockus:shingles_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

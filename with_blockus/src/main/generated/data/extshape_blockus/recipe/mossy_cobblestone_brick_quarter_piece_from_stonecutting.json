@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:mossy_cobblestone_bricks",
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:mossy_cobblestone_brick_quarter_piece"
+  }
+}

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:nether_stars_fence"
+        "recipes": "extshape_blockus:nether_stars_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

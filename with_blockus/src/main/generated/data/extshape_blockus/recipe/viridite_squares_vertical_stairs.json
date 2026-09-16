@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    "extshape_blockus:viridite_squares_stairs"
+    "blockus:viridite_squares_stairs"
   ],
   "result": {
     "id": "extshape_blockus:viridite_squares_vertical_stairs"

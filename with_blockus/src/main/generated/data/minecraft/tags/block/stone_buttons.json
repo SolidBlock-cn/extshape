@@ -20,6 +20,14 @@
     "extshape_blockus:rough_sandstone_button",
     "extshape_blockus:rough_red_sandstone_button",
     "extshape_blockus:rough_soul_sandstone_button",
-    "extshape_blockus:smooth_soul_sandstone_button"
+    "extshape_blockus:smooth_soul_sandstone_button",
+    "extshape_blockus:copper_tuff_brick_button",
+    "extshape_blockus:waxed_copper_tuff_brick_button",
+    "extshape_blockus:exposed_copper_tuff_brick_button",
+    "extshape_blockus:waxed_exposed_copper_tuff_brick_button",
+    "extshape_blockus:weathered_copper_tuff_brick_button",
+    "extshape_blockus:waxed_weathered_copper_tuff_brick_button",
+    "extshape_blockus:oxidized_copper_tuff_brick_button",
+    "extshape_blockus:waxed_oxidized_copper_tuff_brick_button"
   ]
 }

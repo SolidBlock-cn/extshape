@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "extshape_blockus:waxed_exposed_copper_tuff_brick_fence_gate"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

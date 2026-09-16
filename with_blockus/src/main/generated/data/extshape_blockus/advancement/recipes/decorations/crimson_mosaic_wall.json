@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:crimson_mosaic_wall"
+        "recipes": "extshape_blockus:crimson_mosaic_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

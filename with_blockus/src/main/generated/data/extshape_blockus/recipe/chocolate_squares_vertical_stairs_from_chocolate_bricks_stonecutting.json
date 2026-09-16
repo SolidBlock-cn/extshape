@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:chocolate_bricks",
+  "result": {
+    "id": "extshape_blockus:chocolate_squares_vertical_stairs"
+  }
+}

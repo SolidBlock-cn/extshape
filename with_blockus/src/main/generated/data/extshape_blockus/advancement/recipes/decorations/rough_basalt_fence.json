@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:rough_basalt_fence"
+        "recipes": "extshape_blockus:rough_basalt_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

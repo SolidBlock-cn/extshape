@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:rough_red_sandstone_button"
+        "recipes": "extshape_blockus:rough_red_sandstone_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

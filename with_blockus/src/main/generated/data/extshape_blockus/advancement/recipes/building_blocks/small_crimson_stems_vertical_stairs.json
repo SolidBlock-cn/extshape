@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:small_crimson_stems_vertical_stairs"
+        "recipes": "extshape_blockus:small_crimson_stems_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "mossy_wooden_wall",
+  "key": {
+    "#": "blockus:mossy_poplar_planks"
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extshape_blockus:mossy_poplar_wall"
+  }
+}

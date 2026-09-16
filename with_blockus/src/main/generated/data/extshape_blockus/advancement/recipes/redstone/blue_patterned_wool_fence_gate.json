@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:blue_patterned_wool_fence_gate"
+        "recipes": "extshape_blockus:blue_patterned_wool_fence_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

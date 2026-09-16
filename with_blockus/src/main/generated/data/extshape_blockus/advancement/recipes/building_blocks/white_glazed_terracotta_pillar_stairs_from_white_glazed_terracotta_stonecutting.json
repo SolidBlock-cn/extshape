@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:white_glazed_terracotta_pillar_stairs_from_white_glazed_terracotta_stonecutting"
+        "recipes": "extshape_blockus:white_glazed_terracotta_pillar_stairs_from_white_glazed_terracotta_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

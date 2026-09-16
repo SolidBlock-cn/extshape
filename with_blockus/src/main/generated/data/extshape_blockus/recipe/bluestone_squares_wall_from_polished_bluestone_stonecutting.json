@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:polished_bluestone",
-  "result": {
-    "id": "extshape_blockus:bluestone_squares_wall"
-  }
-}

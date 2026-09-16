@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:viridite_squares_vertical_quarter_piece_from_viridite_stonecutting"
+        "recipes": "extshape_blockus:viridite_squares_vertical_quarter_piece_from_viridite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

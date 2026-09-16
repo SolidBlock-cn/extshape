@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "extshape_blockus:phantom_purpur_squares_slab"
+            "items": "blockus:phantom_purpur_squares_slab"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:phantom_purpur_squares_vertical_slab"
+        "recipes": "extshape_blockus:phantom_purpur_squares_vertical_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

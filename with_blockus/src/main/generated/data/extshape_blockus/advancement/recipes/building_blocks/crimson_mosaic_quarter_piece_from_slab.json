@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:crimson_mosaic_quarter_piece_from_slab"
+        "recipes": "extshape_blockus:crimson_mosaic_quarter_piece_from_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

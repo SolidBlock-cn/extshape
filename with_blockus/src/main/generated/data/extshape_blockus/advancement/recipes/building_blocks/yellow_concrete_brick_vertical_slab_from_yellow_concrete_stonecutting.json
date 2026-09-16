@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:yellow_concrete_brick_vertical_slab_from_yellow_concrete_stonecutting"
+        "recipes": "extshape_blockus:yellow_concrete_brick_vertical_slab_from_yellow_concrete_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

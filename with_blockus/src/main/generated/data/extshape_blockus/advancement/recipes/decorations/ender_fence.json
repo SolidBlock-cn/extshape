@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:ender_fence"
+        "recipes": "extshape_blockus:ender_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

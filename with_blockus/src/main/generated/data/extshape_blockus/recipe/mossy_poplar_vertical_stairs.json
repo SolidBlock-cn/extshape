@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "mossy_wooden_vertical_stairs_from_rotation",
+  "ingredients": [
+    "blockus:mossy_poplar_stairs"
+  ],
+  "result": {
+    "id": "extshape_blockus:mossy_poplar_vertical_stairs"
+  }
+}

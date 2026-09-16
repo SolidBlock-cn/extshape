@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "extshape_blockus:bluestone_squares_stairs"
+            "items": "blockus:bluestone_squares_stairs"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:bluestone_squares_quarter_piece_from_stairs_stonecutting"
+        "recipes": "extshape_blockus:bluestone_squares_quarter_piece_from_stairs_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

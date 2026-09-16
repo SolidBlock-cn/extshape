@@ -10,7 +10,6 @@ import com.brand.blockus.utils.helper.WoodMaps;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
-import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
@@ -29,8 +28,10 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import org.jetbrains.annotations.UnmodifiableView;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
+import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.builder.*;
+import pers.solid.extshape.number.ExtShapeNumberProviders;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
@@ -61,6 +62,14 @@ public final class ExtShapeBlockusBlocks {
 
     BlockusBlockBiMaps.importFromBlockus();
     markStoneCuttableWhenCreating = true;
+    create(BlockusBlocks.COBBLESTONE_BRICKS)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
+    create(BlockusBlocks.MOSSY_COBBLESTONE_BRICKS)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
     create(BlockusBlocks.STONE_TILES)
         .setFenceSettings(FenceSettings.STONE)
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
@@ -694,6 +703,7 @@ public final class ExtShapeBlockusBlocks {
       } else {
         FACTORY.createConstructionOnly(block)
             .with(BlockShape.WALL)
+            .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
             .addPostBuildConsumer(plankFlammable)
             .setRecipeGroup(blockShape -> "herringbone_wooden_" + blockShape.getSerializedName())
             .build();
@@ -713,6 +723,7 @@ public final class ExtShapeBlockusBlocks {
             .setPillar()
             .addPostBuildConsumer(logFlammable)
             .setRecipeGroup(blockShape -> "small_logs_" + blockShape.getSerializedName())
+            .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
             .build();
       }
     }
@@ -765,6 +776,10 @@ public final class ExtShapeBlockusBlocks {
         .without(BlockShape.FENCE, BlockShape.FENCE_GATE)
         .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireResistant())
         .build();
+
+    // 铜砖
+    new CopperManager(BlockusBlocks.COPPER_BRICKS.block().blocks()).registerBlocks(FACTORY);
+    new CopperManager(BlockusBlocks.COPPER_TUFF_BRICKS.block().blocks()).registerBlocks(FACTORY);
 
     markStoneCuttableWhenCreating = false;
 
@@ -838,8 +853,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.THATCH)
         .addPostBuildConsumer((blockShape4, blockBuilder3) -> {
           FlammableBlockRegistry.getDefaultInstance().add(blockBuilder3.instance, 60, 20);
-          CompostableRegistry.INSTANCE.add(blockBuilder3.instance, blockShape4.logicalCompleteness * 0.75f);
-        })
+        }) // todo thatch 没有堆肥了？
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.WHEAT, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
         .build();
@@ -847,6 +861,7 @@ public final class ExtShapeBlockusBlocks {
         .addPostBuildConsumer((blockShape3, blockBuilder2) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder2.instance, 30, 60))
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.PAPER, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
+        .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
         .build();
     create(BlockusBlocks.BURNT_PAPER_BLOCK)
         .addPostBuildConsumer((blockShape2, blockBuilder1) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder1.instance, 5, 60))
@@ -868,6 +883,7 @@ public final class ExtShapeBlockusBlocks {
     create(BlockusBlocks.CHARCOAL_BLOCK)
         .markStoneCuttable()
         .setStoneFenceSettings(Items.CHARCOAL)
+        .cookingTime(ExtShapeNumberProviders.COOKING_TIME_COAL_BLOCK)
         .build();
 
     // sugar 没有，因为是下落方块，不符合条件。

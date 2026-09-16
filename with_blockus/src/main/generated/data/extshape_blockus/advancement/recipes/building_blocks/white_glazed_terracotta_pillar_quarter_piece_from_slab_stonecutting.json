@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:white_glazed_terracotta_pillar_quarter_piece_from_slab_stonecutting"
+        "recipes": "extshape_blockus:white_glazed_terracotta_pillar_quarter_piece_from_slab_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

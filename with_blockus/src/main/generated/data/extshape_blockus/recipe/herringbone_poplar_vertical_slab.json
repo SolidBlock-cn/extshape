@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "herringbone_wooden_vertical_slab_from_rotation",
+  "ingredients": [
+    "extshape_blockus:herringbone_poplar_slab"
+  ],
+  "result": {
+    "id": "extshape_blockus:herringbone_poplar_vertical_slab"
+  }
+}

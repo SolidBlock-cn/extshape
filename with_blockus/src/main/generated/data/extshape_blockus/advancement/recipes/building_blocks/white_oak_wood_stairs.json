@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:white_oak_wood_stairs"
+        "recipes": "extshape_blockus:white_oak_wood_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

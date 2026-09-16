@@ -2,45 +2,25 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "predicates": {
-              "minecraft:enchantments": [
-                {
-                  "enchantments": "minecraft:silk_touch",
-                  "levels": {
-                    "min": 1
-                  }
-                }
-              ]
-            }
-          }
-        }
-      ],
+      "condition": "minecraft:tool/can_silk_touch",
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "conditions": [
-                {
-                  "block": "extshape_blockus:ice_brick_slab",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "type": "double"
-                  }
-                }
-              ],
-              "count": 2.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "condition": {
+              "type": "minecraft:match_block",
+              "blocks": "extshape_blockus:ice_brick_slab",
+              "state": {
+                "type": "double"
+              }
+            },
+            "count": 2
+          },
           "name": "extshape_blockus:ice_brick_slab"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

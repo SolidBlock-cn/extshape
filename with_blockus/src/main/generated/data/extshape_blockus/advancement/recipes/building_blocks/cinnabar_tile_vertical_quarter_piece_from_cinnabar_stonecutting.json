@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:cinnabar_tile_vertical_quarter_piece_from_cinnabar_stonecutting"
+        "recipes": "extshape_blockus:cinnabar_tile_vertical_quarter_piece_from_cinnabar_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

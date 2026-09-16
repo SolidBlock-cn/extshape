@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:cobblestone_brick_vertical_stairs_from_cobblestone_stonecutting"
+        "recipes": "extshape_blockus:cobblestone_brick_vertical_stairs_from_cobblestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

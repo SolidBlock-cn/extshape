@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:black_shingles_quarter_piece_from_black_terracotta_stonecutting"
+        "recipes": "extshape_blockus:black_shingles_quarter_piece_from_black_terracotta_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

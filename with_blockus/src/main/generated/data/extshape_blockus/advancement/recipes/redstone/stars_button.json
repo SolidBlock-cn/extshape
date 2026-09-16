@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:stars_button"
+        "recipes": "extshape_blockus:stars_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:light_gray_shingles_vertical_slab_from_light_gray_terracotta_stonecutting"
+        "recipes": "extshape_blockus:light_gray_shingles_vertical_slab_from_light_gray_terracotta_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

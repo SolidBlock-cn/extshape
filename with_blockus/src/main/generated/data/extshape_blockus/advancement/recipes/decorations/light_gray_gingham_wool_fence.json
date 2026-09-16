@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:light_gray_gingham_wool_fence"
+        "recipes": "extshape_blockus:light_gray_gingham_wool_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:yellow_shingles_wall_from_stonecutting"
+        "recipes": "extshape_blockus:yellow_shingles_wall_from_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

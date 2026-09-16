@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:diorite_brick_vertical_quarter_piece_from_diorite_stonecutting"
+        "recipes": "extshape_blockus:diorite_brick_vertical_quarter_piece_from_diorite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

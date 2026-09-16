@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:orange_shingles_quarter_piece_from_orange_terracotta_stonecutting"
+        "recipes": "extshape_blockus:orange_shingles_quarter_piece_from_orange_terracotta_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

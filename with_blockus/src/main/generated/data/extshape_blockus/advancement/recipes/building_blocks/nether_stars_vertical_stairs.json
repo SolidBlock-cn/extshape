@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:nether_stars_vertical_stairs"
+        "recipes": "extshape_blockus:nether_stars_vertical_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

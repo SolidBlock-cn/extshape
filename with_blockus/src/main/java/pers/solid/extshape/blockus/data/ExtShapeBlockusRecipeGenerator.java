@@ -1,16 +1,18 @@
 package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.registry.content.BlockusBlocks;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -24,8 +26,9 @@ import pers.solid.extshape.data.CrossShapeDataGeneration;
 import pers.solid.extshape.util.BlockBiMaps;
 
 public class ExtShapeBlockusRecipeGenerator extends RecipeProvider {
-  protected ExtShapeBlockusRecipeGenerator(HolderLookup.Provider registries, RecipeOutput exporter) {
-    super(registries, exporter);
+
+  protected ExtShapeBlockusRecipeGenerator(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+    super(recipeOutput, advancementOutput);
   }
 
   @Override

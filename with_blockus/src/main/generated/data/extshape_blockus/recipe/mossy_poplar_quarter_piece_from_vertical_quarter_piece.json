@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "mossy_wooden_quarter_piece_from_rotation",
+  "ingredients": [
+    "extshape_blockus:mossy_poplar_vertical_quarter_piece"
+  ],
+  "result": {
+    "id": "extshape_blockus:mossy_poplar_quarter_piece"
+  }
+}

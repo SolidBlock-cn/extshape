@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "extshape_blockus:poplar_mosaic_vertical_stairs"
+  ],
+  "result": {
+    "id": "blockus:poplar_mosaic_stairs"
+  }
+}

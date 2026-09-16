@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:pink_shingles_fence_from_dyeing"
+        "recipes": "extshape_blockus:pink_shingles_fence_from_dyeing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

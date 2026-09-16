@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "blockus:water_bricks"
+  ],
+  "result": {
+    "id": "extshape_blockus:water_brick_button"
+  }
+}

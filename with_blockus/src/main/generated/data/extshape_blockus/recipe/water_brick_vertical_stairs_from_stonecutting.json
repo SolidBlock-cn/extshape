@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:water_bricks",
+  "result": {
+    "id": "extshape_blockus:water_brick_vertical_stairs"
+  }
+}

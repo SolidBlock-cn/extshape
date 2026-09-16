@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:small_bluestone_brick_vertical_quarter_piece_from_bluestone_stonecutting"
+        "recipes": "extshape_blockus:small_bluestone_brick_vertical_quarter_piece_from_bluestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

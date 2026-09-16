@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:polished_sculk_fence"
+        "recipes": "extshape_blockus:polished_sculk_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

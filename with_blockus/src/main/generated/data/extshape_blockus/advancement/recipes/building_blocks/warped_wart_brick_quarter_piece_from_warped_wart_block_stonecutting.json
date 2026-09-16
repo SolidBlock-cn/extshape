@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:warped_wart_brick_quarter_piece_from_warped_wart_block_stonecutting"
+        "recipes": "extshape_blockus:warped_wart_brick_quarter_piece_from_warped_wart_block_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

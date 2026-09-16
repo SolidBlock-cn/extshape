@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:oxidized_copper_brick_vertical_stairs_from_oxidized_cut_copper_stonecutting"
+        "recipes": "extshape_blockus:oxidized_copper_brick_vertical_stairs_from_oxidized_cut_copper_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

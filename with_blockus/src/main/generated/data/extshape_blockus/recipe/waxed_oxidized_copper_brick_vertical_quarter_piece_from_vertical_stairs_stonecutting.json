@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "extshape_blockus:waxed_oxidized_copper_brick_vertical_stairs",
+  "result": {
+    "count": 3,
+    "id": "extshape_blockus:waxed_oxidized_copper_brick_vertical_quarter_piece"
+  }
+}

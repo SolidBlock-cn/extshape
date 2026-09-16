@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:copper_bricks",
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:copper_brick_vertical_slab"
+  }
+}

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:herringbone_mangrove_stairs"
+        "recipes": "extshape_blockus:herringbone_mangrove_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

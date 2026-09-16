@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:dripstone_brick_quarter_piece_from_polished_dripstone_stonecutting"
+        "recipes": "extshape_blockus:dripstone_brick_quarter_piece_from_polished_dripstone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

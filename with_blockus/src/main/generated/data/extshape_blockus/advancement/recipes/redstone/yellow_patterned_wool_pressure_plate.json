@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:yellow_patterned_wool_pressure_plate"
+        "recipes": "extshape_blockus:yellow_patterned_wool_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

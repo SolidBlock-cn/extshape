@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:chocolate_fence"
+        "recipes": "extshape_blockus:chocolate_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "extshape_blockus:small_poplar_logs_quarter_piece"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

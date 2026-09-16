@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "small_logs_vertical_stairs_from_rotation",
+  "ingredients": [
+    "extshape_blockus:small_poplar_logs_stairs"
+  ],
+  "result": {
+    "id": "extshape_blockus:small_poplar_logs_vertical_stairs"
+  }
+}

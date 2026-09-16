@@ -3,9 +3,8 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.registry.FuelValueEvents;
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -45,7 +44,6 @@ public class ExtShapeBlockus implements ModInitializer {
       ExtShapeBlockusAliases.initWallChanges();
       ExtShapeBlockusItemGroup.registerEvent();
       registerStrippableBlocks();
-      registerBlockusFuels();
 
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
         validateBlockIds();
@@ -70,25 +68,13 @@ public class ExtShapeBlockus implements ModInitializer {
       var block1 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_LOG);
       var block2 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_LOG);
       if (block1 != null && block2 != null) {
-        ExtShape.EXTENDED_STRIPPABLE_BLOCKS.put(block1, block2);
+        BlockTransformerHelper.registerStripping(block1, block2);
       }
       var block3 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_WOOD);
       var block4 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_WOOD);
       if (block3 != null && block4 != null) {
-        ExtShape.EXTENDED_STRIPPABLE_BLOCKS.put(block3, block4);
+        BlockTransformerHelper.registerStripping(block3, block4);
       }
-    }
-  }
-
-  private void registerBlockusFuels() {
-    final Identifier phaseName = id("extshape_blockus");
-    FuelValueEvents.BUILD.addPhaseOrdering(Event.DEFAULT_PHASE, phaseName);
-
-    // 确保此注册在 Blockus 模组的阶段之后
-    FuelValueEvents.BUILD.register(phaseName, (builder, context) -> ExtShape.registerFuelTimes(builder, ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains));
-
-    if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-      FuelValueEvents.EXCLUSIONS.register((builder, context) -> ExtShape.verityFuelTimes(builder.build(), "Extended Block Shapes Blockus", ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS, ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains));
     }
   }
 

@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:purpur_block",
-  "result": {
-    "id": "extshape_blockus:purpur_squares_wall"
-  }
-}

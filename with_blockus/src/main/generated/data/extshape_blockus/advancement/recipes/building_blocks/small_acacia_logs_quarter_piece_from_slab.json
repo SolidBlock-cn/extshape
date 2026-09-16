@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:small_acacia_logs_quarter_piece_from_slab"
+        "recipes": "extshape_blockus:small_acacia_logs_quarter_piece_from_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

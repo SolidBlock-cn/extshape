@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:bluestone_brick_vertical_stairs_from_polished_bluestone_stonecutting"
+        "recipes": "extshape_blockus:bluestone_brick_vertical_stairs_from_polished_bluestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:orange_glazed_terracotta_pillar_vertical_stairs_from_orange_glazed_terracotta_stonecutting"
+        "recipes": "extshape_blockus:orange_glazed_terracotta_pillar_vertical_stairs_from_orange_glazed_terracotta_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

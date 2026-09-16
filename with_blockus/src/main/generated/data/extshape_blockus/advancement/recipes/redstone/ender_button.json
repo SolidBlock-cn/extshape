@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:ender_button"
+        "recipes": "extshape_blockus:ender_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

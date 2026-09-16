@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "wooden_mosaic_vertical_quarter_piece_from_rotation",
+  "ingredients": [
+    "extshape_blockus:poplar_mosaic_quarter_piece"
+  ],
+  "result": {
+    "id": "extshape_blockus:poplar_mosaic_vertical_quarter_piece"
+  }
+}

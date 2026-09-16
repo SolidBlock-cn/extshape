@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "blockus:waxed_weathered_copper_brick_slab"
+  ],
+  "result": {
+    "id": "extshape_blockus:waxed_weathered_copper_brick_vertical_slab"
+  }
+}

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:viridite_circular_paving_slab"
+        "recipes": "extshape_blockus:viridite_circular_paving_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

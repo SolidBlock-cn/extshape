@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:phantom_purpur_wall"
+        "recipes": "extshape_blockus:phantom_purpur_wall"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

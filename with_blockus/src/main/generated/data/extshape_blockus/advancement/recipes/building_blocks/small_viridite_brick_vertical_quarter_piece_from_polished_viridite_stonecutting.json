@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:small_viridite_brick_vertical_quarter_piece_from_polished_viridite_stonecutting"
+        "recipes": "extshape_blockus:small_viridite_brick_vertical_quarter_piece_from_polished_viridite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

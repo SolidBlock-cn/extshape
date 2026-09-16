@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:viridite_fence"
+        "recipes": "extshape_blockus:viridite_fence"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

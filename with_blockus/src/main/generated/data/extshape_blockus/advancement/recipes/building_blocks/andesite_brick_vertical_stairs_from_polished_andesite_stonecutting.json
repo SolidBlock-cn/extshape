@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:andesite_brick_vertical_stairs_from_polished_andesite_stonecutting"
+        "recipes": "extshape_blockus:andesite_brick_vertical_stairs_from_polished_andesite_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

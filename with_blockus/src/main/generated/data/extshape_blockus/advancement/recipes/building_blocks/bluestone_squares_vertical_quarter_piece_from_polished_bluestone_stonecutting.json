@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:bluestone_squares_vertical_quarter_piece_from_polished_bluestone_stonecutting"
+        "recipes": "extshape_blockus:bluestone_squares_vertical_quarter_piece_from_polished_bluestone_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

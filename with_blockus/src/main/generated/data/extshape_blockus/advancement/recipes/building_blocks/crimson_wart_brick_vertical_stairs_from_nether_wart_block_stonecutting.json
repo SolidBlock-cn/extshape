@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:crimson_wart_brick_vertical_stairs_from_nether_wart_block_stonecutting"
+        "recipes": "extshape_blockus:crimson_wart_brick_vertical_stairs_from_nether_wart_block_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

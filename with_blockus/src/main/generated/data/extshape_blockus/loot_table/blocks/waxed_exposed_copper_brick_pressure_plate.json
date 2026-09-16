@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "extshape_blockus:waxed_exposed_copper_brick_pressure_plate"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

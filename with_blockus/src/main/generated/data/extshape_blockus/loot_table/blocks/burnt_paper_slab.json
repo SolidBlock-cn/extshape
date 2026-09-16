@@ -8,59 +8,37 @@
           "children": [
             {
               "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "predicates": {
-                      "minecraft:enchantments": [
-                        {
-                          "enchantments": "minecraft:silk_touch",
-                          "levels": {
-                            "min": 1
-                          }
-                        }
-                      ]
-                    }
+              "condition": "minecraft:tool/can_silk_touch",
+              "modifier": {
+                "type": "minecraft:set_count",
+                "condition": {
+                  "type": "minecraft:match_block",
+                  "blocks": "extshape_blockus:burnt_paper_slab",
+                  "state": {
+                    "type": "double"
                   }
-                }
-              ],
-              "functions": [
-                {
-                  "conditions": [
-                    {
-                      "block": "extshape_blockus:burnt_paper_slab",
-                      "condition": "minecraft:block_state_property",
-                      "properties": {
-                        "type": "double"
-                      }
-                    }
-                  ],
-                  "count": 2.0,
-                  "function": "minecraft:set_count"
-                }
-              ],
+                },
+                "count": 2
+              },
               "name": "extshape_blockus:burnt_paper_slab"
             },
             {
               "type": "minecraft:item",
-              "functions": [
+              "modifier": [
                 {
-                  "count": 1.0,
-                  "function": "minecraft:set_count"
+                  "type": "minecraft:set_count",
+                  "count": 1
                 },
                 {
-                  "conditions": [
-                    {
-                      "block": "extshape_blockus:burnt_paper_slab",
-                      "condition": "minecraft:block_state_property",
-                      "properties": {
-                        "type": "double"
-                      }
+                  "type": "minecraft:set_count",
+                  "condition": {
+                    "type": "minecraft:match_block",
+                    "blocks": "extshape_blockus:burnt_paper_slab",
+                    "state": {
+                      "type": "double"
                     }
-                  ],
-                  "count": 2.0,
-                  "function": "minecraft:set_count"
+                  },
+                  "count": 2
                 }
               ],
               "name": "minecraft:gunpowder"
@@ -68,7 +46,7 @@
           ]
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ]
 }

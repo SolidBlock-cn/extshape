@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:small_pale_oak_logs_stairs"
+        "recipes": "extshape_blockus:small_pale_oak_logs_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
