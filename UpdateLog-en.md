@@ -39,18 +39,18 @@
 
 ### 3.1.6-beta.6
 
-- Added a new number provider type: `enhanced_commands:product`, used to calculate the product of values of multiple number providers.
+- Added a new number provider type: `extshape:product`, used to calculate the product of values of multiple number providers.
     - It has one field: `values`, the value is the list or tag of number providers.
 - Added the number provider of variant modifier value, all of which are constant values, whose ID and values are:
-    - `enhanced_commands:shape_variant_modifier/half`: 0.5
-    - `enhanced_commands:shape_variant_modifier/one_third`: 1/3
-    - `enhanced_commands:shape_variant_modifier/quarter`: 0.25
-- Added the number provider for the composting and cooking for the shape variants of some blocks. The ID is `enhanced_commands:shape_variant/<scene type>/<base name>/<variant type>`, where the value of `<scene type>` is `compostable` or `cooking`, the `<variant type` is `half`, `one_third` or `quarter`. Example: `enhanced_commands:shape_variant/compostable/medium/half`, `enhanced_commands:shape_variant/cooking/time_wool/quarter`.
-    - `half` variant type is used for slabs and vertical slabs, `one_third` variant type is used for buttons and pressure plates, `quarter` variant type is used for vertical quarter pieces and quarter pieces. For example, the cooking number provider of yellow wool button is `ehanced_commands:shape_variant/cooking/time_wool/one_third`, the composting number provider of pale moss is `enhanced_commands:shape_variant/compostable/mediun/quarter`.
+    - `extshape:shape_variant_modifier/half`: 0.5
+    - `extshape:shape_variant_modifier/one_third`: 1/3
+    - `extshape:shape_variant_modifier/quarter`: 0.25
+- Added the number provider for the composting and cooking for the shape variants of some blocks. The ID is `extshape:shape_variant/<scene type>/<base name>/<variant type>`, where the value of `<scene type>` is `compostable` or `cooking`, the `<variant type` is `half`, `one_third` or `quarter`. Example: `extshape:shape_variant/compostable/medium/half`, `extshape:shape_variant/cooking/time_wool/quarter`.
+    - `half` variant type is used for slabs and vertical slabs, `one_third` variant type is used for buttons and pressure plates, `quarter` variant type is used for vertical quarter pieces and quarter pieces. For example, the cooking number provider of yellow wool button is `ehanced_commands:shape_variant/cooking/time_wool/one_third`, the composting number provider of pale moss is `extshape:shape_variant/compostable/mediun/quarter`.
     - Stairs, vertical stairs, fences, fence gates and walls use the cooking or composting number provider of their base blocks. For example, the cooking number provider of yellow wool wall is `minecraft:cooking/time_wool`, and the composting number provider of pale moss fences is `minecraft:compostable/medium`.
     - For composting number providers, the probability the value is 1 is the probability its base value (the value of the composting number provider of the base block) is 1 multiplied by the value of its corresponding variant modifier, but similar to vanilla behavior, composting always successes when the composter block is empty.
     - For cooking number providers, the cooking time is the base value (the value of the cooking number provider of the base block) multiplied by the value of its corresponding variant modifier.
-    - These number providers are affected by the number providers of the corresponding base blocks, and meanwhile affected by the number provider of variant modifier value (`enhanced_commands:shape_variant_modifier/<变种类型>`).
+    - These number providers are affected by the number providers of the corresponding base blocks, and meanwhile affected by the number provider of variant modifier value (`extshape:shape_variant_modifier/<variant modifier type>`).
 - Fixed the issue of wrong block sort of colored blocks in the creative mode inventory in 26.3.
 - The changes above only apply to 26.3 snapshots and higher versions.
 
