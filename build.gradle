@@ -124,17 +124,11 @@ allprojects {
     }
 
     loom {
-        runs {
-            client {
-                programArg "-username=Solid"
-            }
-        }
-
         runConfigs.configureEach {
-            it.configName = "Minecraft Fabric ${it.name.capitalize()}"
-            ideConfigGenerated = true
+            it.displayName = "Minecraft Fabric ${it.name.capitalize()}"
+            generateRunConfig = true
 
-            runDir = project.relativePath(project(':').file('run')).toString()
+            runDirectory = project.relativePath(project(':').file('run')).toString()
         }
     }
 }
@@ -220,7 +214,7 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 
 modrinth {
     projectId = 'tb7kCxSW'
-    String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
+    String platform = project.findProperty('loom.platform') ?: 'fabric'
     versionNumber = "${rootProject.mod_version}+mc${rootProject.minecraft_version}"
     versionType = release_type
     uploadFile = remapJar
