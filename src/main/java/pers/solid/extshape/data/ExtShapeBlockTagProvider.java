@@ -52,6 +52,10 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
     getOrCreateTagBuilder(BlockTags.OCCLUDES_VIBRATION_SIGNALS).addTag(ExtShapeTags.WOOLEN_BLOCKS);
 
+    getOrCreateTagBuilder(BlockTags.PRESSURE_PLATES).forceAddTag(ExtShapeTags.PRESSURE_PLATES);
+    getOrCreateTagBuilder(BlockTags.STONE_PRESSURE_PLATES).forceAddTag(ExtShapeTags.STONE_PRESSURE_PLATES);
+    getOrCreateTagBuilder(ExtShapeTags.PRESSURE_PLATES).addTag(ExtShapeTags.WOODEN_PRESSURE_PLATES).forceAddTag(ExtShapeTags.STONE_PRESSURE_PLATES);
+
     // 将原木的所有标签加入 log_blocks
     for (TagKey<Block> tag : ExtShapeTags.SHAPE_TO_LOG_TAG.values()) {
       getOrCreateTagBuilder(ExtShapeTags.LOG_BLOCKS).addTag(tag);
@@ -201,7 +205,7 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.RAW_IRON_BLOCK,
         Blocks.RAW_COPPER_BLOCK
     );
-    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
+    addForShapes(BlockTags.NEEDS_STONE_TOOL, Iterables.concat(CopperManager.COPPER_BLOCKS, CopperManager.CUT_COPPER_BLOCKS, CopperManager.WAXED_COPPER_BLOCKS, CopperManager.WAXED_CUT_COPPER_BLOCKS));
     addForShapes(BlockTags.NEEDS_IRON_TOOL,
         Blocks.GOLD_BLOCK,
         Blocks.DIAMOND_BLOCK,
@@ -214,6 +218,8 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
         Blocks.ANCIENT_DEBRIS,
         Blocks.CRYING_OBSIDIAN
     );
+
+    addForShapes(BlockTags.SWORD_EFFICIENT, Blocks.PUMPKIN, Blocks.MELON);
 
     // endregion mineable 部分
 
@@ -358,9 +364,9 @@ public class ExtShapeBlockTagProvider extends FabricTagProvider.BlockTagProvider
 
       // 对石质压力板的特殊处理
       if (isStoneBaseBlock(baseBlock)) {
-        if (BlockTags.PRESSURE_PLATES.equals(tag)) {
-          tag = BlockTags.STONE_PRESSURE_PLATES;
-        } else if (BlockTags.BUTTONS.equals(tag)) {
+        if (ExtShapeTags.PRESSURE_PLATES.equals(tag)) {
+          tag = ExtShapeTags.STONE_PRESSURE_PLATES;
+        } else if (ExtShapeTags.BUTTONS.equals(tag)) {
           tag = BlockTags.STONE_BUTTONS;
         }
       }
