@@ -188,7 +188,7 @@ public class CrossShapeDataGeneration {
       for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
         final Block uncutBaseBlock = uncutBaseBlockInfo.left();
         final String path = Registries.BLOCK.getId(uncutBaseBlock).getPath();
-        final Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
+        final @Nullable Block output = BlockBiMaps.getBlockOf(blockShape, baseBlock);
         if (!(output instanceof ExtShapeBlockInterface) || !((ExtShapeBlockInterface) output).shouldWriteStonecuttingRecipe()) continue;
         SingleItemRecipeJsonBuilder recipe = ((ExtShapeBlockInterface) output).getStonecuttingRecipe();
         if (recipe != null) {
@@ -211,7 +211,7 @@ public class CrossShapeDataGeneration {
         cutStairsToQuarterPiece(stairs, quarterPiece, null, 1);
         if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
           final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-          final Block uncutStairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, uncutBaseBlock);
+          final @Nullable Block uncutStairs = BlockBiMaps.getBlockOf(BlockShape.STAIRS, uncutBaseBlock);
           if (uncutStairs == null) continue;
           final String name0 = Registries.BLOCK.getId(uncutStairs).getPath();
           cutStairsToQuarterPiece(uncutStairs, quarterPiece, "_from_" + name0 + "_stonecutting", uncutBaseBlockInfo.rightInt());
@@ -225,7 +225,7 @@ public class CrossShapeDataGeneration {
           cutSlabToQuarterPiece(slab, quarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-            final Block uncutSlab = BlockBiMaps.getBlockOf(BlockShape.SLAB, uncutBaseBlock);
+            final @Nullable Block uncutSlab = BlockBiMaps.getBlockOf(BlockShape.SLAB, uncutBaseBlock);
             if (uncutSlab == null) continue;
             final String name0 = Registries.BLOCK.getId(uncutSlab).getPath();
             cutSlabToQuarterPiece(uncutSlab, quarterPiece, "_from_" + name0 + "_stonecutting", uncutBaseBlockInfo.rightInt());
@@ -240,7 +240,7 @@ public class CrossShapeDataGeneration {
           cutVerticalSlabToQuarterPiece(verticalSlab, quarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-            final Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
+            final @Nullable Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
             if (uncutVerticalSlab == null) continue;
             cutVerticalSlabToQuarterPiece(uncutVerticalSlab, quarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalSlab).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
           }
@@ -256,7 +256,7 @@ public class CrossShapeDataGeneration {
           cutVerticalSlabToVerticalQuarterPiece(verticalSlab, verticalQuarterPiece, null, 1);
           if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
             final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-            final Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
+            final @Nullable Block uncutVerticalSlab = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, uncutBaseBlock);
             if (uncutVerticalSlab == null) return;
             cutVerticalSlabToVerticalQuarterPiece(uncutVerticalSlab, verticalQuarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalSlab).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
           }
@@ -268,7 +268,7 @@ public class CrossShapeDataGeneration {
         cutVerticalStairsToVerticalQuarterPiece(verticalStairs, verticalQuarterPiece, null, 1);
         if (enableCuttingShape) for (final var uncutBaseBlockInfo : uncutBaseBlocks) {
           final Block uncutBaseBlock = uncutBaseBlockInfo.left();
-          final Block uncutVerticalStairs = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, uncutBaseBlock);
+          final @Nullable Block uncutVerticalStairs = BlockBiMaps.getBlockOf(BlockShape.VERTICAL_STAIRS, uncutBaseBlock);
           if (uncutVerticalStairs == null) continue;
           cutVerticalStairsToVerticalQuarterPiece(uncutVerticalStairs, verticalQuarterPiece, "_from_" + Registries.BLOCK.getId(uncutVerticalStairs).getPath() + "_stonecutting", uncutBaseBlockInfo.rightInt());
         }

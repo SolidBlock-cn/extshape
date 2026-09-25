@@ -26,6 +26,7 @@ import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
@@ -156,8 +157,8 @@ public class ExtShape implements ModInitializer {
       final Block inputBase = pair.getFirst();
       final Block outputBase = pair.getSecond();
       for (BlockShape shape : BlockShape.values()) {
-        final Block input = BlockBiMaps.getBlockOf(shape, inputBase);
-        final Block output = BlockBiMaps.getBlockOf(shape, outputBase);
+        final @Nullable Block input = BlockBiMaps.getBlockOf(shape, inputBase);
+        final @Nullable Block output = BlockBiMaps.getBlockOf(shape, outputBase);
         if (input != null && output != null) {
           EXTENDED_STRIPPABLE_BLOCKS.put(input, output);
         }

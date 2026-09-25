@@ -14,6 +14,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
 import pers.solid.extshape.blockus.BlockusCrossShapeDataGeneration;
@@ -52,8 +53,8 @@ public class ExtShapeBlockusRecipeProvider extends FabricRecipeProvider {
     for (var bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
       Item dyeItem = Registries.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registries.BLOCK.getId(bssTypes.block).getPath(), "_shingle") + "_dye"));
       for (BlockShape blockShape : BlockShape.values()) {
-        final Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block);
-        final Block dyed = BlockBiMaps.getBlockOf(blockShape, bssTypes.block);
+        final @Nullable Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block);
+        final @Nullable Block dyed = BlockBiMaps.getBlockOf(blockShape, bssTypes.block);
         if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
         BlockusRecipeProvider
             .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
@@ -65,11 +66,11 @@ public class ExtShapeBlockusRecipeProvider extends FabricRecipeProvider {
   }
 
   private void registerStainedStoneBricksRecipe(Consumer<RecipeJsonProvider> exporter) {
-    for (var bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
-      Item dyeItem = Registries.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registries.BLOCK.getId(bsswTypes.block).getPath(), "_stone_brick") + "_dye"));
+    for (var bsswBundle : BlockusBlockCollections.STAINED_STONE_BRICKS) {
+      Item dyeItem = Registries.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registries.BLOCK.getId(bsswBundle.block).getPath(), "_stone_brick") + "_dye"));
       for (BlockShape blockShape : BlockShape.values()) {
-        final Block unDyed = BlockBiMaps.getBlockOf(blockShape, Blocks.STONE_BRICKS);
-        final Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswTypes.block);
+        final @Nullable Block unDyed = BlockBiMaps.getBlockOf(blockShape, Blocks.STONE_BRICKS);
+        final @Nullable Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswBundle.block);
         if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
         final CraftingRecipeJsonBuilder recipe = BlockusRecipeProvider
             .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)

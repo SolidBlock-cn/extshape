@@ -18,7 +18,6 @@ import pers.solid.extshape.util.EntryVariantAppender;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -35,15 +34,15 @@ public final class ItemGroupRules {
 
   @ApiStatus.Internal
   public static void registerForMod() {
-    UpdateItemGroupRulesEvent.EVENT.register((rulesAccess) -> ItemGroupRules.recreateVanillaGroupRules(rulesAccess, ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla));
+    UpdateItemGroupRulesEvent.EVENT.register(rulesAccess -> ItemGroupRules.recreateVanillaGroupRules(rulesAccess, ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla));
   }
 
   private static void recreateVanillaGroupRules(ItemGroupRulesAccess rulesAccess, Collection<BlockShape> shapes) {
     ExtShape.LOGGER.info("Recreating vanilla item group rules for Extended Block Shapes.");
     final Multimap<Item, Item> apRedstone = rulesAccess.getAppendingRule(ItemGroups.REDSTONE);
-    apRedstone.put(Items.STONE_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.OBSIDIAN)).asItem());
+    apRedstone.put(Items.STONE_BUTTON, BlockBiMaps.getBlockOfOrThrow(BlockShape.BUTTON, Blocks.OBSIDIAN).asItem());
     final Multimap<Item, Item> preRedstone = rulesAccess.getPrependingRule(ItemGroups.REDSTONE);
-    preRedstone.put(Items.OAK_BUTTON, Objects.requireNonNull(BlockBiMaps.getBlockOf(BlockShape.BUTTON, Blocks.WHITE_WOOL)).asItem());
+    preRedstone.put(Items.OAK_BUTTON, BlockBiMaps.getBlockOfOrThrow(BlockShape.BUTTON, Blocks.WHITE_WOOL).asItem());
 
     final Multimap<Item, Item> apBuilding = rulesAccess.getAppendingRule(ItemGroups.BUILDING_BLOCKS);
     final Multimap<Item, Item> preBuilding = rulesAccess.getPrependingRule(ItemGroups.BUILDING_BLOCKS);

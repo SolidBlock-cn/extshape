@@ -5,6 +5,7 @@ import com.google.common.collect.HashBiMap;
 import net.minecraft.block.Block;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
@@ -75,15 +76,31 @@ public final class BlockBiMaps {
   }
 
   /**
-   * 根据指定的形状和基础方块，获取变种方块。
+   * 根据指定的形状和基础方块，获取变种方块。方块不存在时返回 null。
    *
    * @param shape     形状。
    * @param baseBlock 基础方块。
    * @return 变种方块。
    */
-  @Nullable
-  public static Block getBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock) {
+  public static @Nullable Block getBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock) {
     return of(shape).get(baseBlock);
+  }
+
+
+  /**
+   * 根据指定的形状和基础方块，获取变种方块。方块不存在时抛出异常。
+   *
+   * @param shape     形状。
+   * @param baseBlock 基础方块。
+   * @return 变种方块。
+   */
+  @ApiStatus.AvailableSince("3.2.0")
+  public static @NotNull Block getBlockOfOrThrow(@NotNull BlockShape shape, @NotNull Block baseBlock) {
+    final Block block = getBlockOf(shape, baseBlock);
+    if (block == null) {
+      throw new IllegalArgumentException("Block " + baseBlock + " does not have the shape variant: " + shape);
+    }
+    return block;
   }
 
   /**

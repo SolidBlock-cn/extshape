@@ -13,6 +13,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -37,31 +38,31 @@ public final class ExtShapeSpecificItemGroups {
 
   public static final ItemGroup WOODEN_BLOCKS = register("wooden_blocks", FabricItemGroup.builder()
       .displayName(Text.translatable("itemGroup.extshape.wooden_blocks"))
-      .icon(() -> new ItemStack(BlockBiMaps.getBlockOf(BlockShape.WALL, Blocks.CHERRY_PLANKS)))
+      .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, Blocks.CHERRY_PLANKS)))
       .entries((displayContext, entries) -> WOODEN_BASE_BLOCKS.forEach((block -> addBaseAndVariantsToEntries(block, entries))))
       .build());
 
   public static final ItemGroup COLORFUL_BLOCKS = register("color_blocks", FabricItemGroup.builder()
       .displayName(Text.translatable("itemGroup.extshape.colorful_blocks"))
-      .icon(() -> new ItemStack(BlockBiMaps.getBlockOf(BlockShape.STAIRS, Blocks.LIME_WOOL)))
+      .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.STAIRS, Blocks.LIME_WOOL)))
       .entries((displayContext, entries) -> COLORFUL_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
   public static final ItemGroup STONE_BLOCKS = register("stone_blocks", FabricItemGroup.builder()
       .displayName(Text.translatable("itemGroup.extshape.stone_blocks"))
-      .icon(() -> new ItemStack(BlockBiMaps.getBlockOf(BlockShape.FENCE, Blocks.CALCITE)))
+      .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.FENCE, Blocks.CALCITE)))
       .entries((displayContext, entries) -> STONE_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
   public static final ItemGroup MINERAL_BLOCKS = register("mineral_blocks", FabricItemGroup.builder()
       .displayName(Text.translatable("itemGroup.extshape.mineral_blocks"))
-      .icon(() -> new ItemStack(BlockBiMaps.getBlockOf(BlockShape.SLAB, Blocks.DIAMOND_BLOCK)))
+      .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.SLAB, Blocks.DIAMOND_BLOCK)))
       .entries((displayContext, entries) -> MINERAL_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
   public static final ItemGroup OTHER_BLOCKS = register("other_blocks", FabricItemGroup.builder()
       .displayName(Text.translatable("itemGroup.extshape.other_blocks"))
-      .icon(() -> new ItemStack(BlockBiMaps.getBlockOf(BlockShape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER)))
+      .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.VERTICAL_SLAB, Blocks.WAXED_OXIDIZED_COPPER)))
       .entries((displayContext, entries) -> OTHER_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
@@ -202,7 +203,7 @@ public final class ExtShapeSpecificItemGroups {
     if (baseBlock == null) return;
     entries.add(baseBlock);
     for (BlockShape shape : ExtShapeConfig.CURRENT_CONFIG.shapesInSpecificGroups) {
-      final Block shapeBlock = BlockBiMaps.getBlockOf(shape, baseBlock);
+      final @Nullable Block shapeBlock = BlockBiMaps.getBlockOf(shape, baseBlock);
       if (shapeBlock != null) {
         entries.add(shapeBlock);
       }

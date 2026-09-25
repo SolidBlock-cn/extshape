@@ -9,6 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.ExtShape;
@@ -51,13 +52,13 @@ public class ExtShapeBlockus implements ModInitializer {
 
   private static void registerStrippableBlocks() {
     for (BlockShape shape : BlockShape.values()) {
-      var block1 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_LOG);
-      var block2 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_LOG);
+      @Nullable var block1 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_LOG);
+      @Nullable var block2 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_LOG);
       if (block1 != null && block2 != null) {
         ExtShape.EXTENDED_STRIPPABLE_BLOCKS.put(block1, block2);
       }
-      var block3 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_WOOD);
-      var block4 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_WOOD);
+      @Nullable var block3 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.WHITE_OAK_WOOD);
+      @Nullable var block4 = BlockBiMaps.getBlockOf(shape, BlockusBlocks.STRIPPED_WHITE_OAK_WOOD);
       if (block3 != null && block4 != null) {
         ExtShape.EXTENDED_STRIPPABLE_BLOCKS.put(block3, block4);
       }

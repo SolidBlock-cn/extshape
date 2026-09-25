@@ -14,6 +14,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
@@ -120,8 +121,8 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
       final Block unwaxedBase = unwaxedBases.get(i);
       final Block waxedBase = waxedBases.get(i);
       for (BlockShape shape : BlockShape.values()) {
-        final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
-        final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
+        final @Nullable Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
+        final @Nullable Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
         if (unwaxed != null && waxed != null && blocksBuilderFactory.instanceCollection != null && blocksBuilderFactory.instanceCollection.contains(unwaxed) && blocksBuilderFactory.instanceCollection.contains(waxed)) {
           OxidizableBlocksRegistry.registerWaxableBlockPair(unwaxed, waxed);
         }
@@ -163,8 +164,8 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
 
   private static void generateWaxRecipesForShapes(Consumer<RecipeJsonProvider> exporter, Block unwaxedBaseBlock, Block waxedBaseBlock, Predicate<Block> blockPredicate) {
     for (BlockShape shape : BlockShape.values()) {
-      final Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
-      final Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
+      final @Nullable Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBaseBlock);
+      final @Nullable Block waxed = BlockBiMaps.getBlockOf(shape, waxedBaseBlock);
       if (unwaxed != null && waxed != null && blockPredicate.test(waxed)) {
         final ShapelessRecipeJsonBuilder recipe = ShapelessRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, waxed)
             .input(unwaxed)
