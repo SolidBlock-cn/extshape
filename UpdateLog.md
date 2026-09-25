@@ -13,6 +13,17 @@
 ### 3.1.6
 
 - 参见 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3 的更新日志。
+- 对于 26.3，参见 3.1.6-beta.4、3.1.6-beta.5、3.1.6-beta.6、3.1.6-beta.7、3.1.6-beta.8、3.1.9-beta.9、3.1.9-beta.10、3.1.6-beta.11、3.1.6-beta.12、3.1.6-rc.1 的更新日志。
+- 对于 26.3，现在木头方块的去皮是通过 Fabric API 注册的。
+
+### 3.1.6-rc.1
+
+- （仅限 26.3）现在可以正常在 Mod Menu 模组的模组列表中配置了。
+- 已知问题：在配置界面的文本输入框中输入无效的形状名称，会使游戏在控制台中报告错误。此问题在其他版本亦存在。
+
+### 3.1.6-beta.12
+
+- 更新 26.3-pre-1。跟随原版的变更，本模组中的数值提供器亦拆分为 `context_int_provider` 和 `context_float_provider`。
 
 ### 3.1.6-beta.11
 
@@ -38,18 +49,18 @@
 
 ### 3.1.6-beta.6
 
-- 加入新的数值提供器类型：`enhanced_commands:product`，用于计算多个数值提供器的值的乘积。
+- 加入新的数值提供器类型：`extshape:product`，用于计算多个数值提供器的值的乘积。
     - 有一个字段：`values`，其值为数值提供器的列表或标签。
 - 添加了变种修饰器值的数值提供器，均为常量值，其 ID 和值分别为：
-    - `enhanced_commands:shape_variant_modifier/half`：0.5
-    - `enhanced_commands:shape_variant_modifier/one_third`：1/3
-    - `enhanced_commands:shape_variant_modifier/quarter`：0.25
-- 为一些方块的形状变种添加了堆肥和烧炼的数值提供器，其 ID 为 `enhanced_commands:shape_variant/<场景类型>/<基准名称>/<变种类型>`，其中 `<场景类型>` 的值为 `compostable` 或 `cooking`，变种类型为 `half`、`one_third` 或 `quarter`。示例：`enhanced_commands:shape_variant/compostable/medium/half`、`enhanced_commands:shape_variant/cooking/time_wool/quarter`。
-    - `half` 变种类型用于台阶和竖直台阶，`one_third` 变种类型适用于按钮和耐力板，`quarter` 变种类型适用于纵条和横条。例如，黄色羊毛按钮的烧炼数值提供器为 `ehanced_commands:shape_variant/cooking/time_wool/one_third`，苍白苔藓横条的堆肥数值提供器为 `enhanced_commands:shape_variant/compostable/mediun/quarter`。
+    - `extshape:shape_variant_modifier/half`：0.5
+    - `extshape:shape_variant_modifier/one_third`：1/3
+    - `extshape:shape_variant_modifier/quarter`：0.25
+- 为一些方块的形状变种添加了堆肥和烧炼的数值提供器，其 ID 为 `extshape:shape_variant/<场景类型>/<基准名称>/<变种类型>`，其中 `<场景类型>` 的值为 `compostable` 或 `cooking`，变种类型为 `half`、`one_third` 或 `quarter`。示例：`extshape:shape_variant/compostable/medium/half`、`extshape:shape_variant/cooking/time_wool/quarter`。
+    - `half` 变种类型用于台阶和竖直台阶，`one_third` 变种类型适用于按钮和耐力板，`quarter` 变种类型适用于纵条和横条。例如，黄色羊毛按钮的烧炼数值提供器为 `ehanced_commands:shape_variant/cooking/time_wool/one_third`，苍白苔藓横条的堆肥数值提供器为 `extshape:shape_variant/compostable/mediun/quarter`。
     - 楼梯、竖直楼梯、栅栏、栅栏门、墙均使用其基础方块的烧炼或堆肥数值提供器。例如，黄色羊毛墙的烧炼数值提供器为 `minecraft:cooking/time_wool`，苍白苔藓栅栏的堆肥数值提供器为 `minecraft:compostable/medium`。
     - 对于堆肥的数值提供器，其值为 1 的概率为基准值（基础方块的堆肥数值提供器的值）为 1 的概率乘以对应的变种修饰器值，但类似原版行为，当堆肥桶为空时，堆肥始终成功。
     - 对于烧炼的数值提供器，其烧炼时间为基准值（基础方块的烧炼数值提供器的值）乘以对应的变种修饰器值。
-    - 这些数值提供器会受到对应基础方块数值提供器的影响，同时也会受到变种修饰器值的数值提供器（`enhanced_commands:shape_variant_modifier/<变种类型>`）的影响。
+    - 这些数值提供器会受到对应基础方块数值提供器的影响，同时也会受到变种修饰器值的数值提供器（`extshape:shape_variant_modifier/<变种类型>`）的影响。
 - 修复了 26.3 的创造模式物品栏中染色方块排序错误的问题。
 - 上述更改仅适用于 26.3 快照及以上版本。
 
