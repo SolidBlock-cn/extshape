@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-24T17:41:53.9302902	Extended Block Shapes - Blockus/Tags for minecraft:block
+// 1.20.1	2026-09-25T11:22:00.3960277	Extended Block Shapes - Blockus/Tags for minecraft:block
 9e83293f4bb19067d227a1127593d5ea449ad58e data\blockus\tags\blocks\sculk_blocks.json
 46a786c0992284fa629b75ece0a48420c747788d data\blockus\tags\blocks\phantom_purpur_blocks.json
 8038f38e9a1f76b8d34475f7cca3f125ef929f85 data\minecraft\tags\blocks\slabs.json
@@ -8,8 +8,8 @@
 5ace77d77c5988eac03589b4c98e0d09ac3793df data\blockus\tags\blocks\tuff_blocks.json
 8b1273d22b0f9e1427f6df786f8be3f5b87ecd13 data\blockus\tags\blocks\chocolate_blocks.json
 bc08352120a7c0a89e7cc641199b215570b54ea8 data\minecraft\tags\blocks\infiniburn_overworld.json
-b6501510de2f8c8a9922ee9a74a3021261beb5d9 data\blockus\tags\blocks\platings.json
 a59d183ea570c87562e9f7d911593850aeaa894c data\blockus\tags\blocks\all_patterned_wools.json
+b6501510de2f8c8a9922ee9a74a3021261beb5d9 data\blockus\tags\blocks\platings.json
 204c151cb548b34efbe18beb8beb1f4a11f323a9 data\extshape\tags\blocks\log_vertical_stairs.json
 b398eb3c14e05bda607de9c6d532ba95f75c875b data\blockus\tags\blocks\end_stone_blocks.json
 1d699ef82f49bd5583882d8a05feba64ce8c41d9 data\extshape\tags\blocks\log_slabs.json
@@ -51,8 +51,8 @@ bbf32fb5dec2ab13643d8bfd49ab7b68588016e7 data\extshape_blockus\tags\blocks\glaze
 7e1b0f7b15bdfb0428ee67d0de23ac8a042f102d data\blockus\tags\blocks\snow_bricks.json
 42139173599fd234fa44fab82e9a5cfadc310122 data\blockus\tags\blocks\quartz_blocks.json
 160577d49d446eeafc4e8e21c4cc9564c8b0939c data\blockus\tags\blocks\blaze_bricks.json
-c2d897ccd5e424713ba6537096cefd4038bfb6b3 data\extshape_blockus\tags\blocks\glazed_terracotta_pillar_stairs.json
 bd24345bf021b074897f0e784f363de089860c59 data\minecraft\tags\blocks\walls.json
+c2d897ccd5e424713ba6537096cefd4038bfb6b3 data\extshape_blockus\tags\blocks\glazed_terracotta_pillar_stairs.json
 b979dd4552c4756c3960e3321c291de900deecc2 data\blockus\tags\blocks\all_wooden_mosaics.json
 8854ef3183f91a7bc5aaf172cf2ec92fd1f7a0c0 data\extshape\tags\blocks\vertical_quarter_pieces.json
 dfce07e2dafd0f929a7b9124cce9d82c43241723 data\blockus\tags\blocks\dripstone_blocks.json

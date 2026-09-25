@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-24T17:39:41.7924174	extshape:recipe_tweak/Recipes
+// 1.20.1	2026-09-25T11:49:35.1821158	extshape:recipe_tweak/Recipes
 58c14ad36907c4fa7435433939a2ae658b0d3fb3 resourcepacks\recipe_tweak\data\extshape\recipes\waxed_copper_button.json
 2bdb127209bf07902877e28a676f054d3a774c19 resourcepacks\recipe_tweak\data\minecraft\advancements\recipes\building_blocks\red_sandstone_stairs.json
 0bbbf9fd2c9f95f4fd112574a718d81c5ad0f3c4 resourcepacks\recipe_tweak\data\extshape\recipes\pink_wool_pressure_plate.json
@@ -36,8 +36,8 @@ ff0ceb2173792f78f7ef47c8dc03bd403587fb98 resourcepacks\recipe_tweak\data\extshap
 57e49b86e4d06f9a9a011e0c188354221c3fc247 resourcepacks\recipe_tweak\data\extshape\advancements\recipes\redstone\crimson_hyphae_button.json
 17a39b7d9667ba885f210bcf1da233103baffb02 resourcepacks\recipe_tweak\data\extshape\recipes\bamboo_wall.json
 cadc25a207a103bcd6f9591cfd5ec1b497a063ac resourcepacks\recipe_tweak\data\extshape\recipes\cherry_wall.json
-a9e7098d81db5ce07bf2ca285ba4b450f845105e resourcepacks\recipe_tweak\data\extshape\recipes\diamond_button.json
 eb8bfe7028d903d1264668062144e8d5dabb1e39 resourcepacks\recipe_tweak\data\extshape\recipes\orange_wool_pressure_plate.json
+a9e7098d81db5ce07bf2ca285ba4b450f845105e resourcepacks\recipe_tweak\data\extshape\recipes\diamond_button.json
 08f28e3e89a39ddef28a444c8cd7f7fd7d86e72a resourcepacks\recipe_tweak\data\extshape\advancements\recipes\redstone\white_wool_pressure_plate.json
 63548b040d913b3a14ddd360bd7d67bd12a0054a resourcepacks\recipe_tweak\data\extshape\recipes\bamboo_mosaic_wall.json
 0dac42a881e66d99813aa45cd94687619961f837 resourcepacks\recipe_tweak\data\extshape\recipes\waxed_copper_wall.json
