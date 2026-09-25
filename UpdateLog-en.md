@@ -1,8 +1,33 @@
 # Update log
 
+### 3.2.0
+
+- Optimized the implementation of item group rules. Item group rules are no longer rebuilt when rebuilding Creative inventories, and can be used more early. Now the items in the mod should be able to be displayed in the item list of JustEnoughItems mod.
+- Followed the updates in 3.1.5 for versions below 1.21.10, including:
+    - Fixed the tag issue of shape variants of copper block, pumpkin and melon.
+    - Considering vanilla `pressure_plates` and `stone_pressure_plates` only have block tags, no item tags, this mod uses corresponding tags namespaced `extshape`.
+    - Added blocks related to herringbone charred nether bricks.
+- Readded the feature of "specific item groups" removed at the time of Minecraft 1.19.3. Now there are 5 specific groups: wooden and bamboo blocks, colored blocks, stone blocks, mineral blocks, other blocks. Enabling or disabling specific item groups now requires restarting the game.
+    - In the specific item group for colored blocks, colors are sorted like in vanilla item groups.
+- Added two config entries: wooden and bamboo block specific item group sorting and colored blocks item group sorting.
+    - The sorting for item groups of wooden and bamboo blocks can be: "same species different forms together" (default), "same form different species together". "Species" refers to different types of trees, such as oak and birch, and "form" refers to how the wood is processed, such as wood (hyphae), log (stem), planks. Bamboo block is treated as log form; bamboo planks are treated as planks form; there are no corresponding wood form for bamboo. For example, when setting to "same species different forms together", variants forms like oak wood, stripped oak wood and oak planks are placed together, while when setting to "same form different species together", wood blocks like oak wood and birch wood are placed together, and plank blocks like oak planks and birch planks are placed together.
+    - The sorting for item groups of colored blocks can be: "same color different shapes together" and "same shape different colors together". For example, when setting to "same color different shapes together", white wool along with its stairs and slab is placed together, light gray wool along with its stairs and slab is placed together, while when setting to "same shape different colors together", base blocks of white wool, light gray wool and wool block of other various colors are placed together, the wool stairs of various colors are placed together, and the wool slabs of various colors are placed together.
+- Fixed the issue that when modifying "shapes to add to vanilla item groups" and "shapes to add to specific item groups", the modification cannot work if nothing but the order is changes.
+
 ### 3.1.6
 
-- See the update log for 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3.
+- See the update log for 3.1.6-beta.1, 3.1.6-beta.2, 3.1.6-beta.3.
+- For 26.3, see the update log for 3.1.6-beta.4, 3.1.6-beta.5, 3.1.6-beta.6, 3.1.6-beta.7, 3.1.6-beta.8, 3.1.9-beta.9, 3.1.9-beta.10, 3.1.6-beta.11, 3.1.6-beta.12, 3.1.6-rc.1.
+- For 26.3, now the stripping of wood blocks is registered through Fabric API.
+
+### 3.1.6-rc.1
+
+- (For 26.3 only) Now the mod can be normally configured in the mod list of Mod Menu mod.
+- Known issue: Typing an invalid shape name in the text field in the configuration screen causes logging an error in the console. This issue also exists in other version.
+
+### 3.1.6-beta.12
+
+- Update for 26.3-pre-1. Following the vanilla changes, the number providers in this mod are split into `context_int_provider` and `context_float_provider`.
 
 ### 3.1.6-beta.11
 
@@ -28,18 +53,18 @@
 
 ### 3.1.6-beta.6
 
-- Added a new number provider type: `enhanced_commands:product`, used to calculate the product of values of multiple number providers.
+- Added a new number provider type: `extshape:product`, used to calculate the product of values of multiple number providers.
     - It has one field: `values`, the value is the list or tag of number providers.
 - Added the number provider of variant modifier value, all of which are constant values, whose ID and values are:
-    - `enhanced_commands:shape_variant_modifier/half`: 0.5
-    - `enhanced_commands:shape_variant_modifier/one_third`: 1/3
-    - `enhanced_commands:shape_variant_modifier/quarter`: 0.25
-- Added the number provider for the composting and cooking for the shape variants of some blocks. The ID is `enhanced_commands:shape_variant/<scene type>/<base name>/<variant type>`, where the value of `<scene type>` is `compostable` or `cooking`, the `<variant type` is `half`, `one_third` or `quarter`. Example: `enhanced_commands:shape_variant/compostable/medium/half`, `enhanced_commands:shape_variant/cooking/time_wool/quarter`.
-    - `half` variant type is used for slabs and vertical slabs, `one_third` variant type is used for buttons and pressure plates, `quarter` variant type is used for vertical quarter pieces and quarter pieces. For example, the cooking number provider of yellow wool button is `ehanced_commands:shape_variant/cooking/time_wool/one_third`, the composting number provider of pale moss is `enhanced_commands:shape_variant/compostable/mediun/quarter`.
+    - `extshape:shape_variant_modifier/half`: 0.5
+    - `extshape:shape_variant_modifier/one_third`: 1/3
+    - `extshape:shape_variant_modifier/quarter`: 0.25
+- Added the number provider for the composting and cooking for the shape variants of some blocks. The ID is `extshape:shape_variant/<scene type>/<base name>/<variant type>`, where the value of `<scene type>` is `compostable` or `cooking`, the `<variant type` is `half`, `one_third` or `quarter`. Example: `extshape:shape_variant/compostable/medium/half`, `extshape:shape_variant/cooking/time_wool/quarter`.
+    - `half` variant type is used for slabs and vertical slabs, `one_third` variant type is used for buttons and pressure plates, `quarter` variant type is used for vertical quarter pieces and quarter pieces. For example, the cooking number provider of yellow wool button is `ehanced_commands:shape_variant/cooking/time_wool/one_third`, the composting number provider of pale moss is `extshape:shape_variant/compostable/mediun/quarter`.
     - Stairs, vertical stairs, fences, fence gates and walls use the cooking or composting number provider of their base blocks. For example, the cooking number provider of yellow wool wall is `minecraft:cooking/time_wool`, and the composting number provider of pale moss fences is `minecraft:compostable/medium`.
     - For composting number providers, the probability the value is 1 is the probability its base value (the value of the composting number provider of the base block) is 1 multiplied by the value of its corresponding variant modifier, but similar to vanilla behavior, composting always successes when the composter block is empty.
     - For cooking number providers, the cooking time is the base value (the value of the cooking number provider of the base block) multiplied by the value of its corresponding variant modifier.
-    - These number providers are affected by the number providers of the corresponding base blocks, and meanwhile affected by the number provider of variant modifier value (`enhanced_commands:shape_variant_modifier/<变种类型>`).
+    - These number providers are affected by the number providers of the corresponding base blocks, and meanwhile affected by the number provider of variant modifier value (`extshape:shape_variant_modifier/<variant modifier type>`).
 - Fixed the issue of wrong block sort of colored blocks in the creative mode inventory in 26.3.
 - The changes above only apply to 26.3 snapshots and higher versions.
 
