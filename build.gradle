@@ -1,6 +1,8 @@
 import com.modrinth.minotaur.dependencies.ModDependency
 import net.darkhax.curseforgegradle.TaskPublishCurseForge
 
+import java.util.regex.Pattern
+
 plugins {
     id 'fabric-loom' version '1.18-SNAPSHOT'
     id 'maven-publish'
@@ -183,6 +185,13 @@ static String getUpdateLog(String modVersion = project.mod_version, Project proj
     return builder.toString().trim()
 }
 
+ext {
+    pattern1 = Pattern.compile("^(.+?)(.{0,6})\$")
+    pattern2 = Pattern.compile(".")
+
+    screenToken = (String token) -> token.replaceAll("^(.+?)(.{0,6})\$", (String s, String a, String b) -> a.replaceAll(".", "*") + b)
+}
+
 // 模组发布部分
 
 println "Extended Block Shapes 当前版本（${project.mod_version}）更新记录："
@@ -191,11 +200,11 @@ println changelogContent
 
 tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
-        def getenv = System.getenv("CURSEFORGE_TOKEN")
-        println("CurseForge 令牌: $getenv")
-        if (getenv) apiToken = getenv
+        def curseforgeToken = System.getenv("CURSEFORGE_TOKEN")
+        println("CurseForge 令牌: ${screenToken(curseforgeToken)}")
+        if (curseforgeToken) apiToken = curseforgeToken
     }
-    def mainFile = upload('514125', remapJar)
+    def mainFile = upload('514125', jar)
     mainFile.changelog = changelogContent
     mainFile.changelogType = 'markdown'
     mainFile.releaseType = release_type
@@ -206,14 +215,13 @@ tasks.register('curseforge', TaskPublishCurseForge) {
 
     mainFile.addRelations 'requiredDependency', 'fabric-api'
 
-    // The sources JAR
-    mainFile.withAdditionalFile(sourcesJar)
+    mainFile.addEnvironment 'Client', 'Server'
 }
 
 modrinth {
     projectId = 'tb7kCxSW'
     String platform = project.properties.getOrDefault 'loom.platform', 'fabric'
-    versionNumber = "${rootProject.mod_version}-${platform}-${rootProject.minecraft_version}"
+    versionNumber = "${rootProject.mod_version}+mc${rootProject.minecraft_version}"
     versionType = release_type
     uploadFile = remapJar
     gameVersions = project.supported_minecraft_versions.isEmpty() ? List.of(rootProject.minecraft_version as String) : (project.supported_minecraft_versions as String).split(',') as List<String>
@@ -225,10 +233,10 @@ modrinth {
 }
 
 githubRelease {
-    def getenv = System.getenv("GITHUB_TOKEN")
-    if (getenv) token = getenv
+    def githubToken = System.getenv("GITHUB_TOKEN")
+    if (githubToken) token = githubToken
     tasks.githubRelease.doFirst {
-        println "GitHub 令牌: $getenv"
+        println "GitHub 令牌: ${screenToken(githubToken)}"
     }
     owner = "SolidBlock-cn"
     repo = "extshape"
