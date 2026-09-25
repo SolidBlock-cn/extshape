@@ -1,5 +1,15 @@
 # Update log
 
+### 3.2.0
+
+- Optimized the implementation of item group rules. Item group rules are no longer rebuilt when rebuilding Creative inventories, and can be used more early. Now the items in the mod should be able to be displayed in the item list of JustEnoughItems mod.
+- Followed the updates in 3.1.5 for versions below 1.21.10.
+- Readded the feature of "specific item groups" removed at the time of Minecraft 1.19.3. Now there are 5 specific groups: wooden and bamboo blocks, colorful blocks, stone blocks, mineral blocks, other blocks. Enabling or disabling specific item groups now requires restarting the game.
+    - In the specific item group for colorful blocks, colors are sorted like in vanilla item groups.
+- Added two config entries: wooden and bamboo block specific item group sorting and colorful blocks item group sorting.
+    - The sorting for item groups of wooden and bamboo blocks can be: "same species different forms together" (default), "same form different species together". "Species" refers to different types of trees, such as oak and birch, and "form" refers to how the wood is processed, such as wood (hyphae), log (stem), planks. Bamboo block is treated as log form; bamboo planks are treated as planks form; there are no corresponding wood form for bamboo. For example, when setting to "same species different forms together", variants forms like oak wood, stripped oak wood and oak planks are placed together, while when setting to "same form different species together", wood blocks like oak wood and birch wood are placed together, and plank blocks like oak planks and birch planks are placed together.
+    - The sorting for item groups of colorful blocks can be: "same color different shapes together" and "same shape different colors together". For example, when setting to "same color different shapes together", white wool along with its stairs and slab is placed together, light gray wool along with its stairs and slab is placed together, while when setting to "same shape different colors together", base blocks of white wool, light gray wool and wool block of other various colors are placed together, the wool stairs of various colors are placed together, and the wool slabs of various colors are placed together.
+
 ### 3.1.1
 
 - Fixed the incompatibility with Sinytra Connector.
