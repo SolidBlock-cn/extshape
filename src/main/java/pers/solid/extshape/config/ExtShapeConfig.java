@@ -30,6 +30,8 @@ public class ExtShapeConfig implements Cloneable {
   private static final Gson GSON = new GsonBuilder()
       .setPrettyPrinting()
       .registerTypeAdapter(BlockShape.class, BlockShape.Serializer.INSTANCE)
+      .registerTypeAdapter(WoodenAndBambooBlockSorting.class, WoodenAndBambooBlockSorting.Serializer.INSTANCE)
+      .registerTypeAdapter(ColorfulBlockSorting.class, ColorfulBlockSorting.Serializer.INSTANCE)
       .create();
   /**
    * 本模组当前的配置。
@@ -74,6 +76,16 @@ public class ExtShapeConfig implements Cloneable {
    * 需要添加到专用物品组中的方块形状的列表。不应该含有重复元素。
    */
   public Collection<BlockShape> shapesInSpecificGroups = shapesToAddToVanilla;
+
+  /**
+   * 规定如何排序专用物品组中的“木制方块”的排序。
+   */
+  public WoodenAndBambooBlockSorting woodenAndBambooBlockSorting = WoodenAndBambooBlockSorting.SAME_SPECIES_DIFFERENT_FORMS_TOGETHER;
+
+  /**
+   * 规定如何排序专用物品组中“染色方块”的排序。
+   */
+  public ColorfulBlockSorting colorfulBlockSorting = ColorfulBlockSorting.SAME_COLOR_DIFFERENT_SHAPES_TOGETHER;
 
   /**
    * 从配置文件中读取并保存配置文件。如果捕获到异常，将会在控制台中输出。读取到的文件中，所有其他的 NBT 标签都被保留。

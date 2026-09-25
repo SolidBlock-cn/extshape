@@ -52,20 +52,20 @@ public final class BlockCollections {
       STRIPPED_MANGROVE_WOOD
   );
   public static final ImmutableList<Block> STEMS = ImmutableList.of(
-      WARPED_STEM,
-      CRIMSON_STEM
+      CRIMSON_STEM,
+      WARPED_STEM
   );
   public static final ImmutableList<Block> STRIPPED_STEMS = ImmutableList.of(
-      STRIPPED_WARPED_STEM,
-      STRIPPED_CRIMSON_STEM
+      STRIPPED_CRIMSON_STEM,
+      STRIPPED_WARPED_STEM
   );
   public static final ImmutableList<Block> HYPHAES = ImmutableList.of(
-      WARPED_HYPHAE,
-      CRIMSON_HYPHAE
+      CRIMSON_HYPHAE,
+      WARPED_HYPHAE
   );
   public static final ImmutableList<Block> STRIPPED_HYPHAES = ImmutableList.of(
-      STRIPPED_WARPED_HYPHAE,
-      STRIPPED_CRIMSON_HYPHAE
+      STRIPPED_CRIMSON_HYPHAE,
+      STRIPPED_WARPED_HYPHAE
   );
   public static final @Unmodifiable ImmutableSet<Block> PLANKS = ImmutableSet.of(
       OAK_PLANKS,

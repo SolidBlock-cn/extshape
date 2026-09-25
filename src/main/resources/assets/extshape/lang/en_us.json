@@ -36,6 +36,16 @@
   "options.extshape.shapesInSpecificGroups.description": "Add which shapes to the mod's specific item groups? (Separated with space.)",
   "options.extshape.reset": "Reset",
 
+  "options.extshape.sorting_examples": "Examples: %s",
+  "options.extshape.wooden_and_bamboo_block_sorting": "Sorting of the specific item group for wooden and bamboo blocks",
+  "options.extshape.wooden_and_bamboo_block_sorting.description": "The way blocks in the specific item group for wooden and bamboo blocks are sorted in the Creative Mode inventory.",
+  "options.extshape.wooden_and_bamboo_block_sorting.same_species_different_forms_together": "Same species different form together",
+  "options.extshape.wooden_and_bamboo_block_sorting.same_form_different_species_together": "Same form different species together",
+  "options.extshape.colorful_block_sorting": "Sorting of the specific item group for colored blocks",
+  "options.extshape.colorful_block_sorting.description": "The way blocks in the specific item group for colorful blocks are sorted in the Creative Mode inventory.",
+  "options.extshape.colorful_block_sorting.same_color_different_shapes_together": "Same color different shapes together",
+  "options.extshape.colorful_block_sorting.same_shape_different_colors_together": "Same shape different colors together",
+
   "options.extshape.default": "Default: %s",
   "options.extshape.confirm": "Are you sure?",
   "options.extshape.confirm.noGroups": "Your both '%s' and '%s' are set '%s', which means in Creative Mode you may not directly obtain items in this mod in your Creative inventory. Are you sure to continue?",

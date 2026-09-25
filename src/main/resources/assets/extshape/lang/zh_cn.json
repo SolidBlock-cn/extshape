@@ -36,6 +36,16 @@
   "options.extshape.shapesInSpecificGroups.description": "将哪些形状的方块添加到本模组的专用物品组中？（用空格间隔。）",
   "options.extshape.reset": "重置",
 
+  "options.extshape.sorting_examples": "示例：%s",
+  "options.extshape.wooden_and_bamboo_block_sorting": "木制与竹制方块专用物品组排序",
+  "options.extshape.wooden_and_bamboo_block_sorting.description": "创造模式物品栏中，木制与竹制方块的专用物品组中的方块的排序方式。",
+  "options.extshape.wooden_and_bamboo_block_sorting.same_species_different_forms_together": "相同物种不同形式的在一起",
+  "options.extshape.wooden_and_bamboo_block_sorting.same_form_different_species_together": "相同形式不同物种的在一起",
+  "options.extshape.colorful_block_sorting": "彩色方块专用物品组排序",
+  "options.extshape.colorful_block_sorting.description": "创造模式物品栏中，彩色方块的专用物品组中的方块的排序方式。",
+  "options.extshape.colorful_block_sorting.same_color_different_shapes_together": "相同颜色不同形状的在一起",
+  "options.extshape.colorful_block_sorting.same_shape_different_colors_together": "相同形状不同颜色的在一起",
+
   "options.extshape.default": "默认：%s",
   "options.extshape.confirm": "确定？",
   "options.extshape.confirm.noGroups": "您的“%s”和“%s”都设置为“%s”，这意味着您在创造模式下，无法从创造模式物品栏中获取模组中的物品。确定要继续吗？",

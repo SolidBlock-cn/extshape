@@ -4,20 +4,20 @@ import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.OptionListWidget;
-import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.tooltip.Tooltip;
+import net.minecraft.client.gui.widget.*;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
+import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import org.apache.commons.lang3.StringUtils;
@@ -91,6 +91,32 @@ public class ExtShapeOptionsScreen extends Screen {
       }
   ).createWidget(gameOptions, width / 2 + 5, 36, 200);
 
+  private final CyclingButtonWidget<WoodenAndBambooBlockSorting> woodenBlockSortingButton = CyclingButtonWidget.builder(WoodenAndBambooBlockSorting::displayName)
+      .initially(newConfig.woodenAndBambooBlockSorting)
+      .values(WoodenAndBambooBlockSorting.values())
+      .tooltip(value -> Tooltip.of(Text.empty()
+          .append(Text.translatable("options.extshape.wooden_and_bamboo_block_sorting.description"))
+          .append("\n\n")
+          .append(Text.translatable("options.extshape.default", ExtShapeConfig.DEFAULT_CONFIG.woodenAndBambooBlockSorting.displayName()).formatted(Formatting.GRAY))
+          .append("\n\n")
+          .append(Text.literal("[").formatted(Formatting.YELLOW, Formatting.BOLD).append(value.displayName()).append("]"))
+          .append("\n  ")
+          .append(Text.translatable("options.extshape.sorting_examples", Texts.join(value.examples(), Texts.DEFAULT_SEPARATOR_TEXT, Block::getName)).formatted(Formatting.GRAY))))
+      .build(width / 2 - 205, 151, 200, 20, Text.translatable("options.extshape.wooden_and_bamboo_block_sorting"), (button, value) -> newConfig.woodenAndBambooBlockSorting = value);
+
+  private final CyclingButtonWidget<ColorfulBlockSorting> colorfulBlockSortingButton = CyclingButtonWidget.builder(ColorfulBlockSorting::displayName)
+      .initially(newConfig.colorfulBlockSorting)
+      .values(ColorfulBlockSorting.values())
+      .tooltip(value -> Tooltip.of(Text.empty()
+          .append(Text.translatable("options.extshape.colorful_block_sorting.description"))
+          .append("\n\n")
+          .append(Text.translatable("options.extshape.default", ExtShapeConfig.DEFAULT_CONFIG.colorfulBlockSorting.displayName()).formatted(Formatting.GRAY))
+          .append("\n\n")
+          .append(Text.literal("[").formatted(Formatting.YELLOW, Formatting.BOLD).append(value.displayName()).append("]"))
+          .append("\n  ")
+          .append(Text.translatable("options.extshape.sorting_examples", Texts.join(value.examples(), Texts.DEFAULT_SEPARATOR_TEXT, Block::getName)).formatted(Formatting.GRAY))))
+      .build(width / 2 - 205, 151, 200, 20, Text.translatable("options.extshape.colorful_block_sorting"), (button, value) -> newConfig.colorfulBlockSorting = value);
+
   // 完成按钮
   private final ButtonWidget finishButton = new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).position(this.width / 2 - 100, this.height - 27).size(200, 20).build();
 
@@ -117,6 +143,11 @@ public class ExtShapeOptionsScreen extends Screen {
     resetShapesInSpecificGroupsButton.setX(width / 2 + 155);
     addDrawableChild(resetShapesInSpecificGroupsButton);
 
+    woodenBlockSortingButton.setX(width / 2 - 205);
+    addDrawableChild(woodenBlockSortingButton);
+    colorfulBlockSortingButton.setX(width / 2 + 5);
+    addDrawableChild(colorfulBlockSortingButton);
+
     finishButton.setPosition(width / 2 - 100, height - 27);
     addDrawableChild(finishButton);
   }
@@ -142,8 +173,11 @@ public class ExtShapeOptionsScreen extends Screen {
         || !oldConfig.shapesInSpecificGroups.equals(newConfig.shapesInSpecificGroups)) {
       ExtShapeConfig.requireUpdateDisplay = true;
     }
-    if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)) {
+    if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)
+        || !oldConfig.woodenAndBambooBlockSorting.equals(newConfig.woodenAndBambooBlockSorting)
+        || !oldConfig.colorfulBlockSorting.equals(newConfig.colorfulBlockSorting)) {
       ItemGroupRules.rebuildRules();
+      ExtShapeConfig.requireUpdateDisplay = true;
     }
   }
 
