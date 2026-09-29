@@ -3,6 +3,7 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
@@ -50,6 +51,12 @@ public class ExtShapeBlockus implements ModInitializer {
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
         validateBlockIds();
         validateReplacingIds();
+
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+          LOGGER.info("Validating Extended Block Shapes Blockus mod content");
+          ExtShape.validateTagsForBlocks(server, ExtShapeBlockusBlocks.BLOCKUS_BLOCKS);
+          LOGGER.info("Extended Block Shapes Blockus mod content is successfully validated");
+        });
       }
     }
   }

@@ -2,6 +2,7 @@ package pers.solid.extshape.builder;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -10,6 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.*;
 import org.spongepowered.include.com.google.common.collect.ImmutableMap;
 import pers.solid.extshape.ExtShapeBlockItem;
@@ -29,6 +31,17 @@ import java.util.regex.Pattern;
  */
 public abstract class AbstractBlockBuilder<T extends Block> {
   /**
+   * 将完整的方块英文名称转换为前缀。
+   */
+  private static final @Unmodifiable Map<Pattern, String> blockNameConversion = new ImmutableMap.Builder<Pattern, String>()
+      .put(Pattern.compile("bamboo_block$"), "bamboo_block")
+      .put(Pattern.compile("_planks$"), StringUtils.EMPTY)
+      .put(Pattern.compile("_block$"), StringUtils.EMPTY)
+      .put(Pattern.compile("^block_of_"), StringUtils.EMPTY)
+      .put(Pattern.compile("tiles$"), "tile")
+      .put(Pattern.compile("bricks$"), "brick")
+      .build();
+  /**
    * 该方块的基础方块。
    */
   public final Block baseBlock;
@@ -38,32 +51,9 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   public final boolean buildItem;
   public AbstractBlock.Settings blockSettings;
   /**
-   * 构建之后将构建后的方块添加到这个集合中，方便以后进行集中的管理。这个一般是在 {@link BlocksBuilderFactory} 中设置的，然后间接传递到这个参数来。
-   */
-  protected @Nullable Collection<Block> instanceCollection;
-  /**
-   * 计算方块注册时使用的 id 时使用的默认命名空间。如果为 {@code null}，则直接使用基础方块的 id。如果使用 {@link #setIdentifier(Identifier)} 设置好了 id，那么不会使用 {@code defaultNamespace} 来计算 id。
-   */
-  protected @Nullable String defaultNamespace;
-  /**
-   * 需要创建的方块的方块形状，主要用于在创建之后注册 {@link BlockBiMaps}。
-   */
-  protected BlockShape shape;
-  /**
    * 是否将方块添加到相应的 {@link BlockBiMaps} 中。
    */
   public boolean shouldAddToBlockBiMap;
-  /**
-   * 用于构造实例的匿名函数。该值必须非 {@code null}，否则实例化无法进行。
-   *
-   * @see #createInstance()
-   * @see #setInstanceSupplier(Function)
-   */
-  protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier;
-  /**
-   * 用于构造其物品实例的匿名函数。
-   */
-  protected @NotNull Function<AbstractBlockBuilder<T>, BlockItem> itemInstanceSupplier = builder -> new ExtShapeBlockItem(builder.instance, builder.itemSettings);
   /**
    * 方块实例。只有在调用 {@link #build()} 之后，这个字段才有可能非 {@code null}。
    */
@@ -84,6 +74,29 @@ public abstract class AbstractBlockBuilder<T extends Block> {
    * 物品实例。只有在调用 {@link #build()} 之后，这个字段才有可能非 {@code null}。
    */
   public BlockItem itemInstance;
+  /**
+   * 构建之后将构建后的方块添加到这个集合中，方便以后进行集中的管理。这个一般是在 {@link BlocksBuilderFactory} 中设置的，然后间接传递到这个参数来。
+   */
+  protected @Nullable Collection<Block> instanceCollection;
+  /**
+   * 计算方块注册时使用的 id 时使用的默认命名空间。如果为 {@code null}，则直接使用基础方块的 id。如果使用 {@link #setIdentifier(Identifier)} 设置好了 id，那么不会使用 {@code defaultNamespace} 来计算 id。
+   */
+  protected @Nullable String defaultNamespace;
+  /**
+   * 需要创建的方块的方块形状，主要用于在创建之后注册 {@link BlockBiMaps}。
+   */
+  protected BlockShape shape;
+  /**
+   * 用于构造实例的匿名函数。该值必须非 {@code null}，否则实例化无法进行。
+   *
+   * @see #createInstance()
+   * @see #setInstanceSupplier(Function)
+   */
+  protected @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier;
+  /**
+   * 用于构造其物品实例的匿名函数。
+   */
+  protected @NotNull Function<AbstractBlockBuilder<T>, BlockItem> itemInstanceSupplier = builder -> new ExtShapeBlockItem(builder.instance, builder.itemSettings);
 
   protected AbstractBlockBuilder(@Nullable Block baseBlock, AbstractBlock.Settings settings, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
     this.baseBlock = baseBlock;
@@ -102,18 +115,6 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   protected AbstractBlockBuilder(Block baseBlock, @NotNull Function<AbstractBlockBuilder<T>, T> instanceSupplier) {
     this(baseBlock, AbstractBlock.Settings.copy(baseBlock), instanceSupplier);
   }
-
-  /**
-   * 将完整的方块英文名称转换为前缀。
-   */
-  private static final @Unmodifiable Map<Pattern, String> blockNameConversion = new ImmutableMap.Builder<Pattern, String>()
-      .put(Pattern.compile("bamboo_block$"), "bamboo_block")
-      .put(Pattern.compile("_planks$"), StringUtils.EMPTY)
-      .put(Pattern.compile("_block$"), StringUtils.EMPTY)
-      .put(Pattern.compile("^block_of_"), StringUtils.EMPTY)
-      .put(Pattern.compile("tiles$"), "tile")
-      .put(Pattern.compile("bricks$"), "brick")
-      .build();
 
   /**
    * 获得 {@code path} 对应的名称前缀。
@@ -271,7 +272,12 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   public T build() {
     if (this.instance == null) this.createInstance();
     if (this.registerBlock) {
-      Registry.register(Registries.BLOCK, this.getBlockId(), instance);
+      final Identifier blockId = this.getBlockId();
+      if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        final Identifier vanillaId = new Identifier(blockId.getPath());
+        Validate.validState(!Registries.BLOCK.containsId(vanillaId), "The block with id cannot be registered because there is a same block whose id is %s!", blockId, vanillaId);
+      }
+      Registry.register(Registries.BLOCK, blockId, instance);
     }
     if (buildItem) {
       createItemInstance();
