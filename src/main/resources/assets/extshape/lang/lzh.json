@@ -16,7 +16,7 @@
 
   "itemGroup.extshape.prefix": "%s：",
   "itemGroup.extshape.wooden_blocks": "木与竹",
-  "itemGroup.extshape.colorful_blocks": "彩",
+  "itemGroup.extshape.colored_blocks": "彩",
   "itemGroup.extshape.stone_blocks": "石",
   "itemGroup.extshape.mineral_blocks": "礦",
   "itemGroup.extshape.other_blocks": "餘",
@@ -42,10 +42,10 @@
   "options.extshape.wooden_and_bamboo_block_sorting.description": "創之囊中，林竹之專物組塊之列序。",
   "options.extshape.wooden_and_bamboo_block_sorting.same_species_different_forms_together": "同種異式鄰",
   "options.extshape.wooden_and_bamboo_block_sorting.same_form_different_species_together": "同式異種鄰",
-  "options.extshape.colorful_block_sorting": "彩塊之惠物組之序",
-  "options.extshape.colorful_block_sorting.description": "創之囊中，彩塊之專物組塊之列序。",
-  "options.extshape.colorful_block_sorting.same_color_different_shapes_together": "同色異形鄰",
-  "options.extshape.colorful_block_sorting.same_shape_different_colors_together": "同形異色鄰",
+  "options.extshape.colored_block_sorting": "彩塊之惠物組之序",
+  "options.extshape.colored_block_sorting.description": "創之囊中，彩塊之專物組塊之列序。",
+  "options.extshape.colored_block_sorting.same_color_different_shapes_together": "同色異形鄰",
+  "options.extshape.colored_block_sorting.same_shape_different_colors_together": "同形異色鄰",
 
   "options.extshape.default": "預設：%s",
   "options.extshape.confirm": "確？",

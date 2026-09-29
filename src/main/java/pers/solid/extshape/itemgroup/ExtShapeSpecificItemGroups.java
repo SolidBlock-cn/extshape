@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
  */
 public final class ExtShapeSpecificItemGroups {
   private static final ArrayList<List<Block>> WOODEN_AND_BAMBOO_BASE_BLOCKS = new ArrayList<>();
-  private static final ArrayList<List<Block>> COLORFUL_BASE_BLOCKS = new ArrayList<>();
+  private static final ArrayList<List<Block>> COLORED_BASE_BLOCKS = new ArrayList<>();
   private static final ArrayList<Block> STONE_BASE_BLOCKS = new ArrayList<>();
   private static final ArrayList<Block> MINERAL_BASE_BLOCKS = new ArrayList<>();
   private static final LinkedHashSet<Block> OTHER_BASE_BLOCKS = new LinkedHashSet<>();
@@ -41,10 +41,10 @@ public final class ExtShapeSpecificItemGroups {
       .entries((displayContext, entries) -> addWoodenBaseAndVariantsToEntries(WOODEN_AND_BAMBOO_BASE_BLOCKS, entries))
       .build());
 
-  public static final ItemGroup COLORFUL_BLOCKS = register("extshape_color_blocks", FabricItemGroup.builder()
-      .displayName(wrapItemGroupName(Text.translatable("itemGroup.extshape.colorful_blocks")))
+  public static final ItemGroup COLORED_BLOCKS = register("extshape_colored_blocks", FabricItemGroup.builder()
+      .displayName(wrapItemGroupName(Text.translatable("itemGroup.extshape.colored_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, Blocks.LIME_WOOL)))
-      .entries((displayContext, entries) -> COLORFUL_BASE_BLOCKS.forEach(blocks -> addColorfulBaseAndVariantsToEntries(blocks, entries)))
+      .entries((displayContext, entries) -> COLORED_BASE_BLOCKS.forEach(blocks -> addColoredBaseAndVariantsToEntries(blocks, entries)))
       .build());
 
   public static final ItemGroup STONE_BLOCKS = register("extshape_stone_blocks", FabricItemGroup.builder()
@@ -65,7 +65,7 @@ public final class ExtShapeSpecificItemGroups {
       .entries((displayContext, entries) -> OTHER_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
-  public static final ImmutableSet<ItemGroup> MOD_GROUPS = ImmutableSet.of(WOODEN_AND_BAMBOO_BLOCKS, COLORFUL_BLOCKS, STONE_BLOCKS, MINERAL_BLOCKS, OTHER_BLOCKS);
+  public static final ImmutableSet<ItemGroup> MOD_GROUPS = ImmutableSet.of(WOODEN_AND_BAMBOO_BLOCKS, COLORED_BLOCKS, STONE_BLOCKS, MINERAL_BLOCKS, OTHER_BLOCKS);
 
   private ExtShapeSpecificItemGroups() {
   }
@@ -73,7 +73,7 @@ public final class ExtShapeSpecificItemGroups {
 
   private static void prepareBlockList() {
     WOODEN_AND_BAMBOO_BASE_BLOCKS.clear();
-    COLORFUL_BASE_BLOCKS.clear();
+    COLORED_BASE_BLOCKS.clear();
     STONE_BASE_BLOCKS.clear();
     OTHER_BASE_BLOCKS.clear();
 
@@ -95,20 +95,20 @@ public final class ExtShapeSpecificItemGroups {
     WOODEN_AND_BAMBOO_BASE_BLOCKS.add(planks);
 
     // 彩色方块不使用 BlockCollections 中的颜色，这是为了确保顺序。
-    var colorfulBaseBlocks = COLORFUL_BASE_BLOCKS;
+    var coloredBaseBlocks = COLORED_BASE_BLOCKS;
     final List<Block> wools = List.of(Blocks.WHITE_WOOL, Blocks.LIGHT_GRAY_WOOL, Blocks.GRAY_WOOL, Blocks.BLACK_WOOL, Blocks.BROWN_WOOL, Blocks.RED_WOOL, Blocks.ORANGE_WOOL, Blocks.YELLOW_WOOL, Blocks.LIME_WOOL, Blocks.GREEN_WOOL, Blocks.CYAN_WOOL, Blocks.LIGHT_BLUE_WOOL, Blocks.BLUE_WOOL, Blocks.PURPLE_WOOL, Blocks.MAGENTA_WOOL, Blocks.PINK_WOOL);
 
-    colorfulBaseBlocks.add(wools);
-    colorfulBaseBlocks.add(List.of(Blocks.TERRACOTTA));
+    coloredBaseBlocks.add(wools);
+    coloredBaseBlocks.add(List.of(Blocks.TERRACOTTA));
 
     final List<Block> stainedTerracottas = List.of(Blocks.WHITE_TERRACOTTA, Blocks.LIGHT_GRAY_TERRACOTTA, Blocks.GRAY_TERRACOTTA, Blocks.BLACK_TERRACOTTA, Blocks.BROWN_TERRACOTTA, Blocks.RED_TERRACOTTA, Blocks.ORANGE_TERRACOTTA, Blocks.YELLOW_TERRACOTTA, Blocks.LIME_TERRACOTTA, Blocks.GREEN_TERRACOTTA, Blocks.CYAN_TERRACOTTA, Blocks.LIGHT_BLUE_TERRACOTTA, Blocks.BLUE_TERRACOTTA, Blocks.PURPLE_TERRACOTTA, Blocks.MAGENTA_TERRACOTTA, Blocks.PINK_TERRACOTTA);
-    colorfulBaseBlocks.add(stainedTerracottas);
+    coloredBaseBlocks.add(stainedTerracottas);
 
     final List<Block> concretes = List.of(Blocks.WHITE_CONCRETE, Blocks.LIGHT_GRAY_CONCRETE, Blocks.GRAY_CONCRETE, Blocks.BLACK_CONCRETE, Blocks.BROWN_CONCRETE, Blocks.RED_CONCRETE, Blocks.ORANGE_CONCRETE, Blocks.YELLOW_CONCRETE, Blocks.LIME_CONCRETE, Blocks.GREEN_CONCRETE, Blocks.CYAN_CONCRETE, Blocks.LIGHT_BLUE_CONCRETE, Blocks.BLUE_CONCRETE, Blocks.PURPLE_CONCRETE, Blocks.MAGENTA_CONCRETE, Blocks.PINK_CONCRETE);
-    colorfulBaseBlocks.add(concretes);
+    coloredBaseBlocks.add(concretes);
 
     final List<Block> glazedTerracottas = List.of(Blocks.WHITE_GLAZED_TERRACOTTA, Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA, Blocks.GRAY_GLAZED_TERRACOTTA, Blocks.BLACK_GLAZED_TERRACOTTA, Blocks.BROWN_GLAZED_TERRACOTTA, Blocks.RED_GLAZED_TERRACOTTA, Blocks.ORANGE_GLAZED_TERRACOTTA, Blocks.YELLOW_GLAZED_TERRACOTTA, Blocks.LIME_GLAZED_TERRACOTTA, Blocks.GREEN_GLAZED_TERRACOTTA, Blocks.CYAN_GLAZED_TERRACOTTA, Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA, Blocks.BLUE_GLAZED_TERRACOTTA, Blocks.PURPLE_GLAZED_TERRACOTTA, Blocks.MAGENTA_GLAZED_TERRACOTTA, Blocks.PINK_GLAZED_TERRACOTTA);
-    colorfulBaseBlocks.add(glazedTerracottas);
+    coloredBaseBlocks.add(glazedTerracottas);
 
     STONE_BASE_BLOCKS.addAll(BlockCollections.STONES);
     STONE_BASE_BLOCKS.addAll(Arrays.asList(
@@ -202,7 +202,7 @@ public final class ExtShapeSpecificItemGroups {
 
     ObjectSet<Block> baseBlocks = new ObjectLinkedOpenHashSet<>(ExtShapeBlocks.getBaseBlocks());
     WOODEN_AND_BAMBOO_BASE_BLOCKS.forEach(baseBlocks::removeAll);
-    COLORFUL_BASE_BLOCKS.forEach(baseBlocks::removeAll);
+    COLORED_BASE_BLOCKS.forEach(baseBlocks::removeAll);
     STONE_BASE_BLOCKS.forEach(baseBlocks::remove);
     MINERAL_BASE_BLOCKS.forEach(baseBlocks::remove);
 
@@ -267,8 +267,8 @@ public final class ExtShapeSpecificItemGroups {
     }
   }
 
-  public static void addColorfulBaseAndVariantsToEntries(List<Block> baseBlocks, ItemGroup.Entries entries) {
-    switch (ExtShapeConfig.CURRENT_CONFIG.colorfulBlockSorting) {
+  public static void addColoredBaseAndVariantsToEntries(List<Block> baseBlocks, ItemGroup.Entries entries) {
+    switch (ExtShapeConfig.CURRENT_CONFIG.coloredBlockSorting) {
       case SAME_COLOR_DIFFERENT_SHAPES_TOGETHER -> {
         for (Block baseBlock : baseBlocks) {
           addBaseAndVariantsToEntries(baseBlock, entries);

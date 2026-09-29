@@ -16,7 +16,7 @@
 
   "itemGroup.extshape.prefix": "%s：",
   "itemGroup.extshape.wooden_blocks": "木製同竹製方塊",
-  "itemGroup.extshape.colorful_blocks": "彩色方塊",
+  "itemGroup.extshape.colored_blocks": "染色方塊",
   "itemGroup.extshape.stone_blocks": "石質方塊",
   "itemGroup.extshape.mineral_blocks": "礦物方塊",
   "itemGroup.extshape.other_blocks": "其他",
@@ -42,10 +42,10 @@
   "options.extshape.wooden_and_bamboo_block_sorting.description": "創造模式物品欄中，木製與竹製方塊的專用物品組中的方塊的排序方式。",
   "options.extshape.wooden_and_bamboo_block_sorting.same_species_different_forms_together": "相同物種不同形式的在一起",
   "options.extshape.wooden_and_bamboo_block_sorting.same_form_different_species_together": "相同形式不同物種的在一起",
-  "options.extshape.colorful_block_sorting": "彩色方塊專用物品組排序",
-  "options.extshape.colorful_block_sorting.description": "創造模式物品欄中，彩色方塊的專用物品組中的方塊的排序方式。",
-  "options.extshape.colorful_block_sorting.same_color_different_shapes_together": "相同顏色不同形狀的在一起",
-  "options.extshape.colorful_block_sorting.same_shape_different_colors_together": "相同形狀不同顏色的在一起",
+  "options.extshape.colored_block_sorting": "染色方塊專用物品組排序",
+  "options.extshape.colored_block_sorting.description": "創造模式物品欄中，染色方塊的專用物品組中的方塊的排序方式。",
+  "options.extshape.colored_block_sorting.same_color_different_shapes_together": "相同顏色不同形狀的在一起",
+  "options.extshape.colored_block_sorting.same_shape_different_colors_together": "相同形狀不同顏色的在一起",
 
   "options.extshape.default": "默認：%s",
   "options.extshape.confirm": "確定？",

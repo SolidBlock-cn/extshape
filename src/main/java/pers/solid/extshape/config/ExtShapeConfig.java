@@ -31,7 +31,7 @@ public class ExtShapeConfig implements Cloneable {
       .setPrettyPrinting()
       .registerTypeAdapter(BlockShape.class, BlockShape.Serializer.INSTANCE)
       .registerTypeAdapter(WoodenAndBambooBlockSorting.class, WoodenAndBambooBlockSorting.Serializer.INSTANCE)
-      .registerTypeAdapter(ColorfulBlockSorting.class, ColorfulBlockSorting.Serializer.INSTANCE)
+      .registerTypeAdapter(ColoredBlockSorting.class, ColoredBlockSorting.Serializer.INSTANCE)
       .create();
   /**
    * 本模组当前的配置。
@@ -85,7 +85,7 @@ public class ExtShapeConfig implements Cloneable {
   /**
    * 规定如何排序专用物品组中“染色方块”的排序。
    */
-  public ColorfulBlockSorting colorfulBlockSorting = ColorfulBlockSorting.SAME_COLOR_DIFFERENT_SHAPES_TOGETHER;
+  public ColoredBlockSorting coloredBlockSorting = ColoredBlockSorting.SAME_COLOR_DIFFERENT_SHAPES_TOGETHER;
 
   /**
    * 从配置文件中读取并保存配置文件。如果捕获到异常，将会在控制台中输出。读取到的文件中，所有其他的 NBT 标签都被保留。

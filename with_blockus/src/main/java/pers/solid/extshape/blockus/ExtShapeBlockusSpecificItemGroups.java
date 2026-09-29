@@ -44,7 +44,7 @@ public final class ExtShapeBlockusSpecificItemGroups {
   public static final ItemGroup COLORED_BLOCKS = register("extshape-blockus_colored_blocks", FabricItemGroup.builder()
       .displayName(wrapItemGroupName(Text.translatable("itemGroup.extshape_blockus.colored_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.VERTICAL_STAIRS, BlockusBlocks.MANGROVE_MOSAIC.block)))
-      .entries((displayContext, entries) -> COLORED_BASE_BLOCKS.forEach(blocks -> ExtShapeSpecificItemGroups.addColorfulBaseAndVariantsToEntries(blocks, entries)))
+      .entries((displayContext, entries) -> COLORED_BASE_BLOCKS.forEach(blocks -> ExtShapeSpecificItemGroups.addColoredBaseAndVariantsToEntries(blocks, entries)))
       .build());
 
   private static <T extends ItemGroup> T register(String name, T group) {

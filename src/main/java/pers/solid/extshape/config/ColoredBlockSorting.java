@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public enum ColorfulBlockSorting implements StringIdentifiable {
+public enum ColoredBlockSorting implements StringIdentifiable {
   SAME_COLOR_DIFFERENT_SHAPES_TOGETHER("same_color_different_shapes_together", Suppliers.memoize(() -> Stream.of(Blocks.WHITE_WOOL, Blocks.LIGHT_GRAY_WOOL, Blocks.GRAY_WOOL, Blocks.BLACK_WOOL).flatMap(base -> Stream.of(base, BlockBiMaps.getBlockOfOrThrow(BlockShape.STAIRS, base), BlockBiMaps.getBlockOfOrThrow(BlockShape.SLAB, base))).toList())),
   SAME_SHAPE_DIFFERENT_COLORS_TOGETHER("same_shape_different_colors_together", Suppliers.memoize(() -> Stream.of(List.of(Blocks.WHITE_WOOL, Blocks.LIGHT_GRAY_WOOL, Blocks.GRAY_WOOL, Blocks.BLACK_WOOL)).flatMap(blocks -> Streams.concat(blocks.stream(), Stream.of(BlockShape.STAIRS, BlockShape.SLAB).flatMap(shape -> blocks.stream().map(base -> BlockBiMaps.getBlockOfOrThrow(shape, base))))).toList()));
 
@@ -24,11 +24,11 @@ public enum ColorfulBlockSorting implements StringIdentifiable {
   private final Text displayName;
   public final Supplier<@Unmodifiable List<Block>> examples;
   @SuppressWarnings("deprecation")
-  public static final Codec<ColorfulBlockSorting> CODEC = StringIdentifiable.createCodec(ColorfulBlockSorting::values);
+  public static final Codec<ColoredBlockSorting> CODEC = StringIdentifiable.createCodec(ColoredBlockSorting::values);
 
-  ColorfulBlockSorting(String name, Supplier<@Unmodifiable List<Block>> examples) {
+  ColoredBlockSorting(String name, Supplier<@Unmodifiable List<Block>> examples) {
     this.name = name;
-    this.displayName = Text.translatable("options.extshape.colorful_block_sorting." + name);
+    this.displayName = Text.translatable("options.extshape.colored_block_sorting." + name);
     this.examples = examples;
   }
 
@@ -45,16 +45,16 @@ public enum ColorfulBlockSorting implements StringIdentifiable {
     return examples.get();
   }
 
-  public enum Serializer implements JsonSerializer<ColorfulBlockSorting>, JsonDeserializer<ColorfulBlockSorting> {
+  public enum Serializer implements JsonSerializer<ColoredBlockSorting>, JsonDeserializer<ColoredBlockSorting> {
     INSTANCE;
 
     @Override
-    public ColorfulBlockSorting deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public ColoredBlockSorting deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       return CODEC.byId(json.getAsString());
     }
 
     @Override
-    public JsonElement serialize(ColorfulBlockSorting src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(ColoredBlockSorting src, Type typeOfSrc, JsonSerializationContext context) {
       return new JsonPrimitive(src.asString());
     }
   }

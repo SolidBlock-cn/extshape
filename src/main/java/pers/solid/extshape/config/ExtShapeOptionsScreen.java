@@ -101,18 +101,18 @@ public class ExtShapeOptionsScreen extends Screen {
           .append(Text.translatable("options.extshape.sorting_examples", Texts.join(value.examples(), Texts.DEFAULT_SEPARATOR_TEXT, Block::getName)).formatted(Formatting.GRAY))))
       .build(width / 2 - 205, 151, 200, 20, Text.translatable("options.extshape.wooden_and_bamboo_block_sorting"), (button, value) -> newConfig.woodenAndBambooBlockSorting = value);
 
-  private final CyclingButtonWidget<ColorfulBlockSorting> colorfulBlockSortingButton = CyclingButtonWidget.builder(ColorfulBlockSorting::displayName)
-      .initially(newConfig.colorfulBlockSorting)
-      .values(ColorfulBlockSorting.values())
+  private final CyclingButtonWidget<ColoredBlockSorting> coloredBlockSortingButton = CyclingButtonWidget.builder(ColoredBlockSorting::displayName)
+      .initially(newConfig.coloredBlockSorting)
+      .values(ColoredBlockSorting.values())
       .tooltip(value -> Tooltip.of(Text.empty()
-          .append(Text.translatable("options.extshape.colorful_block_sorting.description"))
+          .append(Text.translatable("options.extshape.colored_block_sorting.description"))
           .append("\n\n")
-          .append(Text.translatable("options.extshape.default", ExtShapeConfig.DEFAULT_CONFIG.colorfulBlockSorting.displayName()).formatted(Formatting.GRAY))
+          .append(Text.translatable("options.extshape.default", ExtShapeConfig.DEFAULT_CONFIG.coloredBlockSorting.displayName()).formatted(Formatting.GRAY))
           .append("\n\n")
           .append(Text.literal("[").formatted(Formatting.YELLOW, Formatting.BOLD).append(value.displayName()).append("]"))
           .append("\n  ")
           .append(Text.translatable("options.extshape.sorting_examples", Texts.join(value.examples(), Texts.DEFAULT_SEPARATOR_TEXT, Block::getName)).formatted(Formatting.GRAY))))
-      .build(width / 2 - 205, 151, 200, 20, Text.translatable("options.extshape.colorful_block_sorting"), (button, value) -> newConfig.colorfulBlockSorting = value);
+      .build(width / 2 - 205, 151, 200, 20, Text.translatable("options.extshape.colored_block_sorting"), (button, value) -> newConfig.coloredBlockSorting = value);
 
   // 完成按钮
   private final ButtonWidget finishButton = new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).position(this.width / 2 - 100, this.height - 27).size(200, 20).build();
@@ -142,8 +142,8 @@ public class ExtShapeOptionsScreen extends Screen {
 
     woodenBlockSortingButton.setX(width / 2 - 205);
     addDrawableChild(woodenBlockSortingButton);
-    colorfulBlockSortingButton.setX(width / 2 + 5);
-    addDrawableChild(colorfulBlockSortingButton);
+    coloredBlockSortingButton.setX(width / 2 + 5);
+    addDrawableChild(coloredBlockSortingButton);
 
     finishButton.setPosition(width / 2 - 100, height - 27);
     addDrawableChild(finishButton);
@@ -172,7 +172,7 @@ public class ExtShapeOptionsScreen extends Screen {
     }
     if (!oldConfig.shapesToAddToVanilla.equals(newConfig.shapesToAddToVanilla)
         || !oldConfig.woodenAndBambooBlockSorting.equals(newConfig.woodenAndBambooBlockSorting)
-        || !oldConfig.colorfulBlockSorting.equals(newConfig.colorfulBlockSorting)) {
+        || !oldConfig.coloredBlockSorting.equals(newConfig.coloredBlockSorting)) {
       ItemGroupRules.rebuildRules();
       ExtShapeConfig.requireUpdateDisplay = true;
     }
