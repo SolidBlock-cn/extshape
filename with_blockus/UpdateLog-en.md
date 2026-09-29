@@ -1,5 +1,9 @@
 # Update log (for Blockus part)
 
+### 3.2.0
+
+- Fit the new version of Extended Block Shapes mod.
+
 ### 3.1.6
 
 - Fit the new version Blockus 2.17.3 and 2.16.6, since Blockus has added stairs, slab and wall for some square blocks, this mod no longer adds these blocks. For these blocks, old block and item ids namespaced `extshape_blockus` are registered as an alias for ids namespace `blockus`. For example, block and item ID `extshape_blockus:marble_squares_slab` will be equivalent to `blockus:marble_squares_slab`.
