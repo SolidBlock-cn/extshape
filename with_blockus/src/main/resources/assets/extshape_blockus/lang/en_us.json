@@ -1,4 +1,6 @@
 {
-  "modmenu.nameTranslation.extshape_blockus": "Extended Block Shapes - Blockus",
-  "modmenu.descriptionTranslation.extshape_blockus": "Adds Extended Block Shapes for Blockus mod!"
+  "itemGroup.extshape_blockus.colored_blocks": "Colored Blocks",
+  "itemGroup.extshape_blockus.construction_blocks": "Construction Blocks",
+  "modmenu.descriptionTranslation.extshape_blockus": "Adds Extended Block Shapes for Blockus mod!",
+  "modmenu.nameTranslation.extshape_blockus": "Extended Block Shapes - Blockus"
 }

@@ -868,8 +868,8 @@ public final class ExtShapeBlockusBlocks {
         .setPillar()
         .build();
 
-    for (var bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
-      create(bsswTypes)
+    for (var bsswBundle : BlockusBlockCollections.STAINED_STONE_BRICKS) {
+      create(bsswBundle)
           .markStoneCuttable()
           .setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.asString())
           .setActivationSettings(ActivationSettings.STONE)

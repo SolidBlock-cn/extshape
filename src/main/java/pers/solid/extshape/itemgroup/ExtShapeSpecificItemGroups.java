@@ -35,32 +35,32 @@ public final class ExtShapeSpecificItemGroups {
   private static final ArrayList<Block> MINERAL_BASE_BLOCKS = new ArrayList<>();
   private static final LinkedHashSet<Block> OTHER_BASE_BLOCKS = new LinkedHashSet<>();
 
-  public static final ItemGroup WOODEN_AND_BAMBOO_BLOCKS = register("wooden_and_bamboo_blocks", FabricItemGroup.builder()
-      .displayName(Text.translatable("itemGroup.extshape.wooden_blocks"))
+  public static final ItemGroup WOODEN_AND_BAMBOO_BLOCKS = register("extshape_wooden_and_bamboo_blocks", FabricItemGroup.builder()
+      .displayName(wrapItemGroupName(Text.translatable("itemGroup.extshape.wooden_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, Blocks.CHERRY_PLANKS)))
       .entries((displayContext, entries) -> addWoodenBaseAndVariantsToEntries(WOODEN_AND_BAMBOO_BASE_BLOCKS, entries))
       .build());
 
-  public static final ItemGroup COLORFUL_BLOCKS = register("color_blocks", FabricItemGroup.builder()
-      .displayName(Text.translatable("itemGroup.extshape.colorful_blocks"))
+  public static final ItemGroup COLORFUL_BLOCKS = register("extshape_color_blocks", FabricItemGroup.builder()
+      .displayName(wrapItemGroupName(Text.translatable("itemGroup.extshape.colorful_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, Blocks.LIME_WOOL)))
       .entries((displayContext, entries) -> COLORFUL_BASE_BLOCKS.forEach(blocks -> addColorfulBaseAndVariantsToEntries(blocks, entries)))
       .build());
 
-  public static final ItemGroup STONE_BLOCKS = register("stone_blocks", FabricItemGroup.builder()
-      .displayName(Text.translatable("itemGroup.extshape.stone_blocks"))
+  public static final ItemGroup STONE_BLOCKS = register("extshape_stone_blocks", FabricItemGroup.builder()
+      .displayName(wrapItemGroupName(Text.translatable("itemGroup.extshape.stone_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.FENCE, Blocks.CALCITE)))
       .entries((displayContext, entries) -> STONE_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
-  public static final ItemGroup MINERAL_BLOCKS = register("mineral_blocks", FabricItemGroup.builder()
-      .displayName(Text.translatable("itemGroup.extshape.mineral_blocks"))
+  public static final ItemGroup MINERAL_BLOCKS = register("extshape_mineral_blocks", FabricItemGroup.builder()
+      .displayName(wrapItemGroupName(Text.translatable("itemGroup.extshape.mineral_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.VERTICAL_SLAB, Blocks.DIAMOND_BLOCK)))
       .entries((displayContext, entries) -> MINERAL_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
-  public static final ItemGroup OTHER_BLOCKS = register("other_blocks", FabricItemGroup.builder()
-      .displayName(Text.translatable("itemGroup.extshape.other_blocks"))
+  public static final ItemGroup OTHER_BLOCKS = register("extshape_other_blocks", FabricItemGroup.builder()
+      .displayName(wrapItemGroupName(Text.translatable("itemGroup.extshape.other_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.SLAB, Blocks.HONEYCOMB_BLOCK)))
       .entries((displayContext, entries) -> OTHER_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
@@ -221,7 +221,7 @@ public final class ExtShapeSpecificItemGroups {
    *
    * @param baseBlock 基础方块。
    */
-  private static void addBaseAndVariantsToEntries(Block baseBlock, ItemGroup.Entries entries) {
+  public static void addBaseAndVariantsToEntries(Block baseBlock, ItemGroup.Entries entries) {
     if (baseBlock == null) return;
     entries.add(baseBlock);
     for (BlockShape shape : ExtShapeConfig.CURRENT_CONFIG.shapesInSpecificGroups) {
@@ -232,7 +232,7 @@ public final class ExtShapeSpecificItemGroups {
     }
   }
 
-  private static void addWoodenBaseAndVariantsToEntries(List<List<Block>> baseBlockLists, ItemGroup.Entries entries) {
+  public static void addWoodenBaseAndVariantsToEntries(List<List<Block>> baseBlockLists, ItemGroup.Entries entries) {
     switch (ExtShapeConfig.CURRENT_CONFIG.woodenAndBambooBlockSorting) {
       case SAME_SPECIES_DIFFERENT_FORMS_TOGETHER -> {
         if (baseBlockLists.isEmpty()) {
@@ -267,7 +267,7 @@ public final class ExtShapeSpecificItemGroups {
     }
   }
 
-  private static void addColorfulBaseAndVariantsToEntries(List<Block> baseBlocks, ItemGroup.Entries entries) {
+  public static void addColorfulBaseAndVariantsToEntries(List<Block> baseBlocks, ItemGroup.Entries entries) {
     switch (ExtShapeConfig.CURRENT_CONFIG.colorfulBlockSorting) {
       case SAME_COLOR_DIFFERENT_SHAPES_TOGETHER -> {
         for (Block baseBlock : baseBlocks) {
@@ -292,6 +292,12 @@ public final class ExtShapeSpecificItemGroups {
 
   private static <T extends ItemGroup> T register(String name, T group) {
     return Registry.register(Registries.ITEM_GROUP, ExtShape.id(name), group);
+  }
+
+  private static Text wrapItemGroupName(Text text) {
+    return Text.empty()
+        .append(Text.translatable("itemGroup.extshape.prefix", Text.translatable("modmenu.nameTranslation.extshape")).styled(style -> style.withColor(0x1676C4)))
+        .append(text);
   }
 
   public static void init() {

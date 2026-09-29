@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockBiMaps;
 
 import java.util.ArrayList;
@@ -38,10 +39,13 @@ public class ExtShapeBlockus implements ModInitializer {
   @Override
   public void onInitialize() {
     if (FabricLoader.getInstance().isModLoaded("blockus")) {
-      LOGGER.info("Blockus mod loaded. Extended Block Shapes mod is trying to apply it.");
+      LOGGER.info("Blockus mod loaded. Extended Block Shapes - Blockus mod is trying to apply it.");
       ExtShapeBlockusBlocks.init();
       ExtShapeBlockusItemGroup.registerEvent();
       registerStrippableBlocks();
+      if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
+        ExtShapeBlockusSpecificItemGroups.init();
+      }
 
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
         validateBlockIds();

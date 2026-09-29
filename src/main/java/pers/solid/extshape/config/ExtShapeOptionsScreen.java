@@ -3,7 +3,6 @@ package pers.solid.extshape.config;
 import com.google.common.collect.ImmutableSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -64,8 +63,6 @@ public class ExtShapeOptionsScreen extends Screen {
       "options.extshape.addToVanillaGroups",
       SimpleOption.constantTooltip(
           Text.translatable("options.extshape.addToVanillaGroups.tooltip", Registries.ITEM_GROUP.getOrThrow(ItemGroups.BUILDING_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.COLORED_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.NATURAL).getDisplayName())
-              .append(FabricLoader.getInstance().isModLoaded("extshape_blockus") ? Text.literal("\n\n").append(Text.translatable("options.extshape.addToVanillaGroups.blockus").formatted(Formatting.RED)) : Text.empty())
-              .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))
               .append("\n\n")
               .append(Text.translatable("options.extshape.addToVanillaGroups.notice_for_effect").formatted(Formatting.YELLOW))),

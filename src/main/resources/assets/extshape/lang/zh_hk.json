@@ -14,11 +14,12 @@
   "block.extshape.?_vertical_stairs": "豎直%s樓梯",
   "block.extshape.?_vertical_quarter_piece": "%s縱條",
 
-  "itemGroup.extshape.wooden_blocks": "\u00a79擴展方塊形狀：\u00a7r木製同竹製方塊",
-  "itemGroup.extshape.colorful_blocks": "\u00a79擴展方塊形狀：\u00a7r彩色方塊",
-  "itemGroup.extshape.stone_blocks": "\u00a79擴展方塊形狀：\u00a7r石質方塊",
-  "itemGroup.extshape.mineral_blocks": "\u00a7擴展方塊形狀：\u00a7r礦物方塊",
-  "itemGroup.extshape.other_blocks": "\u00a79擴展方塊形狀：\u00a7r其他",
+  "itemGroup.extshape.prefix": "%s：",
+  "itemGroup.extshape.wooden_blocks": "木製同竹製方塊",
+  "itemGroup.extshape.colorful_blocks": "彩色方塊",
+  "itemGroup.extshape.stone_blocks": "石質方塊",
+  "itemGroup.extshape.mineral_blocks": "礦物方塊",
+  "itemGroup.extshape.other_blocks": "其他",
 
   "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗更多形狀，包括原版唔存在嘅形狀，如縱半磚、縱樓梯同橫條。大多數方塊都有好似原版一样嘅行為，就類似於基礎方塊。比如，基岩樓梯同基岩半磚像基岩本身一樣，可以防爆防凋零怪，羊毛欄杆同羊毛閘門可燃且可以被鉸剪剪碎。\n藉助此模組，你可以製作出更加精美嘅建築，玩生存也會更貪得意。",
   "modmenu.summaryTranslation.extshape": "為好多原版方塊添加咗更多形狀，且具有類似原版嘅行為。",
@@ -60,8 +61,6 @@
   "message.extshape.recipe_conflict.finish.plural": "檢測完成，共檢測到%s個合成表撞車",
 
   "modmenu.nameTranslation.extshape": "擴展方塊形狀",
-
-  "options.extshape.addToVanillaGroups.blockus": "請注意：如要喺創造模式中尋到 Blockus 模組中嘅擴展形狀嘅方塊，你需要啟用「添加至原版物品組」。呢啲方塊只會顯示喺 Blockus 嘅物品組中。Blockus 方塊嘅擴展形狀嘅方塊冇專用物品組。",
 
   "resourcePack.extshape.recipe_tweak.name": "配方調整",
   "resourcePack.extshape.recipe_tweak.description": "調整擴展方塊形狀模組嘅些合成配方以修復同原版合成配方之間嘅衝突。如果安裝中咗能解決合成配方衝突嘅模組，可以禁用呢個數據包。"
