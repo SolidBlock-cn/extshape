@@ -119,6 +119,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.MOSSY_TUFF_BRICKS.block,
         BlockusBlocks.POLISHED_TUFF.block,
         BlockusBlocks.TUFF_BRICKS.block,
+        BlockusBlocks.CHISELED_TUFF,
         BlockusBlocks.CRACKED_TUFF_BRICKS,
         BlockusBlocks.HERRINGBONE_TUFF_BRICKS,
         BlockusBlocks.TUFF_CIRCULAR_PAVING);
