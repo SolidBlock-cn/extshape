@@ -519,6 +519,10 @@ public final class ExtShapeBlockusBlocks {
         .setStoneFenceSettings(Items.NETHER_BRICK)
         .without(BlockShape.BUTTON)
         .build();
+    create(BlockusBlocks.HERRINGBONE_CHARRED_NETHER_BRICKS)
+        .setStoneFenceSettings(Items.NETHER_BRICK)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
     create(BlockusBlocks.TEAL_NETHER_BRICKS)
         .setStoneFenceSettings(Items.NETHER_BRICK)
         .without(BlockShape.BUTTON)
