@@ -35,8 +35,8 @@ public final class ExtShapeBlockusItemGroup {
 
   private static final ImmutableSet<Block> SPECIAL_SORTED_RAINBOW_BLOCKS = Streams.concat(
       BlockusBlockCollections.TINTED_SHINGLES.stream().map(t -> t.block),
-      BlockusBlockCollections.STAINED_STONE_BRICKS.stream().map(bsswTypes -> bsswTypes.block),
-      Stream.of(BlockusBlocks.SHINGLES).map(bssTypes -> bssTypes.block)).collect(ImmutableSet.toImmutableSet());
+      BlockusBlockCollections.STAINED_STONE_BRICKS.stream().map(bsswBundle -> bsswBundle.block),
+      Stream.of(BlockusBlocks.SHINGLES).map(bsswBundle -> bsswBundle.block)).collect(ImmutableSet.toImmutableSet());
 
   public static void addVanillaGroupRules(ItemGroupRulesAccess rulesAccess, Collection<BlockShape> shapes) {
     final Multimap<Item, Item> buildingAppendingRule = rulesAccess.getAppendingRule(BlockusItemGroups.BLOCKUS_BUILDING_BLOCKS);
@@ -52,13 +52,13 @@ public final class ExtShapeBlockusItemGroup {
       final Block block1 = biMap.get(BlockusBlocks.SHINGLES.block);
       if (block1 != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block1))
         coloredAppendingRule.put(shingleAnchor, block1.asItem());
-      for (var bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
-        final Block block = biMap.get(bssTypes.block);
+      for (var bsswBundle : BlockusBlockCollections.TINTED_SHINGLES) {
+        final Block block = biMap.get(bsswBundle.block);
         if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
           coloredAppendingRule.put(shingleAnchor, block.asItem());
       }
-      for (var bsswTypes : BlockusBlockCollections.STAINED_STONE_BRICKS) {
-        final Block block = biMap.get(bsswTypes.block);
+      for (var bsswBundle : BlockusBlockCollections.STAINED_STONE_BRICKS) {
+        final Block block = biMap.get(bsswBundle.block);
         if (block != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(block))
           coloredAppendingRule.put(stainedStoneBrickAnchor, block.asItem());
       }

@@ -153,8 +153,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     // shingles and terracotta
     builder.put(BlockusBlocks.SHINGLES.block, Blocks.TERRACOTTA);
     final Iterator<Block> terracottaIterator = BlockCollections.STAINED_TERRACOTTA.iterator();
-    for (var bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
-      builder.put(bssTypes.block, terracottaIterator.next());
+    for (var bsswBundle : BlockusBlockCollections.TINTED_SHINGLES) {
+      builder.put(bsswBundle.block, terracottaIterator.next());
     }
 
     // glazed terracotta

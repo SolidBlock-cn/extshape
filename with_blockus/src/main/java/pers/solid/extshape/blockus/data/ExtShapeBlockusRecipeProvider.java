@@ -50,11 +50,11 @@ public class ExtShapeBlockusRecipeProvider extends FabricRecipeProvider {
 
 
   private void registerShingleDyeingRecipes(Consumer<RecipeJsonProvider> exporter) {
-    for (var bssTypes : BlockusBlockCollections.TINTED_SHINGLES) {
-      Item dyeItem = Registries.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registries.BLOCK.getId(bssTypes.block).getPath(), "_shingle") + "_dye"));
+    for (var bsswBundle : BlockusBlockCollections.TINTED_SHINGLES) {
+      Item dyeItem = Registries.ITEM.get(new Identifier(Identifier.DEFAULT_NAMESPACE, StringUtils.substringBefore(Registries.BLOCK.getId(bsswBundle.block).getPath(), "_shingle") + "_dye"));
       for (BlockShape blockShape : BlockShape.values()) {
         final @Nullable Block unDyed = BlockBiMaps.getBlockOf(blockShape, BlockusBlocks.SHINGLES.block);
-        final @Nullable Block dyed = BlockBiMaps.getBlockOf(blockShape, bssTypes.block);
+        final @Nullable Block dyed = BlockBiMaps.getBlockOf(blockShape, bsswBundle.block);
         if (unDyed == null || dyed == null || !ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(dyed)) continue;
         BlockusRecipeProvider
             .createEnclosedRecipe(dyed, Ingredient.ofItems(unDyed), dyeItem)
