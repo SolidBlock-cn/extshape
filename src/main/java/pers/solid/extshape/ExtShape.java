@@ -14,7 +14,12 @@ import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.StonecuttingRecipe;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
@@ -24,6 +29,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
@@ -41,6 +47,7 @@ import pers.solid.extshape.util.BlockBiMaps;
 import pers.solid.extshape.util.BlockCollections;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -105,6 +112,10 @@ public class ExtShape implements ModInitializer {
         LOGGER.info("Validating Extended Block Shapes mod content");
         validateTagsForBlocks(server, ExtShapeBlocks.getBlocks());
         LOGGER.info("Extended Block Shapes mod content is successfully validated");
+
+        LOGGER.info("Validating Extended Block Shapes recipes");
+        validateStonecuttingForBlocks(server, ExtShapeBlocks.getBaseBlocks());
+        LOGGER.info("Extended Block Shapes recipes are successfully validated");
       });
     }
   }
@@ -163,6 +174,85 @@ public class ExtShape implements ModInitializer {
 
     if (errors > 0) {
       throw new IllegalStateException("Failed to validate tags for blocks with " + errors + " errors!");
+    }
+  }
+
+  /**
+   * 验证模组的切石配方，避免出现基础方块 A 能切成 A 的 X 形状但不能切成 Y 形状，或 A 能切成 B 的 X 形状但不能切成 Y 形状的问题。注意：仅限切石为建筑方块形状以及墙，如果切石为其他形状，则会抛出错误。
+   */
+  @ApiStatus.AvailableSince("3.1.5")
+  public static void validateStonecuttingForBlocks(MinecraftServer server, Collection<Block> baseBlocks) {
+    final List<StonecuttingRecipe> stonecuttingRecipes = server.getRecipeManager().listAllOfType(RecipeType.STONECUTTING);
+    int errors = 0;
+
+    final Object2IntMap<BlockShape> stoneCuttableShapes = Util.make(new Object2IntOpenHashMap<>(), map -> {
+      map.put(BlockShape.STAIRS, 1);
+      map.put(BlockShape.SLAB, 2);
+      map.put(BlockShape.VERTICAL_QUARTER_PIECE, 4);
+      map.put(BlockShape.VERTICAL_SLAB, 2);
+      map.put(BlockShape.VERTICAL_STAIRS, 1);
+      map.put(BlockShape.QUARTER_PIECE, 4);
+      map.put(BlockShape.WALL, 1);
+    });
+    for (Block baseBlock : baseBlocks) {
+      final Set<StonecuttingRecipe> set = stonecuttingRecipes.stream().filter(stonecuttingRecipe -> stonecuttingRecipe.matches(new SimpleInventory(new ItemStack(baseBlock)), server.getOverworld())).collect(Collectors.toUnmodifiableSet());
+      if (set.isEmpty()) {
+        continue;
+      }
+
+      // 映射，键为对应合成产物的基础方块（可能和 baseBlock 变量的值相同或不同），值为形状到布尔值的映射（方块存在且可合成的为 true，方块存在且不可合成的为 false，方块不存在的为 null）
+      final Map<Block, Set<BlockShape>> map = new HashMap<>();
+      for (StonecuttingRecipe recipe : set) {
+        final ItemStack output = recipe.getOutput(server.getRegistryManager());
+        final Item resultItem = output.getItem();
+        final int resultCount = output.getCount();
+
+        if (!recipe.getId().getPath().startsWith(Registries.ITEM.getId(resultItem).getPath())) {
+          LOGGER.error("Stonecutting recipe name mismatches! Recipe name {} does not start with item name of {}.", recipe.getId(), Registries.ITEM.getId(resultItem));
+          errors++;
+        }
+
+        if (!(resultItem instanceof BlockItem blockItem)) {
+          continue;
+        }
+
+        final Block resultBlock = blockItem.getBlock();
+        final BlockShape resultShape = BlockShape.getShapeOf(resultBlock);
+        if (resultShape != null) {
+          final Block resultBase = BlockBiMaps.of(resultShape).inverse().get(resultBlock);
+          if (resultBase == null) {
+            continue;
+          }
+          if (!stoneCuttableShapes.containsKey(resultShape)) {
+            LOGGER.error("The shape {} should not be stone-cut, but {} can be cut into these shapes of {}!", resultShape.asString(), Registries.BLOCK.getId(baseBlock), Registries.BLOCK.getId(resultBase));
+            errors++;
+          }
+          /* 检测切石产生的方块数量是否符合要求。
+          由于一个铜能切成 4 个切制铜块，因此切成各种形状也是按照 4 倍（原版也是如此）。目前，模组不对切石配方进行此检测。
+
+          if (stoneCuttableShapes.getInt(resultShape) != resultCount) {
+            LOGGER.error("Result count mismatches! The shape {} is expected to have {} results, but {} can be cut into {} items of {}!", resultShape.getSerializedName(), stoneCuttableShapes.getInt(resultShape), Registries.BLOCK.getId(baseBlock), resultCount, Registries.ITEM.getId(resultItem));
+          }*/
+
+          map.computeIfAbsent(resultBase, block -> new HashSet<>()).add(resultShape);
+        }
+      }
+
+      for (Map.Entry<Block, Set<BlockShape>> e : map.entrySet()) {
+        final Block resultBase = e.getKey();
+        final Set<BlockShape> craftableShapes = e.getValue();
+        final Set<BlockShape> uncraftableShapes = stoneCuttableShapes.keySet().stream().filter(blockShape -> BlockBiMaps.getBlockOf(blockShape, resultBase) != null).filter(blockShape -> !craftableShapes.contains(blockShape)).collect(Collectors.toSet());
+
+
+        if (!uncraftableShapes.isEmpty()) {
+          LOGGER.error("{} can be stone-cut into {} of {}, but cannot be cut into {} of that block!", Registries.BLOCK.getId(baseBlock), craftableShapes.stream().map(BlockShape::asString).collect(Collectors.joining(", ")), Registries.BLOCK.getId(resultBase), uncraftableShapes.stream().map(BlockShape::asString).collect(Collectors.joining(", ")));
+          errors++;
+        }
+      }
+    }
+
+    if (errors > 0) {
+      throw new IllegalStateException("Failed to validate stonecutting recipes with " + errors + " errors!");
     }
   }
 

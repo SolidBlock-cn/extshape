@@ -56,6 +56,10 @@ public class ExtShapeBlockus implements ModInitializer {
           LOGGER.info("Validating Extended Block Shapes Blockus mod content");
           ExtShape.validateTagsForBlocks(server, ExtShapeBlockusBlocks.BLOCKUS_BLOCKS);
           LOGGER.info("Extended Block Shapes Blockus mod content is successfully validated");
+
+          LOGGER.info("Validating Extended Block Shapes Blockus recipes");
+          ExtShape.validateStonecuttingForBlocks(server, ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS);
+          LOGGER.info("Extended Block Shapes Blockus recipes are successfully validated");
         });
       }
     }
