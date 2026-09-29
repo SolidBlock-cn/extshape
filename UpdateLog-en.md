@@ -3,7 +3,10 @@
 ### 3.2.0
 
 - Optimized the implementation of item group rules. Item group rules are no longer rebuilt when rebuilding Creative inventories, and can be used more early. Now the items in the mod should be able to be displayed in the item list of JustEnoughItems mod.
-- Followed the updates in 3.1.5 for versions below 1.21.10.
+- Followed the updates in 3.1.5 for versions below 1.21.10, including:
+    - Fixed the tag issue of shape variants of copper block, pumpkin and melon.
+    - Considering vanilla `pressure_plates` and `stone_pressure_plates` only have block tags, no item tags, this mod uses corresponding tags namespaced `extshape`.
+    - Added blocks related to herringbone charred nether bricks.
 - Readded the feature of "specific item groups" removed at the time of Minecraft 1.19.3. Now there are 5 specific groups: wooden and bamboo blocks, colored blocks, stone blocks, mineral blocks, other blocks. Enabling or disabling specific item groups now requires restarting the game.
     - In the specific item group for colored blocks, colors are sorted like in vanilla item groups.
 - Added two config entries: wooden and bamboo block specific item group sorting and colored blocks item group sorting.

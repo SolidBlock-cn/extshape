@@ -3,6 +3,13 @@
 ### 3.2.0
 
 - Fit the new version of Extended Block Shapes mod.
+- Followed the 3.1.5 updates for versions below 1.21.10, including:
+    - Various shape variants of blocks like raw bamboo, mossy planks, oak planks are added to shape variants prefixed with `wooden`.
+    - `minebale/pickaxe` block tag added blocks related star block, and removed blocks of blaze lantern.
+    - Fixed the issue that some shape tags prefixed with `wooden` or `lag` has only block tags, no item tags.
+    - Follow the updates of Blockus, polished end stone can be stone-cut into shape variants of vanilla end stone bricks.
+    - Stone can be cut into the shape variants of stone tiles.
+- Fixed the issue that blocks related to chiseled tuff block before the version where chiseled tuff become part of vanilla game do not have tag `mineable/pickaxe`.
 
 ### 3.1.6
 
