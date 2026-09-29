@@ -129,13 +129,22 @@ The syntax the command supports:
 
 ### Creative Inventory
 
-In versions above 1.19.3, items in these mods will by default be added to vanilla item groups.
+Blocks of this mod are added to vanilla item groups (Creative Mode inventory tabs) by default, and sorted. The sorting of blocks is similar to vanilla, and blocks of various shapes based on the same base block will be sorted together. Some base blocks exist in both item groups "construction blocks" and "natural blocks", and their shape variants are only added to "construction blocks" item group.
 
 In versions 1.19.2 and before, if you enabled "Add to vanilla groups", mods will be directly appended after all existing blocks, which may make item groups appear messy. You may install Reasonable Sorting mod to sort the content. (Reasonable Sorting mod does not support versions above 1.19.3, and it is also unnecessary.)
 
-You may also configure the shapes to be added into groups. You can enter the mod config screen through the mod menu of Mod Menu mod. If you did not install Mod Menu mod, you can also access the config screen of the mod through typing `/extshape:config` in game.
+You may also configure the shapes to be added into groups. You can enter the mod config screen through the mod menu of Mod Menu mod. If you did not install Mod Menu mod, you can also access the config screen of the mod through typing `/extshape:config` in game. The configuration GUI has the following contents:
 
-For example, if you enable "add to vanilla groups", and set "shapes added to vanilla groups" to `stairs slab`, then only stairs and slabs in this mod are added into vanilla groups (not affecting vanilla existing items). For 1.19.3, the shapes are added in order (but cannot be duplicate). For example, if you write `slab stairs`, stairs will be added after the slabs (vanilla stairs and slabs will not be affected).
+- **Add to vanilla item groups** (enabled by default). If enabled, all blocks of the mod will be added to vanilla item groups, usually directly after their base blocks or vanilla shape variants.
+- **Show specific item groups** (disabled by default). If enabled, the mod will provide 5 specific item groups to store the base blocks and shape variants (including ones) of blocks of this mod, but will not contain any base blocks that do not have shape variants in the mod. These 5 specified item groups are: "wooden and bamboo blocks", "colored blocks", "stone blocks", "mineral blocks", and "other blocks." Modifying this option requires restarting the game to take effect. Please note that it is recommended to enable at least one of "Add to vanilla item groups" and "Show specific item groups", or you cannot obtain blocks of this mod in the Creative Mode inventory.
+- **Shapes to add to vanilla item groups**: Text box, determining blocks of which shapes are added to vanilla item groups. Blocks that already exist in vanilla game are not affected. Multiple shape names are separated by a space, and invalid shape names are ignored. For example, if the value is set to `stairs slab`, only stairs and slabs of this mod will be added to vanilla item groups. These shapes are added in the order (but cannot be duplicate). If the value is `slab stairs`, stairs will be sorted after slabs (but stairs and slabs that already exist in vanilla games are not affected). The default value is all shapes.
+- **Shapes to add to specific item groups**: Text box, determining blocks of which shapes are added to specific item groups. Usage and default value are same as above. If this text box is empty, specific item groups will only have base blocks.
+- **Sorting of the specific item group for wooden and bamboo blocks**: Can be set to "Same species different forms together" (by default) or "Same form different species together".
+    - If set to "Same species different forms together", all oak blocks (wood, stripped wood, planks, etc.) and their various shape variants are placed together, all birch blocks and their various shape variants are placed together.
+    - If set to "Same form different species together", all kinds of woods (oak wood, birch wood, spruce wood, etc.) block and their various shape variants are placed together, and all kinds of planks (oak planks, birch planks, spruce planks, etc.) and their various shape variants are placed together.
+- **Sorting of the specific item group for colored blocks**: Can be set to "Same color different shapes together" (by default) or "Same shape different colors together". Take the example of wool:
+    - If set to "Same color different shapes together", white wool and its various shape variants are together, light gray wool and its various shapes variants are together.
+    - If set to "Same shape different colors together", full wool blocks in various colors are together, wool stairs in various colors are together, wool slabs in various colors are together.
 
 ## Inter-mod support
 
@@ -143,6 +152,8 @@ The mod can currently add utilities with Blockus mod.
 
 ### Blockus
 
-If you have installed Extended Block Shapes and Blockus mod, you may optionally install "Extended Block Shapes - Blockus" mod based on those two mods, so that extended shapes for Blockus blocks will also be added.
+If you have installed Extended Block Shapes and Blockus mod, you may optionally install "Extended Block Shapes - Blockus" mod based on those two mods, so that extended shapes for Blockus blocks will also be added. This mod does not support versions above 26.3
 
-Note: There are no specific groups for these blocks. Therefore, to find these blocks in creative inventory, you need to enable "Add to vanilla groups" in the mod options of "Extended Block Shapes", and find these blocks in Blockus item groups.
+If the option "Add to vanilla item groups" of Extended Block Shapes is added, blocks of "Extended Block Shape - Blockus" mod will be directly added to the item groups of Blockus mod, and which shapes are added depends on "Shapes to add to vanilla item groups" of Extended Block Shapes mod.
+
+If the option "Show specific item groups" of Extended Block Shapes is enabled, two specified item groups will be added: "Extended Block Shapes - Blockus: Construction Blocks" and "Extended Block Shapes - Blockus: Colored Blocks", and which shapes are added depends on "Shapes to add to specific item groups" of Extended Block Shapes mod.
