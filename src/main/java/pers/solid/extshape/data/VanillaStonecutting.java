@@ -56,15 +56,26 @@ public final class VanillaStonecutting {
   }
 
   private static void registerVanillaStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
+    // 石头
     builder.put(Blocks.STONE_BRICKS, Blocks.STONE);
+
+    // 砂岩
     builder.put(Blocks.CUT_SANDSTONE, Blocks.SANDSTONE);
     builder.put(Blocks.CUT_RED_SANDSTONE, Blocks.RED_SANDSTONE);
+
+    // 石英
     builder.put(Blocks.CHISELED_QUARTZ_BLOCK, Blocks.QUARTZ_BLOCK);
     builder.put(Blocks.QUARTZ_BRICKS, Blocks.QUARTZ_BLOCK);
+
+    // 废石
     builder.put(Blocks.POLISHED_ANDESITE, Blocks.ANDESITE);
     builder.put(Blocks.POLISHED_GRANITE, Blocks.GRANITE);
     builder.put(Blocks.POLISHED_DIORITE, Blocks.DIORITE);
+
+    // 末地
     builder.put(Blocks.END_STONE_BRICKS, Blocks.END_STONE);
+
+    // 深层石头
     builder.put(Blocks.POLISHED_BLACKSTONE, Blocks.BLACKSTONE);
     builder.put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.BLACKSTONE);
     builder.put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE);
@@ -75,6 +86,7 @@ public final class VanillaStonecutting {
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.POLISHED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.DEEPSLATE_BRICKS);
 
+    // 凝灰岩相关
     builder.put(Blocks.POLISHED_TUFF, Blocks.TUFF);
     builder.put(Blocks.TUFF_BRICKS, Blocks.TUFF);
     builder.put(Blocks.TUFF_BRICKS, Blocks.POLISHED_TUFF);
