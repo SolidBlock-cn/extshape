@@ -43,6 +43,10 @@ public class ExtShapeBlockusRecipeProvider extends FabricRecipeProvider {
       final CrossShapeDataGeneration crossShapeDataGeneration = new BlockusCrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, exporter);
       crossShapeDataGeneration.generateCrossShapeData();
     }
+    // Blockus 的磨制末地石到原版的末地石砖
+    final CrossShapeDataGeneration vanillaEndStoneBricks = new BlockusCrossShapeDataGeneration(Blocks.END_STONE_BRICKS, ExtShapeBlockus.NAMESPACE, exporter);
+    vanillaEndStoneBricks.enableConversionWithinBlock = false;
+    vanillaEndStoneBricks.generateCrossShapeData();
 
     registerShingleDyeingRecipes(exporter);
     registerStainedStoneBricksRecipe(exporter);

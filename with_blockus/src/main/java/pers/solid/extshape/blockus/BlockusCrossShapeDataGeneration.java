@@ -70,7 +70,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.CHISELED_MUD_BRICKS, Blocks.MUD_BRICKS);
 
     // 石头
-    builder.put(BlockusBlocks.STONE_TILES.block, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.STONE_TILES.block, Blocks.STONE, Blocks.STONE_BRICKS);
     builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE);
     builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE_BRICKS);
 
@@ -179,7 +179,9 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 末地石
     builder.put(BlockusBlocks.POLISHED_END_STONE.block, Blocks.END_STONE);
-    putMultipleWithMid(builder, Blocks.END_STONE_BRICKS, Blocks.END_STONE, BlockusBlocks.POLISHED_END_STONE.block, BlockusBlocks.SMALL_END_STONE_BRICKS.block, BlockusBlocks.CHISELED_END_STONE_BRICKS, BlockusBlocks.HERRINGBONE_END_STONE_BRICKS);
+    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SMALL_END_STONE_BRICKS.block, BlockusBlocks.CHISELED_END_STONE_BRICKS, BlockusBlocks.HERRINGBONE_END_STONE_BRICKS), Blocks.END_STONE, BlockusBlocks.POLISHED_END_STONE.block, Blocks.END_STONE_BRICKS);
+    // 在 Blockus 中，磨制末地石可合成原版的末地石砖
+    builder.put(Blocks.END_STONE_BRICKS, BlockusBlocks.POLISHED_END_STONE.block);
 
     // 彩虹砖
     builder.put(BlockusBlocks.RAINBOW_BRICKS.block, BlockusBlocks.RAINBOW_BLOCK);
