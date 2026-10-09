@@ -194,11 +194,11 @@ println changelogContent
 
 tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
-        def curseforgeToken = System.getenv("CURSEFORGE_TOKEN")
-        println("CurseForge 令牌: ${screenToken(curseforgeToken)}")
-        if (curseforgeToken) apiToken = curseforgeToken
+        def curseForgeToken = System.getenv("CURSEFORGE_TOKEN")
+        println("CurseForge 令牌: ${screenToken(curseForgeToken)}")
+        if (curseForgeToken) apiToken = curseForgeToken
     }
-    def mainFile = upload('514125', jar)
+    def mainFile = upload('514125', remapJar)
     mainFile.changelog = changelogContent
     mainFile.changelogType = 'markdown'
     mainFile.releaseType = release_type
@@ -235,7 +235,7 @@ githubRelease {
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "1.20.6"
+    targetCommitish = "1.20.1"
     body = changelogContent
     draft = true
     prerelease = false
