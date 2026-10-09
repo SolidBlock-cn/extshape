@@ -41,7 +41,7 @@ public class CrossShapeDataGeneration {
    */
   public boolean enableConversionWithinBlock = true;
 
-  public CrossShapeDataGeneration(@NotNull Block baseBlock, @Nullable String defaultNamespace, @NotNull RecipeExporter exporter) {
+  public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeExporter exporter) {
     this.baseBlock = baseBlock;
     this.defaultNamespace = defaultNamespace;
     this.exporter = exporter;
@@ -142,8 +142,8 @@ public class CrossShapeDataGeneration {
   }
 
   protected void generateSimpleStonecuttingRecipe(
-     @Nullable ItemConvertible ingredient,
-     @Nullable ItemConvertible result,
+      @Nullable ItemConvertible ingredient,
+      @Nullable ItemConvertible result,
       int count,
       @Nullable String suffix,
       String criterionName

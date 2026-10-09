@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
@@ -94,7 +93,7 @@ public final class BlockBiMaps {
    * @return 变种方块。
    */
   @ApiStatus.AvailableSince("3.2.0")
-  public static @NotNull Block getBlockOfOrThrow(@NotNull BlockShape shape, @NotNull Block baseBlock) {
+  public static Block getBlockOfOrThrow(BlockShape shape, Block baseBlock) {
     final Block block = getBlockOf(shape, baseBlock);
     if (block == null) {
       throw new IllegalArgumentException("Block " + baseBlock + " does not have the shape variant: " + shape);

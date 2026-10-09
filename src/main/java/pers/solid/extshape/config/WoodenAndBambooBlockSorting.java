@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.text.Text;
 import net.minecraft.util.StringIdentifiable;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.lang.reflect.Type;
@@ -46,7 +47,7 @@ public enum WoodenAndBambooBlockSorting implements StringIdentifiable {
     INSTANCE;
 
     @Override
-    public WoodenAndBambooBlockSorting deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public @Nullable WoodenAndBambooBlockSorting deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
       return CODEC.byId(json.getAsString());
     }
 
