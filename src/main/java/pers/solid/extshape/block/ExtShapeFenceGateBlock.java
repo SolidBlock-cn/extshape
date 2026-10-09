@@ -32,7 +32,7 @@ public class ExtShapeFenceGateBlock extends FenceGateBlock implements ExtShapeVa
   /**
    * 合成栅栏门方块所需要的第二合成材料，通常和对应栅栏的一致。
    */
-  private final Item secondIngredient;
+  private final @Nullable Item secondIngredient;
 
   public ExtShapeFenceGateBlock(Block baseBlock, Settings settings, WoodType woodType, @Nullable Item secondIngredient) {
     super(settings, woodType);

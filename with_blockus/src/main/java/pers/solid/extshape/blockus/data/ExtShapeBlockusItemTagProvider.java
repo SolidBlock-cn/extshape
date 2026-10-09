@@ -10,7 +10,6 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
-import org.jetbrains.annotations.NotNull;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
 import pers.solid.extshape.data.ExtShapeItemTagProvider;
@@ -19,7 +18,7 @@ import pers.solid.extshape.tag.ExtShapeTags;
 import java.util.concurrent.CompletableFuture;
 
 public class ExtShapeBlockusItemTagProvider extends ExtShapeItemTagProvider {
-  public ExtShapeBlockusItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
+  public ExtShapeBlockusItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, ExtShapeBlockTagProvider blockTagProvider) {
     super(output, completableFuture, blockTagProvider);
   }
 

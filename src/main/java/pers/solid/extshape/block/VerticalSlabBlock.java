@@ -15,6 +15,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * 竖直台阶。
@@ -61,7 +62,7 @@ public class VerticalSlabBlock extends HorizontalFacingBlock implements Waterlog
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
+  public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
     BlockPos blockPos = ctx.getBlockPos();
     FluidState fluidState = ctx.getWorld().getFluidState(blockPos);
     final Direction.Axis axis = ctx.getHorizontalPlayerFacing().getAxis();

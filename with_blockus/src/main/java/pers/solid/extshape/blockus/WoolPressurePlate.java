@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapePressurePlateBlock;
 import pers.solid.extshape.util.ActivationSettings;
@@ -15,7 +14,7 @@ import pers.solid.extshape.util.ActivationSettings;
 public class WoolPressurePlate extends ExtShapePressurePlateBlock {
   private final Block carpet;
 
-  public WoolPressurePlate(Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, Block carpet) {
+  public WoolPressurePlate(Block baseBlock, Settings settings, ActivationSettings activationSettings, Block carpet) {
     super(baseBlock, settings, activationSettings);
     this.carpet = carpet;
   }

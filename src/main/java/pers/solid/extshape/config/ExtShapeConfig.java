@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,7 +100,7 @@ public class ExtShapeConfig implements Cloneable {
 
   public static ExtShapeConfig readFile(File file) throws IOException {
     try (final FileReader fileReader = new FileReader(file)) {
-      final ExtShapeConfig config = GSON.fromJson(fileReader, ExtShapeConfig.class);
+      final @Nullable ExtShapeConfig config = GSON.fromJson(fileReader, ExtShapeConfig.class);
       if (config == null) {
         final ExtShapeConfig newConfig = new ExtShapeConfig();
         newConfig.tryWriteFile(file);

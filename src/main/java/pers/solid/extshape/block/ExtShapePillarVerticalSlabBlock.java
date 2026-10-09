@@ -9,6 +9,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.data.ExtShapeBlockStateModelGenerator;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.BlockCollections;
@@ -28,7 +29,7 @@ public class ExtShapePillarVerticalSlabBlock extends ExtShapeVerticalSlabBlock {
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
+  public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
     final BlockState placementState = super.getPlacementState(ctx);
     final BlockState oldState = ctx.getWorld().getBlockState(ctx.getBlockPos());
     if (oldState.isOf(this) && placementState != null) {

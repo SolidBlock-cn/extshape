@@ -339,7 +339,7 @@ public class BlocksBuilder extends TreeMap<BlockShape, AbstractBlockBuilder<? ex
       case 4 -> new QuarterPieceBuilder(baseBlock);
       case 5 -> new VerticalQuarterPieceBuilder(baseBlock);
       case 6 -> new FenceBuilder(baseBlock, Objects.requireNonNull(fenceSettings, "fenceSettings").secondIngredient());
-      case 7 -> new FenceGateBuilder(baseBlock, fenceSettings);
+      case 7 -> new FenceGateBuilder(baseBlock, Objects.requireNonNull(fenceSettings, "fenceSettings"));
       case 8 -> new WallBuilder(baseBlock);
       case 9 -> new ButtonBuilder(baseBlock, Objects.requireNonNull(activationSettings, "activationSettings"));
       case 10 -> new PressurePlateBuilder(baseBlock, Objects.requireNonNull(activationSettings, "activationSettings"));
