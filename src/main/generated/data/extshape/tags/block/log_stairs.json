@@ -32,13 +32,13 @@
     "extshape:stripped_cherry_wood_stairs",
     "extshape:stripped_dark_oak_wood_stairs",
     "extshape:stripped_mangrove_wood_stairs",
-    "extshape:warped_stem_stairs",
     "extshape:crimson_stem_stairs",
-    "extshape:stripped_warped_stem_stairs",
+    "extshape:warped_stem_stairs",
     "extshape:stripped_crimson_stem_stairs",
-    "extshape:warped_hyphae_stairs",
+    "extshape:stripped_warped_stem_stairs",
     "extshape:crimson_hyphae_stairs",
-    "extshape:stripped_warped_hyphae_stairs",
-    "extshape:stripped_crimson_hyphae_stairs"
+    "extshape:warped_hyphae_stairs",
+    "extshape:stripped_crimson_hyphae_stairs",
+    "extshape:stripped_warped_hyphae_stairs"
   ]
 }
