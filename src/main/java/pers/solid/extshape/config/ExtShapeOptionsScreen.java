@@ -1,6 +1,6 @@
 package pers.solid.extshape.config;
 
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -25,6 +25,7 @@ import pers.solid.extshape.itemgroup.ItemGroupRules;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,7 @@ public class ExtShapeOptionsScreen extends Screen {
       "options.extshape.addToVanillaGroups",
       SimpleOption.constantTooltip(
           Text.translatable("options.extshape.addToVanillaGroups.tooltip", Registries.ITEM_GROUP.getOrThrow(ItemGroups.BUILDING_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.COLORED_BLOCKS).getDisplayName(), Registries.ITEM_GROUP.getOrThrow(ItemGroups.NATURAL).getDisplayName())
+              .append("\n\n")
               .append(Text.translatable("options.extshape.default", ScreenTexts.onOrOff(ExtShapeConfig.DEFAULT_CONFIG.addToVanillaGroups)).formatted(Formatting.GRAY))
               .append("\n\n")
               .append(Text.translatable("options.extshape.addToVanillaGroups.notice_for_effect").formatted(Formatting.YELLOW))),
@@ -208,8 +210,8 @@ public class ExtShapeOptionsScreen extends Screen {
     client.setScreen(parent);
   }
 
-  private static Collection<BlockShape> convertStringToCollection(String s) {
-    return Arrays.stream(StringUtils.split(s)).map(BlockShape::byName).filter(Objects::nonNull).collect(ImmutableSet.toImmutableSet());
+  private static List<BlockShape> convertStringToCollection(String s) {
+    return Arrays.stream(StringUtils.split(s)).map(BlockShape::byName).filter(Objects::nonNull).distinct().collect(ImmutableList.toImmutableList());
   }
 
   private static String convertCollectionToString(Collection<BlockShape> list) {

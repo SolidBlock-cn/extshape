@@ -13,8 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -65,7 +64,7 @@ public class ExtShapeConfig implements Cloneable {
   /**
    * 需要添加到原版物品组的方块形状的列表。不应该含有重复元素。
    */
-  public Collection<BlockShape> shapesToAddToVanilla = ImmutableList.of(
+  public List<BlockShape> shapesToAddToVanilla = ImmutableList.of(
       BlockShape.STAIRS, BlockShape.SLAB, BlockShape.QUARTER_PIECE, BlockShape.VERTICAL_STAIRS, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_QUARTER_PIECE, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.WALL, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON
   );
   /**
@@ -75,7 +74,7 @@ public class ExtShapeConfig implements Cloneable {
   /**
    * 需要添加到专用物品组中的方块形状的列表。不应该含有重复元素。
    */
-  public Collection<BlockShape> shapesInSpecificGroups = shapesToAddToVanilla;
+  public List<BlockShape> shapesInSpecificGroups = shapesToAddToVanilla;
 
   /**
    * 规定如何排序专用物品组中的“木制方块”的排序。
@@ -106,8 +105,8 @@ public class ExtShapeConfig implements Cloneable {
         newConfig.tryWriteFile(file);
         return newConfig;
       }
-      config.shapesToAddToVanilla = new LinkedHashSet<>(config.shapesToAddToVanilla);
-      config.shapesInSpecificGroups = new LinkedHashSet<>(config.shapesInSpecificGroups);
+      config.shapesToAddToVanilla = config.shapesToAddToVanilla.stream().filter(Objects::nonNull).distinct().collect(ImmutableList.toImmutableList());
+      config.shapesInSpecificGroups = config.shapesInSpecificGroups.stream().filter(Objects::nonNull).distinct().collect(ImmutableList.toImmutableList());
       return config;
     }
   }
