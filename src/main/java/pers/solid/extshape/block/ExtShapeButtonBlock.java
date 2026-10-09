@@ -20,7 +20,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -31,15 +30,15 @@ import pers.solid.extshape.util.ActivationSettings;
  * 本模组中的按钮方块。按钮的激活时长可能会是特制的。
  */
 public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantBlockInterface {
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public ExtShapeButtonBlock(@NotNull Block baseBlock, Settings blockSettings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapeButtonBlock(Block baseBlock, Settings blockSettings, ActivationSettings activationSettings) {
     super(blockSettings, activationSettings.blockSetType(), activationSettings.buttonTime(), activationSettings.buttonActivatedByProjectile());
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -75,9 +74,9 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   }
 
   public static class WithExtension extends ExtShapeButtonBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Settings settings, ActivationSettings activationSettings, BlockExtension extension) {
       super(baseBlock, settings, activationSettings);
       this.extension = extension;
     }
@@ -114,9 +113,9 @@ public class ExtShapeButtonBlock extends ButtonBlock implements ExtShapeVariantB
   }
 
   public static class WithOxidation extends ExtShapeButtonBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(Block baseBlock, Settings settings, ActivationSettings activationSettings, OxidationLevel oxidationLevel) {
       super(baseBlock, settings, activationSettings);
       this.oxidationLevel = oxidationLevel;
     }

@@ -13,14 +13,14 @@ import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.data.ExtShapeModelProvider;
 import pers.solid.extshape.util.ActivationSettings;
 
 public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressurePlateBlock {
   public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
-  public ExtShapeHorizontalFacingPressurePlateBlock(@NotNull Block baseBlock, Settings settings, @NotNull ActivationSettings activationSettings) {
+  public ExtShapeHorizontalFacingPressurePlateBlock(Block baseBlock, Settings settings, ActivationSettings activationSettings) {
     super(baseBlock, settings, activationSettings);
     setDefaultState(getDefaultState().with(FACING, Direction.SOUTH));
   }
@@ -32,7 +32,7 @@ public class ExtShapeHorizontalFacingPressurePlateBlock extends ExtShapePressure
   }
 
   @Override
-  public BlockState getPlacementState(ItemPlacementContext ctx) {
+  public @Nullable BlockState getPlacementState(ItemPlacementContext ctx) {
     final BlockState placementState = super.getPlacementState(ctx);
     return placementState != null ? placementState.with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()) : null;
   }

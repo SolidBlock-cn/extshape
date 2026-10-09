@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.builder.BlockShape;
@@ -57,7 +56,6 @@ public final class BlockBiMaps {
           }
         }
         if (variant != null) {
-          // 考虑到凝灰岩基础方块没有功能标签，但是凝灰岩变种方块有功能标签，故在此进行修改，以使用本模组中的凝灰岩楼梯和凝灰岩台阶
           setBlockOf(shape, baseBlock, variant);
           BASE_BLOCKS.add(baseBlock);
         }
@@ -71,7 +69,7 @@ public final class BlockBiMaps {
    * @param shape 方块形状。
    * @return 方块映射。
    */
-  public static @NotNull BiMap<Block, Block> of(@NotNull BlockShape shape) {
+  public static BiMap<Block, Block> of(BlockShape shape) {
     return SHAPE_TO_BI_MAP.computeIfAbsent(shape, shape1 -> HashBiMap.create());
   }
 
@@ -82,7 +80,7 @@ public final class BlockBiMaps {
    * @param baseBlock 基础方块。
    * @return 变种方块。
    */
-  public static @Nullable Block getBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock) {
+  public static @Nullable Block getBlockOf(BlockShape shape, Block baseBlock) {
     return of(shape).get(baseBlock);
   }
 
@@ -95,7 +93,7 @@ public final class BlockBiMaps {
    * @return 变种方块。
    */
   @ApiStatus.AvailableSince("3.2.0")
-  public static @NotNull Block getBlockOfOrThrow(@NotNull BlockShape shape, @NotNull Block baseBlock) {
+  public static Block getBlockOfOrThrow(BlockShape shape, Block baseBlock) {
     final Block block = getBlockOf(shape, baseBlock);
     if (block == null) {
       throw new IllegalArgumentException("Block " + baseBlock + " does not have the shape variant: " + shape);
@@ -110,7 +108,7 @@ public final class BlockBiMaps {
    * @param baseBlock 基础方块。
    * @param block     需要被设置的方块，该方块不是基础方块。
    */
-  public static void setBlockOf(@NotNull BlockShape shape, @NotNull Block baseBlock, @NotNull Block block) {
+  public static void setBlockOf(BlockShape shape, Block baseBlock, Block block) {
     final BiMap<Block, Block> biMap = of(shape);
     if (biMap.containsKey(baseBlock)) {
       ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape.asString(), baseBlock, biMap.get(baseBlock), block);

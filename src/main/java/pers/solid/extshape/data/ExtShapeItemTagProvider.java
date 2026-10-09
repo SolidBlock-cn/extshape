@@ -14,7 +14,6 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.tag.ExtShapeTags;
@@ -26,9 +25,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
-  protected final @NotNull ExtShapeBlockTagProvider blockTagProvider;
+  protected final ExtShapeBlockTagProvider blockTagProvider;
 
-  public ExtShapeItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, @NotNull ExtShapeBlockTagProvider blockTagProvider) {
+  public ExtShapeItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture, ExtShapeBlockTagProvider blockTagProvider) {
     super(output, completableFuture, blockTagProvider);
     this.blockTagProvider = blockTagProvider;
   }
@@ -110,7 +109,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
    * @implNote 其他模组继承此类时需要重写此方法。
    */
   @Contract("null -> fail")
-  protected void checkValidBaseBlock(Block baseBlock) {
+  protected void checkValidBaseBlock(@Nullable Block baseBlock) {
     blockTagProvider.checkValidBaseBlock(baseBlock);
   }
 
@@ -120,7 +119,7 @@ public class ExtShapeItemTagProvider extends FabricTagProvider.ItemTagProvider {
    * @implNote 其他模组继承此类时需要重写此方法。
    */
   @Contract("null -> false")
-  protected boolean isValidBlock(Block block) {
+  protected boolean isValidBlock(@Nullable Block block) {
     return blockTagProvider.isValidBlock(block);
   }
 }

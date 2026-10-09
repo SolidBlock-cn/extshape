@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.Validate;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +30,9 @@ public class ExtShapeBlockus implements ModInitializer {
   /**
    * 此字段仅在开发环境下生效，将在初始化 data fixer 时设置值，从而在完成注册后验证其中的 id 是否有效。
    */
-  public static Map<String, String> replacing_id_map = null;
+  public static @Nullable Map<String, String> replacing_id_map = null;
 
-  public static Identifier id(@NotNull String path) {
+  public static Identifier id(String path) {
     return defaultId.withPath(path);
   }
 

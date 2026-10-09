@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.registry.Registries;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.ExtShapeBlocks;
@@ -52,7 +51,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
   }
 
   @Override
-  protected @NotNull Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
+  protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
     return INSTANCE.get(baseBlock).stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList());
   }
 

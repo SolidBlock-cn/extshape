@@ -20,6 +20,7 @@ import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.itemgroup.ItemGroupRules;
 
@@ -32,7 +33,7 @@ import java.util.stream.Collectors;
 @Environment(EnvType.CLIENT)
 public class ExtShapeOptionsScreen extends Screen {
 
-  private final Screen parent;
+  private final @Nullable Screen parent;
   private final GameOptions gameOptions = MinecraftClient.getInstance().options;
   public final ExtShapeConfig oldConfig = ExtShapeConfig.CURRENT_CONFIG;
   public final ExtShapeConfig newConfig = ExtShapeConfig.CURRENT_CONFIG.clone();
@@ -119,7 +120,7 @@ public class ExtShapeOptionsScreen extends Screen {
   // 完成按钮
   private final ButtonWidget finishButton = new ButtonWidget.Builder(ScreenTexts.DONE, button -> close()).position(this.width / 2 - 100, this.height - 27).size(200, 20).build();
 
-  public ExtShapeOptionsScreen(Screen parent) {
+  public ExtShapeOptionsScreen(@Nullable Screen parent) {
     super(Text.translatable("options.extshape.title"));
     this.parent = parent;
   }
@@ -218,7 +219,7 @@ public class ExtShapeOptionsScreen extends Screen {
     return list.stream().map(BlockShape::asString).collect(Collectors.joining(StringUtils.SPACE));
   }
 
-  private static String getSuggestion(String currentValue) {
+  private static @Nullable String getSuggestion(String currentValue) {
     final String[] split = StringUtils.split(currentValue);
     if (split.length == 0) return null;
     final String last = split[split.length - 1];

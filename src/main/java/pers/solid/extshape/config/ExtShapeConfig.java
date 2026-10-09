@@ -35,7 +35,7 @@ public class ExtShapeConfig implements Cloneable {
   /**
    * 本模组当前的配置。
    */
-  public static ExtShapeConfig CURRENT_CONFIG;
+  public static ExtShapeConfig CURRENT_CONFIG = DEFAULT_CONFIG;
   /**
    * 当配置更新后，这个值就会是 {@code true}，参见 {@link pers.solid.extshape.mixin.ItemGroupsMixin}。
    */

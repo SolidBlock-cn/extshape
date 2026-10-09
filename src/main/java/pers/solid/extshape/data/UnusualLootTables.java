@@ -30,7 +30,10 @@ import net.minecraft.predicate.StatePredicate;
 import net.minecraft.predicate.item.EnchantmentPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 import net.minecraft.state.property.Properties;
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
 
 /**
@@ -54,11 +57,11 @@ public class UnusualLootTables {
    * 对应形状估算的体积，用于与基础方块的掉落数相乘。
    */
   @Contract(pure = true)
-  public static float shapeVolume(@NotNull BlockShape shape) {
+  public static float shapeVolume(BlockShape shape) {
     return shape.isConstruction ? shape.logicalCompleteness : 1;
   }
 
-  public static ConstantLootNumberProvider shapeVolumeConstantProvider(@NotNull BlockShape shape, float count) {
+  public static ConstantLootNumberProvider shapeVolumeConstantProvider(BlockShape shape, float count) {
     return ConstantLootNumberProvider.create(shapeVolume(shape) * count);
   }
 
@@ -71,7 +74,7 @@ public class UnusualLootTables {
    * @param block     方块自身。
    * @return 战利品表项。
    */
-  private static LeafEntry.Builder<?> entryBuilderConstCount(@NotNull ItemConvertible drop, float fullCount, @NotNull BlockShape shape, @NotNull Block block) {
+  private static LeafEntry.Builder<?> entryBuilderConstCount(ItemConvertible drop, float fullCount, BlockShape shape, Block block) {
     final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop)
         // 根据该方块的形状确定数量。
         .apply(SetCountLootFunction.builder(shapeVolumeConstantProvider(shape, fullCount)));
@@ -93,11 +96,11 @@ public class UnusualLootTables {
    * @param childWhenDoubleSlab 不符合条件，且为双层台阶时，需要使用的战利品表池。当方块本身就不是台阶时，此参数应为 {@code null}。
    * @return 战利品表。
    */
-  public static LootTable.Builder dropsDoubleSlab(@NotNull Block drop, @NotNull LootCondition.Builder conditionBuilder, @NotNull LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
+  public static LootTable.Builder dropsDoubleSlab(Block drop, LootCondition.Builder conditionBuilder, LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
     return addDropsDoubleSlabPool(LootTable.builder(), drop, conditionBuilder, child, childWhenDoubleSlab);
   }
 
-  public static LootTable.Builder addDropsDoubleSlabPool(@NotNull LootTable.Builder builder, @NotNull Block drop, LootCondition.@NotNull Builder conditionBuilder, LootPoolEntry.@NotNull Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
+  public static LootTable.Builder addDropsDoubleSlabPool(LootTable.Builder builder, Block drop, LootCondition.Builder conditionBuilder, LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
     if (childWhenDoubleSlab == null) {
       builder
           .pool(LootPool.builder()
@@ -123,7 +126,7 @@ public class UnusualLootTables {
   }
 
   @Unmodifiable
-  public ImmutableMap<Block, @NotNull LootTableFunction> createInstance() {
+  public ImmutableMap<Block, LootTableFunction> createInstance() {
     final ImmutableMap.Builder<Block, LootTableFunction> builder = new ImmutableMap.Builder<>();
     registerUnusualLootTables(builder);
     return builder.build();
@@ -193,7 +196,7 @@ public class UnusualLootTables {
    * @param drop      没有精准采集时，掉落的物品。
    * @param fullCount 没有精准采集时，掉落的物品对应完整方块大小时的数量。
    */
-  public static LootTableFunction dropsWithSilkTouchOrConst(@NotNull ItemConvertible drop, float fullCount) {
+  public static LootTableFunction dropsWithSilkTouchOrConst(ItemConvertible drop, float fullCount) {
     return (baseBlock, shape, block, generator) -> {
       final LeafEntry.Builder<?> entryBuilder = entryBuilderConstCount(drop, fullCount, shape, block);
       if (shape == BlockShape.SLAB) {
@@ -218,7 +221,7 @@ public class UnusualLootTables {
    * @param childWhenDoubleSlab 没有精准采集，且为双层台阶时，需要使用的战利品表池。当方块本身就不是台阶时，此参数应为 {@code null}。
    * @return 战利品表。
    */
-  public static LootTable.Builder dropsDoubleSlabWithSilkTouch(@NotNull Block drop, @NotNull LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
+  public static LootTable.Builder dropsDoubleSlabWithSilkTouch(Block drop, LootPoolEntry.Builder<?> child, @Nullable LootPoolEntry.Builder<?> childWhenDoubleSlab) {
     return dropsDoubleSlab(drop, WITH_SILK_TOUCH, child, childWhenDoubleSlab);
   }
 
@@ -230,7 +233,7 @@ public class UnusualLootTables {
    * @return 战利品表。
    * @see net.minecraft.data.server.loottable.BlockLootTableGenerator#dropsWithSilkTouch(Block, LootPoolEntry.Builder)
    */
-  public static LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(@NotNull Block drop, boolean isSlab) {
+  public static LootTable.Builder dropsDoubleSlabWithSilkTouchOrNone(Block drop, boolean isSlab) {
     final LeafEntry.Builder<?> itemEntryBuilder = ItemEntry.builder(drop);
     if (isSlab) {
       itemEntryBuilder.apply(

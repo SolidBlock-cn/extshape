@@ -21,7 +21,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.ExtShapeModelProvider;
@@ -31,20 +30,20 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  */
 public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlockInterface {
 
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
   /**
    * 合成栅栏方块需要使用的第二个材料。
    */
   private final @Nullable Item secondIngredient;
 
-  public ExtShapeFenceBlock(@NotNull Block baseBlock, @Nullable Item secondIngredient, Settings settings) {
+  public ExtShapeFenceBlock(Block baseBlock, @Nullable Item secondIngredient, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;
     this.secondIngredient = secondIngredient;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -79,9 +78,9 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   }
 
   public static class WithExtension extends ExtShapeFenceBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(@NotNull Block baseBlock, @Nullable Item secondIngredient, Settings settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, @Nullable Item secondIngredient, Settings settings, BlockExtension extension) {
       super(baseBlock, secondIngredient, settings);
       this.extension = extension;
     }
@@ -121,9 +120,9 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   }
 
   public static class WithOxidation extends ExtShapeFenceBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, @Nullable Item secondIngredient, Settings settings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(Block baseBlock, @Nullable Item secondIngredient, Settings settings, OxidationLevel oxidationLevel) {
       super(baseBlock, secondIngredient, settings);
       this.oxidationLevel = oxidationLevel;
     }

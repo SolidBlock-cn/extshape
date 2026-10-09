@@ -32,7 +32,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +78,7 @@ public class ExtShape implements ModInitializer {
   /**
    * 创建一个以模型命名 id 为命名空间的 id。
    */
-  public static Identifier id(@NotNull String path) {
+  public static Identifier id(String path) {
     // 使用 withPath 是为了避免不必要地对 namespace 进行 validate。
     return defaultId.withPath(path);
   }

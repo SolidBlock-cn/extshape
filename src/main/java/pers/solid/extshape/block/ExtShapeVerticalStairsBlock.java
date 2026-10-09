@@ -18,7 +18,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.builder.BlocksBuilder;
@@ -29,15 +28,15 @@ import pers.solid.extshape.data.ExtShapeModelProvider;
  * 本模组中的竖直楼梯方块。
  */
 public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements ExtShapeVariantBlockInterface {
-  public final @NotNull Block baseBlock;
+  public final Block baseBlock;
 
-  public ExtShapeVerticalStairsBlock(@NotNull Block baseBlock, Settings settings) {
+  public ExtShapeVerticalStairsBlock(Block baseBlock, Settings settings) {
     super(settings);
     this.baseBlock = baseBlock;
   }
 
   @Override
-  public @NotNull Block getBaseBlock() {
+  public Block getBaseBlock() {
     return baseBlock;
   }
 
@@ -71,9 +70,9 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   }
 
   public static class WithExtension extends ExtShapeVerticalStairsBlock {
-    private final @NotNull BlockExtension extension;
+    private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Settings settings, @NotNull BlockExtension extension) {
+    public WithExtension(Block baseBlock, Settings settings, BlockExtension extension) {
       super(baseBlock, settings);
       this.extension = extension;
     }
@@ -112,9 +111,9 @@ public class ExtShapeVerticalStairsBlock extends VerticalStairsBlock implements 
   }
 
   public static class WithOxidation extends ExtShapeVerticalStairsBlock implements Oxidizable {
-    private final @NotNull OxidationLevel oxidationLevel;
+    private final OxidationLevel oxidationLevel;
 
-    public WithOxidation(@NotNull Block baseBlock, Settings settings, @NotNull OxidationLevel oxidationLevel) {
+    public WithOxidation(Block baseBlock, Settings settings, OxidationLevel oxidationLevel) {
       super(baseBlock, settings);
       this.oxidationLevel = oxidationLevel;
     }

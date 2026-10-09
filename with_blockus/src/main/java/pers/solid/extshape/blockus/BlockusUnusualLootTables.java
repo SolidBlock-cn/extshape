@@ -11,7 +11,6 @@ import net.minecraft.loot.function.LimitCountLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.data.UnusualLootTables;
@@ -21,7 +20,7 @@ import pers.solid.extshape.data.UnusualLootTables;
  */
 public final class BlockusUnusualLootTables {
   @Unmodifiable
-  public ImmutableMap<Block, UnusualLootTables.@NotNull LootTableFunction> createInstance() {
+  public ImmutableMap<Block, UnusualLootTables.LootTableFunction> createInstance() {
     final ImmutableMap.Builder<Block, UnusualLootTables.LootTableFunction> builder = new ImmutableMap.Builder<>();
     registerUnusualLootTables(builder);
     return builder.build();

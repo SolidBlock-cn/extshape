@@ -13,7 +13,6 @@ import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
@@ -59,7 +58,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   /**
    * 为一个特定氧化等级以及涂蜡情况的铜方块注册 {@code BlocksBuilder}。
    */
-  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, @NotNull Oxidizable.OxidationLevel oxidationLevel, boolean waxed) {
+  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, Oxidizable.OxidationLevel oxidationLevel, boolean waxed) {
     final BlocksBuilder builder = blocksBuilderFactory.createAllShapes(copperBase).setActivationSettings(ActivationSettings.COPPER.get(oxidationLevel));
 
     if (!waxed) {
@@ -142,8 +141,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
    * @param oxidationLevel 氧化等级。
    * @return 方块激活持续的刻数。
    */
-
-  public static int getActivationRate(@NotNull Oxidizable.OxidationLevel oxidationLevel) {
+  public static int getActivationRate(Oxidizable.OxidationLevel oxidationLevel) {
     return switch (oxidationLevel) {
       case UNAFFECTED -> 10;
       case EXPOSED -> 40;
