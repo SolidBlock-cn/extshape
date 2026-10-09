@@ -385,6 +385,9 @@ public final class ExtShapeBlockusBlocks {
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.VIRIDITE_CIRCULAR_PAVING)
         .markStoneCuttable());
 
+    create(BlockusBlocks.WATER_BRICKS)
+        .setFenceSettings(FenceSettings.STONE)
+        .build();
     create(BlockusBlocks.LAVA_BRICKS)
         .setFenceSettings(FenceSettings.STONE)
         .build();

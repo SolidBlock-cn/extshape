@@ -133,17 +133,12 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 熔岩砖
     builder.put(BlockusBlocks.CHISELED_LAVA_BRICKS, BlockusBlocks.LAVA_BRICKS.block());
-    builder.put(BlockusBlocks.CHISELED_WATER_BRICKS, BlockusBlocks.WATER_BRICKS.block());
-
-    // 雪柱
-    builder.put(BlockusBlocks.SNOW_PILLAR, BlockusBlocks.SNOW_BRICKS.block());
 
     // 岩浆砖
     builder.put(BlockusBlocks.MAGMA_BRICKS.block(), Blocks.MAGMA_BLOCK);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SMALL_MAGMA_BRICKS.block(), BlockusBlocks.CHISELED_MAGMA_BRICKS), Blocks.MAGMA_BLOCK, BlockusBlocks.MAGMA_BRICKS.block());
 
     // 烈焰柱
-    builder.put(BlockusBlocks.BLAZE_PILLAR, BlockusBlocks.BLAZE_BRICKS.block());
     builder.put(BlockusBlocks.POLISHED_NETHERRACK.block(), Blocks.NETHERRACK);
     putMultipleWithMid(builder, BlockusBlocks.NETHERRACK_BRICKS.block(), Blocks.NETHERRACK, BlockusBlocks.POLISHED_NETHERRACK.block(), BlockusBlocks.NETHERRACK_CIRCULAR_PAVING);
 

@@ -220,6 +220,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.VIRIDITE_CIRCULAR_PAVING
     );
 
+    addForShapes(BlockusBlockTags.WATER_BRICKS, BlockusBlocks.WATER_BRICKS.block());
     addForShapes(BlockusBlockTags.LAVA_BRICKS,
         BlockusBlocks.LAVA_BRICKS.block(),
         BlockusBlocks.CHISELED_LAVA_BRICKS
