@@ -95,8 +95,8 @@ public class ExtShapeOptionsScreen extends Screen {
   ).createWidget(gameOptions, width / 2 + 5, 36, 200);
 
   private final CyclingButtonWidget<WoodenAndBambooBlockSorting> woodenBlockSortingButton = CyclingButtonWidget.builder(WoodenAndBambooBlockSorting::displayName)
-      .initially(newConfig.woodenAndBambooBlockSorting)
       .values(WoodenAndBambooBlockSorting.values())
+      .initially(newConfig.woodenAndBambooBlockSorting)
       .tooltip(value -> Tooltip.of(Text.empty()
           .append(Text.translatable("options.extshape.wooden_and_bamboo_block_sorting.description"))
           .append("\n\n")
@@ -108,8 +108,8 @@ public class ExtShapeOptionsScreen extends Screen {
       .build(width / 2 - 205, 151, 200, 20, Text.translatable("options.extshape.wooden_and_bamboo_block_sorting"), (button, value) -> newConfig.woodenAndBambooBlockSorting = value);
 
   private final CyclingButtonWidget<ColoredBlockSorting> coloredBlockSortingButton = CyclingButtonWidget.builder(ColoredBlockSorting::displayName)
-      .initially(newConfig.coloredBlockSorting)
       .values(ColoredBlockSorting.values())
+      .initially(newConfig.coloredBlockSorting)
       .tooltip(value -> Tooltip.of(Text.empty()
           .append(Text.translatable("options.extshape.colored_block_sorting.description"))
           .append("\n\n")
