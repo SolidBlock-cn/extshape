@@ -32,11 +32,12 @@ println changelogContent
 tasks.register('curseforge', TaskPublishCurseForge) {
     doFirst {
         def curseForgeToken = System.getenv("CURSEFORGE_TOKEN")
-        println("CurseForge 令牌: $screenToken(curseForgeToken)")
+        println("CurseForge 令牌: ${screenToken(curseForgeToken)}")
         if (curseForgeToken) apiToken = curseForgeToken
     }
     def mainFile = upload('841655', remapJar)
     mainFile.changelog = changelogContent
+    mainFile.changelogType = 'markdown'
     mainFile.releaseType = release_type
 
     for (final String v in ((rootProject.supported_minecraft_versions as String).split(','))) {
@@ -44,6 +45,8 @@ tasks.register('curseforge', TaskPublishCurseForge) {
     }
 
     mainFile.addRelations 'requiredDependency', 'fabric-api', 'blockus'
+
+    mainFile.addEnvironment 'Client', 'Server'
 }
 modrinth {
     projectId = 'qAQHIBF8'
