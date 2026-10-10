@@ -19,7 +19,7 @@
 ### 3.1.6
 
 - 参见 3.1.6-beta.1、3.1.6-beta.2、3.1.6-beta.3 的更新日志。
-- 对于 26.3，参见 3.1.6-beta.4、3.1.6-beta.5、3.1.6-beta.6、3.1.6-beta.7、3.1.6-beta.8、3.1.9-beta.9、3.1.9-beta.10、3.1.6-beta.11、3.1.6-beta.12、3.1.6-rc.1 的更新日志。
+- 对于 26.3，参见 3.1.6-beta.4、3.1.6-beta.5、3.1.6-beta.6、3.1.6-beta.7、3.1.6-beta.8、3.1.6-beta.9、3.1.6-beta.10、3.1.6-beta.11、3.1.6-beta.12、3.1.6-rc.1 的更新日志。
 - 对于 26.3，现在木头方块的去皮是通过 Fabric API 注册的。
 
 ### 3.1.6-rc.1
@@ -62,7 +62,7 @@
     - `extshape:shape_variant_modifier/one_third`：1/3
     - `extshape:shape_variant_modifier/quarter`：0.25
 - 为一些方块的形状变种添加了堆肥和烧炼的数值提供器，其 ID 为 `extshape:shape_variant/<场景类型>/<基准名称>/<变种类型>`，其中 `<场景类型>` 的值为 `compostable` 或 `cooking`，变种类型为 `half`、`one_third` 或 `quarter`。示例：`extshape:shape_variant/compostable/medium/half`、`extshape:shape_variant/cooking/time_wool/quarter`。
-    - `half` 变种类型用于台阶和竖直台阶，`one_third` 变种类型适用于按钮和耐力板，`quarter` 变种类型适用于纵条和横条。例如，黄色羊毛按钮的烧炼数值提供器为 `ehanced_commands:shape_variant/cooking/time_wool/one_third`，苍白苔藓横条的堆肥数值提供器为 `extshape:shape_variant/compostable/mediun/quarter`。
+    - `half` 变种类型用于台阶和竖直台阶，`one_third` 变种类型适用于按钮和压力板，`quarter` 变种类型适用于纵条和横条。例如，黄色羊毛按钮的烧炼数值提供器为 `extshape:shape_variant/cooking/time_wool/one_third`，苍白苔藓横条的堆肥数值提供器为 `extshape:shape_variant/compostable/medium/quarter`。
     - 楼梯、竖直楼梯、栅栏、栅栏门、墙均使用其基础方块的烧炼或堆肥数值提供器。例如，黄色羊毛墙的烧炼数值提供器为 `minecraft:cooking/time_wool`，苍白苔藓栅栏的堆肥数值提供器为 `minecraft:compostable/medium`。
     - 对于堆肥的数值提供器，其值为 1 的概率为基准值（基础方块的堆肥数值提供器的值）为 1 的概率乘以对应的变种修饰器值，但类似原版行为，当堆肥桶为空时，堆肥始终成功。
     - 对于烧炼的数值提供器，其烧炼时间为基准值（基础方块的烧炼数值提供器的值）乘以对应的变种修饰器值。
@@ -108,7 +108,7 @@
 - 现在在开发环境中，会进一步验证方块标签，和方块采集相关的方块标签（`#mineable/*`、`#needs_*_tool`、`#incorrect_for_*_tool`，以及 26.2 引入的 `#shears_*_breaking_speed`），基础方块有的，其变种方块必须有，基础方块没有的，其变种方块必须没有，否则抛出错误。同时，对方块标签进行了以下更改：
     - 修复各氧化程度的涂蜡铜块相关方块没有 `#needs_stone_tool` 标签的问题。
     - 修复南瓜和西瓜相关方块没有 `#sword_efficient` 标签的问题。
-- 现在在开发环境中，会验证物品标签。由于原版的 `#pressure_plates` 和 `#stone_pressure_plates` 只有方块标签，没有物品标签，本模组现在使用方块和物品标签 `#extshape:pressure_plates` 和 `#extshape:stone_pressure_plates`，其中方块标签 `#extshape:pressure_plates` 和 `#extshape:stone_pressure_plates` 被视为原版方块标签 `#pressure_plates` 和 `#extshape:stone_pressure_plates` 的别称。同时，对物品标签作出了如下更改：
+- 现在在开发环境中，会验证物品标签。由于原版的 `#pressure_plates` 和 `#stone_pressure_plates` 只有方块标签，没有物品标签，本模组现在使用方块和物品标签 `#extshape:pressure_plates` 和 `#extshape:stone_pressure_plates`，其中方块标签 `#extshape:pressure_plates` 和 `#extshape:stone_pressure_plates` 被视为原版方块标签 `#pressure_plates` 和 `#stone_pressure_plates` 的别称。同时，对物品标签作出了如下更改：
     - 修复了之前的 `#pressure_plates` 物品标签不包含 `#wooden_pressure_plates` 和 `#stone_pressure_plates` 的问题（现在物品标签不使用原版不存在 `#pressure_plates` 和 `#stone_pressure_plates`）。
     - 将更多的石质方块的压力板和按钮加入 `#extshape:stone_pressure_plates` 和 `#minecraft:stone_buttons` 方块和物品标签。
 - 现在在开发环境中，会验证切石配方。如果一个基础方块可以切成某个基础方块（同一个或另一个）的部分形状，但不能切成其他存在的形状（仅限建筑形状和墙），则会抛出错误。例如，如果 A 可以切成 B 的楼梯和台阶（A 和 B 可以是同一基础方块），但不能切成 B 的 竖直台阶，则会抛出错误。此外，由于切石仅限在建筑形状和墙范围内，如果能切成其他形状（例如按钮、压力板），则也会抛出错误。同时，对切石配方进行了以下更改：
@@ -143,7 +143,7 @@
 
 - 调整 `#stone_buttons` 和 `#stone_pressure_plates` 方块标签的赋予规则，仅限部分石质方块。
 - 修复 Blockus 模组中的部分方块的模型错误的问题。
-- 根进 Blockus 模组的更新，加入苍白橡木、树脂相关 Blockus 方块。
+- 跟进 Blockus 模组的更新，加入苍白橡木、树脂相关 Blockus 方块。
 - 修复 Blockus 部分的带釉陶瓦柱标签名称错误，并加入了相应的标签翻译。
 - 修复 Blockus 模组中的一些方块在已经有相关变种的情况下仍添加了相关变种的问题。
 
@@ -295,7 +295,7 @@
 - 南瓜和西瓜的按钮不再拥有 `#wooden_buttons` 标签。
 - 南瓜和西瓜的压力板不再拥有 `#wooden_pressure_plates` 标签。
 - 修复 `#pressure_plates` 没有对应物品标签的问题。
-- 移除了配置界面中控制避免特定合成表的功能，添加了内置的数据包以规避合成表冲突，默认启用，可通过 `/datapack disbale ...` 命令禁用。
+- 移除了配置界面中控制避免特定合成表的功能，添加了内置的数据包以规避合成表冲突，默认启用，可通过 `/datapack disable ...` 命令禁用。
 - `/extshape:check-conflict` 命令添加了新的参数，用于筛选命名空间。
     - 如果没有指定，则检测所有命名空间的合成表的冲突。
     - 如果只指定了一个命名空间，则检测该命名空间与原版命名空间的合成表的冲突。
@@ -368,7 +368,7 @@
 ### 2.1.0
 
 - 加入了未涂蜡的各种形状的铜制方块（涂蜡的方块已存在于之前的版本）。现在这些方块可以正常地涂蜡和除蜡，未涂蜡的方块可以被氧化或还原。
-- 修复了激活和压力板或按钮在变化方块（例如木头压力板或按钮被去皮）后不能正确释放的问题。
+- 修复了激活的压力板或按钮在变化方块（例如木头压力板或按钮被去皮）后不能正确释放的问题。
 - 调整了一些压力板方块的激活时长，不再全部都是 20 刻。
 - （仅限 1.20.4）加入了凝灰岩变种方块的各个形状方块。同时考虑到凝灰岩楼梯、凝灰岩台阶、凝灰岩墙是实验性内容，故不视为正式的内容。
 - 跟进 Blockus 更新，加入了青苔木板的相关形状的方块。
@@ -378,7 +378,7 @@
 - 为花纹羊毛和方格羊毛添加了栅栏、栅栏门、压力板，但是没有按钮，其中压力板是使用 3 个地毯合成的。
 - 不再允许烧焦各个形状的木板和木马赛克。
 - 在创造模式物品栏中隐藏了糖块的相关方块并去除了合成配方，因为糖块是可下落的方块，而其各形状变种没有满足其特点。
-- 为石砖、苔石、红砖块、下界庞和诡异庞砖加入了按钮和压力板。
+- 为石砖、苔石、红砖块、下界疣和诡异疣砖加入了按钮和压力板。
 - 修复了黑石相关方块的顶部和底部纹理不正常的问题。
 - 调整了部分栅栏和栅栏门（含 Blockus 模组方块为基础方块的栅栏和栅栏门）的第二合成材料。
 - 改善与 Sinytra Connector 的兼容性（扩展方块形状 Blockus 的部分仍不能兼容）。
@@ -553,7 +553,7 @@
 
 - <span style="color:red">删除了下界疣墙、诡异疣墙。</span>
 - 添加了更多方块，主要是按钮。
-- 修复了 BlocksBuilder 的构造函数中，参数若为 <code>null</code>仍会创建对应对象的问题（可能导致部分压力板或按钮有崩溃风险）的问题。
+- 修复了 BlocksBuilder 的构造函数中在参数为 <code>null</code> 时仍会创建对应对象的问题（可能导致部分压力板或按钮有崩溃风险）。
 - 修复了铁、金、钻石、绿宝石、青金石块可能存在的与合成表冲突的问题。<b>这些方块仍然存在，但是不再能够合成。</b>
 - 稍微调整了物品分组。
 - 修复了部分石质方块无法用切石机切石的问题。

@@ -4,7 +4,7 @@
 
 > Since 3.0.0, [Better Runtime Resource Pack](https://github.com/SolidBlock-cn/BRRP/) mod is **no longer required**.
 
-This mod adds stairs, slabs, fences, fence gates, button and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [Block List](BlockList.md).
+This mod adds stairs, slabs, fences, fence gates, buttons and pressure plates for many vanilla blocks, along with vertical slabs, vertical stairs, quarter pieces and vertical quarter pieces that do not exist in vanilla Minecraft. A list of the contents can be found in [Block List](BlockList.md).
 
 At present, this mod supports Minecraft Java Edition. Please install the relevant mod according to your MC version, and it requires Fabric API to run. Besides, for Fabric, Mod Menu is usually needed (but not required) to open mod config screen.
 
@@ -16,11 +16,11 @@ See [update log](UpdateLog-en.md) for previous update logs. Welcome to join Tenc
 
 ### Blocks
 
-This mod provides numbers of variants of many blocks. For example, wool has wool stairs, wool slab, wool wall, wool pressure plate, etc. Vertical stairs, vertical slab, quarter piece and vertical quarter piece are added by the mod; these blocks, like regular stairs and slabs, are waterloggable.
+This mod provides many variants of a wide variety of blocks. For example, wool has wool stairs, wool slabs, wool walls, wool pressure plates, etc. Vertical stairs, vertical slabs, quarter pieces and vertical quarter pieces are added by the mod; these blocks, like regular stairs and slabs, are waterloggable.
 
-The hardness, mining tools and mining time of all stairs, slabs, fences and walls are equal to their base blocks, which is the same behaviour of vanilla, instead of related to their volume. For example, a plank slab and a plank block will take the same time to mine.
+The hardness, mining tools and mining time of all stairs, slabs, fences and walls are equal to their base blocks, as in vanilla, rather than related to their volume. For example, a plank slab and a plank block will take the same time to mine.
 
-In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of their basic blocks. All pressure plates and buttons added in this mod have the same hardness as 1/4 of their base blocks. This mod simply extends buttons: soft buttons (wool buttons, snow buttons) trigger 60 ticks (3 seconds); hard buttons (obsidian buttons, bedrock buttons) trigger 5 ticks (1/4 second). For the actual activation time, see the table below. Like in vanilla Minecraft, all buttons and pressure plates have no collision box.
+In vanilla, the hardness of pressure plates and buttons is equal to 1/4 or 1/3 of their base blocks. All pressure plates and buttons added in this mod have the same hardness as 1/4 of their base blocks. This mod simply extends buttons: soft buttons (wool buttons, snow buttons) trigger 60 ticks (3 seconds); hard buttons (obsidian buttons, bedrock buttons) trigger 5 ticks (1/4 second). For the actual activation time, see the table below. Like in vanilla Minecraft, all buttons and pressure plates have no collision box.
 
 | base block                              | button activation time | plate activation time |
 |-----------------------------------------|------------------------|-----------------------|
@@ -46,16 +46,16 @@ In vanilla, the hardness of pressure plates and buttons equals to 1/4 or 1/3 of 
 | nether wart, warped wart                | 45                     | 45                    |
 | amethyst                                | 35                     | 25                    |
 
-This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs. Both of the two blocks can be placed into sulfur cubes, and their sulfur cube archetypes are both `#slow_bouncy` (same to stone).
+This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs. Both of the two blocks can be placed into sulfur cubes, and their sulfur cube archetypes are both `#slow_bouncy` (the same as stone).
 
 Blocks added by this mod inherit most features of their base blocks:
 
-- **Wool and planks** blocks (which means blocks based on wool or planks different shapes) are flammable (burning time and spreading speed equal vanilla full blocks).
-- **Wool, planks, wood and log** blocks can be used as fuel. Slabs and vertical slabs, when used as fuel, can consume half the time of their base blocks. Buttons used as fuels smelt about 1/3 the time of their base blocks. Quarter pieces and vertical quarter pieces, when used as fuel, smelt 1/4 the time of the base blocks.
+- **Wool and planks** blocks (which means blocks of different shapes based on wool or planks) are flammable (burning time and spreading speed equal vanilla full blocks).
+- **Wool, planks, wood and log** blocks can be used as fuel. Slabs and vertical slabs, when used as fuel, can burn for half as long as their base blocks. Buttons used as fuels burn for about 1/3 as long as their base blocks. Quarter pieces and vertical quarter pieces, when used as fuel, burn for 1/4 as long as their base blocks.
 - **Wool** blocks, no matter whether they occupy the space of a whole block, can block sculk sensors.
     - Note that in vanilla, wool carpets dampen vibrations but cannot occlude signals. However, all woolen blocks in this mod occlude all vibration signals.
 - **Netherrack** blocks are infiniburn.
-- **Bedrock** blocks are infiniburn in the end. They are not harvestable in Survival Mode. However, bedrock buttons and pressure plates may drop when they lose the blocks they relie on.
+- **Bedrock** blocks are infiniburn in the end. They are not harvestable in Survival Mode. However, bedrock buttons and pressure plates may drop when they lose the blocks they rely on.
 - **Endstone, obsidian and crying obsidian** blocks are immune to ender dragons.
 - **Netherite** blocks and **ancient debris** blocks, when dropped as items, resist fire and lava.
 - Blocks of **Gold blocks, raw gold and gilded blackstone** can be admired by piglins.
@@ -63,12 +63,12 @@ Blocks added by this mod inherit most features of their base blocks:
 - A **snow** stairs or snow slab, when placed on a grass block, if it just covers the whole top of the grass block, makes it snowy, just like covered by a snow block or snow.
 - Small dripleaves and large dripleaves can be placed on blocks based on **moss blocks and clay** (only building blocks).
 - Blocks based on **pumpkin, melon, moss block, shroomlight, nether wart block and warped wart block** can be composted.
-- Blocks based on **packed ice and sculk block** drop only mined with items with Silk Touch enchantment.
-- Blocks based on **clay block, snow block, melon block**, etc., drop their corresponding items when mined, such as clay ball, snow ball (only when shoveled) and melon slice. The number of items dropped by slabs, quarter pieces, vertical slabs, vertical slabs is based on that of base blocks divided by 2 or 4, and double slabs drop the double. Some items dropped may be affected by Fortune enchantment, and blocks themselves are dropped when mined with tools with Silk Touch.
+- Blocks based on **packed ice and sculk block** drop only when mined with items enchanted with Silk Touch.
+- Blocks based on **clay block, snow block, melon block**, etc., drop their corresponding items when mined, such as clay ball, snow ball (only when shoveled) and melon slice. The number of items dropped by slabs, quarter pieces, vertical slabs, vertical quarter pieces is based on the amount dropped by the base blocks divided by 2 or 4, and double slabs drop the double. Some items dropped may be affected by Fortune enchantment, and blocks themselves are dropped when mined with tools with Silk Touch.
 - About the interaction between blocks and pistons: for blocks that cannot be pushed by piston, such as obsidian, bedrock, the buttons and pressure plates can also not be pushed by piston, while buttons and pressure plates for other blocks will be directly destroyed.
 - About note block: To be consistent with vanilla, the note block instrument of button blocks is always harp, while others are the same as their base blocks.
 - Buttons will not be displayed as colors in maps.
-- **Copper** blocks, like vanilla copper blocks, can be oxidized, and be deoxidized by using axes or being hit by lighting bolt. They can also be waxed and de-waxed. Oxidation of waxed copper does not change.
+- **Copper** blocks, like vanilla copper blocks, can be oxidized, and be deoxidized by using axes or being hit by a lightning bolt. They can also be waxed and de-waxed. Oxidation of waxed copper does not change.
 
 ### Crafting and smelting
 
@@ -94,9 +94,11 @@ Stone-cutting recipes of some blocks are as follows:
 - 1×vertical stairs → 3×vertical quarter pieces
 - 1×vertical slab → 2×quarter pieces / 2×vertical quarter pieces
 
-In stonecutters, one base blocks can be cut into various shapes for cut base blocks. For instance, a stone can be cut into stone bricks, and stone bricks can be cut into 2 vertical stone brick slabs, while one stone can also be cut directly into 2 vertical stone brick slabs. However, blocks of various shapes cannot be cut into their corresponding shapes of cut base blocks.
+In stonecutters, one base block can be cut into various shapes for cut base blocks. For instance, a stone can be cut into stone bricks, and stone bricks can be cut into 2 vertical stone brick slabs, while one stone can also be cut directly into 2 vertical stone brick slabs. However, blocks of various shapes cannot be cut into their corresponding shapes of cut base blocks.
 
-The second crafting ingredient for crafting fences and fences (apart from base blocks) is dependent on its base block. See details in [block list](BlockList.md).
+The second crafting ingredient for crafting fences and fence gates (apart from base blocks) is dependent on its base block. See details in [block list](BlockList.md).
+
+All crafting recipes are unlocked when obtaining any base block, like vanilla recipes. In detail, each crafting recipe has a corresponding advancement, and when the base block is obtained or the recipe is unlocked, the advancement will be triggered and the recipe will be unlocked.
 
 All unwaxed copper blocks can be crafted with honeycomb into corresponding waxed blocks.
 
@@ -104,8 +106,8 @@ All unwaxed copper blocks can be crafted with honeycomb into corresponding waxed
 
 Some recipes may conflict with vanilla. To avoid the conflicts, there is a built-in data pack in this mod to avoid recipe conflicts, which is enabled by default. When the data pack is enabled, the following crafting will change:
 
-- Wool pressure plates are not crafted from 2 blocks of wool, but 3 carpets crafts into 1 wool pressure plate, and 1 wool pressure plate also crafts into 3 carpets.
-- Moss pressure plates are not crafted from 2 moss blocks, but 1 moss carpet crafts into 1 moss pressure plate, and 1 moss pressure plate also crafts into 2 moss carpets.
+- Wool pressure plates are not crafted from 2 blocks of wool, but 3 carpets can be crafted into 1 wool pressure plate, and 1 wool pressure plate can also be crafted into 3 carpets.
+- Moss pressure plates are not crafted from 2 moss blocks, but 3 moss carpets can be crafted into 1 moss pressure plate, and 1 moss pressure plate can also be crafted into 3 moss carpets.
 - Snow slabs are not crafted from 2 snow blocks but 1 snow (layer).
 - Stairs and slabs of vanilla sandstone, red sandstone and quartz must be crafted from base blocks, instead of variants of the base blocks.
 - Buttons of block of iron, block of gold, block of diamond, block of coal, block of lapis, pumpkin, block of netherite, raw gold block, raw copper block and raw iron block, are crafted from 1 base block and 1 iron ingot, gold ingot, diamond, coal, lapis lazuli, pumpkin seeds, netherite ingot, raw gold, raw copper or raw iron.
@@ -113,7 +115,7 @@ Some recipes may conflict with vanilla. To avoid the conflicts, there is a built
 - Walls of planks are crafted from 6 planks and 1 stick.
 - Copper walls and waxed copper walls (including all oxidization levels) are crafted from 6 base blocks and 1 copper ingot.
 
-This datapack is enabled by default. If it's not enabled in your word, you can run command `/datapack enable "extshape:recipe_tweak"`.
+This datapack is enabled by default. If it's not enabled in your world, you can run the command `/datapack enable "extshape:recipe_tweak"`.
 
 > If you installed the part that cooperates with other mods (see [inter-mod support](#inter-mod-support)), the recipe conflicts are unavoidable. In this case it's recommended to install mods that fix the recipe conflict.
 
@@ -136,9 +138,9 @@ In versions 1.19.2 and before, if you enabled "Add to vanilla groups", mods will
 You may also configure the shapes to be added into groups. You can enter the mod config screen through the mod menu of Mod Menu mod. If you did not install Mod Menu mod, you can also access the config screen of the mod through typing `/extshape:config` in game. The configuration GUI has the following contents:
 
 - **Add to vanilla item groups** (enabled by default). If enabled, all blocks of the mod will be added to vanilla item groups, usually directly after their base blocks or vanilla shape variants.
-- **Show specific item groups** (disabled by default). If enabled, the mod will provide 5 specific item groups to store the base blocks and shape variants (including ones) of blocks of this mod, but will not contain any base blocks that do not have shape variants in the mod. These 5 specified item groups are: "wooden and bamboo blocks", "colored blocks", "stone blocks", "mineral blocks", and "other blocks." Modifying this option requires restarting the game to take effect. Please note that it is recommended to enable at least one of "Add to vanilla item groups" and "Show specific item groups", or you cannot obtain blocks of this mod in the Creative Mode inventory.
-- **Shapes to add to vanilla item groups**: Text box, determining blocks of which shapes are added to vanilla item groups. Blocks that already exist in vanilla game are not affected. Multiple shape names are separated by a space, and invalid shape names are ignored. For example, if the value is set to `stairs slab`, only stairs and slabs of this mod will be added to vanilla item groups. These shapes are added in the order (but cannot be duplicate). If the value is `slab stairs`, stairs will be sorted after slabs (but stairs and slabs that already exist in vanilla games are not affected). The default value is all shapes.
-- **Shapes to add to specific item groups**: Text box, determining blocks of which shapes are added to specific item groups. Usage and default value are same as above. If this text box is empty, specific item groups will only have base blocks.
+- **Show specific item groups** (disabled by default). If enabled, the mod will provide 5 specific item groups to store the base blocks and shape variants (including vanilla variants) of blocks of this mod, but will not contain any base blocks that do not have shape variants in the mod. These 5 specified item groups are: "wooden and bamboo blocks", "colored blocks", "stone blocks", "mineral blocks", and "other blocks." Modifying this option requires restarting the game to take effect. Please note that it is recommended to enable at least one of "Add to vanilla item groups" and "Show specific item groups", or you cannot obtain blocks of this mod in the Creative Mode inventory.
+- **Shapes to add to vanilla item groups**: Text box, determining blocks of which shapes are added to vanilla item groups. Blocks that already exist in vanilla game are not affected. Multiple shape names are separated by a space, and invalid shape names are ignored. For example, if the value is set to `stairs slab`, only stairs and slabs of this mod will be added to vanilla item groups. These shapes are added in the order (but cannot be duplicated). If the value is `slab stairs`, stairs will be sorted after slabs (but stairs and slabs that already exist in vanilla games are not affected). The default value is all shapes.
+- **Shapes to add to specific item groups**: Text box, determining blocks of which shapes are added to specific item groups. Usage and default value are the same as above. If this text box is empty, specific item groups will only have base blocks.
 - **Sorting of the specific item group for wooden and bamboo blocks**: Can be set to "Same species different forms together" (by default) or "Same form different species together".
     - If set to "Same species different forms together", all oak blocks (wood, stripped wood, planks, etc.) and their various shape variants are placed together, all birch blocks and their various shape variants are placed together.
     - If set to "Same form different species together", all kinds of woods (oak wood, birch wood, spruce wood, etc.) block and their various shape variants are placed together, and all kinds of planks (oak planks, birch planks, spruce planks, etc.) and their various shape variants are placed together.
@@ -147,8 +149,8 @@ You may also configure the shapes to be added into groups. You can enter the mod
     - If set to "Same shape different colors together", full wool blocks in various colors are together, wool stairs in various colors are together, wool slabs in various colors are together.
 
 ℹ️Note:
-1. If "add to vanilla item groups" is enabled, it's not recommended to use mods like Inventory Item Groups or Bedrock Item Groups, which can group items in the creative inventory, because these mods may not handle the way blocks in this mod are sorted in vanilla item groups (creative inventory tabs).
-2. If Modern Fix mod is enabled, it's recommended to turn off "mixin.perf.memoize_creative_tab_build" in the mod config, otherwise changes to Extended Block Shanes configs may not take effect instantly. If this happens, you can modify vanilla "Options" - "Controls" - "Creative Items Tab", or leave the world and enter again.
+1. If "add to vanilla item groups" is enabled, it's not recommended to use mods like Inventory Item Groups or Bedrock Item Groups, which can group items in the creative inventory, because these mods may not handle well the way blocks in this mod are sorted in vanilla item groups (creative inventory tabs).
+2. If Modern Fix mod is enabled, it's recommended to turn off "mixin.perf.memoize_creative_tab_build" in the mod config, otherwise changes to Extended Block Shapes configs may not take effect instantly. If this happens, you can modify vanilla "Options" - "Controls" - "Creative Items Tab", or leave the world and enter again.
 
 ## Inter-mod support
 
@@ -158,6 +160,6 @@ The mod can currently add utilities with Blockus mod.
 
 If you have installed Extended Block Shapes and Blockus mod, you may optionally install "Extended Block Shapes - Blockus" mod based on those two mods, so that extended shapes for Blockus blocks will also be added. This mod does not support versions above 26.3
 
-If the option "Add to vanilla item groups" of Extended Block Shapes is added, blocks of "Extended Block Shape - Blockus" mod will be directly added to the item groups of Blockus mod, and which shapes are added depends on "Shapes to add to vanilla item groups" of Extended Block Shapes mod.
+If the option "Add to vanilla item groups" of Extended Block Shapes is enabled, blocks of "Extended Block Shape - Blockus" mod will be directly added to the item groups of Blockus mod, and which shapes are added depends on "Shapes to add to vanilla item groups" of Extended Block Shapes mod.
 
 If the option "Show specific item groups" of Extended Block Shapes is enabled, two specified item groups will be added: "Extended Block Shapes - Blockus: Construction Blocks" and "Extended Block Shapes - Blockus: Colored Blocks", and which shapes are added depends on "Shapes to add to specific item groups" of Extended Block Shapes mod.
