@@ -76,6 +76,7 @@ public class ExtShapeOptionsScreen extends Screen {
       value -> {
         newConfig.addToVanillaGroups = value;
         shapesToAddToVanillaTextField.setEditable(value);
+        resetShapesToAddToVanillaButton.active = value;
       }
   ).createWidget(gameOptions, width / 2 - 205, 36, 200);
 
@@ -91,6 +92,9 @@ public class ExtShapeOptionsScreen extends Screen {
       value -> {
         newConfig.showSpecificGroups = value;
         shapesInSpecificGroupsTextField.setEditable(value);
+        resetShapesInSpecificGroupsButton.active = value;
+        this.coloredBlockSortingButton.active = value;
+        this.woodenBlockSortingButton.active = value;
       }
   ).createWidget(gameOptions, width / 2 + 5, 36, 200);
 
@@ -126,6 +130,11 @@ public class ExtShapeOptionsScreen extends Screen {
   public ExtShapeOptionsScreen(@Nullable Screen parent) {
     super(Text.translatable("options.extshape.title"));
     this.parent = parent;
+
+    this.resetShapesInSpecificGroupsButton.active = newConfig.showSpecificGroups;
+    this.resetShapesToAddToVanillaButton.active = newConfig.addToVanillaGroups;
+    this.coloredBlockSortingButton.active = newConfig.showSpecificGroups;
+    this.woodenBlockSortingButton.active = newConfig.showSpecificGroups;
   }
 
   @Override
