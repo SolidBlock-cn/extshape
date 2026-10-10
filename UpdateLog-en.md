@@ -2,7 +2,7 @@
 
 ### 3.2.0
 
-- Optimized the implementation of item group rules. Item group rules are no longer rebuilt when rebuilding Creative inventories, and can be used more early. Now the items in the mod should be able to be displayed in the item list of JustEnoughItems mod.
+- Optimized the implementation of item group rules. Item group rules are no longer rebuilt when rebuilding Creative inventories, and can be used earlier. Now the items in the mod should be able to be displayed in the item list of JustEnoughItems mod.
 - Followed the updates in 3.1.5 for versions below 1.21.10, including:
     - Fixed the tag issue of shape variants of copper block, pumpkin and melon.
     - Considering vanilla `pressure_plates` and `stone_pressure_plates` only have block tags, no item tags, this mod uses corresponding tags namespaced `extshape`.
@@ -10,22 +10,22 @@
 - Readded the feature of "specific item groups" removed at the time of Minecraft 1.19.3. Now there are 5 specific groups: wooden and bamboo blocks, colored blocks, stone blocks, mineral blocks, other blocks. Enabling or disabling specific item groups now requires restarting the game.
     - In the specific item group for colored blocks, colors are sorted like in vanilla item groups.
 - Added two config entries: wooden and bamboo block specific item group sorting and colored blocks item group sorting.
-    - The sorting for item groups of wooden and bamboo blocks can be: "same species different forms together" (default), "same form different species together". "Species" refers to different types of trees, such as oak and birch, and "form" refers to how the wood is processed, such as wood (hyphae), log (stem), planks. Bamboo block is treated as log form; bamboo planks are treated as planks form; there are no corresponding wood form for bamboo. For example, when setting to "same species different forms together", variants forms like oak wood, stripped oak wood and oak planks are placed together, while when setting to "same form different species together", wood blocks like oak wood and birch wood are placed together, and plank blocks like oak planks and birch planks are placed together.
+    - The sorting for item groups of wooden and bamboo blocks can be: "same species different forms together" (default), "same form different species together". "Species" refers to different types of trees, such as oak and birch, and "form" refers to how the wood is processed, such as wood (hyphae), log (stem), planks. Bamboo block is treated as log form; bamboo planks are treated as planks form; there are no corresponding wood form for bamboo. For example, when setting to "same species different forms together", variant forms like oak wood, stripped oak wood and oak planks are placed together, while when setting to "same form different species together", wood blocks like oak wood and birch wood are placed together, and plank blocks like oak planks and birch planks are placed together.
     - The sorting for item groups of colored blocks can be: "same color different shapes together" and "same shape different colors together". For example, when setting to "same color different shapes together", white wool along with its stairs and slab is placed together, light gray wool along with its stairs and slab is placed together, while when setting to "same shape different colors together", base blocks of white wool, light gray wool and wool block of other various colors are placed together, the wool stairs of various colors are placed together, and the wool slabs of various colors are placed together.
     - In the mod's configuration screen, when "show specific item groups" is off, the buttons for the two config entries above will be disabled.
-- Fixed the issue that when modifying "shapes to add to vanilla item groups" and "shapes to add to specific item groups", the modification cannot work if nothing but the order is changes.
+- Fixed the issue that when modifying "shapes to add to vanilla item groups" and "shapes to add to specific item groups", the modification cannot work if nothing but the order is changed.
 - Now in the configuration screen, when the "add to vanilla item groups" and "show specific item groups" are off, besides relevant text fields, the "reset" button right to the text field will also be disabled.
 
 ### 3.1.6
 
 - See the update log for 3.1.6-beta.1, 3.1.6-beta.2, 3.1.6-beta.3.
-- For 26.3, see the update log for 3.1.6-beta.4, 3.1.6-beta.5, 3.1.6-beta.6, 3.1.6-beta.7, 3.1.6-beta.8, 3.1.9-beta.9, 3.1.9-beta.10, 3.1.6-beta.11, 3.1.6-beta.12, 3.1.6-rc.1.
+- For 26.3, see the update log for 3.1.6-beta.4, 3.1.6-beta.5, 3.1.6-beta.6, 3.1.6-beta.7, 3.1.6-beta.8, 3.1.6-beta.9, 3.1.6-beta.10, 3.1.6-beta.11, 3.1.6-beta.12, 3.1.6-rc.1.
 - For 26.3, now the stripping of wood blocks is registered through Fabric API.
 
 ### 3.1.6-rc.1
 
 - (For 26.3 only) Now the mod can be normally configured in the mod list of Mod Menu mod.
-- Known issue: Typing an invalid shape name in the text field in the configuration screen causes logging an error in the console. This issue also exists in other version.
+- Known issue: Typing an invalid shape name in the text field in the configuration screen causes logging an error in the console. This issue also exists in other versions.
 
 ### 3.1.6-beta.12
 
@@ -61,10 +61,10 @@
     - `extshape:shape_variant_modifier/half`: 0.5
     - `extshape:shape_variant_modifier/one_third`: 1/3
     - `extshape:shape_variant_modifier/quarter`: 0.25
-- Added the number provider for the composting and cooking for the shape variants of some blocks. The ID is `extshape:shape_variant/<scene type>/<base name>/<variant type>`, where the value of `<scene type>` is `compostable` or `cooking`, the `<variant type` is `half`, `one_third` or `quarter`. Example: `extshape:shape_variant/compostable/medium/half`, `extshape:shape_variant/cooking/time_wool/quarter`.
-    - `half` variant type is used for slabs and vertical slabs, `one_third` variant type is used for buttons and pressure plates, `quarter` variant type is used for vertical quarter pieces and quarter pieces. For example, the cooking number provider of yellow wool button is `ehanced_commands:shape_variant/cooking/time_wool/one_third`, the composting number provider of pale moss is `extshape:shape_variant/compostable/mediun/quarter`.
+- Added the number provider for the composting and cooking for the shape variants of some blocks. The ID is `extshape:shape_variant/<scene type>/<base name>/<variant type>`, where the value of `<scene type>` is `compostable` or `cooking`, the `<variant type>` is `half`, `one_third` or `quarter`. Example: `extshape:shape_variant/compostable/medium/half`, `extshape:shape_variant/cooking/time_wool/quarter`.
+    - `half` variant type is used for slabs and vertical slabs, `one_third` variant type is used for buttons and pressure plates, `quarter` variant type is used for vertical quarter pieces and quarter pieces. For example, the cooking number provider of yellow wool button is `extshape:shape_variant/cooking/time_wool/one_third`, the composting number provider of pale moss is `extshape:shape_variant/compostable/medium/quarter`.
     - Stairs, vertical stairs, fences, fence gates and walls use the cooking or composting number provider of their base blocks. For example, the cooking number provider of yellow wool wall is `minecraft:cooking/time_wool`, and the composting number provider of pale moss fences is `minecraft:compostable/medium`.
-    - For composting number providers, the probability the value is 1 is the probability its base value (the value of the composting number provider of the base block) is 1 multiplied by the value of its corresponding variant modifier, but similar to vanilla behavior, composting always successes when the composter block is empty.
+    - For composting number providers, the probability the value is 1 is the probability its base value (the value of the composting number provider of the base block) is 1 multiplied by the value of its corresponding variant modifier, but similar to vanilla behavior, composting always succeeds when the composter block is empty.
     - For cooking number providers, the cooking time is the base value (the value of the cooking number provider of the base block) multiplied by the value of its corresponding variant modifier.
     - These number providers are affected by the number providers of the corresponding base blocks, and meanwhile affected by the number provider of variant modifier value (`extshape:shape_variant_modifier/<variant modifier type>`).
 - Fixed the issue of wrong block sort of colored blocks in the creative mode inventory in 26.3.
@@ -75,7 +75,7 @@
 - Update to 26.3 snapshot 3.
 - Following vanilla changes, current block loot tables will also reference the loot table predicate in the dynamic registry, instead of inlined in loot tables.
 - Following vanilla changes, composting chances will use the number providers in the dynamic registry.
-    - In the current version, the composting chance of some items has been changes comparing to the previous version, as only vanilla number providers are used currently. Further adjustments will be made in future versions.
+    - In the current version, the composting chance of some items have changed compared with the previous version, as only vanilla number providers are used currently. Further adjustments will be made in future versions.
 
 ### 3.1.6-beta.4
 
@@ -87,7 +87,7 @@
 - Optimized the way the fuels are registered.
     - Now registration will no longer happen for every single block. It can improve loading speed in theory.
     - Now the fuel time is automatically decided according to registered fuel time.
-    - Added the verification of fuel time. In the development environment, if a base block can be used as fuel but its shape variants cannot, or a bae block cannot be used as fuel but the shape variants can, exceptions will be thrown.
+    - Added the verification of fuel time. In the development environment, if a base block can be used as fuel but its shape variants cannot, or a base block cannot be used as fuel but the shape variants can, exceptions will be thrown.
     - As vanilla treats all items with `#fence_gates` item tags as fuel, some fence gate blocks made of non-burnable blocks were also used as fuels. This issue has now been fixed.
 - Now in vanilla, when handling special sorted blocks (such as copper-related blocks), the "shapes to add to vanilla" in the mod's config will also be used.
 
@@ -98,7 +98,7 @@
 ### 3.1.6-beta.1
 
 - Adjusted the sorting of copper blocks in the creative mode inventory for versions 26.2 and above to match vanilla.
-- Fit 26.3-snapshot-1.
+- Updated for 26.3-snapshot-1.
     - Now in 26.3 versions, the mod no longer provides wool stairs and slabs, because they already exist in vanilla. The former block and item IDs in the mod will be redirected to vanilla IDs, making use of the registry alias feature of Fabric API. For example, `extshape:red_wood_stairs` will be identical to `minecraft:red_wood_stairs`.
     - Now in 26.3 versions, there are no longer `#extshape:woolen_stairs` and `#extshape:woolen_slabs` block and item tags, and the vanilla `#minecraft:wool_stairs` and `#minecraft:wool_slabs` block and item tags will be directly used.
     - Now in 26.3 versions, petrified oak planks, double smooth stone slab blocks and all extended shapes are added to `#blocks_motion_no_leaves` block tag, so as to be automatically added to block tags like`#blocks_motion`.
@@ -108,7 +108,7 @@
 - Now in the development environment, block tags are verified more. Block Tags related to block harvesting (`#mineable/*`, `#needs_*_tool`, `#incorrect_for_*_tool`, and `#shears_*_breaking_speed` introduced in 26.2), those existing in base blocks must exist in variants block, and those not existing in base blocks must not exist in variants block, otherwise errors are thrown. Meanwhile, the following changes are applied to block tags:
     - Fixed the issue that blocks of waxed copper block of any oxidization level do not have `#needs_stone_tool` tag.
     - Fixed the issue that pumpkins and melons blocks do not have `#sword_efficient` tag.
-- Now in the development environment, item tags will be varified. As vanilla `#pressure_plates` and `#stone_pressure_plates` only provide block tags, not item tags, the mod now uses block and item tags `#extshape:pressure_plates` and `#extshape:stone_pressure_plates`, and the block tags `#extshape:pressure_plates` and `#extshape:stone_pressure_plates` will be treated as the aliases of vanilla block tags `#pressure_plates` and `#extshape:stone_pressure_plates`. Meanwhile, the following changes are made on item tags:
+- Now in the development environment, item tags will be verified. As vanilla `#pressure_plates` and `#stone_pressure_plates` only provide block tags, not item tags, the mod now uses block and item tags `#extshape:pressure_plates` and `#extshape:stone_pressure_plates`, and the block tags `#extshape:pressure_plates` and `#extshape:stone_pressure_plates` will be treated as the aliases of vanilla block tags `#pressure_plates` and `#stone_pressure_plates`. Meanwhile, the following changes are made on item tags:
     - Fixed the issue that `#pressure_plates` item tag does not contain `#wooden_pressure_plates` and `#stone_pressure_plates` (now item tags do not use `#pressure_plates` and `#stone_pressure_plates` which does not exist in vanilla).
     - Added more stone blocks' pressure plates and buttons to `#extshape:stone_pressure_plates` and `#minecraft:stone_buttons` block and item tags.
 - Now in the development environment, stonecutting recipes are verified. If a base block can be cut into some shape variants of some base block (which can be the same or another), while cannot be cut into other shapes (only limited to construction shapes and walls), errors will be thrown. For instance, if A can be cut into stairs and slab of B (A and B can be a same base block), but cannot be cut into a vertical slab of B, an error will be thrown. Besides, as stonecutting is limited to construction shapes and walls, if some block can be cut into other shapes (such as button, pressure plate), an error will be thrown as well. Meanwhile, the following changes are applied to stonecutting recipes.
@@ -119,8 +119,8 @@
 
 ### 3.1.4.1-beta.1
 
-- Fit 26.1 snapshots. Added all variants for sulfur, polished sulfur, sulfur bricks, cinnabar, polished cinnabar, cinnabar bricks. Variants for chiseled sulfur and chiseled cinnabar are not added.
-- Petrified oak planks and double smooth stone stairs can be absorbed by Sulfur Cube and belong to regular type (same as stone blocks).
+- Updated for 26.1 snapshots. Added all variants for sulfur, polished sulfur, sulfur bricks, cinnabar, polished cinnabar, cinnabar bricks. Variants for chiseled sulfur and chiseled cinnabar are not added.
+- Petrified oak planks and double smooth stone slab can be absorbed by Sulfur Cube and belong to regular type (same as stone blocks).
 
 ### 3.1.3
 
@@ -128,7 +128,7 @@
 - Use `@NullMarked`.
 - Fixed the issue that items of netherite blocks are not fire-resistant in 26.1.
 
-> Since this version, the version number of the mod file use an add symbol instead of hyphen to identify Minecraft versions, for example `3.1.3+mc26.1` instead of `3.1.3-mc26.1`.
+> Since this version, the version number of the mod file uses a plus sign instead of hyphen to identify Minecraft versions, for example `3.1.3+mc26.1` instead of `3.1.3-mc26.1`.
 
 ### 3.1.2
 
@@ -142,8 +142,8 @@
 ### 3.1.0
 
 - Adjusted the inclusion rule of block tags `#stone_buttons` and `#stone_pressure_plates` to limit to some stone blocks.
-- Fixed the wrong issue of some blocks in Blockus mod.
-- Followed up to updates of Blockus, added Blockus blocks related to pale oaks, resin.
+- Fixed the wrong model of some blocks in Blockus mod.
+- Followed the updates of Blockus, added Blockus blocks related to pale oaks, resin.
 - Fixed the wrong tag name of some terracotta pillar blocks in Blockus, and added relevant tag translation.
 - Fixed the issue that some block variants are still added even if the variants already exist.
 
@@ -152,7 +152,7 @@
 - Since version 1.21.4, following vanilla update, all buttons and pressure plates can be harvested by hand with dropping themselves.
     - Buttons and pressure plates for glowstone and clay block also drop themselves. Versions below 1.21.3 are not affected.
     - Buttons and pressure plates of bedrock cannot be harvested in Survival Mode, but when losing support blocks, will drop normally.
-    - Except for bedrock, the hardness and resistance of buttons and pressures, if higher than 0.5 in previous versions, will be all adjusted to 0.5. Versions below 1.21.3 are not affected.
+    - Except for bedrock, the hardness and resistance of buttons and pressure plates, if higher than 0.5 in previous versions, will be all adjusted to 0.5. Versions below 1.21.3 are not affected.
 - Fixed the issue that buttons and pressure plates of bedrock may not drop when losing support blocks.
 - Fixed the issue that buttons and pressure plates of bedrock may be destroyed when pushed by a piston.
 - Fixed the issue that items of blocks of gilded blackstone do not have the item tag `#minecraft:piglin_loved`.
@@ -199,7 +199,7 @@
         - viridite tiles (replaced with viridite)
         - viridite squares (replaced with viridite)
         - obsidian bricks (replaced with small obsidian bricks)
-        - netherrack bricks (replaced with polished netehrrack)
+        - netherrack bricks (replaced with polished netherrack)
         - quartz tiles (replaced with smooth quartz)
         - magma bricks (replaced with small magma bricks; buttons are removed and replaced too)
         - herringbone nether bricks (replaced with nether bricks)
@@ -294,7 +294,7 @@
 - Buttons of pumpkin and melon will no longer have `#wooden_buttons` tag.
 - Pressure plates of pumpkin and melon will no longer have `#wooden_pressure_plates` tag.
 - Fixed the issue that `#pressure_plates` lack its corresponding item tag.
-- Removed the feature in the configuration screen to avoid some specific recipes, and added a built-in datapack to avoid recipe conflicts, which is enabled by default and can be disabled through command `/datapack disbale ...`.
+- Removed the feature in the configuration screen to avoid some specific recipes, and added a built-in datapack to avoid recipe conflicts, which is enabled by default and can be disabled through command `/datapack disable ...`.
 - The command `/extshape:check-conflict` added a new parameter to filter namespaces.
     - Tests recipe conflicts of all namespaces if not specified.
     - Tests recipe conflicts between the specified namespace and vanilla if only specified one.
@@ -307,8 +307,8 @@
 
 ### 2.2.2
 
-- Fit for new BRRP API.
-- Fit Blocks 2.9.2。
+- Updated for new BRRP API.
+- Updated for Blockus 2.9.2.
 - Following Blockus 2.9.2 changes, canceled rainbow glowstone dropping rainbow petals.
 
 ### 2.2.1.9
@@ -361,12 +361,12 @@ This version is published in Jan 2026, which is only a fix update to mods for ol
 - Fixed the issue that Extended Block Shapes Blockus cannot run correctly due to compilation issue.
 - Fixed the issue that pressure plates with special features (such as sculk pressure plate) cannot work normally.
 - Adjusted again the activation time of some pressure plates and buttons.
-- Adjusted some loot tables. Now blocks who drop other items, no matter when dropping other items, or dropping themselves under the effect of Silk Touch enchantment, when the block is a double slab, the dropped stacks are doubled.
+- Adjusted some loot tables. Now blocks that drop other items, no matter when dropping other items, or dropping themselves under the effect of Silk Touch enchantment, when the block is a double slab, the dropped stacks are doubled.
 - Fixed the issue that sculk buttons do not drop experience upon harvested.
 
 ### 2.1.0
 
-- Added blocks of various shapes for unwaxed copper blocks (waxed blocks already exist in previous versions). Now these blocks can be normally waxed and de-waxed. Unnwaxed block can be oxidized or restored.
+- Added blocks of various shapes for unwaxed copper blocks (waxed blocks already exist in previous versions). Now these blocks can be normally waxed and de-waxed. Unwaxed block can be oxidized or restored.
 - Fixed the issue that activated pressure plates or buttons cannot release normally after changing blocks (such as wood pressure plates or buttons being stripped).
 - Adjusted the activation time for some pressure plate blocks, instead of all 20 ticks.
 - (For 1.20.4) Added blocks of various shapes for tuff variants. Meanwhile, considering tuff stairs, tuff slab and tuff walls are experimental features, they are not regarded as formal content.
@@ -376,7 +376,7 @@ This version is published in Jan 2026, which is only a fix update to mods for ol
 - Adjusted the crafting recipes to crafting with 3 wool carpets or moss carpets.
 - Added fences, fence gates and pressure plates for patterned wool and gingham wool (but not buttons). A pressure plate is crafted from 3 carpets.
 - No longer allows charring planks and wooden mosaic in various shapes.
-- Made blocks of sugar blocks invisible in creative inventory and removed crafting recipe, because sugar block is a falling block, however, the variants in various shapes do not implement this feature.
+- Made shape variants of sugar blocks invisible in creative inventory and removed crafting recipe, because sugar block is a falling block, however, the variants in various shapes do not implement this feature.
 - Added button and pressure plate for stone bricks, mossy stone bricks, bricks block, nether wart and warped wart.
 - Fixed the issue that the texture of blocks of blackstone on top and bottom side is incorrect.
 - Adjusted the second crafting ingredient of fences and fence gates (including those whose base block is from Blockus mod).
@@ -409,8 +409,8 @@ This version is published in Jan 2026, which is only a fix update to mods for ol
 
 - Fixed the issue that some blocks lack tags such as `minecraft:mineable/pickaxe`.
 - Fixed the issue that walls of non-`mineable/pickaxe` blocks are pickaxe-mineable.
-- Fixed the correct recipes of slabs and stairs of pattered wools in Blockus mod.
-- Fixed the issue that some blocks of pattered wools in Blockus are not shears-mineable.
+- Fixed the incorrect recipes of slabs and stairs of patterned wools in Blockus mod.
+- Fixed the issue that some blocks of patterned wools in Blockus are not shears-mineable.
 - Fixed the issue that herringbone cherry planks blocks cannot be charred into relevant charred planks blocks.
 - Fixed the identifying of mining tools of blocks during data generation.
 - For versions 1.20 and above, ore blocks can now be crafted into Blockus ore brick blocks.
@@ -483,7 +483,7 @@ This version is published in Jan 2026, which is only a fix update to mods for ol
 - Added shapes for logs and woods (blocks with 6-face sparks) as well as hyphaes and stems, including their stripped variants.
 - Added shapes for dirt, coarse dirt, coal block, froglights, deepslate, polished deepslate and sculk.
 - Fixed incorrect texture for quarter piece block.
-- The command `extshape:check-confict` can only be executed by player now.
+- The command `extshape:check-conflict` can only be executed by player now.
 - Optimized the code.
 
 ### 1.6.0
@@ -530,7 +530,7 @@ The update does not seem obvious, but code is changed from head to toe, actually
     - Mining blocks based on gold block, raw gold block and gilded blackstone irritates piglins (block tag `#piglin_guarded`).
     - Dripleaves can be placed on blocks of moss and clay (block tag `#small_dripleaf_placeable_on`).
     - Wool blocks, like vanilla wools, can be sheared quickly (block tag `#fabric:mineable/shears`).
-    - Re-added walls of non-stone blocks, which cannot be harvested quickly by pickaxes. Although `#minecraft:mineable/pickaxes` directly contains `#minecraft:walls`, this mod lets blocks of `#extshape:pickaxe_unmineable` no possible to be harvested quickly by pickaxes.
+    - Re-added walls of non-stone blocks, which cannot be harvested quickly by pickaxes. Although `#minecraft:mineable/pickaxes` directly contains `#minecraft:walls`, this mod makes blocks of `#extshape:pickaxe_unmineable` impossible to be harvested quickly by pickaxes.
 - Added a corresponding unlocking advancement for recipes. When obtaining some ingredients, the advancement is triggered and the recipe is unlocked.
 - Added configuration screen, to config whether to add items into vanilla item groups, and whether to add extra item groups for this block. Besides, the mod adds the feature of manually re-generate and dump runtime resource packs.
 - Fixed some issues in language files, and refined some wording.
