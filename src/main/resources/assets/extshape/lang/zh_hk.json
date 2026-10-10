@@ -21,7 +21,7 @@
   "itemGroup.extshape.mineral_blocks": "礦物方塊",
   "itemGroup.extshape.other_blocks": "其他",
 
-  "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗更多形狀，包括原版唔存在嘅形狀，如縱半磚、縱樓梯同橫條。大多數方塊都有好似原版一样嘅行為，就類似於基礎方塊。比如，基岩樓梯同基岩半磚像基岩本身一樣，可以防爆防凋零怪，羊毛欄杆同羊毛閘門可燃且可以被鉸剪剪碎。\n藉助此模組，你可以製作出更加精美嘅建築，玩生存也會更貪得意。",
+  "modmenu.descriptionTranslation.extshape": "本模組為好多方塊添加咗更多形狀，包括原版唔存在嘅形狀，如縱半磚、縱樓梯同橫條。大多數方塊都有好似原版一樣嘅行為，就類似於基礎方塊。比如，基岩樓梯同基岩半磚像基岩本身一樣，可以防爆防凋零怪，羊毛欄杆同羊毛閘門可燃且可以被鉸剪剪碎。\n藉助此模組，你可以製作出更加精美嘅建築，玩生存也會更有趣。",
   "modmenu.summaryTranslation.extshape": "為好多原版方塊添加咗更多形狀，且具有類似原版嘅行為。",
 
   "options.extshape.title": "擴展方塊形狀模組配置",
@@ -29,7 +29,7 @@
   "options.extshape.addToVanillaGroups.tooltip": "如果啟用，此模組中嘅方塊將會直接添加到 Minecraft 嘅原版物品組中，例如%s、%s同%s。方塊會直接添加到其基礎方塊後面，咁你可以方便找到同一基礎方塊嘅不同形狀嘅方塊。默認情況下，會添加所有嘅形狀。你可以喺下方嘅文本框中指定添加邊個形狀。",
   "options.extshape.addToVanillaGroups.notice_for_effect": "立即生效。",
   "options.extshape.showSpecificGroups": "顯示專用物品組",
-  "options.extshape.showSpecificGroups.tooltip": "添加 4 個專用物品組以顯示所有擁有唔同形狀嘅方塊（含原版同模組中），依啲方塊按照其基礎方塊嘅順序排列，基礎方塊相同嘅方塊顯示喺一起。",
+  "options.extshape.showSpecificGroups.tooltip": "添加 5 個專用物品組以顯示所有擁有唔同形狀嘅方塊（含原版同模組中），依啲方塊按照其基礎方塊嘅順序排列，基礎方塊相同嘅方塊顯示喺一起。",
   "options.extshape.showSpecificGroups.notice_for_effect": "重啟遊戲後生效。",
   "options.extshape.shapesToAddToVanilla": "添加到原版物品組中嘅形狀",
   "options.extshape.shapesToAddToVanilla.description": "需要將邊形狀嘅方塊添加到原版物品組中？（用空格間隔。）",
@@ -63,7 +63,7 @@
   "modmenu.nameTranslation.extshape": "擴展方塊形狀",
 
   "resourcePack.extshape.recipe_tweak.name": "配方調整",
-  "resourcePack.extshape.recipe_tweak.description": "調整擴展方塊形狀模組嘅些合成配方以修復同原版合成配方之間嘅衝突。如果安裝中咗能解決合成配方衝突嘅模組，可以禁用呢個數據包。",
+  "resourcePack.extshape.recipe_tweak.description": "調整擴展方塊形狀模組嘅一啲合成配方以修復同原版合成配方之間嘅衝突。如果安裝咗能解決合成配方衝突嘅模組，可以禁用呢個數據包。",
 
   "tag.block.extshape.snow": "雪",
 
