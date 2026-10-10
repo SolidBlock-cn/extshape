@@ -139,7 +139,7 @@ public class ExtShape implements ModInitializer {
         final RegistryEntry<Block> blockEntry = blockRegistry.getEntry(block);
         final RegistryEntry<Block> baseBlockEntry = blockRegistry.getEntry(baseBlock);
 
-        for (TagKey<Block> tag : ImmutableSet.of(BlockTags.AXE_MINEABLE, BlockTags.HOE_MINEABLE, BlockTags.PICKAXE_MINEABLE, BlockTags.SHOVEL_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL, BlockTags.NEEDS_IRON_TOOL, BlockTags.NEEDS_STONE_TOOL, BlockTags.SWORD_EFFICIENT)) {
+        for (TagKey<Block> tag : ImmutableSet.of(BlockTags.AXE_MINEABLE, BlockTags.HOE_MINEABLE, BlockTags.PICKAXE_MINEABLE, BlockTags.SHOVEL_MINEABLE, BlockTags.NEEDS_DIAMOND_TOOL, BlockTags.NEEDS_IRON_TOOL, BlockTags.NEEDS_STONE_TOOL, BlockTags.SWORD_EFFICIENT, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, BlockTags.INCORRECT_FOR_GOLD_TOOL, BlockTags.INCORRECT_FOR_IRON_TOOL, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, BlockTags.INCORRECT_FOR_STONE_TOOL, BlockTags.INCORRECT_FOR_WOODEN_TOOL)) {
           final boolean blockInTag = blockEntry.isIn(tag);
           final boolean baseBlockInTag = baseBlockEntry.isIn(tag);
 
