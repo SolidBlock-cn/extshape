@@ -146,6 +146,10 @@ You may also configure the shapes to be added into groups. You can enter the mod
     - If set to "Same color different shapes together", white wool and its various shape variants are together, light gray wool and its various shapes variants are together.
     - If set to "Same shape different colors together", full wool blocks in various colors are together, wool stairs in various colors are together, wool slabs in various colors are together.
 
+ℹ️Note:
+1. If "add to vanilla item groups" is enabled, it's not recommended to use mods like Inventory Item Groups or Bedrock Item Groups, which can group items in the creative inventory, because these mods may not handle the way blocks in this mod are sorted in vanilla item groups (creative inventory tabs).
+2. If Modern Fix mod is enabled, it's recommended to turn off "mixin.perf.memoize_creative_tab_build" in the mod config, otherwise changes to Extended Block Shanes configs may not take effect instantly. If this happens, you can modify vanilla "Options" - "Controls" - "Creative Items Tab", or leave the world and enter again.
+
 ## Inter-mod support
 
 The mod can currently add utilities with Blockus mod.
