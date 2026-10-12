@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "blockus:tuff_tiles"
+  },
+  "result": "extshape_blockus:tuff_tile_quarter_piece"
+}
