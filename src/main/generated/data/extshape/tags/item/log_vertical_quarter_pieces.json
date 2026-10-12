@@ -36,13 +36,13 @@
     "extshape:stripped_dark_oak_wood_vertical_quarter_piece",
     "extshape:stripped_pale_oak_wood_vertical_quarter_piece",
     "extshape:stripped_mangrove_wood_vertical_quarter_piece",
-    "extshape:warped_stem_vertical_quarter_piece",
     "extshape:crimson_stem_vertical_quarter_piece",
-    "extshape:stripped_warped_stem_vertical_quarter_piece",
+    "extshape:warped_stem_vertical_quarter_piece",
     "extshape:stripped_crimson_stem_vertical_quarter_piece",
-    "extshape:warped_hyphae_vertical_quarter_piece",
+    "extshape:stripped_warped_stem_vertical_quarter_piece",
     "extshape:crimson_hyphae_vertical_quarter_piece",
-    "extshape:stripped_warped_hyphae_vertical_quarter_piece",
-    "extshape:stripped_crimson_hyphae_vertical_quarter_piece"
+    "extshape:warped_hyphae_vertical_quarter_piece",
+    "extshape:stripped_crimson_hyphae_vertical_quarter_piece",
+    "extshape:stripped_warped_hyphae_vertical_quarter_piece"
   ]
 }

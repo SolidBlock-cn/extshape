@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "minecraft:flint",
+    "W": "blockus:water_bricks"
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "count": 3,
+    "id": "extshape_blockus:water_brick_fence_gate"
+  }
+}

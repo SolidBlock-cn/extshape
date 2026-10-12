@@ -1,0 +1,31 @@
+{
+  "values": [
+    "extshape:granite_button",
+    "extshape:polished_granite_button",
+    "extshape:diorite_button",
+    "extshape:polished_diorite_button",
+    "extshape:andesite_button",
+    "extshape:polished_andesite_button",
+    "extshape:cobblestone_button",
+    "extshape:smooth_sandstone_button",
+    "extshape:smooth_red_sandstone_button",
+    "extshape:mossy_cobblestone_button",
+    "extshape:netherrack_button",
+    "extshape:stone_brick_button",
+    "extshape:mossy_stone_brick_button",
+    "extshape:end_stone_button",
+    "extshape:end_stone_brick_button",
+    "extshape:red_nether_brick_button",
+    "extshape:smooth_stone_button",
+    "extshape:blackstone_button",
+    "extshape:tuff_button",
+    "extshape:calcite_button",
+    "extshape:deepslate_button",
+    "extshape:cobbled_deepslate_button",
+    "extshape:deepslate_tile_button",
+    "extshape:deepslate_brick_button",
+    "extshape:basalt_button",
+    "extshape:polished_basalt_button",
+    "extshape:smooth_basalt_button"
+  ]
+}

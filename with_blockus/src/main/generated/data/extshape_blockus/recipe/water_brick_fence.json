@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:flint",
+    "W": "blockus:water_bricks"
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:water_brick_fence"
+  }
+}

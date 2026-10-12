@@ -36,13 +36,13 @@
     "extshape:stripped_dark_oak_wood_slab",
     "extshape:stripped_pale_oak_wood_slab",
     "extshape:stripped_mangrove_wood_slab",
-    "extshape:warped_stem_slab",
     "extshape:crimson_stem_slab",
-    "extshape:stripped_warped_stem_slab",
+    "extshape:warped_stem_slab",
     "extshape:stripped_crimson_stem_slab",
-    "extshape:warped_hyphae_slab",
+    "extshape:stripped_warped_stem_slab",
     "extshape:crimson_hyphae_slab",
-    "extshape:stripped_warped_hyphae_slab",
-    "extshape:stripped_crimson_hyphae_slab"
+    "extshape:warped_hyphae_slab",
+    "extshape:stripped_crimson_hyphae_slab",
+    "extshape:stripped_warped_hyphae_slab"
   ]
 }
