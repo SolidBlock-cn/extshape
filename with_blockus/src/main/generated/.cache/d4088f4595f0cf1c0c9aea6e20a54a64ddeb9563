@@ -1,4 +1,4 @@
-// 1.21.1	2026-10-09T22:53:59.6709584	Extended Block Shapes - Blockus/Tags for minecraft:block
+// 1.21.1	2026-10-12T23:18:45.2608142	Extended Block Shapes - Blockus/Tags for minecraft:block
 7a64346424ac1b794371c60cfa77f3cbb1283184 data\blockus\tags\block\phantom_purpur_blocks.json
 291f70f838993ec18845a6f6eea3c4b6921eb0ff data\blockus\tags\block\snow_bricks.json
 3c7dd1eb55df0efc9baaa64b04c81ec386389c13 data\extshape\tags\block\log_stairs.json
@@ -10,14 +10,14 @@ fb27f09a9fd842a360cb598605c96c5750e5aaa4 data\extshape_blockus\tags\block\glazed
 7c720dbfd30d9571a4b8fce94ea7da3b7b754f10 data\blockus\tags\block\diorite_blocks.json
 85c8f27dd5e00fbbba2ac0e11df8346c616abce5 data\blockus\tags\block\nether_bricks.json
 8d908d32b8b57ff3fcc93f5fdb184d0f99448cfd data\extshape\tags\block\wooden_walls.json
-cec4c4d6124f1d402f0f4561698a5f18fb46e1ba data\extshape\tags\block\vertical_slabs.json
+9cd64504a320cf4e09b369c50e75eb8ec241a080 data\extshape\tags\block\vertical_slabs.json
 a0bf96c3fbd6edf68333e23eaecaa7c97734ca56 data\blockus\tags\block\platings.json
 521e158f8f718d8857e013375c36faa2ab02f082 data\blockus\tags\block\marble.json
-80266c42ab4c585e12660282b64b9abb20b5bd71 data\blockus\tags\block\red_sandstone.json
+ba827209d385c7cfae2416d5ea9b0b375ef66cc9 data\blockus\tags\block\red_sandstone.json
 0d65530597eaee37d5e1dd7ab67481f9e343277b data\minecraft\tags\block\fences.json
 a67925ed7960f26713dcc781ff5aadb03ef7a602 data\extshape_blockus\tags\block\glazed_terracotta_pillar_quarter_piece.json
 1080adf14294788de1cb66cdc345ad8618c8b7ca data\blockus\tags\block\chocolate_blocks.json
-ac734536a414a2866d1431b3ac7266bfa375e627 data\extshape\tags\block\vertical_stairs.json
+88eae5c7c9bcfbf3094e901feb2eb4459a3c7a26 data\extshape\tags\block\vertical_stairs.json
 64392aaa73d7c97b759c77e9c7bea8903e730e28 data\extshape\tags\block\log_vertical_stairs.json
 a8d74fc74712f245577295306f7971a225b6a638 data\minecraft\tags\block\buttons.json
 daee9ae99cf7beaf53d6704b2435ecf36d8fc6c0 data\blockus\tags\block\end_stone_blocks.json
@@ -41,7 +41,7 @@ d45e3355d09ec24ccdd2d37c14f41bf0d8dfd5a4 data\extshape\tags\block\woolen_blocks.
 ed314a73f0db67d8b8f82a767889e302fd5901d4 data\extshape\tags\block\log_vertical_slabs.json
 29688563c61ba47d44f29d00810e34af6d898cfd data\blockus\tags\block\water_bricks.json
 d46f03d5ec1eebe0dcd467bd4da7d35487dce2eb data\blockus\tags\block\obsidian.json
-2b667f9570afcbe650960c6d9a511cf4cd01cb67 data\blockus\tags\block\soul_sandstone.json
+07fc5abb8b448d96927a7d59f42b7eacd97f39d1 data\blockus\tags\block\soul_sandstone.json
 5d5e1ee166e797b804bbee9df9eebac04b91b5df data\blockus\tags\block\netherrack_blocks.json
 e65a916f28bab6d908cc60b10e5ae5d3ccd5c1c7 data\extshape\tags\block\wooden_vertical_stairs.json
 e81476158ad82367748f768ad1d5204e776d42d2 data\extshape_blockus\tags\block\glazed_terracotta_pillar_vertical_stairs.json
@@ -54,25 +54,25 @@ de38b6ef30ee347fe3b3c971da5d7d539a394ded data\blockus\tags\block\all_wooden_mosa
 b2efd4fe1a60f0dd167bcb3a839ce3cc7e69c892 data\minecraft\tags\block\wooden_stairs.json
 dd4921f7a1fabd81076f4987896512f254832b66 data\blockus\tags\block\sculk_blocks.json
 cbc2c84b7a04764e5a64ed83f01c118d150b631c data\blockus\tags\block\ice_bricks.json
-85308249dedc6d89e589e7e2307997f712617618 data\extshape\tags\block\stone_pressure_plates.json
+522c2a4be1bdcb581a80ebd79bab9f226b665844 data\extshape\tags\block\stone_pressure_plates.json
 b163ee3a1f73ab5fdf1a5e65aca2aa99bde3813f data\minecraft\tags\block\mineable\pickaxe.json
-f2b3418901251dbaba6dd6d2e0b5086a6e0a45b9 data\blockus\tags\block\sandstone.json
+bb81e39d4cd8c6aee44da278b4678b0ae07f707c data\blockus\tags\block\sandstone.json
 6b014c1e9beb976824c8802a85617f9b975deb48 data\blockus\tags\block\thatch.json
 23134466fc39b0e52d0855c2d45de0c17b1a23a1 data\minecraft\tags\block\slabs.json
-b3e59a360f78b3ef71d45bc9d3064ef6e34f1d04 data\extshape\tags\block\vertical_quarter_pieces.json
+10beb7c17e01c891b287160c0722a21930330dc8 data\extshape\tags\block\vertical_quarter_pieces.json
 7f2c2062e83b59cdfda4f90f0f281a3200a51928 data\blockus\tags\block\lava_bricks.json
 7a4a8cc1d7c0f00e57fd5ce8fb7d314e4b22af15 data\blockus\tags\block\lava_polished_blackstone_bricks.json
 027d41bd009f1fb305b03d5d7c965b8a9b1cfe93 data\blockus\tags\block\prismarine_blocks.json
 29c5a6041d54e16bd0d745e9ceba45a6b50b4d3a data\blockus\tags\block\deepslate_blocks.json
 d45e3355d09ec24ccdd2d37c14f41bf0d8dfd5a4 data\blockus\tags\block\all_patterned_wools.json
-8e1eaeb745df2c5dabe245245f3d344287a1df4f data\extshape\tags\block\quarter_pieces.json
+1a627204d59dcf20fdd11a032eed7fac071fef66 data\extshape\tags\block\quarter_pieces.json
 6208dd7ad8627a1e7c25b894310da6686395f1c9 data\minecraft\tags\block\needs_iron_tool.json
 67f8308628ee88cd93fdde00d1122d68b4ee44ad data\minecraft\tags\block\wooden_buttons.json
 b2043c3f144c4bf3b878100eadab5f3ff282f0fe data\blockus\tags\block\rainbow_blocks.json
-161d8adedc4e2345eb4b7b0d66eb02a337939b37 data\blockus\tags\block\tuff_blocks.json
+9e8f98ce15df13f27ba8fe6da7d5ece121204af2 data\blockus\tags\block\tuff_blocks.json
 cd0220e89d80932227861080953488266b5494e4 data\blockus\tags\block\honeycomb_blocks.json
 4f740cd898b8bbb07bd84563e8957d51cecc63cc data\minecraft\tags\block\wooden_fences.json
-83ce22b652ad284e8cf4cfc367c4466d268d69b9 data\minecraft\tags\block\walls.json
+c01f4d13668c6cd0f48774a31155d57df940a10c data\minecraft\tags\block\walls.json
 eb7cf951870642b73ec04f63644f885841b2b11c data\minecraft\tags\block\needs_stone_tool.json
 e88209848598c67bf21cc8cf2dd9cc821bcc9ba9 data\blockus\tags\block\limestone.json
 18649aca70133c78614bbba00d8a72fc7148f767 data\extshape\tags\block\wooden_quarter_pieces.json
