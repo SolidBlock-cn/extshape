@@ -1,0 +1,17 @@
+{
+  "values": [
+    "extshape_blockus:large_resin_brick_vertical_slab",
+    "extshape_blockus:large_resin_brick_vertical_stairs",
+    "extshape_blockus:large_resin_brick_quarter_piece",
+    "extshape_blockus:large_resin_brick_vertical_quarter_piece",
+    "extshape_blockus:large_resin_brick_pressure_plate",
+    "extshape_blockus:herringbone_resin_brick_stairs",
+    "extshape_blockus:herringbone_resin_brick_slab",
+    "extshape_blockus:herringbone_resin_brick_vertical_slab",
+    "extshape_blockus:herringbone_resin_brick_vertical_stairs",
+    "extshape_blockus:herringbone_resin_brick_quarter_piece",
+    "extshape_blockus:herringbone_resin_brick_vertical_quarter_piece",
+    "extshape_blockus:herringbone_resin_brick_wall",
+    "extshape_blockus:herringbone_resin_brick_pressure_plate"
+  ]
+}

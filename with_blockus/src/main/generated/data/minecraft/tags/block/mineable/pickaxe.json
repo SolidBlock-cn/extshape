@@ -92,6 +92,17 @@
     "extshape_blockus:nether_stars_vertical_quarter_piece",
     "extshape_blockus:nether_stars_fence",
     "extshape_blockus:nether_stars_fence_gate",
-    "extshape_blockus:nether_stars_wall"
+    "extshape_blockus:nether_stars_wall",
+    "extshape_blockus:stars_stairs",
+    "extshape_blockus:stars_slab",
+    "extshape_blockus:stars_vertical_slab",
+    "extshape_blockus:stars_vertical_stairs",
+    "extshape_blockus:stars_quarter_piece",
+    "extshape_blockus:stars_vertical_quarter_piece",
+    "extshape_blockus:stars_fence",
+    "extshape_blockus:stars_fence_gate",
+    "extshape_blockus:stars_wall",
+    "extshape_blockus:stars_button",
+    "extshape_blockus:stars_pressure_plate"
   ]
 }
