@@ -2,10 +2,12 @@ package pers.solid.extshape.blockus;
 
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
+import com.google.common.collect.Iterables;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.Validate;
@@ -18,6 +20,7 @@ import pers.solid.extshape.config.ExtShapeConfig;
 import pers.solid.extshape.util.BlockBiMaps;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +33,7 @@ public class ExtShapeBlockus implements ModInitializer {
   /**
    * 此字段仅在开发环境下生效，将在初始化 data fixer 时设置值，从而在完成注册后验证其中的 id 是否有效。
    */
-  public static @Nullable Map<String, String> replacing_id_map = null;
+  public static @Nullable Map<String, String> datafixer_replacing_id_map = null;
 
   public static Identifier id(String path) {
     return defaultId.withPath(path);
@@ -50,7 +53,11 @@ public class ExtShapeBlockus implements ModInitializer {
 
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
         validateBlockIds();
-        validateReplacingIds();
+        if (datafixer_replacing_id_map == null) {
+          LOGGER.warn("ExtShapeBlockus.replacing_id_map is null");
+        } else {
+          validateReplacingIds(Iterables.transform(datafixer_replacing_id_map.entrySet(), input -> Map.entry(Identifier.of(input.getKey()), Identifier.of(input.getValue()))));
+        }
 
         ServerLifecycleEvents.SERVER_STARTED.register(server -> {
           LOGGER.info("Validating Extended Block Shapes Blockus mod content");
@@ -62,6 +69,7 @@ public class ExtShapeBlockus implements ModInitializer {
           LOGGER.info("Extended Block Shapes Blockus recipes are successfully validated");
         });
       }
+      prepareAndValidateRegistryAliases();
     }
   }
 
@@ -100,11 +108,14 @@ public class ExtShapeBlockus implements ModInitializer {
     }
   }
 
-  private static void validateReplacingIds() {
-    if (replacing_id_map == null) return;
+  /**
+   * 检查需要替换的 ID 是否存在错误。只有当需要被替换的 ID（entry.key）均不存在对应方块或物品，且替换后的 ID 均存在对应方块或物品时存在时，才能通过。
+   */
+  protected static void validateReplacingIds(Iterable<Map.Entry<Identifier, Identifier>> entries) {
     final List<RuntimeException> exceptions = new ArrayList<>();
-    replacing_id_map.forEach((k, v) -> {
-      final Identifier key = Identifier.of(k);
+    entries.forEach((entry) -> {
+      final Identifier key = entry.getKey();
+      final Identifier value = entry.getValue();
       try {
         Validate.validState(!Registries.BLOCK.containsId(key), "The id %s is to be replaced, but still exists in the block registry!", key);
         Validate.validState(!Registries.ITEM.containsId(key), "The id %s is to be replaced, but still exists in the item registry!", key);
@@ -112,7 +123,6 @@ public class ExtShapeBlockus implements ModInitializer {
         LOGGER.error("Data fixer:", e);
         exceptions.add(e);
       }
-      final Identifier value = Identifier.of(v);
       try {
         Validate.validState(Registries.BLOCK.containsId(value), "The id %s is to be replace with, but does not exist in the block registry!", value);
         Validate.validState(Registries.ITEM.containsId(value), "The id %s is to be replace with, but does not exist in the item registry!", value);
@@ -124,5 +134,26 @@ public class ExtShapeBlockus implements ModInitializer {
     if (!exceptions.isEmpty()) {
       throw exceptions.getLast();
     }
+  }
+
+  private static void prepareAndValidateRegistryAliases() {
+    final Map<Identifier, Identifier> replacingIds = new HashMap<>();
+    final Map<Block, Block> baseBlockForWallReplacements = Map.of(
+        BlockusBlocks.ROUGH_SANDSTONE.block(), Blocks.SANDSTONE,
+        BlockusBlocks.ROUGH_RED_SANDSTONE.block(), Blocks.RED_SANDSTONE,
+        BlockusBlocks.ROUGH_SOUL_SANDSTONE.block(), BlockusBlocks.SOUL_SANDSTONE.block()
+    );
+
+    baseBlockForWallReplacements.forEach((fromBase, toBase) -> {
+      replacingIds.put(ExtShapeBlockus.id(Registries.BLOCK.getId(fromBase).getPath() + "_wall"), Registries.BLOCK.getId(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, toBase)));
+    });
+
+    if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+      validateReplacingIds(replacingIds.entrySet());
+    }
+    replacingIds.forEach((fromId, toId) -> {
+      Registries.BLOCK.addAlias(fromId, toId);
+      Registries.ITEM.addAlias(fromId, toId);
+    });
   }
 }

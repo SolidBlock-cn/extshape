@@ -563,6 +563,7 @@ public final class ExtShapeBlockusBlocks {
         .build();
 
     create(BlockusBlocks.ROUGH_SANDSTONE)
+        .without(BlockShape.WALL)
         .setStoneFenceSettings(Items.SAND)
         .build();
     create(BlockusBlocks.SANDSTONE_BRICKS)
@@ -574,6 +575,7 @@ public final class ExtShapeBlockusBlocks {
         .without(BlockShape.BUTTON)
         .build();
     create(BlockusBlocks.ROUGH_RED_SANDSTONE)
+        .without(BlockShape.WALL)
         .setStoneFenceSettings(Items.RED_SAND)
         .build();
     create(BlockusBlocks.RED_SANDSTONE_BRICKS)
@@ -590,6 +592,7 @@ public final class ExtShapeBlockusBlocks {
         .build();
     create(BlockusBlocks.ROUGH_SOUL_SANDSTONE)
         .setStoneFenceSettings(Items.SOUL_SAND)
+        .without(BlockShape.WALL)
         .build();
     create(BlockusBlocks.SOUL_SANDSTONE_BRICKS)
         .setStoneFenceSettings(Items.SOUL_SAND)
