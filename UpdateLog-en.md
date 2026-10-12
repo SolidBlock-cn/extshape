@@ -142,10 +142,6 @@
 ### 3.1.0
 
 - Adjusted the inclusion rule of block tags `#stone_buttons` and `#stone_pressure_plates` to limit to some stone blocks.
-- Fixed the wrong model of some blocks in Blockus mod.
-- Followed the updates of Blockus, added Blockus blocks related to pale oaks, resin.
-- Fixed the wrong tag name of some terracotta pillar blocks in Blockus, and added relevant tag translation.
-- Fixed the issue that some block variants are still added even if the variants already exist.
 
 ### 3.0.6
 
@@ -164,101 +160,7 @@
 - Fixed the issue that some recipes do not correctly substitute vanilla recipes in the `recipe_tweak` datapack.
 - Fixed some incorrect sounds of some resin blocks in 1.21.4.
 - Since version 1.21.3, added the fence, fence gate, pressure plate and button for blackstone; added fence, fence gate and pressure plate for polished blackstone (the button is vanilla block), and the pressure plate of polished blackstone bricks.
-- Fixed the issue that the block/item tag for glazed terracotta slabs (`#extshape:glazed_terracotta_slabs`) is not contained in block/item tag `#minecraft:slab`.
-
-#### The Blockus part of 3.0.5
-
-- Since version 1.21.3, the following blocks in Blockus will be changed:
-    - Removed _fences and fence gates_ of the following blocks:
-        - stone tiles (replaced with stone)
-        - herringbone stone bricks (replaced with stone bricks)
-        - andesite bricks (replaced with andesite)
-        - herringbone andesite bricks (replaced with andesite)
-        - diorite bricks (replaced with diorite)
-        - herringbone diorite bricks (replaced with diorite)
-        - granite bricks (replaced with granite)
-        - herringbone granite bricks (replaced with granite)
-        - dripstone bricks (replaced with dripstone)
-        - herringbone tuff bricks (replaced with tuff bricks)
-        - herringbone deepslate bricks (replaced with deepslate bricks)
-        - sculk bricks (replaced with polished sculk)
-        - amethyst bricks (replaced with polished amethyst)
-        - polished blackstone tiles (replaced with polished blackstone)
-        - herringbone polished blackstone bricks (replaced with polished blackstone bricks)
-        - polished basalt bricks (replaced with polished blackstone)
-        - herringbone polished basalt bricks (replaced with polished basalt)
-        - limestone bricks (replaced with small limestone bricks)
-        - limestone tiles (replaced with limestone)
-        - limestone squares (replaced with limestone)
-        - marble bricks (replaced with small marble bricks)
-        - marble tiles (replaced with marble)
-        - marble squares (replaced with marble)
-        - bluestone bricks (replaced with bluestone)
-        - bluestone squares (replaced with bluestone)
-        - viridite bricks (replaced with viridite)
-        - viridite tiles (replaced with viridite)
-        - viridite squares (replaced with viridite)
-        - obsidian bricks (replaced with small obsidian bricks)
-        - netherrack bricks (replaced with polished netherrack)
-        - quartz tiles (replaced with smooth quartz)
-        - magma bricks (replaced with small magma bricks; buttons are removed and replaced too)
-        - herringbone nether bricks (replaced with nether bricks)
-        - herringbone red nether bricks (replaced with red nether bricks)
-        - herringbone teal nether bricks (replaced with teal nether bricks)
-        - large bricks (replaced with bricks)
-        - herringbone bricks (replaced with bricks)
-        - herringbone soaked bricks (replaced with soaked bricks)
-        - herringbone charred bricks (replaced with charred bricks)
-        - herringbone sandy bricks (replaced with sandy bricks)
-        - sandstone bricks (replaced with small sandstone bricks)
-        - red sandstone bricks (replaced with small red sandstone bricks)
-        - soul sandstone bricks (replaced with small soul sandstone bricks)
-        - chorus bricks (replaced with small chorus bricks)
-        - chorus squares (replaced with polished chorus block)
-        - phantom chorus bricks (replaced with small phantom chorus bricks)
-        - phantom chorus squares (replaced with polished phantom chorus block)
-        - herringbone end stone bricks (replaced with small end stone bricks)
-    - Removed _all shapes_ of the following blocks:
-        - chiseled andesite (replaced with andesite)
-        - chiseled diorite (replaced with diorite)
-        - chiseled granite (replaced with granite)
-        - chiseled mud bricks (replaced with mud bricks)
-        - chiseled dripstone (replaced with dripstone)
-        - cracked tuff bricks (replaced with tuff bricks)
-        - carved tuff bricks (replaced with tuff bricks)
-        - chiseled sculk bricks (replaced with sculk bricks)
-        - chiseled amethyst (replaced with polished amethyst)
-        - chiseled limestone (replaced with limestone)
-        - chiseled marble (replaced with marble)
-        - chiseled bluestone (replaced with bluestone)
-        - chiseled viridite (replaced with viridite)
-        - chiseled lava bricks (replaced with lava bricks)
-        - chiseled lava polished blackstone (replaced with lava polished blackstone)
-        - chiseled magma bricks (replaced with small magma bricks)
-        - chiseled prismarine (replaced with prismarine)
-        - chiseled dark prismarine (replaced with dark prismarine)
-        - chiseled soul sandstone (replaced with smooth soul sandstone)
-        - chiseled chorus block (replaced with polished chorus block)
-        - chiseled phantom chorus block (replaced with polished phantom chorus block)
-        - white oak log (replaced with white oak wood)
-        - stripped white oak log (replaced with stripped white oak wood)
-        - chiseled concrete bricks (replaced with concrete bricks)
-    - Added the following blocks:
-        - mossy dripstone (excluding button, fence, fence gate)
-        - tuff tiles (excluding button, fence, fence gate)
-        - charred nether brick button (charred nether bricks will have blocks of all shapes)
-        - polished charred nether brick button (polished nether bricks will have blocks of all shapes)
-        - herringbone charred nether bricks (excluding button, fence, fence gate)
-        - teal nether brick button (teal nether bricks will have blocks of all shapes)
-        - polished teal nether brick button (polished teal nether bricks will have blocks of all shapes)
-    - Of the following blocks, as they belong to circular paving blocks, _only slabs and pressure plates_ will be obtained, and blocks in other shapes will be removed and replaced:
-        - polished basalt circular paving (replaced with polished basalt)
-        - prismarine circular paving (replaced with prismarine)
-    - Removed the following blocks:
-        - ice brick wall (which exists in Blockus mod)
-        - various shapes of cut soul sand stone except construction shapes (replaced with smooth soul sandstone)
-        - slab of cut soul sandstone (which exists in Blockus mod)
-- The activation times of crimson wart brick and warped wart brick pressure plate will be adjusted from 2 seconds to 1 second.
+- Fixed the issue that the block/item tag for glazed terracotta slabs (`#extshape:glazed_terracotta_slabs`) is not contained in block/item tag `#minecraft:slabs`.
 
 ### 3.0.4
 
@@ -308,8 +210,6 @@
 ### 2.2.2
 
 - Updated for new BRRP API.
-- Updated for Blockus 2.9.2.
-- Following Blockus 2.9.2 changes, canceled rainbow glowstone dropping rainbow petals.
 
 ### 2.2.1.9
 
@@ -326,7 +226,7 @@ This version is published in Jan 2026, which is only a fix update to mods for ol
 - Fixed the issue of lack of stonecutting related to tuff.
 - Added stairs and slabs related to sandstones into tags of Fabric Convention Tags.
 - Tweaked some translations: "quarter piece" is translated to <span lang=ja>四半ブロック</span> in Japanese, <span lang=lzh>橫條</span> in Legacy Chinese.
-- Corrected the wrong tag name `mishanguc:concrete_fence_walls`, `mishanguc:terracotta_fence_walls` and `mishanguc:stained_terracotta_fence_walls` into `mishanguc:concrete_walls`, `mishanguc:terracotta_walls` and `mishanguc:stained_terracotta_walls`.
+- Corrected the wrong tag name `extshape:concrete_fence_walls`, `extshape:terracotta_fence_walls` and `extshape:stained_terracotta_fence_walls` into `extshape:concrete_walls`, `extshape:terracotta_walls` and `extshape:stained_terracotta_walls`.
 - Fixed the issue that loot tables are incorrect for some blocks like snow and clay.
 - Fixed the issue that stripping blocks related to mangrove turn them into oak.
 - Other code optimization.
