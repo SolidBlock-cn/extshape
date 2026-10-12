@@ -90,7 +90,7 @@ public class ExtShapeFenceBlock extends FenceBlock implements ExtShapeVariantBlo
   public static class WithExtension extends ExtShapeFenceBlock {
     private final BlockExtension extension;
 
-    public WithExtension(Block baseBlock, Item secondIngredient, Settings settings, BlockExtension extension) {
+    public WithExtension(Block baseBlock, @Nullable Item secondIngredient, Settings settings, BlockExtension extension) {
       super(baseBlock, secondIngredient, settings);
       this.extension = extension;
     }

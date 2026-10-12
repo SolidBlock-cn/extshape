@@ -93,6 +93,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     putMultipleWithMid(builder, BlockusBlocks.DRIPSTONE_BRICKS.block(), Blocks.DRIPSTONE_BLOCK, BlockusBlocks.POLISHED_DRIPSTONE.block(), BlockusBlocks.CHISELED_DRIPSTONE);
 
     // 凝灰岩
+    builder.putAll(BlockusBlocks.TUFF_TILES.block(), Blocks.TUFF, Blocks.POLISHED_TUFF, Blocks.TUFF_BRICKS);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.CARVED_TUFF_BRICKS, BlockusBlocks.HERRINGBONE_TUFF_BRICKS, BlockusBlocks.TUFF_CIRCULAR_PAVING), Blocks.TUFF, Blocks.POLISHED_TUFF, Blocks.TUFF_BRICKS);
 
     // 紫水晶
@@ -138,7 +139,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     builder.put(BlockusBlocks.MAGMA_BRICKS.block(), Blocks.MAGMA_BLOCK);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SMALL_MAGMA_BRICKS.block(), BlockusBlocks.CHISELED_MAGMA_BRICKS), Blocks.MAGMA_BLOCK, BlockusBlocks.MAGMA_BRICKS.block());
 
-    // 烈焰柱
+    // 下界岩
     builder.put(BlockusBlocks.POLISHED_NETHERRACK.block(), Blocks.NETHERRACK);
     putMultipleWithMid(builder, BlockusBlocks.NETHERRACK_BRICKS.block(), Blocks.NETHERRACK, BlockusBlocks.POLISHED_NETHERRACK.block(), BlockusBlocks.NETHERRACK_CIRCULAR_PAVING);
 
