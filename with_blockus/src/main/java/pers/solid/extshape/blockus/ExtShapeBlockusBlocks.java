@@ -172,6 +172,11 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.TUFF)
         .without(BlockShape.BUTTON)
         .build();
+    create(BlockusBlocks.TUFF_TILES)
+        .setFenceSettings(FenceSettings.TUFF)
+        .setActivationSettings(ActivationSettings.TUFF)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
     create(BlockusBlocks.CRACKED_TUFF_BRICKS)
         .setFenceSettings(FenceSettings.TUFF)
         .setActivationSettings(ActivationSettings.TUFF)

@@ -37,7 +37,7 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
     register(BlockusBlocks.ROUGH_SOUL_SANDSTONE.block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_bottom"));
 
     // 切制灵魂砂岩
-    // *空*
+    textureMaps.put(BlockusBlocks.CUT_SOUL_SANDSTONE, TextureMap.sideEnd(TextureMap.getId(BlockusBlocks.CUT_SOUL_SANDSTONE), TextureMap.getSubId(BlockusBlocks.SOUL_SANDSTONE.block, "_top")));
 
     registerSuffixed(BlockusBlocks.STRIPPED_WHITE_OAK_LOG, TextureKey.END, "_top");
     register(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD, new Identifier(Blockus.MOD_ID, "block/stripped_white_oak_log"));
