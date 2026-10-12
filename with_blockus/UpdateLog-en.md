@@ -10,6 +10,12 @@
     - Follow the updates of Blockus, polished end stone can be stone-cut into shape variants of vanilla end stone bricks.
     - Stone can be cut into the shape variants of stone tiles.
 - Fixed the issue that blocks related to chiseled tuff block before the version where chiseled tuff become part of vanilla game do not have tag `mineable/pickaxe`.
+- Removed the wall for rough sandstone, rough red sandstone and rough soul sandstone, because their textures are fully the same to the walls of sandstone, red sandstone and soul sandstone.
+    - Blocks and items described about that already existed before, will be converted.
+    - This update automatically applies to all Minecraft versions.
+    - Actually, vanilla sandstone wall and red sandstone wall, and the soul sandstone wall of Blockus, have the same texture on all sides, and in theory they are closer to rough sandstone, rough red sandstone and rough soul sandstone. But as they already exist in vanilla, the mod no longer provides walls for these three rough sandstone blocks.
+    - **Previously, in the version 3.0.5 of this mod, shape variants for many blocks were deleted, but the deletion only applied to Minecraft version 1.21.3 and above. Blocks placed in previous Minecraft versions, when the world is updated to versions 1.21.3 and above, will be automatically substituted. These removed blocks, still exist in the current version mods for Minecraft versions before 1.21.3, but may also be removed and automatically substituted in the future. For the list of actual block removal and substitution, please refer to the update log for 3.0.5.**
+- Further solved the texture issue related to blocks of cut soul sandstone. This issue may only existed in some Minecraft versions.
 
 ### 3.1.6
 
@@ -67,3 +73,109 @@
 > **Important note**
 >
 > As the updates of Blockus changed the name of small logs, after updating the mod, if you have used blocks related to small logs, please make a back-up for your level.
+
+### 3.1.0
+
+- Fixed the wrong model of some blocks in Blockus mod.
+- Followed the updates of Blockus, added Blockus blocks related to pale oaks, resin.
+- Fixed the wrong tag name of some terracotta pillar blocks in Blockus, and added relevant tag translation.
+- Fixed the issue that some block variants are still added even if the variants already exist.
+
+### 3.0.5
+
+- Since version 1.21.3, the following blocks in Blockus will be changed:
+    - Removed _fences and fence gates_ of the following blocks:
+        - stone tiles (replaced with stone)
+        - herringbone stone bricks (replaced with stone bricks)
+        - andesite bricks (replaced with andesite)
+        - herringbone andesite bricks (replaced with andesite)
+        - diorite bricks (replaced with diorite)
+        - herringbone diorite bricks (replaced with diorite)
+        - granite bricks (replaced with granite)
+        - herringbone granite bricks (replaced with granite)
+        - dripstone bricks (replaced with dripstone)
+        - herringbone tuff bricks (replaced with tuff bricks)
+        - herringbone deepslate bricks (replaced with deepslate bricks)
+        - sculk bricks (replaced with polished sculk)
+        - amethyst bricks (replaced with polished amethyst)
+        - polished blackstone tiles (replaced with polished blackstone)
+        - herringbone polished blackstone bricks (replaced with polished blackstone bricks)
+        - polished basalt bricks (replaced with polished blackstone)
+        - herringbone polished basalt bricks (replaced with polished basalt)
+        - limestone bricks (replaced with small limestone bricks)
+        - limestone tiles (replaced with limestone)
+        - limestone squares (replaced with limestone)
+        - marble bricks (replaced with small marble bricks)
+        - marble tiles (replaced with marble)
+        - marble squares (replaced with marble)
+        - bluestone bricks (replaced with bluestone)
+        - bluestone squares (replaced with bluestone)
+        - viridite bricks (replaced with viridite)
+        - viridite tiles (replaced with viridite)
+        - viridite squares (replaced with viridite)
+        - obsidian bricks (replaced with small obsidian bricks)
+        - netherrack bricks (replaced with polished netherrack)
+        - quartz tiles (replaced with smooth quartz)
+        - magma bricks (replaced with small magma bricks; buttons are removed and replaced too)
+        - herringbone nether bricks (replaced with nether bricks)
+        - herringbone red nether bricks (replaced with red nether bricks)
+        - herringbone teal nether bricks (replaced with teal nether bricks)
+        - large bricks (replaced with bricks)
+        - herringbone bricks (replaced with bricks)
+        - herringbone soaked bricks (replaced with soaked bricks)
+        - herringbone charred bricks (replaced with charred bricks)
+        - herringbone sandy bricks (replaced with sandy bricks)
+        - sandstone bricks (replaced with small sandstone bricks)
+        - red sandstone bricks (replaced with small red sandstone bricks)
+        - soul sandstone bricks (replaced with small soul sandstone bricks)
+        - chorus bricks (replaced with small chorus bricks)
+        - chorus squares (replaced with polished chorus block)
+        - phantom chorus bricks (replaced with small phantom chorus bricks)
+        - phantom chorus squares (replaced with polished phantom chorus block)
+        - herringbone end stone bricks (replaced with small end stone bricks)
+    - Removed _all shapes_ of the following blocks:
+        - chiseled andesite (replaced with andesite)
+        - chiseled diorite (replaced with diorite)
+        - chiseled granite (replaced with granite)
+        - chiseled mud bricks (replaced with mud bricks)
+        - chiseled dripstone (replaced with dripstone)
+        - cracked tuff bricks (replaced with tuff bricks)
+        - carved tuff bricks (replaced with tuff bricks)
+        - chiseled sculk bricks (replaced with sculk bricks)
+        - chiseled amethyst (replaced with polished amethyst)
+        - chiseled limestone (replaced with limestone)
+        - chiseled marble (replaced with marble)
+        - chiseled bluestone (replaced with bluestone)
+        - chiseled viridite (replaced with viridite)
+        - chiseled lava bricks (replaced with lava bricks)
+        - chiseled lava polished blackstone (replaced with lava polished blackstone)
+        - chiseled magma bricks (replaced with small magma bricks)
+        - chiseled prismarine (replaced with prismarine)
+        - chiseled dark prismarine (replaced with dark prismarine)
+        - chiseled soul sandstone (replaced with smooth soul sandstone)
+        - chiseled chorus block (replaced with polished chorus block)
+        - chiseled phantom chorus block (replaced with polished phantom chorus block)
+        - white oak log (replaced with white oak wood)
+        - stripped white oak log (replaced with stripped white oak wood)
+        - chiseled concrete bricks (replaced with concrete bricks)
+    - Added the following blocks:
+        - mossy dripstone (excluding button, fence, fence gate)
+        - tuff tiles (excluding button, fence, fence gate)
+        - charred nether brick button (charred nether bricks will have blocks of all shapes)
+        - polished charred nether brick button (polished nether bricks will have blocks of all shapes)
+        - herringbone charred nether bricks (excluding button, fence, fence gate)
+        - teal nether brick button (teal nether bricks will have blocks of all shapes)
+        - polished teal nether brick button (polished teal nether bricks will have blocks of all shapes)
+    - Of the following blocks, as they belong to circular paving blocks, _only slabs and pressure plates_ will be obtained, and blocks in other shapes will be removed and replaced:
+        - polished basalt circular paving (replaced with polished basalt)
+        - prismarine circular paving (replaced with prismarine)
+    - Removed the following blocks:
+        - ice brick wall (which exists in Blockus mod)
+        - various shapes of cut soul sand stone except construction shapes (replaced with smooth soul sandstone)
+        - slab of cut soul sandstone (which exists in Blockus mod)
+- The activation times of crimson wart brick and warped wart brick pressure plate will be adjusted from 2 seconds to 1 second.
+
+### 2.2.2
+
+- Updated for Blockus 2.9.2.
+- Following Blockus 2.9.2 changes, canceled rainbow glowstone dropping rainbow petals.
