@@ -36,6 +36,9 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
     register(BlockusBlocks.ROUGH_RED_SANDSTONE.block, new Identifier("block/red_sandstone_bottom"));
     register(BlockusBlocks.ROUGH_SOUL_SANDSTONE.block, new Identifier(Blockus.MOD_ID, "block/soul_sandstone_bottom"));
 
+    // 切制灵魂砂岩
+    // *空*
+
     registerSuffixed(BlockusBlocks.STRIPPED_WHITE_OAK_LOG, TextureKey.END, "_top");
     register(BlockusBlocks.STRIPPED_WHITE_OAK_WOOD, new Identifier(Blockus.MOD_ID, "block/stripped_white_oak_log"));
     registerSuffixed(BlockusBlocks.WHITE_OAK_LOG, TextureKey.END, "_top");

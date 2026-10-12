@@ -5,6 +5,7 @@ import com.google.common.collect.HashBiMap;
 import net.minecraft.block.Block;
 import net.minecraft.data.family.BlockFamilies;
 import net.minecraft.data.family.BlockFamily;
+import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
@@ -96,7 +97,7 @@ public final class BlockBiMaps {
   public static Block getBlockOfOrThrow(BlockShape shape, Block baseBlock) {
     final Block block = getBlockOf(shape, baseBlock);
     if (block == null) {
-      throw new IllegalArgumentException("Block " + baseBlock + " does not have the shape variant: " + shape);
+      throw new IllegalArgumentException("Block " + Registries.BLOCK.getId(baseBlock) + " does not have the shape variant: " + shape.asString());
     }
     return block;
   }
@@ -111,7 +112,7 @@ public final class BlockBiMaps {
   public static void setBlockOf(BlockShape shape, Block baseBlock, Block block) {
     final BiMap<Block, Block> biMap = of(shape);
     if (biMap.containsKey(baseBlock)) {
-      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape.asString(), baseBlock, biMap.get(baseBlock), block);
+      ExtShape.LOGGER.warn("Duplicate block mapping found: the shape {} of base block {} is {}, but will also be {}.", shape.asString(), Registries.BLOCK.getId(baseBlock), Registries.BLOCK.getId(biMap.get(baseBlock)), Registries.BLOCK.getId(block));
     }
     biMap.put(baseBlock, block);
     BASE_BLOCKS.add(baseBlock);
