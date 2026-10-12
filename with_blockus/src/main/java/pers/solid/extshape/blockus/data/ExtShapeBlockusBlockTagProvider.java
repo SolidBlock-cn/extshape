@@ -346,7 +346,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     addForShapes(BlockusBlockTags.STAINED_STONE_BRICKS, Iterables.transform(BlockusBlockCollections.STAINED_STONE_BRICKS, input -> input.block));
 
     addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlockCollections.CONCRETE_BRICKS, input -> input.block));
-    addForShapes(BlockusBlockTags.CONCRETE_BLOCKS, Iterables.transform(BlockusBlockCollections.CONCRETE_BRICKS, input -> input.chiseled));
 
     addForShapes(BlockusBlockTags.SHINGLES, BlockusBlocks.SHINGLES.block);
     addForShapes(BlockusBlockTags.SHINGLES, Iterables.transform(BlockusBlockCollections.TINTED_SHINGLES, input -> input.block));
