@@ -1,9 +1,9 @@
-// 1.21.3	2026-10-12T15:53:07.6989545	Extended Block Shapes - Blockus/Tags for minecraft:item
+// 1.21.3	2026-10-12T19:41:58.1834371	Extended Block Shapes - Blockus/Tags for minecraft:item
 f4baa156555fd75921229ef9ac89af552decb0ca data\minecraft\tags\item\fences.json
 a07cf91c493d28af485150abb723d9d5c1693e77 data\extshape_blockus\tags\item\glazed_terracotta_pillar_slab.json
 f05f693e02a27dcadae98a4f6732417a6a796976 data\extshape\tags\item\pressure_plates.json
-2f45259b1c71bfa845b2569d2815a933151aded8 data\extshape\tags\item\log_vertical_slabs.json
 97876b2a17ef112fee066a5b734f0fcffc4ae426 data\extshape\tags\item\log_slabs.json
+2f45259b1c71bfa845b2569d2815a933151aded8 data\extshape\tags\item\log_vertical_slabs.json
 dfdb216a6aed1dc2b2b887a2e83103f8b591d412 data\extshape\tags\item\log_vertical_quarter_pieces.json
 a3163c6d3cc66f188e37fd438eddcf89dafa0059 data\extshape_blockus\tags\item\glazed_terracotta_pillar_quarter_piece.json
 67f8308628ee88cd93fdde00d1122d68b4ee44ad data\minecraft\tags\item\wooden_buttons.json
@@ -24,10 +24,10 @@ e49ae32df73dba61d4d566514926f56ff771801d data\minecraft\tags\item\slabs.json
 af00951886eddd717c22cd2bd89e8db424fa99f2 data\minecraft\tags\item\piglin_loved.json
 478a601e664ada44fadfa649ca52c74f5706e446 data\extshape\tags\item\vertical_slabs.json
 cedea3e291dd95f966edb36238812225dd6a4ef6 data\minecraft\tags\item\wooden_stairs.json
-d3583ee295232daefc3bf447934c26563cd49d7f data\minecraft\tags\item\walls.json
+88f53f342c6c0ec21611c104ccd6caf67437d3d7 data\minecraft\tags\item\walls.json
 27d65c5f843f527288fa289da0fde550f5c99949 data\minecraft\tags\item\wooden_pressure_plates.json
-ffe7d0020daf738928fc43f3eb27cf7e85b2dd3b data\extshape\tags\item\wooden_vertical_quarter_pieces.json
 84f4e30dae20c4b7b7da6e4376bb1adc25b7706f data\minecraft\tags\item\buttons.json
+ffe7d0020daf738928fc43f3eb27cf7e85b2dd3b data\extshape\tags\item\wooden_vertical_quarter_pieces.json
 93f141560884ac1a35e20fee79344f31ddbda760 data\extshape\tags\item\quarter_pieces.json
 2476c410d71ee87b70735fc832ad33fbf8875f4d data\blockus\tags\item\all_patterned_wools.json
 e78dc713a2896901f5f5af644f46a8f03b777d2f data\extshape_blockus\tags\item\glazed_terracotta_pillar_vertical_slab.json
