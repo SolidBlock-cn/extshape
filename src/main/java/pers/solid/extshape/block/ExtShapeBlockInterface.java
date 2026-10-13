@@ -21,7 +21,6 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
@@ -120,15 +119,15 @@ public interface ExtShapeBlockInterface {
   @Environment(EnvType.CLIENT)
   void registerModel(ExtShapeModelProvider modelProvider, BlockStateModelGenerator blockStateModelGenerator);
 
-  default void registerRecipes(String namespace, RecipeGenerator recipeGenerator, RecipeExporter exporter) {
+  default void registerRecipes(RecipeGenerator recipeGenerator, RecipeExporter exporter) {
     final CraftingRecipeJsonBuilder craftingRecipe = getCraftingRecipe(recipeGenerator);
     if (craftingRecipe != null) {
-      craftingRecipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(namespace, Registries.ITEM.getId(craftingRecipe.getOutputItem()).getPath())));
+      craftingRecipe.offerTo(exporter);
     }
     if (shouldWriteStonecuttingRecipe()) {
       final StonecuttingRecipeJsonBuilder stonecuttingRecipe = getStonecuttingRecipe(recipeGenerator);
       if (stonecuttingRecipe != null) {
-        stonecuttingRecipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(namespace, Registries.ITEM.getId(stonecuttingRecipe.getOutputItem()).getPath() + "_from_stonecutting")));
+        stonecuttingRecipe.offerTo(exporter, RegistryKey.of(RegistryKeys.RECIPE, Registries.ITEM.getId(stonecuttingRecipe.getOutputItem()).withSuffixedPath("_from_stonecutting")));
       }
     }
   }
