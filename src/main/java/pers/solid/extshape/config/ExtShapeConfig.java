@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 本模组使用的配置文件。
+ * 本模组使用的配置文件。<b>注意：增减配置项时，必须修改 {@link #equals(Object)} 和 {@link #hashCode()} 方法！</b>
  */
 public class ExtShapeConfig implements Cloneable {
   /**
@@ -125,11 +125,11 @@ public class ExtShapeConfig implements Cloneable {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof ExtShapeConfig that)) return false;
-    return addToVanillaGroups == that.addToVanillaGroups && showSpecificGroups == that.showSpecificGroups && Objects.equals(shapesToAddToVanilla, that.shapesToAddToVanilla) && Objects.equals(shapesInSpecificGroups, that.shapesInSpecificGroups);
+    return addToVanillaGroups == that.addToVanillaGroups && showSpecificGroups == that.showSpecificGroups && Objects.equals(shapesToAddToVanilla, that.shapesToAddToVanilla) && Objects.equals(shapesInSpecificGroups, that.shapesInSpecificGroups) && Objects.equals(this.woodenAndBambooBlockSorting, that.woodenAndBambooBlockSorting) && Objects.equals(this.coloredBlockSorting, that.coloredBlockSorting);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addToVanillaGroups, shapesToAddToVanilla, showSpecificGroups, shapesInSpecificGroups);
+    return Objects.hash(addToVanillaGroups, shapesToAddToVanilla, showSpecificGroups, shapesInSpecificGroups, woodenAndBambooBlockSorting, coloredBlockSorting);
   }
 }
