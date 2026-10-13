@@ -47,7 +47,7 @@ public final class ItemGroupRules {
     final Multimap<Item, Item> apBuilding = rulesAccess.getAppendingRule(ItemGroups.BUILDING_BLOCKS);
     final Multimap<Item, Item> preBuilding = rulesAccess.getPrependingRule(ItemGroups.BUILDING_BLOCKS);
     preBuilding.put(Items.SMOOTH_STONE_SLAB, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem());
-    apBuilding.put(Items.OAK_PLANKS, ExtShapeBlocks.PETRIFIED_OAK_PLANKS.asItem());
+
     new EntryVariantAppender(ItemGroups.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA)), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);
     new EntryVariantAppender(ItemGroups.COLORED_BLOCKS, shapes, Iterables.concat(BlockCollections.WOOLS, Collections.singleton(Blocks.TERRACOTTA), BlockCollections.STAINED_TERRACOTTA, BlockCollections.CONCRETES, BlockCollections.GLAZED_TERRACOTTA), ExtShapeBlocks::contains).appendItems(rulesAccess.getAppendingRule(ItemGroups.COLORED_BLOCKS));
     // natural 物品组应该排除变种的方块（这些方块已出现在了建筑方块物品组中）。
