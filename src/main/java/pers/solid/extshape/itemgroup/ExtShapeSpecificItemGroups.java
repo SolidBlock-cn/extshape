@@ -78,19 +78,15 @@ public final class ExtShapeSpecificItemGroups {
     OTHER_BASE_BLOCKS.clear();
 
     final Block air = Blocks.AIR;
-    final List<Block> logsAndStems = ImmutableList.copyOf(Iterables.concat(BlockCollections.LOGS, Arrays.asList(Blocks.BAMBOO_BLOCK, air), BlockCollections.STEMS));
     final List<Block> woodsAndHyphaes = ImmutableList.copyOf(Iterables.concat(BlockCollections.WOODS, Arrays.asList(air, air), BlockCollections.HYPHAES));
-    final List<Block> strippedLogsAndStems = ImmutableList.copyOf(Iterables.concat(BlockCollections.STRIPPED_LOGS, Arrays.asList(Blocks.STRIPPED_BAMBOO_BLOCK, air), BlockCollections.STRIPPED_STEMS));
     final List<Block> strippedWoodsAndHyphaes = ImmutableList.copyOf(Iterables.concat(BlockCollections.STRIPPED_WOODS, Arrays.asList(air, air), BlockCollections.STRIPPED_HYPHAES));
     final List<Block> planks = ImmutableList.copyOf(BlockCollections.PLANKS);
 
-    if (IntStream.of(logsAndStems.size(), woodsAndHyphaes.size(), strippedLogsAndStems.size(), strippedWoodsAndHyphaes.size(), planks.size()).distinct().count() > 1) {
-      throw new IllegalStateException("Sizes mismatch! Sizes are: logs_and_stems = " + logsAndStems.size() + ", woods_and_hyphaes = " + woodsAndHyphaes.size() + ", stripped_logs_and_steps = " + strippedLogsAndStems.size() + ", stripped_woods_and_hyphaes = " + strippedWoodsAndHyphaes.size() + ", planks = " + planks.size());
+    if (IntStream.of(woodsAndHyphaes.size(), strippedWoodsAndHyphaes.size(), planks.size()).distinct().count() > 1) {
+      throw new IllegalStateException("Sizes mismatch! Sizes are: woods_and_hyphaes = " + woodsAndHyphaes.size() + ", stripped_woods_and_hyphaes = " + strippedWoodsAndHyphaes.size() + ", planks = " + planks.size());
     }
 
-    WOODEN_AND_BAMBOO_BASE_BLOCKS.add(logsAndStems);
     WOODEN_AND_BAMBOO_BASE_BLOCKS.add(woodsAndHyphaes);
-    WOODEN_AND_BAMBOO_BASE_BLOCKS.add(strippedLogsAndStems);
     WOODEN_AND_BAMBOO_BASE_BLOCKS.add(strippedWoodsAndHyphaes);
     WOODEN_AND_BAMBOO_BASE_BLOCKS.add(planks);
 

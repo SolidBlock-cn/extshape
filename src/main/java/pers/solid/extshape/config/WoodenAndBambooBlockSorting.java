@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public enum WoodenAndBambooBlockSorting implements StringIdentifiable {
-  SAME_SPECIES_DIFFERENT_FORMS_TOGETHER("same_species_different_forms_together", Suppliers.memoize(() -> List.of(Blocks.OAK_LOG, Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_LOG, Blocks.STRIPPED_OAK_WOOD, Blocks.BIRCH_LOG, Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_LOG, Blocks.STRIPPED_BIRCH_WOOD, Blocks.SPRUCE_LOG, Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_WOOD))),
-  SAME_FORM_DIFFERENT_SPECIES_TOGETHER("same_form_different_species_together", Suppliers.memoize(() -> List.of(Blocks.OAK_LOG, Blocks.BIRCH_LOG, Blocks.SPRUCE_LOG, Blocks.OAK_WOOD, Blocks.BIRCH_WOOD, Blocks.SPRUCE_WOOD, Blocks.STRIPPED_OAK_LOG, Blocks.STRIPPED_BIRCH_LOG, Blocks.STRIPPED_SPRUCE_LOG, Blocks.STRIPPED_OAK_WOOD, Blocks.STRIPPED_BIRCH_WOOD, Blocks.STRIPPED_SPRUCE_WOOD)));
+  SAME_SPECIES_DIFFERENT_FORMS_TOGETHER("same_species_different_forms_together", Suppliers.memoize(() -> List.of(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD, Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD, Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD))),
+  SAME_FORM_DIFFERENT_SPECIES_TOGETHER("same_form_different_species_together", Suppliers.memoize(() -> List.of(Blocks.OAK_WOOD, Blocks.BIRCH_WOOD, Blocks.SPRUCE_WOOD, Blocks.STRIPPED_OAK_WOOD, Blocks.STRIPPED_BIRCH_WOOD, Blocks.STRIPPED_SPRUCE_WOOD)));
 
   @SuppressWarnings("deprecation")
   public static final EnumCodec<WoodenAndBambooBlockSorting> CODEC = StringIdentifiable.createCodec(WoodenAndBambooBlockSorting::values);
