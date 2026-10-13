@@ -213,7 +213,10 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.BASALT)
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.POLISHED_BASALT_CIRCULAR_PAVING));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.POLISHED_BASALT_CIRCULAR_PAVING)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.BASALT)
+        .setActivationSettings(ActivationSettings.BASALT));
 
     create(BlockusBlocks.CRIMSON_WART_BRICKS)
         .setFenceSettings(new FenceSettings(Items.NETHER_WART, ExtShapeBlockTypes.NETHER_BRICKS_WOOD_TYPE))
@@ -445,7 +448,8 @@ public final class ExtShapeBlockusBlocks {
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .build();
 
-    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.PRISMARINE_CIRCULAR_PAVING));
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.PRISMARINE_CIRCULAR_PAVING)
+        .markStoneCuttable());
     create(BlockusBlocks.PRISMARINE_TILES)
         .setStoneFenceSettings(Items.PRISMARINE_SHARD)
         .without(BlockShape.BUTTON)
