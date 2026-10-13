@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_slab": {
+    "has_basalt": {
       "conditions": {
         "items": [
           {
-            "items": "extshape_blockus:rainbow_glowstone_slab"
+            "items": "minecraft:basalt"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:rainbow_glowstone_quarter_piece_from_slab_stonecutting"
+        "recipe": "extshape_blockus:polished_basalt_circular_paving_slab_from_basalt_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_slab"
+      "has_basalt"
     ]
   ],
   "rewards": {
     "recipes": [
-      "extshape_blockus:rainbow_glowstone_quarter_piece_from_slab_stonecutting"
+      "extshape_blockus:polished_basalt_circular_paving_slab_from_basalt_stonecutting"
     ]
   }
 }

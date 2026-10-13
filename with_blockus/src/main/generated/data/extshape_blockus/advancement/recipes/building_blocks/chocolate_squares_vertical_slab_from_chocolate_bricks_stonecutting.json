@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_stairs": {
+    "has_chocolate_bricks": {
       "conditions": {
         "items": [
           {
-            "items": "extshape_blockus:rainbow_glowstone_stairs"
+            "items": "blockus:chocolate_bricks"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "extshape_blockus:rainbow_glowstone_quarter_piece_from_stairs_stonecutting"
+        "recipe": "extshape_blockus:chocolate_squares_vertical_slab_from_chocolate_bricks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_stairs"
+      "has_chocolate_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
-      "extshape_blockus:rainbow_glowstone_quarter_piece_from_stairs_stonecutting"
+      "extshape_blockus:chocolate_squares_vertical_slab_from_chocolate_bricks_stonecutting"
     ]
   }
 }
