@@ -1,7 +1,6 @@
 package pers.solid.extshape.data;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
 import net.minecraft.data.recipe.*;
@@ -20,9 +19,6 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.StonecuttingRecipeJsonBuilderAccessor;
 import pers.solid.extshape.util.BlockBiMaps;
 
-import java.util.Collections;
-import java.util.stream.Collectors;
-
 
 /**
  * 处理同一方块不同形状的数据生成的类。只涉及基本的几种形状，且不涉及方块与基础方块之间的转化。
@@ -33,6 +29,10 @@ public class CrossShapeDataGeneration {
    */
   public final Block baseBlock;
   public final @Nullable String defaultNamespace;
+  /**
+   * 基础方块到切石前的切石方块的映射。例如，由于原版的石头可以生成石砖，那么这个映射就可以加入“石砖->石头”，从而在生成石砖的跨形状数据生成时，会生成石头到石砖的各形状的切石配方。
+   */
+  private final Multimap<Block, ObjectIntPair<Block>> baseToUncutBase;
   private final RecipeGenerator recipeGenerator;
   public final RecipeExporter exporter;
   /**
@@ -44,9 +44,10 @@ public class CrossShapeDataGeneration {
    */
   public boolean enableConversionWithinBlock = true;
 
-  public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeGenerator recipeGenerator, RecipeExporter exporter) {
+  public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, Multimap<Block, ObjectIntPair<Block>> baseToUncutBase, RecipeGenerator recipeGenerator, RecipeExporter exporter) {
     this.baseBlock = baseBlock;
     this.defaultNamespace = defaultNamespace;
+    this.baseToUncutBase = baseToUncutBase;
     this.recipeGenerator = recipeGenerator;
     this.exporter = exporter;
   }
@@ -284,8 +285,6 @@ public class CrossShapeDataGeneration {
   }
 
   protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
-    final ImmutableCollection<Block> blocks = VanillaStonecutting.INSTANCE.get(baseBlock);
-    final ImmutableCollection<ObjectIntPair<Block>> weightedBlocks = VanillaStonecutting.INSTANCE_WITH_WEIGHT.get(baseBlock);
-    return Iterables.concat(blocks.isEmpty() ? Collections.emptyList() : blocks.stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList()), weightedBlocks);
+    return baseToUncutBase.get(baseBlock);
   }
 }
