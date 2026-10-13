@@ -1,7 +1,6 @@
 package pers.solid.extshape.data;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.*;
@@ -18,9 +17,7 @@ import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.mixin.SingleItemRecipeJsonBuilderAccessor;
 import pers.solid.extshape.util.BlockBiMaps;
 
-import java.util.Collections;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 
 /**
@@ -32,6 +29,10 @@ public class CrossShapeDataGeneration {
    */
   public final Block baseBlock;
   public final @Nullable String defaultNamespace;
+  /**
+   * 基础方块到切石前的切石方块的映射。例如，由于原版的石头可以生成石砖，那么这个映射就可以加入“石砖->石头”，从而在生成石砖的跨形状数据生成时，会生成石头到石砖的各形状的切石配方。
+   */
+  private final Multimap<Block, ObjectIntPair<Block>> baseToUncutBase;
   public final Consumer<RecipeJsonProvider> exporter;
   /**
    * 是否启用同种形状之间的方块切石功能，例如将非切制的楼梯切成已切制的横条。如果未启用，则只能将非切制的楼梯切成非切制的横条，但是基础方块仍不在此限。将此设置为 {@code false} 是为了与原版的行为相匹配。
@@ -42,9 +43,10 @@ public class CrossShapeDataGeneration {
    */
   public boolean enableConversionWithinBlock = true;
 
-  public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, Consumer<RecipeJsonProvider> exporter) {
+  public CrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, Multimap<Block, ObjectIntPair<Block>> baseToUncutBase, Consumer<RecipeJsonProvider> exporter) {
     this.baseBlock = baseBlock;
     this.defaultNamespace = defaultNamespace;
+    this.baseToUncutBase = baseToUncutBase;
     this.exporter = exporter;
   }
 
@@ -281,8 +283,6 @@ public class CrossShapeDataGeneration {
   }
 
   protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
-    final ImmutableCollection<Block> blocks = VanillaStonecutting.INSTANCE.get(baseBlock);
-    final ImmutableCollection<ObjectIntPair<Block>> weightedBlocks = VanillaStonecutting.INSTANCE_WITH_WEIGHT.get(baseBlock);
-    return Iterables.concat(blocks.isEmpty() ? Collections.emptyList() : blocks.stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList()), weightedBlocks);
+    return baseToUncutBase.get(baseBlock);
   }
 }

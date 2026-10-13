@@ -2,6 +2,7 @@ package pers.solid.extshape.data;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimaps;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
@@ -29,21 +30,21 @@ public final class VanillaStonecutting {
   /**
    * 键为切石<i>之后</i>的方块，值为切石<i>之前</i>的方块。
    */
-  public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
-  public static final @Unmodifiable ImmutableMultimap<Block, ObjectIntPair<Block>> INSTANCE_WITH_WEIGHT;
+  public static final @Unmodifiable ImmutableMultimap<Block, ObjectIntPair<Block>> INSTANCE;
 
   private VanillaStonecutting() {
   }
 
   static {
-    final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
-    registerVanillaStonecutting(builder);
-    final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> weightedBuilder = new ImmutableMultimap.Builder<>();
-    registerCutCopperBlocks(weightedBuilder);
-    INSTANCE = builder.build();
+    final ImmutableMultimap.Builder<Block, Block> simpleBuilder = new ImmutableMultimap.Builder<>();
+    registerVanillaStonecutting(simpleBuilder);
+    final ImmutableMultimap<Block, Block> simpleMap = simpleBuilder.build();
+    final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder = new ImmutableMultimap.Builder<>();
+    builder.putAll(Multimaps.transformValues(simpleMap, input -> ObjectIntPair.of(input, 1)));
+    registerCutCopperBlocks(builder);
 
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-      final List<Block> unrecognizedBaseBlocks = INSTANCE.keySet().stream().distinct()
+      final List<Block> unrecognizedBaseBlocks = simpleMap.keySet().stream().distinct()
           .filter(block -> !ExtShapeBlocks.containsBaseBlock(block))
           .toList();
 
@@ -52,16 +53,19 @@ public final class VanillaStonecutting {
       }
     }
 
-    INSTANCE_WITH_WEIGHT = weightedBuilder.build();
+    INSTANCE = builder.build();
   }
 
   private static void registerVanillaStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
     // 石头
     builder.put(Blocks.STONE_BRICKS, Blocks.STONE);
+    builder.putAll(Blocks.CHISELED_STONE_BRICKS, Blocks.STONE, Blocks.STONE_BRICKS);
 
     // 砂岩
     builder.put(Blocks.CUT_SANDSTONE, Blocks.SANDSTONE);
     builder.put(Blocks.CUT_RED_SANDSTONE, Blocks.RED_SANDSTONE);
+    builder.put(Blocks.CHISELED_SANDSTONE, Blocks.SANDSTONE);
+    builder.put(Blocks.CHISELED_RED_SANDSTONE, Blocks.RED_SANDSTONE);
 
     // 石英
     builder.put(Blocks.CHISELED_QUARTZ_BLOCK, Blocks.QUARTZ_BLOCK);
@@ -72,6 +76,9 @@ public final class VanillaStonecutting {
     builder.put(Blocks.POLISHED_GRANITE, Blocks.GRANITE);
     builder.put(Blocks.POLISHED_DIORITE, Blocks.DIORITE);
 
+    // 下界砖
+    builder.put(Blocks.CHISELED_NETHER_BRICKS, Blocks.NETHER_BRICKS);
+
     // 末地
     builder.put(Blocks.END_STONE_BRICKS, Blocks.END_STONE);
 
@@ -79,12 +86,17 @@ public final class VanillaStonecutting {
     builder.put(Blocks.POLISHED_BLACKSTONE, Blocks.BLACKSTONE);
     builder.put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.BLACKSTONE);
     builder.put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE);
+    builder.putAll(Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE);
     builder.put(Blocks.POLISHED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_BRICKS, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_BRICKS, Blocks.POLISHED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.POLISHED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.DEEPSLATE_BRICKS);
+    builder.put(Blocks.CHISELED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE);
+
+    // 玄武岩
+    builder.put(Blocks.POLISHED_BASALT, Blocks.BASALT);
   }
 
   private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {
