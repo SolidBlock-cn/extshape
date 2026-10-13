@@ -59,13 +59,10 @@ public final class VanillaStonecutting {
   private static void registerVanillaStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
     // 石头
     builder.put(Blocks.STONE_BRICKS, Blocks.STONE);
-    builder.putAll(Blocks.CHISELED_STONE_BRICKS, Blocks.STONE, Blocks.STONE_BRICKS);
 
     // 砂岩
     builder.put(Blocks.CUT_SANDSTONE, Blocks.SANDSTONE);
     builder.put(Blocks.CUT_RED_SANDSTONE, Blocks.RED_SANDSTONE);
-    builder.put(Blocks.CHISELED_SANDSTONE, Blocks.SANDSTONE);
-    builder.put(Blocks.CHISELED_RED_SANDSTONE, Blocks.RED_SANDSTONE);
 
     // 石英
     builder.put(Blocks.CHISELED_QUARTZ_BLOCK, Blocks.QUARTZ_BLOCK);
@@ -76,9 +73,6 @@ public final class VanillaStonecutting {
     builder.put(Blocks.POLISHED_GRANITE, Blocks.GRANITE);
     builder.put(Blocks.POLISHED_DIORITE, Blocks.DIORITE);
 
-    // 下界砖
-    builder.put(Blocks.CHISELED_NETHER_BRICKS, Blocks.NETHER_BRICKS);
-
     // 末地
     builder.put(Blocks.END_STONE_BRICKS, Blocks.END_STONE);
 
@@ -86,24 +80,17 @@ public final class VanillaStonecutting {
     builder.put(Blocks.POLISHED_BLACKSTONE, Blocks.BLACKSTONE);
     builder.put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.BLACKSTONE);
     builder.put(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.POLISHED_BLACKSTONE);
-    builder.putAll(Blocks.CHISELED_POLISHED_BLACKSTONE, Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE);
     builder.put(Blocks.POLISHED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_BRICKS, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.COBBLED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_BRICKS, Blocks.POLISHED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.POLISHED_DEEPSLATE);
     builder.put(Blocks.DEEPSLATE_TILES, Blocks.DEEPSLATE_BRICKS);
-    builder.put(Blocks.CHISELED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE);
-
-    // 玄武岩
-    builder.put(Blocks.POLISHED_BASALT, Blocks.BASALT);
 
     // 凝灰岩相关
     builder.put(Blocks.POLISHED_TUFF, Blocks.TUFF);
     builder.put(Blocks.TUFF_BRICKS, Blocks.TUFF);
     builder.put(Blocks.TUFF_BRICKS, Blocks.POLISHED_TUFF);
-    builder.putAll(Blocks.CHISELED_TUFF, Blocks.TUFF);
-    builder.putAll(Blocks.CHISELED_TUFF_BRICKS, Blocks.TUFF, Blocks.POLISHED_TUFF, Blocks.TUFF_BRICKS);
   }
 
   private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {
