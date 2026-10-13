@@ -194,14 +194,24 @@ public class ExtShape implements ModInitializer {
       map.put(BlockShape.WALL, 1);
     });
     for (Block baseBlock : baseBlocks) {
-      final Set<StonecuttingRecipe> set = stonecuttingRecipes.stream().filter(stonecuttingRecipe -> stonecuttingRecipe.matches(new SimpleInventory(new ItemStack(baseBlock)), server.getOverworld())).collect(Collectors.toUnmodifiableSet());
-      if (set.isEmpty()) {
+      // 对平滑石头方块予以额外豁免
+      if (Blocks.SMOOTH_STONE == baseBlock) {
         continue;
       }
 
+      final Set<StonecuttingRecipe> matchingRecipes = stonecuttingRecipes.stream().filter(stonecuttingRecipe -> stonecuttingRecipe.matches(new SimpleInventory(new ItemStack(baseBlock)), server.getOverworld())).collect(Collectors.toUnmodifiableSet());
+      if (matchingRecipes.isEmpty()) {
+        continue;
+      }
+
+      // 此方块能切石成哪些基础方块（不包括输入的自身）
+      final Set<Block> resultBases = new HashSet<>();
+
       // 映射，键为对应合成产物的基础方块（可能和 baseBlock 变量的值相同或不同），值为形状到布尔值的映射（方块存在且可合成的为 true，方块存在且不可合成的为 false，方块不存在的为 null）
-      final Map<Block, Set<BlockShape>> map = new HashMap<>();
-      for (StonecuttingRecipe recipe : set) {
+      final Map<Block, Set<BlockShape>> resultBaseToShapes = new HashMap<>();
+
+      // 记录当前方块能够切石成哪些基础方块以及对应形状
+      for (StonecuttingRecipe recipe : matchingRecipes) {
         final ItemStack output = recipe.getOutput(server.getRegistryManager());
         final Item resultItem = output.getItem();
         final int resultCount = output.getCount();
@@ -221,6 +231,8 @@ public class ExtShape implements ModInitializer {
           final Block resultBase = BlockBiMaps.of(resultShape).inverse().get(resultBlock);
           if (resultBase == null) {
             continue;
+          } else if (resultBase != baseBlock) {
+            resultBases.add(resultBase);
           }
           if (!stoneCuttableShapes.containsKey(resultShape)) {
             LOGGER.error("The shape {} should not be stone-cut, but {} can be cut into these shapes of {}!", resultShape.asString(), Registries.BLOCK.getId(baseBlock), Registries.BLOCK.getId(resultBase));
@@ -233,11 +245,15 @@ public class ExtShape implements ModInitializer {
             LOGGER.error("Result count mismatches! The shape {} is expected to have {} results, but {} can be cut into {} items of {}!", resultShape.getSerializedName(), stoneCuttableShapes.getInt(resultShape), Registries.BLOCK.getId(baseBlock), resultCount, Registries.ITEM.getId(resultItem));
           }*/
 
-          map.computeIfAbsent(resultBase, block -> new HashSet<>()).add(resultShape);
+          resultBaseToShapes.computeIfAbsent(resultBase, block -> new HashSet<>()).add(resultShape);
+        } else if (BlockBiMaps.BASE_BLOCKS.contains(resultBlock)) {
+          // 方块不是形状变种，视为基础方块
+          resultBases.add(resultBlock);
         }
       }
 
-      for (Map.Entry<Block, Set<BlockShape>> e : map.entrySet()) {
+      // 检测方块的切石结果中的各情况是否一致。
+      for (Map.Entry<Block, Set<BlockShape>> e : resultBaseToShapes.entrySet()) {
         final Block resultBase = e.getKey();
         final Set<BlockShape> craftableShapes = e.getValue();
         final Set<BlockShape> uncraftableShapes = stoneCuttableShapes.keySet().stream().filter(blockShape -> BlockBiMaps.getBlockOf(blockShape, resultBase) != null).filter(blockShape -> !craftableShapes.contains(blockShape)).collect(Collectors.toSet());
@@ -245,6 +261,24 @@ public class ExtShape implements ModInitializer {
 
         if (!uncraftableShapes.isEmpty()) {
           LOGGER.error("{} can be stone-cut into {} of {}, but cannot be cut into {} of that block!", Registries.BLOCK.getId(baseBlock), craftableShapes.stream().map(BlockShape::asString).collect(Collectors.joining(", ")), Registries.BLOCK.getId(resultBase), uncraftableShapes.stream().map(BlockShape::asString).collect(Collectors.joining(", ")));
+          errors++;
+        }
+      }
+
+      // 检测方块切石为其他基础方块与方块切石为基础方块的形状变种是否一致。
+      for (Block resultBase : resultBases) {
+        final boolean whetherBaseCraftable = matchingRecipes.stream().anyMatch(entry -> entry.getOutput(server.getRegistryManager()).isOf(resultBase.asItem()));
+        final boolean whetherShapeVariantsExists = BlockBiMaps.BASE_BLOCKS.contains(resultBase);
+        final boolean whetherShapeVariantsCraftable = resultBaseToShapes.containsKey(resultBase) && !resultBaseToShapes.get(resultBase).isEmpty();
+
+        if (!whetherShapeVariantsExists) {
+          LOGGER.error("{} can be stone-cut into {} which is a base block, but it does not have shape variants!",
+              Registries.BLOCK.getId(baseBlock), Registries.BLOCK.getId(resultBase));
+          errors++;
+        }
+
+        if (whetherBaseCraftable != whetherShapeVariantsCraftable) {
+          LOGGER.error("Inter-shape stone-cutting mismatches! {} can be cut into another base block {}: {}, but can be cut into shape variants of {}: {}", Registries.BLOCK.getId(baseBlock), Registries.BLOCK.getId(resultBase), whetherBaseCraftable, Registries.BLOCK.getId(resultBase), whetherShapeVariantsCraftable);
           errors++;
         }
       }
