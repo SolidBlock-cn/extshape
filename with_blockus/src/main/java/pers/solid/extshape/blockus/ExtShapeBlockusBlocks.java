@@ -167,6 +167,7 @@ public final class ExtShapeBlockusBlocks {
         .without(BlockShape.BUTTON)
         .build();
     createAllShapes(BlockusBlocks.CHISELED_TUFF)
+        .markStoneCuttable()
         .setFenceSettings(FenceSettings.TUFF)
         .setActivationSettings(ActivationSettings.TUFF)
         .without(BlockShape.BUTTON)
@@ -189,6 +190,7 @@ public final class ExtShapeBlockusBlocks {
         .without(BlockShape.BUTTON)
         .build();
     createAllShapes(BlockusBlocks.TUFF_TILES)
+        .markStoneCuttable()
         .setFenceSettings(FenceSettings.TUFF)
         .setActivationSettings(ActivationSettings.TUFF)
         .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
