@@ -30,7 +30,7 @@ public final class BlockBiMaps {
    */
   private static final Map<BlockShape, BiMap<Block, Block>> SHAPE_TO_BI_MAP = new HashMap<>();
   /**
-   * 基础方块集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。
+   * 基础方块（包括其他模组中的）集合。当某个方块被产生变种方块（楼梯、台阶等）后，该方块就会视为基础方块，加到此集合中。会在调用 {@link #setBlockOf} 时自动写入。
    */
   public static final LinkedHashSet<Block> BASE_BLOCKS = new LinkedHashSet<>();
 
@@ -58,7 +58,6 @@ public final class BlockBiMaps {
         }
         if (variant != null) {
           setBlockOf(shape, baseBlock, variant);
-          BASE_BLOCKS.add(baseBlock);
         }
       }
     });

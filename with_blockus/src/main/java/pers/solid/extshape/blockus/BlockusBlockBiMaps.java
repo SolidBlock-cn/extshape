@@ -37,7 +37,6 @@ public final class BlockusBlockBiMaps {
         }
         if (variant != null) {
           BlockBiMaps.setBlockOf(shape, baseBlock, variant);
-          BlockBiMaps.BASE_BLOCKS.add(baseBlock);
         }
       }
     });
