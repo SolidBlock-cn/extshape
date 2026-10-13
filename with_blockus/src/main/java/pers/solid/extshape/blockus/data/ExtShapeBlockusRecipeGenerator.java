@@ -37,7 +37,7 @@ public class ExtShapeBlockusRecipeGenerator extends RecipeGenerator {
   public void generate() {
     for (Block block : ExtShapeBlockusBlocks.BLOCKUS_BLOCKS) {
       if (block instanceof ExtShapeBlockInterface i) {
-        i.registerRecipes(ExtShapeBlockus.NAMESPACE, this, exporter);
+        i.registerRecipes(this, exporter);
       }
     }
 
