@@ -84,7 +84,7 @@ public final class ExtShapeSpecificItemGroups {
     final List<Block> strippedWoodsAndHyphaes = ImmutableList.copyOf(Iterables.concat(BlockCollections.STRIPPED_WOODS, Arrays.asList(air, air), BlockCollections.STRIPPED_HYPHAES));
     final List<Block> planks = ImmutableList.copyOf(BlockCollections.PLANKS);
 
-    if (IntStream.of(logsAndStems.size(), woodsAndHyphaes.size(), strippedLogsAndStems.size(), strippedLogsAndStems.size(), planks.size()).distinct().count() > 1) {
+    if (IntStream.of(logsAndStems.size(), woodsAndHyphaes.size(), strippedLogsAndStems.size(), strippedWoodsAndHyphaes.size(), planks.size()).distinct().count() > 1) {
       throw new IllegalStateException("Sizes mismatch! Sizes are: logs_and_stems = " + logsAndStems.size() + ", woods_and_hyphaes = " + woodsAndHyphaes.size() + ", stripped_logs_and_steps = " + strippedLogsAndStems.size() + ", stripped_woods_and_hyphaes = " + strippedWoodsAndHyphaes.size() + ", planks = " + planks.size());
     }
 
