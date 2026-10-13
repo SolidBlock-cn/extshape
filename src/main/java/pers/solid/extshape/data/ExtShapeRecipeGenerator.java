@@ -23,7 +23,7 @@ public class ExtShapeRecipeGenerator extends RecipeGenerator {
   public void generate() {
     for (Block block : ExtShapeBlocks.getBlocks()) {
       if (block instanceof ExtShapeBlockInterface i) {
-        i.registerRecipes(this, exporter);
+        i.registerRecipes(ExtShape.MOD_ID, this, exporter);
       }
     }
 
