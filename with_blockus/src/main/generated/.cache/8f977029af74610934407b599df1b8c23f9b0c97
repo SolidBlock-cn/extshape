@@ -1,7 +1,7 @@
-// 1.20.1	2026-10-12T23:34:30.5159231	Extended Block Shapes - Blockus/Tags for minecraft:item
+// 1.20.1	2026-10-13T15:43:01.5677495	Extended Block Shapes - Blockus/Tags for minecraft:item
 9d5fe1a007f496b5e6a775593c219566b477f14d data\extshape_blockus\tags\items\glazed_terracotta_pillar_quarter_piece.json
-e91188c0c434a47872309c833f2c98397382b2b7 data\extshape_blockus\tags\items\glazed_terracotta_pillar_vertical_stairs.json
 64e675779bfa88f7c7195fad3b84939cd3f0d702 data\minecraft\tags\items\slabs.json
+e91188c0c434a47872309c833f2c98397382b2b7 data\extshape_blockus\tags\items\glazed_terracotta_pillar_vertical_stairs.json
 1d699ef82f49bd5583882d8a05feba64ce8c41d9 data\extshape\tags\items\log_slabs.json
 cc73b0e9fd130adf1769411270f928552435655a data\minecraft\tags\items\stone_buttons.json
 43ebc0de157d3680a68c0e81c6deb7e8fe38857d data\extshape\tags\items\pressure_plates.json
@@ -10,12 +10,12 @@ b530863c0b2f1acb5a105597e9f975e1f4f4c121 data\minecraft\tags\items\stairs.json
 c2d897ccd5e424713ba6537096cefd4038bfb6b3 data\extshape_blockus\tags\items\glazed_terracotta_pillar_stairs.json
 bbf32fb5dec2ab13643d8bfd49ab7b68588016e7 data\extshape_blockus\tags\items\glazed_terracotta_pillar_vertical_slab.json
 170270c3538157934806a1e0378c93d01b4c1192 data\minecraft\tags\items\walls.json
-8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\extshape\tags\items\log_fence_gates.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\extshape\tags\items\log_walls.json
+8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\extshape\tags\items\log_fence_gates.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\extshape\tags\items\log_buttons.json
 a59d183ea570c87562e9f7d911593850aeaa894c data\extshape\tags\items\woolen_blocks.json
-6c5599afa20e0c66101e745d5f1732e265b382b2 data\minecraft\tags\items\wooden_slabs.json
 b1f85e1401ea165a32cdb11980b907989f1abd8b data\extshape\tags\items\wooden_vertical_slabs.json
+6c5599afa20e0c66101e745d5f1732e265b382b2 data\minecraft\tags\items\wooden_slabs.json
 f61d07f6e5419c0847e86597f3d0aec6baa8a550 data\minecraft\tags\items\fences.json
 8b9e9f292ff598e40a6cc4899c75a39c42398451 data\extshape_blockus\tags\items\glazed_terracotta_pillar_slab.json
 61d50d9ff64caaa5341aed29c6663529abcc63dc data\minecraft\tags\items\buttons.json

@@ -1,4 +1,4 @@
-// 1.20.1	2026-10-12T23:34:30.504922	Extended Block Shapes - Blockus/Block Loot Tables
+// 1.20.1	2026-10-13T15:43:01.5570155	Extended Block Shapes - Blockus/Block Loot Tables
 d7e7961e976900afae1bb4f7c5a131b5f49feeea data\extshape_blockus\loot_tables\blocks\blue_shingles_pressure_plate.json
 f80af8ee80554f32d3b4539bc00408f4a5c6c502 data\extshape_blockus\loot_tables\blocks\small_marble_brick_pressure_plate.json
 211cddcf97d91afd35b7e2859c210013a6ce6de4 data\extshape_blockus\loot_tables\blocks\red_concrete_brick_quarter_piece.json
@@ -1755,8 +1755,8 @@ e063ed5f521349d03ef438d485b457f8a01d23d9 data\extshape_blockus\loot_tables\block
 48503abe3a8e08451512dbbf5e2af774f6fbb234 data\extshape_blockus\loot_tables\blocks\viridite_tile_fence.json
 93f4bd64373fd92b75ca13c556776054b2d575a0 data\extshape_blockus\loot_tables\blocks\rough_red_sandstone_vertical_stairs.json
 803ae31f3876d3caf2e644adebb9c2c34ecd6bdf data\extshape_blockus\loot_tables\blocks\limestone_fence.json
-2e340d8dfbe672088827dd1376168a50b7299d36 data\extshape_blockus\loot_tables\blocks\charcoal_fence.json
 fac67f2a4753a6dc02673ef0b1ead0fcf9ae72c0 data\extshape_blockus\loot_tables\blocks\acacia_small_logs_quarter_piece.json
+2e340d8dfbe672088827dd1376168a50b7299d36 data\extshape_blockus\loot_tables\blocks\charcoal_fence.json
 30b05bf2fa4d331b355c9bad0c29cde981c45b49 data\extshape_blockus\loot_tables\blocks\marble_squares_stairs.json
 cad92d8d2685f1f08f723532b59f3fd29ef2b300 data\extshape_blockus\loot_tables\blocks\lava_polished_blackstone_brick_fence.json
 514adf6070bccae73d61c5187b303dd0c7ff2b4e data\extshape_blockus\loot_tables\blocks\herringbone_birch_wall.json

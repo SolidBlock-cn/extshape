@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "minecraft:stone"
+  },
+  "result": "extshape_blockus:stone_circular_paving_slab"
+}
