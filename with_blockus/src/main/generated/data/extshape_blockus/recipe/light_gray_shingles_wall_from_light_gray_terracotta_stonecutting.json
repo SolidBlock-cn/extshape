@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "minecraft:light_gray_terracotta",
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:light_gray_shingles_wall"
+  }
+}
