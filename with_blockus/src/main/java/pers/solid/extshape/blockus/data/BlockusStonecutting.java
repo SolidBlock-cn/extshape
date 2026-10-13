@@ -1,4 +1,4 @@
-package pers.solid.extshape.blockus;
+package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
 import com.brand.blockus.registry.content.BlockusBlocks;
@@ -7,17 +7,15 @@ import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.utils.helper.BlockMaps;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.google.common.collect.ImmutableMultimap;
-import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.DyeColor;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.data.CrossShapeDataGeneration;
+import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.data.VanillaStonecutting;
 
 import java.util.Arrays;
@@ -29,9 +27,8 @@ import java.util.stream.Collectors;
 /**
  * @see VanillaStonecutting
  */
-public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
+public final class BlockusStonecutting {
   public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
-
 
   static {
     final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
@@ -48,13 +45,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     }
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeExporter exporter) {
-    super(baseBlock, defaultNamespace, exporter);
-  }
-
-  @Override
-  protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
-    return INSTANCE.get(baseBlock).stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList());
+  private BlockusStonecutting() {
   }
 
   /**
@@ -71,6 +62,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
         }
         Block base = BlockMaps.CONCRETE_MAP.get(dyeColor);
         builder.put(concreteVariants.block(), base);
+        builder.put(concreteVariants.chiseled(), concreteVariants.block());
         builder.put(concreteVariants.chiseled(), base);
       }
     }
@@ -80,8 +72,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 石头
     builder.putAll(BlockusBlocks.STONE_TILES.block(), Blocks.STONE, Blocks.STONE_BRICKS);
-    builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE);
-    builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.STONE_CIRCULAR_PAVING, Blocks.STONE, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE, Blocks.STONE_BRICKS);
 
     // 三废石
     putMultipleWithMid(builder, BlockusBlocks.ANDESITE_BRICKS.block(), Blocks.ANDESITE, Blocks.POLISHED_ANDESITE, BlockusBlocks.CHISELED_ANDESITE_BRICKS, BlockusBlocks.HERRINGBONE_ANDESITE_BRICKS, BlockusBlocks.ANDESITE_CIRCULAR_PAVING);
@@ -134,6 +126,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 熔岩砖
     builder.put(BlockusBlocks.CHISELED_LAVA_BRICKS, BlockusBlocks.LAVA_BRICKS.block());
+    builder.put(BlockusBlocks.CHISELED_LAVA_POLISHED_BLACKSTONE, BlockusBlocks.LAVA_POLISHED_BLACKSTONE_BRICKS.block());
 
     // 岩浆砖
     builder.put(BlockusBlocks.MAGMA_BRICKS.block(), Blocks.MAGMA_BLOCK);
@@ -197,7 +190,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 巧克力
     builder.put(BlockusBlocks.CHOCOLATE_BRICKS.block(), BlockusBlocks.CHOCOLATE_BLOCK.block());
-    builder.put(BlockusBlocks.CHOCOLATE_SQUARES, BlockusBlocks.CHOCOLATE_BLOCK.block());
+    builder.putAll(BlockusBlocks.CHOCOLATE_SQUARES, BlockusBlocks.CHOCOLATE_BLOCK.block(), BlockusBlocks.CHOCOLATE_BRICKS.block());
 
     // 瓦片
     builder.put(BlockusBlocks.SHINGLES.block(), Blocks.TERRACOTTA);

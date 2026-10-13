@@ -30,7 +30,7 @@ public class ExtShapeRecipeProvider extends FabricRecipeProvider {
     }
 
     for (Block baseBlock : ExtShapeBlocks.getBaseBlocks()) {
-      final CrossShapeDataGeneration crossShapeDataGeneration = new CrossShapeDataGeneration(baseBlock, ExtShape.MOD_ID, exporter);
+      final CrossShapeDataGeneration crossShapeDataGeneration = new CrossShapeDataGeneration(baseBlock, ExtShape.MOD_ID, VanillaStonecutting.INSTANCE, exporter);
       crossShapeDataGeneration.generateCrossShapeData();
     }
 
