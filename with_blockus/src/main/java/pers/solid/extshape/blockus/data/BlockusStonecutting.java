@@ -1,20 +1,17 @@
-package pers.solid.extshape.blockus;
+package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.google.common.collect.ImmutableMultimap;
-import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.RecipeGenerator;
 import net.minecraft.registry.Registries;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import pers.solid.extshape.block.ExtShapeBlocks;
-import pers.solid.extshape.data.CrossShapeDataGeneration;
+import pers.solid.extshape.blockus.BlockusBlockCollections;
+import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.data.VanillaStonecutting;
 import pers.solid.extshape.util.BlockCollections;
 
@@ -27,9 +24,8 @@ import java.util.stream.Collectors;
 /**
  * @see VanillaStonecutting
  */
-public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
+public final class BlockusStonecutting {
   public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
-
 
   static {
     final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
@@ -46,13 +42,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
     }
   }
 
-  public BlockusCrossShapeDataGeneration(Block baseBlock, @Nullable String defaultNamespace, RecipeGenerator recipeGenerator, RecipeExporter exporter) {
-    super(baseBlock, defaultNamespace, recipeGenerator, exporter);
-  }
-
-  @Override
-  protected Iterable<ObjectIntPair<Block>> getUncutBaseBlocks() {
-    return INSTANCE.get(baseBlock).stream().map(block -> ObjectIntPair.of(block, 1)).collect(Collectors.toList());
+  private BlockusStonecutting() {
   }
 
   /**
@@ -66,8 +56,8 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 石头
     builder.putAll(BlockusBlocks.STONE_TILES.block, Blocks.STONE, Blocks.STONE_BRICKS);
-    builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE);
-    builder.put(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.STONE_CIRCULAR_PAVING, Blocks.STONE, Blocks.STONE_BRICKS);
+    builder.putAll(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE, Blocks.STONE_BRICKS);
 
     // 三废石
     putMultipleWithMid(builder, BlockusBlocks.ANDESITE_BRICKS.block, Blocks.ANDESITE, Blocks.POLISHED_ANDESITE, BlockusBlocks.HERRINGBONE_ANDESITE_BRICKS, BlockusBlocks.ANDESITE_CIRCULAR_PAVING);
@@ -179,7 +169,7 @@ public class BlockusCrossShapeDataGeneration extends CrossShapeDataGeneration {
 
     // 巧克力
     builder.put(BlockusBlocks.CHOCOLATE_BRICKS.block, BlockusBlocks.CHOCOLATE_BLOCK.block);
-    builder.put(BlockusBlocks.CHOCOLATE_SQUARES, BlockusBlocks.CHOCOLATE_BLOCK.block);
+    builder.putAll(BlockusBlocks.CHOCOLATE_SQUARES, BlockusBlocks.CHOCOLATE_BLOCK.block, BlockusBlocks.CHOCOLATE_BRICKS.block);
 
     // 瓦片
     builder.put(BlockusBlocks.SHINGLES.block, Blocks.TERRACOTTA);
