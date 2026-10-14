@@ -1,0 +1,15 @@
+{
+  "values": [
+    "extshape_blockus:chorus_stairs",
+    "extshape_blockus:chorus_slab",
+    "extshape_blockus:chorus_vertical_slab",
+    "extshape_blockus:chorus_vertical_stairs",
+    "extshape_blockus:chorus_quarter_piece",
+    "extshape_blockus:chorus_vertical_quarter_piece",
+    "extshape_blockus:chorus_fence",
+    "extshape_blockus:chorus_fence_gate",
+    "extshape_blockus:chorus_wall",
+    "extshape_blockus:chorus_button",
+    "extshape_blockus:chorus_pressure_plate"
+  ]
+}
