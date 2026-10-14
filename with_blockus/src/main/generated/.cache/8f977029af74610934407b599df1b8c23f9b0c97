@@ -1,10 +1,10 @@
-// 1.21.3	2026-10-13T16:48:05.4247935	Extended Block Shapes - Blockus/Tags for minecraft:item
+// 1.21.3	2026-10-14T23:24:40.5361343	Extended Block Shapes - Blockus/Tags for minecraft:item
 f4baa156555fd75921229ef9ac89af552decb0ca data\minecraft\tags\item\fences.json
 a07cf91c493d28af485150abb723d9d5c1693e77 data\extshape_blockus\tags\item\glazed_terracotta_pillar_slab.json
 f05f693e02a27dcadae98a4f6732417a6a796976 data\extshape\tags\item\pressure_plates.json
 97876b2a17ef112fee066a5b734f0fcffc4ae426 data\extshape\tags\item\log_slabs.json
-dfdb216a6aed1dc2b2b887a2e83103f8b591d412 data\extshape\tags\item\log_vertical_quarter_pieces.json
 2f45259b1c71bfa845b2569d2815a933151aded8 data\extshape\tags\item\log_vertical_slabs.json
+dfdb216a6aed1dc2b2b887a2e83103f8b591d412 data\extshape\tags\item\log_vertical_quarter_pieces.json
 a3163c6d3cc66f188e37fd438eddcf89dafa0059 data\extshape_blockus\tags\item\glazed_terracotta_pillar_quarter_piece.json
 67f8308628ee88cd93fdde00d1122d68b4ee44ad data\minecraft\tags\item\wooden_buttons.json
 36c07b8cf1ca582b1cbaf7d2abb7cfed999ce11c data\extshape\tags\item\log_quarter_pieces.json
