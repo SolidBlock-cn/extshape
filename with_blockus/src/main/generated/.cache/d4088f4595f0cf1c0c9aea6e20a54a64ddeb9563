@@ -85,7 +85,6 @@ eb7cf951870642b73ec04f63644f885841b2b11c data/minecraft/tags/block/needs_stone_t
 150f8e3796963a163ec54dcba906800cedbf2fb0 data/minecraft/tags/block/slabs.json
 9531718aca5233211832ef5bcc3070727ef4bddb data/minecraft/tags/block/stairs.json
 d281d8cbf6d7fc124bac9bd1d6297d403dbe9a29 data/minecraft/tags/block/stone_buttons.json
-2ad61efc51f496c13f7c49d3e1229eda618f5730 data/minecraft/tags/block/sword_efficient.json
 93feeaee768a281e4eca141f1d0f7c4b3d9cf4e6 data/minecraft/tags/block/walls.json
 67f8308628ee88cd93fdde00d1122d68b4ee44ad data/minecraft/tags/block/wooden_buttons.json
 4f740cd898b8bbb07bd84563e8957d51cecc63cc data/minecraft/tags/block/wooden_fences.json

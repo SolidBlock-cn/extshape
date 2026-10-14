@@ -105,8 +105,6 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     addForShapes(BlockTags.NEEDS_DIAMOND_TOOL, BlockusBlocks.NETHERITE_BRICKS.block());
 
-    addForShapes(BlockTags.SWORD_EFFICIENT, BlockusBlocks.CHORUS_BLOCK);
-
     // endregion mineable 方块标签
 
     // region 特殊方块标签
