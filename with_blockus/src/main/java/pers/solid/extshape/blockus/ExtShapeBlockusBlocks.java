@@ -873,7 +873,7 @@ public final class ExtShapeBlockusBlocks {
         .markStoneCuttable()
         .withoutRedstone()
         .without(BlockShape.FENCE, BlockShape.FENCE_GATE)
-        .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireproof())
+        .addPreBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireproof())
         .build();
 
 
