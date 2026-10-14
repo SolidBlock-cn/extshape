@@ -113,6 +113,7 @@ public final class ExtShapeSpecificItemGroups {
     STONE_BASE_BLOCKS.addAll(BlockCollections.STONES);
     STONE_BASE_BLOCKS.addAll(Arrays.asList(
         Blocks.SMOOTH_STONE,
+        ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB,
         Blocks.STONE_BRICKS,
         Blocks.MOSSY_STONE_BRICKS,
         Blocks.CHISELED_STONE_BRICKS,
@@ -207,6 +208,10 @@ public final class ExtShapeSpecificItemGroups {
     MINERAL_BASE_BLOCKS.forEach(baseBlocks::remove);
 
     for (Block block : baseBlocks) {
+      if (block == ExtShapeBlocks.PETRIFIED_OAK_PLANKS) {
+        continue;
+      }
+
       final BlockSoundGroup soundGroup = block.getDefaultState().getSoundGroup();
       if (soundGroup == BlockSoundGroup.STONE) {
         STONE_BASE_BLOCKS.add(block);
