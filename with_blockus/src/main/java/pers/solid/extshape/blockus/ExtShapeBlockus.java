@@ -148,6 +148,18 @@ public class ExtShapeBlockus implements ModInitializer {
       replacingIds.put(ExtShapeBlockus.id(Registries.BLOCK.getId(fromBase).getPath() + "_wall"), Registries.BLOCK.getId(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, toBase)));
     });
 
+    final String[] smallLogs = new String[]{"oak", "spruce", "birch", "jungle", "acacia", "dark_oak", "mangrove", "cherry", "white_oak"};
+    final BlockShape[] constructionShapes = {BlockShape.STAIRS, BlockShape.SLAB, BlockShape.VERTICAL_QUARTER_PIECE, BlockShape.VERTICAL_SLAB, BlockShape.VERTICAL_STAIRS, BlockShape.QUARTER_PIECE};
+
+    // region 小型原木的更名
+    // 适用于 1.21.1 和 >=1.21.8
+    for (String type : smallLogs) {
+      for (BlockShape shape : constructionShapes) {
+        replacingIds.put(ExtShapeBlockus.id(type + "_small_logs_" + shape.asString()), ExtShapeBlockus.id("small_" + type + "_logs_" + shape.asString()));
+      }
+    }
+    // endregion 小型原木的更名
+
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
       validateReplacingIds(replacingIds.entrySet());
     }
