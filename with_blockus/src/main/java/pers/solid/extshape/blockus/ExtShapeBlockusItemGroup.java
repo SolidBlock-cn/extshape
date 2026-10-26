@@ -13,6 +13,7 @@ import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -50,7 +51,8 @@ public final class ExtShapeBlockusItemGroup {
       BlockusBlocks.DYED_SHINGLES.block().blocks().asList().stream(),
       BlockusBlocks.CONCRETE_BRICKS.block().blocks().asList().stream(),
       BlockusBlocks.PATTERNED_WOOL.block().blocks().asList().stream(),
-      BlockusBlocks.GINGHAM_WOOL.block().blocks().asList().stream()).collect(ImmutableSet.toImmutableSet()
+      BlockusBlocks.GINGHAM_WOOL.block().blocks().asList().stream(),
+      BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().asList().stream()).collect(ImmutableSet.toImmutableSet()
   );
 
   public static void addVanillaGroupRules(ItemGroupRulesAccess rulesAccess, Collection<BlockShape> shapes) {
@@ -77,6 +79,9 @@ public final class ExtShapeBlockusItemGroup {
     // 方格羊毛
     putWoolBundle(BlockusBlocks.GINGHAM_WOOL, coloredAppendingRule);
 
+    // 带釉陶瓦柱
+    ItemGroupRules.addSpecialColoredSortingRules(coloredAppendingRule, BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.items().pink(), BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks(), BlockOrder.COLOR, ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains);
+
     putCopperBSSW(BlockusBlocks.COPPER_BRICKS, buildingAppendingRule);
     putCopperBSSW(BlockusBlocks.COPPER_TUFF_BRICKS, buildingAppendingRule);
   }
@@ -97,12 +102,13 @@ public final class ExtShapeBlockusItemGroup {
       if (blockShape == BlockShape.STAIRS || blockShape == BlockShape.SLAB || (wallItemCollection != null && blockShape == BlockShape.WALL)) continue;
       final BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
       final Item anchor = blockShape.compareTo(BlockShape.WALL) > 0 ? wallAnchor : slabAnchor;
-      baseCollection.forEach(block -> {
+      for (DyeColor dyeColor : BlockOrder.COLOR) {
+        final Block block = baseCollection.pick(dyeColor);
         final Block shaped = biMap.get(block);
         if (shaped != null && ExtShapeBlockusBlocks.BLOCKUS_BLOCKS.contains(shaped)) {
           appendingRule.put(anchor, shaped.asItem());
         }
-      });
+      }
     }
   }
 
