@@ -58,6 +58,8 @@
   "tag.block.extshape.terracotta_buttons": "テラコッタのボタン",
   "tag.block.extshape.stained_terracotta_buttons": "色付きテラコッタのボタン",
 
+  "tag.block.extshape.pressure_plates": "感圧板",
+  "tag.block.extshape.stone_pressure_plates": "石の感圧板",
   "tag.block.extshape.log_pressure_plates": "原木の感圧板",
   "tag.block.extshape.woolen_pressure_plates": "羊毛の感圧板",
   "tag.block.extshape.concrete_pressure_plates": "コンクリートの感圧板",
@@ -138,6 +140,8 @@
   "tag.item.extshape.terracotta_buttons": "テラコッタのボタン",
   "tag.item.extshape.stained_terracotta_buttons": "色付きテラコッタのボタン",
 
+  "tag.item.extshape.pressure_plates": "感圧板",
+  "tag.item.extshape.stone_pressure_plates": "石の感圧板",
   "tag.item.extshape.log_pressure_plates": "原木の感圧板",
   "tag.item.extshape.woolen_pressure_plates": "羊毛の感圧板",
   "tag.item.extshape.concrete_pressure_plates": "コンクリートの感圧板",
