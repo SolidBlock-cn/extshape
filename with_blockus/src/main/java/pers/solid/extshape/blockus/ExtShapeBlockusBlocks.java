@@ -997,20 +997,20 @@ public final class ExtShapeBlockusBlocks {
     }
 
     createAllShapes(BlockusBlocks.THATCH)
-        .addPostBuildConsumer((blockShape4, blockBuilder3) -> {
-          FlammableBlockRegistry.getDefaultInstance().add(blockBuilder3.instance, 60, 20);
-        }) // 茅草的基础方块能堆肥，但是楼梯和台阶不能堆肥（可能是 bug？）
+        .addPostBuildConsumer((blockShape, blockBuilder) -> {
+          FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 60, 20);
+        })
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.WHEAT, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
         .build();
     createAllShapes(BlockusBlocks.PAPER_BLOCK)
-        .addPostBuildConsumer((blockShape3, blockBuilder2) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder2.instance, 30, 60))
+        .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60))
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.PAPER, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
         .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
         .build();
     createAllShapes(BlockusBlocks.BURNT_PAPER_BLOCK)
-        .addPostBuildConsumer((blockShape2, blockBuilder1) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder1.instance, 5, 60))
+        .addPostBuildConsumer((blockShape, blockBuilder1) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder1.instance, 5, 60))
         .setActivationSettings(ActivationSettings.soft(ExtShapeBlockusBlockTypes.GRASS_BLOCK_SET_TYPE))
         .setFenceSettings(new FenceSettings(Items.GUNPOWDER, ExtShapeBlockusBlockTypes.GRASS_BLOCK_WOOD_TYPE))
         .build();
