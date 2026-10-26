@@ -15,6 +15,8 @@
     - In the mod's configuration screen, when "show specific item groups" is off, the buttons for the two config entries above will be disabled.
 - Fixed the issue that when modifying "shapes to add to vanilla item groups" and "shapes to add to specific item groups", the modification cannot work if nothing but the order is changed.
 - Now in the configuration screen, when the "add to vanilla item groups" and "show specific item groups" are off, besides relevant text fields, the "reset" button right to the text field will also be disabled.
+- Petrified oak planks are no longer added to vanilla item groups, and will also not be added to specific item groups of this mod. Vanilla petrified oak slab exists due to historical reasons and does not exist in vanilla item groups. Petrified oak planks of this mod is also a technical content, so will not be present in vanilla item groups.
+- Fixed the issue that in some versions, relevant blocks of tuff bricks are not in `#stone_pressure_plates` and `#stone_buttons` block tags.
 
 ### 3.1.6
 
