@@ -3,14 +3,17 @@ package pers.solid.extshape.blockus.data;
 import com.brand.blockus.datagen.providers.BlockusRecipeProvider;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.Unmodifiable;
+import pers.solid.extshape.block.CopperManager;
 import pers.solid.extshape.block.ExtShapeBlocks;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
+import pers.solid.extshape.blockus.BlockusCopperManager;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.data.VanillaStonecutting;
 import pers.solid.extshape.util.BlockCollections;
@@ -198,6 +201,26 @@ public final class BlockusStonecutting {
     builder.put(BlockusBlocks.EMERALD_BRICKS.block, Blocks.EMERALD_BLOCK);
     builder.put(BlockusBlocks.DIAMOND_BRICKS.block, Blocks.DIAMOND_BLOCK);
     builder.put(BlockusBlocks.NETHERITE_BRICKS.block, Blocks.NETHERITE_BLOCK);
+
+    // region 铜砖
+    final List<Block> unwaxedCopperBricksList = BlockusCopperManager.COPPER_BRICKS.unwaxed();
+    final ImmutableList<Block> unwaxedCopperBlockList = CopperManager.COPPER_BLOCKS;
+    final ImmutableList<Block> unwaxedCutCopperBlockList = CopperManager.CUT_COPPER_BLOCKS;
+    for (int i = 0; i < unwaxedCopperBricksList.size(); i++) {
+      final Block unwaxedCopperBricks = unwaxedCopperBricksList.get(i);
+      builder.put(unwaxedCopperBricks, unwaxedCopperBlockList.get(i));
+      builder.put(unwaxedCopperBricks, unwaxedCutCopperBlockList.get(i));
+    }
+
+    final List<Block> waxedCopperBricksList = BlockusCopperManager.COPPER_BRICKS.waxed();
+    final ImmutableList<Block> waxedCopperBlockList = CopperManager.WAXED_COPPER_BLOCKS;
+    final ImmutableList<Block> waxedCutCopperBlockList = CopperManager.WAXED_CUT_COPPER_BLOCKS;
+    for (int i = 0; i < waxedCopperBricksList.size(); i++) {
+      final Block waxedCopperBricks = waxedCopperBricksList.get(i);
+      builder.put(waxedCopperBricks, waxedCopperBlockList.get(i));
+      builder.put(waxedCopperBricks, waxedCutCopperBlockList.get(i));
+    }
+    // endregion 铜砖
   }
 
   private static void putMultipleWithMid(ImmutableMultimap.Builder<Block, Block> builder, Block midOutput, Block ingredient1, Block ingredient2, Block... outputs) {
