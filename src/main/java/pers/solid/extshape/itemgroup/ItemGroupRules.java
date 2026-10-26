@@ -1,12 +1,16 @@
 package pers.solid.extshape.itemgroup;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Streams;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColorCollection;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
@@ -19,7 +23,10 @@ import pers.solid.extshape.util.EntryVariantAppender;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * <p>此类用于管理扩展方块形状中需要添加到原版物品组的物品。所有的物品组都可以指定一个 prepending 规则和 appending 规则，分别指定在一个原版物品的前面和后面添加哪些物品。
@@ -49,11 +56,67 @@ public final class ItemGroupRules {
     final Multimap<Item, Item> preBuilding = rulesAccess.getPrependingRule(CreativeModeTabs.BUILDING_BLOCKS);
     preBuilding.put(Items.SMOOTH_STONE_SLAB, ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB.asItem());
 
-    new EntryVariantAppender(CreativeModeTabs.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA)), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);
-    new EntryVariantAppender(CreativeModeTabs.COLORED_BLOCKS, shapes, Iterables.concat(BlockCollections.WOOLS, Collections.singleton(Blocks.TERRACOTTA), BlockCollections.STAINED_TERRACOTTA, BlockCollections.CONCRETES, BlockCollections.GLAZED_TERRACOTTA), ExtShapeBlocks::contains).appendItems(rulesAccess.getAppendingRule(CreativeModeTabs.COLORED_BLOCKS));
+    // 需要特殊处理的基础方块，在添加方块时，将不按常规方法添加，通常适用于铜和染色方块。
+    final Set<Block> specialSortedBase = Streams.concat(Blocks.COPPER_BLOCK.asList().stream(), Blocks.CUT_COPPER.asList().stream()).collect(Collectors.toUnmodifiableSet());
+
+    new EntryVariantAppender(CreativeModeTabs.BUILDING_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.WOOLS.contains(block) || BlockCollections.STAINED_TERRACOTTA.contains(block) || BlockCollections.CONCRETES.contains(block) || BlockCollections.GLAZED_TERRACOTTA.contains(block) || block == Blocks.TERRACOTTA || specialSortedBase.contains(block))), ExtShapeBlocks.getBlocks()::contains).appendItems(apBuilding);
+    final Multimap<Item, Item> coloredAppendingRule = rulesAccess.getAppendingRule(CreativeModeTabs.COLORED_BLOCKS);
+    new EntryVariantAppender(CreativeModeTabs.COLORED_BLOCKS, shapes, Collections.singleton(Blocks.TERRACOTTA), ExtShapeBlocks::contains).appendItems(coloredAppendingRule);
     // natural 物品组应该排除变种的方块（这些方块已出现在了建筑方块物品组中）。
     final Set<Block> excludedInNatural = Set.of(Blocks.DEEPSLATE, Blocks.NETHERRACK, Blocks.BASALT, Blocks.SMOOTH_BASALT, Blocks.END_STONE, Blocks.AMETHYST_BLOCK);
     new EntryVariantAppender(CreativeModeTabs.NATURAL_BLOCKS, shapes, Iterables.filter(BlockBiMaps.BASE_BLOCKS, block -> !(BlockCollections.LOGS.contains(block) || BlockCollections.STEMS.contains(block) || excludedInNatural.contains(block))), ExtShapeBlocks::contains).appendItems(rulesAccess.getAppendingRule(CreativeModeTabs.NATURAL_BLOCKS));
+
+
+    // 对原版切制铜块（含涂蜡变种）的特殊处理
+    final Item unwaxedCopperAnchor = Items.COPPER_BLOCK.weathering().oxidized();
+    final Item waxedCopperAnchor = Items.COPPER_BLOCK.waxed().oxidized();
+    final Item unwaxedCutCopperAnchor = Items.CUT_COPPER_SLAB.weathering().oxidized();
+    final Item waxedCutCopperAnchor = Items.CUT_COPPER_SLAB.waxed().oxidized();
+
+    final Item woolAnchor = Items.WOOL_SLAB.pink();
+    final Item dyedTerracottaAnchor = Items.DYED_TERRACOTTA.pink();
+    final Item concreteAnchor = Items.CONCRETE_SLAB.pink();
+    final Item glazedTerracottaAnchor = Items.GLAZED_TERRACOTTA.pink();
+
+    // 铜类方块的特殊排序
+    addSpecialCopperSortingRules(apBuilding, unwaxedCopperAnchor, Blocks.COPPER_BLOCK.weathering(), ExtShapeBlocks::contains);
+    addSpecialCopperSortingRules(apBuilding, waxedCopperAnchor, Blocks.COPPER_BLOCK.waxed(), ExtShapeBlocks::contains);
+    addSpecialCopperSortingRules(apBuilding, unwaxedCutCopperAnchor, Blocks.CUT_COPPER.weathering(), ExtShapeBlocks::contains);
+    addSpecialCopperSortingRules(apBuilding, waxedCutCopperAnchor, Blocks.CUT_COPPER.waxed(), ExtShapeBlocks::contains);
+
+    List<DyeColor> gameplayColorOrder = List.of(DyeColor.WHITE, DyeColor.LIGHT_GRAY, DyeColor.GRAY, DyeColor.BLACK, DyeColor.BROWN, DyeColor.RED, DyeColor.ORANGE, DyeColor.YELLOW, DyeColor.LIME, DyeColor.GREEN, DyeColor.CYAN, DyeColor.LIGHT_BLUE, DyeColor.BLUE, DyeColor.PURPLE, DyeColor.MAGENTA, DyeColor.PINK);
+
+    // 染色方块的特殊排序
+    addSpecialColoredSortingRules(coloredAppendingRule, woolAnchor, Blocks.WOOL, gameplayColorOrder, ExtShapeBlocks::contains);
+    addSpecialColoredSortingRules(coloredAppendingRule, dyedTerracottaAnchor, Blocks.DYED_TERRACOTTA, gameplayColorOrder, ExtShapeBlocks::contains);
+    addSpecialColoredSortingRules(coloredAppendingRule, concreteAnchor, Blocks.CONCRETE, gameplayColorOrder, ExtShapeBlocks::contains);
+    addSpecialColoredSortingRules(coloredAppendingRule, glazedTerracottaAnchor, Blocks.GLAZED_TERRACOTTA, gameplayColorOrder, ExtShapeBlocks::contains);
+  }
+
+  public static void addSpecialCopperSortingRules(Multimap<Item, Item> appendingRule, Item anchor, WeatheringCopperCollection.ByState<? extends Block> coppersByState, Predicate<Block> predicate) {
+    for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
+      final BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
+      coppersByState.forEach(block -> {
+        final Block variant = biMap.get(block);
+        if (variant != null && predicate.test(variant)) {
+          appendingRule.put(anchor, variant.asItem());
+        }
+      });
+    }
+  }
+
+  public static void addSpecialColoredSortingRules(Multimap<Item, Item> appendingRule, Item anchor, ColorCollection<? extends Block> colorCollection, List<DyeColor> colorOrder, Predicate<Block> predicate) {
+
+    for (BlockShape blockShape : ExtShapeConfig.CURRENT_CONFIG.shapesToAddToVanilla) {
+      final BiMap<Block, Block> biMap = BlockBiMaps.of(blockShape);
+      for (DyeColor dyeColor : colorOrder) {
+        final Block block = colorCollection.pick(dyeColor);
+        final Block variant = biMap.get(block);
+        if (variant != null && predicate.test(variant)) {
+          appendingRule.put(anchor, variant.asItem());
+        }
+      }
+    }
   }
 
   /**
