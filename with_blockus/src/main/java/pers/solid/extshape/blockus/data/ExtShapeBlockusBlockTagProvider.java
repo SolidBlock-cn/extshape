@@ -17,6 +17,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+import pers.solid.extshape.blockus.BlockusCopperManager;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
@@ -111,6 +112,8 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
 
     // region 特殊方块标签
     addForShapes(BlockusBlockTags.STONE_BLOCKS,
+        BlockusBlocks.COBBLESTONE_BRICKS.block(),
+        BlockusBlocks.MOSSY_COBBLESTONE_BRICKS.block(),
         BlockusBlocks.STONE_TILES.block(),
         BlockusBlocks.HERRINGBONE_STONE_BRICKS,
         BlockusBlocks.STONE_CIRCULAR_PAVING
@@ -275,6 +278,11 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.SANDY_BRICKS.block(),
         BlockusBlocks.HERRINGBONE_SANDY_BRICKS
     );
+
+    addForShapes(BlockusBlockTags.TUFF_BLOCKS, BlockusCopperManager.COPPER_TUFF.unwaxed());
+    addForShapes(BlockusBlockTags.TUFF_BLOCKS, BlockusCopperManager.COPPER_TUFF.waxed());
+    addForShapes(BlockusBlockTags.COPPER_BLOCKS, BlockusCopperManager.COPPER_BRICKS.unwaxed());
+    addForShapes(BlockusBlockTags.COPPER_BLOCKS, BlockusCopperManager.COPPER_BRICKS.waxed());
 
     addForShapes(BlockusBlockTags.RESIN_BLOCKS, BlockusBlocks.LARGE_RESIN_BRICKS.block(), BlockusBlocks.HERRINGBONE_RESIN_BRICKS);
 
