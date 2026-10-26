@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "blockus:waxed_copper_tuff_bricks"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:waxed_copper_tuff_brick_button"
+  }
+}

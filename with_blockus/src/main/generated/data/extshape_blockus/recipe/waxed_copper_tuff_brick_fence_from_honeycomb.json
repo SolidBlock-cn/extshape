@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_copper_tuff_brick_fence",
+  "ingredients": [
+    "extshape_blockus:copper_tuff_brick_fence",
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:waxed_copper_tuff_brick_fence"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:oxidized_copper_tuff_bricks",
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:oxidized_copper_tuff_brick_vertical_quarter_piece"
+  }
+}
