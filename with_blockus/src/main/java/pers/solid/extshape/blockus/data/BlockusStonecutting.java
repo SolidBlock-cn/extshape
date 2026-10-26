@@ -48,6 +48,7 @@ public final class BlockusStonecutting {
    * @see BlockusRecipeProvider#createRecipeProvider
    */
   private static void registerBlockusStonecutting(ImmutableMultimap.Builder<Block, Block> builder) {
+    // 混凝土砖
     for (ConcreteBundle concreteBundle : ConcreteBundle.values()) {
       final ColorCollection<Block> concreteBlocks = concreteBundle.block().blocks();
       for (DyeColor dyeColor : BlockOrder.COLOR) {
@@ -55,18 +56,26 @@ public final class BlockusStonecutting {
         builder.put(concreteBlocks.pick(dyeColor), base);
       }
     }
+
+    // 圆石（圆石砖仅限 1.21.11 以上）
     builder.putAll(BlockusBlocks.COBBLESTONE_BRICKS.block(), Blocks.COBBLESTONE, Blocks.STONE);
     builder.putAll(BlockusBlocks.MOSSY_COBBLESTONE_BRICKS.block(), Blocks.MOSSY_COBBLESTONE);
+
+    // 石头
     builder.putAll(BlockusBlocks.STONE_TILES.block(), Blocks.STONE, Blocks.STONE_BRICKS);
     builder.putAll(BlockusBlocks.STONE_CIRCULAR_PAVING, Blocks.STONE, Blocks.STONE_BRICKS);
     builder.putAll(BlockusBlocks.HERRINGBONE_STONE_BRICKS, Blocks.STONE, Blocks.STONE_BRICKS);
+
+    // 三废石
     putMultipleWithMid(builder, BlockusBlocks.ANDESITE_BRICKS.block(), Blocks.ANDESITE, Blocks.POLISHED_ANDESITE, BlockusBlocks.HERRINGBONE_ANDESITE_BRICKS, BlockusBlocks.ANDESITE_CIRCULAR_PAVING);
     putMultipleWithMid(builder, BlockusBlocks.DIORITE_BRICKS.block(), Blocks.DIORITE, Blocks.POLISHED_DIORITE, BlockusBlocks.HERRINGBONE_DIORITE_BRICKS, BlockusBlocks.DIORITE_CIRCULAR_PAVING);
     putMultipleWithMid(builder, BlockusBlocks.GRANITE_BRICKS.block(), Blocks.GRANITE, Blocks.POLISHED_GRANITE, BlockusBlocks.HERRINGBONE_GRANITE_BRICKS, BlockusBlocks.GRANITE_CIRCULAR_PAVING);
 
+    // 滴水石
     builder.put(BlockusBlocks.POLISHED_DRIPSTONE.block(), Blocks.DRIPSTONE_BLOCK);
     builder.putAll(BlockusBlocks.DRIPSTONE_BRICKS.block(), Blocks.DRIPSTONE_BLOCK, BlockusBlocks.POLISHED_DRIPSTONE.block());
 
+    // 硫黄和朱砂
     builder.putAll(BlockusBlocks.SULFUR_TILES.block(), Blocks.SULFUR, Blocks.POLISHED_SULFUR, Blocks.SULFUR_BRICKS);
     builder.putAll(BlockusBlocks.HERRINGBONE_SULFUR_BRICKS, Blocks.SULFUR, Blocks.POLISHED_SULFUR, Blocks.SULFUR_BRICKS);
     builder.putAll(BlockusBlocks.SULFUR_CIRCULAR_PAVING, Blocks.SULFUR, Blocks.POLISHED_SULFUR, Blocks.SULFUR_BRICKS);
@@ -74,51 +83,68 @@ public final class BlockusStonecutting {
     builder.putAll(BlockusBlocks.HERRINGBONE_CINNABAR_BRICKS, Blocks.CINNABAR, Blocks.POLISHED_CINNABAR, Blocks.CINNABAR_BRICKS);
     builder.putAll(BlockusBlocks.CINNABAR_CIRCULAR_PAVING, Blocks.CINNABAR, Blocks.POLISHED_CINNABAR, Blocks.CINNABAR_BRICKS);
 
+    // 凝灰岩
     builder.putAll(BlockusBlocks.TUFF_TILES.block(), Blocks.TUFF, Blocks.POLISHED_TUFF, Blocks.TUFF_BRICKS);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.HERRINGBONE_TUFF_BRICKS, BlockusBlocks.TUFF_CIRCULAR_PAVING), Blocks.TUFF, Blocks.POLISHED_TUFF, Blocks.TUFF_BRICKS);
 
+    // 紫水晶
     builder.put(BlockusBlocks.POLISHED_AMETHYST.block(), Blocks.AMETHYST_BLOCK);
     builder.putAll(BlockusBlocks.AMETHYST_BRICKS.block(), Blocks.AMETHYST_BLOCK, BlockusBlocks.POLISHED_AMETHYST.block());
 
+    // 深板岩
     builder.putAll(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS, Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
     builder.putAll(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING, Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
 
+    // 幽匿
     builder.put(BlockusBlocks.POLISHED_SCULK.block(), Blocks.SCULK);
     builder.putAll(BlockusBlocks.SCULK_BRICKS.block(), BlockusBlocks.POLISHED_SCULK.block(), Blocks.SCULK);
 
+    // 黑石
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_BLACKSTONE_TILES.block(), BlockusBlocks.HERRINGBONE_POLISHED_BLACKSTONE_BRICKS, BlockusBlocks.POLISHED_BLACKSTONE_CIRCULAR_PAVING), Blocks.BLACKSTONE, Blocks.POLISHED_BLACKSTONE, Blocks.POLISHED_BLACKSTONE_BRICKS);
 
+    // 玄武岩
     putMultipleWithMid(builder, BlockusBlocks.POLISHED_BASALT_BRICKS.block(), Blocks.BASALT, Blocks.POLISHED_BASALT, BlockusBlocks.HERRINGBONE_POLISHED_BASALT_BRICKS, BlockusBlocks.POLISHED_BASALT_CIRCULAR_PAVING);
     builder.put(BlockusBlocks.CRIMSON_WART_BRICKS.block(), Blocks.NETHER_WART_BLOCK);
     builder.put(BlockusBlocks.WARPED_WART_BRICKS.block(), Blocks.WARPED_WART_BLOCK);
 
+    // 石灰岩
     builder.put(BlockusBlocks.POLISHED_LIMESTONE.block(), BlockusBlocks.LIMESTONE.block());
     putMultipleWithMid(builder, BlockusBlocks.LIMESTONE_BRICKS.block(), BlockusBlocks.LIMESTONE.block(), BlockusBlocks.POLISHED_LIMESTONE.block(), BlockusBlocks.SMALL_LIMESTONE_BRICKS.block(), BlockusBlocks.LIMESTONE_TILES.block(), BlockusBlocks.LIMESTONE_SQUARES.block(), BlockusBlocks.LIMESTONE_CIRCULAR_PAVING);
 
+    // 大理石
     builder.put(BlockusBlocks.POLISHED_MARBLE.block(), BlockusBlocks.MARBLE.block());
     putMultipleWithMid(builder, BlockusBlocks.MARBLE_BRICKS.block(), BlockusBlocks.MARBLE.block(), BlockusBlocks.POLISHED_MARBLE.block(), BlockusBlocks.SMALL_MARBLE_BRICKS.block(), BlockusBlocks.MARBLE_TILES.block(), BlockusBlocks.MARBLE_SQUARES.block(), BlockusBlocks.MARBLE_CIRCULAR_PAVING);
 
+    // 蓝石
     builder.put(BlockusBlocks.POLISHED_BLUESTONE.block(), BlockusBlocks.BLUESTONE.block());
     putMultipleWithMid(builder, BlockusBlocks.BLUESTONE_BRICKS.block(), BlockusBlocks.BLUESTONE.block(), BlockusBlocks.POLISHED_BLUESTONE.block(), BlockusBlocks.SMALL_BLUESTONE_BRICKS.block(), BlockusBlocks.BLUESTONE_TILES.block(), BlockusBlocks.BLUESTONE_SQUARES.block(), BlockusBlocks.BLUESTONE_CIRCULAR_PAVING);
 
+    // 青绿石
     builder.put(BlockusBlocks.POLISHED_VIRIDITE.block(), BlockusBlocks.VIRIDITE.block());
     putMultipleWithMid(builder, BlockusBlocks.VIRIDITE_BRICKS.block(), BlockusBlocks.VIRIDITE.block(), BlockusBlocks.POLISHED_VIRIDITE.block(), BlockusBlocks.SMALL_VIRIDITE_BRICKS.block(), BlockusBlocks.VIRIDITE_TILES.block(), BlockusBlocks.VIRIDITE_SQUARES.block(), BlockusBlocks.VIRIDITE_CIRCULAR_PAVING);
 
+    // 岩浆砖
     builder.put(BlockusBlocks.MAGMA_BRICKS.block(), Blocks.MAGMA_BLOCK);
     builder.putAll(BlockusBlocks.SMALL_MAGMA_BRICKS.block(), Blocks.MAGMA_BLOCK, BlockusBlocks.MAGMA_BRICKS.block());
 
+    // 下界岩
     builder.put(BlockusBlocks.POLISHED_NETHERRACK.block(), Blocks.NETHERRACK);
     putMultipleWithMid(builder, BlockusBlocks.NETHERRACK_BRICKS.block(), Blocks.NETHERRACK, BlockusBlocks.POLISHED_NETHERRACK.block(), BlockusBlocks.NETHERRACK_CIRCULAR_PAVING);
 
+    // 下界砖
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_NETHER_BRICKS.block(), BlockusBlocks.HERRINGBONE_NETHER_BRICKS), Blocks.NETHER_BRICKS);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_RED_NETHER_BRICKS.block(), BlockusBlocks.HERRINGBONE_RED_NETHER_BRICKS), Blocks.RED_NETHER_BRICKS);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_CHARRED_NETHER_BRICKS.block(), BlockusBlocks.HERRINGBONE_CHARRED_NETHER_BRICKS), BlockusBlocks.CHARRED_NETHER_BRICKS.block());
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.POLISHED_TEAL_NETHER_BRICKS.block(), BlockusBlocks.HERRINGBONE_TEAL_NETHER_BRICKS), BlockusBlocks.TEAL_NETHER_BRICKS.block());
 
+    // 黑曜石
     builder.put(BlockusBlocks.OBSIDIAN_BRICKS.block(), Blocks.OBSIDIAN);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SMALL_OBSIDIAN_BRICKS.block(), BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING), Blocks.OBSIDIAN, BlockusBlocks.OBSIDIAN_BRICKS.block());
 
+    // 石英
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.QUARTZ_TILES.block(), BlockusBlocks.QUARTZ_CIRCULAR_PAVING), Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_BRICKS);
+
+    // 海晶
     builder.put(BlockusBlocks.PRISMARINE_CIRCULAR_PAVING, Blocks.PRISMARINE_BRICKS);
 
     // 红砖及各类变种
@@ -128,10 +154,11 @@ public final class BlockusStonecutting {
     builder.put(BlockusBlocks.HERRINGBONE_SANDY_BRICKS, BlockusBlocks.SANDY_BRICKS.block());
     builder.put(BlockusBlocks.HERRINGBONE_CHARRED_BRICKS, BlockusBlocks.CHARRED_BRICKS.block());
 
-
+    // 树脂砖
     builder.put(BlockusBlocks.LARGE_RESIN_BRICKS.block(), Blocks.RESIN_BRICKS);
     builder.put(BlockusBlocks.HERRINGBONE_RESIN_BRICKS, Blocks.RESIN_BRICKS);
 
+    // 砂岩砖
     builder.put(BlockusBlocks.SANDSTONE_BRICKS.block(), Blocks.SANDSTONE);
     builder.putAll(BlockusBlocks.SMALL_SANDSTONE_BRICKS.block(), Blocks.SANDSTONE, BlockusBlocks.SANDSTONE_BRICKS.block());
 
@@ -141,22 +168,29 @@ public final class BlockusStonecutting {
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SOUL_SANDSTONE_BRICKS.block(), BlockusBlocks.CUT_SOUL_SANDSTONE), BlockusBlocks.SOUL_SANDSTONE.block());
     builder.putAll(BlockusBlocks.SMALL_SOUL_SANDSTONE_BRICKS.block(), BlockusBlocks.SOUL_SANDSTONE.block(), BlockusBlocks.SOUL_SANDSTONE_BRICKS.block());
 
+    // 蜜脾
     builder.put(BlockusBlocks.HONEYCOMB_BRICKS.block(), Blocks.HONEYCOMB_BLOCK);
+
+    // 紫珀
     builder.put(BlockusBlocks.POLISHED_PURPUR.block(), Blocks.PURPUR_BLOCK);
     putMultipleWithMid(builder, BlockusBlocks.PURPUR_BRICKS.block(), Blocks.PURPUR_BLOCK, BlockusBlocks.POLISHED_PURPUR.block(), BlockusBlocks.SMALL_PURPUR_BRICKS.block(), BlockusBlocks.PURPUR_SQUARES.block());
     builder.put(BlockusBlocks.POLISHED_PHANTOM_PURPUR.block(), BlockusBlocks.PHANTOM_PURPUR_BLOCK.block());
     putMultipleWithMid(builder, BlockusBlocks.PHANTOM_PURPUR_BRICKS.block(), BlockusBlocks.PHANTOM_PURPUR_BLOCK.block(), BlockusBlocks.POLISHED_PHANTOM_PURPUR.block(), BlockusBlocks.SMALL_PHANTOM_PURPUR_BRICKS.block(), BlockusBlocks.PHANTOM_PURPUR_SQUARES.block());
 
+    // 末地石
     builder.put(BlockusBlocks.POLISHED_END_STONE.block(), Blocks.END_STONE);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SMALL_END_STONE_BRICKS.block(), BlockusBlocks.HERRINGBONE_END_STONE_BRICKS), Blocks.END_STONE, BlockusBlocks.POLISHED_END_STONE.block(), Blocks.END_STONE_BRICKS);
     // 在 Blockus 中，磨制末地石可合成原版的末地石砖
     builder.put(Blocks.END_STONE_BRICKS, BlockusBlocks.POLISHED_END_STONE.block());
 
+    // 彩虹砖
     builder.put(BlockusBlocks.RAINBOW_BRICKS.block(), BlockusBlocks.RAINBOW_BLOCK);
+
+    // 巧克力
     builder.put(BlockusBlocks.CHOCOLATE_BRICKS.block(), BlockusBlocks.CHOCOLATE_BLOCK.block());
     builder.putAll(BlockusBlocks.CHOCOLATE_SQUARES.block(), BlockusBlocks.CHOCOLATE_BLOCK.block(), BlockusBlocks.CHOCOLATE_BRICKS.block());
 
-    // shingles and terracotta and glazed terracotta
+    // 瓦片
     builder.put(BlockusBlocks.SHINGLES.block(), Blocks.TERRACOTTA);
 
     // 彩色瓦片
