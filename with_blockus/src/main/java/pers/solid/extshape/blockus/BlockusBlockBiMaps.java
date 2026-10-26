@@ -4,12 +4,14 @@ import com.brand.blockus.datagen.family.BlockusFamilies;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.BSSWBundle;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
+import com.brand.blockus.registry.content.bundles.DyedBSSWBundle;
 import com.brand.blockus.registry.content.bundles.WoolBundle;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
+import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.BlockShape;
 import pers.solid.extshape.util.BlockBiMaps;
 
@@ -78,6 +80,24 @@ public final class BlockusBlockBiMaps {
         BlockBiMaps.setBlockOf(BlockShape.STAIRS, concreteBlock, concreteStairsBlock);
         BlockBiMaps.setBlockOf(BlockShape.SLAB, concreteBlock, concreteSlabBlock);
         BlockBiMaps.setBlockOf(BlockShape.WALL, concreteBlock, concreteWallBlock);
+      }
+    });
+    DyedBSSWBundle.values().forEach(dyedBSSWBundle -> {
+      final ColorCollection<Block> blockCollection = dyedBSSWBundle.block().blocks();
+      final ColorCollection<Block> stairsCollection = dyedBSSWBundle.stairs().blocks();
+      final ColorCollection<Block> slabCollection = dyedBSSWBundle.slab().blocks();
+      final @Nullable ColorCollection<Block> wallCollection = dyedBSSWBundle.wall() == null ? null : dyedBSSWBundle.wall().blocks();
+      for (DyeColor dyeColor : DyeColor.values()) {
+        final Block block = blockCollection.pick(dyeColor);
+        final Block stairs = stairsCollection.pick(dyeColor);
+        final Block slab = slabCollection.pick(dyeColor);
+        BlockBiMaps.setBlockOf(BlockShape.STAIRS, block, stairs);
+        BlockBiMaps.setBlockOf(BlockShape.SLAB, block, slab);
+
+        if (wallCollection != null) {
+          final Block wall = wallCollection.pick(dyeColor);
+          BlockBiMaps.setBlockOf(BlockShape.WALL, block, wall);
+        }
       }
     });
 
