@@ -8,8 +8,14 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pers.solid.extshape.builder.BlockShape;
+import pers.solid.extshape.util.BlockBiMaps;
+
+import java.util.List;
+import java.util.Map;
 
 public class ExtShapeBlockusAliases {
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeBlockusAliases.class);
@@ -46,6 +52,33 @@ public class ExtShapeBlockusAliases {
     convertSquareBlockBundle(BlockusBlocks.PURPUR_SQUARES);
     convertSquareBlockBundle(BlockusBlocks.PHANTOM_PURPUR_SQUARES);
     convertSquareBlockBundle(BlockusBlocks.CHOCOLATE_SQUARES);
+  }
+
+  /**
+   * 自扩展方块形状模组 3.2.0 开始，硫黄和朱砂的瓦以及人字形纹砖的按钮和栅栏被移除，替换为原版的相应方块。
+   */
+  public static void initTilesAndHerringboneChanges() {
+    final Map<Identifier, Block> map = Map.of(
+        ExtShapeBlockus.id("sulfur_tile_"), Blocks.SULFUR_BRICKS,
+        ExtShapeBlockus.id("herringbone_sulfur_brick_"), Blocks.SULFUR_BRICKS,
+        ExtShapeBlockus.id("cinnabar_tile_"), Blocks.CINNABAR_BRICKS,
+        ExtShapeBlockus.id("herringbone_cinnabar_brick_"), Blocks.CINNABAR_BRICKS
+    );
+    final List<BlockShape> shapesToReplace = List.of(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE);
+
+    map.forEach((prefix, newBase) -> {
+      for (BlockShape blockShape : shapesToReplace) {
+        final Identifier oldId = prefix.withSuffix(blockShape.getSerializedName());
+        if (BuiltInRegistries.BLOCK.containsKey(oldId)) {
+          throw new IllegalArgumentException(oldId + " is still present in the block registry!");
+        }
+        final Block newBlock = BlockBiMaps.getBlockOfOrThrow(blockShape, newBase);
+        final Identifier newId = BuiltInRegistries.BLOCK.getKey(newBlock);
+
+        BuiltInRegistries.BLOCK.addAlias(oldId, newId);
+        BuiltInRegistries.ITEM.addAlias(oldId, newId);
+      }
+    });
   }
 
   private static void convertWallsToBlockus(String baseName) {
