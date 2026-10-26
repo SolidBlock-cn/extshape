@@ -782,10 +782,10 @@ public final class ExtShapeBlocks {
   private static void checkWoodValidity(Block block, @Nullable WoodType woodType, @Nullable ActivationSettings activationSettings) {
     final String idPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
     if (woodType != null && !idPath.contains(woodType.name())) {
-      throw new IllegalArgumentException(String.format("Block id '%s' does not contain wood type '%s", idPath, woodType.name()));
+      throw new IllegalArgumentException(String.format("Block id '%s' does not contain wood type '%s'", idPath, woodType.name()));
     }
     if (activationSettings != null && !idPath.contains(activationSettings.blockSetType().name())) {
-      throw new IllegalArgumentException(String.format("Block id '%s' does not contain activation settings '%s", idPath, activationSettings.blockSetType().name()));
+      throw new IllegalArgumentException(String.format("Block id '%s' does not contain activation settings '%s'", idPath, activationSettings.blockSetType().name()));
     }
   }
 
