@@ -1,5 +1,7 @@
 {
   "values": [
+    "extshape_blockus:cobblestone_brick_pressure_plate",
+    "extshape_blockus:mossy_cobblestone_brick_pressure_plate",
     "extshape_blockus:stone_tile_pressure_plate",
     "extshape_blockus:herringbone_stone_brick_pressure_plate",
     "extshape_blockus:stone_circular_paving_pressure_plate",
@@ -80,6 +82,14 @@
     "extshape_blockus:smooth_soul_sandstone_pressure_plate",
     "extshape_blockus:small_end_stone_brick_pressure_plate",
     "extshape_blockus:herringbone_end_stone_brick_pressure_plate",
+    "extshape_blockus:copper_tuff_brick_pressure_plate",
+    "extshape_blockus:exposed_copper_tuff_brick_pressure_plate",
+    "extshape_blockus:weathered_copper_tuff_brick_pressure_plate",
+    "extshape_blockus:oxidized_copper_tuff_brick_pressure_plate",
+    "extshape_blockus:waxed_copper_tuff_brick_pressure_plate",
+    "extshape_blockus:waxed_exposed_copper_tuff_brick_pressure_plate",
+    "extshape_blockus:waxed_weathered_copper_tuff_brick_pressure_plate",
+    "extshape_blockus:waxed_oxidized_copper_tuff_brick_pressure_plate",
     "extshape_blockus:white_stone_brick_pressure_plate",
     "extshape_blockus:orange_stone_brick_pressure_plate",
     "extshape_blockus:magenta_stone_brick_pressure_plate",

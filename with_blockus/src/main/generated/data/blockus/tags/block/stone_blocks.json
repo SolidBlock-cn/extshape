@@ -1,5 +1,15 @@
 {
   "values": [
+    "extshape_blockus:cobblestone_brick_vertical_slab",
+    "extshape_blockus:cobblestone_brick_vertical_stairs",
+    "extshape_blockus:cobblestone_brick_quarter_piece",
+    "extshape_blockus:cobblestone_brick_vertical_quarter_piece",
+    "extshape_blockus:cobblestone_brick_pressure_plate",
+    "extshape_blockus:mossy_cobblestone_brick_vertical_slab",
+    "extshape_blockus:mossy_cobblestone_brick_vertical_stairs",
+    "extshape_blockus:mossy_cobblestone_brick_quarter_piece",
+    "extshape_blockus:mossy_cobblestone_brick_vertical_quarter_piece",
+    "extshape_blockus:mossy_cobblestone_brick_pressure_plate",
     "extshape_blockus:stone_tile_vertical_slab",
     "extshape_blockus:stone_tile_vertical_stairs",
     "extshape_blockus:stone_tile_quarter_piece",
