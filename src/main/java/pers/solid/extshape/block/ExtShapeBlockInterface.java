@@ -46,7 +46,7 @@ public interface ExtShapeBlockInterface {
    * 方块所在的合成配方的组。
    *
    * @return 方块合成配方中的 {@code group} 字段。
-   * @see net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder#group(String)
+   * @see CraftingRecipeJsonBuilder#group(String)
    */
   default String getRecipeGroup() {
     return RecipeGroupRegistry.getRecipeGroup((ItemConvertible) this);
