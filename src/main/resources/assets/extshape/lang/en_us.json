@@ -109,6 +109,8 @@
   "tag.block.extshape.terracotta_buttons": "Terracotta Buttons",
   "tag.block.extshape.stained_terracotta_buttons": "Stained Terracotta Buttons",
 
+  "tag.block.extshape.pressure_plates": "Pressure Plates",
+  "tag.block.extshape.stone_pressure_plates": "Stone Pressure Plates",
   "tag.block.extshape.log_pressure_plates": "Log Pressure Plates",
   "tag.block.extshape.woolen_pressure_plates": "Woolen Pressure Plates",
   "tag.block.extshape.concrete_pressure_plates": "Concrete Pressure Plates",
@@ -189,6 +191,8 @@
   "tag.item.extshape.terracotta_buttons": "Terracotta Buttons",
   "tag.item.extshape.stained_terracotta_buttons": "Stained Terracotta Buttons",
 
+  "tag.item.extshape.pressure_plates": "Pressure Plates",
+  "tag.item.extshape.stone_pressure_plates": "Stone Pressure Plates",
   "tag.item.extshape.log_pressure_plates": "Log Pressure Plates",
   "tag.item.extshape.woolen_pressure_plates": "Woolen Pressure Plates",
   "tag.item.extshape.concrete_pressure_plates": "Concrete Pressure Plates",
