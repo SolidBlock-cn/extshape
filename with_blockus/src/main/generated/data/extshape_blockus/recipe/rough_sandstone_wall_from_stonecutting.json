@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:rough_sandstone",
-  "result": {
-    "id": "extshape_blockus:rough_sandstone_wall"
-  }
-}
