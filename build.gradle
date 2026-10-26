@@ -134,6 +134,8 @@ allprojects {
             generateRunConfig = true
 
             runDirectory = project.relativePath(project(':').file('run')).toString()
+
+            systemProperties["fabric-tag-conventions-v2.missingTagTranslationWarning"] = "VERBOSE"
         }
     }
 }
