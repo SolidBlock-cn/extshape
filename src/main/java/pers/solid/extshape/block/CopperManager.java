@@ -71,9 +71,9 @@ public record CopperManager(WeatheringCopperCollection<Block> copperCollection) 
       });
     }
 
-    builder.markStoneCuttable()
-        .setFenceSettings(new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE))
+    builder
         .markStoneCuttable()
+        .setFenceSettings(new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE))
         .build();
     return builder;
   }
