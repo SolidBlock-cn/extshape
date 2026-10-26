@@ -61,7 +61,7 @@ public class ExtShapeBlockusRecipeGenerator extends RecipeProvider {
 
     final Predicate<Block> predicate = Predicates.in(ExtShapeBlockusBlocks.BLOCKUS_BLOCKS);
     BlockusCopperManager.COPPER_BRICKS.generateWaxRecipes(this, output, predicate);
-    BlockusCopperManager.COPPER_TUFF.generateWaxRecipes(this, output, predicate);
+    BlockusCopperManager.COPPER_TUFF_BRICKS.generateWaxRecipes(this, output, predicate);
   }
 
 
