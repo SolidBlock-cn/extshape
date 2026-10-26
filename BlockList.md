@@ -21,3 +21,7 @@ Click the [online document link](https://www.kdocs.cn/l/cqyeH2FvN5RU) or view th
 - Extended shapes include: vertical stairs, vertical slabs, quarter pieces, vertical quarter pieces.
 
 ![方块列表](img.png)
+
+注意：目前无计划为平滑石方块加入楼梯等其他形状变种。这是因为，原版的平滑石有两个纹理，这些纹理有各自的轮廓以分别适应完整方块表面和一半的方块表面。楼梯等形状无法很好地适应原版的这两个纹理。
+
+Note: It is not planned to add other shape variants like stairs for smooth stone block. This is because vanilla smooth stone has two textures, each of which has its own outline in the texture to fit full block surface and half block surface respectively. Shapes like stairs cannot fit these two textures well.
