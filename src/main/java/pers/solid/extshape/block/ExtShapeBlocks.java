@@ -170,7 +170,7 @@ public final class ExtShapeBlocks {
         ActivationSettings.wood(BlockSetType.POPLAR),
         ActivationSettings.wood(BlockSetType.MANGROVE));
     final Iterator<ActivationSettings> netherWoodActivationSettings = Iterators.cycle(ActivationSettings.wood(BlockSetType.CRIMSON), ActivationSettings.wood(BlockSetType.WARPED));
-    final Iterator<WoodType> ovrewordWoodTypes = Iterators.cycle(
+    final Iterator<WoodType> overworldWoodTypes = Iterators.cycle(
         WoodType.OAK,
         WoodType.SPRUCE,
         WoodType.BIRCH,
@@ -185,7 +185,7 @@ public final class ExtShapeBlocks {
     final Iterator<WoodType> netherWoodTypes = Iterators.cycle(WoodType.CRIMSON, WoodType.WARPED);
     // 木头
     for (final Block block : BlockCollections.WOODS) {
-      final WoodType woodType = ovrewordWoodTypes.next();
+      final WoodType woodType = overworldWoodTypes.next();
       final ActivationSettings activationSettings = overworldWoodActivationSettings.next();
       checkWoodValidity(block, woodType, activationSettings);
       FACTORY.createAllShapes(block)
@@ -198,7 +198,7 @@ public final class ExtShapeBlocks {
           .build();
     }
     for (final Block block : BlockCollections.STRIPPED_WOODS) {
-      final WoodType woodType = ovrewordWoodTypes.next();
+      final WoodType woodType = overworldWoodTypes.next();
       final ActivationSettings activationSettings = overworldWoodActivationSettings.next();
       checkWoodValidity(block, woodType, activationSettings);
       FACTORY.createAllShapes(block)
