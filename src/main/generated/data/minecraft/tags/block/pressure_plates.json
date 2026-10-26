@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "#extshape:pressure_plates",
-      "required": false
-    }
+    "#extshape:pressure_plates"
   ]
 }

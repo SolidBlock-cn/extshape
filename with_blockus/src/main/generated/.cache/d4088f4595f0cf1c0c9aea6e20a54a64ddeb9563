@@ -33,13 +33,13 @@ a0bf96c3fbd6edf68333e23eaecaa7c97734ca56 data/blockus/tags/block/platings.json
 ce42a542e41c31940a8601349a71381df6390774 data/blockus/tags/block/purpur_blocks.json
 58eb038d24bc823a1a2f0ed4cec3b4dc87189be1 data/blockus/tags/block/quartz_blocks.json
 b2043c3f144c4bf3b878100eadab5f3ff282f0fe data/blockus/tags/block/rainbow_blocks.json
-79012ca3a326aabce1716666f488ce7c3e597deb data/blockus/tags/block/red_sandstone.json
+040bbc6c7918adba13ddf3c474bac36de0fcf8df data/blockus/tags/block/red_sandstone.json
 04e615595f0373baa7cfe244c855acf0cf77d66f data/blockus/tags/block/resin_blocks.json
-91e674c87380c31db81ceb75c9b1beb6b5cb8928 data/blockus/tags/block/sandstone.json
+4ca7d2230737d30e1d64d59e3624dcb2c081246a data/blockus/tags/block/sandstone.json
 7ea56ed7d462a94c081351f948f3c7b7ad6a0cd5 data/blockus/tags/block/sculk_blocks.json
 d30b71aa38d5a0d2909fa12d042e8ea74b24a5e0 data/blockus/tags/block/shingles.json
 291f70f838993ec18845a6f6eea3c4b6921eb0ff data/blockus/tags/block/snow_bricks.json
-9b40d45d2528513ddd8e0ea4186fed4de6095610 data/blockus/tags/block/soul_sandstone.json
+320fb8ccad87ba39c576a6f691da141d69bb8ef5 data/blockus/tags/block/soul_sandstone.json
 ad03ac33fd969997f1f144307bf4127740e5529c data/blockus/tags/block/stained_stone_bricks.json
 1cccde86e45cab4aa93732ca1a502eba9bf659bd data/blockus/tags/block/stone_blocks.json
 6b014c1e9beb976824c8802a85617f9b975deb48 data/blockus/tags/block/thatch.json
@@ -80,7 +80,7 @@ af00951886eddd717c22cd2bd89e8db424fa99f2 data/minecraft/tags/block/guarded_by_pi
 4b4f752838cb1bf1dce038e4fa3f9fdede6ce31f data/minecraft/tags/block/infiniburn_overworld.json
 8a2446c13235c88b4ac44051a15f664daffbc27c data/minecraft/tags/block/mineable/axe.json
 1bb4dbe035d40307dec839068cb63cc0503414db data/minecraft/tags/block/mineable/hoe.json
-90d2be0f9885ddc40304323e8ddc3ab523d1eb69 data/minecraft/tags/block/mineable/pickaxe.json
+9591701a117adc8ac21a662827486af10cdeb65d data/minecraft/tags/block/mineable/pickaxe.json
 4d9ab09c0f95bfb04c40f800c36066c4a8367d06 data/minecraft/tags/block/needs_diamond_tool.json
 6208dd7ad8627a1e7c25b894310da6686395f1c9 data/minecraft/tags/block/needs_iron_tool.json
 eb7cf951870642b73ec04f63644f885841b2b11c data/minecraft/tags/block/needs_stone_tool.json
@@ -88,7 +88,7 @@ eb7cf951870642b73ec04f63644f885841b2b11c data/minecraft/tags/block/needs_stone_t
 36a4831c9f261332a00fe1739e34badaab5e6884 data/minecraft/tags/block/stairs.json
 0b8acfcf4841b356f20bd44a03326eacacbb761e data/minecraft/tags/block/stone_buttons.json
 2ad61efc51f496c13f7c49d3e1229eda618f5730 data/minecraft/tags/block/sword_efficient.json
-bfbed8e179acc0fe4a1a5af9af905df937c799d4 data/minecraft/tags/block/walls.json
+b898bde2431992367783a0efbe40f979c1ebe8fb data/minecraft/tags/block/walls.json
 67f8308628ee88cd93fdde00d1122d68b4ee44ad data/minecraft/tags/block/wooden_buttons.json
 4f740cd898b8bbb07bd84563e8957d51cecc63cc data/minecraft/tags/block/wooden_fences.json
 27d65c5f843f527288fa289da0fde550f5c99949 data/minecraft/tags/block/wooden_pressure_plates.json
