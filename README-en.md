@@ -46,7 +46,7 @@ In vanilla, the hardness of pressure plates and buttons is equal to 1/4 or 1/3 o
 | nether wart, warped wart                | 45                     | 45                    |
 | amethyst                                | 35                     | 25                    |
 
-This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs. Both of the two blocks can be placed into sulfur cubes, and their sulfur cube archetypes are both `#slow_bouncy` (the same as stone).
+This mod also adds "double smooth stone slab" and "petrified oak planks" blocks, respectively crafted from smooth stone slabs and petrified oak slabs. Vanilla smooth stone blocks can still be crafted into smooth stone slabs. Both of the two blocks can be placed into sulfur cubes, and their sulfur cube archetypes are both `#slow_bouncy` (the same as stone). Petrified oak planks cannot be obtained from the Creative Mode inventory.
 
 Blocks added by this mod inherit most features of their base blocks:
 
@@ -72,7 +72,7 @@ Blocks added by this mod inherit most features of their base blocks:
 
 ### Crafting and smelting
 
-The crafting recipes for all blocks in this mod are similar to those in vanilla. Stone and metal blocks can also be made with a stonecutter. Stairs can be crafted 3:2 in a crafting table (ingredient:result) and 1:1 in the stone cutter. Slabs and vertical slabs are craftable 1:2 in either crafting table or stone cutter.
+The crafting recipes for all blocks in this mod are similar to those in vanilla. Stone and metal blocks can also be made with a stonecutter. (Vanilla petrified oak slab can be crafted from the petrified oak planks in this mod with the stonecutter.) Stairs can be crafted 3:2 in a crafting table (ingredient:result) and 1:1 in the stone cutter. Slabs and vertical slabs are craftable 1:2 in either crafting table or stone cutter.
 
 Slabs, stairs and quarter pieces can be rotated in crafting recipes to be corresponding vertical blocks; you can also "rotate them back". For instance, one slab can be crafted into one corresponding vertical slab, and one vertical slab can also be crafted into a corresponding slab directly.
 
@@ -94,7 +94,7 @@ Stone-cutting recipes of some blocks are as follows:
 - 1×vertical stairs → 3×vertical quarter pieces
 - 1×vertical slab → 2×quarter pieces / 2×vertical quarter pieces
 
-In stonecutters, one base block can be cut into various shapes for cut base blocks. For instance, a stone can be cut into stone bricks, and stone bricks can be cut into 2 vertical stone brick slabs, while one stone can also be cut directly into 2 vertical stone brick slabs. However, blocks of various shapes cannot be cut into their corresponding shapes of cut base blocks.
+In stonecutters, one base block can be cut into various shapes for cut base blocks. For instance, a stone can be cut into stone bricks, and stone bricks can be cut into 2 vertical stone brick slabs, while one stone can also be cut directly into 2 vertical stone brick slabs. However, blocks of various shapes cannot be cut into their corresponding shapes of cut base blocks. For example, stone slab cannot be cut into stone brick slabs or stone brick quarter pieces.
 
 The second crafting ingredient for crafting fences and fence gates (apart from base blocks) is dependent on its base block. See details in [block list](BlockList.md).
 
@@ -135,10 +135,10 @@ Blocks of this mod are added to vanilla item groups (Creative Mode inventory tab
 
 In versions 1.19.2 and before, if you enabled "Add to vanilla groups", mods will be directly appended after all existing blocks, which may make item groups appear messy. You may install Reasonable Sorting mod to sort the content. (Reasonable Sorting mod does not support versions above 1.19.3, and it is also unnecessary.)
 
-You may also configure the shapes to be added into groups. You can enter the mod config screen through the mod menu of Mod Menu mod. If you did not install Mod Menu mod, you can also access the config screen of the mod through typing `/extshape:config` in game. The configuration GUI has the following contents:
+You may also configure the shapes to be added into groups. You can enter the mod config screen through the mod menu of Mod Menu mod. If you did not install Mod Menu mod, you can also access the config screen of the mod through typing the client command `/extshape:config` in game. The configuration GUI has the following contents:
 
-- **Add to vanilla item groups** (enabled by default). If enabled, all blocks of the mod will be added to vanilla item groups, usually directly after their base blocks or vanilla shape variants.
-- **Show specific item groups** (disabled by default). If enabled, the mod will provide 5 specific item groups to store the base blocks and shape variants (including vanilla variants) of blocks of this mod, but will not contain any base blocks that do not have shape variants in the mod. These 5 specified item groups are: "wooden and bamboo blocks", "colored blocks", "stone blocks", "mineral blocks", and "other blocks." Modifying this option requires restarting the game to take effect. Please note that it is recommended to enable at least one of "Add to vanilla item groups" and "Show specific item groups", or you cannot obtain blocks of this mod in the Creative Mode inventory.
+- **Add to vanilla item groups** (enabled by default). If enabled, all blocks of the mod (except petrified oak planks) will be added to vanilla item groups, usually directly after their base blocks or vanilla shape variants.
+- **Show specific item groups** (disabled by default). If enabled, the mod will provide 5 specific item groups to store the base blocks and shape variants (including vanilla variants) of blocks of this mod, but will not contain any base blocks that do not have shape variants in the mod (petrified oak planks of this mod and vanilla petrified oak slab are also excluded). These 5 specified item groups are: "wooden and bamboo blocks", "colored blocks", "stone blocks", "mineral blocks", and "other blocks." Modifying this option requires restarting the game to take effect. Please note that it is recommended to enable at least one of "Add to vanilla item groups" and "Show specific item groups", or you cannot obtain blocks of this mod in the Creative Mode inventory.
 - **Shapes to add to vanilla item groups**: Text box, determining blocks of which shapes are added to vanilla item groups. Blocks that already exist in vanilla game are not affected. Multiple shape names are separated by a space, and invalid shape names are ignored. For example, if the value is set to `stairs slab`, only stairs and slabs of this mod will be added to vanilla item groups. These shapes are added in the order (but cannot be duplicated). If the value is `slab stairs`, stairs will be sorted after slabs (but stairs and slabs that already exist in vanilla games are not affected). The default value is all shapes.
 - **Shapes to add to specific item groups**: Text box, determining blocks of which shapes are added to specific item groups. Usage and default value are the same as above. If this text box is empty, specific item groups will only have base blocks.
 - **Sorting of the specific item group for wooden and bamboo blocks**: Can be set to "Same species different forms together" (by default) or "Same form different species together".
