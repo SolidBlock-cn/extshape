@@ -43,7 +43,7 @@ public final class BlockusStonecutting {
           .toList();
 
       if (!unrecognizedBaseBlocks.isEmpty()) {
-        throw new IllegalStateException("These blocks exist in the results of BlockusCrossShapeDataGeneration.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(Registries.BLOCK::getId).map(Objects::toString).collect(Collectors.joining(", ")));
+        throw new IllegalStateException("These blocks exist in the results of BlockusStonecutting.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(Registries.BLOCK::getId).map(Objects::toString).collect(Collectors.joining(", ")));
       }
     }
   }
