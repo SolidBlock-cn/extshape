@@ -109,6 +109,8 @@
   "tag.block.extshape.terracotta_buttons": "陶鈕",
   "tag.block.extshape.stained_terracotta_buttons": "既染陶鈕",
 
+  "tag.block.extshape.pressure_plates": "踏板",
+  "tag.block.extshape.stone_pressure_plates": "石踏板",
   "tag.block.extshape.log_pressure_plates": "樁踏板",
   "tag.block.extshape.woolen_pressure_plates": "羊毛踏板",
   "tag.block.extshape.concrete_pressure_plates": "砼踏板",
@@ -189,6 +191,8 @@
   "tag.item.extshape.terracotta_buttons": "陶鈕",
   "tag.item.extshape.stained_terracotta_buttons": "既染陶鈕",
 
+  "tag.item.extshape.pressure_plates": "踏板",
+  "tag.item.extshape.stone_pressure_plates": "石踏板",
   "tag.item.extshape.log_pressure_plates": "樁踏板",
   "tag.item.extshape.woolen_pressure_plates": "羊毛踏板",
   "tag.item.extshape.concrete_pressure_plates": "砼踏板",
