@@ -49,12 +49,20 @@ allprojects {
 
         // 合理模组（仅限 1.19.2 之前）。这两个模组均存储于本地的 maven 仓库。
         mavenLocal()
+
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
     }
 
     dependencies {
         // To change the versions see the gradle.properties file
         minecraft "com.mojang:minecraft:${project.minecraft_version}"
-        mappings loom.officialMojangMappings()
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-$project.minecraft_version:$project.parchment_version@zip")
+        }
         modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
         // Fabric API
