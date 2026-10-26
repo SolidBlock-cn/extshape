@@ -1,6 +1,8 @@
 package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.registry.content.BlockusBlocks;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
@@ -22,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
+import pers.solid.extshape.blockus.BlockusCopperManager;
 import pers.solid.extshape.blockus.ExtShapeBlockus;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.builder.BlockShape;
@@ -57,6 +60,10 @@ public class ExtShapeBlockusRecipeGenerator extends RecipeGenerator {
 
     registerShingleDyeingRecipes(exporter);
     registerStainedStoneBricksRecipe(exporter);
+
+    final Predicate<Block> predicate = Predicates.in(ExtShapeBlockusBlocks.BLOCKUS_BLOCKS);
+    BlockusCopperManager.COPPER_BRICKS.generateWaxRecipes(this, exporter, predicate);
+    BlockusCopperManager.COPPER_TUFF.generateWaxRecipes(this, exporter, predicate);
   }
 
 
