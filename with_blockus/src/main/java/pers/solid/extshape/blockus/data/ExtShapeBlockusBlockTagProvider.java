@@ -14,6 +14,7 @@ import net.minecraft.registry.tag.BlockTags;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.blockus.BlockusBlockCollections;
+import pers.solid.extshape.blockus.BlockusCopperManager;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
 import pers.solid.extshape.blockus.ExtShapeBlockusTags;
 import pers.solid.extshape.data.ExtShapeBlockTagProvider;
@@ -285,6 +286,11 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.SANDY_BRICKS.block,
         BlockusBlocks.HERRINGBONE_SANDY_BRICKS
     );
+
+    addForShapes(BlockusBlockTags.TUFF_BLOCKS, BlockusCopperManager.COPPER_TUFF.unwaxed());
+    addForShapes(BlockusBlockTags.TUFF_BLOCKS, BlockusCopperManager.COPPER_TUFF.waxed());
+    addForShapes(BlockusBlockTags.COPPER_BLOCKS, BlockusCopperManager.COPPER_BRICKS.unwaxed());
+    addForShapes(BlockusBlockTags.COPPER_BLOCKS, BlockusCopperManager.COPPER_BRICKS.waxed());
 
     addForShapes(BlockusBlockTags.SANDSTONE,
         BlockusBlocks.ROUGH_SANDSTONE.block,

@@ -1020,6 +1020,9 @@ public final class ExtShapeBlockusBlocks {
         .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> abstractBlockBuilder.itemSettings.fireproof())
         .build();
 
+    // 铜砖
+    BlockusCopperManager.COPPER_BRICKS.registerBlocks(FACTORY);
+    BlockusCopperManager.COPPER_TUFF.registerBlocks(FACTORY);
 
     createAllShapes(BlockusBlocks.CHORUS_BLOCK)
         .setStoneFenceSettings(Items.CHORUS_PLANT)
