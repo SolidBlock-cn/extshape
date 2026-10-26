@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_oxidized_copper_tuff_brick_button",
+  "ingredients": [
+    "extshape_blockus:oxidized_copper_tuff_brick_button",
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "id": "extshape_blockus:waxed_oxidized_copper_tuff_brick_button"
+  }
+}
