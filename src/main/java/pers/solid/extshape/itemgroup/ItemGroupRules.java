@@ -2,7 +2,7 @@ package pers.solid.extshape.itemgroup;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +23,7 @@ import java.util.Set;
 
 /**
  * <p>此类用于管理扩展方块形状中需要添加到原版物品组的物品。所有的物品组都可以指定一个 prepending 规则和 appending 规则，分别指定在一个原版物品的前面和后面添加哪些物品。
- * <p>本模组没有使用 Fabric API 的 {@link FabricItemGroupEntries#addBefore(ItemLike, ItemLike...)} 和 {@link FabricItemGroupEntries#addAfter(ItemLike, ItemLike...)}，是考虑到该方法在寻找锚点时会迭代所有物品，如果反复调用，将影响性能。因此此模组是直接将 mixin 加到原版的 add 中，在调用原版的 {@link CreativeModeTab.Output#accept(ItemStack, CreativeModeTab.TabVisibility)} 时，会根据已有的规则一并添加需要 prepend 或 append 的物品。
+ * <p>本模组没有使用 Fabric API 的 {@link FabricCreativeModeTabOutput#addBefore(ItemLike, ItemLike...)} 和 {@link FabricCreativeModeTabOutput#addAfter(ItemLike, ItemLike...)}，是考虑到该方法在寻找锚点时会迭代所有物品，如果反复调用，将影响性能。因此此模组是直接将 mixin 加到原版的 add 中，在调用原版的 {@link CreativeModeTab.Output#accept(ItemStack, CreativeModeTab.TabVisibility)} 时，会根据已有的规则一并添加需要 prepend 或 append 的物品。
  * <p>物品规则可通过 {@link UpdateItemGroupRulesEvent#EVENT} 注册。游戏第一次访问物品规则时，以及配置有改变时，都会重行生成一次规则。
  */
 public final class ItemGroupRules {

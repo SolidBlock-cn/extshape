@@ -222,7 +222,7 @@ public class ExtShape implements ModInitializer {
 
         final RecipeHolder<StonecutterRecipe> recipeHolder = optional.get();
         final StonecutterRecipe recipe = recipeHolder.value();
-        final ItemStack resultStack = recipe.assemble(new SingleRecipeInput(ItemStack.EMPTY), server.registryAccess());
+        final ItemStack resultStack = recipe.assemble(new SingleRecipeInput(ItemStack.EMPTY));
         final Item resultItem = resultStack.getItem();
         final int resultCount = resultStack.getCount();
 
@@ -277,7 +277,7 @@ public class ExtShape implements ModInitializer {
 
       // 检测方块切石为其他基础方块与方块切石为基础方块的形状变种是否一致。
       for (Block resultBase : resultBases) {
-        final boolean whetherBaseCraftable = matchingRecipes.entries().stream().anyMatch(entry -> entry.recipe().recipe().map(recipe -> recipe.value().assemble(new SingleRecipeInput(ItemStack.EMPTY), server.registryAccess())).orElse(ItemStack.EMPTY).is(resultBase.asItem()));
+        final boolean whetherBaseCraftable = matchingRecipes.entries().stream().anyMatch(entry -> entry.recipe().recipe().map(recipe -> recipe.value().assemble(new SingleRecipeInput(ItemStack.EMPTY))).orElse(ItemStack.EMPTY).is(resultBase.asItem()));
         final boolean whetherShapeVariantsExists = BlockBiMaps.BASE_BLOCKS.contains(resultBase);
         final boolean whetherShapeVariantsCraftable = resultBaseToShapes.containsKey(resultBase) && !resultBaseToShapes.get(resultBase).isEmpty();
 

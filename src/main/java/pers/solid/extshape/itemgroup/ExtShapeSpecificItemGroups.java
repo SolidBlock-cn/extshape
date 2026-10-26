@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -35,31 +35,31 @@ public final class ExtShapeSpecificItemGroups {
   private static final ArrayList<Block> MINERAL_BASE_BLOCKS = new ArrayList<>();
   private static final LinkedHashSet<Block> OTHER_BASE_BLOCKS = new LinkedHashSet<>();
 
-  public static final CreativeModeTab WOODEN_AND_BAMBOO_BLOCKS = register("extshape_wooden_and_bamboo_blocks", FabricItemGroup.builder()
+  public static final CreativeModeTab WOODEN_AND_BAMBOO_BLOCKS = register("extshape_wooden_and_bamboo_blocks", FabricCreativeModeTab.builder()
       .title(wrapItemGroupName(Component.translatable("itemGroup.extshape.wooden_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, Blocks.CHERRY_PLANKS)))
       .displayItems((displayContext, entries) -> addWoodenBaseAndVariantsToEntries(WOODEN_AND_BAMBOO_BASE_BLOCKS, entries))
       .build());
 
-  public static final CreativeModeTab COLORED_BLOCKS = register("extshape_colored_blocks", FabricItemGroup.builder()
+  public static final CreativeModeTab COLORED_BLOCKS = register("extshape_colored_blocks", FabricCreativeModeTab.builder()
       .title(wrapItemGroupName(Component.translatable("itemGroup.extshape.colored_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, Blocks.LIME_WOOL)))
       .displayItems((displayContext, entries) -> COLORED_BASE_BLOCKS.forEach(blocks -> addColoredBaseAndVariantsToEntries(blocks, entries)))
       .build());
 
-  public static final CreativeModeTab STONE_BLOCKS = register("extshape_stone_blocks", FabricItemGroup.builder()
+  public static final CreativeModeTab STONE_BLOCKS = register("extshape_stone_blocks", FabricCreativeModeTab.builder()
       .title(wrapItemGroupName(Component.translatable("itemGroup.extshape.stone_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.FENCE, Blocks.CALCITE)))
       .displayItems((displayContext, entries) -> STONE_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
-  public static final CreativeModeTab MINERAL_BLOCKS = register("extshape_mineral_blocks", FabricItemGroup.builder()
+  public static final CreativeModeTab MINERAL_BLOCKS = register("extshape_mineral_blocks", FabricCreativeModeTab.builder()
       .title(wrapItemGroupName(Component.translatable("itemGroup.extshape.mineral_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.VERTICAL_SLAB, Blocks.DIAMOND_BLOCK)))
       .displayItems((displayContext, entries) -> MINERAL_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))
       .build());
 
-  public static final CreativeModeTab OTHER_BLOCKS = register("extshape_other_blocks", FabricItemGroup.builder()
+  public static final CreativeModeTab OTHER_BLOCKS = register("extshape_other_blocks", FabricCreativeModeTab.builder()
       .title(wrapItemGroupName(Component.translatable("itemGroup.extshape.other_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.SLAB, Blocks.HONEYCOMB_BLOCK)))
       .displayItems((displayContext, entries) -> OTHER_BASE_BLOCKS.forEach(block -> addBaseAndVariantsToEntries(block, entries)))

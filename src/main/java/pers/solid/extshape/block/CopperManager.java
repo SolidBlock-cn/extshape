@@ -97,6 +97,7 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
 
     builder.markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE))
+        .markStoneCuttable()
         .build();
     return builder;
   }

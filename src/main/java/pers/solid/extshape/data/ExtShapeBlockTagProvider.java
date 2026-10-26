@@ -100,7 +100,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         ExtShapeBlocks.PETRIFIED_OAK_PLANKS,
         ExtShapeBlocks.SMOOTH_STONE_DOUBLE_SLAB
     );
-    final Iterable<Block> pickaxeMineableBaseBlocks = Iterables.concat(
+    final Collection<Block> pickaxeMineableBaseBlocks = ImmutableList.copyOf(Iterables.concat(
         BlockCollections.STONES,
         BlockCollections.UNCOLORED_SANDSTONES,
         BlockCollections.RED_SANDSTONES,
@@ -163,7 +163,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
             Blocks.RAW_COPPER_BLOCK,
             Blocks.RAW_GOLD_BLOCK
         )
-    );
+    ));
     addForShapes(BlockTags.MINEABLE_WITH_PICKAXE, pickaxeMineableBaseBlocks);
 
     // 所有的混凝土和陶瓦加入 pickaxe_mineable
@@ -213,6 +213,8 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         Blocks.CRYING_OBSIDIAN
     );
 
+    // region mineable部分-配置标签移除
+    // 仅限 26.1 以上
     final ImmutableSet<Block> woodBlocks = Stream.of(BlockCollections.LOGS, BlockCollections.STRIPPED_LOGS, BlockCollections.WOODS, BlockCollections.STRIPPED_WOODS, BlockCollections.STEMS, BlockCollections.STRIPPED_STEMS, BlockCollections.HYPHAES, BlockCollections.STRIPPED_HYPHAES, BlockCollections.PLANKS, List.of(Blocks.BAMBOO_BLOCK, Blocks.STRIPPED_BAMBOO_BLOCK)).flatMap(Collection::stream).collect(ImmutableSet.toImmutableSet());
 
     valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -232,6 +234,7 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
             .map(block -> BlockBiMaps.getBlockOf(BlockShape.FENCE_GATE, block))
             .filter(Objects::nonNull)
             .filter(ExtShapeBlocks::contains));
+    // endregion mineable部分-配置标签移除
 
     addForShapes(BlockTags.SWORD_EFFICIENT, Blocks.PUMPKIN, Blocks.MELON);
 

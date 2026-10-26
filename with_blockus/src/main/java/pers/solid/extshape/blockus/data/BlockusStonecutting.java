@@ -83,8 +83,8 @@ public final class BlockusStonecutting {
     builder.put(BlockusBlocks.POLISHED_AMETHYST.block(), Blocks.AMETHYST_BLOCK);
     builder.putAll(BlockusBlocks.AMETHYST_BRICKS.block(), Blocks.AMETHYST_BLOCK, BlockusBlocks.POLISHED_AMETHYST.block());
 
-    builder.putAll(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
-    builder.putAll(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
+    builder.putAll(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS, Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
+    builder.putAll(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING, Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
 
     builder.put(BlockusBlocks.POLISHED_SCULK.block(), Blocks.SCULK);
     builder.putAll(BlockusBlocks.SCULK_BRICKS.block(), BlockusBlocks.POLISHED_SCULK.block(), Blocks.SCULK);
@@ -158,7 +158,6 @@ public final class BlockusStonecutting {
     builder.put(BlockusBlocks.RAINBOW_BRICKS.block(), BlockusBlocks.RAINBOW_BLOCK);
     builder.put(BlockusBlocks.CHOCOLATE_BRICKS.block(), BlockusBlocks.CHOCOLATE_BLOCK.block());
     builder.putAll(BlockusBlocks.CHOCOLATE_SQUARES.block(), BlockusBlocks.CHOCOLATE_BLOCK.block(), BlockusBlocks.CHOCOLATE_BRICKS.block());
-    builder.put(BlockusBlocks.CHOCOLATE_SQUARES.block(), BlockusBlocks.CHOCOLATE_BRICKS.block());
 
     // shingles and terracotta and glazed terracotta
     builder.put(BlockusBlocks.SHINGLES.block(), Blocks.TERRACOTTA);
@@ -192,6 +191,7 @@ public final class BlockusStonecutting {
     builder.put(BlockusBlocks.DIAMOND_BRICKS.block(), Blocks.DIAMOND_BLOCK);
     builder.put(BlockusBlocks.NETHERITE_BRICKS.block(), Blocks.NETHERITE_BLOCK);
 
+    // region 铜砖
     final List<Block> unwaxedCopperBricksList = BlockusCopperManager.COPPER_BRICKS.unwaxed();
     final ImmutableList<Block> unwaxedCopperBlockList = CopperManager.COPPER_BLOCKS;
     final ImmutableList<Block> unwaxedCutCopperBlockList = CopperManager.CUT_COPPER_BLOCKS;
@@ -209,6 +209,7 @@ public final class BlockusStonecutting {
       builder.put(waxedCopperBricks, waxedCopperBlockList.get(i));
       builder.put(waxedCopperBricks, waxedCutCopperBlockList.get(i));
     }
+    // endregion 铜砖
   }
 
   private static void putMultipleWithMid(ImmutableMultimap.Builder<Block, Block> builder, Block midOutput, Block ingredient1, Block ingredient2, Block... outputs) {

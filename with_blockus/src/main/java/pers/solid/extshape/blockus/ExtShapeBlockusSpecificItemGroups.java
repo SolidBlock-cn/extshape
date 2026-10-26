@@ -5,7 +5,7 @@ import com.brand.blockus.utils.helper.BlockOrder;
 import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -33,7 +33,7 @@ public final class ExtShapeBlockusSpecificItemGroups {
   /**
    * 扩展方块形状 - Blockus 模组中的建筑方块。
    */
-  public static final CreativeModeTab CONSTRUCTION_BLOCKS = register("extshape-blockus_construction_blocks", FabricItemGroup.builder()
+  public static final CreativeModeTab CONSTRUCTION_BLOCKS = register("extshape-blockus_construction_blocks", FabricCreativeModeTab.builder()
       .title(wrapItemGroupName(Component.translatable("itemGroup.extshape_blockus.construction_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.WALL, BlockusBlocks.GINGHAM_WOOL.colorMap().get(DyeColor.YELLOW).block())))
       .displayItems((displayContext, entries) -> CONSTRUCTION_BASE_BLOCKS.forEach(block -> ExtShapeSpecificItemGroups.addBaseAndVariantsToEntries(block, entries)))
@@ -42,7 +42,7 @@ public final class ExtShapeBlockusSpecificItemGroups {
   /**
    * 扩展方块形状 - Blockus 模组中的染色方块。
    */
-  public static final CreativeModeTab COLORED_BLOCKS = register("extshape-blockus_colored_blocks", FabricItemGroup.builder()
+  public static final CreativeModeTab COLORED_BLOCKS = register("extshape-blockus_colored_blocks", FabricCreativeModeTab.builder()
       .title(wrapItemGroupName(Component.translatable("itemGroup.extshape_blockus.colored_blocks")))
       .icon(() -> new ItemStack(BlockBiMaps.getBlockOfOrThrow(BlockShape.VERTICAL_STAIRS, BlockusBlocks.WOODEN_MOSAIC.get("mangrove").block())))
       .displayItems((displayContext, entries) -> COLORED_BASE_BLOCKS.forEach(blocks -> ExtShapeSpecificItemGroups.addColoredBaseAndVariantsToEntries(blocks, entries)))
