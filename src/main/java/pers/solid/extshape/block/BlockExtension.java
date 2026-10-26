@@ -27,8 +27,8 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
   public static final BlockExtension AMETHYST = BlockExtension.builder().setProjectileHitCallback((world, state, hit, projectile) -> {
     if (!world.isClientSide()) {
       BlockPos blockPos = hit.getBlockPos();
-      world.playSound(null, blockPos, SoundEvents.AMETHYST_BLOCK_HIT, SoundSource.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
-      world.playSound(null, blockPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F, 0.5F + world.random.nextFloat() * 1.2F);
+      world.playSound(null, blockPos, SoundEvents.AMETHYST_BLOCK_HIT, SoundSource.BLOCKS, 1.0F, 0.5F + world.getRandom().nextFloat() * 1.2F);
+      world.playSound(null, blockPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F, 0.5F + world.getRandom().nextFloat() * 1.2F);
     }
   }).build();
 
