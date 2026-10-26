@@ -138,18 +138,22 @@ public final class ExtShapeBlockusBlocks {
         .build();
 
     createAllShapes(BlockusBlocks.SULFUR_TILES)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .markStoneCuttable()
         .build();
     createAllShapes(BlockusBlocks.HERRINGBONE_SULFUR_BRICKS)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .markStoneCuttable()
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.SULFUR_CIRCULAR_PAVING)
         .markStoneCuttable());
 
     createAllShapes(BlockusBlocks.CINNABAR_TILES)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .markStoneCuttable()
         .build();
     createAllShapes(BlockusBlocks.HERRINGBONE_CINNABAR_BRICKS)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
         .markStoneCuttable()
         .build();
     buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.CINNABAR_CIRCULAR_PAVING)

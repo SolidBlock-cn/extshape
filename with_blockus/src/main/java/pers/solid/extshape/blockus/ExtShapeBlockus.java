@@ -48,6 +48,7 @@ public class ExtShapeBlockus implements ModInitializer {
       ExtShapeBlockusBlocks.init();
       ExtShapeBlockusAliases.initWallChanges();
       ExtShapeBlockusAliases.initSquaresChanges();
+      ExtShapeBlockusAliases.initTilesAndHerringboneChanges();
       ExtShapeBlockusItemGroup.registerEvent();
       registerStrippableBlocks();
       if (ExtShapeConfig.CURRENT_CONFIG.showSpecificGroups) {
