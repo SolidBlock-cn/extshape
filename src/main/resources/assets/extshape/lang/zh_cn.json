@@ -109,6 +109,8 @@
   "tag.block.extshape.terracotta_buttons": "陶瓦按钮",
   "tag.block.extshape.stained_terracotta_buttons": "染色陶瓦按钮",
 
+  "tag.block.extshape.pressure_plates": "压力板",
+  "tag.block.extshape.stone_pressure_plates": "石质压力板",
   "tag.block.extshape.log_pressure_plates": "原木压力板",
   "tag.block.extshape.woolen_pressure_plates": "羊毛压力板",
   "tag.block.extshape.concrete_pressure_plates": "混凝土压力板",
