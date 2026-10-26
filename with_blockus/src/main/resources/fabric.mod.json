@@ -28,9 +28,9 @@
   ],
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": "1.21.11",
-    "extshape": [">=3.2.0-beta.1", "${version}"],
+    "extshape": ">=3.2.0",
     "blockus": ">=2.15.2"
   },
   "custom": {
