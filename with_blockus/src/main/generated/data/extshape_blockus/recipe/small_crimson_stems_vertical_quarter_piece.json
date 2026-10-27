@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "small_logs_vertical_quarter_piece_from_rotation",
+  "ingredients": [
+    "extshape_blockus:small_crimson_stems_quarter_piece"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:small_crimson_stems_vertical_quarter_piece"
+  }
+}

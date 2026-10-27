@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:light_gray_stone_bricks",
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:light_gray_stone_brick_vertical_quarter_piece"
+  }
+}

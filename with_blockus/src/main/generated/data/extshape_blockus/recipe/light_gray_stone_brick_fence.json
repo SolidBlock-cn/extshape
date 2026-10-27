@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "stained_stone_brick_fence",
+  "key": {
+    "#": "minecraft:flint",
+    "W": "blockus:light_gray_stone_bricks"
+  },
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "result": {
+    "count": 2,
+    "id": "extshape_blockus:light_gray_stone_brick_fence"
+  }
+}

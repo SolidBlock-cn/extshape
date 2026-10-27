@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": "blockus:rainbow_petal",
+    "#": "blockus:rainbow_petals",
     "W": "blockus:rainbow_bricks"
   },
   "pattern": [

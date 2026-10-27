@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "small_logs_stairs",
+  "key": {
+    "#": "blockus:small_warped_stems"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:small_warped_stems_stairs"
+  }
+}
