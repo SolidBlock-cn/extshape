@@ -80,7 +80,7 @@ af00951886eddd717c22cd2bd89e8db424fa99f2 data/minecraft/tags/block/guarded_by_pi
 4b4f752838cb1bf1dce038e4fa3f9fdede6ce31f data/minecraft/tags/block/infiniburn_overworld.json
 8a2446c13235c88b4ac44051a15f664daffbc27c data/minecraft/tags/block/mineable/axe.json
 1bb4dbe035d40307dec839068cb63cc0503414db data/minecraft/tags/block/mineable/hoe.json
-9591701a117adc8ac21a662827486af10cdeb65d data/minecraft/tags/block/mineable/pickaxe.json
+9bc512a8d57cdf1664bf826aa5be7d8d42472fc2 data/minecraft/tags/block/mineable/pickaxe.json
 4d9ab09c0f95bfb04c40f800c36066c4a8367d06 data/minecraft/tags/block/needs_diamond_tool.json
 6208dd7ad8627a1e7c25b894310da6686395f1c9 data/minecraft/tags/block/needs_iron_tool.json
 eb7cf951870642b73ec04f63644f885841b2b11c data/minecraft/tags/block/needs_stone_tool.json

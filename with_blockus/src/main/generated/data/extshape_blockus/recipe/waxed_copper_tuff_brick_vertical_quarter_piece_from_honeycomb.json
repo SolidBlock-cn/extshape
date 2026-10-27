@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_copper_tuff_brick_vertical_quarter_piece",
+  "ingredients": [
+    "extshape_blockus:copper_tuff_brick_vertical_quarter_piece",
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "id": "extshape_blockus:waxed_copper_tuff_brick_vertical_quarter_piece"
+  }
+}

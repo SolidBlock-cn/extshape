@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_copper_tuff_brick_vertical_slab",
+  "ingredients": [
+    "extshape_blockus:copper_tuff_brick_vertical_slab",
+    "minecraft:honeycomb"
+  ],
+  "result": {
+    "id": "extshape_blockus:waxed_copper_tuff_brick_vertical_slab"
+  }
+}
