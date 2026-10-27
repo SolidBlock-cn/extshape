@@ -49,6 +49,7 @@ public final class RecipeConflict {
    *
    * @return 冲突的个数。
    */
+  @SuppressWarnings("deprecation")
   public static int checkConflict(ServerRecipeManager recipeManager, World world, @Nullable Predicate<Identifier> filter, Consumer<Supplier<Text>> messageConsumer) {
     int numberOfConflicts = 0;
     for (RecipeEntry<?> recipeEntry : recipeManager.values()) {
