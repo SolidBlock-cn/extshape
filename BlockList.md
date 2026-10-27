@@ -22,6 +22,10 @@ Click the [online document link](https://www.kdocs.cn/l/cqyeH2FvN5RU) or view th
 
 ![方块列表](img.png)
 
-注意：目前无计划为平滑石方块加入楼梯等其他形状变种。这是因为，原版的平滑石有两个纹理，这些纹理有各自的轮廓以分别适应完整方块表面和一半的方块表面。楼梯等形状无法很好地适应原版的这两个纹理。
+注意：
+1. 目前无计划为平滑石方块加入楼梯等其他形状变种。这是因为，原版的平滑石有两个纹理，这些纹理有各自的轮廓以分别适应完整方块表面和一半的方块表面。楼梯等形状无法很好地适应原版的这两个纹理。
+2. 目前无计划为玻璃等方块加入形状变种。玻璃的纹理有完整方块大小的轮廓，如添加形状变种，纹理需要特殊处理，且玻璃等方块属于透明方块或半透明方块，其渲染也需要单独处理。
 
-Note: It is not planned to add other shape variants like stairs for smooth stone block. This is because vanilla smooth stone has two textures, each of which has its own outline in the texture to fit full block surface and half block surface respectively. Shapes like stairs cannot fit these two textures well.
+Note:
+1. It is not planned to add other shape variants like stairs for smooth stone block. This is because vanilla smooth stone has two textures, each of which has its own outline in the texture to fit full block surface and half block surface respectively. Shapes like stairs cannot fit these two textures well.
+2. It is not planned to add shape variants for glass and other blocks. The texture of glass has an outline of a full block, and if shape variants are added, the textures should be specially handled. Besides, blocks like glass are transparent or translucent blocks, and the rendering also requires special handling.
