@@ -99,7 +99,7 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
             BlockusBlocks.RAINBOW_GLOWSTONE,
             BlockusBlocks.CHORUS_BLOCK,
             BlockusBlocks.THATCH.block()
-        ), BlockusBlocks.PATTERNED_WOOL.block().blocks().asList().stream(), BlockusBlocks.GINGHAM_WOOL.block().blocks().asList().stream(), BlockusBlocks.WOODEN_MOSAIC.bundle().values().stream().map(BSSWBundle::block))
+        ), BlockOrder.COLOR.stream().map(BlockusBlocks.PATTERNED_WOOL.block().blocks()::pick), BlockOrder.COLOR.stream().map(BlockusBlocks.GINGHAM_WOOL.block().blocks()::pick), Arrays.stream(BlockOrder.WOOD).map(WoodMaps::getId).map(BlockusBlocks.WOODEN_MOSAIC.bundle()::get).filter(Objects::nonNull).map(BSSWBundle::block))
         .map(block -> BlockBiMaps.getBlockOf(BlockShape.WALL, block))
         .filter(Objects::nonNull)
         .filter(ExtShapeBlockusBlocks.BLOCKUS_BLOCKS::contains)
