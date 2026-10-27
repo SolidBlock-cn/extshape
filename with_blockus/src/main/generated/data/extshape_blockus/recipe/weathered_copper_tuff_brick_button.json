@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "blockus:weathered_copper_tuff_bricks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:weathered_copper_tuff_brick_button"
+  }
+}

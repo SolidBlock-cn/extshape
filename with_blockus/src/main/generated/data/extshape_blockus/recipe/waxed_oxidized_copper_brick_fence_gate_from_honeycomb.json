@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_oxidized_copper_brick_fence_gate",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:oxidized_copper_brick_fence_gate"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extshape_blockus:waxed_oxidized_copper_brick_fence_gate"
+  }
+}
