@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:exposed_cut_copper"
+  },
+  "result": "extshape_blockus:exposed_copper_brick_vertical_stairs"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:waxed_oxidized_cut_copper"
+  },
+  "result": "extshape_blockus:waxed_oxidized_copper_brick_vertical_stairs"
+}

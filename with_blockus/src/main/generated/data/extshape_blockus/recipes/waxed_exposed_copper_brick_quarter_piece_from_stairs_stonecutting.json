@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "ingredient": {
+    "item": "blockus:waxed_exposed_copper_brick_stairs"
+  },
+  "result": "extshape_blockus:waxed_exposed_copper_brick_quarter_piece"
+}

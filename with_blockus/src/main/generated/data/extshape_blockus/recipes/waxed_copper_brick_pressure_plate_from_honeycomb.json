@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "waxed_copper_brick_pressure_plate",
+  "ingredients": [
+    {
+      "item": "extshape_blockus:copper_brick_pressure_plate"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "extshape_blockus:waxed_copper_brick_pressure_plate"
+  }
+}

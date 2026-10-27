@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:waxed_cut_copper"
+  },
+  "result": "extshape_blockus:waxed_copper_brick_quarter_piece"
+}

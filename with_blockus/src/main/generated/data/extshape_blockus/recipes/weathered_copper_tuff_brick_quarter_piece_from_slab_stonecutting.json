@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "blockus:weathered_copper_tuff_brick_slab"
+  },
+  "result": "extshape_blockus:weathered_copper_tuff_brick_quarter_piece"
+}

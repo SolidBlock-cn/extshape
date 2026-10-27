@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:copper_block"
+  },
+  "result": "extshape_blockus:copper_brick_vertical_stairs"
+}
