@@ -18,8 +18,9 @@
 - Further solved the texture issue related to blocks of cut soul sandstone. This issue may only existed in some Minecraft versions.
 - Removed the buttons, fences and fence gates for sulfur tiles, herringbone sulfur bricks, cinnabar tiles and herringbone cinnabar bricks. When updating the mod, these blocks and items will be automatically replaced with relevant blocks of sulfur bricks and cinnabar bricks.
 - Since in versions 1.21.1 and 1.21.8 and above, Blockus renamed small logs, now similar to Blockus mod, this mod treats the block and item IDs of old small logs (except those added in new versions like poplar) as aliases of new IDs, and can automatically convert. For example, `extshape_blockus:oak_small_logs_stairs` placed in other versions will be automatically replaced with `extshape_blockus:small_oak_logs_stairs`.
-- In versions where copper bricks and copper tuff blocks exist, relevant shape variants of copper bricks and copper tuff bricks are added (if not added yet), and these blocks can now be waxed by crafting from one with a honeycomb.
-- In versions where copper bricks exist, fixed the incorrect stonecutting. Since in Blockus, one copper block can be cut into four copper bricks, in this mod, when cutting copper block to shape variants of copper bricks, the amount is also calculated by multiplying by 4. Cut copper block cutting to copper brick is still 1:1 without changes.
+- Added relevant shape variants of copper bricks and copper tuff bricks (if not added yet), and these blocks can now be waxed by crafting from one with a honeycomb.
+- Fixed the incorrect stonecutting or copper bricks. Since in Blockus, one copper block can be cut into four copper bricks, in this mod, when cutting copper block to shape variants of copper bricks, the amount is also calculated by multiplying by 4. Cut copper block cutting to copper brick is still 1:1 without changes.
+- Fixed the failure of compatibility with the latest Blockus mod for 1.21.4.
 
 ### 3.1.6
 
