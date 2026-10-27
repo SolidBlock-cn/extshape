@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:petrified_oak_slab"
+        "recipe": "extshape:petrified_oak_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:petrified_oak_slab"
+      "extshape:petrified_oak_slab"
     ]
   }
 }
