@@ -4,7 +4,6 @@ import com.brand.blockus.registry.content.BlockusBlocks;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -42,7 +41,7 @@ public class ExtShapeBlockusRecipeGenerator extends RecipeProvider {
       }
     }
 
-    final Multimap<Block, ObjectIntPair<Block>> mappedInstance = Multimaps.transformValues(BlockusStonecutting.INSTANCE, input -> ObjectIntPair.of(input, 1));
+    final Multimap<Block, ObjectIntPair<Block>> mappedInstance = BlockusStonecutting.INSTANCE;
     for (Block baseBlock : ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS) {
       final CrossShapeDataGeneration crossShapeDataGeneration = new CrossShapeDataGeneration(baseBlock, ExtShapeBlockus.NAMESPACE, mappedInstance, this, output);
       crossShapeDataGeneration.generateCrossShapeData();
