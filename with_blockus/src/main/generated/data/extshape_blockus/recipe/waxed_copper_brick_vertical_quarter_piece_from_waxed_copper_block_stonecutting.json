@@ -2,7 +2,7 @@
   "type": "minecraft:stonecutting",
   "ingredient": "minecraft:waxed_copper_block",
   "result": {
-    "count": 4,
+    "count": 16,
     "id": "extshape_blockus:waxed_copper_brick_vertical_quarter_piece"
   }
 }
