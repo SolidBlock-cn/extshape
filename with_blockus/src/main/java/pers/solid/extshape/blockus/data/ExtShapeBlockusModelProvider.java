@@ -2,6 +2,8 @@ package pers.solid.extshape.blockus.data;
 
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
+import com.brand.blockus.utils.helper.BlockOrder;
+import com.brand.blockus.utils.helper.WoodMaps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -10,6 +12,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import pers.solid.extshape.block.ExtShapeBlockInterface;
 import pers.solid.extshape.blockus.ExtShapeBlockusBlocks;
@@ -50,13 +53,15 @@ public class ExtShapeBlockusModelProvider extends ExtShapeModelProvider {
     registerSuffixed(BlockusBlocks.SOUL_SANDSTONE.block(), TextureSlot.TOP, "_top");
     register(BlockusBlocks.SMOOTH_SOUL_SANDSTONE.block(), Identifier.fromNamespaceAndPath(Blockus.MOD_ID, "block/soul_sandstone_top"));
 
-    for (var block : BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().asList()) {
+    for (DyeColor dyeColor : BlockOrder.COLOR) {
+      final Block block = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.blocks().pick(dyeColor);
       registerSuffixed(block, TextureSlot.END, "_top");
       registerSuffixed(block, TextureSlot.SIDE, "_side");
       registerSuffixed(block, TextureSlot.WALL, "_side");
     }
 
-    for (final Block block : BlockusBlocks.SMALL_LOGS.bundle().values()) {
+    for (WoodMaps woodMaps : BlockOrder.WOOD) {
+      final Block block = BlockusBlocks.SMALL_LOGS.bundle().get(woodMaps.getId());
       registerSuffixed(block, TextureSlot.END, "_top");
     }
   }
