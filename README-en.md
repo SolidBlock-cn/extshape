@@ -94,7 +94,7 @@ Stone-cutting recipes of some blocks are as follows:
 - 1×vertical stairs → 3×vertical quarter pieces
 - 1×vertical slab → 2×quarter pieces / 2×vertical quarter pieces
 
-In stonecutters, one base block can be cut into various shapes for cut base blocks. For instance, a stone can be cut into stone bricks, and stone bricks can be cut into 2 vertical stone brick slabs, while one stone can also be cut directly into 2 vertical stone brick slabs. However, blocks of various shapes cannot be cut into their corresponding shapes of cut base blocks. For example, stone slab cannot be cut into stone brick slabs or stone brick quarter pieces.
+In stonecutters, one base block can be cut into various shapes for cut base blocks. For instance, a stone can be cut into stone bricks, and stone bricks can be cut into 2 vertical stone brick slabs, while one stone can also be cut directly into 2 vertical stone brick slabs. However, blocks of various shapes cannot be cut into their corresponding shapes of cut base blocks. For example, stone slab cannot be cut into stone brick slabs or stone brick quarter pieces. When cutting copper blocks (including different oxidization levels, including waxed ones) into relevant shape variants of cut copper, the amount is calculated by multiplying by 4, for example, one copper block can be cut into 4 vertical cut copper stairs, 8 vertical cut copper slabs or 16 cut copper quarter pieces.
 
 The second crafting ingredient for crafting fences and fence gates (apart from base blocks) is dependent on its base block. See details in [block list](BlockList.md).
 
