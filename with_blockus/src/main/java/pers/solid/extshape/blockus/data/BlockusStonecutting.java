@@ -5,6 +5,8 @@ import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.utils.helper.BlockOrder;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimaps;
+import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.DyeColor;
@@ -24,14 +26,18 @@ import java.util.stream.Collectors;
  * @see VanillaStonecutting
  */
 public final class BlockusStonecutting {
-  public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
+  public static final @Unmodifiable ImmutableMultimap<Block, ObjectIntPair<Block>> INSTANCE;
 
   static {
-    final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
-    registerBlockusStonecutting(builder);
-    INSTANCE = builder.build();
+    final ImmutableMultimap.Builder<Block, Block> simpleBuilder = new ImmutableMultimap.Builder<>();
+    registerBlockusStonecutting(simpleBuilder);
+    final ImmutableMultimap<Block, Block> simpleMap = simpleBuilder.build();
+    final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder = new ImmutableMultimap.Builder<>();
+    builder.putAll(Multimaps.transformValues(simpleMap, input -> ObjectIntPair.of(input, 1)));
+    registerWeightedBlockusStonecutting(builder);
+
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-      final List<Block> unrecognizedBaseBlocks = INSTANCE.keySet().stream().distinct()
+      final List<Block> unrecognizedBaseBlocks = simpleMap.keySet().stream().distinct()
           .filter(block -> !(ExtShapeBlocks.containsBaseBlock(block) || ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.contains(block)))
           .toList();
 
@@ -39,6 +45,8 @@ public final class BlockusStonecutting {
         throw new IllegalStateException("These blocks exist in the results of BlockusStonecutting.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(BuiltInRegistries.BLOCK::getKey).map(Objects::toString).collect(Collectors.joining(", ")));
       }
     }
+
+    INSTANCE = builder.build();
   }
 
   private BlockusStonecutting() {
@@ -217,8 +225,10 @@ public final class BlockusStonecutting {
     builder.put(BlockusBlocks.EMERALD_BRICKS.block(), Blocks.EMERALD_BLOCK);
     builder.put(BlockusBlocks.DIAMOND_BRICKS.block(), Blocks.DIAMOND_BLOCK);
     builder.put(BlockusBlocks.NETHERITE_BRICKS.block(), Blocks.NETHERITE_BLOCK);
+  }
 
-    // 和铜相关的
+  private static void registerWeightedBlockusStonecutting(final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {
+    // region 铜砖
     final WeatheringCopperCollection.ByState<Block> weatheringCopper = Blocks.COPPER_BLOCK.weathering();
     final WeatheringCopperCollection.ByState<Block> waxedCopper = Blocks.COPPER_BLOCK.waxed();
     final WeatheringCopperCollection.ByState<Block> weatheringCutCopper = Blocks.CUT_COPPER.weathering();
@@ -228,8 +238,10 @@ public final class BlockusStonecutting {
     final WeatheringCopperCollection.ByState<Block> waxedCopperBricks = copperBricks.waxed();
 
     for (WeatheringCopper.WeatherState oxidationLevel : CopperManager.OXIDATION_LEVELS) {
-      builder.putAll(weatheringCopperBricks.pick(oxidationLevel), weatheringCopper.pick(oxidationLevel), weatheringCutCopper.pick(oxidationLevel));
-      builder.putAll(waxedCopperBricks.pick(oxidationLevel), waxedCopper.pick(oxidationLevel), waxedCutCopper.pick(oxidationLevel));
+      builder.put(weatheringCopperBricks.pick(oxidationLevel), ObjectIntPair.of(weatheringCopper.pick(oxidationLevel), 4));
+      builder.put(weatheringCopperBricks.pick(oxidationLevel), ObjectIntPair.of(weatheringCutCopper.pick(oxidationLevel),1));
+      builder.put(waxedCopperBricks.pick(oxidationLevel), ObjectIntPair.of(waxedCopper.pick(oxidationLevel), 4));
+      builder.put(waxedCopperBricks.pick(oxidationLevel), ObjectIntPair.of(waxedCutCopper.pick(oxidationLevel), 1));
     }
     // endregion 铜砖
   }
