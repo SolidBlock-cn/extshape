@@ -1,4 +1,4 @@
-// 1.21.3	2026-10-14T23:18:31.8303341	Extended Block Shapes/Tags for minecraft:block
+// 1.21.3	2026-10-27T11:30:58.6469339	Extended Block Shapes/Tags for minecraft:block
 420e0fef026b9e1304889bd7e5c7755d3380e959 data\extshape\tags\block\concrete_quarter_pieces.json
 e40c837a09674c8a73a65f0fe00172553aa032a9 data\c\tags\block\dyed\pink.json
 49038b7419f8f27b0f4cc2c9c7e759d86e7820fa data\extshape\tags\block\vertical_stairs.json
@@ -34,8 +34,8 @@ c4c70639631fd0e53b701ee7866c50e27a9ea142 data\extshape\tags\block\stained_terrac
 1ba7979c665ae6a281c51bf1b92dea9444a66a0e data\extshape\tags\block\log_vertical_quarter_pieces.json
 265c02aee0ba567a7f747daedba8b8e790d46a07 data\extshape\tags\block\log_stairs.json
 f26fb08728a0f1b9fd4f940679aa701cfffae8a2 data\minecraft\tags\block\guarded_by_piglins.json
-d3325113bbefd7b62a2be70cd1dde19b504072e2 data\minecraft\tags\block\wooden_buttons.json
 a21a01d6f077ff50c03fd338067584d06c836235 data\minecraft\tags\block\buttons.json
+d3325113bbefd7b62a2be70cd1dde19b504072e2 data\minecraft\tags\block\wooden_buttons.json
 d02263f197e3120d4b816c34dfb989f5e4cce5ac data\minecraft\tags\block\wooden_fences.json
 80f23905012ec6002512ef0c4bf2b5c2ca635726 data\extshape\tags\block\stained_terracotta_fence_gates.json
 9d5880bb9fabd62af5d145de4c20f3044f21d2a2 data\c\tags\block\sandstone\uncolored_stairs.json
