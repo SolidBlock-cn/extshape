@@ -22,8 +22,8 @@ public final class BlockusCopperManager {
 
   public static CopperManager of(List<CopperBundle> bundles) {
     return new CopperManager(
-        ImmutableList.copyOf(Lists.transform(bundles, input -> input.block)),
-        ImmutableList.copyOf(Lists.transform(bundles, input -> input.blockWaxed))
+        ImmutableList.copyOf(Lists.transform(bundles, CopperBundle::block)),
+        ImmutableList.copyOf(Lists.transform(bundles, CopperBundle::blockWaxed))
     );
   }
 }

@@ -3,8 +3,11 @@ package pers.solid.extshape.blockus;
 import com.brand.blockus.Blockus;
 import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.BSSWBundle;
+import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.brand.blockus.registry.content.bundles.WoodBundle;
-import com.google.common.collect.Iterables;
+import com.brand.blockus.registry.content.bundles.WoolBundle;
+import com.brand.blockus.utils.helper.BlockOrder;
+import com.brand.blockus.utils.helper.WoodMaps;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
@@ -23,6 +26,7 @@ import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.Util;
@@ -35,6 +39,7 @@ import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 public final class ExtShapeBlockusBlocks {
@@ -613,7 +618,7 @@ public final class ExtShapeBlockusBlocks {
         .setStoneFenceSettings(Items.RED_SAND)
         .without(BlockShape.BUTTON)
         .build();
-    FACTORY.createConstructionOnly(BlockusBlocks.SOUL_SANDSTONE.block)
+    FACTORY.createConstructionOnly(BlockusBlocks.SOUL_SANDSTONE.block())
         .markStoneCuttable()
         .setStoneFenceSettings(Items.SOUL_SAND)
         .build();
@@ -755,9 +760,14 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.wood(BlockSetType.OAK))
         .build();
 
-    for (var bsswBundle : BlockusBlockCollections.WOODEN_MOSAICS) {
-      final boolean isNonFlammable = BlockusBlocks.WARPED_MOSAIC == bsswBundle || BlockusBlocks.CRIMSON_MOSAIC == bsswBundle || BlockusBlocks.CHARRED_MOSAIC == bsswBundle;
-      final BlocksBuilder builder = FACTORY.createConstructionOnly(bsswBundle.block)
+    final Map<String, BSSWBundle> woodenMosaicBundle = BlockusBlocks.WOODEN_MOSAIC.bundle();
+    for (WoodMaps maps : BlockOrder.WOOD) {
+      final BSSWBundle bsswBundle = woodenMosaicBundle.get(maps.getId());
+      if (bsswBundle == null) {
+        continue;
+      }
+      final boolean isNonFlammable = maps.equals(WoodMaps.WARPED) || maps.equals(WoodMaps.CRIMSON) || maps.equals(WoodMaps.CHARRED);
+      final BlocksBuilder builder = FACTORY.createConstructionOnly(bsswBundle.block())
           .without(BlockShape.STAIRS, BlockShape.SLAB)
           .with(BlockShape.WALL)
           .setRecipeGroup(blockShape -> "wooden_mosaic_" + blockShape.asString());
@@ -768,16 +778,21 @@ public final class ExtShapeBlockusBlocks {
             .build();
       }
     }
-    for (var bsswBundle : BlockusBlockCollections.MOSSY_PLANKS) {
-      final boolean isNonFlammable = BlockusBlocks.MOSSY_WARPED_PLANKS == bsswBundle || BlockusBlocks.MOSSY_CRIMSON_PLANKS == bsswBundle || BlockusBlocks.MOSSY_CHARRED_PLANKS == bsswBundle;
+    final Map<String, BSSWBundle> mossyPlanksBundle = BlockusBlocks.MOSSY_PLANKS.bundle();
+    for (WoodMaps maps : BlockOrder.WOOD) {
+      final BSSWBundle bsswBundle = mossyPlanksBundle.get(maps.getId());
+      if (bsswBundle == null) {
+        continue;
+      }
+      final boolean isNonFlammable = maps.equals(WoodMaps.WARPED) || maps.equals(WoodMaps.CRIMSON) || maps.equals(WoodMaps.CHARRED);
       if (isNonFlammable) {
-        FACTORY.createConstructionOnly(bsswBundle.block)
+        FACTORY.createConstructionOnly(bsswBundle.block())
             .without(BlockShape.STAIRS, BlockShape.SLAB)
             .with(BlockShape.WALL)
             .setRecipeGroup(blockShape -> "mossy_wooden_" + blockShape.asString())
             .build();
       } else {
-        FACTORY.createConstructionOnly(bsswBundle.block)
+        FACTORY.createConstructionOnly(bsswBundle.block())
             .without(BlockShape.STAIRS, BlockShape.SLAB)
             .with(BlockShape.WALL)
             .addPostBuildConsumer(plankFlammable)
@@ -786,8 +801,13 @@ public final class ExtShapeBlockusBlocks {
             .build();
       }
     }
-    for (var block : BlockusBlockCollections.HERRINGBONE_PLANKS) {
-      final boolean isNonFlammable = BlockusBlocks.HERRINGBONE_WARPED_PLANKS == block || BlockusBlocks.HERRINGBONE_CRIMSON_PLANKS == block || BlockusBlocks.HERRINGBONE_CHARRED_PLANKS == block;
+    final Map<String, Block> herringbonePlanksBundle = BlockusBlocks.HERRINGBONE_PLANKS.bundle();
+    for (WoodMaps woodMap : BlockOrder.WOOD) {
+      final Block block = herringbonePlanksBundle.get(woodMap.getId());
+      if (block == null) {
+        continue;
+      }
+      final boolean isNonFlammable = woodMap.equals(WoodMaps.WARPED) || woodMap.equals(WoodMaps.CRIMSON) || woodMap.equals(WoodMaps.CHARRED);
       if (isNonFlammable) {
         FACTORY.createConstructionOnly(block)
             .with(BlockShape.WALL)
@@ -802,8 +822,11 @@ public final class ExtShapeBlockusBlocks {
             .build();
       }
     }
-    for (var block : BlockusBlockCollections.SMALL_LOGS) {
-      if (block == BlockusBlocks.CRIMSON_SMALL_STEMS || block == BlockusBlocks.WARPED_SMALL_STEMS) {
+    final Map<String, Block> smallLogsBundle = BlockusBlocks.SMALL_LOGS.bundle();
+    for (WoodMaps woodMaps : BlockOrder.WOOD) {
+      final Block block = smallLogsBundle.get(woodMaps.getId());
+      if (block == null) continue;
+      if (woodMaps.equals(WoodMaps.CRIMSON) || woodMaps.equals(WoodMaps.WARPED) || woodMaps.equals(WoodMaps.CHARRED)) {
         FACTORY.createConstructionOnly(block)
             .setPillar()
             .setRecipeGroup(blockShape -> "small_logs_" + blockShape.asString())
@@ -885,7 +908,7 @@ public final class ExtShapeBlockusBlocks {
         .setPillar()
         .build();
 
-    for (var bsswBundle : BlockusBlockCollections.STAINED_STONE_BRICKS) {
+    for (var bsswBundle : BlockusBlocks.STAINED_STONE_BRICKS.colorMap().values()) {
       createAllShapes(bsswBundle)
           .markStoneCuttable()
           .setRecipeGroup(blockShape -> "stained_stone_brick_" + blockShape.asString())
@@ -894,8 +917,14 @@ public final class ExtShapeBlockusBlocks {
           .without(BlockShape.BUTTON)
           .build();
     }
-    for (var concreteBundle : BlockusBlockCollections.CONCRETE_BRICKS) {
-      FACTORY.createConstructionOnly(concreteBundle.block)
+
+    final Map<DyeColor, ConcreteBundle.ConcreteVariants> concreteBricksMap = BlockusBlocks.CONCRETE_BRICKS.colorMap();
+    for (DyeColor dyeColor : BlockOrder.COLOR) {
+      final ConcreteBundle.ConcreteVariants concreteVariants = concreteBricksMap.get(dyeColor);
+      if (concreteVariants == null) {
+        continue;
+      }
+      FACTORY.createConstructionOnly(concreteVariants.block())
           .markStoneCuttable()
           .without(BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL)
           .setRecipeGroup(blockShape1 -> "concrete_brick_" + blockShape1.asString())
@@ -909,7 +938,7 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.STONE)
         .setFenceSettings(FenceSettings.STONE)
         .build();
-    for (var bsswBundle : BlockusBlockCollections.TINTED_SHINGLES) {
+    for (var bsswBundle : BlockusBlocks.STAINED_SHINGLES.colorMap().values()) {
       createAllShapes(bsswBundle)
           .markStoneCuttable()
           .setActivationSettings(ActivationSettings.STONE)
@@ -918,22 +947,33 @@ public final class ExtShapeBlockusBlocks {
           .build();
     }
 
-    for (var woolBundle : Iterables.concat(BlockusBlockCollections.PATTERNED_WOOLS, BlockusBlockCollections.GINGHAM_WOOLS)) {
-      FACTORY.createAllShapes(woolBundle.block)
-          .without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.BUTTON)
-          .addPreBuildConsumer((blockShape, blockBuilder) -> {
-            if (blockShape == BlockShape.PRESSURE_PLATE) {
-              ((PressurePlateBuilder) blockBuilder).setInstanceSupplier(x -> new WoolPressurePlate(x.baseBlock, x.blockSettings, ((PressurePlateBuilder) x).activationSettings, woolBundle.carpet));
-            }
-          })
-          .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60))
-          .fuelTime(100)
-          .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString())
-          .setActivationSettings(ActivationSettings.WOOL)
-          .setFenceSettings(FenceSettings.WOOL)
-          .build();
+    for (var woolTypes : List.of(BlockusBlocks.PATTERNED_WOOL, BlockusBlocks.GINGHAM_WOOL)) {
+      final Map<DyeColor, WoolBundle.WoolVariants> colorMap = woolTypes.colorMap();
+      for (DyeColor dyeColor : BlockOrder.COLOR) {
+        final WoolBundle.WoolVariants woolVariants = colorMap.get(dyeColor);
+        if (woolVariants == null) {
+          continue;
+        }
+        FACTORY.createAllShapes(woolVariants.block())
+            .without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.BUTTON)
+            .addPreBuildConsumer((blockShape, blockBuilder) -> {
+              if (blockShape == BlockShape.PRESSURE_PLATE) {
+                ((PressurePlateBuilder) blockBuilder).setInstanceSupplier(x -> new WoolPressurePlate(x.baseBlock, x.blockSettings, ((PressurePlateBuilder) x).activationSettings, woolVariants.carpet()));
+              }
+            })
+            .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 60))
+            .fuelTime(100)
+            .setRecipeGroup(blockShape -> "patterned_wool_" + blockShape.asString())
+            .setActivationSettings(ActivationSettings.WOOL)
+            .setFenceSettings(FenceSettings.WOOL)
+            .build();
+      }
     }
-    for (var block : BlockusBlockCollections.GLAZED_TERRACOTTA_PILLARS) {
+
+    final Map<DyeColor, Block> glazedTerracottaPillarMap = BlockusBlocks.GLAZED_TERRACOTTA_PILLAR.colorMap();
+    for (DyeColor dyeColor : BlockOrder.COLOR) {
+      final Block block = glazedTerracottaPillarMap.get(dyeColor);
+      if (block == null) continue;
       FACTORY.createConstructionOnly(block)
           .markStoneCuttable()
           .with(BlockShape.WALL)
@@ -1043,15 +1083,15 @@ public final class ExtShapeBlockusBlocks {
   }
 
   private static BlocksBuilder createAllShapes(BSSWBundle bsswBundle) {
-    final BlocksBuilder blocksBuilder = createAllShapes(bsswBundle.block);
-    if (bsswBundle.stairs != null) blocksBuilder.without(BlockShape.STAIRS);
-    if (bsswBundle.slab != null) blocksBuilder.without(BlockShape.SLAB);
-    if (bsswBundle.wall != null) blocksBuilder.without(BlockShape.WALL);
+    final BlocksBuilder blocksBuilder = createAllShapes(bsswBundle.block());
+    if (bsswBundle.stairs() != null) blocksBuilder.without(BlockShape.STAIRS);
+    if (bsswBundle.slab() != null) blocksBuilder.without(BlockShape.SLAB);
+    if (bsswBundle.wall() != null) blocksBuilder.without(BlockShape.WALL);
     return blocksBuilder;
   }
 
   private static BlocksBuilder createAllShapes(WoodBundle woodBundle) {
-    return createAllShapes(woodBundle.planks).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
+    return createAllShapes(woodBundle.planks()).without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.FENCE, BlockShape.FENCE_GATE, BlockShape.PRESSURE_PLATE, BlockShape.BUTTON);
   }
 
   private static void buildCircularPavingBlock(BlocksBuilder blocksBuilder) {
