@@ -5,6 +5,8 @@ import com.brand.blockus.registry.content.BlockusBlocks;
 import com.brand.blockus.registry.content.bundles.ConcreteBundle;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimaps;
+import it.unimi.dsi.fastutil.objects.ObjectIntPair;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -29,14 +31,18 @@ import java.util.stream.Collectors;
  * @see VanillaStonecutting
  */
 public final class BlockusStonecutting {
-  public static final @Unmodifiable ImmutableMultimap<Block, Block> INSTANCE;
+  public static final @Unmodifiable ImmutableMultimap<Block, ObjectIntPair<Block>> INSTANCE;
 
   static {
-    final ImmutableMultimap.Builder<Block, Block> builder = new ImmutableMultimap.Builder<>();
-    registerBlockusStonecutting(builder);
-    INSTANCE = builder.build();
+    final ImmutableMultimap.Builder<Block, Block> simpleBuilder = new ImmutableMultimap.Builder<>();
+    registerBlockusStonecutting(simpleBuilder);
+    final ImmutableMultimap<Block, Block> simpleMap = simpleBuilder.build();
+    final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder = new ImmutableMultimap.Builder<>();
+    builder.putAll(Multimaps.transformValues(simpleMap, input -> ObjectIntPair.of(input, 1)));
+    registerWeightedBlockusStonecutting(builder);
+
     if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-      final List<Block> unrecognizedBaseBlocks = INSTANCE.keySet().stream().distinct()
+      final List<Block> unrecognizedBaseBlocks = simpleMap.keySet().stream().distinct()
           .filter(block -> !(ExtShapeBlocks.containsBaseBlock(block) || ExtShapeBlockusBlocks.BLOCKUS_BASE_BLOCKS.contains(block)))
           .toList();
 
@@ -44,6 +50,8 @@ public final class BlockusStonecutting {
         throw new IllegalStateException("These blocks exist in the results of BlockusStonecutting.INSTANCE, but are not base blocks: " + unrecognizedBaseBlocks.stream().map(Registries.BLOCK::getId).map(Objects::toString).collect(Collectors.joining(", ")));
       }
     }
+
+    INSTANCE = builder.build();
   }
 
   private BlockusStonecutting() {
@@ -209,15 +217,17 @@ public final class BlockusStonecutting {
     builder.put(BlockusBlocks.EMERALD_BRICKS.block, Blocks.EMERALD_BLOCK);
     builder.put(BlockusBlocks.DIAMOND_BRICKS.block, Blocks.DIAMOND_BLOCK);
     builder.put(BlockusBlocks.NETHERITE_BRICKS.block, Blocks.NETHERITE_BLOCK);
+  }
 
+  private static void registerWeightedBlockusStonecutting(final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {
     // region 铜砖
     final List<Block> unwaxedCopperBricksList = BlockusCopperManager.COPPER_BRICKS.unwaxed();
     final ImmutableList<Block> unwaxedCopperBlockList = CopperManager.COPPER_BLOCKS;
     final ImmutableList<Block> unwaxedCutCopperBlockList = CopperManager.CUT_COPPER_BLOCKS;
     for (int i = 0; i < unwaxedCopperBricksList.size(); i++) {
       final Block unwaxedCopperBricks = unwaxedCopperBricksList.get(i);
-      builder.put(unwaxedCopperBricks, unwaxedCopperBlockList.get(i));
-      builder.put(unwaxedCopperBricks, unwaxedCutCopperBlockList.get(i));
+      builder.put(unwaxedCopperBricks, ObjectIntPair.of(unwaxedCopperBlockList.get(i), 4));
+      builder.put(unwaxedCopperBricks, ObjectIntPair.of(unwaxedCutCopperBlockList.get(i), 1));
     }
 
     final List<Block> waxedCopperBricksList = BlockusCopperManager.COPPER_BRICKS.waxed();
@@ -225,8 +235,8 @@ public final class BlockusStonecutting {
     final ImmutableList<Block> waxedCutCopperBlockList = CopperManager.WAXED_CUT_COPPER_BLOCKS;
     for (int i = 0; i < waxedCopperBricksList.size(); i++) {
       final Block waxedCopperBricks = waxedCopperBricksList.get(i);
-      builder.put(waxedCopperBricks, waxedCopperBlockList.get(i));
-      builder.put(waxedCopperBricks, waxedCutCopperBlockList.get(i));
+      builder.put(waxedCopperBricks, ObjectIntPair.of(waxedCopperBlockList.get(i), 4));
+      builder.put(waxedCopperBricks, ObjectIntPair.of(waxedCutCopperBlockList.get(i), 1));
     }
     // endregion 铜砖
   }
