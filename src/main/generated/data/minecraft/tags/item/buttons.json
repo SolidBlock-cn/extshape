@@ -61,6 +61,8 @@
     "extshape:raw_gold_button",
     "extshape:ochre_froglight_button",
     "extshape:verdant_froglight_button",
-    "extshape:pearlescent_froglight_button"
+    "extshape:pearlescent_froglight_button",
+    "extshape:packed_ice_brick_button",
+    "extshape:snow_brick_button"
   ]
 }

@@ -64,6 +64,8 @@
     "extshape:raw_gold_pressure_plate",
     "extshape:ochre_froglight_pressure_plate",
     "extshape:verdant_froglight_pressure_plate",
-    "extshape:pearlescent_froglight_pressure_plate"
+    "extshape:pearlescent_froglight_pressure_plate",
+    "extshape:packed_ice_brick_pressure_plate",
+    "extshape:snow_brick_pressure_plate"
   ]
 }

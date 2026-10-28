@@ -41,6 +41,14 @@
     "extshape:clay_fence_gate",
     "extshape:clay_wall",
     "extshape:clay_button",
-    "extshape:clay_pressure_plate"
+    "extshape:clay_pressure_plate",
+    "extshape:snow_brick_vertical_slab",
+    "extshape:snow_brick_vertical_stairs",
+    "extshape:snow_brick_quarter_piece",
+    "extshape:snow_brick_vertical_quarter_piece",
+    "extshape:snow_brick_fence",
+    "extshape:snow_brick_fence_gate",
+    "extshape:snow_brick_button",
+    "extshape:snow_brick_pressure_plate"
   ]
 }

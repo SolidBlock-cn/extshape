@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "extshape:packed_ice_brick_fence_gate"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

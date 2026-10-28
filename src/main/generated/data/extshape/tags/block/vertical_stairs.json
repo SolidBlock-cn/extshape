@@ -110,6 +110,8 @@
     "extshape:sulfur_brick_vertical_stairs",
     "extshape:cinnabar_vertical_stairs",
     "extshape:polished_cinnabar_vertical_stairs",
-    "extshape:cinnabar_brick_vertical_stairs"
+    "extshape:cinnabar_brick_vertical_stairs",
+    "extshape:packed_ice_brick_vertical_stairs",
+    "extshape:snow_brick_vertical_stairs"
   ]
 }

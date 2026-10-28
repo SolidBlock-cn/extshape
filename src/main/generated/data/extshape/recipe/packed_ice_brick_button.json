@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "minecraft:packed_ice_bricks"
+  ],
+  "result": {
+    "id": "extshape:packed_ice_brick_button"
+  }
+}

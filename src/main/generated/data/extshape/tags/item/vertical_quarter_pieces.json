@@ -110,6 +110,8 @@
     "extshape:sulfur_brick_vertical_quarter_piece",
     "extshape:cinnabar_vertical_quarter_piece",
     "extshape:polished_cinnabar_vertical_quarter_piece",
-    "extshape:cinnabar_brick_vertical_quarter_piece"
+    "extshape:cinnabar_brick_vertical_quarter_piece",
+    "extshape:packed_ice_brick_vertical_quarter_piece",
+    "extshape:snow_brick_vertical_quarter_piece"
   ]
 }

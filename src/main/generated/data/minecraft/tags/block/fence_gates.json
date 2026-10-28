@@ -104,6 +104,8 @@
     "extshape:sulfur_brick_fence_gate",
     "extshape:cinnabar_fence_gate",
     "extshape:polished_cinnabar_fence_gate",
-    "extshape:cinnabar_brick_fence_gate"
+    "extshape:cinnabar_brick_fence_gate",
+    "extshape:packed_ice_brick_fence_gate",
+    "extshape:snow_brick_fence_gate"
   ]
 }

@@ -1,4 +1,4 @@
-// 26.3	-999999999-01-01T00:00:00	Extended Block Shapes/Tags for minecraft:block
+// 26.4-snapshot-6	-999999999-01-01T00:00:00	Extended Block Shapes/Tags for minecraft:block
 4f0f7f7ab93e2be0f4b46b048eee4a864b772750 data/c/tags/block/dyed/black.json
 8d2ffbdab26dda31016925f7a06ee6e7652638e8 data/c/tags/block/dyed/blue.json
 5380a3b46c9fce0969edef1ce7e6d380524917ca data/c/tags/block/dyed/brown.json
@@ -41,8 +41,8 @@ bc854b1376db0ec4f275a0f21c40b2e5bca21717 data/extshape/tags/block/log_vertical_q
 6e99c5c1dd087f0e621af29e9576c343263ed395 data/extshape/tags/block/log_vertical_slabs.json
 5aa2b1e50b1a7cc55fb37510e94048a70dfac5a2 data/extshape/tags/block/log_vertical_stairs.json
 6e0dc67fd6166fe4144658f740ac44852a3c0cf7 data/extshape/tags/block/log_walls.json
-61d8c88127d8da420f1ba35ad7d4eebf0e5a4666 data/extshape/tags/block/pressure_plates.json
-65f5b1e3b6f64dfb726842dd21996bd68c48850b data/extshape/tags/block/quarter_pieces.json
+942715dd1a880a1920323cb713efdcc24014dee1 data/extshape/tags/block/pressure_plates.json
+30e38a06c5be78341ca8bddfbe76e6537678334c data/extshape/tags/block/quarter_pieces.json
 b11b908c41a1292da4dcb2104888da6d0427523b data/extshape/tags/block/snow.json
 4b98b8ac1ad694e010b5635af0b069800b361bce data/extshape/tags/block/stained_terracotta_buttons.json
 80f23905012ec6002512ef0c4bf2b5c2ca635726 data/extshape/tags/block/stained_terracotta_fence_gates.json
@@ -67,9 +67,9 @@ df2057856133dfea4a8ff5f095136f75e83583c1 data/extshape/tags/block/terracotta_sta
 51619018e753b1fc7ee1d3ff08ed9d25df83ab25 data/extshape/tags/block/terracotta_vertical_slabs.json
 84b3ef460c41de6ca66122b84607d062b3c55146 data/extshape/tags/block/terracotta_vertical_stairs.json
 e01fb47c2f008ce52d7edbd1177cbc68ef4605e7 data/extshape/tags/block/terracotta_walls.json
-381e92b7a5b1cde06cae9e8f39fe3cf3c8ee1bfa data/extshape/tags/block/vertical_quarter_pieces.json
-a2f6d71f116f64094b4c38eee6e2766439a1e03d data/extshape/tags/block/vertical_slabs.json
-ce79d26ff545f3562ee6860f5cbca230e8d30c0a data/extshape/tags/block/vertical_stairs.json
+326bfdeafe72adf5614de14cae129e3276c259dd data/extshape/tags/block/vertical_quarter_pieces.json
+8330f778eaed43ee994651ba7f3d7ad9be7bb26f data/extshape/tags/block/vertical_slabs.json
+43f475bea91140ba16464d9e9d884c6f559f6fea data/extshape/tags/block/vertical_stairs.json
 109577f00eebc1764cfa720d80ba783e39bae567 data/extshape/tags/block/wooden_blocks.json
 ec3bf81f885b4583846ec567bfc35eded8358840 data/extshape/tags/block/wooden_quarter_pieces.json
 7309985ccfaa222dab4d15030d141ed8d325205b data/extshape/tags/block/wooden_vertical_quarter_pieces.json
@@ -87,18 +87,18 @@ c2630a02452130dfa038094d1e0277a1e8144bef data/extshape/tags/block/woolen_vertica
 cb3b0e3178a37184fbb36cfe325d1b7705a26faa data/extshape/tags/block/woolen_vertical_stairs.json
 bae2ffad52f51c8f7008861399a0a0b817bc3c39 data/extshape/tags/block/woolen_walls.json
 1b128d098d411eb351680ab935985e56fec92eeb data/minecraft/tags/block/blocks_motion_no_leaves.json
-1f897f2a776630a85e9c3e510b4cdf058f5c3753 data/minecraft/tags/block/buttons.json
+c8b61ef4dc4d0600982d7d2628457861801ff2f7 data/minecraft/tags/block/buttons.json
 6bfdc5a0c0054861cbc293ebfb5985bc5b55896d data/minecraft/tags/block/dragon_immune.json
 8d5ee92efde0e75a269ae5b1db7d364b8788eb37 data/minecraft/tags/block/enderman_holdable.json
-c57fcb5a0dafccf9e92691113f5a9ef4c1c64705 data/minecraft/tags/block/fence_gates.json
-5effd831e9760828e02563929bf5c0e6bcce0b71 data/minecraft/tags/block/fences.json
+b36ff8eea31ddc5d246b81adaf86a2efa4d764ae data/minecraft/tags/block/fence_gates.json
+84afda14c5ceb2c5287a88ed7a2dc5a8c7922368 data/minecraft/tags/block/fences.json
 f26fb08728a0f1b9fd4f940679aa701cfffae8a2 data/minecraft/tags/block/guarded_by_piglins.json
 a43690fd1026e3f9aa0d1d548ca0478b1df46201 data/minecraft/tags/block/infiniburn_end.json
 443a90300f0415fa4cbf8f0b3061aefce4b0eab7 data/minecraft/tags/block/infiniburn_overworld.json
-50cef90906ab343446135d2285ba3e951f9ed536 data/minecraft/tags/block/mineable/axe.json
+fc7dfc095d367c345dc4bcac07f0598e71a0bbf4 data/minecraft/tags/block/mineable/axe.json
 35a18fadcd1e8274a0987b65e274992dfae2411c data/minecraft/tags/block/mineable/hoe.json
-3b22be96ecb2dad3e9ac307cece640de87935851 data/minecraft/tags/block/mineable/pickaxe.json
-3d4e38d1370483c0a8a59b2bec54e7d366010aa6 data/minecraft/tags/block/mineable/shovel.json
+1b11a7cc75c240caf65516f360ab71740c764d2e data/minecraft/tags/block/mineable/pickaxe.json
+882c62239c444684eae372723f45d69b7fe5f41e data/minecraft/tags/block/mineable/shovel.json
 6a4b7f567422639c419eef8026a37ca98509cd25 data/minecraft/tags/block/needs_diamond_tool.json
 b0cdf8245402e06ee011cc4d5bbad6b42aa4bc44 data/minecraft/tags/block/needs_iron_tool.json
 d3efd389e2b6928ff1c8a73bad28a2e06e62f91b data/minecraft/tags/block/needs_stone_tool.json
