@@ -13,7 +13,7 @@
     "FenceGateAccessor",
     "ItemGroupEntriesImplMixin",
     "ItemGroupsMixin",
-    "ItemMixin",
+    "ItemPropertiesMixin",
     "ItemSettingAccessor",
     "SchemasMixin",
     "SnowyBlockMixin",

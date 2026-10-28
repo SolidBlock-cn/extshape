@@ -107,6 +107,9 @@ public final class VanillaStonecutting {
     builder.put(Blocks.CINNABAR_BRICKS, Blocks.CINNABAR);
     builder.put(Blocks.POLISHED_CINNABAR, Blocks.CINNABAR);
     builder.put(Blocks.CINNABAR_BRICKS, Blocks.POLISHED_CINNABAR);
+
+    // 26.4 加入的浮冰砖
+    builder.put(Blocks.PACKED_ICE_BRICKS, Blocks.PACKED_ICE);
   }
 
   private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {

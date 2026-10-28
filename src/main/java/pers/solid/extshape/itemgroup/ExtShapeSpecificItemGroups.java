@@ -9,13 +9,15 @@ import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.sounds.BlockSoundSet;
+import net.minecraft.world.level.block.sounds.BlockSoundSets;
 import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.block.ExtShapeBlocks;
@@ -191,8 +193,8 @@ public final class ExtShapeSpecificItemGroups {
         continue;
       }
 
-      final SoundType soundGroup = block.defaultBlockState().getSoundType();
-      if (soundGroup == SoundType.STONE) {
+      final Optional<ResourceKey<BlockSoundSet>> sounds = block.defaultBlockState().getSounds();
+      if (sounds.isPresent() && sounds.get().equals(BlockSoundSets.STONE)) {
         STONE_BASE_BLOCKS.add(block);
       } else {
         OTHER_BASE_BLOCKS.add(block);

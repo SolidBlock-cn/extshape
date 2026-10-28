@@ -62,4 +62,7 @@ public record ActivationSettings(BlockSetType blockSetType, int buttonTime, int 
   public static final ActivationSettings WART = new ActivationSettings(ExtShapeBlockTypes.WART_BLOCK_SET_TYPE, 45, 45);
   public static final ActivationSettings RESIN = softerStone(ExtShapeBlockTypes.RESIN_BLOCK_SET_TYPE);
   public static final ActivationSettings RESIN_BRICKS = stone(ExtShapeBlockTypes.RESIN_BRICKS_SET_TYPE);
+
+  public static final ActivationSettings SULFUR = stone(ExtShapeBlockTypes.SULFUR_BLOCK_SET_TYPE);
+  public static final ActivationSettings CINNABAR = stone(ExtShapeBlockTypes.CINNABAR_BLOCK_SET_TYPE);
 }

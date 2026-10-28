@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Function3;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -92,7 +91,7 @@ public record CopperManager(WeatheringCopperCollection<Block> copperCollection) 
           final var value = entry.getValue();
           final var previousValue = previousWeathering.get(key);
           if (value != null && previousValue != null) {
-            OxidizableBlocksRegistry.registerNextStage(previousValue.instance, value.instance);
+//            OxidizableBlocksRegistry.registerNextStage(previousValue.instance, value.instance); todo complete
           }
         }
       }
@@ -110,7 +109,7 @@ public record CopperManager(WeatheringCopperCollection<Block> copperCollection) 
         final @Nullable Block unwaxed = BlockBiMaps.getBlockOf(shape, unwaxedBase);
         final @Nullable Block waxed = BlockBiMaps.getBlockOf(shape, waxedBase);
         if (unwaxed != null && waxed != null && blocksBuilderFactory.instanceCollection != null && blocksBuilderFactory.instanceCollection.contains(unwaxed) && blocksBuilderFactory.instanceCollection.contains(waxed)) {
-          OxidizableBlocksRegistry.registerWaxable(unwaxed, waxed);
+//          OxidizableBlocksRegistry.registerWaxable(unwaxed, waxed); todo complete
         }
       }
     }

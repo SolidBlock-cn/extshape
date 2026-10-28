@@ -10,5 +10,3 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-
-include 'with_blockus', 'runtest'

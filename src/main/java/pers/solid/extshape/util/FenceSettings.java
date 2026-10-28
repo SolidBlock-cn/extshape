@@ -28,4 +28,7 @@ public record FenceSettings(Item secondIngredient, WoodType woodType) {
   public static final FenceSettings NETHERRACK = new FenceSettings(Items.NETHER_BRICK, ExtShapeBlockTypes.NETHERRACK_WOOD_TYPE);
   public static final FenceSettings RESIN_BLOCK = new FenceSettings(Items.RESIN_CLUMP, ExtShapeBlockTypes.RESIN_BLOCK_WOOD_TYPE);
   public static final FenceSettings RESIN_BRICKS = new FenceSettings(Items.RESIN_CLUMP, ExtShapeBlockTypes.RESIN_BRICKS_WOOD_TYPE);
+
+  public static final FenceSettings SULFUR = new FenceSettings(Items.STICK, ExtShapeBlockTypes.SULFUR_WOOD_TYPE);
+  public static final FenceSettings CINNABAR = new FenceSettings(Items.STICK, ExtShapeBlockTypes.CINNABAR_WOOD_TYPE);
 }

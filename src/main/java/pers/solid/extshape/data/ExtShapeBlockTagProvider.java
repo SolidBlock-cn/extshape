@@ -185,7 +185,8 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
             Blocks.SULFUR_BRICKS,
             Blocks.CINNABAR,
             Blocks.POLISHED_CINNABAR,
-            Blocks.CINNABAR_BRICKS
+            Blocks.CINNABAR_BRICKS,
+            Blocks.PACKED_ICE_BRICKS
         )
     ));
     addForShapes(BlockTags.MINEABLE_WITH_PICKAXE, pickaxeMineableBaseBlocks);
@@ -207,7 +208,8 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
         Blocks.DIRT,
         Blocks.COARSE_DIRT,
         Blocks.SNOW_BLOCK,
-        Blocks.CLAY);
+        Blocks.CLAY,
+        Blocks.SNOW_BRICKS);
 
     addForShapes(BlockTags.MINEABLE_WITH_HOE,
         Blocks.NETHER_WART_BLOCK,

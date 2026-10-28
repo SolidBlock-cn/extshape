@@ -3,17 +3,17 @@ package pers.solid.extshape.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AmethystSoundUtils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * <p>方块的一些扩展行为组成的记录。这个记录在未来版本可能会增加新内容，因此建议使用 {@code BlockExtension.builder().build()}。不含有任何行为的对象可见 {@link #EMPTY}。
@@ -24,13 +24,7 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
    * 不含任何行为的空白 {@code BlockExtension} 对象。
    */
   public static final BlockExtension EMPTY = new BlockExtension(StacksDroppedCallback.EMPTY, ProjectileHitCallback.EMPTY, SteppedOnCallback.EMPTY, EmitsRedstonePower.EMPTY, WeakRedstonePower.EMPTY);
-  public static final BlockExtension AMETHYST = BlockExtension.builder().setProjectileHitCallback((world, state, hit, projectile) -> {
-    if (!world.isClientSide()) {
-      BlockPos blockPos = hit.getBlockPos();
-      world.playSound(null, blockPos, SoundEvents.AMETHYST_BLOCK_HIT, SoundSource.BLOCKS, 1.0F, 0.5F + world.getRandom().nextFloat() * 1.2F);
-      world.playSound(null, blockPos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.0F, 0.5F + world.getRandom().nextFloat() * 1.2F);
-    }
-  }).build();
+  public static final BlockExtension AMETHYST = BlockExtension.builder().setProjectileHitCallback((level, state, hitResult, projectile) -> AmethystSoundUtils.onProjectileHit(level, state, hitResult)).build();
 
   public static Builder builder() {
     return new Builder();
@@ -52,13 +46,13 @@ public record BlockExtension(StacksDroppedCallback stacksDroppedCallback, Projec
    */
   @FunctionalInterface
   public interface StacksDroppedCallback {
-    StacksDroppedCallback EMPTY = (state, world, pos, stack, dropExperience) -> {
+    StacksDroppedCallback EMPTY = (state, level, pos, tool, dropExperience, breaker) -> {
     };
 
     /**
      * 方块被破坏后的行为。
      */
-    void onStackDropped(BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience);
+    void onStackDropped(BlockState state, ServerLevel level, BlockPos pos, ItemStack tool, boolean dropExperience, @Nullable Entity breaker);
   }
 
   /**

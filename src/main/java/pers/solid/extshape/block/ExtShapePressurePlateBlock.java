@@ -99,9 +99,9 @@ public class ExtShapePressurePlateBlock extends PressurePlateBlock implements Ex
     }
 
     @Override
-    public void spawnAfterBreak(BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience) {
-      super.spawnAfterBreak(state, world, pos, stack, dropExperience);
-      extension.stacksDroppedCallback().onStackDropped(state, world, pos, stack, dropExperience);
+    protected void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack tool, boolean dropExperience, @Nullable Entity breaker) {
+      super.spawnAfterBreak(state, level, pos, tool, dropExperience, breaker);
+      extension.stacksDroppedCallback().onStackDropped(state, level, pos, tool, dropExperience, breaker);
     }
 
     @Override

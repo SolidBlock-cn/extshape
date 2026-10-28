@@ -119,7 +119,7 @@ public class ExtShapeOptionsScreen extends Screen {
       .create(width / 2 - 205, 151, 200, 20, Component.translatable("options.extshape.colored_block_sorting"), (button, value) -> newConfig.coloredBlockSorting = value);
 
   // 完成按钮
-  private final Button finishButton = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 - 100, this.height - 27).size(200, 20).build();
+  private final Button finishButton = Button.builder(CommonComponents.GUI_DONE, button -> onClose()).pos(this.width / 2 - 100, this.height - 27).size(200, 20).build();
 
   public ExtShapeOptionsScreen(@Nullable Screen parent) {
     super(Component.translatable("options.extshape.title"));
@@ -158,8 +158,8 @@ public class ExtShapeOptionsScreen extends Screen {
   }
 
   @Override
-  public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-    super.extractRenderState(graphics, mouseX, mouseY, a);
+  public void extractRenderState(GuiGraphicsExtractor graphics) {
+    super.extractRenderState(graphics);
     graphics.centeredText(this.font, this.title.getVisualOrderText(), this.width / 2, 16, 0xffffffff);
     graphics.text(font, Component.translatable("options.extshape.shapesToAddToVanilla.description"), width / 2 - 205, 61, 0xffffffff);
     graphics.text(font, Component.translatable("options.extshape.shapesInSpecificGroups.description"), width / 2 - 205, 106, 0xffffffff);

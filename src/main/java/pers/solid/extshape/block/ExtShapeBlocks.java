@@ -4,7 +4,6 @@ import com.google.common.collect.Iterators;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import it.unimi.dsi.fastutil.objects.ObjectSet;
 import it.unimi.dsi.fastutil.objects.ObjectSets;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -135,7 +134,8 @@ public final class ExtShapeBlocks {
 
     // 原木、木头、菌柄、菌核及其去皮变种。
     // 下面两个标签均带有 axe_mineable
-    final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> woodFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
+    final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> woodFlammable = (blockShape, blockBuilder) -> {}; // todo check
+//    final BiConsumer<BlockShape, AbstractBlockBuilder<? extends Block>> woodFlammable = (blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 5);
 
     // 竹子。
     FACTORY.createAllShapes(BAMBOO_BLOCK)
@@ -239,7 +239,7 @@ public final class ExtShapeBlocks {
         FACTORY.createAllShapes(block)
             .setFenceSettings(FenceSettings.BAMBOO_PLANKS)
             .setActivationSettings(ActivationSettings.BAMBOO)
-            .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
+//            .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
             .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
             .build();
@@ -255,7 +255,7 @@ public final class ExtShapeBlocks {
         FACTORY.createAllShapes(block)
             .setFenceSettings(null)
             .setActivationSettings(activationSettings)
-            .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
+//            .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 5, 20))
             .setRecipeGroup(blockShape -> "wooden_" + blockShape.getSerializedName())
             .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOD_BLOCKS)
             .build();
@@ -318,7 +318,7 @@ public final class ExtShapeBlocks {
       FACTORY.createAllShapes(block)
           .setFenceSettings(FenceSettings.WOOL)
           .setActivationSettings(ActivationSettings.WOOL)
-          .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 50))
+//          .addPostBuildConsumer((blockShape, blockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(blockBuilder.instance, 30, 50))
           .setRecipeGroup(blockShape -> "wool_" + blockShape.getSerializedName())
           .cookingTime(ExtShapeNumberProviders.COOKING_TIME_WOOL)
           .build();
@@ -350,6 +350,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(MOSSY_COBBLESTONE)
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.STONE)
+        .setActivationSettings(ActivationSettings.STONE)
         .build();
 
     // 黑曜石。
@@ -530,7 +531,7 @@ public final class ExtShapeBlocks {
     // 浮冰。
     FACTORY.createAllShapes(PACKED_ICE)
         .markStoneCuttable()
-        .setFenceSettings(new FenceSettings(Items.ICE, ExtShapeBlockTypes.STONE_WOOD_TYPE))
+        .setFenceSettings(new FenceSettings(Items.ICE, ExtShapeBlockTypes.PACKED_ICE_WOOD_TYPE))
         .build();
 
     // 海晶石、海晶石砖、暗海晶石。
@@ -683,11 +684,11 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(SCULK)
         .setFenceSettings(new FenceSettings(Items.SCULK_VEIN, ExtShapeBlockTypes.SCULK_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.wood(ExtShapeBlockTypes.SCULK_BLOCK_SET_TYPE))
-        .addPreBuildConsumer((blockShape, x) -> x.withExtension(BlockExtension.builder().setStacksDroppedCallback((state, world, pos, stack, dropExperience) -> {
+        .addPreBuildConsumer((blockShape, x) -> x.withExtension(BlockExtension.builder().setStacksDroppedCallback((state, level, pos, tool, dropExperience, breaker) -> {
           if (dropExperience) {
             final float logicalCompleteness = blockShape.logicalCompleteness(state);
-            if (logicalCompleteness == 1 || world.getRandom().nextFloat() < logicalCompleteness)
-              ((BlockAccessor) state.getBlock()).callTryDropExperience(world, pos, stack, ConstantInt.of(1));
+            if (logicalCompleteness == 1 || level.getRandom().nextFloat() < logicalCompleteness)
+              ((BlockAccessor) state.getBlock()).callTryDropExperience(level, pos, tool, ConstantInt.of(1));
           }
         }).build()))
         .build();
@@ -711,7 +712,7 @@ public final class ExtShapeBlocks {
         .setFenceSettings(new FenceSettings(Items.PALE_MOSS_CARPET, ExtShapeBlockTypes.MOSS_BLOCK_WOOD_TYPE))
         .compostingChance(ExtShapeNumberProviders.COMPOSTABLE_MEDIUM)
         .setActivationSettings(ActivationSettings.MOSS)
-        .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(abstractBlockBuilder.instance, 5, 100))
+//        .addPostBuildConsumer((blockShape, abstractBlockBuilder) -> FlammableBlockRegistry.getDefaultInstance().add(abstractBlockBuilder.instance, 5, 100))
         .build();
 
     // 深板岩。
@@ -783,22 +784,43 @@ public final class ExtShapeBlocks {
 
     // 硫黄和朱砂
     FACTORY.createAllShapes(SULFUR)
+        .setFenceSettings(FenceSettings.SULFUR)
+        .setActivationSettings(ActivationSettings.SULFUR)
         .markStoneCuttable()
         .build();
     FACTORY.createAllShapes(POLISHED_SULFUR)
+        .setFenceSettings(FenceSettings.SULFUR)
+        .setActivationSettings(ActivationSettings.SULFUR)
         .markStoneCuttable()
         .build();
     FACTORY.createAllShapes(SULFUR_BRICKS)
+        .setFenceSettings(FenceSettings.SULFUR)
+        .setActivationSettings(ActivationSettings.SULFUR)
         .markStoneCuttable()
         .build();
     FACTORY.createAllShapes(CINNABAR)
+        .setFenceSettings(FenceSettings.CINNABAR)
+        .setActivationSettings(ActivationSettings.CINNABAR)
         .markStoneCuttable()
         .build();
     FACTORY.createAllShapes(POLISHED_CINNABAR)
+        .setFenceSettings(FenceSettings.CINNABAR)
+        .setActivationSettings(ActivationSettings.CINNABAR)
         .markStoneCuttable()
         .build();
     FACTORY.createAllShapes(CINNABAR_BRICKS)
+        .setFenceSettings(FenceSettings.CINNABAR)
+        .setActivationSettings(ActivationSettings.CINNABAR)
         .markStoneCuttable()
+        .build();
+
+    // 26.4 新增的浮点砖和雪砖
+    FACTORY.createAllShapes(PACKED_ICE_BRICKS)
+        .markStoneCuttable()
+        .setFenceSettings(new FenceSettings(Items.PACKED_ICE, ExtShapeBlockTypes.PACKED_ICE_WOOD_TYPE))
+        .build();
+    FACTORY.createAllShapes(SNOW_BRICKS)
+        .setFenceSettings(new FenceSettings(Items.SNOW_BLOCK, ExtShapeBlockTypes.SNOW_WOOD_TYPE))
         .build();
 
     ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());

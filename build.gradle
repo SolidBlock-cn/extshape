@@ -47,9 +47,6 @@ allprojects {
         // Cloth Config、Roughly Enough Items
         maven { url "https://maven.shedaniel.me/" }
 
-        // 合理模组（仅限 1.19.2 之前）。这两个模组均存储于本地的 maven 仓库。
-        mavenLocal()
-
         maven {
             name = 'ParchmentMC'
             url = 'https://maven.parchmentmc.org'
@@ -149,23 +146,6 @@ subprojects {
     }
 }
 
-project(':runtest') {
-    repositories {
-    }
-    dependencies {
-        implementation rootProject
-        implementation project(path: ':with_blockus')
-        if (project.hasProperty('rei_version') && !project.rei_version.isEmpty()) {
-            runtimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version"
-        }
-    }
-
-    [tasks.jar, tasks.sourcesJar, tasks.build].each {
-        it.enabled = false
-    }
-}
-
-
 /**
  * 从 UpdateLog-en.md 中提取更新日志
  */
@@ -210,9 +190,10 @@ tasks.register('curseforge', TaskPublishCurseForge) {
     mainFile.changelogType = 'markdown'
     mainFile.releaseType = release_type
 
-    for (final String v in ((project.supported_minecraft_versions as String).split(','))) {
-        mainFile.addGameVersion v
-    }
+//    for (final String v in ((project.supported_minecraft_versions as String).split(','))) {
+//        mainFile.addGameVersion v
+//    } todo 在正式发布之前改回来
+    mainFile.addGameVersion '26.4-snapshot'
 
     mainFile.addRelations 'requiredDependency', 'fabric-api'
 
@@ -242,7 +223,7 @@ githubRelease {
     owner = "SolidBlock-cn"
     repo = "extshape"
     tagName = "v$project.mod_version"
-    targetCommitish = "26.3"
+    targetCommitish = "26.4"
     body = changelogContent
     draft = true
     prerelease = false
