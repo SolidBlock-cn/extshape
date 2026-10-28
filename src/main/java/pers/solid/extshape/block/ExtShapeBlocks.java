@@ -532,6 +532,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(PACKED_ICE)
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.ICE, ExtShapeBlockTypes.PACKED_ICE_WOOD_TYPE))
+        .setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.PACKED_ICE_BLOCK_SET_TYPE))
         .build();
 
     // 海晶石、海晶石砖、暗海晶石。
@@ -818,9 +819,11 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(PACKED_ICE_BRICKS)
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.PACKED_ICE, ExtShapeBlockTypes.PACKED_ICE_WOOD_TYPE))
+        .setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.PACKED_ICE_BLOCK_SET_TYPE))
         .build();
     FACTORY.createAllShapes(SNOW_BRICKS)
         .setFenceSettings(new FenceSettings(Items.SNOW_BLOCK, ExtShapeBlockTypes.SNOW_WOOD_TYPE))
+        .setActivationSettings(ActivationSettings.SNOW)
         .build();
 
     ExtShape.LOGGER.info("Extended Block Shapes mod created {} blocks for {} base blocks. So swift!", BLOCKS.size(), BASE_BLOCKS.size());
