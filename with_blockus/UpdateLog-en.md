@@ -1,5 +1,12 @@
 # Update log (for Blockus part)
 
+### 3.2.1
+
+- Added relevant shape variants for cobbled deepslate bricks.
+- Fixed the issue of incorrect placing and mining sound for fence gates, pressure plates and buttons of sulfur series blocks, cinnabar series blocks, tuff series blocks, polished sculk, sculk bricks, viridite series blocks, snow bricks, packed ice bricks, blaze bricks, blaze lantern, nether bricks series block (including variants of different colors and charred variants), resin series blocks, copper tuff (including various oxidized and waxed variants), chorus block, shingles.
+- For Minecraft versions 26.1 and above, following the update of Blockus, renamed shape variants of ice bricks into relevant variants of packed ice bricks. Ice brick stairs and slab placed previously will be replaced with relevant blocks in Blockus, and other shape variants of ice bricks will be updated to renamed blocks in this mod. Items will also be replaced or updated.
+- For Minecraft versions 26.1 and above, following the update of Blockus, added shape variants for mossy cobbled deepslate, mossy cobbled deepslate bricks, crying obsidian bricks, small crying obsidian bricks, obsidian circular paving.
+
 ### 3.2.0
 
 - Fit the new version of Extended Block Shapes mod.
