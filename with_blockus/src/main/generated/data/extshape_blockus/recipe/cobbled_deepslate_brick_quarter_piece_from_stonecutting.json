@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:cobbled_deepslate_bricks",
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:cobbled_deepslate_brick_quarter_piece"
+  }
+}
