@@ -48,6 +48,7 @@ public record ActivationSettings(BlockSetType blockSetType, int buttonTime, int 
   public static final ActivationSettings BAMBOO = wood(BlockSetType.BAMBOO);
   public static final ActivationSettings GRAVEL = new ActivationSettings(ExtShapeBlockTypes.GRAVEL_BLOCK_SET_TYPE, 45, 45);
   public static final ActivationSettings ORE_BLOCK = new ActivationSettings(BlockSetType.STONE, 15, 10);
+  public static final ActivationSettings EMERALD = new ActivationSettings(ExtShapeBlockTypes.METAL_BLOCK_SET_TYPE, 15, 10);
   public static final ActivationSettings GOLD = new ActivationSettings(BlockSetType.GOLD, 15, 10);
   public static final ActivationSettings IRON = new ActivationSettings(BlockSetType.IRON, 15, 10);
   public static final ActivationSettings CROPS = new ActivationSettings(BlockSetType.OAK, 35, 25);
@@ -55,6 +56,7 @@ public record ActivationSettings(BlockSetType blockSetType, int buttonTime, int 
   public static final ActivationSettings BASALT = new ActivationSettings(ExtShapeBlockTypes.BASALT_BLOCK_SET_TYPE, 15, 15);
   public static final ActivationSettings DRIPSTONE = stone(ExtShapeBlockTypes.DRIPSTONE_BLOCK_SET_TYPE);
   public static final ActivationSettings TUFF = softerStone(ExtShapeBlockTypes.TUFF_BLOCK_SET_TYPE);
+  public static final ActivationSettings TUFF_BRICKS = softerStone(ExtShapeBlockTypes.TUFF_BRICKS_BLOCK_SET_TYPE);
   public static final ActivationSettings DEEPSLATE = new ActivationSettings(ExtShapeBlockTypes.DEEPSLATE_BLOCK_SET_TYPE, 10, 10);
   public static final ActivationSettings DEEPSLATE_BRICKS = new ActivationSettings(ExtShapeBlockTypes.DEEPSLATE_BRICKS_BLOCK_SET_TYPE, 10, 10);
   public static final ActivationSettings NETHERRACK = softerStone(ExtShapeBlockTypes.NETHERRACK_BLOCK_SET_TYPE);
@@ -62,4 +64,6 @@ public record ActivationSettings(BlockSetType blockSetType, int buttonTime, int 
   public static final ActivationSettings WART = new ActivationSettings(ExtShapeBlockTypes.WART_BLOCK_SET_TYPE, 45, 45);
   public static final ActivationSettings RESIN = softerStone(ExtShapeBlockTypes.RESIN_BLOCK_SET_TYPE);
   public static final ActivationSettings RESIN_BRICKS = stone(ExtShapeBlockTypes.RESIN_BRICKS_SET_TYPE);
+
+  public static final ActivationSettings NETHER_BRICKS = stone(ExtShapeBlockTypes.NETHER_BRICKS_BLOCK_SET_TYPE);
 }

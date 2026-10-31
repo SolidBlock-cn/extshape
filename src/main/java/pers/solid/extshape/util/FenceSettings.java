@@ -23,9 +23,14 @@ public record FenceSettings(Item secondIngredient, WoodType woodType) {
   public static final FenceSettings BASALT = new FenceSettings(Items.FLINT, ExtShapeBlockTypes.BASALT_WOOD_TYPE);
   public static final FenceSettings DRIPSTONE = new FenceSettings(Items.POINTED_DRIPSTONE, ExtShapeBlockTypes.DRIPSTONE_WOOD_TYPE);
   public static final FenceSettings TUFF = new FenceSettings(Items.FLINT, ExtShapeBlockTypes.TUFF_WOOD_TYPE);
+  public static final FenceSettings TUFF_BRICKS = new FenceSettings(Items.FLINT, ExtShapeBlockTypes.TUFF_BRICKS_WOOD_TYPE);
   public static final FenceSettings DEEPSLATE = new FenceSettings(Items.FLINT, ExtShapeBlockTypes.DEEPSLATE_WOOD_TYPE);
   public static final FenceSettings DEEPSLATE_BRICKS = new FenceSettings(Items.FLINT, ExtShapeBlockTypes.DEEPSLATE_BRICKS_WOOD_TYPE);
   public static final FenceSettings NETHERRACK = new FenceSettings(Items.NETHER_BRICK, ExtShapeBlockTypes.NETHERRACK_WOOD_TYPE);
   public static final FenceSettings RESIN_BLOCK = new FenceSettings(Items.RESIN_CLUMP, ExtShapeBlockTypes.RESIN_BLOCK_WOOD_TYPE);
   public static final FenceSettings RESIN_BRICKS = new FenceSettings(Items.RESIN_CLUMP, ExtShapeBlockTypes.RESIN_BRICKS_WOOD_TYPE);
+
+  public static final FenceSettings NETHER_BRICKS = new FenceSettings(Items.NETHER_BRICK, ExtShapeBlockTypes.NETHER_BRICKS_WOOD_TYPE);
+
+  public static final FenceSettings COPPER = new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE);
 }

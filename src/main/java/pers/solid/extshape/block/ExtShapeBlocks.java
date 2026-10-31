@@ -203,9 +203,11 @@ public final class ExtShapeBlocks {
           .setRecipeGroup(blockShape -> "stripped_wood_" + blockShape.getSerializedName())
           .build();
     }
+    final Iterator<WoodType> netherStemWoodTypes = Iterators.cycle(ExtShapeBlockTypes.CRIMSON_STEM_WOOD_TYPE, ExtShapeBlockTypes.WARPED_STEM_WOOD_TYPE);
+    final Iterator<ActivationSettings> netherStemActivationSettings = Iterators.cycle(ActivationSettings.wood(ExtShapeBlockTypes.CRIMSON_STEM_BLOCK_SET_TYPE), ActivationSettings.wood(ExtShapeBlockTypes.WARPED_STEM_BLOCK_SET_TYPE));
     for (final Block block : BlockCollections.HYPHAES) {
-      final WoodType woodType = netherWoodTypes.next();
-      ActivationSettings activationSettings = netherWoodActivationSettings.next();
+      final WoodType woodType = netherStemWoodTypes.next();
+      ActivationSettings activationSettings = netherStemActivationSettings.next();
       checkWoodValidity(block, woodType, activationSettings);
       FACTORY.createAllShapes(block)
           .setFenceSettings(new FenceSettings(Items.STICK, woodType))
@@ -215,8 +217,8 @@ public final class ExtShapeBlocks {
           .build();
     }
     for (final Block block : BlockCollections.STRIPPED_HYPHAES) {
-      final WoodType woodType = netherWoodTypes.next();
-      final ActivationSettings activationSettings = netherWoodActivationSettings.next();
+      final WoodType woodType = netherStemWoodTypes.next();
+      final ActivationSettings activationSettings = netherStemActivationSettings.next();
       checkWoodValidity(block, woodType, activationSettings);
       FACTORY.createAllShapes(block)
           .setFenceSettings(new FenceSettings(Items.STICK, woodType))
@@ -340,6 +342,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(MOSSY_COBBLESTONE)
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.STONE)
+        .setActivationSettings(ActivationSettings.STONE)
         .build();
 
     // 黑曜石。
@@ -441,8 +444,8 @@ public final class ExtShapeBlocks {
     // 下界砖块的栅栏门、按钮和压力板。
     FACTORY.createAllShapes(NETHER_BRICKS)
         .markStoneCuttable()
-        .setFenceSettings(new FenceSettings(Items.NETHER_BRICK, ExtShapeBlockTypes.NETHER_BRICKS_WOOD_TYPE))
-        .setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.NETHER_BRICKS_BLOCK_SET_TYPE))
+        .setFenceSettings(FenceSettings.NETHER_BRICKS)
+        .setActivationSettings(ActivationSettings.NETHER_BRICKS)
         .withoutRedstone()
         .build();
 
@@ -462,7 +465,7 @@ public final class ExtShapeBlocks {
     FACTORY.createAllShapes(EMERALD_BLOCK)
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.EMERALD, ExtShapeBlockTypes.METAL_WOOD_TYPE))
-        .setActivationSettings(ActivationSettings.ORE_BLOCK)
+        .setActivationSettings(ActivationSettings.EMERALD)
         .build();
 
     // 石英、石英砖、平滑石英块、錾制石英块均有按钮和压力板。
@@ -493,7 +496,8 @@ public final class ExtShapeBlocks {
     // 红色下界砖。
     FACTORY.createAllShapes(RED_NETHER_BRICKS)
         .markStoneCuttable()
-        .setFenceSettings(new FenceSettings(Items.NETHER_BRICK, ExtShapeBlockTypes.STONE_WOOD_TYPE))
+        .setFenceSettings(FenceSettings.NETHER_BRICKS)
+        .setActivationSettings(ActivationSettings.NETHER_BRICKS)
         .build();
 
     // 陶瓦和彩色陶瓦。
@@ -519,7 +523,8 @@ public final class ExtShapeBlocks {
     // 浮冰。
     FACTORY.createAllShapes(PACKED_ICE)
         .markStoneCuttable()
-        .setFenceSettings(new FenceSettings(Items.ICE, ExtShapeBlockTypes.STONE_WOOD_TYPE))
+        .setFenceSettings(new FenceSettings(Items.ICE, ExtShapeBlockTypes.PACKED_ICE_WOOD_TYPE))
+        .setActivationSettings(ActivationSettings.stone(ExtShapeBlockTypes.PACKED_ICE_BLOCK_SET_TYPE))
         .build();
 
     // 海晶石、海晶石砖、暗海晶石。
@@ -781,10 +786,10 @@ public final class ExtShapeBlocks {
   @ApiStatus.AvailableSince("3.1.6")
   private static void checkWoodValidity(Block block, @Nullable WoodType woodType, @Nullable ActivationSettings activationSettings) {
     final String idPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
-    if (woodType != null && !idPath.contains(woodType.name())) {
+    if (woodType != null && !idPath.contains(woodType.name().replace("extshape:", "").replace("_stem", "").replace("_hyphae", ""))) {
       throw new IllegalArgumentException(String.format("Block id '%s' does not contain wood type '%s'", idPath, woodType.name()));
     }
-    if (activationSettings != null && !idPath.contains(activationSettings.blockSetType().name())) {
+    if (activationSettings != null && !idPath.contains(activationSettings.blockSetType().name().replace("extshape:", "").replace("_stem", "").replace("_hyphae", ""))) {
       throw new IllegalArgumentException(String.format("Block id '%s' does not contain activation settings '%s'", idPath, activationSettings.blockSetType().name()));
     }
   }

@@ -24,10 +24,10 @@ import org.jetbrains.annotations.Nullable;
 import pers.solid.extshape.builder.*;
 import pers.solid.extshape.util.ActivationSettings;
 import pers.solid.extshape.util.BlockBiMaps;
-import pers.solid.extshape.util.ExtShapeBlockTypes;
 import pers.solid.extshape.util.FenceSettings;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
@@ -36,7 +36,7 @@ import java.util.function.Predicate;
  * @param unwaxed 未涂蜡的铜块，氧化程度从低到高的列表
  * @param waxed   涂蜡的铜块，氧化程度从低到高的列表，需要与未涂蜡的铜块对应
  */
-public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
+public record CopperManager(List<Block> unwaxed, List<Block> waxed, @Nullable Map<WeatheringCopper.WeatherState, ActivationSettings> activationSettings, @Nullable FenceSettings fenceSettings) {
   /**
    * 不同氧化等级的铜方块。
    */
@@ -61,11 +61,16 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   public static final CopperManager COPPER = new CopperManager(COPPER_BLOCKS, WAXED_COPPER_BLOCKS);
   public static final CopperManager CUT_COPPER = new CopperManager(CUT_COPPER_BLOCKS, WAXED_CUT_COPPER_BLOCKS);
 
+  public CopperManager(List<Block> unwaxed, List<Block> waxed) {
+    this(unwaxed, waxed, null, null);
+  }
+
   /**
    * 为一个特定氧化等级以及涂蜡情况的铜方块注册 {@code BlocksBuilder}。
    */
-  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, WeatheringCopper.WeatherState oxidationLevel, boolean waxed) {
-    final BlocksBuilder builder = blocksBuilderFactory.createAllShapes(copperBase).setActivationSettings(ActivationSettings.COPPER.get(oxidationLevel));
+  public static BlocksBuilder registerCopperBlock(BlocksBuilderFactory blocksBuilderFactory, Block copperBase, WeatheringCopper.WeatherState oxidationLevel, boolean waxed, Map<WeatheringCopper.WeatherState, ActivationSettings> activationSettings, FenceSettings fenceSettings) {
+    final BlocksBuilder builder = blocksBuilderFactory.createAllShapes(copperBase)
+        .setActivationSettings(activationSettings.get(oxidationLevel));
 
     if (!waxed) {
       builder.addPreBuildConsumer((blockShape, oneBuilder) -> {
@@ -97,15 +102,15 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
 
     builder
         .markStoneCuttable()
-        .setFenceSettings(new FenceSettings(Items.COPPER_INGOT, ExtShapeBlockTypes.COPPER_WOOD_TYPE))
+        .setFenceSettings(fenceSettings)
         .build();
     return builder;
   }
 
-  public static void registerWithMultipleOxidizationLevel(BlocksBuilderFactory blocksBuilderFactory, List<Block> coppers, boolean waxed) {
+  public static void registerWithMultipleOxidizationLevel(BlocksBuilderFactory blocksBuilderFactory, List<Block> coppers, boolean waxed, Map<WeatheringCopper.WeatherState, ActivationSettings> activationSettings, FenceSettings fenceSettings) {
     final BlocksBuilder[] blocksBuilders = new BlocksBuilder[coppers.size()];
     for (int i = 0; i < coppers.size(); i++) {
-      final BlocksBuilder blocksBuilder = registerCopperBlock(blocksBuilderFactory, coppers.get(i), OXIDATION_LEVELS.get(i), waxed);
+      final BlocksBuilder blocksBuilder = registerCopperBlock(blocksBuilderFactory, coppers.get(i), OXIDATION_LEVELS.get(i), waxed, activationSettings, fenceSettings);
       blocksBuilders[i] = blocksBuilder;
       if (i > 0 && !waxed) {
         final BlocksBuilder previous = blocksBuilders[i - 1];
@@ -137,8 +142,8 @@ public record CopperManager(List<Block> unwaxed, List<Block> waxed) {
   }
 
   public void registerBlocks(BlocksBuilderFactory blocksBuilderFactory) {
-    registerWithMultipleOxidizationLevel(blocksBuilderFactory, unwaxed, false);
-    registerWithMultipleOxidizationLevel(blocksBuilderFactory, waxed, true);
+    registerWithMultipleOxidizationLevel(blocksBuilderFactory, unwaxed, false, activationSettings == null ? ActivationSettings.COPPER : activationSettings, fenceSettings == null ? FenceSettings.COPPER : fenceSettings);
+    registerWithMultipleOxidizationLevel(blocksBuilderFactory, waxed, true, activationSettings == null ? ActivationSettings.COPPER : activationSettings, fenceSettings == null ? FenceSettings.COPPER : fenceSettings);
     registerExtendedWax(blocksBuilderFactory, unwaxed, waxed);
   }
 
