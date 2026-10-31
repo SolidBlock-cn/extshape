@@ -185,9 +185,12 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
         BlockusBlocks.TUFF_CIRCULAR_PAVING);
 
     addForShapes(BlockusBlockTags.DEEPSLATE_BLOCKS,
+        BlockusBlocks.COBBLED_DEEPSLATE_BRICKS.block(),
         BlockusBlocks.MOSSY_DEEPSLATE_BRICKS.block(),
         BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS,
-        BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING);
+        BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING,
+        BlockusBlocks.MOSSY_COBBLED_DEEPSLATE.block(),
+        BlockusBlocks.MOSSY_COBBLED_DEEPSLATE_BRICKS.block());
 
     addForShapes(BlockusBlockTags.SCULK_BLOCKS,
         BlockusBlocks.POLISHED_SCULK.block(),
@@ -261,13 +264,16 @@ public class ExtShapeBlockusBlockTagProvider extends ExtShapeBlockTagProvider {
     );
 
     addForShapes(BlockusBlockTags.SNOW_BRICKS, BlockusBlocks.SNOW_BRICKS.block());
-    addForShapes(BlockusBlockTags.ICE_BRICKS, BlockusBlocks.ICE_BRICKS);
+    addForShapes(BlockusBlockTags.ICE_BRICKS, BlockusBlocks.PACKED_ICE_BRICKS.block());
 
     addForShapes(BlockusBlockTags.OBSIDIAN,
         BlockusBlocks.OBSIDIAN_BRICKS.block(),
         BlockusBlocks.SMALL_OBSIDIAN_BRICKS.block(),
         BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING,
-        BlockusBlocks.GLOWING_OBSIDIAN
+        BlockusBlocks.GLOWING_OBSIDIAN,
+        BlockusBlocks.CRYING_OBSIDIAN_BRICKS.block(),
+        BlockusBlocks.SMALL_CRYING_OBSIDIAN_BRICKS.block(),
+        BlockusBlocks.CRYING_OBSIDIAN_CIRCULAR_PAVING
     );
 
     addForShapes(BlockusBlockTags.NETHERRACK_BLOCKS,
