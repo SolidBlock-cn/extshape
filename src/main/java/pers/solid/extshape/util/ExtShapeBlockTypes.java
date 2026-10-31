@@ -74,8 +74,10 @@ public final class ExtShapeBlockTypes {
       .soundType(SoundType.METAL)
       .build(ExtShape.id("metal"), METAL_BLOCK_SET_TYPE);
   public static final WoodType GOLD_WOOD_TYPE = WoodTypeBuilder.copyOf(METAL_WOOD_TYPE)
+      .soundType(SoundType.METAL)
       .build(ExtShape.id("gold"), BlockSetType.GOLD);
   public static final WoodType IRON_WOOD_TYPE = WoodTypeBuilder.copyOf(METAL_WOOD_TYPE)
+      .soundType(SoundType.IRON)
       .build(ExtShape.id("iron"), BlockSetType.IRON);
 
   public static final BlockSetType HARD_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
@@ -306,6 +308,41 @@ public final class ExtShapeBlockTypes {
   public static final WoodType RESIN_BRICKS_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .soundType(SoundType.RESIN_BRICKS)
       .register(ExtShape.id("resin_bricks"), RESIN_BRICKS_SET_TYPE);
+
+  public static final BlockSetType SULFUR_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
+      .soundType(SoundType.SULFUR)
+      .register(ExtShape.id("sulfur"));
+  public static final WoodType SULFUR_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
+      .soundType(SoundType.SULFUR)
+      .register(ExtShape.id("sulfur"), SULFUR_BLOCK_SET_TYPE);
+
+  public static final BlockSetType CINNABAR_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
+      .soundType(SoundType.CINNABAR)
+      .register(ExtShape.id("cinnabar"));
+  public static final WoodType CINNABAR_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
+      .soundType(SoundType.CINNABAR)
+      .register(ExtShape.id("cinnabar"), CINNABAR_BLOCK_SET_TYPE);
+
+  public static final BlockSetType PACKED_ICE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
+      .soundType(SoundType.GLASS)
+      .register(ExtShape.id("packed_ice"));
+  public static final WoodType PACKED_ICE_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
+      .soundType(SoundType.GLASS)
+      .register(ExtShape.id("packed_ice"), PACKED_ICE_BLOCK_SET_TYPE);
+
+  // 用于 stem 和 hyphae
+  public static final BlockSetType CRIMSON_STEM_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.CRIMSON)
+      .soundType(SoundType.STEM)
+      .register(ExtShape.id("crimson_stem"));
+  public static final WoodType CRIMSON_STEM_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.CRIMSON)
+      .soundType(SoundType.STEM)
+      .register(ExtShape.id("crimson_stem"), CRIMSON_STEM_BLOCK_SET_TYPE);
+  public static final BlockSetType WARPED_STEM_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.WARPED)
+      .soundType(SoundType.STEM)
+      .register(ExtShape.id("warped_stem"));
+  public static final WoodType WARPED_STEM_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.WARPED)
+      .soundType(SoundType.STEM)
+      .register(ExtShape.id("warped_stem"), WARPED_STEM_BLOCK_SET_TYPE);
 
   private ExtShapeBlockTypes() {
   }
