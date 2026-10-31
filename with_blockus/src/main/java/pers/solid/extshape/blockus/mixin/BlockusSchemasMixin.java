@@ -98,7 +98,7 @@ public abstract class BlockusSchemasMixin {
     removeShapesFor(idMap, "chiseled_lava_brick", "blockus:lava_brick", BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL);
     removeShapesExcept(idMap, "chiseled_lava_polished_blackstone_brick", "extshape_blockus:lava_polished_blackstone_brick", BlockShape.BUTTON, BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL);
     removeShapesFor(idMap, "chiseled_lava_polished_blackstone_brick", "blockus:lava_polished_blackstone_brick", BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL);
-    idMap.put("extshape_blockus:ice_brick_wall", "blockus:ice_brick_wall");
+    idMap.put("extshape_blockus:ice_brick_wall", "blockus:packed_ice_brick_wall");
     removeFenceAndGate(idMap, "obsidian_brick", "extshape_blockus:small_obsidian_brick");
     removeFenceAndGate(idMap, "netherrack_brick", "extshape_blockus:polished_netherrack");
     removeFenceAndGate(idMap, "quartz_tiles", "extshape:smooth_quartz");
