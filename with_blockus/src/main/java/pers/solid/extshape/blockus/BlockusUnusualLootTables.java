@@ -28,7 +28,6 @@ public class BlockusUnusualLootTables extends UnusualLootTables {
   }
 
   private void registerUnusualLootTables(ImmutableMap.Builder<Block, UnusualLootTables.LootTableFunction> builder) {
-    builder.put(BlockusBlocks.ICE_BRICKS, dropsDoubleWithSilkTouchOrNone);
     builder.put(BlockusBlocks.RAINBOW_GLOWSTONE, (baseBlock, shape, block, blocks, enchantments, generator) -> {
       final float shapeVolume = UnusualLootTables.shapeVolume(shape);
       return dropsDoubleSlabWithSilkTouch(blocks, block, generator.applyExplosionDecay(block, LootItem.lootTableItem(Items.GLOWSTONE_DUST)

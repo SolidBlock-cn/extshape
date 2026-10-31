@@ -100,6 +100,8 @@ public final class BlockusStonecutting {
     builder.putAll(BlockusBlocks.AMETHYST_BRICKS.block(), Blocks.AMETHYST_BLOCK, BlockusBlocks.POLISHED_AMETHYST.block());
 
     // 深板岩
+    builder.putAll(BlockusBlocks.COBBLED_DEEPSLATE_BRICKS.block(), Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE);
+    builder.put(BlockusBlocks.MOSSY_COBBLED_DEEPSLATE_BRICKS.block(), BlockusBlocks.MOSSY_COBBLED_DEEPSLATE.block());
     builder.putAll(BlockusBlocks.HERRINGBONE_DEEPSLATE_BRICKS, Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
     builder.putAll(BlockusBlocks.DEEPSLATE_CIRCULAR_PAVING, Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS);
 
@@ -148,6 +150,10 @@ public final class BlockusStonecutting {
     // 黑曜石
     builder.put(BlockusBlocks.OBSIDIAN_BRICKS.block(), Blocks.OBSIDIAN);
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SMALL_OBSIDIAN_BRICKS.block(), BlockusBlocks.OBSIDIAN_CIRCULAR_PAVING), Blocks.OBSIDIAN, BlockusBlocks.OBSIDIAN_BRICKS.block());
+
+    // Blockus 新增的哭泣黑曜石
+    builder.put(BlockusBlocks.CRYING_OBSIDIAN_BRICKS.block(), Blocks.CRYING_OBSIDIAN);
+    putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.SMALL_CRYING_OBSIDIAN_BRICKS.block(), BlockusBlocks.CRYING_OBSIDIAN_CIRCULAR_PAVING), Blocks.CRYING_OBSIDIAN, BlockusBlocks.CRYING_OBSIDIAN_BRICKS.block());
 
     // 石英
     putMultipleOutputs(builder, Arrays.asList(BlockusBlocks.QUARTZ_TILES.block(), BlockusBlocks.QUARTZ_CIRCULAR_PAVING), Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_BRICKS);
@@ -225,6 +231,9 @@ public final class BlockusStonecutting {
     builder.put(BlockusBlocks.EMERALD_BRICKS.block(), Blocks.EMERALD_BLOCK);
     builder.put(BlockusBlocks.DIAMOND_BRICKS.block(), Blocks.DIAMOND_BLOCK);
     builder.put(BlockusBlocks.NETHERITE_BRICKS.block(), Blocks.NETHERITE_BLOCK);
+
+    // 浮冰和浮冰砖（跟随 Blockus 模组更新）
+    builder.put(BlockusBlocks.PACKED_ICE_BRICKS.block(), Blocks.PACKED_ICE);
   }
 
   private static void registerWeightedBlockusStonecutting(final ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {
@@ -239,7 +248,7 @@ public final class BlockusStonecutting {
 
     for (WeatheringCopper.WeatherState oxidationLevel : CopperManager.OXIDATION_LEVELS) {
       builder.put(weatheringCopperBricks.pick(oxidationLevel), ObjectIntPair.of(weatheringCopper.pick(oxidationLevel), 4));
-      builder.put(weatheringCopperBricks.pick(oxidationLevel), ObjectIntPair.of(weatheringCutCopper.pick(oxidationLevel),1));
+      builder.put(weatheringCopperBricks.pick(oxidationLevel), ObjectIntPair.of(weatheringCutCopper.pick(oxidationLevel), 1));
       builder.put(waxedCopperBricks.pick(oxidationLevel), ObjectIntPair.of(waxedCopper.pick(oxidationLevel), 4));
       builder.put(waxedCopperBricks.pick(oxidationLevel), ObjectIntPair.of(waxedCutCopper.pick(oxidationLevel), 1));
     }

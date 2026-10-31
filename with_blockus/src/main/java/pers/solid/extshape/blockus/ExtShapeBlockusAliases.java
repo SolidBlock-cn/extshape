@@ -19,6 +19,20 @@ import java.util.Map;
 
 public class ExtShapeBlockusAliases {
   public static final Logger LOGGER = LoggerFactory.getLogger(ExtShapeBlockusAliases.class);
+  private static boolean initialized = false;
+
+  public static void init() {
+    if (initialized) {
+      throw new IllegalStateException("ExtShapeBlockusAliases already initialized!");
+    }
+
+    ExtShapeBlockusAliases.initWallChanges();
+    ExtShapeBlockusAliases.initPackedIceBricksChanges();
+    ExtShapeBlockusAliases.initSquaresChanges();
+    ExtShapeBlockusAliases.initTilesAndHerringboneChanges();
+
+    initialized = true;
+  }
 
   /**
    * 自 Blockus 更新后，加入了一些磨制方块的墙，导致这些方块在 Extended Block Shapes Blockus 中不再创建。因此创建 alias，以兼容此前版本。
@@ -52,6 +66,24 @@ public class ExtShapeBlockusAliases {
     convertSquareBlockBundle(BlockusBlocks.PURPUR_SQUARES);
     convertSquareBlockBundle(BlockusBlocks.PHANTOM_PURPUR_SQUARES);
     convertSquareBlockBundle(BlockusBlocks.CHOCOLATE_SQUARES);
+  }
+
+  /**
+   * 自 2.16.7/2.17.4/2.18.2 起，Blockus 模组更改了冰砖的 ID，并加入了一些形状变种。
+   */
+  public static void initPackedIceBricksChanges() {
+    for (BlockShape shape : BlockShape.values()) {
+      if (shape == BlockShape.WALL || shape == BlockShape.BUTTON) {
+        continue;
+      }
+      final Block newBlock = BlockBiMaps.getBlockOfOrThrow(shape, BlockusBlocks.PACKED_ICE_BRICKS.block());
+
+      final Identifier newId = BuiltInRegistries.BLOCK.getKey(newBlock);
+      final Identifier oldId = ExtShapeBlockus.id("ice_brick_" + shape.getSerializedName());
+
+      BuiltInRegistries.BLOCK.addAlias(oldId, newId);
+      BuiltInRegistries.ITEM.addAlias(oldId, newId);
+    }
   }
 
   /**

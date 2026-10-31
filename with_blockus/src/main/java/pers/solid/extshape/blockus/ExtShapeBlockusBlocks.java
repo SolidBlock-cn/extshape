@@ -194,6 +194,14 @@ public final class ExtShapeBlockusBlocks {
         .setFenceSettings(FenceSettings.TUFF_BRICKS)
         .setActivationSettings(ActivationSettings.TUFF_BRICKS));
 
+
+    // 可能是忘记加了：深板岩圆石砖
+    createAllShapes(BlockusBlocks.COBBLED_DEEPSLATE_BRICKS)
+        .setFenceSettings(FenceSettings.DEEPSLATE)
+        .setActivationSettings(ActivationSettings.DEEPSLATE)
+        .markStoneCuttable()
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
     createAllShapes(BlockusBlocks.MOSSY_DEEPSLATE_BRICKS)
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.DEEPSLATE_BRICKS)
@@ -210,6 +218,19 @@ public final class ExtShapeBlockusBlocks {
         .markStoneCuttable()
         .setFenceSettings(FenceSettings.DEEPSLATE_BRICKS)
         .setActivationSettings(ActivationSettings.DEEPSLATE_BRICKS));
+
+    // Blockus 模组新增的深板岩苔石和深板岩苔石砖
+    createAllShapes(BlockusBlocks.MOSSY_COBBLED_DEEPSLATE)
+        .markStoneCuttable()
+        .setFenceSettings(FenceSettings.DEEPSLATE)
+        .setActivationSettings(ActivationSettings.DEEPSLATE)
+        .build();
+    createAllShapes(BlockusBlocks.MOSSY_COBBLED_DEEPSLATE_BRICKS)
+        .setFenceSettings(FenceSettings.DEEPSLATE)
+        .setActivationSettings(ActivationSettings.DEEPSLATE)
+        .markStoneCuttable()
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
 
     createAllShapes(BlockusBlocks.POLISHED_SCULK)
         .markStoneCuttable()
@@ -478,6 +499,23 @@ public final class ExtShapeBlockusBlocks {
         .setActivationSettings(ActivationSettings.HARD)
         .setFenceSettings(FenceSettings.STONE)
         .build();
+
+    // Blockus 新增：哭泣黑曜石砖
+    createAllShapes(BlockusBlocks.CRYING_OBSIDIAN_BRICKS)
+        .markStoneCuttable()
+        .setActivationSettings(ActivationSettings.HARD)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON, BlockShape.FENCE, BlockShape.FENCE_GATE)
+        .build();
+    createAllShapes(BlockusBlocks.SMALL_CRYING_OBSIDIAN_BRICKS)
+        .markStoneCuttable()
+        .setActivationSettings(ActivationSettings.HARD)
+        .setFenceSettings(FenceSettings.STONE)
+        .without(BlockShape.BUTTON)
+        .build();
+    buildCircularPavingBlock(FACTORY.createEmpty(BlockusBlocks.CRYING_OBSIDIAN_CIRCULAR_PAVING)
+        .markStoneCuttable()
+        .setActivationSettings(ActivationSettings.HARD));
 
     createAllShapes(BlockusBlocks.POLISHED_NETHERRACK)
         .markStoneCuttable()
