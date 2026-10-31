@@ -1,5 +1,19 @@
 # Update log
 
+### 3.2.1
+
+- Fixed the issue of incorrect placing and mining sound for the fence gates, pressure plates and buttons of the following blocks: Crimson hyphae, warped hyphae, emerald block, red nether bricks, packed ice, sulfur with its series blocks, cinnabar with its series blocks.
+
+### 3.2.1-alpha.1
+
+- Made suitable for 26.4-snapshot-6.
+- Added all shape variants for packed ice bricks and snow bricks.
+- Fixed the incorrect placing and mining sound of fence gates, pressure plates and buttons of packed ice, sulfur, cinnabar, etc.
+- Known issues in this version:
+    - Blocks in this mod are not flammable by fire at present.
+    - Blocks in this mod do not support oxidization and waxing at present.
+    - When standing on the top of the bottom slab of packed ice slab, it is not slippery (this issue has existed since the beginning).
+
 ### 3.2.0
 
 - Optimized the implementation of item group rules. Item group rules are no longer rebuilt when rebuilding Creative inventories, and can be used earlier. Now the items in the mod should be able to be displayed in the item list of JustEnoughItems mod.
