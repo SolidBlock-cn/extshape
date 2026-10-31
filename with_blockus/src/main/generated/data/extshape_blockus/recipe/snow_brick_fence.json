@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "minecraft:flint",
+    "#": "minecraft:snow",
     "W": "blockus:snow_bricks"
   },
   "pattern": [

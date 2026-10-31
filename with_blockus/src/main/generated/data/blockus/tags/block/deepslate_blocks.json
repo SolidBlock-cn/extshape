@@ -1,5 +1,10 @@
 {
   "values": [
+    "extshape_blockus:cobbled_deepslate_brick_vertical_slab",
+    "extshape_blockus:cobbled_deepslate_brick_vertical_stairs",
+    "extshape_blockus:cobbled_deepslate_brick_quarter_piece",
+    "extshape_blockus:cobbled_deepslate_brick_vertical_quarter_piece",
+    "extshape_blockus:cobbled_deepslate_brick_pressure_plate",
     "extshape_blockus:mossy_deepslate_brick_vertical_slab",
     "extshape_blockus:mossy_deepslate_brick_vertical_stairs",
     "extshape_blockus:mossy_deepslate_brick_quarter_piece",
@@ -16,6 +21,19 @@
     "extshape_blockus:herringbone_deepslate_brick_wall",
     "extshape_blockus:herringbone_deepslate_brick_pressure_plate",
     "extshape_blockus:deepslate_circular_paving_slab",
-    "extshape_blockus:deepslate_circular_paving_pressure_plate"
+    "extshape_blockus:deepslate_circular_paving_pressure_plate",
+    "extshape_blockus:mossy_cobbled_deepslate_vertical_slab",
+    "extshape_blockus:mossy_cobbled_deepslate_vertical_stairs",
+    "extshape_blockus:mossy_cobbled_deepslate_quarter_piece",
+    "extshape_blockus:mossy_cobbled_deepslate_vertical_quarter_piece",
+    "extshape_blockus:mossy_cobbled_deepslate_fence",
+    "extshape_blockus:mossy_cobbled_deepslate_fence_gate",
+    "extshape_blockus:mossy_cobbled_deepslate_button",
+    "extshape_blockus:mossy_cobbled_deepslate_pressure_plate",
+    "extshape_blockus:mossy_cobbled_deepslate_brick_vertical_slab",
+    "extshape_blockus:mossy_cobbled_deepslate_brick_vertical_stairs",
+    "extshape_blockus:mossy_cobbled_deepslate_brick_quarter_piece",
+    "extshape_blockus:mossy_cobbled_deepslate_brick_vertical_quarter_piece",
+    "extshape_blockus:mossy_cobbled_deepslate_brick_pressure_plate"
   ]
 }

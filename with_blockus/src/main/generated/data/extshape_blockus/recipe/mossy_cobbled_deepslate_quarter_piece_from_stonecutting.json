@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "blockus:mossy_cobbled_deepslate",
+  "result": {
+    "count": 4,
+    "id": "extshape_blockus:mossy_cobbled_deepslate_quarter_piece"
+  }
+}

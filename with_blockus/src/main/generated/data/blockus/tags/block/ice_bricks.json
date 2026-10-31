@@ -1,13 +1,11 @@
 {
   "values": [
-    "extshape_blockus:ice_brick_stairs",
-    "extshape_blockus:ice_brick_slab",
-    "extshape_blockus:ice_brick_vertical_slab",
-    "extshape_blockus:ice_brick_vertical_stairs",
-    "extshape_blockus:ice_brick_quarter_piece",
-    "extshape_blockus:ice_brick_vertical_quarter_piece",
-    "extshape_blockus:ice_brick_fence",
-    "extshape_blockus:ice_brick_fence_gate",
-    "extshape_blockus:ice_brick_pressure_plate"
+    "extshape_blockus:packed_ice_brick_vertical_slab",
+    "extshape_blockus:packed_ice_brick_vertical_stairs",
+    "extshape_blockus:packed_ice_brick_quarter_piece",
+    "extshape_blockus:packed_ice_brick_vertical_quarter_piece",
+    "extshape_blockus:packed_ice_brick_fence",
+    "extshape_blockus:packed_ice_brick_fence_gate",
+    "extshape_blockus:packed_ice_brick_pressure_plate"
   ]
 }
