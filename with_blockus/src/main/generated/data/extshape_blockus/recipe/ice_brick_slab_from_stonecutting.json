@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "blockus:ice_bricks",
-  "result": {
-    "count": 2,
-    "id": "extshape_blockus:ice_brick_slab"
-  }
-}

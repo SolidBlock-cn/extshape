@@ -24,6 +24,20 @@
     "extshape_blockus:glowing_obsidian_fence_gate",
     "extshape_blockus:glowing_obsidian_wall",
     "extshape_blockus:glowing_obsidian_button",
-    "extshape_blockus:glowing_obsidian_pressure_plate"
+    "extshape_blockus:glowing_obsidian_pressure_plate",
+    "extshape_blockus:crying_obsidian_brick_vertical_slab",
+    "extshape_blockus:crying_obsidian_brick_vertical_stairs",
+    "extshape_blockus:crying_obsidian_brick_quarter_piece",
+    "extshape_blockus:crying_obsidian_brick_vertical_quarter_piece",
+    "extshape_blockus:crying_obsidian_brick_pressure_plate",
+    "extshape_blockus:small_crying_obsidian_brick_vertical_slab",
+    "extshape_blockus:small_crying_obsidian_brick_vertical_stairs",
+    "extshape_blockus:small_crying_obsidian_brick_quarter_piece",
+    "extshape_blockus:small_crying_obsidian_brick_vertical_quarter_piece",
+    "extshape_blockus:small_crying_obsidian_brick_fence",
+    "extshape_blockus:small_crying_obsidian_brick_fence_gate",
+    "extshape_blockus:small_crying_obsidian_brick_pressure_plate",
+    "extshape_blockus:crying_obsidian_circular_paving_slab",
+    "extshape_blockus:crying_obsidian_circular_paving_pressure_plate"
   ]
 }
