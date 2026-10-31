@@ -6,6 +6,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.sounds.BlockSoundSets;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -74,8 +75,10 @@ public final class ExtShapeBlockTypes {
       .blockSoundSet(BlockSoundSets.METAL)
       .build(ExtShape.id("metal"), METAL_BLOCK_SET_TYPE);
   public static final WoodType GOLD_WOOD_TYPE = WoodTypeBuilder.copyOf(METAL_WOOD_TYPE)
+      .soundType(SoundType.METAL)
       .build(ExtShape.id("gold"), BlockSetType.GOLD);
   public static final WoodType IRON_WOOD_TYPE = WoodTypeBuilder.copyOf(METAL_WOOD_TYPE)
+      .soundType(SoundType.IRON)
       .build(ExtShape.id("iron"), BlockSetType.IRON);
 
   public static final BlockSetType HARD_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
@@ -327,6 +330,20 @@ public final class ExtShapeBlockTypes {
   public static final WoodType PACKED_ICE_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.PACKED_ICE)
       .register(ExtShape.id("packed_ice"), PACKED_ICE_BLOCK_SET_TYPE);
+
+  // 用于 stem 和 hyphae
+  public static final BlockSetType CRIMSON_STEM_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.CRIMSON)
+      .soundType(SoundType.STEM)
+      .register(ExtShape.id("crimson_stem"));
+  public static final WoodType CRIMSON_STEM_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.CRIMSON)
+      .soundType(SoundType.STEM)
+      .register(ExtShape.id("crimson_stem"), CRIMSON_STEM_BLOCK_SET_TYPE);
+  public static final BlockSetType WARPED_STEM_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.WARPED)
+      .soundType(SoundType.STEM)
+      .register(ExtShape.id("warped_stem"));
+  public static final WoodType WARPED_STEM_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.WARPED)
+      .soundType(SoundType.STEM)
+      .register(ExtShape.id("warped_stem"), WARPED_STEM_BLOCK_SET_TYPE);
 
   private ExtShapeBlockTypes() {
   }

@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -19,6 +20,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.spongepowered.include.com.google.common.collect.ImmutableMap;
+import pers.solid.extshape.ExtShape;
 import pers.solid.extshape.ExtShapeBlockItem;
 import pers.solid.extshape.block.BlockExtension;
 import pers.solid.extshape.mixin.AbstractBlockSettingsAccessor;
@@ -277,6 +279,13 @@ public abstract class AbstractBlockBuilder<T extends Block> {
   public T build() {
     if (this.instance == null) this.createInstance();
     final Identifier blockId = this.getBlockId();
+    if (FabricLoader.getInstance().isDevelopmentEnvironment() && baseBlock != null) {
+      final SoundType baseSound = baseBlock.defaultBlockState().getSoundType();
+      final SoundType thisSound = instance.defaultBlockState().getSoundType();
+      if (!baseSound.equals(thisSound)) {
+        ExtShape.LOGGER.warn("The sound of {} is different from its base block!", blockId);
+      }
+    }
     if (this.registerBlock) {
       if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
         final Identifier vanillaId = Identifier.withDefaultNamespace(blockId.getPath());
