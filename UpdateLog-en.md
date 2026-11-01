@@ -1,5 +1,9 @@
 # Update log
 
+### 3.2.2
+
+- Modified the sound of shape variants of dyed shingles to match the update of Blockus mod.
+
 ### 3.2.1
 
 - Fixed the issue of incorrect placing and mining sound for the fence gates, pressure plates and buttons of the following blocks: Crimson hyphae, warped hyphae, emerald block, red nether bricks, packed ice, sulfur with its series blocks, cinnabar with its series blocks.
