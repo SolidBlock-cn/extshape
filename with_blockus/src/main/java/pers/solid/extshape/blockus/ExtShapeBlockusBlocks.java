@@ -1034,8 +1034,8 @@ public final class ExtShapeBlockusBlocks {
         .build();
     createForDyed(BlockusBlocks.DYED_SHINGLES, ExtShapeBlockusBlocks::createAllShapes, (dyeColor, blocksBuilder) -> blocksBuilder
         .markStoneCuttable()
-        .setActivationSettings(ActivationSettings.STONE)
-        .setFenceSettings(FenceSettings.STONE)
+        .setActivationSettings(ExtShapeBlockusBlockTypes.SHINGLES_ACTIVATION_SETTINGS)
+        .setFenceSettings(ExtShapeBlockusBlockTypes.SHINGLES_FENCE_SETTINGS)
         .setRecipeGroup(blockShape -> "shingles_" + blockShape.getSerializedName())
         .build());
 
