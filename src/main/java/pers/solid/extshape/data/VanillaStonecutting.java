@@ -110,6 +110,10 @@ public final class VanillaStonecutting {
 
     // 26.4 加入的浮冰砖
     builder.put(Blocks.PACKED_ICE_BRICKS, Blocks.PACKED_ICE);
+
+    // 26.4 加入的方解石系列
+    builder.put(Blocks.POLISHED_CALCITE, Blocks.CALCITE);
+    builder.putAll(Blocks.POLISHED_CALCITE_BRICKS, Blocks.POLISHED_CALCITE, Blocks.CALCITE);
   }
 
   private static void registerCutCopperBlocks(ImmutableMultimap.Builder<Block, ObjectIntPair<Block>> builder) {

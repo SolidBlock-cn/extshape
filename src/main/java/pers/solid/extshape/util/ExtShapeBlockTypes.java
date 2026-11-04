@@ -6,7 +6,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.sounds.BlockSoundSets;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -26,9 +25,9 @@ public final class ExtShapeBlockTypes {
       .blockSoundSet(BlockSoundSets.STONE)
       .build(ExtShape.id("stone"), BlockSetType.STONE);
 
-  public static final BlockSetType AMETHYST_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
+  public static final BlockSetType AMETHYST_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.DEFAULT_WOOD)
       .blockSoundSet(BlockSoundSets.AMETHYST_BLOCK)
-      .build(ExtShape.id("amethyst"));
+      .build();
   public static final WoodType AMETHYST_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .fenceGateOpenSound(of("block.amethyst_fence_gate.open"))
       .fenceGateCloseSound(of("block.amethyst_fence_gate.close"))
@@ -40,12 +39,12 @@ public final class ExtShapeBlockTypes {
       .openableByHand(true)
       .openableByWindCharge(true)
       .pressurePlateActivationRule(BlockSetType.PressurePlateSensitivity.EVERYTHING)
-      .build(ExtShape.id("soft"));
+      .build();
 
-  public static final BlockSetType GRAVEL_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
+  public static final BlockSetType GRAVEL_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.DEFAULT_WOOD)
       .blockSoundSet(BlockSoundSets.GRAVEL)
       .pressurePlateActivationRule(BlockSetType.PressurePlateSensitivity.EVERYTHING)
-      .build(ExtShape.id("gravel"));
+      .build();
   public static final WoodType GRAVEL_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.GRAVEL)
       .build(ExtShape.id("gravel"), GRAVEL_BLOCK_SET_TYPE);
@@ -56,7 +55,7 @@ public final class ExtShapeBlockTypes {
       .buttonClickOffSound(of("block.wool_button.click_off"))
       .pressurePlateClickOnSound(of("block.wool_pressure_plate.click_on"))
       .pressurePlateClickOffSound(of("block.wool_pressure_plate.click_off"))
-      .build(ExtShape.id("wool"));
+      .build();
   public static final WoodType WOOL_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.WOOL)
       .fenceGateOpenSound(of("block.wool_fence_gate.open"))
@@ -64,28 +63,28 @@ public final class ExtShapeBlockTypes {
       .build(ExtShape.id("wool"), WOOL_BLOCK_SET_TYPE);
 
   public static final BlockSetType QUARTZ_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
-      .build(ExtShape.id("quartz"));
+      .build();
   public static final WoodType QUARTZ_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .build(ExtShape.id("quartz"), QUARTZ_BLOCK_SET_TYPE);
 
   public static final BlockSetType METAL_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.METAL)
-      .build(ExtShape.id("metal"));
+      .build();
   public static final WoodType METAL_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.METAL)
       .build(ExtShape.id("metal"), METAL_BLOCK_SET_TYPE);
   public static final WoodType GOLD_WOOD_TYPE = WoodTypeBuilder.copyOf(METAL_WOOD_TYPE)
-      .soundType(SoundType.METAL)
+      .blockSoundSet(BlockSoundSets.METAL)
       .build(ExtShape.id("gold"), BlockSetType.GOLD);
   public static final WoodType IRON_WOOD_TYPE = WoodTypeBuilder.copyOf(METAL_WOOD_TYPE)
-      .soundType(SoundType.IRON)
+      .blockSoundSet(BlockSoundSets.IRON)
       .build(ExtShape.id("iron"), BlockSetType.IRON);
 
   public static final BlockSetType HARD_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .openableByHand(false)
       .openableByWindCharge(false)
       .buttonActivatedByArrows(false)
-      .build(ExtShape.id("hard"));
+      .build();
   public static final WoodType HARD_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .build(ExtShape.id("hard"), HARD_BLOCK_SET_TYPE);
 
@@ -99,7 +98,7 @@ public final class ExtShapeBlockTypes {
       .buttonClickOffSound(of("block.snow_button.click_off"))
       .pressurePlateClickOnSound(of("block.snow_pressure_plate.click_on"))
       .pressurePlateClickOffSound(of("block.snow_pressure_plate.click_off"))
-      .build(ExtShape.id("snow"));
+      .build();
   public static final WoodType SNOW_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.SNOW)
       .fenceGateOpenSound(of("block.snow_fence_gate.open"))
@@ -108,35 +107,35 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType NETHERRACK_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.NETHERRACK)
-      .build(ExtShape.id("netherrack"));
+      .build();
   public static final WoodType NETHERRACK_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.NETHERRACK)
       .build(ExtShape.id("netherrack"), NETHERRACK_BLOCK_SET_TYPE);
 
-  public static final BlockSetType GLOWSTONE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
+  public static final BlockSetType GLOWSTONE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.DEFAULT_WOOD)
       .blockSoundSet(BlockSoundSets.GLASS)
-      .build(ExtShape.id("glowstone"));
+      .build();
   public static final WoodType GLOWSTONE_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.GLASS)
       .build(ExtShape.id("glowstone"), ExtShapeBlockTypes.SOFT_BLOCK_SET_TYPE);
 
   public static final BlockSetType PACKED_MUD_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.PACKED_MUD)
-      .build(ExtShape.id("packed_mud"));
+      .build();
   public static final WoodType PACKED_MUD = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.PACKED_MUD)
       .build(ExtShape.id("packed_mud"), PACKED_MUD_BLOCK_SET_TYPE);
 
   public static final BlockSetType MUD_BRICKS_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.MUD_BRICKS)
-      .build(ExtShape.id("mud_bricks"));
+      .build();
   public static final WoodType MUD_BRICKS = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.MUD_BRICKS)
       .build(ExtShape.id("mud_bricks"), MUD_BRICKS_BLOCK_SET_TYPE);
 
   public static final BlockSetType NETHER_BRICKS_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.NETHER_BRICKS)
-      .build(ExtShape.id("nether_bricks"));
+      .build();
   public static final WoodType NETHER_BRICKS_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.NETHER_BRICKS)
       .build(ExtShape.id("nether_bricks"), NETHER_BRICKS_BLOCK_SET_TYPE);
@@ -147,53 +146,53 @@ public final class ExtShapeBlockTypes {
       .buttonClickOffSound(of("block.wart_button.click_off"))
       .pressurePlateClickOnSound(of("block.wart_pressure_plate.click_on"))
       .pressurePlateClickOffSound(of("block.wart_pressure_plate.click_off"))
-      .build(ExtShape.id("wart_block"));
+      .build();
   public static final WoodType WART_BLOCK_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.WART_BLOCK)
       .fenceGateOpenSound(of("block.wart_fence_gate.open"))
       .fenceGateCloseSound(of("block.wart_fence_gate.close"))
       .build(ExtShape.id("wart_block"), WART_BLOCK_SET_TYPE);
 
-  public static final BlockSetType SHROMLIGHT_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
+  public static final BlockSetType SHROMLIGHT_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.DEFAULT_WOOD)
       .blockSoundSet(BlockSoundSets.SHROOMLIGHT)
-      .build(ExtShape.id("shroomlight"));
+      .build();
   public static final WoodType SHROOMLIGHT_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.SHROOMLIGHT)
       .build(ExtShape.id("shroomlight"), SHROMLIGHT_BLOCK_SET_TYPE);
 
-  public static final BlockSetType HONEYCOMB_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
+  public static final BlockSetType HONEYCOMB_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.DEFAULT_WOOD)
       .blockSoundSet(BlockSoundSets.CORAL_BLOCK)
-      .build(ExtShape.id("honeycomb"));
+      .build();
   public static final WoodType HONEYCOMB_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.CORAL_BLOCK)
       .build(ExtShape.id("honeycomb"), HONEYCOMB_BLOCK_SET_TYPE);
 
   public static final BlockSetType NETHERITE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(HARD_BLOCK_SET_TYPE)
       .blockSoundSet(BlockSoundSets.NETHERITE_BLOCK)
-      .build(ExtShape.id("netherite"));
+      .build();
   public static final WoodType NETHERITE_WOOD_TYPE = WoodTypeBuilder.copyOf(HARD_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.NETHERITE_BLOCK)
       .build(ExtShape.id("netherite"), NETHERITE_BLOCK_SET_TYPE);
 
   public static final BlockSetType ANCIENT_DEBRIS_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(HARD_BLOCK_SET_TYPE)
       .blockSoundSet(BlockSoundSets.ANCIENT_DEBRIS)
-      .build(ExtShape.id("ancient_debris"));
+      .build();
   public static final WoodType ANCIENT_DEBRIS_WOOD_TYPE = WoodTypeBuilder.copyOf(HARD_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.ANCIENT_DEBRIS)
       .build(ExtShape.id("ancient_debris"), ANCIENT_DEBRIS_BLOCK_SET_TYPE);
 
   public static final BlockSetType TUFF_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.TUFF)
-      .build(ExtShape.id("tuff"));
+      .build();
   public static final BlockSetType POLISHED_TUFF_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.POLISHED_TUFF)
-      .build(ExtShape.id("polished_tuff"));
+      .build();
   public static final BlockSetType TUFF_BRICKS_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.TUFF_BRICKS)
-      .build(ExtShape.id("tuff_bricks"));
+      .build();
   public static final BlockSetType CALCITE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.CALCITE)
-      .build(ExtShape.id("calcite"));
+      .build();
   public static final WoodType TUFF_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.TUFF)
       .build(ExtShape.id("tuff"), TUFF_BLOCK_SET_TYPE);
@@ -213,7 +212,7 @@ public final class ExtShapeBlockTypes {
       .buttonClickOffSound(of("block.sculk_button.click_off"))
       .pressurePlateClickOnSound(of("block.sculk_pressure_plate.click_on"))
       .pressurePlateClickOffSound(of("block.sculk_pressure_plate.click_off"))
-      .build(ExtShape.id("sculk"));
+      .build();
   public static final WoodType SCULK_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.SCULK)
       .fenceGateOpenSound(of("block.sculk_fence_gate.open"))
@@ -222,7 +221,7 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType DRIPSTONE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.DRIPSTONE_BLOCK)
-      .build(ExtShape.id("dripstone"));
+      .build();
   public static final WoodType DRIPSTONE_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.DRIPSTONE_BLOCK)
       .build(ExtShape.id("dripstone"), DRIPSTONE_BLOCK_SET_TYPE);
@@ -233,7 +232,7 @@ public final class ExtShapeBlockTypes {
       .buttonClickOffSound(of("block.moss_button.click_off"))
       .pressurePlateClickOnSound(of("block.moss_pressure_plate.click_on"))
       .pressurePlateClickOffSound(of("block.moss_pressure_plate.click_off"))
-      .build(ExtShape.id("moss_block"));
+      .build();
   public static final WoodType MOSS_BLOCK_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.MOSS)
       .fenceGateOpenSound(of("block.moss_fence_gate.open"))
@@ -246,7 +245,7 @@ public final class ExtShapeBlockTypes {
       .buttonClickOffSound(of("block.slime_button.click_off"))
       .pressurePlateClickOnSound(of("block.slime_pressure_plate.click_on"))
       .pressurePlateClickOffSound(of("block.slime_pressure_plate.click_off"))
-      .build(ExtShape.id("slime"));
+      .build();
   public static final WoodType SLIME_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.SLIME_BLOCK)
       .fenceGateOpenSound(of("block.slime_fence_gate.open"))
@@ -255,39 +254,39 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType DEEPSLATE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.DEEPSLATE)
-      .build(ExtShape.id("deepslate"));
+      .build();
   public static final WoodType DEEPSLATE_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.DEEPSLATE)
       .build(ExtShape.id("deepslate"), DEEPSLATE_BLOCK_SET_TYPE);
   public static final BlockSetType DEEPSLATE_BRICKS_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.DEEPSLATE_BRICKS)
-      .build(ExtShape.id("deepslate_bricks"));
+      .build();
   public static final WoodType DEEPSLATE_BRICKS_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.DEEPSLATE_BRICKS)
       .build(ExtShape.id("deepslate_bricks"), DEEPSLATE_BRICKS_BLOCK_SET_TYPE);
   public static final BlockSetType DEEPSLATE_TILES_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.DEEPSLATE_TILES)
-      .build(ExtShape.id("deepslate_tiles"));
+      .build();
   public static final WoodType DEEPSLATE_TILES_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.DEEPSLATE_TILES)
       .build(ExtShape.id("deepslate_tiles"), DEEPSLATE_TILES_BLOCK_SET_TYPE);
   public static final BlockSetType POLISHED_DEEPSLATE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.POLISHED_DEEPSLATE)
-      .build(ExtShape.id("polished_deepslate"));
+      .build();
   public static final WoodType POLISHED_DEEPSLATE_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.POLISHED_DEEPSLATE)
       .build(ExtShape.id("polished_deepslate"), POLISHED_DEEPSLATE_BLOCK_SET_TYPE);
 
   public static final BlockSetType BASALT_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.BASALT)
-      .build(ExtShape.id("basalt"));
+      .build();
   public static final WoodType BASALT_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.BASALT)
       .build(ExtShape.id("basalt"), BASALT_BLOCK_SET_TYPE);
 
-  public static final BlockSetType FROGLIGHT_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.OAK)
+  public static final BlockSetType FROGLIGHT_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.DEFAULT_WOOD)
       .blockSoundSet(BlockSoundSets.FROGLIGHT)
-      .build(ExtShape.id("froglight"));
+      .build();
   public static final WoodType FROGLIGHT_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.OAK)
       .blockSoundSet(BlockSoundSets.FROGLIGHT)
       .build(ExtShape.id("froglight"), FROGLIGHT_BLOCK_SET_TYPE);
@@ -298,52 +297,52 @@ public final class ExtShapeBlockTypes {
 
   public static final BlockSetType RESIN_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.RESIN)
-      .register(ExtShape.id("resin"));
+      .build();
   public static final WoodType RESIN_BLOCK_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.RESIN)
-      .register(ExtShape.id("resin"), RESIN_BLOCK_SET_TYPE);
+      .build(ExtShape.id("resin"), RESIN_BLOCK_SET_TYPE);
 
   public static final BlockSetType RESIN_BRICKS_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.RESIN_BRICKS)
-      .register(ExtShape.id("resin_bricks"));
+      .build();
   public static final WoodType RESIN_BRICKS_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.RESIN_BRICKS)
-      .register(ExtShape.id("resin_bricks"), RESIN_BRICKS_SET_TYPE);
+      .build(ExtShape.id("resin_bricks"), RESIN_BRICKS_SET_TYPE);
 
   public static final BlockSetType SULFUR_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.SULFUR)
-      .register(ExtShape.id("sulfur"));
+      .build();
   public static final WoodType SULFUR_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.SULFUR)
-      .register(ExtShape.id("sulfur"), SULFUR_BLOCK_SET_TYPE);
+      .build(ExtShape.id("sulfur"), SULFUR_BLOCK_SET_TYPE);
 
   public static final BlockSetType CINNABAR_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.CINNABAR)
-      .register(ExtShape.id("cinnabar"));
+      .build();
   public static final WoodType CINNABAR_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.CINNABAR)
-      .register(ExtShape.id("cinnabar"), CINNABAR_BLOCK_SET_TYPE);
+      .build(ExtShape.id("cinnabar"), CINNABAR_BLOCK_SET_TYPE);
 
   public static final BlockSetType PACKED_ICE_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.STONE)
       .blockSoundSet(BlockSoundSets.PACKED_ICE)
-      .register(ExtShape.id("packed_ice"));
+      .build();
   public static final WoodType PACKED_ICE_WOOD_TYPE = WoodTypeBuilder.copyOf(STONE_WOOD_TYPE)
       .blockSoundSet(BlockSoundSets.PACKED_ICE)
-      .register(ExtShape.id("packed_ice"), PACKED_ICE_BLOCK_SET_TYPE);
+      .build(ExtShape.id("packed_ice"), PACKED_ICE_BLOCK_SET_TYPE);
 
   // 用于 stem 和 hyphae
   public static final BlockSetType CRIMSON_STEM_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.CRIMSON)
-      .soundType(SoundType.STEM)
-      .register(ExtShape.id("crimson_stem"));
+      .blockSoundSet(BlockSoundSets.STEM)
+      .build();
   public static final WoodType CRIMSON_STEM_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.CRIMSON)
-      .soundType(SoundType.STEM)
-      .register(ExtShape.id("crimson_stem"), CRIMSON_STEM_BLOCK_SET_TYPE);
+      .blockSoundSet(BlockSoundSets.STEM)
+      .build(ExtShape.id("crimson_stem"), CRIMSON_STEM_BLOCK_SET_TYPE);
   public static final BlockSetType WARPED_STEM_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.WARPED)
-      .soundType(SoundType.STEM)
-      .register(ExtShape.id("warped_stem"));
+      .blockSoundSet(BlockSoundSets.STEM)
+      .build();
   public static final WoodType WARPED_STEM_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.WARPED)
-      .soundType(SoundType.STEM)
-      .register(ExtShape.id("warped_stem"), WARPED_STEM_BLOCK_SET_TYPE);
+      .blockSoundSet(BlockSoundSets.STEM)
+      .build(ExtShape.id("warped_stem"), WARPED_STEM_BLOCK_SET_TYPE);
 
   private ExtShapeBlockTypes() {
   }

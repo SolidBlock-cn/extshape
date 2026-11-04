@@ -379,7 +379,7 @@ public class ExtShape implements ModInitializer {
    * 应用方块和物品的更名，适用于 26.3 中加入的原版羊毛和混凝土楼梯和台阶。
    */
   private static void registerRegistryAliases() {
-    for (BlockItemId blockItemId : Iterables.concat(BlockItemIds.WOOL_STAIRS.asList(), BlockItemIds.WOOL_SLAB.asList(), BlockItemIds.CONCRETE_STAIRS.asList(), BlockItemIds.CONCRETE_SLAB.asList())) {
+    for (BlockItemId blockItemId : Iterables.concat(BlockItemIds.WOOL_STAIRS.asList(), BlockItemIds.WOOL_SLAB.asList(), BlockItemIds.CONCRETE_STAIRS.asList(), BlockItemIds.CONCRETE_SLAB.asList(), List.of(BlockItemIds.CALCITE_STAIRS, BlockItemIds.CALCITE_SLAB, BlockItemIds.CALCITE_WALL))) {
       BuiltInRegistries.BLOCK.addAlias(id(blockItemId.block().identifier().getPath()), blockItemId.block().identifier());
       BuiltInRegistries.ITEM.addAlias(id(blockItemId.item().identifier().getPath()), blockItemId.item().identifier());
     }

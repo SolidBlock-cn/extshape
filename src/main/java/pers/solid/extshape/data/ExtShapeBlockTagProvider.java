@@ -169,6 +169,8 @@ public class ExtShapeBlockTagProvider extends FabricTagsProvider.BlockTagsProvid
             Blocks.POLISHED_TUFF,
             Blocks.TUFF_BRICKS,
             Blocks.CALCITE,
+            Blocks.POLISHED_CALCITE,
+            Blocks.POLISHED_CALCITE_BRICKS,
             Blocks.DRIPSTONE_BLOCK,
             Blocks.DEEPSLATE,
             Blocks.COBBLED_DEEPSLATE,

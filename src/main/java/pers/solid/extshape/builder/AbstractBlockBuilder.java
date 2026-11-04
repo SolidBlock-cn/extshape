@@ -11,7 +11,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -280,8 +279,8 @@ public abstract class AbstractBlockBuilder<T extends Block> {
     if (this.instance == null) this.createInstance();
     final Identifier blockId = this.getBlockId();
     if (FabricLoader.getInstance().isDevelopmentEnvironment() && baseBlock != null) {
-      final SoundType baseSound = baseBlock.defaultBlockState().getSoundType();
-      final SoundType thisSound = instance.defaultBlockState().getSoundType();
+      final var baseSound = baseBlock.defaultBlockState().getSounds();
+      final var thisSound = instance.defaultBlockState().getSounds();
       if (!baseSound.equals(thisSound)) {
         ExtShape.LOGGER.warn("The sound of {} is different from its base block!", blockId);
       }

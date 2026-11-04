@@ -51,7 +51,7 @@ public record ActivationSettings(BlockSetType blockSetType, int buttonTime, int 
   public static final ActivationSettings EMERALD = new ActivationSettings(ExtShapeBlockTypes.METAL_BLOCK_SET_TYPE, 15, 10);
   public static final ActivationSettings GOLD = new ActivationSettings(BlockSetType.GOLD, 15, 10);
   public static final ActivationSettings IRON = new ActivationSettings(BlockSetType.IRON, 15, 10);
-  public static final ActivationSettings CROPS = new ActivationSettings(BlockSetType.OAK, 35, 25);
+  public static final ActivationSettings CROPS = new ActivationSettings(BlockSetType.DEFAULT_WOOD, 35, 25);
   public static final ActivationSettings QUARTZ = new ActivationSettings(ExtShapeBlockTypes.QUARTZ_BLOCK_SET_TYPE, 25, 20);
   public static final ActivationSettings BASALT = new ActivationSettings(ExtShapeBlockTypes.BASALT_BLOCK_SET_TYPE, 15, 15);
   public static final ActivationSettings DRIPSTONE = stone(ExtShapeBlockTypes.DRIPSTONE_BLOCK_SET_TYPE);

@@ -159,16 +159,16 @@ public final class ExtShapeBlocks {
     // an infinite cycling loop for wooden block set types, which each cycle should correspond to
     // BlockCollections.WOODS, which does not include bamboo and nether woods.
     final Iterator<ActivationSettings> overworldWoodActivationSettings = Iterators.cycle(
-        ActivationSettings.wood(BlockSetType.OAK),
-        ActivationSettings.wood(BlockSetType.SPRUCE),
-        ActivationSettings.wood(BlockSetType.BIRCH),
-        ActivationSettings.wood(BlockSetType.JUNGLE),
-        ActivationSettings.wood(BlockSetType.ACACIA),
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD), // oak
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD), // spruce
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD), // birch
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD), // jungle
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD), // acacia
         ActivationSettings.wood(BlockSetType.CHERRY),
-        ActivationSettings.wood(BlockSetType.DARK_OAK),
-        ActivationSettings.wood(BlockSetType.PALE_OAK),
-        ActivationSettings.wood(BlockSetType.POPLAR),
-        ActivationSettings.wood(BlockSetType.MANGROVE));
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD), // dark oak
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD), // pale oak
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD), // poplar
+        ActivationSettings.wood(BlockSetType.DEFAULT_WOOD)); // mangrove
     final Iterator<ActivationSettings> netherWoodActivationSettings = Iterators.cycle(ActivationSettings.wood(BlockSetType.CRIMSON), ActivationSettings.wood(BlockSetType.WARPED));
     final Iterator<WoodType> overworldWoodTypes = Iterators.cycle(
         WoodType.OAK,
@@ -679,6 +679,21 @@ public final class ExtShapeBlocks {
         .build();
 
     FACTORY.createAllShapes(CALCITE)
+        .without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL)
+        .markStoneCuttable()
+        .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.CALCITE_WOOD_TYPE))
+        .setActivationSettings(ActivationSettings.softerStone(ExtShapeBlockTypes.CALCITE_BLOCK_SET_TYPE))
+        .build();
+
+    // 26.4 新增的方解石相关方块
+    FACTORY.createAllShapes(POLISHED_CALCITE)
+        .without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL)
+        .markStoneCuttable()
+        .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.CALCITE_WOOD_TYPE))
+        .setActivationSettings(ActivationSettings.softerStone(ExtShapeBlockTypes.CALCITE_BLOCK_SET_TYPE))
+        .build();
+    FACTORY.createAllShapes(POLISHED_CALCITE_BRICKS)
+        .without(BlockShape.STAIRS, BlockShape.SLAB, BlockShape.WALL)
         .markStoneCuttable()
         .setFenceSettings(new FenceSettings(Items.FLINT, ExtShapeBlockTypes.CALCITE_WOOD_TYPE))
         .setActivationSettings(ActivationSettings.softerStone(ExtShapeBlockTypes.CALCITE_BLOCK_SET_TYPE))
@@ -842,9 +857,6 @@ public final class ExtShapeBlocks {
     final String idPath = BuiltInRegistries.BLOCK.getKey(block).getPath();
     if (woodType != null && !idPath.contains(woodType.name().replace("extshape:", "").replace("_stem", "").replace("_hyphae", ""))) {
       throw new IllegalArgumentException(String.format("Block id '%s' does not contain wood type '%s'", idPath, woodType.name()));
-    }
-    if (activationSettings != null && !idPath.contains(activationSettings.blockSetType().name().replace("extshape:", "").replace("_stem", "").replace("_hyphae", ""))) {
-      throw new IllegalArgumentException(String.format("Block id '%s' does not contain activation settings '%s'", idPath, activationSettings.blockSetType().name()));
     }
   }
 
