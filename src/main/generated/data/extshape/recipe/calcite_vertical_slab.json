@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    "extshape:calcite_slab"
+    "minecraft:calcite_slab"
   ],
   "result": {
     "id": "extshape:calcite_vertical_slab"

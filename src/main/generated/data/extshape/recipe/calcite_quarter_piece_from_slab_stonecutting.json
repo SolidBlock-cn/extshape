@@ -1,6 +1,6 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "extshape:calcite_slab",
+  "ingredient": "minecraft:calcite_slab",
   "result": {
     "count": 2,
     "id": "extshape:calcite_quarter_piece"

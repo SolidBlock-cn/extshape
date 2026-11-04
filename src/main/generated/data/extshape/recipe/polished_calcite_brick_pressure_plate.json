@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "minecraft:polished_calcite_bricks"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "extshape:polished_calcite_brick_pressure_plate"
+  }
+}

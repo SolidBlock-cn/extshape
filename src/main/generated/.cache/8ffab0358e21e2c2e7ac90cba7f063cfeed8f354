@@ -1,4 +1,4 @@
-// 26.4-snapshot-6	-999999999-01-01T00:00:00	Extended Block Shapes/Tags for minecraft:block
+// 26.4-snapshot-7	-999999999-01-01T00:00:00	Extended Block Shapes/Tags for minecraft:block
 4f0f7f7ab93e2be0f4b46b048eee4a864b772750 data/c/tags/block/dyed/black.json
 8d2ffbdab26dda31016925f7a06ee6e7652638e8 data/c/tags/block/dyed/blue.json
 5380a3b46c9fce0969edef1ce7e6d380524917ca data/c/tags/block/dyed/brown.json
@@ -41,8 +41,8 @@ bc854b1376db0ec4f275a0f21c40b2e5bca21717 data/extshape/tags/block/log_vertical_q
 6e99c5c1dd087f0e621af29e9576c343263ed395 data/extshape/tags/block/log_vertical_slabs.json
 5aa2b1e50b1a7cc55fb37510e94048a70dfac5a2 data/extshape/tags/block/log_vertical_stairs.json
 6e0dc67fd6166fe4144658f740ac44852a3c0cf7 data/extshape/tags/block/log_walls.json
-942715dd1a880a1920323cb713efdcc24014dee1 data/extshape/tags/block/pressure_plates.json
-30e38a06c5be78341ca8bddfbe76e6537678334c data/extshape/tags/block/quarter_pieces.json
+a82999136fed8db64c2fbf7b2ae339847bb7977c data/extshape/tags/block/pressure_plates.json
+38654d78a40e103d20d23f08af9f9d3f01e0775d data/extshape/tags/block/quarter_pieces.json
 b11b908c41a1292da4dcb2104888da6d0427523b data/extshape/tags/block/snow.json
 4b98b8ac1ad694e010b5635af0b069800b361bce data/extshape/tags/block/stained_terracotta_buttons.json
 80f23905012ec6002512ef0c4bf2b5c2ca635726 data/extshape/tags/block/stained_terracotta_fence_gates.json
@@ -67,9 +67,9 @@ df2057856133dfea4a8ff5f095136f75e83583c1 data/extshape/tags/block/terracotta_sta
 51619018e753b1fc7ee1d3ff08ed9d25df83ab25 data/extshape/tags/block/terracotta_vertical_slabs.json
 84b3ef460c41de6ca66122b84607d062b3c55146 data/extshape/tags/block/terracotta_vertical_stairs.json
 e01fb47c2f008ce52d7edbd1177cbc68ef4605e7 data/extshape/tags/block/terracotta_walls.json
-326bfdeafe72adf5614de14cae129e3276c259dd data/extshape/tags/block/vertical_quarter_pieces.json
-8330f778eaed43ee994651ba7f3d7ad9be7bb26f data/extshape/tags/block/vertical_slabs.json
-43f475bea91140ba16464d9e9d884c6f559f6fea data/extshape/tags/block/vertical_stairs.json
+def7dcd99256e67abc61c3e4e7972596581749a8 data/extshape/tags/block/vertical_quarter_pieces.json
+409b56392c0077a24c540efa261187f8c824399f data/extshape/tags/block/vertical_slabs.json
+28148ba6ab8faf43e7ecf966dd1662cd243cc56e data/extshape/tags/block/vertical_stairs.json
 109577f00eebc1764cfa720d80ba783e39bae567 data/extshape/tags/block/wooden_blocks.json
 ec3bf81f885b4583846ec567bfc35eded8358840 data/extshape/tags/block/wooden_quarter_pieces.json
 7309985ccfaa222dab4d15030d141ed8d325205b data/extshape/tags/block/wooden_vertical_quarter_pieces.json
@@ -87,17 +87,17 @@ c2630a02452130dfa038094d1e0277a1e8144bef data/extshape/tags/block/woolen_vertica
 cb3b0e3178a37184fbb36cfe325d1b7705a26faa data/extshape/tags/block/woolen_vertical_stairs.json
 bae2ffad52f51c8f7008861399a0a0b817bc3c39 data/extshape/tags/block/woolen_walls.json
 1b128d098d411eb351680ab935985e56fec92eeb data/minecraft/tags/block/blocks_motion_no_leaves.json
-c8b61ef4dc4d0600982d7d2628457861801ff2f7 data/minecraft/tags/block/buttons.json
+6737afc94854f66b21c7d85d8512b28cccf24265 data/minecraft/tags/block/buttons.json
 6bfdc5a0c0054861cbc293ebfb5985bc5b55896d data/minecraft/tags/block/dragon_immune.json
 8d5ee92efde0e75a269ae5b1db7d364b8788eb37 data/minecraft/tags/block/enderman_holdable.json
-b36ff8eea31ddc5d246b81adaf86a2efa4d764ae data/minecraft/tags/block/fence_gates.json
-84afda14c5ceb2c5287a88ed7a2dc5a8c7922368 data/minecraft/tags/block/fences.json
+1eb6e9adae1a0eb7a4e7cbf77f160f50ed42d90a data/minecraft/tags/block/fence_gates.json
+e8bb34e786d220acd0f089083a3d707556fa2795 data/minecraft/tags/block/fences.json
 f26fb08728a0f1b9fd4f940679aa701cfffae8a2 data/minecraft/tags/block/guarded_by_piglins.json
 a43690fd1026e3f9aa0d1d548ca0478b1df46201 data/minecraft/tags/block/infiniburn_end.json
 443a90300f0415fa4cbf8f0b3061aefce4b0eab7 data/minecraft/tags/block/infiniburn_overworld.json
-fc7dfc095d367c345dc4bcac07f0598e71a0bbf4 data/minecraft/tags/block/mineable/axe.json
+06fffbce57f331998aee167ee6571949d59c5143 data/minecraft/tags/block/mineable/axe.json
 35a18fadcd1e8274a0987b65e274992dfae2411c data/minecraft/tags/block/mineable/hoe.json
-1b11a7cc75c240caf65516f360ab71740c764d2e data/minecraft/tags/block/mineable/pickaxe.json
+ec3fe968dd306574d65ada0a708e03db62f618ef data/minecraft/tags/block/mineable/pickaxe.json
 882c62239c444684eae372723f45d69b7fe5f41e data/minecraft/tags/block/mineable/shovel.json
 6a4b7f567422639c419eef8026a37ca98509cd25 data/minecraft/tags/block/needs_diamond_tool.json
 b0cdf8245402e06ee011cc4d5bbad6b42aa4bc44 data/minecraft/tags/block/needs_iron_tool.json
@@ -105,15 +105,15 @@ d3efd389e2b6928ff1c8a73bad28a2e06e62f91b data/minecraft/tags/block/needs_stone_t
 1e34d90e78825a9fbd9df7f9fe8b7a847e4fb213 data/minecraft/tags/block/occludes_vibration_signals.json
 155b69caab488a47c94583641c310669552cc484 data/minecraft/tags/block/pressure_plates.json
 1e34d90e78825a9fbd9df7f9fe8b7a847e4fb213 data/minecraft/tags/block/shears_major_breaking_speed.json
-7a4f8cca0fb81974ed9ff5d6926b8f5dc8123348 data/minecraft/tags/block/slabs.json
-28f462c671bdd9e9d998664ca9b98ecca011848a data/minecraft/tags/block/stairs.json
+f4e739022b13a472a793832c956ad0695620edf5 data/minecraft/tags/block/slabs.json
+c1ec98b72b00a1c5333cccc59db94a3d638aea02 data/minecraft/tags/block/stairs.json
 591846f3a0515ab15510cef332de82a691c1496d data/minecraft/tags/block/stone_buttons.json
 f47bc4b4a54e950d5ee0481db21d16bb5e243f28 data/minecraft/tags/block/stone_pressure_plates.json
 1d3073a3a62913ccde3424878d52e9403e930554 data/minecraft/tags/block/supports_bamboo.json
 5f71fd9b86ae1833f434a041907b33611585105e data/minecraft/tags/block/supports_dry_vegetation.json
 edf907fd6518eebb2b8bda3d7ff608825dea64a4 data/minecraft/tags/block/supports_small_dripleaf.json
 0939b636594f3a6ff221f6384ba3cb5aaf418cf4 data/minecraft/tags/block/sword_efficient.json
-8c0a2cbcfd9db13b810bcaa71012cece8010cfd9 data/minecraft/tags/block/walls.json
+91d44d70b195e83a353b0da2270569c388acce37 data/minecraft/tags/block/walls.json
 a43690fd1026e3f9aa0d1d548ca0478b1df46201 data/minecraft/tags/block/wither_immune.json
 d3325113bbefd7b62a2be70cd1dde19b504072e2 data/minecraft/tags/block/wooden_buttons.json
 d02263f197e3120d4b816c34dfb989f5e4cce5ac data/minecraft/tags/block/wooden_fences.json

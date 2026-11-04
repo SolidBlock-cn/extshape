@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "building",
   "ingredients": [
-    "extshape:calcite_stairs"
+    "minecraft:calcite_stairs"
   ],
   "result": {
     "id": "extshape:calcite_vertical_stairs"

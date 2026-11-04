@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "minecraft:polished_calcite_bricks"
+  ],
+  "result": {
+    "id": "extshape:polished_calcite_brick_button"
+  }
+}
