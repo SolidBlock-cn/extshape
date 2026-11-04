@@ -4,6 +4,12 @@
 
 - Modified the sound of shape variants of dyed shingles to match the update of Blockus mod.
 
+### 3.2.2-alpha.2
+
+- Made suitable for 26.4-snapshot-7.
+- Add all shape variants for polished calcite and polished calcite bricks.
+- Since calcite stairs, slab and wall are provided already in vanilla, the mod no longer provides these blocks. Such blocks (and items) previously existing in worlds will be automatically replaced with vanilla blocks.
+
 ### 3.2.1
 
 - Fixed the issue of incorrect placing and mining sound for the fence gates, pressure plates and buttons of the following blocks: Crimson hyphae, warped hyphae, emerald block, red nether bricks, packed ice, sulfur with its series blocks, cinnabar with its series blocks.
